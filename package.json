@@ -1,6 +1,6 @@
 {
-  "name": "myappname",
-  "version": "0.0.0",
+  "name": "prime-enrollment",
+  "version": "0.0.1",
   "license": "Apache-2.0",
   "scripts": {
     "ng": "ng",
