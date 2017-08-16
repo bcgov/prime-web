@@ -2,11 +2,18 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from 'app/dashboard/dashboard.component';
 import { CustomerComponent } from 'app/customer/customer.component';
+import { PersonalInfoComponent } from './pages/personal-info/personal-info.component';
+import { ConsentModalComponent } from './core/consent-modal/consent-modal.component';
 
 const routes: Routes = [
   {
     path: '',
-    children: []
+
+    //toggle below to work on prepare again
+    children: [],
+    // canActivate: [],
+    // redirectTo: 'prepare',
+    // pathMatch: 'full'
   },
   {
     path: 'dashboard',
@@ -16,13 +23,13 @@ const routes: Routes = [
     }
   },
   {
-    path: 'customer',
-    component: CustomerComponent,
-    data: {
-      breadcrumb: 'Customer'
-    }
-    
-  }
+    path: 'personal-info',
+    component: PersonalInfoComponent,
+  },
+  {
+    path: 'prepare',
+    component: ConsentModalComponent,
+  },
 ];
 
 @NgModule({

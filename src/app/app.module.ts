@@ -2,8 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
+
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppComponent } from './app.component';
 import { CustomerComponent } from './customer/customer.component';
@@ -12,6 +14,10 @@ import { GeneralDataService } from 'app/general-data.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminModule } from 'app/admin/admin.module';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { ProgressBarComponent } from './core/progress-bar/progress-bar.component';
+import { ConsentModalComponent, ModalContentComponent } from './core/consent-modal/consent-modal.component';
+import { PersonalInfoComponent } from './pages/personal-info/personal-info.component';
+import { BaseComponent } from './core/base-component/base-component.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +25,12 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
     CustomerComponent,
     SearchBoxDirective,
     DashboardComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    ProgressBarComponent,
+    ConsentModalComponent,
+    PersonalInfoComponent,
+    ModalContentComponent,
+    BaseComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +39,7 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
     AppRoutingModule,
     NgbModule,
     AdminModule,
+    ModalModule.forRoot(),
   ],
   providers: [GeneralDataService],
   bootstrap: [AppComponent]

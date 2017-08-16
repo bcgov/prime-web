@@ -1,0 +1,27 @@
+<div class="container">
+  <nav>
+    <div class="progressBar">
+      <ul>
+        <li *ngFor="let item of progressBarList; let itemNum = index">
+          <a
+          routerLink="{{item.routerLink}}"
+          [class.active]="itemNum === 0"
+          [class.afterActive]="itemNum > 0">
+            <span>{{itemNum + 1}}</span>
+            <span>{{item.displayName}}</span>
+          </a>
+        </li>
+        <!-- <li *ngFor="let item of progressBarList; let itemNum = index">
+                    <a routerLink="{{item.routerLink}}"
+                       [tabindex]="(isActiveRoute(item.routerLink) || isBeforeActiveRoute(item.routerLink) )? 0 : -1"
+                       [class.beforeActive]="isBeforeActiveRoute(item.routerLink)"
+                       [class.active]="isActiveRoute(item.routerLink)"
+                       [class.afterActive]="isAfterActiveRoute(item.routerLink)">
+                        <span>{{itemNum + 1}}</span>
+                        <span [class.hidden-xs]="!isActiveRoute(item.routerLink)">{{item.displayName}}</span>
+                    </a>
+                </li> -->
+      </ul>
+    </div>
+  </nav>
+</div>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { ConsentModalComponent } from './core/consent-modal/consent-modal.component'
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,12 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 })
 export class AppComponent {
   title = 'app works!';
+
+  constructor(){
+    //TODO - Put into LocalStorage service
+  }
+
+  ngOnInit(){
+    // let modal = new ConsentModalComponent();
+  }
 }
