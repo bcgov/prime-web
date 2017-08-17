@@ -5,13 +5,15 @@ import {
 
 import { AppComponent } from './app.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { ProgressBarComponent } from './core/progress-bar/progress-bar.component'
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
-        BreadcrumbComponent
+        BreadcrumbComponent,
+        ProgressBarComponent
       ],
       imports: [ RouterTestingModule ]
     }).compileComponents();
@@ -27,6 +29,6 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('span.title').textContent).toContain('Put your title here');
+    expect(compiled.querySelector('span.title').textContent).toContain('PRIME — Application Enrollment');
   }));
 });

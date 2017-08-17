@@ -2,15 +2,29 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProfessionalInfoComponent } from './professional-info.component';
 
-describe('PersonalInfoComponent', () => {
+import { CalendarYearValidator } from '../../core/date/calendar-year.validator';
+import { DateComponent } from '../../core/date/date.component';
+import { ConsentModalComponent } from '../../core/consent-modal/consent-modal.component'
+import { FormsModule } from '@angular/forms';
+import { Select2Module } from 'ng2-select2';
+import { CalendarFieldFormatterDirective } from '../../core/date/calendar-field-formatter.directive';
+import { ModalModule } from 'ngx-bootstrap';
+
+import { ApplicantDataService } from '../../services/applicant-data.service';
+import { Colleges } from '../../models/colleges.enum'
+
+
+describe('ProfessionalInfoComponent', () => {
   let component: ProfessionalInfoComponent;
   let fixture: ComponentFixture<ProfessionalInfoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfessionalInfoComponent ]
+      providers: [ApplicantDataService],
+      imports: [FormsModule, Select2Module, ModalModule.forRoot()],
+      declarations: [ProfessionalInfoComponent, CalendarYearValidator, DateComponent, ConsentModalComponent, CalendarFieldFormatterDirective]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -22,4 +36,17 @@ describe('PersonalInfoComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should return 4 items in the college list', () => {
+    expect(component.collegeList.length === 4).toBeTruthy();
+    expect(component.collegeList[0].text === "None").toBeTruthy();
+  })
+
+  it('should be able to set device provider', () => {
+    expect(component.applicant.isDeviceProvider).toBeUndefined();
+    component.setDeviceProvider(true);
+    expect(component.applicant.isDeviceProvider).toBeTruthy();
+    component.setDeviceProvider(false);
+    expect(component.applicant.isDeviceProvider).toBeFalsy();
+  })
 });

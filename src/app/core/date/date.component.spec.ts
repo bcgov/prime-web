@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { CalendarFieldFormatterDirective } from '../../core/date/calendar-field-formatter.directive';
 
 import { DateComponent } from './date.component';
 
@@ -8,7 +10,8 @@ describe('DateComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DateComponent ]
+      imports: [FormsModule],
+      declarations: [DateComponent, CalendarFieldFormatterDirective]
     })
     .compileComponents();
   }));
@@ -22,4 +25,22 @@ describe('DateComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
+
+   it('should be required by default', () => {
+    expect(component.required).toBe(true);
+  });
+
+  it('should detect incomplete dates', () => {
+    expect(component.isValid()).toBe(false);
+    component.setDayValueOnModel('1');
+    component.setMonthValueOnModel('1');
+    expect(component.isValid()).toBe(false);
+  });
+
+  it('should pass validation when completely empty if not required', () =>{
+    component.required = false;
+    expect(component.isValid()).toBe(true);
+    component.setDayValueOnModel('1');
+    expect(component.isValid()).toBe(false);
+  })
 });

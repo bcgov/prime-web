@@ -6,7 +6,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 // import { ConsentModalContent } from './content/consent-modal-content.component';
 
 @Component({
-  selector: 'app-consent-modal',
+  selector: 'prime-consent-modal',
   templateUrl: './consent-modal.component.html',
   styleUrls: ['./consent-modal.component.scss']
 })
