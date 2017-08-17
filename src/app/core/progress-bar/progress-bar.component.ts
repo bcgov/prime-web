@@ -10,7 +10,7 @@ import { ProgressBarItem } from './progress-bar.interface';
 })
 export class ProgressBarComponent implements OnInit {
   progressBarList: ProgressBarItem[] = [
-    {displayName: 'Personal Information', routerLink: 'personal-info'},
+    {displayName: 'Personal Information', routerLink: 'professional-info'},
     {displayName: 'Site Access', routerLink: 'site-access'},
     {displayName: 'Contact Information', routerLink: 'contact-info'},
     {displayName: 'Self Declaration', routerLink: 'self-declaration'},

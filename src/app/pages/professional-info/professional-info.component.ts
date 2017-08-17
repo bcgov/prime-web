@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 // import {  }
 
 @Component({
-  selector: 'prime-personal-info',
-  templateUrl: './personal-info.component.html',
-  styleUrls: ['./personal-info.component.scss']
+  selector: 'prime-professional-info',
+  templateUrl: './professional-info.component.html',
+  styleUrls: ['./professional-info.component.scss']
 })
-export class PersonalInfoComponent implements OnInit {
+export class ProfessionalInfoComponent implements OnInit {
 
   /**
    * Goal: This component fires up the consent-modal.

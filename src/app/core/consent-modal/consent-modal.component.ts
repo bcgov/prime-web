@@ -12,8 +12,6 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 })
 export class ConsentModalComponent extends BaseComponent implements AfterViewInit {
   bsModalRef: BsModalRef
-
-  // @ViewChild('informationCollectionModal') public informationCollectionModal: ModalDirective;
   @ViewChild('informationCollectionModal') public informationCollectionModal:ModalDirective;
 
 
