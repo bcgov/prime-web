@@ -10,17 +10,14 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
   templateUrl: './consent-modal.component.html',
   styleUrls: ['./consent-modal.component.scss']
 })
-export class ConsentModalComponent extends BaseComponent implements AfterViewInit {
-  bsModalRef: BsModalRef
+export class ConsentModalComponent extends BaseComponent {
+  bsModalRef: BsModalRef;
+  agreeCheck: boolean;
   @ViewChild('informationCollectionModal') public informationCollectionModal:ModalDirective;
 
 
   constructor(private modalService: BsModalService) {
     super();
-  }
-
-  ngAfterViewInit() {
-    this.openModal();
   }
 
   public openModal(): void {

@@ -1,4 +1,4 @@
- <app-consent-modal></app-consent-modal>
+<app-consent-modal></app-consent-modal>
 <form #formRef="ngForm" novalidate (submit)="continue()">
   <h1>Professional Information</h1>
 
@@ -52,13 +52,15 @@
     </div>
   </div>
 
-  <div class="row">
-    <label id="deviceProvider" for="deviceProvider" class='control-label' i18n="@@DeviceProvider">Are you a Device Provider?</label>
+  <div class="row form-group">
+    <div class="col-sm-6">
+      <label id="deviceProvider" for="deviceProvider" class='control-label' i18n="@@DeviceProvider">Are you a Device Provider?</label>
 
-    <!-- TODO - Move this into its own component?  -->
-    <div class="btn-group">
-      <label class="btn btn-default" (click)="setDeviceProvider(true)" btnRadio="Left" [class.btn-radio]="applicant.isDeviceProvider" >Yes</label>
-      <label class="btn btn-default" (click)="<setDevi></setDevi>ceProvider(false)"btnRadio="Middle" [class.btn-radio]="applicant.isDeviceProvider === false" >No</label>
+      <!-- TODO - Move this into its own component?  -->
+      <div class="btn-group">
+        <label class="btn btn-default" (click)="setDeviceProvider(true)" btnRadio="Left" [class.btn-radio]="applicant.isDeviceProvider">Yes</label>
+        <label class="btn btn-default" (click)="setDeviceProvider(false)" btnRadio="Middle" [class.btn-radio]="applicant.isDeviceProvider === false">No</label>
+      </div>
     </div>
 
   </div>
