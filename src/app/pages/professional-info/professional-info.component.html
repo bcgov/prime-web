@@ -6,14 +6,13 @@
     <div class="col-sm-4">
       <div class="form-group">
         <label for='collegeName' i18n="@@ProfessionalCollegeName">Professional College Name</label>
-        <select2 name='collegeName' id='collegeName' [data]="collegeList"></select2>
+        <select2 name='collegeName' id='collegeName' [data]="collegeList" (valueChanged)="onCollegeChange($event.value)"></select2>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="form-group">
-        <!-- TODO - Auto-populate from College Name somehow, check SR.  -->
         <label for='collegeNumber' i18n="@@CollegeNumber">College Number</label>
-         <input type="text" disabled class="form-control" name='collegeNumber' id='collegeNumber'>
+         <input type="text" disabled class="form-control" name='collegeNumber' id='collegeNumber' [value]="applicant.collegeNumber">
       </div>
     </div>
   </div>
@@ -28,19 +27,19 @@
     <div class="col-sm-4">
       <div class="form-group">
         <label for='mspBillingNumber' i18n="@@LicenseClass">License Class</label>
-        <input type="text" class="form-control" name='mspBillingNumber' id='mspBillingNumber'>
+        <input type="text" class="form-control" name='mspBillingNumber' id='mspBillingNumber' [(ngModel)]="applicant.license.licenseClass">
       </div>
     </div>
     <div class="col-sm-4">
       <div class="form-group">
         <label for='mspBillingNumber' i18n="@@ExpiryDateLicense">Expiry Date of License</label>
        <prime-date name='mspBillingNumber' id='mspBillingNumber'
-          [year]="applicant.licenseExpiry?.year"
-          (yearChange)="applicant.licenseExpiry.year = $event"
-          [month]="applicant.licenseExpiry?.month"
-          (monthChange)="applicant.licenseExpiry.month = $event"
-          [day]="applicant.licenseExpiry?.day"
-          (dayChange)="applicant.licenseExpiry.day = $event"
+          [year]="applicant.license.licenseExpiry?.year"
+          (yearChange)="applicant.license.licenseExpiry.year = $event"
+          [month]="applicant.license.licenseExpiry?.month"
+          (monthChange)="applicant.license.licenseExpiry.month = $event"
+          [day]="applicant.license.licenseExpiry?.day"
+          (dayChange)="applicant.license.licenseExpiry.day = $event"
           (onChange) = "onChange.emit($event)"
           [showError]="showError"
           [required] = "true">
@@ -85,12 +84,12 @@
       <div class="form-group">
         <label for='RequestedEndDate' i18n="@@RequestedStartDate">Requested Access Start Date</label>
        <prime-date name='RequestedStartDate' id='RequestedStartDate'
-          [year]="applicant.requestStartDate?.year"
-          (yearChange)="applicant.requestStartDate.year = $event"
-          [month]="applicant.requestStartDate?.month"
-          (monthChange)="applicant.requestStartDate.month = $event"
-          [day]="applicant.requestStartDate?.day"
-          (dayChange)="applicant.requestStartDate.day = $event"
+          [year]="applicant.dates.requestStartDate?.year"
+          (yearChange)="applicant.dates.requestStartDate.year = $event"
+          [month]="applicant.dates.requestStartDate?.month"
+          (monthChange)="applicant.dates.requestStartDate.month = $event"
+          [day]="applicant.dates.requestStartDate?.day"
+          (dayChange)="applicant.dates.requestStartDate.day = $event"
           (onChange) = "onChange.emit($event)"
           [showError]="showError"
           [required] = "true">
@@ -101,12 +100,12 @@
       <div class="form-group">
         <label for='RequestedEndDate' i18n="@@RequestedEndDate">Access End Date (optional)</label>
        <prime-date name='RequestedEndDate' id='RequestedEndDate'
-          [year]="applicant.requestEndDate?.year"
-          (yearChange)="applicant.requestEndDate.year = $event"
-          [month]="applicant.requestEndDate?.month"
-          (monthChange)="applicant.requestEndDate.month = $event"
-          [day]="applicant.requestEndDate?.day"
-          (dayChange)="applicant.requestEndDate.day = $event"
+          [year]="applicant.dates.requestEndDate?.year"
+          (yearChange)="applicant.dates.requestEndDate.year = $event"
+          [month]="applicant.dates.requestEndDate?.month"
+          (monthChange)="applicant.dates.requestEndDate.month = $event"
+          [day]="applicant.dates.requestEndDate?.day"
+          (dayChange)="applicant.dates.requestEndDate.day = $event"
           (onChange) = "onChange.emit($event)"
           [showError]="showError"
           [required] = "false">

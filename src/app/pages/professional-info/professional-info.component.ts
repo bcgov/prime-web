@@ -3,6 +3,7 @@ import { ApplicantDataService } from '../../services/applicant-data.service';
 import { Applicant } from '../../models/applicant';
 import { ConsentModalComponent } from '../../core/consent-modal/consent-modal.component';
 import { BaseComponent } from '../../core/base-component/base-component.component';
+import { Colleges } from '../../models/colleges.enum';
 
 @Component({
   selector: 'prime-professional-info',
@@ -24,26 +25,8 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
     // this.consentModal.openModal();
   }
 
-  get collegeList(): any {
-    return [
-      {
-        id: 'basic1',
-        text: 'Basic 1'
-      },
-      {
-        id: 'basic2',
-        disabled: true,
-        text: 'Basic 2'
-      },
-      {
-        id: 'basic3',
-        text: 'Basic 3'
-      },
-      {
-        id: 'basic4',
-        text: 'Basic 4'
-      }
-    ]
+  public onCollegeChange(value : Colleges): void {
+    this.applicant.college = value;
   }
 
   setDeviceProvider(val: boolean): void {
@@ -52,6 +35,28 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
 
   continue(): void {
     console.log('---------------\ncontinue');
+  }
+
+  // TODO - Create interfaces once we get real / non-dummy data here.
+  get collegeList(): any {
+    return [
+      {
+        id: Colleges.None,
+        text: 'None'
+      },
+      {
+        id: Colleges.CollegeOfPhysiciansAndSurgeonsOfBC,
+        text: 'College of Physicians and Surgeons of BC (CPSBC)'
+      },
+      {
+        id: Colleges.CollegeOfPharmacistsOfBC,
+        text: 'College of Pharmacists of BC (CPBC)'
+      },
+      {
+        id: Colleges.CollegeOfPhysicainsAndNursesOfBC,
+        text: 'College of Physicians and Nurses of BC (CPNBC)'
+      }
+    ]
   }
 
 }

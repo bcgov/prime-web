@@ -14,9 +14,4 @@ export class ApplicantDataService {
     this.applicant = new Applicant();
   }
 
-  // TODO - Not sure if necessary
-  // saveApplicant(applicant: Applicant): void {
-  //   this.applicant = applicant;
-  // }
-
 }
