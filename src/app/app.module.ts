@@ -10,7 +10,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { AppComponent } from './app.component';
 import { CustomerComponent } from './customer/customer.component';
 import { SearchBoxDirective } from './search-box/search-box.directive';
-import { GeneralDataService } from 'app/general-data.service';
+import { ApplicantDataService } from './services/applicant-data.service'
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminModule } from 'app/admin/admin.module';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
@@ -41,7 +41,7 @@ import { BaseComponent } from './core/base-component/base-component.component';
     ModalModule.forRoot(),
   ],
   // entryComponents: [ConsentModalContent],
-  providers: [GeneralDataService],
+  providers: [ApplicantDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

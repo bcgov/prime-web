@@ -1,4 +1,4 @@
-<app-consent-modal></app-consent-modal>
+ <app-consent-modal></app-consent-modal>
 <form #formRef="ngForm" novalidate (submit)="continue()">
   <h1>Professional Information</h1>
 
@@ -52,13 +52,44 @@
     </div>
   </div>
 
-   <div class="row">
+  <div class="row">
     <label id="deviceProvider" for="deviceProvider" class='control-label' i18n="@@DeviceProvider">Are you a Device Provider?</label>
 
-    <div class="btn-group" role="group">
-      <button [class.msp-btn-radio]="person.isDeviceProvider" (click)="setDeviceProvider(true)" type="button" class="btn btn-default">Yes</button>
-      <button [class.msp-btn-radio]="person.isDeviceProvider === false" (click)="setDeviceProvider(false)" type="button" class="btn btn-default">No&nbsp;</button>
+    <!-- TODO - Move this into its own component?  -->
+    <div class="btn-group">
+      <label class="btn btn-default" (click)="setDeviceProvider(true)" btnRadio="Left" [class.btn-radio]="applicant.isDeviceProvider" >Yes</label>
+      <label class="btn btn-default" (click)="<setDevi></setDevi>ceProvider(false)"btnRadio="Middle" [class.btn-radio]="applicant.isDeviceProvider === false" >No</label>
     </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <!-- TODO Turn into Date  -->
+        <label for='RequestedStartDate' i18n="@@RequestedStartDate">Requested Access Start Date</label>
+        <input type="text" class="form-control" name='RequestedStartDate' id='RequestedStartDate'>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group">
+        <!-- TODO Turn into Date  -->
+        <label for='RequestedEndDate' i18n="@@RequestedEndDate">Access End Date (optional)</label>
+        <input type="text" class="form-control" name='RequestedEndDate' id='RequestedEndDate'>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <button type='button' class='btn btn-default pull-left'>Cancel</button>
+    <button type='button' class='btn btn-primary pull-right'>Continue</button>
+  </div>
+
+
+  <div *ngIf="true">
+    {{ applicant | json }}
   </div>
 
 </form>

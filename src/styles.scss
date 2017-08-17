@@ -10,3 +10,31 @@
     font-weight: 600;
   }
 }
+
+
+
+
+// Move all this .btn-radio stuff into own component for Yes/No button group toggles
+
+.btn-group .btn-default {
+  margin-right: 0;
+}
+
+.btn-radio {
+  background: #2962FF;
+  color: white;
+  &:hover {
+    background: #2962FF;
+    color: white;
+  }
+  &:not(:hover) {
+    background: #2962FF;
+    color: white;
+  }
+  &:selection {
+    background: #2962FF;
+  }
+  &:active {
+    background: #2962FF;
+  }
+}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-// import {  }
+import { ApplicantDataService } from '../../services/applicant-data.service';
+import { Applicant } from '../../models/applicant';
 
 @Component({
   selector: 'prime-professional-info',
@@ -8,16 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfessionalInfoComponent implements OnInit {
 
-  /**
-   * Goal: This component fires up the consent-modal.
-   * From user perspective, personal info form is visible below modal.
-   *
-   * Use ViewChild to create modal and toggle it on?
-   */
+  public applicant: Applicant;
 
-  constructor() { }
+  constructor(private applicantData: ApplicantDataService) {
+    this.applicant = applicantData.applicant;
+  }
 
   ngOnInit() {
+  }
+
+  setDeviceProvider(val: boolean) : void {
+    this.applicant.isDeviceProvider = val;
   }
 
 }
