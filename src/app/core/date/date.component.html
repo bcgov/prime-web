@@ -1,0 +1,92 @@
+<!--
+  TODO
+  - Ability to customize date logic (e.g. 'must be in future')
+  - Could do in parent component directly? Some ReactiveForm techniques?
+  - Or, subclass this datefn and override validation fn.
+  -->
+
+
+<form #formRef='ngForm' novalidate>
+    <label class="visuallyhidden" for="month{{objectId}}">Month</label>
+    <div class="form-group"
+         [ngClass]="{'has-error': formRef.invalid && required && (monthRef.touched || yearRef.touched || dayRef.touched || showError)}">
+        <select class="form-control monthSelect"
+                [ngModel]="month"
+                (ngModelChange)="setMonthValueOnModel($event)"
+                id="month{{objectId}}"
+                name="month"
+                #monthRef="ngModel"
+                [required]="required">
+            <option value="0">&nbsp;</option>
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+        </select>
+        <label class="visuallyhidden" for="day{{objectId}}">Day</label>
+        <input type="number" class="form-control dayInput"
+               [ngModel]="day"
+               (ngModelChange) = 'setDayValueOnModel($event)'
+               [calendarFieldFormatter]="'day'"
+               validateCalendarDay
+
+               id="day{{objectId}}" name="day" #dayRef="ngModel"
+               placeholder="day"
+               [required]="required"
+               min="1"
+               max="31">
+        <label class="visuallyhidden" for="year{{objectId}}">Year</label>
+        <input type="number" [calendarFieldFormatter]="'year'"
+               class="form-control yearInput"
+               [ngModel]="year"
+               (ngModelChange) = 'setYearValueOnModel($event)'
+               validateCalendarYear
+
+               id="year{{objectId}}" name="year" #yearRef="ngModel"
+               placeholder="year"
+               [required]="required"
+               min="1830"
+               max="2300"
+               step="1">
+
+         <div role="alert" class='error-container' aria-live="assertive">
+            <div *ngIf='monthRef.touched || showError'>
+                <div class="text-danger" *ngIf="monthRef.errors?.required"
+                     i18n="@@monthErrorRequired">Month is required</div>
+            </div>
+            <div *ngIf='dayRef.touched || showError'>
+                <div class="text-danger" *ngIf="dayRef.errors?.required"
+                     i18n="@@dayErrorRequired">Day is required</div>
+            </div>
+            <div *ngIf='yearRef.touched || showError'>
+                <div class="text-danger" *ngIf="yearRef.errors?.required"
+                     i18n="@@yearErrorRequired">Year is required</div>
+            </div>
+            <div *ngIf='(yearRef.touched || showError) && !isValid()'>
+                <div class="text-danger"
+                     i18n="@@yearErrorBadFormat">This does not appear to be a valid date</div>
+            </div>
+
+            <div *ngIf='(dayRef.touched || showError)'>
+                <div class="text-danger" *ngIf="dayRef.errors?.calendarDayOutOfRange"
+                     i18n="@@calendarDayOutOfRange">Day of the month is out of range</div>
+            </div>
+            <div *ngIf='(yearRef.touched || showError)'>
+                <div class="text-danger" *ngIf="yearRef.errors?.yearDistantPast"
+                     i18n="@@yearErrorDistantPast">Date is too far in the past</div>
+            </div>
+            <div *ngIf='(yearRef.touched || showError)'>
+                <div class="text-danger" *ngIf="yearRef.errors?.yearDistantFuture"
+                     i18n="@@yearErrorDistantFuture">Date is too far in the future</div>
+            </div>
+        </div>
+    </div>
+</form>

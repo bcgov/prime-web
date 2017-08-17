@@ -5,9 +5,7 @@
   <div class="row">
     <div class="col-sm-4">
       <div class="form-group">
-        <!--TODO Turn into dropdown using select2 or some variant  -->
         <label for='collegeName' i18n="@@ProfessionalCollegeName">Professional College Name</label>
-        <!-- <input type="text" class="form-control" name='collegeName' id='collegeName'> -->
         <select2 name='collegeName' id='collegeName' [data]="collegeList"></select2>
       </div>
     </div>
@@ -35,9 +33,18 @@
     </div>
     <div class="col-sm-4">
       <div class="form-group">
-        <!-- TODO - Turn into Date input.  -->
         <label for='mspBillingNumber' i18n="@@ExpiryDateLicense">Expiry Date of License</label>
-        <input type="text" class="form-control" name='mspBillingNumber' id='mspBillingNumber'>
+       <prime-date name='mspBillingNumber' id='mspBillingNumber'
+          [year]="applicant.licenseExpiry?.year"
+          (yearChange)="applicant.licenseExpiry.year = $event"
+          [month]="applicant.licenseExpiry?.month"
+          (monthChange)="applicant.licenseExpiry.month = $event"
+          [day]="applicant.licenseExpiry?.day"
+          (dayChange)="applicant.licenseExpiry.day = $event"
+          (onChange) = "onChange.emit($event)"
+          [showError]="showError"
+          [required] = "true">
+        </prime-date>
       </div>
     </div>
   </div>
@@ -46,9 +53,8 @@
   <div class="row">
     <div class="col-sm-4">
       <div class="form-group">
-        <!--TODO Turn into dropdown using select2 or some variant  -->
         <label for='advancedPracticeCerts' i18n="@@AdvancedPracticeCerts">Advanced Practice Certification(s)</label>
-        <input type="text" class="form-control" name='advancedPracticeCerts' id='advancedPracticeCerts'>
+        <select2 name='advancedPracticeCerts' id='advancedPracticeCerts'></select2>
       </div>
     </div>
   </div>
@@ -63,22 +69,48 @@
         <label class="btn btn-default" (click)="setDeviceProvider(false)" btnRadio="Middle" [class.btn-radio]="applicant.isDeviceProvider === false">No</label>
       </div>
     </div>
+  </div>
 
+ <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for='onBehalfOfJobTitle' i18n="@@OnBehalfOfJobTitle">On-Behalf Of Job Title</label>
+        <select2 name='onBehalfOfJobTitle' id='onBehalfOfJobTitle'></select2>
+      </div>
+    </div>
   </div>
 
   <div class="row">
     <div class="col-sm-4">
       <div class="form-group">
-        <!-- TODO Turn into Date  -->
-        <label for='RequestedStartDate' i18n="@@RequestedStartDate">Requested Access Start Date</label>
-        <input type="text" class="form-control" name='RequestedStartDate' id='RequestedStartDate'>
+        <label for='RequestedEndDate' i18n="@@RequestedStartDate">Requested Access Start Date</label>
+       <prime-date name='RequestedStartDate' id='RequestedStartDate'
+          [year]="applicant.requestStartDate?.year"
+          (yearChange)="applicant.requestStartDate.year = $event"
+          [month]="applicant.requestStartDate?.month"
+          (monthChange)="applicant.requestStartDate.month = $event"
+          [day]="applicant.requestStartDate?.day"
+          (dayChange)="applicant.requestStartDate.day = $event"
+          (onChange) = "onChange.emit($event)"
+          [showError]="showError"
+          [required] = "true">
+        </prime-date>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="form-group">
-        <!-- TODO Turn into Date  -->
         <label for='RequestedEndDate' i18n="@@RequestedEndDate">Access End Date (optional)</label>
-        <input type="text" class="form-control" name='RequestedEndDate' id='RequestedEndDate'>
+       <prime-date name='RequestedEndDate' id='RequestedEndDate'
+          [year]="applicant.requestEndDate?.year"
+          (yearChange)="applicant.requestEndDate.year = $event"
+          [month]="applicant.requestEndDate?.month"
+          (monthChange)="applicant.requestEndDate.month = $event"
+          [day]="applicant.requestEndDate?.day"
+          (dayChange)="applicant.requestEndDate.day = $event"
+          (onChange) = "onChange.emit($event)"
+          [showError]="showError"
+          [required] = "false">
+        </prime-date>
       </div>
     </div>
   </div>

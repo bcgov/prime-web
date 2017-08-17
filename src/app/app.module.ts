@@ -19,6 +19,9 @@ import { ProgressBarComponent } from './core/progress-bar/progress-bar.component
 import { ConsentModalComponent } from './core/consent-modal/consent-modal.component';
 import { ProfessionalInfoComponent } from './pages/professional-info/professional-info.component';
 import { BaseComponent } from './core/base-component/base-component.component';
+import { DateComponent } from './core/date/date.component';
+import { CalendarFieldFormatterDirective } from './core/date/calendar-field-formatter.directive';
+import { CalendarYearValidator } from './core/date/calendar-year.validator'
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import { BaseComponent } from './core/base-component/base-component.component';
     ProgressBarComponent,
     ConsentModalComponent,
     ProfessionalInfoComponent,
-    BaseComponent
+    BaseComponent,
+    DateComponent,
+    CalendarFieldFormatterDirective,
+    CalendarYearValidator,
   ],
   imports: [
     BrowserModule,
