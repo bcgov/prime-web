@@ -1,4 +1,64 @@
 <app-consent-modal></app-consent-modal>
-<p>
-  personal-info works!
-</p>
+<form #formRef="ngForm" novalidate (submit)="continue()">
+  <h1>Professional Information</h1>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <!--TODO Turn into dropdown using select2 or some variant  -->
+        <label for='collegeName' i18n="@@ProfessionalCollegeName">Professional College Name</label>
+        <input type="text" class="form-control" name='collegeName' id='collegeName'>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group">
+        <!-- TODO - Auto-populate from College Name somehow, check SR.  -->
+        <label for='collegeNumber' i18n="@@CollegeNumber">College Number</label>
+        <input type="text" disabled class="form-control" name='collegeNumber' id='collegeNumber'>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for='mspBillingNumber' i18n="@@MSPBillingNumber">MSP Billing Number</label>
+        <input type="text" class="form-control" name='mspBillingNumber' id='mspBillingNumber'>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for='mspBillingNumber' i18n="@@LicenseClass">License Class</label>
+        <input type="text" class="form-control" name='mspBillingNumber' id='mspBillingNumber'>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group">
+        <!-- TODO - Turn into Date input.  -->
+        <label for='mspBillingNumber' i18n="@@ExpiryDateLicense">Expiry Date of License</label>
+        <input type="text" class="form-control" name='mspBillingNumber' id='mspBillingNumber'>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <!--TODO Turn into dropdown using select2 or some variant  -->
+        <label for='advancedPracticeCerts' i18n="@@AdvancedPracticeCerts">Advanced Practice Certification(s)</label>
+        <input type="text" class="form-control" name='advancedPracticeCerts' id='advancedPracticeCerts'>
+      </div>
+    </div>
+  </div>
+
+   <div class="row">
+    <label id="deviceProvider" for="deviceProvider" class='control-label' i18n="@@DeviceProvider">Are you a Device Provider?</label>
+
+    <div class="btn-group" role="group">
+      <button [class.msp-btn-radio]="person.isDeviceProvider" (click)="setDeviceProvider(true)" type="button" class="btn btn-default">Yes</button>
+      <button [class.msp-btn-radio]="person.isDeviceProvider === false" (click)="setDeviceProvider(false)" type="button" class="btn btn-default">No&nbsp;</button>
+    </div>
+  </div>
+
+</form>

@@ -2,11 +2,18 @@
   <div class="progressBar">
     <ul>
       <li *ngFor="let item of progressBarList; let itemNum = index">
-        <a routerLink="{{item.routerLink}}" [class.active]="('/' + item.routerLink )=== router.url" [class.afterActive]="itemNum > 0">
-            <span>{{itemNum + 1}}</span>
-            <span>{{item.displayName}}</span>
+        <a routerLink="{{item.routerLink}}"
+        [class.active]="isActive(item)"
+        [class.afterActive]="isAfterActive(item)">
+            <!-- <span>{{item.routerLink}} == {{router.url}}</span> -->
+             <span>{{itemNum + 1}}</span>
+             <span>{{item.displayName}}</span>
           </a>
       </li>
+
+<!-- [class.active]="('/' + item.routerLink )=== router.url"
+        [class.afterActive]="itemNum > 0"> -->
+
       <!-- Below is the 'original' from MSP application. Left in just for reference. TODO - Remove before releasing.  -->
       <!-- <li *ngFor="let item of progressBarList; let itemNum = index">
                     <a routerLink="{{item.routerLink}}"
