@@ -7,14 +7,15 @@
       <div class="form-group">
         <!--TODO Turn into dropdown using select2 or some variant  -->
         <label for='collegeName' i18n="@@ProfessionalCollegeName">Professional College Name</label>
-        <input type="text" class="form-control" name='collegeName' id='collegeName'>
+        <!-- <input type="text" class="form-control" name='collegeName' id='collegeName'> -->
+        <select2 name='collegeName' id='collegeName' [data]="collegeList"></select2>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="form-group">
         <!-- TODO - Auto-populate from College Name somehow, check SR.  -->
         <label for='collegeNumber' i18n="@@CollegeNumber">College Number</label>
-        <input type="text" disabled class="form-control" name='collegeNumber' id='collegeNumber'>
+         <input type="text" disabled class="form-control" name='collegeNumber' id='collegeNumber'>
       </div>
     </div>
   </div>

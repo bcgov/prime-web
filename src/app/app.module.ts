@@ -6,6 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { Select2Module } from 'ng2-select2';
 
 import { AppComponent } from './app.component';
 import { CustomerComponent } from './customer/customer.component';
@@ -39,6 +40,7 @@ import { BaseComponent } from './core/base-component/base-component.component';
     NgbModule,
     AdminModule,
     ModalModule.forRoot(),
+    Select2Module,
   ],
   // entryComponents: [ConsentModalContent],
   providers: [ApplicantDataService],
