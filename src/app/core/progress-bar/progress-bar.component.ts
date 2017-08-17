@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router} from '@angular/router';
 import { ProgressBarItem } from './progress-bar.interface';
 
 
@@ -9,15 +10,15 @@ import { ProgressBarItem } from './progress-bar.interface';
 })
 export class ProgressBarComponent implements OnInit {
   progressBarList: ProgressBarItem[] = [
-    {displayName: 'Personal Information', routerLink: ''},
-    {displayName: 'Site Access', routerLink: ''},
-    {displayName: 'Contact Information', routerLink: ''},
-    {displayName: 'Self Declaration', routerLink: ''},
-    {displayName: 'User Acceptance', routerLink: ''},
-    {displayName: 'Review & Submit ', routerLink: ''},
+    {displayName: 'Personal Information', routerLink: 'personal-info'},
+    {displayName: 'Site Access', routerLink: 'site-access'},
+    {displayName: 'Contact Information', routerLink: 'contact-info'},
+    {displayName: 'Self Declaration', routerLink: 'self-declaration'},
+    {displayName: 'User Acceptance', routerLink: 'user-acceptance'},
+    {displayName: 'Review & Submit ', routerLink: 'review'},
   ]
 
-  constructor() { }
+  constructor(public router: Router) { }
 
   ngOnInit() {
   }

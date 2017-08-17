@@ -5,12 +5,13 @@
         <li *ngFor="let item of progressBarList; let itemNum = index">
           <a
           routerLink="{{item.routerLink}}"
-          [class.active]="itemNum === 0"
+          [class.active]="('/' + item.routerLink )=== router.url"
           [class.afterActive]="itemNum > 0">
             <span>{{itemNum + 1}}</span>
             <span>{{item.displayName}}</span>
           </a>
         </li>
+        <!-- Below is the 'original' from MSP application. Left in just for reference. TODO - Remove before releasing.  -->
         <!-- <li *ngFor="let item of progressBarList; let itemNum = index">
                     <a routerLink="{{item.routerLink}}"
                        [tabindex]="(isActiveRoute(item.routerLink) || isBeforeActiveRoute(item.routerLink) )? 0 : -1"

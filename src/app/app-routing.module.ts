@@ -10,10 +10,11 @@ const routes: Routes = [
     path: '',
 
     //toggle below to work on prepare again
-    children: [],
-    // canActivate: [],
+    // children: [],
+    canActivate: [],
     // redirectTo: 'prepare',
-    // pathMatch: 'full'
+    redirectTo: 'personal-info',
+    pathMatch: 'full'
   },
   {
     path: 'dashboard',

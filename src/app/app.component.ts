@@ -9,12 +9,4 @@ import { ConsentModalComponent } from './core/consent-modal/consent-modal.compon
 })
 export class AppComponent {
   title = 'app works!';
-
-  constructor(){
-    //TODO - Put into LocalStorage service
-  }
-
-  ngOnInit(){
-    // let modal = new ConsentModalComponent();
-  }
 }

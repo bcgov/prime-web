@@ -1,2 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~mygovbc-bootstrap-theme/dist/mygovbc-bootstrap-theme.min.css";
+@import "./app/variables.scss";
+
+.modal-header-primary {
+  background: $brand-primary;
+
+  h2 {
+    color: white;
+    font-weight: 600;
+  }
+}
