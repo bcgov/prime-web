@@ -7,13 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BaseComponent implements OnInit {
 
-  constructor() { }
-
   /**
    * TODO
    * - UUID / hash id setup in base component
    * - Make sure all possible classes are extending BaseComponent
    */
+
+
+  // TODO - Switch over to properly using UUID! random() has collisions.
+  // objectId:string = UUID.UUID().toString();
+  objectId:string = Math.random().toString(36).substring(7);
+
+  constructor() { }
 
   ngOnInit() {
   }

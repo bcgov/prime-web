@@ -10,7 +10,8 @@ module.exports = function (config) {
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
-      require('@angular/cli/plugins/karma')
+      require('@angular/cli/plugins/karma'),
+      require('karma-spec-reporter')
     ],
     client:{
       clearContext: false // leave Jasmine Spec Runner output visible in browser
@@ -33,7 +34,13 @@ module.exports = function (config) {
     },
     reporters: config.angularCli && config.angularCli.codeCoverage
               ? ['progress', 'coverage-istanbul']
-              : ['progress', 'kjhtml'],
+              // : ['progress', 'kjhtml'],
+              : ['spec', 'kjhtml'],
+    specReporters : {
+      maxLogLines: 5,         // limit number of lines logged per test
+      showSpecTiming: true // print the time elapsed for each spec
+    },
+
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
