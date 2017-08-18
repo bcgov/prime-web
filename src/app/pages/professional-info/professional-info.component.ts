@@ -15,6 +15,7 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
   @ViewChild(ConsentModalComponent) private consentModal: ConsentModalComponent;
 
   public Colleges: typeof Colleges = Colleges;
+  public showError: boolean = false;
 
   constructor(private applicantData: ApplicantDataService) {
     super()
@@ -59,6 +60,10 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
         text: 'College of Physicians and Nurses of BC (CPNBC)'
       }
     ]
+  }
+
+  onChange(values: any){
+    console.log('professional-info onchange: ', values);
   }
 
 }

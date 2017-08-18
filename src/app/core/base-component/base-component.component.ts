@@ -9,6 +9,12 @@ export class BaseComponent implements OnInit {
 
   constructor() { }
 
+  /**
+   * TODO
+   * - UUID / hash id setup in base component
+   * - Make sure all possible classes are extending BaseComponent
+   */
+
   ngOnInit() {
   }
 

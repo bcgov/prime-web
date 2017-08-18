@@ -40,7 +40,7 @@
           (monthChange)="applicant.license.licenseExpiry.month = $event"
           [day]="applicant.license.licenseExpiry?.day"
           (dayChange)="applicant.license.licenseExpiry.day = $event"
-          (onChange) = "onChange.emit($event)"
+          (onChange) = "onChange($event)"
           [showError]="showError"
           [required] = "true">
         </prime-date>
@@ -90,7 +90,7 @@
           (monthChange)="applicant.dates.requestStartDate.month = $event"
           [day]="applicant.dates.requestStartDate?.day"
           (dayChange)="applicant.dates.requestStartDate.day = $event"
-          (onChange) = "onChange.emit($event)"
+          (onChange) = "onChange($event)"
           [showError]="showError"
           [required] = "true"
           [useCurrentDate]="true">
@@ -107,7 +107,7 @@
           (monthChange)="applicant.dates.requestEndDate.month = $event"
           [day]="applicant.dates.requestEndDate?.day"
           (dayChange)="applicant.dates.requestEndDate.day = $event"
-          (onChange) = "onChange.emit($event)"
+          (onChange) = "onChange($event)"
           [showError]="showError"
           [required] = "false">
         </prime-date>
