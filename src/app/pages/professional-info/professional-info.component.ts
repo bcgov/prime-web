@@ -48,16 +48,16 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
         text: 'None'
       },
       {
-        id: Colleges.CollegeOfPhysiciansAndSurgeonsOfBC,
+        id: Colleges.CPSBC,
         text: 'College of Physicians and Surgeons of BC (CPSBC)'
       },
       {
-        id: Colleges.CollegeOfPharmacistsOfBC,
+        id: Colleges.CPBC,
         text: 'College of Pharmacists of BC (CPBC)'
       },
       {
-        id: Colleges.CollegeOfRegisteredNursesOfBC,
-        text: 'College of Physicians and Nurses of BC (CPNBC)'
+        id: Colleges.CRNBC,
+        text: 'College of Registered Nurses of BC (CRNBC)'
       }
     ]
   }
