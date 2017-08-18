@@ -2,9 +2,6 @@
  * Professional Information college choices
  */
 export enum Colleges {
-  /** Not valid choice for applicant. Necessary when instantiating select2 form elements */
-  Unselected = '',
-  /**Applicant has not gone to a college. Valid choice. */
   None = "none",
   /**College of Physicians and Surgeons of BC (CPSBC)*/
   CPSBC = "91",
@@ -20,4 +17,9 @@ export enum Colleges {
 export interface CollegeList {
   id: Colleges;
   text: string;
+  disabled?: boolean;
+
+  //Dummy field you can change to force Angular to refresh
+  //not sure if working! verify / remove
+  _refresh?: any;
 }

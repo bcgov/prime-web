@@ -6,7 +6,14 @@
     <div class="col-sm-4">
       <div class="form-group">
         <label for='collegeName' i18n="@@ProfessionalCollegeName">Professional College Name</label>
-        <select2 name='collegeName' id='collegeName' [data]="collegeList" (valueChanged)="onCollegeChange($event.value)" [options]="{placeholder: 'Select a College'}"></select2>
+        <select2
+        name='collegeName'
+        id='collegeName'
+        [data]="collegeList"
+        (valueChanged)="onCollegeChange($event.value)"
+        [options]="{multiple: true, placeholder: 'Select a College'}"
+        [value]="collegeVal"
+        ></select2>
       </div>
     </div>
     <div class="col-sm-4">
@@ -16,6 +23,8 @@
       </div>
     </div>
   </div>
+
+  <button class="btn-btn-lg" type="button" (click)="collegeDebug()">College Debug</button>
 
   <div class="row">
     <div class="col-sm-4">
