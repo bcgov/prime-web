@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BaseComponent } from '../base-component/base-component.component';
+import * as moment from 'moment';
 
 @Component({
   selector: 'prime-date',
@@ -16,14 +17,19 @@ export class DateComponent extends BaseComponent implements OnInit {
   @Output() monthChange = new EventEmitter<number>();
   @Input() day: number | string;
   @Output() dayChange = new EventEmitter<number | string>();
+  @Input() useCurrentDate: boolean = false;
 
   constructor() {
     super();
   }
 
   ngOnInit() {
-    // Can toggle to show all errors for design purposes
+    // Can toggle to show all errors for design/dev purposes
     // this.showError = true;
+
+    if (this.useCurrentDate) {
+      this.setToToday();
+    }
   }
 
   setYearValueOnModel(value: string) {
@@ -51,6 +57,15 @@ export class DateComponent extends BaseComponent implements OnInit {
       this.month = NaN;
     }
     this.monthChange.emit(this.month);
+  }
+
+  /**
+   * Sets the default values to the current clientside date.
+   */
+  setToToday() : void {
+    this.month = moment().month() + 1; //0 is blank/unselected in options list
+    this.day = moment().date();
+    this.year = moment().year();
   }
 
   isValid(): boolean {
