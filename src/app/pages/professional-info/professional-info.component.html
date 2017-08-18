@@ -49,7 +49,7 @@
   </div>
 
 
-  <div class="row">
+  <div class="row" *ngIf="applicant.college === Colleges.CollegeOfRegisteredNursesOfBC">
     <div class="col-sm-4">
       <div class="form-group">
         <label for='advancedPracticeCerts' i18n="@@AdvancedPracticeCerts">Advanced Practice Certification(s)</label>
@@ -58,7 +58,7 @@
     </div>
   </div>
 
-  <div class="row form-group">
+  <div class="row form-group" *ngIf="applicant.college === Colleges.None">
     <div class="col-sm-6">
       <label id="deviceProvider" for="deviceProvider" class='control-label' i18n="@@DeviceProvider">Are you a Device Provider?</label>
 
@@ -70,7 +70,7 @@
     </div>
   </div>
 
- <div class="row">
+ <div class="row" *ngIf="applicant.college === Colleges.None && applicant.isDeviceProvider === false">
     <div class="col-sm-4">
       <div class="form-group">
         <label for='onBehalfOfJobTitle' i18n="@@OnBehalfOfJobTitle">On-Behalf Of Job Title</label>
@@ -92,7 +92,8 @@
           (dayChange)="applicant.dates.requestStartDate.day = $event"
           (onChange) = "onChange.emit($event)"
           [showError]="showError"
-          [required] = "true">
+          [required] = "true"
+          [useCurrentDate]="true">
         </prime-date>
       </div>
     </div>

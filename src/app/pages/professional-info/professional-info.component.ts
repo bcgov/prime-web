@@ -14,6 +14,8 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
   public applicant: Applicant;
   @ViewChild(ConsentModalComponent) private consentModal: ConsentModalComponent;
 
+  public Colleges: typeof Colleges = Colleges;
+
   constructor(private applicantData: ApplicantDataService) {
     super()
     this.applicant = applicantData.applicant;
@@ -53,7 +55,7 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
         text: 'College of Pharmacists of BC (CPBC)'
       },
       {
-        id: Colleges.CollegeOfPhysicainsAndNursesOfBC,
+        id: Colleges.CollegeOfRegisteredNursesOfBC,
         text: 'College of Physicians and Nurses of BC (CPNBC)'
       }
     ]

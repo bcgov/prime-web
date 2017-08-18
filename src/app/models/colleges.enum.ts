@@ -5,5 +5,5 @@ export enum Colleges {
   None = "none",
   CollegeOfPhysiciansAndSurgeonsOfBC = "CPSBC",
   CollegeOfPharmacistsOfBC = "CPBC",
-  CollegeOfPhysicainsAndNursesOfBC = "CPNBC",
+  CollegeOfRegisteredNursesOfBC = "CRNBC"
 }
