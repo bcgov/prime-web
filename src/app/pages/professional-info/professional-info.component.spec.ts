@@ -37,9 +37,10 @@ describe('ProfessionalInfoComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should return 4 items in the college list', () => {
-    expect(component.collegeList.length === 4).toBeTruthy();
-    expect(component.collegeList[0].text === "None").toBeTruthy();
+  it('should return 5 items in the college list', () => {
+    expect(component.collegeList.length === 5).toBeTruthy();
+    expect(component.collegeList[1].text === "None").toBeTruthy();
+    expect(component.collegeList[0].text === "").toBeTruthy();
   })
 
   it('should be able to set device provider', () => {

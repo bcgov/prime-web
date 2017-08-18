@@ -3,7 +3,7 @@ import { ApplicantDataService } from '../../services/applicant-data.service';
 import { Applicant } from '../../models/applicant';
 import { ConsentModalComponent } from '../../core/consent-modal/consent-modal.component';
 import { BaseComponent } from '../../core/base-component/base-component.component';
-import { Colleges } from '../../models/colleges.enum';
+import { Colleges, CollegeList } from '../../models/colleges.enum';
 
 @Component({
   selector: 'prime-professional-info',
@@ -40,9 +40,13 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
     console.log('---------------\ncontinue');
   }
 
-  // TODO - Create interfaces once we get real / non-dummy data here.
-  get collegeList(): any {
+  get collegeList(): CollegeList[] {
     return [
+      // It's necessary to have a blank option for the placeholder to work.
+      {
+        id: Colleges.Unselected,
+        text: '',
+      },
       {
         id: Colleges.None,
         text: 'None'

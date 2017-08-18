@@ -3,6 +3,7 @@ import { Colleges } from './colleges.enum';
 export class Applicant {
   isDeviceProvider: boolean;
   MSPBillingNumber: number;
+  college: Colleges;
 
   license : {
     licenseExpiry: SimpleDate;
@@ -13,8 +14,6 @@ export class Applicant {
     requestStartDate: SimpleDate;
     requestEndDate: SimpleDate;
   }
-
-  college: Colleges = Colleges.None;
 
   constructor() {
     this.license = {
