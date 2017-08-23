@@ -44,19 +44,19 @@
     </div>
   </div>
 
+  <hr>
+
+  <prime-address></prime-address>
+
+  <hr>
+
   <div class="row">
-    <div class="col-sm-4">
-      <div class="form-group">
-        <label for='country' i18n="@@country">Country</label>
-        <select2 name='country' id='country' [data]="countries" (valueChanged)="onCountryChanged($event.value)" [value]="countryVal"></select2>
-      </div>
-    </div>
-    <div class="col-sm-4">
-        <div class="form-group">
-            <label for='postalCode' i18n="@@postalCode">Postal Code</label>
-            <input type="text" class="form-control" name='postalCode' id='postalCode'>
+      <div class="col-sm-4">
+          <div class="form-group">
+            <label for='bcServicesCard' i18n="@@bcServicesCard">BC Services Card Reference #</label>
+            <input type="text" class="form-control" name='bcServicesCard' id='bcServicesCard'>
           </div>
-    </div>
+        </div>
   </div>
 
   <hr>

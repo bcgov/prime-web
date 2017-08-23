@@ -28,6 +28,8 @@ import { UserAcceptanceComponent } from './pages/user-acceptance/user-acceptance
 import { ReviewSubmitComponent } from './pages/review-submit/review-submit.component';
 import { SiteAccessComponent } from './pages/site-access/site-access.component'
 
+import { AddressComponent } from './core/address/address.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +49,7 @@ import { SiteAccessComponent } from './pages/site-access/site-access.component'
     UserAcceptanceComponent,
     ReviewSubmitComponent,
     SiteAccessComponent,
+    AddressComponent,
   ],
   imports: [
     BrowserModule,
