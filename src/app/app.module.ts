@@ -21,7 +21,12 @@ import { ProfessionalInfoComponent } from './pages/professional-info/professiona
 import { BaseComponent } from './core/base-component/base-component.component';
 import { DateComponent } from './core/date/date.component';
 import { CalendarFieldFormatterDirective } from './core/date/calendar-field-formatter.directive';
-import { CalendarYearValidator } from './core/date/calendar-year.validator'
+import { CalendarYearValidator } from './core/date/calendar-year.validator';
+import { ContactInformationComponent } from './pages/contact-information/contact-information.component';
+import { SelfDeclarationComponent } from './pages/self-declaration/self-declaration.component';
+import { UserAcceptanceComponent } from './pages/user-acceptance/user-acceptance.component';
+import { ReviewSubmitComponent } from './pages/review-submit/review-submit.component';
+import { SiteAccessComponent } from './pages/site-access/site-access.component'
 
 @NgModule({
   declarations: [
@@ -37,6 +42,11 @@ import { CalendarYearValidator } from './core/date/calendar-year.validator'
     DateComponent,
     CalendarFieldFormatterDirective,
     CalendarYearValidator,
+    ContactInformationComponent,
+    SelfDeclarationComponent,
+    UserAcceptanceComponent,
+    ReviewSubmitComponent,
+    SiteAccessComponent,
   ],
   imports: [
     BrowserModule,

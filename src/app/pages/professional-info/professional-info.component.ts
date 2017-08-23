@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApplicantDataService } from '../../services/applicant-data.service';
 import { Applicant } from '../../models/applicant';
 import { ConsentModalComponent } from '../../core/consent-modal/consent-modal.component';
@@ -25,7 +26,8 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
   constructor(
     private applicantData: ApplicantDataService,
     private cdRef: ChangeDetectorRef,
-    private elementRef: ElementRef) {
+    private elementRef: ElementRef,
+    private router: Router) {
     super()
     this.applicant = applicantData.applicant;
   }
@@ -105,10 +107,6 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
     this.applicant.isDeviceProvider = val;
   }
 
-  continue(): void {
-    console.log('---------------\ncontinue');
-  }
-
   defaultCollegeList(): CollegeList[] {
     return [
       {
@@ -132,6 +130,15 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
 
   onChange(values: any) {
     console.log('professional-info onchange: ', values);
+  }
+
+  canContinue(): boolean {
+    return true;
+  }
+
+  continue(): void {
+    console.log('---------------\ncontinue');
+    this.router.navigate(['site-access']);
   }
 
 }
