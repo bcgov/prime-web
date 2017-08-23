@@ -8,7 +8,22 @@ import { Router } from '@angular/router';
 })
 export class ContactInformationComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  public countries;
+
+  constructor(private router: Router) {
+    //todo
+    //make an interface for the list type below, i.e. select2 lists
+    this.countries = [
+      {
+        id: 'CAN',
+        text: "Canada"
+      },
+      {
+        id: "USA",
+        text: "United States of America"
+      }
+    ]
+   }
 
   ngOnInit() {
   }

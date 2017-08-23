@@ -52,7 +52,6 @@ export class ProgressBarComponent implements OnInit {
         activeRouteIndex = i;
       }
     }
-    console.log('isBeforeActive', routeIndex, activeRouteIndex);
     return routeIndex < activeRouteIndex;
   }
 

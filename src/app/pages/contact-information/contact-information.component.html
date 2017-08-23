@@ -1,10 +1,70 @@
-<p>
-  contact-information works!
-</p>
+<form #formRef="ngForm" novalidate (submit)="continue()">
+  <h1 i18n="@@ContactInformation">Contact Information</h1>
 
-<hr>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for='firstName' i18n="@@firstName">First Name</label>
+        <input type="text" class="form-control" name='firstName' id='firstName'>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for='middleName' i18n="@@middleName">Middle name (if applicable)</label>
+        <input type="text" class="form-control" name='middleName' id='middleName'>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for='lastName' i18n="@@lastName">Last Name</label>
+        <input type="text" class="form-control" name='lastName' id='lastName'>
+      </div>
+    </div>
+  </div>
 
-<div class="row">
-  <button type='button' class='btn btn-default pull-left'>Cancel</button>
-  <button type='button' class='btn btn-primary pull-right' (click)="continue()" [disabled]="!canContinue()">Continue</button>
-</div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for='dateOfBirth' i18n="@@DateOfBirth">Date of Birth</label>
+        <prime-date name='dateOfBirth' id='dateOfBirth' [showError]="false" [required]="true">
+        </prime-date>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for='phoneNumber' i18n="@@phoneNumber">Phone Number</label>
+        <input type="text" class="form-control" name='phoneNumber' id='phoneNumber'>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for='email' i18n="@@email">Email Address</label>
+        <input type="text" class="form-control" name='email' id='email'>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for='country' i18n="@@country">Country</label>
+        <select2 name='country' id='country' [data]="countries" (valueChanged)="onCountryChanged($event.value)" [value]="countryVal"></select2>
+      </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="form-group">
+            <label for='postalCode' i18n="@@postalCode">Postal Code</label>
+            <input type="text" class="form-control" name='postalCode' id='postalCode'>
+          </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <button type='button' class='btn btn-default pull-left'>Cancel</button>
+    <button type='button' class='btn btn-primary pull-right' (click)="continue()" [disabled]="!canContinue()">Continue</button>
+  </div>
+
+
+</form>
