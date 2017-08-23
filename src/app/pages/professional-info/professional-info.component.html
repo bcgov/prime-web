@@ -24,8 +24,6 @@
     </div>
   </div>
 
-  <button class="btn-btn-lg" type="button" (click)="collegeDebug()">College Debug</button>
-
   <div class="row">
     <div class="col-sm-4">
       <div class="form-group">
@@ -57,8 +55,7 @@
     </div>
   </div>
 
-
-  <div class="row" *ngIf="applicant.college === Colleges.CRNBC">
+  <div class="row" *ngIf="applicant.college?.indexOf(Colleges.CRNBC) >= 0">
     <div class="col-sm-4">
       <div class="form-group">
         <label for='advancedPracticeCerts' i18n="@@AdvancedPracticeCerts">Advanced Practice Certification(s)</label>
@@ -132,7 +129,7 @@
   </div>
 
 
-  <div *ngIf="true">
+  <div *ngIf="false">
     {{ applicant | json }}
   </div>
 
