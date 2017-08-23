@@ -3,7 +3,7 @@ import { Colleges } from './colleges.enum';
 export class Applicant {
   isDeviceProvider: boolean;
   MSPBillingNumber: number;
-  college: Colleges;
+  college: Colleges[] | Colleges;
 
   license : {
     licenseExpiry: SimpleDate;
@@ -28,7 +28,7 @@ export class Applicant {
   }
 
   get collegeNumber(): string{
-    return this.college ? this.college : '';
+    return this.college ? this.college.toString() : '';
   }
 
 }

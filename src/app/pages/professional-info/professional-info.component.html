@@ -11,7 +11,7 @@
         name='collegeName'
         id='collegeName'
         [data]="collegeList"
-        (valueChanged)="onCollegeChange(collegeName)"
+        (valueChanged)="onCollegeChange($event.value)"
         [options]="{multiple: true, placeholder: 'Select a College'}"
         [value]="collegeVal"
         ></select2>      </div>
