@@ -58,4 +58,11 @@ select2 {
     width: 100% !important;
     min-height: 36px !important;
   }
+  .select2-selection {
+    padding-right: 8px !important; //Same as the padding-left default
+  }
+  .select2-selection__rendered {
+    //Ensure selected text isn't cut off on smaller view sizes.
+    white-space: normal !important;
+  }
 }

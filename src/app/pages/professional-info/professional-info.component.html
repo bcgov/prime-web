@@ -7,14 +7,14 @@
       <div class="form-group">
         <label for='collegeName' i18n="@@ProfessionalCollegeName">Professional College Name</label>
         <select2
+        #collegeName
         name='collegeName'
         id='collegeName'
         [data]="collegeList"
-        (valueChanged)="onCollegeChange($event.value)"
+        (valueChanged)="onCollegeChange(collegeName)"
         [options]="{multiple: true, placeholder: 'Select a College'}"
         [value]="collegeVal"
-        ></select2>
-      </div>
+        ></select2>      </div>
     </div>
     <div class="col-sm-4">
       <div class="form-group">

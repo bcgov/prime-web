@@ -1,9 +1,11 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { ApplicantDataService } from '../../services/applicant-data.service';
 import { Applicant } from '../../models/applicant';
 import { ConsentModalComponent } from '../../core/consent-modal/consent-modal.component';
 import { BaseComponent } from '../../core/base-component/base-component.component';
 import { Colleges, CollegeList } from '../../models/colleges.enum';
+
+import { Select2Component } from 'ng2-select2';
 
 
 @Component({
@@ -18,18 +20,20 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
   public Colleges: typeof Colleges = Colleges;
   public showError: boolean = false;
   public collegeList: CollegeList[];
-  public collegeVal: string;
-  // public collegeModelVal: any;
+  public collegeVal: string | string[];
+  public collegeModelVal: any;
   private needToUpdateCollegeVal: boolean = false;
+  private lastSelectedOption: string;
 
   constructor(
     private applicantData: ApplicantDataService,
-    private cdRef:ChangeDetectorRef) {
+    private cdRef: ChangeDetectorRef,
+    private elementRef: ElementRef) {
     super()
     this.applicant = applicantData.applicant;
   }
 
-  ngAfterViewChecked(){
+  ngAfterViewChecked() {
     this.cdRef.detectChanges();
     // if (this.needToUpdateCollegeVal){
     //   this.collegeVal = 'none';
@@ -37,9 +41,10 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
     // }
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.collegeList = this.defaultCollegeList();
     this.collegeVal = 'unchanged!';
+    this.initSelect();
   }
 
   ngAfterViewInit() {
@@ -48,7 +53,7 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
     // this.consentModal.openModal();
   }
 
-  collegeDebug(){
+  collegeDebug() {
     console.log('collegeDebug');
     // // this.setCollegeSelection(Colleges.None);
     // // this.collegeList[0]._refresh = Date.now(); //won't work, must change reference id
@@ -70,7 +75,7 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
   /**
    * Sets the college selection value.
    */
-  setCollegeSelection(value : Colleges){
+  setCollegeSelection(value: Colleges) {
     //Angular won't fire an onChange event if we pass in the same data (e.g. pass in 'none' two times in a row). Solution is to use a timeout and pass two separate values in quick succession.
 
     // NOT WORKING! Getting a bad loop here when changing it twice.
@@ -91,24 +96,130 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
 
   }
 
+  initSelect() {
+    let self = this;
+
+    //Problem - This listener fires AFTER onCollegeChange, so lastSelectedOption is wrong.
+    $(this.elementRef.nativeElement).on("select2:select", 'select', function (evt: any) {
+    // $(this.elementRef.nativeElement)
+    // .on("select2:select", 'select', (evt: any) => {
+      // console.log('initSelect called. evt: ', );
+      var element = evt.params.data.element;
+      var $element = $(element);
+
+      // console.log('Select2A:', $element.val())
+
+      $element.detach();
+      $(this).append($element);
+      $(this).trigger("change");
+
+      // console.log('last selected option:', $element.val())
+      // self.lastSelectedOption = $element.val();
+      // console.log('done changing select2', )
+      // console.log('Select2B:', $element.val())
+
+    });
+
+  }
+
   private counter: number = 0;
 
-  public onCollegeChange(value: string[]): void {;
-    console.log('onCollegeChange', {count: value.length });
+  /**
+   * Todo - finish off this function!
+   *
+   */
+  // public onCollegeChange(value: string[]): void {
+  public onCollegeChange(select2Element: any): void {
+    let value = select2Element.element.val();
+    // let mostRecentVal = $(select2Element.element).find('option:last').val()
 
-    if (value.indexOf(Colleges.None) !== -1 && value.length > 1 ){
-      console.log('NONE selected, clearing!');
+    let areOtherOptionsSelected: boolean = !!value.filter(x => x !== Colleges.None).length;
+
+    //Must be used in conjunction w/ initSelect's reordering. Otherwise will get the first item after sorting, which ignores the user input order.
+    let firstSelected = this.elementRef.nativeElement.querySelectorAll('.select2-selection__rendered > li')[0].title
+
+    //'None' is already selected only if it's the non-first option.
+    let isNoneInPreviousSelection = !(firstSelected === "None");
+    let isNoneInSelection = value.indexOf(Colleges.None) >= 0;
+
+
+
+
+    console.log('onCollegeChange', value, isNoneInPreviousSelection);
+    // console.log('onCollegeChange templateR', value, select2Element);
+
+
+    //1. Have items, select 'None' -> clear and show 'None'
+    //2. Have 'None', select items -> clear and show items.
+
+    //Problem - Can't detect the order that items are added.
+    //can't detect if 'Have items' or 'Have none', only what the end selection is.
+
+
+    //NOTE - Not sure if both these if statements are working together
+    // if (value.indexOf(Colleges.None) === 0 && areOtherOptionsSelected) {
+    // if (value.indexOf(Colleges.None) >= 0) {
+    if (isNoneInSelection && !isNoneInPreviousSelection) {
+
+      //THIS PART IS WORKING REALLY WELL!
+      //Only problem - Once 'none' is active, can't easily add other sections
+      //It clears them. Need to find out how to auto-remove 'None'. Slice isn't working for some reason.
+      //Case: Have items, select 'None' -> clear and show 'None'
+      console.log('NoneA')
+      this.collegeVal = this.counter++ % 2 == 0 ? '' : 'none';
+      this.cdRef.detectChanges();
+      this.collegeVal = 'none';
+      this.cdRef.detectChanges();
+    }
+    else if (isNoneInSelection && isNoneInPreviousSelection){
+      //Case: Have 'None', select items -> clear and show items.
+      console.log('NoneC!!!', value)
+      this.collegeVal = value.filter(x => x.toLowerCase() !== 'none');
+      this.cdRef.detectChanges();
+    }
+    else {
+      //Case: ???
+      // console.log('None already selected, remove None');
+      console.log('NoneB');
+      //If user selects a college when 'none' is selected, remove 'none'
+      // this.collegeVal = value.slice(1);
+      // this.cdRef.detectChanges();
+    }
+
+
+    if (value.indexOf(Colleges.None) !== -1 && value.length > 1) {
+      // console.log('NONE selected, clearing!');
       // this.setCollegeSelection(Colleges.None);
 
+      // //NOTE - Not sure if both these if statements are working together
+      // if (value.indexOf(Colleges.None) === 0) {
+      //   //THIS PART IS WORKING REALLY WELL!
+      //   //Only problem - Once 'none' is active, can't easily add other sections
+      //   //It clears them. Need to find out how to auto-remove 'None'. Slice isn't working for some reason.
+      //   console.log('NoneA')
+      //   // this.collegeVal = this.counter++ % 2 == 0 ? '' : 'none';
+      //   // this.cdRef.detectChanges();
+      //   // this.collegeVal = 'none';
+      //   // this.cdRef.detectChanges();
+      // }
+      // else {
+      //   // console.log('None already selected, remove None');
+      //   console.log('NoneB');
+      //   //If user selects a college when 'none' is selected, remove 'none'
+      //   // this.collegeVal = value.slice(1);
+      //   // this.cdRef.detectChanges();
+      // }
 
-      // this.collegeVal = '';
-
-      this.collegeVal = this.counter++ % 2 == 0 ? 'none' : '';
-      console.log('collegeVal', this.collegeVal);
 
 
-      this.cdRef.detectChanges();
+      // //THIS IS PARTIALLY WORKING!
+      // //Problem - it always blanks out the value to empty, but we want 'None'
+      // // this.collegeVal = this.counter++ % 2 == 0 ? 'none' : '';
+      // this.collegeVal = this.counter++ % 2 == 0 ? '' : 'none';
+      // this.cdRef.detectChanges();
       // this.collegeVal = 'none';
+      // //now need to disable other results until 'None' is removed.
+      // // this.defaultCollegeList(true);
       // this.cdRef.detectChanges();
     }
 
@@ -123,10 +234,10 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
   }
 
   // get defaultCollegeList(): CollegeList[] {
-  defaultCollegeList(): CollegeList[] {
+  // defaultCollegeList(): CollegeList[] {
   // defaultCollegeList(): any[] {
-  // defaultCollegeList(disabled: boolean = false): CollegeList[] {
-  // defaultCollegeList(disabled: boolean = false): any[] {
+  defaultCollegeList(disabled: boolean = false): CollegeList[] {
+    // defaultCollegeList(disabled: boolean = false): any[] {
     return [
       {
         id: Colleges.None,
@@ -134,29 +245,30 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
         // disabled: false,
       },
       // {
-      //   id: 'NONE',
-      //   text: 'NoneBoop',
+      //   // id: 'NONE',
+      //   id: Colleges.None,
+      //   text: 'None2',
       //   // disabled: false,
       // },
       {
         id: Colleges.CPSBC,
         text: 'College of Physicians and Surgeons of BC (CPSBC)',
-        // // disabled: disabled
+        disabled: disabled
       },
       {
         id: Colleges.CPBC,
         text: 'College of Pharmacists of BC (CPBC)',
-        // disabled: disabled
+        disabled: disabled
       },
       {
         id: Colleges.CRNBC,
         text: 'College of Registered Nurses of BC (CRNBC)',
-        // disabled: disabled
+        disabled: disabled
       }
     ]
   }
 
-  onChange(values: any){
+  onChange(values: any) {
     console.log('professional-info onchange: ', values);
   }
 
