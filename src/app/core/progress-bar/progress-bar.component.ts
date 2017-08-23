@@ -15,7 +15,7 @@ export class ProgressBarComponent implements OnInit {
     {displayName: 'Contact Information', routerLink: '/contact-info'},
     {displayName: 'Self Declaration', routerLink: '/self-declaration'},
     {displayName: 'User Acceptance', routerLink: '/user-acceptance'},
-    {displayName: 'Review & Submit ', routerLink: '/review'},
+    {displayName: 'Review & Submit ', routerLink: '/review-submit'},
   ]
 
   constructor(public router: Router) { }
@@ -39,6 +39,21 @@ export class ProgressBarComponent implements OnInit {
       }
     }
     return routeIndex > activeRouteIndex;
+  }
+
+  isBeforeActiveRoute(item: ProgressBarItem) {
+    let routeIndex = -1;
+    let activeRouteIndex = -1;
+    for (let i = 0; i < this.progressBarList.length; i++) {
+      if (this.progressBarList[i].routerLink === item.routerLink) {
+        routeIndex = i;
+      }
+      if (this.isActive(this.progressBarList[i])) {
+        activeRouteIndex = i;
+      }
+    }
+    console.log('isBeforeActive', routeIndex, activeRouteIndex);
+    return routeIndex < activeRouteIndex;
   }
 
 

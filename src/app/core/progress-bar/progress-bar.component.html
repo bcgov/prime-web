@@ -4,7 +4,8 @@
       <li *ngFor="let item of progressBarList; let itemNum = index">
         <a routerLink="{{item.routerLink}}"
         [class.active]="isActive(item)"
-        [class.afterActive]="isAfterActive(item)">
+        [class.afterActive]="isAfterActive(item)"
+        [class.beforeActive]="isBeforeActiveRoute(item)">
             <!-- <span>{{item.routerLink}} == {{router.url}}</span> -->
              <span>{{itemNum + 1}}</span>
              <span>{{item.displayName}}</span>
