@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApplicantDataService } from '../../services/applicant-data.service';
+import { Applicant } from '../../models/applicant';
+
 
 @Component({
   selector: 'app-contact-information',
@@ -9,8 +12,11 @@ import { Router } from '@angular/router';
 export class ContactInformationComponent implements OnInit {
 
   public countries;
+  public applicant: Applicant;
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+  private applicantData: ApplicantDataService) {
+    this.applicant = applicantData.applicant;
     //todo
     //make an interface for the list type below, i.e. select2 lists
     this.countries = [
@@ -26,6 +32,10 @@ export class ContactInformationComponent implements OnInit {
    }
 
   ngOnInit() {
+  }
+
+  hasBCServicesCard(val: boolean) : void {
+    this.applicant.hasBCServicesCard = val;
   }
 
   canContinue(): boolean {

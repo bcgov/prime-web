@@ -4,6 +4,7 @@ export class Applicant {
   isDeviceProvider: boolean;
   MSPBillingNumber: number;
   college: Colleges[] | Colleges;
+  hasBCServicesCard: boolean;
 
   license : {
     licenseExpiry: SimpleDate;

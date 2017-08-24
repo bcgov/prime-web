@@ -50,13 +50,25 @@
 
   <hr>
 
-  <div class="row">
-      <div class="col-sm-4">
-          <div class="form-group">
-            <label for='bcServicesCard' i18n="@@bcServicesCard">BC Services Card Reference #</label>
-            <input type="text" class="form-control" name='bcServicesCard' id='bcServicesCard'>
-          </div>
+  <div class="row form-group">
+      <div class="col-sm-6">
+        <label id="haveBCServicesCard" for="haveBCServicesCard" class='control-label' i18n="@@haveBCServicesCard">Do you have a BC Services Card?</label>
+
+        <!-- TODO - Move this into its own component?  -->
+        <div class="btn-group">
+          <label class="btn btn-default" (click)="hasBCServicesCard(true)" btnRadio="Left" [class.btn-radio]="applicant.hasBCServicesCard">Yes</label>
+          <label class="btn btn-default" (click)="hasBCServicesCard(false)" btnRadio="Middle" [class.btn-radio]="applicant.hasBCServicesCard === false">No</label>
         </div>
+      </div>
+    </div>
+
+  <div class="row" *ngIf="applicant.hasBCServicesCard">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for='bcServicesCard' i18n="@@bcServicesCard">BC Services Card Reference #</label>
+        <input type="text" class="form-control" name='bcServicesCard' id='bcServicesCard'>
+      </div>
+    </div>
   </div>
 
   <hr>
