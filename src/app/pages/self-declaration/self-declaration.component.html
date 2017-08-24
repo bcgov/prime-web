@@ -1,7 +1,91 @@
-<p>
-  self-declaration works!
-</p>
+<div class="row form-group">
+  <div class="col-sm-12 col-md-8 col-lg-8">
+    <label id="haveBeenSubjectOfOrderOrConviction" for="haveBeenSubjectOfOrderOrConviction" class='intro' i18n="@@haveBeenSubjectOfOrderOrConviction">Have you ever been the subject of an order or conviction for an information contravention?</label>
 
+    <!-- TODO - Move this into its own component?  -->
+    <div class="btn-group">
+      <label class="btn btn-default" (click)="setInfoContravention(true)" btnRadio="Left" [class.btn-radio]="applicant.hasInformationContraventionOrder">Yes</label>
+      <label class="btn btn-default" (click)="setInfoContravention(false)" btnRadio="Middle" [class.btn-radio]="applicant.hasInformationContraventionOrder === false">No</label>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="applicant.hasInformationContraventionOrder">
+  <div class="form-group">
+    <div class="col-lg-6 col-md-8 col-sm-12">
+      <!-- <label for="infoContraventionDetails" class="control-label">If yes, please provide</label> -->
+      <label for="infoContraventionDetails" class="control-label">Please provide details</label>
+      <textarea name="infoContraventionDetails" id="infoContraventionDetails" class='form-control' rows='3'></textarea>
+    </div>
+  </div>
+</div>
+
+<div class="row form-group">
+  <div class="col-sm-12 col-md-8 col-lg-8">
+    <label id="haveBeenSubjectOfOrderOrConviction" for="haveBeenSubjectOfOrderOrConviction" class='intro' i18n="@@haveBeenSubjectOfOrderOrConviction">Have you ever had your registration with a governing body of a health profession suspended or cancelled?</label>
+
+    <!-- TODO - Move this into its own component?  -->
+    <div class="btn-group">
+      <label class="btn btn-default" (click)="setHasBeenSuspended(true)" btnRadio="Left" [class.btn-radio]="applicant.hasBeenSuspended">Yes</label>
+      <label class="btn btn-default" (click)="setHasBeenSuspended(false)" btnRadio="Middle" [class.btn-radio]="applicant.hasBeenSuspended === false">No</label>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="applicant.hasBeenSuspended">
+  <div class="form-group">
+    <div class="col-lg-6 col-md-8 col-sm-12">
+      <label for="infoContraventionDetails" class="control-label">Please provide details</label>
+      <textarea name="infoContraventionDetails" id="infoContraventionDetails" class='form-control' rows='3'></textarea>
+    </div>
+  </div>
+</div>
+
+<div class="row form-group">
+  <div class="col-sm-12 col-md-8 col-lg-8">
+    <label id="haveBeenSubjectOfOrderOrConviction" for="haveBeenSubjectOfOrderOrConviction" class='intro' i18n="@@haveBeenSubjectOfOrderOrConviction">Have you ever had your access to PharmaNet suspended or revoked?</label>
+
+    <!-- TODO - Move this into its own component?  -->
+    <div class="btn-group">
+      <label class="btn btn-default" (click)="setHasPharmaNetEverRevoked(true)" btnRadio="Left" [class.btn-radio]="applicant.hasPharmaNetEverRevoked">Yes</label>
+      <label class="btn btn-default" (click)="setHasPharmaNetEverRevoked(false)" btnRadio="Middle" [class.btn-radio]="applicant.hasPharmaNetEverRevoked === false">No</label>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="applicant.hasPharmaNetEverRevoked">
+  <div class="form-group">
+    <div class="col-lg-6 col-md-8 col-sm-12">
+      <label for="infoContraventionDetails" class="control-label">Please provide details</label>
+      <textarea name="infoContraventionDetails" id="infoContraventionDetails" class='form-control' rows='3'></textarea>
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="applicant.hasPharmaNetEverRevoked">
+
+  <div class="row form-group">
+    <div class="col-sm-12 col-md-8 col-lg-8">
+      <label id="haveBeenSubjectOfOrderOrConviction" for="haveBeenSubjectOfOrderOrConviction" class='intro' i18n="@@haveBeenSubjectOfOrderOrConviction">Has the circumstances that lead to the revocation been resolved?</label>
+
+      <!-- TODO - Move this into its own component?  -->
+      <div class="btn-group">
+        <label class="btn btn-default" (click)="setHasRevocationBeenResolved(true)" btnRadio="Left" [class.btn-radio]="applicant.hasRevocationBeenResolved">Yes</label>
+        <label class="btn btn-default" (click)="setHasRevocationBeenResolved(false)" btnRadio="Middle" [class.btn-radio]="applicant.hasRevocationBeenResolved === false">No</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="applicant.hasRevocationBeenResolved">
+    <div class="form-group">
+      <div class="col-lg-6 col-md-8 col-sm-12">
+        <label for="infoContraventionDetails" class="control-label">Please provide details</label>
+        <textarea name="infoContraventionDetails" id="infoContraventionDetails" class='form-control' rows='3'></textarea>
+      </div>
+    </div>
+  </div>
+
+</ng-container>
 <hr>
 
 <div class="row">

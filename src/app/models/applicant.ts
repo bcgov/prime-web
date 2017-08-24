@@ -6,6 +6,11 @@ export class Applicant {
   college: Colleges[] | Colleges;
   hasBCServicesCard: boolean;
 
+  hasInformationContraventionOrder: boolean;
+  hasBeenSuspended: boolean;
+  hasPharmaNetEverRevoked: boolean;
+  hasRevocationBeenResolved: boolean;
+
   license : {
     licenseExpiry: SimpleDate;
     licenseClass: string; //TODO!

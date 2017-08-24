@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApplicantDataService } from '../../services/applicant-data.service';
+import { Applicant } from '../../models/applicant';
 
 @Component({
   selector: 'app-self-declaration',
@@ -7,10 +9,30 @@ import { Router } from '@angular/router';
   styleUrls: ['./self-declaration.component.scss']
 })
 export class SelfDeclarationComponent implements OnInit {
+  public applicant: Applicant;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+  private applicantData: ApplicantDataService) {
+    this.applicant = applicantData.applicant;
+   }
 
   ngOnInit() {
+  }
+
+  setHasBeenSuspended(val: boolean) {
+    this.applicant.hasBeenSuspended = val;
+  }
+
+  setHasPharmaNetEverRevoked(val: boolean){
+    this.applicant.hasPharmaNetEverRevoked = val;
+  }
+
+  setHasRevocationBeenResolved(val: boolean){
+    this.applicant.hasRevocationBeenResolved = val;
+  }
+
+  setInfoContravention(val : boolean){
+    this.applicant.hasInformationContraventionOrder = val;
   }
 
   canContinue(): boolean {
