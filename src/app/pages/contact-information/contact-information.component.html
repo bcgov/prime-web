@@ -82,14 +82,15 @@
     <p>Ensure to record your responses to the security questions as these questions will be asked if you request a change to
       your information or access in the future.</p>
 
-    <div class="row" class='question-row' *ngFor="let count of [1,2,3,4,5,6,7,8,9,10]">
+    <div class="row" class='question-row' *ngFor="let question of securityQuestions; let count = index" [ngClass]="{'has-success' : question['selected']}">
       <div class="col-sm-5 form-group">
-        <label for="securityQuestion1" class='block-label'>Security Question {{count}}</label>
+        <label for="securityQuestion1" class='block-label'>Security Question {{count + 1}}</label>
         <div class="checkbox checkbox-success checkbox-inline">
-          <input class="input-lg" id="checkbox{{count}}" type="checkbox">
+          <input class="input-lg" id="checkbox{{count}}" type="checkbox" [checked]="question.selected"
+          (click)="selectQuestion(question, $event)">
           <label class="" for="checkbox{{count}}"></label>
         </div>
-        <input type="text" class="form-control" id='securityQuestion{{count}}' name='securityQuestion{{count}}' [value]="securityQuestions[count-1] || ''">
+        <input type="text" class="form-control" id='securityQuestion{{count}}' name='securityQuestion{{count}}' [value]="question.question || ''">
       </div>
       <div class="col-sm-5 form-group">
         <label for="securityAnswer{{count}}">Security Response {{count}}</label>

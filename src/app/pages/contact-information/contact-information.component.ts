@@ -13,7 +13,7 @@ export class ContactInformationComponent implements OnInit {
 
   public countries;
   public applicant: Applicant;
-  public securityQuestions: string[];
+  public securityQuestions: {question: string, selected: boolean}[];
 
   constructor(private router: Router,
   private applicantData: ApplicantDataService) {
@@ -32,17 +32,21 @@ export class ContactInformationComponent implements OnInit {
     ]
 
     this.securityQuestions = [
-      "What was your first pet's name?",
-      "What was the make of your first car?",
-      "What was the last name of your favourite teacher?",
-      "What was the last name of your childhood best friend?",
-      "What is your oldest cousin's first name?",
-      "What town was your father born in?",
-      "What town was your mother born in?",
-      "Where did you meet your spouse?",
-      "What is the name of your favourite book?"
+      {question: "What was your first pet's name?", selected: true},
+      {question: "What was the make of your first car?", selected: true},
+      {question: "What was the last name of your favourite teacher?", selected: false},
+      {question: "What was the last name of your childhood best friend?", selected: false},
+      {question: "What is your oldest cousin's first name?", selected: false},
+      {question: "What town was your father born in?", selected: false},
+      {question: "What town was your mother born in?", selected: false},
+      {question: "Where did you meet your spouse?", selected: false},
+      {question: "What is the name of your favourite book?", selected: false}
     ]
    }
+
+  selectQuestion(question, event){
+    question.selected = event.target.checked;
+  }
 
   ngOnInit() {
   }

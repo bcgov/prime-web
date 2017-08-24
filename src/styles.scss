@@ -75,6 +75,7 @@ select2 {
 }
 
 
-.has-success {
-  border-color: #1b926c;
+.has-success .form-control {
+  border-color: #1b926c !important;
 }
+
