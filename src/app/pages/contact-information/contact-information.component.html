@@ -85,7 +85,7 @@
 
     <div class="row" class='question-row' *ngFor="let question of securityQuestions; let count = index" [ngClass]="{'has-success' : question['selected']}">
       <div class="col-sm-5 form-group">
-        <label for="securityQuestion1" class='block-label'>Security Question {{count + 1}}</label>
+        <label for="securityQuestion1" class='block-label'>Security Question {{count + 1}} <span *ngIf="question.selected">&mdash; Selected</span></label>
         <div class="checkbox checkbox-success checkbox-inline">
           <input class="input-lg" id="checkbox{{count}}" type="checkbox" [checked]="question.selected"
           (click)="selectQuestion(question, $event)">
@@ -97,14 +97,9 @@
         <label for="securityAnswer{{count}}">Security Response {{count}}</label>
         <input type="text" class="form-control" id='securityAnswer{{count}}' name='securityAnswer{{count}}'>
       </div>
-      <!-- <hr> -->
     </div>
 
   </div>
-
-
-
-  <!-- <h1>boop</h1> -->
 
   <hr>
 
