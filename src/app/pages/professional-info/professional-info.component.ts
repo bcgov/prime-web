@@ -45,7 +45,7 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
   ngAfterViewInit() {
     // ENABLE THIS LINE! TODO!
     // Commented out during dev.
-    // this.consentModal.openModal();
+    this.consentModal.openModal();
   }
 
   collegeDebug() {

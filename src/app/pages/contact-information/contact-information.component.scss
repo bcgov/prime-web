@@ -1,0 +1,7 @@
+.security-questions {
+  .block-label { display: block;}
+  input[type="text"].form-control {
+    display: inline-block;
+    width: calc(100% - 30px) //size of checkbox
+  }
+}
