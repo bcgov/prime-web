@@ -5,9 +5,9 @@
     width: calc(100% - 30px) //size of checkbox
   }
 
-  // Todo - toggle below to show/hide the green bg and sizing for questions
   .form-group {
     padding: 15px 0px 15px 10px;
+    transition: background-color 0.3s;
   }
   .has-success .form-group {
     background-color: rgba(124, 199, 147, 0.09);

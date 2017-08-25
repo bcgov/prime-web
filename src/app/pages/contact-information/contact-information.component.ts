@@ -40,6 +40,7 @@ export class ContactInformationComponent implements OnInit {
       {question: "What town was your father born in?", selected: false},
       {question: "What town was your mother born in?", selected: false},
       {question: "Where did you meet your spouse?", selected: false},
+      {question: "What year did you meet your spouse?", selected: false},
       {question: "What is the name of your favourite book?", selected: false}
     ]
    }
