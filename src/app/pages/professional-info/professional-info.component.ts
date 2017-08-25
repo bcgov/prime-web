@@ -43,8 +43,6 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    // ENABLE THIS LINE! TODO!
-    // Commented out during dev.
     if (!this.applicant.consentInfoCollection){
       this.consentModal.openModal();
     }
@@ -107,10 +105,6 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
     else {
       this.setCollegeSelection(value)
     }
-  }
-
-  setDeviceProvider(val: boolean): void {
-    this.applicant.isDeviceProvider = val;
   }
 
   defaultCollegeList(): CollegeList[] {

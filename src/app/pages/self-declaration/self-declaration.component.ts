@@ -19,26 +19,6 @@ export class SelfDeclarationComponent implements OnInit {
   ngOnInit() {
   }
 
-  setHadLimits(val: boolean) {
-    this.applicant.hasHadLimitsOrConditions = val;
-  }
-
-  setHasBeenSuspended(val: boolean) {
-    this.applicant.hasBeenSuspended = val;
-  }
-
-  setHasPharmaNetEverRevoked(val: boolean){
-    this.applicant.hasPharmaNetEverRevoked = val;
-  }
-
-  setHasRevocationBeenResolved(val: boolean){
-    this.applicant.hasRevocationBeenResolved = val;
-  }
-
-  setInfoContravention(val : boolean){
-    this.applicant.hasInformationContraventionOrder = val;
-  }
-
   canContinue(): boolean {
     return true;
   }

@@ -36,9 +36,10 @@ export class Applicant {
 
   }
 
-  get collegeNumber(): string{
-    return this.college ? this.college.toString() : '';
-  }
+  //Removeable TODO
+  // get collegeNumber(): string{
+  //   return this.college ? this.college.toString() : '';
+  // }
 
   /**
    * Determines if applicant goes to college. Can be left blank to see if they go to any college. To check if option is "none", must explicitly pass Colleges.None

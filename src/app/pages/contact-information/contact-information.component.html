@@ -114,17 +114,9 @@
     <div class="row question-row" *ngFor="let count of [1, 2, 3];" >
       <div class="col-sm-5 form-group">
         <label for="securityQuestion{{count}}" class='block-label'>Security Question {{count}}</label>
-        <!-- <div class="checkbox checkbox-success checkbox-inline">
-          <input class="input-lg" id="checkbox{{count}}" type="checkbox" [checked]="question.selected" (click)="selectQuestion(question, $event)">
-          <label class="" for="checkbox{{count}}"></label>
-        </div> -->
-        <!-- <select2
-        name='securityQuestion{{count}}'
-        id='securityQuestion{{count}}'
-        [data]="securityQuestions"
-        ></select2> -->
         <select2
         [data]="securityQuestions"
+        value="{{securityQuestions[count - 1].id}}"
         ></select2>
       </div>
       <div class="col-sm-5 form-group">

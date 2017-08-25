@@ -34,6 +34,7 @@ import { FileUploaderComponent } from './core/file-uploader/file-uploader.compon
 // import { CaptchaComponent } from 'mygovbc-captcha-widget/component';
 
 import { CaptchaComponent } from 'mygovbc-captcha-widget/src/captcha.component';
+import { PrimeToggleComponent } from './core/prime-toggle/prime-toggle.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { CaptchaComponent } from 'mygovbc-captcha-widget/src/captcha.component';
     AddressComponent,
     FileUploaderComponent,
     CaptchaComponent,
+    PrimeToggleComponent,
   ],
   imports: [
     BrowserModule,

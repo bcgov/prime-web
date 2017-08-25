@@ -70,10 +70,7 @@
       <label id="deviceProvider" for="deviceProvider" class='control-label' i18n="@@DeviceProvider">Are you a Device Provider?</label>
 
       <!-- TODO - Move this into its own component?  -->
-      <div class="btn-group">
-        <label class="btn btn-default" (click)="setDeviceProvider(true)" btnRadio="Left" [class.btn-radio]="applicant.isDeviceProvider">Yes</label>
-        <label class="btn btn-default" (click)="setDeviceProvider(false)" btnRadio="Middle" [class.btn-radio]="applicant.isDeviceProvider === false">No</label>
-      </div>
+      <prime-toggle [(data)]="applicant.isDeviceProvider"></prime-toggle>
     </div>
   </div>
 
@@ -127,11 +124,6 @@
   <div class="row">
     <button type='button' class='btn btn-default pull-left'>Cancel</button>
     <button type='button' class='btn btn-primary pull-right' (click)="continue()" [disabled]="!canContinue()">Continue</button>
-  </div>
-
-
-  <div *ngIf="true">
-    {{ applicant | json }}
   </div>
 
 </form>
