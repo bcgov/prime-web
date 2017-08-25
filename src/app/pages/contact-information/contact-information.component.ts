@@ -4,23 +4,26 @@ import { ApplicantDataService } from '../../services/applicant-data.service';
 import { Applicant } from '../../models/applicant';
 import { Select2OptionData } from 'ng2-select2';
 
+import { BaseComponent } from '../../core/base-component/base-component.component';
+
+
+
 @Component({
   selector: 'app-contact-information',
   templateUrl: './contact-information.component.html',
   styleUrls: ['./contact-information.component.scss']
 })
-export class ContactInformationComponent implements OnInit {
+export class ContactInformationComponent extends BaseComponent implements OnInit {
 
-  public countries;
+  public countries: Select2OptionData[];
   public applicant: Applicant;
-  // public securityQuestions: {question: string, selected: boolean}[];
   public securityQuestions: Select2OptionData[];
 
   constructor(private router: Router,
     private applicantData: ApplicantDataService) {
+    super();
     this.applicant = applicantData.applicant;
-    //todo
-    //make an interface for the list type below, i.e. select2 lists
+
     this.countries = [
       {
         id: 'CAN',
@@ -60,27 +63,11 @@ export class ContactInformationComponent implements OnInit {
     ]
   }
 
-  // getSecurityQuestions(offset: number) : Select2OptionData[] {
-  //   let arr = this.securityQuestions.slice();
-  //   return this.rotateArray(arr, offset);
-  // }
-
-  // private rotateArray(arr: any[], timesToRotate: number) {
-  //   for (let i = 0; i <= timesToRotate; i++) {
-  //     arr.push(arr.shift());
-  //   }
-  //   return arr;
-  // }
-
   selectQuestion(question, event) {
     question.selected = event.target.checked;
   }
 
   ngOnInit() {
-  }
-
-  hasBCServicesCard(val: boolean): void {
-    this.applicant.hasBCServicesCard = val;
   }
 
   canContinue(): boolean {

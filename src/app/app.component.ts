@@ -8,10 +8,8 @@ import { ConsentModalComponent } from './core/consent-modal/consent-modal.compon
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app works!';
+  title = 'Prime – Applicant Enrollment';
   constructor(){
-
-    //ARC TODO - Refactor and move this into a better section?
     //Set app-wide configuration for select2.
     (<any>$.fn.select2).defaults.set( "theme", "bootstrap" );
   }

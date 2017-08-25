@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
 import { ProgressBarItem } from './progress-bar.interface';
 
+import { BaseComponent } from '../base-component/base-component.component';
 
 @Component({
   selector: 'prime-progress-bar',
   templateUrl: './progress-bar.component.html',
   styleUrls: ['./progress-bar.component.scss']
 })
-export class ProgressBarComponent implements OnInit {
+export class ProgressBarComponent extends BaseComponent implements OnInit {
   progressBarList: ProgressBarItem[] = [
     {displayName: 'Professional Information', routerLink: '/professional-info'},
     {displayName: 'Site Access', routerLink:  '/site-access'},
@@ -18,7 +19,9 @@ export class ProgressBarComponent implements OnInit {
     {displayName: 'Review & Submit ', routerLink: '/review-submit'},
   ]
 
-  constructor(public router: Router) { }
+  constructor(public router: Router) {
+    super();
+  }
 
   ngOnInit() {
   }

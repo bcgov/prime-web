@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { BaseComponent } from '../../core/base-component/base-component.component';
 
 @Component({
   selector: 'app-review-submit',
   templateUrl: './review-submit.component.html',
   styleUrls: ['./review-submit.component.scss']
 })
-export class ReviewSubmitComponent implements OnInit {
+export class ReviewSubmitComponent extends BaseComponent implements OnInit {
 
   private hasValidToken: boolean = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+    super();
+   }
 
   ngOnInit() {
   }

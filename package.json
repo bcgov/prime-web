@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
     "@ng-bootstrap/ng-bootstrap": "^1.0.0-alpha.26",
+    "angular2-uuid": "^1.1.1",
     "core-js": "^2.4.1",
     "jquery": "^3.2.1",
     "karma-spec-reporter": "^0.0.31",

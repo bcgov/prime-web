@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UUID } from 'angular2-uuid';
 
 @Component({
   selector: 'app-base-component',
@@ -8,15 +9,10 @@ import { Component, OnInit } from '@angular/core';
 export class BaseComponent implements OnInit {
 
   /**
-   * TODO
-   * - UUID / hash id setup in base component
-   * - Make sure all possible classes are extending BaseComponent
+   * An identifier for parents to keep track of components
+   * @type {string}
    */
-
-
-  // TODO - Switch over to properly using UUID! random() has collisions.
-  // objectId:string = UUID.UUID().toString();
-  objectId:string = Math.random().toString(36).substring(7);
+  objectId:string = UUID.UUID().toString();
 
   constructor() { }
 
