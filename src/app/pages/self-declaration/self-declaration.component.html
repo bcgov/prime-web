@@ -2,11 +2,6 @@
   <div class="col-sm-12 col-md-7 col-lg-8">
     <div class="row form-group">
       <div class="col-sm-12 col-md-12">
-
-        <div>
-          {{applicant | json}}
-        </div>
-
         <label id="haveBeenSubjectOfOrderOrConviction"
           for="haveBeenSubjectOfOrderOrConviction"
           class='intro'
@@ -133,8 +128,6 @@
   </div>
   <div class="col-md-5 col-lg-4">
 
-
-    <!-- <h3><i class="fa fa-upload fa icon-upload" aria-hidden="true"></i> Upload your documents (optional)</h3> -->
     <h3><i class="fa fa-upload fa icon-upload"
         aria-hidden="true"></i> Supporting Documentation Attachment (optional)</h3>
 
@@ -149,7 +142,6 @@
       </ul>
     </div>
     <prime-file-uploader>
-      <!-- <span id="uploadInstruction" #uploadInstruction tabindex="0">Please upload required ID documents</span> -->
       <span id="uploadInstruction"
         #uploadInstruction
         tabindex="0">Upload supporting documentation (optional)</span>
@@ -158,11 +150,5 @@
 </div>
 <hr>
 
-<div class="row">
-  <button type='button'
-    class='btn btn-default pull-left'>Cancel</button>
-  <button type='button'
-    class='btn btn-primary pull-right'
-    (click)="continue()"
-    [disabled]="!canContinue()">Continue</button>
-</div>
+
+<prime-form-footer (onContinue)='continue()' [locked]="!canContinue()"></prime-form-footer>

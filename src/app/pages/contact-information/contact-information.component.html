@@ -145,10 +145,7 @@
 
   <hr>
 
-  <div class="row">
-    <button type='button' class='btn btn-default pull-left'>Cancel</button>
-    <button type='button' class='btn btn-primary pull-right' (click)="continue()" [disabled]="!canContinue()">Continue</button>
-  </div>
+  <prime-form-footer (onContinue)='continue()' [locked]="!canContinue()"></prime-form-footer>
 
 
 </form>
