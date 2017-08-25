@@ -10,6 +10,7 @@ export class Applicant {
   hasBeenSuspended: boolean;
   hasPharmaNetEverRevoked: boolean;
   hasRevocationBeenResolved: boolean;
+  hasHadLimitsOrConditions: boolean;
 
   license : {
     licenseExpiry: SimpleDate;

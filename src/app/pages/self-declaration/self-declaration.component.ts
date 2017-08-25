@@ -19,6 +19,10 @@ export class SelfDeclarationComponent implements OnInit {
   ngOnInit() {
   }
 
+  setHadLimits(val: boolean) {
+    this.applicant.hasHadLimitsOrConditions = val;
+  }
+
   setHasBeenSuspended(val: boolean) {
     this.applicant.hasBeenSuspended = val;
   }
