@@ -8,19 +8,24 @@ import { Router } from '@angular/router';
 })
 export class ReviewSubmitComponent implements OnInit {
 
+  private hasValidToken: boolean = false;
+
   constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
   canContinue(): boolean {
-    return true;
+    return this.hasValidToken;
+  }
+
+  onValidToken(event): void {
+    console.log(event);
+    this.hasValidToken = true;
   }
 
   continue(): void {
-    console.log('---------------\ncontinue');
-    console.log('all done!');
-    // this.router.navigate(['site-access']);
+    console.log('---------------\all done!');
   }
 
 }

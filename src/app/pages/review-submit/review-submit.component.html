@@ -1,6 +1,11 @@
-<p>
-  review-submit works!
-</p>
+<div class="row">
+  <div class="col-md-12">
+    <captcha
+    apiBaseUrl="https://captcha-service-gcpe-mygovbc-demo.pathfinder.gov.bc.ca"
+    nonce="PrimeBC"
+    (onValidToken)="onValidToken($event)"></captcha>
+  </div>
+</div>
 
 <hr>
 

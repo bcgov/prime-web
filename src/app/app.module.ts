@@ -31,6 +31,10 @@ import { SiteAccessComponent } from './pages/site-access/site-access.component'
 import { AddressComponent } from './core/address/address.component';
 import { FileUploaderComponent } from './core/file-uploader/file-uploader.component';
 
+// import { CaptchaComponent } from 'mygovbc-captcha-widget/component';
+
+import { CaptchaComponent } from 'mygovbc-captcha-widget/src/captcha.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,6 +56,7 @@ import { FileUploaderComponent } from './core/file-uploader/file-uploader.compon
     SiteAccessComponent,
     AddressComponent,
     FileUploaderComponent,
+    CaptchaComponent,
   ],
   imports: [
     BrowserModule,
