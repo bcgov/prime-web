@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SiteAccessComponent } from './site-access.component';
+import { PrimeFormFooterComponent } from '../../core/prime-form-footer/prime-form-footer.component'
+import { PrimeToggleComponent } from '../../core//prime-toggle/prime-toggle.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('SiteAccessComponent', () => {
   let component: SiteAccessComponent;
@@ -8,7 +11,8 @@ describe('SiteAccessComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SiteAccessComponent ]
+      imports: [RouterTestingModule],
+      declarations: [ SiteAccessComponent, PrimeFormFooterComponent, PrimeToggleComponent ]
     })
     .compileComponents();
   }));

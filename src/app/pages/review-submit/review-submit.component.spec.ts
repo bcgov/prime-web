@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormsModule } from '@angular/forms';
 import { ReviewSubmitComponent } from './review-submit.component';
+import { CaptchaComponent } from 'mygovbc-captcha-widget/src/captcha.component';
+import { PrimeFormFooterComponent } from '../../core/prime-form-footer/prime-form-footer.component'
+import { RouterModule } from '@angular/router';
 
 describe('ReviewSubmitComponent', () => {
   let component: ReviewSubmitComponent;
@@ -8,7 +11,8 @@ describe('ReviewSubmitComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ReviewSubmitComponent ]
+      imports: [FormsModule, RouterModule],
+      declarations: [ ReviewSubmitComponent, CaptchaComponent, PrimeFormFooterComponent ]
     })
     .compileComponents();
   }));

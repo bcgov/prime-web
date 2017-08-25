@@ -4,7 +4,6 @@ import {
 } from '@angular/router/testing';
 
 import { AppComponent } from './app.component';
-import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { ProgressBarComponent } from './core/progress-bar/progress-bar.component'
 
 describe('AppComponent', () => {
@@ -12,7 +11,6 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
-        BreadcrumbComponent,
         ProgressBarComponent
       ],
       imports: [ RouterTestingModule ]

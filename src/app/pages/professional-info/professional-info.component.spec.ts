@@ -43,11 +43,16 @@ describe('ProfessionalInfoComponent', () => {
     expect(component.collegeList[0].text === "").toBeTruthy();
   })
 
-  it('should be able to set device provider', () => {
-    expect(component.applicant.isDeviceProvider).toBeUndefined();
-    component.setDeviceProvider(true);
-    expect(component.applicant.isDeviceProvider).toBeTruthy();
-    component.setDeviceProvider(false);
-    expect(component.applicant.isDeviceProvider).toBeFalsy();
+  it('should be able to set college selection', () => {
+    // component.setDeviceProvider(false);
+    // expect(component.applicant.isDeviceProvider).toBeFalsy();
+    expect(component.applicant.college).toBeUndefined();
+    component.setCollegeSelection(Colleges.None);
+    expect(component.applicant.college === Colleges.None).toBeTruthy();
+    expect(component.collegeVal === Colleges.None).toBeTruthy();
+
+    component.setCollegeSelection(Colleges.CPBC);
+    expect(component.applicant.college === Colleges.CPBC).toBeTruthy();
+    expect(component.collegeVal === Colleges.CPBC).toBeTruthy();
   })
 });
