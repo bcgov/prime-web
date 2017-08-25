@@ -12,7 +12,7 @@ export class Applicant {
   hasRevocationBeenResolved: boolean;
   hasHadLimitsOrConditions: boolean;
 
-  license : {
+  license: {
     licenseExpiry: SimpleDate;
     licenseClass: string; //TODO!
   }
@@ -26,28 +26,22 @@ export class Applicant {
 
   constructor() {
     this.license = {
-      licenseExpiry : { day: null, month: null, year: null },
+      licenseExpiry: { day: null, month: null, year: null },
       licenseClass: ''
     }
     this.dates = {
-      requestStartDate : { day: null, month: null, year: null },
-      requestEndDate : { day: null, month: null, year: null },
+      requestStartDate: { day: null, month: null, year: null },
+      requestEndDate: { day: null, month: null, year: null },
     }
-
   }
-
-  //Removeable TODO
-  // get collegeNumber(): string{
-  //   return this.college ? this.college.toString() : '';
-  // }
 
   /**
    * Determines if applicant goes to college. Can be left blank to see if they go to any college. To check if option is "none", must explicitly pass Colleges.None
    * @param college optional, should be Colleges or undefined.
    */
-  goesToCollege(college? : Colleges): boolean {
+  goesToCollege(college?: Colleges): boolean {
     if (!this.college) return false;
-    if (this.college.length  ===  0 && this.college[0] == Colleges.None) {
+    if (this.college.length === 0 && this.college[0] == Colleges.None) {
       return this.college[0] === college;
     }
     if (this.college === Colleges.None) return this.college === college;
