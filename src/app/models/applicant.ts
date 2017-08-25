@@ -21,6 +21,8 @@ export class Applicant {
     requestEndDate: SimpleDate;
   }
 
+  consentInfoCollection: boolean = false;
+
   constructor() {
     this.license = {
       licenseExpiry : { day: null, month: null, year: null },

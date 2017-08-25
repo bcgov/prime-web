@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, EventEmitter, Output } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { BaseComponent } from '../../core/base-component/base-component.component'
@@ -15,6 +15,8 @@ export class ConsentModalComponent extends BaseComponent {
   agreeCheck: boolean;
   @ViewChild('informationCollectionModal') public informationCollectionModal:ModalDirective;
 
+  @Output() onConsented = new EventEmitter<boolean>();
+
 
   constructor(private modalService: BsModalService) {
     super();
@@ -26,6 +28,7 @@ export class ConsentModalComponent extends BaseComponent {
 
   public closeModal(): void {
     this.informationCollectionModal.hide();
+    this.onConsented.emit(true);
   }
 
 

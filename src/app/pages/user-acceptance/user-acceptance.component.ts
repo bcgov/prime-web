@@ -17,6 +17,10 @@ export class UserAcceptanceComponent implements OnInit {
     return true;
   }
 
+  print(): void {
+    alert('todo');
+  }
+
   continue(): void {
     console.log('---------------\ncontinue');
     this.router.navigate(['review-submit']);
