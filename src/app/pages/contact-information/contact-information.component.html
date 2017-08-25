@@ -1,23 +1,37 @@
-<form #formRef="ngForm" novalidate (submit)="continue()">
+<form #formRef="ngForm"
+  novalidate
+  (submit)="continue()">
   <h1 i18n="@@ContactInformation">Contact Information</h1>
 
   <div class="row">
     <div class="col-sm-4">
       <div class="form-group">
-        <label for='firstName' i18n="@@firstName">First Name</label>
-        <input type="text" class="form-control" name='firstName' id='firstName'>
+        <label for='firstName'
+          i18n="@@firstName">First Name</label>
+        <input type="text"
+          class="form-control"
+          name='firstName'
+          id='firstName'>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="form-group">
-        <label for='middleName' i18n="@@middleName">Middle name (if applicable)</label>
-        <input type="text" class="form-control" name='middleName' id='middleName'>
+        <label for='middleName'
+          i18n="@@middleName">Middle name (if applicable)</label>
+        <input type="text"
+          class="form-control"
+          name='middleName'
+          id='middleName'>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="form-group">
-        <label for='lastName' i18n="@@lastName">Last Name</label>
-        <input type="text" class="form-control" name='lastName' id='lastName'>
+        <label for='lastName'
+          i18n="@@lastName">Last Name</label>
+        <input type="text"
+          class="form-control"
+          name='lastName'
+          id='lastName'>
       </div>
     </div>
   </div>
@@ -25,21 +39,33 @@
   <div class="row">
     <div class="col-sm-4">
       <div class="form-group">
-        <label for='dateOfBirth' i18n="@@DateOfBirth">Date of Birth</label>
-        <prime-date name='dateOfBirth' id='dateOfBirth' [showError]="false" [required]="true">
+        <label for='dateOfBirth'
+          i18n="@@DateOfBirth">Date of Birth</label>
+        <prime-date name='dateOfBirth'
+          id='dateOfBirth'
+          [showError]="false"
+          [required]="true">
         </prime-date>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="form-group">
-        <label for='phoneNumber' i18n="@@phoneNumber">Phone Number</label>
-        <input type="text" class="form-control" name='phoneNumber' id='phoneNumber'>
+        <label for='phoneNumber'
+          i18n="@@phoneNumber">Phone Number</label>
+        <input type="text"
+          class="form-control"
+          name='phoneNumber'
+          id='phoneNumber'>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="form-group">
-        <label for='email' i18n="@@email">Email Address</label>
-        <input type="text" class="form-control" name='email' id='email'>
+        <label for='email'
+          i18n="@@email">Email Address</label>
+        <input type="text"
+          class="form-control"
+          name='email'
+          id='email'>
       </div>
     </div>
   </div>
@@ -47,14 +73,22 @@
   <div class="row">
     <div class="col-sm-offset-4 col-sm-4">
       <div class="form-group">
-        <label for='phoneNumber' i18n="@@altphoneNumber">Alternate Phone Number</label>
-        <input type="text" class="form-control" name='altphoneNumber' id='altphoneNumber'>
+        <label for='phoneNumber'
+          i18n="@@altphoneNumber">Alternate Phone Number</label>
+        <input type="text"
+          class="form-control"
+          name='altphoneNumber'
+          id='altphoneNumber'>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="form-group">
-        <label for='altEmail' i18n="@@altEmail">Alternate Email Address</label>
-        <input type="text" class="form-control" name='altEmail' id='altEmail'>
+        <label for='altEmail'
+          i18n="@@altEmail">Alternate Email Address</label>
+        <input type="text"
+          class="form-control"
+          name='altEmail'
+          id='altEmail'>
       </div>
     </div>
   </div>
@@ -111,41 +145,28 @@
     <p>Ensure to record your responses to the security questions as these questions will be asked if you request a change to
       your information or access in the future.</p>
 
-    <div class="row question-row" *ngFor="let count of [1, 2, 3];" >
+    <div class="row question-row"
+      *ngFor="let count of [1, 2, 3];">
       <div class="col-sm-5 form-group">
-        <label for="securityQuestion{{count}}" class='block-label'>Security Question {{count}}</label>
-        <select2
-        [data]="securityQuestions"
-        value="{{securityQuestions[count - 1].id}}"
-        ></select2>
+        <label for="securityQuestion{{count}}"
+          class='block-label'>Security Question {{count}}</label>
+        <select2 [data]="securityQuestions"
+          value="{{securityQuestions[count - 1].id}}"></select2>
       </div>
       <div class="col-sm-5 form-group">
         <label for="securityAnswer{{count}}">Security Response {{count}}</label>
-        <input type="text" class="form-control" id='securityAnswer{{count}}' name='securityAnswer{{count}}'>
+        <input type="text"
+          class="form-control"
+          id='securityAnswer{{count}}'
+          name='securityAnswer{{count}}'>
       </div>
     </div>
-
-
-    <!-- <div class="row" class='question-row' *ngFor="let question of securityQuestions; let count = index" [ngClass]="{'has-success' : question['selected']}">
-      <div class="col-sm-5 form-group">
-        <label for="securityQuestion{{count}}" class='block-label'>Security Question {{count + 1}} <span *ngIf="question.selected">&mdash; Selected</span></label>
-        <div class="checkbox checkbox-success checkbox-inline">
-          <input class="input-lg" id="checkbox{{count}}" type="checkbox" [checked]="question.selected" (click)="selectQuestion(question, $event)">
-          <label class="" for="checkbox{{count}}"></label>
-        </div>
-        <input type="text" class="form-control" id='securityQuestion{{count}}' name='securityQuestion{{count}}' [value]="question.question || ''" readonly>
-      </div>
-      <div class="col-sm-5 form-group">
-        <label for="securityAnswer{{count}}">Security Response {{count + 1}}</label>
-        <input type="text" class="form-control" id='securityAnswer{{count}}' name='securityAnswer{{count}}'>
-      </div>
-    </div> -->
-
   </div>
 
   <hr>
 
-  <prime-form-footer (onContinue)='continue()' [locked]="!canContinue()"></prime-form-footer>
+  <prime-form-footer (onContinue)='continue()'
+    [locked]="!canContinue()"></prime-form-footer>
 
 
 </form>

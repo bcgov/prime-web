@@ -35,20 +35,9 @@ export class ContactInformationComponent extends BaseComponent implements OnInit
       }
     ]
 
-    // this.securityQuestions = [
-    //   {question: "What was your first pet's name?", selected: true},
-    //   {question: "What was the make of your first car?", selected: true},
-    //   {question: "What was the last name of your favourite teacher?", selected: false},
-    //   {question: "What was the last name of your childhood best friend?", selected: false},
-    //   {question: "What is your oldest cousin's first name?", selected: false},
-    //   {question: "What town was your father born in?", selected: false},
-    //   {question: "What town was your mother born in?", selected: false},
-    //   {question: "Where did you meet your spouse?", selected: false},
-    //   {question: "What year did you meet your spouse?", selected: false},
-    //   {question: "What is the name of your favourite book?", selected: false}
-    // ]
-
-    //TODO - What ids would the backend want here?
+    /**
+     * Note: Must discuss with backend devs what they'd want as IDs here. Should probably have these questions enforced on the backend, so maybe we can just pass an identifier instead of the full string.
+     */
     this.securityQuestions = [
       { id: "What was your first pet's name?", text: "What was your first pet's name?"},
       { id: "What was the make of your first car?", text: "What was the make of your first car?"},
