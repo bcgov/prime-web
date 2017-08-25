@@ -58,8 +58,8 @@
     </div>
 
     <div class="form-group col-sm-3 col-lg-2">
-        <label for="streetType">Street Type</label>
-        <select class='form-control' name='streetType' id='streetType'>
+      <label for="streetType">Street Type</label>
+      <select class='form-control' name='streetType' id='streetType'>
           <option value=""></option>
           <option value="Avenue">Avenue</option>
           <option value="Street">Street</option>
@@ -71,8 +71,8 @@
     </div>
 
     <div class="form-group col-sm-3 col-lg-2">
-        <label for="streetType">Street Direction</label>
-        <select class='form-control' name='streetDirection' id='streetDirection'>
+      <label for="streetType">Street Direction</label>
+      <select class='form-control' name='streetDirection' id='streetDirection'>
           <option value=""></option>
           <option value="North">North</option>
           <option value="South">South</option>
@@ -85,7 +85,7 @@
         </select>
     </div>
 
-<!--
+    <!--
     <div class="form-group col-sm-3" [ngClass]="{'has-error': !formRef.controls.residentialAddressPostalCode?.valid &&
              (residentialAddressPostalCodeRef.touched  || showError)}">
       <label for="residentialAddressPostalCode{{objectId}}">Postal or zip code</label>
@@ -109,20 +109,15 @@
         <div class="text-danger" *ngIf="residentialAddressCityRef.errors?.maxlength">City cannot be more than _LENGTH_ characters</div>
       </div>
     </div>
-    <div class="form-group col-sm-4">
+    <div class="form-group col-sm-3">
       <label for="residentialAddressProvince{{objectId}}">Province</label>
       <input [(ngModel)]='residentialAddress.province' type="text" class="form-control" id="residentialAddressProvince{{objectId}}"
         name="residentialAddressProvince" value="British Columbia">
     </div>
-    <!-- <div class="form-group col-sm-4">
-            <label for="residentialAddressCountry{{objectId}}" >Country</label>
-            <input type="text" [(ngModel)]="residentialAddress.country"
-                   class="form-control"
-                   id="residentialAddressCountry{{objectId}}" name="residentialAddressCountry"
-                   #residentialAddressCountry="ngModel"
-                   value="Canada"
-                   >
-        </div> -->
+    <div class="form-group col-sm-3">
+      <label for="residentialAddressCountry{{objectId}}">Country</label>
+      <input type="text" class="form-control" id="residentialAddressCountry{{objectId}}" name="residentialAddressCountry" value="Canada">
+    </div>
   </div>
 
 

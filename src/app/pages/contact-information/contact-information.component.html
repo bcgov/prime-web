@@ -44,6 +44,21 @@
     </div>
   </div>
 
+  <div class="row">
+      <div class="col-sm-offset-4 col-sm-4">
+        <div class="form-group">
+          <label for='phoneNumber' i18n="@@altphoneNumber">Alternate Phone Number</label>
+          <input type="text" class="form-control" name='altphoneNumber' id='altphoneNumber'>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for='altEmail' i18n="@@altEmail">Alternate Email Address</label>
+          <input type="text" class="form-control" name='altEmail' id='altEmail'>
+        </div>
+      </div>
+    </div>
+
   <hr>
 
   <prime-address></prime-address>
@@ -69,12 +84,27 @@
         <input type="text" class="form-control" name='bcServicesCard' id='bcServicesCard'>
       </div>
     </div>
+    <div class="col-md-4">
+
+      <h3><i class="fa fa-upload fa icon-upload" aria-hidden="true"></i> Upload your documents</h3>
+
+      <div>
+        Scan the document, or take a photo of it. Make sure that it&#8217;s:
+        <ul>
+          <li>The entire document, from corner to corner</li>
+          <li>At least 1000 pixels wide x 1500 pixels tall</li>
+          <li>Rotated correctly (not upside down or sideways)</li>
+          <li>In focus and easy to read</li>
+          <li>A JPG, PNG, GIF or BMP file (<strong>not a PDF</strong>)</li>
+        </ul>
+      </div>
+    <!-- </div>
+    <div class="col-md-3"> -->
+      <prime-file-uploader>
+        <span id="uploadInstruction" #uploadInstruction tabindex="0">Please upload required ID documents</span>
+      </prime-file-uploader>
+    </div>
   </div>
-
-  <!--
-    TODO Upload documents component goes here
-   -->
-
   <hr>
   <div class='security-questions row'>
     <h2>Security Questions</h2>
@@ -87,8 +117,7 @@
       <div class="col-sm-5 form-group">
         <label for="securityQuestion1" class='block-label'>Security Question {{count + 1}} <span *ngIf="question.selected">&mdash; Selected</span></label>
         <div class="checkbox checkbox-success checkbox-inline">
-          <input class="input-lg" id="checkbox{{count}}" type="checkbox" [checked]="question.selected"
-          (click)="selectQuestion(question, $event)">
+          <input class="input-lg" id="checkbox{{count}}" type="checkbox" [checked]="question.selected" (click)="selectQuestion(question, $event)">
           <label class="" for="checkbox{{count}}"></label>
         </div>
         <input type="text" class="form-control" id='securityQuestion{{count}}' name='securityQuestion{{count}}' [value]="question.question || ''">

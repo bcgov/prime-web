@@ -29,6 +29,7 @@ import { ReviewSubmitComponent } from './pages/review-submit/review-submit.compo
 import { SiteAccessComponent } from './pages/site-access/site-access.component'
 
 import { AddressComponent } from './core/address/address.component';
+import { FileUploaderComponent } from './core/file-uploader/file-uploader.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { AddressComponent } from './core/address/address.component';
     ReviewSubmitComponent,
     SiteAccessComponent,
     AddressComponent,
+    FileUploaderComponent,
   ],
   imports: [
     BrowserModule,
