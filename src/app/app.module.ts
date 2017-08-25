@@ -13,8 +13,6 @@ import { CustomerComponent } from './customer/customer.component';
 import { SearchBoxDirective } from './search-box/search-box.directive';
 import { ApplicantDataService } from './services/applicant-data.service'
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { AdminModule } from 'app/admin/admin.module';
-import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { ProgressBarComponent } from './core/progress-bar/progress-bar.component';
 import { ConsentModalComponent } from './core/consent-modal/consent-modal.component';
 import { ProfessionalInfoComponent } from './pages/professional-info/professional-info.component';
@@ -31,9 +29,8 @@ import { SiteAccessComponent } from './pages/site-access/site-access.component'
 import { AddressComponent } from './core/address/address.component';
 import { FileUploaderComponent } from './core/file-uploader/file-uploader.component';
 
-// import { CaptchaComponent } from 'mygovbc-captcha-widget/component';
-
 import { CaptchaComponent } from 'mygovbc-captcha-widget/src/captcha.component';
+
 import { PrimeToggleComponent } from './core/prime-toggle/prime-toggle.component';
 import { PrimeFormFooterComponent } from './core/prime-form-footer/prime-form-footer.component';
 
@@ -43,7 +40,6 @@ import { PrimeFormFooterComponent } from './core/prime-form-footer/prime-form-fo
     CustomerComponent,
     SearchBoxDirective,
     DashboardComponent,
-    BreadcrumbComponent,
     ProgressBarComponent,
     ConsentModalComponent,
     ProfessionalInfoComponent,
@@ -68,7 +64,6 @@ import { PrimeFormFooterComponent } from './core/prime-form-footer/prime-form-fo
     HttpModule,
     AppRoutingModule,
     NgbModule,
-    AdminModule,
     ModalModule.forRoot(),
     Select2Module,
   ],

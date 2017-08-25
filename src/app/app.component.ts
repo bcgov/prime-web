@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { ConsentModalComponent } from './core/consent-modal/consent-modal.component'
 
 @Component({
