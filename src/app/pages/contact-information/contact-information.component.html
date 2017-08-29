@@ -44,11 +44,14 @@
       <div class="form-group">
         <label for='dateOfBirth'
           i18n="@@DateOfBirth">Date of Birth</label>
-        <prime-date name='dateOfBirth'
+
+         <prime-date name='dateOfBirth'
           id='dateOfBirth'
           [showError]="false"
-          [required]="true">
+          [required]="true"
+          [(date)]="applicant.dates.dateOfBirth">
         </prime-date>
+
       </div>
     </div>
     <div class="col-sm-4">

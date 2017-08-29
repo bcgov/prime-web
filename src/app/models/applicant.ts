@@ -16,6 +16,9 @@ export class Applicant {
   middleName: string;
   lastName: string;
 
+  // dateOfBirth: SimpleDate;
+  // dateOfBirth: SimpleDate = <SimpleDate>{};
+
   license: {
     licenseExpiry: SimpleDate;
     licenseClass: string; //TODO!
@@ -24,6 +27,7 @@ export class Applicant {
   dates: {
     requestStartDate: SimpleDate;
     requestEndDate: SimpleDate;
+    dateOfBirth: SimpleDate;
   }
 
   consentInfoCollection: boolean = false;
@@ -36,7 +40,9 @@ export class Applicant {
     this.dates = {
       requestStartDate: { day: null, month: null, year: null },
       requestEndDate: { day: null, month: null, year: null },
+      dateOfBirth: { day: null, month: null, year: null },
     }
+
   }
 
   /**

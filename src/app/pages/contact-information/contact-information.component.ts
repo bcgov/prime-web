@@ -68,4 +68,10 @@ export class ContactInformationComponent extends BaseComponent implements OnInit
     this.router.navigate(['self-declaration']);
   }
 
+  contactDayChange(input){
+    console.log('contactDayChange with', input);
+    // console.log('applicant.dates.dateofBirth', this.applicant.dates.dateOfBirth);
+
+  }
+
 }

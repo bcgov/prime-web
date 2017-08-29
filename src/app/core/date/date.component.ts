@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BaseComponent } from '../base-component/base-component.component';
 import * as moment from 'moment';
+import { SimpleDate } from '../../core/date/simple-date.interface';
 
 @Component({
   selector: 'prime-date',
@@ -11,13 +12,11 @@ export class DateComponent extends BaseComponent implements OnInit {
 
   @Input() showError: boolean;
   @Input() required: boolean = true;
-  @Input() year: number | string;
-  @Output() yearChange = new EventEmitter<number | string>();
-  @Input() month: number;
-  @Output() monthChange = new EventEmitter<number>();
-  @Input() day: number | string;
-  @Output() dayChange = new EventEmitter<number | string>();
   @Input() useCurrentDate: boolean = false;
+
+  @Input() date: SimpleDate
+  @Output() onDateChange: EventEmitter<SimpleDate> = new EventEmitter<SimpleDate>();
+
 
   constructor() {
     super();
@@ -34,59 +33,59 @@ export class DateComponent extends BaseComponent implements OnInit {
 
   setYearValueOnModel(value: string) {
     if (value) {
-      this.year = parseInt(value);
+      this.date.year = parseInt(value);
     } else {
-      this.year = value;
+      this.date.year = null;
     }
-    this.yearChange.emit(this.year);
+    this.onDateChange.emit(this.date);
   }
 
   setDayValueOnModel(value: string) {
     if (value) {
-      this.day = parseInt(value);
+      this.date.day = parseInt(value);
     } else {
-      this.day = value;
+      this.date.day = null;
     }
-    this.dayChange.emit(this.day);
+    this.onDateChange.emit(this.date);
   }
 
   setMonthValueOnModel(value: string) {
     if (value) {
-      this.month = parseInt(value);
+      this.date.month = parseInt(value);
     } else {
-      this.month = NaN;
+      this.date.month = null;
     }
-    this.monthChange.emit(this.month);
+    this.onDateChange.emit(this.date);
   }
 
   /**
    * Sets the default values to the current clientside date.
    */
   setToToday() : void {
-    this.month = moment().month() + 1; //0 is blank/unselected in options list
-    this.day = moment().date();
-    this.year = moment().year();
+    this.date.month = moment().month() + 1; //0 is blank/unselected in options list
+    this.date.day = moment().date();
+    this.date.year = moment().year();
   }
 
   isValid(): boolean {
     if (this.required) {
-      if (!this.year || !this.month || !this.day) {
+      if (!this.date.year || !this.date.month || !this.date.day) {
         return false;
       }
     }
     else {
       //Non-required components are okay if all fields are blank.
-      if (!this.year && !this.month && !this.day){
+      if (!this.date.year && !this.date.month && !this.date.day){
         return true;
       }
     }
 
     //Month indices start at 1 for Jan, so 0 is unselected.
-    if (!(this.month && this.month > 0 && this.month <= 12)) {
+    if (!(this.date.month && this.date.month > 0 && this.date.month <= 12)) {
       return false;
     }
 
-    if (this.month && (!this.day || !this.year)  ){
+    if (this.date.month && (!this.date.day || !this.date.year)  ){
         return false;
     }
 

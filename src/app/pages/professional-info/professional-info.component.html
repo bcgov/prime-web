@@ -50,13 +50,7 @@
           i18n="@@ExpiryDateLicense">Expiry Date of License</label>
         <prime-date name='mspBillingNumber'
           id='mspBillingNumber'
-          [year]="applicant.license.licenseExpiry?.year"
-          (yearChange)="applicant.license.licenseExpiry.year = $event"
-          [month]="applicant.license.licenseExpiry?.month"
-          (monthChange)="applicant.license.licenseExpiry.month = $event"
-          [day]="applicant.license.licenseExpiry?.day"
-          (dayChange)="applicant.license.licenseExpiry.day = $event"
-          (onChange)="onChange($event)"
+          [(date)]="applicant.license.licenseExpiry"
           [showError]="showError"
           [required]="true">
         </prime-date>
@@ -118,13 +112,7 @@
           i18n="@@RequestedStartDate">Requested Access Start Date</label>
         <prime-date name='RequestedStartDate'
           id='RequestedStartDate'
-          [year]="applicant.dates.requestStartDate?.year"
-          (yearChange)="applicant.dates.requestStartDate.year = $event"
-          [month]="applicant.dates.requestStartDate?.month"
-          (monthChange)="applicant.dates.requestStartDate.month = $event"
-          [day]="applicant.dates.requestStartDate?.day"
-          (dayChange)="applicant.dates.requestStartDate.day = $event"
-          (onChange)="onChange($event)"
+          [(date)]="applicant.dates.requestStartDate"
           [showError]="showError"
           [required]="true"
           [useCurrentDate]="true">
@@ -137,13 +125,7 @@
           i18n="@@RequestedEndDate">Access End Date (optional)</label>
         <prime-date name='RequestedEndDate'
           id='RequestedEndDate'
-          [year]="applicant.dates.requestEndDate?.year"
-          (yearChange)="applicant.dates.requestEndDate.year = $event"
-          [month]="applicant.dates.requestEndDate?.month"
-          (monthChange)="applicant.dates.requestEndDate.month = $event"
-          [day]="applicant.dates.requestEndDate?.day"
-          (dayChange)="applicant.dates.requestEndDate.day = $event"
-          (onChange)="onChange($event)"
+          [(date)]="applicant.dates.requestEndDate"
           [showError]="showError"
           [required]="false">
         </prime-date>
