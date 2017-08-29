@@ -30,7 +30,7 @@
           class="form-control"
           name='licenseClass'
           id='licenseClass'
-          [(ngModel)]="applicant.license.licenseClass">
+          [(ngModel)]="applicant.licenseClass">
       </div>
     </div>
     <div class="col-sm-4">
@@ -41,7 +41,7 @@
           class="form-control"
           name='licenseNumber'
           id='licenseNumber'
-          [(ngModel)]="applicant.license.licenseNumber">
+          [(ngModel)]="applicant.licenseNumber">
       </div>
     </div>
     <div class="col-sm-4">
@@ -50,7 +50,7 @@
           i18n="@@ExpiryDateLicense">Expiry Date of License</label>
         <prime-date name='mspBillingNumber'
           id='mspBillingNumber'
-          [(date)]="applicant.license.licenseExpiry"
+          [(date)]="applicant.licenseExpiry"
           [showError]="showError"
           [required]="true">
         </prime-date>

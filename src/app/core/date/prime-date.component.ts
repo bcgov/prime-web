@@ -5,10 +5,10 @@ import { SimpleDate } from '../../core/date/simple-date.interface';
 
 @Component({
   selector: 'prime-date',
-  templateUrl: './date.component.html',
-  styleUrls: ['./date.component.scss']
+  templateUrl: './prime-date.component.html',
+  styleUrls: ['./prime-date.component.scss']
 })
-export class DateComponent extends BaseComponent implements OnInit {
+export class PrimeDateComponent extends BaseComponent implements OnInit {
 
   @Input() showError: boolean;
   @Input() required: boolean = true;

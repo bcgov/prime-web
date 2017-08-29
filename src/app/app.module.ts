@@ -17,7 +17,7 @@ import { ProgressBarComponent } from './core/progress-bar/progress-bar.component
 import { ConsentModalComponent } from './core/consent-modal/consent-modal.component';
 import { ProfessionalInfoComponent } from './pages/professional-info/professional-info.component';
 import { BaseComponent } from './core/base-component/base-component.component';
-import { DateComponent } from './core/date/date.component';
+import { PrimeDateComponent } from './core/date/prime-date.component';
 import { CalendarFieldFormatterDirective } from './core/date/calendar-field-formatter.directive';
 import { CalendarYearValidator } from './core/date/calendar-year.validator';
 import { ContactInformationComponent } from './pages/contact-information/contact-information.component';
@@ -35,6 +35,9 @@ import { PrimeToggleComponent } from './core/prime-toggle/prime-toggle.component
 import { PrimeFormFooterComponent } from './core/prime-form-footer/prime-form-footer.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { PrimeTableSelectComponent } from './core/prime-table-select/prime-table-select.component';
+import { CollegeDataService } from './services/college-data.service';
+
+
 
 @NgModule({
   declarations: [
@@ -46,7 +49,7 @@ import { PrimeTableSelectComponent } from './core/prime-table-select/prime-table
     ConsentModalComponent,
     ProfessionalInfoComponent,
     BaseComponent,
-    DateComponent,
+    PrimeDateComponent,
     CalendarFieldFormatterDirective,
     CalendarYearValidator,
     ContactInformationComponent,
@@ -72,7 +75,10 @@ import { PrimeTableSelectComponent } from './core/prime-table-select/prime-table
     Ng2SmartTableModule
   ],
   entryComponents: [PrimeTableSelectComponent],
-  providers: [ApplicantDataService],
+  providers: [
+    ApplicantDataService,
+    CollegeDataService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

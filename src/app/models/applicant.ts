@@ -3,7 +3,8 @@ import { Colleges } from './colleges.enum';
 export class Applicant {
   isDeviceProvider: boolean;
   MSPBillingNumber: number;
-  college: Colleges[] | Colleges;
+  // college: Colleges[] | Colleges;
+  college: Colleges[];
   hasBCServicesCard: boolean;
 
   hasInformationContraventionOrder: boolean;
@@ -15,11 +16,14 @@ export class Applicant {
   firstName: string;
   middleName: string;
   lastName: string;
+  phoneNumber: string;
+  emailAddress: string;
+  altPhoneNumber: string;
+  altEmailAddress: string;
 
-  license: {
-    licenseExpiry: SimpleDate;
-    licenseClass: string; //TODO!
-  }
+  licenseClass: string;
+  licenseNumber: string;
+  licenseExpiry: SimpleDate = {} as SimpleDate;
 
   dateOfBirth: SimpleDate = {} as SimpleDate;
   requestStartDate: SimpleDate = {} as SimpleDate;
@@ -28,11 +32,6 @@ export class Applicant {
   consentInfoCollection: boolean = false;
 
   constructor() {
-    this.license = {
-      licenseExpiry: { day: null, month: null, year: null },
-      licenseClass: ''
-    }
-
   }
 
   /**
@@ -44,13 +43,19 @@ export class Applicant {
     if (this.college.length === 0 && this.college[0] == Colleges.None) {
       return this.college[0] === college;
     }
-    if (this.college === Colleges.None) return this.college === college;
+    // if (this.college === Colleges.None) return this.college === college;
+    // if (this.college === Colleges.None) return this.college === college;
     if (!college && this.college.length) return true;
     return (<Colleges[]>this.college).indexOf(college) >= 0;
   }
 
-  // TODO - Typechecking. Ensure doesn't show "undefined undefined undefined"
+  /**
+   * Applicant full name. Combines first name, middle name (if provided), and last name.
+   */
   get fullName(): string {
-    return `${this.firstName} ${this.middleName} ${this.lastName}`;
+    if (!this.firstName || !this.lastName){
+      return null;
+    }
+    return `${this.firstName} ${this.middleName ? this.middleName : ''} ${this.lastName}`;
   }
 }

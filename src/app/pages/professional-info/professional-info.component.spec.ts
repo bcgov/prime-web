@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProfessionalInfoComponent } from './professional-info.component';
 
 import { CalendarYearValidator } from '../../core/date/calendar-year.validator';
-import { DateComponent } from '../../core/date/date.component';
+import { PrimeDateComponent } from '../../core/date/prime-date.component';
 import { ConsentModalComponent } from '../../core/consent-modal/consent-modal.component'
 import { FormsModule } from '@angular/forms';
 import { Select2Module } from 'ng2-select2';
@@ -22,7 +22,7 @@ describe('ProfessionalInfoComponent', () => {
     TestBed.configureTestingModule({
       providers: [ApplicantDataService],
       imports: [FormsModule, Select2Module, ModalModule.forRoot()],
-      declarations: [ProfessionalInfoComponent, CalendarYearValidator, DateComponent, ConsentModalComponent, CalendarFieldFormatterDirective]
+      declarations: [ProfessionalInfoComponent, CalendarYearValidator, PrimeDateComponent, ConsentModalComponent, CalendarFieldFormatterDirective]
     })
       .compileComponents();
   }));

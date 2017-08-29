@@ -4,6 +4,10 @@ import { BaseComponent } from '../../core/base-component/base-component.componen
 
 import { Applicant } from '../../models/applicant';
 import { ApplicantDataService } from '../../services/applicant-data.service';
+import { CollegeDataService } from '../../services/college-data.service';
+
+import { SimpleDate } from '../../core/date/simple-date.interface';
+import * as moment from 'moment'; //Only used in convertSimpelDateToText();
 
 
 @Component({
@@ -16,10 +20,12 @@ export class ReviewSubmitComponent extends BaseComponent implements OnInit {
   private hasValidToken: boolean = false;
   public applicant: Applicant;
 
-  constructor(private router: Router, private dataStore: ApplicantDataService) {
+  constructor(private router: Router,
+    private dataStore: ApplicantDataService,
+    private collegeData: CollegeDataService) {
     super();
     this.applicant = dataStore.applicant;
-   }
+  }
 
   ngOnInit() {
   }
@@ -35,6 +41,30 @@ export class ReviewSubmitComponent extends BaseComponent implements OnInit {
 
   continue(): void {
     console.log('---------------\all done!');
+  }
+
+  get collegeText(): string {
+    return this.collegeData.getTextFromSelection(this.applicant.college);
+  }
+
+  /**
+   * Converts SimpleDate object of integers to human readable, formatted date.
+   * TODO - Refactor this function to its own service if necessary, but currently only need to use this on the review screen.
+   */
+  convertSimpleDateToText(simpleDate: SimpleDate): string {
+
+    if (simpleDate.year == null
+      || simpleDate.month == null
+      || simpleDate.day == null) {
+      return null;
+    }
+
+    return moment.utc({
+      year: simpleDate.year,
+      month: simpleDate.month - 1, //Moment starts month indice at 0.
+      day: simpleDate.day
+    }).format("MMMM Do, YYYY");
+
   }
 
 }

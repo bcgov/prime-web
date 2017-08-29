@@ -3,22 +3,22 @@ import { FormsModule } from '@angular/forms';
 import { CalendarFieldFormatterDirective } from '../../core/date/calendar-field-formatter.directive';
 import * as moment from 'moment';
 
-import { DateComponent } from './date.component';
+import { PrimeDateComponent } from './prime-date.component';
 
-describe('DateComponent', () => {
-  let component: DateComponent;
-  let fixture: ComponentFixture<DateComponent>;
+describe('PrimeDateComponent', () => {
+  let component: PrimeDateComponent;
+  let fixture: ComponentFixture<PrimeDateComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule],
-      declarations: [DateComponent, CalendarFieldFormatterDirective]
+      declarations: [PrimeDateComponent, CalendarFieldFormatterDirective]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DateComponent);
+    fixture = TestBed.createComponent(PrimeDateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

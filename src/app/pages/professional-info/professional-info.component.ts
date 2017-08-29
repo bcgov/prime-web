@@ -5,6 +5,7 @@ import { Applicant } from '../../models/applicant';
 import { ConsentModalComponent } from '../../core/consent-modal/consent-modal.component';
 import { BaseComponent } from '../../core/base-component/base-component.component';
 import { Colleges, CollegeList } from '../../models/colleges.enum';
+import { CollegeDataService } from '../../services/college-data.service';
 
 
 @Component({
@@ -27,7 +28,8 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
     private applicantData: ApplicantDataService,
     private cdRef: ChangeDetectorRef,
     private elementRef: ElementRef,
-    private router: Router) {
+    private router: Router,
+    private collegeData: CollegeDataService) {
     super()
     this.applicant = applicantData.applicant;
   }
@@ -38,7 +40,7 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     this.collegeList = this.defaultCollegeList();
-    this.collegeVal = '';
+    this.collegeVal = this.applicant.college;
     this.initSelect();
   }
 
@@ -61,9 +63,12 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
    */
   setCollegeSelection(value: Colleges[] | Colleges) {
     this.collegeVal = value;
-    this.applicant.college = value;
+    this.applicant.college = <Colleges[]>value;
   }
 
+  /**
+   * Re-orders the selected elements in the Professional College multiselect box. Now they will be ordered in the same order the user selects them. This step is necessary in order for the code in onCollegeChange() to work, which enforces business logic rules relating to selecting 'None'.
+   */
   initSelect() {
     $(this.elementRef.nativeElement).on("select2:select", 'select', function (evt: any) {
       var element = evt.params.data.element;
@@ -108,24 +113,7 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
   }
 
   defaultCollegeList(): CollegeList[] {
-    return [
-      {
-        id: Colleges.None,
-        text: 'None',
-      },
-      {
-        id: Colleges.CPSBC,
-        text: 'College of Physicians and Surgeons of BC (CPSBC) - 91',
-      },
-      {
-        id: Colleges.CPBC,
-        text: 'College of Pharmacists of BC (CPBC) - P1',
-      },
-      {
-        id: Colleges.CRNBC,
-        text: 'College of Registered Nurses of BC (CRNBC) - 96',
-      }
-    ]
+    return this.collegeData.defaultCollegeList();
   }
 
   onChange(values: any) {
