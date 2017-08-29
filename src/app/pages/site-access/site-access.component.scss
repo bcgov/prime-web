@@ -1,4 +1,9 @@
 ng2-smart-table {
   //The plugin sets most text to 0.875em. We want a font-size of 14px, so we have to set it to 16px to achieve that.
   font-size: 16px;
+
+  //Doesn't work. trying to hide first select box. Think it's scoping issue and scss must be defined in e.g. styles.scss. Or find workaround for this file.
+  // .ng2-smart-filters > th:first-of-type {
+  //   visibility: hidden;
+  // }
 }

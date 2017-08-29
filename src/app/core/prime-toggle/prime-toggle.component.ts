@@ -15,8 +15,4 @@ export class PrimeToggleComponent implements OnInit {
   ngOnInit() {
   }
 
-  // toggle(value : boolean) : void{
-
-  // }
-
 }

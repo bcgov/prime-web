@@ -34,6 +34,7 @@ import { CaptchaComponent } from 'mygovbc-captcha-widget/src/captcha.component';
 import { PrimeToggleComponent } from './core/prime-toggle/prime-toggle.component';
 import { PrimeFormFooterComponent } from './core/prime-form-footer/prime-form-footer.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { PrimeTableSelectComponent } from './core/prime-table-select/prime-table-select.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     CaptchaComponent,
     PrimeToggleComponent,
     PrimeFormFooterComponent,
+    PrimeTableSelectComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,7 +71,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     Select2Module,
     Ng2SmartTableModule
   ],
-  // entryComponents: [ConsentModalContent],
+  entryComponents: [PrimeTableSelectComponent],
   providers: [ApplicantDataService],
   bootstrap: [AppComponent]
 })
