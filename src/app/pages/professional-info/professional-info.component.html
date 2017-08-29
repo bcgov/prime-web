@@ -112,7 +112,7 @@
           i18n="@@RequestedStartDate">Requested Access Start Date</label>
         <prime-date name='RequestedStartDate'
           id='RequestedStartDate'
-          [(date)]="applicant.dates.requestStartDate"
+          [(date)]="applicant.requestStartDate"
           [showError]="showError"
           [required]="true"
           [useCurrentDate]="true">
@@ -125,7 +125,7 @@
           i18n="@@RequestedEndDate">Access End Date (optional)</label>
         <prime-date name='RequestedEndDate'
           id='RequestedEndDate'
-          [(date)]="applicant.dates.requestEndDate"
+          [(date)]="applicant.requestEndDate"
           [showError]="showError"
           [required]="false">
         </prime-date>

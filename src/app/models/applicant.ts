@@ -16,19 +16,14 @@ export class Applicant {
   middleName: string;
   lastName: string;
 
-  // dateOfBirth: SimpleDate;
-  // dateOfBirth: SimpleDate = <SimpleDate>{};
-
   license: {
     licenseExpiry: SimpleDate;
     licenseClass: string; //TODO!
   }
 
-  dates: {
-    requestStartDate: SimpleDate;
-    requestEndDate: SimpleDate;
-    dateOfBirth: SimpleDate;
-  }
+  dateOfBirth: SimpleDate = {} as SimpleDate;
+  requestStartDate: SimpleDate = {} as SimpleDate;
+  requestEndDate: SimpleDate = {} as SimpleDate;
 
   consentInfoCollection: boolean = false;
 
@@ -36,11 +31,6 @@ export class Applicant {
     this.license = {
       licenseExpiry: { day: null, month: null, year: null },
       licenseClass: ''
-    }
-    this.dates = {
-      requestStartDate: { day: null, month: null, year: null },
-      requestEndDate: { day: null, month: null, year: null },
-      dateOfBirth: { day: null, month: null, year: null },
     }
 
   }
