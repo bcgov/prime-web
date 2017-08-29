@@ -3148,12 +3148,23 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
+ng2-completer@^1.2.2:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/ng2-completer/-/ng2-completer-1.6.1.tgz#62bad1a0a1d99c62b15f6723911ee0a3a00c91bb"
+
 ng2-select2@^1.0.0-beta.10:
   version "1.0.0-beta.10"
   resolved "https://registry.yarnpkg.com/ng2-select2/-/ng2-select2-1.0.0-beta.10.tgz#908b0b8a9f8cd06736f3bca16b1e35a1f696a145"
   dependencies:
     "@types/jquery" "^2.0.39"
     "@types/select2" "^4.0.31"
+
+ng2-smart-table@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/ng2-smart-table/-/ng2-smart-table-1.2.1.tgz#b25102c1a8b0588c508cf913c539ddf0f0b3341d"
+  dependencies:
+    lodash "^4.17.4"
+    ng2-completer "^1.2.2"
 
 ngx-bootstrap@^1.8.1:
   version "1.8.1"

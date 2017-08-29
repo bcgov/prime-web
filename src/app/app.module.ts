@@ -33,6 +33,7 @@ import { CaptchaComponent } from 'mygovbc-captcha-widget/src/captcha.component';
 
 import { PrimeToggleComponent } from './core/prime-toggle/prime-toggle.component';
 import { PrimeFormFooterComponent } from './core/prime-form-footer/prime-form-footer.component';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { PrimeFormFooterComponent } from './core/prime-form-footer/prime-form-fo
     NgbModule,
     ModalModule.forRoot(),
     Select2Module,
+    Ng2SmartTableModule
   ],
   // entryComponents: [ConsentModalContent],
   providers: [ApplicantDataService],
