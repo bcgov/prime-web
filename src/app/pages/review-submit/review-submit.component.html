@@ -43,11 +43,45 @@
     <h2>Contact Information</h2>
     <div class="panel panel-default">
       <div class="panel-body">
-        <div class="col-xs-4">
-          <label for="name">Name</label>
+        <div class="row">
+          <div class="col-xs-4">
+            <label for="name">Name</label>
+          </div>
+          <div class="col-xs-8">
+            <span id="name"><strong>{{applicant.fullName}}</strong></span>
+          </div>
         </div>
-        <div class="col-xs-8">
-          <span id="name"><strong>{{applicant.fullName}}</strong></span>
+        <div class="row">
+          <div class="col-xs-4">
+            <label for="name">Phone Number</label>
+          </div>
+          <div class="col-xs-8">
+            <span id="name"><strong>{{applicant.phoneNumber}}</strong></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">
+            <label for="name">Email Address</label>
+          </div>
+          <div class="col-xs-8">
+            <span id="name"><strong>{{applicant.emailAddress}}</strong></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">
+            <label for="name">Alternate Phone Number</label>
+          </div>
+          <div class="col-xs-8">
+            <span id="name"><strong>{{applicant.altPhoneNumber}}</strong></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">
+            <label for="name">Alt Email Address</label>
+          </div>
+          <div class="col-xs-8">
+            <span id="name"><strong>{{applicant.altEmailAddress}}</strong></span>
+          </div>
         </div>
       </div>
     </div>
