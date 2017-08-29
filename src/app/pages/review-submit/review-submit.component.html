@@ -1,12 +1,101 @@
+<h1>
+  Review your application</h1>
+<!-- <h2>Profesional Information</h2> -->
+<div class="row">
+  <div class="col-md-6">
+    <h2>Profesional Information</h2>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="col-xs-4">
+          <label for="collegeName">Professional College Name</label>
+        </div>
+        <div class="col-xs-8">
+          <span id="collegeName"><strong>{{applicant.fullName}}</strong></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h2>Site Access</h2>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="col-xs-4">
+          <label for="accessList">Site Access</label>
+        </div>
+        <div class="col-xs-8">
+          <span id="accessList"><strong>{{applicant.fullName}}</strong></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <h2>Contact Information</h2> -->
+<div class="row">
+  <div class="col-md-6">
+    <h2>Contact Information</h2>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="col-xs-4">
+          <label for="name">Name</label>
+        </div>
+        <div class="col-xs-8">
+          <span id="name"><strong>{{applicant.fullName}}</strong></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h2>Self Declaration</h2>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="col-xs-4">
+          <label for="name">Name</label>
+        </div>
+        <div class="col-xs-8">
+          <span id="name"><strong>{{applicant.fullName}}</strong></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="row">
   <div class="col-md-12">
-    <captcha
-    apiBaseUrl="https://captcha-service-gcpe-mygovbc-demo.pathfinder.gov.bc.ca"
-    nonce="PrimeBC"
-    (onValidToken)="onValidToken($event)"></captcha>
+    <h2>Authorize your application</h2>
+
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perspiciatis porro cumque nobis atque eligendi natus ipsum
+      mollitia iure eum sunt, est impedit exercitationem earum blanditiis consequuntur, cum nulla quis asperiores. Tempora
+      doloribus quo, atque fugiat necessitatibus doloremque provident voluptas fuga explicabo tempore quas ea aut sunt fugit
+      magnam corrupti tenetur. Iste corrupti autem blanditiis aliquid praesentium? Corrupti autem eligendi alias! Unde architecto
+      odio soluta enim neque commodi incidunt vero excepturi, rem quisquam totam amet, culpa tempora modi cumque harum, atque
+      velit reiciendis nobis vel temporibus sint. Eveniet commodi quidem a. Voluptatibus magnam illo cupiditate voluptatum
+      vero sit ullam necessitatibus iste nihil accusantium corporis molestiae obcaecati velit repudiandae fuga explicabo,
+      similique libero atque asperiores cum aut sunt nisi? Ex, dolor eum.</p>
+
+    <div class="checkbox checkbox-success checkbox-inline">
+      <input class="input-lg"
+        id="authorize"
+        type="checkbox">
+      <label class=""
+        for="authorize"><strong i18n="@@AuthroizeApplication">I authorize the application (GET TEXT)</strong></label>
+    </div>
   </div>
 </div>
 
 <hr>
 
-<prime-form-footer (onContinue)='continue()' [locked]="!canContinue()"></prime-form-footer>
+
+<div class="row">
+  <div class="col-md-12">
+    <captcha apiBaseUrl="https://captcha-service-gcpe-mygovbc-demo.pathfinder.gov.bc.ca"
+      nonce="PrimeBC"
+      (onValidToken)="onValidToken($event)"></captcha>
+  </div>
+</div>
+
+<hr>
+
+<prime-form-footer (onContinue)='continue()'
+  [locked]="!canContinue()"></prime-form-footer>

@@ -12,6 +12,10 @@ export class Applicant {
   hasRevocationBeenResolved: boolean;
   hasHadLimitsOrConditions: boolean;
 
+  firstName: string;
+  middleName: string;
+  lastName: string;
+
   license: {
     licenseExpiry: SimpleDate;
     licenseClass: string; //TODO!
@@ -47,5 +51,10 @@ export class Applicant {
     if (this.college === Colleges.None) return this.college === college;
     if (!college && this.college.length) return true;
     return (<Colleges[]>this.college).indexOf(college) >= 0;
+  }
+
+  // TODO - Typechecking. Ensure doesn't show "undefined undefined undefined"
+  get fullName(): string {
+    return `${this.firstName} ${this.middleName} ${this.lastName}`;
   }
 }
