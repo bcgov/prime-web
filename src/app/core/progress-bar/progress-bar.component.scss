@@ -94,6 +94,7 @@
     font-size: $font-size-h3;
     text-decoration: none;
     color: black;
+    // white-space: normal;
     @media(max-width: $screen-xs) {
         padding: 7px 2px 0 24px;
         margin: 0 2px 0 0;
@@ -102,6 +103,7 @@
     @media(max-width: $screen-md - 1) {
         font-size: $font-size-h4;
         text-align: left;
+        padding: 7px 7px 0 30px;
     }
 }
 
@@ -113,10 +115,13 @@
     .progressBar ul li:first-child a {
         padding-left: 15px;
     }
-    .progressBar {white-space: nowrap;}
+}
+
+@media(max-width: $screen-sm - 1) {
     .beforeActive .progress-title,
     .afterActive .progress-title { display: none; }
 }
+
 
 .progressBar ul li a:before {
     content: "";

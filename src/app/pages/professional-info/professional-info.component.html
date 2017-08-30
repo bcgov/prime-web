@@ -22,7 +22,7 @@
 
   <div class="row"
     *ngIf="applicant.goesToCollege()">
-    <div class="col-sm-4">
+    <div class="col-sm-6 col-md-4">
       <div class="form-group">
         <label for='licenseClass'
           i18n="@@LicenseClass">License Class</label>
@@ -44,7 +44,7 @@
           [(ngModel)]="applicant.licenseNumber">
       </div>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-6 col-md-4">
       <div class="form-group">
         <label for='mspBillingNumber'
           i18n="@@ExpiryDateLicense">Expiry Date of License</label>
@@ -106,7 +106,7 @@
   </div>
 
   <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-6 col-md-4">
       <div class="form-group">
         <label for='RequestedEndDate'
           i18n="@@RequestedStartDate">Requested Access Start Date</label>
@@ -119,7 +119,7 @@
         </prime-date>
       </div>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-6 col-md-4">
       <div class="form-group">
         <label for='RequestedEndDate'
           i18n="@@RequestedEndDate">Access End Date (optional)</label>
