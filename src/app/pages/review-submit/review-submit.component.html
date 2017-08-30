@@ -169,6 +169,100 @@
             <span id="name"><strong>{{applicant.altEmailAddress}}</strong></span>
           </div>
         </div>
+        <div class="row">
+          <div class="col-xs-4">
+            <label for="streetNum">Street #</label>
+          </div>
+          <div class="col-xs-8">
+            <span id="streetNum"><strong>{{applicant.address.streetNum}}</strong></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">
+            <label for="streetSuffix">Street Suffix</label>
+          </div>
+          <div class="col-xs-8">
+            <span id="streetSuffix"><strong>{{applicant.address.streetSuffix}}</strong></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">
+            <label for="suite">Unit, Suite #</label>
+          </div>
+          <div class="col-xs-8">
+            <span id="suite"><strong>{{applicant.address.suite}}</strong></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">
+            <label for="street">Street</label>
+          </div>
+          <div class="col-xs-8">
+            <span id="street"><strong>{{applicant.address.street}}</strong></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">
+            <label for="streetType">Street Type</label>
+          </div>
+          <div class="col-xs-8">
+            <span id="streetType"><strong>{{applicant.address.streetType}}</strong></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">
+            <label for="streetDirection">Street Direction</label>
+          </div>
+          <div class="col-xs-8">
+            <span id="streetDirection"><strong>{{applicant.address.streetDirection}}</strong></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">
+            <label for="city">City</label>
+          </div>
+          <div class="col-xs-8">
+            <span id="city"><strong>{{applicant.address.city}}</strong></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">
+            <label for="province">Province</label>
+          </div>
+          <div class="col-xs-8">
+            <span id="province"><strong>{{applicant.address.province}}</strong></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">
+            <label for="country">Country</label>
+          </div>
+          <div class="col-xs-8">
+            <span id="country"><strong>{{applicant.address.country}}</strong></span>
+          </div>
+        </div>
+
+        <hr>
+
+        <ng-container *ngFor="let count of [1, 2, 3];">
+          <div class="row">
+            <div class="col-xs-4">
+              <label for="label{{count}}">Security Question {{count}}</label>
+            </div>
+            <div class="col-xs-8">
+              <span id="label{{count}}"><strong>Security Response {{count}}</strong></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4">
+              <label for="question{{count}}">{{ applicant.securityQuestions[count - 1]?.question}}</label>
+            </div>
+            <div class="col-xs-8">
+              <span id="question{{count}}"><strong>{{applicant.securityQuestions[count - 1]?.answer}}</strong></span>
+            </div>
+          </div>
+        </ng-container>
+
         <a class='edit-link'
           routerLink="/contact-info">EDIT CONTACT INFORMATION</a>
       </div>

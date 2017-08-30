@@ -1,17 +1,16 @@
 import { SimpleDate } from '../core/date/simple-date.interface'
 import { Colleges } from './colleges.enum';
+import { SecurityQuestions } from './security-questions';
 export class Applicant {
-  isDeviceProvider: boolean;
-  MSPBillingNumber: number;
-  // college: Colleges[] | Colleges;
   college: Colleges[];
-  hasBCServicesCard: boolean;
 
+  hasBCServicesCard: boolean;
   hasInformationContraventionOrder: boolean;
   hasBeenSuspended: boolean;
   hasPharmaNetEverRevoked: boolean;
   hasRevocationBeenResolved: boolean;
   hasHadLimitsOrConditions: boolean;
+  isDeviceProvider: boolean;
 
   firstName: string;
   middleName: string;
@@ -20,6 +19,7 @@ export class Applicant {
   emailAddress: string;
   altPhoneNumber: string;
   altEmailAddress: string;
+  MSPBillingNumber: number;
 
   licenseClass: string;
   licenseNumber: string;
@@ -30,6 +30,12 @@ export class Applicant {
   requestEndDate: SimpleDate = {} as SimpleDate;
 
   consentInfoCollection: boolean = false;
+
+  //Stores data from address.component
+  //TODO - Setup proper model or interface for this. Composition? Address.model.ts?
+  address: any = {};
+
+  securityQuestions: SecurityQuestions[] = [];
 
   constructor() {
   }
@@ -53,9 +59,21 @@ export class Applicant {
    * Applicant full name. Combines first name, middle name (if provided), and last name.
    */
   get fullName(): string {
-    if (!this.firstName || !this.lastName){
+    if (!this.firstName || !this.lastName) {
       return null;
     }
     return `${this.firstName} ${this.middleName ? this.middleName : ''} ${this.lastName}`;
+  }
+
+  /**
+   * Checks there are 3 security questions, and none of the values are null/falsy.
+   */
+  get hasSecurityQuestions(): boolean {
+    if (this.securityQuestions.length < 3) return false;
+    this.securityQuestions.forEach(element => {
+      if (element.question == null || element.answer == null) return false;
+    });
+
+    return true;
   }
 }

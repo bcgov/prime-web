@@ -10,6 +10,8 @@ import { BaseComponent } from '../base-component/base-component.component';
 // import {MspProvinceComponent} from "../province/province.component";
 // import {MspCountryComponent} from "../country/country.component";
 
+import { Applicant } from '../../models/applicant';
+
 @Component({
   selector: 'prime-address',
   templateUrl: './address.component.html'
@@ -25,6 +27,11 @@ export class AddressComponent extends BaseComponent {
   /**
    * Model Inputs
    */
+
+  @Input() applicant: Applicant;
+  @Output() onApplicantChange: EventEmitter<Applicant> = new EventEmitter<Applicant>();
+
+
   // @Input() residentialAddress: Address;
   @Input() residentialAddress: any; //todo remove - restore address
   @Input() mailingAddress: any; // todo remove - restore address
@@ -50,8 +57,6 @@ export class AddressComponent extends BaseComponent {
   }
 
   ngAfterViewInit(): void {
-    // super.ngAfterViewInit();
-
     this.form.valueChanges.subscribe(values => {
       this.onChange.emit(values);
     });

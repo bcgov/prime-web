@@ -104,9 +104,7 @@
   </div>
 
   <hr>
-
-  <prime-address></prime-address>
-
+  <prime-address [(applicant)]="applicant"></prime-address>
   <hr>
 
   <!-- <div class="row form-group">
@@ -160,18 +158,26 @@
       <div class="col-sm-5 form-group">
         <label for="securityQuestion{{count}}"
           class='block-label'>Security Question {{count}}</label>
-        <select2 [data]="securityQuestions"
-          value="{{securityQuestions[count - 1].id}}"></select2>
+        <select2
+          [data]="securityQuestions"
+          [value]="selectedSecurityQuestions[count - 1].id"
+          (valueChanged)="onSecurityQuestionChange($event, count)"></select2>
       </div>
       <div class="col-sm-5 form-group">
         <label for="securityAnswer{{count}}">Security Response {{count}}</label>
         <input type="text"
           class="form-control"
           id='securityAnswer{{count}}'
-          name='securityAnswer{{count}}'>
+          name='securityAnswer{{count}}'
+          [ngModel]='applicant.securityQuestions[count - 1]?.answer'
+          (ngModelChange)='onSecurityAnswerChange($event, count)'>
       </div>
     </div>
   </div>
+
+  <hr>
+  <p>APPLICANT SECURITY QUESTIONS</p>
+  {{applicant.securityQuestions | json}}
 
   <hr>
 

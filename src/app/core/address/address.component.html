@@ -1,17 +1,20 @@
-<form #formRef='ngForm' novalidate>
+<form #formRef='ngForm'
+  novalidate>
   <div class="row">
-    <!-- <div class="form-group col-sm-5">
-
-      </div> -->
     <div class="form-group col-lg-1 col-sm-2">
       <label for="streetNum">Street #</label>
-      <input type="text" class="form-control" id='streetNum' name='streetNum'>
+      <input type="text"
+        class="form-control"
+        id='streetNum'
+        name='streetNum'
+        [(ngModel)]="applicant.address.streetNum">
     </div>
     <div class="form-group col-sm-2">
       <label for="streetNum">Street Suffix (optional)</label>
-      <!-- <input type="text" class="form-control" id='streetNum' name='streetNum'> -->
-      <!-- <select2 name='streetNum' id='streetNum'></select2> -->
-      <select class='form-control' name='streetNum' id='streetNum'>
+      <select class='form-control'
+        name='streetSuffix'
+        id='streetSuffix'
+        [(ngModel)]="applicant.address.streetSuffix">
             <option value=""></option>
             <option value="1/2">1/2</option>
             <option value="1/4">1/4</option>
@@ -21,45 +24,53 @@
           </select>
     </div>
     <div class="form-group col-sm-2">
-      <label for="streetNum">Unit, Suite # (optional)</label>
-      <input type="text" class="form-control" id='streetNum' name='streetNum'>
+      <label for="suite">Unit, Suite # (optional)</label>
+      <input type="text"
+        class="form-control"
+        id='suite'
+        name='suite'
+        [(ngModel)]="applicant.address.suite">
     </div>
   </div>
 
   <div class="row">
-    <div class="form-group col-sm-5" [ngClass]="{'has-error': !formRef.controls.residentialAddressLine1?.valid && (residentialAddressLine1Ref.touched || showError)}">
+    <div class="form-group col-sm-5"
+      [ngClass]="{'has-error': !formRef.controls.street?.valid && (residentialAddressLine1Ref.touched || showError)}">
       <label for="residentialAddressLine1{{objectId}}">Street</label>
-      <input [(ngModel)]="residentialAddress.addressLine1" type="text" class="form-control msp-addressline" id="residentialAddressLine1{{objectId}}"
-        name="residentialAddressLine1" #residentialAddressLine1Ref="ngModel" required tabindex="0" maxlength="25">
-      <label class="visuallyhidden" for="residentialAddressLine2{{objectId}}">Address Line 2</label>
-      <div [hidden]="!useResidentialAddressLine2">
-        <input [(ngModel)]="residentialAddress.addressLine2" type="text" class="form-control msp-addressline" id="residentialAddressLine2{{objectId}}"
-          name="residentialAddressLine2" #residentialAddressLine2Ref="ngModel" maxlength="25" tabindex="0">
-      </div>
-      <label class="visuallyhidden" for="residentialAddressLine3{{objectId}}">Address Line 3</label>
-      <div [hidden]="!useResidentialAddressLine3">
-        <input [(ngModel)]="residentialAddress.addressLine3" type="text" class="form-control msp-addressline" id="residentialAddressLine3{{objectId}}"
-          name="residentialAddressLine3" #residentialAddressLine3Ref="ngModel" maxlength="25" tabindex="0">
-      </div>
-      <!-- <a [hidden]="useResidentialAddressLine2 && useResidentialAddressLine3" href="javascript:void(0)"
-               (click)="useAnotherResidentialAddressLine()" role="button">Need another address line?</a> -->
-      <div role="alert" aria-live="assertive">
+      <input [(ngModel)]="applicant.address.street"
+        type="text"
+        class="form-control msp-addressline"
+        id="residentialAddressLine1{{objectId}}"
+        name="street"
+        #residentialAddressLine1Ref="ngModel"
+        required
+        tabindex="0"
+        maxlength="25">
+      <div role="alert"
+        aria-live="assertive">
         <div *ngIf='residentialAddressLine1Ref.touched || showError'>
-          <div class="text-danger" *ngIf="residentialAddressLine1Ref.errors?.required">Street is required</div>
-          <div class="text-danger" *ngIf="residentialAddressLine1Ref.errors?.maxlength">Address Line cannot be more than _LENGTH_ characters</div>
+          <div class="text-danger"
+            *ngIf="residentialAddressLine1Ref.errors?.required">Street is required</div>
+          <div class="text-danger"
+            *ngIf="residentialAddressLine1Ref.errors?.maxlength">Address Line cannot be more than _LENGTH_ characters</div>
         </div>
         <div *ngIf='useResidentialAddressLine2 && residentialAddressLine2Ref.touched || showError'>
-          <div class="text-danger" *ngIf="residentialAddressLine2Ref.errors?.maxlength">Address Line 2 cannot be more than _LENGTH_ characters</div>
+          <div class="text-danger"
+            *ngIf="residentialAddressLine2Ref.errors?.maxlength">Address Line 2 cannot be more than _LENGTH_ characters</div>
         </div>
         <div *ngIf='useResidentialAddressLine3 && residentialAddressLine3Ref.touched || showError'>
-          <div class="text-danger" *ngIf="residentialAddressLine3Ref.errors?.maxlength">Address Line 3 cannot be more than _LENGTH_ characters</div>
+          <div class="text-danger"
+            *ngIf="residentialAddressLine3Ref.errors?.maxlength">Address Line 3 cannot be more than _LENGTH_ characters</div>
         </div>
       </div>
     </div>
 
     <div class="form-group col-sm-3 col-lg-2">
       <label for="streetType">Street Type</label>
-      <select class='form-control' name='streetType' id='streetType'>
+      <select class='form-control'
+        name='streetType'
+        id='streetType'
+        [(ngModel)]="applicant.address.streetType">
           <option value=""></option>
           <option value="Avenue">Avenue</option>
           <option value="Street">Street</option>
@@ -72,7 +83,10 @@
 
     <div class="form-group col-sm-3 col-lg-2">
       <label for="streetType">Street Direction (optional)</label>
-      <select class='form-control' name='streetDirection' id='streetDirection'>
+      <select class='form-control'
+        name='streetDirection'
+        id='streetDirection'
+        [(ngModel)]="applicant.address.streetDirection">
           <option value=""></option>
           <option value="North">North</option>
           <option value="South">South</option>
@@ -84,39 +98,46 @@
           <option value="Southwest">Southwest</option>
         </select>
     </div>
-
-    <!--
-    <div class="form-group col-sm-3" [ngClass]="{'has-error': !formRef.controls.residentialAddressPostalCode?.valid &&
-             (residentialAddressPostalCodeRef.touched  || showError)}">
-      <label for="residentialAddressPostalCode{{objectId}}">Postal or zip code</label>
-      <input [(ngModel)]='residentialAddress.postal' type="text" class="form-control to-upper" id="residentialAddressPostalCode{{objectId}}"
-        name="residentialAddressPostalCode" #residentialAddressPostalCodeRef="ngModel" required tabindex="0">
-      <div *ngIf='residentialAddressPostalCodeRef.touched || showError' role="alert" aria-live="assertive">
-        <div class="text-danger" *ngIf="residentialAddressPostalCodeRef.errors?.required">Postal or zip code is required</div>
-        <div class="text-danger" *ngIf="residentialAddressPostalCodeRef.errors?.pattern">Postal code must be a valid BC postal code</div>
-      </div>
-    </div> -->
-
-
   </div>
   <div class="row">
-    <div class="form-group col-sm-5" [ngClass]="{'has-error': !formRef.controls.residentialAddressCity?.valid && (residentialAddressCityRef.touched || showError)}">
+    <div class="form-group col-sm-5"
+      [ngClass]="{'has-error': !formRef.controls.city?.valid && (residentialAddressCityRef.touched || showError)}">
       <label for="residentialAddressCity{{objectId}}">City</label>
-      <input [(ngModel)]='residentialAddress.city' type="text" class="form-control" id="residentialAddressCity{{objectId}}" name="residentialAddressCity"
-        #residentialAddressCityRef="ngModel" required tabindex="0" maxlength="25">
-      <div *ngIf='residentialAddressCityRef.touched || showError' role="alert" aria-live="assertive">
-        <div class="text-danger" *ngIf="residentialAddressCityRef.errors?.required">City is required</div>
-        <div class="text-danger" *ngIf="residentialAddressCityRef.errors?.maxlength">City cannot be more than _LENGTH_ characters</div>
+      <input [(ngModel)]='applicant.address.city'
+        type="text"
+        class="form-control"
+        id="residentialAddressCity{{objectId}}"
+        name="city"
+        #residentialAddressCityRef="ngModel"
+        required
+        tabindex="0"
+        maxlength="25">
+      <div *ngIf='residentialAddressCityRef.touched || showError'
+        role="alert"
+        aria-live="assertive">
+        <div class="text-danger"
+          *ngIf="residentialAddressCityRef.errors?.required">City is required</div>
+        <div class="text-danger"
+          *ngIf="residentialAddressCityRef.errors?.maxlength">City cannot be more than _LENGTH_ characters</div>
       </div>
     </div>
     <div class="form-group col-sm-3">
       <label for="residentialAddressProvince{{objectId}}">Province</label>
-      <input [(ngModel)]='residentialAddress.province' type="text" class="form-control" id="residentialAddressProvince{{objectId}}"
-        name="residentialAddressProvince" value="British Columbia">
+      <input [(ngModel)]='applicant.address.province'
+        type="text"
+        class="form-control"
+        id="residentialAddressProvince{{objectId}}"
+        name="residentialAddressProvince"
+        value="British Columbia">
     </div>
     <div class="form-group col-sm-3">
       <label for="residentialAddressCountry{{objectId}}">Country</label>
-      <input type="text" class="form-control" id="residentialAddressCountry{{objectId}}" name="residentialAddressCountry" value="Canada">
+      <input type="text"
+        class="form-control"
+        id="residentialAddressCountry{{objectId}}"
+        name="residentialAddressCountry"
+        value="Canada"
+        [(ngModel)]="applicant.address.country">
     </div>
   </div>
 

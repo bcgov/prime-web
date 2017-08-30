@@ -5,6 +5,7 @@ import { Applicant } from '../../models/applicant';
 import { Select2OptionData } from 'ng2-select2';
 
 import { BaseComponent } from '../../core/base-component/base-component.component';
+import { SecurityQuestions } from '../../models/security-questions';
 
 
 
@@ -14,26 +15,16 @@ import { BaseComponent } from '../../core/base-component/base-component.componen
   styleUrls: ['./contact-information.component.scss']
 })
 export class ContactInformationComponent extends BaseComponent implements OnInit {
-
-  public countries: Select2OptionData[];
   public applicant: Applicant;
   public securityQuestions: Select2OptionData[];
+
+  public selectedSecurityQuestions: Select2OptionData[];
+  private securityQuestionAndAnswers: SecurityQuestions[] = [];
 
   constructor(private router: Router,
     private applicantData: ApplicantDataService) {
     super();
     this.applicant = applicantData.applicant;
-
-    this.countries = [
-      {
-        id: 'CAN',
-        text: "Canada"
-      },
-      {
-        id: "USA",
-        text: "United States of America"
-      }
-    ]
 
     /**
      * Note: Must discuss with backend devs what they'd want as IDs here. Should probably have these questions enforced on the backend, so maybe we can just pass an identifier instead of the full string.
@@ -42,7 +33,7 @@ export class ContactInformationComponent extends BaseComponent implements OnInit
       { id: "What was your first pet's name?", text: "What was your first pet's name?"},
       { id: "What was the make of your first car?", text: "What was the make of your first car?"},
       { id: "What was the last name of your favourite teacher?", text: "What was the last name of your favourite teacher?"},
-      { id: "What was the last name of your childhood best friend?", text: "What was the last name of your childhood best friend?"},
+      { id: "What was the last name of  your childhood best friend?", text: "What was the last name of your childhood best friend?"},
       { id: "What is your oldest cousin's first name?", text: "What is your oldest cousin's first name?"},
       { id: "What town was your father born in?", text: "What town was your father born in?"},
       { id: "What town was your mother born in?", text: "What town was your mother born in?"},
@@ -50,6 +41,37 @@ export class ContactInformationComponent extends BaseComponent implements OnInit
       { id: "What year did you meet your spouse?", text: "What year did you meet your spouse?"},
       { id: "What is the name of your favourite book?", text: "What is the name of your favourite book?" }
     ]
+
+
+    if (this.applicant.hasSecurityQuestions){
+      this.selectedSecurityQuestions = this.applicant.securityQuestions.map(x => {
+        return <Select2OptionData>{id: x.question, text: x.question}
+      })
+    }
+    else {
+      this.selectedSecurityQuestions = this.securityQuestions.slice(0, 3);
+    }
+
+    for (var index = 0; index <= 2; index++) {
+      this.securityQuestionAndAnswers[index] = {
+        question: this.selectedSecurityQuestions[index].text,
+        answer: null
+      }
+    }
+
+  }
+
+  onSecurityQuestionChange(event, count) {
+    const index = count - 1;
+    this.securityQuestionAndAnswers[index].question = event.value;
+    this.applicant.securityQuestions = this.securityQuestionAndAnswers;
+    this.selectedSecurityQuestions[index] = {id: event.value, text: event.value};
+  }
+
+
+  onSecurityAnswerChange(input, count){
+    const index = count - 1;
+    this.applicant.securityQuestions[index].answer = input;
   }
 
   selectQuestion(question, event) {
@@ -66,12 +88,6 @@ export class ContactInformationComponent extends BaseComponent implements OnInit
   continue(): void {
     console.log('---------------\ncontinue');
     this.router.navigate(['self-declaration']);
-  }
-
-  contactDayChange(input){
-    console.log('contactDayChange with', input);
-    // console.log('applicant.dates.dateofBirth', this.applicant.dates.dateOfBirth);
-
   }
 
 }
