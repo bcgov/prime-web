@@ -45,7 +45,7 @@
         <label for='dateOfBirth'
           i18n="@@DateOfBirth">Date of Birth</label>
 
-         <prime-date name='dateOfBirth'
+        <prime-date name='dateOfBirth'
           id='dateOfBirth'
           [showError]="false"
           [required]="true"
@@ -176,13 +176,7 @@
   </div>
 
   <hr>
-  <p>APPLICANT SECURITY QUESTIONS</p>
-  {{applicant.securityQuestions | json}}
-
-  <hr>
-
-  <prime-form-footer (onContinue)='continue()'
-    [locked]="!canContinue()"></prime-form-footer>
+  <prime-form-footer (onContinue)='continue()' [locked]="!canContinue()"></prime-form-footer>
 
 
 </form>

@@ -11,6 +11,7 @@ export class Applicant {
   hasRevocationBeenResolved: boolean;
   hasHadLimitsOrConditions: boolean;
   isDeviceProvider: boolean;
+  willPersonallyAccessFromSites: boolean;
 
   firstName: string;
   middleName: string;

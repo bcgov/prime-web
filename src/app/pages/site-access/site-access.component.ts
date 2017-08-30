@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { BaseComponent } from '../../core/base-component/base-component.component';
 import { ViewCell } from 'ng2-smart-table';
 import { PrimeTableSelectComponent } from '../../core/prime-table-select/prime-table-select.component'
+import { Applicant } from '../../models/applicant';
+import { ApplicantDataService } from '../../services/applicant-data.service';
 
 @Component({
   selector: 'app-site-access',
@@ -10,25 +12,11 @@ import { PrimeTableSelectComponent } from '../../core/prime-table-select/prime-t
   styleUrls: ['./site-access.component.scss']
 })
 export class SiteAccessComponent extends BaseComponent implements OnInit {
+  public applicant: Applicant;
 
   tableSettings: any = {
-    // hideSubHeader: true,
 
     columns: {
-      // selected: {
-      //   width: '20px',
-
-      //   title: 'Selected',
-      //   type: 'custom',
-      //   renderComponent: PrimeTableSelectComponent,
-      //   onComponentInitFunction(instance) {
-      //     instance.save.subscribe(row => {
-      //       console.log(row.namedCollection + (row.selected ? " selected" : " unselected"));
-      //       console.log('row', row.namedCollection, row);
-      //     });
-      //   }
-      // },
-
       namedCollection: {
         title: 'Named Collection of Sites'
       },
@@ -89,8 +77,10 @@ export class SiteAccessComponent extends BaseComponent implements OnInit {
     },
   ]
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+    private dataStore: ApplicantDataService) {
     super();
+    this.applicant = this.dataStore.applicant;
    }
 
   ngOnInit() {

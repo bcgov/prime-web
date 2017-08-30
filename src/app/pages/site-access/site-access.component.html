@@ -1,13 +1,11 @@
-<p>
-  site-access - in progress, check console data tables.
-</p>
-
 <ng2-smart-table [settings]="tableSettings" [source]="tableData"></ng2-smart-table>
-
 <hr>
 
-{{tableData | json }}
-
-<hr>
+<div class="row">
+  <div class="col-sm-12">
+    <label for="" class='control-label'>Will you personally access PharmaNet from the Site(s) selected?</label>
+    <prime-toggle [(data)]="applicant.willPersonallyAccessFromSites"></prime-toggle>
+  </div>
+</div>
 
 <prime-form-footer (onContinue)='continue()' [locked]="!canContinue()"></prime-form-footer>
