@@ -1,7 +1,5 @@
 // @import "../../../../styles/variables.less";
 @import "../../variables.scss";
-
-
 .progressBar {
     text-align: left;
     display: table;
@@ -22,15 +20,14 @@
     text-align: center;
     font-weight: 500;
     width: auto;
-    @media screen and (min-width:$screen-sm) {
+    @media screen and (min-width: $screen-sm) {
         min-width: 25%;
         display: table-cell;
-        }
+    }
 }
 
 .progressBar ul li a span:first-of-type {
-    font-weight: 700;
-    // padding-right: 5px;
+    font-weight: 700; // padding-right: 5px;
 }
 
 .progressBar .beforeActive {
@@ -102,9 +99,23 @@
         margin: 0 2px 0 0;
         text-align: left;
     }
-    @media(max-width: $screen-md) {
+    @media(max-width: $screen-md - 1) {
         font-size: $font-size-h4;
+        text-align: left;
     }
+}
+
+
+
+
+@media(max-width: $screen-md - 1) {
+    //This is a specific CSS hack to make sure that "Professional Information" fits in the medium breakpoint for the first progress bar item.
+    .progressBar ul li:first-child a {
+        padding-left: 15px;
+    }
+    .progressBar {white-space: nowrap;}
+    .beforeActive .progress-title,
+    .afterActive .progress-title { display: none; }
 }
 
 .progressBar ul li a:before {

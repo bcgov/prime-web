@@ -6,8 +6,8 @@
         [class.active]="isActive(item)"
         [class.afterActive]="isAfterActive(item)"
         [class.beforeActive]="isBeforeActiveRoute(item)">
-             <span>{{itemNum + 1}}</span>
-             <span>{{item.displayName}}</span>
+             <span class='progress-step'>{{itemNum + 1}}</span>
+             <span class='progress-title' [innerHTML]='item.displayName'></span>
           </a>
       </li>
     </ul>
