@@ -4,6 +4,8 @@ import { SiteAccessComponent } from './site-access.component';
 import { PrimeFormFooterComponent } from '../../core/prime-form-footer/prime-form-footer.component'
 import { PrimeToggleComponent } from '../../core//prime-toggle/prime-toggle.component';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { ApplicantDataService } from '../../services/applicant-data.service';
 
 describe('SiteAccessComponent', () => {
   let component: SiteAccessComponent;
@@ -11,8 +13,9 @@ describe('SiteAccessComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      declarations: [ SiteAccessComponent, PrimeFormFooterComponent, PrimeToggleComponent ]
+      imports: [RouterTestingModule, Ng2SmartTableModule],
+      declarations: [ SiteAccessComponent, PrimeFormFooterComponent, PrimeToggleComponent ],
+      providers: [ApplicantDataService]
     })
     .compileComponents();
   }));

@@ -61,7 +61,8 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
   /**
    * Sets the college selection value.
    */
-  setCollegeSelection(value: Colleges[] | Colleges) {
+  // setCollegeSelection(value: Colleges[] | Colleges) {
+  setCollegeSelection(value: Colleges[]) {
     this.collegeVal = value;
     this.applicant.college = <Colleges[]>value;
   }
@@ -82,12 +83,14 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
   }
 
   private selectCounter: number = 0;
+  /**
+   * Must be used in conjunction w/ initSelect's reordering. Otherwise will get
+   * the first item after sorting, which ignores the user input order.  Most of
+   * the logic is about selecting "None", which results in this function being
+   * fired multiple times in quick succession.
+   * @param value An array of Colleges ids.
+   */
   public onCollegeChange(value: Colleges[]): void {
-    let areOtherOptionsSelected : boolean = value instanceof Array ?
-      !!value.filter(x => x !== Colleges.None).length
-      : false;
-
-    //Must be used in conjunction w/ initSelect's reordering. Otherwise will get the first item after sorting, which ignores the user input order.
     let firstSelected = this.elementRef.nativeElement.querySelectorAll('.select2-selection__rendered > li')[0].title
 
     //'None' is already selected only if it's the non-first option.
@@ -96,16 +99,11 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
 
     //Case: Have items, select 'None' -> clear and show 'None'
     if (isNoneInSelection && !isNoneInPreviousSelection) {
-      //This is a hackfix to trigger an update. Angular will auto filter onChange updates if you send the same value twice, so we quickly send a blank string before the value we want.
-      this.collegeVal = this.selectCounter++ % 2 == 0 ? '' : 'none';
-      this.cdRef.detectChanges();
-      this.setCollegeSelection(Colleges.None);
-      this.cdRef.detectChanges();
+      this.setCollegeSelection([Colleges.None]);
     }
     //Case: Have 'None', select items -> clear and show items.
     else if (isNoneInSelection && isNoneInPreviousSelection){
       this.collegeVal = value.filter(x => x.toLowerCase() !== 'none');
-      this.cdRef.detectChanges();
     }
     else {
       this.setCollegeSelection(value)

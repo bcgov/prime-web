@@ -2,7 +2,6 @@ import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { BaseComponent } from '../../core/base-component/base-component.component';
 import { ViewCell } from 'ng2-smart-table';
-import { PrimeTableSelectComponent } from '../../core/prime-table-select/prime-table-select.component'
 import { Applicant } from '../../models/applicant';
 import { ApplicantDataService } from '../../services/applicant-data.service';
 

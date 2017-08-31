@@ -12,6 +12,8 @@ import { FileUploaderComponent } from './file-uploader.component';
 import {Http, Headers, RequestOptions, ConnectionBackend, HttpModule} from "@angular/http"
 import moment = require("moment");
 
+import { ModalModule } from 'ngx-bootstrap/modal';
+
 
 
 describe('FileUploaderComponent', () => {
@@ -23,7 +25,7 @@ describe('FileUploaderComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [FileUploaderComponent],
-      imports: [FormsModule, HttpModule],
+      imports: [FormsModule, HttpModule, ModalModule.forRoot()],
     })
   });
   it ('should work', () => {

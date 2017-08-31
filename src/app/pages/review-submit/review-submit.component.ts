@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
 import { BaseComponent } from '../../core/base-component/base-component.component';
 
 import { Applicant } from '../../models/applicant';
@@ -20,7 +20,8 @@ export class ReviewSubmitComponent extends BaseComponent implements OnInit {
   private hasValidToken: boolean = false;
   public applicant: Applicant;
 
-  constructor(private router: Router,
+  constructor(
+    // private router: Router,
     private dataStore: ApplicantDataService,
     private collegeData: CollegeDataService) {
     super();
