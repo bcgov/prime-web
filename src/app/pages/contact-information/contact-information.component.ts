@@ -42,7 +42,7 @@ export class ContactInformationComponent extends BaseComponent implements OnInit
       { id: "What is the name of your favourite book?", text: "What is the name of your favourite book?" }
     ]
 
-
+    //Use persisted security questions if possible
     if (this.applicant.hasSecurityQuestions){
       this.selectedSecurityQuestions = this.applicant.securityQuestions.map(x => {
         return <Select2OptionData>{id: x.question, text: x.question}
@@ -52,6 +52,7 @@ export class ContactInformationComponent extends BaseComponent implements OnInit
       this.selectedSecurityQuestions = this.securityQuestions.slice(0, 3);
     }
 
+    //Initialize values, otherwise we get undefined/null errors in template
     for (var index = 0; index <= 2; index++) {
       this.securityQuestionAndAnswers[index] = {
         question: this.selectedSecurityQuestions[index].text,

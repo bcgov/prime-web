@@ -82,7 +82,6 @@ export class SiteAccessComponent extends BaseComponent implements OnInit {
       result.push({
         id: index,
         selected: false,
-        // namedCollection: (() => )
         namedCollection: this.getRandomElFromArray(COLLECTIONS),
         siteName: this.getRandomElFromArray(SITENAME),
         city: this.getRandomElFromArray(CITY),

@@ -29,4 +29,8 @@ describe('SiteAccessComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have table data', () => {
+    expect(component.tableData.length).toBeTruthy();
+  });
 });
