@@ -57,6 +57,7 @@ select2 {
     //override element styling that happens via js.
     width: 100% !important;
     min-height: 36px !important;
+    height: auto !important; //when label is two lines
   }
   .select2-selection {
     padding-right: 8px !important; //Same as the padding-left default
@@ -79,16 +80,19 @@ select2 {
   border-color: #1b926c !important;
 }
 
-
-
-.visually-hidden { /*https://developer.yahoo.com/blogs/ydn/clip-hidden-content-better-accessibility-53456.html*/
-  position: absolute !important;
-  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
-  clip: rect(1px, 1px, 1px, 1px);
-  padding:0 !important;
-  border:0 !important;
-  height: 1px !important;
-  width: 1px !important;
-  overflow: hidden;
+.nowrap {
+  white-space: nowrap;
 }
-body:hover .visually-hidden a, body:hover .visually-hidden input, body:hover .visually-hidden button { display: none !important; }
+
+@media(min-width: $screen-sm) {
+  .nowrap-sm { white-space: nowrap;}
+  .wrap-sm {white-space: normal;}
+}
+@media(min-width: $screen-md) {
+  .nowrap-md { white-space: nowrap;}
+  .wrap-md { white-space: normal;}
+}
+@media(min-width: $screen-lg) {
+  .nowrap-lg { white-space: nowrap;}
+  .wrap-lg { white-space: normal;}
+}

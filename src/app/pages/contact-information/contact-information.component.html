@@ -15,10 +15,11 @@
           [(ngModel)]="applicant.firstName">
       </div>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-3 col-md-4 col-sm-offset-1 col-md-offset-0">
       <div class="form-group">
         <label for='middleName'
-          i18n="@@middleName">Middle name (if applicable)</label>
+          i18n="@@middleName"
+          class="nowrap-sm wrap-md">Middle name (if applicable)</label>
         <input type="text"
           class="form-control"
           name='middleName'
@@ -40,7 +41,7 @@
   </div>
 
   <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-5 col-md-4">
       <div class="form-group">
         <label for='dateOfBirth'
           i18n="@@DateOfBirth">Date of Birth</label>
@@ -54,7 +55,7 @@
 
       </div>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-3 col-md-4">
       <div class="form-group">
         <label for='phoneNumber'
           i18n="@@phoneNumber">Phone Number</label>
@@ -79,7 +80,7 @@
   </div>
 
   <div class="row">
-    <div class="col-sm-offset-4 col-sm-4">
+    <div class="col-sm-offset-5 col-md-offset-4 col-sm-3 col-md-4">
       <div class="form-group">
         <label for='phoneNumber'
           i18n="@@altphoneNumber">Alternate Phone Number</label>
