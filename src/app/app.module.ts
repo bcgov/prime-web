@@ -9,10 +9,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { Select2Module } from 'ng2-select2';
 
 import { AppComponent } from './app.component';
-import { CustomerComponent } from './customer/customer.component';
-import { SearchBoxDirective } from './search-box/search-box.directive';
 import { ApplicantDataService } from './services/applicant-data.service'
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressBarComponent } from './core/progress-bar/progress-bar.component';
 import { ConsentModalComponent } from './core/consent-modal/consent-modal.component';
 import { ProfessionalInfoComponent } from './pages/professional-info/professional-info.component';
@@ -41,9 +38,6 @@ import { CollegeDataService } from './services/college-data.service';
 @NgModule({
   declarations: [
     AppComponent,
-    CustomerComponent,
-    SearchBoxDirective,
-    DashboardComponent,
     ProgressBarComponent,
     ConsentModalComponent,
     ProfessionalInfoComponent,

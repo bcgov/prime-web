@@ -23,13 +23,6 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'dashboard',
-    component: DashboardComponent,
-    data: {
-      breadcrumb: 'Dashboard'
-    }
-  },
-  {
     path: 'professional-info',
     component: ProfessionalInfoComponent,
   },
