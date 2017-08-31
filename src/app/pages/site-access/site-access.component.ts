@@ -25,10 +25,13 @@ export class SiteAccessComponent extends BaseComponent implements OnInit {
         title: 'Site Name'
       },
       city: {
-        title: 'City'
+        title: 'City',
+        width: '110px',
       },
       postal: {
-        title: 'Postal Code'
+        title: 'Postal Code',
+        width: '90px',
+        class: 'nowrap',
       },
       vendor: {
         title: "Vendor"
@@ -45,43 +48,13 @@ export class SiteAccessComponent extends BaseComponent implements OnInit {
 
   };
 
-  tableData: any = [
-    {
-      id: 1,
-      selected: false,
-      namedCollection: "VIHA",
-      siteName: "Royal Jubilee",
-      city: "Victoria",
-      postal: "V8R 2N9",
-      vendor: "???",
-      siteType: "Example"
-    },
-    {
-      id: 2,
-      selected: true,
-      namedCollection: "Pharmasave",
-      siteName: "845 Yates",
-      city: "Victoria",
-      postal: "V9B 1Z2",
-      // vendor: "???",
-      // siteType: "Example"
-    },
-    {
-      id: 3,
-      selected: false,
-      namedCollection: "Pharmasave",
-      siteName: "845 Jacklin",
-      city: "Langford",
-      postal: "V9B 1Z2",
-      // vendor: "???",
-      // siteType: "Example"
-    },
-  ]
+  tableData: any;
 
   constructor(private router: Router,
     private dataStore: ApplicantDataService) {
     super();
     this.applicant = this.dataStore.applicant;
+    this.tableData = this.generateTableData(20);
    }
 
   ngOnInit() {
@@ -94,6 +67,37 @@ export class SiteAccessComponent extends BaseComponent implements OnInit {
   continue(): void {
     console.log('---------------\ncontinue');
     this.router.navigate(['contact-info']);
+  }
+
+  generateTableData(numberOfRows: number){
+    const COLLECTIONS = ["Pharmasave", "Walmart", "VIHA", "Island Sexual Health"];
+    const SITENAME = ["845 Jacklin", "Royal Jubilee", "Victoria General Hospital", "Pacific Health Clinic", "Island Sexual Health"];
+    const CITY = ["Victoria", "Langford", "Saanich", "Sidney", "Colwood", "Oak Bay"];
+    const VENDOR = ["GlaxoSmithKline", "Bayer", "Rochester", "Pfizer", "Merck", "Johnson & Johnson"]
+    const SITETYPE = ["Clinic", "Hospital", "Pharmacy"];
+    const POSTAL = ["V9B 1Z2", "V6R 2YK", "V4T 1UA", "V2S R2M"]
+
+    let result = [];
+
+    for (var index = 0; index < numberOfRows; index++) {
+      result.push({
+        id: index,
+        selected: false,
+        // namedCollection: (() => )
+        namedCollection: this.getRandomElFromArray(COLLECTIONS),
+        siteName: this.getRandomElFromArray(SITENAME),
+        city: this.getRandomElFromArray(CITY),
+        postal: this.getRandomElFromArray(POSTAL),
+        vendor: this.getRandomElFromArray(VENDOR),
+        siteType: this.getRandomElFromArray(SITETYPE)
+      })
+    }
+
+    return result;
+  }
+
+  private getRandomElFromArray(arr: any[]) : any {
+    return arr[Math.ceil(Math.random() * arr.length) - 1]
   }
 
 }

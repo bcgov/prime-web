@@ -68,6 +68,18 @@ select2 {
   }
 }
 
+ng2-smart-table tbody {
+  tr:nth-of-type(even){background-color: #f9f9f9;}
+  tr {
+    transition: 0.15s;
+    border: 1px solid #ededed;
+    &:hover {background-color: #f0f6ff}
+  }
+
+  //Selected is triggered when user taps on a row. Since we're read-only, selection would only serve to confuse the user.
+  .ng2-smart-row .selected {background-color: transparent;}
+}
+
 .intro {
   font-size: 18px;
   margin-top: 20px;
