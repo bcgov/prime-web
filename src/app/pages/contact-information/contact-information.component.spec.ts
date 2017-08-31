@@ -32,4 +32,8 @@ describe('ContactInformationComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have 10 security questions', () => {
+    expect(component.securityQuestions.length).toEqual(10);
+  });
 });

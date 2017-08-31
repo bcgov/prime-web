@@ -24,6 +24,11 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
   public collegeModelVal: any;
   private lastSelectedOption: string;
 
+
+  //Configuration option. Toggle this to turn the whole page into readonly.
+  //Waiting to hear from Cristina if this will be a permanent change.
+  public readonly: boolean = true;
+
   constructor(
     private applicantData: ApplicantDataService,
     private cdRef: ChangeDetectorRef,
@@ -42,6 +47,11 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
     this.collegeList = this.defaultCollegeList();
     this.collegeVal = this.applicant.college;
     this.initSelect();
+
+    if (this.readonly){
+      //For Demo purposes only
+      this.setCollegeSelection([Colleges.CPBC, Colleges.CRNBC]);
+    }
   }
 
   ngAfterViewInit() {

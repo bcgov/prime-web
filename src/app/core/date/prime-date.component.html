@@ -8,6 +8,7 @@
                 id="month{{objectId}}"
                 name="month"
                 #monthRef="ngModel"
+                [disabled]="disabled"
                 [required]="required">
             <option value="0">&nbsp;</option>
             <option value="1">January</option>
@@ -33,6 +34,7 @@
                id="day{{objectId}}" name="day" #dayRef="ngModel"
                placeholder="day"
                [required]="required"
+               [disabled]="disabled"
                min="1"
                max="31">
         <label class="visuallyhidden" for="year{{objectId}}">Year</label>
@@ -41,7 +43,7 @@
                [ngModel]="date.year"
                (ngModelChange) = 'setYearValueOnModel($event)'
                validateCalendarYear
-
+               [disabled]="disabled"
                id="year{{objectId}}" name="year" #yearRef="ngModel"
                placeholder="year"
                [required]="required"

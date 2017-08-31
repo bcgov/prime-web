@@ -15,7 +15,8 @@
           [data]="collegeList"
           (valueChanged)="onCollegeChange($event.value)"
           [options]="{multiple: true, placeholder: 'Select a College'}"
-          [value]="collegeVal"></select2>
+          [value]="collegeVal"
+          [disabled]="readonly"></select2>
       </div>
     </div>
   </div>
@@ -30,6 +31,7 @@
           class="form-control"
           name='licenseClass'
           id='licenseClass'
+          [disabled]="readonly"
           [(ngModel)]="applicant.licenseClass">
       </div>
     </div>
@@ -41,6 +43,7 @@
           class="form-control"
           name='licenseNumber'
           id='licenseNumber'
+          [disabled]="readonly"
           [(ngModel)]="applicant.licenseNumber">
       </div>
     </div>
@@ -52,6 +55,7 @@
           id='mspBillingNumber'
           [(date)]="applicant.licenseExpiry"
           [showError]="showError"
+          [disabled]="readonly"
           [required]="true">
         </prime-date>
       </div>
@@ -65,6 +69,7 @@
           class="form-control"
           name='mspBillingNumber'
           id='mspBillingNumber'
+          [disabled]="readonly"
           [(ngModel)]="applicant.MSPBillingNumber">
       </div>
     </div>
@@ -76,7 +81,9 @@
       <div class="form-group">
         <label for='advancedPracticeCerts'
           i18n="@@AdvancedPracticeCerts">Advanced Practice Certification(s)</label>
-        <select2 name='advancedPracticeCerts'
+        <select2
+        [disabled]="readonly"
+        name='advancedPracticeCerts'
           id='advancedPracticeCerts'></select2>
       </div>
     </div>
@@ -100,6 +107,7 @@
         <label for='onBehalfOfJobTitle'
           i18n="@@OnBehalfOfJobTitle">On-Behalf Of Job Title</label>
         <select2 name='onBehalfOfJobTitle'
+          [disabled]="readonly"
           id='onBehalfOfJobTitle'></select2>
       </div>
     </div>
@@ -115,6 +123,7 @@
           [(date)]="applicant.requestStartDate"
           [showError]="showError"
           [required]="true"
+          [disabled]="readonly"
           [useCurrentDate]="true">
         </prime-date>
       </div>
@@ -127,6 +136,7 @@
           id='RequestedEndDate'
           [(date)]="applicant.requestEndDate"
           [showError]="showError"
+          [disabled]="readonly"
           [required]="false">
         </prime-date>
       </div>

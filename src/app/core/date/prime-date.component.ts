@@ -13,6 +13,7 @@ export class PrimeDateComponent extends BaseComponent implements OnInit {
   @Input() showError: boolean;
   @Input() required: boolean = true;
   @Input() useCurrentDate: boolean = false;
+  @Input() disabled: boolean;
 
   @Input() date: SimpleDate
   @Output() onDateChange: EventEmitter<SimpleDate> = new EventEmitter<SimpleDate>();
