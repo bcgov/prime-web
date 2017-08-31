@@ -30,4 +30,8 @@ export class SelfDeclarationComponent extends BaseComponent implements OnInit {
     this.router.navigate(['user-acceptance']);
   }
 
+  back(): void {
+    this.router.navigate(['contact-info']);
+  }
+
 }

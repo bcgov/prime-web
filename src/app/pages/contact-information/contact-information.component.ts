@@ -91,4 +91,8 @@ export class ContactInformationComponent extends BaseComponent implements OnInit
     this.router.navigate(['self-declaration']);
   }
 
+  back(): void {
+    this.router.navigate(['site-access']);
+  }
+
 }

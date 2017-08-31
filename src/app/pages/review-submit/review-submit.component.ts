@@ -8,7 +8,7 @@ import { CollegeDataService } from '../../services/college-data.service';
 
 import { SimpleDate } from '../../core/date/simple-date.interface';
 import * as moment from 'moment'; //Only used in convertSimpelDateToText();
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-review-submit',
@@ -23,7 +23,8 @@ export class ReviewSubmitComponent extends BaseComponent implements OnInit {
   constructor(
     // private router: Router,
     private dataStore: ApplicantDataService,
-    private collegeData: CollegeDataService) {
+    private collegeData: CollegeDataService,
+    private router: Router) {
     super();
     this.applicant = dataStore.applicant;
   }
@@ -66,6 +67,10 @@ export class ReviewSubmitComponent extends BaseComponent implements OnInit {
       day: simpleDate.day
     }).format("MMMM Do, YYYY");
 
+  }
+
+  back(): void {
+    this.router.navigate(['user-acceptance']);
   }
 
 }

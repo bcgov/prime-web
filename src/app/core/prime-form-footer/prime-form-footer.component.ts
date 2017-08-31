@@ -8,7 +8,9 @@ import { BaseComponent } from '../base-component/base-component.component';
 })
 export class PrimeFormFooterComponent extends BaseComponent implements OnInit {
   @Input() locked: boolean;
+  @Input() disableBack: boolean;
   @Output() onContinue: EventEmitter<void> = new EventEmitter<void>();
+  @Output() onBack: EventEmitter<void> = new EventEmitter<void>();
 
   constructor() {
     super();
@@ -19,6 +21,10 @@ export class PrimeFormFooterComponent extends BaseComponent implements OnInit {
 
   continue(){
     this.onContinue.emit();
+  }
+
+  back(){
+    this.onBack.emit();
   }
 
 }

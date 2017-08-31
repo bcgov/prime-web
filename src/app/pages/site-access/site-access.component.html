@@ -10,4 +10,7 @@
 
 <hr>
 
-<prime-form-footer (onContinue)='continue()' [locked]="!canContinue()"></prime-form-footer>
+<prime-form-footer
+(onContinue)='continue()'
+(onBack)="back()"
+[locked]="!canContinue()"></prime-form-footer>

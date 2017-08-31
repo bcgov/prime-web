@@ -48,4 +48,8 @@ export class UserAcceptanceComponent extends BaseComponent implements OnInit {
     this.router.navigate(['review-submit']);
   }
 
+  back(): void {
+    this.router.navigate(['self-declaration']);
+  }
+
 }

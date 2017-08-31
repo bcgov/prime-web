@@ -68,6 +68,10 @@ export class SiteAccessComponent extends BaseComponent implements OnInit {
     this.router.navigate(['contact-info']);
   }
 
+  back(): void {
+    this.router.navigate(['professional-info']);
+  }
+
   generateTableData(numberOfRows: number){
     const COLLECTIONS = ["Pharmasave", "Walmart", "VIHA", "Island Sexual Health"];
     const SITENAME = ["845 Jacklin", "Royal Jubilee", "Victoria General Hospital", "Pacific Health Clinic", "Island Sexual Health"];
