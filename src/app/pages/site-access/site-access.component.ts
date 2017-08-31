@@ -18,7 +18,8 @@ export class SiteAccessComponent extends BaseComponent implements OnInit {
 
     columns: {
       namedCollection: {
-        title: 'Named Collection of Sites'
+        title: 'Named Collection of Sites',
+        class: 'nowrap',
       },
       siteName: {
         title: 'Site Name'
