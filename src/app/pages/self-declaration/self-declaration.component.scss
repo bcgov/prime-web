@@ -9,10 +9,21 @@ Have upload-section slide down with user, similar to affix.js
 but have it transition nicely with some easing.
 */
 
+.upload-section {
+  transition: 0.3s;
+  // background-color: lightgrey;
+}
 @media screen and (min-width: $screen-md) {
+  // .upload-section {
+  //   position: absolute;
+  //   bottom: 83px;
+  //   right: 0px;
+  // }
+}
+
+
+@media screen and (max-width: $screen-md) {
   .upload-section {
-    position: absolute;
-    bottom: 83px;
-    right: 0px;
+    transform: none !important; //Overwrite direct element styling
   }
 }
