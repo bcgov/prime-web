@@ -40,9 +40,11 @@ describe('ProfessionalInfoComponent', () => {
   });
 
   it('should be able to set college selection', () => {
-    expect(component.applicant.college).toBeUndefined();
+    //During dev, if app is in readOnly we populate dummy data. Once business decisions are nailed down, this will change.
+    if (!component.readonly){
+      expect(component.applicant.college).toBeUndefined();
+    }
     component.setCollegeSelection([Colleges.None]);
-    console.log('ARCARC', component.applicant.college, component.applicant.college[0] === Colleges.None);
     expect(component.applicant.college[0] === Colleges.None).toBeTruthy();
     expect(component.collegeVal[0] === Colleges.None).toBeTruthy();
     component.setCollegeSelection([Colleges.CPBC]);
