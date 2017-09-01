@@ -4,6 +4,7 @@ import { BaseComponent } from '../../core/base-component/base-component.componen
 import { ViewCell } from 'ng2-smart-table';
 import { Applicant } from '../../models/applicant';
 import { ApplicantDataService } from '../../services/applicant-data.service';
+import { Colleges } from '../../models/colleges.enum';
 
 @Component({
   selector: 'app-site-access',
@@ -12,6 +13,7 @@ import { ApplicantDataService } from '../../services/applicant-data.service';
 })
 export class SiteAccessComponent extends BaseComponent implements OnInit {
   public applicant: Applicant;
+  public Colleges: typeof Colleges = Colleges;
 
   tableSettings: any = {
 
