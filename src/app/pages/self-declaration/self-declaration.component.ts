@@ -15,13 +15,13 @@ export class SelfDeclarationComponent extends BaseComponent implements OnInit {
   public viewHeight: number;
   @ViewChild('declarationQuestions') declarationQuestions: ElementRef;
 
-
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private changeRef: ChangeDetectorRef,
     private applicantData: ApplicantDataService) {
-    super();
-    this.applicant = applicantData.applicant;
-  }
+      super();
+      this.applicant = applicantData.applicant;
+   }
 
   ngOnInit() {
   }

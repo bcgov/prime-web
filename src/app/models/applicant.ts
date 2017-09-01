@@ -1,8 +1,11 @@
 import { SimpleDate } from '../core/date/simple-date.interface'
 import { Colleges } from './colleges.enum';
 import { SecurityQuestions } from './security-questions';
+import { NamedCollection } from './named-collections.interface';
+
 export class Applicant {
   college: Colleges[];
+  namedCollections: NamedCollection[];
 
   hasBCServicesCard: boolean;
   hasInformationContraventionOrder: boolean;

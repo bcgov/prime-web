@@ -4,6 +4,8 @@ import { BaseComponent } from '../../core/base-component/base-component.componen
 import { ViewCell } from 'ng2-smart-table';
 import { Applicant } from '../../models/applicant';
 import { ApplicantDataService } from '../../services/applicant-data.service';
+import { Colleges } from '../../models/colleges.enum';
+import { NamedCollection } from '../../models/named-collections.interface';
 
 @Component({
   selector: 'app-site-access',
@@ -12,6 +14,8 @@ import { ApplicantDataService } from '../../services/applicant-data.service';
 })
 export class SiteAccessComponent extends BaseComponent implements OnInit {
   public applicant: Applicant;
+  public Colleges: typeof Colleges = Colleges;
+  public tableData: NamedCollection[];
 
   tableSettings: any = {
 
@@ -47,13 +51,12 @@ export class SiteAccessComponent extends BaseComponent implements OnInit {
 
   };
 
-  tableData: any;
-
   constructor(private router: Router,
     private dataStore: ApplicantDataService) {
     super();
     this.applicant = this.dataStore.applicant;
     this.tableData = this.generateTableData(20);
+    this.applicant.namedCollections = this.tableData;
    }
 
   ngOnInit() {
@@ -72,12 +75,18 @@ export class SiteAccessComponent extends BaseComponent implements OnInit {
     this.router.navigate(['professional-info']);
   }
 
-  generateTableData(numberOfRows: number){
+  /**
+   * Randomly generate NamedCollections, useful during development.
+   * Each cell is randomized, so the whole row may not be cohesive.
+   *
+   * @param numberOfRows Number of NamedCollections to generate
+   */
+  generateTableData(numberOfRows: number) : NamedCollection[]{
     const COLLECTIONS = ["Pharmasave", "Walmart", "VIHA", "Island Sexual Health"];
     const SITENAME = ["845 Jacklin", "Royal Jubilee", "Victoria General Hospital", "Pacific Health Clinic", "Island Sexual Health"];
     const CITY = ["Victoria", "Langford", "Saanich", "Sidney", "Colwood", "Oak Bay"];
     const VENDOR = ["GlaxoSmithKline", "Bayer", "Rochester", "Pfizer", "Merck", "Johnson & Johnson"]
-    const SITETYPE = ["Clinic", "Hospital", "Pharmacy"];
+    const SITETYPE = ["Medical Practice", "Emergency Department", "Clinic", "Hospital", "Pharmacy"];
     const POSTAL = ["V9B 1Z2", "V6R 2YK", "V4T 1UA", "V2S R2M"]
 
     let result = [];

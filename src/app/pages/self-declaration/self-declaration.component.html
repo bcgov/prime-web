@@ -2,64 +2,96 @@
   <div class="col-sm-12 col-md-7 col-lg-8" #declarationQuestions style="z-index: 10">
     <div class="row form-group">
       <div class="col-sm-12 col-md-12">
-        <label id="haveBeenSubjectOfOrderOrConviction" for="haveBeenSubjectOfOrderOrConviction" class='intro' i18n="@@haveBeenSubjectOfOrderOrConviction">Have you ever been the subject of an order or conviction for an information contravention?</label>
+        <label id="haveBeenSubjectOfOrderOrConviction"
+          for="haveBeenSubjectOfOrderOrConviction"
+          class='intro'
+          i18n="@@haveBeenSubjectOfOrderOrConviction">Have you ever been the subject of an order or conviction for an information contravention?</label>
         <prime-toggle [(data)]="applicant.hasInformationContraventionOrder"></prime-toggle>
       </div>
     </div>
 
-    <div class="row" *ngIf="applicant.hasInformationContraventionOrder">
+    <div class="row"
+      *ngIf="applicant.hasInformationContraventionOrder">
       <div class="form-group">
         <div class="col-lg-10 col-md-12 col-sm-12">
-          <label for="infoContraventionDetails" class="control-label">Please provide details</label>
-          <textarea name="infoContraventionDetails" id="infoContraventionDetails" class='form-control' rows='3'></textarea>
+          <label for="infoContraventionDetails"
+            class="control-label">Please provide details</label>
+          <textarea name="infoContraventionDetails"
+            id="infoContraventionDetails"
+            class='form-control'
+            rows='3'></textarea>
         </div>
       </div>
     </div>
 
     <div class="row form-group">
       <div class="col-sm-12 col-md-12">
-        <label id="haveBeenSubjectOfOrderOrConviction" for="haveBeenSubjectOfOrderOrConviction" class='intro' i18n="@@haveBeenSubjectOfOrderOrConviction">Have you ever had your registration with a governing body of a health profession suspended or cancelled?</label>
+        <label id="haveBeenSubjectOfOrderOrConviction"
+          for="haveBeenSubjectOfOrderOrConviction"
+          class='intro'
+          i18n="@@haveBeenSubjectOfOrderOrConviction">Have you ever had your registration with a governing body of a health profession suspended or cancelled?</label>
         <prime-toggle [(data)]="applicant.hasBeenSuspended"></prime-toggle>
       </div>
     </div>
 
-    <div class="row" *ngIf="applicant.hasBeenSuspended">
+    <div class="row"
+      *ngIf="applicant.hasBeenSuspended">
       <div class="form-group">
         <div class="col-lg-10 col-md-12 col-sm-12">
-          <label for="infoContraventionDetails" class="control-label">Please provide details</label>
-          <textarea name="infoContraventionDetails" id="infoContraventionDetails" class='form-control' rows='3'></textarea>
+          <label for="infoContraventionDetails"
+            class="control-label">Please provide details</label>
+          <textarea name="infoContraventionDetails"
+            id="infoContraventionDetails"
+            class='form-control'
+            rows='3'></textarea>
         </div>
       </div>
     </div>
 
     <div class="row form-group">
       <div class="col-sm-12 col-md-12">
-        <label id="haveHadLimitsImposed" for="haveHadLimitsImposed" class='intro' i18n="@@haveHadLimitsImposed">Have you ever had any limits or conditions imposed on your license as a result of disciplinary actions taken by a governing body of a health profession? </label>
+        <label id="haveHadLimitsImposed"
+          for="haveHadLimitsImposed"
+          class='intro'
+          i18n="@@haveHadLimitsImposed">Have you ever had any limits or conditions imposed on your license as a result of disciplinary actions taken by a governing body of a health profession? </label>
         <prime-toggle [(data)]="applicant.hasHadLimitsOrConditions"></prime-toggle>
       </div>
     </div>
 
-    <div class="row" *ngIf="applicant.hasHadLimitsOrConditions">
+    <div class="row"
+      *ngIf="applicant.hasHadLimitsOrConditions">
       <div class="form-group">
         <div class="col-lg-10 col-md-12 col-sm-12">
-          <label for="hasHadLimitsDetails" class="control-label">Please provide details</label>
-          <textarea name="hasHadLimitsDetails" id="hasHadLimitsDetails" class='form-control' rows='3'></textarea>
+          <label for="hasHadLimitsDetails"
+            class="control-label">Please provide details</label>
+          <textarea name="hasHadLimitsDetails"
+            id="hasHadLimitsDetails"
+            class='form-control'
+            rows='3'></textarea>
         </div>
       </div>
     </div>
 
     <div class="row form-group">
       <div class="col-sm-12 col-md-12">
-        <label id="haveBeenSubjectOfOrderOrConviction" for="haveBeenSubjectOfOrderOrConviction" class='intro' i18n="@@haveBeenSubjectOfOrderOrConviction">Have you ever had your access to PharmaNet suspended or revoked?</label>
+        <label id="haveBeenSubjectOfOrderOrConviction"
+          for="haveBeenSubjectOfOrderOrConviction"
+          class='intro'
+          i18n="@@haveBeenSubjectOfOrderOrConviction">Have you ever had your access to PharmaNet suspended or revoked?</label>
         <prime-toggle [(data)]="applicant.hasPharmaNetEverRevoked"></prime-toggle>
       </div>
     </div>
 
-    <div class="row" *ngIf="applicant.hasPharmaNetEverRevoked">
+    <div class="row"
+      *ngIf="applicant.hasPharmaNetEverRevoked">
       <div class="form-group">
         <div class="col-lg-10 col-md-12 col-sm-12">
-          <label for="infoContraventionDetails" class="control-label">Please provide details</label>
-          <textarea name="infoContraventionDetails" id="infoContraventionDetails" class='form-control' rows='3'></textarea>
+          <label for="infoContraventionDetails"
+            class="control-label">Please provide details</label>
+          <textarea name="infoContraventionDetails"
+            id="infoContraventionDetails"
+            class='form-control'
+            rows='3'></textarea>
         </div>
       </div>
     </div>
@@ -68,49 +100,58 @@
 
       <div class="row form-group">
         <div class="col-sm-12 col-md-12">
-          <label id="haveBeenSubjectOfOrderOrConviction" for="haveBeenSubjectOfOrderOrConviction" class='intro' i18n="@@haveBeenSubjectOfOrderOrConviction">Has the circumstances that lead to the revocation been resolved?</label>
+          <label id="haveBeenSubjectOfOrderOrConviction"
+            for="haveBeenSubjectOfOrderOrConviction"
+            class='intro'
+            i18n="@@haveBeenSubjectOfOrderOrConviction">Has the circumstances that lead to the revocation been resolved?</label>
 
           <prime-toggle [(data)]="applicant.hasRevocationBeenResolved"></prime-toggle>
         </div>
       </div>
 
-      <div class="row" *ngIf="applicant.hasRevocationBeenResolved">
+      <div class="row"
+        *ngIf="applicant.hasRevocationBeenResolved">
         <div class="form-group">
           <div class="col-lg-10 col-md-12 col-sm-12">
-            <label for="infoContraventionDetails" class="control-label">Please provide details</label>
-            <textarea name="infoContraventionDetails" id="infoContraventionDetails" class='form-control' rows='3'></textarea>
+            <label for="infoContraventionDetails"
+              class="control-label">Please provide details</label>
+            <textarea name="infoContraventionDetails"
+              id="infoContraventionDetails"
+              class='form-control'
+              rows='3'></textarea>
           </div>
         </div>
       </div>
     </ng-container>
 
-    <!-- [style.height]="viewHeight ? viewHeight : 'auto'" -->
-    <!-- [style.height]="viewHeight + 'px'" -->
 
   </div>
-  <div class="col-md-5 col-lg-4 upload-section"
-    [style.transform]="'translateY('+viewHeight+'px)'"
-    >
-    <div class="upload-content">
-      <h3><i class="fa fa-upload fa icon-upload" aria-hidden="true"></i> Supporting Documentation Attachment (optional)</h3>
+  <div class="col-md-5 col-lg-4 upload-section" [style.transform]="'translateY('+viewHeight+'px)'">
 
-      <div>
-        Scan the document, or take a photo of it. Make sure that it&#8217;s:
-        <ul>
-          <li>The entire document, from corner to corner</li>
-          <li>At least 1000 pixels wide x 1500 pixels tall</li>
-          <li>Rotated correctly (not upside down or sideways)</li>
-          <li>In focus and easy to read</li>
-          <li>A JPG, PNG, GIF or BMP file (<strong>not a PDF</strong>)</li>
-        </ul>
-      </div>
-      <prime-file-uploader>
-        <span id="uploadInstruction" #uploadInstruction tabindex="0">Upload supporting documentation (optional)</span>
-      </prime-file-uploader>
+    <h3><i class="fa fa-upload fa icon-upload"
+        aria-hidden="true"></i> Supporting Documentation Attachment (optional)</h3>
+
+    <div>
+      Scan the document, or take a photo of it. Make sure that it&#8217;s:
+      <ul>
+        <li>The entire document, from corner to corner</li>
+        <li>At least 1000 pixels wide x 1500 pixels tall</li>
+        <li>Rotated correctly (not upside down or sideways)</li>
+        <li>In focus and easy to read</li>
+        <li>A JPG, PNG, GIF or BMP file (<strong>not a PDF</strong>)</li>
+      </ul>
     </div>
+    <prime-file-uploader>
+      <span id="uploadInstruction"
+        #uploadInstruction
+        tabindex="0">Upload supporting documentation (optional)</span>
+    </prime-file-uploader>
   </div>
 </div>
 <hr>
 
 
-<prime-form-footer (onContinue)='continue()' (onBack)="back()" [locked]="!canContinue()"></prime-form-footer>
+<prime-form-footer
+(onContinue)='continue()'
+(onBack)="back()"
+[locked]="!canContinue()"></prime-form-footer>

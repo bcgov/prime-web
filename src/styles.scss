@@ -80,6 +80,9 @@ ng2-smart-table tbody {
   .ng2-smart-row .selected {background-color: transparent;}
 }
 
+thead tr.ng2-smart-filters .ng2-smart-th,
+thead tr.ng2-smart-titles .ng2-smart-th {padding-left: 0}
+
 .intro {
   font-size: 18px;
   margin-top: 20px;
