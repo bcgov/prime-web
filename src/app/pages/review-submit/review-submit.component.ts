@@ -51,7 +51,7 @@ export class ReviewSubmitComponent extends BaseComponent implements OnInit {
 
   /**
    * Converts SimpleDate object of integers to human readable, formatted date.
-   * TODO - Refactor this function to its own service if necessary, but currently only need to use this on the review screen.
+   * NOTE - Refactor this function to its own service if necessary, but currently only need to use this on the review screen.
    */
   convertSimpleDateToText(simpleDate: SimpleDate): string {
 
