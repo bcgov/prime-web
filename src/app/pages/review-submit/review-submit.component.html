@@ -96,30 +96,11 @@
             </strong></span>
           </div>
         </div>
-        <a class='edit-link' routerLink="/professional-info">EDIT PROFESSIONAL INFORMATION</a>
+        <a class='edit-link' routerLink="/professional-info">VIEW PROFESSIONAL INFORMATION</a>
       </div>
     </div>
   </div>
-  <div class="col-md-6">
-    <h2>Site Access</h2>
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-xs-4">
-            <label for="accessList">Site Access</label>
-          </div>
-          <div class="col-xs-8">
-            <span id="accessList"><strong>{{applicant.fullName}}</strong></span>
-          </div>
-        </div>
-        <a class='edit-link' routerLink="/site-access">EDIT SITE ACCESS</a>
-      </div>
-    </div>
-  </div>
-</div>
 
-
-<div class="row">
   <div class="col-md-6">
     <h2>Contact Information</h2>
     <div class="panel panel-default">
@@ -158,7 +139,7 @@
         </div>
         <div class="row">
           <div class="col-xs-4">
-            <label for="name">Alt Email Address</label>
+            <label for="name">Alternate Email Address</label>
           </div>
           <div class="col-xs-8">
             <span id="name"><strong>{{applicant.altEmailAddress}}</strong></span>
@@ -262,7 +243,26 @@
       </div>
     </div>
   </div>
-  <div class="col-md-6">
+</div>
+
+
+<div class="row">
+
+  <div class="col-md-4">
+    <h2>Site Access</h2>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <ul>
+          <li *ngFor="let site of applicant.namedCollections">
+            {{ site.siteName + ", " + site.city + " (" + site.siteType + ")" }}
+          </li>
+        </ul>
+        <a class='edit-link' routerLink="/site-access">VIEW SITE ACCESS</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8">
     <h2>Self Declaration</h2>
     <div class="panel panel-default">
       <div class="panel-body">
