@@ -46,6 +46,9 @@ export class Applicant {
 
   securityQuestions: SecurityQuestions[] = [];
 
+  //TODO TODO! Refactor to use interface/enum.
+  advancedPracticeCerts: any[];
+
   constructor() {
   }
 

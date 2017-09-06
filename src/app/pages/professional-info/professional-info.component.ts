@@ -6,6 +6,7 @@ import { ConsentModalComponent } from '../../core/consent-modal/consent-modal.co
 import { BaseComponent } from '../../core/base-component/base-component.component';
 import { Colleges, CollegeList } from '../../models/colleges.enum';
 import { CollegeDataService } from '../../services/college-data.service';
+import { AdvancedPracticeCerts } from '../../models/advanced-practice-certs.enum';
 
 
 @Component({
@@ -16,18 +17,14 @@ import { CollegeDataService } from '../../services/college-data.service';
 export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
   public applicant: Applicant;
   @ViewChild(ConsentModalComponent) private consentModal: ConsentModalComponent;
-
   public Colleges: typeof Colleges = Colleges;
   public showError: boolean = false;
   public collegeList: CollegeList[];
-  public collegeVal: string | string[];
-  public collegeModelVal: any;
-  private lastSelectedOption: string;
 
 
   //Configuration option. Toggle this to turn the whole page into readonly.
   //Waiting to hear from Cristina if this will be a permanent change.
-  public readonly: boolean = true;
+  public readonly: boolean = false;
 
   constructor(
     private applicantData: ApplicantDataService,
@@ -45,19 +42,49 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     this.collegeList = this.defaultCollegeList();
-    this.collegeVal = this.applicant.college;
     this.initSelect();
 
     if (this.readonly){
       //For Demo purposes only
-      this.setCollegeSelection([Colleges.CPBC, Colleges.CRNBC]);
+      this.applicant.college = [Colleges.CPBC, Colleges.CRNBC]
+      this.applicant.advancedPracticeCerts = [AdvancedPracticeCerts.RemotePractice, AdvancedPracticeCerts.ReproductiveCare];
     }
   }
 
+  get advancedPracticeCertsList() {
+    return [
+      {
+        id: 'none',
+        text: AdvancedPracticeCerts.None,
+      },
+      {
+        id: AdvancedPracticeCerts.RemotePractice,
+        text: AdvancedPracticeCerts.RemotePractice,
+      },
+      {
+        id: AdvancedPracticeCerts.ReproductiveCare,
+        text: AdvancedPracticeCerts.ReproductiveCare,
+      },
+      {
+        id: AdvancedPracticeCerts.SexuallyTransmittedInfections,
+        text: AdvancedPracticeCerts.SexuallyTransmittedInfections
+      }
+    ]
+  }
+
+  onAdvancedPracticeCertChanged(value, el){
+    this.applicant.advancedPracticeCerts = this.enforceNoneSelect(value, el);
+  }
+
+  onCollegeChange(value: Colleges[], el): void {
+    this.applicant.college = this.enforceNoneSelect(value, el);
+  }
+
+
   ngAfterViewInit() {
-    if (!this.applicant.consentInfoCollection){
-      this.consentModal.openModal();
-    }
+    // if (!this.applicant.consentInfoCollection){
+    //   this.consentModal.openModal();
+    // }
   }
 
   onConsented(consent){
@@ -66,15 +93,6 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
 
   collegeDebug() {
     console.log('collegeDebug');
-  }
-
-  /**
-   * Sets the college selection value.
-   */
-  // setCollegeSelection(value: Colleges[] | Colleges) {
-  setCollegeSelection(value: Colleges[]) {
-    this.collegeVal = value;
-    this.applicant.college = <Colleges[]>value;
   }
 
   /**
@@ -92,31 +110,35 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
 
   }
 
-  private selectCounter: number = 0;
-  /**
-   * Must be used in conjunction w/ initSelect's reordering. Otherwise will get
-   * the first item after sorting, which ignores the user input order.  Most of
-   * the logic is about selecting "None", which results in this function being
-   * fired multiple times in quick succession.
-   * @param value An array of Colleges ids.
-   */
-  public onCollegeChange(value: Colleges[]): void {
-    let firstSelected = this.elementRef.nativeElement.querySelectorAll('.select2-selection__rendered > li')[0].title
 
-    //'None' is already selected only if it's the non-first option.
-    let isNoneInPreviousSelection = !(firstSelected.toLowerCase() === "none");
-    let isNoneInSelection = value.indexOf(Colleges.None) >= 0;
+  /**
+   * Enforces business logic relating to selecting a "None" value when select2's
+   * multiselect is enabled.  Ensures the user cannot both have items selected
+   * as well as 'none'. If 'none' is selected, it will clear all other
+   * results, and vice versa.
+   *
+   * This MUST be used in conjunction w/ initSelects() reordering, otherwise
+   * detection will not work.
+   * @param value The $event.value from <select2>'s (valueChanged)
+   * @param el A parent element containing the <select2> element.
+   */
+  enforceNoneSelect(value, el) : any[] {
+    const firstSelected = el.querySelectorAll('.select2-selection__rendered > li')[0].title
+    const isNoneInPreviousSelection = !(firstSelected.toLowerCase() === "none");
+    const isNoneInSelection = value.indexOf("none") >= 0;
+    const onlyNoneSelected = value.length === 1 && isNoneInPreviousSelection;
+    const otherOptionsSelected = (value.length >= 2 || (value.length === 1 && ! isNoneInSelection))
 
     //Case: Have items, select 'None' -> clear and show 'None'
-    if (isNoneInSelection && !isNoneInPreviousSelection) {
-      this.setCollegeSelection([Colleges.None]);
+    if (isNoneInSelection && !isNoneInPreviousSelection && otherOptionsSelected){
+      return ["none"];
     }
     //Case: Have 'None', select items -> clear and show items.
-    else if (isNoneInSelection && isNoneInPreviousSelection){
-      this.collegeVal = value.filter(x => x.toLowerCase() !== 'none');
+    else if (isNoneInSelection && isNoneInPreviousSelection) {
+      return value.filter(x => x.toLowerCase() !== 'none')
     }
     else {
-      this.setCollegeSelection(value)
+      return value;
     }
   }
 
