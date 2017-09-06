@@ -3126,9 +3126,9 @@ mute-stream@0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
 
-mygovbc-bootstrap-theme@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/mygovbc-bootstrap-theme/-/mygovbc-bootstrap-theme-0.3.0.tgz#310694bef180ca6ddf3b8a30cb42b866f727b70d"
+mygovbc-bootstrap-theme@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/mygovbc-bootstrap-theme/-/mygovbc-bootstrap-theme-0.4.0.tgz#373121c0fd4690be5c51455507f69c019cb3d45b"
 
 "mygovbc-captcha-widget@git+https://github.com/bcgov/MyGovBC-CAPTCHA-Widget.git":
   version "1.0.4"
