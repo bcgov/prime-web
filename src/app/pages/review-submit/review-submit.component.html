@@ -1,8 +1,6 @@
 <h1>Review your application</h1>
 
-<button tabindex="0"
-  class="btn btn-default"
-  (click)="print()">
+<button tabindex="0" class="btn btn-default" (click)="print()">
   <i class="fa fa-print fa-lg pointer" aria-hidden="true"></i>
   Print
 </button>
@@ -62,8 +60,7 @@
             <span id="advancedPraticeCerts"><strong>TODO!</strong></span>
           </div>
         </div>
-        <div class="row"
-          *ngIf="applicant.isDeviceProvider === true || applicant.isDeviceProvider === false">
+        <div class="row" *ngIf="applicant.isDeviceProvider === true || applicant.isDeviceProvider === false">
           <div class="col-xs-4">
             <label for="licenseClass">Is a device provider</label>
           </div>
@@ -99,8 +96,7 @@
             </strong></span>
           </div>
         </div>
-        <a class='edit-link'
-          routerLink="/professional-info">EDIT PROFESSIONAL INFORMATION</a>
+        <a class='edit-link' routerLink="/professional-info">EDIT PROFESSIONAL INFORMATION</a>
       </div>
     </div>
   </div>
@@ -116,8 +112,7 @@
             <span id="accessList"><strong>{{applicant.fullName}}</strong></span>
           </div>
         </div>
-        <a class='edit-link'
-          routerLink="/site-access">EDIT SITE ACCESS</a>
+        <a class='edit-link' routerLink="/site-access">EDIT SITE ACCESS</a>
       </div>
     </div>
   </div>
@@ -263,8 +258,7 @@
           </div>
         </ng-container>
 
-        <a class='edit-link'
-          routerLink="/contact-info">EDIT CONTACT INFORMATION</a>
+        <a class='edit-link' routerLink="/contact-info">EDIT CONTACT INFORMATION</a>
       </div>
     </div>
   </div>
@@ -273,15 +267,94 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <div class="row">
-          <div class="col-xs-4">
-            <label for="name">Name</label>
+          <div class="col-xs-6">
+            <label for="name">Have you ever been the subject of an order or conviction for an information contravention?</label>
           </div>
-          <div class="col-xs-8">
-            <span id="name"><strong>{{applicant.fullName}}</strong></span>
+          <div class="col-xs-6">
+            <span id="name"><strong>{{applicant.hasInformationContraventionOrder ? "Yes" : "No"}}</strong></span>
           </div>
         </div>
-        <a class='edit-link'
-          routerLink="/self-declaration">EDIT SELF DECLARATION</a>
+        <div class="row" *ngIf="applicant.hasInformationContraventionOrder">
+          <div class="col-xs-2">
+            <label for="name">Details</label>
+          </div>
+          <div class="col-xs-10">
+            <span id="name"><strong>{{applicant.informationContraventionOrderDetails}}</strong></span>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-xs-6">
+            <label for="name">Have you ever had your registration with a governing body of a health profession suspended or cancelled?</label>
+          </div>
+          <div class="col-xs-6">
+            <span id="name"><strong>{{applicant.hasBeenSuspended ? "Yes" : "No"}}</strong></span>
+          </div>
+        </div>
+        <div class="row" *ngIf="applicant.hasBeenSuspended">
+          <div class="col-xs-2">
+            <label for="name">Details</label>
+          </div>
+          <div class="col-xs-10">
+            <span id="name"><strong>{{applicant.beenSuspendedDetails}}</strong></span>
+          </div>
+        </div>
+        <hr>
+
+        <div class="row">
+          <div class="col-xs-6">
+            <label for="name">Have you ever had any limits or conditions imposed on your license as a result of disciplinary actions taken by a governing body of a health profession?</label>
+          </div>
+          <div class="col-xs-6">
+            <span id="name"><strong>{{applicant.hasHadLimitsOrConditions ? "Yes" : "No"}}</strong></span>
+          </div>
+        </div>
+        <div class="row" *ngIf="applicant.hasHadLimitsOrConditions">
+          <div class="col-xs-2">
+            <label for="name">Details</label>
+          </div>
+          <div class="col-xs-10">
+            <span id="name"><strong>{{applicant.hadLimitsOrConditionsDetails}}</strong></span>
+          </div>
+        </div>
+        <hr>
+
+        <div class="row">
+          <div class="col-xs-6">
+            <label for="name">Have you ever had your access to PharmaNet suspended or revoked?</label>
+          </div>
+          <div class="col-xs-6">
+            <span id="name"><strong>{{applicant.hasPharmaNetEverRevoked ? "Yes" : "No"}}</strong></span>
+          </div>
+        </div>
+        <div class="row" *ngIf="applicant.hasPharmaNetEverRevoked">
+          <div class="col-xs-2">
+            <label for="name">Details</label>
+          </div>
+          <div class="col-xs-10">
+            <span id="name"><strong>{{applicant.PharmaNetEverRevokedDetails}}</strong></span>
+          </div>
+        </div>
+        <hr>
+
+        <div class="row" *ngIf="applicant.hasPharmaNetEverRevoked">
+          <div class="col-xs-6">
+            <label for="name">Has the circumstances that lead to the revocation been resolved?</label>
+          </div>
+          <div class="col-xs-6">
+            <span id="name"><strong>{{applicant.hasRevocationBeenResolved ? "Yes" : "No"}}</strong></span>
+          </div>
+        </div>
+        <div class="row" *ngIf="applicant.hasRevocationBeenResolved">
+          <div class="col-xs-2">
+            <label for="name">Details</label>
+          </div>
+          <div class="col-xs-10">
+            <span id="name"><strong>{{applicant.revocationBeenResolvedDetails}}</strong></span>
+          </div>
+        </div>
+
+        <a class='edit-link' routerLink="/self-declaration">EDIT SELF DECLARATION</a>
       </div>
     </div>
   </div>
@@ -301,11 +374,8 @@
       similique libero atque asperiores cum aut sunt nisi? Ex, dolor eum.</p>
 
     <div class="checkbox checkbox-success checkbox-inline">
-      <input class="input-lg"
-        id="authorize"
-        type="checkbox">
-      <label class=""
-        for="authorize"><strong i18n="@@AuthroizeApplication">I authorize the application (GET TEXT)</strong></label>
+      <input class="input-lg" id="authorize" type="checkbox">
+      <label class="" for="authorize"><strong i18n="@@AuthroizeApplication">I authorize the application (GET TEXT)</strong></label>
     </div>
   </div>
 </div>
@@ -315,15 +385,10 @@
 
 <div class="row">
   <div class="col-md-12">
-    <captcha apiBaseUrl="https://captcha-service-gcpe-mygovbc-demo.pathfinder.gov.bc.ca"
-      nonce="PrimeBC"
-      (onValidToken)="onValidToken($event)"></captcha>
+    <captcha apiBaseUrl="https://captcha-service-gcpe-mygovbc-demo.pathfinder.gov.bc.ca" nonce="PrimeBC" (onValidToken)="onValidToken($event)"></captcha>
   </div>
 </div>
 
 <hr>
 
-<prime-form-footer
-(onContinue)='continue()'
-(onBack)="back()"
-[locked]="!canContinue()"></prime-form-footer>
+<prime-form-footer (onContinue)='continue()' (onBack)="back()" [locked]="!canContinue()"></prime-form-footer>

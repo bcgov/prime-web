@@ -9,10 +9,15 @@ export class Applicant {
 
   hasBCServicesCard: boolean;
   hasInformationContraventionOrder: boolean;
+  informationContraventionOrderDetails: string;
   hasBeenSuspended: boolean;
+  beenSuspendedDetails: string;
   hasPharmaNetEverRevoked: boolean;
+  PharmaNetEverRevokedDetails: string;
   hasRevocationBeenResolved: boolean;
+  revocationBeenResolvedDetails: string;
   hasHadLimitsOrConditions: boolean;
+  hadLimitsOrConditionsDetails: string;
   isDeviceProvider: boolean;
   willPersonallyAccessFromSites: boolean;
 

@@ -19,6 +19,7 @@
           <textarea name="infoContraventionDetails"
             id="infoContraventionDetails"
             class='form-control'
+            [(ngModel)]="applicant.informationContraventionOrderDetails"
             rows='3'></textarea>
         </div>
       </div>
@@ -43,6 +44,7 @@
           <textarea name="infoContraventionDetails"
             id="infoContraventionDetails"
             class='form-control'
+            [(ngModel)]="applicant.beenSuspendedDetails"
             rows='3'></textarea>
         </div>
       </div>
@@ -62,11 +64,12 @@
       *ngIf="applicant.hasHadLimitsOrConditions">
       <div class="form-group">
         <div class="col-lg-10 col-md-12 col-sm-12">
-          <label for="hasHadLimitsDetails"
+          <label for="hadLimitsOrConditionsDetails"
             class="control-label">Please provide details</label>
-          <textarea name="hasHadLimitsDetails"
-            id="hasHadLimitsDetails"
+          <textarea name="hadLimitsOrConditionsDetails"
+            id="hadLimitsOrConditionsDetails"
             class='form-control'
+            [(ngModel)]="applicant.hadLimitsOrConditionsDetails"
             rows='3'></textarea>
         </div>
       </div>
@@ -91,6 +94,7 @@
           <textarea name="infoContraventionDetails"
             id="infoContraventionDetails"
             class='form-control'
+            [(ngModel)]="applicant.PharmaNetEverRevokedDetails"
             rows='3'></textarea>
         </div>
       </div>
@@ -118,6 +122,7 @@
             <textarea name="infoContraventionDetails"
               id="infoContraventionDetails"
               class='form-control'
+              [(ngModel)]="applicant.revocationBeenResolvedDetails"
               rows='3'></textarea>
           </div>
         </div>
