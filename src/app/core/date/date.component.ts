@@ -5,8 +5,8 @@ import { SimpleDate } from '../../core/date/simple-date.interface';
 
 @Component({
   selector: 'prime-date',
-  templateUrl: './prime-date.component.html',
-  styleUrls: ['./prime-date.component.scss']
+  templateUrl: './date.component.html',
+  styleUrls: ['./date.component.scss']
 })
 export class PrimeDateComponent extends BaseComponent implements OnInit {
 

@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProfessionalInfoComponent } from './professional-info.component';
 import { CalendarYearValidator } from '../../core/date/calendar-year.validator';
-import { PrimeDateComponent } from '../../core/date/prime-date.component';
+import { PrimeDateComponent } from '../../core/date/date.component';
 import { ConsentModalComponent } from '../../core/consent-modal/consent-modal.component'
 import { FormsModule } from '@angular/forms';
 import { Select2Module } from 'ng2-select2';
@@ -9,8 +9,8 @@ import { CalendarFieldFormatterDirective } from '../../core/date/calendar-field-
 import { ModalModule } from 'ngx-bootstrap';
 import { ApplicantDataService } from '../../services/applicant-data.service';
 import { Colleges } from '../../models/colleges.enum'
-import { PrimeToggleComponent } from '../../core/prime-toggle/prime-toggle.component';
-import { PrimeFormFooterComponent } from '../../core/prime-form-footer/prime-form-footer.component';
+import { PrimeToggleComponent } from '../../core/toggle/toggle.component';
+import { PrimeFormFooterComponent } from '../../core/form-footer/form-footer.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CollegeDataService } from '../../services/college-data.service';
 

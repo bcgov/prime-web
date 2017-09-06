@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApplicantDataService } from '../../services/applicant-data.service';
-import { Applicant } from '../../models/applicant';
+import { Applicant } from '../../models/applicant.model';
 import { Select2OptionData } from 'ng2-select2';
 
 import { BaseComponent } from '../../core/base-component/base-component.component';

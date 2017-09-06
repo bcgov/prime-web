@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApplicantDataService } from '../../services/applicant-data.service';
-import { Applicant } from '../../models/applicant';
+import { Applicant } from '../../models/applicant.model';
 import { ConsentModalComponent } from '../../core/consent-modal/consent-modal.component';
 import { BaseComponent } from '../../core/base-component/base-component.component';
 import { Colleges, CollegeList } from '../../models/colleges.enum';

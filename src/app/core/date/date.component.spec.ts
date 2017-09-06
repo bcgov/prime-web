@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { CalendarFieldFormatterDirective } from '../../core/date/calendar-field-formatter.directive';
 import * as moment from 'moment';
-import { PrimeDateComponent } from './prime-date.component'
+import { PrimeDateComponent } from './date.component'
 
 describe('PrimeDateComponent', () => {
   let component: PrimeDateComponent;

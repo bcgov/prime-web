@@ -2,7 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { BaseComponent } from '../../core/base-component/base-component.component';
 import { ViewCell } from 'ng2-smart-table';
-import { Applicant } from '../../models/applicant';
+import { Applicant } from '../../models/applicant.model';
 import { ApplicantDataService } from '../../services/applicant-data.service';
 import { Colleges } from '../../models/colleges.enum';
 import { NamedCollection } from '../../models/named-collections.interface';

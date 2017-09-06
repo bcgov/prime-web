@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApplicantDataService } from '../../services/applicant-data.service';
-import { Applicant } from '../../models/applicant';
+import { Applicant } from '../../models/applicant.model';
 import { BaseComponent } from '../../core/base-component/base-component.component';
 import { ElementRef, ViewChild } from '@angular/core';
 

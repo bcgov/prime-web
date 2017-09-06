@@ -10,7 +10,7 @@ import { BaseComponent } from '../base-component/base-component.component';
 // import {MspProvinceComponent} from "../province/province.component";
 // import {MspCountryComponent} from "../country/country.component";
 
-import { Applicant } from '../../models/applicant';
+import { Applicant } from '../../models/applicant.model';
 
 @Component({
   selector: 'prime-address',

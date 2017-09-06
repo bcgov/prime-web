@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PrimeToggleComponent } from './prime-toggle.component';
+import { PrimeFormFooterComponent } from './form-footer.component';
 
-describe('PrimeToggleComponent', () => {
-  let component: PrimeToggleComponent;
-  let fixture: ComponentFixture<PrimeToggleComponent>;
+describe('PrimeFormFooterComponent', () => {
+  let component: PrimeFormFooterComponent;
+  let fixture: ComponentFixture<PrimeFormFooterComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PrimeToggleComponent ]
+      declarations: [ PrimeFormFooterComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PrimeToggleComponent);
+    fixture = TestBed.createComponent(PrimeFormFooterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

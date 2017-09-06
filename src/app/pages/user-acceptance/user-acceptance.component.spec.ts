@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserAcceptanceComponent } from './user-acceptance.component';
-import { PrimeFormFooterComponent } from '../../core/prime-form-footer/prime-form-footer.component'
-import { PrimeToggleComponent } from '../../core//prime-toggle/prime-toggle.component';
+import { PrimeFormFooterComponent } from '../../core/form-footer/form-footer.component'
+import { PrimeToggleComponent } from '../../core/toggle/toggle.component';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('UserAcceptanceComponent', () => {

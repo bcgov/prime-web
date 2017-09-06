@@ -1,11 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { ContactInformationComponent } from './contact-information.component';
-import { PrimeDateComponent } from '../../core/date/prime-date.component';
+import { PrimeDateComponent } from '../../core/date/date.component';
 import { ApplicantDataService } from '../../services/applicant-data.service';
 import { AddressComponent} from '../../core/address/address.component';
 import { Select2Module } from 'ng2-select2';
-import { PrimeFormFooterComponent } from '../../core/prime-form-footer/prime-form-footer.component';
+import { PrimeFormFooterComponent } from '../../core/form-footer/form-footer.component';
 import { CalendarFieldFormatterDirective } from '../../core/date/calendar-field-formatter.directive';
 import { RouterTestingModule } from '@angular/router/testing';
 
