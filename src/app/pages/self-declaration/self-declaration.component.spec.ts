@@ -7,6 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ApplicantDataService } from '../../services/applicant-data.service';
+import { StickyModule } from 'ng2-sticky-kit';
 
 
 describe('SelfDeclarationComponent', () => {
@@ -15,7 +16,7 @@ describe('SelfDeclarationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule, ModalModule.forRoot(), RouterTestingModule],
+      imports: [FormsModule, ModalModule.forRoot(), RouterTestingModule, StickyModule],
       declarations: [ SelfDeclarationComponent, PrimeFormFooterComponent, PrimeToggleComponent, FileUploaderComponent ],
       providers: [ApplicantDataService]
     })

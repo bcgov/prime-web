@@ -131,27 +131,41 @@
 
 
   </div>
-  <div class="col-md-5 col-lg-4 upload-section" [style.transform]="'translateY('+viewHeight+'px)'" #uploadSection>
 
-    <h3><i class="fa fa-upload fa icon-upload"
-        aria-hidden="true"></i> Supporting Documentation Attachment (optional)</h3>
+  <!-- <div class="col-md-5 col-lg-4 upload-section" [style.minHeight]="viewHeight + 'px'" #uploadSection> -->
+  <div class="col-md-5 col-lg-4 upload-section" [style.minHeight]="viewHeight + 'px'" #uploadSection>
 
-    <div>
-      Scan the document, or take a photo of it. Make sure that it&#8217;s:
-      <ul>
-        <li>The entire document, from corner to corner</li>
-        <li>At least 1000 pixels wide x 1500 pixels tall</li>
-        <li>Rotated correctly (not upside down or sideways)</li>
-        <li>In focus and easy to read</li>
-        <li>A JPG, PNG, GIF or BMP file (<strong>not a PDF</strong>)</li>
-      </ul>
+
+      <sticky
+      sticky-width="360px"
+      sticky-media-query="min-width: 992px"
+      [sticky-zIndex]="stickyZIndex"
+      [ngClass]="{'disable-sticky': disableSticky}"
+        >
+
+        <h3><i class="fa fa-upload fa icon-upload" aria-hidden="true"></i> Supporting Documentation Attachment (optional)</h3>
+
+        <div>
+          Scan the document, or take a photo of it. Make sure that it&#8217;s:
+          <ul>
+            <li>The entire document, from corner to corner</li>
+            <li>At least 1000 pixels wide x 1500 pixels tall</li>
+            <li>Rotated correctly (not upside down or sideways)</li>
+            <li>In focus and easy to read</li>
+            <li>A JPG, PNG, GIF or BMP file (<strong>not a PDF</strong>)</li>
+          </ul>
+        </div>
+        <prime-file-uploader>
+          <span id="uploadInstruction" #uploadInstruction tabindex="0">Upload supporting documentation (optional)</span>
+        </prime-file-uploader>
+
+      </sticky>
+
+
     </div>
-    <prime-file-uploader>
-      <span id="uploadInstruction"
-        #uploadInstruction
-        tabindex="0">Upload supporting documentation (optional)</span>
-    </prime-file-uploader>
-  </div>
+
+
+
 </div>
 <hr>
 

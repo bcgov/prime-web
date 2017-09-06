@@ -3,9 +3,6 @@
   position: relative;
 }
 
-.upload-section {
-  transition: 0.3s;
-  @media screen and (max-width: $screen-md) {
-    transform: none !important //Override element styling from Angular
-  }
+.disable-sticky {
+  position: static !important;
 }

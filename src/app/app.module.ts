@@ -32,6 +32,7 @@ import { PrimeToggleComponent } from './core/toggle/toggle.component';
 import { PrimeFormFooterComponent } from './core/form-footer/form-footer.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { CollegeDataService } from './services/college-data.service';
+import { StickyModule } from 'ng2-sticky-kit';
 
 
 
@@ -64,7 +65,8 @@ import { CollegeDataService } from './services/college-data.service';
     NgbModule,
     ModalModule.forRoot(),
     Select2Module,
-    Ng2SmartTableModule
+    Ng2SmartTableModule,
+    StickyModule
   ],
   providers: [
     ApplicantDataService,

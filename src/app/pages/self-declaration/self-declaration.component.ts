@@ -13,6 +13,8 @@ import { ElementRef, ViewChild } from '@angular/core';
 export class SelfDeclarationComponent extends BaseComponent implements OnInit {
   public applicant: Applicant;
   public viewHeight: number;
+  public disableSticky: boolean = false;
+  public stickyZIndex: number = 10;
   @ViewChild('declarationQuestions') declarationQuestions: ElementRef;
   @ViewChild('uploadSection') uploadSection: ElementRef;
 
@@ -29,31 +31,13 @@ export class SelfDeclarationComponent extends BaseComponent implements OnInit {
   }
 
   ngAfterViewChecked() {
-    let px;
-    const uploadHeight = this.uploadSection.nativeElement.offsetHeight;
+    this.stickyZIndex = (this.stickyZIndex === 10 ? 9 : 10);
+    let offset = (this.stickyZIndex === 10 ? 1 : 0);
 
-    let coefficient = this.declarationQuestions.nativeElement.offsetHeight / 850
-    if (coefficient > 1) coefficient = 1
-
-    if (this.applicant.hasBeenSuspended
-      || this.applicant.hasInformationContraventionOrder
-      || this.applicant.hasHadLimitsOrConditions
-      || this.applicant.hasPharmaNetEverRevoked
-      || this.applicant.hasRevocationBeenResolved) {
-        px = (this.declarationQuestions.nativeElement.offsetHeight - uploadHeight) * coefficient;
-    }
-    else {
-      px = 0;
-    }
-    // console.log('ngAfterViewChecked', this.declarationQuestions.nativeElement.offsetHeight, coefficient, px);
-    this.viewHeight = px;
+    //We want to constantly toggle the height of viewHeight here, to force sticky to update itself. So, we alternate it by 1px.
+    this.viewHeight = this.declarationQuestions.nativeElement.offsetHeight + offset;
     this.changeRef.detectChanges();
-  }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    // event.target.innerWidth;
-    this.changeRef.detectChanges();
   }
 
   canContinue(): boolean {
