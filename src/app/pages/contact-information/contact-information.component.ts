@@ -60,6 +60,8 @@ export class ContactInformationComponent extends BaseComponent implements OnInit
       }
     }
 
+    //Now that the controller's questions are initialized, copy to applicant model.
+    this.applicant.securityQuestions = this.securityQuestionAndAnswers;
   }
 
   onSecurityQuestionChange(event, count) {
@@ -69,7 +71,6 @@ export class ContactInformationComponent extends BaseComponent implements OnInit
     this.selectedSecurityQuestions[index] = {id: event.value, text: event.value};
   }
 
-
   onSecurityAnswerChange(input, count){
     const index = count - 1;
     this.applicant.securityQuestions[index].answer = input;
@@ -77,9 +78,6 @@ export class ContactInformationComponent extends BaseComponent implements OnInit
 
   selectQuestion(question, event) {
     question.selected = event.target.checked;
-  }
-
-  ngOnInit() {
   }
 
   canContinue(): boolean {
