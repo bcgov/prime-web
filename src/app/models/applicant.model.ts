@@ -2,6 +2,7 @@ import { SimpleDate } from '../core/date/simple-date.interface'
 import { Colleges } from './colleges.enum';
 import { SecurityQuestions } from './security-questions';
 import { NamedCollection } from './named-collections.interface';
+import { AdvancedPracticeCerts } from './advanced-practice-certs.enum';
 
 export class Applicant {
   college: Colleges[];
@@ -37,17 +38,14 @@ export class Applicant {
   dateOfBirth: SimpleDate = {} as SimpleDate;
   requestStartDate: SimpleDate = {} as SimpleDate;
   requestEndDate: SimpleDate = {} as SimpleDate;
+  advancedPracticeCerts: AdvancedPracticeCerts[];
+  securityQuestions: SecurityQuestions[] = [];
 
   consentInfoCollection: boolean = false;
 
   //Stores data from address.component
   //TODO - Setup proper model or interface for this. Composition? Address.model.ts?
   address: any = {};
-
-  securityQuestions: SecurityQuestions[] = [];
-
-  //TODO TODO! Refactor to use interface/enum.
-  advancedPracticeCerts: any[];
 
   constructor() {
   }
@@ -74,7 +72,7 @@ export class Applicant {
     if (!this.firstName || !this.lastName) {
       return null;
     }
-    return `${this.firstName} ${this.middleName ? this.middleName : ''} ${this.lastName}`;
+    return `${this.firstName}${this.middleName ? ' ' + this.middleName : ''} ${this.lastName}`;
   }
 
   /**
@@ -82,10 +80,9 @@ export class Applicant {
    */
   get hasSecurityQuestions(): boolean {
     if (this.securityQuestions.length < 3) return false;
-    this.securityQuestions.forEach(element => {
-      if (element.question == null || element.answer == null) return false;
-    });
 
-    return true;
+    return this.securityQuestions
+    .filter(x => x.answer !== null && x.question !== null)
+    .length == 3;
   }
 }
