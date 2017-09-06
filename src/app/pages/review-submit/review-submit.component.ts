@@ -5,6 +5,7 @@ import { BaseComponent } from '../../core/base-component/base-component.componen
 import { Applicant } from '../../models/applicant';
 import { ApplicantDataService } from '../../services/applicant-data.service';
 import { CollegeDataService } from '../../services/college-data.service';
+import { Colleges } from '../../models/colleges.enum';
 
 import { SimpleDate } from '../../core/date/simple-date.interface';
 import * as moment from 'moment'; //Only used in convertSimpelDateToText();
@@ -19,6 +20,7 @@ export class ReviewSubmitComponent extends BaseComponent implements OnInit {
 
   private hasValidToken: boolean = false;
   public applicant: Applicant;
+  public Colleges: typeof Colleges = Colleges;
 
   constructor(
     // private router: Router,

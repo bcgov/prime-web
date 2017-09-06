@@ -19,7 +19,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-xs-4">
+          <div class="col-xs-4" *ngIf="applicant.goesToCollege()">
             <label for="licenseClass">License Class</label>
           </div>
           <div class="col-xs-8">
@@ -44,7 +44,7 @@
             </strong></span>
           </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="applicant.goesToCollege(Colleges.CPSBC)">
           <div class="col-xs-4">
             <label for="MSPBillingNumber">MSP Billing Number</label>
           </div>
@@ -52,15 +52,15 @@
             <span id="MSPBillingNumber"><strong>{{applicant.MSPBillingNumber}}</strong></span>
           </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="applicant.goesToCollege(Colleges.CRNBC)">
           <div class="col-xs-4">
             <label for="advancedPraticeCerts">Advanced Practice Certification(s)</label>
           </div>
           <div class="col-xs-8">
-            <span id="advancedPraticeCerts"><strong>TODO!</strong></span>
+            <span id="advancedPraticeCerts"><strong>{{applicant.advancedPracticeCerts.join(", ")}}</strong></span>
           </div>
         </div>
-        <div class="row" *ngIf="applicant.isDeviceProvider === true || applicant.isDeviceProvider === false">
+        <div class="row"  *ngIf="applicant.goesToCollege(Colleges.None)">
           <div class="col-xs-4">
             <label for="licenseClass">Is a device provider</label>
           </div>
@@ -68,7 +68,7 @@
             <span id="licenseClass"><strong>{{applicant.isDeviceProvider}}</strong></span>
           </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="applicant.college === Colleges.None && applicant.isDeviceProvider === false">
           <div class="col-xs-4">
             <label for="licenseClass">On Behalf of Job Title</label>
           </div>

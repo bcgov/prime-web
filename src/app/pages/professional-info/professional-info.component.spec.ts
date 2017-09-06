@@ -39,16 +39,19 @@ describe('ProfessionalInfoComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should have applicant', () => {
+    expect(component.applicant).toBeTruthy();
+  });
+
+  //These tests are outdated, when there used to be a .setCollegeSelection() method. Removable. Left in for now during greenfield dev when tests and API are in flux.
   it('should be able to set college selection', () => {
     //During dev, if app is in readOnly we populate dummy data. Once business decisions are nailed down, this will change.
     if (!component.readonly){
       expect(component.applicant.college).toBeUndefined();
     }
-    component.setCollegeSelection([Colleges.None]);
+    component.applicant.college = [Colleges.None];
     expect(component.applicant.college[0] === Colleges.None).toBeTruthy();
-    expect(component.collegeVal[0] === Colleges.None).toBeTruthy();
-    component.setCollegeSelection([Colleges.CPBC]);
+    component.applicant.college = [Colleges.CPBC];
     expect(component.applicant.college[0] === Colleges.CPBC).toBeTruthy();
-    expect(component.collegeVal[0] === Colleges.CPBC).toBeTruthy();
   })
 });
