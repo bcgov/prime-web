@@ -24,7 +24,7 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
 
   //Configuration option. Toggle this to turn the whole page into readonly.
   //Waiting to hear from Cristina if this will be a permanent change.
-  public readonly: boolean = false;
+  public readonly: boolean = true;
 
   constructor(
     private applicantData: ApplicantDataService,
