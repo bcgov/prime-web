@@ -48,6 +48,9 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
       //For Demo purposes only
       this.applicant.college = [Colleges.CPBC, Colleges.CRNBC]
       this.applicant.advancedPracticeCerts = [AdvancedPracticeCerts.RemotePractice, AdvancedPracticeCerts.ReproductiveCare];
+      this.applicant.licenseClass = "To be provided by Ministry";
+      this.applicant.licenseNumber = "To be provided by Ministry";
+      this.applicant.licenseExpiry = {day: 12, month: 10, year: 2018}
     }
   }
 

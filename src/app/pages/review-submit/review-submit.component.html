@@ -11,86 +11,86 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <div class="row">
-          <div class="col-xs-4">
+          <div class="col-xs-6">
             <label for="collegeName">Professional College Name</label>
           </div>
-          <div class="col-xs-8">
+          <div class="col-xs-6">
             <span id="collegeName"><strong>{{collegeText}}</strong></span>
           </div>
         </div>
         <div class="row">
-          <div class="col-xs-4" *ngIf="applicant.goesToCollege()">
+          <div class="col-xs-6" *ngIf="applicant.goesToCollege()">
             <label for="licenseClass">License Class</label>
           </div>
-          <div class="col-xs-8">
+          <div class="col-xs-6">
             <span id="licenseClass"><strong>{{applicant.licenseClass}}</strong></span>
           </div>
         </div>
         <div class="row">
-          <div class="col-xs-4">
+          <div class="col-xs-6">
             <label for="licenseNumber">License Number</label>
           </div>
-          <div class="col-xs-8">
+          <div class="col-xs-6">
             <span id="licenseNumber"><strong>{{applicant.licenseNumber}}</strong></span>
           </div>
         </div>
         <div class="row">
-          <div class="col-xs-4">
+          <div class="col-xs-6">
             <label for="licenseExpiry">License Expiry</label>
           </div>
-          <div class="col-xs-8">
+          <div class="col-xs-6">
             <span id="licenseExpiry"><strong>
               {{convertSimpleDateToText(applicant.licenseExpiry)}}
             </strong></span>
           </div>
         </div>
         <div class="row" *ngIf="applicant.goesToCollege(Colleges.CPSBC)">
-          <div class="col-xs-4">
+          <div class="col-xs-6">
             <label for="MSPBillingNumber">MSP Billing Number</label>
           </div>
-          <div class="col-xs-8">
+          <div class="col-xs-6">
             <span id="MSPBillingNumber"><strong>{{applicant.MSPBillingNumber}}</strong></span>
           </div>
         </div>
         <div class="row" *ngIf="applicant.goesToCollege(Colleges.CRNBC)">
-          <div class="col-xs-4">
+          <div class="col-xs-6">
             <label for="advancedPraticeCerts">Advanced Practice Certification(s)</label>
           </div>
-          <div class="col-xs-8">
+          <div class="col-xs-6">
             <span id="advancedPraticeCerts"><strong>{{applicant.advancedPracticeCerts.join(", ")}}</strong></span>
           </div>
         </div>
         <div class="row"  *ngIf="applicant.goesToCollege(Colleges.None)">
-          <div class="col-xs-4">
+          <div class="col-xs-6">
             <label for="licenseClass">Is a device provider</label>
           </div>
-          <div class="col-xs-8">
+          <div class="col-xs-6">
             <span id="licenseClass"><strong>{{applicant.isDeviceProvider}}</strong></span>
           </div>
         </div>
         <div class="row" *ngIf="applicant.college === Colleges.None && applicant.isDeviceProvider === false">
-          <div class="col-xs-4">
+          <div class="col-xs-6">
             <label for="licenseClass">On Behalf of Job Title</label>
           </div>
-          <div class="col-xs-8">
+          <div class="col-xs-6">
             <span id="licenseClass"><strong>TODO</strong></span>
           </div>
         </div>
         <div class="row">
-          <div class="col-xs-4">
+          <div class="col-xs-6">
             <label for="requestStartDate">Request Access Start Date</label>
           </div>
-          <div class="col-xs-8">
+          <div class="col-xs-6">
             <span id="requestStartDate"><strong>
               {{convertSimpleDateToText(applicant.requestStartDate)}}
             </strong></span>
           </div>
         </div>
-        <div class="row">
-          <div class="col-xs-4">
+        <div class="row" *ngIf="applicant.requestEndDate.year">
+          <div class="col-xs-6">
             <label for="requestEndDate">Access End Date</label>
           </div>
-          <div class="col-xs-8">
+          <div class="col-xs-6">
             <span id="requestEndDate"><strong>
               {{convertSimpleDateToText(applicant.requestEndDate)}}
             </strong></span>
