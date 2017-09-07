@@ -222,18 +222,18 @@
 
         <ng-container *ngFor="let count of [1, 2, 3];">
           <div class="row">
-            <div class="col-xs-4">
+            <div class="col-xs-6">
               <label for="label{{count}}">Security Question {{count}}</label>
             </div>
-            <div class="col-xs-8">
+            <div class="col-xs-6">
               <span id="label{{count}}"><strong>Security Response {{count}}</strong></span>
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-4">
+            <div class="col-xs-6">
               <label for="question{{count}}">{{ applicant.securityQuestions[count - 1]?.question}}</label>
             </div>
-            <div class="col-xs-8">
+            <div class="col-xs-6">
               <span id="question{{count}}"><strong>{{applicant.securityQuestions[count - 1]?.answer}}</strong></span>
             </div>
           </div>
@@ -275,10 +275,10 @@
           </div>
         </div>
         <div class="row" *ngIf="applicant.hasInformationContraventionOrder">
-          <div class="col-xs-2">
+          <div class="col-xs-6">
             <label for="name">Details</label>
           </div>
-          <div class="col-xs-10">
+          <div class="col-xs-6">
             <span id="name"><strong>{{applicant.informationContraventionOrderDetails}}</strong></span>
           </div>
         </div>
@@ -292,10 +292,10 @@
           </div>
         </div>
         <div class="row" *ngIf="applicant.hasBeenSuspended">
-          <div class="col-xs-2">
+          <div class="col-xs-6">
             <label for="name">Details</label>
           </div>
-          <div class="col-xs-10">
+          <div class="col-xs-6">
             <span id="name"><strong>{{applicant.beenSuspendedDetails}}</strong></span>
           </div>
         </div>
@@ -310,10 +310,10 @@
           </div>
         </div>
         <div class="row" *ngIf="applicant.hasHadLimitsOrConditions">
-          <div class="col-xs-2">
+          <div class="col-xs-6">
             <label for="name">Details</label>
           </div>
-          <div class="col-xs-10">
+          <div class="col-xs-6">
             <span id="name"><strong>{{applicant.hadLimitsOrConditionsDetails}}</strong></span>
           </div>
         </div>
@@ -328,10 +328,10 @@
           </div>
         </div>
         <div class="row" *ngIf="applicant.hasPharmaNetEverRevoked">
-          <div class="col-xs-2">
+          <div class="col-xs-6">
             <label for="name">Details</label>
           </div>
-          <div class="col-xs-10">
+          <div class="col-xs-6">
             <span id="name"><strong>{{applicant.PharmaNetEverRevokedDetails}}</strong></span>
           </div>
         </div>
@@ -346,10 +346,10 @@
           </div>
         </div>
         <div class="row" *ngIf="applicant.hasRevocationBeenResolved">
-          <div class="col-xs-2">
+          <div class="col-xs-6">
             <label for="name">Details</label>
           </div>
-          <div class="col-xs-10">
+          <div class="col-xs-6">
             <span id="name"><strong>{{applicant.revocationBeenResolvedDetails}}</strong></span>
           </div>
         </div>

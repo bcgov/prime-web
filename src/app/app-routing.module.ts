@@ -11,16 +11,6 @@ import { SiteAccessComponent } from './pages/site-access/site-access.component';
 
 const routes: Routes = [
   {
-    path: '',
-
-    //toggle below to work on prepare again
-    // children: [],
-    canActivate: [],
-    // redirectTo: 'prepare',
-    redirectTo: 'professional-info',
-    pathMatch: 'full'
-  },
-  {
     path: 'professional-info',
     component: ProfessionalInfoComponent,
   },
@@ -47,6 +37,10 @@ const routes: Routes = [
   {
     path: 'review-submit',
     component: ReviewSubmitComponent
+  },
+  {
+    path: '**',
+    redirectTo: 'professional-info'
   }
 ];
 
