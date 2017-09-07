@@ -1,6 +1,6 @@
 import { BaseApp2Page } from './app.po';
 
-describe('base-app2 App', () => {
+describe('PRIME e2e tests', () => {
   let page: BaseApp2Page;
 
   beforeEach(() => {
@@ -9,6 +9,6 @@ describe('base-app2 App', () => {
 
   it('should display message saying app works', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Theming your app');
+    expect(page.getParagraphText()).toEqual('Professional Information');
   });
 });
