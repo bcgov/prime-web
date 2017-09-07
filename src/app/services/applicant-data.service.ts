@@ -10,7 +10,7 @@ export class ApplicantDataService {
     this.createApplicant();
   }
 
-  createApplicant(): void {
+  private createApplicant(): void {
     this.applicant = new Applicant();
   }
 

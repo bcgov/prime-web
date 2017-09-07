@@ -33,7 +33,7 @@ import { PrimeFormFooterComponent } from './core/form-footer/form-footer.compone
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { CollegeDataService } from './services/college-data.service';
 import { StickyModule } from 'ng2-sticky-kit';
-
+import { DummyDataService } from './services/dummy-data.service';
 
 
 @NgModule({
@@ -70,7 +70,8 @@ import { StickyModule } from 'ng2-sticky-kit';
   ],
   providers: [
     ApplicantDataService,
-    CollegeDataService
+    CollegeDataService,
+    DummyDataService
   ],
   bootstrap: [AppComponent]
 })
