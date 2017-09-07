@@ -23,32 +23,27 @@ Special accessibility class to hide things like labels but still have the readab
 }
 
 
+/* Re-implementing .btn-default after 0.4.0 of mygovbc-bootstrap-theme
+ * made it identical to .btn-primary.
+ *
+ * GitHub Issue:
+ * https://github.com/bcgov/mygovbc-bootstrap-theme/issues/4#issuecomment-327599375
+ */
 
-// Move all this .btn-radio stuff into own component for Yes/No button group toggles
-
-.btn-group .btn-default {
-  margin-right: 0;
-}
-
-.btn-radio {
-  background: #2962FF;
-  color: white;
+.btn-default {
+  color: #333;
+  background-color: #f4f6f9;
+  border-color: #ccc;
   &:hover {
-    background: #2962FF;
-    color: white;
-  }
-  &:not(:hover) {
-    background: #2962FF;
-    color: white;
-  }
-  &:selection {
-    background: #2962FF;
-  }
-  &:active {
-    background: #2962FF;
+    color: #333;
+    background-color: #d3dbe7;
+    border-color: #adadad;
   }
 }
-
+//Related to same mygovbc-bootstrap-theme 0.4.0 issue as above.
+.btn-primary:hover {
+  background-color: #294266;
+}
 
 // Style select2 to match look and feel of other form elements
 select2 {
