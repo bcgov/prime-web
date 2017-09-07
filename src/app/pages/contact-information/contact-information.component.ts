@@ -16,9 +16,11 @@ import { SecurityQuestions } from '../../models/security-questions';
 })
 export class ContactInformationComponent extends BaseComponent implements OnInit {
   public applicant: Applicant;
+  /** A list of all possible questions the user can choose from */
   public securityQuestions: Select2OptionData[];
-
+  /** The 3 currently selected questions in the select2 dropdown on the page. */
   public selectedSecurityQuestions: Select2OptionData[];
+  /** A local copy of applicant.securityQuestions, ensuring it matches the interface before pushing it to applicant.  */
   private securityQuestionAndAnswers: SecurityQuestions[] = [];
 
   constructor(private router: Router,
@@ -26,9 +28,7 @@ export class ContactInformationComponent extends BaseComponent implements OnInit
     super();
     this.applicant = applicantData.applicant;
 
-    /**
-     * Note: Must discuss with backend devs what they'd want as IDs here. Should probably have these questions enforced on the backend, so maybe we can just pass an identifier instead of the full string.
-     */
+    //Note - This will be changing. Questions will be stored on backend, and we will fetch on init + send ids.
     this.securityQuestions = [
       { id: "What was your first pet's name?", text: "What was your first pet's name?" },
       { id: "What was the make of your first car?", text: "What was the make of your first car?" },
@@ -45,6 +45,10 @@ export class ContactInformationComponent extends BaseComponent implements OnInit
     this.initSecurityQuestions();
   }
 
+  /**
+   * Either gets persisted Applicant security question data, or initializes
+   * default values. The array must be initialized before user action.
+   */
   private initSecurityQuestions() {
     //Use persisted security questions if possible
     if (this.applicant.hasSecurityQuestions) {
@@ -54,6 +58,7 @@ export class ContactInformationComponent extends BaseComponent implements OnInit
       this.securityQuestionAndAnswers = this.applicant.securityQuestions;
     }
     else {
+      //Nothing is persisted, so initialize default values.
       this.selectedSecurityQuestions = this.securityQuestions.slice(0, 3);
 
       //Initialize values, otherwise we get undefined/null errors in template
@@ -69,14 +74,14 @@ export class ContactInformationComponent extends BaseComponent implements OnInit
     }
   }
 
-  onSecurityQuestionChange(event, count) {
+  onSecurityQuestionChange(event, count: number) {
     const index = count - 1;
     this.securityQuestionAndAnswers[index].question = event.value;
     this.applicant.securityQuestions = this.securityQuestionAndAnswers;
     this.selectedSecurityQuestions[index] = { id: event.value, text: event.value };
   }
 
-  onSecurityAnswerChange(input, count) {
+  onSecurityAnswerChange(input, count: number) {
     const index = count - 1;
     this.applicant.securityQuestions[index].answer = input;
   }
