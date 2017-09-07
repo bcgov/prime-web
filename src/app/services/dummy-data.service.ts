@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Applicant } from '../models/applicant.model';
+import { NamedCollection } from '../models/named-collections.interface';
 
 @Injectable()
 export class DummyDataService {
@@ -40,7 +41,7 @@ export class DummyDataService {
             "answer":"Fehr"
          }
       ],
-      "consentInfoCollection":true,
+      "consentInfoCollection":false,
       "address":{
          "streetNum":"784",
          "streetSuffix":"B",
@@ -291,6 +292,42 @@ export class DummyDataService {
     }
 
     return applicant;
+  }
+
+  /**
+   * Randomly generate NamedCollections, used for Site Access.
+   * Each cell is randomized, so the whole row may not be cohesive.
+   *
+   * @param numberOfRows Number of NamedCollections to generate
+   */
+  generateNamedCollections(numberOfRows: number) : NamedCollection[]{
+    const COLLECTIONS = ["Pharmasave", "Walmart", "VIHA", "Island Sexual Health"];
+    const SITENAME = ["845 Jacklin", "Royal Jubilee", "Victoria General Hospital", "Pacific Health Clinic", "Island Sexual Health"];
+    const CITY = ["Victoria", "Langford", "Saanich", "Sidney", "Colwood", "Oak Bay"];
+    const VENDOR = ["GlaxoSmithKline", "Bayer", "Rochester", "Pfizer", "Merck", "Johnson & Johnson"]
+    const SITETYPE = ["Medical Practice", "Emergency Department", "Clinic", "Hospital", "Pharmacy"];
+    const POSTAL = ["V9B 1Z2", "V6R 2YK", "V4T 1UA", "V2S R2M"]
+
+    let result = [];
+
+    for (var index = 0; index < numberOfRows; index++) {
+      result.push({
+        id: index,
+        selected: false,
+        namedCollection: this.getRandomElFromArray(COLLECTIONS),
+        siteName: this.getRandomElFromArray(SITENAME),
+        city: this.getRandomElFromArray(CITY),
+        postal: this.getRandomElFromArray(POSTAL),
+        vendor: this.getRandomElFromArray(VENDOR),
+        siteType: this.getRandomElFromArray(SITETYPE)
+      })
+    }
+
+    return result;
+  }
+
+  private getRandomElFromArray(arr: any[]) : any {
+    return arr[Math.ceil(Math.random() * arr.length) - 1]
   }
 
 

@@ -6,6 +6,8 @@ import { Applicant } from '../../models/applicant.model';
 import { ApplicantDataService } from '../../services/applicant-data.service';
 import { Colleges } from '../../models/colleges.enum';
 import { NamedCollection } from '../../models/named-collections.interface';
+import { DummyDataService } from '../../services/dummy-data.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-site-access',
@@ -52,10 +54,13 @@ export class SiteAccessComponent extends BaseComponent implements OnInit {
   };
 
   constructor(private router: Router,
-    private dataStore: ApplicantDataService) {
+    private dataStore: ApplicantDataService,
+    private dummyData: DummyDataService) {
     super();
     this.applicant = this.dataStore.applicant;
-    this.tableData = this.generateTableData(20);
+    if (environment.useDummyData) {
+      this.tableData = dummyData.generateNamedCollections(20);
+    }
     this.applicant.namedCollections = this.tableData;
    }
 
@@ -75,40 +80,6 @@ export class SiteAccessComponent extends BaseComponent implements OnInit {
     this.router.navigate(['professional-info']);
   }
 
-  /**
-   * Randomly generate NamedCollections, useful during development.
-   * Each cell is randomized, so the whole row may not be cohesive.
-   *
-   * @param numberOfRows Number of NamedCollections to generate
-   */
-  generateTableData(numberOfRows: number) : NamedCollection[]{
-    const COLLECTIONS = ["Pharmasave", "Walmart", "VIHA", "Island Sexual Health"];
-    const SITENAME = ["845 Jacklin", "Royal Jubilee", "Victoria General Hospital", "Pacific Health Clinic", "Island Sexual Health"];
-    const CITY = ["Victoria", "Langford", "Saanich", "Sidney", "Colwood", "Oak Bay"];
-    const VENDOR = ["GlaxoSmithKline", "Bayer", "Rochester", "Pfizer", "Merck", "Johnson & Johnson"]
-    const SITETYPE = ["Medical Practice", "Emergency Department", "Clinic", "Hospital", "Pharmacy"];
-    const POSTAL = ["V9B 1Z2", "V6R 2YK", "V4T 1UA", "V2S R2M"]
 
-    let result = [];
-
-    for (var index = 0; index < numberOfRows; index++) {
-      result.push({
-        id: index,
-        selected: false,
-        namedCollection: this.getRandomElFromArray(COLLECTIONS),
-        siteName: this.getRandomElFromArray(SITENAME),
-        city: this.getRandomElFromArray(CITY),
-        postal: this.getRandomElFromArray(POSTAL),
-        vendor: this.getRandomElFromArray(VENDOR),
-        siteType: this.getRandomElFromArray(SITETYPE)
-      })
-    }
-
-    return result;
-  }
-
-  private getRandomElFromArray(arr: any[]) : any {
-    return arr[Math.ceil(Math.random() * arr.length) - 1]
-  }
 
 }
