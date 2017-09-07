@@ -269,16 +269,16 @@ export class DummyDataService {
       "phoneNumber":"250-216-0609",
       "emailAddress":"arcoard@gmail.com",
       "altPhoneNumber":"250-592-7511",
-      "altEmailAddress":"katiebmcoard@gmail.com",
-      "hasInformationContraventionOrder":true,
-      "informationContraventionOrderDetails":"My bad!",
-      "hasBeenSuspended":true,
+      "altEmailAddress":"adam.coard@maximusbc.com",
+      "hasInformationContraventionOrder":undefined,
+      "informationContraventionOrderDetails":"Lorem ipsum dolor sit, amet consectetur adipisicing elit. In quas inventore consequuntur tempore facere exercitationem numquam necessitatibus nostrum eaque provident odio quasi, libero adipisci nihil magnam harum excepturi eos voluptatibus!",
+      "hasBeenSuspended":undefined,
       "beenSuspendedDetails":"Lorem ipsum dolor sit, amet consectetur adipisicing elit. In quas inventore consequuntur tempore facere exercitationem numquam necessitatibus nostrum eaque provident odio quasi, libero adipisci nihil magnam harum excepturi eos voluptatibus.",
-      "hasHadLimitsOrConditions":true,
+      "hasHadLimitsOrConditions":undefined,
       "hadLimitsOrConditionsDetails":"  Doloremque voluptatum facilis sint velit numquam magnam, tempora aspernatur exercitationem, ut aliquid iste laboriosam blanditiis iure soluta deserunt consequatur repellendus similique. Id error similique voluptatem iusto dolor temporibus nulla nihil!\n  Sequi eligendi praesentium itaque veritatis minus, distinctio repellendus aperiam et aliquid nam, veniam optio perferendis! Quod officiis quaerat aut quo porro enim molestiae corporis. Dignissimos deserunt rem maiores est modi.\n  Voluptatibus ut ducimus neque repellendus voluptate eos hic sequi recusandae, exercitationem rerum aliquid, aut reprehenderit libero totam labore numquam unde quasi quae cumque laudantium. Pariatur, expedita. Labore voluptatem explicabo ut.",
-      "hasPharmaNetEverRevoked":true,
+      "hasPharmaNetEverRevoked":undefined,
       "PharmaNetEverRevokedDetails":"Eaque consequatur, adipisci nobis doloribus dolore libero accusamus, illo laborum optio consectetur similique explicabo deserunt aperiam accusantium autem illum nam doloremque. Ipsa tempore veritatis alias, voluptates soluta doloribus eveniet vero!",
-      "hasRevocationBeenResolved":true,
+      "hasRevocationBeenResolved":undefined,
       "revocationBeenResolvedDetails":"Non ab ratione voluptates beatae harum, esse amet accusamus ea. Exercitationem fugit illo at quisquam, deserunt, non eveniet qui accusantium voluptas reprehenderit nihil tempore molestiae, explicabo natus facilis eos. Ut?"
     }
   }
