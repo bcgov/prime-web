@@ -22,4 +22,8 @@ describe('BaseComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have a UUID', () => {
+    expect(component.objectId.length).toBeTruthy();
+  });
 });
