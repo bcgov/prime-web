@@ -1,10 +1,12 @@
 import { TestBed, async } from '@angular/core/testing';
 import {
-    RouterTestingModule
+  RouterTestingModule
 } from '@angular/router/testing';
 
 import { AppComponent } from './app.component';
 import { ProgressBarComponent } from './core/progress-bar/progress-bar.component'
+import { ApplicantDataService } from './services/applicant-data.service';
+import { DummyDataService } from './services/dummy-data.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -13,7 +15,11 @@ describe('AppComponent', () => {
         AppComponent,
         ProgressBarComponent
       ],
-      imports: [ RouterTestingModule ]
+      providers: [
+        ApplicantDataService,
+        DummyDataService
+      ],
+      imports: [RouterTestingModule]
     }).compileComponents();
   }));
 

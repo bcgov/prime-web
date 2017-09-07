@@ -6,6 +6,7 @@ import { PrimeToggleComponent } from '../../core//toggle/toggle.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { ApplicantDataService } from '../../services/applicant-data.service';
+import { DummyDataService } from '../../services/dummy-data.service';
 
 describe('SiteAccessComponent', () => {
   let component: SiteAccessComponent;
@@ -15,7 +16,7 @@ describe('SiteAccessComponent', () => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule, Ng2SmartTableModule],
       declarations: [ SiteAccessComponent, PrimeFormFooterComponent, PrimeToggleComponent ],
-      providers: [ApplicantDataService]
+      providers: [ApplicantDataService, DummyDataService]
     })
     .compileComponents();
   }));
