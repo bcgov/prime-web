@@ -13,7 +13,7 @@
           name='collegeName'
           id='collegeName'
           [data]="collegeList"
-          (valueChanged)="onCollegeChange($event.value, collegeNameContainer)"
+          (valueChanged)="onCollegeChange($event.value)"
           [options]="{multiple: true, placeholder: 'Select a College'}"
           [value]="applicant.college"
           [disabled]="readonly"></select2>
@@ -85,7 +85,7 @@
         [disabled]="readonly"
         [data]="advancedPracticeCertsList"
         [options]="{multiple: true, placeholder: 'Select a College'}"
-        (valueChanged)="onAdvancedPracticeCertChanged($event.value, advancedPracticeCertContainer)"
+        (valueChanged)="onAdvancedPracticeCertChanged($event.value)"
         [value]="applicant.advancedPracticeCerts"
         name='advancedPracticeCerts'
           id='advancedPracticeCerts'></select2>
