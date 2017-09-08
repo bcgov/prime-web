@@ -3,6 +3,7 @@ import { Colleges } from './colleges.enum';
 import { SecurityQuestions } from './security-questions';
 import { NamedCollection } from './named-collections.interface';
 import { AdvancedPracticeCerts } from './advanced-practice-certs.enum';
+import { Address } from './address.interface';
 
 export class Applicant {
   college: Colleges[];
@@ -21,7 +22,6 @@ export class Applicant {
   hadLimitsOrConditionsDetails: string;
   isDeviceProvider: boolean;
   willPersonallyAccessFromSites: boolean;
-
   firstName: string;
   middleName: string;
   lastName: string;
@@ -30,22 +30,19 @@ export class Applicant {
   altPhoneNumber: string;
   altEmailAddress: string;
   MSPBillingNumber: number;
-
   licenseClass: string;
   licenseNumber: string;
   licenseExpiry: SimpleDate = {} as SimpleDate;
-
   dateOfBirth: SimpleDate = {} as SimpleDate;
   requestStartDate: SimpleDate = {} as SimpleDate;
   requestEndDate: SimpleDate = {} as SimpleDate;
   advancedPracticeCerts: AdvancedPracticeCerts[];
   securityQuestions: SecurityQuestions[] = [];
+  address: Address = {} as Address;
 
+  /** Has the user consented to the initial info collection notice modal */
   consentInfoCollection: boolean = false;
 
-  //Stores data from address.component
-  //TODO - Setup proper model or interface for this. Composition? Address.model.ts?
-  address: any = {};
 
   constructor() {
   }
@@ -59,8 +56,6 @@ export class Applicant {
     if (this.college.length === 0 && this.college[0] == Colleges.None) {
       return this.college[0] === college;
     }
-    // if (this.college === Colleges.None) return this.college === college;
-    // if (this.college === Colleges.None) return this.college === college;
     if (!college && this.college.length) return true;
     return (<Colleges[]>this.college).indexOf(college) >= 0;
   }
