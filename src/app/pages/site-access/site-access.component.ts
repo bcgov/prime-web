@@ -17,7 +17,7 @@ import { environment } from '../../../environments/environment';
 export class SiteAccessComponent extends BaseComponent implements OnInit {
   public applicant: Applicant;
   public Colleges: typeof Colleges = Colleges;
-  public tableData: NamedCollection[];
+  public tableData: NamedCollection[] = [];
 
   tableSettings: any = {
 

@@ -1,11 +1,15 @@
-import { TestBed } from '@angular/core/testing'
+import { TestBed, inject } from '@angular/core/testing'
 import { Applicant } from './applicant.model';
 import { Colleges } from './colleges.enum';
+import { DummyDataService } from '../services/dummy-data.service';
 
 describe('Applicant Model', () => {
   let applicant: Applicant;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [DummyDataService]
+    });
     applicant = new Applicant();
   });
 
@@ -51,6 +55,12 @@ describe('Applicant Model', () => {
       applicant.securityQuestions.push({ question: "Test", answer: "Test" });
     }
     expect(applicant.hasSecurityQuestions).toBe(true);
-
   });
+
+  it('should work with DummyDataService', inject([DummyDataService], (dummyData: DummyDataService) => {
+    applicant = dummyData.useApplicantDummyData(applicant);
+    expect(applicant.goesToCollege()).toBeTruthy();
+    expect(applicant.hasSecurityQuestions).toBeTruthy();
+    expect(applicant.fullName).toEqual("Bill Henry Gates");
+  }));
 })
