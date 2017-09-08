@@ -162,6 +162,7 @@
           class='block-label'>Security Question {{count}}</label>
         <select2
           [data]="securityQuestions"
+          id='securityQuestion{{count}}'
           [value]="selectedSecurityQuestions[count - 1].id"
           (valueChanged)="onSecurityQuestionChange($event, count)"></select2>
       </div>
