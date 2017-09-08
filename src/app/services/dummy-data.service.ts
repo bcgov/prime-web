@@ -326,7 +326,7 @@ export class DummyDataService {
     return result;
   }
 
-  private getRandomElFromArray(arr: any[]) : any {
+  private getRandomElFromArray<T>(arr: T[]) : T {
     return arr[Math.ceil(Math.random() * arr.length) - 1]
   }
 
