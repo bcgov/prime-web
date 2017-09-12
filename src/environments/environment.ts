@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  useDummyData: true,
+  useDummyData: false,
 };

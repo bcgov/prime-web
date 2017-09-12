@@ -14,10 +14,10 @@
       *ngIf="applicant.hasInformationContraventionOrder">
       <div class="form-group">
         <div class="col-lg-10 col-md-12 col-sm-12">
-          <label for="infoContraventionDetails"
+          <label for="haveBeenSubjectOfOrderOrConvictionDetails"
             class="control-label">Please provide details</label>
-          <textarea name="infoContraventionDetails"
-            id="infoContraventionDetails"
+          <textarea name="haveBeenSubjectOfOrderOrConvictionDetails"
+            id="haveBeenSubjectOfOrderOrConvictionDetails"
             class='form-control'
             [(ngModel)]="applicant.informationContraventionOrderDetails"
             rows='3'></textarea>
@@ -27,10 +27,10 @@
 
     <div class="row form-group">
       <div class="col-sm-12 col-md-12">
-        <label id="haveBeenSubjectOfOrderOrConviction"
-          for="haveBeenSubjectOfOrderOrConviction"
+        <label id="haveBeenSuspendedOrCancelled"
+          for="haveBeenSuspendedOrCancelled"
           class='intro'
-          i18n="@@haveBeenSubjectOfOrderOrConviction">Have you ever had your registration with a governing body of a health profession suspended or cancelled?</label>
+          i18n="@@haveBeenSuspendedOrCancelled">Have you ever had your registration with a governing body of a health profession suspended or cancelled?</label>
         <prime-toggle [(data)]="applicant.hasBeenSuspended"></prime-toggle>
       </div>
     </div>
@@ -39,10 +39,10 @@
       *ngIf="applicant.hasBeenSuspended">
       <div class="form-group">
         <div class="col-lg-10 col-md-12 col-sm-12">
-          <label for="infoContraventionDetails"
+          <label for="haveBeenSuspendedOrCancelledDetails"
             class="control-label">Please provide details</label>
-          <textarea name="infoContraventionDetails"
-            id="infoContraventionDetails"
+          <textarea name="haveBeenSuspendedOrCancelledDetails"
+            id="haveBeenSuspendedOrCancelledDetails"
             class='form-control'
             [(ngModel)]="applicant.beenSuspendedDetails"
             rows='3'></textarea>
@@ -64,10 +64,10 @@
       *ngIf="applicant.hasHadLimitsOrConditions">
       <div class="form-group">
         <div class="col-lg-10 col-md-12 col-sm-12">
-          <label for="hadLimitsOrConditionsDetails"
+          <label for="haveHadLimitsImposedDetails"
             class="control-label">Please provide details</label>
-          <textarea name="hadLimitsOrConditionsDetails"
-            id="hadLimitsOrConditionsDetails"
+          <textarea name="haveHadLimitsImposedDetails"
+            id="haveHadLimitsImposedDetails"
             class='form-control'
             [(ngModel)]="applicant.hadLimitsOrConditionsDetails"
             rows='3'></textarea>
@@ -77,10 +77,10 @@
 
     <div class="row form-group">
       <div class="col-sm-12 col-md-12">
-        <label id="haveBeenSubjectOfOrderOrConviction"
-          for="haveBeenSubjectOfOrderOrConviction"
+        <label id="haveBeenSuspendedOrRevokedFromPharmaNet"
+          for="haveBeenSuspendedOrRevokedFromPharmaNet"
           class='intro'
-          i18n="@@haveBeenSubjectOfOrderOrConviction">Have you ever had your access to PharmaNet suspended or revoked?</label>
+          i18n="@@haveBeenSuspendedOrRevokedFromPharmaNet">Have you ever had your access to PharmaNet suspended or revoked?</label>
         <prime-toggle [(data)]="applicant.hasPharmaNetEverRevoked"></prime-toggle>
       </div>
     </div>
@@ -89,10 +89,10 @@
       *ngIf="applicant.hasPharmaNetEverRevoked">
       <div class="form-group">
         <div class="col-lg-10 col-md-12 col-sm-12">
-          <label for="infoContraventionDetails"
+          <label for="haveBeenSuspendedOrRevokedFromPharmaNetDetails"
             class="control-label">Please provide details</label>
-          <textarea name="infoContraventionDetails"
-            id="infoContraventionDetails"
+          <textarea name="haveBeenSuspendedOrRevokedFromPharmaNetDetails"
+            id="haveBeenSuspendedOrRevokedFromPharmaNetDetails"
             class='form-control'
             [(ngModel)]="applicant.PharmaNetEverRevokedDetails"
             rows='3'></textarea>
@@ -104,10 +104,10 @@
 
       <div class="row form-group">
         <div class="col-sm-12 col-md-12">
-          <label id="haveBeenSubjectOfOrderOrConviction"
-            for="haveBeenSubjectOfOrderOrConviction"
+          <label id="hasRevocationBeenResolved"
+            for="hasRevocationBeenResolved"
             class='intro'
-            i18n="@@haveBeenSubjectOfOrderOrConviction">Has the circumstances that lead to the revocation been resolved?</label>
+            i18n="@@hasRevocationBeenResolved">Has the circumstances that lead to the revocation been resolved?</label>
 
           <prime-toggle [(data)]="applicant.hasRevocationBeenResolved"></prime-toggle>
         </div>
@@ -117,10 +117,10 @@
         *ngIf="applicant.hasRevocationBeenResolved">
         <div class="form-group">
           <div class="col-lg-10 col-md-12 col-sm-12">
-            <label for="infoContraventionDetails"
+            <label for="hasRevocationBeenResolvedDetails"
               class="control-label">Please provide details</label>
-            <textarea name="infoContraventionDetails"
-              id="infoContraventionDetails"
+            <textarea name="hasRevocationBeenResolvedDetails"
+              id="hasRevocationBeenResolvedDetails"
               class='form-control'
               [(ngModel)]="applicant.revocationBeenResolvedDetails"
               rows='3'></textarea>
