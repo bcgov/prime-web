@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { CalendarFieldFormatterDirective } from '../../core/date/calendar-field-formatter.directive';
+import { CalendarFutureDates } from '../date/calendar-future-dates.validator';
 import * as moment from 'moment';
 import { PrimeDateComponent } from './date.component'
 
@@ -11,7 +12,7 @@ describe('PrimeDateComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule],
-      declarations: [PrimeDateComponent, CalendarFieldFormatterDirective],
+      declarations: [PrimeDateComponent, CalendarFieldFormatterDirective, CalendarFutureDates],
     })
     .compileComponents();
   }));

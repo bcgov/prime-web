@@ -13,6 +13,7 @@ import { PrimeToggleComponent } from '../../core/toggle/toggle.component';
 import { PrimeFormFooterComponent } from '../../core/form-footer/form-footer.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CollegeDataService } from '../../services/college-data.service';
+import { CalendarFutureDates } from '../../core/date/calendar-future-dates.validator';
 
 
 
@@ -24,7 +25,7 @@ describe('ProfessionalInfoComponent', () => {
     TestBed.configureTestingModule({
       providers: [ApplicantDataService, CollegeDataService],
       imports: [FormsModule, Select2Module, ModalModule.forRoot(), RouterTestingModule],
-      declarations: [ProfessionalInfoComponent, CalendarYearValidator, PrimeDateComponent, ConsentModalComponent, CalendarFieldFormatterDirective, PrimeToggleComponent, PrimeFormFooterComponent]
+      declarations: [ProfessionalInfoComponent, CalendarYearValidator, PrimeDateComponent, ConsentModalComponent, CalendarFieldFormatterDirective, PrimeToggleComponent, PrimeFormFooterComponent, CalendarFutureDates]
     })
       .compileComponents();
   }));
