@@ -1,4 +1,4 @@
-<form #formRef='ngForm' novalidate>
+<form #formRef='ngForm' novalidate [validateCalendarFutureDates]="restrictDate">
     <label class="visuallyhidden" for="month{{objectId}}">Month</label>
     <div class="form-group"
          [ngClass]="{'has-error': formRef.invalid && required && (monthRef.touched || yearRef.touched || dayRef.touched || showError)}">
@@ -81,6 +81,17 @@
                 <div class="text-danger" *ngIf="yearRef.errors?.yearDistantFuture"
                      i18n="@@yearErrorDistantFuture">Date is too far in the future</div>
             </div>
+            <!-- ARC  BELOW TODO REMOVE LINE -->
+            <!-- <div *ngIf='(yearRef.touched || showError)'> -->
+
+            <div *ngIf='(formRef.touched || showError)'>
+              <div class="text-danger" *ngIf="formRef.errors?.dateNotInPast"
+                   i18n="@@dateErrorMustBeInFuture">Date must be in the future.</div>
+          </div>
+          <div *ngIf='(formRef.touched || showError)'>
+            <div class="text-danger" *ngIf="formRef.errors?.dateNotInFuture"
+                 i18n="@@dateErrorMustBeInPast">Date must be in the past</div>
+        </div>
         </div>
     </div>
 </form>

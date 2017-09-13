@@ -17,6 +17,9 @@ import { BaseComponent } from './core/base-component/base-component.component';
 import { PrimeDateComponent } from './core/date/date.component';
 import { CalendarFieldFormatterDirective } from './core/date/calendar-field-formatter.directive';
 import { CalendarYearValidator } from './core/date/calendar-year.validator';
+import { CalendarDayValidator } from './core/date/calendar-day.validator';
+import { CalendarMonthValidator } from './core/date/calendar-month.validator';
+import { CalendarFutureDates } from './core/date/calendar-future-dates.validator';
 import { ContactInformationComponent } from './pages/contact-information/contact-information.component';
 import { SelfDeclarationComponent } from './pages/self-declaration/self-declaration.component';
 import { UserAcceptanceComponent } from './pages/user-acceptance/user-acceptance.component';
@@ -46,6 +49,9 @@ import { DummyDataService } from './services/dummy-data.service';
     PrimeDateComponent,
     CalendarFieldFormatterDirective,
     CalendarYearValidator,
+    CalendarDayValidator,
+    CalendarMonthValidator,
+    CalendarFutureDates,
     ContactInformationComponent,
     SelfDeclarationComponent,
     UserAcceptanceComponent,

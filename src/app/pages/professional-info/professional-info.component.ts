@@ -28,7 +28,7 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
 
   //Configuration option. Toggle this to turn the whole page into readonly.
   //Waiting to hear from Cristina if this will be a permanent change.
-  public readonly: boolean = true;
+  public readonly: boolean = false;
 
   constructor(
     private applicantData: ApplicantDataService,
@@ -80,7 +80,7 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
 
   ngAfterViewInit() {
     if (!this.applicant.consentInfoCollection) {
-      this.consentModal.openModal();
+      // this.consentModal.openModal();
     }
   }
 

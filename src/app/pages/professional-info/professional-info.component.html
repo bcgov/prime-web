@@ -21,6 +21,7 @@
     </div>
   </div>
 
+
   <div class="row"
     *ngIf="applicant.goesToCollege()">
     <div class="col-sm-6 col-md-4">
@@ -49,10 +50,10 @@
     </div>
     <div class="col-sm-6 col-md-4">
       <div class="form-group">
-        <label for='mspBillingNumber'
+        <label for='licenseExpiry'
           i18n="@@ExpiryDateLicense">Expiry Date of License</label>
-        <prime-date name='mspBillingNumber'
-          id='mspBillingNumber'
+        <prime-date name='licenseExpiry'
+          id='licenseExpiry'
           [(date)]="applicant.licenseExpiry"
           [showError]="showError"
           [disabled]="readonly"
@@ -128,6 +129,7 @@
           [showError]="showError"
           [required]="true"
           [disabled]="readonly"
+          restrictDate="future"
           [useCurrentDate]="true">
         </prime-date>
       </div>
@@ -141,6 +143,7 @@
           [(date)]="applicant.requestEndDate"
           [showError]="showError"
           [disabled]="readonly"
+          restrictDate="future"
           [required]="false">
         </prime-date>
       </div>
