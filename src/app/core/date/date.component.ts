@@ -19,7 +19,7 @@ export class PrimeDateComponent extends BaseComponent implements OnInit {
   @Input() date: SimpleDate
   @Output() onDateChange: EventEmitter<SimpleDate> = new EventEmitter<SimpleDate>();
 
-  /** Can be one of: "future", "past", "none". Defaults to "none". */
+  /** Can be one of: "future", "past". "future" includes today, "past" does not. */
   @Input() restrictDate: string;
 
 
@@ -95,7 +95,26 @@ export class PrimeDateComponent extends BaseComponent implements OnInit {
         return false;
     }
 
+    if (this.restrictDate){
+      const diff = this.moment.diff(moment(), 'days', true);
+      if (this.restrictDate.toLowerCase() === "future"){
+        return diff >= -1;
+      }
+      else if (this.restrictDate.toLowerCase() === "past"){
+        return diff < -1;
+      }
+    }
+
+    // TODO - Change to false after wiring up rest of validation.
     return true;
+  }
+
+  private get moment(){
+    return moment({
+      year: this.date.year,
+      month: this.date.month - 1, //Moment starts month indice at 0.
+      day: this.date.day
+    });
   }
 
 }

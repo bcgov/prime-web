@@ -54,4 +54,30 @@ describe('PrimeDateComponent', () => {
     expect(component.date.day).toEqual(moment().date())
   })
 
+  it('should be able to require dates to be set in the future.', () =>{
+    component.restrictDate = "future"
+    component.setToToday();
+    component.setYearValueOnModel(component.date.year + 1 + '')
+    expect(component.isValid()).toBe(true);
+    component.setYearValueOnModel(component.date.year - 10 + '')
+    expect(component.isValid()).toBe(false);
+  })
+
+  it('should be able to require dates to be set in the past.', () =>{
+    component.restrictDate = "past"
+    component.setToToday();
+    component.setYearValueOnModel(component.date.year + 1 + '')
+    expect(component.isValid()).toBe(false);
+    component.setYearValueOnModel(component.date.year - 10 + '')
+    expect(component.isValid()).toBe(true);
+  })
+
+  it('should validate today as if it\'s a future date', () =>{
+    component.restrictDate = "future"
+    component.setToToday();
+    expect(component.isValid()).toBe(true);
+    component.restrictDate = "past"
+    expect(component.isValid()).toBe(false);
+  })
+
 });
