@@ -100,43 +100,13 @@ export class PrimeDateComponent extends BaseComponent implements OnInit {
 
 
     /**
-     * The below commented out code replaces the if statement following it.
-     * It's an improvement on the below, but it doesn't work.
-     * Instead of duplicating logic from CalendarFutureDates, it attempts
-     * to look for CalendarFutureDates's artifcats themselves.  The problem
-     * is it doesn't seem to work for unit tests, but is fine for actual app.
+     * Ensure that the validation from CalendarFutureDates influences isValid.
      */
-    // if (this.restrictDate && this.form.errors){
-    //   const option = this.restrictDate.toLowerCase();
-
-    //   // if ((option === "future" && this.form.errors && this.form.errors.dateNotInPast)
-    //   // || (option === "past" && this.form.errors && this.form.errors.dateNotInFuture)) {
-    //   //   // console.log(`Restrict date. Option: ${option} ||
-    //   //   // dateNotInPast: ${this.form.errors.dateNotInPast} ||
-    //   //   // dateNotInFuture: ${this.form.errors.dateNotInFuture}`)
-    //   //   return false;
-    //   // }
-
-
-    //   if ((option === "future" && this.form.errors.dateNotInFuture)
-    //   || (option === "past" && this.form.errors.dateNotInPast)) {
-    //     // console.log(`Restrict date. Option: ${option} ||
-    //     // dateNotInPast: ${this.form.errors.dateNotInPast} ||
-    //     // dateNotInFuture: ${this.form.errors.dateNotInFuture}`)
-    //     return false;
-    //   }
-
-    // }
-
-
-
-    if (this.restrictDate) {
-      const diff = this.moment.diff(moment(), 'days', true);
-      if (this.restrictDate.toLowerCase() === "future") {
-        return diff >= -1;
-      }
-      else if (this.restrictDate.toLowerCase() === "past") {
-        return diff < -1;
+    if (this.restrictDate && this.form.errors){
+      const option = this.restrictDate.toLowerCase();
+      if ((option === "future" && this.form.errors.dateNotInPast)
+      || (option === "past" && this.form.errors.dateNotInFuture)) {
+        return false;
       }
     }
 

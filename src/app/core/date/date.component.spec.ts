@@ -5,6 +5,7 @@ import { CalendarFutureDates } from '../date/calendar-future-dates.validator';
 import * as moment from 'moment';
 import { PrimeDateComponent } from './date.component'
 
+
 describe('PrimeDateComponent', () => {
   let component: PrimeDateComponent;
   let fixture: ComponentFixture<PrimeDateComponent>;
@@ -54,30 +55,65 @@ describe('PrimeDateComponent', () => {
     expect(component.date.day).toEqual(moment().date())
   })
 
-  it('should be able to require dates to be set in the future.', () =>{
+  it('should accept future dates when restricted to future dates', async(() =>{
     component.restrictDate = "future"
     component.setToToday();
-    component.setYearValueOnModel(component.date.year + 1 + '')
-    expect(component.isValid()).toBe(true);
-    component.setYearValueOnModel(component.date.year - 10 + '')
-    expect(component.isValid()).toBe(false);
-  })
+    component.setYearValueOnModel(component.date.year + 1 + '');
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      expect(component.isValid()).toBe(true);
+    });
 
-  it('should be able to require dates to be set in the past.', () =>{
+  }))
+
+  it('should reject past dates when restricted to future dates', async(() =>{
+    component.restrictDate = "future"
+    component.setToToday();
+    component.setYearValueOnModel(component.date.year - 10 + '')
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      expect(component.isValid()).toBe(false);
+    });
+
+  }))
+
+  it('should reject future dates when restricted to past dates', async(() =>{
     component.restrictDate = "past"
     component.setToToday();
     component.setYearValueOnModel(component.date.year + 1 + '')
-    expect(component.isValid()).toBe(false);
-    component.setYearValueOnModel(component.date.year - 10 + '')
-    expect(component.isValid()).toBe(true);
-  })
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      expect(component.isValid()).toBe(false);
+    });
+  }))
 
-  it('should validate today as if it\'s a future date', () =>{
+  it('should accept past dates when restricted to past dates.', async(() =>{
+    component.restrictDate = "past"
+    component.setToToday();
+    component.setYearValueOnModel(component.date.year - 10 + '')
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      expect(component.isValid()).toBe(true);
+    });
+  }))
+
+
+  it('should accept todays date when restricted to future dates', async(() =>{
     component.restrictDate = "future"
     component.setToToday();
-    expect(component.isValid()).toBe(true);
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      expect(component.isValid()).toBe(true);
+    });
+  }))
+
+  it('should reject todays date when restricted to past dates', async(() =>{
     component.restrictDate = "past"
-    expect(component.isValid()).toBe(false);
-  })
+    component.setToToday();
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      expect(component.isValid()).toBe(false);
+    });
+  }))
 
 });
