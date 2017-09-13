@@ -15,20 +15,17 @@ import { AdvancedPracticeCerts } from '../../models/advanced-practice-certs.enum
   styleUrls: ['./professional-info.component.scss']
 })
 export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
-  public applicant: Applicant;
   @ViewChild(ConsentModalComponent) private consentModal: ConsentModalComponent;
   @ViewChild('collegeNameContainer') private collegeNameContainer: ElementRef;
   @ViewChild('advancedPracticeCertContainer') private advancedPracticeCertContainer: ElementRef;
 
-
+  public applicant: Applicant;
   public Colleges: typeof Colleges = Colleges;
   public showError: boolean = false;
   public collegeList: CollegeList[];
 
-
-  //Configuration option. Toggle this to turn the whole page into readonly.
-  //Waiting to hear from Cristina if this will be a permanent change.
-  public readonly: boolean = false;
+  /** Makes all the form inputs on professional info page readonly. */
+  public readonly: boolean = true;
 
   constructor(
     private applicantData: ApplicantDataService,
@@ -80,7 +77,7 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
 
   ngAfterViewInit() {
     if (!this.applicant.consentInfoCollection) {
-      // this.consentModal.openModal();
+      this.consentModal.openModal();
     }
   }
 
