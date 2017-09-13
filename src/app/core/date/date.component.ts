@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { NgForm } from "@angular/forms";
 import { BaseComponent } from '../base-component/base-component.component';
 import * as moment from 'moment';
 import { SimpleDate } from '../../core/date/simple-date.interface';
@@ -21,6 +22,8 @@ export class PrimeDateComponent extends BaseComponent implements OnInit {
 
   /** Can be one of: "future", "past". "future" includes today, "past" does not. */
   @Input() restrictDate: string;
+
+  @ViewChild('formRef') form: NgForm;
 
 
 
@@ -67,7 +70,7 @@ export class PrimeDateComponent extends BaseComponent implements OnInit {
   /**
    * Sets the default values to the current clientside date.
    */
-  setToToday() : void {
+  setToToday(): void {
     this.date.month = moment().month() + 1; //0 is blank/unselected in options list
     this.date.day = moment().date();
     this.date.year = moment().year();
@@ -81,7 +84,7 @@ export class PrimeDateComponent extends BaseComponent implements OnInit {
     }
     else {
       //Non-required components are okay if all fields are blank.
-      if (!this.date.year && !this.date.month && !this.date.day){
+      if (!this.date.year && !this.date.month && !this.date.day) {
         return true;
       }
     }
@@ -91,25 +94,56 @@ export class PrimeDateComponent extends BaseComponent implements OnInit {
       return false;
     }
 
-    if (this.date.month && (!this.date.day || !this.date.year)  ){
-        return false;
+    if (this.date.month && (!this.date.day || !this.date.year)) {
+      return false;
     }
 
-    if (this.restrictDate){
+
+    /**
+     * The below commented out code replaces the if statement following it.
+     * It's an improvement on the below, but it doesn't work.
+     * Instead of duplicating logic from CalendarFutureDates, it attempts
+     * to look for CalendarFutureDates's artifcats themselves.  The problem
+     * is it doesn't seem to work for unit tests, but is fine for actual app.
+     */
+    // if (this.restrictDate && this.form.errors){
+    //   const option = this.restrictDate.toLowerCase();
+
+    //   // if ((option === "future" && this.form.errors && this.form.errors.dateNotInPast)
+    //   // || (option === "past" && this.form.errors && this.form.errors.dateNotInFuture)) {
+    //   //   // console.log(`Restrict date. Option: ${option} ||
+    //   //   // dateNotInPast: ${this.form.errors.dateNotInPast} ||
+    //   //   // dateNotInFuture: ${this.form.errors.dateNotInFuture}`)
+    //   //   return false;
+    //   // }
+
+
+    //   if ((option === "future" && this.form.errors.dateNotInFuture)
+    //   || (option === "past" && this.form.errors.dateNotInPast)) {
+    //     // console.log(`Restrict date. Option: ${option} ||
+    //     // dateNotInPast: ${this.form.errors.dateNotInPast} ||
+    //     // dateNotInFuture: ${this.form.errors.dateNotInFuture}`)
+    //     return false;
+    //   }
+
+    // }
+
+
+
+    if (this.restrictDate) {
       const diff = this.moment.diff(moment(), 'days', true);
-      if (this.restrictDate.toLowerCase() === "future"){
+      if (this.restrictDate.toLowerCase() === "future") {
         return diff >= -1;
       }
-      else if (this.restrictDate.toLowerCase() === "past"){
+      else if (this.restrictDate.toLowerCase() === "past") {
         return diff < -1;
       }
     }
 
-    // TODO - Change to false after wiring up rest of validation.
     return true;
   }
 
-  private get moment(){
+  private get moment() {
     return moment({
       year: this.date.year,
       month: this.date.month - 1, //Moment starts month indice at 0.

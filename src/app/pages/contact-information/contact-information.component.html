@@ -50,6 +50,7 @@
           id='dateOfBirth'
           [showError]="false"
           [required]="true"
+          restrictDate="past"
           [(date)]="applicant.dateOfBirth">
         </prime-date>
 

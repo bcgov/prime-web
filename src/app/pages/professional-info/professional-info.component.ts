@@ -80,7 +80,7 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
 
   ngAfterViewInit() {
     if (!this.applicant.consentInfoCollection) {
-      this.consentModal.openModal();
+      // this.consentModal.openModal();
     }
   }
 
