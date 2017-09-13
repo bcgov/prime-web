@@ -88,6 +88,8 @@ describe('PRIME Consent Modal Tests', () => {
 /**
  * Commented out until we write specific tests for this page.
  * Currently it's functionality is duplicated in AllPrimePages
+ *
+ * TODO - Write tests to check validation! Invalid date, address, etc.
  */
 
 // describe('PRIME Contact Info', () => {

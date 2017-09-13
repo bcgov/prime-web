@@ -95,12 +95,14 @@ export class ContactInfoPage extends BasePrimePage {
     this.continue(); //contact-info
   }
 
+  /** Fills out everything on contact info page to pass validation. */
   fillAllContactInfo(){
     this.fillContactInfo();
     this.fillAddressInfo();
     this.fillSecurityQuestions();
   }
 
+  /** Fills out the contact info section at top of page. */
   fillContactInfo() {
     element(by.css('#firstName')).sendKeys(this.firstName);
     element(by.css('#middleName')).sendKeys(this.middleName);
@@ -114,6 +116,7 @@ export class ContactInfoPage extends BasePrimePage {
     element(by.css('#altEmail')).sendKeys(this.altEmail);
   }
 
+  /** Fills out address section in middle of page. */
   fillAddressInfo() {
     element(by.css('#streetNum')).sendKeys(this.streetNum);
     element.all(by.css('#streetSuffix option')).get(2).click();
@@ -126,6 +129,7 @@ export class ContactInfoPage extends BasePrimePage {
     element(by.css('prime-address input[name="residentialAddressCountry"]')).sendKeys(this.country);
   }
 
+  /** Fills out security questions section at bottom of page. */
   fillSecurityQuestions(){
     element.all(by.css('#securityQuestion1 > select option')).get(3).click();
     element.all(by.css('#securityQuestion2 > select option')).get(4).click();
@@ -158,6 +162,14 @@ export class SelfDeclarationPage extends ContactInfoPage {
     this.toggleAndFill('hasRevocationBeenResolved')
   }
 
+  /**
+   * Selects "Yes" for a toggle, then fills out the details text input with lorem ipsum text.
+   * This function is very tightly coupled to the HTML structure of self-declaration.component.html
+   * The provided toggleID must:
+   *  - Belong to a sibling element immediately PRECEEDING prime-toggle
+   *  - When suffixed with "Details", match the ID of a text input.
+   * @param toggleID must match ID of sibling to prime-toggle, and ${toggleID}Details must match ID of textarea.
+   */
   private toggleAndFill(toggleID: string){
     element.all(by.css(`#${toggleID} + prime-toggle .btn`)).first().click();
     element(by.css(`#${toggleID}Details`)).sendKeys("Lorem ipsum dolor sit, amet consectetur adipisicing elit. In quas inventore consequuntur tempore facere exercitationem numquam necessitatibus nostrum eaque provident odio quasi, libero adipisci nihil magnam harum excepturi eos voluptatibus!")
@@ -200,13 +212,7 @@ export class AllPrimePages extends SelfDeclarationPage {
     return element(by.css('app-review-submit #authorize')).click();
   }
 
-  // verifyReviewContent(){
-  //   element(by.css('app-review-submit #agree-acceptance'))
-  // }
-
-  // verifyReviewContent(selector: string, text: string): boolean{
-  //   return element(by.css(`app-review-submit ${selector}`)).getText();
-  // }
+  /** Simple find selector that restricts results to app-review-submit page. */
   find(selector: string) {
     return element(by.css(`app-review-submit ${selector}`)).getText();
   }
