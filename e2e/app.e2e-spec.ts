@@ -138,27 +138,27 @@ describe('PRIME All Pages', () => {
   });
 
 
-  it('should have urls update as it fills out all pages and navigates to the end', () => {
-    expect(page.url).toContain('/professional-info');
-    page.continue();
-    expect(page.url).toContain('/site-access');
-    page.continue();
-    expect(page.url).toContain('/contact-info');
-    page.fillAllContactInfo();
-    page.continue();
-    expect(page.url).toContain('/self-declaration');
-    page.fillDeclarations();
-    page.continue();
-    expect(page.url).toContain('/user-acceptance');
-    page.checkUserAcceptanceCheckbox();
-    page.continue();
-    expect(page.url).toContain('/review-submit');
-    page.checkAuthorizeCheckbox();
-    // page.sleep(5000);
-  });
+  // it('should have urls update as it fills out all pages and navigates to the end', () => {
+  //   expect(page.url).toContain('/professional-info');
+  //   page.continue();
+  //   expect(page.url).toContain('/site-access');
+  //   page.continue();
+  //   expect(page.url).toContain('/contact-info');
+  //   page.fillAllContactInfo();
+  //   page.continue();
+  //   expect(page.url).toContain('/self-declaration');
+  //   page.fillDeclarations();
+  //   page.continue();
+  //   expect(page.url).toContain('/user-acceptance');
+  //   page.checkUserAcceptanceCheckbox();
+  //   page.continue();
+  //   expect(page.url).toContain('/review-submit');
+  //   page.checkAuthorizeCheckbox();
+  //   // page.sleep(5000);
+  // });
 
   it('should verify that data entered on earlier pages is correct on review-submit page', () => {
-    page.navigateToEnd();
+    page.navigateToEndAndFill();
 
     expect(page.find('#name')).toEqual(`${page.firstName} ${page.middleName} ${page.lastName}`);
     expect(page.find('#phone')).toEqual(page.phoneNumber);
@@ -166,7 +166,36 @@ describe('PRIME All Pages', () => {
     expect(page.find('#altPhone')).toEqual(page.altPhoneNumber);
     expect(page.find('#altEmail')).toEqual(page.altEmail);
     expect(page.find('#streetNum')).toEqual(page.streetNum);
-    //TODO - Write more tests here.
+    expect(page.find('#suite')).toEqual(page.suite);
+    expect(page.find('#city')).toEqual(page.city);
+    expect(page.find('#province')).toEqual(page.province);
+    expect(page.find('#country')).toEqual(page.country);
+
+    expect(page.find('#question1')).toEqual(page.securityAnswer1);
+    expect(page.find('#question2')).toEqual(page.securityAnswer2);
+    expect(page.find('#question3')).toEqual(page.securityAnswer3);
+
+    expect(page.find('#haveBeenSubjectOfOrderOrConviction')).toEqual("Yes");
+    expect(page.find('#hasBeenSuspendedOrCancelled')).toEqual("Yes");
+    expect(page.find('#hasHadLimits')).toEqual("Yes");
+    expect(page.find('#havePharmaNetRevoked')).toEqual("Yes");
+    expect(page.find('#hasRevocationBeenResolved')).toEqual("Yes");
+
+    // expect(page.find('#captcha')).toEqual("notworking");
+
+    //TODO. Fix below error. Maybe just need to increase time because tests are so long?
+    /** ERROR:
+
+     A Jasmine spec timed out. Resetting the WebDriver Control Flow.
+    ✗ should verify that data entered on earlier pages is correct on review-submit page
+      - Error: Timeout - Async callback was not invoked within timeout specified by jasmine.DEFAULT_TIMEOUT_INTERVAL.
+          at ontimeout (timers.js:365:14)
+          at tryOnTimeout (timers.js:237:5)
+     */
+    // page.failCaptcha();
+    // expect(page.find('captcha .text-danger')).toContain("Incorrect answer")
+
+
 
 
     page.sleep(5000);

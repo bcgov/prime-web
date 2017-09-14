@@ -190,7 +190,7 @@ export class AllPrimePages extends SelfDeclarationPage {
   }
 
   /** Navigates to the end while filling out all fields. */
-  navigateToEnd(){
+  navigateToEndAndFill(){
     this.continue(); //site-access
     this.continue(); //contact-info
     this.fillAllContactInfo();
@@ -216,6 +216,13 @@ export class AllPrimePages extends SelfDeclarationPage {
   find(selector: string) {
     return element(by.css(`app-review-submit ${selector}`)).getText();
   }
+
+  /** Fills the captcha with incorrect text, expecting it to fail */
+  failCaptcha(){
+    element(by.css(`app-review-submit captcha #answer`)).sendKeys("Filler")
+  }
+
+
 
 
 
