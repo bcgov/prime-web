@@ -1,3 +1,8 @@
+# prime-web
+PharmaNet Revisions for Information Management Enhancements
+
+Prime-web uses angular-scaffold. The default angular-scaffold readme can be found below.
+
 # 🚀 angular-scaffold
 
 This project provides a baseline code base to help you kick start an Angular project that is based on BC Goverment themed Bootstrap styles, footers and headers.
