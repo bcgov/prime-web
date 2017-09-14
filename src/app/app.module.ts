@@ -29,7 +29,7 @@ import { SiteAccessComponent } from './pages/site-access/site-access.component'
 import { AddressComponent } from './core/address/address.component';
 import { FileUploaderComponent } from './core/file-uploader/file-uploader.component';
 
-import { CaptchaComponent } from 'mygovbc-captcha-widget/src/captcha.component';
+// import { CaptchaComponent } from 'mygovbc-captcha-widget/src/captcha.component';
 
 import { PrimeToggleComponent } from './core/toggle/toggle.component';
 import { PrimeFormFooterComponent } from './core/form-footer/form-footer.component';
@@ -59,7 +59,7 @@ import { DummyDataService } from './services/dummy-data.service';
     SiteAccessComponent,
     AddressComponent,
     FileUploaderComponent,
-    CaptchaComponent,
+    // CaptchaComponent,
     PrimeToggleComponent,
     PrimeFormFooterComponent,
   ],

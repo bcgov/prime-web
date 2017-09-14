@@ -107,7 +107,7 @@
   </div>
 
   <div class="row"
-    *ngIf="applicant.college === Colleges.None && applicant.isDeviceProvider === false">
+    *ngIf="applicant.goesToCollege(Colleges.None) && applicant.isDeviceProvider === false">
     <div class="col-sm-4">
       <div class="form-group">
         <label for='onBehalfOfJobTitle'

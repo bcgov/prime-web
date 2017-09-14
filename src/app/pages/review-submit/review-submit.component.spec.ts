@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { ReviewSubmitComponent } from './review-submit.component';
 import { CaptchaComponent } from 'mygovbc-captcha-widget/src/captcha.component';
+// let CaptchaComponent = require("mygovbc-captcha-widget/component").CaptchaComponent;
 import { PrimeFormFooterComponent } from '../../core/form-footer/form-footer.component'
 import { RouterTestingModule } from '@angular/router/testing';
 import { ApplicantDataService } from '../../services/applicant-data.service';
