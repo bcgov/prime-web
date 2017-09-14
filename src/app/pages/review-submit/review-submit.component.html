@@ -268,89 +268,89 @@
       <div class="panel-body">
         <div class="row">
           <div class="col-xs-6">
-            <label for="name">Have you ever been the subject of an order or conviction for an information contravention?</label>
+            <label for="haveBeenSubjectOfOrderOrConviction">Have you ever been the subject of an order or conviction for an information contravention?</label>
           </div>
           <div class="col-xs-6">
-            <span id="name"><strong>{{applicant.hasInformationContraventionOrder ? "Yes" : "No"}}</strong></span>
+            <span id="haveBeenSubjectOfOrderOrConviction"><strong>{{applicant.hasInformationContraventionOrder ? "Yes" : "No"}}</strong></span>
           </div>
         </div>
         <div class="row" *ngIf="applicant.hasInformationContraventionOrder">
           <div class="col-xs-6">
-            <label for="name">Details</label>
+            <label for="subjectOfOrderOrConvictionDetails">Details</label>
           </div>
           <div class="col-xs-6">
-            <span id="name"><strong>{{applicant.informationContraventionOrderDetails}}</strong></span>
+            <span id="subjectOfOrderOrConvictionDetails"><strong>{{applicant.informationContraventionOrderDetails}}</strong></span>
           </div>
         </div>
         <hr>
         <div class="row">
           <div class="col-xs-6">
-            <label for="name">Have you ever had your registration with a governing body of a health profession suspended or cancelled?</label>
+            <label for="hasBeenSuspendedOrCancelled">Have you ever had your registration with a governing body of a health profession suspended or cancelled?</label>
           </div>
           <div class="col-xs-6">
-            <span id="name"><strong>{{applicant.hasBeenSuspended ? "Yes" : "No"}}</strong></span>
+            <span id="hasBeenSuspendedOrCancelled"><strong>{{applicant.hasBeenSuspended ? "Yes" : "No"}}</strong></span>
           </div>
         </div>
         <div class="row" *ngIf="applicant.hasBeenSuspended">
           <div class="col-xs-6">
-            <label for="name">Details</label>
+            <label for="suspendedOrCancelledDetails">Details</label>
           </div>
           <div class="col-xs-6">
-            <span id="name"><strong>{{applicant.beenSuspendedDetails}}</strong></span>
+            <span id="suspendedOrCancelledDetails"><strong>{{applicant.beenSuspendedDetails}}</strong></span>
           </div>
         </div>
         <hr>
 
         <div class="row">
           <div class="col-xs-6">
-            <label for="name">Have you ever had any limits or conditions imposed on your license as a result of disciplinary actions taken by a governing body of a health profession?</label>
+            <label for="hasHadLimits">Have you ever had any limits or conditions imposed on your license as a result of disciplinary actions taken by a governing body of a health profession?</label>
           </div>
           <div class="col-xs-6">
-            <span id="name"><strong>{{applicant.hasHadLimitsOrConditions ? "Yes" : "No"}}</strong></span>
+            <span id="hasHadLimits"><strong>{{applicant.hasHadLimitsOrConditions ? "Yes" : "No"}}</strong></span>
           </div>
         </div>
         <div class="row" *ngIf="applicant.hasHadLimitsOrConditions">
           <div class="col-xs-6">
-            <label for="name">Details</label>
+            <label for="hadLimitDetails">Details</label>
           </div>
           <div class="col-xs-6">
-            <span id="name"><strong>{{applicant.hadLimitsOrConditionsDetails}}</strong></span>
+            <span id="hadLimitDetails"><strong>{{applicant.hadLimitsOrConditionsDetails}}</strong></span>
           </div>
         </div>
         <hr>
 
         <div class="row">
           <div class="col-xs-6">
-            <label for="name">Have you ever had your access to PharmaNet suspended or revoked?</label>
+            <label for="havePharmaNetRevoked">Have you ever had your access to PharmaNet suspended or revoked?</label>
           </div>
           <div class="col-xs-6">
-            <span id="name"><strong>{{applicant.hasPharmaNetEverRevoked ? "Yes" : "No"}}</strong></span>
+            <span id="havePharmaNetRevoked"><strong>{{applicant.hasPharmaNetEverRevoked ? "Yes" : "No"}}</strong></span>
           </div>
         </div>
         <div class="row" *ngIf="applicant.hasPharmaNetEverRevoked">
           <div class="col-xs-6">
-            <label for="name">Details</label>
+            <label for="PharmaNetRevokedDetails">Details</label>
           </div>
           <div class="col-xs-6">
-            <span id="name"><strong>{{applicant.PharmaNetEverRevokedDetails}}</strong></span>
+            <span id="PharmaNetRevokedDetails"><strong>{{applicant.PharmaNetEverRevokedDetails}}</strong></span>
           </div>
         </div>
         <hr>
 
         <div class="row" *ngIf="applicant.hasPharmaNetEverRevoked">
           <div class="col-xs-6">
-            <label for="name">Has the circumstances that lead to the revocation been resolved?</label>
+            <label for="hasRevocationBeenResolved">Has the circumstances that lead to the revocation been resolved?</label>
           </div>
           <div class="col-xs-6">
-            <span id="name"><strong>{{applicant.hasRevocationBeenResolved ? "Yes" : "No"}}</strong></span>
+            <span id="hasRevocationBeenResolved"><strong>{{applicant.hasRevocationBeenResolved ? "Yes" : "No"}}</strong></span>
           </div>
         </div>
         <div class="row" *ngIf="applicant.hasRevocationBeenResolved">
           <div class="col-xs-6">
-            <label for="name">Details</label>
+            <label for="revocationBeenResolvedDetails">Details</label>
           </div>
           <div class="col-xs-6">
-            <span id="name"><strong>{{applicant.revocationBeenResolvedDetails}}</strong></span>
+            <span id="revocationBeenResolvedDetails"><strong>{{applicant.revocationBeenResolvedDetails}}</strong></span>
           </div>
         </div>
 
