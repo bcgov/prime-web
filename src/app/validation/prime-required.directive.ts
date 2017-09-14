@@ -46,26 +46,31 @@ export class PrimeRequiredDirective {
   private validationComponents = []; //todo - typing!
 
 
-  constructor(el: ElementRef, private renderer: Renderer2,
+  constructor(input: ElementRef, private renderer: Renderer2,
     @Inject(ViewContainerRef) viewContainerRef,
     @Inject(ComponentFactoryResolver) factoryResolver,
     private ref: ChangeDetectorRef) {
-    this.el = el;
+    this.input = input;
     this.view = viewContainerRef;
     this.factoryResolver = factoryResolver;
   }
 
   ngOnInit() {
-    if (!this.check(this.el)) {
+    if (!this.check(this.input)) {
       throw new Error("Unable to initialize PrimeRequiredDirective. Directive is on an element without required child elements.");
     }
     this.validationOptions = this.validationOptions || "required";
-    // Load validation components based on validationOptions
+    this.loadValidationComponents();
+  }
+
+  /** Loads the validation components based off of directive input. Add future validation options here. */
+  private loadValidationComponents() {
     this.validationOptions.replace(' ', '').split(',').forEach(opt => {
+      //TODO - Refactor to a simple switch statement.
       if (opt.toLowerCase() === "required") {
         this.validationComponents.push(RequiredValidationErrorsComponent);
       }
-      //If you want to add another validation function, add it here.
+      //Future validation options should be added here.
     });
   }
 
@@ -76,7 +81,7 @@ export class PrimeRequiredDirective {
   }
 
   /** Runs the logic of a given validation component */
-  private runValidationComponent(validationComponent: ValidationComponent): void{
+  private runValidationComponent(validationComponent: ValidationComponent): void {
     if (!validationComponent.validate(this.input)) {
       this.setInvalid(validationComponent);
     }
@@ -86,9 +91,7 @@ export class PrimeRequiredDirective {
   }
 
   setInvalid(validationComponent) {
-    //todo - addClass needs to be on form-group parent!
-    // this.renderer.addClass(this.el.nativeElement, this.ERROR_CLASS);
-    this.renderer.addClass(this.el.nativeElement.parentElement, this.ERROR_CLASS);
+    this.renderer.addClass(this.formGroupElement, this.ERROR_CLASS);
     let comp = this.addComponent(validationComponent);
   }
 
@@ -102,12 +105,11 @@ export class PrimeRequiredDirective {
 
     //Only remove class if there are no other active components.
     const componentsActive = Object.keys(this.activeComponents)
-    .map(key => this.activeComponents[key])
-    .filter(x => x !== null).length >= 1;
+      .map(key => this.activeComponents[key])
+      .filter(x => x !== null).length >= 1;
 
-    if (!componentsActive){
-      // this.renderer.removeClass(this.el.nativeElement, this.ERROR_CLASS);
-      this.renderer.removeClass(this.el.nativeElement.parentElement, this.ERROR_CLASS);
+    if (!componentsActive) {
+      this.renderer.removeClass(this.formGroupElement, this.ERROR_CLASS);
     }
   }
 
@@ -117,6 +119,16 @@ export class PrimeRequiredDirective {
 
   private get labelText() {
     return this.label.nativeElement.textContent;
+  }
+
+  /** Returns the div.form-group parent, which _should_ be the direct parent. */
+  private get formGroupElement(): ElementRef {
+    let parent = this.input.nativeElement.parentElement;
+    if (parent.classList.contains('form-group')) {
+      return parent
+    }
+    //Extend this function as required to find .form-group, but keep DOM operations at a minimum.
+    throw new Error("PrimeRequiredDirective unable to find the parent .form-group element");
   }
 
   /** Creates a component and adds it to the view. */
@@ -145,7 +157,7 @@ export class PrimeRequiredDirective {
   }
 
 
-  /** Checks that primeRequired is attached to the right element. It must have exactly one child label and one input label. */
+  /** Checks that primeRequired is attached to the right element and can identify the label. */
   private check(el: ElementRef): boolean {
     this.input = el;
     // this.input = new ElementRef(el.nativeElement.querySelector('input'));
