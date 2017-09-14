@@ -37,6 +37,8 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { CollegeDataService } from './services/college-data.service';
 import { StickyModule } from 'ng2-sticky-kit';
 import { DummyDataService } from './services/dummy-data.service';
+import { PrimeRequiredDirective } from './validation/prime-required.directive';
+import { RequiredValidationErrorsComponent } from './validation/required-validation-errors/required-validation-errors.component';
 
 
 @NgModule({
@@ -62,6 +64,8 @@ import { DummyDataService } from './services/dummy-data.service';
     CaptchaComponent,
     PrimeToggleComponent,
     PrimeFormFooterComponent,
+    PrimeRequiredDirective,
+    RequiredValidationErrorsComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +82,9 @@ import { DummyDataService } from './services/dummy-data.service';
     ApplicantDataService,
     CollegeDataService,
     DummyDataService
+  ],
+  entryComponents: [
+    RequiredValidationErrorsComponent //Necessary because it's a dynamicly added component.
   ],
   bootstrap: [AppComponent]
 })
