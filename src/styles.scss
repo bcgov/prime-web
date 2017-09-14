@@ -1,0 +1,114 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~mygovbc-bootstrap-theme/dist/mygovbc-bootstrap-theme.min.css";
+@import "./app/variables.scss";
+
+.modal-header-primary {
+  background: $brand-primary;
+
+  h2 {
+    color: white;
+    font-weight: 600;
+  }
+}
+
+/*
+Special accessibility class to hide things like labels but still have the readable by screen readers
+ */
+.visuallyhidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px; width: 1px;
+  margin: -1px; padding: 0; border: 0;
+}
+
+
+/* Re-implementing .btn-default after 0.4.0 of mygovbc-bootstrap-theme
+ * made it identical to .btn-primary.
+ *
+ * GitHub Issue:
+ * https://github.com/bcgov/mygovbc-bootstrap-theme/issues/4#issuecomment-327599375
+ */
+
+.btn-default {
+  color: #333;
+  background-color: #f4f6f9;
+  border-color: #ccc;
+  &:hover {
+    color: #333;
+    background-color: #d3dbe7;
+    border-color: #adadad;
+  }
+  //Make btn-toggles selected colour match new primary colour.
+  //If we want to make the change permanent after issue resolves,
+  //Move into toggle.scss.
+  &.btn-radio {
+    background-color: #38598a !important;
+  }
+}
+//Related to same mygovbc-bootstrap-theme 0.4.0 issue as above.
+.btn-primary:hover {
+  background-color: #294266;
+}
+
+// Style select2 to match look and feel of other form elements
+select2 {
+  display: block;
+  .select2-container, .select2-selection {
+    //override element styling that happens via js.
+    width: 100% !important;
+    min-height: 36px !important;
+    height: auto !important; //when label is two lines
+  }
+  .select2-selection {
+    padding-right: 8px !important; //Same as the padding-left default
+  }
+  .select2-selection__rendered {
+    //Ensure selected text isn't cut off on smaller view sizes.
+    white-space: normal !important;
+  }
+}
+
+ng2-smart-table tbody {
+  tr:nth-of-type(even){background-color: #f9f9f9;}
+  tr {
+    transition: 0.15s;
+    border: 1px solid #ededed;
+    &:hover {background-color: #f0f6ff}
+  }
+
+  //Selected is triggered when user taps on a row. Since we're read-only, selection would only serve to confuse the user.
+  .ng2-smart-row .selected {background-color: transparent;}
+}
+
+thead tr.ng2-smart-filters .ng2-smart-th,
+thead tr.ng2-smart-titles .ng2-smart-th {padding-left: 0}
+
+.intro {
+  font-size: 18px;
+  margin-top: 20px;
+  font-weight: 400;
+  display: block;
+}
+
+
+.has-success .form-control {
+  border-color: #1b926c !important;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+@media(min-width: $screen-sm) {
+  .nowrap-sm { white-space: nowrap;}
+  .wrap-sm {white-space: normal;}
+}
+@media(min-width: $screen-md) {
+  .nowrap-md { white-space: nowrap;}
+  .wrap-md { white-space: normal;}
+}
+@media(min-width: $screen-lg) {
+  .nowrap-lg { white-space: nowrap;}
+  .wrap-lg { white-space: normal;}
+}
