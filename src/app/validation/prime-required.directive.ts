@@ -1,6 +1,6 @@
 import { Directive, ElementRef, Input, HostListener, HostBinding, Renderer2, Inject, ViewContainerRef, ChangeDetectorRef, ComponentRef } from '@angular/core';
-
 import { RequiredValidationErrorsComponent } from './required-validation-errors/required-validation-errors.component';
+import {ValidationComponent} from './validation-component.interface'
 
 //TODO - Tidy up imports here.
 import {
@@ -132,7 +132,7 @@ export class PrimeRequiredDirective {
   }
 
   /** Creates a component and adds it to the view. */
-  private addComponent<T>(componentClass): ComponentRef<T> {
+  private addComponent<T extends ValidationComponent>(componentClass): ComponentRef<T> {
     //Max 1 instance of each component type, to stop duplicate messages.
     if (this.activeComponents[componentClass.name]) {
       return;
@@ -144,10 +144,13 @@ export class PrimeRequiredDirective {
   }
 
   /** Creates a component but does not add it to the view */
-  private prepareComponent<T>(componentClass): ComponentRef<T> {
+  // private prepareComponent<T>(componentClass): ComponentRef<T> {
+  private prepareComponent<T extends ValidationComponent>(componentClass): ComponentRef<T> {
     const factory = this.factoryResolver.resolveComponentFactory(componentClass)
     const component = factory.create(this.view.parentInjector) as ComponentRef<T>
+    // (component.instance as ValidationComponent).fieldName = this.labelText;
     (component.instance as ValidationComponent).fieldName = this.labelText;
+
     return component;
   }
 
@@ -171,10 +174,4 @@ export class PrimeRequiredDirective {
     return true;
   }
 
-}
-
-// TODO TODO - Move to separate file
-interface ValidationComponent {
-  fieldName?: string;
-  validate?: (input: any) => boolean;
 }

@@ -39,6 +39,7 @@ import { StickyModule } from 'ng2-sticky-kit';
 import { DummyDataService } from './services/dummy-data.service';
 import { PrimeRequiredDirective } from './validation/prime-required.directive';
 import { RequiredValidationErrorsComponent } from './validation/required-validation-errors/required-validation-errors.component';
+import { PhoneValidationComponent } from './validation/phone-validation/phone-validation.component';
 
 
 @NgModule({
@@ -66,6 +67,7 @@ import { RequiredValidationErrorsComponent } from './validation/required-validat
     PrimeFormFooterComponent,
     PrimeRequiredDirective,
     RequiredValidationErrorsComponent,
+    PhoneValidationComponent,
   ],
   imports: [
     BrowserModule,
