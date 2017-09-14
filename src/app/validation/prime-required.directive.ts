@@ -86,7 +86,9 @@ export class PrimeRequiredDirective {
   }
 
   setInvalid(validationComponent) {
-    this.renderer.addClass(this.el.nativeElement, this.ERROR_CLASS);
+    //todo - addClass needs to be on form-group parent!
+    // this.renderer.addClass(this.el.nativeElement, this.ERROR_CLASS);
+    this.renderer.addClass(this.el.nativeElement.parentElement, this.ERROR_CLASS);
     let comp = this.addComponent(validationComponent);
   }
 
@@ -104,7 +106,8 @@ export class PrimeRequiredDirective {
     .filter(x => x !== null).length >= 1;
 
     if (!componentsActive){
-      this.renderer.removeClass(this.el.nativeElement, this.ERROR_CLASS);
+      // this.renderer.removeClass(this.el.nativeElement, this.ERROR_CLASS);
+      this.renderer.removeClass(this.el.nativeElement.parentElement, this.ERROR_CLASS);
     }
   }
 
@@ -144,8 +147,8 @@ export class PrimeRequiredDirective {
 
   /** Checks that primeRequired is attached to the right element. It must have exactly one child label and one input label. */
   private check(el: ElementRef): boolean {
-    // this.input = el;
-    this.input = new ElementRef(el.nativeElement.querySelector('input'));
+    this.input = el;
+    // this.input = new ElementRef(el.nativeElement.querySelector('input'));
     // this.label = document.querySelector(`[for="${this.input.nativeElement.name}"]`);
     this.label = new ElementRef(document.querySelector(`[for="${this.input.nativeElement.name}"]`));
 
