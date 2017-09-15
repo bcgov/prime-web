@@ -14,15 +14,13 @@ import { ValidationComponent, staticImplements } from './validation-component.in
 @staticImplements<ValidationComponent>()
 export class BaseValidationComponent {
   @Input() public fieldName: string;
-  static inputRegex: RegExp;
+  static regex: RegExp;
 
   public static validate(input: ElementRef): boolean {
     const inputVal = input.nativeElement.value
     if (inputVal == null || inputVal.length < 1) {
       return true;
     }
-
-    const regex = new RegExp(this.inputRegex);
-    return regex.test(inputVal);
+    return this.regex.test(inputVal);
   }
 }

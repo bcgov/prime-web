@@ -85,7 +85,7 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" [ngClass]="{'has-error': showAlternatePhoneError}">
     <div class="col-sm-offset-5 col-md-offset-4 col-sm-3 col-md-4">
       <div class="form-group">
         <label for='phoneNumber'
@@ -94,7 +94,12 @@
           class="form-control"
           name='altphoneNumber'
           id='altphoneNumber'
-          [(ngModel)]="applicant.altPhoneNumber">
+          #altPhoneNumber
+          [ngModel]="applicant.altPhoneNumber"
+          (ngModelChange)="onAlternateFieldChange(altPhoneNumber, altEmail)">
+      </div>
+      <div role="alert" aria-live="assertive" *ngIf="showAlternatePhoneError">
+        <div class="text-danger">At least one of Alternate Phone Number or Alternate Email Address must be filled out.</div>
       </div>
     </div>
     <div class="col-sm-4">
@@ -105,7 +110,9 @@
           class="form-control"
           name='altEmail'
           id='altEmail'
-          [(ngModel)]="applicant.altEmailAddress">
+          #altEmail
+          [ngModel]="applicant.altEmailAddress"
+          (ngModelChange)="onAlternateFieldChange(altPhoneNumber, altEmail)">
       </div>
     </div>
   </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApplicantDataService } from '../../services/applicant-data.service';
 import { Applicant } from '../../models/applicant.model';
@@ -22,6 +22,11 @@ export class ContactInformationComponent extends BaseComponent implements OnInit
   public selectedSecurityQuestions: Select2OptionData[];
   /** A local copy of applicant.securityQuestions, ensuring it matches the interface before pushing it to applicant.  */
   private securityQuestionAndAnswers: SecurityQuestions[] = [];
+
+  public showAlternatePhoneError: boolean = false;
+
+  @ViewChild('altEmail') altEmail: ElementRef;
+  @ViewChild('altPhoneNumber') altPhoneNumber: ElementRef;
 
   constructor(private router: Router,
     private applicantData: ApplicantDataService) {
@@ -84,6 +89,10 @@ export class ContactInformationComponent extends BaseComponent implements OnInit
   onSecurityAnswerChange(input, count: number) {
     const index = count - 1;
     this.applicant.securityQuestions[index].answer = input;
+  }
+
+  onAlternateFieldChange(){
+    this.showAlternatePhoneError = !(this.altPhoneNumber.nativeElement.value || this.altEmail.nativeElement.value)
   }
 
   selectQuestion(question, event) {

@@ -9,5 +9,5 @@ import { BaseValidationComponent } from '../base-validation.component';
 })
 @staticImplements<ValidationComponent>()
 export class PhoneValidationComponent extends BaseValidationComponent {
-  static inputRegex = /^[2-9]{1}\\d{2}[\\-]?\\d{3}[\\-]?\\d{4}$/;
+  static regex: RegExp = /^[2-9]{1}\d{2}[\-]?\d{3}[\-]?\d{4}$/;
 }
