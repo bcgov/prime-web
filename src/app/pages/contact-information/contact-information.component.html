@@ -66,7 +66,7 @@
           class="form-control"
           name='phoneNumber'
           id='phoneNumber'
-          primeRequired="phone"
+          primeRequired="phone,required"
           [(ngModel)]="applicant.phoneNumber">
       </div>
     </div>
@@ -78,6 +78,8 @@
           class="form-control"
           name='email'
           id='email'
+          primeRequired="email,required"
+
           [(ngModel)]="applicant.emailAddress">
       </div>
     </div>

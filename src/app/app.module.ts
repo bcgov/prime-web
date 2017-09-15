@@ -86,7 +86,8 @@ import { PhoneValidationComponent } from './validation/phone-validation/phone-va
     DummyDataService
   ],
   entryComponents: [
-    RequiredValidationErrorsComponent //Necessary because it's a dynamicly added component.
+    RequiredValidationErrorsComponent,
+    PhoneValidationComponent
   ],
   bootstrap: [AppComponent]
 })

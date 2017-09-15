@@ -1,6 +1,9 @@
 import { Directive, ElementRef, Input, HostListener, HostBinding, Renderer2, Inject, ViewContainerRef, ChangeDetectorRef, ComponentRef } from '@angular/core';
+
+
+import { ValidationComponent } from './validation-component.interface'
 import { RequiredValidationErrorsComponent } from './required-validation-errors/required-validation-errors.component';
-import {ValidationComponent} from './validation-component.interface'
+import { PhoneValidationComponent } from './phone-validation/phone-validation.component';
 
 //TODO - Tidy up imports here.
 import {
@@ -57,7 +60,7 @@ export class PrimeRequiredDirective {
 
   ngOnInit() {
     if (!this.check(this.input)) {
-      throw new Error("Unable to initialize PrimeRequiredDirective. Directive is on an element without required child elements.");
+      throw new Error("Unable to initialize PrimeRequiredDirective. Directive is unable to locate the input and labels. Make sure you have <label for='NAME'> setup correctly for the input with primeRequired.");
     }
     this.validationOptions = this.validationOptions || "required";
     this.loadValidationComponents();
@@ -66,14 +69,24 @@ export class PrimeRequiredDirective {
   /** Loads the validation components based off of directive input. Add future validation options here. */
   private loadValidationComponents() {
     this.validationOptions.replace(' ', '').split(',').forEach(opt => {
-      //TODO - Refactor to a simple switch statement.
-      if (opt.toLowerCase() === "required") {
-        this.validationComponents.push(RequiredValidationErrorsComponent);
+
+      switch (opt.toLowerCase()) {
+        case "required":
+          this.validationComponents.push(RequiredValidationErrorsComponent);
+          break;
+
+        case "phone":
+          this.validationComponents.push(PhoneValidationComponent);
+          break;
+
+        default:
+          break;
       }
-      //Future validation options should be added here.
     });
   }
 
+  //TODO - Have more listeners! blur?
+  //If user clicks el and clicks away, need to fire validation. "touched"
   @HostListener('keyup')
   onKey() {
     //Run validation of EACH of the validation components.
