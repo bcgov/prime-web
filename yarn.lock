@@ -157,9 +157,13 @@
   version "2.0.48"
   resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-2.0.48.tgz#3e90d8cde2d29015e5583017f7830cb3975b2eef"
 
-"@types/node@^6.0.46", "@types/node@~6.0.60":
+"@types/node@^6.0.46":
   version "6.0.77"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.77.tgz#3e4d569a427f17085e1ee4ecd3c31befb56af7b5"
+
+"@types/node@^8.0.28":
+  version "8.0.28"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.28.tgz#86206716f8d9251cf41692e384264cbd7058ad60"
 
 "@types/q@^0.0.32":
   version "0.0.32"
@@ -3130,9 +3134,9 @@ mygovbc-bootstrap-theme@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/mygovbc-bootstrap-theme/-/mygovbc-bootstrap-theme-0.4.0.tgz#373121c0fd4690be5c51455507f69c019cb3d45b"
 
-"mygovbc-captcha-widget@git+https://github.com/bcgov/MyGovBC-CAPTCHA-Widget.git":
-  version "1.0.4"
-  resolved "git+https://github.com/bcgov/MyGovBC-CAPTCHA-Widget.git#122ac5d6c1c111fe30d6de19d41793b26dd969e6"
+"mygovbc-captcha-widget@git+https://github.com/bcgov/MyGovBC-CAPTCHA-Widget.git#v1.0.0-beta.2":
+  version "1.0.0"
+  resolved "git+https://github.com/bcgov/MyGovBC-CAPTCHA-Widget.git#2f5f836840a85bb5c6e1671e47c6eb8d97eedcd1"
 
 nan@^2.3.0, nan@^2.3.2:
   version "2.6.2"

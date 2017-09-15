@@ -54,14 +54,6 @@
           <div class="text-danger"
             *ngIf="residentialAddressLine1Ref.errors?.maxlength">Address Line cannot be more than _LENGTH_ characters</div>
         </div>
-        <div *ngIf='useResidentialAddressLine2 && residentialAddressLine2Ref.touched || showError'>
-          <div class="text-danger"
-            *ngIf="residentialAddressLine2Ref.errors?.maxlength">Address Line 2 cannot be more than _LENGTH_ characters</div>
-        </div>
-        <div *ngIf='useResidentialAddressLine3 && residentialAddressLine3Ref.touched || showError'>
-          <div class="text-danger"
-            *ngIf="residentialAddressLine3Ref.errors?.maxlength">Address Line 3 cannot be more than _LENGTH_ characters</div>
-        </div>
       </div>
     </div>
 

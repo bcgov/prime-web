@@ -34,6 +34,10 @@ export class ReviewSubmitComponent extends BaseComponent implements OnInit {
   ngOnInit() {
   }
 
+  print() {
+    console.log('print - todo');
+  }
+
   canContinue(): boolean {
     return this.hasValidToken;
   }

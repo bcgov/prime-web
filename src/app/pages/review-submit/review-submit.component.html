@@ -68,7 +68,7 @@
             <span id="licenseClass"><strong>{{applicant.isDeviceProvider}}</strong></span>
           </div>
         </div>
-        <div class="row" *ngIf="applicant.college === Colleges.None && applicant.isDeviceProvider === false">
+        <div class="row" *ngIf="applicant.goesToCollege(Colleges.None) && applicant.isDeviceProvider === false">
           <div class="col-xs-6">
             <label for="licenseClass">On Behalf of Job Title</label>
           </div>
@@ -385,7 +385,7 @@
 
 <div class="row">
   <div class="col-md-12">
-    <captcha apiBaseUrl="https://captcha-service-gcpe-mygovbc-demo.pathfinder.gov.bc.ca" nonce="PrimeBC" (onValidToken)="onValidToken($event)"></captcha>
+    <!-- <captcha apiBaseUrl="https://captcha-service-gcpe-mygovbc-demo.pathfinder.gov.bc.ca" nonce="PrimeBC" (onValidToken)="onValidToken($event)"></captcha> -->
   </div>
 </div>
 
