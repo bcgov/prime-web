@@ -4,6 +4,7 @@ import { Directive, ElementRef, Input, HostListener, HostBinding, Renderer2, Inj
 import { ValidationComponent } from './validation-component.interface'
 import { RequiredValidationErrorsComponent } from './required-validation-errors/required-validation-errors.component';
 import { PhoneValidationComponent } from './phone-validation/phone-validation.component';
+import { EmailValidationComponent} from './email-validation/email-validation.component';
 
 //TODO - Tidy up imports here.
 import {
@@ -77,6 +78,10 @@ export class PrimeRequiredDirective {
 
         case "phone":
           this.validationComponents.push(PhoneValidationComponent);
+          break;
+
+        case "email":
+          this.validationComponents.push(EmailValidationComponent);
           break;
 
         default:

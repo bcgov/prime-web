@@ -40,6 +40,7 @@ import { DummyDataService } from './services/dummy-data.service';
 import { PrimeRequiredDirective } from './validation/prime-required.directive';
 import { RequiredValidationErrorsComponent } from './validation/required-validation-errors/required-validation-errors.component';
 import { PhoneValidationComponent } from './validation/phone-validation/phone-validation.component';
+import { EmailValidationComponent } from './validation/email-validation/email-validation.component';
 
 
 @NgModule({
@@ -68,6 +69,7 @@ import { PhoneValidationComponent } from './validation/phone-validation/phone-va
     PrimeRequiredDirective,
     RequiredValidationErrorsComponent,
     PhoneValidationComponent,
+    EmailValidationComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,7 +89,8 @@ import { PhoneValidationComponent } from './validation/phone-validation/phone-va
   ],
   entryComponents: [
     RequiredValidationErrorsComponent,
-    PhoneValidationComponent
+    PhoneValidationComponent,
+    EmailValidationComponent,
   ],
   bootstrap: [AppComponent]
 })
