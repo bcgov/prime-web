@@ -41,7 +41,7 @@ export class DummyDataService {
             "answer":"Fehr"
          }
       ],
-      "consentInfoCollection":false,
+      "consentInfoCollection":true,
       "address":{
          "streetNum":"845",
          "streetSuffix":"B",

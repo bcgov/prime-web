@@ -36,6 +36,21 @@ describe('Applicant Model', () => {
     expect(applicant.goesToCollege()).toBe(true);
   });
 
+  it('should not go to college when college selection is undefined', () => {
+    applicant.college = [];
+    expect(applicant.goesToCollege()).toBe(false);
+    expect(applicant.goesToCollege(Colleges.CPBC)).toBe(false);
+    expect(applicant.goesToCollege(Colleges.CRNBC)).toBe(false);
+    expect(applicant.goesToCollege(Colleges.CPSBC)).toBe(false);
+    expect(applicant.goesToCollege(Colleges.None)).toBe(false);
+  });
+
+  it('should not go to college when college selection is Colleges.None, BUT it should be able to specifically lookup if applicant goes to College.None', () => {
+    applicant.college = [Colleges.None];
+    expect(applicant.goesToCollege(Colleges.None)).toBe(true);
+    expect(applicant.goesToCollege()).toBe(false);
+  });
+
   it('should have a full name field', () => {
     expect(applicant.fullName).toBeNull();
     applicant.firstName = "William";

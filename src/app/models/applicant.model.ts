@@ -52,10 +52,11 @@ export class Applicant {
    * @param college optional, should be Colleges or undefined.
    */
   goesToCollege(college?: Colleges): boolean {
-    if (!this.college) return false;
-    if (this.college.length === 0 && this.college[0] == Colleges.None) {
+    if (!this.college || this.college.length === 0) return false;
+    if (this.college.length === 1 && this.college[0] === Colleges.None) {
       return this.college[0] === college;
     }
+    //No input means check if applicant goes to ANY college (besides "none", which is dealt with above)
     if (!college && this.college.length) return true;
     return (<Colleges[]>this.college).indexOf(college) >= 0;
   }
