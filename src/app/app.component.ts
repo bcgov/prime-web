@@ -6,6 +6,7 @@ import { ApplicantDataService } from './services/applicant-data.service'
 import { DummyDataService } from './services/dummy-data.service';
 import { Applicant } from './models/applicant.model';
 import { environment } from './../environments/environment';
+import 'rxjs/add/operator/filter';
 
 @Component({
   selector: 'app-root',
