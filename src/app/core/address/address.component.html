@@ -7,6 +7,7 @@
         class="form-control"
         id='streetNum'
         name='streetNum'
+        primeRequired
         [(ngModel)]="applicant.address.streetNum">
     </div>
     <div class="form-group col-sm-3">
@@ -114,20 +115,22 @@
       </div>
     </div>
     <div class="form-group col-sm-3">
-      <label for="residentialAddressProvince{{objectId}}">Province</label>
+      <label for="residentialAddressProvince">Province</label>
       <input [(ngModel)]='applicant.address.province'
         type="text"
         class="form-control"
-        id="residentialAddressProvince{{objectId}}"
+        id="residentialAddressProvince"
         name="residentialAddressProvince"
+        primeRequired
         value="British Columbia">
     </div>
     <div class="form-group col-sm-3">
-      <label for="residentialAddressCountry{{objectId}}">Country</label>
+      <label for="residentialAddressCountry">Country</label>
       <input type="text"
         class="form-control"
-        id="residentialAddressCountry{{objectId}}"
+        id="residentialAddressCountry"
         name="residentialAddressCountry"
+        primeRequired
         value="Canada"
         [(ngModel)]="applicant.address.country">
     </div>

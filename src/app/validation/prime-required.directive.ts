@@ -51,12 +51,14 @@ export class PrimeRequiredDirective {
     this.factoryResolver = factoryResolver;
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     if (!this.check(this.input)) {
       throw new Error("Unable to initialize PrimeRequiredDirective. Directive is unable to locate the input and labels. Make sure you have <label for='NAME'> setup correctly for the input with primeRequired.");
     }
     this.validationOptions = this.validationOptions || "required";
+
     this.loadValidationComponents();
+
   }
 
   /** Loads the validation components based off of directive input. Add future validation options here. */
@@ -173,7 +175,7 @@ export class PrimeRequiredDirective {
     this.label = new ElementRef(document.querySelector(`[for="${this.input.nativeElement.name}"]`));
 
     if (this.input.nativeElement === null || this.label.nativeElement === null) {
-      console.error("PrimeRequiredDirective is on an element without required child elements.", { element: el })
+      console.error("PrimeRequiredDirective is on an element without required child elements.", { element: el, name: this.input.nativeElement.name })
       return false;
     }
     return true;
