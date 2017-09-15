@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { RequiredValidationErrorsComponent } from './required-validation.component';
+import { mockValue } from '../base-validation.component.spec';
 
 describe('RequiredErrorAlertComponent', () => {
   let component: RequiredValidationErrorsComponent;
@@ -21,5 +21,12 @@ describe('RequiredErrorAlertComponent', () => {
 
   it('should be created', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('be able to validate a field as required', () => {
+    expect(RequiredValidationErrorsComponent.validate(mockValue('Some Data'))).toBeTruthy();
+    expect(RequiredValidationErrorsComponent.validate(mockValue(''))).toBeFalsy();
+    expect(RequiredValidationErrorsComponent.validate(mockValue(' '))).toBeTruthy();
+    expect(RequiredValidationErrorsComponent.validate(mockValue(""))).toBeFalsy();
   });
 });

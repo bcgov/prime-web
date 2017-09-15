@@ -3,6 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { PhoneValidationComponent } from './phone-validation.component';
 import { ElementRef } from '@angular/core';
 
+import { mockValue } from '../base-validation.component.spec';
+
 
 describe('PhoneValidationComponent', () => {
   let component: PhoneValidationComponent;
@@ -30,14 +32,11 @@ describe('PhoneValidationComponent', () => {
   });
 
   it('be able to validate a phone number', () => {
-    expect(PhoneValidationComponent.validate(createWithPhone('123-456-7890'))).toBeTruthy();
-    expect(PhoneValidationComponent.validate(createWithPhone('123-456-7890a'))).toBeTruthy(); //Should fail! but it isn't.
-    debugger;
-    expect(PhoneValidationComponent.validate(createWithPhone('plzfaila'))).toBeTruthy(); //Should fail! but it isn't.
-
+    expect(PhoneValidationComponent.validate(mockValue('250-555-0609'))).toBeTruthy();
+    //Numbers cannot start with a 1. Must start w/ 2-9.
+    expect(PhoneValidationComponent.validate(mockValue('150-555-0609'))).toBeFalsy();
+    expect(PhoneValidationComponent.validate(mockValue('250-555-0609a'))).toBeFalsy();
+    expect(PhoneValidationComponent.validate(mockValue('plzfaila'))).toBeFalsy();
+    expect(PhoneValidationComponent.validate(mockValue('2505550609'))).toBeTruthy();
   });
 });
-
-function createWithPhone(phoneNum: string): ElementRef{
-  return new ElementRef(`<input type='text' value='${phoneNum}'>`);
-}
