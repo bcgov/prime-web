@@ -1,33 +1,26 @@
-import { Directive, ElementRef, Input, HostListener, HostBinding, Renderer2, Inject, ViewContainerRef, ChangeDetectorRef, ComponentRef } from '@angular/core';
+import { Directive, ElementRef, Input, HostListener, HostBinding, Renderer2, Inject, ViewContainerRef, ChangeDetectorRef, ComponentRef, ComponentFactoryResolver } from '@angular/core';
 
 
 import { ValidationComponent } from './validation-component.interface'
 import { RequiredValidationErrorsComponent } from './required-validation/required-validation.component';
 import { PhoneValidationComponent } from './phone-validation/phone-validation.component';
-import { EmailValidationComponent} from './email-validation/email-validation.component';
+import { EmailValidationComponent } from './email-validation/email-validation.component';
 
-//TODO - Tidy up imports here.
-import {
-  ComponentFactoryResolver,
-  Injectable,
-  ReflectiveInjector
-} from '@angular/core'
 
 /**
- * NOTES / Proposed Architecture
+ * Validate a **single** <input>, and specify validation options via a comma
+ * separated list. Also requires that a <label for="name"> matches the input.
  *
- * Idea: Depending on options, different/multiple injected class is used (e.g.
- * RequiredValidationErrorsComponent). That component should contain both
- * the validation logic, and the text to display.
+ * Example:
+ * ```
+ *    <div class="form-group" primeRequired="required,phone">
+ * ```
  *
- * Example input:
- *  <div class="form-group" primeRequired="notEmpty, phoneNumber">
+ * A list of all options can be found in `loadValidationComponents()`
  *
- * Would load 2 different classes, for notEmpty + phoneNumber.
- * Including validation logic.
- *
- *
- * Use STATIC fn for validation.
+ * If you wish to write your own validation, you'll have to extend
+ * base-validation.component.ts, and then add your class + option
+ * to `loadValidationComponents()`
  */
 @Directive({
   selector: '[primeRequired]'
@@ -41,13 +34,12 @@ export class PrimeRequiredDirective {
   /** The CSS class to add to the element with the directive, i.e. form-group */
   private ERROR_CLASS: string = "has-error";
   /** A list of all active validation components. Components are created/destroyed when validation fails/passes. */
-  private activeComponents = {}; //todo - typing!
+  private activeComponents = {};
 
   /** A comma separated list of validation choices. Default: "required" */
   @Input('primeRequired') validationOptions: string;
 
-
-  private validationComponents = []; //todo - typing!
+  private validationComponents: ValidationComponent[] = [];
 
 
   constructor(input: ElementRef, private renderer: Renderer2,
@@ -90,11 +82,9 @@ export class PrimeRequiredDirective {
     });
   }
 
-  //TODO - Have more listeners! blur?
-  //If user clicks el and clicks away, need to fire validation. "touched"
   @HostListener('keyup')
+  @HostListener('blur')
   onKey() {
-    //Run validation of EACH of the validation components.
     this.validationComponents.forEach(this.runValidationComponent.bind(this));
   }
 
@@ -162,7 +152,6 @@ export class PrimeRequiredDirective {
   }
 
   /** Creates a component but does not add it to the view */
-  // private prepareComponent<T>(componentClass): ComponentRef<T> {
   private prepareComponent<T extends ValidationComponent>(componentClass): ComponentRef<T> {
     const factory = this.factoryResolver.resolveComponentFactory(componentClass)
     const component = factory.create(this.view.parentInjector) as ComponentRef<T>
@@ -181,11 +170,9 @@ export class PrimeRequiredDirective {
   /** Checks that primeRequired is attached to the right element and can identify the label. */
   private check(el: ElementRef): boolean {
     this.input = el;
-    // this.input = new ElementRef(el.nativeElement.querySelector('input'));
-    // this.label = document.querySelector(`[for="${this.input.nativeElement.name}"]`);
     this.label = new ElementRef(document.querySelector(`[for="${this.input.nativeElement.name}"]`));
 
-    if (this.input === null || this.label === null) {
+    if (this.input.nativeElement === null || this.label.nativeElement === null) {
       console.error("PrimeRequiredDirective is on an element without required child elements.", { element: el })
       return false;
     }

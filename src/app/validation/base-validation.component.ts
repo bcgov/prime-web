@@ -2,17 +2,23 @@ import { Component, OnInit, ElementRef, Input } from '@angular/core';
 import { ValidationComponent, staticImplements } from './validation-component.interface';
 
 /**
- * By default, will test the input's value against
- * inputRegex. If custom validation is needed just overwrite the function.
+ * An abstract class which all prime validation components should extend from.
+ *
+ * If you only need a simple regex test, just overwrite `regex` prop. Otherwise,
+ * overwrite the validation function in your subclass.
+ *
+ * Subclasses should also copy the staticImplements decorator as such:
+ * `@staticImplements<ValidationComponent>()`
  *
  * Extended classes must have a template showing the validation error, e.g.
- *
+ *```
  *  <div role="alert" aria-live="assertive">
  *    <div class="text-danger">{{fieldName} is required</div>
  *  </div>
+ * ```
  */
 @staticImplements<ValidationComponent>()
-export class BaseValidationComponent {
+export abstract class BaseValidationComponent {
   @Input() public fieldName: string;
   static regex: RegExp;
 
