@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RequiredValidationErrorsComponent } from './required-validation-errors.component';
+import { RequiredValidationErrorsComponent } from './required-validation.component';
 
 describe('RequiredErrorAlertComponent', () => {
   let component: RequiredValidationErrorsComponent;

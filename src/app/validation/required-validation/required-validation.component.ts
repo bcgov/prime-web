@@ -1,12 +1,10 @@
 import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { ValidationComponent, staticImplements } from '../validation-component.interface'
 
-
-
 @Component({
-  selector: 'required-validation-errors',
-  templateUrl: './required-validation-errors.component.html',
-  styleUrls: ['./required-validation-errors.component.scss']
+  selector: 'required-validation',
+  templateUrl: './required-validation.component.html',
+  styleUrls: ['./required-validation.component.scss']
 })
 @staticImplements<ValidationComponent>()
 export class RequiredValidationErrorsComponent implements OnInit {

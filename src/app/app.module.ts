@@ -38,7 +38,7 @@ import { CollegeDataService } from './services/college-data.service';
 import { StickyModule } from 'ng2-sticky-kit';
 import { DummyDataService } from './services/dummy-data.service';
 import { PrimeRequiredDirective } from './validation/prime-required.directive';
-import { RequiredValidationErrorsComponent } from './validation/required-validation-errors/required-validation-errors.component';
+import { RequiredValidationErrorsComponent } from './validation/required-validation/required-validation.component';
 import { PhoneValidationComponent } from './validation/phone-validation/phone-validation.component';
 import { EmailValidationComponent } from './validation/email-validation/email-validation.component';
 

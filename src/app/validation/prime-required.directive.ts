@@ -2,7 +2,7 @@ import { Directive, ElementRef, Input, HostListener, HostBinding, Renderer2, Inj
 
 
 import { ValidationComponent } from './validation-component.interface'
-import { RequiredValidationErrorsComponent } from './required-validation-errors/required-validation-errors.component';
+import { RequiredValidationErrorsComponent } from './required-validation/required-validation.component';
 import { PhoneValidationComponent } from './phone-validation/phone-validation.component';
 import { EmailValidationComponent} from './email-validation/email-validation.component';
 
