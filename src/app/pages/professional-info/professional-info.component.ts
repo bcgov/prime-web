@@ -25,7 +25,7 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
   public collegeList: CollegeList[];
 
   /** Makes all the form inputs on professional info page readonly. */
-  public readonly: boolean = true;
+  public readonly: boolean = false;
 
   constructor(
     private applicantData: ApplicantDataService,
@@ -135,6 +135,11 @@ export class ProfessionalInfoComponent extends BaseComponent implements OnInit {
 
   defaultCollegeList(): CollegeList[] {
     return this.collegeData.defaultCollegeList();
+  }
+
+  getCollegeNameFromID(collegeID: string): string{
+    return this.collegeData.defaultCollegeList()
+    .filter(x => x.id === collegeID)[0].text;
   }
 
   onChange(values: any) {
