@@ -40,7 +40,8 @@
                 name='licenseClass'
                 id='licenseClass'
                 [disabled]="readonly"
-                [(ngModel)]="applicant.licenseClass">
+                [(ngModel)]="applicant.licenseClass"
+                primeRequired="required">
             </div>
           </div>
           <div class="col-sm-4">
@@ -52,7 +53,8 @@
                 name='licenseNumber'
                 id='licenseNumber'
                 [disabled]="readonly"
-                [(ngModel)]="applicant.licenseNumber">
+                [(ngModel)]="applicant.licenseNumber"
+                primeRequired="required">
             </div>
           </div>
           <div class="col-sm-6 col-md-4">
@@ -79,9 +81,12 @@
               name='mspBillingNumber'
               id='mspBillingNumber'
               [disabled]="readonly"
-              [(ngModel)]="applicant.MSPBillingNumber">
+              [(ngModel)]="applicant.MSPBillingNumber"
+              primeRequired="required">
             </div>
           </div>
+          <!-- Necessary for layout when validation errors are displayed -->
+          <div class="clearfix hidden-xs hidden-sm"></div>
           <div class="col-sm-6" #advancedPracticeCertContainer *ngIf="collegeID === Colleges.CRNBC">
             <div class="form-group">
               <label for='advancedPracticeCerts'
