@@ -93,6 +93,8 @@ export class ContactInformationComponent extends BaseComponent implements OnInit
 
   onAlternateFieldChange(){
     this.showAlternatePhoneError = !(this.altPhoneNumber.nativeElement.value || this.altEmail.nativeElement.value)
+    this.applicant.altPhoneNumber = this.altPhoneNumber.nativeElement.value;
+    this.applicant.altEmailAddress = this.altEmail.nativeElement.value;
   }
 
   selectQuestion(question, event) {

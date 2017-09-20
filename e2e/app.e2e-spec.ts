@@ -181,16 +181,9 @@ describe('PRIME All Pages', () => {
     expect(page.find('#havePharmaNetRevoked')).toEqual("Yes");
     expect(page.find('#hasRevocationBeenResolved')).toEqual("Yes");
 
-    // expect(page.find('#captcha')).toEqual("notworking");
-
-    //TODO. Fix below error. Maybe just need to increase time because tests are so long?
-    /** ERROR:
-
-     A Jasmine spec timed out. Resetting the WebDriver Control Flow.
-    ✗ should verify that data entered on earlier pages is correct on review-submit page
-      - Error: Timeout - Async callback was not invoked within timeout specified by jasmine.DEFAULT_TIMEOUT_INTERVAL.
-          at ontimeout (timers.js:365:14)
-          at tryOnTimeout (timers.js:237:5)
+    /**
+     * Currently unable to test CAPTCHA because it isn't compatible with AoT
+     * but the below code should work once we reinstitute it.
      */
     // page.failCaptcha();
     // expect(page.find('captcha .text-danger')).toContain("Incorrect answer")
