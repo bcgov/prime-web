@@ -5,7 +5,7 @@
   <h1>Professional Information</h1>
 
   <div class="row">
-    <div class="col-sm-6 col-md-6" #collegeNameContainer>
+    <div class="col-sm-6 col-md-8" #collegeNameContainer>
       <div class="form-group">
         <label for='collegeName'
           i18n="@@ProfessionalCollegeName">Professional College Name</label>
@@ -69,43 +69,38 @@
               </prime-date>
             </div>
           </div>
+          <div class="col-sm-4"
+          *ngIf="collegeID === Colleges.CPSBC">
+          <div class="form-group">
+            <label for='mspBillingNumber'
+              i18n="@@MSPBillingNumber">MSP Billing Number</label>
+            <input type="text"
+              class="form-control"
+              name='mspBillingNumber'
+              id='mspBillingNumber'
+              [disabled]="readonly"
+              [(ngModel)]="applicant.MSPBillingNumber">
+            </div>
+          </div>
+          <div class="col-sm-6" #advancedPracticeCertContainer *ngIf="collegeID === Colleges.CRNBC">
+            <div class="form-group">
+              <label for='advancedPracticeCerts'
+                i18n="@@AdvancedPracticeCerts">Advanced Practice Certification(s)</label>
+              <select2
+              [disabled]="readonly"
+              [data]="advancedPracticeCertsList"
+              [options]="{multiple: true, placeholder: 'Select a College'}"
+              (valueChanged)="onAdvancedPracticeCertChanged($event.value)"
+              [value]="applicant.advancedPracticeCerts"
+              name='advancedPracticeCerts'
+                id='advancedPracticeCerts'></select2>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-
-    <!-- MSP Billing Number is only shown once, so is outside for-loop. -->
-    <div class="col-sm-4"
-    *ngIf="applicant.goesToCollege(Colleges.CPSBC)">
-    <div class="form-group">
-      <label for='mspBillingNumber'
-        i18n="@@MSPBillingNumber">MSP Billing Number</label>
-      <input type="text"
-        class="form-control"
-        name='mspBillingNumber'
-        id='mspBillingNumber'
-        [disabled]="readonly"
-        [(ngModel)]="applicant.MSPBillingNumber">
       </div>
     </div>
   </ng-container>
 
-  <div class="row"
-    *ngIf="applicant.goesToCollege(Colleges.CRNBC)">
-    <div class="col-sm-4" #advancedPracticeCertContainer>
-      <div class="form-group">
-        <label for='advancedPracticeCerts'
-          i18n="@@AdvancedPracticeCerts">Advanced Practice Certification(s)</label>
-        <select2
-        [disabled]="readonly"
-        [data]="advancedPracticeCertsList"
-        [options]="{multiple: true, placeholder: 'Select a College'}"
-        (valueChanged)="onAdvancedPracticeCertChanged($event.value)"
-        [value]="applicant.advancedPracticeCerts"
-        name='advancedPracticeCerts'
-          id='advancedPracticeCerts'></select2>
-      </div>
-    </div>
-  </div>
 
   <div class="row form-group"
     *ngIf="applicant.goesToCollege(Colleges.None)">
