@@ -22,6 +22,12 @@ export abstract class BaseValidationComponent {
   @Input() public fieldName: string;
   static regex: RegExp;
 
+  /**
+   * Validates the input's value based on the classes regex. Does not
+   * require the field be filled out, but if it is must pass regex.
+   *
+   * @param input An ElementRef, or mocked class with input.nativeElement.value defined.
+   */
   public static validate(input: ElementRef): boolean {
     const inputVal = input.nativeElement.value
     if (inputVal == null || inputVal.length < 1) {
