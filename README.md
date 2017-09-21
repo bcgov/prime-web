@@ -1,139 +1,153 @@
 # prime-web
 PharmaNet Revisions for Information Management Enhancements
 
-Prime-web uses angular-scaffold. The default angular-scaffold readme can be found below.
+Prime-web used [angular-scaffold](https://github.com/bcgov/angular-scaffold) as it's starting off point.  The original angular-scaffold readme can be found in `angular-scaffold-readme.md`.
 
-# 🚀 angular-scaffold
+## Setup
 
-This project provides a baseline code base to help you kick start an Angular project that is based on BC Goverment themed Bootstrap styles, footers and headers.
+### Prerequisites
 
+1. yarn `npm i -g yarn`
+2. angular-cli `npm i -g @angular/cli`
+3. Node 6.9.x or greater
 
-This application has a complete development environment set up, including build, test, deploy, routing, simple components, service, and directives as examples and templates.
+Verify angular-cli is installed by running `ng -v`. Since `ng -v` is dependant upon the folder it's execued in (i.e. it looks in `node_modules/`), it's fine if some of the fields show "error." 
 
-The goal is to help you start a project fast, enable you to focus on building actual business logics for your project.
+### Installation
 
-[Check out a running demo of just scaffold out of the box](https://angular-scaffold-demo.pathfinder.gov.bc.ca)
+```bash
+git clone https://github.com/bcgov/prime-web
+cd prime-web
+yarn
+npm start # Runs a local dev server
+```
 
-# Development Prerequisites
+There currently is a bug in the latest version of Yarn (1.0.1) which will lead to multiple "unmet peer dependency" warnings when installing. These errors can safely be ignored, or you can force downgrade to 0.27.5 ([Issue 1](https://github.com/angular/angular-cli/issues/7658), [Issue 2](https://github.com/yarnpkg/yarn/issues/4433))
 
-## Node and NPM 
-
-Node 6.9.x or greater must be installed (an angular-cli requirement).
-
-## Install angular/cli
-
-**Note, use `angular/cli`, do not use `angular/angular-cli`**
-
-`npm i -g @angular/cli`
-
-`ng` is the CLI itself 
-
-    Verify the installation
-
-    `npm list -g @angular/cli --depth=0`
-    `ng -v`
-
-### Install [yarn](https://yarnpkg.com/lang/en/docs/install/#alternatives-tab).
-
-`npm i -g yarn`
-
-## Fork, Build and Deployment
-
-1. After installing Node and Yarn, you can fork or straight download a copy of this application to start your own app.
-1. First download all the dependencies with `yarn install`
-1. `npm start` to start the a webpack server to run the application on port 4300
-
-    Go to http://localhost:4300 to verify that the application is running
-
-    To change the default port, open `.angular-cli.json`, change the value on default.serve.port
-1. Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build, like so: `ng serve --prod` to run in production mode.
-1. `npm run lint` to check styles
+After install, it's recommended you run tests below to ensure everything is working.
 
 
-## Code scaffolding
+## Testing
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
+This app has both unit tests and e2e tests written. At the time of this writing, all tests are passing.
 
-### Example: Generate a customer component
+```bash
+npm run test # Runs `ng test`
+npm run e2e # Runs `ng e2e --environment prod`, necessary for e2e tests.
+```
 
-`ng g c customer -d`
+You can run the `ng` commands above directly if you prefer. However, it's necessary you keep the `--environment prod` on the e2e command or they'll fail because of dummy data in the development environment.
 
-### Example: Generate a directive: search-bpx
-`ng g d search-box -d`
+More information on tests can be found in the [Angular Documentation](https://angular.io/guide/testing).
 
-### Example: Generate a service: general-data
+### e2e testing
 
-`ng g s general-data -d`
+The e2e files are in the `/e2e/` folder
 
-Angular will give out a warning line after this command, `
-WARNING Service is generated but not provided, it must be provided to be used
-`
-After generating a service, we must go to its owning module and add the service to the `providers` array.
+The e2e tests run through the entirety of the web app, filling in data on fields and then navigating to the review and submit page to verify that the data is correct.  In the environment files there's a `useDummyData` flag, which if true will lead to the tests failing as the e2e tests assume blank inputs.
 
-### Example: Generate a service & include it in a module automatically
-
-`ng g s general-data2 -m app.module`
-
-### Example: Generate a class, an interface and emum
-
-`ng g cl models/customer`
-
-`ng g i models/person`
-
-`ng g enum models/gender`
-
-### Example: Generate a pipe
-
-`ng g pipe shared/init-caps`
-
-## Generate a module
-
-Create a login directory and generate a login module in that directory
-
-`ng g module login/login.module`
-
-## Add/Generate Routing Features
-
-Generate a module called admin and add routing feature to it.
-
-`ng g module admin --routing`
+The classes for the tests are written in `/e2e/app.po.ts` and and well documented via jsDocs.
 
 
-## Accessibility Guidance
+Currently the e2e test runs through every screen of the app, filling in data on the inputs, then 
 
-For guidance on how to make your app accessible, see our `/ACCESSIBILITY.md` docs for more info.
+## Application Details
 
-## Running Tests
+### Folder Structure
 
-### Unit tests
-  
-  Set up via Karma, Jasmin
-1. `ng test` by default to watch file changes
-
-### End-to-end tests
-    Set up with Protractor
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+The base folder structure is largely defined by [angular-scaffold](https://github.com/bcgov/angular-scaffold), however that does not extend to files in the `src/` folder. This section seeks to explain the `src/` folder structure that's unique to prime-web.
 
 
-## Getting Help
+```bash
+prime-web/src/
+├── assets/  # from angular-scaffold
+├── environments/ # from angular-scaffold
+│   └── environment.ts # used by default
+│   └── environment.prod.ts # used with --prod or --environment prod
+└── app/
+    ├── core/ # re-usable components , e.g. date selector or toggle.
+    ├── models/ # data models, interfaces, enums.
+    └── pages/ # one component for each page, e.g. contact-info, site-access
+    └── services/ # angular services
+    └── validation/ # directives for frontend validation, discussed below
+    └── app-routing.module.ts # routes are defined here
+    └── app.component.* # contains app-wide configs and header/footer.
+    └── app.module.ts
+    └── variables.scss # app wide scss variables, copied from MSP.
+```
 
-1. To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-1. `ng doc component` to look up documentation for features
-1. `ng serve --help` to look up doc for `ng serve` command
+### Dummy Data
+
+When developing, sometimes having Dummy Data pre-populated into the app can be convenient.  You can toggle this via the `useDummyData` environment flag, i.e. by either editting environment.ts if you're in dev, or environment.prod.ts if you're in prod. You can toggle the variable freely, but know that the e2e tests fail when dummy data is used.
+
+All dummy data is defined in `src/app/services/dummy-data.service.ts`.
 
 
-## Change aspects of the application
+### Validation
 
-### Change style dialect
+#### Using Validation
 
-`ng set default.styleExt css`
+Currently the app only handles front-end validation. This section is only about front-end validation.
 
-## Regnerate a brand new project with routing and scss options
+In the `src/app/validation` we define the primeDirective directive that can be applied directly to the input element. You can pass in validation options to the directive. If no options are provided, it defaults to "required."
+ 
+```html
+<!-- These two are equivalent. "required" is default. -->
+ <input type="text"
+  class="form-control"
+  name='lastName'
+  id='lastName'
+  primeRequired
+  [(ngModel)]="applicant.lastName">
 
-`ng new my-app --routing --style scss`
+<input type="text"
+  class="form-control"
+  name='lastName'
+  id='lastName'
+  primeRequired="required"
+  [(ngModel)]="applicant.lastName">
+```
 
-# Build and Deployment
+The other options you can currently pass are "phone" and "email."  They can be provided as a CSV (order does not matter). 
 
-For dev, test, and production builds on OpenShift/Jenkins see `openshift/README.md` for detailed instructions
-on how to setup in an OpenShift environment using nginx.
+```html
+
+<input type="text"
+  class="form-control"
+  name='phoneNumber'
+  id='phoneNumber'
+  primeRequired="phone,required"
+  [(ngModel)]="applicant.phoneNumber">
+
+  <!-- These two are NOT equivalent. "required" is not included, so field can
+  can be blank. But IF it's non-blank, must pass phone validation.-->
+
+  <input type="text"
+  class="form-control"
+  name='altphoneNumber'
+  id='altphoneNumber'
+  #altPhoneNumber
+  primeRequired="phone"
+  [ngModel]="applicant.altPhoneNumber"
+  (ngModelChange)="onAlternateFieldChange()">
+```
+
+#### Understanding & Extending Validation
+
+The primeRequired directive looks at the options, and then loads a different class for each validation option.  That process is defined in `/src/app/validation/prime-required.directive.ts::loadValidationComponents()`. For example, `/src/app/validation/phone-validation/` has all the logic for validating phone numbers. Each validation class is responsible for both the validation logic, and the error template. 
+
+Validation classes must extend from `BaseValidationComponent`. If your validation can be handled with a single regex, then all you need to do is extend `BaseValidationComponent` and overwrite the `regex` value.  If you need more, simply re-define the `validate()` method.  For an example of regex validation look at `PhoneValidationComponent`, for an example of overwriting `validate()` look at `RequiredValidationErrorsComponent`.
+
+The validation components only gets the input element itself, and due to the static methods cannot retain state. It can't look between multiple elements, or anywhere else outside the input it's validating. If you need more complex validation, try a different approach. 
+
+## Pending Task List
+
+This project has temporarily been put on hold.  There are a few tasks that have been put on hold, and should be resolved when the project resumes.
+
+#### Reintegrate CAPTCHA
+
+This app should use the CAPTCHA widget, as found in `review-submit.html:388`. However, due to an issue with the widget failing `ng build --prod` it has temporarily been removed.
+
+[Details of the issue can be found here.](https://github.com/bcgov/MyGovBC-CAPTCHA-Widget/issues/3)
+
+Once the issue has been resolved, and the CAPTCHA widget updated, the plugin should be reintegrated. Verify that `ng build --prod`, and `ng build --aot=true` work fine with CAPTCHA integrated.
