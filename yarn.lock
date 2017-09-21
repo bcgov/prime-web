@@ -3134,10 +3134,6 @@ mygovbc-bootstrap-theme@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/mygovbc-bootstrap-theme/-/mygovbc-bootstrap-theme-0.4.0.tgz#373121c0fd4690be5c51455507f69c019cb3d45b"
 
-"mygovbc-captcha-widget@git+https://github.com/bcgov/MyGovBC-CAPTCHA-Widget.git#v1.0.0-beta.2":
-  version "1.0.0"
-  resolved "git+https://github.com/bcgov/MyGovBC-CAPTCHA-Widget.git#2f5f836840a85bb5c6e1671e47c6eb8d97eedcd1"
-
 nan@^2.3.0, nan@^2.3.2:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.6.2.tgz#e4ff34e6c95fdfb5aecc08de6596f43605a7db45"
