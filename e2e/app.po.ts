@@ -1,5 +1,24 @@
+/**
+ * This file contains all the classes for running e2e tests.  The classes are
+ * broken up by page (i.e. one for Professional Info page, one for Contact Info,
+ * etc.). The inheiritance structure is very straightforward, with each page
+ * class inheiriting from it's immediate predecessor creating a linear
+ * inheiritance structure. This is important so each class is capable of
+ * completing the previous pages, which will be necessary once validation is
+ * implemented.
+ */
+
+
 import { browser, element, by } from 'protractor';
 
+
+/**
+ * Base e2e test pages all other page classes should inheirit from.
+ * Responsibilities:
+ * - navigating through pages
+ * - accepting and closing info consent modal (but nothing more)
+ * - any future behaviour that will be necessary on all pages.
+ */
 export class BasePrimePage {
   private continueElement;
   private backElement;
@@ -9,11 +28,16 @@ export class BasePrimePage {
     this.backElement = element(by.css('prime-form-footer .btn-default'));
   }
 
-  /**
-   * Navigates to the component's related page. Defaults to the first page.
-   */
+  /** Navigates to the component's related page. Defaults to the first page. */
   navigateTo(): void {
     browser.get('/');
+  }
+
+  /** Readies navigation to future pages by closing the info consent modal. */
+  ready(){
+    browser.get('/');
+    this.clickInfoConsentCheckbox();
+    this.clickModalSubmit();
   }
 
   canContinue() {
@@ -46,11 +70,20 @@ export class BasePrimePage {
     return element(by.css('prime-consent-modal .modal-footer .btn')).click();
   }
 
+  /**
+   * Pauses browser execution
+   * @param ms Time to sleep in milliseconds
+   */
   sleep(ms: number){
     browser.sleep(ms);
   }
 }
 
+/**
+ *
+ * Responsibilities:
+ * - Contains further tests for info consent modal
+ */
 export class ProfessionalInfoPage extends BasePrimePage {
 
   getParagraphText() {
@@ -66,7 +99,11 @@ export class ProfessionalInfoPage extends BasePrimePage {
   }
 }
 
-export class ContactInfoPage extends BasePrimePage {
+/**
+ * Fills out the Contact Info page, including contact info, address, and
+ * security questions. All the properties in this class match the form fields
+ */
+export class ContactInfoPage extends ProfessionalInfoPage {
   firstName: string = "Bill";
   middleName: string = "Henry";
   lastName: string = "Gates";
@@ -87,6 +124,7 @@ export class ContactInfoPage extends BasePrimePage {
   securityAnswer2: string = "Joe";
   securityAnswer3: string = "Nottinghamfordshire";
 
+  /** Navigates to contact-info page without completing previous pages */
   navigateTo() {
     browser.get('/');
     this.clickInfoConsentCheckbox();
@@ -140,11 +178,14 @@ export class ContactInfoPage extends BasePrimePage {
   }
 }
 
-/**
- * Intentionally extends from ContactInfo page, and UserAcceptance should extend from this one.
- * The reason is so that the final ReviewSubmit component is capable of filling out every page as it navigates through them.
- */
+ /**
+  * Fills out the Self Declaration page.
+  */
 export class SelfDeclarationPage extends ContactInfoPage {
+
+  declarationText: string = "Lorem ipsum dolor sit, amet consectetur adipisicing elit. In quas inventore consequuntur tempore facere exercitationem numquam necessitatibus nostrum eaque provident odio quasi, libero adipisci nihil magnam harum excepturi eos voluptatibus!"
+
+  /** Navigates to self-declaration page without completing previous pages */
   navigateTo() {
     browser.get('/');
     this.clickInfoConsentCheckbox();
@@ -154,6 +195,7 @@ export class SelfDeclarationPage extends ContactInfoPage {
     this.continue(); //self-declaration
   }
 
+  /** Selects yes for all declarations and fills text. */
   fillDeclarations(){
     this.toggleAndFill('haveBeenSubjectOfOrderOrConviction')
     this.toggleAndFill('haveBeenSuspendedOrCancelled')
@@ -167,30 +209,42 @@ export class SelfDeclarationPage extends ContactInfoPage {
    * This function is very tightly coupled to the HTML structure of self-declaration.component.html
    * The provided toggleID must:
    *  - Belong to a sibling element immediately PRECEEDING prime-toggle
-   *  - When suffixed with "Details", match the ID of a text input.
+   *  - When suffixed with "Details", match the ID of the displayed text input.
+   *
    * @param toggleID must match ID of sibling to prime-toggle, and ${toggleID}Details must match ID of textarea.
    */
   private toggleAndFill(toggleID: string){
     element.all(by.css(`#${toggleID} + prime-toggle .btn`)).first().click();
-    element(by.css(`#${toggleID}Details`)).sendKeys("Lorem ipsum dolor sit, amet consectetur adipisicing elit. In quas inventore consequuntur tempore facere exercitationem numquam necessitatibus nostrum eaque provident odio quasi, libero adipisci nihil magnam harum excepturi eos voluptatibus!")
+    element(by.css(`#${toggleID}Details`)).sendKeys(this.declarationText)
   }
 
 }
 
 /**
- * Also responsible for User Acceptance page for now, since that page is so minor.
+ * AllPrimePages is capable of running through the whole app. Since it inheirits
+ * from previous pages it can fill out data and then verify the results on the
+ * review submit page.
+ *
+ * AllPrimePages Responsibilities:
+ * - The Review Submit page, since it contains all previous pages.
+ * - The User Acceptance page, since it's so minor.
  */
-// export class ReviewSubmit extends SelfDeclarationPage {
 export class AllPrimePages extends SelfDeclarationPage {
 
+ /** Navigates to review-submit page without completing previous pages */
   navigateTo() {
     browser.get('/');
     this.clickInfoConsentCheckbox();
     this.clickModalSubmit();
+    this.continue(); //site-access
+    this.continue(); //contact-info
+    this.continue(); //self-declaration
+    this.continue(); //user-acceptance
+    this.continue(); //review-submit
   }
 
-  /** Navigates to the end while filling out all fields. */
-  navigateToEndAndFill(){
+  /** Navigates to review-submit while completing all previous pages */
+  navigateToAndFill(){
     this.continue(); //site-access
     this.continue(); //contact-info
     this.fillAllContactInfo();

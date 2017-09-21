@@ -4,15 +4,9 @@ import { BasePrimePage } from './app.po';
 import { SelfDeclarationPage } from './app.po';
 import { AllPrimePages } from './app.po';
 
-/**
- * TODO - Write more actual tests. I've writen filling out each input already,
- * but we need to verify and validate results.
- *
- * TODO - Need to find a way to ensure environment.useDummyData = false
- * Maybe force production environment?
- */
-
-
+ /**
+  * Tests the modal behaviour on the the initial screen.
+  */
 describe('PRIME Consent Modal Tests', () => {
   let page: ProfessionalInfoPage;
 
@@ -43,47 +37,14 @@ describe('PRIME Consent Modal Tests', () => {
     expect(page.checkModalDisplayed()).toBeFalsy();
   });
 
+  it('should not be able to close modal by clicking modal backgruound', () => {
+    // page.clickInfoConsentCheckbox();
+    page.clickModalSubmit();
+    expect(page.checkModalDisplayed()).toBeTruthy();
+    //How simulate a click on background?
+  });
+
 });
-
-
-/**
- * Commented out until we write specific tests for this page.
- * Currently it's functionality is duplicated in AllPrimePages
- */
-// describe('PRIME Base Navigation Tests', () => {
-//   let page: BasePrimePage;
-
-//   beforeEach(() => {
-
-//     page = new BasePrimePage();
-//     page.navigateTo();
-//     //Always clear the modal for these tests.
-//     page.clickInfoConsentCheckbox();
-//     page.clickModalSubmit();
-//   });
-
-//   /**
-//    * Note - This function assumes the user can just Continue on each page,
-//    * i.e. there's no form validation required before continuing.
-//    *
-//    * Once validation is required, this function will require changes. We'll have
-//    * to fill out fields and pass validation before advancing.
-//    */
-//   it('should navigate through each page to the end', () => {
-//     expect(page.url).toContain('/professional-info');
-//     page.continue();
-//     expect(page.url).toContain('/site-access');
-//     page.continue();
-//     expect(page.url).toContain('/contact-info');
-//     page.continue();
-//     expect(page.url).toContain('/self-declaration');
-//     page.continue();
-//     expect(page.url).toContain('/user-acceptance');
-//     page.continue();
-//     expect(page.url).toContain('/review-submit');
-//   });
-
-// });
 
 /**
  * Commented out until we write specific tests for this page.
@@ -134,31 +95,26 @@ describe('PRIME All Pages', () => {
 
   beforeEach(() => {
     page = new AllPrimePages();
-    page.navigateTo();
+    page.ready();
   });
 
 
-  // it('should have urls update as it fills out all pages and navigates to the end', () => {
-  //   expect(page.url).toContain('/professional-info');
-  //   page.continue();
-  //   expect(page.url).toContain('/site-access');
-  //   page.continue();
-  //   expect(page.url).toContain('/contact-info');
-  //   page.fillAllContactInfo();
-  //   page.continue();
-  //   expect(page.url).toContain('/self-declaration');
-  //   page.fillDeclarations();
-  //   page.continue();
-  //   expect(page.url).toContain('/user-acceptance');
-  //   page.checkUserAcceptanceCheckbox();
-  //   page.continue();
-  //   expect(page.url).toContain('/review-submit');
-  //   page.checkAuthorizeCheckbox();
-  //   // page.sleep(5000);
-  // });
+  it('should have urls update as it fills out all pages and navigates to the end', () => {
+    expect(page.url).toContain('/professional-info');
+    page.continue();
+    expect(page.url).toContain('/site-access');
+    page.continue();
+    expect(page.url).toContain('/contact-info');
+    page.continue();
+    expect(page.url).toContain('/self-declaration');
+    page.continue();
+    expect(page.url).toContain('/user-acceptance');
+    page.continue();
+    expect(page.url).toContain('/review-submit');
+  });
 
   it('should verify that data entered on earlier pages is correct on review-submit page', () => {
-    page.navigateToEndAndFill();
+    page.navigateToAndFill();
 
     expect(page.find('#name')).toEqual(`${page.firstName} ${page.middleName} ${page.lastName}`);
     expect(page.find('#phone')).toEqual(page.phoneNumber);
@@ -187,9 +143,6 @@ describe('PRIME All Pages', () => {
      */
     // page.failCaptcha();
     // expect(page.find('captcha .text-danger')).toContain("Incorrect answer")
-
-
-
 
     page.sleep(5000);
   });
