@@ -8,7 +8,7 @@ import { BaseValidationComponent } from '../base-validation.component';
 })
 @staticImplements<ValidationComponent>()
 export class RequiredValidationErrorsComponent extends BaseValidationComponent {
-  @Input() public fieldName: string = 'TODO!'; //should be overwritten at runtime, but write unit tests to check!
+  @Input() public fieldName: string = 'DEFAULT_FIELD_NAME'; //should be overwritten at runtime, but write unit tests to check!
 
   public static validate(el: ElementRef): boolean {
     return el.nativeElement.value.length > 0;
