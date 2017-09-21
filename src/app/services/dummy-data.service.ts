@@ -2,11 +2,25 @@ import { Injectable } from '@angular/core';
 import { Applicant } from '../models/applicant.model';
 import { NamedCollection } from '../models/named-collections.interface';
 
+/**
+ * Responsible for generating dummy data, useful for development. Used in
+ * conjunction with `environment.useDummyData` flag. Not responsible for
+ * *injecting* dummy data, must be called from components.
+ *
+ * This class is not necessary for production builds. Ideally, we should find a
+ * way to remove it entirely from prod builds (i.e. from app.module.ts too).
+ */
 @Injectable()
 export class DummyDataService {
 
   constructor() { }
 
+  /**
+   * Generates a JSON blob that can be used to populate an Applicant instance.
+   *
+   * Need to update the data? Run through the app and ensure Applicant has the
+   * data you want, then just JSON.stringify().
+   */
   generateApplicantDummyData(){
     return {
       "licenseExpiry":{
@@ -284,6 +298,11 @@ export class DummyDataService {
     }
   }
 
+  /**
+   * Fill out an Applicant with data as if a user had just gone through an
+   * application.
+   * @param applicant The applicant to apply dummy data to.
+   */
   useApplicantDummyData(applicant: Applicant) : Applicant  {
     const data = this.generateApplicantDummyData();
 
