@@ -1,7 +1,10 @@
-import { Directive, ElementRef, Input, HostListener, HostBinding, Renderer2, Inject, ViewContainerRef, ChangeDetectorRef, ComponentRef, ComponentFactoryResolver } from '@angular/core';
+import {
+  Directive, ElementRef, Input, HostListener, HostBinding, Renderer2, Inject,
+  ViewContainerRef, ChangeDetectorRef, ComponentRef, ComponentFactoryResolver, AfterViewInit
+} from '@angular/core';
 
 
-import { ValidationComponent } from './validation-component.interface'
+import { ValidationComponent } from './validation-component.interface';
 import { RequiredValidationErrorsComponent } from './required-validation/required-validation.component';
 import { PhoneValidationComponent } from './phone-validation/phone-validation.component';
 import { EmailValidationComponent } from './email-validation/email-validation.component';
@@ -25,14 +28,14 @@ import { EmailValidationComponent } from './email-validation/email-validation.co
 @Directive({
   selector: '[primeRequired]'
 })
-export class PrimeRequiredDirective {
+export class PrimeRequiredDirective implements AfterViewInit {
   private el: ElementRef;
   private input: ElementRef;
   private label: ElementRef;
   private view: ViewContainerRef;
   private factoryResolver: ComponentFactoryResolver;
   /** The CSS class to add to the element with the directive, i.e. form-group */
-  private ERROR_CLASS: string = "has-error";
+  private ERROR_CLASS = 'has-error';
   /** A list of all active validation components. Components are created/destroyed when validation fails/passes. */
   private activeComponents = {};
 
@@ -53,9 +56,11 @@ export class PrimeRequiredDirective {
 
   ngAfterViewInit() {
     if (!this.check(this.input)) {
-      throw new Error("Unable to initialize PrimeRequiredDirective. Directive is unable to locate the input and labels. Make sure you have <label for='NAME'> setup correctly for the input with primeRequired.");
+      throw new Error(`Unable to initialize PrimeRequiredDirective. Directive \
+      is unable to locate the input and labels. Make sure you have <label \
+      for=\'NAME\'> setup correctly for the input with primeRequired.`);
     }
-    this.validationOptions = this.validationOptions || "required";
+    this.validationOptions = this.validationOptions || 'required';
 
     this.loadValidationComponents();
 
@@ -66,15 +71,15 @@ export class PrimeRequiredDirective {
     this.validationOptions.replace(' ', '').split(',').forEach(opt => {
 
       switch (opt.toLowerCase()) {
-        case "required":
+        case 'required':
           this.validationComponents.push(RequiredValidationErrorsComponent);
           break;
 
-        case "phone":
+        case 'phone':
           this.validationComponents.push(PhoneValidationComponent);
           break;
 
-        case "email":
+        case 'email':
           this.validationComponents.push(EmailValidationComponent);
           break;
 
@@ -102,7 +107,7 @@ export class PrimeRequiredDirective {
 
   setInvalid(validationComponent) {
     this.renderer.addClass(this.formGroupElement, this.ERROR_CLASS);
-    let comp = this.addComponent(validationComponent);
+    const comp = this.addComponent(validationComponent);
   }
 
   setValid(validationComponent) {
@@ -133,12 +138,12 @@ export class PrimeRequiredDirective {
 
   /** Returns the div.form-group parent, which _should_ be the direct parent. */
   private get formGroupElement(): ElementRef {
-    let parent = this.input.nativeElement.parentElement;
+    const parent = this.input.nativeElement.parentElement;
     if (parent.classList.contains('form-group')) {
-      return parent
+      return parent;
     }
     //Extend this function as required to find .form-group, but keep DOM operations at a minimum.
-    throw new Error("PrimeRequiredDirective unable to find the parent .form-group element");
+    throw new Error('PrimeRequiredDirective unable to find the parent .form-group element');
   }
 
   /** Creates a component and adds it to the view. */
@@ -155,8 +160,8 @@ export class PrimeRequiredDirective {
 
   /** Creates a component but does not add it to the view */
   private prepareComponent<T extends ValidationComponent>(componentClass): ComponentRef<T> {
-    const factory = this.factoryResolver.resolveComponentFactory(componentClass)
-    const component = factory.create(this.view.parentInjector) as ComponentRef<T>
+    const factory = this.factoryResolver.resolveComponentFactory(componentClass);
+    const component = factory.create(this.view.parentInjector) as ComponentRef<T>;
     // (component.instance as ValidationComponent).fieldName = this.labelText;
     (component.instance as ValidationComponent).fieldName = this.labelText;
 
@@ -165,7 +170,7 @@ export class PrimeRequiredDirective {
 
   /** Inserts an already created component into the view (c.f. prepareComponent()) */
   private insertComponent(component: ComponentRef<{}>) {
-    this.view.insert(component.hostView)
+    this.view.insert(component.hostView);
   }
 
 
@@ -175,7 +180,10 @@ export class PrimeRequiredDirective {
     this.label = new ElementRef(document.querySelector(`[for="${this.input.nativeElement.name}"]`));
 
     if (this.input.nativeElement === null || this.label.nativeElement === null) {
-      console.error("PrimeRequiredDirective is on an element without required child elements.", { element: el, name: this.input.nativeElement.name })
+      console.error('PrimeRequiredDirective cannot find require label.', {
+         element: el,
+         name: this.input.nativeElement.name
+      });
       return false;
     }
     return true;

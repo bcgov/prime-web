@@ -1,14 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { ReviewSubmitComponent } from './review-submit.component';
-import { CaptchaComponent } from 'mygovbc-captcha-widget/src/captcha.component';
+// import { CaptchaComponent } from 'mygovbc-captcha-widget/src/captcha.component';
 // let CaptchaComponent = require("mygovbc-captcha-widget/component").CaptchaComponent;
-import { PrimeFormFooterComponent } from '../../core/form-footer/form-footer.component'
+import { PrimeFormFooterComponent } from '../../core/form-footer/form-footer.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ApplicantDataService } from '../../services/applicant-data.service';
 import { CollegeDataService } from '../../services/college-data.service';
 
-import {Http, Headers, RequestOptions, ConnectionBackend, HttpModule} from "@angular/http"
+import {Http, Headers, RequestOptions, ConnectionBackend, HttpModule} from '@angular/http';
 
 
 describe('ReviewSubmitComponent', () => {
@@ -18,7 +18,7 @@ describe('ReviewSubmitComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule, RouterTestingModule, HttpModule],
-      declarations: [ReviewSubmitComponent, CaptchaComponent, PrimeFormFooterComponent],
+      declarations: [ReviewSubmitComponent, PrimeFormFooterComponent],
       providers: [ApplicantDataService, CollegeDataService]
     })
       .compileComponents();
@@ -52,10 +52,10 @@ describe('ReviewSubmitComponent', () => {
   it('should convert SimpleDate to text', () => {
     expect(component.convertSimpleDateToText({
       day: 1, month: 1, year: 2012
-    })).toEqual("January 1st, 2012")
+    })).toEqual('January 1st, 2012');
     expect(component.convertSimpleDateToText({
       day: 2, month: 8, year: 2018
-    })).toEqual("August 2nd, 2018")
+    })).toEqual('August 2nd, 2018');
 
   });
 

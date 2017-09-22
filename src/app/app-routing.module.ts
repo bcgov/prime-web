@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProfessionalInfoComponent } from './pages/professional-info/professional-info.component';
 import { ConsentModalComponent } from './core/consent-modal/consent-modal.component';
 
-import { ContactInformationComponent } from './pages/contact-information/contact-information.component'
+import { ContactInformationComponent } from './pages/contact-information/contact-information.component';
 import { ReviewSubmitComponent } from './pages/review-submit/review-submit.component';
 import { SelfDeclarationComponent } from './pages/self-declaration/self-declaration.component';
 import { UserAcceptanceComponent } from './pages/user-acceptance/user-acceptance.component';

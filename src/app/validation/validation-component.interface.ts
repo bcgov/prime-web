@@ -10,5 +10,5 @@ export interface ValidationComponent {
  * Necessary to use with ValidationComponent, as `validate` is static.
  */
 export function staticImplements<T>() {
-  return (constructor: T) => {}
+  return (constructor: T) => {};
 }

@@ -17,7 +17,7 @@ export class ProgressBarComponent extends BaseComponent implements OnInit {
     {displayName: 'Self Declaration', routerLink: '/self-declaration'},
     {displayName: 'User Acceptance', routerLink: '/user-acceptance'},
     {displayName: 'Review & Submit ', routerLink: '/review-submit'},
-  ]
+  ];
 
   constructor(public router: Router) {
     super();

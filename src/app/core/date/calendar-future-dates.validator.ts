@@ -6,11 +6,11 @@ import * as moment from 'moment';
   selector: '[validateCalendarFutureDates]',
   providers: [
     {
-      provide: NG_VALIDATORS, useExisting: forwardRef(() => CalendarFutureDates), multi: true
+      provide: NG_VALIDATORS, useExisting: forwardRef(() => CalendarFutureDatesDirective), multi: true
     }
   ]
 })
-export class CalendarFutureDates {
+export class CalendarFutureDatesDirective {
 
   /** One of "future", "past". Determines what validation errors are generated.*/
   @Input() validateCalendarFutureDates: string;
@@ -44,11 +44,11 @@ export class CalendarFutureDates {
      * Validate current date as if it's a future date, and reject it when only
      * accepting past dates.  We accomplish this by comparing diff against 1.
      */
-    if (diff < -1 && this.validateCalendarFutureDates === "future") {
-      return { dateNotInPast: true, dateNotInFuture: false }
+    if (diff < -1 && this.validateCalendarFutureDates === 'future') {
+      return { dateNotInPast: true, dateNotInFuture: false };
     }
-    else if (diff >= -1 && this.validateCalendarFutureDates === "past") {
-      return { dateNotInPast: false, dateNotInFuture: true }
+    else if (diff >= -1 && this.validateCalendarFutureDates === 'past') {
+      return { dateNotInPast: false, dateNotInFuture: true };
     }
 
     return null;

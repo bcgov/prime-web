@@ -39,10 +39,10 @@ export class SiteAccessComponent extends BaseComponent implements OnInit {
         class: 'nowrap',
       },
       vendor: {
-        title: "Vendor"
+        title: 'Vendor'
       },
       siteType: {
-        title: "Site Type"
+        title: 'Site Type'
       }
     },
     actions: {

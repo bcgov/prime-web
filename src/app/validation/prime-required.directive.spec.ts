@@ -33,7 +33,11 @@
 //   beforeEach(async(() => {
 //     TestBed.configureTestingModule({
 //       imports: [FormsModule, Select2Module, RouterTestingModule],
-//       declarations: [ContactInformationComponent, PrimeDateComponent, AddressComponent, PrimeFormFooterComponent, CalendarFieldFormatterDirective, CalendarFutureDates],
+//      declarations: [
+//        ContactInformationComponent, PrimeDateComponent, AddressComponent,
+//        PrimeFormFooterComponent, CalendarFieldFormatterDirective,
+//        CalendarFutureDates
+//      ],
 //       providers: [ApplicantDataService],
 //     }).compileComponents();
 //   }));

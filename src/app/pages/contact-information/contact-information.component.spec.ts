@@ -8,7 +8,7 @@ import { Select2Module } from 'ng2-select2';
 import { PrimeFormFooterComponent } from '../../core/form-footer/form-footer.component';
 import { CalendarFieldFormatterDirective } from '../../core/date/calendar-field-formatter.directive';
 import { RouterTestingModule } from '@angular/router/testing';
-import { CalendarFutureDates } from '../../core/date/calendar-future-dates.validator';
+import { CalendarFutureDatesDirective } from '../../core/date/calendar-future-dates.validator';
 
 describe('ContactInformationComponent', () => {
   let component: ContactInformationComponent;
@@ -17,7 +17,11 @@ describe('ContactInformationComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule, Select2Module, RouterTestingModule],
-      declarations: [ContactInformationComponent, PrimeDateComponent, AddressComponent, PrimeFormFooterComponent, CalendarFieldFormatterDirective, CalendarFutureDates],
+      declarations: [
+        ContactInformationComponent, PrimeDateComponent, AddressComponent,
+        PrimeFormFooterComponent, CalendarFieldFormatterDirective,
+        CalendarFutureDatesDirective
+      ],
       providers: [ApplicantDataService],
     })
       .compileComponents();

@@ -19,8 +19,8 @@ import { ValidationComponent, staticImplements } from './validation-component.in
  */
 @staticImplements<ValidationComponent>()
 export abstract class BaseValidationComponent {
-  @Input() public fieldName: string;
   static regex: RegExp;
+  @Input() public fieldName: string;
 
   /**
    * Validates the input's value based on the classes regex. Does not
@@ -29,7 +29,7 @@ export abstract class BaseValidationComponent {
    * @param input An ElementRef, or mocked class with input.nativeElement.value defined.
    */
   public static validate(input: ElementRef): boolean {
-    const inputVal = input.nativeElement.value
+    const inputVal = input.nativeElement.value;
     if (inputVal == null || inputVal.length < 1) {
       return true;
     }

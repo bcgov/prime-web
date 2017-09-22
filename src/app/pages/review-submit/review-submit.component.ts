@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
 })
 export class ReviewSubmitComponent extends BaseComponent implements OnInit {
 
-  private hasValidToken: boolean = false;
+  private hasValidToken = false;
   public applicant: Applicant;
   public Colleges: typeof Colleges = Colleges;
 
@@ -71,7 +71,7 @@ export class ReviewSubmitComponent extends BaseComponent implements OnInit {
       year: simpleDate.year,
       month: simpleDate.month - 1, //Moment starts month indice at 0.
       day: simpleDate.day
-    }).format("MMMM Do, YYYY");
+    }).format('MMMM Do, YYYY');
 
   }
 

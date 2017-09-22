@@ -131,11 +131,11 @@ describe('PRIME All Pages', () => {
     expect(page.find('#question2')).toEqual(page.securityAnswer2);
     expect(page.find('#question3')).toEqual(page.securityAnswer3);
 
-    expect(page.find('#haveBeenSubjectOfOrderOrConviction')).toEqual("Yes");
-    expect(page.find('#hasBeenSuspendedOrCancelled')).toEqual("Yes");
-    expect(page.find('#hasHadLimits')).toEqual("Yes");
-    expect(page.find('#havePharmaNetRevoked')).toEqual("Yes");
-    expect(page.find('#hasRevocationBeenResolved')).toEqual("Yes");
+    expect(page.find('#haveBeenSubjectOfOrderOrConviction')).toEqual('Yes');
+    expect(page.find('#hasBeenSuspendedOrCancelled')).toEqual('Yes');
+    expect(page.find('#hasHadLimits')).toEqual('Yes');
+    expect(page.find('#havePharmaNetRevoked')).toEqual('Yes');
+    expect(page.find('#hasRevocationBeenResolved')).toEqual('Yes');
 
     /**
      * Currently unable to test CAPTCHA because it isn't compatible with AoT

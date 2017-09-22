@@ -4,7 +4,7 @@ import {
 } from '@angular/router/testing';
 
 import { AppComponent } from './app.component';
-import { ProgressBarComponent } from './core/progress-bar/progress-bar.component'
+import { ProgressBarComponent } from './core/progress-bar/progress-bar.component';
 import { ApplicantDataService } from './services/applicant-data.service';
 import { DummyDataService } from './services/dummy-data.service';
 

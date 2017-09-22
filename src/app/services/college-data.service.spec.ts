@@ -14,19 +14,19 @@ describe('CollegeDataService', () => {
     expect(service).toBeTruthy();
   }));
 
-  it('should return 4 items in college list', inject([CollegeDataService], (service: CollegeDataService) =>{
+  it('should return 4 items in college list', inject([CollegeDataService], (service: CollegeDataService) => {
     expect(service.defaultCollegeList().length === 4).toBeTruthy();
-    expect(service.defaultCollegeList()[0].text === "None").toBeTruthy();
-  }))
-
-  it('should get text for single selections', inject([CollegeDataService], (service: CollegeDataService) =>{
-      expect(service.getTextFromSelection([Colleges.None])).toEqual("None");
-      expect(service.getTextFromSelection([Colleges.CPSBC])).toEqual("College of Physicians and Surgeons of BC (CPSBC) - 91");
-      expect(service.getTextFromSelection([Colleges.CPBC])).toEqual("College of Pharmacists of BC (CPBC) - P1");
+    expect(service.defaultCollegeList()[0].text === 'None').toBeTruthy();
   }));
 
-  it('should get text for multiple selections', inject([CollegeDataService], (service: CollegeDataService) =>{
+  it('should get text for single selections', inject([CollegeDataService], (service: CollegeDataService) => {
+      expect(service.getTextFromSelection([Colleges.None])).toEqual('None');
+      expect(service.getTextFromSelection([Colleges.CPSBC])).toEqual('College of Physicians and Surgeons of BC (CPSBC) - 91');
+      expect(service.getTextFromSelection([Colleges.CPBC])).toEqual('College of Pharmacists of BC (CPBC) - P1');
+  }));
+
+  it('should get text for multiple selections', inject([CollegeDataService], (service: CollegeDataService) => {
     expect(service.getTextFromSelection([Colleges.CPSBC, Colleges.CPBC]))
-    .toEqual("College of Physicians and Surgeons of BC (CPSBC) - 91, College of Pharmacists of BC (CPBC) - P1");
+    .toEqual('College of Physicians and Surgeons of BC (CPSBC) - 91, College of Pharmacists of BC (CPBC) - P1');
 }));
 });

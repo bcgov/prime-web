@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ElementRef } from '@angular/core';
-import { ValidationComponent, staticImplements } from '../validation-component.interface'
+import { ValidationComponent, staticImplements } from '../validation-component.interface';
 import { BaseValidationComponent } from '../base-validation.component';
 
 @Component({

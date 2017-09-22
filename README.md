@@ -11,7 +11,7 @@ Prime-web used [angular-scaffold](https://github.com/bcgov/angular-scaffold) as 
 2. angular-cli `npm i -g @angular/cli`
 3. Node 6.9.x or greater
 
-Verify angular-cli is installed by running `ng -v`. Since `ng -v` is dependant upon the folder it's execued in (i.e. it looks in `node_modules/`), it's fine if some of the fields show "error." 
+Verify angular-cli is installed by running `ng -v`. Since `ng -v` is dependent upon the folder it's executed in (i.e. it looks in `node_modules/`), it's fine if some of the fields show "error." 
 
 ### Installation
 
@@ -51,6 +51,14 @@ The classes for the tests are written in `/e2e/app.po.ts` and and well documente
 
 Currently the e2e test runs through every screen of the app, filling in data on the inputs, then 
 
+### Linting
+
+`ng lint`
+
+This is not specifically testing *per se*, but related. AngularCLI, with TSLint, will statically analyze the whole project and look for things like poorly indented code, untyped variables, inconsistent usage of single/double quotes, inconsistent class names.  It is recommended you run `ng lint` periodically. This ensures the code is consistent across the entire app.
+
+Some, but not all, of the issues it identifies it can fix via the `ng lint --fix` command.
+
 ## Application Details
 
 ### Folder Structure
@@ -78,7 +86,9 @@ prime-web/src/
 
 ### Dummy Data
 
-When developing, sometimes having Dummy Data pre-populated into the app can be convenient.  You can toggle this via the `useDummyData` environment flag, i.e. by either editting environment.ts if you're in dev, or environment.prod.ts if you're in prod. You can toggle the variable freely, but know that the e2e tests fail when dummy data is used.
+Disable/Enable in `/src/environments/environment.ts`
+
+When developing, sometimes having Dummy Data pre-populated into the app can be convenient.  You can toggle this via the `useDummyData` environment flag, i.e. by either editing environment.ts if you're in dev, or environment.prod.ts if you're in prod. You can toggle the variable freely, but know that the e2e tests fail when dummy data is used.
 
 All dummy data is defined in `src/app/services/dummy-data.service.ts`.
 
@@ -139,6 +149,27 @@ The primeRequired directive looks at the options, and then loads a different cla
 Validation classes must extend from `BaseValidationComponent`. If your validation can be handled with a single regex, then all you need to do is extend `BaseValidationComponent` and overwrite the `regex` value.  If you need more, simply re-define the `validate()` method.  For an example of regex validation look at `PhoneValidationComponent`, for an example of overwriting `validate()` look at `RequiredValidationErrorsComponent`.
 
 The validation components only gets the input element itself, and due to the static methods cannot retain state. It can't look between multiple elements, or anywhere else outside the input it's validating. If you need more complex validation, try a different approach. 
+
+### Environments
+
+prime uses the default AngularCLI approach to environments. [Documentation.](https://github.com/angular/angular-cli/wiki/build)
+
+In brief, `/src/environments/environment.ts` is for the dev environment, and `/src/environments/environment.prod.ts` is for prod.  The default environment is dev, and you dictate other environments via command line arguments:
+
+```bash
+ng serve -o # uses dev by default
+ng serve -o --environment=prod # uses prod
+ng build # uses dev
+ng build --prod # uses prod. normal way to get a prod build.
+ng build --target=prod # uses prod environment, but omits other --prod flags.
+ng e2e # uses dev
+ng e2e --environment=prod # uses prod
+
+# uses dev environment, but takes the rest of the --prod flags
+ng build --prod --environment=dev
+```
+
+For more details, read the documentation linked above.
 
 ## Pending Task List
 

@@ -27,6 +27,6 @@ describe('RequiredErrorAlertComponent', () => {
     expect(RequiredValidationErrorsComponent.validate(mockValue('Some Data'))).toBeTruthy();
     expect(RequiredValidationErrorsComponent.validate(mockValue(''))).toBeFalsy();
     expect(RequiredValidationErrorsComponent.validate(mockValue(' '))).toBeTruthy();
-    expect(RequiredValidationErrorsComponent.validate(mockValue(""))).toBeFalsy();
+    expect(RequiredValidationErrorsComponent.validate(mockValue(''))).toBeFalsy();
   });
 });

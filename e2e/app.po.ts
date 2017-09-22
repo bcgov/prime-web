@@ -104,25 +104,25 @@ export class ProfessionalInfoPage extends BasePrimePage {
  * security questions. All the properties in this class match the form fields
  */
 export class ContactInfoPage extends ProfessionalInfoPage {
-  firstName: string = "Bill";
-  middleName: string = "Henry";
-  lastName: string = "Gates";
-  dateOfBirthDay: number = 11;
-  dayOfBirthYear: number = 1999;
-  phoneNumber: string = "250-555-1234";
-  email: string = "billg@microsoft.com";
-  altPhoneNumber: string = "250-555-9999"
-  altEmail: string = "billg@hotmail.com";
+  firstName = 'Bill';
+  middleName = 'Henry';
+  lastName = 'Gates';
+  dateOfBirthDay = 11;
+  dayOfBirthYear = 1999;
+  phoneNumber = '250-555-1234';
+  email = 'billg@microsoft.com';
+  altPhoneNumber = '250-555-9999';
+  altEmail = 'billg@hotmail.com';
 
-  streetNum: string = "103"
-  suite: string = "345"
-  street: string = "Yates"
-  city: string = "Victoria"
-  province: string = "British Columbia"
-  country: string = "Canada"
-  securityAnswer1: string = "Steve Jobs";
-  securityAnswer2: string = "Joe";
-  securityAnswer3: string = "Nottinghamfordshire";
+  streetNum = '103';
+  suite = '345';
+  street = 'Yates';
+  city = 'Victoria';
+  province = 'British Columbia';
+  country = 'Canada';
+  securityAnswer1 = 'Steve Jobs';
+  securityAnswer2 = 'Joe';
+  securityAnswer3 = 'Nottinghamfordshire';
 
   /** Navigates to contact-info page without completing previous pages */
   navigateTo() {
@@ -183,7 +183,8 @@ export class ContactInfoPage extends ProfessionalInfoPage {
   */
 export class SelfDeclarationPage extends ContactInfoPage {
 
-  declarationText: string = "Lorem ipsum dolor sit, amet consectetur adipisicing elit. In quas inventore consequuntur tempore facere exercitationem numquam necessitatibus nostrum eaque provident odio quasi, libero adipisci nihil magnam harum excepturi eos voluptatibus!"
+  // tslint:disable-next-line:max-line-length
+  declarationText = `Lorem ipsum dolor sit, amet consectetur adipisicing elit. In quas inventore consequuntur tempore facere exercitationem numquam necessitatibus nostrum eaque provident odio quasi, libero adipisci nihil magnam harum excepturi eos voluptatibus!`;
 
   /** Navigates to self-declaration page without completing previous pages */
   navigateTo() {
@@ -197,11 +198,11 @@ export class SelfDeclarationPage extends ContactInfoPage {
 
   /** Selects yes for all declarations and fills text. */
   fillDeclarations(){
-    this.toggleAndFill('haveBeenSubjectOfOrderOrConviction')
-    this.toggleAndFill('haveBeenSuspendedOrCancelled')
-    this.toggleAndFill('haveHadLimitsImposed')
-    this.toggleAndFill('haveBeenSuspendedOrRevokedFromPharmaNet')
-    this.toggleAndFill('hasRevocationBeenResolved')
+    this.toggleAndFill('haveBeenSubjectOfOrderOrConviction');
+    this.toggleAndFill('haveBeenSuspendedOrCancelled');
+    this.toggleAndFill('haveHadLimitsImposed');
+    this.toggleAndFill('haveBeenSuspendedOrRevokedFromPharmaNet');
+    this.toggleAndFill('hasRevocationBeenResolved');
   }
 
   /**
@@ -215,7 +216,7 @@ export class SelfDeclarationPage extends ContactInfoPage {
    */
   private toggleAndFill(toggleID: string){
     element.all(by.css(`#${toggleID} + prime-toggle .btn`)).first().click();
-    element(by.css(`#${toggleID}Details`)).sendKeys(this.declarationText)
+    element(by.css(`#${toggleID}Details`)).sendKeys(this.declarationText);
   }
 
 }
@@ -273,7 +274,7 @@ export class AllPrimePages extends SelfDeclarationPage {
 
   /** Fills the captcha with incorrect text, expecting it to fail */
   failCaptcha(){
-    element(by.css(`app-review-submit captcha #answer`)).sendKeys("Filler")
+    element(by.css(`app-review-submit captcha #answer`)).sendKeys('Filler');
   }
 
 

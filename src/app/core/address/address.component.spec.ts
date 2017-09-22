@@ -1,4 +1,4 @@
-import { TestBed } from '@angular/core/testing'
+import { TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { AddressComponent } from './address.component';
 // import MspDataService from '../../service/msp-data.service';
@@ -13,11 +13,11 @@ describe('AddressComponent', () => {
     TestBed.configureTestingModule({
       declarations: [AddressComponent],
       imports: [FormsModule],
-    })
+    });
   });
   it ('should work', () => {
-    let fixture = TestBed.createComponent(AddressComponent);
+    const fixture = TestBed.createComponent(AddressComponent);
     expect(fixture.componentInstance instanceof AddressComponent).toBe(true, 'should create AddressComponent');
 
   });
-})
+});

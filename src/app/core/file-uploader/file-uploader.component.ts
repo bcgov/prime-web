@@ -25,6 +25,7 @@ import { BaseComponent } from '../base-component/base-component.component';
 // var sha1 = require('sha1');
 
 // require('./file-uploader.component.less');
+/* tslint:disable:max-line-length */
 @Component({
   selector: 'prime-file-uploader',
   templateUrl: './file-uploader.html',
@@ -51,7 +52,7 @@ export class FileUploaderComponent
   @Input() images: Array<any> = [];
   @Input() id: string;
   @Input() showError: boolean;
-  @Input() required: boolean = false;
+  @Input() required = false;
 
   // @Output() onAddDocument: EventEmitter<MspImage> = new EventEmitter<MspImage>();
   // @Output() onErrorDocument: EventEmitter<MspImage> = new EventEmitter<MspImage>();

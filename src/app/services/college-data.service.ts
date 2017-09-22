@@ -25,21 +25,21 @@ export class CollegeDataService {
         id: Colleges.CRNBC,
         text: 'College of Registered Nurses of BC (CRNBC) - 96',
       }
-    ]
+    ];
   }
 
   getTextFromSelection(selection: Colleges[]): string {
     if (typeof selection === 'undefined') { return null; }
     //Selection can briefly be an empty string when re-setting input to "None"
-    if (typeof selection.forEach === 'undefined') { return "None"; }
+    if (typeof selection.forEach === 'undefined') { return 'None'; }
 
     let output = '';
-    let list = this.defaultCollegeList().slice();
+    const list = this.defaultCollegeList().slice();
 
 
     selection.forEach(element => {
-      let el = list.filter(x => { return x["id"] === element })[0];
-      output += (output.length ? ", " : "") + el.text;
+      const el = list.filter(x => { return x['id'] === element; })[0];
+      output += (output.length ? ', ' : '') + el.text;
     });
     return output;
   }

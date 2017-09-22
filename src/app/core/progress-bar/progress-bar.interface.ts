@@ -1,5 +1,5 @@
 export interface ProgressBarItem {
-  displayName: string,
-  routerLink: string,
+  displayName: string;
+  routerLink: string;
 }
 

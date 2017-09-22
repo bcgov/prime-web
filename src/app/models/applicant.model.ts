@@ -1,10 +1,11 @@
-import { SimpleDate } from '../core/date/simple-date.interface'
+import { SimpleDate } from '../core/date/simple-date.interface';
 import { Colleges } from './colleges.enum';
 import { SecurityQuestions } from './security-questions';
 import { NamedCollection } from './named-collections.interface';
 import { AdvancedPracticeCerts } from './advanced-practice-certs.enum';
 import { Address } from './address.interface';
 
+/** The main data model for the application. The official source of truth for the frontend. */
 export class Applicant {
   college: Colleges[];
   namedCollections: NamedCollection[];
@@ -41,23 +42,25 @@ export class Applicant {
   address: Address = {} as Address;
 
   /** Has the user consented to the initial info collection notice modal */
-  consentInfoCollection: boolean = false;
+  consentInfoCollection = false;
 
 
   constructor() {
   }
 
   /**
-   * Determines if applicant goes to college. Can be left blank to see if they go to any college. To check if option is "none", must explicitly pass Colleges.None
+   * Determines if applicant goes to college. Can be left blank to see if they
+   * go to any college. To check if option is "none", must explicitly pass
+   * Colleges.None
    * @param college optional, should be Colleges or undefined.
    */
   goesToCollege(college?: Colleges): boolean {
-    if (!this.college || this.college.length === 0) return false;
+    if (!this.college || this.college.length === 0) { return false; }
     if (this.college.length === 1 && this.college[0] === Colleges.None) {
       return this.college[0] === college;
     }
     //No input means check if applicant goes to ANY college (besides "none", which is dealt with above)
-    if (!college && this.college.length) return true;
+    if (!college && this.college.length) { return true; }
     return (<Colleges[]>this.college).indexOf(college) >= 0;
   }
 
@@ -75,10 +78,10 @@ export class Applicant {
    * Checks there are 3 security questions, and none of the values are null/falsy.
    */
   get hasSecurityQuestions(): boolean {
-    if (this.securityQuestions.length < 3) return false;
+    if (this.securityQuestions.length < 3) { return false; }
 
     return this.securityQuestions
     .filter(x => x.answer !== null && x.question !== null)
-    .length == 3;
+    .length === 3;
   }
 }

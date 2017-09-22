@@ -5,13 +5,13 @@ import { Select2OptionData } from 'ng2-select2';
  * Professional Information college choices
  */
 export enum Colleges {
-  None = "none",
+  None = 'none',
   /**College of Physicians and Surgeons of BC (CPSBC)*/
-  CPSBC = "91",
+  CPSBC = '91',
   /**College of Pharmacists Of BC (CPBC)*/
-  CPBC = "P1",
+  CPBC = 'P1',
   /**College of Registered Nurses of BC (CRNBC)*/
-  CRNBC = "96",
+  CRNBC = '96',
 }
 
 export interface CollegeList extends Select2OptionData {

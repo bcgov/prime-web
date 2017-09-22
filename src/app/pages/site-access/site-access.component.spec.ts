@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SiteAccessComponent } from './site-access.component';
-import { PrimeFormFooterComponent } from '../../core/form-footer/form-footer.component'
+import { PrimeFormFooterComponent } from '../../core/form-footer/form-footer.component';
 import { PrimeToggleComponent } from '../../core//toggle/toggle.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Ng2SmartTableModule } from 'ng2-smart-table';

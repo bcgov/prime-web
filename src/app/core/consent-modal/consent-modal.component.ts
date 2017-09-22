@@ -1,7 +1,7 @@
 import { Component, ViewChild, AfterViewInit, EventEmitter, Output } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
-import { BaseComponent } from '../../core/base-component/base-component.component'
+import { BaseComponent } from '../../core/base-component/base-component.component';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 // import { ConsentModalContent } from './content/consent-modal-content.component';
 
@@ -13,7 +13,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 export class ConsentModalComponent extends BaseComponent {
   bsModalRef: BsModalRef;
   agreeCheck: boolean;
-  @ViewChild('informationCollectionModal') public informationCollectionModal:ModalDirective;
+  @ViewChild('informationCollectionModal') public informationCollectionModal: ModalDirective;
 
   @Output() onConsented = new EventEmitter<boolean>();
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
-import { NgForm } from "@angular/forms";
+import { NgForm } from '@angular/forms';
 import { BaseComponent } from '../base-component/base-component.component';
 import * as moment from 'moment';
 import { SimpleDate } from '../../core/date/simple-date.interface';
@@ -12,12 +12,12 @@ import { SimpleDate } from '../../core/date/simple-date.interface';
 export class PrimeDateComponent extends BaseComponent implements OnInit {
 
   @Input() showError: boolean;
-  @Input() required: boolean = true;
+  @Input() required = true;
   /** Sets the default values to the client-side current date. */
-  @Input() useCurrentDate: boolean = false;
+  @Input() useCurrentDate = false;
   @Input() disabled: boolean;
 
-  @Input() date: SimpleDate
+  @Input() date: SimpleDate;
   @Output() onDateChange: EventEmitter<SimpleDate> = new EventEmitter<SimpleDate>();
 
   /** Can be one of: "future", "past". "future" includes today, "past" does not. */
@@ -42,7 +42,7 @@ export class PrimeDateComponent extends BaseComponent implements OnInit {
 
   setYearValueOnModel(value: string) {
     if (value) {
-      this.date.year = parseInt(value);
+      this.date.year = parseInt(value, 10);
     } else {
       this.date.year = null;
     }
@@ -51,7 +51,7 @@ export class PrimeDateComponent extends BaseComponent implements OnInit {
 
   setDayValueOnModel(value: string) {
     if (value) {
-      this.date.day = parseInt(value);
+      this.date.day = parseInt(value, 10);
     } else {
       this.date.day = null;
     }
@@ -60,7 +60,7 @@ export class PrimeDateComponent extends BaseComponent implements OnInit {
 
   setMonthValueOnModel(value: string) {
     if (value) {
-      this.date.month = parseInt(value);
+      this.date.month = parseInt(value, 10);
     } else {
       this.date.month = null;
     }
@@ -104,8 +104,8 @@ export class PrimeDateComponent extends BaseComponent implements OnInit {
      */
     if (this.restrictDate && this.form.errors){
       const option = this.restrictDate.toLowerCase();
-      if ((option === "future" && this.form.errors.dateNotInPast)
-      || (option === "past" && this.form.errors.dateNotInFuture)) {
+      if ((option === 'future' && this.form.errors.dateNotInPast)
+      || (option === 'past' && this.form.errors.dateNotInFuture)) {
         return false;
       }
     }

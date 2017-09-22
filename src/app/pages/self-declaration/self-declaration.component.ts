@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, HostListener } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, HostListener, AfterViewChecked } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApplicantDataService } from '../../services/applicant-data.service';
 import { Applicant } from '../../models/applicant.model';
@@ -10,11 +10,11 @@ import { ElementRef, ViewChild } from '@angular/core';
   templateUrl: './self-declaration.component.html',
   styleUrls: ['./self-declaration.component.scss']
 })
-export class SelfDeclarationComponent extends BaseComponent implements OnInit {
+export class SelfDeclarationComponent extends BaseComponent implements OnInit, AfterViewChecked {
   public applicant: Applicant;
   public viewHeight: number;
-  public disableSticky: boolean = false;
-  public stickyZIndex: number = 10;
+  public disableSticky = false;
+  public stickyZIndex = 10;
   @ViewChild('declarationQuestions') declarationQuestions: ElementRef;
   @ViewChild('uploadSection') uploadSection: ElementRef;
 
@@ -32,7 +32,7 @@ export class SelfDeclarationComponent extends BaseComponent implements OnInit {
 
   ngAfterViewChecked() {
     this.stickyZIndex = (this.stickyZIndex === 10 ? 9 : 10);
-    let offset = (this.stickyZIndex === 10 ? 1 : 0);
+    const offset = (this.stickyZIndex === 10 ? 1 : 0);
 
     //We want to constantly toggle the height of viewHeight here, to force sticky to update itself. So, we alternate it by 1px.
     this.viewHeight = this.declarationQuestions.nativeElement.offsetHeight + offset;

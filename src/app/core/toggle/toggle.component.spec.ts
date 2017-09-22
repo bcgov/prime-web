@@ -32,12 +32,12 @@ describe('PrimeToggleComponent', () => {
     component.data = true;
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelectorAll('.btn-radio').length).toEqual(1);
-    expect(fixture.nativeElement.querySelectorAll('.btn-radio')[0].textContent).toEqual("Yes");
+    expect(fixture.nativeElement.querySelectorAll('.btn-radio')[0].textContent).toEqual('Yes');
 
     component.data = false;
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelectorAll('.btn-radio').length).toEqual(1);
-    expect(fixture.nativeElement.querySelectorAll('.btn-radio')[0].textContent).toEqual("No");
+    expect(fixture.nativeElement.querySelectorAll('.btn-radio')[0].textContent).toEqual('No');
     expect(component.data).toBeFalsy();
   });
 

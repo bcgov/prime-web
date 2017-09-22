@@ -1,8 +1,9 @@
 import {
   Component, Input, Output, SimpleChanges,
-  EventEmitter, ViewChild, ChangeDetectorRef
+  EventEmitter, ViewChild, ChangeDetectorRef,
+  AfterViewInit, OnChanges
 } from '@angular/core';
-import {NgForm} from "@angular/forms";
+import {NgForm} from '@angular/forms';
 // import {Address} from "../../model/address.model";
 import './address.component.less';
 // import {BaseComponent} from "../base.component";
@@ -17,24 +18,27 @@ import { Applicant } from '../../models/applicant.model';
   templateUrl: './address.component.html'
 })
 
-export class AddressComponent extends BaseComponent {
-  // lang = require('./i18n');
-  private _useResidentialAddressLine2: boolean = false;
-  private _useResidentialAddressLine3: boolean = false;
-  private _useMailingAddressLine2: boolean = false;
-  private _useMailingAddressLine3: boolean = false;
-
-  /**
-   * Model Inputs
-   */
+/**
+ * This class provides the address component on the contact-info page. It's in a
+ * component in case it has to be reused, as well as to reduce template
+ * complexity for the address page.
+ *
+ * This class was copied from MSP, the original can be found here:
+ * https://github.com/bcgov/MyGovBC-MSP/blob/master/src/app/components/msp/common/address/address.component.ts
+ */
+export class AddressComponent extends BaseComponent implements AfterViewInit, OnChanges {
+  private _useResidentialAddressLine2 = false;
+  private _useResidentialAddressLine3 = false;
+  private _useMailingAddressLine2 = false;
+  private _useMailingAddressLine3 = false;
 
   @Input() applicant: Applicant;
   @Output() onApplicantChange: EventEmitter<Applicant> = new EventEmitter<Applicant>();
 
 
   // @Input() residentialAddress: Address;
-  @Input() residentialAddress: any; //todo remove - restore address
-  @Input() mailingAddress: any; // todo remove - restore address
+  @Input() residentialAddress: any;
+  @Input() mailingAddress: any;
   @Input() mailingSameAsResidentialAddress: boolean;
   @Output() mailingSameAsResidentialAddressChange = new EventEmitter<boolean>();
   // @Input() mailingAddress: Address;
@@ -63,121 +67,5 @@ export class AddressComponent extends BaseComponent {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-
-    // if(!changes['mailingOnly'] && !!changes['mailingSameAsResidentialAddress']){
-    //   if(changes['mailingSameAsResidentialAddress'].currentValue === null
-    //     || changes['mailingSameAsResidentialAddress'].currentValue === undefined){
-    //       this.mailingSameAsResidentialAddress = true;
-    //   }
-    // }
-  }
-
-  // provinceUpdate(event:string){
-  //   this.mailingAddress.province = event;
-  //   this.onChange.emit(event);
-  // }
-  // countryUpdate(event:string) {
-  //   this.mailingAddress.country = event;
-  //   this.onChange.emit(event);
-  // }
-
-  /**
-   * Auto complete for country
-   */
-
-  /**
-   * When user click 'Need another address line?'
-   */
-  useAnotherResidentialAddressLine() {
-    if (!this.useResidentialAddressLine2) {
-      this.useResidentialAddressLine2 = true;
-    }
-    else if (!this._useResidentialAddressLine3) {
-      this.useResidentialAddressLine3 = true;
-    }
-  }
-
-  get useResidentialAddressLine2() {
-    if (this._useResidentialAddressLine2 ||
-       this.residentialAddress.addressLine2) {
-      return true;
-    }
-    return false;
-  }
-
-  set useResidentialAddressLine2(value: boolean) {
-    this._useResidentialAddressLine2 = value;
-    if (!this._useResidentialAddressLine2) {
-      this.residentialAddress.addressLine2 = "";
-    }
-  }
-
-  get useResidentialAddressLine3() {
-    if (this._useResidentialAddressLine3 ||
-      this.residentialAddress.addressLine3) {
-      return true;
-    }
-    return false;
-  }
-
-  set useResidentialAddressLine3(value: boolean) {
-    this._useResidentialAddressLine3 = value;
-    if (!this._useResidentialAddressLine3) {
-      this.residentialAddress.addressLine3 = "";
-    }
-  }
-
-  /**
-   * When user click 'Need another address line?'
-   */
-  useAnotherMailingAddressLine() {
-    if (!this.useMailingAddressLine2) {
-      this.useMailingAddressLine2 = true;
-    }
-    else if (!this.useMailingAddressLine3) {
-      this.useMailingAddressLine3 = true;
-    }
-  }
-
-  get useMailingAddressLine2() {
-    if (this._useMailingAddressLine2 ||
-      this.mailingAddress.addressLine2) {
-      return true;
-    }
-    return false;
-  }
-
-  set useMailingAddressLine2(value: boolean) {
-    this._useMailingAddressLine2 = value;
-    if (!this._useMailingAddressLine2) {
-      this.mailingAddress.addressLine2 = "";
-    }
-  }
-
-  get useMailingAddressLine3() {
-    if (this._useMailingAddressLine3 ||
-      this.mailingAddress.addressLine3) {
-      return true;
-    }
-    return false;
-  }
-
-  set useMailingAddressLine3(value: boolean) {
-    this._useMailingAddressLine3 = value;
-    if (!this._useMailingAddressLine3) {
-      this.mailingAddress.addressLine3 = "";
-    }
-  }
-
-  useDifferentMailingAddress() {
-    this.mailingSameAsResidentialAddress = false;
-    this.mailingSameAsResidentialAddressChange.emit(this.mailingSameAsResidentialAddress);
-  }
-
-  useSameMailingAddress() {
-    this.mailingSameAsResidentialAddress = true;
-    // this.mailingAddress = new Address();
-    this.mailingAddress = new Object;
-    this.mailingSameAsResidentialAddressChange.emit(this.mailingSameAsResidentialAddress);
   }
 }

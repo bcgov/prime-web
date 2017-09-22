@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProfessionalInfoComponent } from './professional-info.component';
-import { CalendarYearValidator } from '../../core/date/calendar-year.validator';
+import { CalendarYearValidatorDirective } from '../../core/date/calendar-year.validator';
 import { PrimeDateComponent } from '../../core/date/date.component';
-import { ConsentModalComponent } from '../../core/consent-modal/consent-modal.component'
+import { ConsentModalComponent } from '../../core/consent-modal/consent-modal.component';
 import { FormsModule } from '@angular/forms';
 import { Select2Module } from 'ng2-select2';
 import { CalendarFieldFormatterDirective } from '../../core/date/calendar-field-formatter.directive';
 import { ModalModule } from 'ngx-bootstrap';
 import { ApplicantDataService } from '../../services/applicant-data.service';
-import { Colleges } from '../../models/colleges.enum'
+import { Colleges } from '../../models/colleges.enum';
 import { PrimeToggleComponent } from '../../core/toggle/toggle.component';
 import { PrimeFormFooterComponent } from '../../core/form-footer/form-footer.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CollegeDataService } from '../../services/college-data.service';
-import { CalendarFutureDates } from '../../core/date/calendar-future-dates.validator';
+import { CalendarFutureDatesDirective } from '../../core/date/calendar-future-dates.validator';
 
 
 
@@ -25,9 +25,13 @@ describe('ProfessionalInfoComponent', () => {
     TestBed.configureTestingModule({
       providers: [ApplicantDataService, CollegeDataService],
       imports: [FormsModule, Select2Module, ModalModule.forRoot(), RouterTestingModule],
-      declarations: [ProfessionalInfoComponent, CalendarYearValidator, PrimeDateComponent, ConsentModalComponent, CalendarFieldFormatterDirective, PrimeToggleComponent, PrimeFormFooterComponent, CalendarFutureDates]
-    })
-      .compileComponents();
+      declarations: [
+        ProfessionalInfoComponent, CalendarYearValidatorDirective,
+        PrimeDateComponent, ConsentModalComponent,
+        CalendarFieldFormatterDirective, PrimeToggleComponent,
+        PrimeFormFooterComponent, CalendarFutureDatesDirective
+      ]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -44,7 +48,6 @@ describe('ProfessionalInfoComponent', () => {
     expect(component.applicant).toBeTruthy();
   });
 
-  //These tests are outdated, when there used to be a .setCollegeSelection() method. Removable. Left in for now during greenfield dev when tests and API are in flux.
   it('should be able to set college selection', () => {
     //During dev, if app is in readOnly we populate dummy data. Once business decisions are nailed down, this will change.
     if (!component.readonly){
@@ -54,5 +57,11 @@ describe('ProfessionalInfoComponent', () => {
     expect(component.applicant.college[0] === Colleges.None).toBeTruthy();
     component.applicant.college = [Colleges.CPBC];
     expect(component.applicant.college[0] === Colleges.CPBC).toBeTruthy();
-  })
+  });
+
+  it('should be able to get college name from ID', () => {
+    expect(component.getCollegeNameFromID('91')).toEqual('College of Physicians and Surgeons of BC (CPSBC) - 91');
+    expect(component.getCollegeNameFromID('P1')).toEqual('College of Pharmacists of BC (CPBC) - P1');
+    expect(component.getCollegeNameFromID('96')).toEqual('College of Registered Nurses of BC (CRNBC) - 96');
+  });
 });

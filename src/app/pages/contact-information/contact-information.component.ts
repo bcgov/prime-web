@@ -23,7 +23,7 @@ export class ContactInformationComponent extends BaseComponent implements OnInit
   /** A local copy of applicant.securityQuestions, ensuring it matches the interface before pushing it to applicant.  */
   private securityQuestionAndAnswers: SecurityQuestions[] = [];
 
-  public showAlternatePhoneError: boolean = false;
+  public showAlternatePhoneError = false;
 
   @ViewChild('altEmail') altEmail: ElementRef;
   @ViewChild('altPhoneNumber') altPhoneNumber: ElementRef;
@@ -35,17 +35,17 @@ export class ContactInformationComponent extends BaseComponent implements OnInit
 
     //Note - This will be changing. Questions will be stored on backend, and we will fetch on init + send ids.
     this.securityQuestions = [
-      { id: "What was your first pet's name?", text: "What was your first pet's name?" },
-      { id: "What was the make of your first car?", text: "What was the make of your first car?" },
-      { id: "What was the last name of your favourite teacher?", text: "What was the last name of your favourite teacher?" },
-      { id: "What was the last name of  your childhood best friend?", text: "What was the last name of your childhood best friend?" },
-      { id: "What is your oldest cousin's first name?", text: "What is your oldest cousin's first name?" },
-      { id: "What town was your father born in?", text: "What town was your father born in?" },
-      { id: "What town was your mother born in?", text: "What town was your mother born in?" },
-      { id: "Where did you meet your spouse?", text: "Where did you meet your spouse?" },
-      { id: "What year did you meet your spouse?", text: "What year did you meet your spouse?" },
-      { id: "What is the name of your favourite book?", text: "What is the name of your favourite book?" }
-    ]
+      { id: 'What was your first pet\'s name?', text: 'What was your first pet\'s name?' },
+      { id: 'What was the make of your first car?', text: 'What was the make of your first car?' },
+      { id: 'What was the last name of your favourite teacher?', text: 'What was the last name of your favourite teacher?' },
+      { id: 'What was the last name of  your childhood best friend?', text: 'What was the last name of your childhood best friend?' },
+      { id: 'What is your oldest cousin\'s first name?', text: 'What is your oldest cousin\'s first name?' },
+      { id: 'What town was your father born in?', text: 'What town was your father born in?' },
+      { id: 'What town was your mother born in?', text: 'What town was your mother born in?' },
+      { id: 'Where did you meet your spouse?', text: 'Where did you meet your spouse?' },
+      { id: 'What year did you meet your spouse?', text: 'What year did you meet your spouse?' },
+      { id: 'What is the name of your favourite book?', text: 'What is the name of your favourite book?' }
+    ];
 
     this.initSecurityQuestions();
   }
@@ -58,8 +58,8 @@ export class ContactInformationComponent extends BaseComponent implements OnInit
     //Use persisted security questions if possible
     if (this.applicant.hasSecurityQuestions) {
       this.selectedSecurityQuestions = this.applicant.securityQuestions.map(x => {
-        return <Select2OptionData>{ id: x.question, text: x.question }
-      })
+        return <Select2OptionData>{ id: x.question, text: x.question };
+      });
       this.securityQuestionAndAnswers = this.applicant.securityQuestions;
     }
     else {
@@ -67,11 +67,11 @@ export class ContactInformationComponent extends BaseComponent implements OnInit
       this.selectedSecurityQuestions = this.securityQuestions.slice(0, 3);
 
       //Initialize values, otherwise we get undefined/null errors in template
-      for (var index = 0; index <= 2; index++) {
+      for (let index = 0; index <= 2; index++) {
         this.securityQuestionAndAnswers[index] = {
           question: this.selectedSecurityQuestions[index].text,
           answer: null
-        }
+        };
       }
 
       //Now that the controller's questions are initialized, copy to applicant model.
@@ -92,7 +92,7 @@ export class ContactInformationComponent extends BaseComponent implements OnInit
   }
 
   onAlternateFieldChange(){
-    this.showAlternatePhoneError = !(this.altPhoneNumber.nativeElement.value || this.altEmail.nativeElement.value)
+    this.showAlternatePhoneError = !(this.altPhoneNumber.nativeElement.value || this.altEmail.nativeElement.value);
     this.applicant.altPhoneNumber = this.altPhoneNumber.nativeElement.value;
     this.applicant.altEmailAddress = this.altEmail.nativeElement.value;
   }

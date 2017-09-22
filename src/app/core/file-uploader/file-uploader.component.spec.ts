@@ -1,4 +1,4 @@
-import { TestBed } from '@angular/core/testing'
+import { TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { FileUploaderComponent } from './file-uploader.component';
 // import MspDataService from '../../service/msp-data.service';
@@ -9,15 +9,15 @@ import { FileUploaderComponent } from './file-uploader.component';
 // import {MspLogService} from "../../service/log.service";
 // import DataService from "../../service/msp-data.service";
 // import {LogEntry} from "../logging/log-entry.model";
-import {Http, Headers, RequestOptions, ConnectionBackend, HttpModule} from "@angular/http"
-import moment = require("moment");
+import {Http, Headers, RequestOptions, ConnectionBackend, HttpModule} from '@angular/http';
+import moment = require('moment');
 
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 
 describe('FileUploaderComponent', () => {
-  let localStorageServiceConfig = {
+  const localStorageServiceConfig = {
     prefix: 'ca.bc.gov.msp',
     storageType: 'localStorage'
   };
@@ -26,11 +26,11 @@ describe('FileUploaderComponent', () => {
     TestBed.configureTestingModule({
       declarations: [FileUploaderComponent],
       imports: [FormsModule, HttpModule, ModalModule.forRoot()],
-    })
+    });
   });
   it ('should work', () => {
-    let fixture = TestBed.createComponent(FileUploaderComponent);
+    const fixture = TestBed.createComponent(FileUploaderComponent);
     expect(fixture.componentInstance instanceof FileUploaderComponent).toBe(true, 'should create FileUploaderComponent');
 
   });
-})
+});

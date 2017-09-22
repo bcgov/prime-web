@@ -1,4 +1,4 @@
-import { TestBed, inject } from '@angular/core/testing'
+import { TestBed, inject } from '@angular/core/testing';
 import { Applicant } from './applicant.model';
 import { Colleges } from './colleges.enum';
 import { DummyDataService } from '../services/dummy-data.service';
@@ -45,7 +45,8 @@ describe('Applicant Model', () => {
     expect(applicant.goesToCollege(Colleges.None)).toBe(false);
   });
 
-  it('should not go to college when college selection is Colleges.None, BUT it should be able to specifically lookup if applicant goes to College.None', () => {
+  it(`should not go to college when college selection is Colleges.None, BUT it \
+   should be able to specifically lookup if applicant goes to College.None`, () => {
     applicant.college = [Colleges.None];
     expect(applicant.goesToCollege(Colleges.None)).toBe(true);
     expect(applicant.goesToCollege()).toBe(false);
@@ -53,21 +54,21 @@ describe('Applicant Model', () => {
 
   it('should have a full name field', () => {
     expect(applicant.fullName).toBeNull();
-    applicant.firstName = "William";
-    applicant.lastName = "Gates";
-    expect(applicant.fullName).toBe("William Gates");
-    applicant.middleName = "Henry";
-    expect(applicant.fullName).toBe("William Henry Gates");
+    applicant.firstName = 'William';
+    applicant.lastName = 'Gates';
+    expect(applicant.fullName).toBe('William Gates');
+    applicant.middleName = 'Henry';
+    expect(applicant.fullName).toBe('William Henry Gates');
   });
 
   it('should detect the presence of security questions', () => {
     expect(applicant.hasSecurityQuestions).toBe(false);
-    for (var i = 0; i < 3; i++) {
+    for (let i = 0; i < 3; i++) {
       applicant.securityQuestions.push({ question: null, answer: null });
     }
     expect(applicant.hasSecurityQuestions).toBe(false);
-    for (var i = 0; i < 3; i++) {
-      applicant.securityQuestions.push({ question: "Test", answer: "Test" });
+    for (let i = 0; i < 3; i++) {
+      applicant.securityQuestions.push({ question: 'Test', answer: 'Test' });
     }
     expect(applicant.hasSecurityQuestions).toBe(true);
   });
@@ -76,6 +77,6 @@ describe('Applicant Model', () => {
     applicant = dummyData.useApplicantDummyData(applicant);
     expect(applicant.goesToCollege()).toBeTruthy();
     expect(applicant.hasSecurityQuestions).toBeTruthy();
-    expect(applicant.fullName).toEqual("Bill Henry Gates");
+    expect(applicant.fullName).toEqual('Bill Henry Gates');
   }));
-})
+});

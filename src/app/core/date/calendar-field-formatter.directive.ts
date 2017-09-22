@@ -1,8 +1,7 @@
 import {
   Directive, HostListener, HostBinding,
   ElementRef, Input, Output, EventEmitter
-}
-  from '@angular/core';
+} from '@angular/core';
 import { NgModel, NgControl } from '@angular/forms';
 
 @Directive({
