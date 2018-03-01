@@ -1,0 +1,228 @@
+@startuml
+class Base{
+  +id : guid
+}
+
+interface guid{
+
+}
+
+class Person{
+  +userId : PrimeUserID
+  +name : Name
+  +address : Address
+  +dateOfBirth : Date
+  +phone : PhoneNumber
+  +user : User
+  +verifier : Verifier
+  +organizationAuthority : OrganizationAuthority
+  +provisioner : Provisioner
+  +sites : SiteAccess[]
+  + <<readonly>> activeSites : SiteAccess[]
+  +requests : PrimeRequest[]
+}
+
+class Name{
+  +firstName : string
+  +lastName : string
+  +middleName : string
+  + <<readonly>> fullName : string
+}
+
+interface Address{
+  +street : string
+  +postal : string
+}
+
+interface PhoneNumber{
+
+}
+
+interface PrimeUserID{
+
+}
+
+class Role{
+  +status : RoleStatus
+  +person : Person
+  +type : User | Verifier | OrganizationAuthority | Provisioner
+  +selfDeclarations : SelfDeclaration[]
+}
+
+class User{
+  +college : Colleges[]
+  +license : License
+  +isDeviceProvider : boolean
+  +PoSUserId : string
+}
+
+class Verifier{
+
+}
+
+class OrganizationAuthority{
+
+}
+
+class Provisioner{
+
+}
+
+class License{
+  +number : string
+  +licenseClass : LicenseClasses
+  +expiry : Date
+}
+
+class PrimeRequest{
+  +applicant : Role
+  +imitationDate : Date
+  +priority : PrimeRequestPriority
+  +status : PrimeRequestStatus
+}
+
+class ProvisionerChange{
+
+}
+
+class ProvisionerEnrollment{
+
+}
+
+class VerifierChange{
+
+}
+
+class VerifierEnrollment{
+
+}
+
+class Site{
+  +name : string
+  +address : Address
+}
+
+class SiteAccess{
+  +site : Site
+  +person : Role
+  +status : SiteAccessStatus
+  +reason : string
+  +startDate : Date
+  +endDate : Date
+  +vendor : Vendor
+  +personalAccessToPharmaNet : boolean
+  +verifier : Verifier
+  +privilege : typeof Role
+}
+
+class Vendor{
+
+}
+
+class Group{
+  +members : T[]
+  +find()
+  +contains()
+}
+
+class NamedCollection{
+
+}
+
+class PeopleGroup{
+
+}
+
+class SelfDeclaration{
+  +question : string
+  +userAnswer : boolean
+  +userDetails : string
+}
+
+
+enum RoleStatus {
+    PENDING,
+    ACTIVE,
+    EXPIRING,
+    INACTIVE_OR_REJECTED
+}
+
+enum Colleges {
+    None,
+    CPSBC,
+    CPBC,
+    CRNBC,
+}
+
+enum LicenseClasses {
+    FULL_PHARMACIST
+}
+
+enum PrimeRequestPriority {
+    URGENT,
+    NORMAL
+}
+enum PrimeRequestStatus {
+    RESUBMISSION,
+    SAVED_FOR_COMPLETION,
+    RETURNED_BY_APPLICANT,
+    MANUAL_REVIEW,
+    PROVISIONING
+}
+
+enum SiteAccessStatus {
+    PENDING_APPROVAL,
+    INITIATED,
+    RETURNED_TO_APPLICANT,
+    ACTVE
+}
+Role --> SelfDeclaration
+Person --> Colleges
+Base --> guid
+Person --> PrimeUserID
+Person --> Name
+Person --> Address
+Person --> Date
+Person --> PhoneNumber
+Person --> User
+Person --> Verifier
+Person --> OrganizationAuthority
+Person --> Provisioner
+Role --> RoleStatus
+Role --> Person
+Role --> User
+Role --> Verifier
+Role --> OrganizationAuthority
+Role --> Provisioner
+User --> License
+License --> LicenseClasses
+License --> Date
+PrimeRequest --> Role
+PrimeRequest --> Date
+PrimeRequest --> PrimeRequestPriority
+PrimeRequest --> PrimeRequestStatus
+Site --> Address
+SiteAccess --> Site
+SiteAccess --> Role
+SiteAccess --> SiteAccessStatus
+SiteAccess --> Date
+SiteAccess --> Vendor
+SiteAccess --> Verifier
+Base <|-- Person
+Base <|-- Role
+Role <|-- User
+Role <|-- Verifier
+Role <|-- OrganizationAuthority
+Role <|-- Provisioner
+Base <|-- PrimeRequest
+PrimeRequest <|-- ProvisionerChange
+PrimeRequest <|-- ProvisionerEnrollment
+PrimeRequest <|-- VerifierChange
+PrimeRequest <|-- VerifierEnrollment
+Base <|-- Site
+Base <|-- SiteAccess
+Base <|-- Vendor
+Base <|-- Group
+Group <|-- NamedCollection
+Group <|-- PeopleGroup
+@enduml
