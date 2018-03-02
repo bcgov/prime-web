@@ -1,28 +1,14 @@
-// Use JSON Schema
-// http://json-schema.org/implementations.html
-// https://github.com/krg7880/json-schema-generator
-// maybe: https://github.com/YousefED/typescript-json-schema
-
-/**
- * TODO:
- *
- *  - run json-schema generator
- *  - run tsuml to generate UML
- *
- *
- * Steps to generate UML:
- *  - run tsuml on this file to generate .puml
- *  - manually copy `enum` statements into  .puml
- *  - use plantUML to generate
- */
-
+// This file is the result of an object-oriented design session.  It is used to
+// generate UML diagrams and JSON-schemas.  See design-readme.md for more
+// details.
 
 
 //-----------------------------------------------------------------------------
 // BASE
 //-----------------------------------------------------------------------------
 
-abstract class Base {
+//FIXME: Abstract class. Had to remove abstract for JSON schema generation.
+class Base {
     id: guid;
 }
 interface guid { }
@@ -47,7 +33,7 @@ class Person extends Base {
     // ALL sites, including expired/rejected.
     sites: SiteAccess[];
     get activeSites(): SiteAccess[] {
-        return this.sites.filter(x => x.status === SiteAccessStatus.ACTVE);
+        return this.sites.filter(x => x.status === SiteAccessStatus.ACTIVE);
     }
 
     requests: PrimeRequest[];
@@ -73,7 +59,8 @@ interface PrimeUserID { }
 // ROLES
 //-----------------------------------------------------------------------------
 
-abstract class Role extends Base {
+//FIXME: Abstract class. Had to remove abstract for JSON schema generation.
+class Role extends Base {
     status: RoleStatus;
     // Person is a circular reference for runtime convenience and does NOT need
     // to really be modelled in the JSON. We must handle the circular reference
@@ -96,20 +83,17 @@ class Provisioner extends Role { }
 
 // Note - A user may have different statuses for each role (e.g. active user, pending verifier)
 enum RoleStatus {
-    PENDING,
-    ACTIVE,
-    EXPIRING,
-    INACTIVE_OR_REJECTED
+    PENDING = "Pending",
+    ACTIVE = "Active",
+    EXPIRING = "Expiring",
+    INACTIVE_OR_REJECTED = "Inactive or rejected"
 }
 
 enum Colleges {
-    None,
-    /**College of Physicians and Surgeons of BC (CPSBC)*/
-    CPSBC,
-    /**College of Pharmacists Of BC (CPBC)*/
-    CPBC,
-    /**College of Registered Nurses of BC (CRNBC)*/
-    CRNBC,
+    None = "None",
+    CPSBC = "College of Physicians and Surgeons of BC (CPSBC",
+    CPBC = "College of Pharmacists Of BC (CPBC)",
+    CRNBC = "College of Registered Nurses of BC (CRNBC)"
 }
 
 class License {
@@ -119,7 +103,7 @@ class License {
 }
 
 enum LicenseClasses {
-    FULL_PHARMACIST
+    FULL_PHARMACIST = "Full pharmacist"
 }
 
 //-----------------------------------------------------------------------------
@@ -139,15 +123,15 @@ class ProvisionerEnrollment extends PrimeRequest { }
 class VerifierChange extends PrimeRequest { }
 class VerifierEnrollment extends PrimeRequest { }
 enum PrimeRequestPriority {
-    URGENT,
-    NORMAL
+    URGENT = "Urgent",
+    NORMAL = "Normal",
 }
 enum PrimeRequestStatus {
-    RESUBMISSION,
-    SAVED_FOR_COMPLETION,
-    RETURNED_BY_APPLICANT,
-    MANUAL_REVIEW,
-    PROVISIONING
+    RESUBMISSION = "Resubmission",
+    SAVED_FOR_COMPLETION = "Saved for completion",
+    RETURNED_BY_APPLICANT = "Returned by applicant",
+    MANUAL_REVIEW = "Manual review",
+    PROVISIONING = "Provisioning"
 }
 
 //-----------------------------------------------------------------------------
@@ -178,10 +162,10 @@ class SiteAccess extends Base {
 }
 
 enum SiteAccessStatus {
-    PENDING_APPROVAL,
-    INITIATED,
-    RETURNED_TO_APPLICANT,
-    ACTVE
+    PENDING_APPROVAL = "Pending Approval",
+    INITIATED = "Initiated",
+    RETURNED_TO_APPLICANT = "Returned to applicant",
+    ACTIVE = "Active"
 }
 
 class Vendor extends Base { }

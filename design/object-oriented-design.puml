@@ -1,5 +1,5 @@
-@startuml
-class Base{
+@startuml PRIME
+abstract class Base{
   +id : guid
 }
 
@@ -7,20 +7,37 @@ interface guid{
 
 }
 
+
 class Person{
   +userId : PrimeUserID
+  __ personal info __
   +name : Name
   +address : Address
   +dateOfBirth : Date
   +phone : PhoneNumber
+  __ roles __
   +user : User
   +verifier : Verifier
   +organizationAuthority : OrganizationAuthority
   +provisioner : Provisioner
+  __ prime access __
   +sites : SiteAccess[]
   + <<readonly>> activeSites : SiteAccess[]
   +requests : PrimeRequest[]
 }
+
+note top of Person
+  Everyone who logs in is a Person. Depending
+  on their their roles, the 'roles' attributes
+  will be null or point to an instance of those
+  classes.
+end note
+
+note top of User
+  A user is the lowest tier role in Prime.
+  It's possible for a person to login as
+  another role and NOT be a User.
+end note
 
 class Name{
   +firstName : string
@@ -42,7 +59,7 @@ interface PrimeUserID{
 
 }
 
-class Role{
+abstract class Role{
   +status : RoleStatus
   +person : Person
   +type : User | Verifier | OrganizationAuthority | Provisioner
@@ -139,43 +156,39 @@ class SelfDeclaration{
   +userDetails : string
 }
 
-
 enum RoleStatus {
-    PENDING,
-    ACTIVE,
-    EXPIRING,
-    INACTIVE_OR_REJECTED
+    PENDING = "Pending",
+    ACTIVE = "Active",
+    EXPIRING = "Expiring",
+    INACTIVE_OR_REJECTED = "Inactive or rejected"
 }
-
 enum Colleges {
-    None,
-    CPSBC,
-    CPBC,
-    CRNBC,
+    None = "None",
+    CPSBC = "College of Physicians and Surgeons of BC (CPSBC",
+    CPBC = "College of Pharmacists Of BC (CPBC)",
+    CRNBC = "College of Registered Nurses of BC (CRNBC)"
 }
-
 enum LicenseClasses {
-    FULL_PHARMACIST
+    FULL_PHARMACIST = "Full pharmacist"
 }
-
 enum PrimeRequestPriority {
-    URGENT,
-    NORMAL
+    URGENT = "Urgent",
+    NORMAL = "Normal",
 }
 enum PrimeRequestStatus {
-    RESUBMISSION,
-    SAVED_FOR_COMPLETION,
-    RETURNED_BY_APPLICANT,
-    MANUAL_REVIEW,
-    PROVISIONING
+    RESUBMISSION = "Resubmission",
+    SAVED_FOR_COMPLETION = "Saved for completion",
+    RETURNED_BY_APPLICANT = "Returned by applicant",
+    MANUAL_REVIEW = "Manual review",
+    PROVISIONING = "Provisioning"
+}
+enum SiteAccessStatus {
+    PENDING_APPROVAL = "Pending Approval",
+    INITIATED = "Initiated",
+    RETURNED_TO_APPLICANT = "Returned to applicant",
+    ACTIVE = "Active"
 }
 
-enum SiteAccessStatus {
-    PENDING_APPROVAL,
-    INITIATED,
-    RETURNED_TO_APPLICANT,
-    ACTVE
-}
 Role --> SelfDeclaration
 Person --> Colleges
 Base --> guid
