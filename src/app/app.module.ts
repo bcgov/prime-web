@@ -28,8 +28,6 @@ import { SiteAccessComponent } from './pages/site-access/site-access.component';
 import { AddressComponent } from './core/address/address.component';
 import { FileUploaderComponent } from './core/file-uploader/file-uploader.component';
 
-// import { CaptchaComponent } from 'mygovbc-captcha-widget/src/captcha.component';
-
 import { PrimeToggleComponent } from './core/toggle/toggle.component';
 import { PrimeFormFooterComponent } from './core/form-footer/form-footer.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
@@ -41,6 +39,8 @@ import { RequiredValidationErrorsComponent } from './validation/required-validat
 import { PhoneValidationComponent } from './validation/phone-validation/phone-validation.component';
 import { EmailValidationComponent } from './validation/email-validation/email-validation.component';
 import { DemoPageComponent } from './pages/demo-page/demo-page.component';
+import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
+import { DatepickerComponent } from './app/core/datepicker/datepicker.component';
 
 
 @NgModule({
@@ -71,6 +71,7 @@ import { DemoPageComponent } from './pages/demo-page/demo-page.component';
     PhoneValidationComponent,
     EmailValidationComponent,
     DemoPageComponent,
+    DatepickerComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,7 +81,8 @@ import { DemoPageComponent } from './pages/demo-page/demo-page.component';
     ModalModule.forRoot(),
     Select2Module,
     Ng2SmartTableModule,
-    StickyModule
+    StickyModule,
+    NgxMyDatePickerModule.forRoot()
   ],
   providers: [
     ApplicantDataService,

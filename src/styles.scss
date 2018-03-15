@@ -55,6 +55,29 @@
 // @import "~bootstrap/scss/utilities";
 // @import "~bootstrap/scss/print";
 
+
+
+ @import "~font-awesome/scss/variables";
+ @import "~font-awesome/scss/mixins";
+ $fa-font-path: '~font-awesome/fonts';
+ @font-face {
+     font-family: 'FontAwesome';
+     src: url('#{$fa-font-path}/fontawesome-webfont.ttf?v=${fa-version}') format('truetype');
+     font-weight: normal;
+     font-style: normal;
+ }
+
+ @import "~font-awesome/scss/core";
+ @import "~font-awesome/scss/larger";
+ @import "~font-awesome/scss/fixed-width";
+ @import "~font-awesome/scss/list";
+ @import "~font-awesome/scss/bordered-pulled";
+ @import "~font-awesome/scss/animated";
+ @import "~font-awesome/scss/rotated-flipped";
+ @import "~font-awesome/scss/stacked";
+ @import "~font-awesome/scss/icons";
+ @import "~font-awesome/scss/screen-reader";
+
 @import "overrides";
 @import "additions";
 
