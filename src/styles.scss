@@ -1,14 +1,9 @@
-//TODO: Tidy up
-/* You can add global styles to this file, and also import other style files */
-
-// @import "~mygovbc-bootstrap-theme/dist/mygovbc-bootstrap-theme.min.css";
-
 //TODO: Include font. Currently missing.
 // Declare primary font
-// @font-face {
-//   font-family: 'Myriad-Pro';
-//   src: url('fonts/MyriadWebPro.ttf');
-// }
+@font-face {
+  font-family: 'Myriad-Pro';
+  src: url('app/fonts/MyriadWebPro.ttf');
+}
 
 //------------------------------------------------------------------------------
 // Customizing which bootstrap files get imported, copied from bootstrap.scss
@@ -22,6 +17,8 @@
 
 @import "variables.scss";
 @import "~bootstrap/scss/bootstrap";
+
+//TODO: Import bootstrap piecemeal
 
 // @import "~bootstrap/scss/functions";
 // @import "~bootstrap/scss/mixins";
@@ -60,6 +57,20 @@
 
 @import "overrides";
 @import "additions";
+
+// Set a base font-size in px to ensure that we don't just use the browser's
+// default text size. We use rems for font-sizes everywhere else.
+html {
+  font-size: 16px;
+
+  // Optional - This may be removed!
+  // Left in because it really demonstrates the value of rem based designs. We
+  // can scale the entire layout, from element sizing to padding, just by
+  // changing font-size here.
+  @include media-breakpoint-up(sm){
+    font-size: 14px;
+  }
+}
 
 
 
