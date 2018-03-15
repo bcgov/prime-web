@@ -21,6 +21,7 @@ export class DatepickerComponent implements OnInit {
   /** Default options. Applies to default size and provide the baseline for other sizes (which may override). */
   datepickerOptions: INgxMyDpOptions = {
     dateFormat: 'dd/mm/yyyy',
+    sunHighlight: false,
   };
 
   /** Datetime data. Ultimate source of truth for data.  */
@@ -32,9 +33,9 @@ export class DatepickerComponent implements OnInit {
     console.log('Datepicker size', this.size);
 
     if (this.size === DatepickerSizes.MINI){
-      //Set width/height to 3/4 of default
-      this.datepickerOptions.selectorHeight = '174px';
-      this.datepickerOptions.selectorWidth = '189px';
+      //Set width/height to 4/5 of default
+      this.datepickerOptions.selectorHeight = '185px';
+      this.datepickerOptions.selectorWidth = '201px';
     }
   }
 

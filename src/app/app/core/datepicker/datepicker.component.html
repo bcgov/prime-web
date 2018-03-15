@@ -22,7 +22,7 @@
     </form>
 
     <form *ngSwitchCase="DatepickerSizes.MINI">
-        <div class="input-group">
+        <div class="input-group datepicker--mini">
             <button type="button" class='btn btn-outline-primary'
               ngx-mydatepicker
               name="mydate"
@@ -35,7 +35,7 @@
             </button>
 
             <span class="input-group-append">
-                <button type="button" class="btn btn-link" (click)="dp.clearDate()" [disabled]="!hasValidDate" >
+                <button type="button" class="btn btn-outline-primary" (click)="dp.clearDate()" [disabled]="!hasValidDate" >
                     <i class="fa fa-close"></i>
                 </button>
             </span>

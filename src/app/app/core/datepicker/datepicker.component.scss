@@ -1,0 +1,7 @@
+.datepicker--mini {
+  > .btn {
+    // Make button and .input-group-append play nice.
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
