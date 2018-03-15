@@ -9,6 +9,8 @@ import { SelfDeclarationComponent } from './pages/self-declaration/self-declarat
 import { UserAcceptanceComponent } from './pages/user-acceptance/user-acceptance.component';
 import { SiteAccessComponent } from './pages/site-access/site-access.component';
 
+import { DemoPageComponent } from './pages/demo-page/demo-page.component'
+
 const routes: Routes = [
   {
     path: 'professional-info',
@@ -39,8 +41,12 @@ const routes: Routes = [
     component: ReviewSubmitComponent
   },
   {
+    path: 'demo',
+    component: DemoPageComponent
+  },
+  {
     path: '**',
-    redirectTo: 'professional-info'
+    redirectTo: 'demo'
   }
 ];
 
