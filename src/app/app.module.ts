@@ -40,6 +40,7 @@ import { PhoneValidationComponent } from './validation/phone-validation/phone-va
 import { EmailValidationComponent } from './validation/email-validation/email-validation.component';
 import { DemoPageComponent } from './pages/demo-page/demo-page.component';
 import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
+import { MyDateRangePickerModule } from 'mydaterangepicker';
 import { DatepickerComponent } from './app/core/datepicker/datepicker.component';
 
 
@@ -82,7 +83,8 @@ import { DatepickerComponent } from './app/core/datepicker/datepicker.component'
     Select2Module,
     Ng2SmartTableModule,
     StickyModule,
-    NgxMyDatePickerModule.forRoot()
+    NgxMyDatePickerModule.forRoot(),
+    MyDateRangePickerModule
   ],
   providers: [
     ApplicantDataService,
