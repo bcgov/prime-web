@@ -132,7 +132,7 @@ Special accessibility class to hide things like labels but still have the readab
   color: #333;
   background-color: #f4f6f9;
   border-color: #ccc;
-  &:hover {
+  &:hover:not(:disabled) {
     color: #333;
     background-color: #d3dbe7;
     border-color: #adadad;

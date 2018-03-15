@@ -18,19 +18,24 @@ export class DatepickerComponent implements OnInit {
   // Make enum accessible in HTML
   DatepickerSizes: typeof DatepickerSizes = DatepickerSizes;
 
+  /** Default options. Applies to default size and provide the baseline for other sizes (which may override). */
   datepickerOptions: INgxMyDpOptions = {
     dateFormat: 'dd/mm/yyyy',
-    // closeSelectorOnDateSelect: false,
   };
 
   /** Datetime data. Ultimate source of truth for data.  */
   model: IMyDateModel;
 
-
   constructor() {}
 
   ngOnInit() {
     console.log('Datepicker size', this.size);
+
+    if (this.size === DatepickerSizes.MINI){
+      //Set width/height to 3/4 of default
+      this.datepickerOptions.selectorHeight = '174px';
+      this.datepickerOptions.selectorWidth = '189px';
+    }
   }
 
   onDateChanged(event: IMyDateModel): void {

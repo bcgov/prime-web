@@ -4,17 +4,18 @@
         <div class="input-group">
             <input class="form-control" placeholder="Select a date"
               ngx-mydatepicker name="mydate"
-              [(ngModel)]="model" 
-              [options]="datepickerOptions" 
-              #dp="ngx-mydatepicker" 
-              (dateChanged)="onDateChanged($event)"/>
-    
+              [(ngModel)]="model"
+              [options]="datepickerOptions"
+              #dp="ngx-mydatepicker"
+              (dateChanged)="onDateChanged($event)"
+              (click)="dp.toggleCalendar()"/>
+
             <span class="input-group-append">
-                <button type="button" class="btn btn-default" (click)="dp.clearDate()">
-                    <i class="fa fa-close"></i>
-                </button>
                 <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
                     <i class="fa fa-calendar"></i>
+                </button>
+                <button type="button" class="btn btn-default" (click)="dp.clearDate()" [disabled]="!hasValidDate">
+                    <i class="fa fa-close"></i>
                 </button>
             </span>
         </div>
@@ -22,20 +23,22 @@
 
     <form *ngSwitchCase="DatepickerSizes.MINI">
         <div class="input-group">
-            <button type="button" class='btn btn-link' 
-              ngx-mydatepicker 
-              name="mydate" 
-              [(ngModel)]="model" 
-              [options]="datepickerOptions" 
-              #dp="ngx-mydatepicker" 
+            <button type="button" class='btn btn-outline-primary'
+              ngx-mydatepicker
+              name="mydate"
+              [(ngModel)]="model"
+              [options]="datepickerOptions"
+              #dp="ngx-mydatepicker"
               (dateChanged)="onDateChanged($event)"
               (click)="dp.toggleCalendar()">
               {{ model?.formatted || 'Select a date' }}
             </button>
-    
-            <button type="button" class="btn btn-link" (click)="dp.clearDate()" [disabled]="!hasValidDate" >
-              <i class="fa fa-close"></i>
-            </button>
+
+            <span class="input-group-append">
+                <button type="button" class="btn btn-link" (click)="dp.clearDate()" [disabled]="!hasValidDate" >
+                    <i class="fa fa-close"></i>
+                </button>
+            </span>
         </div>
     </form>
 </div>
