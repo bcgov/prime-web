@@ -1,5 +1,5 @@
-// @import "../../../../styles/variables.less";
-@import "../../variables.scss";
+@import "variables.scss";
+
 .progressBar {
     text-align: left;
     display: table;
@@ -20,7 +20,8 @@
     text-align: center;
     font-weight: 500;
     width: auto;
-    @media screen and (min-width: $screen-sm) {
+    @include media-breakpoint-up(xs){
+    // @media screen and (min-width: $screen-sm) {
         min-width: 25%;
         display: table-cell;
     }
@@ -68,7 +69,7 @@
     background: #E3E4E5;
     cursor: not-allowed;
     pointer-events: none;
-    color: $gray-light;
+    color: $gray-600;
 }
 
 .progressBar .afterActive:after {
@@ -91,17 +92,20 @@
     padding: 7px 10px 0 30px;
     position: relative;
     margin: 0 5px 0 0;
-    font-size: $font-size-h3;
+    font-size: $h3-font-size;
     text-decoration: none;
     color: black;
     // white-space: normal;
-    @media(max-width: $screen-xs) {
+
+    @include media-breakpoint-down(sm){
+    // @media(max-width: $screen-xs) {
         padding: 7px 2px 0 24px;
         margin: 0 2px 0 0;
         text-align: left;
     }
-    @media(max-width: $screen-md - 1) {
-        font-size: $font-size-h4;
+    @include media-breakpoint-down(sm){
+    // @media(max-width: $screen-md - 1) {
+        font-size: $h4-font-size;
         text-align: left;
         padding: 7px 7px 0 30px;
     }
@@ -110,14 +114,16 @@
 
 
 
-@media(max-width: $screen-md - 1) {
+@include media-breakpoint-down(sm){
+// @media(max-width: $screen-md - 1) {
     //This is a specific CSS hack to make sure that "Professional Information" fits in the medium breakpoint for the first progress bar item.
     .progressBar ul li:first-child a {
         padding-left: 15px;
     }
 }
 
-@media(max-width: $screen-sm - 1) {
+@include media-breakpoint-down(xs){
+// @media(max-width: $screen-sm - 1) {
     .beforeActive .progress-title,
     .afterActive .progress-title { display: none; }
 }
@@ -135,7 +141,7 @@
 
 .progressBar ul li:first-child a {
     border-top-left-radius: 0px;
-    border-bottom-left-radius: $btn-border-radius-base;
+    border-bottom-left-radius: $btn-border-radius;
 }
 
 .progressBar ul li:first-child a:before {
@@ -145,7 +151,7 @@
 .progressBar ul li:last-child a {
     padding-right: 20px;
     border-top-right-radius: 0px;
-    border-bottom-right-radius: $btn-border-radius-base;
+    border-bottom-right-radius: $btn-border-radius;
 }
 
 .progressBar ul li:last-child a:after {

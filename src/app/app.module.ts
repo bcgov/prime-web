@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -41,6 +40,7 @@ import { PrimeRequiredDirective } from './validation/prime-required.directive';
 import { RequiredValidationErrorsComponent } from './validation/required-validation/required-validation.component';
 import { PhoneValidationComponent } from './validation/phone-validation/phone-validation.component';
 import { EmailValidationComponent } from './validation/email-validation/email-validation.component';
+import { DemoPageComponent } from './pages/demo-page/demo-page.component';
 
 
 @NgModule({
@@ -70,13 +70,13 @@ import { EmailValidationComponent } from './validation/email-validation/email-va
     RequiredValidationErrorsComponent,
     PhoneValidationComponent,
     EmailValidationComponent,
+    DemoPageComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    NgbModule,
     ModalModule.forRoot(),
     Select2Module,
     Ng2SmartTableModule,

@@ -1,6 +1,5 @@
 import { Component, ViewChild, AfterViewInit, EventEmitter, Output } from '@angular/core';
-import { BsModalService } from 'ngx-bootstrap/modal';
-import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { BaseComponent } from '../../core/base-component/base-component.component';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 // import { ConsentModalContent } from './content/consent-modal-content.component';

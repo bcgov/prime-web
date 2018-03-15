@@ -1,9 +1,73 @@
+//TODO: Tidy up
 /* You can add global styles to this file, and also import other style files */
-@import "~mygovbc-bootstrap-theme/dist/mygovbc-bootstrap-theme.min.css";
-@import "./app/variables.scss";
+
+// @import "~mygovbc-bootstrap-theme/dist/mygovbc-bootstrap-theme.min.css";
+
+//TODO: Include font. Currently missing.
+// Declare primary font
+// @font-face {
+//   font-family: 'Myriad-Pro';
+//   src: url('fonts/MyriadWebPro.ttf');
+// }
+
+//------------------------------------------------------------------------------
+// Customizing which bootstrap files get imported, copied from bootstrap.scss
+// Overriding the "variables.scss" file with our custom theme
+//------------------------------------------------------------------------------
+
+// Comment out unused component styles, so they won't be bundled in final CSS.
+// If they're ever used in the future we can just un-comment.
+
+
+
+@import "variables.scss";
+@import "~bootstrap/scss/bootstrap";
+
+// @import "~bootstrap/scss/functions";
+// @import "~bootstrap/scss/mixins";
+// @import "~bootstrap/scss/root";
+// @import "~bootstrap/scss/reboot";
+// @import "~bootstrap/scss/type";
+// @import "~bootstrap/scss/images";
+// // @import "~bootstrap/scss/code";
+// @import "~bootstrap/scss/grid";
+// @import "~bootstrap/scss/tables";
+// @import "~bootstrap/scss/forms";
+// @import "~bootstrap/scss/buttons";
+// @import "~bootstrap/scss/transitions";
+// @import "~bootstrap/scss/dropdown";
+// @import "~bootstrap/scss/button-group";
+// @import "~bootstrap/scss/input-group";
+// @import "~bootstrap/scss/custom-forms";
+// @import "~bootstrap/scss/nav";
+// @import "~bootstrap/scss/navbar";
+// @import "~bootstrap/scss/card";
+// // @import "~bootstrap/scss/breadcrumb";
+// // @import "~bootstrap/scss/pagination";
+// // @import "~bootstrap/scss/badge";
+// // @import "~bootstrap/scss/jumbotron";
+// @import "~bootstrap/scss/alert";
+// // @import "~bootstrap/scss/progress";
+// @import "~bootstrap/scss/media";
+// // @import "~bootstrap/scss/list-group";
+// @import "~bootstrap/scss/close";
+// @import "~bootstrap/scss/modal";
+// // @import "~bootstrap/scss/tooltip";
+// // @import "~bootstrap/scss/popover";
+// // @import "~bootstrap/scss/carousel";
+// @import "~bootstrap/scss/utilities";
+// @import "~bootstrap/scss/print";
+
+@import "overrides";
+@import "additions";
+
+
+
+//TODO: Move below to new file - 'additions.scss'?
+
 
 .modal-header-primary {
-  background: $brand-primary;
+  background: $color-primary;
 
   h2 {
     color: white;
@@ -100,15 +164,18 @@ thead tr.ng2-smart-titles .ng2-smart-th {padding-left: 0}
   white-space: nowrap;
 }
 
-@media(min-width: $screen-sm) {
+@include media-breakpoint-up(xs){
+// @media(min-width: $screen-sm) {
   .nowrap-sm { white-space: nowrap;}
   .wrap-sm {white-space: normal;}
 }
-@media(min-width: $screen-md) {
+@include media-breakpoint-up(sm){
+// @media(min-width: $screen-md) {
   .nowrap-md { white-space: nowrap;}
   .wrap-md { white-space: normal;}
 }
-@media(min-width: $screen-lg) {
+@include media-breakpoint-up(md){
+// @media(min-width: $screen-lg) {
   .nowrap-lg { white-space: nowrap;}
   .wrap-lg { white-space: normal;}
 }

@@ -1,4 +1,4 @@
-@import "../../variables.scss";
+@import "variables.scss";
 
 .panel-clear {
   // background-color: $gray-lighter;
@@ -12,7 +12,7 @@
   }
 
   &.panel-primary {
-    border-color: $brand-primary-muted;
-    > .panel-heading { background-color: $brand-primary-muted;}
+    border-color: $color-primary-muted;
+    > .panel-heading { background-color: $color-primary-muted;}
   }
 }
