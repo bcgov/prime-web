@@ -9,22 +9,31 @@
     <h2>Datepicker Component</h2>
 
     Default. Fluid (block) width.
-    <code>
-      &lt;prime-datepicker&gt;&lt;/prime-datepicker&gt;
-    </code>
+    <code>&lt;prime-datepicker&gt;&lt;/prime-datepicker&gt;</code>
     <prime-datepicker></prime-datepicker>
     <hr />
 
     Mini. Fits into a button. Good for embedding in already busy areas.
-    <code>
-      &lt;prime-datepicker size='mini'&gt;&lt;/prime-datepicker&gt;
-    </code>
+    <code>&lt;prime-datepicker size='mini'&gt;&lt;/prime-datepicker&gt;</code>
     <prime-datepicker size='mini'></prime-datepicker>
   </div>
   <div class="col-sm">
-    <h2>Modal windows</h2>
-  </div>
-  <div class="col-sm">
     <h2>Breadcrumbs</h2>
+
+    <code>&lt;prime-breadcrumb&gt;&lt;/prime-breadcrumb&gt;</code>
+    <prime-breadcrumb></prime-breadcrumb>
+
+    <p>Click one of the links below to simulate a route change, and watch how the breadcumb automatically populates. <span class='text-muted small'>Known issue: Currently the breadcrumb is not populated until a route change event is detected. This is mitigated in a real app where we'd have one breadcrumb component shared across pages, which means it wouldn't be an issue.</span></p>
+
+    <ul>
+        <li><a routerLink="/demo">Demo page</a></li>
+        <li><a routerLink="/demo/ExampleA">/demo/ExampleA</a></li>
+        <li><a routerLink="/demo/ExampleB">/demo/ExampleB</a></li>
+        <li><a routerLink="/demo/ExampleB/ExampleB-1">/demo/ExampleB/ExampleB-1</a></li>
+        <li><a routerLink="/demo/ExampleB/ExampleB-2">/demo/ExampleB/ExampleB-2</a></li>
+        <li><a routerLink="/demo/ExampleC">/demo/ExampleC</a></li>
+    </ul>
+
+    <router-outlet></router-outlet>
   </div>
 </div>

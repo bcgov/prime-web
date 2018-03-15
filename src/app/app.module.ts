@@ -42,6 +42,9 @@ import { DemoPageComponent } from './pages/demo-page/demo-page.component';
 import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 import { MyDateRangePickerModule } from 'mydaterangepicker';
 import { DatepickerComponent } from './app/core/datepicker/datepicker.component';
+import { BreadcrumbComponent } from './core/breadcrumb/breadcrumb.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { BlankPageComponent } from './pages/blank-page/blank-page.component';
 
 
 @NgModule({
@@ -73,6 +76,9 @@ import { DatepickerComponent } from './app/core/datepicker/datepicker.component'
     EmailValidationComponent,
     DemoPageComponent,
     DatepickerComponent,
+    BreadcrumbComponent,
+    HomePageComponent,
+    BlankPageComponent,
   ],
   imports: [
     BrowserModule,
