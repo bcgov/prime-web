@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MasterDetailComponent } from './master-detail.component';
+import { MillerColumnsComponent } from './miller-columns.component';
 
-describe('MasterDetailComponent', () => {
-  let component: MasterDetailComponent;
-  let fixture: ComponentFixture<MasterDetailComponent>;
+describe('MillerColumnsComponent', () => {
+  let component: MillerColumnsComponent;
+  let fixture: ComponentFixture<MillerColumnsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MasterDetailComponent ]
+      declarations: [ MillerColumnsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MasterDetailComponent);
+    fixture = TestBed.createComponent(MillerColumnsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

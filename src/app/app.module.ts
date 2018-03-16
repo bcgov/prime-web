@@ -45,7 +45,7 @@ import { DatepickerComponent } from './app/core/datepicker/datepicker.component'
 import { BreadcrumbComponent } from './core/breadcrumb/breadcrumb.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { BlankPageComponent } from './pages/blank-page/blank-page.component';
-import { MasterDetailComponent } from './core/master-detail/master-detail.component';
+import { MillerColumnsComponent } from './core/miller-columns/miller-columns.component';
 
 
 @NgModule({
@@ -80,7 +80,7 @@ import { MasterDetailComponent } from './core/master-detail/master-detail.compon
     BreadcrumbComponent,
     HomePageComponent,
     BlankPageComponent,
-    MasterDetailComponent,
+    MillerColumnsComponent,
   ],
   imports: [
     BrowserModule,
