@@ -1,6 +1,57 @@
 // TODO: Probably best to use Bootstrap breakpoints and flex classes, to stay consistent.
 @import 'variables.scss';
 
+// DEVELOPMENT ONLY, REMOVE!
+.miller-column:nth-of-type(1){
+  background-color: rgb(255, 243, 208)
+}
+.miller-column:nth-of-type(2){
+  background-color: rgb(233, 255, 233)
+}
+
+.miller-container {
+  display: flex;
+  // TODO: Ems?
+  min-height: 400px;
+
+  position: relative;
+  @include media-breakpoint-up(md){
+    position: initial;
+  }
+}
+
+.miller-column {
+    //TODO: Not sure about keeping this.
+    // flex-basis: 0;
+    // flex-grow: 1;
+
+
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 100% !important;
+
+    @include media-breakpoint-up(md){
+      position: initial;
+    }
+
+    flex: 1;
+
+    border: 1px #ccc solid;
+    margin: 0 10px;
+    overflow: auto;
+
+    background: $gray-300;
+
+    // TODO: Document this is max amount it works?
+    // Add an .open class here for mobile?
+    @for $i from 1 through 10 {
+      &:nth-of-type($i){
+        z-index: $i;
+      }
+    }
+}
 
 .miller-items-container {
   list-style: none;
@@ -8,19 +59,6 @@
   padding: 0;
 }
 
-.miller-column {
-    //TODO: Not sure about keeping this.
-    flex-basis: 0;
-    flex-grow: 1;
-
-    border: 1px #ccc solid;
-    height: 100%;
-    margin: 0 10px;
-    overflow: auto;
-
-    // background: #f3f3f4; //FIXME: Variable
-    background: $gray-300;
-}
 
 .miller-item {
   margin: 0;
@@ -48,7 +86,19 @@
   text-decoration: none;
 }
 
-.title {
+.item-title {
   font-weight: 800;
   font-size: $h4-font-size;
+}
+
+.miller-column-title {
+  padding: 1em;
+  font-size: $h4-font-size;
+  background: $gray-100;
+  border-bottom: 1px solid $gray-900;
+}
+
+.blank-column {
+  // Don't show as 'open' for mobile.
+  z-index: -100;
 }
