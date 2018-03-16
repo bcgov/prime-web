@@ -23,8 +23,6 @@ export class BreadcrumbComponent implements OnInit {
     .filter(event => event instanceof NavigationEnd)
     .distinctUntilChanged()
     .map(event =>  this.buildBreadCrumb(this.activatedRoute.root));
-
-    this.breadcrumbs$.subscribe(x => { console.log('subscribeLog', x) })
   }
 
   buildBreadCrumb(route: ActivatedRoute, url: string = '',
