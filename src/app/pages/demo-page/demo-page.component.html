@@ -32,7 +32,7 @@
       <code>&lt;prime-breadcrumb&gt;&lt;/prime-breadcrumb&gt;</code>
       <prime-breadcrumb></prime-breadcrumb>
 
-      <p>Click one of the links below to simulate a route change, and watch how the breadcumb automatically populates. <span class='text-muted small'>Known issue: Currently the breadcrumb is not populated until a route change event is detected. This is mitigated in a real app where we'd have one breadcrumb component shared across pages, which means it wouldn't be an issue.</span></p>
+      <p>Click one of the links below to simulate a route change, and watch how the breadcumb automatically populates. <span class='text-muted small'>Known issue: Currently the breadcrumb is not populated until a route change event is detected. That means the breadcrumb will be blank until you click a link.</span></p>
 
       <ul>
           <li><a routerLink="/demo">Demo page</a></li>
@@ -48,12 +48,19 @@
     </div>
 </div>
 
+<hr />
 
 <div class="row">
   <div class="col">
-    <h2>Miller Collumns</h2>
+    <h2>
+      Miller Collumns
+      <small><a href="https://en.wikipedia.org/wiki/Miller_columns">(wiki)</a></small>
+    </h2>
 
-    <prime-miller-columns></prime-miller-columns>
+    <prime-miller-columns [data]="millerColumnDummyData"></prime-miller-columns>
 
   </div>
 </div>
+
+
+<hr />

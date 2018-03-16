@@ -1,0 +1,54 @@
+// TODO: Probably best to use Bootstrap breakpoints and flex classes, to stay consistent.
+@import 'variables.scss';
+
+
+.miller-items-container {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.miller-column {
+    //TODO: Not sure about keeping this.
+    flex-basis: 0;
+    flex-grow: 1;
+
+    border: 1px #ccc solid;
+    height: 100%;
+    margin: 0 10px;
+    overflow: auto;
+
+    // background: #f3f3f4; //FIXME: Variable
+    background: $gray-300;
+}
+
+.miller-item {
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px $gray-700 solid; //FIXME: Variable
+  cursor: pointer;
+  position: relative;
+
+  &:hover {
+    background: $gray-100;
+  }
+
+  &.open, &.open:hover {
+    background-color: lightblue; //FIXME: Variable
+  }
+
+  .has-children {
+    color: red !important;
+  }
+}
+
+.miller-item-link {
+  display: block;
+  padding: 1em;
+  text-decoration: none;
+}
+
+.title {
+  font-weight: 800;
+  font-size: $h4-font-size;
+}

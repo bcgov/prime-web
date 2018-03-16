@@ -1,3 +1,82 @@
-<p>
-  miller-columns works!
-</p>
+<!--
+  TODO: Move miller item into separate component? Interface? Depends on how much variety will be in the content.
+ -->
+
+<div class="miller-container d-flex flex-row">
+  <div class="miller-column">
+    <ul class="miller-items-container">
+      <!-- Classes: .miller-item, .has-children, .selected -->
+
+      <!-- TODO: Turn this into a forloop with dummy data in DemoPage component. Data should be tree-shaped, as that's what Miller Tables are all about. -->
+
+      <!-- TODO: Add .has-children class to .li if needed -->
+      <li class="miller-item" *ngFor="let item of data" [ngClass]="{
+        'open': item.open,
+        'has-children': item.children.length
+      }">
+        <!-- TODO - Turn this bit into a new component, miller-item? Depends on complexity. -->
+        <a (click)="onItemClick($event, item)" class='miller-item-link'>
+          <span class="title">{{item.title}}</span>
+        </a>
+      </li>
+<!--
+      <li class="miller-item selected">
+        <a (click)="onItemClick($event)" class='miller-item-link'>
+          <span class="title">Example A</span>
+        </a>
+      </li>
+
+      <li class="miller-item has-children">
+        <a (click)="onItemClick($event)" class='miller-item-link'>
+          <span class="title">ExampleB</span>
+        </a>
+      </li>
+      <li class="miller-item">
+        <a (click)="onItemClick($event)" class='miller-item-link'>
+          <span class="title">ExampleC</span>
+        </a>
+      </li>
+      <li class="miller-item has-children">
+        <a (click)="onItemClick($event)" class='miller-item-link'>
+          <span class="title">ExampleD</span>
+        </a>
+      </li>
+      <li class="miller-item">
+        <a (click)="onItemClick($event)" class='miller-item-link'>
+          <span class="title">ExampleE</span>
+        </a>
+      </li>
+      <li class="miller-item">
+        <a (click)="onItemClick($event)" class='miller-item-link'>
+          <span class="title">ExampleF</span>
+        </a>
+      </li> -->
+
+    </ul>
+
+
+  </div>
+  <div class="miller-column">
+    <p>Quas corporis tempore accusantium corrupti vitae odit dicta illum quam deserunt est officia ab, minus fugit, cum aperiam
+      voluptates autem adipisci ut veritatis molestias doloribus quos! Modi cupiditate doloremque deleniti.</p>
+  </div>
+  <div class="miller-column">
+    <p>Dolore, laboriosam consequatur molestias perferendis magnam eaque dicta nihil voluptatem, fugit cumque et? Ea quisquam
+      dignissimos repellat consectetur libero voluptatum. Distinctio debitis dolores quibusdam eum veritatis. Consequuntur
+      ullam repellat doloremque.</p>
+  </div>
+</div>
+
+
+<!--
+<div class="miller-container d-flex flex-column flex-md-row">
+  <div class="miller-column p2">
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. At similique est nam ad, molestiae quis ducimus expedita eum laborum, ullam eligendi voluptatibus nemo ex iure possimus praesentium, veritatis ipsam quos!</p>
+  </div>
+  <div class="miller-column p2">
+    <p>Quas corporis tempore accusantium corrupti vitae odit dicta illum quam deserunt est officia ab, minus fugit, cum aperiam voluptates autem adipisci ut veritatis molestias doloribus quos! Modi cupiditate doloremque deleniti.</p>
+  </div>
+  <div class="miller-column p2">
+    <p>Dolore, laboriosam consequatur molestias perferendis magnam eaque dicta nihil voluptatem, fugit cumque et? Ea quisquam dignissimos repellat consectetur libero voluptatum. Distinctio debitis dolores quibusdam eum veritatis. Consequuntur ullam repellat doloremque.</p>
+  </div>
+</div> -->
