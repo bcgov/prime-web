@@ -42,8 +42,6 @@ export class DatepickerComponent implements OnInit {
       sunHighlight: false,
     };
 
-    console.log('ngOnInit DateFormat:', this.dateFormat)
-
     if (this.size === DatepickerSizes.MINI) {
       //Set width/height to 4/5 of default
       this.datepickerOptions.selectorHeight = '185px';
@@ -54,7 +52,6 @@ export class DatepickerComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
 
     if (this.date || this.date === null) { //Just not `undefined`
-      console.log('ngOnChanges, updating model, dateFormat:', this.dateFormat);
       this.model = {
         date: this.date,
         formatted: this.formatDate(this.date, this.dateFormat, this.monthLabels)
@@ -91,10 +88,6 @@ export class DatepickerComponent implements OnInit {
     const D = "d";
     const DD = "dd";
     const YYYY = "yyyy";
-
-    // if (this.size === "mini"){
-    console.log('formatDate with dateFormat:', dateFormat, this.dateFormat);
-    // }
 
     if (this.date === null) {
       return null;
