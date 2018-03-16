@@ -3,6 +3,12 @@
 
 <hr>
 
+TODO:
+<ul>
+  <li>Add @Inputs() and @Outputs() to Datepicker! Including [ngModel] and events!</li>
+  <li>Make the rows equal height (Datepicker + breadcrumbs)</li>
+</ul>
+
 
 <div class="row">
   <div class="col-sm">
@@ -13,9 +19,16 @@
     <prime-datepicker></prime-datepicker>
     <hr />
 
-    Mini. Fits into a button. Good for embedding in already busy areas.
-    <code>&lt;prime-datepicker size='mini'&gt;&lt;/prime-datepicker&gt;</code>
-    <prime-datepicker size='mini'></prime-datepicker>
+    Binding to data.
+    <code>&lt;prime-datepicker [(date)]="demoDate"&gt;&lt;/prime-datepicker&gt;</code>
+    <prime-datepicker [(date)]="demoDate"></prime-datepicker>
+    <pre>{{this.demoDate | json}}</pre>
+
+    <hr />
+
+    Mini. Fits in a button. Plus custom date formatting.
+    <code>&lt;prime-datepicker size='mini' dateFormat="yyyy/mm/dd"&gt;&lt;/prime-datepicker&gt;</code>
+    <prime-datepicker size='mini' dateFormat="yyyy/mm/dd"></prime-datepicker>
   </div>
   <div class="col-sm">
     <h2>Breadcrumbs</h2>
@@ -35,5 +48,15 @@
     </ul>
 
     <router-outlet></router-outlet>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col">
+    <h2>Master-Detail (a.k.a Miller Collumn)</h2>
+
+    <prime-master-detail></prime-master-detail>
+
   </div>
 </div>

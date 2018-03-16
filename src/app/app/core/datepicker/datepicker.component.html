@@ -33,6 +33,7 @@
               (click)="dp.toggleCalendar()">
               {{ model?.formatted || 'Select a date' }}
             </button>
+            <input type="hidden" name="date" [value]="model?.formatted" />
 
             <span class="input-group-append">
                 <button type="button" class="btn btn-outline-primary" (click)="dp.clearDate()" [disabled]="!hasValidDate" >
