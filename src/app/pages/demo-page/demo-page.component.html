@@ -3,52 +3,49 @@
 
 <hr>
 
-TODO:
-<ul>
-  <li>Add @Inputs() and @Outputs() to Datepicker! Including [ngModel] and events!</li>
-  <li>Make the rows equal height (Datepicker + breadcrumbs)</li>
-</ul>
-
-
 <div class="row">
-  <div class="col-sm">
-    <h2>Datepicker Component</h2>
+  <div class="col-sm d-flex">
+    <div class="col">
+      <h2>Datepicker Component</h2>
 
-    Default. Fluid (block) width.
-    <code>&lt;prime-datepicker&gt;&lt;/prime-datepicker&gt;</code>
-    <prime-datepicker></prime-datepicker>
-    <hr />
+      Default. Fluid (block) width.
+      <code>&lt;prime-datepicker&gt;&lt;/prime-datepicker&gt;</code>
+      <prime-datepicker></prime-datepicker>
+      <hr />
 
-    Binding to data.
-    <code>&lt;prime-datepicker [(date)]="demoDate"&gt;&lt;/prime-datepicker&gt;</code>
-    <prime-datepicker [(date)]="demoDate"></prime-datepicker>
-    <pre>{{this.demoDate | json}}</pre>
+      Binding to data.
+      <code>&lt;prime-datepicker [(date)]="demoDate"&gt;&lt;/prime-datepicker&gt;</code>
+      <prime-datepicker [(date)]="demoDate"></prime-datepicker>
+      <pre>{{this.demoDate | json}}</pre>
 
-    <hr />
+      <hr />
 
-    Mini. Fits in a button. Plus custom date formatting.
-    <code>&lt;prime-datepicker size='mini' dateFormat="yyyy/mm/dd"&gt;&lt;/prime-datepicker&gt;</code>
-    <prime-datepicker size='mini' dateFormat="yyyy/mm/dd"></prime-datepicker>
+      Mini. Fits in a button. Plus custom date formatting.
+      <code>&lt;prime-datepicker size='mini' dateFormat="yyyy/mm/dd"&gt;&lt;/prime-datepicker&gt;</code>
+      <prime-datepicker size='mini' dateFormat="yyyy/mm/dd"></prime-datepicker>
+    </div>
   </div>
-  <div class="col-sm">
-    <h2>Breadcrumbs</h2>
+  <div class="col-sm d-flex">
+    <div class="col">
+      <h2>Breadcrumbs</h2>
 
-    <code>&lt;prime-breadcrumb&gt;&lt;/prime-breadcrumb&gt;</code>
-    <prime-breadcrumb></prime-breadcrumb>
+      <code>&lt;prime-breadcrumb&gt;&lt;/prime-breadcrumb&gt;</code>
+      <prime-breadcrumb></prime-breadcrumb>
 
-    <p>Click one of the links below to simulate a route change, and watch how the breadcumb automatically populates. <span class='text-muted small'>Known issue: Currently the breadcrumb is not populated until a route change event is detected. This is mitigated in a real app where we'd have one breadcrumb component shared across pages, which means it wouldn't be an issue.</span></p>
+      <p>Click one of the links below to simulate a route change, and watch how the breadcumb automatically populates. <span class='text-muted small'>Known issue: Currently the breadcrumb is not populated until a route change event is detected. This is mitigated in a real app where we'd have one breadcrumb component shared across pages, which means it wouldn't be an issue.</span></p>
 
-    <ul>
-        <li><a routerLink="/demo">Demo page</a></li>
-        <li><a routerLink="/demo/ExampleA">/demo/ExampleA</a></li>
-        <li><a routerLink="/demo/ExampleB">/demo/ExampleB</a></li>
-        <li><a routerLink="/demo/ExampleB/ExampleB-1">/demo/ExampleB/ExampleB-1</a></li>
-        <li><a routerLink="/demo/ExampleB/ExampleB-2">/demo/ExampleB/ExampleB-2</a></li>
-        <li><a routerLink="/demo/ExampleC">/demo/ExampleC</a></li>
-    </ul>
+      <ul>
+          <li><a routerLink="/demo">Demo page</a></li>
+          <li><a routerLink="/demo/ExampleA">/demo/ExampleA</a></li>
+          <li><a routerLink="/demo/ExampleB">/demo/ExampleB</a></li>
+          <li><a routerLink="/demo/ExampleB/ExampleB-1">/demo/ExampleB/ExampleB-1</a></li>
+          <li><a routerLink="/demo/ExampleB/ExampleB-2">/demo/ExampleB/ExampleB-2</a></li>
+          <li><a routerLink="/demo/ExampleC">/demo/ExampleC</a></li>
+      </ul>
 
-    <router-outlet></router-outlet>
-  </div>
+      <router-outlet></router-outlet>
+    </div>
+    </div>
 </div>
 
 
