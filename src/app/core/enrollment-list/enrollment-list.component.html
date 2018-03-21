@@ -1,0 +1,10 @@
+<!-- TODO: List component should have the "Find Collection" and "View" dropdowns here, as well as all the search logic. -->
+
+<div>
+  <div class="enrollment-item-container" *ngFor="let item of rowItems">
+    <prime-enrollment-row
+      [rowData]='item'
+      (onRowOpened)='rowOpened($event)'>
+    </prime-enrollment-row>
+  </div>
+</div>

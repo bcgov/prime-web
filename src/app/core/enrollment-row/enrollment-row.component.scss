@@ -1,0 +1,56 @@
+@import 'variables.scss';
+$rowHeight: 2.5em; //35px;
+// Shared baseline flex stylings
+
+:host {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.enrollment-icons,
+.enrollment-list-item,
+.enrollment-expandable {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.enrollment-list-item {
+    border: 1px solid $gray-600;
+    height: $rowHeight; // Background necessary so it can hide animation underneath it.
+    background: white;
+    z-index: 1;
+    position: relative;
+}
+
+.enrollment-actions {
+    display: flex;
+    align-items: center;
+}
+
+.enrollment-text-container {
+    flex: 5;
+    padding-left: 1em;
+    .enrollment-text-main {
+        font-weight: 800;
+    }
+    &>span:not(:last-of-type):after {
+        content: " / "
+    }
+    &>span:not(.enrollment-text-main) {
+        color: $gray-600;
+    }
+}
+
+.enrollment-icons>i {
+    padding: 0 5px;
+    font-size: 18px;
+}
+
+.enrollment-expandable {
+    margin-left: 8em;
+    color: $gray-700;
+    height: $rowHeight; // TODO: Custom colours depending on if it has a warning etc.
+    border: 1px solid $gray-500;
+}

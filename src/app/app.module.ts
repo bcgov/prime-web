@@ -46,6 +46,10 @@ import { BreadcrumbComponent } from './core/breadcrumb/breadcrumb.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { BlankPageComponent } from './pages/blank-page/blank-page.component';
 import { MillerColumnsComponent } from './core/miller-columns/miller-columns.component';
+import { EnrollmentListComponent } from './core/enrollment-list/enrollment-list.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EnrollmentRowComponent } from './core/enrollment-row/enrollment-row.component';
+
 
 
 @NgModule({
@@ -81,9 +85,12 @@ import { MillerColumnsComponent } from './core/miller-columns/miller-columns.com
     HomePageComponent,
     BlankPageComponent,
     MillerColumnsComponent,
+    EnrollmentListComponent,
+    EnrollmentRowComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpModule,
     AppRoutingModule,

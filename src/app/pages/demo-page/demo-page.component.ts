@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MillerItem } from '../../core/miller-columns/miller-columns.interface';
+import { EnrollmentRowItem } from '../../core/enrollment-row/enrollment-row.interface';
 @Component({
   selector: 'prime-demo-page',
   templateUrl: './demo-page.component.html',
@@ -20,75 +21,48 @@ export class DemoPageComponent implements OnInit {
       parentId: null,
       title: "Example A",
       hasChildren: false,
-      // children: [],
     },
     {
       id: "2",
       parentId: null,
       title: "Roman Emperors",
       hasChildren: true,
-      // children: [
-        // {
-        //   id: "2a",
-        //   parentId: "2",
-        //   title: "Julius Caesar",
-        //   children: []
-        // },
-        // {
-        //   id: "2b",
-        //   parentId: "2",
-        //   title: "Trajan",
-        //   children: []
-        // },
-        // {
-        //   id: "2c",
-        //   parentId: "2",
-        //   title: "Hadrian",
-        //   children: []
-        // }
-      // ],
     },
     {
       id: "3",
       parentId: null,
       title: "Aeneas and Company",
       hasChildren: false,
-      // children: [],
     },
     {
       id: "4",
       parentId: null,
       title: "Self-Help with Sisyphus",
       hasChildren: false,
-      // children: [],
     },
     {
       id: "5",
       parentId: null,
       title: "Lorem Ipsum",
       hasChildren: false,
-      // children: [],
     },
     {
       id: "6",
       parentId: "2",
       title: "Julius Caesar",
       hasChildren: false,
-      // children: []
     },
     {
       id: "7",
       parentId: "2",
       title: "Trajan",
       hasChildren: false,
-      // children: []
     },
     {
       id: "8",
       parentId: "2",
       title: "Hadrian",
       hasChildren: false,
-      // children: []
     },
     {
       id: "9",
@@ -116,16 +90,59 @@ export class DemoPageComponent implements OnInit {
     },
   ]
 
+  //TODO: Interface
+  public enrollmentListDummyData: EnrollmentRowItem[] = [
+    {
+      title: "London Drugs - All",
+      sites: Array(2),
+      users: Array(5),
+      expandableChildren: []
+    },
+    {
+      title: "Rexall Vancouver Island - All",
+      sites: Array(6),
+      users: Array(8),
+      expandableChildren: [],
+    },
+    {
+      title: "SDM Vancouver Island",
+      sites: Array(3),
+      users: Array(8),
+      expandableChildren: [],
+    }
+  ]
+
 
   ngOnInit() {
+    this.generateDummyData();
+  }
+
+  generateDummyData() {
+    // Make each of the enrollment rows expandable
+    this.enrollmentListDummyData = this.enrollmentListDummyData.map(x => {
+      x.expandableChildren = [
+        {
+          title: "Ellen Hunt",
+          hasWarning: false,
+          hasAlert: true,
+        },
+        {
+          title: "James Smith",
+          hasWarning: true,
+          hasAlert: false,
+        },
+        {
+          title: "Bob Jones",
+          hasWarning: true,
+          hasAlert: false,
+        }
+      ]
+      return x;
+    })
   }
 
   ngOnChanges(ev) {
     console.log('DemoPage, ngOnChanges', ev);
   }
-
-  // ngDoCheck(ev){
-  //   console.log('DemoPage, ngDoCheck', ev, this.demoDate);
-  // }
 
 }

@@ -1,0 +1,40 @@
+<div class="enrollment-list-item" (click)="toggleRow()">
+
+    <div class="enrollment-text-container">
+      <span class="enrollment-text-main">London Drugs &mdash; All</span>
+      <span class="enrollment-text-extra">(2) Sites</span>
+      <span class="enrollment-text-extra">(5) Users</span>
+    </div>
+
+    <div class="enrollment-actions">
+      <span class="enrollment-icons">
+        <i class="fa fa-exclamation-triangle text-danger"></i>
+        <i class="fa fa-exclamation-circle text-warning"></i>
+        <i class="fa fa-info-circle"></i>
+      </span>
+      <button class="btn btn-default btn-block">Site Enrollment</button>
+    </div>
+
+  </div>
+
+  <div [@openState]="openState" class="hidden">
+
+    <div [@openStateChild]="openState"  class="expandable-container">
+
+      <div class="enrollment-expandable" *ngFor="let expandableItem of rowData?.expandableChildren">
+        <div class="enrollment-text-container">
+          <span class="enrollment-text-main">{{expandableItem.title}}</span>
+        </div>
+        <div class="enrollment-actions">
+            <span class="enrollment-icons">
+                <i *ngIf="expandableItem.hasAlert" class="fa fa-exclamation-triangle text-danger"></i>
+                <i *ngIf="expandableItem.hasWarning"class="fa fa-exclamation-circle text-warning"></i>
+                <i class="fa fa-info-circle"></i>
+            </span>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
