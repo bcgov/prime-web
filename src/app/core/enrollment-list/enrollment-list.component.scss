@@ -1,3 +1,17 @@
 .enrollment-item-container {
-  overflow: hidden;
+  min-height: 20rem; //Helps for demo, remove if necessary.
+}
+
+.enrollment-list-controls  {
+  margin-bottom: 1em;
+  min-height: 4em;
+  padding: 1em;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.enrollment-view-selector {
+  min-width: 5em;
 }

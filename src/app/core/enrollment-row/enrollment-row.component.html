@@ -1,9 +1,9 @@
 <div class="enrollment-list-item" (click)="toggleRow()">
 
     <div class="enrollment-text-container">
-      <span class="enrollment-text-main">London Drugs &mdash; All</span>
-      <span class="enrollment-text-extra">(2) Sites</span>
-      <span class="enrollment-text-extra">(5) Users</span>
+      <span class="enrollment-text-main">{{rowData.title}}</span>
+      <span class="enrollment-text-extra">({{rowData.sites.length}}) Sites</span>
+      <span class="enrollment-text-extra">({{rowData.users.length}}) Users</span>
     </div>
 
     <div class="enrollment-actions">
@@ -21,7 +21,10 @@
 
     <div [@openStateChild]="openState"  class="expandable-container">
 
-      <div class="enrollment-expandable" *ngFor="let expandableItem of rowData?.expandableChildren">
+      <div class="enrollment-expandable" *ngFor="let expandableItem of rowData?.expandableChildren" [ngClass]="{
+          'border-danger': expandableItem.hasAlert,
+          'border-warning': expandableItem.hasWarning && !expandableItem.hasAlert
+        }">
         <div class="enrollment-text-container">
           <span class="enrollment-text-main">{{expandableItem.title}}</span>
         </div>

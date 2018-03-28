@@ -10,19 +10,23 @@ import { EnrollmentRowComponent } from '../enrollment-row/enrollment-row.compone
 export class EnrollmentListComponent implements OnInit {
   @Input() rowItems: EnrollmentRowItem[];
   @ViewChildren(EnrollmentRowComponent) rowElements: QueryList<EnrollmentRowComponent>
-
-  public ONE_ROW_OPEN_AT_A_TIME = true;
-
+  /** Internal representation of data used in for loops. Can be filtered by esarch. */
+  public data: EnrollmentRowItem[];
 
   constructor() { }
 
   ngOnInit() {
+    this.data = this.rowItems;
   }
 
   rowOpened(item: EnrollmentRowComponent) {
-    // console.log("rowOpened", {
-    //   item, rowElements: this.rowElements,
-    // });
+    // console.log("rowOpened", { item, rowElements: this.rowElements });
+  }
+
+  search(phrase){
+    this.data = this.rowItems.filter(x => {
+      return x.title.toLowerCase().indexOf(phrase.toLowerCase()) !== -1;
+    })
   }
 
 }

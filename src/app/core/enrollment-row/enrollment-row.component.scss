@@ -1,6 +1,6 @@
 @import 'variables.scss';
 $rowHeight: 2.5em; //35px;
-// Shared baseline flex stylings
+$rowBgColor: white;
 
 :host {
     display: flex;
@@ -14,30 +14,65 @@ $rowHeight: 2.5em; //35px;
     flex: 1;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .enrollment-list-item {
-    border: 1px solid $gray-600;
-    height: $rowHeight; // Background necessary so it can hide animation underneath it.
-    background: white;
+    border: 1px solid $gray-500;
+    min-height: $rowHeight;
+    background: $rowBgColor; // Hide animation underneath it.
     z-index: 1;
     position: relative;
+}
+
+// Same hover effect for full rows and expandable rows
+.enrollment-expandable,
+.enrollment-list-item {
+  transition: 0.25s;
+  &:hover {
+    background: darken($rowBgColor, 2.5%);
+  }
+}
+
+.enrollment-expandable {
+  margin-left: 8em;
+  color: $gray-700;
+  min-height: $rowHeight;
+  border: 1px solid $gray-500;
 }
 
 .enrollment-actions {
     display: flex;
     align-items: center;
+    align-self: stretch;
+
+    .btn-block {
+      border-radius: 0;
+      border-top: 0;
+      border-right: 0;
+      border-bottom: 0;
+      height: 100%;
+    }
 }
 
 .enrollment-text-container {
     flex: 5;
     padding-left: 1em;
+    margin-right: 2em;
     .enrollment-text-main {
         font-weight: 800;
     }
     &>span:not(:last-of-type):after {
         content: " / "
     }
+
+    @include media-breakpoint-down(xs){
+      &>span:first-of-type:after {
+        content: "";
+        display: block;
+      }
+    }
+
     &>span:not(.enrollment-text-main) {
         color: $gray-600;
     }
@@ -46,11 +81,5 @@ $rowHeight: 2.5em; //35px;
 .enrollment-icons>i {
     padding: 0 5px;
     font-size: 18px;
-}
-
-.enrollment-expandable {
-    margin-left: 8em;
-    color: $gray-700;
-    height: $rowHeight; // TODO: Custom colours depending on if it has a warning etc.
-    border: 1px solid $gray-500;
+    cursor: pointer;
 }
