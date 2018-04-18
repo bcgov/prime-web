@@ -1,12 +1,15 @@
 <!--
   TODO:
-  - Wire up with router (add <router-outlet></router-outlet> ???)
-  - Able to configure which routes are loaded below via config
   - Add User button on side
  -->
 <div class='dashboard-container'>
     <nav class="nav">
-      <button class="btn btn-default">By User</button>
-      <button class="btn btn-default">By Site</button>
+
+      <a routerLink="/dashboard/user">
+        <button class="btn btn-default btn-block">By User</button>
+      </a>
+      <a routerLink="/dashboard/site">
+        <button class="btn btn-default btn-block">By Site</button>
+      </a>
     </nav>
 </div>

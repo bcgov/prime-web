@@ -13,6 +13,8 @@ import { DemoPageComponent } from './pages/demo-page/demo-page.component'
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { BlankPageComponent } from './pages/blank-page/blank-page.component';
 import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
+import { DashboardBySiteComponent } from './pages/dashboard-page/dashboard-by-site/dashboard-by-site.component';
+import { DashboardByUserComponent } from './pages/dashboard-page/dashboard-by-user/dashboard-by-user.component';
 
 const routes: Routes = [
 
@@ -93,7 +95,27 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardPageComponent
+    component: DashboardPageComponent,
+
+    children: [
+      {
+        path: 'user',
+        // data: { breadcrumb: "user"},
+        component: DashboardByUserComponent,
+        // outlet: 'dashboard',
+      },
+      {
+        path: 'site',
+        // data: { breadcrumb: "site"},
+        component: DashboardBySiteComponent,
+        // outlet: 'dashboard',
+      },
+      {
+        path: '**',
+        redirectTo: 'user'
+      }
+    ]
+
   },
   {
     path: '**',

@@ -59,6 +59,8 @@ import { PillBadgeComponent } from './core/pill-badge/pill-badge.component';
 import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
 import { AlertComponent } from './core/alert/alert.component';
 import { AlertModule } from 'ngx-bootstrap/alert';
+import { DashboardByUserComponent } from './pages/dashboard-page/dashboard-by-user/dashboard-by-user.component';
+import { DashboardBySiteComponent } from './pages/dashboard-page/dashboard-by-site/dashboard-by-site.component';
 
 
 
@@ -104,6 +106,8 @@ import { AlertModule } from 'ngx-bootstrap/alert';
     PillBadgeComponent,
     DashboardPageComponent,
     AlertComponent,
+    DashboardByUserComponent,
+    DashboardBySiteComponent,
   ],
   imports: [
     BrowserModule,

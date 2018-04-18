@@ -6,7 +6,7 @@
   .nav {
     display: flex;
     justify-content: center;
-    & > button {
+    & > button, & > a {
       margin: 0 1rem;
       flex-basis: 200px;
     }
