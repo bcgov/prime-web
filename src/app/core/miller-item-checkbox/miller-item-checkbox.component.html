@@ -1,0 +1,27 @@
+<li class="miller-item" *ngFor="let item of items" [ngClass]="{
+  'open': item.open,
+  'has-children': item.hasChildren,
+  'd-none': item.hidden && !item.checked
+}">
+
+  <a (click)="onItemClick(item)" class='miller-item-link'>
+    <!-- <input type="checkbox" name="s" id=""> -->
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="millerCheckbox{{objectId}}" [(ngModel)]='item.checked'>
+        <label class="form-check-label" for="millerCheckbox{{objectId}}">
+          <span class="item-title">{{item.title}}</span>
+        </label>
+    </div>
+
+
+    <span class="icons-group d-flex align-items-center">
+        <span *ngIf="item.isActive" class="badge badge-pill badge-success mr-1">Active</span>
+
+        <i *ngIf="item.hasAlert" class="fa fa-exclamation-triangle text-danger"></i>
+        <i *ngIf="item.hasWarning"class="fa fa-exclamation-circle text-warning"></i>
+
+        <i class="fa fa-exclamation-circle text-muted ml-1"></i>
+    </span>
+
+  </a>
+</li>

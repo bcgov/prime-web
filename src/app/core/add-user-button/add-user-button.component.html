@@ -1,0 +1,60 @@
+<button type="button" class="btn btn-primary" (click)="openModal(template)">
+    Add User
+</button>
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title">Find and add a new user</h4>
+
+        <prime-mini-progress-bar [maxSteps]='maxProgressSteps' [currentStep]='currentProgressStep'>
+        </prime-mini-progress-bar>
+
+        <!-- <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+        </button> -->
+    </div>
+    <div class="modal-body">
+        <form class="form-inline align-items-start">
+            <div class="d-flex flex-column align-items-end">
+                <span class='d-flex flex-row'>
+                    <label for="lastName">Last Name</label>
+                    <input type="text" class="form-control mb-2 mr-sm-2" id="lastName" placeholder="" (blur)="incrementProgress()" tabindex="1">
+                </span>
+
+                <span class='d-flex flex-row'>
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control mb-2 mr-sm-2" id="firstName" placeholder="" (blur)="incrementProgress()" tabindex="3">
+                </span>
+
+                <span class='d-flex flex-row'>
+                    <label for="DoB">Date of Birth</label>
+                    <input type="text" class="form-control mb-2 mr-sm-2" id="DoB" placeholder="" (blur)="incrementProgress()" tabindex="5">
+                </span>
+            </div>
+            <div class="d-flex flex-column align-items-end">
+                <span class='d-flex flex-row'>
+                    <label for="middleName">Middle Name (optional)</label>
+                    <input type="text" class="form-control mb-2 mr-sm-2" id="middleName" placeholder="" (blur)="incrementProgress()" tabindex="2">
+                </span>
+
+                <span class='d-flex flex-row'>
+                    <label for="primeUserID">PRIME UserID</label>
+                    <input type="text" class="form-control mb-2 mr-sm-2" id="primeUserID" placeholder="" (blur)="incrementProgress()" tabindex="4">
+                </span>
+            </div>
+        </form>
+
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="currentProgressStep = 0;">
+            Clear All
+        </button>
+        <button type="button" class="btn btn-primary" disabled>
+            Add User
+        </button>
+        <button type="button" class="btn btn-default" disabled>
+            Find User
+        </button>
+    </div>
+</ng-template>

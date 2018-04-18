@@ -12,7 +12,6 @@ import { ApplicantDataService } from './services/applicant-data.service';
 import { ProgressBarComponent } from './core/progress-bar/progress-bar.component';
 import { ConsentModalComponent } from './core/consent-modal/consent-modal.component';
 import { ProfessionalInfoComponent } from './pages/professional-info/professional-info.component';
-import { BaseComponent } from './core/base-component/base-component.component';
 import { PrimeDateComponent } from './core/date/date.component';
 import { CalendarFieldFormatterDirective } from './core/date/calendar-field-formatter.directive';
 import { CalendarYearValidatorDirective } from './core/date/calendar-year.validator';
@@ -40,6 +39,8 @@ import { PhoneValidationComponent } from './validation/phone-validation/phone-va
 import { EmailValidationComponent } from './validation/email-validation/email-validation.component';
 import { DemoPageComponent } from './pages/demo-page/demo-page.component';
 import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 import { MyDateRangePickerModule } from 'mydaterangepicker';
 import { DatepickerComponent } from './app/core/datepicker/datepicker.component';
 import { BreadcrumbComponent } from './core/breadcrumb/breadcrumb.component';
@@ -49,6 +50,12 @@ import { MillerColumnsComponent } from './core/miller-columns/miller-columns.com
 import { EnrollmentListComponent } from './core/enrollment-list/enrollment-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EnrollmentRowComponent } from './core/enrollment-row/enrollment-row.component';
+import { ExpandingSearchComponent } from './core/expanding-search/expanding-search.component';
+import { MillerItemCheckboxComponent } from './core/miller-item-checkbox/miller-item-checkbox.component';
+import { AddUserButtonComponent } from './core/add-user-button/add-user-button.component';
+import { MiniProgressBarComponent } from './core/mini-progress-bar/mini-progress-bar.component';
+import { DashboardBarComponent } from './core/dashboard-bar/dashboard-bar.component';
+import { PillBadgeComponent } from './core/pill-badge/pill-badge.component';
 
 
 
@@ -58,7 +65,6 @@ import { EnrollmentRowComponent } from './core/enrollment-row/enrollment-row.com
     ProgressBarComponent,
     ConsentModalComponent,
     ProfessionalInfoComponent,
-    BaseComponent,
     PrimeDateComponent,
     CalendarFieldFormatterDirective,
     CalendarYearValidatorDirective,
@@ -87,6 +93,12 @@ import { EnrollmentRowComponent } from './core/enrollment-row/enrollment-row.com
     MillerColumnsComponent,
     EnrollmentListComponent,
     EnrollmentRowComponent,
+    ExpandingSearchComponent,
+    MillerItemCheckboxComponent,
+    AddUserButtonComponent,
+    MiniProgressBarComponent,
+    DashboardBarComponent,
+    PillBadgeComponent,
   ],
   imports: [
     BrowserModule,
@@ -99,6 +111,8 @@ import { EnrollmentRowComponent } from './core/enrollment-row/enrollment-row.com
     Ng2SmartTableModule,
     StickyModule,
     NgxMyDatePickerModule.forRoot(),
+    ProgressbarModule.forRoot(),
+    TabsModule.forRoot(),
     MyDateRangePickerModule
   ],
   providers: [

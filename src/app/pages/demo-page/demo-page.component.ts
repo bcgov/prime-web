@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MillerItem } from '../../core/miller-columns/miller-columns.interface';
-import { EnrollmentRowItem } from '../../core/enrollment-row/enrollment-row.interface';
+import { MillerItem, MillerColumnConfig } from '../../core/miller-columns/miller-columns.interface';
+import { EnrollmentRowItem, EnrollmentRowChild, EnrollmentStatus, BadgeLevel } from '../../core/enrollment-row/enrollment-row.interface';
+
 @Component({
   selector: 'prime-demo-page',
   templateUrl: './demo-page.component.html',
@@ -13,82 +14,105 @@ export class DemoPageComponent implements OnInit {
   // The Ides of March!
   public demoDate = { year: 2018, month: 3, day: 15 }
 
-  // Tree shaped
-  // TODO: Change IDs to GUIDs
-  public millerColumnDummyData: MillerItem[] = [
-    {
-      id: "1",
-      parentId: null,
-      title: "Example A",
-      hasChildren: false,
+  public millerColumnDummyDataV2: MillerColumnConfig = {
+    data: {
+      collections: [
+        {
+          id: "2",
+          associationId: null,
+          title: "London Drugs - North",
+          hasChildren: true,
+          hasAlert: true,
+          hasWarning: true,
+          // open: true,
+        },
+        {
+          id: "1",
+          associationId: null,
+          title: "London Drugs - South",
+          hasChildren: true,
+          hasAlert: true,
+          hasWarning: false,
+        },
+      ],
+      sites: [
+        {
+          associationId: "2",
+          id: "6",
+          title: "London Drugs - 5314",
+          hasChildren: true,
+          hasAlert: true,
+          hasWarning: true,
+          // open: true,
+        },
+        {
+          id: "7",
+          associationId: "2",
+          title: "London Drugs - 6358",
+          hasChildren: false,
+          hasAlert: false,
+          hasWarning: false,
+        },
+        {
+          id: "8",
+          associationId: "2",
+          title: "Longon Drugs - 9435",
+          hasChildren: false,
+          hasAlert: false,
+          hasWarning: false,
+        },
+        {
+          id: "9",
+          associationId: "2",
+          title: "Longon Drugs - 1225",
+          hasChildren: false,
+          hasAlert: false,
+          hasWarning: false,
+        },
+      ],
+      people: [
+        {
+          id: "11",
+          associationId: "6",
+          title: "James Smith",
+          hasChildren: false,
+          hasAlert: false,
+          hasWarning: false,
+          isActive: true,
+          checked: true,
+        },
+        {
+          id: "12",
+          associationId: "6",
+          title: "Mike Chan",
+          hasChildren: false,
+          hasAlert: false,
+          hasWarning: false,
+          isActive: true,
+        },
+        {
+          id: "13",
+          associationId: "6",
+          title: "Liz Montgomery",
+          hasChildren: false,
+          hasAlert: true,
+          hasWarning: false,
+        },
+        {
+          id: "14",
+          associationId: "6",
+          title: "Ellen Hunt",
+          hasChildren: false,
+          hasAlert: false,
+          hasWarning: true,
+        },
+      ],
     },
-    {
-      id: "2",
-      parentId: null,
-      title: "Roman Emperors",
-      hasChildren: true,
-    },
-    {
-      id: "3",
-      parentId: null,
-      title: "Aeneas and Company",
-      hasChildren: false,
-    },
-    {
-      id: "4",
-      parentId: null,
-      title: "Self-Help with Sisyphus",
-      hasChildren: false,
-    },
-    {
-      id: "5",
-      parentId: null,
-      title: "Lorem Ipsum",
-      hasChildren: false,
-    },
-    {
-      id: "6",
-      parentId: "2",
-      title: "Julius Caesar",
-      hasChildren: false,
-    },
-    {
-      id: "7",
-      parentId: "2",
-      title: "Trajan",
-      hasChildren: false,
-    },
-    {
-      id: "8",
-      parentId: "2",
-      title: "Hadrian",
-      hasChildren: false,
-    },
-    {
-      id: "9",
-      parentId: "6",
-      title: "Augustus",
-      hasChildren: false,
-    },
-    {
-      id: "10",
-      parentId: "9",
-      title: "Agrippa",
-      hasChildren: false,
-    },
-    {
-      id: "11",
-      parentId: "6",
-      title: "Cleopatra",
-      hasChildren: false,
-    },
-    {
-      id: "12",
-      parentId: "6",
-      title: "Diadems",
-      hasChildren: false,
-    },
-  ]
+    options: {
+      //FIXME: Improve? Change to passing in the array! Just make sure strings always match.
+      // primaryColumn: 'People'
+    }
+  }
 
   //TODO: Interface
   public enrollmentListDummyData: EnrollmentRowItem[] = [
@@ -123,18 +147,38 @@ export class DemoPageComponent implements OnInit {
       x.expandableChildren = [
         {
           title: "Ellen Hunt",
-          hasWarning: false,
-          hasAlert: true,
+          alerts: [
+            {
+              level: BadgeLevel.Danger,
+              status: EnrollmentStatus.Declined,
+            },
+            {
+              level: BadgeLevel.Danger,
+              status: EnrollmentStatus.Declined,
+            },
+          ],
         },
         {
           title: "James Smith",
-          hasWarning: true,
-          hasAlert: false,
+          alerts: [
+            {
+              level: BadgeLevel.Warning,
+              status: EnrollmentStatus.Incomplete
+            },
+          ],
         },
         {
           title: "Bob Jones",
-          hasWarning: true,
-          hasAlert: false,
+          alerts: [
+            {
+              level: BadgeLevel.Warning,
+              status: EnrollmentStatus.Pending
+            },
+            {
+              level: BadgeLevel.Warning,
+              status: EnrollmentStatus.Pending
+            },
+          ],
         }
       ]
       return x;

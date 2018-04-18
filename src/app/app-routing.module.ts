@@ -16,34 +16,34 @@ import { BlankPageComponent } from './pages/blank-page/blank-page.component';
 const routes: Routes = [
 
   // --- Old Routes from prototype here! Scroll down to find new routes
-  // {
-  //   path: 'professional-info',
-  //   component: ProfessionalInfoComponent,
-  // },
-  // {
-  //   path: 'prepare',
-  //   component: ConsentModalComponent,
-  // },
-  // {
-  //   path: 'site-access',
-  //   component: SiteAccessComponent,
-  // },
-  // {
-  //   path: 'contact-info',
-  //   component: ContactInformationComponent
-  // },
-  // {
-  //   path: 'self-declaration',
-  //   component: SelfDeclarationComponent
-  // },
-  // {
-  //   path: 'user-acceptance',
-  //   component: UserAcceptanceComponent
-  // },
-  // {
-  //   path: 'review-submit',
-  //   component: ReviewSubmitComponent
-  // },
+  {
+    path: 'professional-info',
+    component: ProfessionalInfoComponent,
+  },
+  {
+    path: 'prepare',
+    component: ConsentModalComponent,
+  },
+  {
+    path: 'site-access',
+    component: SiteAccessComponent,
+  },
+  {
+    path: 'contact-info',
+    component: ContactInformationComponent
+  },
+  {
+    path: 'self-declaration',
+    component: SelfDeclarationComponent
+  },
+  {
+    path: 'user-acceptance',
+    component: UserAcceptanceComponent
+  },
+  {
+    path: 'review-submit',
+    component: ReviewSubmitComponent
+  },
 
 
   // ----- New Routes

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ViewChildren, QueryList } from '@angular/core';
 import { EnrollmentRowItem } from '../enrollment-row/enrollment-row.interface'
 import { EnrollmentRowComponent } from '../enrollment-row/enrollment-row.component';
+import { EnrollmentStatus } from '../enrollment-row/enrollment-row.interface';
 
 @Component({
   selector: 'prime-enrollment-list',
@@ -10,8 +11,16 @@ import { EnrollmentRowComponent } from '../enrollment-row/enrollment-row.compone
 export class EnrollmentListComponent implements OnInit {
   @Input() rowItems: EnrollmentRowItem[];
   @ViewChildren(EnrollmentRowComponent) rowElements: QueryList<EnrollmentRowComponent>
-  /** Internal representation of data used in for loops. Can be filtered by esarch. */
+  /** Internal representation of data used in for loops. Can be filtered by search. */
   public data: EnrollmentRowItem[];
+
+  // Valid values: EnrollmentStatus enums + "All"
+  public viewTypeSelector  = "All";
+
+  //Convert enum to iterable array
+  get EnrollmentStatus() {
+    return Object.keys(EnrollmentStatus)
+  }
 
   constructor() { }
 
@@ -29,4 +38,33 @@ export class EnrollmentListComponent implements OnInit {
     })
   }
 
+  viewTypes(type){
+    if (type == "All") {
+      return this.data.map(rowItem => {
+        rowItem.expandableChildren.map(rowChild => {
+          rowChild.hidden = false;
+        })
+      });
+      // return this.data = this.rowItems;
+    }
+
+
+    console.log('viewTypes', type);
+    this.data = this.rowItems.map(x => {
+      if (!x.expandableChildren) return;
+
+      // x.expandableChildren = x.expandableChildren.filter(child => {
+      //   return child.alerts[0].status === type;
+      // })
+      x.expandableChildren.map(child => {
+        child.hidden = (child.alerts[0].status !== type);
+      })
+
+      // x.expandableChildren = x.expandableChildren.filter(child => {
+      //   return child.alerts.indexOf(type) !== -1;
+      // })
+
+      return x;
+    })
+  }
 }

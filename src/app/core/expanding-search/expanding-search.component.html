@@ -1,0 +1,5 @@
+<form #formRef='ngForm' class="form-inline">
+    <input [@hinge] #searchElement [ngModel]="searchPhrase" (ngModelChange)="onSearchChange($event)" type="search" class='form-control form-control-sm mr-2' name="expandingSearch{{objectId}}" id="expandingSearch{{objectId}}" *ngIf="showSearch">
+
+    <i class="fa fa-search" (click)="toggleSearch()"></i>
+</form>

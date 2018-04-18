@@ -1,0 +1,32 @@
+
+input[type="search"]{
+  // padding-top: 0;
+  // padding-bottom: 0;
+  transform-origin: center right;
+}
+
+.form-inline {
+  min-height: 2rem;
+  // perspective: 80px;
+  // perspective-origin: 100% 50%;
+
+  // perspective: 600px;
+  // // perspective-origin: 70px 0;
+  // perspective-origin: 50% 50%;
+
+  perspective: 200px;
+  perspective-origin: 0 0;
+}
+
+
+// input.flipped {
+//   transform: rotateY(-180deg);
+// }
+
+
+// transform-origin: 0 0;
+// transform-origin: top right;
+
+// transition: 2s;
+// transform: rotateY(-90deg);
+// transform: rotateY(0deg);

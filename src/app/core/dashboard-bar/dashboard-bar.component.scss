@@ -1,0 +1,16 @@
+@import 'variables.scss';
+
+.dashboard-container {
+  background: $gray-200;
+  padding: 1rem;
+  .nav {
+    display: flex;
+    justify-content: center;
+    & > button {
+      margin: 0 1rem;
+      flex-basis: 200px;
+    }
+  }
+
+
+}

@@ -1,12 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { UUID } from 'angular2-uuid';
 
-@Component({
-  selector: 'app-base-component',
-  templateUrl: './base-component.component.html',
-  styleUrls: ['./base-component.component.scss']
-})
-export class BaseComponent implements OnInit {
+import { UUID } from 'angular2-uuid';
+export class BaseComponent  {
 
   /**
    * An identifier for parents to keep track of components
@@ -15,8 +9,5 @@ export class BaseComponent implements OnInit {
   objectId: string = UUID.UUID().toString();
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }

@@ -1,31 +1,54 @@
-<!--
-  TODO: Move miller item into separate component? Interface? Depends on how much variety will be in the content.
- -->
-
 <div class="miller-container">
-  <div class="miller-column" *ngFor="let column of columns; let colIndex = index;">
-    <!-- TODO: Able to set title. Also change header to "breadcrumb" style like taxonomy-browser, so user can click earlier titles to nav back.-->
-    <h4 class='miller-column-title' *ngIf="colIndex >= 1">
-      <span (click)="onClickColTitle(column)">(back)</span>
-      {{ column.title}}
-    </h4>
+  <div class="miller-column" *ngFor="let column of columns; let colIndex = index;" [@loadInOut]>
+    <div class='miller-column-title'>
+
+      <!-- <h4>{{column.title}}</h4> -->
+      <h4>{{ buildBreadCrumb(column)  }}</h4>
+
+
+        <div class='d-flex align-items-center'>
+          <prime-expanding-search
+            (onChange)="filterColumn($event, colIndex)"
+             class='mr-2'>
+          </prime-expanding-search>
+
+          <!-- Close button. Not in current designs, but absolutely necessary for mobile (otherwise there's no back!) -->
+          <i *ngIf="colIndex >= 1" (click)="onClickColTitle(column)" class="fa fa-times-circle close-button"></i>
+        </div>
+    </div>
+
+
 
 
     <ul class="miller-items-container">
 
-      <li class="miller-item" *ngFor="let item of column['items']" [ngClass]="{
-        'open': item.open,
-        'has-children': item.hasChildren
-      }">
-        <!-- TODO - Turn this bit into a new component, miller-item? Depends on complexity. -->
-        <!-- FIXME: Idea! Can we use "slots" here? Or anyway to embed content within a component's template? Or do we have to specify class name?-->
-        <a (click)="onItemClick(item)" class='miller-item-link'>
-          <span class="item-title">{{item.title}}</span>
-        </a>
-      </li>
+      <!-- First Two Columns,  single-selection. -->
+      <ng-container *ngIf="colIndex !== 2">
+        <li class="miller-item" *ngFor="let item of column['items']" [ngClass]="{
+          'open': item.open,
+          'has-children': item.hasChildren,
+          'd-none': item.hidden && !item.open
+        }">
+          <a (click)="onItemClick(item)" class='miller-item-link'>
+            <span class="item-title">{{item.title}}</span>
+            <span class="icons-group">
+                <i *ngIf="item.hasAlert" class="fa fa-exclamation-triangle text-danger"></i>
+                <i *ngIf="item.hasWarning"class="fa fa-exclamation-circle text-warning"></i>
+                <!-- <i class="fa fa-angle-double-right has-children-icon" *ngIf="item.hasChildren"></i> -->
+            </span>
+          </a>
+        </li>
+      </ng-container>
+
+      <!-- Final Column, multi-selection plus custom logic. -->
+      <!-- TODO: Potentially split into two different components here, depending on if the final column is People or Sites. -->
+      <ng-container *ngIf="colIndex === 2">
+        <prime-miller-item-checkbox
+          [items]="column['items']">
+        </prime-miller-item-checkbox>
+
+      </ng-container>
 
     </ul>
   </div>
-  <!-- Display blank columns before user selection -->
-  <div class="miller-column blank-column" *ngFor="let blank of blankColumns"></div>
 </div>

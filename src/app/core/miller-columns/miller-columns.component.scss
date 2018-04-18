@@ -1,13 +1,4 @@
-// TODO: Probably best to use Bootstrap breakpoints and flex classes, to stay consistent.
 @import 'variables.scss';
-
-// DEVELOPMENT ONLY, REMOVE!
-.miller-column:nth-of-type(1){
-  background-color: rgb(255, 243, 208)
-}
-.miller-column:nth-of-type(2){
-  background-color: rgb(233, 255, 233)
-}
 
 .miller-container {
   display: flex;
@@ -15,40 +6,40 @@
   min-height: 400px;
 
   position: relative;
-  @include media-breakpoint-up(md){
-    position: initial;
-  }
+  perspective: 800px;
 }
 
 .miller-column {
-    //TODO: Not sure about keeping this.
-    // flex-basis: 0;
-    // flex-grow: 1;
-
-
+    // Mobile positioning
     position: absolute;
     left: 0;
     top: 0;
     bottom: 0;
     width: 100% !important;
 
+    // General positioning
+    flex: 1;
+    border: 1px #ccc solid;
+    overflow: auto;
+    margin: 0 10px;
+    background: $gray-100;
+    // background: $color-white; //Off white
+
     @include media-breakpoint-up(md){
       position: initial;
+      // Somewhat hacky. Stops the columns from re-sizing when 3 are displayed
+      max-width: 31% !important;
+      &:first-of-type {
+        margin-left: 0;
+      }
     }
 
-    flex: 1;
 
-    border: 1px #ccc solid;
-    margin: 0 10px;
-    overflow: auto;
-
-    background: $gray-300;
-
-    // TODO: Document this is max amount it works?
-    // Add an .open class here for mobile?
-    @for $i from 1 through 10 {
-      &:nth-of-type($i){
-        z-index: $i;
+    // Added by Angular during animation
+    &.ng-animating {
+      z-index: 9999; //On top for mobile
+      @include media-breakpoint-up(md){
+        z-index: -1; // Slide in underneath for desktop
       }
     }
 }
@@ -63,16 +54,17 @@
 .miller-item {
   margin: 0;
   padding: 0;
-  border-bottom: 1px $gray-700 solid; //FIXME: Variable
+  border-bottom: 1px $gray-700 solid;
   cursor: pointer;
   position: relative;
+  background: $color-white; //Off white
 
   &:hover {
     background: $gray-100;
   }
 
   &.open, &.open:hover {
-    background-color: lightblue; //FIXME: Variable
+    background-color: $gray-400;
   }
 
   .has-children {
@@ -81,7 +73,9 @@
 }
 
 .miller-item-link {
-  display: block;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 1em;
   text-decoration: none;
 }
@@ -94,11 +88,39 @@
 .miller-column-title {
   padding: 1em;
   font-size: $h4-font-size;
-  background: $gray-100;
+  background: $gray-200;
   border-bottom: 1px solid $gray-900;
+  // cursor: pointer;
+  margin-bottom: 0;
+  min-height: 4rem;
+  display: flex;
+  justify-content: space-between;
+  & > i.fa {
+    color: transparentize($color: $body-color, $amount: 0.25)
+  }
+
+  & > h4 {
+    margin-bottom: 0;
+    align-self: center;
+  }
 }
 
 .blank-column {
   // Don't show as 'open' for mobile.
   z-index: -100;
+  position: relative;
+  flex: 1;
+  // visibility: hidden; //TODO: ENABLE!
+
+  // DEMO PURPOSES ONLY! TODO: CAN BE REMOVED!
+  & > h2 {
+    position: absolute;
+    top: 0%;
+    font-size: 86px;
+    color: rgba(0, 51, 102, 0.075)
+  }
+}
+
+.icons-group {
+  font-size: 1.5rem;
 }

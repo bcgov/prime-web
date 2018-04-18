@@ -34,7 +34,7 @@ import { BaseComponent } from '../base-component/base-component.component';
 export class FileUploaderComponent
   extends BaseComponent
   // implements OnInit, OnChanges, AfterContentInit {
-  implements OnInit {
+   {
 
   // lang = require('./i18n');
   noIdImage: Boolean = false;

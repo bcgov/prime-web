@@ -14,7 +14,7 @@ import { SecurityQuestions } from '../../models/security-questions';
   templateUrl: './contact-information.component.html',
   styleUrls: ['./contact-information.component.scss']
 })
-export class ContactInformationComponent extends BaseComponent implements OnInit {
+export class ContactInformationComponent extends BaseComponent  {
   public applicant: Applicant;
   /** A list of all possible questions the user can choose from */
   public securityQuestions: Select2OptionData[];

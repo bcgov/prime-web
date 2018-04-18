@@ -9,6 +9,7 @@
     <div class="enrollment-actions">
       <span class="enrollment-icons">
         <i class="fa fa-exclamation-triangle text-danger"></i>
+        <!-- <span class="badge badge-pill badge-danger">Declined</span> -->
         <i class="fa fa-exclamation-circle text-warning"></i>
         <i class="fa fa-info-circle"></i>
       </span>
@@ -23,14 +24,22 @@
 
       <div class="enrollment-expandable" *ngFor="let expandableItem of rowData?.expandableChildren" [ngClass]="{
           'border-danger': expandableItem.hasAlert,
-          'border-warning': expandableItem.hasWarning && !expandableItem.hasAlert
+          'border-warning': expandableItem.hasWarning && !expandableItem.hasAlert,
+          'd-none': expandableItem.hidden
         }">
         <div class="enrollment-text-container">
           <span class="enrollment-text-main">{{expandableItem.title}}</span>
         </div>
         <div class="enrollment-actions">
             <span class="enrollment-icons">
-                <i *ngIf="expandableItem.hasAlert" class="fa fa-exclamation-triangle text-danger"></i>
+
+                <prime-pill-badge
+                  *ngIf="expandableItem.alerts.length"
+                  [title]="expandableItem.alerts[0].status"
+                  [level]="expandableItem.alerts[0].level"
+                  [count]="expandableItem.alerts.length">
+                </prime-pill-badge>
+
                 <i *ngIf="expandableItem.hasWarning"class="fa fa-exclamation-circle text-warning"></i>
                 <i class="fa fa-info-circle"></i>
             </span>
