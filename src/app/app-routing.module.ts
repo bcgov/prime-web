@@ -12,6 +12,7 @@ import { SiteAccessComponent } from './pages/site-access/site-access.component';
 import { DemoPageComponent } from './pages/demo-page/demo-page.component'
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { BlankPageComponent } from './pages/blank-page/blank-page.component';
+import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
 
 const routes: Routes = [
 
@@ -90,26 +91,13 @@ const routes: Routes = [
       }
     ]
   },
-  // {
-  //   path: '',
-  //   component: HomePageComponent,
-  //   children: [
-  //     {
-  //       path: 'demo',
-  //       component: DemoPageComponent,
-  //       data: {
-  //         breadcrumb: "Demo"
-  //       }
-  //     },
-  //     {
-  //       path: 'prepare',
-  //       component: ConsentModalComponent,
-  //     }
-  //   ]
-  // },
+  {
+    path: 'dashboard',
+    component: DashboardPageComponent
+  },
   {
     path: '**',
-    redirectTo: 'demo'
+    redirectTo: ''
   }
 ];
 

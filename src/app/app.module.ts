@@ -56,6 +56,9 @@ import { AddUserButtonComponent } from './core/add-user-button/add-user-button.c
 import { MiniProgressBarComponent } from './core/mini-progress-bar/mini-progress-bar.component';
 import { DashboardBarComponent } from './core/dashboard-bar/dashboard-bar.component';
 import { PillBadgeComponent } from './core/pill-badge/pill-badge.component';
+import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
+import { AlertComponent } from './core/alert/alert.component';
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 
 
@@ -99,6 +102,8 @@ import { PillBadgeComponent } from './core/pill-badge/pill-badge.component';
     MiniProgressBarComponent,
     DashboardBarComponent,
     PillBadgeComponent,
+    DashboardPageComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,
@@ -113,6 +118,7 @@ import { PillBadgeComponent } from './core/pill-badge/pill-badge.component';
     NgxMyDatePickerModule.forRoot(),
     ProgressbarModule.forRoot(),
     TabsModule.forRoot(),
+    AlertModule.forRoot(),
     MyDateRangePickerModule
   ],
   providers: [
