@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, Input } from '@angular/core';
-import { BaseComponent } from '../base-component/base-component.component';
+import { Base } from '../base/base.class';
 import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
 
 const TIMING = "350ms";
@@ -40,7 +40,7 @@ const TIMING = "350ms";
     ]),
   ]
 })
-export class ExpandingSearchComponent extends BaseComponent implements OnInit {
+export class ExpandingSearchComponent extends Base implements OnInit {
   searchPhrase: string;
   showSearch: boolean = false;
 

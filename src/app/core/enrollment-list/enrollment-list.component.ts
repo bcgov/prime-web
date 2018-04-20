@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChildren, QueryList } from '@angular/core';
 import { EnrollmentRowItem } from '../enrollment-row/enrollment-row.interface'
 import { EnrollmentRowComponent } from '../enrollment-row/enrollment-row.component';
-import { EnrollmentStatus } from '../enrollment-row/enrollment-row.interface';
+import { EnrollmentStatus } from '../../models/prime.models';
 
 @Component({
   selector: 'prime-enrollment-list',
@@ -38,6 +38,7 @@ export class EnrollmentListComponent implements OnInit {
     })
   }
 
+  // FIXME: This doesn't work properly with search.
   viewTypes(type){
     if (type == "All") {
       return this.data.map(rowItem => {
@@ -45,26 +46,19 @@ export class EnrollmentListComponent implements OnInit {
           rowChild.hidden = false;
         })
       });
-      // return this.data = this.rowItems;
     }
-
 
     console.log('viewTypes', type);
     this.data = this.rowItems.map(x => {
       if (!x.expandableChildren) return;
 
-      // x.expandableChildren = x.expandableChildren.filter(child => {
-      //   return child.alerts[0].status === type;
-      // })
       x.expandableChildren.map(child => {
         child.hidden = (child.alerts[0].status !== type);
       })
 
-      // x.expandableChildren = x.expandableChildren.filter(child => {
-      //   return child.alerts.indexOf(type) !== -1;
-      // })
-
       return x;
     })
   }
+
+
 }

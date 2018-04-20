@@ -1,59 +1,21 @@
 import { Component, OnInit, Input, Output, EventEmitter, HostBinding } from '@angular/core';
 import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
-import { EnrollmentRowItem } from './enrollment-row.interface';
+import { EnrollmentRowItem, EnrollmentRowChild } from './enrollment-row.interface';
+
+import { openState, openStateChild, loadInOut } from '../../animations/animations';
+
 
 const TIMING = "250ms";
 @Component({
   selector: 'prime-enrollment-row',
   templateUrl: './enrollment-row.component.html',
   styleUrls: ['./enrollment-row.component.scss'],
-  animations: [
-    trigger('openState', [
-      state('closed', style({
-        overflow: 'hidden',
-        height: '0',
-      })),
-      state('opened', style({
-        overflow: 'hidden',
-        height: '*',
-      })),
-      transition('closed => opened', animate(`${TIMING} ease-in`)),
-      transition('opened => closed', animate(`${TIMING} ease-out`))
-    ]),
-    trigger('openStateChild', [
-      state('closed', style({
-        transform: 'translateY(-100%)',
-      })),
-      state('opened', style({
-        transform: 'translateY(0px)',
-      })),
-      transition('closed => opened', animate(`${TIMING} ease-in`)),
-      transition('opened => closed', animate(`${TIMING} ease-out`))
-    ]),
-
-    trigger('loadInOut', [
-
-      transition('void => *', [
-        animate(TIMING, keyframes([
-          style({opacity: 0, transform: 'translateX(-100%)', offset: 0}),
-          style({opacity: 1, transform: 'translateX(15px)',  offset: 0.3}),
-          style({opacity: 1, transform: 'translateX(0)',     offset: 1.0})
-        ]))
-      ]),
-      transition('* => void', [
-        animate(TIMING, keyframes([
-          style({opacity: 1, transform: 'translateX(0)',     offset: 0}),
-          style({opacity: 1, transform: 'translateX(-15px)', offset: 0.5}),
-          style({opacity: 0, transform: 'translateX(100%)',  offset: 1.0})
-        ]))
-      ])
-
-    ])
-  ]
+  animations: [openState, openStateChild, loadInOut]
 })
 export class EnrollmentRowComponent implements OnInit {
-
   @Input() rowData: EnrollmentRowItem;
+  @Input() primaryType: "User"|"Site" = "Site";
+
   @Output() onRowOpened = new EventEmitter<any>();
   public openState: string = 'closed';
 
@@ -73,6 +35,32 @@ export class EnrollmentRowComponent implements OnInit {
 
   closeRow() {
     this.openState = 'closed';
+  }
+
+  expandedRowClick(row: EnrollmentRowChild){
+    // this.rowData.expandableChildren.map(row => row.open = false)
+    this.rowData.expandableChildren.filter(x => x !== row)
+    .map(x => x.open = false)
+
+    row.open = !row.open;
+    // row.open = true;
+  }
+
+  get siteAccessRequiringAttention(): any[] {
+    // All this function does is generate titles for Site Access rows.
+    if (this.primaryType === "Site"){
+      return this.rowData.expandableRows.map(siteAccess => {
+        siteAccess.title = `${siteAccess.site.name} / ${siteAccess.person.name}`
+        return siteAccess;
+      });
+    }
+    else {
+      return this.rowData.expandableRows.map(siteAccess => {
+        siteAccess.title = `${siteAccess.person.name}`
+        return siteAccess;
+      });
+    }
+
   }
 
 }

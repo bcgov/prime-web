@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-import { BaseComponent } from '../../core/base-component/base-component.component';
+import { Base } from '../../core/base/base.class';
 import { ViewCell } from 'ng2-smart-table';
 import { Applicant } from '../../models/applicant.model';
 import { ApplicantDataService } from '../../services/applicant-data.service';
@@ -14,7 +14,7 @@ import { environment } from '../../../environments/environment';
   templateUrl: './site-access.component.html',
   styleUrls: ['./site-access.component.scss']
 })
-export class SiteAccessComponent extends BaseComponent implements OnInit {
+export class SiteAccessComponent extends Base implements OnInit {
   public applicant: Applicant;
   public Colleges: typeof Colleges = Colleges;
   public tableData: NamedCollection[] = [];
@@ -59,7 +59,7 @@ export class SiteAccessComponent extends BaseComponent implements OnInit {
     super();
     this.applicant = this.dataStore.applicant;
     if (environment.useDummyData) {
-      this.tableData = dummyData.generateNamedCollections(20);
+      // this.tableData = dummyData.generateNamedCollections(20);
     }
     this.applicant.namedCollections = this.tableData;
    }

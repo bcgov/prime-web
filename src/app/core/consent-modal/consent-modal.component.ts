@@ -1,6 +1,6 @@
 import { Component, ViewChild, AfterViewInit, EventEmitter, Output } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { BaseComponent } from '../../core/base-component/base-component.component';
+import { Base } from '../base/base.class';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 // import { ConsentModalContent } from './content/consent-modal-content.component';
 
@@ -9,7 +9,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
   templateUrl: './consent-modal.component.html',
   styleUrls: ['./consent-modal.component.scss']
 })
-export class ConsentModalComponent extends BaseComponent {
+export class ConsentModalComponent extends Base {
   bsModalRef: BsModalRef;
   agreeCheck: boolean;
   @ViewChild('informationCollectionModal') public informationCollectionModal: ModalDirective;

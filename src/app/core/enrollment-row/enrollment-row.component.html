@@ -22,18 +22,22 @@
 
     <div [@openStateChild]="openState"  class="expandable-container">
 
-      <div class="enrollment-expandable" *ngFor="let expandableItem of rowData?.expandableChildren" [ngClass]="{
-          'border-danger': expandableItem.hasAlert,
-          'border-warning': expandableItem.hasWarning && !expandableItem.hasAlert,
-          'd-none': expandableItem.hidden
-        }">
+      <!-- <div class="enrollment-expandable" *ngFor="let expandableItem of rowData?.expandableChildren"
+          [ngClass]="{
+            'border-danger': expandableItem.hasAlert,
+            'border-warning': expandableItem.hasWarning && !expandableItem.hasAlert,
+            'd-none': expandableItem.hidden
+          }"
+          (click)="expandedRowClick(expandableItem)"
+        >
         <div class="enrollment-text-container">
           <span class="enrollment-text-main">{{expandableItem.title}}</span>
         </div>
         <div class="enrollment-actions">
             <span class="enrollment-icons">
 
-                <prime-pill-badge
+              <!-- TODO: Improve title generation when multiple -->
+                <!-- <prime-pill-badge
                   *ngIf="expandableItem.alerts.length"
                   [title]="expandableItem.alerts[0].status"
                   [level]="expandableItem.alerts[0].level"
@@ -43,10 +47,47 @@
                 <i *ngIf="expandableItem.hasWarning"class="fa fa-exclamation-circle text-warning"></i>
                 <i class="fa fa-info-circle"></i>
             </span>
+        </div> -->
+
+
+
+        <!-- TODO: Should just pass the whole SiteAccess object here! -->
+        <!-- <prime-enrollment-progress-row
+          [open]='expandableItem.open'>
+        </prime-enrollment-progress-row>
+
+      </div> -->
+
+
+
+        <div class="enrollment-expandable" *ngFor="let siteAccess of siteAccessRequiringAttention"
+            (click)="expandedRowClick(siteAccess)"
+          >
+          <div class="enrollment-text-container">
+            <span class="enrollment-text-main">{{siteAccess.title}}</span>
+          </div>
+          <div class="enrollment-actions">
+              <span class="enrollment-icons">
+
+                  <prime-pill-badge
+                    [alerts]="siteAccess.alert">
+                  </prime-pill-badge>
+
+                  <i class="fa fa-info-circle"></i>
+              </span>
+          </div>
+
+
+
+          <!-- TODO: Should just pass the whole SiteAccess object here! -->
+          <prime-enrollment-progress-row
+            [open]='siteAccess.open'>
+          </prime-enrollment-progress-row>
+
         </div>
-      </div>
+
+
+
 
     </div>
-
-
   </div>

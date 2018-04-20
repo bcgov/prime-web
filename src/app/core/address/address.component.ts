@@ -7,7 +7,7 @@ import {NgForm} from '@angular/forms';
 // import {Address} from "../../model/address.model";
 import './address.component.less';
 // import {BaseComponent} from "../base.component";
-import { BaseComponent } from '../base-component/base-component.component';
+import { Base } from '../base/base.class';
 // import {MspProvinceComponent} from "../province/province.component";
 // import {MspCountryComponent} from "../country/country.component";
 
@@ -26,7 +26,7 @@ import { Applicant } from '../../models/applicant.model';
  * This class was copied from MSP, the original can be found here:
  * https://github.com/bcgov/MyGovBC-MSP/blob/master/src/app/components/msp/common/address/address.component.ts
  */
-export class AddressComponent extends BaseComponent implements AfterViewInit, OnChanges {
+export class AddressComponent extends Base implements AfterViewInit, OnChanges {
   private _useResidentialAddressLine2 = false;
   private _useResidentialAddressLine3 = false;
   private _useMailingAddressLine2 = false;

@@ -4,7 +4,7 @@ import { ApplicantDataService } from '../../services/applicant-data.service';
 import { Applicant } from '../../models/applicant.model';
 import { Select2OptionData } from 'ng2-select2';
 
-import { BaseComponent } from '../../core/base-component/base-component.component';
+import { Base } from '../../core/base/base.class';
 import { SecurityQuestions } from '../../models/security-questions';
 
 
@@ -14,7 +14,7 @@ import { SecurityQuestions } from '../../models/security-questions';
   templateUrl: './contact-information.component.html',
   styleUrls: ['./contact-information.component.scss']
 })
-export class ContactInformationComponent extends BaseComponent  {
+export class ContactInformationComponent extends Base  {
   public applicant: Applicant;
   /** A list of all possible questions the user can choose from */
   public securityQuestions: Select2OptionData[];

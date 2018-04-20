@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
 import { ProgressBarItem } from './progress-bar.interface';
 
-import { BaseComponent } from '../base-component/base-component.component';
+import { Base } from '../base/base.class';
 
 @Component({
   selector: 'prime-progress-bar',
   templateUrl: './progress-bar.component.html',
   styleUrls: ['./progress-bar.component.scss']
 })
-export class ProgressBarComponent extends BaseComponent implements OnInit {
+export class ProgressBarComponent extends Base implements OnInit {
   progressBarList: ProgressBarItem[] = [
     {displayName: 'Professional Information', routerLink: '/professional-info'},
     {displayName: 'Site Access', routerLink:  '/site-access'},

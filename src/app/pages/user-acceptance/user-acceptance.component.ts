@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { BaseComponent } from '../../core/base-component/base-component.component';
+import { Base } from '../../core/base/base.class';
 
 @Component({
   selector: 'app-user-acceptance',
   templateUrl: './user-acceptance.component.html',
   styleUrls: ['./user-acceptance.component.scss']
 })
-export class UserAcceptanceComponent extends BaseComponent implements OnInit {
+export class UserAcceptanceComponent extends Base implements OnInit {
 
   constructor(private router: Router) {
     super();

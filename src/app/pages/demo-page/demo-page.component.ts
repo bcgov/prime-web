@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MillerItem, MillerColumnConfig } from '../../core/miller-columns/miller-columns.interface';
-import { EnrollmentRowItem, EnrollmentRowChild, EnrollmentStatus, BadgeLevel } from '../../core/enrollment-row/enrollment-row.interface';
+import { EnrollmentRowItem, EnrollmentRowChild, BadgeLevel } from '../../core/enrollment-row/enrollment-row.interface';
+import { EnrollmentStatus } from '../../models/prime.models';
 
 @Component({
   selector: 'prime-demo-page',

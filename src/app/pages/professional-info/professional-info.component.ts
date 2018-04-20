@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ApplicantDataService } from '../../services/applicant-data.service';
 import { Applicant } from '../../models/applicant.model';
 import { ConsentModalComponent } from '../../core/consent-modal/consent-modal.component';
-import { BaseComponent } from '../../core/base-component/base-component.component';
+import { Base } from '../../core/base/base.class';
 import { Colleges, CollegeList } from '../../models/colleges.enum';
 import { CollegeDataService } from '../../services/college-data.service';
 import { AdvancedPracticeCerts } from '../../models/advanced-practice-certs.enum';
@@ -14,7 +14,7 @@ import { AdvancedPracticeCerts } from '../../models/advanced-practice-certs.enum
   templateUrl: './professional-info.component.html',
   styleUrls: ['./professional-info.component.scss']
 })
-export class ProfessionalInfoComponent extends BaseComponent
+export class ProfessionalInfoComponent extends Base
 implements OnInit, AfterViewChecked, AfterViewInit {
   @ViewChild(ConsentModalComponent) private consentModal: ConsentModalComponent;
   @ViewChild('collegeNameContainer') private collegeNameContainer: ElementRef;

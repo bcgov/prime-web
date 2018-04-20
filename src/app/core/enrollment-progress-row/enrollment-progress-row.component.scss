@@ -1,0 +1,10 @@
+@import 'variables.scss';
+
+:host {
+  background-color: $gray-200;
+  width: 100%;
+}
+
+.progress-row-content p:first-of-type {
+  padding-top: 1em;
+}

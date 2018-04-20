@@ -61,6 +61,10 @@ import { AlertComponent } from './core/alert/alert.component';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { DashboardByUserComponent } from './pages/dashboard-page/dashboard-by-user/dashboard-by-user.component';
 import { DashboardBySiteComponent } from './pages/dashboard-page/dashboard-by-site/dashboard-by-site.component';
+import { UserService } from './services/user.service';
+import { PrimeDataService } from './services/prime-data.service';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { EnrollmentProgressRowComponent } from './core/enrollment-progress-row/enrollment-progress-row.component';
 
 
 
@@ -108,6 +112,7 @@ import { DashboardBySiteComponent } from './pages/dashboard-page/dashboard-by-si
     AlertComponent,
     DashboardByUserComponent,
     DashboardBySiteComponent,
+    EnrollmentProgressRowComponent,
   ],
   imports: [
     BrowserModule,
@@ -123,12 +128,15 @@ import { DashboardBySiteComponent } from './pages/dashboard-page/dashboard-by-si
     ProgressbarModule.forRoot(),
     TabsModule.forRoot(),
     AlertModule.forRoot(),
+    BsDropdownModule.forRoot(),
     MyDateRangePickerModule
   ],
   providers: [
     ApplicantDataService,
     CollegeDataService,
-    DummyDataService
+    UserService,
+    DummyDataService,
+    PrimeDataService
   ],
   entryComponents: [
     RequiredValidationErrorsComponent,

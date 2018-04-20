@@ -1,12 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { BaseComponent } from '../base-component/base-component.component';
+import { Base } from '../base/base.class';
 
 @Component({
   selector: 'prime-miller-item-checkbox',
   templateUrl: './miller-item-checkbox.component.html',
   styleUrls: ['./miller-item-checkbox.component.scss']
 })
-export class MillerItemCheckboxComponent extends BaseComponent implements OnInit {
+export class MillerItemCheckboxComponent extends Base implements OnInit {
 
   //TODO: Add interface for miller items
   @Input() items: any[];

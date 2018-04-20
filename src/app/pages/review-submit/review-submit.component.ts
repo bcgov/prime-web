@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 // import { Router } from '@angular/router';
-import { BaseComponent } from '../../core/base-component/base-component.component';
+import { Base } from '../../core/base/base.class';
 
 import { Applicant } from '../../models/applicant.model';
 import { ApplicantDataService } from '../../services/applicant-data.service';
@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
   templateUrl: './review-submit.component.html',
   styleUrls: ['./review-submit.component.scss']
 })
-export class ReviewSubmitComponent extends BaseComponent implements OnInit {
+export class ReviewSubmitComponent extends Base implements OnInit {
 
   private hasValidToken = false;
   public applicant: Applicant;

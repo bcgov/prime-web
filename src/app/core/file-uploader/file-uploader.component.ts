@@ -19,7 +19,7 @@ import 'rxjs/add/operator/catch';
 // import moment = require("moment");
 
 import * as moment from 'moment';
-import { BaseComponent } from '../base-component/base-component.component';
+import { Base } from '../base/base.class';
 
 // let loadImage = require('blueimp-load-image');
 // var sha1 = require('sha1');
@@ -32,7 +32,7 @@ import { BaseComponent } from '../base-component/base-component.component';
   styleUrls: ['./file-uploader.component.scss']
 })
 export class FileUploaderComponent
-  extends BaseComponent
+  extends Base
   // implements OnInit, OnChanges, AfterContentInit {
    {
 

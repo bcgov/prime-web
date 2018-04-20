@@ -1,6 +1,7 @@
 @import 'variables.scss';
 $rowHeight: 2.5em; //35px;
 $rowBgColor: white;
+// $rowPadding: 0;
 
 :host {
     display: flex;
@@ -20,6 +21,7 @@ $rowBgColor: white;
 .enrollment-list-item {
     border: 1px solid $gray-500;
     min-height: $rowHeight;
+    // padding: $rowPadding;
     background: $rowBgColor; // Hide animation underneath it.
     z-index: 1;
     position: relative;
@@ -38,7 +40,9 @@ $rowBgColor: white;
   margin-left: 8em;
   color: $gray-700;
   min-height: $rowHeight;
+  // padding: $rowPadding;
   border: 1px solid $gray-500;
+  flex-wrap: wrap;
 }
 
 .enrollment-actions {
@@ -56,6 +60,9 @@ $rowBgColor: white;
 }
 
 .enrollment-text-container {
+    min-height: $rowHeight;
+    display: flex;
+    align-items: center;
     flex: 5;
     padding-left: 1em;
     margin-right: 2em;

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { BaseComponent } from '../base-component/base-component.component';
+import { Base } from '../base/base.class';
 import * as moment from 'moment';
 import { SimpleDate } from '../../core/date/simple-date.interface';
 
@@ -9,7 +9,7 @@ import { SimpleDate } from '../../core/date/simple-date.interface';
   templateUrl: './date.component.html',
   styleUrls: ['./date.component.scss']
 })
-export class PrimeDateComponent extends BaseComponent implements OnInit {
+export class PrimeDateComponent extends Base implements OnInit {
 
   @Input() showError: boolean;
   @Input() required = true;

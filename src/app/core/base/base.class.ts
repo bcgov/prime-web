@@ -1,6 +1,6 @@
 
 import { UUID } from 'angular2-uuid';
-export class BaseComponent  {
+export class Base {
 
   /**
    * An identifier for parents to keep track of components

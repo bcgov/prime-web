@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef, HostListener, AfterViewChecked } 
 import { Router } from '@angular/router';
 import { ApplicantDataService } from '../../services/applicant-data.service';
 import { Applicant } from '../../models/applicant.model';
-import { BaseComponent } from '../../core/base-component/base-component.component';
+import { Base } from '../../core/base/base.class';
 import { ElementRef, ViewChild } from '@angular/core';
 
 @Component({
@@ -10,7 +10,7 @@ import { ElementRef, ViewChild } from '@angular/core';
   templateUrl: './self-declaration.component.html',
   styleUrls: ['./self-declaration.component.scss']
 })
-export class SelfDeclarationComponent extends BaseComponent implements OnInit, AfterViewChecked {
+export class SelfDeclarationComponent extends Base implements OnInit, AfterViewChecked {
   public applicant: Applicant;
   public viewHeight: number;
   public disableSticky = false;

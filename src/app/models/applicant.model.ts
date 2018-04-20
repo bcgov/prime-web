@@ -3,7 +3,7 @@ import { Colleges } from './colleges.enum';
 import { SecurityQuestions } from './security-questions';
 import { NamedCollection } from './named-collections.interface';
 import { AdvancedPracticeCerts } from './advanced-practice-certs.enum';
-import { Address } from './address.interface';
+import { Address } from './address.interface.OLD'
 
 /** The main data model for the application. The official source of truth for the frontend. */
 export class Applicant {
