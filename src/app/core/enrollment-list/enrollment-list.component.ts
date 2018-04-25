@@ -60,5 +60,10 @@ export class EnrollmentListComponent implements OnInit {
     })
   }
 
+  sort() {
+    // Temporary solution for prototype before actual sorting is implemented.
+    this.rowItems.reverse();
+  }
+
 
 }

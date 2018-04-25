@@ -33,6 +33,7 @@ export class DummyDataService {
     return result;
   }
 
+  //FIXME: This is a bad approach to including people. Circular JSON. Also, because it already has a hierarchy, it's impossible to easily flip to make people the top level?
   populateCollectionWithPeople(collection: Collection, totalPeople: number){
     const people: Person[] = this.createPeople(totalPeople);
 
@@ -47,6 +48,7 @@ export class DummyDataService {
           continue;
         }
 
+        //FIXME: Circular JSON structure is bad here. Remove some? SiteAccess type is inherently circular. Make it uni-directional with a smart collection/container?
         SA.person = person;
         SA.site = site;
         person.siteAccess.push(SA);
@@ -69,7 +71,7 @@ export class DummyDataService {
   }
 
 
-  createCollections(names: string[] = ["London Drugs"], withPeople = true): Collection[] {
+    createCollectionsWithPeople(names: string[] = ["London Drugs"], withPeople = true): Collection[] {
     const result: Collection[] = [];
 
     names.forEach(name => {

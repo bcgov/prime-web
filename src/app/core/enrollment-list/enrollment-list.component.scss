@@ -1,11 +1,19 @@
+@import 'variables.scss';
+
+.enrollment-list-controls, .enrollment-item-container {
+  border: 2px solid $gray-300;
+}
+
 .enrollment-item-container {
   min-height: 20rem; //Helps for demo, remove if necessary.
+  border-top: none;
 }
 
 .enrollment-list-controls  {
-  margin-bottom: 1em;
+  // margin-bottom: 1em;
   min-height: 4em;
   padding: 1em;
+  border-bottom: none;
 
   display: flex;
   flex-direction: row;

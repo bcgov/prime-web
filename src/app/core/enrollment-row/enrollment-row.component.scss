@@ -7,6 +7,7 @@ $rowBgColor: white;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background: $gray-200;
 }
 
 .enrollment-icons,
@@ -20,8 +21,9 @@ $rowBgColor: white;
 
 .enrollment-list-item {
     border: 1px solid $gray-500;
+    border-left: none;
+    border-right: none;
     min-height: $rowHeight;
-    // padding: $rowPadding;
     background: $rowBgColor; // Hide animation underneath it.
     z-index: 1;
     position: relative;
@@ -43,6 +45,7 @@ $rowBgColor: white;
   // padding: $rowPadding;
   border: 1px solid $gray-500;
   flex-wrap: wrap;
+  background: $color-white;
 }
 
 .enrollment-actions {

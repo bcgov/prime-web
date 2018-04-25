@@ -18,15 +18,27 @@ export const openState = trigger('openState', [
 
 
 export const openStateChild = trigger('openStateChild', [
-    state('closed', style({
-      transform: 'translateY(-100%)',
-    })),
-    state('opened', style({
-      transform: 'translateY(0px)',
-    })),
-    transition('closed => opened', animate(`${TIMING} ease-in`)),
-    transition('opened => closed', animate(`${TIMING} ease-out`))
-  ]);
+  state('closed', style({
+    transform: 'translateY(-100%)',
+  })),
+  state('opened', style({
+    transform: 'translateY(0px)',
+  })),
+  transition('closed => opened', animate(`${TIMING} ease-in`)),
+  transition('opened => closed', animate(`${TIMING} ease-out`))
+]);
+
+export const openStateDisable = trigger('openStateDisable', [
+  state('closed', style({
+    opacity: 1,
+  })),
+  state('opened', style({
+    opacity: 0.75,
+    background: '#e9ecef' //$gray-200
+  })),
+  transition('closed => opened', animate(`${TIMING} ease-in`)),
+  transition('opened => closed', animate(`${TIMING} ease-out`))
+]);
 
 export const loadInOut = trigger('loadInOut', [
   transition('void => *', [

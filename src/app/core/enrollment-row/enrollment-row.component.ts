@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, HostBinding } from '@an
 import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
 import { EnrollmentRowItem, EnrollmentRowChild } from './enrollment-row.interface';
 
-import { openState, openStateChild, loadInOut } from '../../animations/animations';
+import { openState, openStateChild, loadInOut, openStateDisable } from '../../animations/animations';
 
 
 const TIMING = "250ms";
@@ -10,7 +10,7 @@ const TIMING = "250ms";
   selector: 'prime-enrollment-row',
   templateUrl: './enrollment-row.component.html',
   styleUrls: ['./enrollment-row.component.scss'],
-  animations: [openState, openStateChild, loadInOut]
+  animations: [openState, openStateChild, loadInOut, openStateDisable]
 })
 export class EnrollmentRowComponent implements OnInit {
   @Input() rowData: EnrollmentRowItem;
@@ -38,15 +38,19 @@ export class EnrollmentRowComponent implements OnInit {
   }
 
   expandedRowClick(row: EnrollmentRowChild){
-    // this.rowData.expandableChildren.map(row => row.open = false)
     this.rowData.expandableChildren.filter(x => x !== row)
     .map(x => x.open = false)
 
     row.open = !row.open;
-    // row.open = true;
   }
 
+  /** This function is responsible for generating site access row titles depending on dashboard type */
   get siteAccessRequiringAttention(): any[] {
+
+    if ( !this.rowData.expandableRows ){
+      return [];
+    }
+
     // All this function does is generate titles for Site Access rows.
     if (this.primaryType === "Site"){
       return this.rowData.expandableRows.map(siteAccess => {
@@ -61,6 +65,11 @@ export class EnrollmentRowComponent implements OnInit {
       });
     }
 
+  }
+
+
+  get allChildAlerts() {
+    return this.siteAccessRequiringAttention.map(x => x.alert);
   }
 
 }

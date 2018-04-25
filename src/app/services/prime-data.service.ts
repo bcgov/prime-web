@@ -52,91 +52,110 @@ export class PrimeDataService {
     return result;
   }
 
-  private generateRowChildFromSiteAccess(problemAccess: SiteAccess[]){
-    const result = [];
+  getEnrollmentByUser(): EnrollmentRowItem[] {
+    let result: EnrollmentRowItem[] = [];
 
-    // Filter objects based off of person?
-    // generate alerts for each person
-    const uniqueNames = problemAccess.map(sa => sa.person.name)
-      .filter(this.filterUnique)
+    // SiteAccess still as expandableRows, just higher levels which are changed?
 
-    uniqueNames.map(name => {
+    this.people.map(person => {
+      const rowItem: EnrollmentRowItem = {
+        title: person.name,
+        sites: [],
+        users: [],
+      }
 
-      // Get only sites for the unique name
-      const siteAccessForName = problemAccess
-        .filter(site => site.person.name === name);
-
-        // debugger;
-
-      // result.push(... siteAccessForName);
-      // result.push({})
-
-
-      // result.push(...siteAccessForName)
-
-      // result.push({
-      //   title: name,
-      //   alerts: this.generateAlertsFromSiteAccess(siteAccessForName),
-      // })
+      result.push(rowItem);
     })
+
 
     return result;
   }
 
-  private generateRowChildFromSiteAccessOLD(problemAccess: SiteAccess[]){
-    const result = [];
+  // private generateRowChildFromSiteAccess(problemAccess: SiteAccess[]){
+  //   const result = [];
 
-    // Filter objects based off of person?
-    // generate alerts for each person
-    const uniqueNames = problemAccess.map(sa => sa.person.name)
-      .filter(this.filterUnique)
+  //   // Filter objects based off of person?
+  //   // generate alerts for each person
+  //   const uniqueNames = problemAccess.map(sa => sa.person.name)
+  //     .filter(this.filterUnique)
 
-    uniqueNames.map(name => {
+  //   uniqueNames.map(name => {
 
-      // Get only sites for the unique name
-      const siteAccessForName = problemAccess
-        .filter(site => site.person.name === name);
+  //     // Get only sites for the unique name
+  //     const siteAccessForName = problemAccess
+  //       .filter(site => site.person.name === name);
 
-      result.push({
-        title: name,
-        alerts: this.generateAlertsFromSiteAccess(siteAccessForName),
-      })
-    })
+  //       // debugger;
 
-    return result;
-  }
-
-  private generateAlertsFromSiteAccess(siteAccess: SiteAccess[]): EnrollmentAlerts[] {
-    const alerts: EnrollmentAlerts[] = [];
-
-    siteAccess.forEach(siteAccess => {
-
-      if (siteAccess.status === EnrollmentStatus.Pending){
-        alerts.push({
-          level: BadgeLevel.Warning,
-          status: siteAccess.status
-        })
-      }
-
-      if (siteAccess.status === EnrollmentStatus.Expired){
-        alerts.push({
-          level: BadgeLevel.Danger,
-          status: siteAccess.status
-        })
-      }
-
-      if (siteAccess.status === EnrollmentStatus.Declined){
-        alerts.push({
-          level: BadgeLevel.Danger,
-          status: siteAccess.status
-        })
-      }
-
-    })
+  //     // result.push(... siteAccessForName);
+  //     // result.push({})
 
 
-    return alerts;
-  }
+  //     // result.push(...siteAccessForName)
+
+  //     // result.push({
+  //     //   title: name,
+  //     //   alerts: this.generateAlertsFromSiteAccess(siteAccessForName),
+  //     // })
+  //   })
+
+  //   return result;
+  // }
+
+  // private generateRowChildFromSiteAccessOLD(problemAccess: SiteAccess[]){
+  //   const result = [];
+
+  //   // Filter objects based off of person?
+  //   // generate alerts for each person
+  //   const uniqueNames = problemAccess.map(sa => sa.person.name)
+  //     .filter(this.filterUnique)
+
+  //   uniqueNames.map(name => {
+
+  //     // Get only sites for the unique name
+  //     const siteAccessForName = problemAccess
+  //       .filter(site => site.person.name === name);
+
+  //     result.push({
+  //       title: name,
+  //       alerts: this.generateAlertsFromSiteAccess(siteAccessForName),
+  //     })
+  //   })
+
+  //   return result;
+  // }
+
+  // private generateAlertsFromSiteAccess(siteAccess: SiteAccess[]): EnrollmentAlerts[] {
+  //   const alerts: EnrollmentAlerts[] = [];
+
+  //   siteAccess.forEach(siteAccess => {
+
+  //     if (siteAccess.status === EnrollmentStatus.Pending){
+  //       alerts.push({
+  //         level: BadgeLevel.Warning,
+  //         status: siteAccess.status
+  //       })
+  //     }
+
+  //     if (siteAccess.status === EnrollmentStatus.Expired){
+  //       alerts.push({
+  //         level: BadgeLevel.Danger,
+  //         status: siteAccess.status
+  //       })
+  //     }
+
+  //     if (siteAccess.status === EnrollmentStatus.Declined){
+  //       alerts.push({
+  //         level: BadgeLevel.Danger,
+  //         status: siteAccess.status
+  //       })
+  //     }
+
+  //   })
+
+
+  //   return alerts;
+  // }
 
   private filterUnique(x, i, a){
     return x && a.indexOf(x) === i

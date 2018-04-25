@@ -4,6 +4,11 @@
   </form>
 
   <form class="form-inline">
+
+    <button class='btn btn-default mr-3' (click)="sort()">
+        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+    </button>
+
       <label for="enrollmentViewSelector" class='d-none d-sm-flex mr-0 mr-sm-2'>View</label>
       <select id="enrollmentViewSelector" class="form-control enrollment-view-selector" [value]="viewTypeSelector" (change)="viewTypes($event.target.value)">
           <option value="All">All</option>

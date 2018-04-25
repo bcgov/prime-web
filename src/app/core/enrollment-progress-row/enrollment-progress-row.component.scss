@@ -5,6 +5,47 @@
   width: 100%;
 }
 
-.progress-row-content p:first-of-type {
+.progressSlider {
   padding-top: 1em;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.progressItem {
+  display: inline-flex;
+  position: relative;
+}
+
+p:first-of-type {
+  padding-top: 1em;
+}
+
+
+.progressSlider--text {
+  display: flex;
+  flex-basis: 100%;
+  justify-content: space-between;
+}
+
+.progressSlider--bar {
+  display: flex;
+  flex-basis: 90%;
+  justify-content: space-between;
+  background: $gray-500;
+  height: 2px;
+  margin: 0.75em auto;
+}
+
+
+.progressBarMarker {
+  height: 8px;
+  width: 8px;
+  border-radius: 100%;
+  background: $gray-600;
+  transform: translateY(-33%);  //Center vertically
+  &.active {
+    height: 15px;
+    width: 15px;
+  }
 }
