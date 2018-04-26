@@ -3,6 +3,7 @@ import { trigger, state, style, animate, transition, keyframes } from '@angular/
 import { EnrollmentRowItem, EnrollmentRowChild } from './enrollment-row.interface';
 
 import { openState, openStateChild, loadInOut, openStateDisable } from '../../animations/animations';
+import { Base } from '../base/base.class';
 
 
 const TIMING = "250ms";
@@ -12,14 +13,16 @@ const TIMING = "250ms";
   styleUrls: ['./enrollment-row.component.scss'],
   animations: [openState, openStateChild, loadInOut, openStateDisable]
 })
-export class EnrollmentRowComponent implements OnInit {
+export class EnrollmentRowComponent extends Base implements OnInit {
   @Input() rowData: EnrollmentRowItem;
   @Input() primaryType: "User"|"Site" = "Site";
 
   @Output() onRowOpened = new EventEmitter<any>();
   public openState: string = 'closed';
 
-  constructor() { }
+  constructor() {
+    super();
+  }
 
   ngOnInit() {
   }
@@ -27,9 +30,16 @@ export class EnrollmentRowComponent implements OnInit {
   @HostBinding('@loadInOut') true;
 
   toggleRow() {
-    this.openState = this.openState === 'opened' ? 'closed' : 'opened';
-    if (this.openState === 'opened'){
-      this.onRowOpened.emit(this);
+
+    if (this.canOpen()){
+      this.openState = this.openState === 'opened' ? 'closed' : 'opened';
+
+      if (this.openState === 'opened'){
+        this.onRowOpened.emit(this);
+        // First row is open by default
+        this.siteAccessRequiringAttention[0].open = open;
+      }
+
     }
   }
 
@@ -37,11 +47,14 @@ export class EnrollmentRowComponent implements OnInit {
     this.openState = 'closed';
   }
 
-  expandedRowClick(row: EnrollmentRowChild){
-    this.rowData.expandableChildren.filter(x => x !== row)
-    .map(x => x.open = false)
-
+  expandedRowClick(row: EnrollmentRowChild){;
+    this.siteAccessRequiringAttention.map(x => x.open = false);
     row.open = !row.open;
+  }
+
+  ngOnDestroy(){
+    // Set all child rows to closed.
+    this.siteAccessRequiringAttention.map(x => x.open = false);
   }
 
   /** This function is responsible for generating site access row titles depending on dashboard type */
@@ -60,7 +73,7 @@ export class EnrollmentRowComponent implements OnInit {
     }
     else {
       return this.rowData.expandableRows.map(siteAccess => {
-        siteAccess.title = `${siteAccess.person.name}`
+        siteAccess.title = `${siteAccess.site.name}`
         return siteAccess;
       });
     }
@@ -70,6 +83,10 @@ export class EnrollmentRowComponent implements OnInit {
 
   get allChildAlerts() {
     return this.siteAccessRequiringAttention.map(x => x.alert);
+  }
+
+  canOpen() {
+    return this.siteAccessRequiringAttention.length >= 1;
   }
 
 }

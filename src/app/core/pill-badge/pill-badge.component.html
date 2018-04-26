@@ -1,12 +1,21 @@
 <ng-container *ngFor="let badge of distinctBadges">
 
-  <span class="badge badge-pill badge-{{badge.level}}">
-
-
+  <span *ngIf="!iconOnly" class="badge badge-pill badge-{{badge.level}}">
       <i class="fa fa-exclamation-circle" *ngIf="badge.level === 'warning'"></i>
       <i class="fa fa-exclamation-triangle" *ngIf="badge.level === 'danger'"></i>
 
       {{badge.title}}
+      <span *ngIf="badge.count > 1" class="count bg-{{badge.level}}">
+        {{badge.count}}
+      </span>
+  </span>
+
+  <span *ngIf="iconOnly" class="badge badge-pill badge-{{badge.level}}">
+      <i tooltip="{{badge.title}}" class="fa fa-exclamation-circle" *ngIf="badge.level === 'warning'"></i>
+      <i  tooltip="{{badge.title}}" class="fa fa-exclamation-triangle" *ngIf="badge.level === 'danger'"></i>
+
+      <span class="sr-only">{{badge.title}}</span>
+
       <span *ngIf="badge.count > 1" class="count bg-{{badge.level}}">
         {{badge.count}}
       </span>

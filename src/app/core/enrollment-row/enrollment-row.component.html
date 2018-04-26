@@ -2,19 +2,29 @@
 
     <div class="enrollment-text-container">
       <span class="enrollment-text-main">{{rowData.title}}</span>
-      <span class="enrollment-text-extra">({{rowData.sites.length}}) Sites</span>
-      <span class="enrollment-text-extra">({{rowData.users.length}}) Users</span>
+
+       <ng-container *ngIf="primaryType === 'Site'">
+          <span class="enrollment-text-extra">({{rowData.sites.length}}) Sites</span>
+          <span class="enrollment-text-extra">({{rowData.users.length}}) Users</span>
+       </ng-container>
+
+       <ng-container *ngIf="primaryType === 'User'">
+          <span class="enrollment-text-extra">({{rowData.collections.length}}) Collections</span>
+          <span class="enrollment-text-extra">({{rowData.sites.length}}) Sites</span>
+       </ng-container>
+
     </div>
 
     <div class="enrollment-actions">
       <span class="enrollment-icons">
         <prime-pill-badge
-          [alerts]="allChildAlerts">
+          [alerts]="allChildAlerts"
+          [iconOnly]='false'>
         </prime-pill-badge>
+        <i class="fa fa-info-circle text-muted"></i>
+        <i class="fa fa-edit text-muted"></i>
       </span>
-      <button class="btn btn-default btn-block">Site Enrollment</button>
     </div>
-
   </div>
 
 
@@ -35,7 +45,7 @@
                     [alerts]="siteAccess.alert">
                   </prime-pill-badge>
 
-                  <i class="fa fa-info-circle"></i>
+                  <i class="fa fa-info-circle text-muted"></i>
               </span>
           </div>
 

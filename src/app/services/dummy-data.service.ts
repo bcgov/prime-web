@@ -21,75 +21,7 @@ export class DummyDataService {
 
   // -- Generating Models
 
-  /** Returns a number of sites populated with users*/
-  createSites(count: number, name: string = "London Drugs"): Site[] {
-    const result: Site[] = [];
-    for (let index = 0; index < count; index++) {
-      const site = new Site();
-      site.name = this.generateSiteName(name);
-      result.push(site);
-    }
-
-    return result;
-  }
-
-  //FIXME: This is a bad approach to including people. Circular JSON. Also, because it already has a hierarchy, it's impossible to easily flip to make people the top level?
-  populateCollectionWithPeople(collection: Collection, totalPeople: number){
-    const people: Person[] = this.createPeople(totalPeople);
-
-    let result = collection.members.map((site, index) => {
-      //Put in a loop so each user can have multiple associations
-      do {
-        const SA = this.createSiteAccess();
-        const person = this.getRandomElFromArray(people);
-
-        // Each person can only have one access per a site, but can have multiple accesses for multiple sites
-        if (person.canAccess(site)){
-          continue;
-        }
-
-        //FIXME: Circular JSON structure is bad here. Remove some? SiteAccess type is inherently circular. Make it uni-directional with a smart collection/container?
-        SA.person = person;
-        SA.site = site;
-        person.siteAccess.push(SA);
-        site.siteAccess.push(SA);
-      } while (Math.random() > 0.3)
-
-      return site;
-    })
-
-    return result;
-  }
-
-  createSiteAccess(): SiteAccess {
-    const SA: SiteAccess = new SiteAccess();
-    let randomStatusString : string = this.getRandomElFromArray(Object.keys(EnrollmentStatus));
-    let status: EnrollmentStatus = EnrollmentStatus[randomStatusString];
-
-    SA.status = status;
-    return SA;
-  }
-
-
-    createCollectionsWithPeople(names: string[] = ["London Drugs"], withPeople = true): Collection[] {
-    const result: Collection[] = [];
-
-    names.forEach(name => {
-      const sites = this.createSites(5, name);
-      let collection = new Collection(name, sites);
-
-      if (withPeople){
-        console.log('populating collection with people');
-         this.populateCollectionWithPeople(collection, 2)
-      }
-
-      result.push(collection);
-    })
-
-
-    return result;
-  }
-
+  /** Returns an array of people with random names.*/
   createPeople(count): Person[] {
     const result: Person[] = [];
 
@@ -102,9 +34,70 @@ export class DummyDataService {
     return result;
   }
 
+  /** Returns an array of sites with a random name. */
+  createSites(count: number, name: string = "London Drugs"): Site[] {
+    const result: Site[] = [];
+    for (let index = 0; index < count; index++) {
+      const site = new Site();
+      site.name = this.generateSiteName(name);
+      result.push(site);
+    }
+
+    return result;
+  }
+
+  /** Returns an array of collections that come populated with sites. */
+  createCollectionsWithSites(names: string[] = ["London Drugs"], siteCount: number = 5): Collection[] {
+    const result: Collection[] = [];
+
+    names.forEach(name => {
+      const sites = this.createSites(siteCount, name);
+      let collection = new Collection(name, sites);
+      result.push(collection);
+    })
+
+
+    return result;
+  }
+   /**
+   * Creates a Site Access with a random status that's associated to the input
+   * parameters.  It does NOT modify the input parameters themselves, that must
+   * be done outside of the function (e.g. person.sites and site.siteAccess)
+   */
+  createSiteAccess(site: Site, person: Person): SiteAccess {
+    const SA: SiteAccess = new SiteAccess();
+    let randomStatusString : string = this.getRandomElFromArray(Object.keys(EnrollmentStatus));
+    let status: EnrollmentStatus = EnrollmentStatus[randomStatusString];
+
+    SA.status = status;
+
+    SA.site = site;
+    SA.person = person;
+
+    return SA;
+  }
+
+  /**
+   * Returns an array of SiteAccess objects that have been associated to the
+   * inputted collection and people.
+   */
+  populateSiteAccessFromCollection(collection: Collection, people: Person[]): SiteAccess[] {
+    const result: SiteAccess[] = [];
+
+    collection.members.map(site => {
+      const person = this.getRandomElFromArray(people);
+      const sa: SiteAccess = this.createSiteAccess(site, person);
+
+      person.siteAccess.push(sa);
+      site.siteAccess.push(sa);
+      result.push(sa);
+    })
+
+    return result;
+  }
 
   // --- Enrollment List
-
+  /** @deprecated - Going towards creating collection/person directly */
   getEnrollmentListBySiteData(): EnrollmentRowItem[] {
     let result: EnrollmentRowItem[] = [
       {

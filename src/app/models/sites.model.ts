@@ -38,14 +38,6 @@ export class Site extends Base {
       .filter(this.filterUnique)
   }
 
-  // FIXME: Very much dev and likely to be removed.
-  convertToEnrollmentRow(){
-    //what fields does enrollment-row also need
-    //title - WILL CHANGE DEP ON TYPE OF ENROLLMENT ROW (bySite/byUser)
-    //alerts
-    //open
-  }
-
   private filterUnique(x, i, a){
     return x && a.indexOf(x) === i
   }

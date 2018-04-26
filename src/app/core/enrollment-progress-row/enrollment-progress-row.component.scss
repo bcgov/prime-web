@@ -1,7 +1,7 @@
 @import 'variables.scss';
 
 :host {
-  background-color: $gray-200;
+  background-color: $gray-400;
   width: 100%;
 }
 
@@ -17,8 +17,9 @@
   position: relative;
 }
 
-p:first-of-type {
-  padding-top: 1em;
+p:first-of-type, .fa-quote-left {
+  padding-top: 1rem;
+  margin-bottom: 0;
 }
 
 
@@ -30,7 +31,7 @@ p:first-of-type {
 
 .progressSlider--bar {
   display: flex;
-  flex-basis: 90%;
+  flex-basis: calc(100% - 20px);
   justify-content: space-between;
   background: $gray-500;
   height: 2px;

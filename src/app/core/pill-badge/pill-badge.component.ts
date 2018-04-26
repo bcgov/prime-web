@@ -16,6 +16,9 @@ export class PillBadgeComponent implements OnInit {
   @Input() title: string;
   @Input() count: number;
 
+  /** Only show an icon, and use a tooltip to reveal text. */
+  @Input() iconOnly: boolean = false;
+
   constructor() { }
 
   ngOnInit() {

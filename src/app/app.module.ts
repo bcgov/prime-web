@@ -65,6 +65,7 @@ import { UserService } from './services/user.service';
 import { PrimeDataService } from './services/prime-data.service';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { EnrollmentProgressRowComponent } from './core/enrollment-progress-row/enrollment-progress-row.component';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 
 
@@ -129,7 +130,8 @@ import { EnrollmentProgressRowComponent } from './core/enrollment-progress-row/e
     TabsModule.forRoot(),
     AlertModule.forRoot(),
     BsDropdownModule.forRoot(),
-    MyDateRangePickerModule
+    MyDateRangePickerModule,
+    TooltipModule.forRoot()
   ],
   providers: [
     ApplicantDataService,

@@ -12,12 +12,12 @@ export class PrimeDataService {
   constructor() { }
 
   /** List of all sites the front-end app has access to currently */
-  sites: Site[];
+  sites: Site[] = [];
   /** List of all collections the front-end app has access to currently */
-  collections: Collection[]
+  collections: Collection[] = [];
   /** List of all people the front-end app has access to currently */
-  people: Person[];
-
+  people: Person[] = [];
+  siteAccesses: SiteAccess[] = [];
 
   getEnrollmentBySite(): EnrollmentRowItem[] {
 
@@ -30,21 +30,11 @@ export class PrimeDataService {
         sites: collection.members,
         users: collection.allUsers
       }
-
-      rowItem.expandableChildren = [];
-
       const pending = collection.getSiteAccessWithStatus(EnrollmentStatus.Pending)
       const expired = collection.getSiteAccessWithStatus(EnrollmentStatus.Expired)
       const declined = collection.getSiteAccessWithStatus(EnrollmentStatus.Declined)
 
-      // The items we want to turn into expandable rows
       const problemAccess = pending.concat(expired, declined)
-
-      // Convert collapse multiple site access per person down to one row
-      // const children = this.generateRowChildFromSiteAccess(problemAccess);
-      const children = problemAccess;
-
-
       rowItem.expandableRows = problemAccess;
       result.push(rowItem);
     })
@@ -60,102 +50,43 @@ export class PrimeDataService {
     this.people.map(person => {
       const rowItem: EnrollmentRowItem = {
         title: person.name,
-        sites: [],
-        users: [],
+        sites: person.sites,
+        collections: this.findCollectionFromSites(person.sites)
       }
+
+      const pending = person.siteAccess
+        .filter(sa => sa.status === EnrollmentStatus.Pending)
+      const expired = person.siteAccess
+        .filter(sa => sa.status === EnrollmentStatus.Expired)
+      const declined = person.siteAccess
+        .filter(sa => sa.status === EnrollmentStatus.Declined)
+
+      const problemAccess = pending.concat(expired, declined)
+      rowItem.expandableRows = problemAccess;
 
       result.push(rowItem);
     })
 
+    return result;
+  }
+
+  findCollectionFromSites(sites: Site[]): Collection[] {
+    let result: Collection[] = [];
+    for (let index = 0; index < sites.length; index++) {
+      const site = sites[index];
+      const collection = this.findCollectionFromSite(site);
+      result.push(... collection);
+    }
 
     return result;
   }
 
-  // private generateRowChildFromSiteAccess(problemAccess: SiteAccess[]){
-  //   const result = [];
-
-  //   // Filter objects based off of person?
-  //   // generate alerts for each person
-  //   const uniqueNames = problemAccess.map(sa => sa.person.name)
-  //     .filter(this.filterUnique)
-
-  //   uniqueNames.map(name => {
-
-  //     // Get only sites for the unique name
-  //     const siteAccessForName = problemAccess
-  //       .filter(site => site.person.name === name);
-
-  //       // debugger;
-
-  //     // result.push(... siteAccessForName);
-  //     // result.push({})
-
-
-  //     // result.push(...siteAccessForName)
-
-  //     // result.push({
-  //     //   title: name,
-  //     //   alerts: this.generateAlertsFromSiteAccess(siteAccessForName),
-  //     // })
-  //   })
-
-  //   return result;
-  // }
-
-  // private generateRowChildFromSiteAccessOLD(problemAccess: SiteAccess[]){
-  //   const result = [];
-
-  //   // Filter objects based off of person?
-  //   // generate alerts for each person
-  //   const uniqueNames = problemAccess.map(sa => sa.person.name)
-  //     .filter(this.filterUnique)
-
-  //   uniqueNames.map(name => {
-
-  //     // Get only sites for the unique name
-  //     const siteAccessForName = problemAccess
-  //       .filter(site => site.person.name === name);
-
-  //     result.push({
-  //       title: name,
-  //       alerts: this.generateAlertsFromSiteAccess(siteAccessForName),
-  //     })
-  //   })
-
-  //   return result;
-  // }
-
-  // private generateAlertsFromSiteAccess(siteAccess: SiteAccess[]): EnrollmentAlerts[] {
-  //   const alerts: EnrollmentAlerts[] = [];
-
-  //   siteAccess.forEach(siteAccess => {
-
-  //     if (siteAccess.status === EnrollmentStatus.Pending){
-  //       alerts.push({
-  //         level: BadgeLevel.Warning,
-  //         status: siteAccess.status
-  //       })
-  //     }
-
-  //     if (siteAccess.status === EnrollmentStatus.Expired){
-  //       alerts.push({
-  //         level: BadgeLevel.Danger,
-  //         status: siteAccess.status
-  //       })
-  //     }
-
-  //     if (siteAccess.status === EnrollmentStatus.Declined){
-  //       alerts.push({
-  //         level: BadgeLevel.Danger,
-  //         status: siteAccess.status
-  //       })
-  //     }
-
-  //   })
-
-
-  //   return alerts;
-  // }
+  findCollectionFromSite(site: Site): Collection[] {;
+    return this.collections.map(collection => {
+      let exists = collection.members.indexOf(site) >= 0;
+      if (exists) return collection;
+    }).filter(x => x); //Remove undefined
+  }
 
   private filterUnique(x, i, a){
     return x && a.indexOf(x) === i

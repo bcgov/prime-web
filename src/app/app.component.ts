@@ -25,27 +25,23 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    const dummyCollections = this.dummyDataService.createCollectionsWithPeople([
+    const dummyCollections = this.dummyDataService.createCollectionsWithSites([
       "London Drugs - North",
       "London Drugs - South",
       "Rexall Vancouver Island - All",
       "SDM Vancouver Island"
-    ]);
+    ], 5);
+    const dummyPeople = this.dummyDataService.createPeople(10);
+    const dummySites = [].concat(... dummyCollections.map(collection => collection.members)); //flatten array
 
-    const people = this.dummyDataService.createPeople(10);
-
-    // debugger;
-
-    /**
-     * TODO: Re-write to pass in 'natives': Collection/People/Sites
-     * Don't USE `createCollectionsWithPeople()` (as-is), must separate data.
-     *
-     * Need to find membership some other way than nesting. Maybe look up on ID?
-     * Replace in future with PouchDB? So keep data logic separated
-     */
-
+    // Create Site Access objects + associate with people/collections
+    dummyCollections.map(collection => {
+      const SA = this.dummyDataService.populateSiteAccessFromCollection(collection, dummyPeople)
+      this.primeDataService.siteAccesses.push(... SA);
+    });
 
     this.primeDataService.collections = dummyCollections;
-    this.primeDataService.people = people;
+    this.primeDataService.sites = dummySites;
+    this.primeDataService.people = dummyPeople;
   }
 }

@@ -2,17 +2,21 @@ import { Component, OnInit, Input, ViewChildren, QueryList } from '@angular/core
 import { EnrollmentRowItem } from '../enrollment-row/enrollment-row.interface'
 import { EnrollmentRowComponent } from '../enrollment-row/enrollment-row.component';
 import { EnrollmentStatus } from '../../models/prime.models';
+import { Base } from '../base/base.class';
 
 @Component({
   selector: 'prime-enrollment-list',
   templateUrl: './enrollment-list.component.html',
   styleUrls: ['./enrollment-list.component.scss']
 })
-export class EnrollmentListComponent implements OnInit {
+export class EnrollmentListComponent extends Base implements OnInit {
   @Input() rowItems: EnrollmentRowItem[];
   @ViewChildren(EnrollmentRowComponent) rowElements: QueryList<EnrollmentRowComponent>
   /** Internal representation of data used in for loops. Can be filtered by search. */
   public data: EnrollmentRowItem[];
+
+  /** What the primary/top level rows are. Changes labels and some other layout configurations. */
+  @Input() primaryType: "User"|"Site" = "Site";
 
   // Valid values: EnrollmentStatus enums + "All"
   public viewTypeSelector  = "All";
@@ -22,7 +26,9 @@ export class EnrollmentListComponent implements OnInit {
     return Object.keys(EnrollmentStatus)
   }
 
-  constructor() { }
+  constructor() {
+    super();
+   }
 
   ngOnInit() {
     this.data = this.rowItems;
@@ -30,6 +36,8 @@ export class EnrollmentListComponent implements OnInit {
 
   rowOpened(item: EnrollmentRowComponent) {
     // console.log("rowOpened", { item, rowElements: this.rowElements });
+    this.rowElements.filter(x => x !== item)
+      .map(x => x.closeRow());
   }
 
   search(phrase){

@@ -7,10 +7,14 @@ export const openState = trigger('openState', [
   state('closed', style({
     overflow: 'hidden',
     height: '0',
+    'box-shadow': '0px 1px 2px 1px #00000047',
   })),
   state('opened', style({
     overflow: 'hidden',
     height: '*',
+    'box-shadow': '0px 3px 7px 2px #00000047',
+    'z-index' : 10,
+    transform: 'scale(1.005)'
   })),
   transition('closed => opened', animate(`${TIMING} ease-in`)),
   transition('opened => closed', animate(`${TIMING} ease-out`))

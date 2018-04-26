@@ -40,7 +40,6 @@ export class Person extends Base {
 
   canAccess(site: Site): boolean{
     return this.sites.indexOf(site) !== -1
-    // return false;
   }
 }
 
