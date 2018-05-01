@@ -25,6 +25,7 @@ export class EnrollmentRowComponent extends Base implements OnInit {
   }
 
   ngOnInit() {
+    this.siteAccessRequiringAttention.map(x => x.open = false);
   }
 
   @HostBinding('@loadInOut') true;

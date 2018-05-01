@@ -66,7 +66,10 @@ import { PrimeDataService } from './services/prime-data.service';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { EnrollmentProgressRowComponent } from './core/enrollment-progress-row/enrollment-progress-row.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-
+import { SiteAccessWidgetsComponent } from './core/site-access-widgets/site-access-widgets.component';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+// import { PieChartModule } from '@swimlane/ngx-charts';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 @NgModule({
@@ -114,6 +117,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     DashboardByUserComponent,
     DashboardBySiteComponent,
     EnrollmentProgressRowComponent,
+    SiteAccessWidgetsComponent,
   ],
   imports: [
     BrowserModule,
@@ -131,7 +135,9 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     AlertModule.forRoot(),
     BsDropdownModule.forRoot(),
     MyDateRangePickerModule,
-    TooltipModule.forRoot()
+    TooltipModule.forRoot(),
+    ButtonsModule.forRoot(),
+    NgxChartsModule,
   ],
   providers: [
     ApplicantDataService,

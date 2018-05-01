@@ -3,8 +3,9 @@ import { Injectable } from '@angular/core';
 import { EnrollmentRowItem, EnrollmentRowChild, BadgeLevel } from '../core/enrollment-row/enrollment-row.interface';
 import { EnrollmentStatus, Person } from '../models/prime.models';
 
-import { Site, SiteAccess } from '../models/sites.model';
+import { Site, SiteAccess, SiteAccessProgressSteps } from '../models/sites.model';
 import { Collection } from '../models/collections.model';
+import * as moment from "moment";
 
 
 /**
@@ -63,16 +64,35 @@ export class DummyDataService {
    * Creates a Site Access with a random status that's associated to the input
    * parameters.  It does NOT modify the input parameters themselves, that must
    * be done outside of the function (e.g. person.sites and site.siteAccess)
+   *
+   * If you do not set person.site and site.siteAccess to include the result of
+   * this parameter, then the SA will not be setup correctly.
    */
   createSiteAccess(site: Site, person: Person): SiteAccess {
     const SA: SiteAccess = new SiteAccess();
     let randomStatusString : string = this.getRandomElFromArray(Object.keys(EnrollmentStatus));
     let status: EnrollmentStatus = EnrollmentStatus[randomStatusString];
-
     SA.status = status;
-
     SA.site = site;
     SA.person = person;
+
+    // Random Date. Currently we're only interested in "upcoming renewals", so
+    // they expire soon.
+    const today = new Date();
+    const sixMonthsFuture =  new Date(today.getFullYear(), today.getMonth() + 4, today.getDate())
+    const endDate = this.randomDate(today, sixMonthsFuture)
+    SA.endDate = endDate;
+
+    // Request date is any time in the past.
+    const pastDate = new Date(2012, 1, 0);
+    SA.requestDate = this.randomDate(today, pastDate);
+
+    // Random Progress status. Not necessarily logical. For example, a user that
+    // has status=active should not have an in progress status.
+    let randomProgressString : string = this.getRandomElFromArray(Object.keys(SiteAccessProgressSteps));
+    let progress: SiteAccessProgressSteps = SiteAccessProgressSteps[randomProgressString];
+    SA.progress = progress;
+
 
     return SA;
   }
@@ -184,6 +204,11 @@ export class DummyDataService {
 
     return `${this.getRandomElFromArray(firstNames)} ${this.getRandomElFromArray(lastNames)}`
   }
+
+  private randomDate(start: Date, end: Date): Date {
+    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+  }
+
 
 
 

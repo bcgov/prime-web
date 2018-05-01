@@ -1,0 +1,46 @@
+@import 'variables.scss';
+
+
+// All top level styles will be GLOBAL! We use ViewEncapsulation.NONE here, so
+// put all styles specific to this component in this selector.
+prime-site-access-widgets {
+  .card-body {
+    background: $color-white;
+  }
+
+  .card-header {
+    min-height: 4rem;
+    display: flex;
+    align-items: start;
+  }
+
+  .card {
+    border: 1px solid rgba(0, 0, 0, 0.125);
+  }
+
+  .application-text {
+    white-space: nowrap;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(100% - 3rem);
+  }
+}
+
+// Global Styles
+
+.ngx-charts {
+  // Swap position of pie-chart and label
+  float: right !important;
+  // The difference between original label width and new label width.
+  margin-right: -45px;
+}
+
+.legend-labels {
+  min-width: 100px;
+  margin: 1em 0.2rem !important;
+}
+
+.pie-chart-container {
+  padding: 0;
+}

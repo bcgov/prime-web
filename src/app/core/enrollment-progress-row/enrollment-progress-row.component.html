@@ -3,11 +3,12 @@
     <div class="col">
       <i class="fa fa-quote-left fa-2x fa-pull-left" aria-hidden="true"></i>
       <p><em>Request has been approved and is awaiting PoS Provisioning</em></p>
-      <p><small>Requested Date: 02/03/2017</small></p>
+      <p><small>Requested Date: {{ data.formatDateShort(data.requestDate)}}</small></p>
     </div>
 
     <div class="col">
       <div class="progressSlider">
+        <!-- Labels -->
         <div class="progressSlider--text">
           <div class="progressItem">
             <div class="progressText">Verifier</div>
@@ -23,14 +24,13 @@
           </div>
         </div>
 
+        <!-- The progress bar line / dots -->
         <div class="progressSlider--bar">
-          <div class="progressBarMarker"></div>
-          <div class="progressBarMarker"></div>
-          <div class="progressBarMarker"></div>
-          <div class="progressBarMarker active"></div>
+          <div class="progressBarMarker"
+            *ngFor="let x of iterableNumberOfSteps; let i = index"
+            [ngClass]="{active: i == activeStepIndex}">
+          </div>
         </div>
-
-
       </div>
     </div>
   </div>

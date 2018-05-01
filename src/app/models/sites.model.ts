@@ -2,7 +2,7 @@ import { Base } from '../core/base/base.class';
 import { Address, Role, Verifier, Person } from './prime.models';
 import { EnrollmentStatus } from './prime.models';
 import { BadgeLevel } from '../core/enrollment-row/enrollment-row.interface';
-
+import * as moment from "moment";
 
 //-----------------------------------------------------------------------------
 // SITES
@@ -93,6 +93,20 @@ export class SiteAccess extends Base {
     return;
   }
 
+  get daysUntilExpiry(): number {
+    const expiry = moment(this.endDate);
+    const today = moment();
+    return expiry.diff(today, 'days');
+  }
+
+  get endDateShort(): string {
+    return moment(this.endDate).format('DD/MM/YYYY');
+  }
+
+  formatDateShort(date: Date){
+    return moment(date).format('DD/MM/YYYY');
+  }
+
 
 }
 
@@ -103,7 +117,7 @@ class Vendor extends Base { }
 /**
  * These are steps, IN ORDER, for a Site Request. Tied closely with EnrollmentProgressRowComponent
  */
-enum SiteAccessProgressSteps {
+export enum SiteAccessProgressSteps {
   Verifier = 'Verifier',
   Applicant = 'Applicant',
   MoH = "MoH",

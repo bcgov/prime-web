@@ -18,4 +18,8 @@ export class DashboardByUserComponent implements OnInit {
     this.enrollmentByUserData = this.dataService.getEnrollmentByUser();
   }
 
+  get siteAccesses() {
+    return this.dataService.siteAccesses;
+  }
+
 }
