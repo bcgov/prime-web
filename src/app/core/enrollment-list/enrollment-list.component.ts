@@ -41,30 +41,50 @@ export class EnrollmentListComponent extends Base implements OnInit {
   }
 
   search(phrase){
+    if (this.primaryType === 'Site') {
+      this.searchSites(phrase);
+    }
+    else if (this.primaryType === 'User'){
+      this.searchUsers(phrase);
+    }
+  }
+
+  // Searches based on the expandable rows, per business requirements (i.e. site name, NOT collection name!)
+  searchSites(phrase){
+    this.data = this.rowItems.map(enrollmentRow => {
+      // Filter x, hiding all sites that don't fit
+      enrollmentRow.expandableRows = enrollmentRow.expandableRows
+      .filter(expandableRow => {
+        return expandableRow.title.toLowerCase().indexOf(phrase.toLowerCase()) !== -1;
+      });
+
+      return enrollmentRow;
+    }).filter(enrollmentRow => {
+      // Only show rows with search results
+      return enrollmentRow.expandableRows.length;
+    })
+  }
+
+  // Searches based on the top level row (i.e. user name)
+  searchUsers(phrase){
     this.data = this.rowItems.filter(x => {
       return x.title.toLowerCase().indexOf(phrase.toLowerCase()) !== -1;
     })
   }
 
-  // FIXME: This doesn't work properly with search.
+  // NOTE: This doesn't work properly with search. Fine for prototype for now, but will need to be resolved in future.
   viewTypes(type){
-    if (type == "All") {
-      return this.data.map(rowItem => {
-        rowItem.expandableChildren.map(rowChild => {
-          rowChild.hidden = false;
-        })
-      });
+    console.log('viewTypes', type);
+
+    if (type === "All"){
+      return this.data = this.rowItems;
     }
 
-    console.log('viewTypes', type);
-    this.data = this.rowItems.map(x => {
-      if (!x.expandableChildren) return;
 
-      x.expandableChildren.map(child => {
-        child.hidden = (child.alerts[0].status !== type);
-      })
-
-      return x;
+    // // TODO: Verify solution works for byUser and bySite
+    return this.data = this.rowItems.filter(rowItem => {
+      return rowItem.expandableRows
+        .map(x => x.status).indexOf(type) !== -1;
     })
   }
 

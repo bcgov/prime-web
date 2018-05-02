@@ -1,15 +1,15 @@
-<!--
-  TODO:
-  - Add User button on side
- -->
 <div class='dashboard-container'>
     <nav class="nav">
-
       <a routerLink="/dashboard/user">
         <button class="btn btn-default btn-block">By User</button>
       </a>
       <a routerLink="/dashboard/site">
         <button class="btn btn-default btn-block">By Site</button>
       </a>
+
+      <prime-add-user-button
+        class='fix-right'>
+      </prime-add-user-button>
     </nav>
+
 </div>

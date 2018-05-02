@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, Input } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
@@ -8,6 +8,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
   styleUrls: ['./add-user-button.component.scss']
 })
 export class AddUserButtonComponent implements OnInit {
+  @Input() iconOnly: boolean = false;
   modalRef: BsModalRef;
   progress: any = []
   // Can be changed at runtime depending on user behaviour

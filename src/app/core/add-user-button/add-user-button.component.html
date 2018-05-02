@@ -1,6 +1,12 @@
-<button type="button" class="btn btn-primary" (click)="openModal(template)">
-    Add User
+<button *ngIf="!iconOnly" type="button" class="btn btn-outline-primary" (click)="openModal(template)">
+    Add User <i class="fa fa-user-plus"></i>
 </button>
+
+<button *ngIf="iconOnly" type="button" class='btn btn-default' (click)="openModal(template)">
+    <i class="fa fa-user-plus"></i>
+</button>
+
+
 
 <ng-template #template>
     <div class="modal-header">
