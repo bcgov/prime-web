@@ -3,6 +3,7 @@ import { EnrollmentRowItem } from '../enrollment-row/enrollment-row.interface'
 import { EnrollmentRowComponent } from '../enrollment-row/enrollment-row.component';
 import { EnrollmentStatus } from '../../models/prime.models';
 import { Base } from '../base/base.class';
+import { SiteAccess } from '../../models/sites.model';
 
 @Component({
   selector: 'prime-enrollment-list',
@@ -49,6 +50,34 @@ export class EnrollmentListComponent extends Base implements OnInit {
     }
   }
 
+  /**
+   * Filters all expandable rows, making sure changes propagate up to the top
+   * level rows. Just pass in a function which will filter, with its only
+   * parameter being the ExpandableRow/SiteAccess
+   *
+   * @private
+   * @param {(sa: SiteAccess) => boolean} fn Takes a SiteAccess as a parameter
+   * @memberof EnrollmentListComponent
+   */
+  private deepSearch(fn: (sa: SiteAccess) => boolean    ){
+
+    // Clone the source data so our changes do not wind up persisting in the underlying data
+    let cloned = this.rowItems.map(x => Object.assign({}, x));
+
+    this.data = cloned.map(enrollmentRow => {
+      // Hide all subrows that don't match search results.
+      enrollmentRow.expandableRows = enrollmentRow.expandableRows
+      .filter(expandableRow => {
+        return fn(expandableRow);
+      });
+
+      return enrollmentRow;
+    }).filter(enrollmentRow => {
+      // Only show rows with search results
+      return enrollmentRow.expandableRows.length;
+    })
+  }
+
   // Searches based on the expandable rows, per business requirements (i.e. site name, NOT collection name!)
   searchSites(phrase){
 
@@ -56,21 +85,8 @@ export class EnrollmentListComponent extends Base implements OnInit {
       return this.data = this.rowItems;
     }
 
-    // We have to clone the array because of the assignemnt within the .map()
-    // loop, which would wind up editting the original.
-    let cloned = this.rowItems.map(x => Object.assign({}, x));
-
-    this.data = cloned.map(enrollmentRow => {
-      // Hide all subrows that don't match search results.
-      enrollmentRow.expandableRows = enrollmentRow.expandableRows
-      .filter(expandableRow => {
-        return expandableRow.title.toLowerCase().indexOf(phrase.toLowerCase()) !== -1;
-      });
-
-      return enrollmentRow;
-    }).filter(enrollmentRow => {
-      // Only show rows with search results
-      return enrollmentRow.expandableRows.length;
+    this.deepSearch(expandableRow => {
+      return expandableRow.title.toLowerCase().indexOf(phrase.toLowerCase()) !== -1;
     })
   }
 
@@ -89,10 +105,8 @@ export class EnrollmentListComponent extends Base implements OnInit {
       return this.data = this.rowItems;
     }
 
-    // // TODO: Verify solution works for byUser and bySite
-    return this.data = this.rowItems.filter(rowItem => {
-      return rowItem.expandableRows
-        .map(x => x.status).indexOf(type) !== -1;
+    this.deepSearch(expandableRow => {
+      return expandableRow.status.includes(type);
     })
   }
 
@@ -100,12 +114,5 @@ export class EnrollmentListComponent extends Base implements OnInit {
     // Temporary solution for prototype before actual sorting is implemented.
     this.rowItems.reverse();
   }
-
-  // private arrayOfStringsContains(input: string[], phrase: string): boolean {
-
-
-  //   return false;
-  // }
-
 
 }

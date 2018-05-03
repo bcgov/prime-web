@@ -63,7 +63,9 @@
         <ul class="list-group list-group-flush">
           <li class="list-group-item d-flex justify-content-between" *ngFor="let siteAccess of applicationProgress()">
            <span class='application-text'
-           tooltip="{{ siteAccess.person.name }} &ndash; {{ siteAccess.site.name}}">
+            tooltip="{{ siteAccess.person.name }} &ndash; {{ siteAccess.site.name}}"
+            container="body"
+            delay=350>
              {{ siteAccess.person.name }} &ndash; {{ siteAccess.site.name}}
           </span>
            <i class="fa fa-info-circle text-muted"></i>

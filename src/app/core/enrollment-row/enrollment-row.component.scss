@@ -69,9 +69,14 @@ $rowBgColor: white;
     padding-left: 1em;
     margin-right: 2em;
     .enrollment-text-main {
-        font-weight: 800;
+      // Disabling font-weight as our font (MyraidWebPro.ttf) doesn't support it
+      // and it leads to bad artifacts due to aliasing.
+      // font-weight: 800;
+      font-size: $h4-font-size;
     }
     &>span:not(:last-of-type):after {
+        font-size: $font-size-base;
+        color: $gray-600;
         content: " / "
     }
 
@@ -84,6 +89,7 @@ $rowBgColor: white;
 
     &>span:not(.enrollment-text-main) {
         color: $gray-600;
+        margin-left: 0.1rem;
     }
 }
 

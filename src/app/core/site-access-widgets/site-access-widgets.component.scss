@@ -9,6 +9,7 @@ prime-site-access-widgets {
   }
 
   .card-header {
+    font-size: $h3-font-size;
     min-height: 4rem;
     display: flex;
     align-items: start;
@@ -26,13 +27,26 @@ prime-site-access-widgets {
     max-width: calc(100% - 3rem);
   }
 
-  .list-group {
-    max-height: 300px;
+  .list-group, .card-body {
+    height: 17rem;
     overflow-y: scroll;
     .list-group-item {
       min-height: 44px;
     }
   }
+
+  //  Custom scrollbars to show that it's always scrollable
+  // .list-group {
+  //   &::-webkit-scrollbar {
+  //     width: 3px;
+  //     height: 8px;
+  //     background-color: $gray-200;
+  //   }
+  //   &::-webkit-scrollbar-thumb {
+  //     background: $gray-500;
+  //   }
+  // }
+
 }
 
 // Global Styles
@@ -52,3 +66,4 @@ prime-site-access-widgets {
 .pie-chart-container {
   padding: 0;
 }
+

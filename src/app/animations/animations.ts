@@ -9,6 +9,14 @@ export const openState = trigger('openState', [
     height: '0',
     'box-shadow': '0px 1px 2px 1px #00000047',
   })),
+  // Void should be identical to closed. Void can occur in edge cases when
+  // really they should be closed. For example, when running array.reverse() on
+  // EnrollmentList, the rows openState become void.
+  state('void', style({
+    overflow: 'hidden',
+    height: '0',
+    'box-shadow': '0px 1px 2px 1px #00000047',
+  })),
   state('opened', style({
     overflow: 'hidden',
     height: '*',
@@ -16,8 +24,8 @@ export const openState = trigger('openState', [
     'z-index' : 10,
     transform: 'scale(1.005)'
   })),
-  transition('closed => opened', animate(`${TIMING} ease-in`)),
-  transition('opened => closed', animate(`${TIMING} ease-out`))
+  transition('* => opened', animate(`${TIMING} ease-in`)),
+  transition('opened => *', animate(`${TIMING} ease-out`))
 ]);
 
 
