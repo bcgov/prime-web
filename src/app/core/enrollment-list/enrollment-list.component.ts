@@ -51,6 +51,11 @@ export class EnrollmentListComponent extends Base implements OnInit {
 
   // Searches based on the expandable rows, per business requirements (i.e. site name, NOT collection name!)
   searchSites(phrase){
+
+    if (phrase.length === 0){
+      return this.data = this.rowItems;
+    }
+
     this.data = this.rowItems.map(enrollmentRow => {
       // Filter x, hiding all sites that don't fit
       enrollmentRow.expandableRows = enrollmentRow.expandableRows

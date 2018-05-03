@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
       "Rexall Vancouver Island - All",
       "SDM Vancouver Island"
     ], 5);
-    const dummyPeople = this.dummyDataService.createPeople(10);
+    const dummyPeople = this.dummyDataService.createPeople(25);
     const dummySites = [].concat(... dummyCollections.map(collection => collection.members)); //flatten array
 
     // Create Site Access objects + associate with people/collections

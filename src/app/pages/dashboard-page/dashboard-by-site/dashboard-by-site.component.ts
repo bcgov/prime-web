@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { PrimeDataService } from '../../../services/prime-data.service';
 import { EnrollmentRowItem } from '../../../core/enrollment-row/enrollment-row.interface';
-import { SiteAccess } from '../../../models/sites.model';
 
 @Component({
   selector: 'prime-dashboard-by-site',
@@ -16,10 +15,6 @@ export class DashboardBySiteComponent implements OnInit {
 
   ngOnInit() {
     this.enrollmentBySiteData = this.dataService.getEnrollmentBySite();
-  }
-
-  get siteAccesses(): SiteAccess[] {
-    return this.dataService.siteAccesses;
   }
 
 }

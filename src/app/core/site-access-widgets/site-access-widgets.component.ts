@@ -60,11 +60,13 @@ export class SiteAccessWidgetsComponent implements OnInit {
   }
 
   applicationProgress(){
-    //todo: handle dropdown (Verifier/Applicant/MoH/Provisioner)
     let selection: SiteAccessProgressSteps = this.applicationProgressSelector;
 
     // Copy the array so our sorting doesn't mess up other places
     let result: SiteAccess[] = this.data.concat();
+    // Filter to only show 'problem' results, to match enrollment list
+    result = result.filter(x => x.alert);
+
     return result.filter(sa => sa.progress === selection);
   }
 

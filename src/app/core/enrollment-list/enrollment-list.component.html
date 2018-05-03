@@ -22,11 +22,13 @@
 
 
 <div class="enrollment-item-container">
-  <prime-enrollment-row
-    *ngFor="let item of data"
-    [rowData]='item'
-    [primaryType]='primaryType'
-    (onRowOpened)='rowOpened($event)'>
-  </prime-enrollment-row>
+  <div class="enrollment-item-inner">
+    <prime-enrollment-row
+      *ngFor="let item of data"
+      [rowData]='item'
+      [primaryType]='primaryType'
+      (onRowOpened)='rowOpened($event)'>
+    </prime-enrollment-row>
+  </div>
 </div>
 

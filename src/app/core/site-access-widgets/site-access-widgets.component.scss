@@ -25,6 +25,14 @@ prime-site-access-widgets {
     text-overflow: ellipsis;
     max-width: calc(100% - 3rem);
   }
+
+  .list-group {
+    max-height: 300px;
+    overflow-y: scroll;
+    .list-group-item {
+      min-height: 44px;
+    }
+  }
 }
 
 // Global Styles

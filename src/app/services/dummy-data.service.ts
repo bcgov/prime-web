@@ -104,8 +104,20 @@ export class DummyDataService {
   populateSiteAccessFromCollection(collection: Collection, people: Person[]): SiteAccess[] {
     const result: SiteAccess[] = [];
 
+    // Make sure at least each site has one person
     collection.members.map(site => {
       const person = this.getRandomElFromArray(people);
+      const sa: SiteAccess = this.createSiteAccess(site, person);
+
+      person.siteAccess.push(sa);
+      site.siteAccess.push(sa);
+      result.push(sa);
+    })
+
+    // Make sure ALL people have some sort of site access, even if people vastly
+    // outnumber collections.
+    people.map(person => {
+      const site = this.getRandomElFromArray(collection.members)
       const sa: SiteAccess = this.createSiteAccess(site, person);
 
       person.siteAccess.push(sa);
