@@ -56,8 +56,12 @@ export class EnrollmentListComponent extends Base implements OnInit {
       return this.data = this.rowItems;
     }
 
-    this.data = this.rowItems.map(enrollmentRow => {
-      // Filter x, hiding all sites that don't fit
+    // We have to clone the array because of the assignemnt within the .map()
+    // loop, which would wind up editting the original.
+    let cloned = this.rowItems.map(x => Object.assign({}, x));
+
+    this.data = cloned.map(enrollmentRow => {
+      // Hide all subrows that don't match search results.
       enrollmentRow.expandableRows = enrollmentRow.expandableRows
       .filter(expandableRow => {
         return expandableRow.title.toLowerCase().indexOf(phrase.toLowerCase()) !== -1;
@@ -85,7 +89,6 @@ export class EnrollmentListComponent extends Base implements OnInit {
       return this.data = this.rowItems;
     }
 
-
     // // TODO: Verify solution works for byUser and bySite
     return this.data = this.rowItems.filter(rowItem => {
       return rowItem.expandableRows
@@ -97,6 +100,12 @@ export class EnrollmentListComponent extends Base implements OnInit {
     // Temporary solution for prototype before actual sorting is implemented.
     this.rowItems.reverse();
   }
+
+  // private arrayOfStringsContains(input: string[], phrase: string): boolean {
+
+
+  //   return false;
+  // }
 
 
 }
