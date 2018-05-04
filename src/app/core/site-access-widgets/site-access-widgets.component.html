@@ -39,7 +39,8 @@
             [results]="pieChartData"
             [scheme]="'natural'"
             legend=true
-            legendTitle=''>
+            legendTitle=''
+            (select)='onPieChartClick($event)'>
           </ngx-charts-pie-chart>
         </div>
       </div>

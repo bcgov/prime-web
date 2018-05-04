@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { EnrollmentAlert } from '../../models/sites.model';
 
 @Component({
   selector: 'prime-pill-badge',
@@ -7,8 +8,10 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class PillBadgeComponent implements OnInit {
 
-  //FIXME: Convert to 'Alert' class once done, properly type.
-  @Input() alerts: any;
+
+  /** The data for this component. It *must* be an array, even if you're only
+   * passing one alert. */
+  @Input() alerts: EnrollmentAlert[];
   distinctBadges: any[] = [];
 
 
@@ -22,27 +25,14 @@ export class PillBadgeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    // Currently Alerts can be a single alert, or an array. If it's an array, we want to de-dupe them and add a count.
-
     this.count = this.alerts.length;
-
-    // Process Single
-    if (this.alerts && !this.alerts.length){
-      this.title = this.alerts.status;
-      this.level = this.alerts.level;
-
-      this.distinctBadges = [{
-        title: this.alerts.status,
-        level: this.alerts.level,
-        count: 0,
-      }];
-    }
 
     // Process Array
     if (this.alerts && this.alerts.length){
       const alertTypes = this.alerts.map(x => x.status)
       .filter(this.filterUnique);
 
+      // Break each "type" of alert into a distinc element/text/colour
       this.distinctBadges = alertTypes.map(type => {
         const alertOfType = this.alerts.filter(x => x.status === type);
         return {

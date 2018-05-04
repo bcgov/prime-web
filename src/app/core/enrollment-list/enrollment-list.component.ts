@@ -4,6 +4,7 @@ import { EnrollmentRowComponent } from '../enrollment-row/enrollment-row.compone
 import { EnrollmentStatus } from '../../models/prime.models';
 import { Base } from '../base/base.class';
 import { SiteAccess } from '../../models/sites.model';
+import { VerifierService } from '../../services/verifier.service';
 
 @Component({
   selector: 'prime-enrollment-list',
@@ -27,12 +28,21 @@ export class EnrollmentListComponent extends Base implements OnInit {
     return Object.keys(EnrollmentStatus)
   }
 
-  constructor() {
+  constructor(private verifierService: VerifierService) {
     super();
-   }
+
+    verifierService.$enrollmentViewType.subscribe(viewType => {
+      this.viewTypeSelector = viewType;
+      this.viewTypes(viewType);
+    })
+  }
 
   ngOnInit() {
     this.data = this.rowItems;
+  }
+
+  ngOnDestroy(){
+    this.verifierService.enrollmentViewTypeSelector = "All";
   }
 
   rowOpened(item: EnrollmentRowComponent) {

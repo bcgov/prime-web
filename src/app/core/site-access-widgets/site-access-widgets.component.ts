@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { SiteAccess, SiteAccessProgressSteps } from '../../models/sites.model';
 import { EnrollmentStatus } from '../../models/prime.models';
-
+import { VerifierService } from '../../services/verifier.service';
 @Component({
   selector: 'prime-site-access-widgets',
   templateUrl: './site-access-widgets.component.html',
@@ -17,7 +17,7 @@ export class SiteAccessWidgetsComponent implements OnInit {
   @ViewChild('pieChartContainer') pieChartContainer: ElementRef;
 
 
-  constructor() { }
+  constructor(private verifierService: VerifierService) { }
 
   //Current max width, but doesn't really play nice with mobile views
   public pieChartDimension: number[] = [];
@@ -28,11 +28,11 @@ export class SiteAccessWidgetsComponent implements OnInit {
 
     // Very hacky and should be for prototype only! Possibly remove/replace
     // entire chart library because this one does not play nicely and on re-size
-    // it continually breaks / infinitely grows.  Additionally, height must be
-    // artificially high in order to show all items in the legend!
+    // it continually breaks / infinitely grows.  The height value determines if
+    // the entire legend is visible.
     this.pieChartDimension = [
-      this.pieChartContainer.nativeElement.offsetWidth  - 50,
-      this.pieChartContainer.nativeElement.offsetHeight + 80,
+      this.pieChartContainer.nativeElement.offsetWidth,
+      this.pieChartContainer.nativeElement.offsetHeight,
     ]
   }
 
@@ -77,6 +77,11 @@ export class SiteAccessWidgetsComponent implements OnInit {
         value: this.data.filter(sa => sa.status === status).length
       }
     })
+  }
+
+  onPieChartClick($event){
+    // console.log('onPieChartClick', $event);
+    this.verifierService.enrollmentViewTypeSelector = $event.name;
   }
 
 

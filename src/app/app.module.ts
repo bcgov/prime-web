@@ -61,6 +61,7 @@ import { CollegeDataService } from './services/college-data.service';
 import { DummyDataService } from './services/dummy-data.service';
 import { PrimeDataService } from './services/prime-data.service';
 import { UserService } from './services/user.service';
+import { VerifierService } from './services/verifier.service';
 import { EmailValidationComponent } from './validation/email-validation/email-validation.component';
 import { PhoneValidationComponent } from './validation/phone-validation/phone-validation.component';
 import { PrimeRequiredDirective } from './validation/prime-required.directive';
@@ -138,6 +139,7 @@ import { RequiredValidationErrorsComponent } from './validation/required-validat
     ApplicantDataService,
     CollegeDataService,
     UserService,
+    VerifierService,
     DummyDataService,
     PrimeDataService
   ],

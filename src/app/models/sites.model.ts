@@ -3,6 +3,7 @@ import { Address, Role, Verifier, Person } from './prime.models';
 import { EnrollmentStatus } from './prime.models';
 import { BadgeLevel } from '../core/enrollment-row/enrollment-row.interface';
 import * as moment from "moment";
+import { convertToParamMap } from '@angular/router';
 
 //-----------------------------------------------------------------------------
 // SITES
@@ -66,31 +67,9 @@ export class SiteAccess extends Base {
   // e.g. x.privilege = Verifier
   privilege: typeof Role;
 
-  // TODO: Refactor into class
-  get alert() {
-    let alerts = [];
-    if (this.status === EnrollmentStatus.Pending){
-      return {
-        level: BadgeLevel.Warning,
-        status: this.status
-      }
-    }
 
-    if (this.status === EnrollmentStatus.Expired){
-      return {
-        level: BadgeLevel.Danger,
-        status: this.status
-      }
-    }
-
-    if (this.status === EnrollmentStatus.Declined){
-      return {
-        level: BadgeLevel.Danger,
-        status: this.status
-      }
-    }
-
-    return;
+  get alert(): EnrollmentAlert {
+    return new EnrollmentAlert(this.status);
   }
 
   get daysUntilExpiry(): number {
@@ -106,13 +85,31 @@ export class SiteAccess extends Base {
   formatDateShort(date: Date){
     return moment(date).format('DD/MM/YYYY');
   }
-
-
 }
-
-
 class Vendor extends Base { }
 
+export class EnrollmentAlert {
+  level: BadgeLevel;
+
+  constructor(public status: EnrollmentStatus){
+    this.level = EnrollmentAlert.convertStatusToBadgeLevel(status);
+  }
+
+  static convertStatusToBadgeLevel(status: EnrollmentStatus) : BadgeLevel {
+    if (status === EnrollmentStatus.Pending){
+        return BadgeLevel.Warning;
+    }
+
+    if (status === EnrollmentStatus.Expired){
+        return BadgeLevel.Danger;
+    }
+
+    if (status === EnrollmentStatus.Declined){
+        return BadgeLevel.Danger;
+    }
+
+  }
+}
 
 /**
  * These are steps, IN ORDER, for a Site Request. Tied closely with EnrollmentProgressRowComponent
