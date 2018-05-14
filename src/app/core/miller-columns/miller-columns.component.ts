@@ -2,60 +2,6 @@ import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { MillerItem, MillerColumnConfig, MillerColumn } from './miller-columns.interface';
 import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
 
-
-
-/**
- *
- * TODO: NEED TO WORK ON MOBILE!
- * - look at angular animation?
- *
- * Compare:
- * https://github.com/dsharew/responsive-miller-column
- *
- * QUESTION: Should we explicitly configure CATEGORY and ITEM as separate?
- * Currently everything is an item, and we pass with relationships.
- * PRO: Ability to title each column/category
- *
- * Desired features:
- *  * Infinite columns.
- *  * MOBILE MOBILE MOBILE! Needs to work great on small screen.
- *  * Differing item/column content, e.g. checkbox, button, etc.
- *
- *
- *
- *  <prime-miller-columns
- *      [data]="millerColumnDummyData"
- *      [columnTitles]="['Collections', 'Sites', 'People'">
- *  </prime-miller-columns>
- *
- *  PROPOSED:---------
- * - Specify row/item class for each column. Makes it easy to swap out later.
- *
- *  // FIXME:Question - How do we associate each column with the data for it?
- *  // Could add `data` for each column section?
- *  <prime-miller-columns
- *      [columns]="[
- *        {
- *          title: "Collections",
- *          rowClass: "MillerItemSimple",
- *          data: MillerColumnDummyData['collections']
- *        },
- *        {
- *          title: "Sites",
- *          rowClass: "MillerItemSimpleInfo",
- *          data: MillerColumnDummyData['sites']
- *        },
- *        {
- *          title: "People",
- *          rowClass: "MillerItemMultiPerson",
- *          data: MillerColumnDummyData['people']
- *        }
- *    ]">
- *  </prime-miller-columns>
- *
- * Instead of setting "rowClass", could also set via attributes:
- * <prime-miller-columns [selectMultiple]="true"> //For checkbox v radio?
- */
 const TIMING = "500ms";
 @Component({
   selector: 'prime-miller-columns',
@@ -111,7 +57,10 @@ export class MillerColumnsComponent implements OnInit {
   //TODO: Make interface!
   // private _columns: any;
   private _columns:  MillerColumn[];;
+  public changesMade: boolean = false;
   private MINIMUM_COLUMNS = 3;
+  public declarationCheck: boolean = false;
+  public saveSuccess: boolean;
 
   constructor() { }
 
@@ -151,13 +100,18 @@ export class MillerColumnsComponent implements OnInit {
     return this._columns;
   }
 
+  private get IS_PEOPLE_TABLE(): boolean {
+   return !!(this.config.options &&
+      this.config.options.primaryColumn &&
+      this.config.options.primaryColumn.toLowerCase() === "people");
+  }
+
 
   filterColumn(phrase, colIndex){
-
     this._columns[colIndex]['items'] = this._columns[colIndex]['items']
     .map(x => {
       // Remove from search results without modifying array order.
-      x.hidden = x.title.toLowerCase().indexOf(phrase.toLowerCase()) === -1;
+      x.hidden = x.name.toLowerCase().indexOf(phrase.toLowerCase()) === -1;
       return x;
     })
   }
@@ -169,7 +123,7 @@ export class MillerColumnsComponent implements OnInit {
   }
 
   openColumnFromItem(item: MillerItem){
-    let colIndex = this.findColumnFromItem(item);
+    let colIndex = this.findColumnIndexFromItem(item);
     // Close other items in the same column
     this._columns[colIndex]['items'].filter(x => x !== item)
     .map(x => x.open = false);
@@ -183,6 +137,11 @@ export class MillerColumnsComponent implements OnInit {
   // TODO: Column interface/type
   onClickColTitle(column){
     this.closeColumn(column);
+  }
+
+  onCheck(){
+    this.saveSuccess = false;
+    this.changesMade = true;
   }
 
   //TODO: Column interface + move fn location
@@ -205,7 +164,6 @@ export class MillerColumnsComponent implements OnInit {
     const newItems = this.findItemsAtColIndex(item, newIndex);
 
     if (newItems.length){ //Create column
-      // TODO: Column Interface!
       const newCol: MillerColumn = {
         title: this.columnOrder[newIndex],
         items: newItems,
@@ -216,6 +174,11 @@ export class MillerColumnsComponent implements OnInit {
     else {
       this.closeColumnByIndex(newIndex);
     }
+  }
+
+  public save(): void {
+    this.changesMade = false;
+    this.saveSuccess = true;
   }
 
 
@@ -236,9 +199,7 @@ export class MillerColumnsComponent implements OnInit {
   /**
    * Returns the column that the provided item belongs to (from this._columns)
    */
-  //TODO: DOES THIS NEED TO BE REFACTORED OR JUST TOTALLY REMOVED?
-  // Updated data format and this is out of date.
-  private findColumnFromItem(item: MillerItem){
+  private findColumnIndexFromItem(item: MillerItem): number{
     let result;
 
     //Loop through all columns
@@ -247,7 +208,7 @@ export class MillerColumnsComponent implements OnInit {
       // Loop through items in columns to find match
       for (let i = 0; i < column['items'].length; i++) {
         const colItem = column['items'][i];
-        if (colItem.id === item.id){
+        if (colItem === item){
           return colIndex;
         }
       }
@@ -257,12 +218,63 @@ export class MillerColumnsComponent implements OnInit {
   }
 
   private findItemsAtColIndex(item: MillerItem, targetColIndex: number): MillerItem[] {
-    // Always show items without associationId. If associationId is present, then use that to determine if to show.
-    return this.config.data[this.columnOrder[targetColIndex].toLowerCase()]
-    .filter((x: MillerItem) => {
+    // First, filter out data that doesn't apply to get our column data
+    let data = this.config.data[this.columnOrder[targetColIndex].toLowerCase()]
+    .filter((x: any) => {
       if (!x.associationId) return true;
-      return x.associationId === item.id;
+      return x.associationId === item.objectId;
     })
+
+    // Second, update new column attributes on selections in previous columns
+    data = this.recalculateColumnStatus(data, item);
+    return data;
+  }
+
+  /** Calculates column statuses based on selections in previous columns. In need of refactoring.*/
+  private recalculateColumnStatus(column: MillerItem[], originalSelection: MillerItem ): MillerItem[] {
+    //TODO: For PrimaryType=Collection, we need to calculate warnings (shown in wireframe for by_site). This includes the first column!
+    const selectedSites = this.getSelectedSiteAccess().map(x => x.site);
+    if (this.IS_PEOPLE_TABLE){
+      // Find intersections betweeen column and selection
+      for (let i = 0; i < selectedSites.length; i++) {
+        const site = selectedSites[i];
+        const index: number = column.indexOf(site);
+        if (index === -1) continue;
+        const item: MillerItem = column[index];
+        // TODO: Change to check proper status, not just ANY siteAccess
+        item.checked = !!site.siteAccess[0];
+      }
+    } else { // !IS_PEOPLE_TABLE
+      column.map((item: any) => {
+        item.checked = item.siteAccess[0];
+      })
+    }
+
+    // Sort so all checked items are at the top
+    column.sort((a, b) => {
+      if (a.checked || b.checked){
+        return b.checked ? 1 : 0;
+      }
+      else {
+        // Sort remainder alphabetically
+        return a.name > b.name ? 1 : 0;
+      }
+    });
+
+    // Add "Active" badge
+    return column;
+  }
+
+  private getSelectedSiteAccess(){
+    // TODO: Add types
+
+    if (this.IS_PEOPLE_TABLE){ // items are Sites
+      return (this._columns[0].items.filter(x => x.open)[0] as any).siteAccess;
+    }
+    else { // items are Collections
+      return (this._columns[0].items.filter(x => x.open)[0] as any).allSiteAccess
+    }
+
   }
 
   private cleanUpChildColumns(index){

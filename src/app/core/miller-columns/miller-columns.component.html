@@ -1,3 +1,27 @@
+<!-- TODO: Move this into its own component? -->
+<div class="miller-header d-flex justify-content-between p-3 my-3">
+  <span>Dashboard /
+    <strong *ngIf="IS_PEOPLE_TABLE">User Enrollment</strong>
+    <strong *ngIf="!IS_PEOPLE_TABLE">Site Enrollment</strong>
+  </span>
+
+  <span class='d-inline-flex align-items-center'>
+    <div class="form-check mb-2 mr-sm-2" *ngIf="changesMade">
+      <input class="form-check-input" type="checkbox" id="declaration" [(ngModel)]="declarationCheck">
+      <label class="form-check-label" for="declaration">
+        I declare the information I provided is accurate
+      </label>
+    </div>
+
+    <div class="mb-2 mr-sm-2 bg-info" *ngIf="saveSuccess">
+      Enrollment has been updated
+    </div>
+
+    <button type="button" class="btn btn-default mx-2" [disabled]="!declarationCheck">Cancel</button>
+    <button type="button" class="btn btn-primary mx-2" [disabled]="!declarationCheck" (click)="save()">Save</button>
+  </span>
+</div>
+
 <div class="miller-container">
   <div class="miller-column" *ngFor="let column of columns; let colIndex = index;" [@loadInOut]>
     <div class='miller-column-title'>
@@ -30,11 +54,12 @@
           'd-none': item.hidden && !item.open
         }">
           <a (click)="onItemClick(item)" class='miller-item-link'>
-            <span class="item-title">{{item.title}}</span>
-            <span class="icons-group">
+            <span class="item-title">{{item.name}}</span>
+            <span class="icons-group d-flex">
                 <i *ngIf="item.hasAlert" class="fa fa-exclamation-triangle text-danger"></i>
                 <i *ngIf="item.hasWarning"class="fa fa-exclamation-circle text-warning"></i>
                 <!-- <i class="fa fa-angle-double-right has-children-icon" *ngIf="item.hasChildren"></i> -->
+                <i class="fa fa-info-circle text-muted"></i>
             </span>
           </a>
         </li>
@@ -44,7 +69,9 @@
       <!-- TODO: Potentially split into two different components here, depending on if the final column is People or Sites. -->
       <ng-container *ngIf="colIndex === 2">
         <prime-miller-item-checkbox
-          [items]="column['items']">
+          [items]="column['items']"
+          [selectedSiteAccess]='getSelectedSiteAccess()'
+          (onCheck)="onCheck($evt)">
         </prime-miller-item-checkbox>
 
       </ng-container>

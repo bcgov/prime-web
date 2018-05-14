@@ -4,24 +4,35 @@
   'd-none': item.hidden && !item.checked
 }">
 
-  <a (click)="onItemClick(item)" class='miller-item-link'>
-    <!-- <input type="checkbox" name="s" id=""> -->
+  <a (click)="onItemClick($event, item)" class='miller-item-link'>
     <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="millerCheckbox{{objectId}}" [(ngModel)]='item.checked'>
-        <label class="form-check-label" for="millerCheckbox{{objectId}}">
-          <span class="item-title">{{item.title}}</span>
+        <input class="form-check-input" type="checkbox" value="" id="millerCheckbox{{item.objectId}}" [(ngModel)]='item.checked'>
+        <label class="form-check-label" for="millerCheckbox{{item.objectId}}">
+          <span class="item-title">{{item.name}}</span>
         </label>
     </div>
 
 
     <span class="icons-group d-flex align-items-center">
-        <span *ngIf="item.isActive" class="badge badge-pill badge-success mr-1">Active</span>
+        <!-- FIXME: Technical debt: Performance with pill badge data.Right now we're doing an array intersection check in the template. Those values should be pre-calculated and just slotted in as much as possible. Left in for prototype. -->
+        <prime-pill-badge
+          *ngIf="getSiteAccessForItem(item)?.alert"
+          iconOnly=true
+          [alerts]="[getSiteAccessForItem(item)?.alert]">
+        </prime-pill-badge>
 
-        <i *ngIf="item.hasAlert" class="fa fa-exclamation-triangle text-danger"></i>
-        <i *ngIf="item.hasWarning"class="fa fa-exclamation-circle text-warning"></i>
-
-        <i class="fa fa-exclamation-circle text-muted ml-1"></i>
+        <i class="fa fa-info-circle text-muted ml-1"></i>
+    </span>
+  </a>
+  <div *ngIf="getSiteAccessForItem(item)?.pendingChanges" class='d-flex justify-content-around' [@growVertical]>
+    <span class='d-inline-flex align-items-baseline mb-1'>Start
+      <prime-datepicker size='mini' dateFormat="yyyy/mm/dd"
+      [(date)]="today"
+      class='ml-1'></prime-datepicker>
     </span>
 
-  </a>
+    <span class='d-inline-flex align-items-baseline mb-1'>End
+      <prime-datepicker size='mini' dateFormat="yyyy/mm/dd" class='ml-1'></prime-datepicker>
+    </span>
+  </div>
 </li>

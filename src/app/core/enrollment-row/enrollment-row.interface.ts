@@ -43,6 +43,8 @@ export interface EnrollmentAlerts {
 export enum BadgeLevel {
   Warning = "warning",
   Danger = "danger",
+  Info = "info",
+  Success = "success",
 }
 
 // /** The reason we're showing the notification in the first place. */

@@ -15,103 +15,12 @@ export class DemoPageComponent implements OnInit {
   // The Ides of March!
   public demoDate = { year: 2018, month: 3, day: 15 }
 
+  // TODO: Get data from DummyDataService
   public millerColumnDummyDataV2: MillerColumnConfig = {
     data: {
-      collections: [
-        {
-          id: "2",
-          associationId: null,
-          title: "London Drugs - North",
-          hasChildren: true,
-          hasAlert: true,
-          hasWarning: true,
-          // open: true,
-        },
-        {
-          id: "1",
-          associationId: null,
-          title: "London Drugs - South",
-          hasChildren: true,
-          hasAlert: true,
-          hasWarning: false,
-        },
-      ],
-      sites: [
-        {
-          associationId: "2",
-          id: "6",
-          title: "London Drugs - 5314",
-          hasChildren: true,
-          hasAlert: true,
-          hasWarning: true,
-          // open: true,
-        },
-        {
-          id: "7",
-          associationId: "2",
-          title: "London Drugs - 6358",
-          hasChildren: false,
-          hasAlert: false,
-          hasWarning: false,
-        },
-        {
-          id: "8",
-          associationId: "2",
-          title: "Longon Drugs - 9435",
-          hasChildren: false,
-          hasAlert: false,
-          hasWarning: false,
-        },
-        {
-          id: "9",
-          associationId: "2",
-          title: "Longon Drugs - 1225",
-          hasChildren: false,
-          hasAlert: false,
-          hasWarning: false,
-        },
-      ],
-      people: [
-        {
-          id: "11",
-          associationId: "6",
-          title: "James Smith",
-          hasChildren: false,
-          hasAlert: false,
-          hasWarning: false,
-          isActive: true,
-          checked: true,
-        },
-        {
-          id: "12",
-          associationId: "6",
-          title: "Mike Chan",
-          hasChildren: false,
-          hasAlert: false,
-          hasWarning: false,
-          isActive: true,
-        },
-        {
-          id: "13",
-          associationId: "6",
-          title: "Liz Montgomery",
-          hasChildren: false,
-          hasAlert: true,
-          hasWarning: false,
-        },
-        {
-          id: "14",
-          associationId: "6",
-          title: "Ellen Hunt",
-          hasChildren: false,
-          hasAlert: false,
-          hasWarning: true,
-        },
-      ],
-    },
-    options: {
-      //FIXME: Improve? Change to passing in the array! Just make sure strings always match.
-      // primaryColumn: 'People'
+      sites: [],
+      collections: [],
+      people: [],
     }
   }
 

@@ -1,21 +1,18 @@
 <ng-container *ngFor="let badge of distinctBadges">
 
-  <span *ngIf="!iconOnly" class="badge badge-pill badge-{{badge.level}}">
-      <i class="fa fa-exclamation-circle" *ngIf="badge.level === 'warning'"></i>
-      <i class="fa fa-exclamation-triangle" *ngIf="badge.level === 'danger'"></i>
+  <span class="badge badge-pill badge-{{badge.level}}">
+      <i tooltip="{{badge.title}}"
+        tooltipAppendToBody=true
+        [isDisabled]='!iconOnly'
+        class="fa"
+        [ngClass]="{
+          'fa-exclamation-circle' : badge.level === 'warning',
+          'fa-exclamation-triangle' : badge.level === 'info' || badge.level === 'danger',
+          'fa-check' : badge.level === 'success'
+        }">
+      </i>
 
-      {{badge.title}}
-      <span *ngIf="badge.count > 1" class="count bg-{{badge.level}}">
-        {{badge.count}}
-      </span>
-  </span>
-
-  <span *ngIf="iconOnly" class="badge badge-pill badge-{{badge.level}}">
-      <i tooltip="{{badge.title}}" class="fa fa-exclamation-circle" *ngIf="badge.level === 'warning'"></i>
-      <i  tooltip="{{badge.title}}" class="fa fa-exclamation-triangle" *ngIf="badge.level === 'danger'"></i>
-
-      <span class="sr-only">{{badge.title}}</span>
-
+      <span [ngClass]="{'sr-only': iconOnly}">{{badge.title}}</span>
       <span *ngIf="badge.count > 1" class="count bg-{{badge.level}}">
         {{badge.count}}
       </span>

@@ -66,6 +66,7 @@ import { EmailValidationComponent } from './validation/email-validation/email-va
 import { PhoneValidationComponent } from './validation/phone-validation/phone-validation.component';
 import { PrimeRequiredDirective } from './validation/prime-required.directive';
 import { RequiredValidationErrorsComponent } from './validation/required-validation/required-validation.component';
+import { UserEnrollmentComponent } from './pages/user-enrollment/user-enrollment.component';
 
 
 @NgModule({
@@ -114,6 +115,7 @@ import { RequiredValidationErrorsComponent } from './validation/required-validat
     DashboardBySiteComponent,
     EnrollmentProgressRowComponent,
     SiteAccessWidgetsComponent,
+    UserEnrollmentComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,12 @@
 import { DataSet } from "ng2-smart-table/lib/data-set/data-set";
+import { Collection } from "../../models/collections.model";
+import { Site } from "../../models/sites.model";
+import { Person } from "../../models/prime.models";
+
 
 export interface MillerItem {
-  id: string;
+  // id: string;
+  objectId?: string; // Can be used _instead_ of ID in some cases.
 
   /**
    * associationId, if present, should match the id of another MillerItem in an
@@ -13,7 +18,7 @@ export interface MillerItem {
    */
   associationId?: string;
 
-  title: string;
+  name: string;
   hasChildren: boolean;
 
   hasWarning: boolean;
@@ -33,9 +38,9 @@ export interface MillerItem {
 export interface MillerColumnConfig {
   //Required
   data: {
-    collections: MillerItem[],
-    sites: MillerItem[],
-    people: MillerItem[],
+    collections: Collection[],
+    sites: Site[],
+    people: Person[],
   },
 
   //Optional

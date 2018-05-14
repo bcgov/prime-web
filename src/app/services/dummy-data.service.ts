@@ -62,13 +62,16 @@ export class DummyDataService {
   }
    /**
    * Creates a Site Access with a random status that's associated to the input
-   * parameters.  It does NOT modify the input parameters themselves, that must
-   * be done outside of the function (e.g. person.sites and site.siteAccess)
-   *
-   * If you do not set person.site and site.siteAccess to include the result of
-   * this parameter, then the SA will not be setup correctly.
+   * parameters.  It does  modify the inputted Person and Site objects to
+   * associate them with the Site Access.
    */
-  createSiteAccess(site: Site, person: Person): SiteAccess {
+  createSiteAccessAndAssociate(site: Site, person: Person): SiteAccess {
+
+    // Only one SiteAccess between a specific person and specific site. (TODO: Verify business logic, as conceivably this can change)
+    if (person.sites.includes(site)){
+      return null;
+    }
+
     const SA: SiteAccess = new SiteAccess();
     let randomStatusString : string = this.getRandomElFromArray(Object.keys(EnrollmentStatus));
     let status: EnrollmentStatus = EnrollmentStatus[randomStatusString];
@@ -94,6 +97,11 @@ export class DummyDataService {
     SA.progress = progress;
 
 
+    person.siteAccess.push(SA)
+    site.siteAccess.push(SA);
+
+
+
     return SA;
   }
 
@@ -107,22 +115,16 @@ export class DummyDataService {
     // Make sure at least each site has one person
     collection.members.map(site => {
       const person = this.getRandomElFromArray(people);
-      const sa: SiteAccess = this.createSiteAccess(site, person);
-
-      person.siteAccess.push(sa);
-      site.siteAccess.push(sa);
-      result.push(sa);
+      const sa: SiteAccess = this.createSiteAccessAndAssociate(site, person);
     })
 
-    // Make sure ALL people have some sort of site access, even if people vastly
-    // outnumber collections.
+    // Make sure ALL people have one active Site Access, for dev purposes. Can be removed.
     people.map(person => {
+      // Assume they have at least 1 site w/o any
       const site = this.getRandomElFromArray(collection.members)
-      const sa: SiteAccess = this.createSiteAccess(site, person);
-
-      person.siteAccess.push(sa);
-      site.siteAccess.push(sa);
-      result.push(sa);
+      const sa: SiteAccess = this.createSiteAccessAndAssociate(site, person);
+      if (sa) { sa.status = EnrollmentStatus.Active; }
+      else { person.siteAccess[0].status = EnrollmentStatus.Active; }
     })
 
     return result;

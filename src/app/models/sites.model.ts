@@ -63,6 +63,9 @@ export class SiteAccess extends Base {
   // In-progress
   progress: SiteAccessProgressSteps
 
+  // Are there changes to the data made by the user that have not been submitted? NOTE: Rudimentary for now in prototype.
+  pendingChanges: boolean;
+
   // the value must be a class itself (subclassing Role) - not an instance!
   // e.g. x.privilege = Verifier
   privilege: typeof Role;
@@ -106,6 +109,22 @@ export class EnrollmentAlert {
 
     if (status === EnrollmentStatus.Declined){
         return BadgeLevel.Danger;
+    }
+
+    if (status === EnrollmentStatus.Initiated){
+      return BadgeLevel.Info;
+    }
+
+    if (status === EnrollmentStatus.Incomplete){
+      return BadgeLevel.Warning;
+    }
+
+    if (status === EnrollmentStatus.Active){
+      return BadgeLevel.Success;
+    }
+
+    if (status === EnrollmentStatus.Returned){
+      return BadgeLevel.Info;
     }
 
   }

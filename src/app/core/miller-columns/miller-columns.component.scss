@@ -3,7 +3,7 @@
 .miller-container {
   display: flex;
   // TODO: Ems?
-  min-height: 400px;
+  // min-height: 400px;
 
   position: relative;
   perspective: 800px;
@@ -25,10 +25,13 @@
     background: $gray-100;
     // background: $color-white; //Off white
 
+    &:last-of-type {
+      margin-right: 0;
+    }
+
     @include media-breakpoint-up(md){
       position: initial;
-      // Somewhat hacky. Stops the columns from re-sizing when 3 are displayed
-      max-width: 31% !important;
+      max-width: 33% !important;
       &:first-of-type {
         margin-left: 0;
       }
@@ -48,6 +51,10 @@
   list-style: none;
   margin: 0;
   padding: 0;
+
+  max-height: 25rem;
+  min-height: 25rem;
+  overflow-y: scroll;
 }
 
 
@@ -123,4 +130,9 @@
 
 .icons-group {
   font-size: 1.5rem;
+}
+
+.miller-header {
+  background: $gray-200;
+  align-items: center;
 }

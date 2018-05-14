@@ -26,6 +26,9 @@ export class Person extends Base {
   organizationAuthority?: OrganizationAuthority;
   provisioner?: Provisioner;
 
+  /** Corresponds to collection's objectId */
+  associationId?: string;
+
   // requests: PrimeRequest[];
 
   // ALL sites, including expired/rejected.
@@ -41,6 +44,7 @@ export class Person extends Base {
   canAccess(site: Site): boolean{
     return this.sites.indexOf(site) !== -1
   }
+
 }
 
 class Name {

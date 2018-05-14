@@ -1,20 +1,19 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { ProfessionalInfoComponent } from './pages/professional-info/professional-info.component';
+import { RouterModule, Routes } from '@angular/router';
 import { ConsentModalComponent } from './core/consent-modal/consent-modal.component';
-
-import { ContactInformationComponent } from './pages/contact-information/contact-information.component';
-import { ReviewSubmitComponent } from './pages/review-submit/review-submit.component';
-import { SelfDeclarationComponent } from './pages/self-declaration/self-declaration.component';
-import { UserAcceptanceComponent } from './pages/user-acceptance/user-acceptance.component';
-import { SiteAccessComponent } from './pages/site-access/site-access.component';
-
-import { DemoPageComponent } from './pages/demo-page/demo-page.component'
-import { HomePageComponent } from './pages/home-page/home-page.component';
 import { BlankPageComponent } from './pages/blank-page/blank-page.component';
-import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
+import { ContactInformationComponent } from './pages/contact-information/contact-information.component';
 import { DashboardBySiteComponent } from './pages/dashboard-page/dashboard-by-site/dashboard-by-site.component';
 import { DashboardByUserComponent } from './pages/dashboard-page/dashboard-by-user/dashboard-by-user.component';
+import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
+import { DemoPageComponent } from './pages/demo-page/demo-page.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { ProfessionalInfoComponent } from './pages/professional-info/professional-info.component';
+import { ReviewSubmitComponent } from './pages/review-submit/review-submit.component';
+import { SelfDeclarationComponent } from './pages/self-declaration/self-declaration.component';
+import { SiteAccessComponent } from './pages/site-access/site-access.component';
+import { UserAcceptanceComponent } from './pages/user-acceptance/user-acceptance.component';
+import { UserEnrollmentComponent } from './pages/user-enrollment/user-enrollment.component';
 
 const routes: Routes = [
 
@@ -100,22 +99,21 @@ const routes: Routes = [
     children: [
       {
         path: 'user',
-        // data: { breadcrumb: "user"},
         component: DashboardByUserComponent,
-        // outlet: 'dashboard',
       },
       {
         path: 'site',
-        // data: { breadcrumb: "site"},
         component: DashboardBySiteComponent,
-        // outlet: 'dashboard',
       },
       {
         path: '**',
         redirectTo: 'user'
       }
     ]
-
+  },
+  {
+    path: 'enrollment',
+    component: UserEnrollmentComponent,
   },
   {
     path: '**',

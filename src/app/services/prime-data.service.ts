@@ -5,6 +5,7 @@ import { EnrollmentRowItem, EnrollmentRowChild, BadgeLevel, EnrollmentAlerts } f
 
 import { Site, SiteAccess } from '../models/sites.model';
 import { Collection } from '../models/collections.model';
+import { MillerColumnConfig, MillerItem } from '../core/miller-columns/miller-columns.interface';
 
 @Injectable()
 export class PrimeDataService {
@@ -88,8 +89,61 @@ export class PrimeDataService {
     }).filter(x => x); //Remove undefined
   }
 
+  getMillerColumnDataByUser(): MillerColumnConfig {
+    const collectionMiller = this.collections.map(collection => {
+      collection.members = this.setAssociationId(collection.objectId, collection.members);
+      return collection;
+    })
+
+    let result = {
+      data: {
+        collections: collectionMiller,
+        sites: this.sites,
+        people: this.people,
+      },
+      options: {
+        primaryColumn: "people",
+      }
+    }
+
+    return result;
+  }
+
+  getMillerColumnDataByCollection(): MillerColumnConfig {
+
+    // Set assoco
+    this.collections.map(collection => {
+      collection.members = this.setAssociationId(collection.objectId, collection.members);
+
+      //Also set association id from Person->Site
+      collection.allUsers.map(person => {
+        person.associationId = person.sites[0].objectId;
+      })
+    })
+
+
+    let result = {
+      data: {
+        collections: this.collections,
+        sites: this.sites,
+        people: this.people,
+      }
+    }
+
+    return result;
+
+  }
+
   private filterUnique(x, i, a){
     return x && a.indexOf(x) === i
+  }
+
+  private setAssociationId<T>(associationId: string, items: T[]): T[] {
+    return items.map(item => {
+      // item.associationId = associationId;
+      (item as any).associationId = associationId;
+      return item;
+    })
   }
 
 
