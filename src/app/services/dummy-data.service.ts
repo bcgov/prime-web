@@ -116,6 +116,7 @@ export class DummyDataService {
     collection.members.map(site => {
       const person = this.getRandomElFromArray(people);
       const sa: SiteAccess = this.createSiteAccessAndAssociate(site, person);
+      result.push(sa);
     })
 
     // Make sure ALL people have one active Site Access, for dev purposes. Can be removed.
@@ -125,9 +126,11 @@ export class DummyDataService {
       const sa: SiteAccess = this.createSiteAccessAndAssociate(site, person);
       if (sa) { sa.status = EnrollmentStatus.Active; }
       else { person.siteAccess[0].status = EnrollmentStatus.Active; }
+      result.push(sa);
     })
 
-    return result;
+
+    return result.filter(x => x); //filter out null
   }
 
   // --- Enrollment List
