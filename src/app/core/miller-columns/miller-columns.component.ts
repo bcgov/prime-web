@@ -100,7 +100,7 @@ export class MillerColumnsComponent implements OnInit {
     return this._columns;
   }
 
-  private get IS_PEOPLE_TABLE(): boolean {
+  public get IS_PEOPLE_TABLE(): boolean {
    return !!(this.config.options &&
       this.config.options.primaryColumn &&
       this.config.options.primaryColumn.toLowerCase() === "people");
