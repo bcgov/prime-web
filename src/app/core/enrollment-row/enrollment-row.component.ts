@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, HostBinding } from '@angular/core';
 import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
 import { EnrollmentRowItem, EnrollmentRowChild } from './enrollment-row.interface';
-
+import { Router } from '@angular/router'
 import { openState, openStateChild, loadInOut, openStateDisable } from '../../animations/animations';
 import { Base } from '../base/base.class';
 
@@ -20,7 +20,7 @@ export class EnrollmentRowComponent extends Base implements OnInit {
   @Output() onRowOpened = new EventEmitter<any>();
   public openState: string = 'closed';
 
-  constructor() {
+  constructor(private router: Router) {
     super();
   }
 
@@ -88,6 +88,11 @@ export class EnrollmentRowComponent extends Base implements OnInit {
 
   canOpen() {
     return this.siteAccessRequiringAttention.length >= 1;
+  }
+
+  goToEnrollmentPage(rowData){
+    const link = '/enrollment/' + this.primaryType.toLowerCase();
+    this.router.navigate([link]);
   }
 
 }

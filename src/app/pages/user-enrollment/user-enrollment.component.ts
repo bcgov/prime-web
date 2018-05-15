@@ -15,7 +15,6 @@ export class UserEnrollmentComponent implements OnInit {
 
   ngOnInit() {
     this.millerColumnByUser = this.dataService.getMillerColumnDataByUser();
-    // this.millerColumnByUser = this.dataService.getMillerColumnDataByCollection();
   }
 
 }

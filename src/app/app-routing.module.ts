@@ -14,6 +14,7 @@ import { SelfDeclarationComponent } from './pages/self-declaration/self-declarat
 import { SiteAccessComponent } from './pages/site-access/site-access.component';
 import { UserAcceptanceComponent } from './pages/user-acceptance/user-acceptance.component';
 import { UserEnrollmentComponent } from './pages/user-enrollment/user-enrollment.component';
+import { SiteEnrollmentComponent } from './pages/site-enrollment/site-enrollment.component';
 
 const routes: Routes = [
 
@@ -113,7 +114,21 @@ const routes: Routes = [
   },
   {
     path: 'enrollment',
-    component: UserEnrollmentComponent,
+    // component: UserEnrollmentComponent,
+    children: [
+      {
+        path: 'user',
+        component: UserEnrollmentComponent,
+      },
+      {
+        path: 'site',
+        component: SiteEnrollmentComponent,
+      },
+      {
+        path: '**',
+        redirectTo: 'user'
+      }
+    ]
   },
   {
     path: '**',
