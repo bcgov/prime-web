@@ -9,14 +9,14 @@
       <div class="form-group">
         <label for='collegeName'
           i18n="@@ProfessionalCollegeName">Professional College Name</label>
-        <select2 #collegeName
+        <!-- <select2 #collegeName
           name='collegeName'
           id='collegeName'
           [data]="collegeList"
           (valueChanged)="onCollegeChange($event.value)"
           [options]="{multiple: true, placeholder: 'Select a College'}"
           [value]="applicant.college"
-          [disabled]="readonly"></select2>
+          [disabled]="readonly"></select2> -->
       </div>
     </div>
   </div>
@@ -91,14 +91,14 @@
             <div class="form-group">
               <label for='advancedPracticeCerts'
                 i18n="@@AdvancedPracticeCerts">Advanced Practice Certification(s)</label>
-              <select2
+              <!-- <select2
               [disabled]="readonly"
               [data]="advancedPracticeCertsList"
               [options]="{multiple: true, placeholder: 'Select a College'}"
               (valueChanged)="onAdvancedPracticeCertChanged($event.value)"
               [value]="applicant.advancedPracticeCerts"
               name='advancedPracticeCerts'
-                id='advancedPracticeCerts'></select2>
+                id='advancedPracticeCerts'></select2> -->
             </div>
           </div>
         </div>
@@ -124,9 +124,9 @@
       <div class="form-group">
         <label for='onBehalfOfJobTitle'
           i18n="@@OnBehalfOfJobTitle">On-Behalf Of Job Title</label>
-        <select2 name='onBehalfOfJobTitle'
+        <!-- <select2 name='onBehalfOfJobTitle'
           [disabled]="readonly"
-          id='onBehalfOfJobTitle'></select2>
+          id='onBehalfOfJobTitle'></select2> -->
       </div>
     </div>
   </div>

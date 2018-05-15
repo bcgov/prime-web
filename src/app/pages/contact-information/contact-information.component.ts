@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApplicantDataService } from '../../services/applicant-data.service';
 import { Applicant } from '../../models/applicant.model';
-import { Select2OptionData } from 'ng2-select2';
 
 import { Base } from '../../core/base/base.class';
 import { SecurityQuestions } from '../../models/security-questions';
@@ -17,9 +16,9 @@ import { SecurityQuestions } from '../../models/security-questions';
 export class ContactInformationComponent extends Base  {
   public applicant: Applicant;
   /** A list of all possible questions the user can choose from */
-  public securityQuestions: Select2OptionData[];
+  public securityQuestions: any[];
   /** The 3 currently selected questions in the select2 dropdown on the page. */
-  public selectedSecurityQuestions: Select2OptionData[];
+  public selectedSecurityQuestions: any[];
   /** A local copy of applicant.securityQuestions, ensuring it matches the interface before pushing it to applicant.  */
   private securityQuestionAndAnswers: SecurityQuestions[] = [];
 
@@ -58,7 +57,7 @@ export class ContactInformationComponent extends Base  {
     //Use persisted security questions if possible
     if (this.applicant.hasSecurityQuestions) {
       this.selectedSecurityQuestions = this.applicant.securityQuestions.map(x => {
-        return <Select2OptionData>{ id: x.question, text: x.question };
+        return { id: x.question, text: x.question };
       });
       this.securityQuestionAndAnswers = this.applicant.securityQuestions;
     }

@@ -93,14 +93,16 @@ implements OnInit, AfterViewChecked, AfterViewInit {
    * enforces business logic rules relating to selecting 'None'.
    */
   initSelect(): void {
-    $(this.elementRef.nativeElement).on('select2:select', 'select', function (evt: any) {
-      const element = evt.params.data.element;
-      const $element = $(element);
+    // COMMENTED OUT DUE TO REMOVAL OF JQUERY AND SELECT2 FROM BUILD.
 
-      $element.detach();
-      $(this).append($element);
-      $(this).trigger('change');
-    });
+    // $(this.elementRef.nativeElement).on('select2:select', 'select', function (evt: any) {
+    //   const element = evt.params.data.element;
+    //   const $element = $(element);
+
+    //   $element.detach();
+    //   $(this).append($element);
+    //   $(this).trigger('change');
+    // });
 
   }
 

@@ -1,6 +1,4 @@
 
-import { Select2OptionData } from 'ng2-select2';
-
 /**
  * Professional Information college choices
  */
@@ -14,6 +12,7 @@ export enum Colleges {
   CRNBC = '96',
 }
 
-export interface CollegeList extends Select2OptionData {
+export interface CollegeList {
   id: Colleges;
+  text: string;
 }

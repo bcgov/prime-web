@@ -4,7 +4,6 @@ import { CalendarYearValidatorDirective } from '../../core/date/calendar-year.va
 import { PrimeDateComponent } from '../../core/date/date.component';
 import { ConsentModalComponent } from '../../core/consent-modal/consent-modal.component';
 import { FormsModule } from '@angular/forms';
-import { Select2Module } from 'ng2-select2';
 import { CalendarFieldFormatterDirective } from '../../core/date/calendar-field-formatter.directive';
 import { ModalModule } from 'ngx-bootstrap';
 import { ApplicantDataService } from '../../services/applicant-data.service';
@@ -24,7 +23,7 @@ describe('ProfessionalInfoComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       providers: [ApplicantDataService, CollegeDataService],
-      imports: [FormsModule, Select2Module, ModalModule.forRoot(), RouterTestingModule],
+      imports: [FormsModule, ModalModule.forRoot(), RouterTestingModule],
       declarations: [
         ProfessionalInfoComponent, CalendarYearValidatorDirective,
         PrimeDateComponent, ConsentModalComponent,

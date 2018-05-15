@@ -4,7 +4,6 @@ import { ContactInformationComponent } from './contact-information.component';
 import { PrimeDateComponent } from '../../core/date/date.component';
 import { ApplicantDataService } from '../../services/applicant-data.service';
 import { AddressComponent } from '../../core/address/address.component';
-import { Select2Module } from 'ng2-select2';
 import { PrimeFormFooterComponent } from '../../core/form-footer/form-footer.component';
 import { CalendarFieldFormatterDirective } from '../../core/date/calendar-field-formatter.directive';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -16,7 +15,7 @@ describe('ContactInformationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule, Select2Module, RouterTestingModule],
+      imports: [FormsModule, RouterTestingModule],
       declarations: [
         ContactInformationComponent, PrimeDateComponent, AddressComponent,
         PrimeFormFooterComponent, CalendarFieldFormatterDirective,

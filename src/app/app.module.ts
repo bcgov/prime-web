@@ -5,7 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { MyDateRangePickerModule } from 'mydaterangepicker';
-import { Select2Module } from 'ng2-select2';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { StickyModule } from 'ng2-sticky-kit';
 import { AlertModule } from 'ngx-bootstrap/alert';
@@ -126,7 +125,6 @@ import { SiteEnrollmentComponent } from './pages/site-enrollment/site-enrollment
     HttpModule,
     AppRoutingModule,
     ModalModule.forRoot(),
-    Select2Module,
     Ng2SmartTableModule,
     StickyModule,
     NgxMyDatePickerModule.forRoot(),
