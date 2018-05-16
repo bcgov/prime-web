@@ -67,6 +67,9 @@ import { PrimeRequiredDirective } from './validation/prime-required.directive';
 import { RequiredValidationErrorsComponent } from './validation/required-validation/required-validation.component';
 import { UserEnrollmentComponent } from './pages/user-enrollment/user-enrollment.component';
 import { SiteEnrollmentComponent } from './pages/site-enrollment/site-enrollment.component';
+import { VerifierModule } from './modules/verifier/verifier.module';
+import { CoreModule } from './modules/core/core.module';
+import { PrimeDataModule } from './modules/prime-data/prime-data.module';
 
 
 @NgModule({
@@ -96,27 +99,9 @@ import { SiteEnrollmentComponent } from './pages/site-enrollment/site-enrollment
     PhoneValidationComponent,
     EmailValidationComponent,
     DemoPageComponent,
-    DatepickerComponent,
     BreadcrumbComponent,
     HomePageComponent,
     BlankPageComponent,
-    MillerColumnsComponent,
-    EnrollmentListComponent,
-    EnrollmentRowComponent,
-    ExpandingSearchComponent,
-    MillerItemCheckboxComponent,
-    AddUserButtonComponent,
-    MiniProgressBarComponent,
-    DashboardBarComponent,
-    PillBadgeComponent,
-    DashboardPageComponent,
-    AlertComponent,
-    DashboardByUserComponent,
-    DashboardBySiteComponent,
-    EnrollmentProgressRowComponent,
-    SiteAccessWidgetsComponent,
-    UserEnrollmentComponent,
-    SiteEnrollmentComponent,
   ],
   imports: [
     BrowserModule,
@@ -124,18 +109,16 @@ import { SiteEnrollmentComponent } from './pages/site-enrollment/site-enrollment
     FormsModule,
     HttpModule,
     AppRoutingModule,
+    PrimeDataModule.forRoot(),
+    CoreModule,
     ModalModule.forRoot(),
     Ng2SmartTableModule,
     StickyModule,
     NgxMyDatePickerModule.forRoot(),
-    ProgressbarModule.forRoot(),
     TabsModule.forRoot(),
-    AlertModule.forRoot(),
     BsDropdownModule.forRoot(),
     MyDateRangePickerModule,
-    TooltipModule.forRoot(),
     ButtonsModule.forRoot(),
-    NgxChartsModule,
   ],
   providers: [
     ApplicantDataService,

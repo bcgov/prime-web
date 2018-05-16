@@ -90,7 +90,7 @@ export class EnrollmentRowComponent extends Base implements OnInit {
   }
 
   goToEnrollmentPage(){
-    const link = '/enrollment/' + this.primaryType.toLowerCase();
+    const link = '/verifier/enrollment/' + this.primaryType.toLowerCase();
     this.router.navigate([link, this.rowData.associatedObjectId]);
   }
 

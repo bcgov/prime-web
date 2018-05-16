@@ -93,53 +93,11 @@ const routes: Routes = [
       }
     ]
   },
-  {
-    path: 'dashboard',
-    component: DashboardPageComponent,
 
-    children: [
-      {
-        path: 'user',
-        component: DashboardByUserComponent,
-      },
-      {
-        path: 'site',
-        component: DashboardBySiteComponent,
-      },
-      {
-        path: '**',
-        redirectTo: 'user'
-      }
-    ]
-  },
+  // Lazy loading modules below
   {
-    path: 'enrollment',
-    children: [
-      /**
-       * Enrollment routes below must be duplicated, one with /:id and one
-       * without. Using :id allows deep linking to specific items.
-       */
-      {
-        path: 'user',
-        component: UserEnrollmentComponent,
-      },
-      {
-        path: 'site',
-        component: SiteEnrollmentComponent,
-      },
-      {
-        path: 'user/:id',
-        component: UserEnrollmentComponent,
-      },
-      {
-        path: 'site/:id',
-        component: SiteEnrollmentComponent,
-      },
-      {
-        path: '**',
-        redirectTo: 'user'
-      }
-    ]
+    path: "verifier",
+    loadChildren: "app/modules/verifier/verifier.module#VerifierModule"
   },
   {
     path: '**',

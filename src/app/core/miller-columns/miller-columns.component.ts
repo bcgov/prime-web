@@ -95,7 +95,9 @@ export class MillerColumnsComponent implements OnInit {
         .find(item => item.objectId === preselectObjectId)
 
       if (!preselectItem) {
-        throw "MillerColumnsComponent config.options.preselectObjectId refers to an object which does not exist!";
+        console.error("MillerColumnsComponent config.options.preselectObjectId refers to an object which does not exist! Removed objectId from url.");
+        this.router.navigate(['/verifier/enrollment/']);
+        return;
       }
 
       this.openColumnFromItem(preselectItem);
@@ -195,7 +197,7 @@ export class MillerColumnsComponent implements OnInit {
 
   public backLink(): string {
     let linkType = this.IS_PEOPLE_TABLE ? "user" : "site";
-    return `/dashboard/${linkType}`
+    return `/verifier/dashboard/${linkType}`
   }
 
   // TODO:! Build breadcrumb like mobile for http://pebbleroad.github.io/taxonomy-browser/build/#
