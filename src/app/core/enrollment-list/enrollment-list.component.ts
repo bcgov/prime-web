@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, ViewChildren, QueryList } from '@angular/core';
-import { EnrollmentRowItem } from '../enrollment-row/enrollment-row.interface'
-import { EnrollmentRowComponent } from '../enrollment-row/enrollment-row.component';
+import { Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { EnrollmentStatus } from '../../models/prime.models';
-import { Base } from '../base/base.class';
 import { SiteAccess } from '../../models/sites.model';
 import { VerifierService } from '../../services/verifier.service';
+import { Base } from '../base/base.class';
+import { EnrollmentRowComponent } from '../enrollment-row/enrollment-row.component';
+import { EnrollmentRowItem } from '../enrollment-row/enrollment-row.interface';
 
 @Component({
   selector: 'prime-enrollment-list',
@@ -109,8 +109,6 @@ export class EnrollmentListComponent extends Base implements OnInit {
 
   // NOTE: This doesn't work properly with search. Fine for prototype for now, but will need to be resolved in future.
   viewTypes(type){
-    console.log('viewTypes', type);
-
     if (type === "All"){
       return this.data = this.rowItems;
     }

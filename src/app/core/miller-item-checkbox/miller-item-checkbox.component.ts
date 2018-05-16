@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Base } from '../base/base.class';
-import { SiteAccess } from '../../models/sites.model';
-import { EnrollmentStatus } from '../../models/prime.models';
 import { growVertical } from '../../animations/animations';
+import { EnrollmentStatus, Person } from '../../models/prime.models';
+import { Site, SiteAccess } from '../../models/sites.model';
+import { Base } from '../base/base.class';
 @Component({
   selector: 'prime-miller-item-checkbox',
   templateUrl: './miller-item-checkbox.component.html',
@@ -14,13 +14,15 @@ export class MillerItemCheckboxComponent extends Base implements OnInit {
   //TODO: Add interface for miller items
   @Input() items: any[];
   @Input() selectedSiteAccess;
-  @Output() onCheck = new EventEmitter<any>();
+  @Output() onPendingChanges = new EventEmitter<any>();
+  /** Incomplete! Idea is it will store all pending changes, and after the user
+   * clicks 'Save' then we empty this array and store the data in the real data
+   * stores (and cancel just clears it). */
+  private _allPendingChanges: SiteAccess[] = [];
 
   constructor() {
     super();
   }
-
-
 
   public today;
   ngOnInit() {
@@ -39,9 +41,24 @@ export class MillerItemCheckboxComponent extends Base implements OnInit {
       sa.pendingChanges = item.checked;
     }
 
+    if (typeof sa === 'undefined') {
+      // User has selected a blank item, creating new SA.
+      this.initiateSiteAccess(item);
+    }
+
+    if (item.checked && this._allPendingChanges.includes(sa)) {
+      // User is undoing a change they haven't saved. Delete SA.
+      this.deleteInitiatedSiteAccess(item, sa);
+    }
+
 
     item.checked = !item.checked;
-    this.onCheck.emit(item);
+
+    console.log(this._allPendingChanges);
+    this.onPendingChanges.emit(this._allPendingChanges);
+    // if (this._allPendingChanges.length) {
+    //   this.onPendingChanges.emit(item);
+    // }
 
     if (event.target.type !== 'checkbox'){
       // Stop the event from double-firing.
@@ -49,21 +66,23 @@ export class MillerItemCheckboxComponent extends Base implements OnInit {
     }
   }
 
-  //TODO: Test this works with other MillerColumn config type.
-  /**
-   * Only returns SiteAccess relevant to the selection user has made in previous
-   * column. If a Site has SA's to multiple different people but only one person
-   * is selected, it will only show the SA's relevant to that one user.
-   */
+  private initiateSiteAccess(item){
+    const sa = new SiteAccess();
+    sa.status = EnrollmentStatus.Initiated;
+    item.siteAccess.push(sa);
+    // Assign SA to the item depending on type of item (person or site)
+    Site.isSiteGuard(item) ? sa.site = item : sa.person = item;
+    this._allPendingChanges.push(sa);
+  }
+
+  private deleteInitiatedSiteAccess(item: Site | Person, sa: SiteAccess){
+    // Remove from arrays
+    item.siteAccess = item.siteAccess.filter(x => x !== sa);
+    this._allPendingChanges = this._allPendingChanges.filter(x => x !== sa);
+    sa = null;
+  }
+
   private getSiteAccessForItem(item): SiteAccess {
-    return item.siteAccess.filter(itemSA => {
-      return this.selectedSiteAccess.indexOf(itemSA) !== -1;
-    })[0];
+    return item.siteAccess[0];
   }
-
-  isItemActive(item): boolean {
-   let siteAccess = this.getSiteAccessForItem(item);
-   return siteAccess && siteAccess.status == EnrollmentStatus.Active;
-  }
-
 }

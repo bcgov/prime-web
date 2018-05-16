@@ -1,9 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter, HostBinding } from '@angular/core';
-import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
-import { EnrollmentRowItem, EnrollmentRowChild } from './enrollment-row.interface';
-import { Router } from '@angular/router'
-import { openState, openStateChild, loadInOut, openStateDisable } from '../../animations/animations';
+import { Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { loadInOut, openState, openStateChild, openStateDisable } from '../../animations/animations';
 import { Base } from '../base/base.class';
+import { EnrollmentRowChild, EnrollmentRowItem } from './enrollment-row.interface';
 
 
 const TIMING = "250ms";
@@ -90,9 +89,9 @@ export class EnrollmentRowComponent extends Base implements OnInit {
     return this.siteAccessRequiringAttention.length >= 1;
   }
 
-  goToEnrollmentPage(rowData){
+  goToEnrollmentPage(){
     const link = '/enrollment/' + this.primaryType.toLowerCase();
-    this.router.navigate([link]);
+    this.router.navigate([link, this.rowData.associatedObjectId]);
   }
 
 }

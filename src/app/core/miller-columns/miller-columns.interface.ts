@@ -1,7 +1,6 @@
-import { DataSet } from "ng2-smart-table/lib/data-set/data-set";
 import { Collection } from "../../models/collections.model";
-import { Site } from "../../models/sites.model";
 import { Person } from "../../models/prime.models";
+import { Site } from "../../models/sites.model";
 
 
 export interface MillerItem {
@@ -16,7 +15,7 @@ export interface MillerItem {
    *
    * Note: Modifying order of columns can potentially require updating associationIds to reflect new order (TODO: Verify/Document).
    */
-  associationId?: string;
+  associationId?: string[];
 
   name: string;
   hasChildren: boolean;
@@ -45,12 +44,18 @@ export interface MillerColumnConfig {
 
   //Optional
   options?: {
+    /** Type for first column. Can be "people" or "sites". Defaults to sites. */
     primaryColumn?: string
+    /** The item in the MillerColumn to have already open on init, used when
+     * editting a pre-existing record. */
+    preselectObjectId?: string;
   }
 }
 
 export interface MillerColumn {
   title: string;
-  items: MillerItem[];
+  // TODO: Add typing. Previously was MillerItem interface, but now is one of Site/Person/Name. Interface should be updated.
+  // items: MillerItem[];
+  items: any[];
   index: number;
 }

@@ -6,7 +6,6 @@ export class UserService {
   private _user: User;
 
   constructor() {
-    console.log('UserService created user');
     this._user = new User();
   }
 

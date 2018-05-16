@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MillerItem, MillerColumnConfig } from '../../core/miller-columns/miller-columns.interface';
-import { EnrollmentRowItem, EnrollmentRowChild, BadgeLevel } from '../../core/enrollment-row/enrollment-row.interface';
-import { EnrollmentStatus } from '../../models/prime.models';
+import { MillerColumnConfig } from '../../core/miller-columns/miller-columns.interface';
 
 @Component({
   selector: 'prime-demo-page',
@@ -24,76 +22,11 @@ export class DemoPageComponent implements OnInit {
     }
   }
 
-  //TODO: Interface
-  public enrollmentListDummyData: EnrollmentRowItem[] = [
-    {
-      title: "London Drugs - All",
-      sites: Array(2),
-      users: Array(5),
-      expandableChildren: []
-    },
-    {
-      title: "Rexall Vancouver Island - All",
-      sites: Array(6),
-      users: Array(8),
-      expandableChildren: [],
-    },
-    {
-      title: "SDM Vancouver Island",
-      sites: Array(3),
-      users: Array(8),
-      expandableChildren: [],
-    }
-  ]
 
 
   ngOnInit() {
-    this.generateDummyData();
   }
 
-  generateDummyData() {
-    // Make each of the enrollment rows expandable
-    this.enrollmentListDummyData = this.enrollmentListDummyData.map(x => {
-      x.expandableChildren = [
-        {
-          title: "Ellen Hunt",
-          alerts: [
-            {
-              level: BadgeLevel.Danger,
-              status: EnrollmentStatus.Declined,
-            },
-            {
-              level: BadgeLevel.Danger,
-              status: EnrollmentStatus.Declined,
-            },
-          ],
-        },
-        {
-          title: "James Smith",
-          alerts: [
-            {
-              level: BadgeLevel.Warning,
-              status: EnrollmentStatus.Incomplete
-            },
-          ],
-        },
-        {
-          title: "Bob Jones",
-          alerts: [
-            {
-              level: BadgeLevel.Warning,
-              status: EnrollmentStatus.Pending
-            },
-            {
-              level: BadgeLevel.Warning,
-              status: EnrollmentStatus.Pending
-            },
-          ],
-        }
-      ]
-      return x;
-    })
-  }
 
   ngOnChanges(ev) {
     console.log('DemoPage, ngOnChanges', ev);

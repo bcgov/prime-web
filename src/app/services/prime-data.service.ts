@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Base } from '../core/base/base.class';
-import { EnrollmentStatus, Person } from '../models/prime.models';
-import { EnrollmentRowItem, EnrollmentRowChild, BadgeLevel, EnrollmentAlerts } from '../core/enrollment-row/enrollment-row.interface';
-
-import { Site, SiteAccess } from '../models/sites.model';
+import { EnrollmentRowItem } from '../core/enrollment-row/enrollment-row.interface';
+import { MillerColumnConfig } from '../core/miller-columns/miller-columns.interface';
 import { Collection } from '../models/collections.model';
-import { MillerColumnConfig, MillerItem } from '../core/miller-columns/miller-columns.interface';
+import { EnrollmentStatus, Person } from '../models/prime.models';
+import { Site, SiteAccess } from '../models/sites.model';
+
 
 @Injectable()
 export class PrimeDataService {
@@ -28,6 +27,7 @@ export class PrimeDataService {
     this.collections.map(collection => {
       const rowItem: EnrollmentRowItem = {
         title: collection.name,
+        associatedObjectId: collection.objectId,
         sites: collection.members,
         users: collection.allUsers
       }
@@ -51,6 +51,7 @@ export class PrimeDataService {
     this.people.map(person => {
       const rowItem: EnrollmentRowItem = {
         title: person.name,
+        associatedObjectId: person.objectId,
         sites: person.sites,
         collections: this.findCollectionFromSites(person.sites)
       }
@@ -109,16 +110,22 @@ export class PrimeDataService {
     return result;
   }
 
+  // FIXME: This is very likely wrong/buggy. AssociationIDs perhaps not set correctly? Look at enrollment/site.
   getMillerColumnDataByCollection(): MillerColumnConfig {
 
-    // Set assoco
+
     this.collections.map(collection => {
       collection.members = this.setAssociationId(collection.objectId, collection.members);
 
       //Also set association id from Person->Site
-      collection.allUsers.map(person => {
-        person.associationId = person.sites[0].objectId;
-      })
+      // collection.allUsers.map(person => {
+      //   person.associationId = person.sites[0].objectId;
+      // })
+    })
+
+    this.sites.map(site => {
+      this.setAssociationId(site.objectId, site.users);
+      // console.log(`${site.name} has ${site.users.length} users`)
     })
 
 
@@ -127,7 +134,8 @@ export class PrimeDataService {
         collections: this.collections,
         sites: this.sites,
         people: this.people,
-      }
+      },
+      options: {}
     }
 
     return result;
@@ -140,8 +148,20 @@ export class PrimeDataService {
 
   private setAssociationId<T>(associationId: string, items: T[]): T[] {
     return items.map(item => {
+
+      if (  typeof (item as any).associationId === 'undefined') {
+        (item as any).associationId = [];
+      }
+
+      (item as any).associationId.push(associationId);
+      return item;
+    })
+  }
+
+  private clearAssociationId<T>(associationId: string, items: T[]): T[] {
+    return items.map(item => {
       // item.associationId = associationId;
-      (item as any).associationId = associationId;
+      (item as any).associationId = [];
       return item;
     })
   }

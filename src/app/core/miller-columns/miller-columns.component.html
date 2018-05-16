@@ -1,6 +1,5 @@
-<!-- TODO: Move this into its own component? -->
 <div class="miller-header d-flex justify-content-between p-3 my-3">
-  <span>Dashboard /
+  <span><a [routerLink]="backLink()">Dashboard</a> /
     <strong *ngIf="IS_PEOPLE_TABLE">User Enrollment</strong>
     <strong *ngIf="!IS_PEOPLE_TABLE">Site Enrollment</strong>
   </span>
@@ -71,7 +70,7 @@
         <prime-miller-item-checkbox
           [items]="column['items']"
           [selectedSiteAccess]='getSelectedSiteAccess()'
-          (onCheck)="onCheck($evt)">
+          (onPendingChanges)="onCheck($event)">
         </prime-miller-item-checkbox>
 
       </ng-container>

@@ -1,6 +1,11 @@
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
-import { MillerItem, MillerColumnConfig, MillerColumn } from './miller-columns.interface';
-import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
+import { animate, keyframes, style, transition, trigger } from '@angular/animations';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
+import { cloneDeep } from 'lodash';
+import { Collection } from '../../models/collections.model';
+import { Person } from '../../models/prime.models';
+import { Site, SiteAccess } from '../../models/sites.model';
+import { MillerColumn, MillerColumnConfig, MillerItem } from './miller-columns.interface';
 
 const TIMING = "500ms";
 @Component({
@@ -56,16 +61,16 @@ export class MillerColumnsComponent implements OnInit {
   // private _columns: MillerItem[][];
   //TODO: Make interface!
   // private _columns: any;
-  private _columns:  MillerColumn[];;
+  private _columns:  MillerColumn[];
   public changesMade: boolean = false;
   private MINIMUM_COLUMNS = 3;
   public declarationCheck: boolean = false;
   public saveSuccess: boolean;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
-    // Modify column ordering.
+    // Modify column ordering based on config
     if (this.config.options &&
         this.config.options.primaryColumn &&
         this.config.options.primaryColumn.toLowerCase() === "people"){
@@ -81,19 +86,25 @@ export class MillerColumnsComponent implements OnInit {
       }
     ]
 
-    // Process if any columns are already "open"/pre-selected
-    let i = 0;
-    while (i < this._columns.length) {
-      const column = this._columns[i];
-      const open = column.items.filter(x => x.open);
-      if (open.length) {
-        // Adds to this._columns as necessary.
-        // Safe to use [0] since there is only one open item per col (excluding the final column which we can safely ignore).
-        this.openColumnFromItem(open[0])
+
+    // Check if there's a pre-selected id in the config
+    if (this.config.options && this.config.options.preselectObjectId){
+      const preselectObjectId = this.config.options.preselectObjectId;
+      // Selected item will be in first column, regardless of primaryColumn
+      const preselectItem = this._columns[0].items
+        .find(item => item.objectId === preselectObjectId)
+
+      if (!preselectItem) {
+        throw "MillerColumnsComponent config.options.preselectObjectId refers to an object which does not exist!";
       }
-      i++;
+
+      this.openColumnFromItem(preselectItem);
+      // Open second column too. Currently just opens the top item, no advanced logic. Potentially could open an item it does not have SA's with, but should be rare.
+      this.openColumnFromItem(this._columns[1].items[0])
     }
+
   }
+
 
   // get columns() : MillerItem[][] {
   get columns() : any {
@@ -139,9 +150,9 @@ export class MillerColumnsComponent implements OnInit {
     this.closeColumn(column);
   }
 
-  onCheck(){
+  onCheck(pending: SiteAccess[]){
     this.saveSuccess = false;
-    this.changesMade = true;
+    this.changesMade = pending.length >= 1;
   }
 
   //TODO: Column interface + move fn location
@@ -179,8 +190,13 @@ export class MillerColumnsComponent implements OnInit {
   public save(): void {
     this.changesMade = false;
     this.saveSuccess = true;
+    this.declarationCheck = false;
   }
 
+  public backLink(): string {
+    let linkType = this.IS_PEOPLE_TABLE ? "user" : "site";
+    return `/dashboard/${linkType}`
+  }
 
   // TODO:! Build breadcrumb like mobile for http://pebbleroad.github.io/taxonomy-browser/build/#
   buildBreadCrumb(column: MillerColumn){
@@ -222,7 +238,7 @@ export class MillerColumnsComponent implements OnInit {
     let data = this.config.data[this.columnOrder[targetColIndex].toLowerCase()]
     .filter((x: any) => {
       if (!x.associationId) return true;
-      return x.associationId === item.objectId;
+      return x.associationId.indexOf(item.objectId) !== -1;
     })
 
     // Second, update new column attributes on selections in previous columns
@@ -230,25 +246,37 @@ export class MillerColumnsComponent implements OnInit {
     return data;
   }
 
-  /** Calculates column statuses based on selections in previous columns. In need of refactoring.*/
-  private recalculateColumnStatus(column: MillerItem[], originalSelection: MillerItem ): MillerItem[] {
-    //TODO: For PrimaryType=Collection, we need to calculate warnings (shown in wireframe for by_site). This includes the first column!
-    const selectedSites = this.getSelectedSiteAccess().map(x => x.site);
-    if (this.IS_PEOPLE_TABLE){
-      // Find intersections betweeen column and selection
-      for (let i = 0; i < selectedSites.length; i++) {
-        const site = selectedSites[i];
-        const index: number = column.indexOf(site);
-        if (index === -1) continue;
-        const item: MillerItem = column[index];
-        // TODO: Change to check proper status, not just ANY siteAccess
-        item.checked = !!site.siteAccess[0];
-      }
-    } else { // !IS_PEOPLE_TABLE
-      column.map((item: any) => {
-        item.checked = item.siteAccess[0];
-      })
+
+  isSiteColumn(col: Site[] | Collection[] | Person[] | MillerItem[] | any[]): col is Site[] {
+    return (<Site[]>col)[0]._isSite !== undefined;
+  }
+
+  /** Calculates column statuses based on selections in previous columns. INCOMPLETE! Does not handle enrollment/site page. .*/
+  private recalculateColumnStatus(column: any[], originalSelection: MillerItem ): MillerItem[] {
+    // Clone the column so that when we filter out irrelevant data it doesn't destroy the underlying data.
+    column = cloneDeep(column);
+
+    if (this.IS_PEOPLE_TABLE && this.isSiteColumn(column)) { // Last column
+      // First selection is Person, so we filter SA's based on that
+      let selection = this.getUserSelection();
+      // Now, we filter the new column and strip all SA's not related to user
+       column = column.map(site => {
+        site.siteAccess = site.siteAccess.filter(sa => {
+          // Since we clone, we have to check on ID not pure identity
+          return sa.person.objectId === selection.objectId;
+        });
+        return site;
+      });
+
+      // Now that we've filtered out irrelevant SA's, we can easily check items
+      // that have Active SAs.
+      column
+        .filter(item => item.siteAccess.length)
+        .filter(item => item.siteAccess[0].status === 'Active')
+        .map(item => item.checked = true);
     }
+
+    //TODO: Have to do filtering for the other table type
 
     // Sort so all checked items are at the top
     column.sort((a, b) => {
@@ -265,7 +293,13 @@ export class MillerColumnsComponent implements OnInit {
     return column;
   }
 
-  private getSelectedSiteAccess(){
+  public getUserSelection(){
+    if (this.IS_PEOPLE_TABLE){
+      return this._columns[0].items.filter(x => x.open)[0];
+    }
+  }
+
+  public getSelectedSiteAccess(){
     // TODO: Add types
 
     if (this.IS_PEOPLE_TABLE){ // items are Sites

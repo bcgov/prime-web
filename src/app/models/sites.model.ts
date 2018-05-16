@@ -1,9 +1,7 @@
-import { Base } from '../core/base/base.class';
-import { Address, Role, Verifier, Person } from './prime.models';
-import { EnrollmentStatus } from './prime.models';
-import { BadgeLevel } from '../core/enrollment-row/enrollment-row.interface';
 import * as moment from "moment";
-import { convertToParamMap } from '@angular/router';
+import { Base } from '../core/base/base.class';
+import { BadgeLevel } from '../core/enrollment-row/enrollment-row.interface';
+import { Address, EnrollmentStatus, Person, Role, Verifier } from './prime.models';
 
 //-----------------------------------------------------------------------------
 // SITES
@@ -37,6 +35,13 @@ export class Site extends Base {
     return this.siteAccess.filter(x => x.status === status)
       .map(siteAccess => { return siteAccess.person})
       .filter(this.filterUnique)
+  }
+
+  /** For type-guard. You very likely want to use the type guard INSTEAD of
+   * accessing this variable directly. */
+  _isSite: boolean = true;
+  static isSiteGuard(x: any): x is Site {
+    return x._isSite !== undefined;
   }
 
   private filterUnique(x, i, a){

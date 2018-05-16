@@ -12,9 +12,9 @@ import { ProfessionalInfoComponent } from './pages/professional-info/professiona
 import { ReviewSubmitComponent } from './pages/review-submit/review-submit.component';
 import { SelfDeclarationComponent } from './pages/self-declaration/self-declaration.component';
 import { SiteAccessComponent } from './pages/site-access/site-access.component';
+import { SiteEnrollmentComponent } from './pages/site-enrollment/site-enrollment.component';
 import { UserAcceptanceComponent } from './pages/user-acceptance/user-acceptance.component';
 import { UserEnrollmentComponent } from './pages/user-enrollment/user-enrollment.component';
-import { SiteEnrollmentComponent } from './pages/site-enrollment/site-enrollment.component';
 
 const routes: Routes = [
 
@@ -114,14 +114,25 @@ const routes: Routes = [
   },
   {
     path: 'enrollment',
-    // component: UserEnrollmentComponent,
     children: [
+      /**
+       * Enrollment routes below must be duplicated, one with /:id and one
+       * without. Using :id allows deep linking to specific items.
+       */
       {
         path: 'user',
         component: UserEnrollmentComponent,
       },
       {
         path: 'site',
+        component: SiteEnrollmentComponent,
+      },
+      {
+        path: 'user/:id',
+        component: UserEnrollmentComponent,
+      },
+      {
+        path: 'site/:id',
         component: SiteEnrollmentComponent,
       },
       {

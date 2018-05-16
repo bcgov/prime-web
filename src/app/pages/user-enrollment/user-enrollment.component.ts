@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PrimeDataService } from '../../services/prime-data.service';
+import { ActivatedRoute } from '@angular/router';
 import { MillerColumnConfig } from '../../core/miller-columns/miller-columns.interface';
+import { PrimeDataService } from '../../services/prime-data.service';
 
 @Component({
   selector: 'prime-user-enrollment',
@@ -11,10 +12,14 @@ export class UserEnrollmentComponent implements OnInit {
   public millerColumnByUser: MillerColumnConfig;
 
 
-  constructor(private dataService: PrimeDataService) { }
+  constructor(private dataService: PrimeDataService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.millerColumnByUser = this.dataService.getMillerColumnDataByUser();
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.millerColumnByUser.options.preselectObjectId = id;
+    }
   }
 
 }

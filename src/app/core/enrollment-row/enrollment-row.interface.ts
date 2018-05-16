@@ -1,22 +1,20 @@
+import { Collection } from '../../models/collections.model';
 import { EnrollmentStatus } from '../../models/prime.models';
 import { Site, SiteAccess } from '../../models/sites.model';
-import { Collection } from '../../models/collections.model';
 export interface EnrollmentRowItem {
   title: string,
   // TODO: Replace any with new interfaces
   sites: Site[],
   users?: any[],
 
+  /** associatedObjectId and title both refer to the same underlying object. By
+   * having an id, we can lookup from the EnrollmentRow -> item, e.g. when
+   * navigating between pages */
+  associatedObjectId: string;
+
   /** Optional and only used in one config. */
   collections?: Collection[],
-
-  // For Site Enrollment, this would be people. However, potentially from User Enrollment this could be sites(?). Decision still being made, so kept generic.
-  /** @deprecated - use expandableRows instead */
-  expandableChildren?: EnrollmentRowChild[];
-  // expandableChildren?: any[];
-
   expandableRows?: SiteAccess[]
-
 }
 
 // Expanded child for a row. For Site Enrollment, this is people. However, from User Enrollment, this would be a person.

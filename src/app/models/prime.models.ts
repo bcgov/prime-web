@@ -1,6 +1,6 @@
 import { Base } from '../core/base/base.class';
-import { User } from './user.model';
 import { Site, SiteAccess } from './sites.model';
+import { User } from './user.model';
 
 
 // TODO: THIS FILE NEEDS TO BE REFACTORED/BROKEN UP.
@@ -27,7 +27,7 @@ export class Person extends Base {
   provisioner?: Provisioner;
 
   /** Corresponds to collection's objectId */
-  associationId?: string;
+  associationId?: string[];
 
   // requests: PrimeRequest[];
 

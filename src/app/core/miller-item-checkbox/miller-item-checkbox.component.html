@@ -14,7 +14,6 @@
 
 
     <span class="icons-group d-flex align-items-center">
-        <!-- FIXME: Technical debt: Performance with pill badge data.Right now we're doing an array intersection check in the template. Those values should be pre-calculated and just slotted in as much as possible. Left in for prototype. -->
         <prime-pill-badge
           *ngIf="getSiteAccessForItem(item)?.alert"
           iconOnly=true

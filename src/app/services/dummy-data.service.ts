@@ -1,11 +1,9 @@
 
 import { Injectable } from '@angular/core';
-import { EnrollmentRowItem, EnrollmentRowChild, BadgeLevel } from '../core/enrollment-row/enrollment-row.interface';
-import { EnrollmentStatus, Person } from '../models/prime.models';
-
-import { Site, SiteAccess, SiteAccessProgressSteps } from '../models/sites.model';
 import { Collection } from '../models/collections.model';
-import * as moment from "moment";
+import { EnrollmentStatus, Person } from '../models/prime.models';
+import { Site, SiteAccess, SiteAccessProgressSteps } from '../models/sites.model';
+
 
 
 /**
@@ -131,77 +129,6 @@ export class DummyDataService {
 
 
     return result.filter(x => x); //filter out null
-  }
-
-  // --- Enrollment List
-  /** @deprecated - Going towards creating collection/person directly */
-  getEnrollmentListBySiteData(): EnrollmentRowItem[] {
-    let result: EnrollmentRowItem[] = [
-      {
-        title: "London Drugs - All",
-        sites: Array(2),
-        users: Array(5),
-        expandableChildren: []
-      },
-      {
-        title: "Rexall Vancouver Island - All",
-        sites: Array(6),
-        users: Array(8),
-        expandableChildren: [],
-      },
-      {
-        title: "SDM Vancouver Island",
-        sites: Array(3),
-        users: Array(8),
-        expandableChildren: [],
-      }
-    ]
-
-    result = result.map(x => {
-      x.expandableChildren = [
-        {
-          title: "Ellen Hunt",
-          alerts: [
-            {
-              level: BadgeLevel.Danger,
-              status: EnrollmentStatus.Declined,
-            },
-            {
-              level: BadgeLevel.Danger,
-              status: EnrollmentStatus.Declined,
-            },
-          ],
-        },
-        {
-          title: "James Smith",
-          alerts: [
-            {
-              level: BadgeLevel.Warning,
-              status: EnrollmentStatus.Incomplete
-            },
-          ],
-        },
-        {
-          title: "Bob Jones",
-          alerts: [
-            {
-              level: BadgeLevel.Warning,
-              status: EnrollmentStatus.Pending
-            },
-            {
-              level: BadgeLevel.Warning,
-              status: EnrollmentStatus.Pending
-            },
-          ],
-        }
-      ]
-      return x;
-    })
-
-
-
-    return result;
-
   }
 
   // --- Helpers

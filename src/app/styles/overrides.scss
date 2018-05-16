@@ -132,9 +132,10 @@ html, body {
 }
 
 #wrap {
-  min-height: 100%;
-  height: auto!important;
+  // Guarnatee a 5rem margin, while also always being full-height.
+  min-height: calc(100% - 5rem);
   margin-bottom: 5rem;
+  height: auto!important;
 }
 
 .footer {
