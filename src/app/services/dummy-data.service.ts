@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { Collection } from '../models/collections.model';
-import { EnrollmentStatus, Person } from '../models/prime.models';
+import { EnrollmentStatus, Person, Address } from '../models/prime.models';
 import { Site, SiteAccess, SiteAccessProgressSteps } from '../models/sites.model';
 
 
@@ -19,14 +19,21 @@ export class DummyDataService {
   constructor() { }
 
   // -- Generating Models
-
   /** Returns an array of people with random names.*/
   createPeople(count): Person[] {
     const result: Person[] = [];
+    const today = new Date();
+    const future = new Date(2019, 1, 0);
 
     for (let index = 0; index < count; index++) {
       const person = new Person();
       person.name = this.generatePersonName();
+      person.dateOfBirth = this.generateDateOfBirth();
+      person.phone = '250-555-5555';
+      person.phoneSecondary = '604-555-5555';
+      person.address = { street: '123 Main St', postal: 'V9R 2VR'}
+      person.email = person.firstName[0].toLowerCase() + person.lastName.toLowerCase() + "@gmail.com";
+      person.renewalDate =  this.randomDate(today, future);
       result.push(person);
     }
 
@@ -143,10 +150,17 @@ export class DummyDataService {
   }
 
   private generatePersonName(): string {
-    const firstNames = ['Bob', 'Alice', 'Fred', 'Ellen', 'James'];
+    const firstNames = ['Bob', 'Alice', 'Fred', 'Ellen', 'James', 'Tom', 'Greg', 'Kate'];
     const lastNames = ['Hunt', 'Smith', 'Jones', 'Stewart', 'Mason'];
+    const middleInitials = ['A', 'R', 'H', 'B', 'C', 'D']
 
-    return `${this.getRandomElFromArray(firstNames)} ${this.getRandomElFromArray(lastNames)}`
+    return `${this.getRandomElFromArray(firstNames)} ${this.getRandomElFromArray(middleInitials)} ${this.getRandomElFromArray(lastNames)}`
+  }
+
+  private generateDateOfBirth(): Date {
+    const today = new Date();
+    const pastDate = new Date(1970, 1, 0);
+    return this.randomDate(today, pastDate);
   }
 
   private randomDate(start: Date, end: Date): Date {

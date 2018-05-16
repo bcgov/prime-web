@@ -139,7 +139,14 @@ export class PrimeDataService {
     }
 
     return result;
+  }
 
+  findPersonByObjectId(objectId: string): Person{
+    return this.people.find(person => person.objectId === objectId);
+  }
+
+  findSiteByObjectId(objectId: string): Site{
+    return this.sites.find(site => site.objectId === objectId);
   }
 
   private filterUnique(x, i, a){

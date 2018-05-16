@@ -55,10 +55,12 @@
           <a (click)="onItemClick(item)" class='miller-item-link'>
             <span class="item-title">{{item.name}}</span>
             <span class="icons-group d-flex">
+
+              <!-- TODO: Update these two. Currently they never work. We either need to pre-calculate hasAlert/hasWarning on parents based on children, or change the approach. -->
                 <i *ngIf="item.hasAlert" class="fa fa-exclamation-triangle text-danger"></i>
                 <i *ngIf="item.hasWarning"class="fa fa-exclamation-circle text-warning"></i>
-                <!-- <i class="fa fa-angle-double-right has-children-icon" *ngIf="item.hasChildren"></i> -->
-                <i class="fa fa-info-circle text-muted"></i>
+
+                <prime-info-button [targetId]="item.objectId" ></prime-info-button>
             </span>
           </a>
         </li>

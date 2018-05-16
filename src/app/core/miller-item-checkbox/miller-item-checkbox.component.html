@@ -20,7 +20,8 @@
           [alerts]="[getSiteAccessForItem(item)?.alert]">
         </prime-pill-badge>
 
-        <i class="fa fa-info-circle text-muted ml-1"></i>
+        <!-- <i class="fa fa-info-circle text-muted ml-1"></i> -->
+        <prime-info-button [targetId]="item.objectId" ></prime-info-button>
     </span>
   </a>
   <div *ngIf="getSiteAccessForItem(item)?.pendingChanges" class='d-flex justify-content-around' [@growVertical]>

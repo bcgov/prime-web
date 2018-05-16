@@ -14,11 +14,33 @@ import { User } from './user.model';
 
 export class Person extends Base {
   userId: PrimeUserID; //human-readable, like a user-name - "JSmith"
-  // name: Name;
-  name: string; //FIXME: Revert back to proper name interface once we have real data! This is just done for quick prototyping.
+
+  firstName: string;
+  middleName: string;
+  lastName: string;
+
+  get name(): string {
+    return `${this.firstName} ${this.lastName}`
+  }
+  // Just for development with dummyd data, likely to be removed later on.
+  set name(fullName: string){
+    const names = fullName.split(" ");
+    this.firstName = names[0];
+    if (names.length === 2){
+      this.lastName = names[1];
+    }
+    else if (names.length === 3 ){
+      this.middleName = names[1];
+      this.lastName = names[2];
+    }
+  }
+
   address: Address;
   dateOfBirth: Date;
   phone: PhoneNumber;
+  phoneSecondary: PhoneNumber;
+  email: string;
+  renewalDate: Date;
 
   //The different roles the person may have
   user?: User;
@@ -28,8 +50,6 @@ export class Person extends Base {
 
   /** Corresponds to collection's objectId */
   associationId?: string[];
-
-  // requests: PrimeRequest[];
 
   // ALL sites, including expired/rejected.
   siteAccess: SiteAccess[] = [];

@@ -19,6 +19,7 @@ import { DatepickerComponent } from '../../app/core/datepicker/datepicker.compon
 import { RouterModule } from '@angular/router';
 import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 import { PrimeDataModule } from '../prime-data/prime-data.module';
+import { InfoButtonComponent } from '../../core/user-info-button/user-info-button.component';
 
 
 const componentList = [
@@ -49,7 +50,8 @@ const componentList = [
     NgxMyDatePickerModule.forRoot(),
   ],
   declarations: [
-    componentList
+    componentList,
+    InfoButtonComponent
   ],
   exports: [
     componentList

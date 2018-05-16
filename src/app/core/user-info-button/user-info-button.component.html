@@ -1,0 +1,139 @@
+<!-- <button class="btn btn-link"> -->
+<i class="fa fa-info-circle text-muted" (click)="openModal($event)"></i>
+<!-- </button> -->
+
+
+<ng-template #personModal>
+  <div class="modal-header">
+      <h4 class="modal-title">{{person.name}}</h4>
+      <button class="btn btn-default pull-right" *ngIf="!editable" (click)="edit()">Edit</button>
+
+      <!-- TODO -->
+      <span *ngIf="editable">
+          <button class="btn btn-default pull-right" (click)="discard()">Discard - TODO</button>
+          <button class="btn btn-default pull-right" (click)="save()">Save - TODO</button>
+      </span>
+
+  </div>
+  <div class="modal-body">
+      <form>
+        <div class="form-row">
+          <div class="form-group col-md-6 row">
+            <label class='col-sm-5 col-form-label' for="lastName">Last Name</label>
+            <div class="col-sm-7">
+              <input type="text" [disabled]="!editable" class="form-control" id="lastName" name="lastName" [(ngModel)]="person.lastName">
+            </div>
+          </div>
+          <div class="form-group col-md-6 row">
+            <label class='col-sm-5 col-form-label' for="firstName">First Name</label>
+            <div class="col-sm-7">
+              <input type="text" [disabled]="!editable" class="form-control" id="firstName" name="firstName" [(ngModel)]="person.firstName">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6 row">
+            <label class='col-sm-5 col-form-label' for="middleName">Middle Name</label>
+            <div class="col-sm-7">
+              <input type="text" [disabled]="!editable" class="form-control" id="middleName" name="middleName" [(ngModel)]="person.middleName">
+            </div>
+          </div>
+          <div class="form-group col-md-6 row">
+            <label class='col-sm-5 col-form-label' for="DOB">Date of Birth</label>
+            <div class="col-sm-7">
+              <input type="text" [disabled]="!editable" class="form-control" id="DOB" name="DOB" [(ngModel)]="person.dateOfBirth">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6 row">
+            <label class='col-sm-5 col-form-label' for="primaryPhone">Primary Phone</label>
+            <div class="col-sm-7">
+              <input type="text" [disabled]="!editable" class="form-control" id="primaryPhone" name="primaryPhone" [(ngModel)]="person.phone">
+            </div>
+          </div>
+          <div class="form-group col-md-6 row">
+            <label class='col-sm-5 col-form-label' for="secondaryPhone">Secondary Phone</label>
+            <div class="col-sm-7">
+              <input type="text" [disabled]="!editable" class="form-control" id="secondaryPhone" name="secondaryPhone" [(ngModel)]="person.phoneSecondary">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6 row">
+            <label class='col-sm-5 col-form-label' for="email">Email</label>
+            <div class="col-sm-7">
+              <input type="text" [disabled]="!editable" class="form-control" id="email" name="email" [(ngModel)]="person.email">
+            </div>
+          </div>
+          <div class="form-group col-md-6 row">
+            <label class='col-sm-5 col-form-label' for="renewalDate">Renewal Date</label>
+            <div class="col-sm-7">
+              <input type="text" [disabled]="!editable" class="form-control" id="renewalDate" name="renewalDate" [(ngModel)]="person.renewalDate">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6 row">
+            <label class='col-sm-5 col-form-label' for="postal">Postal Code</label>
+            <div class="col-sm-7">
+              <input type="text" [disabled]="!editable" class="form-control" id="postal" name="postal" [(ngModel)]="person.address.postal">
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div class="card">
+        <div class="card-header">
+          Enrollments ( {{person.siteAccess.length}} )
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between" *ngFor="let siteAccess of person.siteAccess">
+
+              <span>{{ siteAccess.site.name }}</span>
+              <span class='d-flex justify-content-between'>
+                <span class='d-inline-flex align-items-baseline mb-1'>Start
+                  <prime-datepicker size='mini' dateFormat="yyyy/mm/dd" [(date)]="today" class='ml-1'></prime-datepicker>
+                </span>
+
+                <span class='d-inline-flex align-items-baseline mb-1'>End
+                  <prime-datepicker size='mini' dateFormat="yyyy/mm/dd" class='ml-1'></prime-datepicker>
+                </span>
+
+                <span class='d-flex flex-column'>
+                  <span>Med Hist</span>
+                  <span>Daytime</span>
+                </span>
+
+                <prime-pill-badge
+                  *ngIf="siteAccess.alert"
+                  [alerts]="[siteAccess.alert]">
+                </prime-pill-badge>
+
+              </span>
+
+            </li>
+          </ul>
+        </div>
+      </div>
+
+  </div>
+</ng-template>
+
+<!-- TODO: Flush out Site Modal -->
+<ng-template #siteModal>
+  <div class="modal-header">
+      <h4 class="modal-title">Site site site</h4>
+      <!-- <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+      </button> -->
+  </div>
+  <div class="modal-body">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit alias possimus labore sapiente, et corporis qui voluptates aut totam nesciunt minima fugit eveniet praesentium beatae quia ab, a quidem. Earum?</p>
+  </div>
+</ng-template>
