@@ -41,7 +41,7 @@ export class InfoButtonComponent implements OnInit {
   ngOnInit() {
   }
 
-  openModal(event: Event, template){
+  openModal(event: Event){
     event.stopPropagation();
     if (!this.target){
       this.loadTarget(this.targetId)
