@@ -26,14 +26,22 @@
     <div class='miller-column-title'>
 
       <!-- <h4>{{column.title}}</h4> -->
-      <h4>{{ buildBreadCrumb(column)  }}</h4>
+      <!-- <h4>{{ buildBreadCrumb(column)  }}</h4> -->
+
+      <prime-expanding-search
+        (onChange)="filterColumn($event, colIndex)"
+        placeholder="{{column.title}}"
+        alwaysShow=true
+        class='mr-2'>
+      </prime-expanding-search>
 
 
         <div class='d-flex align-items-center'>
-          <prime-expanding-search
-            (onChange)="filterColumn($event, colIndex)"
-             class='mr-2'>
-          </prime-expanding-search>
+          <prime-add-user-button
+            *ngIf="column.title.toLowerCase() === 'people'"
+            iconOnly=true
+            class='fix-right'>
+          </prime-add-user-button>
 
           <!-- Close button. Not in current designs, but absolutely necessary for mobile (otherwise there's no back!) -->
           <i *ngIf="colIndex >= 1" (click)="onClickColTitle(column)" class="fa fa-times-circle close-button"></i>

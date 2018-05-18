@@ -14,9 +14,9 @@ import { INgxMyDpOptions, IMyDateModel, IMyDate } from 'ngx-mydatepicker';
 export class DatepickerComponent implements OnInit {
   /** Component size can be reduced, see Datepickersizes for options */
   @Input() size: DatepickerSizes = DatepickerSizes.DEFAULT;
-
-  @Input() date: IMyDate;
-  @Output() dateChange = new EventEmitter<IMyDate>();
+  @Input() date: IMyDate | Date;
+  @Output() dateChange = new EventEmitter<IMyDate | Date>();
+  @Input() disabled: boolean;
 
   /** Format for how to display the date to the user. */
   @Input() dateFormat: string = 'dd/mm/yyyy';
@@ -35,6 +35,26 @@ export class DatepickerComponent implements OnInit {
 
   constructor() { }
 
+  convertDateToSimpleDate(date: Date):IMyDate {
+    return {
+      year: date.getFullYear(),
+      month: date.getMonth() + 1,
+      day: date.getDate(),
+    }
+   }
+  convertSimpleDateToDate(date: IMyDate):Date {
+    return new Date(date.year, date.month - 1, date.day);
+  }
+
+  isDate(x: any): x is Date {
+    return x.getDate !== undefined;
+  }
+
+  isSimpleDate(x: any): x is IMyDate {
+    return x.year !== undefined;
+  }
+
+
   ngOnInit() {
 
     this.datepickerOptions = {
@@ -52,22 +72,37 @@ export class DatepickerComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
 
     if (this.date || this.date === null) { //Just not `undefined`
+
+      let date;
+      if (this.date === null){
+        date = null;
+      }
+      else {
+        date = this.isDate(this.date) ? this.convertDateToSimpleDate(this.date) : this.date;
+      }
+
+
       this.model = {
         date: this.date,
-        formatted: this.formatDate(this.date, this.dateFormat, this.monthLabels)
+        formatted: this.formatDate(date, this.dateFormat, this.monthLabels)
       }
     }
 
   }
 
   onDateChanged(event: IMyDateModel): void {
+
+
     if (event.date) {
+      let date = this.isDate(event.date) ? this.convertDateToSimpleDate(event.date) : event.date;
+
 
       // User has cleared the date, so we want to return null.
-      if (event.date.year === 0 && event.date.month === 0 && event.date.day === 0) {
+      if (date.year === 0 && date.month === 0 && date.day === 0) {
         this.dateChange.emit(null);
       }
       else {
+        // Emit out same type they put in
         this.dateChange.emit(event.date);
       }
     }

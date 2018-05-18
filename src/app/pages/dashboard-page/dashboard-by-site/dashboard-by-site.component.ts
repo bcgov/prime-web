@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
-import { PrimeDataService } from '../../../services/prime-data.service';
+import {  PrimeDataService } from '../../../services/prime-data.service';
 import { EnrollmentRowItem } from '../../../core/enrollment-row/enrollment-row.interface';
 
 @Component({
@@ -8,13 +8,11 @@ import { EnrollmentRowItem } from '../../../core/enrollment-row/enrollment-row.i
   templateUrl: './dashboard-by-site.component.html',
   styleUrls: ['./dashboard-by-site.component.scss']
 })
-export class DashboardBySiteComponent implements OnInit {
-  public enrollmentBySiteData: EnrollmentRowItem[];
-
+export class DashboardBySiteComponent {
   constructor(private dataService: PrimeDataService) { }
 
-  ngOnInit() {
-    this.enrollmentBySiteData = this.dataService.getEnrollmentBySite();
+  get enrollmentBySiteData(): EnrollmentRowItem[] {
+    return this.dataService.getEnrollmentBySite();
   }
 
 }

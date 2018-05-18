@@ -44,6 +44,8 @@ export class ExpandingSearchComponent extends Base implements OnInit {
   searchPhrase: string;
   showSearch: boolean = false;
 
+  @Input() placeholder: string;
+  @Input() alwaysShow: boolean;
   @Output() onChange: EventEmitter<string> = new EventEmitter<string>();
   @ViewChild('searchElement') searchElement: ElementRef;
 
@@ -52,9 +54,14 @@ export class ExpandingSearchComponent extends Base implements OnInit {
    }
 
   ngOnInit() {
+    if (this.alwaysShow){
+      this.showSearch = true;
+    }
   }
 
   toggleSearch() {
+    if (this.alwaysShow) return;
+
     this.showSearch = !this.showSearch;
     if (this.showSearch){
       // Element needs to be created after toggled on.

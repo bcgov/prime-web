@@ -84,3 +84,19 @@ export const growVertical = trigger('growVertical', [
     ]))
   ])
 ])
+
+export const growHorizontal = trigger('growHorizontal', [
+  transition('void => *', [
+    animate(TIMING, keyframes([
+      style({width: '0', overflow: 'hidden'}),
+      style({width: '*', overflow: 'hidden'}),
+    ]))
+  ]),
+  transition('* => void', [
+    animate(TIMING, keyframes([
+      style({width: '*', overflow: 'hidden'}),
+      style({width: '0', overflow: 'hidden'}),
+    ]))
+  ])
+])
+

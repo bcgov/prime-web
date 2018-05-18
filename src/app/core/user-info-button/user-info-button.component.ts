@@ -1,13 +1,16 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { PrimeDataService } from '../../services/prime-data.service';
-import { Site } from '../../models/sites.model';
+import { Site, SiteAccess } from '../../models/sites.model';
 import { Person } from '../../models/prime.models';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
+import { cloneDeep } from 'lodash';
+import { growHorizontal } from '../../animations/animations';
 
 @Component({
   selector: 'prime-info-button',
   templateUrl: './user-info-button.component.html',
-  styleUrls: ['./user-info-button.component.scss']
+  styleUrls: ['./user-info-button.component.scss'],
+  animations: [growHorizontal]
 })
 export class InfoButtonComponent implements OnInit {
 
@@ -22,9 +25,15 @@ export class InfoButtonComponent implements OnInit {
   @ViewChild('personModal') personModalRef: ElementRef
   @ViewChild('siteModal') siteModalRef: ElementRef
 
-  /** Alias for `target` if an only if targetType=Person */
+  /**
+   * A clone of the "real" object in the dataservice, is set if an only if
+   * targetType=Person.
+   */
   public person: Person;
-  /** Alias for `target` if an only if targetType=Site */
+  /**
+   * A clone of the "real" object in the dataservice, is set if an only if
+   * targetType=Site.
+   */
   public site: Site;
 
   constructor(private dataService: PrimeDataService, private modalService: BsModalService) { }
@@ -45,15 +54,49 @@ export class InfoButtonComponent implements OnInit {
   }
 
   discard(){
-    console.log('todo');
-    // TODO: Store a copy of the model - on discard, revert to it.
-    this.editable = false;
+    let restore = this.lookupObjectId(this.person.objectId);
+    if (!Site.isSiteGuard(restore)){
+      this.person = restore;
+    }
+    else {
+      this.site = restore;
+    }
+    this.shouldShowreasonForDeactivation = [];
+    this.doneEditting();
   }
 
+  // TODO: Test! Think it's broken now.
   save(){
-    console.log('todo');
-    // TODO: Store copy of model (i.e. @Input() ) - on save, overwrite it.
+
+    let source = this.lookupObjectId(this.person.objectId);
+
+    if (!Site.isSiteGuard(source)){
+      source.name = this.person.name;
+      source.dateOfBirth = this.person.dateOfBirth
+      source.phone = this.person.phone;
+      source.phoneSecondary = this.person.phoneSecondary;
+      source.renewalDate = this.person.renewalDate;
+      source.address.postal = this.person.address.postal;
+      source.siteAccess = this.person.siteAccess;
+    }
+    else {
+      // TODO: Save all Site attributes based on this.site
+      console.log('todo');
+
+    }
+
+    this.doneEditting();
+  }
+
+  doneEditting(){
     this.editable = false;
+    this.loadTarget(this.person.objectId);
+  }
+
+  public shouldShowreasonForDeactivation: boolean[] = [];
+  onSetEndDate(evt: Date, siteAccess){
+    this.shouldShowreasonForDeactivation[siteAccess.objectId] = !!evt;
+    siteAccess.endDate = evt;
   }
 
   private loadTarget(objectId){
@@ -61,11 +104,11 @@ export class InfoButtonComponent implements OnInit {
 
     if (Site.isSiteGuard(this.target)){
       this.targetType = TargetType.Site;
-      this.site = this.target;
+      this.site = cloneDeep(this.target);
     }
     else {
       this.targetType = TargetType.Person;
-      this.person = this.target;
+      this.person = cloneDeep(this.target);
     }
   }
 

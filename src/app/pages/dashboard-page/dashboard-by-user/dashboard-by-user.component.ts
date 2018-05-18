@@ -9,17 +9,11 @@ import { EnrollmentRowItem } from '../../../core/enrollment-row/enrollment-row.i
   templateUrl: './dashboard-by-user.component.html',
   styleUrls: ['./dashboard-by-user.component.scss']
 })
-export class DashboardByUserComponent implements OnInit {
-  public enrollmentByUserData: EnrollmentRowItem[];
-
+export class DashboardByUserComponent {
   constructor(private dataService: PrimeDataService) { }
 
-  ngOnInit() {
-    this.enrollmentByUserData = this.dataService.getEnrollmentByUser();
-  }
-
-  get siteAccesses() {
-    return this.dataService.siteAccesses;
+  get enrollmentByUserData(): EnrollmentRowItem[] {
+    return this.dataService.getEnrollmentByUser();
   }
 
 }

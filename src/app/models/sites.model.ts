@@ -75,7 +75,6 @@ export class SiteAccess extends Base {
   // e.g. x.privilege = Verifier
   privilege: typeof Role;
 
-
   get alert(): EnrollmentAlert {
     return new EnrollmentAlert(this.status);
   }

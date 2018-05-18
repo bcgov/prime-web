@@ -1,32 +1,21 @@
+@import "variables.scss";
+
+
+// Use EMs, not REMs here!  We size this element variably based on font-size already, so it's an em-based layout
+
 
 input[type="search"]{
-  // padding-top: 0;
-  // padding-bottom: 0;
   transform-origin: center right;
+  border-right: none; // For alwaysShow layout
+  font-size: 1em;
 }
 
 .form-inline {
-  min-height: 2rem;
-  // perspective: 80px;
-  // perspective-origin: 100% 50%;
-
-  // perspective: 600px;
-  // // perspective-origin: 70px 0;
-  // perspective-origin: 50% 50%;
-
+  min-height: 2em;
   perspective: 200px;
   perspective-origin: 0 0;
 }
 
-
-// input.flipped {
-//   transform: rotateY(-180deg);
-// }
-
-
-// transform-origin: 0 0;
-// transform-origin: top right;
-
-// transition: 2s;
-// transform: rotateY(-90deg);
-// transform: rotateY(0deg);
+.input-group-text {
+  background-color: $color-white;
+}

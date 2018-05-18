@@ -41,6 +41,13 @@ export class EnrollmentListComponent extends Base implements OnInit {
     this.data = this.rowItems;
   }
 
+  ngOnChanges(changes){
+    // Handle rows being added to rowItems, such as the "Add User Button" when on the user view
+    if (changes.rowItems && changes.rowItems.currentValue && changes.rowItems.previousValue && changes.rowItems.currentValue.length > changes.rowItems.previousValue.length){
+      this.data = this.rowItems;
+    }
+  }
+
   ngOnDestroy(){
     this.verifierService.enrollmentViewTypeSelector = "All";
   }
