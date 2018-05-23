@@ -42,7 +42,7 @@ import { MiniProgressBarComponent } from './core/mini-progress-bar/mini-progress
 import { PillBadgeComponent } from './core/pill-badge/pill-badge.component';
 import { ProgressBarComponent } from './core/progress-bar/progress-bar.component';
 import { SiteAccessWidgetsComponent } from './core/site-access-widgets/site-access-widgets.component';
-import { PrimeToggleComponent } from './core/toggle/toggle.component';
+// import { PrimeToggleComponent } from './core/toggle/toggle.component';
 import { BlankPageComponent } from './pages/blank-page/blank-page.component';
 import { ContactInformationComponent } from './pages/contact-information/contact-information.component';
 import { DashboardBySiteComponent } from './pages/dashboard-page/dashboard-by-site/dashboard-by-site.component';
