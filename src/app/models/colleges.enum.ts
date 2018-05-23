@@ -19,10 +19,7 @@ export interface CollegeList {
 }
 
 
-export class College {
-
-}
-
+// NEW Colleges Layout... Need to wait until Applicant section is done before solidifying what Collegs implementation we use.
 // export enum Colleges {
 //   None = "None",
 //   CPSBC = "College of Physicians and Surgeons of BC (CPSBC",

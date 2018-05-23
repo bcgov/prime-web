@@ -12,8 +12,6 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AddressComponent } from './core/address/address.component';
-import { BreadcrumbComponent } from './core/breadcrumb/breadcrumb.component';
 import { ConsentModalComponent } from './core/consent-modal/consent-modal.component';
 import { CalendarDayValidatorDirective } from './core/date/calendar-day.validator';
 import { CalendarFieldFormatterDirective } from './core/date/calendar-field-formatter.directive';
@@ -26,18 +24,10 @@ import { PrimeFormFooterComponent } from './core/form-footer/form-footer.compone
 import { ProgressBarComponent } from './core/progress-bar/progress-bar.component';
 import { CoreModule } from './modules/core/core.module';
 import { PrimeDataModule } from './modules/prime-data/prime-data.module';
-// import { PrimeToggleComponent } from './core/toggle/toggle.component';
 import { BlankPageComponent } from './pages/blank-page/blank-page.component';
-import { ContactInformationComponent } from './pages/contact-information/contact-information.component';
 import { DemoPageComponent } from './pages/demo-page/demo-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
-import { ProfessionalInfoComponent } from './pages/professional-info/professional-info.component';
-import { ReviewSubmitComponent } from './pages/review-submit/review-submit.component';
-import { SelfDeclarationComponent } from './pages/self-declaration/self-declaration.component';
-import { SiteAccessComponent } from './pages/site-access/site-access.component';
-import { UserAcceptanceComponent } from './pages/user-acceptance/user-acceptance.component';
 import { ApplicantDataService } from './services/applicant-data.service';
-import { CollegeDataService } from './services/college-data.service';
 import { DummyDataService } from './services/dummy-data.service';
 import { PrimeDataService } from './services/prime-data.service';
 import { UserService } from './services/user.service';
@@ -53,19 +43,12 @@ import { RequiredValidationErrorsComponent } from './validation/required-validat
     AppComponent,
     ProgressBarComponent,
     ConsentModalComponent,
-    ProfessionalInfoComponent,
     PrimeDateComponent,
     CalendarFieldFormatterDirective,
     CalendarYearValidatorDirective,
     CalendarDayValidatorDirective,
     CalendarMonthValidatorDirective,
     CalendarFutureDatesDirective,
-    ContactInformationComponent,
-    SelfDeclarationComponent,
-    UserAcceptanceComponent,
-    ReviewSubmitComponent,
-    SiteAccessComponent,
-    AddressComponent,
     FileUploaderComponent,
     // CaptchaComponent,
     // PrimeToggleComponent, //Moving to CoreModule
@@ -75,7 +58,6 @@ import { RequiredValidationErrorsComponent } from './validation/required-validat
     PhoneValidationComponent,
     EmailValidationComponent,
     DemoPageComponent,
-    BreadcrumbComponent,
     HomePageComponent,
     BlankPageComponent,
   ],
@@ -97,7 +79,6 @@ import { RequiredValidationErrorsComponent } from './validation/required-validat
   ],
   providers: [
     ApplicantDataService,
-    CollegeDataService,
     UserService,
     VerifierService,
     DummyDataService,

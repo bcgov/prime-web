@@ -10,7 +10,7 @@ import { MiniProgressBarComponent } from '../../core/mini-progress-bar/mini-prog
 import { ExpandingSearchComponent } from '../../core/expanding-search/expanding-search.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { FormsModule } from '@angular/forms';
-import { DatepickerComponent } from '../../app/core/datepicker/datepicker.component';
+import { DatepickerComponent } from '../../core/datepicker/datepicker.component';
 import { RouterModule } from '@angular/router';
 import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 import { PrimeDataModule } from '../prime-data/prime-data.module';
