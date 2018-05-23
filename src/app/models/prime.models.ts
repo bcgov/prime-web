@@ -35,11 +35,12 @@ export class Person extends Base {
     }
   }
 
-  address: Address;
+  address: Address = {};
   dateOfBirth: Date;
   phone: PhoneNumber;
   phoneSecondary: PhoneNumber;
   email: string;
+  emailSecondary: string;
   renewalDate: Date;
 
   //The different roles the person may have
@@ -50,6 +51,20 @@ export class Person extends Base {
 
   /** Corresponds to collection's objectId */
   associationId?: string[];
+
+  // License applies to Applicants. Does it apply to all Persons? Possibly
+  // refactor Applicant into a different Role (like Verifier/Provisioner), but
+  // if ALL People were previously Applicants, then there's no need to make the
+  // distinction
+  license;
+  accessAcceptance;
+  hasCollege: boolean;
+  isDeviceProvider: boolean;
+  deviceProviderNumber;
+  isWorkingOnBehalf: boolean;
+  workingOnBehalfTitle;
+  // END of Applicant datatypes.
+
 
   // ALL sites, including expired/rejected.
   siteAccess: SiteAccess[] = [];
@@ -65,6 +80,10 @@ export class Person extends Base {
     return this.sites.indexOf(site) !== -1
   }
 
+  get hasContactInfo(): boolean {
+    return !!(this.name && this.phone && this.email);
+  }
+
 }
 
 class Name {
@@ -75,8 +94,11 @@ class Name {
 }
 
 export interface Address {
-  street: string;
-  postal: string;
+  street?: string;
+  postal?: string;
+  country?: string;
+  province?: string;
+  city?: string;
 }
 
 interface PhoneNumber { }

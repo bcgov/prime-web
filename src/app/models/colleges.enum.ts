@@ -1,6 +1,7 @@
 
 /**
  * Professional Information college choices
+ * @deprecated - Used in OLD prototype only
  */
 export enum Colleges {
   None = 'none',

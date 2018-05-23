@@ -20,6 +20,7 @@ import { RouterModule } from '@angular/router';
 import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 import { PrimeDataModule } from '../prime-data/prime-data.module';
 import { InfoButtonComponent } from '../../core/user-info-button/user-info-button.component';
+import { PrimeToggleComponent } from '../../core/toggle/toggle.component';
 
 
 const componentList = [
@@ -36,6 +37,7 @@ const componentList = [
   EnrollmentRowComponent,
   MillerColumnsComponent,
   DatepickerComponent,
+  PrimeToggleComponent
 ]
 
 @NgModule({

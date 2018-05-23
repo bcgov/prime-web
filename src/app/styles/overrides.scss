@@ -154,3 +154,19 @@ h1, h2, h3,
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
 }
+
+
+.card-body {
+  background: $color-white;
+}
+
+.card-header {
+  font-size: $h3-font-size;
+  min-height: 4rem;
+  display: flex;
+  align-items: start;
+}
+
+.card {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}

@@ -19,6 +19,13 @@ export class PrimeDataService {
   people: Person[] = [];
   siteAccesses: SiteAccess[] = [];
 
+  /** The logged in user interacting with the webapp. When in the Applicant dashboard, this would be the applicant. */
+  user: Person = new Person();
+
+
+
+
+
   getEnrollmentBySite(): EnrollmentRowItem[] {
 
     // By Site means collections at the top level

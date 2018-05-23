@@ -92,7 +92,7 @@ import { PrimeDataModule } from './modules/prime-data/prime-data.module';
     AddressComponent,
     FileUploaderComponent,
     // CaptchaComponent,
-    PrimeToggleComponent,
+    // PrimeToggleComponent, //Moving to CoreModule
     PrimeFormFooterComponent,
     PrimeRequiredDirective,
     RequiredValidationErrorsComponent,

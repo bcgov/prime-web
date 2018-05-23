@@ -100,6 +100,14 @@ const routes: Routes = [
     loadChildren: "app/modules/verifier/verifier.module#VerifierModule"
   },
   {
+    path: "applicant",
+    loadChildren: "app/modules/applicant/applicant.module#ApplicantModule"
+  },
+  {
+    path: "provisioner",
+    loadChildren: "app/modules/provisioner/provisioner.module#ProvisionerModule"
+  },
+  {
     path: '**',
     redirectTo: ''
   }

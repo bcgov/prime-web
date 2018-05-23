@@ -31,7 +31,13 @@ export class DummyDataService {
       person.dateOfBirth = this.generateDateOfBirth();
       person.phone = '250-555-5555';
       person.phoneSecondary = '604-555-5555';
-      person.address = { street: '123 Main St', postal: 'V9R 2VR'}
+      person.address = {
+        street: '123 Main St',
+        postal: 'V9R 2VR',
+        country: "Canada",
+        province: "British Columbia",
+        city: "Victoria"
+      }
       person.email = person.firstName[0].toLowerCase() + person.lastName.toLowerCase() + "@gmail.com";
       person.renewalDate =  this.randomDate(today, future);
       result.push(person);
@@ -136,6 +142,16 @@ export class DummyDataService {
 
 
     return result.filter(x => x); //filter out null
+  }
+
+  /** Edits the Person in place, setting it up for the Applicant module */
+  setPersonToApplicant(person: Person): void {
+    console.log('SETTING PERSON TO APPLICANT');
+    // TODO: Don't overwrite values if there's something already there!
+    person.name = "James Smith";
+    person.phone = "250-592-8553"
+    person.email = "jsmith@email.com";
+    person.renewalDate = new Date(2018, 10, 12);
   }
 
   // --- Helpers
