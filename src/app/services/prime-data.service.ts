@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { EnrollmentRowItem } from '../core/enrollment-row/enrollment-row.interface';
-import { MillerColumnConfig } from '../core/miller-columns/miller-columns.interface';
+import { EnrollmentRowItem } from '../modules/verifier/components/enrollment-row/enrollment-row.interface';
+import { MillerColumnConfig } from '../modules/verifier/components/miller-columns/miller-columns.interface';
 import { Collection } from '../models/collections.model';
 import { EnrollmentStatus, Person } from '../models/prime.models';
 import { Site, SiteAccess } from '../models/sites.model';

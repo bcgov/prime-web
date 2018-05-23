@@ -1,6 +1,6 @@
-import { Collection } from '../../models/collections.model';
-import { EnrollmentStatus } from '../../models/prime.models';
-import { Site, SiteAccess } from '../../models/sites.model';
+import { Collection } from '../../../../models/collections.model';
+import { EnrollmentStatus } from '../../../../models/prime.models';
+import { Site, SiteAccess } from '../../../../models/sites.model';
 export interface EnrollmentRowItem {
   title: string,
   // TODO: Replace any with new interfaces

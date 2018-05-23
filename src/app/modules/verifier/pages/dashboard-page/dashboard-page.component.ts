@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PrimeDataService } from '../../services/prime-data.service';
-import { SiteAccess } from '../../models/sites.model';
-
+import { SiteAccess } from '../../../../models/sites.model';
+import { PrimeDataService } from '../../../../services/prime-data.service';
 @Component({
   selector: 'prime-dashboard-page',
   templateUrl: './dashboard-page.component.html',

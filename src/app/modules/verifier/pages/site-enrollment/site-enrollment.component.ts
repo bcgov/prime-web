@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MillerColumnConfig } from '../../core/miller-columns/miller-columns.interface';
-import { PrimeDataService } from '../../services/prime-data.service';
+import { MillerColumnConfig } from '../../components/miller-columns/miller-columns.interface';
+import { PrimeDataService } from '../../../../services/prime-data.service';
 
 
 @Component({

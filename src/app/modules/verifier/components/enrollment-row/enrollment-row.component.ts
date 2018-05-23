@@ -1,7 +1,7 @@
 import { Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { loadInOut, openState, openStateChild, openStateDisable } from '../../animations/animations';
-import { Base } from '../base/base.class';
+import { loadInOut, openState, openStateChild, openStateDisable } from '../../../../animations/animations';
+import { Base } from '../../../../core/base/base.class';
 import { EnrollmentRowChild, EnrollmentRowItem } from './enrollment-row.interface';
 
 

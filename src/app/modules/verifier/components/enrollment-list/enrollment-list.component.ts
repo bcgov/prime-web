@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { EnrollmentStatus } from '../../models/prime.models';
-import { SiteAccess } from '../../models/sites.model';
-import { VerifierService } from '../../services/verifier.service';
-import { Base } from '../base/base.class';
+import { EnrollmentStatus } from '../../../../models/prime.models';
+import { SiteAccess } from '../../../../models/sites.model';
+import { VerifierService } from '../../../../services/verifier.service';
+import { Base } from '../../../../core/base/base.class';
 import { EnrollmentRowComponent } from '../enrollment-row/enrollment-row.component';
 import { EnrollmentRowItem } from '../enrollment-row/enrollment-row.interface';
 

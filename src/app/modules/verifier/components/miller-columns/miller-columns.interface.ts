@@ -1,6 +1,6 @@
-import { Collection } from "../../models/collections.model";
-import { Person } from "../../models/prime.models";
-import { Site } from "../../models/sites.model";
+import { Collection } from "../../../../models/collections.model";
+import { Person } from "../../../../models/prime.models";
+import { Site } from "../../../../models/sites.model";
 
 
 export interface MillerItem {

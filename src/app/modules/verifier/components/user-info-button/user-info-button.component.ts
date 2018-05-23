@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { PrimeDataService } from '../../services/prime-data.service';
-import { Site, SiteAccess } from '../../models/sites.model';
-import { Person } from '../../models/prime.models';
+import { PrimeDataService } from '../../../../services/prime-data.service';
+import { Site, SiteAccess } from '../../../../models/sites.model';
+import { Person } from '../../../../models/prime.models';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { cloneDeep } from 'lodash';
-import { growHorizontal } from '../../animations/animations';
+import { growHorizontal } from '../../../../animations/animations';
 
 @Component({
   selector: 'prime-info-button',

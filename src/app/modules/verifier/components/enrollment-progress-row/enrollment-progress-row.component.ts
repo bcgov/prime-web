@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { growVertical } from '../../animations/animations';
-import { SiteAccess, SiteAccessProgressSteps } from '../../models/sites.model';
+import { growVertical } from '../../../../animations/animations';
+import { SiteAccess, SiteAccessProgressSteps } from '../../../../models/sites.model';
 
 
 @Component({

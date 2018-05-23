@@ -1,6 +1,6 @@
 import * as moment from "moment";
 import { Base } from '../core/base/base.class';
-import { BadgeLevel } from '../core/enrollment-row/enrollment-row.interface';
+import { BadgeLevel } from '../modules/verifier/components/enrollment-row/enrollment-row.interface';
 import { Address, EnrollmentStatus, Person, Role, Verifier } from './prime.models';
 
 //-----------------------------------------------------------------------------

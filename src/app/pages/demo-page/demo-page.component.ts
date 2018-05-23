@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MillerColumnConfig } from '../../core/miller-columns/miller-columns.interface';
+import { MillerColumnConfig } from '../../modules/verifier/components/miller-columns/miller-columns.interface';
 
 @Component({
   selector: 'prime-demo-page',

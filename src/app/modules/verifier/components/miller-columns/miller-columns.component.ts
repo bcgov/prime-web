@@ -2,9 +2,9 @@ import { animate, keyframes, style, transition, trigger } from '@angular/animati
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { cloneDeep } from 'lodash';
-import { Collection } from '../../models/collections.model';
-import { Person } from '../../models/prime.models';
-import { Site, SiteAccess } from '../../models/sites.model';
+import { Collection } from '../../../../models/collections.model';
+import { Person } from '../../../../models/prime.models';
+import { Site, SiteAccess } from '../../../../models/sites.model';
 import { MillerColumn, MillerColumnConfig, MillerItem } from './miller-columns.interface';
 
 const TIMING = "500ms";

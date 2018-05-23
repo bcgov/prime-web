@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { growVertical } from '../../animations/animations';
-import { EnrollmentStatus, Person } from '../../models/prime.models';
-import { Site, SiteAccess } from '../../models/sites.model';
-import { Base } from '../base/base.class';
+import { growVertical } from '../../../../animations/animations';
+import { EnrollmentStatus, Person } from '../../../../models/prime.models';
+import { Site, SiteAccess } from '../../../../models/sites.model';
+import { Base } from '../../../../core/base/base.class';
 @Component({
   selector: 'prime-miller-item-checkbox',
   templateUrl: './miller-item-checkbox.component.html',

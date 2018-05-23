@@ -3,11 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from '../../pages/home-page/home-page.component';
 import { DemoPageComponent } from '../../pages/demo-page/demo-page.component';
 import { BlankPageComponent } from '../../pages/blank-page/blank-page.component';
-import { DashboardPageComponent } from '../../pages/dashboard-page/dashboard-page.component';
-import { DashboardByUserComponent } from '../../pages/dashboard-page/dashboard-by-user/dashboard-by-user.component';
-import { DashboardBySiteComponent } from '../../pages/dashboard-page/dashboard-by-site/dashboard-by-site.component';
-import { UserEnrollmentComponent } from '../../pages/user-enrollment/user-enrollment.component';
-import { SiteEnrollmentComponent } from '../../pages/site-enrollment/site-enrollment.component';
+import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
+import { DashboardByUserComponent } from './pages/dashboard-page/dashboard-by-user/dashboard-by-user.component';
+import { DashboardBySiteComponent } from './pages/dashboard-page/dashboard-by-site/dashboard-by-site.component';
+
+
+// MOVE THESE TWO
+import { UserEnrollmentComponent } from './pages/user-enrollment/user-enrollment.component';
+import { SiteEnrollmentComponent } from './pages/site-enrollment/site-enrollment.component';
 
 const routes: Routes = [
   {
