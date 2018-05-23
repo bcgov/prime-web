@@ -5,7 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { MyDateRangePickerModule } from 'mydaterangepicker';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { StickyModule } from 'ng2-sticky-kit';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
@@ -112,7 +111,6 @@ import { PrimeDataModule } from './modules/prime-data/prime-data.module';
     PrimeDataModule.forRoot(),
     CoreModule,
     ModalModule.forRoot(),
-    Ng2SmartTableModule,
     StickyModule,
     NgxMyDatePickerModule.forRoot(),
     TabsModule.forRoot(),
