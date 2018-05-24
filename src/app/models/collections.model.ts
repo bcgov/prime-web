@@ -1,6 +1,7 @@
 import { Site, SiteAccess } from './sites.model';
 import { Base } from '../core/base/base.class';
-import { Person, EnrollmentStatus } from './prime.models';
+import { EnrollmentStatus } from './enrollment-status.enum';
+import { Person } from './person.model';
 
 
 
