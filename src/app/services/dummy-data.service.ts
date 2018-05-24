@@ -1,7 +1,9 @@
 
 import { Injectable } from '@angular/core';
 import { Collection } from '../models/collections.model';
-import { EnrollmentStatus, Person, Address } from '../models/prime.models';
+import { EnrollmentStatus } from '../models/enrollment-status.enum';
+import { Person } from '../models/person.model';
+import { Address } from '../models/addresses.model';
 import { Site, SiteAccess, SiteAccessProgressSteps } from '../models/sites.model';
 
 

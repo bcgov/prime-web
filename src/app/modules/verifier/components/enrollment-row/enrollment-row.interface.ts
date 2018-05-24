@@ -1,5 +1,5 @@
 import { Collection } from '../../../../models/collections.model';
-import { EnrollmentStatus } from '../../../../models/prime.models';
+import { EnrollmentStatus } from '../../../../models/enrollment-status.enum';
 import { Site, SiteAccess } from '../../../../models/sites.model';
 export interface EnrollmentRowItem {
   title: string,

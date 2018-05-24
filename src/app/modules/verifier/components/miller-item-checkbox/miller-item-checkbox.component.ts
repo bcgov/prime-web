@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { growVertical } from '../../../../animations/animations';
-import { EnrollmentStatus, Person } from '../../../../models/prime.models';
+import { EnrollmentStatus } from '../../../../models/enrollment-status.enum';
+import { Person } from '../../../../models/person.model';
 import { Site, SiteAccess } from '../../../../models/sites.model';
 import { Base } from '../../../../core/base/base.class';
 @Component({

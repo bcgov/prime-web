@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { EnrollmentStatus } from '../../../../models/prime.models';
+import { EnrollmentStatus } from '../../../../models/enrollment-status.enum';
 import { SiteAccess } from '../../../../models/sites.model';
 import { VerifierService } from '../../../../services/verifier.service';
 import { Base } from '../../../../core/base/base.class';

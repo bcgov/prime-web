@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { DummyDataService } from '../../../../services/dummy-data.service';
-import { Person } from '../../../../models/prime.models';
+import { Person } from '../../../../models/person.model';
 
 @Component({
   selector: 'prime-applicant-contact',

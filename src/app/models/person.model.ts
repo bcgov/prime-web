@@ -1,18 +1,13 @@
 import { Base } from '../core/base/base.class';
 import { Site, SiteAccess } from './sites.model';
 import { User } from './user.model';
-import * as moment from "moment";
+import * as moment from 'moment';
+import { EnrollmentStatus } from './enrollment-status.enum';
+import { Address, PhoneNumber } from './addresses.model';
 
-
-// TODO: THIS FILE NEEDS TO BE REFACTORED/BROKEN UP.
-
-// Currently this is largely a copy-paste from design/object-oriented-design.ts
-// These models were designed _before_ the current design wireframes were given.
-// So, it's very likely they will need substantial changes.
-
-// TIP: Look at which classes are EXPORTED to see where work is done!
-
-
+/**
+ * Information about person
+ */
 export class Person extends Base {
   userId: PrimeUserID; //human-readable, like a user-name - "JSmith"
 
@@ -21,11 +16,11 @@ export class Person extends Base {
   lastName: string;
 
   get name(): string {
-    return `${this.firstName} ${this.lastName}`
+    return `${this.firstName} ${this.lastName}`;
   }
   // Just for development with dummyd data, likely to be removed later on.
   set name(fullName: string){
-    const names = fullName.split(" ");
+    const names = fullName.split(' ');
     this.firstName = names[0];
     if (names.length === 2){
       this.lastName = names[1];
@@ -70,7 +65,7 @@ export class Person extends Base {
   // ALL sites, including expired/rejected.
   siteAccess: SiteAccess[] = [];
   get activeSites(): SiteAccess[] {
-      return this.siteAccess.filter(x => x.status === EnrollmentStatus.Active);
+    return this.siteAccess.filter(x => x.status === EnrollmentStatus.Active);
   }
 
   get sites(): Site[]{
@@ -78,7 +73,7 @@ export class Person extends Base {
   }
 
   canAccess(site: Site): boolean{
-    return this.sites.indexOf(site) !== -1
+    return this.sites.indexOf(site) !== -1;
   }
 
   get hasContactInfo(): boolean {
@@ -97,28 +92,15 @@ class Name {
   firstName: string;
   lastName: string;
   middleName: string;
-  get fullName(): string { return this.firstName + this.lastName }
+  get fullName(): string { return this.firstName + this.lastName; }
 }
 
-export interface Address {
-  street?: string;
-  postal?: string;
-  country?: string;
-  province?: string;
-  city?: string;
-}
-
-interface PhoneNumber { }
 interface PrimeUserID { }
 
 
-
-//-----------------------------------------------------------------------------
-// ROLES
-//-----------------------------------------------------------------------------
-
-
-
+/**
+ * Person's Role(s)
+ */
 export abstract class Role extends Base {
   status: EnrollmentStatus;
   // Person is a circular reference for runtime convenience and does NOT need
@@ -127,7 +109,8 @@ export abstract class Role extends Base {
   // object, and then easily get their name.
   person: Person;
 
-  /** This should exactly match the different user types which extend from Role. Makes it easy to lookup role type in templates e.g. `user.type === Verifier` */
+  /** This should exactly match the different user types which extend from Role.
+   *  Makes it easy to lookup role type in templates e.g. `user.type === Verifier`*/
   type: Verifier | OrganizationAuthority | Provisioner;
   selfDeclarations: SelfDeclaration[];
 }
@@ -142,37 +125,9 @@ export class Verifier extends Role { }
 export class OrganizationAuthority extends Role { } //aka "OA" or "Site Admin"
 export class Provisioner extends Role { }
 
-//-----------------------------------------------------------------------------
-// MISC
-//-----------------------------------------------------------------------------
-
-
-
-// class Group<T> extends Base {
-//   find() { };
-//   contains() { }; // just an example
-//   members: T[];
-// }
-// class Collection extends Group<Site> { };
-// class PeopleGroup extends Group<Person> { };
-
 
 class SelfDeclaration {
   question: string;
   userAnswer: boolean;
   userDetails: string;
-}
-
-
-
-/** The reason we're showing the notification in the first place. */
-export enum EnrollmentStatus {
-  Initiated = "Initiated",
-  Pending = "Pending",
-  Incomplete = "Incomplete",
-  Returned = "Returned to applicant",
-  Declined = "Declined",
-  // Approved = "Approved", //Same as active?
-  Active = "Active",
-  Expired = "Expired",
 }

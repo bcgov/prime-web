@@ -2,7 +2,7 @@ import { Component, OnInit, TemplateRef, Input } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { PrimeDataService } from '../../services/prime-data.service';
-import { Person } from '../../models/prime.models';
+import { Person } from '../../models/person.model';
 import { DummyDataService } from '../../services/dummy-data.service';
 
 @Component({

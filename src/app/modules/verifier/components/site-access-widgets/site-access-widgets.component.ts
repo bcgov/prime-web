@@ -1,9 +1,8 @@
 import { Component, OnInit, Input, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
-import { SiteAccess, SiteAccessProgressSteps } from '../../../../models/sites.model';
-import { EnrollmentStatus, Person } from '../../../../models/prime.models';
+import { SiteAccess, SiteAccessProgressSteps } from '../../models/sites.model';
+import * as moment from 'moment';
+import { Person } from '../../../../models/person.model';
 import { VerifierService } from '../../../../services/verifier.service';
-import * as moment from "moment";
-
 @Component({
   selector: 'prime-site-access-widgets',
   templateUrl: './site-access-widgets.component.html',
