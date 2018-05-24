@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DashboardBarComponent } from './dashboard-bar.component';
+import {AddUserButtonComponent} from '../add-user-button/add-user-button.component';
 
 describe('DashboardBarComponent', () => {
   let component: DashboardBarComponent;
@@ -8,7 +9,7 @@ describe('DashboardBarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DashboardBarComponent ]
+      declarations: [ DashboardBarComponent,AddUserButtonComponent]
     })
     .compileComponents();
   }));
