@@ -40,3 +40,6 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# We want this removed during the prototype phase.
+package-lock.json
