@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SiteAccess } from '../../../../models/sites.model';
 import { PrimeDataService } from '../../../../services/prime-data.service';
+import { Person } from '../../../../models/prime.models';
 @Component({
   selector: 'prime-dashboard-page',
   templateUrl: './dashboard-page.component.html',
@@ -15,6 +16,10 @@ export class DashboardPageComponent implements OnInit {
 
   get siteAccesses(): SiteAccess[] {
     return this.dataService.siteAccesses;
+  }
+
+  get people(): Person[] {
+    return this.dataService.people;
   }
 
 }

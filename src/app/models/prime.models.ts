@@ -1,6 +1,7 @@
 import { Base } from '../core/base/base.class';
 import { Site, SiteAccess } from './sites.model';
 import { User } from './user.model';
+import * as moment from "moment";
 
 
 // TODO: THIS FILE NEEDS TO BE REFACTORED/BROKEN UP.
@@ -82,6 +83,12 @@ export class Person extends Base {
 
   get hasContactInfo(): boolean {
     return !!(this.name && this.phone && this.email);
+  }
+
+  get daysUntilRenewalDate(): number {
+      const expiry = moment(this.renewalDate);
+      const today = moment();
+      return expiry.diff(today, 'days');
   }
 
 }

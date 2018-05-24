@@ -91,51 +91,8 @@
         <div class="card-body">
           <ul class="list-group list-group-flush">
             <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let siteAccess of person.siteAccess">
-
               <span>{{ siteAccess.site.name }}</span>
-              <span class='d-flex justify-content-between align-items-center'>
-                <span class='d-inline-flex align-items-baseline ml-2'>Start
-                  <prime-datepicker size='mini' dateFormat="yyyy/mm/dd" [disabled]="!editable" [(date)]="siteAccess.startDate" class='ml-1'></prime-datepicker>
-                </span>
-
-                <span class='d-inline-flex align-items-baseline ml-2'>End
-                  <prime-datepicker size='mini' dateFormat="yyyy/mm/dd" [disabled]="!editable"  [date]="siteAccess.endDate" (dateChange)="onSetEndDate($event, siteAccess)" class='ml-1'></prime-datepicker>
-                </span>
-
-                <!-- TODO: Get values programmatically, and save!
-                  SiteAccess.status should be updated, just need to add a
-                  (change) to the select and do the logic in the controller -->
-                <select *ngIf="shouldShowreasonForDeactivation[siteAccess.objectId]" [@growHorizontal] [disabled]="!editable"
-                  name="reasonForDeactivation" id="reasonForDeactivation"
-                  class='mx-2'>
-                  <option value="noLongerEmployee">No Longer employee</option>
-                  <option value="contractExpiration">Contract Expiration</option>
-                  <option value="tempAccess">Temp Access</option>
-                  <option value="changedLocation">Changed Location</option>
-                </select>
-
-                <!-- TODO: Move these to attribtues on the SiteAccess object, and then randomly generate them in DummyDataService. -->
-                <span class='d-flex flex-column px-2'>
-                  <span class='nowrap'>Med Hist</span>
-                  <span class='nowrap'>Daytime</span>
-                </span>
-
-                <prime-pill-badge
-                  class='ml-2'
-                  *ngIf="siteAccess.alert.status === 'Expired' || siteAccess.alert.status === 'Active'; else iconOnly"
-                  [alerts]="[siteAccess.alert]">
-                </prime-pill-badge>
-
-                <ng-template #iconOnly>
-                  <prime-pill-badge
-                    class='ml-2'
-                    iconOnly=true
-                    [alerts]="[siteAccess.alert]">
-                  </prime-pill-badge>
-                </ng-template>
-
-              </span>
-
+              <ng-container *ngTemplateOutlet="enrollmentDetails;context:{siteAccess: siteAccess}"></ng-container>
             </li>
           </ul>
         </div>
@@ -147,12 +104,111 @@
 <!-- TODO: Flush out Site Modal -->
 <ng-template #siteModal>
   <div class="modal-header">
-      <h4 class="modal-title">Site site site</h4>
-      <!-- <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <span aria-hidden="true">&times;</span>
-      </button> -->
+    <h4 class="modal-title">{{collection.name}}</h4>
+
+
+    <form class="form-inline">
+      <select class="form-control" [value]="site.objectId"
+        (change)="changeSite($event.target.value, $event)">
+        <option *ngFor="let memberSite of collection.members" value="{{memberSite.objectId}}">
+          {{memberSite.name}}
+        </option>
+      </select>
+    </form>
+
+    <button class="btn btn-default pull-right" *ngIf="!editable" (click)="edit()">Edit</button>
+
+    <span *ngIf="editable">
+        <button class="btn btn-primary pull-right mx-2" (click)="save()">Save</button>
+        <button class="btn btn-default pull-right mx-2" (click)="discard()">Discard</button>
+    </span>
+
   </div>
   <div class="modal-body">
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit alias possimus labore sapiente, et corporis qui voluptates aut totam nesciunt minima fugit eveniet praesentium beatae quia ab, a quidem. Earum?</p>
+      <div class="container">
+        <div class="form-row form-group">
+          <label class='col-2 col-form-label' for="address">Address</label>
+          <div class="col-sm-9 col-xs-12">
+            <input type="text" [disabled]="!editable" class="form-control" id="address" name="address" [(ngModel)]="site.address.street">
+          </div>
+        </div>
+
+        <div class="form-row form-group">
+          <label class='col-2 col-form-label' for="siteType">Site Type</label>
+          <div class="col-sm-3 col-xs-12">
+            <input type="text" [disabled]="!editable" class="form-control" id="siteType" name="siteType" [(ngModel)]="site.siteType">
+          </div>
+
+          <label class='col-1 offset-sm-1 col-form-label' for="vendor">Vendor</label>
+          <div class="col-sm-4 col-xs-12">
+            <input type="text" [disabled]="!editable" class="form-control" id="vendor" name="vendor" [(ngModel)]="site.vendor">
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="card">
+          <div class="card-header">
+            Enrollments ( {{site.siteAccess.length}} )
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let siteAccess of site.siteAccess">
+                  <span>{{siteAccess.person.name}}</span>
+                  <ng-container *ngTemplateOutlet="enrollmentDetails;context:{siteAccess: siteAccess}"></ng-container>
+                </li>
+            </ul>
+          </div>
+      </div>
+
   </div>
+</ng-template>
+
+
+<!-- This template is used in both modals and is identical.  -->
+<ng-template #enrollmentDetails let-siteAccess="siteAccess">
+    <span class='d-flex justify-content-between align-items-center'>
+      <span class='d-inline-flex align-items-baseline ml-2'>Start
+        <prime-datepicker size='mini' dateFormat="yyyy/mm/dd" [disabled]="!editable" [(date)]="siteAccess.startDate" class='ml-1'></prime-datepicker>
+      </span>
+
+      <span class='d-inline-flex align-items-baseline ml-2'>End
+        <prime-datepicker size='mini' dateFormat="yyyy/mm/dd" [disabled]="!editable"  [date]="siteAccess.endDate" (dateChange)="onSetEndDate($event, siteAccess)" class='ml-1'></prime-datepicker>
+      </span>
+
+      <!-- TODO: Get values programmatically, and save!
+        SiteAccess.status should be updated, just need to add a
+        (change) to the select and do the logic in the controller -->
+      <select *ngIf="shouldShowreasonForDeactivation[siteAccess.objectId]" [@growHorizontal] [disabled]="!editable"
+        name="reasonForDeactivation" id="reasonForDeactivation"
+        class='mx-2'>
+        <option value="noLongerEmployee">No Longer employee</option>
+        <option value="contractExpiration">Contract Expiration</option>
+        <option value="tempAccess">Temp Access</option>
+        <option value="changedLocation">Changed Location</option>
+      </select>
+
+      <!-- TODO: Move these to attribtues on the SiteAccess object, and then randomly generate them in DummyDataService. -->
+      <span class='d-flex flex-column px-2'>
+        <span class='nowrap'>Med Hist</span>
+        <span class='nowrap'>Daytime</span>
+      </span>
+
+      <prime-pill-badge
+        class='ml-2'
+        *ngIf="siteAccess.alert.status === 'Expired' || siteAccess.alert.status === 'Active'; else iconOnly"
+        [alerts]="[siteAccess.alert]">
+      </prime-pill-badge>
+
+      <ng-template #iconOnly>
+        <prime-pill-badge
+          class='ml-2'
+          iconOnly=true
+          [alerts]="[siteAccess.alert]">
+        </prime-pill-badge>
+      </ng-template>
+
+    </span>
+
 </ng-template>

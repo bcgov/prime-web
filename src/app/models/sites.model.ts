@@ -12,6 +12,8 @@ export class Site extends Base {
   name: string;
   address: Address;
   siteAccess: SiteAccess[];
+  siteType: string; //TODO: Change to Enum once we have all the types
+  vendor: string;
 
 
   constructor() {

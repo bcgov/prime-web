@@ -16,6 +16,8 @@ import { EnrollmentProgressRowComponent } from './components/enrollment-progress
 import { MillerColumnsComponent } from './components/miller-columns/miller-columns.component';
 import { FormsModule } from '@angular/forms';
 import { UserEnrollmentComponent } from './pages/user-enrollment/user-enrollment.component';
+import { SiteAccessWidgetsComponent } from './components/site-access-widgets/site-access-widgets.component';
+import { TooltipModule } from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
@@ -24,6 +26,7 @@ import { UserEnrollmentComponent } from './pages/user-enrollment/user-enrollment
     NgxChartsModule,
     CoreModule,
     FormsModule,
+    TooltipModule.forRoot()
   ],
   providers: [],
   declarations: [
@@ -37,7 +40,8 @@ import { UserEnrollmentComponent } from './pages/user-enrollment/user-enrollment
     EnrollmentListComponent,
     EnrollmentRowComponent,
     EnrollmentProgressRowComponent,
-    MillerColumnsComponent
+    MillerColumnsComponent,
+    SiteAccessWidgetsComponent
   ],
   exports: [
     InfoButtonComponent,

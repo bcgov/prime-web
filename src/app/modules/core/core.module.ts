@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { AlertComponent } from '../../core/alert/alert.component';
 import { PillBadgeComponent } from '../../core/pill-badge/pill-badge.component';
 import { DashboardBarComponent } from '../../core/dashboard-bar/dashboard-bar.component';
-import { SiteAccessWidgetsComponent } from '../../core/site-access-widgets/site-access-widgets.component';
 import { AlertModule, TooltipModule, ProgressbarModule } from 'ngx-bootstrap';
 import { AddUserButtonComponent } from '../../core/add-user-button/add-user-button.component';
 import { MiniProgressBarComponent } from '../../core/mini-progress-bar/mini-progress-bar.component';
@@ -22,7 +21,6 @@ const componentList = [
   AlertComponent,
   PillBadgeComponent,
   DashboardBarComponent,
-  SiteAccessWidgetsComponent,
   AddUserButtonComponent,
   MiniProgressBarComponent,
   ExpandingSearchComponent,

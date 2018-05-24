@@ -23,7 +23,8 @@ export class DummyDataService {
   createPeople(count): Person[] {
     const result: Person[] = [];
     const today = new Date();
-    const future = new Date(2019, 1, 0);
+    /** We want nearFuture show that they show up in Upcoming Renewals */
+    const nearFuture =  new Date(today.getFullYear(), today.getMonth() + 4, today.getDate())
 
     for (let index = 0; index < count; index++) {
       const person = new Person();
@@ -31,15 +32,9 @@ export class DummyDataService {
       person.dateOfBirth = this.generateDateOfBirth();
       person.phone = '250-555-5555';
       person.phoneSecondary = '604-555-5555';
-      person.address = {
-        street: '123 Main St',
-        postal: 'V9R 2VR',
-        country: "Canada",
-        province: "British Columbia",
-        city: "Victoria"
-      }
+      person.address = this.generateAddress();
       person.email = person.firstName[0].toLowerCase() + person.lastName.toLowerCase() + "@gmail.com";
-      person.renewalDate =  this.randomDate(today, future);
+      person.renewalDate =  this.randomDate(today, nearFuture);
       result.push(person);
     }
 
@@ -51,6 +46,9 @@ export class DummyDataService {
     const result: Site[] = [];
     for (let index = 0; index < count; index++) {
       const site = new Site();
+      site.address = this.generateAddress();
+      site.siteType = this.getRandomElFromArray(['Pharmacy', 'Hospital'])
+      site.vendor = this.getRandomElFromArray(['Intellisense', 'Ultracorp', 'Mediware', 'HealthInc']);
       site.name = this.generateSiteName(name);
       result.push(site);
     }
@@ -90,8 +88,7 @@ export class DummyDataService {
     SA.site = site;
     SA.person = person;
 
-    // Random Date. Currently we're only interested in "upcoming renewals", so
-    // they expire soon.
+    // End date is at most 4mo in future
     const today = new Date();
     const sixMonthsFuture =  new Date(today.getFullYear(), today.getMonth() + 4, today.getDate())
     const endDate = this.randomDate(today, sixMonthsFuture)
@@ -177,6 +174,20 @@ export class DummyDataService {
     const today = new Date();
     const pastDate = new Date(1970, 1, 0);
     return this.randomDate(today, pastDate);
+  }
+
+  private generateAddress(): Address {
+    const streetNames = ['Kings', 'Main', 'Fort', 'Yates', 'Douglas']
+
+    let street = `${Math.ceil(Math.random() * 8000)} ${this.getRandomElFromArray(streetNames)} St.`;
+
+    return {
+      street: street,
+      postal: 'V9R 2VR',
+      country: "Canada",
+      province: "British Columbia",
+      city: "Victoria"
+    }
   }
 
   private randomDate(start: Date, end: Date): Date {

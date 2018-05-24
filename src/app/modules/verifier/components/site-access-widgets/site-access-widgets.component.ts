@@ -1,7 +1,9 @@
 import { Component, OnInit, Input, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
-import { SiteAccess, SiteAccessProgressSteps } from '../../models/sites.model';
-import { EnrollmentStatus } from '../../models/prime.models';
-import { VerifierService } from '../../services/verifier.service';
+import { SiteAccess, SiteAccessProgressSteps } from '../../../../models/sites.model';
+import { EnrollmentStatus, Person } from '../../../../models/prime.models';
+import { VerifierService } from '../../../../services/verifier.service';
+import * as moment from "moment";
+
 @Component({
   selector: 'prime-site-access-widgets',
   templateUrl: './site-access-widgets.component.html',
@@ -9,7 +11,8 @@ import { VerifierService } from '../../services/verifier.service';
   encapsulation: ViewEncapsulation.None
 })
 export class SiteAccessWidgetsComponent implements OnInit {
-  @Input() data: SiteAccess[] = [];
+  @Input() siteAccess: SiteAccess[] = [];
+  @Input() people: Person[] = [];
   public renewalDateCutoff: number = 30;
   public applicationProgressSelector: SiteAccessProgressSteps;
   public pieChartData;
@@ -47,23 +50,24 @@ export class SiteAccessWidgetsComponent implements OnInit {
   }
 
   //days: 30/60/90
+  // TODO: CHange this so it filters on PEOPLE RENEWAL DATE! Not SA daysUntilExpiry
   upcomingRenewals(days: number){
     // Copy the array so our sorting doesn't mess up other places
-    let result: SiteAccess[] = this.data.concat();
+    let people = this.people.concat();
 
-    // Expiring soon are at beginning of array
-    result.sort((a, b) => {
-      return a.endDate.getTime() - b.endDate.getTime()
-    })
+    // Expiring soon = Beginning of array
+    people.sort((a, b) => {
+      return a.renewalDate.getTime() - b.renewalDate.getTime();
+    });
 
-    return result.filter(sa => sa.daysUntilExpiry <= days);
+    return people.filter(person => person.daysUntilRenewalDate <= days);
   }
 
   applicationProgress(){
     let selection: SiteAccessProgressSteps = this.applicationProgressSelector;
 
     // Copy the array so our sorting doesn't mess up other places
-    let result: SiteAccess[] = this.data.concat();
+    let result: SiteAccess[] = this.siteAccess.concat();
     // Filter to only show 'problem' results, to match enrollment list
     result = result.filter(x => x.alert);
 
@@ -74,7 +78,7 @@ export class SiteAccessWidgetsComponent implements OnInit {
     return this.EnrollmentStatus.map(status => {
       return {
         name: status,
-        value: this.data.filter(sa => sa.status === status).length
+        value: this.siteAccess.filter(sa => sa.status === status).length
       }
     })
   }
@@ -82,6 +86,10 @@ export class SiteAccessWidgetsComponent implements OnInit {
   onPieChartClick($event){
     // console.log('onPieChartClick', $event);
     this.verifierService.enrollmentViewTypeSelector = $event.name;
+  }
+
+  formatDate(date: Date){
+    return moment(date).format('DD/MM/YYYY');
   }
 
 
