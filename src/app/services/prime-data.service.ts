@@ -90,9 +90,14 @@ export class PrimeDataService {
     return result;
   }
 
+  //TODO: Change to search on objectId? because if object is cloned...
   findCollectionFromSite(site: Site): Collection[] {;
     return this.collections.map(collection => {
-      let exists = collection.members.indexOf(site) >= 0;
+      // Lookup based on objectId, so it works even if the Site is cloned from original
+      let exists = collection.members
+        .map(site => site.objectId)
+        .includes(site.objectId)
+
       if (exists) return collection;
     }).filter(x => x); //Remove undefined
   }
@@ -154,6 +159,10 @@ export class PrimeDataService {
 
   findSiteByObjectId(objectId: string): Site{
     return this.sites.find(site => site.objectId === objectId);
+  }
+
+  findCollectionByObjectId(objectId: string): Collection{
+    return this.collections.find(col => col.objectId === objectId);
   }
 
   private filterUnique(x, i, a){

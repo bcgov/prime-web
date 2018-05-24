@@ -5,6 +5,7 @@ import { Person } from '../../../../models/prime.models';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { cloneDeep } from 'lodash';
 import { growHorizontal } from '../../../../animations/animations';
+import { Collection } from '../../../../models/collections.model';
 
 @Component({
   selector: 'prime-info-button',
@@ -36,6 +37,27 @@ export class InfoButtonComponent implements OnInit {
    */
   public site: Site;
 
+  /**
+   * Only for use in the siteModal. It is NOT a clone, but the actual object,
+   * which is fine for now because there's no editting of the collection object.
+   * If you find yourself changing the properties of the collection, stop, and
+   * make it a clone of the orignal and update the original in the save()
+   * function as appropriate.
+   *
+   * @readonly
+   * @type {Collection}
+   * @memberof InfoButtonComponent
+   */
+  get collection(): Collection {
+    if (!this.site){
+      throw "Cannot access Collection before having Site defined";
+    }
+
+    // For now, we assume there's only one collection for the site. May need to
+    // change in future if there are multiple collections per site.
+    return this.dataService.findCollectionFromSite(this.site)[0];
+  }
+
   constructor(private dataService: PrimeDataService, private modalService: BsModalService) { }
 
   ngOnInit() {
@@ -54,7 +76,7 @@ export class InfoButtonComponent implements OnInit {
   }
 
   discard(){
-    let restore = this.lookupObjectId(this.person.objectId);
+    let restore = this.lookupObjectId(this.target.objectId);
     if (!Site.isSiteGuard(restore)){
       this.person = restore;
     }
@@ -65,10 +87,9 @@ export class InfoButtonComponent implements OnInit {
     this.doneEditting();
   }
 
-  // TODO: Test! Think it's broken now.
   save(){
-
-    let source = this.lookupObjectId(this.person.objectId);
+    // The original object we want to update
+    let source = this.lookupObjectId(this.target.objectId);
 
     if (!Site.isSiteGuard(source)){
       source.name = this.person.name;
@@ -80,9 +101,9 @@ export class InfoButtonComponent implements OnInit {
       source.siteAccess = this.person.siteAccess;
     }
     else {
-      // TODO: Save all Site attributes based on this.site
-      console.log('todo');
-
+      source.vendor = this.site.vendor;
+      source.address.street = this.site.address.street;
+      source.siteType = this.site.siteType;
     }
 
     this.doneEditting();
@@ -90,7 +111,7 @@ export class InfoButtonComponent implements OnInit {
 
   doneEditting(){
     this.editable = false;
-    this.loadTarget(this.person.objectId);
+    this.loadTarget(this.target.objectId);
   }
 
   public shouldShowreasonForDeactivation: boolean[] = [];
@@ -99,8 +120,12 @@ export class InfoButtonComponent implements OnInit {
     siteAccess.endDate = evt;
   }
 
+  changeSite(siteObjectId, event){
+    this.loadTarget(siteObjectId)
+  }
+
   private loadTarget(objectId){
-    this.target = this.lookupObjectId(this.targetId);
+    this.target = this.lookupObjectId(objectId);
 
     if (Site.isSiteGuard(this.target)){
       this.targetType = TargetType.Site;
@@ -117,6 +142,8 @@ export class InfoButtonComponent implements OnInit {
     if (person) return person;
     let site = this.dataService.findSiteByObjectId(objectId);
     if (site) return site;
+    let collection = this.dataService.findCollectionByObjectId(objectId);
+    if (collection) return collection.members[0];
 
     throw "Unable to find objectId. Double check it's valid.";
   }
