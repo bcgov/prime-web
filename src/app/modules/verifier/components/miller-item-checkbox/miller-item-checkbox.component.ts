@@ -52,14 +52,8 @@ export class MillerItemCheckboxComponent extends Base implements OnInit {
       this.deleteInitiatedSiteAccess(item, sa);
     }
 
-
     item.checked = !item.checked;
-
-    console.log(this._allPendingChanges);
     this.onPendingChanges.emit(this._allPendingChanges);
-    // if (this._allPendingChanges.length) {
-    //   this.onPendingChanges.emit(item);
-    // }
 
     if (event.target.type !== 'checkbox'){
       // Stop the event from double-firing.
