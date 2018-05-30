@@ -1,4 +1,4 @@
-<div class="miller-header d-flex justify-content-between p-3 my-3">
+<div *ngIf="config" class="miller-header d-flex justify-content-between p-3 my-3">
   <span><a [routerLink]="backLink()">Dashboard</a> /
     <strong *ngIf="IS_PEOPLE_TABLE">User Enrollment</strong>
     <strong *ngIf="!IS_PEOPLE_TABLE">Site Enrollment</strong>

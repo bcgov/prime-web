@@ -25,6 +25,7 @@ export class PillBadgeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    if (!this.alerts || !this.alerts.length){ return}
     this.count = this.alerts.length;
 
     // Process Array

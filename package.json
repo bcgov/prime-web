@@ -5,9 +5,9 @@
   "scripts": {
     "ng": "ng",
     "start": "npm run dev",
-    "dev": "ng serve -o",
+    "dev": "ng serve --poll=1000",
     "build": "ng build --prod",
-    "test": "ng test",
+    "test": "ng test -sm=false --poll=1000",
     "lint": "ng lint",
     "e2e": "ng e2e --environment prod",
     "postinstall": "npm run build"

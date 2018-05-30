@@ -24,6 +24,7 @@ export class EnrollmentRowComponent extends Base implements OnInit {
   }
 
   ngOnInit() {
+    if (!this.rowData ) {return}
     this.siteAccessRequiringAttention.map(x => x.open = false);
   }
 
@@ -60,7 +61,7 @@ export class EnrollmentRowComponent extends Base implements OnInit {
   /** This function is responsible for generating site access row titles depending on dashboard type */
   get siteAccessRequiringAttention(): any[] {
 
-    if ( !this.rowData.expandableRows ){
+    if ( !this.rowData || !this.rowData.expandableRows ){
       return [];
     }
 

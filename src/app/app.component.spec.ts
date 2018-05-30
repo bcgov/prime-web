@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { ProgressBarComponent } from './core/progress-bar/progress-bar.component';
 import { ApplicantDataService } from './services/applicant-data.service';
 import { DummyDataService } from './services/dummy-data.service';
+import {UserService} from './services/user.service';
+import {PrimeDataService} from './services/prime-data.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -17,7 +19,9 @@ describe('AppComponent', () => {
       ],
       providers: [
         ApplicantDataService,
-        DummyDataService
+        DummyDataService,
+        UserService,
+        PrimeDataService
       ],
       imports: [RouterTestingModule]
     }).compileComponents();

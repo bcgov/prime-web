@@ -70,9 +70,10 @@ export class MillerColumnsComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
+    if (!this.config) {return}
     // Modify column ordering based on config
-    if (this.config.options &&
-        this.config.options.primaryColumn &&
+      if (this.config.options &&
+       this.config.options.primaryColumn &&
         this.config.options.primaryColumn.toLowerCase() === "people"){
           this.columnOrder = ['People', 'Collections', 'Sites'];
     }
@@ -88,7 +89,7 @@ export class MillerColumnsComponent implements OnInit {
 
 
     // Check if there's a pre-selected id in the config
-    if (this.config.options && this.config.options.preselectObjectId){
+      if (this.config.options && this.config.options.preselectObjectId){
       const preselectObjectId = this.config.options.preselectObjectId;
       // Selected item will be in first column, regardless of primaryColumn
       const preselectItem = this._columns[0].items
