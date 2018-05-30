@@ -9,7 +9,7 @@ import { Address } from './addresses.model';
  * Information about person
  */
 export class Person extends Base {
-  userId: PrimeUserID; //human-readable, like a user-name - "JSmith"
+  primeUserId: PrimeUserID; //human-readable, like a user-name - "JSmith"
 
   firstName: string;
   middleName: string;
