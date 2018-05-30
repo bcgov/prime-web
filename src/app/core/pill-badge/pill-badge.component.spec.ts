@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PillBadgeComponent } from './pill-badge.component';
+import {TooltipModule} from 'ngx-bootstrap';
 
 describe('PillBadgeComponent', () => {
   let component: PillBadgeComponent;
@@ -8,7 +9,8 @@ describe('PillBadgeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PillBadgeComponent ]
+      declarations: [ PillBadgeComponent],
+      imports: [TooltipModule.forRoot()]
     })
     .compileComponents();
   }));

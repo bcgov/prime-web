@@ -36,6 +36,7 @@ import { EmailValidationComponent } from './validation/email-validation/email-va
 import { PhoneValidationComponent } from './validation/phone-validation/phone-validation.component';
 import { PrimeRequiredDirective } from './validation/prime-required.directive';
 import { RequiredValidationErrorsComponent } from './validation/required-validation/required-validation.component';
+import {TooltipModule} from 'ngx-bootstrap';
 
 
 @NgModule({
