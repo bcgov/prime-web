@@ -28,8 +28,6 @@ header {
     font-size: 30px;
     font-weight: bold;
     color: #fff;
-    // top: 7px;
-    // position: relative;
     white-space: nowrap;
 
     //Bootstrap 3 to 4: Using breakpoint mixin.
@@ -41,4 +39,14 @@ header {
 
 header .nav-link {
   color: white !important;
+}
+
+.separator:after {
+  content: " ";
+  background-color: #ffffff33;
+  height: 100%;
+  min-height: 100%;
+  display: block;
+  width: 3px;
+  margin: 0 1em;
 }
