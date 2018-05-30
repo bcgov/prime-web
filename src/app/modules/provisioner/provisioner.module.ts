@@ -4,6 +4,8 @@ import { ProvisionerDashboardComponent } from './pages/provisioner-dashboard/pro
 import { CoreModule } from '../core/core.module';
 import { ProvisionerRoutingModule } from './provisioner-routing.modules';
 import { VerifierModule } from '../verifier/verifier.module';
+import { ProvisionerDetailsComponent } from './pages/provisioner-details/provisioner-details.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -11,9 +13,11 @@ import { VerifierModule } from '../verifier/verifier.module';
     CoreModule,
     ProvisionerRoutingModule,
     VerifierModule,
+    FormsModule
   ],
   declarations: [
-    ProvisionerDashboardComponent
+    ProvisionerDashboardComponent,
+    ProvisionerDetailsComponent
   ]
 })
 export class ProvisionerModule { }
