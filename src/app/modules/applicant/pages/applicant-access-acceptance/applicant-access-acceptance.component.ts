@@ -23,5 +23,10 @@ export class ApplicantAccessAcceptanceComponent implements OnInit {
   ngOnInit() {
   }
 
+
+  shouldDisable() {
+    // Are all checkboxes checked? Loop over accessAceptance and check isAccepted
+    return false;
+  }
 }
 
