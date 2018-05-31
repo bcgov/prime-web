@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { DummyDataService } from '../../../../services/dummy-data.service';
 import { Person } from '../../../../models/person.model';
+import {Address} from '../../../../models/addresses.model';
 
 @Component({
   selector: 'prime-applicant-contact',
@@ -15,7 +16,7 @@ export class ApplicantContactComponent implements OnInit {
 
   ngOnInit() {
     // DEV ONLY! TODO: Remove.
-    // this.applicant = this.dummyDataService.createPeople(1)[0];
+    this.primeDataService.user = this.dummyDataService.createPeople(1)[0];
   }
 
   get applicant(): Person {
