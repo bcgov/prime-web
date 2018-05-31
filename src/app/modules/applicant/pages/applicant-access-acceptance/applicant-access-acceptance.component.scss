@@ -1,0 +1,19 @@
+textarea {
+  background-color: lightgrey;
+  width: 92%;
+  height: 7em;
+  vertical-align:middle;
+}
+
+
+input[type="checkbox"] {
+  padding-right: 1.5em;
+  vertical-align:middle;
+  position:relative;
+  white-space: nowrap;
+}
+
+.myCheckbox {
+  width: 20px;
+  height: 20px;
+}
