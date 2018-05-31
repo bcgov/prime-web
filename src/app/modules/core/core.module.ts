@@ -15,8 +15,11 @@ import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 import { PrimeDataModule } from '../prime-data/prime-data.module';
 // import { InfoButtonComponent } from '../verifier/components/user-info-button/user-info-button.component';
 import { PrimeToggleComponent } from '../../core/toggle/toggle.component';
+import { CoreBreadcrumbComponent } from './components/core-breadcrumb/core-breadcrumb.component';
 
-
+/** A list of all components that we want to both include and export. Since
+ * CoreModule just exports components for other modules the list is pretty much
+ * identical between Declarations and Exports */
 const componentList = [
   AlertComponent,
   PillBadgeComponent,
@@ -25,7 +28,8 @@ const componentList = [
   MiniProgressBarComponent,
   ExpandingSearchComponent,
   DatepickerComponent,
-  PrimeToggleComponent
+  PrimeToggleComponent,
+  CoreBreadcrumbComponent
 ]
 
 @NgModule({
@@ -40,7 +44,7 @@ const componentList = [
     NgxMyDatePickerModule.forRoot(),
   ],
   declarations: [
-    componentList
+    componentList,
   ],
   exports: [
     componentList
