@@ -18,6 +18,8 @@ export class ApplicantAccessAcceptanceComponent implements OnInit {
 
   ];
 
+  canContinue: Boolean = false;
+
   constructor() { }
 
   ngOnInit() {
