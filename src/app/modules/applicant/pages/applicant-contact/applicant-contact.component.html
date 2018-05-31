@@ -19,7 +19,7 @@
           Last Name
         </label>
         <div class="col-sm-9">
-          <input type="text" class="form-control input-readonly" id="lastName" name="lastName" [ngModel]="applicant.lastName" disabled>
+          <input type="text" class="form-control input-readonly" id="lastName" name="lastName" [ngModel]="applicant?.lastName" disabled>
         </div>
       </div>
 
@@ -28,7 +28,7 @@
           Middle Name
         </label>
         <div class="col-sm-9">
-          <input type="text" class="form-control" id="middleName" name="middleName" [ngModel]="applicant.middleName" disabled>
+          <input type="text" class="form-control" id="middleName" name="middleName" [ngModel]="applicant?.middleName" disabled>
         </div>
       </div>
 
@@ -37,7 +37,7 @@
           First Name
         </label>
         <div class="col-sm-9">
-          <input type="text" class="form-control" id="firstName" name="firstName" [ngModel]="applicant.firstName" disabled>
+          <input type="text" class="form-control" id="firstName" name="firstName" [ngModel]="applicant?.firstName" disabled>
         </div>
       </div>
 
@@ -49,7 +49,7 @@
           Address
         </label>
         <div class="col-sm-9">
-          <input type="text" class="form-control" id="address" name="address" [ngModel]="applicant.address.street" disabled>
+          <input type="text" class="form-control" id="address" name="address" [ngModel]="applicant.address?.street" disabled>
         </div>
       </div>
 
@@ -59,7 +59,7 @@
           Country
         </label>
         <div class="col-sm-9">
-          <input type="text" class="form-control" id="country" name="country" [ngModel]="applicant.address.country" disabled>
+          <input type="text" class="form-control" id="country" name="country" [ngModel]="applicant.address?.country" disabled>
         </div>
       </div>
 
@@ -68,7 +68,7 @@
           Province
         </label>
         <div class="col-sm-9">
-          <input type="text" class="form-control" id="province" name="province" [ngModel]="applicant.address.province" disabled>
+          <input type="text" class="form-control" id="province" name="province" [ngModel]="applicant.address?.province" disabled>
         </div>
       </div>
 
@@ -78,7 +78,7 @@
           City
         </label>
         <div class="col-sm-9">
-          <input type="text" class="form-control" id="city" name="city" [ngModel]="applicant.address.city" disabled>
+          <input type="text" class="form-control" id="city" name="city" [ngModel]="applicant.address?.city" disabled>
         </div>
       </div>
 
@@ -99,7 +99,7 @@
           Postal Code
         </label>
         <div class="col-sm-9">
-          <input type="text" class="form-control" id="postal" name="postal" [ngModel]="applicant.address.postal" disabled>
+          <input type="text" class="form-control" id="postal" name="postal" [ngModel]="applicant.address?.postal" disabled>
         </div>
       </div>
     </div>
@@ -167,7 +167,7 @@
         </label>
         <div class="col-sm-9">
           <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control" id="mailAdress" name="mailAddress" [(ngModel)]="applicant.mailAddress.street">
-          <input *ngIf = "applicant.useRegAddress" type="text" class="form-control" id="mailAdress" name="mailAddress" [ngModel]="applicant.address.street" (ngModelChange)="applicant.updateStreet($event)">
+          <input *ngIf = "applicant.useRegAddress" type="text" class="form-control" id="mailAdress" name="mailAddress" [ngModel]="applicant.address?.street" (ngModelChange)="applicant.updateStreet($event)">
         </div>
       </div>
 
@@ -177,7 +177,7 @@
         </label>
         <div class="col-sm-9">
           <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control" id="mailProvince" name="mailProvince" [(ngModel)]="applicant.mailAddress.province">
-          <input *ngIf = "applicant.useRegAddress" type="text" class="form-control" id="mailProvince" name="mailProvince" [ngModel]="applicant.address.province" (ngModelChange)="applicant.updateProvince($event)">
+          <input *ngIf = "applicant.useRegAddress" type="text" class="form-control" id="mailProvince" name="mailProvince" [ngModel]="applicant.address?.province" (ngModelChange)="applicant.updateProvince($event)">
         </div>
       </div>
     </div>
@@ -189,7 +189,7 @@
         </label>
         <div class="col-sm-9">
           <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control" id="mailPostal" name="mailPostal" [(ngModel)]="applicant.mailAddress.postal">
-          <input *ngIf = "applicant.useRegAddress" type="text" class="form-control" id="mailPostal" name="mailPostal" [ngModel]="applicant.address.postal" (ngModelChange)="applicant.updatePostal($event)">
+          <input *ngIf = "applicant.useRegAddress" type="text" class="form-control" id="mailPostal" name="mailPostal" [ngModel]="applicant.address?.postal" (ngModelChange)="applicant.updatePostal($event)">
         </div>
       </div>
 
@@ -199,7 +199,7 @@
         </label>
         <div class="col-sm-9">
           <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control" id="mailCity" name="mailCity" [(ngModel)]="applicant.mailAddress.city">
-          <input *ngIf = "applicant.useRegAddress" type="text" class="form-control" id="mailCity" name="mailCity" [ngModel]="applicant.address.city" (ngModelChange)="applicant.updateCity($event)">
+          <input *ngIf = "applicant.useRegAddress" type="text" class="form-control" id="mailCity" name="mailCity" [ngModel]="applicant.address?.city" (ngModelChange)="applicant.updateCity($event)">
         </div>
       </div>
     </div>
@@ -211,7 +211,7 @@
         </label>
         <div class="col-sm-9">
           <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control" id="mailCountry" name="mailCountry" [(ngModel)]="applicant.mailAddress.country">
-          <input *ngIf = "applicant.useRegAddress" type="text" class="form-control" id="mailCountry" name="mailCountry" [ngModel]="applicant.address.country" (ngModelChange)="applicant.updateCountry($event)">
+          <input *ngIf = "applicant.useRegAddress" type="text" class="form-control" id="mailCountry" name="mailCountry" [ngModel]="applicant.address?.country" (ngModelChange)="applicant.updateCountry($event)">
         </div>
       </div>
     </div>
