@@ -5,7 +5,7 @@ import { ProvisionerDetailsComponent } from './pages/provisioner-details/provisi
 
 
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: 'dashboard',
     component: ProvisionerDashboardComponent,
