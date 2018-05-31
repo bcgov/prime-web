@@ -83,27 +83,25 @@ export class DatepickerComponent implements OnInit {
 
 
       this.model = {
-        date: this.date,
+        date: date,
         formatted: this.formatDate(date, this.dateFormat, this.monthLabels)
       }
     }
 
   }
 
-  onDateChanged(event: IMyDateModel): void {
-
+  onDateChanged(event): void {
 
     if (event.date) {
-      let date = this.isDate(event.date) ? this.convertDateToSimpleDate(event.date) : event.date;
-
+      // Always emit a Date, convert if necessary
+      let date = this.isDate(event.date) ? event.date : this.convertSimpleDateToDate(event.date);
 
       // User has cleared the date, so we want to return null.
       if (date.year === 0 && date.month === 0 && date.day === 0) {
         this.dateChange.emit(null);
       }
       else {
-        // Emit out same type they put in
-        this.dateChange.emit(event.date);
+        this.dateChange.emit(date);
       }
     }
   }

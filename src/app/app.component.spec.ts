@@ -9,13 +9,15 @@ import { ApplicantDataService } from './services/applicant-data.service';
 import { DummyDataService } from './services/dummy-data.service';
 import {UserService} from './services/user.service';
 import {PrimeDataService} from './services/prime-data.service';
+import { PrimeHeaderComponent } from './modules/header-footer/prime-header/prime-header.component';
+import { HeaderFooterModule } from './modules/header-footer/header-footer.module';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
-        ProgressBarComponent
+        ProgressBarComponent,
       ],
       providers: [
         ApplicantDataService,
@@ -23,7 +25,7 @@ describe('AppComponent', () => {
         UserService,
         PrimeDataService
       ],
-      imports: [RouterTestingModule]
+      imports: [RouterTestingModule, HeaderFooterModule]
     }).compileComponents();
   }));
 
@@ -37,6 +39,6 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('span.title').textContent).toContain('PRIME — Applicant Enrollment');
+    expect(compiled.querySelector('span.title').textContent).toContain('PRIME');
   }));
 });

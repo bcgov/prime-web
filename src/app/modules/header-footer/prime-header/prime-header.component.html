@@ -1,0 +1,40 @@
+<header>
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+    <div class='d-flex'>
+      <a href="http://www2.gov.bc.ca/" tabindex="-1">
+        <img class="header-logo"
+             tabindex="-1" alt="B.C. Government Logo"
+             src="assets/gov3_bc_logo.png">
+      </a>
+      <span class="title px-2 mt-1" role="banner">PRIME</span>
+    </div>
+    <div class='d-flex'>
+
+      <!--  For these links make sure that the routerLink is identical to the value passed in routeIsActive() -->
+      <a class="btn btn-outline-secondary mx-2" routerLink="/verifier" [ngClass]="{active: routeIsActive('/verifier')}" role="button">
+        V
+      </a>
+      <a class="btn btn-outline-secondary mx-2" routerLink="/applicant" [ngClass]="{active: routeIsActive('/applicant')}" role="button">
+        A
+      </a>
+      <a class="btn btn-outline-secondary mx-2" routerLink="/provisioner" [ngClass]="{active: routeIsActive('/provisioner')}" role="button">
+        P
+      </a>
+
+      <div class="separator"></div>
+
+
+
+      <a href="#" class='btn btn-outline-info mx-2' role="button">
+          <i class="fa fa-comment" aria-hidden="true"></i>
+      </a>
+      <a href="#" class='btn btn-outline-info mx-2' role="button">
+          <i class="fa fa-question-circle" aria-hidden="true"></i>
+      </a>
+      <a href="#" class='btn btn-outline-info mx-2' role="button">
+          <i class="fa fa-user" aria-hidden="true"></i>
+      </a>
+
+    </div>
+  </div>
+</header>
