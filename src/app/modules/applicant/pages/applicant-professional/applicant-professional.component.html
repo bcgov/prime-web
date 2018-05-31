@@ -1,15 +1,68 @@
 <prime-applicant-breadcrumbs
   pageName="Professional"
-  nextPageLink="/applicant/self-declaration"
+  nextPageLink="/applicant/access-acceptance"
   previousPageLink="/applicant/contact">
 </prime-applicant-breadcrumbs>
 
-<label>
-  Do you have a college certification?
-  <prime-toggle [(data)]="applicant.hasCollege"></prime-toggle>
-</label>
+<div class="row">
+  <div class="col-sm-6">
+    Do you have a college certification?
+  </div>
+  <div class="col-sm-1">
+    <prime-toggle [(data)]="applicant.hasCollege"></prime-toggle>
+  </div>
+</div>
 
-<div *ngIf="applicant.hasCollege" class='d-flex justify-content-between border p-3'>
+
+<div *ngIf="applicant.hasCollege === true" class='d-flex justify-content-between border p-3'>
+  <div class="row">
+    <div class="col d-flex flex-column">
+      <label for="college">College Certification</label>
+      <!-- TODO: Get values programmatically -->
+      <select name="college" id="college">
+        <option value="P1">Pharmacists of BC</option>
+        <option value="96">CRNBC</option>
+        <option value="91">CPSBC</option>
+      </select>
+    </div>
+    <div class="col d-flex flex-column">
+      <label for="collegeNumber">College Number</label>
+      <input type="text" name="collegeNumber" id="collegeNumber" value="TBD" disabled>
+    </div>
+    <div class="col d-flex flex-column">
+      <label for="licenseNumber">License Number</label>
+      <input type="text" name="licenseNumber" id="licenseNumber">
+    </div>
+    <div class="col d-flex flex-column">
+      <label for="licenseClass">License Class</label>
+      <!-- TODO: Get values programmatically -->
+      <select name="licenseClass" id="licenseClass">
+        <option value="1">Full Pharmacists</option>
+        <option value="2">Limited Pharmacists</option>
+      </select>
+    </div>
+    <div class="col d-flex flex-column">
+      <label for="">License Expiry</label>
+      <prime-datepicker></prime-datepicker>
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div></div>
+
+</div>
+
+
+<div *ngIf="applicant.hasCollege === false" class="row">
+  <div class="col-sm-6">
+    Do you have a Device Provider?
+  </div>
+  <div class="col-sm-1">
+    <prime-toggle [(data)]="applicant.isDeviceProvider"></prime-toggle>
+  </div>
+</div>
+
+<div *ngIf="applicant.isDeviceProvider === true" class='d-flex justify-content-between border p-3'>
   <div class="row">
     <div class="col d-flex flex-column">
       <label for="college">College Certification</label>
@@ -23,16 +76,16 @@
       <input type="text" name="collegeNumber" id="collegeNumber" disabled>
     </div>
     <div class="col d-flex flex-column">
-        <label for="licenseNumber">License Number</label>
-        <input type="text" name="licenseNumber" id="licenseNumber">
+      <label for="licenseNumber">License Number</label>
+      <input type="text" name="licenseNumber" id="licenseNumber">
     </div>
     <div class="col d-flex flex-column">
-        <label for="licenseClass">License Class</label>
-        <!-- TODO: Get values programmatically -->
-        <select name="licenseClass" id="licenseClass">
-          <option value="1">Full Pharmacists</option>
-          <option value="2">Limited Pharmacists</option>
-        </select>
+      <label for="licenseClass">License Class</label>
+      <!-- TODO: Get values programmatically -->
+      <select name="licenseClass" id="licenseClass">
+        <option value="1">Full Pharmacists</option>
+        <option value="2">Limited Pharmacists</option>
+      </select>
     </div>
     <div class="col d-flex flex-column">
       <label for="">License Expiry</label>
@@ -44,3 +97,118 @@
   <div></div>
 
 </div>
+
+
+<div *ngIf="applicant.isDeviceProvider === false" class="row">
+  <div class="col-sm-6">
+    Are you working on-behalf?
+  </div>
+  <div class="col-sm-1">
+    <prime-toggle [(data)]="applicant.workingOnBehalf"></prime-toggle>
+  </div>
+</div>
+
+<div *ngIf="applicant.workingOnBehalf === true" class='d-flex justify-content-between border p-3'>
+  <div class="row">
+    <div class="col d-flex flex-column">
+      <label for="college">College Certification</label>
+      <!-- TODO: Get values programmatically -->
+      <select name="college" id="college">
+        <option value="PharmacistsOfBC">91</option>
+      </select>
+    </div>
+    <div class="col d-flex flex-column">
+      <label for="collegeNumber">College Number</label>
+      <input type="text" name="collegeNumber" id="collegeNumber" disabled>
+    </div>
+    <div class="col d-flex flex-column">
+      <label for="licenseNumber">License Number</label>
+      <input type="text" name="licenseNumber" id="licenseNumber">
+    </div>
+    <div class="col d-flex flex-column">
+      <label for="licenseClass">License Class</label>
+      <!-- TODO: Get values programmatically -->
+      <select name="licenseClass" id="licenseClass">
+        <option value="1">Full Pharmacists</option>
+        <option value="2">Limited Pharmacists</option>
+      </select>
+    </div>
+    <div class="col d-flex flex-column">
+      <label for="">License Expiry</label>
+      <prime-datepicker></prime-datepicker>
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div></div>
+
+</div>
+
+
+<section *ngIf="applicant.workingOnBehalf === false" class="row">
+  <div class="col-sm-8">
+    <div class="row">
+      <div class="col-sm-10">
+        Have you ever been the subject of an order or a conviction for an information contravention?
+      </div>
+      <div class="col-sm-2">
+        <prime-toggle [(data)]="applicant.informationContravention"></prime-toggle>
+      </div>
+    </div>
+    <div *ngIf="applicant.informationContravention === true">
+      <textarea class="selfDeclarationTextArea" placeholder="Please provide detail..." name="informationContraventionDetail" id="informationContraventionDetail"></textarea>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-10">
+        Have you ever had your registration with a governing body of a health profession suspended or cancelled?
+      </div>
+      <div class="col-sm-2">
+        <prime-toggle [(data)]="applicant.cancelledRegistration"></prime-toggle>
+      </div>
+    </div>
+    <div *ngIf="applicant.cancelledRegistration === true">
+      <textarea class="selfDeclarationTextArea" placeholder="Please provide detail..." name="cancelledRegistrationDetail" id="cancelledRegistrationDetail"></textarea>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-10">
+        Have you ever had Terms and Conditions imposed on your license as a result of disciplinary actions taken by a governing body?
+      </div>
+      <div class="col-sm-2">
+        <prime-toggle [(data)]="applicant.licenseCondition"></prime-toggle>
+      </div>
+    </div>
+    <div *ngIf="applicant.licenseCondition === true">
+      <textarea class="selfDeclarationTextArea" placeholder="Please provide detail..." name="licenseConditionDetail" id="licenseConditionDetail"></textarea>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-10">
+        Have you ever had your access to PharmaNet suspended or revoked?
+      </div>
+      <div class="col-sm-2">
+        <prime-toggle [(data)]="applicant.revokedAccess"></prime-toggle>
+      </div>
+    </div>
+    <div *ngIf="applicant.revokedAccess === true">
+      <textarea class="selfDeclarationTextArea" placeholder="Please provide detail..." name="revokedAccessDetail" id="revokedAccessDetail"></textarea>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div *ngIf="applicant.informationContravention === true
+             || applicant.cancelledRegistration    === true
+             || applicant.licenseCondition         === true
+             || applicant.revokedAccess            === true">
+      <!-- <prime-file-uploader></prime-file-uploader>-->
+      <span class="note">Scan the document, or take a photo of it. Make sure that it's:</span>
+      <ul class="note">
+        <li>The entire document, from corner to corner</li>
+        <li>At least 1000 pixels wide x 1500 pixels tall</li>
+        <li>Rotated correctly (not upside down or sideways)</li>
+        <li>In focus and easy to read</li>
+        <li>A JPG, PNG, GIF or BMP file (<b>not a PDF</b>)</li>
+      </ul>
+    </div>
+  </div>
+</section>

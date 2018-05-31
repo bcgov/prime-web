@@ -1,0 +1,32 @@
+$note-color: #202020;
+$note-font-size: 85%;
+$placeholder-color: $note-color;
+$placeholder-font-size: $note-font-size;
+
+.selfDeclarationTextArea {
+  width: 100%;
+  height: 75px;
+}
+
+.note {
+  color: $note-color;
+  font-size: $note-font-size;
+}
+
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: $placeholder-color;
+  font-size: $placeholder-font-size;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: $placeholder-color;
+  font-size: $placeholder-font-size;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: $placeholder-color;
+  font-size: $placeholder-font-size;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: $placeholder-color;
+  font-size: $placeholder-font-size;
+}

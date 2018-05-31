@@ -4,7 +4,6 @@ import { ApplicantDashboardComponent } from './pages/applicant-dashboard/applica
 import { ApplicantContactComponent } from './pages/applicant-contact/applicant-contact.component';
 import { ApplicantAccessAcceptanceComponent } from './pages/applicant-access-acceptance/applicant-access-acceptance.component';
 import { ApplicantProfessionalComponent } from './pages/applicant-professional/applicant-professional.component';
-import { ApplicantSelfDeclarationComponent } from './pages/applicant-self-declaration/applicant-self-declaration.component';
 
 
 
@@ -24,10 +23,6 @@ const routes: Routes = [
   {
     path: 'professional',
     component: ApplicantProfessionalComponent,
-  },
-  {
-    path: 'self-declaration',
-    component: ApplicantSelfDeclarationComponent,
   },
   {
     path: '**',
