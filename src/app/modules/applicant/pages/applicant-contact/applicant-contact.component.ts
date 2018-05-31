@@ -16,7 +16,7 @@ export class ApplicantContactComponent implements OnInit {
 
   ngOnInit() {
     // DEV ONLY! TODO: Remove.
-    this.primeDataService.user = this.dummyDataService.createPeople(1)[0];
+    //this.primeDataService.user = this.dummyDataService.createPeople(1)[0];
   }
 
   get applicant(): Person {
