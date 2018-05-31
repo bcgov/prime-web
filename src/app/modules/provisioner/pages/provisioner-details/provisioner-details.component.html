@@ -12,6 +12,14 @@
   <p><a routerLink="/provisioner/details/site">Provision by Site</a></p>
 </div>
 
+<hr>
+
+<prime-core-breadcrumb>
+  <div left>
+    <a routerLink="/provisioner/">Dashboard</a> /
+    <strong>Provision by {{ IS_SHOWING_PERSON ? "User" : "Site" }}</strong>
+  </div>
+</prime-core-breadcrumb>
 
 
 <hr>
@@ -96,3 +104,5 @@
 <ng-template class="row" #siteDetails>
   TODO: Get Site (in Controller) then set up data-binding
 </ng-template>
+
+<prime-provisioner-table></prime-provisioner-table>
