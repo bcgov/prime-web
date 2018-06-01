@@ -14,6 +14,7 @@ $placeholder-font-size: $note-font-size;
 }
 
 
+// the following entries are related to the placeholder
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: $placeholder-color;
   font-size: $placeholder-font-size;

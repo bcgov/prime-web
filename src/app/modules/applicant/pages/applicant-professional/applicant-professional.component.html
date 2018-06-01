@@ -17,13 +17,20 @@
 <div *ngIf="applicant.hasCollege === true" class='d-flex justify-content-between border p-3'>
   <div class="row">
     <div class="col d-flex flex-column">
-      <label for="college">College Certification</label>
-      <!-- TODO: Get values programmatically -->
-      <select name="college" id="college">
-        <option value="P1">Pharmacists of BC</option>
-        <option value="96">CRNBC</option>
-        <option value="91">CPSBC</option>
+      <label for="collegeTypesType">College Certification</label>
+      <select id="collegeTypesType" class="form-control enrollment-view-selector"
+              [value]="collegeTypesSelector">
+              <!--(change)="collegeTypesSelector = $event.target.value">-->
+        <option *ngFor="let type of CollegeTypes" value="{{type}}">
+          {{type}}
+        </option>
       </select>
+      <!--&lt;!&ndash; TODO: Get values programmatically &ndash;&gt;-->
+      <!--<select name="college" id="college">-->
+        <!--<option value="P1">Pharmacists of BC</option>-->
+        <!--<option value="96">CRNBC</option>-->
+        <!--<option value="91">CPSBC</option>-->
+      <!--</select>-->
     </div>
     <div class="col d-flex flex-column">
       <label for="collegeNumber">College Number</label>
@@ -33,17 +40,49 @@
       <label for="licenseNumber">License Number</label>
       <input type="text" name="licenseNumber" id="licenseNumber">
     </div>
+    <!--<div *ngIf="collegeTypesSelector === CPBC" class="col d-flex flex-column">-->
     <div class="col d-flex flex-column">
-      <label for="licenseClass">License Class</label>
+      <label for="licenseClassCP">License Class</label>
       <!-- TODO: Get values programmatically -->
-      <select name="licenseClass" id="licenseClass">
-        <option value="1">Full Pharmacists</option>
-        <option value="2">Limited Pharmacists</option>
+      <select name="licenseClassCP" id="licenseClassCP" class="form-control enrollment-view-selector">
+        <option value="" disabled selected>Select</option>
+        <option value="Full">Full Pharmacist</option>
+        <option value="Limited">Limited Pharmacist</option>
+      </select>
+    </div>
+    <!--<div *ngIf="collegeTypesSelector === CRNBC" class="col d-flex flex-column">-->
+    <div class="col d-flex flex-column">
+      <label for="licenseClassCRN">License Class</label>
+      <!-- TODO: Get values programmatically -->
+      <select name="licenseClassCRN" id="licenseClassCRN" class="form-control enrollment-view-selector">
+        <option value="" disabled selected>Select</option>
+        <option value="Registered">Registered Nurse</option>
+        <option value="Temp">Temp. Registered Nurse</option>
+      </select>
+    </div>
+    <!--<div *ngIf="collegeTypesSelector === CPSBC" class="col d-flex flex-column">-->
+    <div class="col d-flex flex-column">
+      <label for="licenseClassCPS">License Class</label>
+      <!-- TODO: Get values programmatically -->
+      <select name="licenseClassCPS" id="licenseClassCPS" class="form-control enrollment-view-selector">
+        <option value="" disabled selected>Select</option>
+        <option value="General">Full - General</option>
+        <option value="Specialty">Full - Specialty</option>
       </select>
     </div>
     <div class="col d-flex flex-column">
       <label for="">License Expiry</label>
       <prime-datepicker></prime-datepicker>
+    </div>
+    <!--<div *ngIf="collegeTypesSelector === CRNBC" class="col d-flex flex-column">-->
+    <div class="col d-flex flex-column">
+      <label for="advancedPracticeCertification">License Class</label>
+      <!-- TODO: Get values programmatically -->
+      <select name="licenseClass" id="advancedPracticeCertification" class="form-control enrollment-view-selector">
+        <option value="" disabled selected>Select</option>
+        <option value="1">Full Pharmacists</option>
+        <option value="2">Limited Pharmacists</option>
+      </select>
     </div>
   </div>
 
@@ -65,31 +104,8 @@
 <div *ngIf="applicant.isDeviceProvider === true" class='d-flex justify-content-between border p-3'>
   <div class="row">
     <div class="col d-flex flex-column">
-      <label for="college">College Certification</label>
-      <!-- TODO: Get values programmatically -->
-      <select name="college" id="college">
-        <option value="PharmacistsOfBC">91</option>
-      </select>
-    </div>
-    <div class="col d-flex flex-column">
-      <label for="collegeNumber">College Number</label>
-      <input type="text" name="collegeNumber" id="collegeNumber" disabled>
-    </div>
-    <div class="col d-flex flex-column">
-      <label for="licenseNumber">License Number</label>
-      <input type="text" name="licenseNumber" id="licenseNumber">
-    </div>
-    <div class="col d-flex flex-column">
-      <label for="licenseClass">License Class</label>
-      <!-- TODO: Get values programmatically -->
-      <select name="licenseClass" id="licenseClass">
-        <option value="1">Full Pharmacists</option>
-        <option value="2">Limited Pharmacists</option>
-      </select>
-    </div>
-    <div class="col d-flex flex-column">
-      <label for="">License Expiry</label>
-      <prime-datepicker></prime-datepicker>
+      <label for="deviceProviderNumber">License Number</label>
+      <input type="text" name="deviceProviderNumber" id="deviceProviderNumber">
     </div>
   </div>
 
@@ -111,31 +127,13 @@
 <div *ngIf="applicant.workingOnBehalf === true" class='d-flex justify-content-between border p-3'>
   <div class="row">
     <div class="col d-flex flex-column">
-      <label for="college">College Certification</label>
+      <label for="jobTitle">College Certification</label>
       <!-- TODO: Get values programmatically -->
-      <select name="college" id="college">
-        <option value="PharmacistsOfBC">91</option>
+      <select name="jobTitle" id="jobTitle" class="form-control enrollment-view-selector">
+        <option value="" disabled selected>Select</option>
+        <option value="Medica">Medica Office Assistant</option>
+        <option value="Other">Other</option>
       </select>
-    </div>
-    <div class="col d-flex flex-column">
-      <label for="collegeNumber">College Number</label>
-      <input type="text" name="collegeNumber" id="collegeNumber" disabled>
-    </div>
-    <div class="col d-flex flex-column">
-      <label for="licenseNumber">License Number</label>
-      <input type="text" name="licenseNumber" id="licenseNumber">
-    </div>
-    <div class="col d-flex flex-column">
-      <label for="licenseClass">License Class</label>
-      <!-- TODO: Get values programmatically -->
-      <select name="licenseClass" id="licenseClass">
-        <option value="1">Full Pharmacists</option>
-        <option value="2">Limited Pharmacists</option>
-      </select>
-    </div>
-    <div class="col d-flex flex-column">
-      <label for="">License Expiry</label>
-      <prime-datepicker></prime-datepicker>
     </div>
   </div>
 
