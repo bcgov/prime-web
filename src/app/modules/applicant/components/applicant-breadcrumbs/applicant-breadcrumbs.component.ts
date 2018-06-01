@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ApplicantDataService } from '../../../../services/applicant-data.service';
 
 @Component({
   selector: 'prime-applicant-breadcrumbs',
@@ -11,9 +12,13 @@ export class ApplicantBreadcrumbsComponent implements OnInit {
   @Input() previousPageLink: string;
   @Input() shouldDisableContinue: Boolean;
 
-  constructor() { }
+  constructor(private applicantDataService: ApplicantDataService) { }
 
   ngOnInit() {
+  }
+
+  get progressSteps() {
+    return this.applicantDataService.getPageProgressSteps();
   }
 
 }

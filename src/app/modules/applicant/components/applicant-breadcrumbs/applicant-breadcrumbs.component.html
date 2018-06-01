@@ -1,6 +1,8 @@
 <nav class="breadcrumb d-flex justify-content-between">
-  <span>
-    <a routerLink="/applicant/">Dashboard</a> / {{this.pageName}} </span>
+  <span>Dashboard / {{this.pageName}} </span>
+
+  <prime-wizard-progress-bar [progressSteps]="progressSteps">
+  </prime-wizard-progress-bar>
 
   <span class='d-flex'>
     <a class='mx-3' *ngIf="this.previousPageLink" routerLink="{{ this.previousPageLink }}">

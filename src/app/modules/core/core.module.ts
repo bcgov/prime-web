@@ -15,6 +15,7 @@ import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 import { PrimeDataModule } from '../prime-data/prime-data.module';
 // import { InfoButtonComponent } from '../verifier/components/user-info-button/user-info-button.component';
 import { PrimeToggleComponent } from '../../core/toggle/toggle.component';
+import { WizardProgressBarComponent } from './components/wizard-progress-bar/wizard-progress-bar.component';
 
 
 const componentList = [
@@ -25,7 +26,8 @@ const componentList = [
   MiniProgressBarComponent,
   ExpandingSearchComponent,
   DatepickerComponent,
-  PrimeToggleComponent
+  PrimeToggleComponent,
+  WizardProgressBarComponent
 ]
 
 @NgModule({
@@ -40,7 +42,7 @@ const componentList = [
     NgxMyDatePickerModule.forRoot(),
   ],
   declarations: [
-    componentList
+    componentList,
   ],
   exports: [
     componentList

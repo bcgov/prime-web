@@ -1,0 +1,40 @@
+@import 'variables.scss';
+
+:host {
+  // TODO: REFINE
+  flex: 1;
+  padding: 0 10em; //TODO: Remove this and add padding from PARENT as it's going to be on a case by case basis.
+}
+
+.step-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+progressbar {
+  background-color: $gray-500;
+}
+
+.step {
+  position: relative;
+  &:before {
+    content: " ";
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 100%;
+    background: white;
+    border: 3px solid $color-primary;
+
+    // Center above
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 100%;
+  }
+}
+
+
+.progress-background {
+  width: 100%;
+  background-color: blue;
+}
