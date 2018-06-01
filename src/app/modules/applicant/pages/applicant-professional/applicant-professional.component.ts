@@ -8,12 +8,11 @@ import { CollegeTypes } from '../../../../models/colleges.enum';
   styleUrls: ['./applicant-professional.component.scss']
 })
 export class ApplicantProfessionalComponent implements OnInit {
-  public collegeTypesSelector: CollegeTypes;
+  public collegeTypesSelector = 'pleaseSelect';
 
   constructor(private dataService: PrimeDataService) { }
 
   ngOnInit() {
-    this.collegeTypesSelector = CollegeTypes.CPBC;
   }
 
   get applicant() {
@@ -25,7 +24,8 @@ export class ApplicantProfessionalComponent implements OnInit {
     return Object.keys(CollegeTypes);
   }
 
-  // collegeTypes() {
-  //   let selection: CollegeTypes = this.collegeTypesSelector;
-  // }
+  collegeNumber() {
+    const selection = this.collegeTypesSelector;
+    return CollegeTypes[selection] ? CollegeTypes[selection] : '';
+  }
 }

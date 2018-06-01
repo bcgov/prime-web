@@ -19,10 +19,11 @@
     <div class="col d-flex flex-column">
       <label for="collegeTypesType">College Certification</label>
       <select id="collegeTypesType" class="form-control enrollment-view-selector"
-              [value]="collegeTypesSelector">
-              <!--(change)="collegeTypesSelector = $event.target.value">-->
+              [value]="collegeTypesSelector"
+              (change)="collegeTypesSelector = $event.target.value">
+        <option value="pleaseSelect"  disabled selected>Select</option>
         <option *ngFor="let type of CollegeTypes" value="{{type}}">
-          {{type}}
+          {{type ===  'CPBC' ? 'Pharmacists of BC' : type }}
         </option>
       </select>
       <!--&lt;!&ndash; TODO: Get values programmatically &ndash;&gt;-->
@@ -34,14 +35,14 @@
     </div>
     <div class="col d-flex flex-column">
       <label for="collegeNumber">College Number</label>
-      <input type="text" name="collegeNumber" id="collegeNumber" value="TBD" disabled>
+      <input type="text" name="collegeNumber" id="collegeNumber" [value]="collegeNumber()" disabled>
     </div>
     <div class="col d-flex flex-column">
       <label for="licenseNumber">License Number</label>
       <input type="text" name="licenseNumber" id="licenseNumber">
     </div>
-    <!--<div *ngIf="collegeTypesSelector === CPBC" class="col d-flex flex-column">-->
-    <div class="col d-flex flex-column">
+    <div *ngIf="collegeTypesSelector === 'CPBC'" class="col d-flex flex-column">
+    <!--<div class="col d-flex flex-column">-->
       <label for="licenseClassCP">License Class</label>
       <!-- TODO: Get values programmatically -->
       <select name="licenseClassCP" id="licenseClassCP" class="form-control enrollment-view-selector">
@@ -50,8 +51,8 @@
         <option value="Limited">Limited Pharmacist</option>
       </select>
     </div>
-    <!--<div *ngIf="collegeTypesSelector === CRNBC" class="col d-flex flex-column">-->
-    <div class="col d-flex flex-column">
+    <div *ngIf="collegeTypesSelector === 'CRNBC'" class="col d-flex flex-column">
+    <!--<div class="col d-flex flex-column">-->
       <label for="licenseClassCRN">License Class</label>
       <!-- TODO: Get values programmatically -->
       <select name="licenseClassCRN" id="licenseClassCRN" class="form-control enrollment-view-selector">
@@ -60,8 +61,8 @@
         <option value="Temp">Temp. Registered Nurse</option>
       </select>
     </div>
-    <!--<div *ngIf="collegeTypesSelector === CPSBC" class="col d-flex flex-column">-->
-    <div class="col d-flex flex-column">
+    <div *ngIf="collegeTypesSelector === 'CPSBC'" class="col d-flex flex-column">
+    <!--<div class="col d-flex flex-column">-->
       <label for="licenseClassCPS">License Class</label>
       <!-- TODO: Get values programmatically -->
       <select name="licenseClassCPS" id="licenseClassCPS" class="form-control enrollment-view-selector">
@@ -74,8 +75,8 @@
       <label for="">License Expiry</label>
       <prime-datepicker></prime-datepicker>
     </div>
-    <!--<div *ngIf="collegeTypesSelector === CRNBC" class="col d-flex flex-column">-->
-    <div class="col d-flex flex-column">
+    <div *ngIf="collegeTypesSelector === 'CRNBC'" class="col d-flex flex-column">
+    <!--<div class="col d-flex flex-column">-->
       <label for="advancedPracticeCertification">License Class</label>
       <!-- TODO: Get values programmatically -->
       <select name="licenseClass" id="advancedPracticeCertification" class="form-control enrollment-view-selector">
