@@ -15,7 +15,7 @@
 </nav>
 
 <ng-template #backToDashboard>
-    <a class='mr-3' routerLink="/applicant">
-      <i class="fa fa-check-circle text-success fa-2x pull-right" aria-label="Back to Dashboard"></i>
+    <a class='mr-3 btn p-0' [ngClass]="{'disabled': this.shouldDisableContinue}" routerLink="/applicant">
+      <i class="fa fa-check-circle text-success fa-2x" aria-label="Back to Dashboard"></i>
     </a>
 </ng-template>

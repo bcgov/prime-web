@@ -94,7 +94,6 @@ export class Person extends Base {
   // currently updating
   updateStreet(event) {
     // Empty mail address
-    console.log('updateStreet', event);
     if (this.mailAddress.isEmpty()) {
       this.mailAddress.copy(this.address);
     }

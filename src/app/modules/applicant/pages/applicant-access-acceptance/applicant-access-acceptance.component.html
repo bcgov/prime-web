@@ -1,8 +1,19 @@
 <prime-applicant-breadcrumbs
   pageName="User Access Acceptance"
-  previousPageLink="/applicant/self-declaration">
+  previousPageLink="/applicant/self-declaration"
+  [shouldDisableContinue]='!canContinue'>
 </prime-applicant-breadcrumbs>
 
-<p>
-  applicant-access-acceptance works!
-</p>
+
+<div class="row">
+  <ul *ngFor="let item of accessAcceptances; let  itemIndex = index ">
+    <h3><b>Section / Clause</b></h3>
+
+    <textarea value={{item.acceptanceClause}} cols="150" rows="4"></textarea>
+
+    <input type="checkbox" id="{{itemIndex}}" [(ngModel)]="item.isAccepted">
+
+  </ul>
+</div>
+
+
