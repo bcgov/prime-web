@@ -31,7 +31,7 @@ export class ProvisionerDetailsComponent implements OnInit {
     // TODO: DEV ONLY REMOVE! Change this to get userId via URL param, look at
     // verifier-routing.module.ts for exaple with how it does it for
     // EnrollmentComponents
-    // this.person = this.dataService.people[0];
+    this.person = this.dataService.people[0];
     console.log('PROVDETAILS ngOnInit PERSON TARGET', this.person);
   }
 
