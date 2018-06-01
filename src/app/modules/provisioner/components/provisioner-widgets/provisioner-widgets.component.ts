@@ -20,7 +20,7 @@ export class ProvisionerWidgetsComponent implements OnInit {
   constructor(private provisionerService: ProvisionerService) { }
 
   ngOnInit() {
-    this.applicationProgressSelector = SiteAccessProgressSteps.Verifier;
+    this.applicationProgressSelector = SiteAccessProgressSteps.Provisioner;
 
   }
 
