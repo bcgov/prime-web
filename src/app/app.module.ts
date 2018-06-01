@@ -38,6 +38,7 @@ import { PrimeRequiredDirective } from './validation/prime-required.directive';
 import { RequiredValidationErrorsComponent } from './validation/required-validation/required-validation.component';
 import {TooltipModule} from 'ngx-bootstrap';
 import { HeaderFooterModule } from './modules/header-footer/header-footer.module';
+import { ProvisionerService } from './services/provisioner.service';
 
 
 
@@ -86,7 +87,8 @@ import { HeaderFooterModule } from './modules/header-footer/header-footer.module
     UserService,
     VerifierService,
     DummyDataService,
-    PrimeDataService
+    PrimeDataService,
+    ProvisionerService
   ],
   entryComponents: [
     RequiredValidationErrorsComponent,
