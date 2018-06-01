@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MiniProgressBarComponent } from './mini-progress-bar.component';
+import {ProgressBarComponent} from '../progress-bar/progress-bar.component';
+import {ProgressbarModule} from 'ngx-bootstrap';
 
 describe('MiniProgressBarComponent', () => {
   let component: MiniProgressBarComponent;
@@ -8,7 +10,8 @@ describe('MiniProgressBarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MiniProgressBarComponent ]
+      declarations: [ MiniProgressBarComponent],
+      imports: [ProgressbarModule.forRoot()]
     })
     .compileComponents();
   }));

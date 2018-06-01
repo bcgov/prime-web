@@ -3,7 +3,7 @@ import { Site, SiteAccess } from './sites.model';
 import { User } from './user.model';
 import * as moment from 'moment';
 import { EnrollmentStatus } from './enrollment-status.enum';
-import { Address, PhoneNumber } from './addresses.model';
+import { Address } from './addresses.model';
 
 /**
  * Information about person
@@ -18,20 +18,23 @@ export class Person extends Base {
   get name(): string {
     return `${this.firstName} ${this.lastName}`;
   }
-  // Just for development with dummyd data, likely to be removed later on.
-  set name(fullName: string){
+
+  // Just for development with dummy data, likely to be removed later on.
+  set name(fullName: string) {
     const names = fullName.split(' ');
     this.firstName = names[0];
-    if (names.length === 2){
+    if (names.length === 2) {
       this.lastName = names[1];
     }
-    else if (names.length === 3 ){
+    else if (names.length === 3) {
       this.middleName = names[1];
       this.lastName = names[2];
     }
   }
 
-  address: Address = {};
+  address: Address;
+  useRegAddress: Boolean = false;
+  mailAddress: Address = new Address();
   dateOfBirth: Date;
   phone: PhoneNumber;
   phoneSecondary: PhoneNumber;
@@ -64,15 +67,16 @@ export class Person extends Base {
 
   // ALL sites, including expired/rejected.
   siteAccess: SiteAccess[] = [];
+
   get activeSites(): SiteAccess[] {
     return this.siteAccess.filter(x => x.status === EnrollmentStatus.Active);
   }
 
-  get sites(): Site[]{
+  get sites(): Site[] {
     return this.siteAccess.map(SA => SA.site);
   }
 
-  canAccess(site: Site): boolean{
+  canAccess(site: Site): boolean {
     return this.sites.indexOf(site) !== -1;
   }
 
@@ -81,20 +85,59 @@ export class Person extends Base {
   }
 
   get daysUntilRenewalDate(): number {
-      const expiry = moment(this.renewalDate);
-      const today = moment();
-      return expiry.diff(today, 'days');
+    const expiry = moment(this.renewalDate);
+    const today = moment();
+    return expiry.diff(today, 'days');
   }
 
+  // Update mailAddress with information in the input field that the user is
+  // currently updating
+  updateStreet(event) {
+    // Empty mail address
+    if (this.mailAddress.isEmpty()) {
+      this.mailAddress.copy(this.address);
+    }
+    this.useRegAddress = !this.useRegAddress;
+    this.mailAddress.street = event;
+  }
+  updateProvince(event) {
+    if (this.mailAddress.isEmpty()) {
+      this.mailAddress.copy(this.address);
+    }
+    this.useRegAddress = !this.useRegAddress;
+    this.mailAddress.province = event;
+  }
+  updateCountry(event) {
+    if (this.mailAddress.isEmpty()) {
+      this.mailAddress.copy(this.address);
+    }
+    this.useRegAddress = !this.useRegAddress;
+    this.mailAddress.country = event;
+  }
+  updateCity(event) {
+    if (this.mailAddress.isEmpty()) {
+      this.mailAddress.copy(this.address);
+    }
+    this.useRegAddress = !this.useRegAddress;
+    this.mailAddress.city = event;
+  }
+  updatePostal(event) {
+    if (this.mailAddress.isEmpty()) {
+      this.mailAddress.copy(this.address);
+    }
+    this.useRegAddress = !this.useRegAddress;
+    this.mailAddress.postal = event;
+  }
 }
 
-class Name {
-  firstName: string;
-  lastName: string;
-  middleName: string;
-  get fullName(): string { return this.firstName + this.lastName; }
-}
+//class Name {
+//  firstName: string;
+//  lastName: string;
+//  middleName: string;
+//  get fullName(): string { return this.firstName + this.lastName; }
+//}
 
+interface PhoneNumber { }
 interface PrimeUserID { }
 
 

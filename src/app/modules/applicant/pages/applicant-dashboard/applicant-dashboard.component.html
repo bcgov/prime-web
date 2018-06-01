@@ -16,8 +16,9 @@
         </a>
       </div>
       <div  *ngIf="applicant.hasContactInfo; else emptySection" class="card-body d-flex justify-content-between">
-
-        <!-- TODO: Add img placeholder. Holder.js? -->
+        <div>
+          <img class="photo" src="assets/photoPlaceholder.png" alt="Generic placeholder image">
+        </div>
         <div>
           <p>{{applicant.name}}</p>
           <p>{{applicant.phone}}</p>

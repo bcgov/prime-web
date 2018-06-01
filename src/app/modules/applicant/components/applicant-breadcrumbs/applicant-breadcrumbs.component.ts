@@ -9,6 +9,7 @@ export class ApplicantBreadcrumbsComponent implements OnInit {
   @Input() pageName: string;
   @Input() nextPageLink: string;
   @Input() previousPageLink: string;
+  @Input() shouldDisableContinue: Boolean;
 
   constructor() { }
 

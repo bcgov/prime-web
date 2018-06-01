@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ApplicantAccessAcceptanceComponent } from './applicant-access-acceptance.component';
+import {ApplicantBreadcrumbsComponent} from '../../components/applicant-breadcrumbs/applicant-breadcrumbs.component';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('ApplicantAccessAcceptanceComponent', () => {
   let component: ApplicantAccessAcceptanceComponent;
@@ -8,7 +10,8 @@ describe('ApplicantAccessAcceptanceComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ApplicantAccessAcceptanceComponent ]
+      declarations: [ ApplicantAccessAcceptanceComponent, ApplicantBreadcrumbsComponent],
+      imports: [RouterTestingModule]
     })
     .compileComponents();
   }));

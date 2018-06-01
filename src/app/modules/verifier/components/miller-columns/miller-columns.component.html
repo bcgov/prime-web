@@ -1,4 +1,4 @@
-<div class="miller-header d-flex justify-content-between p-3 my-3">
+<div *ngIf="config" class="miller-header d-flex justify-content-between p-3 my-3">
   <span><a [routerLink]="backLink()">Dashboard</a> /
     <strong *ngIf="IS_PEOPLE_TABLE">User Enrollment</strong>
     <strong *ngIf="!IS_PEOPLE_TABLE">Site Enrollment</strong>
@@ -24,9 +24,6 @@
 <div class="miller-container">
   <div class="miller-column" *ngFor="let column of columns; let colIndex = index;" [@loadInOut]>
     <div class='miller-column-title'>
-
-      <!-- <h4>{{column.title}}</h4> -->
-      <!-- <h4>{{ buildBreadCrumb(column)  }}</h4> -->
 
       <prime-expanding-search
         (onChange)="filterColumn($event, colIndex)"

@@ -179,17 +179,16 @@ export class DummyDataService {
   }
 
   private generateAddress(): Address {
-    const streetNames = ['Kings', 'Main', 'Fort', 'Yates', 'Douglas']
+    const streetNames = ['Kings', 'Main', 'Fort', 'Yates', 'Douglas'];
+    const address = new Address();
 
-    let street = `${Math.ceil(Math.random() * 8000)} ${this.getRandomElFromArray(streetNames)} St.`;
-
-    return {
-      street: street,
-      postal: 'V9R 2VR',
-      country: "Canada",
-      province: "British Columbia",
-      city: "Victoria"
-    }
+    //let street = `${Math.ceil(Math.random() * 8000)} ${this.getRandomElFromArray(streetNames)} St.`;
+    address.street = `${Math.ceil(Math.random() * 8000)} ${this.getRandomElFromArray(streetNames)} St.`;
+    address.postal = 'V9R 2VR';
+    address.country = 'Canada';
+    address.province = 'British Columbia';
+    address.city = 'Victoria';
+    return address;
   }
 
   private randomDate(start: Date, end: Date): Date {

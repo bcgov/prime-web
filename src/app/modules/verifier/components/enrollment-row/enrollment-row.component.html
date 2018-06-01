@@ -1,4 +1,4 @@
-<div class="enrollment-list-item" (click)="toggleRow()" [@openStateDisable]="openState">
+<div *ngIf="rowData" class="enrollment-list-item" (click)="toggleRow()" [@openStateDisable]="openState">
 
     <div class="enrollment-text-container">
       <span class="enrollment-text-main">{{rowData.title}}</span>

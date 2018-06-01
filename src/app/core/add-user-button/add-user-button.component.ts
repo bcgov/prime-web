@@ -24,6 +24,11 @@ export class AddUserButtonComponent implements OnInit {
   constructor(private modalService: BsModalService, private dataService: PrimeDataService, private dummyDataService: DummyDataService) { }
 
   ngOnInit() {
+
+    // Clear out the form inputs when the modal closes
+    this.modalService.onHide.subscribe(() => {
+      this.clearSearch();
+    });
   }
 
   openModal(template: TemplateRef<any>) {
@@ -37,16 +42,26 @@ export class AddUserButtonComponent implements OnInit {
       .filter(x => x).length;  //Filter out falsy, like empty strings
   }
 
-  //FIXME: Prototype only! This just generates a user out of thin air. Will have to be completely re-written for prod.
+  /**
+   * Instead of genuinely searching for the user's result, we just create a new
+   * user and make it match their search query. Will need to be completely
+   * re-written for prod.
+   *
+   */
   findUser(){
     const person = this.dummyDataService.createPeople(1)[0];
-    // Instead of genuinely searching for the user's result, we just create a new user and make it match their search query.
+
+    // Copy over the shared defined properties, ignore the rest.
     for (var key in this.searchQuery) {
       if (this.searchQuery.hasOwnProperty(key) && person.hasOwnProperty(key) ) {
          person[key] = this.searchQuery[key];
       }
     }
     person.email = `${person.firstName[0].toLowerCase()}${person.lastName.toLowerCase()}@gmail.com`;
+
+    person.renewalDate = null //We don't want the set date from dummyDataService
+
+
     // Only return one result (prototype only)
     this.searchResultsPeople = [person];
     this.showSearchResults = true;
@@ -64,7 +79,7 @@ export class AddUserButtonComponent implements OnInit {
   }
 
   canFindUser(): boolean {
-    return this.currentProgressStep === this.maxProgressSteps;
+    return this.currentProgressStep >= this.maxProgressSteps;
   }
 
   get showAdditionalFields(): boolean {
@@ -76,6 +91,12 @@ export class AddUserButtonComponent implements OnInit {
       return 4;
     }
     return 3;
+  }
+
+  clearSearch(){
+    this.searchQuery = {};
+    this.searchResultsPeople = [];
+    this.showSearchResults = false;
   }
 
 

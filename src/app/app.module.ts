@@ -36,6 +36,9 @@ import { EmailValidationComponent } from './validation/email-validation/email-va
 import { PhoneValidationComponent } from './validation/phone-validation/phone-validation.component';
 import { PrimeRequiredDirective } from './validation/prime-required.directive';
 import { RequiredValidationErrorsComponent } from './validation/required-validation/required-validation.component';
+import {TooltipModule} from 'ngx-bootstrap';
+import { HeaderFooterModule } from './modules/header-footer/header-footer.module';
+
 
 
 @NgModule({
@@ -76,6 +79,7 @@ import { RequiredValidationErrorsComponent } from './validation/required-validat
     BsDropdownModule.forRoot(),
     MyDateRangePickerModule,
     ButtonsModule.forRoot(),
+    HeaderFooterModule,
   ],
   providers: [
     ApplicantDataService,

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import { ApplicantAccessAcceptance} from './applicant-access-acceptance';
 
 @Component({
   selector: 'prime-applicant-access-acceptance',
@@ -7,9 +8,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ApplicantAccessAcceptanceComponent implements OnInit {
 
+  accessAcceptances = [
+    new ApplicantAccessAcceptance( 'oiweruwioresfsfdsfsdfssdfsfsdfsfdsdfjsfdjsjfsdfslfjsldfsdklfksfdskfjsjfklsflsfjl' +
+      'wejifojwoifjwjiofjwojefwiaojefwiojfeoiwjfiowjfowjefoiwjfiowjefoiwejfi' +
+      'jfwoijfowijfojfowijefwoiajfwoijfewoijfwoijfwoifjwoiejfwifjwioefjwiejfowijefiwojefowjefjwefoijwefjwfo' +
+      'jfowjfwiojfwfjwfjwifjwofjwiofjwoejfowijfeoiwjefoifwfwe', false),
+    new ApplicantAccessAcceptance('jfwoejo', false),
+    new ApplicantAccessAcceptance('jfwoejo', false)
+
+  ];
+
+  canContinue: Boolean = false;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+
+  shouldDisable() {
+    // Are all checkboxes checked? Loop over accessAceptance and check isAccepted
+    return false;
+  }
 }
+

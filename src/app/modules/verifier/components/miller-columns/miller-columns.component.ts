@@ -70,9 +70,10 @@ export class MillerColumnsComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
+    if (!this.config) {return}
     // Modify column ordering based on config
-    if (this.config.options &&
-        this.config.options.primaryColumn &&
+      if (this.config.options &&
+       this.config.options.primaryColumn &&
         this.config.options.primaryColumn.toLowerCase() === "people"){
           this.columnOrder = ['People', 'Collections', 'Sites'];
     }
@@ -88,7 +89,7 @@ export class MillerColumnsComponent implements OnInit {
 
 
     // Check if there's a pre-selected id in the config
-    if (this.config.options && this.config.options.preselectObjectId){
+      if (this.config.options && this.config.options.preselectObjectId){
       const preselectObjectId = this.config.options.preselectObjectId;
       // Selected item will be in first column, regardless of primaryColumn
       const preselectItem = this._columns[0].items
@@ -155,6 +156,7 @@ export class MillerColumnsComponent implements OnInit {
   onCheck(pending: SiteAccess[]){
     this.saveSuccess = false;
     this.changesMade = pending.length >= 1;
+    console.log('onCheck', pending);
   }
 
   //TODO: Column interface + move fn location
@@ -193,6 +195,10 @@ export class MillerColumnsComponent implements OnInit {
     this.changesMade = false;
     this.saveSuccess = true;
     this.declarationCheck = false;
+    // TODO: Create SiteAccess object between Site and selected person
+    // Need to get selected user and selected site. Functions:
+      // getUserSelection < works (at least for one table type)
+      // TODO: need fn to get selected SITE, from checkbox column
   }
 
   public backLink(): string {
@@ -295,12 +301,19 @@ export class MillerColumnsComponent implements OnInit {
     return column;
   }
 
-  public getUserSelection(){
+  public getUserSelection(): Person{
     if (this.IS_PEOPLE_TABLE){
       return this._columns[0].items.filter(x => x.open)[0];
     }
   }
 
+  public getSiteSelection(){
+    //TODO!
+  }
+
+  /** Returns all the SiteAccesses of the selected item in the primary (left
+   * most) column. These are already existing site accesses, not new ones we
+   * will have to save, etc. */
   public getSelectedSiteAccess(){
     // TODO: Add types
 
