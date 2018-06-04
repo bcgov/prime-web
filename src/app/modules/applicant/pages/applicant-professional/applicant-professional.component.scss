@@ -13,6 +13,11 @@ $placeholder-font-size: $note-font-size;
   font-size: $note-font-size;
 }
 
+.row-dropbox {
+  min-width: 4em;
+  max-width: 17em;
+}
+
 
 // the following entries are related to the placeholder
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */

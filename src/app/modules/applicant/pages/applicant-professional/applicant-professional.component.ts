@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { CollegeTypes } from '../../../../models/colleges.enum';
+import { LicenseClassCPTypes } from '../../../../models/colleges.enum';
 
 @Component({
   selector: 'prime-applicant-professional',
@@ -8,7 +9,8 @@ import { CollegeTypes } from '../../../../models/colleges.enum';
   styleUrls: ['./applicant-professional.component.scss']
 })
 export class ApplicantProfessionalComponent implements OnInit {
-  public collegeTypesSelector = 'pleaseSelect';
+  public collegeTypesSelector        = 'pleaseSelect';
+  public licenseClassCPTypesSelector = 'pleaseSelect';
 
   constructor(private dataService: PrimeDataService) { }
 
@@ -24,8 +26,18 @@ export class ApplicantProfessionalComponent implements OnInit {
     return Object.keys(CollegeTypes);
   }
 
-  collegeNumber() {
+  // Make enum accessible to template
+  get LicenseClassCPTypes() {
+    return Object.keys(LicenseClassCPTypes);
+  }
+
+  collegeValue() {
     const selection = this.collegeTypesSelector;
     return CollegeTypes[selection] ? CollegeTypes[selection] : '';
   }
+
+  licenseClassCPValue(selection) {
+    return LicenseClassCPTypes[selection];
+  }
+
 }

@@ -11,6 +11,13 @@ export enum CollegeTypes {
   CPSBC = '91'
 }
 
+
+export enum LicenseClassCPTypes {
+  FULL    = 'Full Pharmacist',
+  LIMITED = 'Limited Pharmacist'
+}
+
+
 // /** @deprecated */
 // export interface CollegeList {
 //   id: Colleges;
