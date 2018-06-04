@@ -6,6 +6,7 @@ import { ProvisionerRoutingModule } from './provisioner-routing.modules';
 import { VerifierModule } from '../verifier/verifier.module';
 import { ProvisionerWidgetsComponent } from './components/provisioner-widgets/provisioner-widgets.component';
 import { TooltipModule } from 'ngx-bootstrap';
+import { PrimeDataService } from '../../services/prime-data.service';
 
 @NgModule({
   imports: [
@@ -14,10 +15,13 @@ import { TooltipModule } from 'ngx-bootstrap';
     ProvisionerRoutingModule,
     VerifierModule,
     TooltipModule.forRoot()
+
   ],
+  providers: [],
   declarations: [
     ProvisionerDashboardComponent,
     ProvisionerWidgetsComponent
   ]
 })
+
 export class ProvisionerModule { }
