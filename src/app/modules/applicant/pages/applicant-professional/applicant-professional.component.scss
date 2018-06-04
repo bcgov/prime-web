@@ -13,9 +13,32 @@ $placeholder-font-size: $note-font-size;
   font-size: $note-font-size;
 }
 
-.row-dropbox {
+.drop-dl-box-15 {
+  min-width: 4em;
+  max-width: 15em;
+}
+
+.drop-dl-box-17 {
   min-width: 4em;
   max-width: 17em;
+}
+
+.drop-dl-box-20 {
+  min-width: 4em;
+  max-width: 20em;
+}
+
+.drop-dl-box-26 {
+  min-width: 4em;
+  max-width: 26em;
+}
+
+.glyphicon-plus-sign {
+  color: green;
+}
+
+.glyphicon-remove {
+  color: red;
 }
 
 
