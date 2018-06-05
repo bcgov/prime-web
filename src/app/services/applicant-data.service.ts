@@ -1,5 +1,21 @@
 import { Injectable } from '@angular/core';
+import {Observable, Subject} from 'rxjs/Rx';
 
 @Injectable()
 export class ApplicantDataService {
+
+  private _enrollmentViewTypeSelector  = 'View All';
+  set enrollmentViewTypeSelector(type: string){
+    this._enrollmentViewTypeSelector = type;
+    this.viewTypeSubject.next(type);
+  }
+
+
+  public $enrollmentViewType: Observable<string>;
+  private viewTypeSubject: Subject<string>;
+
+  constructor() {
+    this.viewTypeSubject = new Subject<string>();
+    this.$enrollmentViewType = this.viewTypeSubject.asObservable();
+  }
 }
