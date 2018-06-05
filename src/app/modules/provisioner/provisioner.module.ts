@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ProvisionerDashboardComponent } from './pages/provisioner-dashboard/provisioner-dashboard.component';
 import { CoreModule } from '../core/core.module';
 import { ProvisionerRoutingModule } from './provisioner-routing.modules';
@@ -13,6 +14,7 @@ import { PrimeDataService } from '../../services/prime-data.service';
     CommonModule,
     CoreModule,
     ProvisionerRoutingModule,
+    NgxChartsModule,
     VerifierModule,
     TooltipModule.forRoot()
 

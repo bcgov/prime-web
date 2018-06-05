@@ -1,8 +1,24 @@
-<p>
-  provisioner-widgets works! foo
-</p>
-
 <div class="row">
+  <div class="col">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between">
+        User status
+        <i class="fa fa-reply fa-flip-horizontal" aria-hidden="true"></i>
+      </div>
+      <div class="card-body pie-chart-container" #pieChartContainer>
+        <ngx-charts-pie-chart
+          [view]='pieChartDimension'
+          [results]="pieChartData"
+          [scheme]="'natural'"
+          legend=true
+          legendTitle=''
+          (select)='onPieChartClick($event)'>
+        </ngx-charts-pie-chart>
+      </div>
+    </div>
+  </div>
+
+
   <div class="col">
     <div class="card">
       <div class="card-header d-flex justify-content-between">

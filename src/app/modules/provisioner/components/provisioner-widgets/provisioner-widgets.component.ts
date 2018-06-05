@@ -8,20 +8,35 @@ import { EnrollmentStatus } from '../../../../models/enrollment-status.enum';
 @Component({
   selector: 'prime-provisioner-widgets',
   templateUrl: './provisioner-widgets.component.html',
-  styleUrls: ['./provisioner-widgets.component.scss']
+  styleUrls: ['./provisioner-widgets.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ProvisionerWidgetsComponent implements OnInit {
 
   @Input() siteAccess: SiteAccess[] = [];
   @Input() people: Person[] = [];
-
   public applicationProgressSelector: SiteAccessProgressSteps;
+  public pieChartData;
+
+  @ViewChild('pieChartContainer') pieChartContainer: ElementRef;
 
   constructor(private provisionerService: ProvisionerService) { }
 
+  //Current max width, but doesn't really play nice with mobile views
+  public pieChartDimension: number[] = [];
+
   ngOnInit() {
     this.applicationProgressSelector = SiteAccessProgressSteps.Provisioner;
+    this.pieChartData = this.calculatePieChartData();
 
+    // Very hacky and should be for prototype only! Possibly remove/replace
+    // entire chart library because this one does not play nicely and on re-size
+    // it continually breaks / infinitely grows.  The height value determines if
+    // the entire legend is visible.
+    this.pieChartDimension = [
+      this.pieChartContainer.nativeElement.offsetWidth,
+      this.pieChartContainer.nativeElement.offsetHeight,
+    ]
   }
 
   // Make enum accessible to template
@@ -46,6 +61,19 @@ export class ProvisionerWidgetsComponent implements OnInit {
     return result.filter(sa => sa.progress === selection);
   }
 
+  calculatePieChartData() : {name: string, value: number}[] {
+    return this.EnrollmentStatus.map(status => {
+      return {
+        name: status,
+        value: this.siteAccess.filter(sa => sa.status === status).length
+      }
+    })
+  }
+
+  onPieChartClick($event){
+    // console.log('onPieChartClick', $event);
+    this.provisionerService.enrollmentViewTypeSelector = $event.name;
+  }
 
   formatDate(date: Date){
     return moment(date).format('DD/MM/YYYY');
