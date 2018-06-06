@@ -25,7 +25,7 @@ export class EnrollmentListComponent extends Base implements OnInit {
 
   //Convert enum to iterable array
   get EnrollmentStatus() {
-    return Object.keys(EnrollmentStatus)
+    return Object.keys(this.verifierService.VerifierEnrollmentStatus)
   }
 
   constructor(private verifierService: VerifierService) {
