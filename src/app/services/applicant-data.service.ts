@@ -10,7 +10,6 @@ export class ApplicantDataService {
     this.viewTypeSubject.next(type);
   }
 
-
   public $enrollmentViewType: Observable<string>;
   private viewTypeSubject: Subject<string>;
 

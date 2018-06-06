@@ -2,30 +2,25 @@
 
   <div class="enrollment-text-container">
     <span class="enrollment-text-main">{{rowData.title}}</span>
-
-    <ng-container>
-      <span class="enrollment-text-extra">({{rowData.sites.length}}) Sites</span>
-      <span class="enrollment-text-extra">({{rowData.users.length}}) Users</span>
-    </ng-container>
-
   </div>
 
+  <!--
   <div class="enrollment-actions">
       <span class="enrollment-icons">
         <prime-pill-badge
           [alerts]="allChildAlerts"
           [iconOnly]='false'>
         </prime-pill-badge>
- <!--       <prime-info-button
+        <prime-info-button
           [targetId]="rowData.associatedObjectId">
-        </prime-info-button>-->
+        </prime-info-button>
         <i class="fa fa-edit text-muted" (click)="goToEnrollmentPage()"></i>
       </span>
   </div>
 </div>
+-->
 
-
-
+<!--
 <div [@openState]="openState">
   <div [@openStateChild]="openState"  class="expandable-container">
 
@@ -42,20 +37,19 @@
                     [alerts]="[siteAccess.alert]">
                   </prime-pill-badge>
 
- <!--                 <prime-info-button
+                  <prime-info-button
                     [targetId]="siteAccess.site.objectId">
-                  </prime-info-button>-->
+                  </prime-info-button>
               </span>
       </div>
 
- <!--     <prime-enrollment-progress-row
+      <prime-enrollment-progress-row
         [open]='siteAccess.open'
         [data]='siteAccess'>
-      </prime-enrollment-progress-row>-->
+      </prime-enrollment-progress-row>
 
     </div>
-
-
   </div>
+  -->
 </div>
 

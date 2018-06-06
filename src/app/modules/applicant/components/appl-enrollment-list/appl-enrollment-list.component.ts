@@ -4,15 +4,10 @@ import {ApplEnrollmentRowItem} from '../appl-enrollment-row/appl-enrollment-row.
 import {ApplEnrollmentRowComponent} from '../appl-enrollment-row/appl-enrollment-row.component';
 import {ApplicantDataService} from '../../../../services/applicant-data.service';
 import {SiteAccess} from '../../../../models/sites.model';
-
-// Applicants' enrollment statuses
-export enum applEnrollmentStatus {
-  Approved = 'Approved',
-  Declined = 'Declined'
-}
+import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
 
 // Define for constant string
-export const defaultViewSelector: string = 'View All';
+export const defaultViewSelector = 'View All';
 
 @Component({
   selector: 'prime-appl-enrollment-list',
@@ -26,16 +21,18 @@ export class ApplEnrollmentListComponent extends Base implements OnInit, OnDestr
   /** Internal representation of data used in for loops. Can be filtered by search. */
   public data: ApplEnrollmentRowItem[];
 
-  /** What the primary/top level rows are. Changes labels and some other layout configurations. */
- // @Input() primaryType: "User"|"Site" = "Site";;
-
+  // Enrollment status for applicant
+  private _applEnrollmentStatus: string [] = [
+    EnrollmentStatus.Approved,
+    EnrollmentStatus.Declined
+  ];
 
   // Valid values: EnrollmentStatus enums + "All"
   public viewTypeSelector  = defaultViewSelector;
 
   //Convert enum to iterable array
   get EnrollmentStatus() {
-    return Object.keys(applEnrollmentStatus);
+    return this._applEnrollmentStatus;
   }
 
   constructor(private applicantDataService: ApplicantDataService) {
@@ -50,6 +47,7 @@ export class ApplEnrollmentListComponent extends Base implements OnInit, OnDestr
   /* OnInit implementation */
   ngOnInit() {
     this.data = this.rowItems;
+    console.log('OnInit (ApplEnrollmentListComponent): ' + this.data );
   }
 
   /* OnChange implementation */
@@ -83,7 +81,7 @@ export class ApplEnrollmentListComponent extends Base implements OnInit, OnDestr
    *
    * @private
    * @param {(sa: SiteAccess) => boolean} fn Takes a SiteAccess as a parameter
-   * @memberof EnrollmentListComponent
+   * @memberof ApplEnrollmentListComponent
    */
   private deepSearch(fn: (sa: SiteAccess) => boolean    ){
 
@@ -112,12 +110,14 @@ export class ApplEnrollmentListComponent extends Base implements OnInit, OnDestr
     }
 
     this.deepSearch(expandableRow => {
+      console.log('deepSearch ' + expandableRow.title );
       return expandableRow.title.toLowerCase().indexOf(phrase.toLowerCase()) !== -1;
     });
   }
 
   // NOTE: This doesn't work properly with search. Fine for prototype for now, but will need to be resolved in future.
   viewTypes(type){
+    console.log('viewTypes: ' + type);
     if (type === defaultViewSelector){
       return this.data = this.rowItems;
     }
@@ -126,11 +126,11 @@ export class ApplEnrollmentListComponent extends Base implements OnInit, OnDestr
       return expandableRow.status.includes(type);
     });
   }
-/*
+
   sort() {
     // Temporary solution for prototype before actual sorting is implemented.
     this.rowItems.reverse();
   }
-*/
+
 }
 

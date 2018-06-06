@@ -7,7 +7,6 @@ import { Address } from '../models/addresses.model';
 import { Site, SiteAccess, SiteAccessProgressSteps } from '../models/sites.model';
 
 
-
 /**
  * Responsible for generating dummy data, useful for development Not responsible
  * for *injecting* dummy data, must be called from components.
@@ -37,6 +36,7 @@ export class DummyDataService {
       person.address = this.generateAddress();
       person.email = person.firstName[0].toLowerCase() + person.lastName.toLowerCase() + "@gmail.com";
       person.renewalDate =  this.randomDate(today, nearFuture);
+
       result.push(person);
     }
 
@@ -110,8 +110,6 @@ export class DummyDataService {
     person.siteAccess.push(SA)
     site.siteAccess.push(SA);
 
-
-
     return SA;
   }
 
@@ -145,16 +143,32 @@ export class DummyDataService {
 
   /** Edits the Person in place, setting it up for the Applicant module */
   setPersonToApplicant(person: Person): void {
-    console.log('SETTING PERSON TO APPLICANT');
+
     // TODO: Don't overwrite values if there's something already there!
     person.name = "James Smith";
     person.phone = "250-592-8553"
     person.email = "jsmith@email.com";
     person.renewalDate = new Date(2018, 10, 12);
+
+    person.dateOfBirth = this.generateDateOfBirth();
+    person.phone = '250-555-5555';
+    person.phoneSecondary = '604-555-5555';
+    person.address = this.generateAddress();
+    person.email = person.firstName[0].toLowerCase() + person.lastName.toLowerCase() + "@gmail.com";
+
+    const today = new Date();
+    /** We want nearFuture show that they show up in Upcoming Renewals */
+    const nearFuture =  new Date(today.getFullYear(), today.getMonth() + 4, today.getDate())
+    person.renewalDate =  this.randomDate(today, nearFuture);
+
+    // Create sites for applicant dashboard
+    const sites = this.createSites( Math.ceil(Math.random() * 5) );
+    for (let site of sites) {
+      this.createSiteAccessAndAssociate(site, person);
+    }
   }
 
   // --- Helpers
-
   private getRandomElFromArray<T>(arr: T[]): T {
     return arr[Math.ceil(Math.random() * arr.length) - 1];
   }
@@ -182,7 +196,6 @@ export class DummyDataService {
     const streetNames = ['Kings', 'Main', 'Fort', 'Yates', 'Douglas'];
     const address = new Address();
 
-    //let street = `${Math.ceil(Math.random() * 8000)} ${this.getRandomElFromArray(streetNames)} St.`;
     address.street = `${Math.ceil(Math.random() * 8000)} ${this.getRandomElFromArray(streetNames)} St.`;
     address.postal = 'V9R 2VR';
     address.country = 'Canada';

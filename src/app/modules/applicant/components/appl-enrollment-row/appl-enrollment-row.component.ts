@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {EnrollmentRowChild, EnrollmentRowItem} from '../../../verifier/components/enrollment-row/enrollment-row.interface';
 import {Base} from '../../../../core/base/base.class';
 import {loadInOut, openState, openStateChild, openStateDisable} from '../../../../animations/animations';
+import {ApplEnrollmentRowChild, ApplEnrollmentRowItem} from './appl-enrollment-row.interface';
 
 const TIMING = "250ms";
 
@@ -14,17 +15,19 @@ const TIMING = "250ms";
 })
 export class ApplEnrollmentRowComponent extends Base implements OnInit {
 
-  @Input() rowData: EnrollmentRowItem;
+  @Input() rowData: ApplEnrollmentRowItem;
   @Input() primaryType: "User" | "Site" = "Site";
 
   @Output() onRowOpened = new EventEmitter<any>();
   public openState: string = 'closed';
 
-  constructor(private router: Router) {
+  constructor() {
     super();
+    console.log('ApplEnrollmentRowComponent');
   }
 
   ngOnInit() {
+
     if (!this.rowData) {
       return;
     }
@@ -51,7 +54,7 @@ export class ApplEnrollmentRowComponent extends Base implements OnInit {
     this.openState = 'closed';
   }
 
-  expandedRowClick(row: EnrollmentRowChild) {
+  expandedRowClick(row: ApplEnrollmentRowChild) {
     this.siteAccessRequiringAttention.map(x => x.open = false);
     row.open = !row.open;
   }
@@ -85,13 +88,6 @@ export class ApplEnrollmentRowComponent extends Base implements OnInit {
   canOpen() {
     return this.siteAccessRequiringAttention.length >= 1;
   }
-
-  /*
-  goToEnrollmentPage() {
-    const link = '/verifier/enrollment/' + this.primaryType.toLowerCase();
-    this.router.navigate([link, this.rowData.associatedObjectId]);
-  }
-*/
 }
 
 
