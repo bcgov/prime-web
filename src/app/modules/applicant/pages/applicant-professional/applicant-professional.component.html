@@ -4,15 +4,16 @@
   previousPageLink="/applicant/contact">
 </prime-applicant-breadcrumbs>
 
-<div class="row">
-  <div class="col-sm-6">
-    Do you have a college certification?
-  </div>
-  <div class="col-sm-1">
-    <prime-toggle [(data)]="applicant.hasCollege"></prime-toggle>
+<div class="col-sm-8">
+  <div class="row">
+    <div class="col-sm-10">
+      Do you have a college certification?
+    </div>
+    <div class="col-sm-2">
+      <prime-toggle [(data)]="applicant.hasCollege"></prime-toggle>
+    </div>
   </div>
 </div>
-
 
 <div *ngIf="applicant.hasCollege === true" class='d-flex justify-content-between border p-3'>
   <div class="row">
@@ -27,15 +28,21 @@
         </option>
       </select>
     </div>
-    <div *ngIf="collegeValue() !== ''" class="row">
+    <div *ngIf="collegeCurrValue() !== ''" class="row">
       <div class="col d-inline-flex flex-column">
         <label for="collegeNumber">College Number</label>
         <input type="text" name="collegeNumber" id="collegeNumber"
-               [value]="collegeValue()" class="form-control" disabled>
+               [value]="collegeCurrValue()" class="form-control" disabled>
       </div>
       <div class="col d-inline-flex flex-column">
         <label for="licenseNumber">License Number</label>
+        <!--<input type="text" name="licenseNumber" id="licenseNumber" ng-model="licenseNumber"-->
+        <!--maxlength="12" class="form-control" required>-->
+        <!--<input type="text" name="licenseNumber" id="licenseNumber"-->
+        <!--[(ngModel)]="inputFields.licenseNumber" #name="ngModel"-->
+        <!--maxlength="12" class="form-control">-->
         <input type="text" name="licenseNumber" id="licenseNumber"
+               [value]="licenseNumberSelector" (change)="licenseNumberSelector = $event.target.value"
                maxlength="12" class="form-control">
       </div>
       <div *ngIf="collegeTypesSelector === 'CPBC'" class="col d-inline-flex flex-column">
@@ -73,7 +80,9 @@
       </div>
       <div class="col d-inline-flex flex-column">
         <label for="">License Expiry</label>
-        <prime-datepicker></prime-datepicker>
+        <prime-datepicker [(date)]="applicant.licenceExpiry"></prime-datepicker>
+        <!--TODO: wrong reference-->
+        <!--<prime-datepicker size='mini' dateFormat="yyyy/mm/dd" [disabled]="!editable" [(date)]="siteAccess.startDate" class='ml-1'></prime-datepicker>-->
       </div>
       <div *ngIf="collegeTypesSelector === 'CRNBC'" class="col d-inline-flex flex-column">
         <label for="advancedPracticeCertification">Advanced Practice Certification</label>
@@ -87,28 +96,49 @@
         </select>
       </div>
     </div>
-
-    <!-- Buttons -->
-    <div class="d-flex flex-row-reverse">
-      <a href="#">
-        <span>x</span>
-        <!--<span class="glyphicon glyphicon-remove"></span>-->
-      </a>
-      <a href="#">
-        <span>+</span>
-        <!--<span class="glyphicon glyphicon-plus-sign"></span>-->
-      </a>
-    </div>
   </div>
+
+  <!-- Buttons -->
+  <ng-container *ngIf="collegeCurrValue().length
+                      && licenseNumberLength()
+                      && (  (  collegeTypesSelector === 'CPBC'
+                            && licenseClassCPCurrValue().length)
+                         || (  collegeTypesSelector === 'CRNBC'
+                            && licenseClassCRNCurrValue().length
+                            && advancedPracticeCertificationCurrValue().length)
+                         || (  collegeTypesSelector === 'CPSBC'
+                            && licenseClassCPSCurrValue().length))">
+      <span class='d-flex'>
+        <ng-container *ngIf="collegeCurrValue().length">
+          <a class='mx-1'>
+            <i class="fa fa-times fa-2x" aria-label="Delete"></i>
+          </a>
+        </ng-container>
+        <a class='mx-1'>
+          <i class="fa fa-plus-circle fa-2x" aria-label="Add"></i>
+        </a>
+      </span>
+  </ng-container>
 </div>
 
 
-<div *ngIf="applicant.hasCollege === false" class="row">
-  <div class="col-sm-6">
-    Do you have a Device Provider?
-  </div>
-  <div class="col-sm-1">
-    <prime-toggle [(data)]="applicant.isDeviceProvider"></prime-toggle>
+<div *ngIf="applicant.hasCollege === false
+         || (  collegeCurrValue().length
+            && licenseNumberLength()
+            && (  (  collegeTypesSelector === 'CPBC'
+                  && licenseClassCPCurrValue().length)
+               || (  collegeTypesSelector === 'CRNBC'
+                  && licenseClassCRNCurrValue().length
+                  && advancedPracticeCertificationCurrValue().length)
+               || (  collegeTypesSelector === 'CPSBC'
+                  && licenseClassCPSCurrValue().length)))" class="col-sm-8 with-top-margin">
+  <div class="row">
+    <div class="col-sm-10">
+      Do you have a Device Provider?
+    </div>
+    <div class="col-sm-2">
+      <prime-toggle [(data)]="applicant.isDeviceProvider"></prime-toggle>
+    </div>
   </div>
 </div>
 
@@ -117,32 +147,39 @@
     <div class="col d-inline-flex flex-column">
       <label for="deviceProviderNumber">License Number</label>
       <input type="text" name="deviceProviderNumber" id="deviceProviderNumber"
+             [value]="deviceProviderNumberSelector"
+             (change)="deviceProviderNumberSelector = $event.target.value"
              maxlength="12" class="form-control">
       <!--<input type="text" name="deviceProviderNumber" id="deviceProviderNumber"-->
-             <!--maxlength="{{maxLengthValue('DEVICE_PROVIDER_NUMBER')}}" class="form-control">-->
+      <!--maxlength="{{maxLengthValue('DEVICE_PROVIDER_NUMBER')}}" class="form-control">-->
     </div>
   </div>
 
   <!-- Buttons -->
-  <div class="d-flex flex-row-reverse">
-    <a href="#">
-      <span>x</span>
-      <!--<span class="glyphicon glyphicon-remove"></span>-->
-    </a>
-    <a href="#">
-      <span>+</span>
-      <!--<span class="glyphicon glyphicon-plus-sign"></span>-->
-    </a>
-  </div>
+  <ng-container *ngIf="deviceProviderNumberLength()">
+      <span class='d-flex'>
+        <ng-container *ngIf="deviceProviderNumberLength()">
+          <a class='mx-1'>
+            <i class="fa fa-times fa-2x" aria-label="Delete"></i>
+          </a>
+        </ng-container>
+        <a class='mx-1'>
+          <i class="fa fa-plus-circle fa-2x" aria-label="Add"></i>
+        </a>
+      </span>
+  </ng-container>
 </div>
 
 
-<div *ngIf="applicant.isDeviceProvider === false" class="row">
-  <div class="col-sm-6">
-    Are you working on-behalf?
-  </div>
-  <div class="col-sm-1">
-    <prime-toggle [(data)]="applicant.workingOnBehalf"></prime-toggle>
+<div *ngIf="applicant.isDeviceProvider === false
+         || deviceProviderNumberLength()" class="col-sm-8 with-top-margin">
+  <div class="row">
+    <div class="col-sm-10">
+      Are you working on-behalf?
+    </div>
+    <div class="col-sm-2">
+      <prime-toggle [(data)]="applicant.workingOnBehalf"></prime-toggle>
+    </div>
   </div>
 </div>
 
@@ -162,20 +199,24 @@
   </div>
 
   <!-- Buttons -->
-  <div class="d-flex flex-row-reverse">
-    <a href="#">
-      <span>x</span>
-      <!--<span class="glyphicon glyphicon-remove"></span>-->
-    </a>
-    <a href="#">
-      <span>+</span>
-      <!--<span class="glyphicon glyphicon-plus-sign"></span>-->
-    </a>
-  </div>
+  <ng-container *ngIf="jobTitleCurrValue().length">
+      <span class='d-flex'>
+        <ng-container *ngIf="collegeCurrValue().length">
+          <a class='mx-1'>
+            <i class="fa fa-times fa-2x" aria-label="Delete"></i>
+          </a>
+        </ng-container>
+        <a class='mx-1'>
+          <i class="fa fa-plus-circle fa-2x" aria-label="Add"></i>
+        </a>
+      </span>
+  </ng-container>
 </div>
 
 
-<section *ngIf="applicant.workingOnBehalf === false" class="row">
+<section *ngIf="applicant.workingOnBehalf === false
+             || jobTitleCurrValue().length"
+         class="row with-top-margin">
   <div class="col-sm-8">
     <div class="row">
       <div class="col-sm-10">
@@ -190,7 +231,7 @@
                 name="informationContraventionDetail" id="informationContraventionDetail"></textarea>
     </div>
 
-    <div class="row">
+    <div class="row with-top-margin">
       <div class="col-sm-10">
         Have you ever had your registration with a governing body of a health profession suspended or cancelled?
       </div>
@@ -203,7 +244,7 @@
                 name="cancelledRegistrationDetail" id="cancelledRegistrationDetail"></textarea>
     </div>
 
-    <div class="row">
+    <div class="row with-top-margin">
       <div class="col-sm-10">
         Have you ever had Terms and Conditions imposed on your license as a result of disciplinary actions taken by a governing body?
       </div>
@@ -216,7 +257,7 @@
                 name="licenseConditionDetail" id="licenseConditionDetail"></textarea>
     </div>
 
-    <div class="row">
+    <div class="row with-top-margin">
       <div class="col-sm-10">
         Have you ever had your access to PharmaNet suspended or revoked?
       </div>

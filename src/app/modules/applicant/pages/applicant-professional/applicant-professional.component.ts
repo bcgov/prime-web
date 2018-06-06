@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { PrimeDataService } from '../../../../services/prime-data.service';
-import { CollegeTypes } from '../../../../models/colleges.enum';
-import { LicenseClassCPTypes } from '../../../../models/colleges.enum';
-import { LicenseClassCRNTypes } from '../../../../models/colleges.enum';
-import { LicenseClassCPSTypes } from '../../../../models/colleges.enum';
-import { AdvancedPracticeCertificationTypes } from '../../../../models/colleges.enum';
-import { JobTitleTypes } from '../../../../models/colleges.enum';
-import { MaxLengthTypes } from '../../../../models/colleges.enum';
+import { CollegeTypes,
+  LicenseClassCPTypes,
+  LicenseClassCRNTypes,
+  LicenseClassCPSTypes,
+  AdvancedPracticeCertificationTypes,
+  JobTitleTypes,
+  MaxLengthTypes } from '../../../../models/colleges.enum';
 
 @Component({
   selector: 'prime-applicant-professional',
@@ -20,6 +20,19 @@ export class ApplicantProfessionalComponent implements OnInit {
   public licenseClassCPSTypesSelector               = 'pleaseSelect';
   public advancedPracticeCertificationTypesSelector = 'pleaseSelect';
   public jobTitleTypesSelector                      = 'pleaseSelect';
+
+  public licenseNumberSelector = '';
+  public deviceProviderNumberSelector = '';
+
+  // /** Binds to the form inputs */
+  // public inputFields: {
+  //   licenseNumber?: string,
+  //   deviceProviderNumber?: string,
+  //   informationContraventionDetail?: string,
+  //   cancelledRegistrationDetail?: string,
+  //   licenseConditionDetail?: string,
+  //   revokedAccessDetail?: string
+  // } = {};
 
   constructor(private dataService: PrimeDataService) { }
 
@@ -65,9 +78,34 @@ export class ApplicantProfessionalComponent implements OnInit {
     return Object.keys(MaxLengthTypes);
   }
 
-  collegeValue() {
+  collegeCurrValue() {
     const selection = this.collegeTypesSelector;
     return CollegeTypes[selection] ? CollegeTypes[selection] : '';
+  }
+
+  licenseClassCPCurrValue() {
+    const selection = this.licenseClassCPTypesSelector;
+    return LicenseClassCPTypes[selection] ? LicenseClassCPTypes[selection] : '';
+  }
+
+  licenseClassCRNCurrValue() {
+    const selection = this.licenseClassCRNTypesSelector;
+    return LicenseClassCRNTypes[selection] ? LicenseClassCRNTypes[selection] : '';
+  }
+
+  licenseClassCPSCurrValue() {
+    const selection = this.licenseClassCPSTypesSelector;
+    return LicenseClassCPSTypes[selection] ? LicenseClassCPSTypes[selection] : '';
+  }
+
+  advancedPracticeCertificationCurrValue() {
+    const selection = this.advancedPracticeCertificationTypesSelector;
+    return AdvancedPracticeCertificationTypes[selection] ? AdvancedPracticeCertificationTypes[selection] : '';
+  }
+
+  jobTitleCurrValue() {
+    const selection = this.jobTitleTypesSelector;
+    return JobTitleTypes[selection] ? JobTitleTypes[selection] : '';
   }
 
   licenseClassCPValue(selection) {
@@ -90,7 +128,21 @@ export class ApplicantProfessionalComponent implements OnInit {
     return JobTitleTypes[selection];
   }
 
-  maxLengthValue(selection) {
-    return MaxLengthTypes[selection];
+  // maxLengthValue(selection) {
+  //   return MaxLengthTypes[selection];
+  // }
+
+  licenseNumberLength() {
+    const selection = this.licenseNumberSelector;
+    return selection.length;
   }
+
+  deviceProviderNumberLength() {
+    const selection = this.deviceProviderNumberSelector;
+    return selection.length;
+  }
+
+  // get licenseNumberHasValue(): number {
+  //   return this.inputFields.licenseNumber.length();
+  // }
 }

@@ -33,14 +33,17 @@ $placeholder-font-size: $note-font-size;
   max-width: 26em;
 }
 
-.glyphicon-plus-sign {
+.fa-plus-circle {
   color: green;
 }
 
-.glyphicon-remove {
+.fa-times {
   color: red;
 }
 
+.with-top-margin {
+  margin-top: 5px;
+}
 
 // the following entries are related to the placeholder
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
