@@ -8,15 +8,15 @@ export class ApplicantDataService {
     return [
       {
         title: "Contact",
-        isActive: true,
+        route: 'contact',
       },
       {
         title: "Professional",
-        isActive: false,
+        route: 'professional',
       },
       {
         title: "Self Declaration",
-        isActive: false,
+        route: 'self-declaration'
       }
     ]
   }

@@ -1,51 +1,44 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, ViewChildren, QueryList } from '@angular/core';
+import { Router } from '@angular/router';
+import { Base } from '../../../../core/base/base.class';
 
 @Component({
   selector: 'prime-wizard-progress-bar',
   templateUrl: './wizard-progress-bar.component.html',
   styleUrls: ['./wizard-progress-bar.component.scss']
 })
-export class WizardProgressBarComponent implements OnInit {
+export class WizardProgressBarComponent extends Base implements OnInit {
   @Input() progressSteps: WizardProgressItem[] = [];
+  @ViewChild('stepContainer') stepContainer: ElementRef
+  @ViewChildren('steps') steps: QueryList<ElementRef>;
 
-  constructor() { }
+  constructor(private router: Router) {
+    super();
+   }
 
   ngOnInit() {
   }
 
-  //FIXME: THIS IS WRONG! VALUES AREN'T CORRECT!  Need to work on the core math/algorithm of it.  Some rough numbers are down at bottom of file.
   calculateProgressPercentage(): Number {
-    const denominator = this.progressSteps.length;
-    const index = this.progressSteps.findIndex(x => x.isActive === true);
-    const numerator = index + 1;
+    const denominator = this.progressSteps.length + 1;
+    const numerator = this.activeIndex + 1;
 
     if (denominator === 0 || numerator <= 0 ){
-      // TODO: Replace with Exception
       console.error("Unable to calculate progress percentage. Is progressSteps properly defined?")
-      return;
+      // Defaulting to full bar for now.
+      return 100;
     }
 
-    const value = Math.round((numerator / denominator) * 100);
-    console.log('calculateProgressPercentage', value)
-    // return value;
-    return 21;
+    return Math.round((numerator / denominator) * 100);
+  }
 
-    // return (numerator / denominator) * 100;
+  get activeIndex(): number {
+    return this.progressSteps.findIndex(x => this.router.url.includes(x.route));
   }
 
 }
 
 interface WizardProgressItem {
-  title: String;
-  isActive: boolean;
+  title: string;
+  route: string;
 }
-/**
-1: 21.33
-2: 47.33
-3: 76.33
-
-Need to restrict range, so that a value of 0 always winds up being our first item.
-
-
-
- */
