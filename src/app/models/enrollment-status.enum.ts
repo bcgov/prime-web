@@ -5,7 +5,7 @@ export enum EnrollmentStatus {
   Incomplete = "Incomplete",
   Returned = "Returned to applicant",
   Declined = "Declined",
-  // Approved = "Approved", //Same as active?
+  Approved = "Approved",
   Active = "Active",
   Expired = "Expired",
 }
