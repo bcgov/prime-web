@@ -24,7 +24,7 @@ export class WizardProgressBarComponent extends Base implements OnInit {
     const numerator = this.activeIndex + 1;
 
     if (denominator === 0 || numerator <= 0 ){
-      console.error("Unable to calculate progress percentage. Is progressSteps properly defined?")
+      // console.error("Unable to calculate progress percentage. Is progressSteps properly defined?")
       // Defaulting to full bar for now.
       return 100;
     }

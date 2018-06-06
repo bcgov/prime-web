@@ -56,7 +56,7 @@ export class Person extends Base {
   // if ALL People were previously Applicants, then there's no need to make the
   // distinction
   license;
-  accessAcceptance;
+  accessAcceptance = [false, false, false];
   hasCollege: boolean;
   isDeviceProvider: boolean;
   deviceProviderNumber;
