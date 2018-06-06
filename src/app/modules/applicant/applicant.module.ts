@@ -9,6 +9,7 @@ import { ApplicantSelfDeclarationComponent } from './pages/applicant-self-declar
 import { ApplicantAccessAcceptanceComponent } from './pages/applicant-access-acceptance/applicant-access-acceptance.component';
 import { FormsModule } from '@angular/forms';
 import { ApplicantBreadcrumbsComponent } from './components/applicant-breadcrumbs/applicant-breadcrumbs.component';
+import { AlertModule } from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { ApplicantBreadcrumbsComponent } from './components/applicant-breadcrumb
     ApplicantRoutingModule,
     CoreModule,
     FormsModule,
+    AlertModule,
   ],
   declarations: [ApplicantDashboardComponent, ApplicantContactComponent, ApplicantProfessionalComponent, ApplicantSelfDeclarationComponent, ApplicantAccessAcceptanceComponent, ApplicantBreadcrumbsComponent]
 })
