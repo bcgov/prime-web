@@ -1,9 +1,9 @@
 import * as moment from 'moment';
 import { Base } from '../core/base/base.class';
-import { BadgeLevel } from '../modules/verifier/components/enrollment-row/enrollment-row.interface';
 import { EnrollmentStatus } from './enrollment-status.enum';
 import { Person, Role, Verifier } from './person.model';
 import { Address } from './addresses.model';
+import {BadgeLevel} from '../core/enrollment-row/enrollment-row.class';
 
 //-----------------------------------------------------------------------------
 // SITES

@@ -9,13 +9,9 @@ import { ApplicantSelfDeclarationComponent } from './pages/applicant-self-declar
 import { ApplicantAccessAcceptanceComponent } from './pages/applicant-access-acceptance/applicant-access-acceptance.component';
 import { FormsModule } from '@angular/forms';
 import { ApplicantBreadcrumbsComponent } from './components/applicant-breadcrumbs/applicant-breadcrumbs.component';
-<<<<<<< HEAD
 import { ApplEnrollmentListComponent } from './components/appl-enrollment-list/appl-enrollment-list.component';
 import { ApplEnrollmentRowComponent } from './components/appl-enrollment-row/appl-enrollment-row.component';
-;
-=======
 import { AlertModule } from 'ngx-bootstrap';
->>>>>>> master
 
 @NgModule({
   imports: [

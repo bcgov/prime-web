@@ -12,7 +12,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {PrimeDataService} from '../../../../services/prime-data.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-describe('EnrollmentRowComponent', () => {
+describe('EnrollmentRowClass', () => {
   let component: EnrollmentRowComponent;
   let fixture: ComponentFixture<EnrollmentRowComponent>;
 

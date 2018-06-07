@@ -1,41 +1,52 @@
-import { Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { loadInOut, openState, openStateChild, openStateDisable } from '../../../../animations/animations';
-import { Base } from '../../../../core/base/base.class';
-import { EnrollmentRowChild, EnrollmentRowItem } from './enrollment-row.interface';
+import {Site, SiteAccess} from '../../../../models/sites.model';
+import {Collection} from '../../../../models/collections.model';
+import {EnrollmentRow, EnrollmentRowChild, RowStates} from '../../../../core/enrollment-row/enrollment-row.class';
 
+export interface EnrollmentRowItem {
+  title: string;
+  // TODO: Replace any with new interfaces
+  sites: Site[];
+  users?: any[];
 
-const TIMING = "250ms";
+  /** associatedObjectId and title both refer to the same underlying object. By
+   * having an id, we can lookup from the EnrollmentRow -> item, e.g. when
+   * navigating between pages */
+  associatedObjectId: string;
+
+  /** Optional and only used in one config. */
+  collections?: Collection[];
+  expandableRows?: SiteAccess[];
+}
+
 @Component({
   selector: 'prime-enrollment-row',
   templateUrl: './enrollment-row.component.html',
   styleUrls: ['./enrollment-row.component.scss'],
   animations: [openState, openStateChild, loadInOut, openStateDisable]
 })
-export class EnrollmentRowComponent extends Base implements OnInit {
+export class EnrollmentRowComponent extends EnrollmentRow implements OnInit {
+
   @Input() rowData: EnrollmentRowItem;
   @Input() primaryType: "User"|"Site" = "Site";
-
-  @Output() onRowOpened = new EventEmitter<any>();
-  public openState: string = 'closed';
 
   constructor(private router: Router) {
     super();
   }
 
   ngOnInit() {
-    if (!this.rowData ) {return}
+    if (!this.rowData ) { return; }
     this.siteAccessRequiringAttention.map(x => x.open = false);
   }
-
-  @HostBinding('@loadInOut') true;
 
   toggleRow() {
 
     if (this.canOpen()){
-      this.openState = this.openState === 'opened' ? 'closed' : 'opened';
+      this.openState = this.openState === RowStates.Opened ? RowStates.Closed  : RowStates.Opened;
 
-      if (this.openState === 'opened'){
+      if (this.openState === RowStates.Opened ){
         this.onRowOpened.emit(this);
         // First row is open by default
         this.siteAccessRequiringAttention[0].open = open;
@@ -44,11 +55,7 @@ export class EnrollmentRowComponent extends Base implements OnInit {
     }
   }
 
-  closeRow() {
-    this.openState = 'closed';
-  }
-
-  expandedRowClick(row: EnrollmentRowChild){;
+  expandedRowClick(row: EnrollmentRowChild){
     this.siteAccessRequiringAttention.map(x => x.open = false);
     row.open = !row.open;
   }
@@ -68,13 +75,13 @@ export class EnrollmentRowComponent extends Base implements OnInit {
     // All this function does is generate titles for Site Access rows.
     if (this.primaryType === "Site"){
       return this.rowData.expandableRows.map(siteAccess => {
-        siteAccess.title = `${siteAccess.site.name} / ${siteAccess.person.name}`
+        siteAccess.title = `${siteAccess.site.name} / ${siteAccess.person.name}`;
         return siteAccess;
       });
     }
     else {
       return this.rowData.expandableRows.map(siteAccess => {
-        siteAccess.title = `${siteAccess.site.name}`
+        siteAccess.title = `${siteAccess.site.name}`;
         return siteAccess;
       });
     }

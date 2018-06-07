@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { EnrollmentRowItem } from '../modules/verifier/components/enrollment-row/enrollment-row.interface';
 import { MillerColumnConfig } from '../modules/verifier/components/miller-columns/miller-columns.interface';
 import { Collection } from '../models/collections.model';
 import { EnrollmentStatus } from '../models/enrollment-status.enum';
 import { Person } from '../models/person.model';
 import { Site, SiteAccess } from '../models/sites.model';
-import {ApplEnrollmentRowItem} from '../modules/applicant/components/appl-enrollment-row/appl-enrollment-row.interface';
+import {EnrollmentRowItem} from '../modules/verifier/components/enrollment-row/enrollment-row.component';
+import {ApplEnrollmentRowItem} from '../modules/applicant/components/appl-enrollment-row/appl-enrollment-row.component';
 
 
 @Injectable()
@@ -23,9 +23,6 @@ export class PrimeDataService {
 
   /** The logged in user interacting with the webapp. When in the Applicant dashboard, this would be the applicant. */
   user: Person = new Person();
-
-
-
 
 
   getEnrollmentBySite(): EnrollmentRowItem[] {

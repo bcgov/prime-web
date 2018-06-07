@@ -11,7 +11,7 @@ import {DatepickerComponent} from '../../../../core/datepicker/datepicker.compon
 import {NgxMyDatePickerModule} from 'ngx-mydatepicker';
 import {VerifierService} from '../../../../services/verifier.service';
 
-describe('EnrollmentListComponent', () => {
+describe('EnrollmentListClass', () => {
   let component: EnrollmentListComponent;
   let fixture: ComponentFixture<EnrollmentListComponent>;
 
