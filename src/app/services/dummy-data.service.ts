@@ -36,10 +36,7 @@ export class DummyDataService {
       person.address = this.generateAddress();
       person.email = person.firstName[0].toLowerCase() + person.lastName.toLowerCase() + "@gmail.com";
       person.renewalDate =  this.randomDate(today, nearFuture);
-<<<<<<< HEAD
-=======
-      person.primeUserId = person.firstName[0] + person.lastName + '--' + person.objectId.slice(0, 4)
->>>>>>> master
+      person.primeUserId = person.firstName[0] + person.lastName + '--' + person.objectId.slice(0, 4);
 
       result.push(person);
     }
