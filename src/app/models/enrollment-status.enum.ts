@@ -1,5 +1,6 @@
 /** The reason we're showing the notification in the first place. */
 export enum EnrollmentStatus {
+  New = "New",
   Initiated = "Initiated",
   Pending = "Pending",
   Incomplete = "Incomplete",

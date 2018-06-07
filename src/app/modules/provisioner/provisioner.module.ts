@@ -7,7 +7,10 @@ import { ProvisionerRoutingModule } from './provisioner-routing.modules';
 import { VerifierModule } from '../verifier/verifier.module';
 import { ProvisionerWidgetsComponent } from './components/provisioner-widgets/provisioner-widgets.component';
 import { TooltipModule } from 'ngx-bootstrap';
-import { PrimeDataService } from '../../services/prime-data.service';
+import { ProvisionerDetailsComponent } from './pages/provisioner-details/provisioner-details.component';
+import { FormsModule } from '@angular/forms';
+import { ProvisionerTableComponent } from './components/provisioner-table/provisioner-table.component';
+
 
 @NgModule({
   imports: [
@@ -16,13 +19,16 @@ import { PrimeDataService } from '../../services/prime-data.service';
     ProvisionerRoutingModule,
     NgxChartsModule,
     VerifierModule,
-    TooltipModule.forRoot()
+    TooltipModule.forRoot(),
+    FormsModule
 
   ],
   providers: [],
   declarations: [
     ProvisionerDashboardComponent,
-    ProvisionerWidgetsComponent
+    ProvisionerWidgetsComponent,
+    ProvisionerDetailsComponent,
+    ProvisionerTableComponent
   ]
 })
 

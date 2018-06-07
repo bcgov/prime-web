@@ -45,8 +45,11 @@ export class SiteAccessWidgetsComponent implements OnInit {
   }
 
   // Make enum iterable strings accessible in template
-  get EnrollmentStatus() {
-    return Object.keys(EnrollmentStatus);
+  // get EnrollmentStatus() {
+  //   return Object.keys(EnrollmentStatus);
+  // }
+  get EnrollmentStatus(){
+    return Object.keys(this.verifierService.VerifierEnrollmentStatus);
   }
 
   //days: 30/60/90

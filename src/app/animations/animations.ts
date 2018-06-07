@@ -100,3 +100,12 @@ export const growHorizontal = trigger('growHorizontal', [
   ])
 ])
 
+export const fadeIn = trigger('fadeIn', [
+  transition('void => *', [
+    animate(TIMING, keyframes([
+      style({opacity: '0'}),
+      style({opacity: '1'}),
+    ]))
+  ]),
+])
+

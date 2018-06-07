@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { ApplicantAccessAcceptance} from './applicant-access-acceptance';
+import {PrimeDataService} from '../../../../services/prime-data.service';
 
 @Component({
   selector: 'prime-applicant-access-acceptance',
@@ -13,22 +14,32 @@ export class ApplicantAccessAcceptanceComponent implements OnInit {
       'wejifojwoifjwjiofjwojefwiaojefwiojfeoiwjfiowjfowjefoiwjfiowjefoiwejfi' +
       'jfwoijfowijfojfowijefwoiajfwoijfewoijfwoijfwoifjwoiejfwifjwioefjwiejfowijefiwojefowjefjwefoijwefjwfo' +
       'jfowjfwiojfwfjwfjwifjwofjwiofjwoejfowijfeoiwjefoifwfwe', false),
-    new ApplicantAccessAcceptance('jfwoejo', false),
-    new ApplicantAccessAcceptance('jfwoejo', false)
+    new ApplicantAccessAcceptance('vsnoefnonvnvowehriowhefwovnwvonwvwoevnwioe' +
+      'weiruvnwovnoqropewugbmnnjwepjwvwpjvwpevkwpeowjeorjweogjweviowjegvowefjwoefjw' +
+      'yjj,bmvnwqiwuqiweqivmbneotueoyuroruhiberobjebojeoejberoberberberber' +
+      'uqqoheiogvnwevwenvkwemvwevwepvmwefwef', false),
+    new ApplicantAccessAcceptance('bvmbuourjnvnlksdjfeoiuiouteriouopbbvihfuiefh' +
+      'ewuunmmozmncxbsdisghiquwegoierjperbjebpojerpbjerbperjbperbjeoprbnbngnbjkfglmvnbzhgqpithbn' +
+      'bvzgdcyfweuyfguygvievherboejrberbjoerbjoerbjbrtb', false)
 
   ];
 
-  canContinue: Boolean = false;
-
-  constructor() { }
+  constructor(private dataService: PrimeDataService) { }
 
   ngOnInit() {
+
+    //TODO: Remove this later, just for development
+    //this.dataService.user.accessAcceptance = {renewalDate: new Date(); }
   }
 
 
-  shouldDisable() {
-    // Are all checkboxes checked? Loop over accessAceptance and check isAccepted
-    return false;
+  disableContinue() {
+    return this.accessAcceptances
+      .map(item => item.isAccepted)
+      .filter(item => item === false).length >= 1;
+
   }
-}
+
+  }
+
 
