@@ -7,6 +7,8 @@ import { CollegeTypes,
   AdvancedPracticeCertificationTypes,
   JobTitleTypes,
   MaxLengthTypes } from '../../../../models/colleges.enum';
+import { DeviceProvider } from '../../../../models/device-provider.model';
+import { DEVICEPROVIDERS } from '../../components/device-provider-list/device-provider-list.component';
 
 @Component({
   selector: 'prime-applicant-professional',
@@ -22,7 +24,9 @@ export class ApplicantProfessionalComponent implements OnInit {
   public jobTitleTypesSelector                      = 'pleaseSelect';
 
   public licenseNumberSelector = '';
-  public deviceProviderNumberSelector = '';
+  // public deviceProviderNumberSelector = '';
+
+  deviceProvider: DeviceProvider = { dpNumber: '' }
 
   // /** Binds to the form inputs */
   // public inputFields: {
@@ -137,10 +141,10 @@ export class ApplicantProfessionalComponent implements OnInit {
     return selection.length;
   }
 
-  deviceProviderNumberLength() {
-    const selection = this.deviceProviderNumberSelector;
-    return selection.length;
-  }
+  // deviceProviderNumberLength() {
+  //   const selection = this.deviceProviderNumberSelector;
+  //   return selection.length;
+  // }
 
   // get licenseNumberHasValue(): number {
   //   return this.inputFields.licenseNumber.length();
