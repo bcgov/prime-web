@@ -1,0 +1,13 @@
+<progressbar
+  [value]="calculateProgressPercentage()"
+  [max]="100"
+  [animate]="true">
+</progressbar>
+
+<div class="step-container" #stepContainer>
+
+  <div class="step" #steps  *ngFor="let step of progressSteps" [ngClass]="{active: step.isActive}">
+    <span class="step-text">{{step.title}}</span>
+  </div>
+
+</div>

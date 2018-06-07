@@ -1,0 +1,27 @@
+prime-applicant-breadcrumbs {
+
+  prime-wizard-progress-bar {
+    // Simple styling for prototype, doesn't play nice with mobile breakpoints right now.
+    padding: 0 10%;
+  }
+
+  .controls {
+    // Keeps the size of the element fixed even if it changes due to replacing the buttons with text.
+    flex-basis: 10.5rem;
+    min-width: 10.5rem;
+  }
+
+ // Override defaults, shrink vertically.
+ .alert, .alert .close {
+   padding: 0.35rem 1.25rem;
+ }
+ .alert {margin-bottom: 0;}
+
+ .disabled {
+   color: #58595a; //Desaturated same hue
+   opacity: 0.8;
+   pointer-events: none;
+   cursor: not-allowed;
+ }
+
+}

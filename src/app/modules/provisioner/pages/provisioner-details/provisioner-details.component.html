@@ -1,0 +1,108 @@
+<div class="card">
+  TODO
+  <ul>
+    <li>Binding to LicenseNumber, College, etc, after merging in Kristin's work</li>
+    <li>Implement Site View too</li>
+    <li>Passing in objectId via URL param:
+      <code>/details/user/:id</code>, and
+      <code>/details/site/:id</code>, keeps lookup simpler</li>
+  </ul>
+
+  <p><a routerLink="/provisioner/details/user">Provision by User</a></p>
+  <p><a routerLink="/provisioner/details/site">Provision by Site</a></p>
+</div>
+
+<hr>
+
+<prime-core-breadcrumb>
+  <div left>
+    <a routerLink="/provisioner/">Dashboard</a> /
+    <strong>Provision by {{ IS_SHOWING_PERSON ? "User" : "Site" }}</strong>
+  </div>
+</prime-core-breadcrumb>
+
+
+<hr>
+
+<div class="row" *ngIf="IS_SHOWING_PERSON; else siteDetails">
+  <div class="col">
+    <div class="form-group row">
+      <label for="lastName" class="col-sm-3 col-form-label">
+        Last Name
+      </label>
+      <div class="col-sm-9">
+        <input type="text" disabled class="form-control" id="lastName" name="lastName" [value]="person?.lastName">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="middleName" class="col-sm-3 col-form-label">
+        Middle Name
+      </label>
+      <div class="col-sm-9">
+        <input type="text" disabled class="form-control" id="middleName" name="middleName" [value]="person?.middleName">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="firstName" class="col-sm-3 col-form-label">
+        First Name
+      </label>
+      <div class="col-sm-9">
+        <input type="text" disabled class="form-control" id="firstName" name="firstName" [value]="person?.firstName">
+      </div>
+    </div>
+
+  </div>
+  <div class="col">
+    <div class="form-group row">
+      <label for="lastName" class="col-sm-3 col-form-label">
+        Prime User ID
+      </label>
+      <div class="col-sm-9">
+        <input type="text" disabled class="form-control" id="primeUserId" name="primeUserId" [value]="person?.primeUserId">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="middleName" class="col-sm-3 col-form-label">
+        College Number
+      </label>
+      <div class="col-sm-9">
+        <input type="text" disabled class="form-control" id="collegeNumber" name="collegeNumber" value="TODO">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="firstName" class="col-sm-3 col-form-label">
+        License Number
+      </label>
+      <div class="col-sm-9">
+        <input type="text" disabled class="form-control" id="licenseNumber" name="licenseNumber" value="TODO">
+      </div>
+    </div>
+
+  </div>
+  <div class="col">
+    <div class="form-group row">
+      <label for="middleName" class="col-sm-3 col-form-label">
+        Email
+      </label>
+      <div class="col-sm-9">
+        <input type="text" disabled class="form-control" id="email" name="email" [value]="person?.email">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="firstName" class="col-sm-3 col-form-label">
+        Phone number
+      </label>
+      <div class="col-sm-9">
+        <input type="text" disabled class="form-control" id="phone" name="phone" [value]="person?.phone">
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template class="row" #siteDetails>
+  TODO: Get Site (in Controller) then set up data-binding
+</ng-template>
+
+<prime-provisioner-table></prime-provisioner-table>
