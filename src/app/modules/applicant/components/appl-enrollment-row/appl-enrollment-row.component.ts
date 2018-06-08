@@ -1,7 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {EnrollmentRow, EnrollmentRowChild, RowStates} from '../../../../core/enrollment-row/enrollment-row.class';
+import {EnrollmentRow, EnrollmentRowChild, RowState} from '../../../../core/enrollment-row/enrollment-row.class';
 import {loadInOut, openState, openStateChild, openStateDisable} from '../../../../animations/animations';
 import {SiteAccess} from '../../../../models/sites.model';
+import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
 
 // Specific to this component
 export interface ApplEnrollmentRowItem {
@@ -12,12 +13,14 @@ export interface ApplEnrollmentRowItem {
    * navigating between pages */
   associatedObjectId: string;
 
+
+
   /** Optional and only used in one config. */
   expandableRows?: SiteAccess[];
 }
 
 @Component({
-  selector: 'prime-appl-enrollment-row',
+  selector: 'prime-enrollment-row',
   templateUrl: './appl-enrollment-row.component.html',
   styleUrls: ['./appl-enrollment-row.component.scss'],
   animations: [openState, openStateChild, loadInOut, openStateDisable]
@@ -43,9 +46,9 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
   toggleRow() {
 
     if (this.canOpen()) {
-      this.openState = this.openState === RowStates.Opened ? RowStates.Closed : RowStates.Opened ;
+      this.openState = this.openState === RowState.Opened ? RowState.Closed : RowState.Opened ;
 
-      if (this.openState === RowStates.Opened ) {
+      if (this.openState === RowState.Opened ) {
         this.onRowOpened.emit(this);
         // First row is open by default
         this.siteAccessRequiringAttention[0].open = open;

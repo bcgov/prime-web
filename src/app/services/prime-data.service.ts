@@ -85,21 +85,20 @@ export class PrimeDataService {
     this.user.sites.map(site => {
       const rowItem: ApplEnrollmentRowItem = {
         title: site.name,
-        associatedObjectId: site.objectId
+        associatedObjectId: site.objectId,
       };
-/*
+
       const pending = site.siteAccess
         .filter(sa => sa.status === EnrollmentStatus.Pending);
       const expired = site.siteAccess
         .filter(sa => sa.status === EnrollmentStatus.Expired);
       const declined = site.siteAccess
         .filter(sa => sa.status === EnrollmentStatus.Declined);
-      const approved = site.siteAccess
-        .filter(sa => sa.status === EnrollmentStatus.Approved);
+
 
       const problemAccess = pending.concat(expired, declined);
       rowItem.expandableRows = problemAccess;
-*/
+
       result.push(rowItem);
     });
 

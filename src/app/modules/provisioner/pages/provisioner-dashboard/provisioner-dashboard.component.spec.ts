@@ -4,7 +4,7 @@ import { ProvisionerDashboardComponent } from './provisioner-dashboard.component
 import { EnrollmentListComponent } from '../../../verifier/components/enrollment-list/enrollment-list.component';
 import { VerifierModule } from '../../../verifier/verifier.module';
 import { EnrollmentRowComponent } from '../../../verifier/components/enrollment-row/enrollment-row.component';
-import { EnrollmentProgressRowComponent } from '../../../verifier/components/enrollment-progress-row/enrollment-progress-row.component';
+import { EnrollmentProgressRowComponent } from '../../../../core/enrollment-progress-row/enrollment-progress-row.component';
 import { PillBadgeComponent } from '../../../../core/pill-badge/pill-badge.component';
 import { AddUserButtonComponent } from '../../../../core/add-user-button/add-user-button.component';
 import { InfoButtonComponent } from '../../../verifier/components/user-info-button/user-info-button.component';

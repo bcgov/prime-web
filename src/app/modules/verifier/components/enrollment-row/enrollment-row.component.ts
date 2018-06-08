@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { loadInOut, openState, openStateChild, openStateDisable } from '../../../../animations/animations';
 import {Site, SiteAccess} from '../../../../models/sites.model';
 import {Collection} from '../../../../models/collections.model';
-import {EnrollmentRow, EnrollmentRowChild, RowStates} from '../../../../core/enrollment-row/enrollment-row.class';
+import {EnrollmentRow, EnrollmentRowChild, RowState} from '../../../../core/enrollment-row/enrollment-row.class';
 
 export interface EnrollmentRowItem {
   title: string;
@@ -44,9 +44,9 @@ export class EnrollmentRowComponent extends EnrollmentRow implements OnInit {
   toggleRow() {
 
     if (this.canOpen()){
-      this.openState = this.openState === RowStates.Opened ? RowStates.Closed  : RowStates.Opened;
+      this.openState = this.openState === RowState.Opened ? RowState.Closed  : RowState.Opened;
 
-      if (this.openState === RowStates.Opened ){
+      if (this.openState === RowState.Opened ){
         this.onRowOpened.emit(this);
         // First row is open by default
         this.siteAccessRequiringAttention[0].open = open;

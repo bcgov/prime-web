@@ -25,11 +25,11 @@
 
 <div class="enrollment-item-container">
   <div class="enrollment-item-inner">
-    <prime-appl-enrollment-row
+    <prime-enrollment-row
       *ngFor="let item of data"
       [rowData]='item'
       (onRowOpened)='rowOpened($event)'>
-    </prime-appl-enrollment-row>
+    </prime-enrollment-row>
   </div>
 </div>
 

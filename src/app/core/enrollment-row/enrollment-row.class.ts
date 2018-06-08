@@ -30,7 +30,7 @@ export enum BadgeLevel {
   Success = 'success'
 }
 
-export enum RowStates {
+export enum RowState {
   Closed = 'closed',
   Opened = 'opened',
 }
@@ -41,12 +41,12 @@ export abstract class EnrollmentRow extends Base {
 
   @Output() onRowOpened = new EventEmitter<any>();
 
-  public openState = RowStates.Closed;
+  public openState = RowState.Closed;
 
   @HostBinding('@loadInOut') true;
 
   closeRow() {
-    this.openState = RowStates.Closed;
+    this.openState = RowState.Closed;
   }
 
   // Implemented by derived class

@@ -5,7 +5,7 @@ import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
 import {defaultViewSelector, EnrollmentList} from '../../../../core/enrollment-list/enrollment-list.class';
 
 @Component({
-  selector: 'prime-appl-enrollment-list',
+  selector: 'prime-enrollment-list',
   templateUrl: './appl-enrollment-list.component.html',
   styleUrls: ['./appl-enrollment-list.component.scss']
 })
@@ -30,9 +30,8 @@ export class ApplEnrollmentListComponent extends EnrollmentList implements OnIni
 
   /* OnInit implementation */
   ngOnInit() {
-    console.log('OnInit (ApplEnrollmentListComponent): ' + this.data );
     this.data = this.rowItems;
-    console.log('After set data: ' + this.data );
+    console.log('OnInit (ApplEnrollmentListComponent): ' + this.data );
   }
 
   /* OnDestroy implementation */
