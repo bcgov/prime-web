@@ -7,6 +7,7 @@ import { VerifierModule } from '../verifier/verifier.module';
 import { ProvisionerDetailsComponent } from './pages/provisioner-details/provisioner-details.component';
 import { FormsModule } from '@angular/forms';
 import { ProvisionerTableComponent } from './components/provisioner-table/provisioner-table.component';
+import { ProvisionerListComponent } from './components/provisioner-list/provisioner-list.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { ProvisionerTableComponent } from './components/provisioner-table/provis
   declarations: [
     ProvisionerDashboardComponent,
     ProvisionerDetailsComponent,
-    ProvisionerTableComponent
+    ProvisionerTableComponent,
+    ProvisionerListComponent
   ]
 })
 export class ProvisionerModule { }

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Person } from '../../../../models/person.model';
 import { PrimeDataService } from '../../../../services/prime-data.service';
+import {EnrollmentRowItem} from '../../../verifier/components/enrollment-row/enrollment-row.interface';
 
 @Component({
   selector: 'prime-provisioner-details',
@@ -47,8 +48,10 @@ export class ProvisionerDetailsComponent implements OnInit {
     return this.provisionByType === ProvisionByType.site;
   }
 
+  get provisionerSiteData(): EnrollmentRowItem[] {
+    return this.dataService.getEnrollmentBySite();
+  }
 }
-
 
 enum ProvisionByType {
   user = "user",
