@@ -7,8 +7,7 @@ import { CollegeTypes,
   AdvancedPracticeCertificationTypes,
   JobTitleTypes,
   MaxLengthTypes } from '../../../../models/colleges.enum';
-import { DeviceProvider } from '../../../../models/device-provider.model';
-import { DEVICEPROVIDERS } from '../../components/device-provider-list/device-provider-list.component';
+// import { DeviceProvider } from '../../../../models/device-provider.model';
 
 @Component({
   selector: 'prime-applicant-professional',
@@ -24,9 +23,11 @@ export class ApplicantProfessionalComponent implements OnInit {
   public jobTitleTypesSelector                      = 'pleaseSelect';
 
   public licenseNumberSelector = '';
-  // public deviceProviderNumberSelector = '';
+  public deviceProviderList = [{ dpNumber: '' }];
+  // public deviceProviderList = [{ text: '' }];
 
-  deviceProvider: DeviceProvider = { dpNumber: '' }
+  // deviceProvider: DeviceProvider = { dpNumber: '' }
+
 
   // /** Binds to the form inputs */
   // public inputFields: {
@@ -41,6 +42,19 @@ export class ApplicantProfessionalComponent implements OnInit {
   constructor(private dataService: PrimeDataService) { }
 
   ngOnInit() {
+  }
+
+
+  addDeviceProvider() {
+    this.deviceProviderList.push({ dpNumber: '' });
+    // this.deviceProviderList.push({text: ''});
+  }
+
+  deleteDeviceProvider(i){
+    console.log(`delete index ${i}`, this.deviceProviderList);
+    // splice
+    // slice
+    //todo - remove item by index
   }
 
   get applicant() {

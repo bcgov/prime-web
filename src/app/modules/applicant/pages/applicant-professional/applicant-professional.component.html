@@ -80,7 +80,7 @@
         </div>
         <div class="col d-inline-flex flex-column">
           <label for="">License Expiry</label>
-          <prime-datepicker [(date)]="applicant.licenceExpiry"></prime-datepicker>
+          <prime-datepicker [(date)]="applicant.licenseExpiry"></prime-datepicker>
           <!--TODO: wrong reference-->
           <!--<prime-datepicker size='mini' dateFormat="yyyy/mm/dd" [disabled]="!editable" [(date)]="siteAccess.startDate" class='ml-1'></prime-datepicker>-->
         </div>
@@ -142,45 +142,42 @@
     </div>
   </div>
 
-  <div *ngIf="applicant.isDeviceProvider === true" class='d-flex justify-content-between border p-3'>
-    <div class="row">
-      <div class="col d-inline-flex flex-column">
-        <label for="deviceProviderNumber">License Number</label>
-        <input type="text" name="deviceProviderNumber" id="deviceProviderNumber"
-               [(ngModel)]="deviceProvider.dpNumber"
-               maxlength="12" class="form-control">
-        <!--<input type="text" name="deviceProviderNumber" id="deviceProviderNumber"-->
-               <!--[value]="deviceProviderNumberSelector"-->
-               <!--(change)="deviceProviderNumberSelector = $event.target.value"-->
-               <!--maxlength="12" class="form-control">-->
-        <!--<input type="text" name="deviceProviderNumber" id="deviceProviderNumber"-->
-        <!--maxlength="{{maxLengthValue('DEVICE_PROVIDER_NUMBER')}}" class="form-control">-->
+  <ng-container *ngIf="applicant.isDeviceProvider === true">
+    <div class='d-flex justify-content-between border p-3' *ngFor="let deviceProviderRecord of deviceProviderList; let i = index">
+      <div class="row">
+        <div class="col d-inline-flex flex-column">
+          <label for="deviceProviderNumber">Device Provider Number</label>
+          <input type="text" name="deviceProviderNumber" id="deviceProviderNumber"
+                 [(ngModel)]="deviceProviderRecord.dpNumber"
+                 maxlength="12" class="form-control">
+          <!--<input type="text" name="deviceProviderNumber" id="deviceProviderNumber"-->
+                 <!--[(ngModel)]="deviceProviderRecord.text"-->
+                 <!--maxlength="12" class="form-control">-->
+        </div>
       </div>
-    </div>
 
-    <!-- Buttons -->
-    <!--<ng-container *ngIf="deviceProviderNumberLength()">-->
-    <ng-container *ngIf="deviceProvider.dpNumber.length">
-      <span class='d-flex align-items-center'>
-        <!--<ng-container *ngIf="deviceProviderNumberLength()">-->
-        <ng-container *ngIf="deviceProvider.dpNumber.length">
-          <a class='mx-1'>
-            <i class="fa fa-times fa-2x" aria-label="Delete"></i>
+      <!-- Buttons -->
+      <ng-container *ngIf="deviceProviderList[i].dpNumber.length">
+        <span class='d-flex align-items-center'>
+          <ng-container *ngIf="i > 0">
+            <a class='mx-1' (click)="deleteDeviceProvider(i)">
+              <i class="fa fa-times fa-2x" aria-label="Delete"></i>
+            </a>
+          </ng-container>
+          <a class='mx-1' (click)="addDeviceProvider()">
+            <i class="fa fa-plus-circle fa-2x" aria-label="Add"></i>
           </a>
-        </ng-container>
-        <a class='mx-1'>
-          <i class="fa fa-plus-circle fa-2x" aria-label="Add"></i>
-        </a>
-      </span>
-    </ng-container>
-  </div>
+        </span>
+      </ng-container>
+    </div>
+  </ng-container>
 </section>
 
 
 <div *ngIf="applicant.isDeviceProvider === false
-         || deviceProvider.dpNumber.length" class="with-top-margin">
+         || deviceProviderList[0].dpNumber.length" class="with-top-margin">
   <!--<div *ngIf="applicant.isDeviceProvider === false-->
-         <!--|| deviceProviderNumberLength()" class="with-top-margin">-->
+  <!--|| deviceProviderNumberLength()" class="with-top-margin">-->
   <div class="row">
     <div class="d-flex justify-content-start align-items-center col-sm-4">
       Are you working on-behalf?
