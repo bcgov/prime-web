@@ -62,8 +62,16 @@ export abstract class EnrollmentList extends Base {
     });
   }
 
+  /**
+   * Can be overwritten by EnrollmentList, but by default will reverse rowItems
+   */
+  sort() {
+    this.rowItems.reverse();
+  }
+
   // Abstract function to be implemented in derived class
   abstract get EnrollmentStatus();
   abstract search(phrase);
-  abstract rowOpened<T>(item: T);
+  // abstract rowOpened<T>(item: T); //original -  desired!
+  abstract rowOpened(item); //Remove typings to pass warnings.
 }

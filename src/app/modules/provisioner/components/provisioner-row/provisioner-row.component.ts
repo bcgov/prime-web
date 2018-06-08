@@ -9,13 +9,13 @@ import { EnrollmentRow, RowState, EnrollmentRowChild } from '../../../../core/en
 import { EnrollmentRowItem } from '../../../verifier/components/enrollment-row/enrollment-row.component';
 
 @Component({
-  selector: 'prime-provisioner-table',
-  templateUrl: './provisioner-table.component.html',
-  styleUrls: ['./provisioner-table.component.scss'],
+  selector: 'prime-provisioner-row',
+  templateUrl: './provisioner-row.component.html',
+  styleUrls: ['./provisioner-row.component.scss'],
   animations: [openState, openStateChild, loadInOut, openStateDisable]
 })
 // TODO: RENAME FILE!
-export class ProvisionerEnrollmentRowComponent extends EnrollmentRow implements OnInit {
+export class ProvisionerRowComponent extends EnrollmentRow implements OnInit {
 
   // @Input() rowData: Site;
   @Input() rowData: EnrollmentRowItem;
@@ -30,17 +30,6 @@ export class ProvisionerEnrollmentRowComponent extends EnrollmentRow implements 
   constructor( private router: Router) {
     super();
   }
-
-  //ORIG
-  // ngOnInit() {
-  //   if (!this.rowData ) {return}
-  //   const name =   this.rowData.name;
-  //   this.siteName = name.substring(0, name.lastIndexOf(' ') - 1);
-  //   this.siteNumber = 'Site ' + name.substring(name.lastIndexOf(' ') + 1);
-  //   console.log(' site is ', this.rowData);
-  //   //this.siteAccessRequiringAttention.map(x => x.open = false);
-  // }
-
 
   ngOnInit() {
     if (!this.rowData ) { return; }

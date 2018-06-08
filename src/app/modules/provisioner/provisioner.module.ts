@@ -9,7 +9,7 @@ import { ProvisionerWidgetsComponent } from './components/provisioner-widgets/pr
 import { TooltipModule } from 'ngx-bootstrap';
 import { ProvisionerDetailsComponent } from './pages/provisioner-details/provisioner-details.component';
 import { FormsModule } from '@angular/forms';
-import { ProvisionerEnrollmentRowComponent } from './components/provisioner-table/provisioner-table.component';
+import { ProvisionerRowComponent } from './components/provisioner-row/provisioner-row.component';
 import { ProvisionerListComponent } from './components/provisioner-list/provisioner-list.component';
 
 
@@ -29,7 +29,7 @@ import { ProvisionerListComponent } from './components/provisioner-list/provisio
     ProvisionerDashboardComponent,
     ProvisionerWidgetsComponent,
     ProvisionerDetailsComponent,
-    ProvisionerEnrollmentRowComponent,
+    ProvisionerRowComponent,
     ProvisionerListComponent
   ]
 })

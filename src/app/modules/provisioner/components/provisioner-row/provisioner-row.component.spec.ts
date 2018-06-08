@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProvisionerTableComponent } from './provisioner-table.component';
+import { ProvisionerRowComponent } from '../provisioner-row/provisioner-row.component';
 
 describe('ProvisionerTableComponent', () => {
-  let component: ProvisionerTableComponent;
-  let fixture: ComponentFixture<ProvisionerTableComponent>;
+  let component: ProvisionerRowComponent;
+  let fixture: ComponentFixture<ProvisionerRowComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProvisionerTableComponent ]
+      declarations: [ ProvisionerRowComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProvisionerTableComponent);
+    fixture = TestBed.createComponent(ProvisionerRowComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

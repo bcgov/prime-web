@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProvisionerDetailsComponent } from './provisioner-details.component';
 import { CoreModule } from '../../../core/core.module';
 import { ProvisionerModule } from '../../provisioner.module';
-import { ProvisionerTableComponent } from '../../components/provisioner-table/provisioner-table.component';
+import { ProvisionerRowComponent } from '../../components/provisioner-row/provisioner-row.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { routes } from '../../provisioner-routing.modules';
@@ -22,7 +22,7 @@ describe('ProvisionerDetailsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProvisionerDetailsComponent, ProvisionerTableComponent, ProvisionerDashboardComponent, ProvisionerWidgetsComponent  ],
+      declarations: [ ProvisionerDetailsComponent, ProvisionerRowComponent, ProvisionerDashboardComponent, ProvisionerWidgetsComponent  ],
       imports: [ CoreModule, RouterTestingModule.withRoutes(routes), VerifierModule, NgxChartsModule, TooltipModule.forRoot() ],
       providers: [ PrimeDataService,
 

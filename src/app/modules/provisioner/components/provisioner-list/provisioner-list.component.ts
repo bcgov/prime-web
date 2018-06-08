@@ -1,9 +1,9 @@
 import {Component, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {Site} from '../../../../models/sites.model';
 import { EnrollmentRowItem } from '../../../verifier/components/enrollment-row/enrollment-row.component';
-import { EnrollmentList } from '../../../../core/enrollment-list/enrollment-list.class';
+import { EnrollmentList, defaultViewSelector } from '../../../../core/enrollment-list/enrollment-list.class';
 import { EnrollmentStatus } from '../../../../models/enrollment-status.enum';
-import { ProvisionerEnrollmentRowComponent } from '../provisioner-table/provisioner-table.component';
+import { ProvisionerRowComponent } from '../provisioner-row/provisioner-row.component';
 
 @Component({
   selector: 'prime-provisioner-list',
@@ -13,9 +13,9 @@ import { ProvisionerEnrollmentRowComponent } from '../provisioner-table/provisio
 export class ProvisionerListComponent extends EnrollmentList implements OnInit {
 
   @Input() rowItems: EnrollmentRowItem[];
+  @Input() primaryType: "User"|"Site" = "User";
 
-
-  @ViewChildren(ProvisionerEnrollmentRowComponent) rowElements: QueryList<ProvisionerEnrollmentRowComponent>
+  @ViewChildren(ProvisionerRowComponent) rowElements: QueryList<ProvisionerRowComponent>
 
   private _enrollmentStatus: string [] = [
     EnrollmentStatus.Approved,
@@ -29,10 +29,7 @@ export class ProvisionerListComponent extends EnrollmentList implements OnInit {
 
   ngOnInit() {
     this.data = this.rowItems;
-    console.log('OnInit (ApplEnrollmentListComponent): ' + this.data );
-    // for (let i = 0; i < this.rowItems.length; i++){
-    //   this.sites.push(this.rowItems[i].sites[0]);
-    // }
+    console.log('OnInit (ProvisionerListComponent): ', this.data );
   }
 
   get EnrollmentStatus() {
@@ -48,6 +45,16 @@ export class ProvisionerListComponent extends EnrollmentList implements OnInit {
 
   search(phrase){
     console.log('ProvisionerList SEARCH:', phrase);
+  }
+
+  viewTypes(type){
+    if (type === defaultViewSelector){
+      return this.data = this.rowItems;
+    }
+
+    this.deepSearch(expandableRow => {
+      return expandableRow.status.includes(type);
+    })
   }
 
 }
