@@ -19,6 +19,10 @@ export class ApplEnrollmentListComponent extends EnrollmentList implements OnIni
     EnrollmentStatus.Declined
   ];
 
+  // TODO: Complete! Added this just to pass compilation checks, the logic isn't done.
+  declarationCheck: boolean = false;
+  save(){}
+
   constructor(private applicantDataService: ApplicantDataService) {
     super();
 
