@@ -1,7 +1,10 @@
 <prime-applicant-breadcrumbs
   pageName="User Access Acceptance"
   previousPageLink="/applicant/self-declaration"
-  [shouldDisableContinue]="disableContinue()">
+  [shouldDisableContinue]="disableContinue()"
+  [showControls]="shouldShowControls()"
+  (onSave)="save()"
+  (onCancel)="cancel()">
 </prime-applicant-breadcrumbs>
 
 

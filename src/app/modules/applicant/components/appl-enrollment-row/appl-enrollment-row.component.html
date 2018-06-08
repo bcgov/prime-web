@@ -1,0 +1,55 @@
+<div *ngIf="rowData" class="enrollment-list-item" (click)="toggleRow()" [@openStateDisable]="openState">
+
+  <div class="enrollment-text-container">
+    <span class="enrollment-text-main">{{rowData.title}}</span>
+  </div>
+
+  <!--
+  <div class="enrollment-actions">
+      <span class="enrollment-icons">
+        <prime-pill-badge
+          [alerts]="allChildAlerts"
+          [iconOnly]='false'>
+        </prime-pill-badge>
+        <prime-info-button
+          [targetId]="rowData.associatedObjectId">
+        </prime-info-button>
+        <i class="fa fa-edit text-muted" (click)="goToEnrollmentPage()"></i>
+      </span>
+  </div>
+</div>
+-->
+
+<!--
+<div [@openState]="openState">
+  <div [@openStateChild]="openState"  class="expandable-container">
+
+    <div class="enrollment-expandable" *ngFor="let siteAccess of siteAccessRequiringAttention"
+         (click)="expandedRowClick(siteAccess)"
+    >
+      <div class="enrollment-text-container">
+        <span class="enrollment-text-main">{{siteAccess.title}}</span>
+      </div>
+      <div class="enrollment-actions">
+              <span class="enrollment-icons">
+
+                  <prime-pill-badge
+                    [alerts]="[siteAccess.alert]">
+                  </prime-pill-badge>
+
+                  <prime-info-button
+                    [targetId]="siteAccess.site.objectId">
+                  </prime-info-button>
+              </span>
+      </div>
+
+      <prime-enrollment-progress-row
+        [open]='siteAccess.open'
+        [data]='siteAccess'>
+      </prime-enrollment-progress-row>
+
+    </div>
+  </div>
+  -->
+</div>
+

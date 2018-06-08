@@ -1,32 +1,32 @@
 import { Component, OnInit, Input, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import * as moment from 'moment';
 import { Person } from '../../../../models/person.model';
-import { VerifierService } from '../../../../services/verifier.service';
+import { ProvisionerService } from '../../../../services/provisioner.service';
 import { SiteAccessProgressSteps, SiteAccess } from '../../../../models/sites.model';
 import { EnrollmentStatus } from '../../../../models/enrollment-status.enum';
+
 @Component({
-  selector: 'prime-site-access-widgets',
-  templateUrl: './site-access-widgets.component.html',
-  styleUrls: ['./site-access-widgets.component.scss'],
+  selector: 'prime-provisioner-widgets',
+  templateUrl: './provisioner-widgets.component.html',
+  styleUrls: ['./provisioner-widgets.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class SiteAccessWidgetsComponent implements OnInit {
+export class ProvisionerWidgetsComponent implements OnInit {
+
   @Input() siteAccess: SiteAccess[] = [];
   @Input() people: Person[] = [];
-  public renewalDateCutoff: number = 30;
   public applicationProgressSelector: SiteAccessProgressSteps;
   public pieChartData;
 
   @ViewChild('pieChartContainer') pieChartContainer: ElementRef;
 
-
-  constructor(private verifierService: VerifierService) { }
+  constructor(private provisionerService: ProvisionerService) { }
 
   //Current max width, but doesn't really play nice with mobile views
   public pieChartDimension: number[] = [];
 
   ngOnInit() {
-    this.applicationProgressSelector = SiteAccessProgressSteps.Verifier;
+    this.applicationProgressSelector = SiteAccessProgressSteps.Provisioner;
     this.pieChartData = this.calculatePieChartData();
 
     // Very hacky and should be for prototype only! Possibly remove/replace
@@ -45,26 +45,10 @@ export class SiteAccessWidgetsComponent implements OnInit {
   }
 
   // Make enum iterable strings accessible in template
-  // get EnrollmentStatus() {
-  //   return Object.keys(EnrollmentStatus);
-  // }
-  get EnrollmentStatus(){
-    return Object.keys(this.verifierService.VerifierEnrollmentStatus);
+  get EnrollmentStatus() {
+    return Object.keys(EnrollmentStatus);
   }
 
-  //days: 30/60/90
-  // TODO: CHange this so it filters on PEOPLE RENEWAL DATE! Not SA daysUntilExpiry
-  upcomingRenewals(days: number){
-    // Copy the array so our sorting doesn't mess up other places
-    let people = this.people.concat();
-
-    // Expiring soon = Beginning of array
-    people.sort((a, b) => {
-      return a.renewalDate.getTime() - b.renewalDate.getTime();
-    });
-
-    return people.filter(person => person.daysUntilRenewalDate <= days);
-  }
 
   applicationProgress(){
     let selection: SiteAccessProgressSteps = this.applicationProgressSelector;
@@ -77,24 +61,48 @@ export class SiteAccessWidgetsComponent implements OnInit {
     return result.filter(sa => sa.progress === selection);
   }
 
-  calculatePieChartData() : {name: string, value: number}[] {
+  /*calculatePieChartData() : {name: string, value: number}[] {
     return this.EnrollmentStatus.map(status => {
       return {
         name: status,
-        value: this.siteAccess.filter(sa => sa.status === status).length
+        value: this.siteAccess.filter(sa => sa.status === status ).length
       }
     })
+  }*/
+
+  /*
+  calculatePieChartData() : {name: string, value: number}[] {
+    const names = ['Active', 'Declined', 'New']
+    const foo = [ {name: 'Active' , value: 10}, {name: 'Declined' , value: 20} ];
+    const filteredFoo = foo.filter(function(itm){
+      return names.indexOf(itm.name) > -1;
+    });
+    return filteredFoo;
+  }
+  */
+  calculatePieChartData() : {name: string, value: number}[] {
+    const validStatusNamesArr = [EnrollmentStatus.Active.valueOf(), EnrollmentStatus.Declined.valueOf()]
+
+    const statusArr = this.EnrollmentStatus.map(status => {
+      return {
+        name: status,
+        value: this.siteAccess.filter(sa => sa.status === status ).length
+      }
+    })
+
+    return statusArr.filter(itm => {
+      return validStatusNamesArr.indexOf(itm.name) > -1;
+    });
   }
 
   onPieChartClick($event){
     // console.log('onPieChartClick', $event);
-    this.verifierService.enrollmentViewTypeSelector = $event.name;
+    this.provisionerService.enrollmentViewTypeSelector = $event.name;
   }
 
   formatDate(date: Date){
     return moment(date).format('DD/MM/YYYY');
   }
-
 
   colorScheme = {
     // primary/secondary/etc, from variables.scss

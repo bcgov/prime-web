@@ -16,6 +16,12 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { DatepickerComponent } from '../../../../core/datepicker/datepicker.component';
 import { VerifierService } from '../../../../services/verifier.service';
 import { NgxMyDatePicker, NgxMyDatePickerModule } from 'ngx-mydatepicker';
+import { ProvisionerWidgetsComponent } from '../../components/provisioner-widgets/provisioner-widgets.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { APP_BASE_HREF } from '@angular/common';
+import { PrimeDataService } from '../../../../services/prime-data.service';
+import { ProvisionerService } from '../../../../services/provisioner.service';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
 describe('ProvisionerDashboardComponent', () => {
@@ -24,9 +30,9 @@ describe('ProvisionerDashboardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProvisionerDashboardComponent, EnrollmentListComponent, EnrollmentRowComponent, EnrollmentProgressRowComponent, PillBadgeComponent, AddUserButtonComponent, InfoButtonComponent, MiniProgressBarComponent, DatepickerComponent],
-      imports: [ TooltipModule.forRoot(),  ProgressbarModule.forRoot(), FormsModule, RouterTestingModule, NgxMyDatePickerModule.forRoot()],
-      providers: [VerifierService]
+      declarations: [ ProvisionerDashboardComponent, EnrollmentListComponent, EnrollmentRowComponent, EnrollmentProgressRowComponent, PillBadgeComponent, AddUserButtonComponent, InfoButtonComponent, MiniProgressBarComponent, DatepickerComponent, ProvisionerWidgetsComponent],
+      imports: [ TooltipModule.forRoot(),  ProgressbarModule.forRoot(), FormsModule, RouterTestingModule, NgxMyDatePickerModule.forRoot(), NgxChartsModule, NoopAnimationsModule],
+      providers: [VerifierService, {provide: APP_BASE_HREF, useValue: '/'}, PrimeDataService, ProvisionerService]
 
     })
     .compileComponents();

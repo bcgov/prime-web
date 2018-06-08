@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
-import {Observable, Subject} from 'rxjs/Rx';
+import { Observable, Subject } from "rxjs";
 
 @Injectable()
-export class ApplicantDataService {
+export class ProvisionerService {
 
-  private _enrollmentViewTypeSelector  = 'View All';
+  private _enrollmentViewTypeSelector  = "All";
   set enrollmentViewTypeSelector(type: string){
     this._enrollmentViewTypeSelector = type;
     this.viewTypeSubject.next(type);
   }
+
 
   public $enrollmentViewType: Observable<string>;
   private viewTypeSubject: Subject<string>;
@@ -18,20 +19,4 @@ export class ApplicantDataService {
     this.$enrollmentViewType = this.viewTypeSubject.asObservable();
   }
 
-  getPageProgressSteps() {
-    return [
-      {
-        title: 'Contact',
-        route: 'contact',
-      },
-      {
-        title: 'Professional',
-        route: 'professional',
-      },
-      {
-        title: 'Self Declaration',
-        route: 'self-declaration'
-      }
-    ];
-  }
 }

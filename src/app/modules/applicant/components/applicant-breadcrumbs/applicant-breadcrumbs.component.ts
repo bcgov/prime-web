@@ -25,6 +25,21 @@ export class ApplicantBreadcrumbsComponent implements OnInit {
   ngOnInit() {
   }
 
+  ngOnChanges(change){
+    // If the parent component is trying to turn the controls back on after
+    // they've been closed (e.g. user has saved changes then modified those
+    // saved changes), we want to reset state and remove the 'saved' message.
+    if (change['showControls']){
+      const controlChange = change['showControls'];
+
+      if (controlChange['currentValue'] === true
+      && controlChange['previousValue'] === false){
+        this.reset();
+      }
+
+    }
+  }
+
   get progressSteps() {
     return this.applicantDataService.getPageProgressSteps();
   }

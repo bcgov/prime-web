@@ -1,6 +1,9 @@
 <prime-applicant-breadcrumbs
   pageName="Contact"
-  nextPageLink="/applicant/professional">
+  nextPageLink="/applicant/professional"
+  [showControls]="hasChanged"
+  (onSave)="onSave($event)"
+  (onCancel)="onCancel($event)">
 </prime-applicant-breadcrumbs>
 
 <h2>Registration Information</h2>
@@ -10,7 +13,7 @@
   <div class="row">
     <div class="col">
 
-      <div class="row photocell">
+      <div class="row toprow">
         <img class="photo" src="assets/photoPlaceholder.png" alt="Generic placeholder image">
       </div>
 
@@ -44,7 +47,7 @@
     </div>
     <div class="col">
 
-      <div class="form-group row">
+      <div class="form-group row toprow align-bottom">
         <label for="address" class="col-sm-3 col-form-label">
           Address
         </label>
@@ -85,7 +88,7 @@
 
     </div>
     <div class="col">
-      <div class="form-group row">
+      <div class="form-group row toprow align-bottom">
         <label for="DoB" class="col-sm-3 col-form-label">
           Date of Birth
         </label>
@@ -114,7 +117,7 @@
           Primary Phone
         </label>
         <div class="col-sm-9">
-          <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="applicant.phone">
+          <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="applicant.phone" (input) = "onChange()">
         </div>
       </div>
 
@@ -123,7 +126,7 @@
           Primary Email
         </label>
         <div class="col-sm-9">
-          <input type="text" class="form-control" id="email" name="email" [(ngModel)]="applicant.email">
+          <input type="text" class="form-control" id="email" name="email" [(ngModel)]="applicant.email" (input) = "onChange()">
         </div>
       </div>
 
@@ -134,7 +137,7 @@
           Alternate Phone
         </label>
         <div class="col-sm-9">
-          <input type="text" class="form-control" id="phoneSecondary" name="phoneSecondary" [(ngModel)]="applicant.phoneSecondary">
+          <input type="text" class="form-control" id="phoneSecondary" name="phoneSecondary" [(ngModel)]="applicant.phoneSecondary" (input) = "onChange()">
         </div>
       </div>
 
@@ -143,7 +146,7 @@
           Alternate Email
         </label>
         <div class="col-sm-9">
-          <input type="text" class="form-control" id="emailSecondary" name="emailSecondary" [(ngModel)]="applicant.emailSecondary">
+          <input type="text" class="form-control" id="emailSecondary" name="emailSecondary" [(ngModel)]="applicant.emailSecondary" (input) = "onChange()">
         </div>
       </div>
 
@@ -156,7 +159,7 @@
   <h2>Mailing Address</h2>
   <label>
     Use my Registration Information for mailing address
-    <prime-toggle [(data)]="applicant.useRegAddress"></prime-toggle>
+    <prime-toggle [(data)]="applicant.useRegAddress" (click) = "onChange()"></prime-toggle>
   </label>
 
   <div class='d-flex justify-content-between'>
@@ -166,8 +169,8 @@
           Address
         </label>
         <div class="col-sm-9">
-          <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control" id="mailAdress" name="mailAddress" [(ngModel)]="applicant.mailAddress.street">
-          <input *ngIf = "applicant.useRegAddress" type="text" class="form-control" id="mailAdress" name="mailAddress" [ngModel]="applicant.address?.street" (ngModelChange)="applicant.updateStreet($event)">
+          <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control" id="mailAdress" name="mailAddress" [(ngModel)]="applicant.mailAddress.street" (input) = "onChange()">
+          <input *ngIf = "applicant.useRegAddress" type="text" class="form-control" id="mailAdress" name="mailAddress" [ngModel]="applicant.address?.street" (ngModelChange)="updateStreet($event)">
         </div>
       </div>
 
@@ -176,8 +179,8 @@
           Province
         </label>
         <div class="col-sm-9">
-          <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control" id="mailProvince" name="mailProvince" [(ngModel)]="applicant.mailAddress.province">
-          <input *ngIf = "applicant.useRegAddress" type="text" class="form-control" id="mailProvince" name="mailProvince" [ngModel]="applicant.address?.province" (ngModelChange)="applicant.updateProvince($event)">
+          <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control" id="mailProvince" name="mailProvince" [(ngModel)]="applicant.mailAddress.province" (input) = "onChange()">
+          <input *ngIf = "applicant.useRegAddress" type="text" class="form-control" id="mailProvince" name="mailProvince" [ngModel]="applicant.address?.province" (ngModelChange)="updateProvince($event)">
         </div>
       </div>
     </div>
@@ -188,8 +191,8 @@
           Postal Code
         </label>
         <div class="col-sm-9">
-          <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control" id="mailPostal" name="mailPostal" [(ngModel)]="applicant.mailAddress.postal">
-          <input *ngIf = "applicant.useRegAddress" type="text" class="form-control" id="mailPostal" name="mailPostal" [ngModel]="applicant.address?.postal" (ngModelChange)="applicant.updatePostal($event)">
+          <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control" id="mailPostal" name="mailPostal" [(ngModel)]="applicant.mailAddress.postal" (input) = "onChange()">
+          <input *ngIf = "applicant.useRegAddress" type="text" class="form-control" id="mailPostal" name="mailPostal" [ngModel]="applicant.address?.postal" (ngModelChange)="updatePostal($event)">
         </div>
       </div>
 
@@ -198,8 +201,8 @@
           City
         </label>
         <div class="col-sm-9">
-          <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control" id="mailCity" name="mailCity" [(ngModel)]="applicant.mailAddress.city">
-          <input *ngIf = "applicant.useRegAddress" type="text" class="form-control" id="mailCity" name="mailCity" [ngModel]="applicant.address?.city" (ngModelChange)="applicant.updateCity($event)">
+          <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control" id="mailCity" name="mailCity" [(ngModel)]="applicant.mailAddress.city" (input) = "onChange()">
+          <input *ngIf = "applicant.useRegAddress" type="text" class="form-control" id="mailCity" name="mailCity" [ngModel]="applicant.address?.city" (ngModelChange)="updateCity($event)">
         </div>
       </div>
     </div>
@@ -210,8 +213,8 @@
           Country
         </label>
         <div class="col-sm-9">
-          <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control" id="mailCountry" name="mailCountry" [(ngModel)]="applicant.mailAddress.country">
-          <input *ngIf = "applicant.useRegAddress" type="text" class="form-control" id="mailCountry" name="mailCountry" [ngModel]="applicant.address?.country" (ngModelChange)="applicant.updateCountry($event)">
+          <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control" id="mailCountry" name="mailCountry" [(ngModel)]="applicant.mailAddress.country" (input) = "onChange()">
+          <input *ngIf = "applicant.useRegAddress" type="text" class="form-control" id="mailCountry" name="mailCountry" [ngModel]="applicant.address?.country" (ngModelChange)="updateCountry($event)">
         </div>
       </div>
     </div>
