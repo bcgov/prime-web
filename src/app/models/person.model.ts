@@ -89,45 +89,6 @@ export class Person extends Base {
     const today = moment();
     return expiry.diff(today, 'days');
   }
-
-  // Update mailAddress with information in the input field that the user is
-  // currently updating
-  updateStreet(event) {
-    // Empty mail address
-    if (this.mailAddress.isEmpty()) {
-      this.mailAddress.copy(this.address);
-    }
-    this.useRegAddress = !this.useRegAddress;
-    this.mailAddress.street = event;
-  }
-  updateProvince(event) {
-    if (this.mailAddress.isEmpty()) {
-      this.mailAddress.copy(this.address);
-    }
-    this.useRegAddress = !this.useRegAddress;
-    this.mailAddress.province = event;
-  }
-  updateCountry(event) {
-    if (this.mailAddress.isEmpty()) {
-      this.mailAddress.copy(this.address);
-    }
-    this.useRegAddress = !this.useRegAddress;
-    this.mailAddress.country = event;
-  }
-  updateCity(event) {
-    if (this.mailAddress.isEmpty()) {
-      this.mailAddress.copy(this.address);
-    }
-    this.useRegAddress = !this.useRegAddress;
-    this.mailAddress.city = event;
-  }
-  updatePostal(event) {
-    if (this.mailAddress.isEmpty()) {
-      this.mailAddress.copy(this.address);
-    }
-    this.useRegAddress = !this.useRegAddress;
-    this.mailAddress.postal = event;
-  }
 }
 
 //class Name {
