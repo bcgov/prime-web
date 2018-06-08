@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ApplEnrollmentRowComponent } from './appl-enrollment-row.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ApplEnrollmentRowComponent', () => {
   let component: ApplEnrollmentRowComponent;
@@ -8,7 +9,8 @@ describe('ApplEnrollmentRowComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ApplEnrollmentRowComponent ]
+      declarations: [ ApplEnrollmentRowComponent ],
+      imports: [NoopAnimationsModule]
     })
     .compileComponents();
   }));

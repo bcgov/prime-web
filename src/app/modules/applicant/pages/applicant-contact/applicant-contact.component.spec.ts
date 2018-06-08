@@ -9,6 +9,8 @@ import {DummyDataService} from '../../../../services/dummy-data.service';
 import { CoreModule } from '../../../core/core.module';
 import { APP_BASE_HREF } from '@angular/common';
 import { Address } from '../../../../models/addresses.model';
+import { AlertModule } from 'ngx-bootstrap';
+import { ApplicantDataService } from '../../../../services/applicant-data.service';
 
 describe('ApplicantContactComponent', () => {
   let component: ApplicantContactComponent;
@@ -17,8 +19,8 @@ describe('ApplicantContactComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ApplicantContactComponent, ApplicantBreadcrumbsComponent],
-      imports: [RouterTestingModule, FormsModule, CoreModule],
-      providers: [PrimeDataService, DummyDataService, {provide: APP_BASE_HREF, useValue: '/'}]
+      imports: [RouterTestingModule, FormsModule, CoreModule, AlertModule.forRoot()],
+      providers: [PrimeDataService, DummyDataService, {provide: APP_BASE_HREF, useValue: '/'}, ApplicantDataService]
     })
     .compileComponents();
   }));
@@ -26,9 +28,6 @@ describe('ApplicantContactComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ApplicantContactComponent);
     component = fixture.componentInstance;
-    // Had to set address or tests would fail with .street undefined
-    // In future, maybe move Applicant to already have initialized address in constructor?
-    component.applicant.address = new Address();;
     fixture.detectChanges();
   });
 
