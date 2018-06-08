@@ -2,7 +2,7 @@ import * as moment from "moment";
 import { Base } from '../core/base/base.class';
 import { BadgeLevel } from '../modules/verifier/components/enrollment-row/enrollment-row.interface';
 import { EnrollmentStatus } from './enrollment-status.enum';
-import { Person, Role, Verifier } from './person.model';
+import { Person, Role, Verifier, Provisioner } from './person.model';
 import { Address } from './addresses.model';
 
 //-----------------------------------------------------------------------------
@@ -68,6 +68,7 @@ export class SiteAccess extends Base {
   vendor: Vendor;
   personalAccessToPharmaNet: boolean;
   verifier: Verifier; // "by" in xlsx designs -  responsible for approving
+  provisioner: Provisioner;
 
   // In-progress
   progress: SiteAccessProgressSteps
