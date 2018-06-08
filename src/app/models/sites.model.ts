@@ -1,4 +1,4 @@
-import * as moment from "moment";
+import * as moment from 'moment';
 import { Base } from '../core/base/base.class';
 import { BadgeLevel } from '../modules/verifier/components/enrollment-row/enrollment-row.interface';
 import { EnrollmentStatus } from './enrollment-status.enum';
@@ -26,19 +26,19 @@ export class Site extends Base {
 
   get users(): Person[] {
     return this.siteAccess.map(siteAccess => siteAccess.person)
-      .filter(this.filterUnique)
+      .filter(this.filterUnique);
   }
 
   get activeUsers(): Person[] {
     return this.siteAccess.filter(x => x.status === EnrollmentStatus.Active)
-      .map(siteAccess => { return siteAccess.person})
-      .filter(this.filterUnique)
+      .map(siteAccess => { return siteAccess.person; })
+      .filter(this.filterUnique);
   }
 
   getUsersForStatus(status: EnrollmentStatus){
     return this.siteAccess.filter(x => x.status === status)
-      .map(siteAccess => { return siteAccess.person})
-      .filter(this.filterUnique)
+      .map(siteAccess => { return siteAccess.person; })
+      .filter(this.filterUnique);
   }
 
   /** For type-guard. You very likely want to use the type guard INSTEAD of
@@ -49,7 +49,7 @@ export class Site extends Base {
   }
 
   private filterUnique(x, i, a){
-    return x && a.indexOf(x) === i
+    return x && a.indexOf(x) === i;
   }
 }
 
@@ -71,7 +71,7 @@ export class SiteAccess extends Base {
   provisioner: Provisioner;
 
   // In-progress
-  progress: SiteAccessProgressSteps
+  progress: SiteAccessProgressSteps;
 
   // Are there changes to the data made by the user that have not been submitted? NOTE: Rudimentary for now in prototype.
   pendingChanges: boolean;
@@ -107,7 +107,7 @@ export class EnrollmentAlert {
     this.level = EnrollmentAlert.convertStatusToBadgeLevel(status);
   }
 
-  static convertStatusToBadgeLevel(status: EnrollmentStatus) : BadgeLevel {
+  static convertStatusToBadgeLevel(status: EnrollmentStatus): BadgeLevel {
     if (status === EnrollmentStatus.Pending){
         return BadgeLevel.Warning;
     }
@@ -145,6 +145,6 @@ export class EnrollmentAlert {
 export enum SiteAccessProgressSteps {
   Verifier = 'Verifier',
   Applicant = 'Applicant',
-  MoH = "MoH",
-  Provisioner = "Provisioner"
+  MoH = 'MoH',
+  Provisioner = 'Provisioner'
 }

@@ -1,12 +1,15 @@
 
-.photocell {
-  width: 150px;
-  height: 150px;
-  margin: 0 auto;
+.toprow {
+  height: 130px;
+}
+
+.align-bottom {
+  top: 100px;
+  position: relative;
 }
 
 .photo {
-  width: 130px;
-  height: 130px;
+  width:45%;
+  height: 90%;
   margin: 0 auto;
 }
