@@ -1,8 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {EnrollmentRow, EnrollmentRowChild, RowState} from '../../../../core/enrollment-row/enrollment-row.class';
 import {loadInOut, openState, openStateChild, openStateDisable} from '../../../../animations/animations';
-import {SiteAccess} from '../../../../models/sites.model';
+import {Site, SiteAccess} from '../../../../models/sites.model';
 import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
+import {Collection} from '../../../../models/collections.model';
 
 // Specific to this component
 export interface ApplEnrollmentRowItem {
@@ -13,9 +14,8 @@ export interface ApplEnrollmentRowItem {
    * navigating between pages */
   associatedObjectId: string;
 
-
-
   /** Optional and only used in one config. */
+  collections?: Collection[];
   expandableRows?: SiteAccess[];
 }
 

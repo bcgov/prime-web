@@ -85,7 +85,7 @@ export class PrimeDataService {
     this.user.sites.map(site => {
       const rowItem: ApplEnrollmentRowItem = {
         title: site.name,
-        associatedObjectId: site.objectId,
+        associatedObjectId: site.objectId
       };
 
       const pending = site.siteAccess
