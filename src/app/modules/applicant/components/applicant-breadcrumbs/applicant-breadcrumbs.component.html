@@ -12,7 +12,7 @@
         </div>
 
         <div  *ngIf="showSaveMessage" [@fadeIn]>
-          <alert type='success' dismissible="true" (onClosed)="reset()">Saved...</alert>
+          <alert type='success' (onClosed)="reset()">Saved...</alert>
         </div>
     </div>
 

@@ -11,6 +11,7 @@ import { ExpandingSearchComponent } from '../../../../core/expanding-search/expa
 import { FormsModule } from '@angular/forms';
 import { ApplicantDataService } from '../../../../services/applicant-data.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { CoreModule } from '../../../core/core.module';
 
 describe('ApplicantDashboardComponent', () => {
   let component: ApplicantDashboardComponent;
@@ -18,8 +19,8 @@ describe('ApplicantDashboardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ApplicantDashboardComponent, AlertComponent, ApplEnrollmentListComponent, ApplEnrollmentRowComponent, ExpandingSearchComponent ],
-      imports: [AlertModule.forRoot(), FormsModule, NoopAnimationsModule],
+      declarations: [ ApplicantDashboardComponent, ApplEnrollmentListComponent, ApplEnrollmentRowComponent ],
+      imports: [AlertModule.forRoot(), FormsModule, NoopAnimationsModule, CoreModule],
       providers: [PrimeDataService, DummyDataService, ApplicantDataService]
     })
     .compileComponents();
