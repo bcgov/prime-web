@@ -1,0 +1,64 @@
+$note-color: #202020;
+$note-font-size: 85%;
+$placeholder-color: $note-color;
+$placeholder-font-size: $note-font-size;
+
+.selfDeclarationTextArea {
+  width: 100%;
+  height: 75px;
+}
+
+.note {
+  color: $note-color;
+  font-size: $note-font-size;
+}
+
+.drop-dl-box-15 {
+  min-width: 4em;
+  max-width: 15em;
+}
+
+.drop-dl-box-17 {
+  min-width: 4em;
+  max-width: 17em;
+}
+
+.drop-dl-box-20 {
+  min-width: 4em;
+  max-width: 20em;
+}
+
+.drop-dl-box-26 {
+  min-width: 4em;
+  max-width: 26em;
+}
+
+.fa-plus-circle {
+  color: green;
+}
+
+.fa-times {
+  color: red;
+}
+
+.with-top-margin {
+  margin-top: 10px;
+}
+
+// the following entries are related to the placeholder
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: $placeholder-color;
+  font-size: $placeholder-font-size;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: $placeholder-color;
+  font-size: $placeholder-font-size;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: $placeholder-color;
+  font-size: $placeholder-font-size;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: $placeholder-color;
+  font-size: $placeholder-font-size;
+}
