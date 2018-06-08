@@ -15,6 +15,7 @@ import { DummyDataService } from '../../../../services/dummy-data.service';
 import { ProvisionerWidgetsComponent } from '../../components/provisioner-widgets/provisioner-widgets.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { TooltipModule } from 'ngx-bootstrap';
+import { ProvisionerListComponent } from '../../components/provisioner-list/provisioner-list.component';
 
 describe('ProvisionerDetailsComponent', () => {
   let component: ProvisionerDetailsComponent;
@@ -22,7 +23,7 @@ describe('ProvisionerDetailsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProvisionerDetailsComponent, ProvisionerRowComponent, ProvisionerDashboardComponent, ProvisionerWidgetsComponent  ],
+      declarations: [ ProvisionerDetailsComponent, ProvisionerRowComponent, ProvisionerDashboardComponent, ProvisionerWidgetsComponent, ProvisionerListComponent, ProvisionerRowComponent  ],
       imports: [ CoreModule, RouterTestingModule.withRoutes(routes), VerifierModule, NgxChartsModule, TooltipModule.forRoot() ],
       providers: [ PrimeDataService,
 
