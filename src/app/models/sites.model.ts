@@ -16,6 +16,7 @@ export class Site extends Base {
   siteAccess: SiteAccess[];
   siteType: string; //TODO: Change to Enum once we have all the types
   vendor: string;
+  PEC: string;
 
 
   constructor() {

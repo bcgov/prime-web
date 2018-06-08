@@ -11,6 +11,15 @@ export class Address extends Base {
   private _city: string;
 
 
+  /** Overwrite the native JavaScript toString method to determine how the
+   * object should be printed, instead of [object Object].  This provides a
+   * standard way to print out an address. If you need something specific you
+   * should access the properties directly. We omit Province/Country because of
+   * Pharmacare's BC focus. */
+  toString(){
+    return `${this.street}, ${this.city}`;
+  }
+
   /* Setter/Getter functions*/
   get city(): string {
     return !(isNullOrUndefined(this._city)) ? this._city : null;

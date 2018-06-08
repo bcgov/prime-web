@@ -53,6 +53,7 @@ export class DummyDataService {
       site.siteType = this.getRandomElFromArray(['Pharmacy', 'Hospital'])
       site.vendor = this.getRandomElFromArray(['Intellisense', 'Ultracorp', 'Mediware', 'HealthInc']);
       site.name = this.generateSiteName(name);
+      site.PEC = this.generatePEC();
       result.push(site);
     }
 
@@ -203,6 +204,11 @@ export class DummyDataService {
     address.province = 'British Columbia';
     address.city = 'Victoria';
     return address;
+  }
+
+  // Generates PEC for a Site
+  private generatePEC(){
+    return `BC00000A` + Math.ceil(Math.random() * 99);
   }
 
   private randomDate(start: Date, end: Date): Date {
