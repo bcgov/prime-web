@@ -11,7 +11,7 @@ import {defaultViewSelector, EnrollmentList} from '../../../../core/enrollment-l
 })
 export class ApplEnrollmentListComponent extends EnrollmentList implements OnInit, OnDestroy {
 
-  @ViewChildren(ApplEnrollmentRowComponent) rowElements: QueryList<ApplEnrollmentRowComponent>
+  @ViewChildren(ApplEnrollmentRowComponent) rowElements: QueryList<ApplEnrollmentRowComponent>;
 
   // Enrollment status for applicant
   private _enrollmentStatus: string [] = [
@@ -31,7 +31,6 @@ export class ApplEnrollmentListComponent extends EnrollmentList implements OnIni
   /* OnInit implementation */
   ngOnInit() {
     this.data = this.rowItems;
-    console.log('OnInit (ApplEnrollmentListComponent): ' + this.data );
   }
 
   /* OnDestroy implementation */

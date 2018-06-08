@@ -87,7 +87,7 @@ export class PrimeDataService {
         title: site.name,
         associatedObjectId: site.objectId
       };
-
+/*
       const pending = site.siteAccess
         .filter(sa => sa.status === EnrollmentStatus.Pending);
       const expired = site.siteAccess
@@ -97,7 +97,8 @@ export class PrimeDataService {
 
 
       const problemAccess = pending.concat(expired, declined);
-      rowItem.expandableRows = problemAccess;
+      rowItem.expandableRows = problemAccess;*/
+      rowItem.expandableRows = site.siteAccess;
 
       result.push(rowItem);
     });

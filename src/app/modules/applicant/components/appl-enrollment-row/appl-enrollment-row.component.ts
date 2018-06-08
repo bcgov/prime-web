@@ -72,13 +72,14 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
   /** This function is responsible for generating site access row titles depending on dashboard type */
   get siteAccessRequiringAttention(): any[] {
 
+    console.log('SiteAccess Required attention');
     if (!this.rowData || !this.rowData.expandableRows) {
       return [];
     }
 
     // All this function does is generate titles for Site Access rows.
     return this.rowData.expandableRows.map(siteAccess => {
-      siteAccess.title = `${siteAccess.site.name} / ${siteAccess.person.name}`
+      siteAccess.title = `${siteAccess.site.name} / ${siteAccess.person.name}`;
       return siteAccess;
     });
   }
