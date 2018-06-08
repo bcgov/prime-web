@@ -13,6 +13,7 @@ import { ApplEnrollmentListComponent } from './components/appl-enrollment-list/a
 import { ApplEnrollmentRowComponent } from './components/appl-enrollment-row/appl-enrollment-row.component';
 ;
 import { AlertModule } from 'ngx-bootstrap';
+import { ApplicantSelfDeclarationComponent } from './pages/applicant-self-declaration/applicant-self-declaration.component';
 
 @NgModule({
   imports: [

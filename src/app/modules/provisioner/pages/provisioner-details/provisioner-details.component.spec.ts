@@ -12,6 +12,9 @@ import { VerifierModule } from '../../../verifier/verifier.module';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { DummyDataService } from '../../../../services/dummy-data.service';
+import { ProvisionerWidgetsComponent } from '../../components/provisioner-widgets/provisioner-widgets.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { TooltipModule } from 'ngx-bootstrap';
 
 describe('ProvisionerDetailsComponent', () => {
   let component: ProvisionerDetailsComponent;
@@ -19,8 +22,8 @@ describe('ProvisionerDetailsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProvisionerDetailsComponent, ProvisionerTableComponent, ProvisionerDashboardComponent,  ],
-      imports: [ CoreModule, RouterTestingModule.withRoutes(routes), VerifierModule ],
+      declarations: [ ProvisionerDetailsComponent, ProvisionerTableComponent, ProvisionerDashboardComponent, ProvisionerWidgetsComponent  ],
+      imports: [ CoreModule, RouterTestingModule.withRoutes(routes), VerifierModule, NgxChartsModule, TooltipModule.forRoot() ],
       providers: [ PrimeDataService,
 
         // Mock the route "data" fields
