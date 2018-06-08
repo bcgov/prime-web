@@ -12,7 +12,7 @@ import { InfoButtonComponent } from './components/user-info-button/user-info-but
 import { MillerItemCheckboxComponent } from './components/miller-item-checkbox/miller-item-checkbox.component';
 import { EnrollmentListComponent } from './components/enrollment-list/enrollment-list.component';
 import { EnrollmentRowComponent } from './components/enrollment-row/enrollment-row.component';
-import { EnrollmentProgressRowComponent } from './components/enrollment-progress-row/enrollment-progress-row.component';
+import { EnrollmentProgressRowComponent } from '../../core/enrollment-progress-row/enrollment-progress-row.component';
 import { MillerColumnsComponent } from './components/miller-columns/miller-columns.component';
 import { FormsModule } from '@angular/forms';
 import { UserEnrollmentComponent } from './pages/user-enrollment/user-enrollment.component';

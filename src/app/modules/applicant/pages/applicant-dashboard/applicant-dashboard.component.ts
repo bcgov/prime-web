@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { Person } from '../../../../models/person.model';
 import { DummyDataService } from '../../../../services/dummy-data.service';
-import {SiteAccess} from '../../../../models/sites.model';
-import {EnrollmentRowItem} from '../../../verifier/components/enrollment-row/enrollment-row.interface';
-import {ApplEnrollmentRowItem} from '../../components/appl-enrollment-row/appl-enrollment-row.interface';
+import {ApplEnrollmentRowItem} from '../../components/appl-enrollment-row/appl-enrollment-row.component';
 
 @Component({
   selector: 'prime-applicant-dashboard',
@@ -19,7 +17,7 @@ export class ApplicantDashboardComponent implements OnInit {
     // TODO: Make sure this only fires once! Don't want to overwrite user behaviour.
     // TODO: Need to move this so it always excutes on ALL applicants, but only once. Maybe need ApplicantComponent like AppComponent?
     // ALTERNATIVELY: JUST REMOVE THIS! Users can fill it out themselves.
-    //this.dummyDataService.setPersonToApplicant(this.applicant);
+    this.dummyDataService.setPersonToApplicant(this.applicant);
   }
 
   get applicant(): Person {

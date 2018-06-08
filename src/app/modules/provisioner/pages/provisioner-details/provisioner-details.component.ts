@@ -3,9 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Person } from '../../../../models/person.model';
 import { PrimeDataService } from '../../../../services/prime-data.service';
-import {EnrollmentRowItem} from '../../../verifier/components/enrollment-row/enrollment-row.interface';
 import { Site } from '../../../../models/sites.model';
 import { Collection } from '../../../../models/collections.model';
+import { EnrollmentRowItem } from '../../../verifier/components/enrollment-row/enrollment-row.component';
 
 @Component({
   selector: 'prime-provisioner-details',

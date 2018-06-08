@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { EnrollmentRowComponent } from './enrollment-row.component';
 import {PillBadgeComponent} from '../../../../core/pill-badge/pill-badge.component';
 import {InfoButtonComponent} from '../user-info-button/user-info-button.component';
-import {EnrollmentProgressRowComponent} from '../enrollment-progress-row/enrollment-progress-row.component';
+import {EnrollmentProgressRowComponent} from '../../../../core/enrollment-progress-row/enrollment-progress-row.component';
 import {BsModalService, TooltipModule} from 'ngx-bootstrap';
 import {FormsModule} from '@angular/forms';
 import {DatepickerComponent} from '../../../../core/datepicker/datepicker.component';
@@ -12,7 +12,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {PrimeDataService} from '../../../../services/prime-data.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-describe('EnrollmentRowComponent', () => {
+describe('EnrollmentRowClass', () => {
   let component: EnrollmentRowComponent;
   let fixture: ComponentFixture<EnrollmentRowComponent>;
 
