@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { growVertical } from '../../../../animations/animations';
-import { SiteAccess, SiteAccessProgressSteps } from '../../../../models/sites.model';
+import { growVertical } from '../../animations/animations';
+import { SiteAccess, SiteAccessProgressSteps } from '../../models/sites.model';
+import {RowState} from '../enrollment-row/enrollment-row.class';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class EnrollmentProgressRowComponent implements OnInit {
   ngOnInit() {}
 
   get openState(): string {
-    return open ? "opened" : "closed";
+    return open ? RowState.Opened : RowState.Closed;
   }
 
   // Makes it easy to iterate over an enum in the template. Only for use in the

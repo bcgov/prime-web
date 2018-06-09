@@ -1,0 +1,113 @@
+<div *ngIf="rowData" class="enrollment-list-item" (click)="toggleRow()" [@openStateDisable]="openState">
+
+  <div class="enrollment-text-container">
+    <span class="enrollment-text-main">{{siteName}}</span>
+    <span class="enrollment-text-main">{{siteNumber}} </span>
+  </div>
+
+  <table>
+    <div *ngIf="siteStatus === 'Active'">
+      <tr>
+        <td class="provisioner-element-label">POS User Id</td>
+        <td class="provisioner-element-label"> Date Provisioned</td>
+      </tr>
+      <tr>
+        <td class="provisioner-element-text">{{rowData.posUserId}}</td>
+        <td class="provisioner-element-text"> {{rowData.provisionedDate}}</td>
+      </tr>
+    </div>
+
+  </table>
+
+
+  <table>
+    <div *ngIf="siteStatus === 'New'">
+      <tr>
+        <td class="provisioner-element-label">POS User Id</td>
+        <td class="provisioner-element-label"> Date Provisioned</td>
+      </tr>
+      <tr>
+        <td> <input type="text"></td>
+        <td > <input type="text"></td>
+      </tr>
+    </div>
+  </table>
+
+
+  <div *ngIf="siteStatus === 'Declined'">
+    hereD
+  </div>
+
+  <div class="enrollment-actions">
+      <span class="enrollment-icons">
+        <prime-pill-badge
+          [alerts]="siteAlert"
+          [iconOnly]='false'>
+        </prime-pill-badge>
+        <prime-info-button
+          [targetId]="rowData.objectId">
+        </prime-info-button>
+      </span>
+  </div>
+</div>
+
+<div *ngIf="siteStatus === 'New'">
+<table width="100%">
+    <tr>
+      <td class="provisioner-element-label" width = "10%">PEC</td>
+      <td class="provisioner-element-label" width = "10%"> Request</td>
+      <td class="provisioner-element-label" width="8">Class</td>
+      <td class="provisioner-element-label" width="35"> Access Rights</td>
+      <td class="provisioner-element-label" width="6">T&C</td>
+      <td class="provisioner-element-label"width="8"> Start</td>
+      <td class="provisioner-element-label" width="8">End</td>
+      <td class="provisioner-element-label" width="30"> Personal Access</td>
+      <td width="10"></td>
+    </tr>
+    <tr>
+      <td class="provisioner-element-text">{{rowData.PEC}}</td>
+      <td class="provisioner-element-text"> {{rowData.request}}</td>
+      <td class="provisioner-element-text">{{rowData.siteClass}}</td>
+      <td class="provisioner-element-text"> {{rowData.accessRights}}</td>
+      <td class="provisioner-element-text">{{rowData.tAndC}}</td>
+      <td class="provisioner-element-text"> {{rowData.startDate}}</td>
+      <td class="provisioner-element-text">{{rowData.endDate}}</td>
+      <td class="provisioner-element-text"> {{rowData.personalAccess}}</td>
+      <td><input type="checkbox" class="myCheckbox">T&C Enforceable </td>
+    </tr>
+
+</table>
+</div>
+
+<div [@openState]="openState">
+  <div [@openStateChild]="openState"  class="expandable-container">
+
+    <div class="enrollment-expandable" *ngFor="let siteAccess of rowData.siteAccess"
+         (click)="expandedRowClick(siteAccess)"
+    >
+      <div class="enrollment-text-container">
+        <span class="enrollment-text-main">{{siteAccess.title}}</span>
+      </div>
+      <div class="enrollment-actions">
+              <span class="enrollment-icons">
+
+                  <prime-pill-badge
+                    [alerts]="[siteAccess.alert]">
+                  </prime-pill-badge>
+
+                  <prime-info-button
+                    [targetId]="siteAccess.site.objectId">
+                  </prime-info-button>
+              </span>
+      </div>
+
+      <prime-enrollment-progress-row
+        [open]='siteAccess.open'
+        [data]='siteAccess'>
+      </prime-enrollment-progress-row>
+
+    </div>
+
+
+  </div>
+</div>

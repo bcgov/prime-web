@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { EnrollmentRowItem } from '../modules/verifier/components/enrollment-row/enrollment-row.interface';
 import { MillerColumnConfig } from '../modules/verifier/components/miller-columns/miller-columns.interface';
 import { Collection } from '../models/collections.model';
 import { EnrollmentStatus } from '../models/enrollment-status.enum';
 import { Person } from '../models/person.model';
 import { Site, SiteAccess } from '../models/sites.model';
+import {EnrollmentRowItem} from '../modules/verifier/components/enrollment-row/enrollment-row.component';
+import {ApplEnrollmentRowItem} from '../modules/applicant/components/appl-enrollment-row/appl-enrollment-row.component';
 
 
 @Injectable()
@@ -24,13 +25,10 @@ export class PrimeDataService {
   user: Person = new Person();
 
 
-
-
-
   getEnrollmentBySite(): EnrollmentRowItem[] {
 
     // By Site means collections at the top level
-    let result: EnrollmentRowItem[] = [];
+    const result: EnrollmentRowItem[] = [];
 
     this.collections.map(collection => {
       const rowItem: EnrollmentRowItem = {
@@ -38,21 +36,21 @@ export class PrimeDataService {
         associatedObjectId: collection.objectId,
         sites: collection.members,
         users: collection.allUsers
-      }
-      const pending = collection.getSiteAccessWithStatus(EnrollmentStatus.Pending)
-      const expired = collection.getSiteAccessWithStatus(EnrollmentStatus.Expired)
-      const declined = collection.getSiteAccessWithStatus(EnrollmentStatus.Declined)
+      };
+      const pending = collection.getSiteAccessWithStatus(EnrollmentStatus.Pending);
+      const expired = collection.getSiteAccessWithStatus(EnrollmentStatus.Expired);
+      const declined = collection.getSiteAccessWithStatus(EnrollmentStatus.Declined);
 
-      const problemAccess = pending.concat(expired, declined)
+      const problemAccess = pending.concat(expired, declined);
       rowItem.expandableRows = problemAccess;
       result.push(rowItem);
-    })
+    });
 
     return result;
   }
 
   getEnrollmentByUser(): EnrollmentRowItem[] {
-    let result: EnrollmentRowItem[] = [];
+    const result: EnrollmentRowItem[] = [];
 
     // SiteAccess still as expandableRows, just higher levels which are changed?
 
@@ -62,26 +60,53 @@ export class PrimeDataService {
         associatedObjectId: person.objectId,
         sites: person.sites,
         collections: this.findCollectionFromSites(person.sites)
-      }
+      };
 
       const pending = person.siteAccess
-        .filter(sa => sa.status === EnrollmentStatus.Pending)
+        .filter(sa => sa.status === EnrollmentStatus.Pending);
       const expired = person.siteAccess
-        .filter(sa => sa.status === EnrollmentStatus.Expired)
+        .filter(sa => sa.status === EnrollmentStatus.Expired);
       const declined = person.siteAccess
-        .filter(sa => sa.status === EnrollmentStatus.Declined)
+        .filter(sa => sa.status === EnrollmentStatus.Declined);
 
-      const problemAccess = pending.concat(expired, declined)
+      const problemAccess = pending.concat(expired, declined);
       rowItem.expandableRows = problemAccess;
 
       result.push(rowItem);
-    })
+    });
+
+    return result;
+  }
+
+  getUserSiteEnrollment(): ApplEnrollmentRowItem[] {
+    const result: ApplEnrollmentRowItem[] = [];
+
+    //NOT sure this is correct??
+    this.user.sites.map(site => {
+      const rowItem: ApplEnrollmentRowItem = {
+        title: site.name,
+        associatedObjectId: site.objectId
+      };
+
+      const pending = site.siteAccess
+        .filter(sa => sa.status === EnrollmentStatus.Pending);
+      const expired = site.siteAccess
+        .filter(sa => sa.status === EnrollmentStatus.Expired);
+      const declined = site.siteAccess
+        .filter(sa => sa.status === EnrollmentStatus.Declined);
+
+
+      const problemAccess = pending.concat(expired, declined);
+      rowItem.expandableRows = problemAccess;
+
+      result.push(rowItem);
+    });
 
     return result;
   }
 
   findCollectionFromSites(sites: Site[]): Collection[] {
-    let result: Collection[] = [];
+    const result: Collection[] = [];
     for (let index = 0; index < sites.length; index++) {
       const site = sites[index];
       const collection = this.findCollectionFromSite(site);
@@ -95,9 +120,9 @@ export class PrimeDataService {
   findCollectionFromSite(site: Site): Collection[] {;
     return this.collections.map(collection => {
       // Lookup based on objectId, so it works even if the Site is cloned from original
-      let exists = collection.members
+      const exists = collection.members
         .map(site => site.objectId)
-        .includes(site.objectId)
+        .includes(site.objectId);
 
       if (exists) return collection;
     }).filter(x => x); //Remove undefined
@@ -107,18 +132,18 @@ export class PrimeDataService {
     const collectionMiller = this.collections.map(collection => {
       collection.members = this.setAssociationId(collection.objectId, collection.members);
       return collection;
-    })
+    });
 
-    let result = {
+    const result = {
       data: {
         collections: collectionMiller,
         sites: this.sites,
         people: this.people,
       },
       options: {
-        primaryColumn: "people",
+        primaryColumn: 'people',
       }
-    }
+    };
 
     return result;
   }
@@ -134,22 +159,22 @@ export class PrimeDataService {
       // collection.allUsers.map(person => {
       //   person.associationId = person.sites[0].objectId;
       // })
-    })
+    });
 
     this.sites.map(site => {
       this.setAssociationId(site.objectId, site.users);
       // console.log(`${site.name} has ${site.users.length} users`)
-    })
+    });
 
 
-    let result = {
+    const result = {
       data: {
         collections: this.collections,
         sites: this.sites,
         people: this.people,
       },
       options: {}
-    }
+    };
 
     return result;
   }
@@ -167,7 +192,7 @@ export class PrimeDataService {
   }
 
   private filterUnique(x, i, a){
-    return x && a.indexOf(x) === i
+    return x && a.indexOf(x) === i;
   }
 
   private setAssociationId<T>(associationId: string, items: T[]): T[] {
@@ -179,7 +204,7 @@ export class PrimeDataService {
 
       (item as any).associationId.push(associationId);
       return item;
-    })
+    });
   }
 
   private clearAssociationId<T>(associationId: string, items: T[]): T[] {
@@ -187,7 +212,7 @@ export class PrimeDataService {
       // item.associationId = associationId;
       (item as any).associationId = [];
       return item;
-    })
+    });
   }
 
 

@@ -1,46 +1,294 @@
 <prime-applicant-breadcrumbs
   pageName="Professional"
-  nextPageLink="/applicant/self-declaration"
+  nextPageLink="/applicant/access-acceptance"
   previousPageLink="/applicant/contact">
 </prime-applicant-breadcrumbs>
 
-<label>
-  Do you have a college certification?
-  <prime-toggle [(data)]="applicant.hasCollege"></prime-toggle>
-</label>
 
-<div *ngIf="applicant.hasCollege" class='d-flex justify-content-between border p-3'>
+<section>
   <div class="row">
-    <div class="col d-flex flex-column">
-      <label for="college">College Certification</label>
-      <!-- TODO: Get values programmatically -->
-      <select name="college" id="college">
-        <option value="PharmacistsOfBC">91</option>
-      </select>
+    <div class="d-flex justify-content-start align-items-center col-sm-4">
+      Do you have a college certification?
     </div>
-    <div class="col d-flex flex-column">
-      <label for="collegeNumber">College Number</label>
-      <input type="text" name="collegeNumber" id="collegeNumber" disabled>
-    </div>
-    <div class="col d-flex flex-column">
-        <label for="licenseNumber">License Number</label>
-        <input type="text" name="licenseNumber" id="licenseNumber">
-    </div>
-    <div class="col d-flex flex-column">
-        <label for="licenseClass">License Class</label>
-        <!-- TODO: Get values programmatically -->
-        <select name="licenseClass" id="licenseClass">
-          <option value="1">Full Pharmacists</option>
-          <option value="2">Limited Pharmacists</option>
-        </select>
-    </div>
-    <div class="col d-flex flex-column">
-      <label for="">License Expiry</label>
-      <prime-datepicker></prime-datepicker>
+    <div class="d-flex justify-content-end">
+      <prime-toggle [(data)]="applicant.hasCollege"></prime-toggle>
     </div>
   </div>
 
-  <!-- Buttons -->
-  <div></div>
+  <div *ngIf="applicant.hasCollege === true" class='d-flex justify-content-between border p-3'>
+    <div class="row">
+      <div class="col d-inline-flex flex-column">
+        <label for="collegeTypesType">College Certification</label>
+        <select id="collegeTypesType" class="form-control drop-dl-box-15"
+                [value]="collegeTypesSelector"
+                (change)="collegeTypesSelector = $event.target.value">
+          <option value="pleaseSelect" disabled selected>Select</option>
+          <option *ngFor="let type of CollegeTypes" value="{{type}}">
+            {{type ===  'CPBC' ? 'Pharmacists of BC' : type}}
+          </option>
+        </select>
+      </div>
+      <div *ngIf="collegeCurrValue() !== ''" class="row">
+        <div class="col d-inline-flex flex-column">
+          <label for="collegeNumber">College Number</label>
+          <input type="text" name="collegeNumber" id="collegeNumber"
+                 [value]="collegeCurrValue()" class="form-control" disabled>
+        </div>
+        <div class="col d-inline-flex flex-column">
+          <label for="licenseNumber">License Number</label>
+          <!--<input type="text" name="licenseNumber" id="licenseNumber" ng-model="licenseNumber"-->
+          <!--maxlength="12" class="form-control" required>-->
+          <!--<input type="text" name="licenseNumber" id="licenseNumber"-->
+          <!--[(ngModel)]="inputFields.licenseNumber" #name="ngModel"-->
+          <!--maxlength="12" class="form-control">-->
+          <input type="text" name="licenseNumber" id="licenseNumber"
+                 [value]="licenseNumberSelector" (change)="licenseNumberSelector = $event.target.value"
+                 maxlength="12" class="form-control">
+        </div>
+        <div *ngIf="collegeTypesSelector === 'CPBC'" class="col d-inline-flex flex-column">
+          <label for="licenseClassCP">License Class</label>
+          <select id="licenseClassCP" class="form-control drop-dl-box-17"
+                  [value]="licenseClassCPTypesSelector"
+                  (change)="licenseClassCPTypesSelector = $event.target.value">
+            <option value="pleaseSelect" disabled selected>Select</option>
+            <option *ngFor="let type of LicenseClassCPTypes" value="{{type}}">
+              {{licenseClassCPValue(type)}}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="collegeTypesSelector === 'CRNBC'" class="col d-inline-flex flex-column">
+          <label for="licenseClassCRN">License Class</label>
+          <select id="licenseClassCRN" class="form-control drop-dl-box-20"
+                  [value]="licenseClassCRNTypesSelector"
+                  (change)="licenseClassCRNTypesSelector = $event.target.value">
+            <option value="pleaseSelect" disabled selected>Select</option>
+            <option *ngFor="let type of LicenseClassCRNTypes" value="{{type}}">
+              {{licenseClassCRNValue(type)}}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="collegeTypesSelector === 'CPSBC'" class="col d-inline-flex flex-column">
+          <label for="licenseClassCPS">License Class</label>
+          <select id="licenseClassCPS" class="form-control drop-dl-box-15"
+                  [value]="licenseClassCPSTypesSelector"
+                  (change)="licenseClassCPSTypesSelector = $event.target.value">
+            <option value="pleaseSelect" disabled selected>Select</option>
+            <option *ngFor="let type of LicenseClassCPSTypes" value="{{type}}">
+              {{licenseClassCPSValue(type)}}
+            </option>
+          </select>
+        </div>
+        <div class="col d-inline-flex flex-column">
+          <label for="">License Expiry</label>
+          <prime-datepicker [(date)]="applicant.licenseExpiry"></prime-datepicker>
+          <!--TODO: wrong reference-->
+          <!--<prime-datepicker size='mini' dateFormat="yyyy/mm/dd" [disabled]="!editable" [(date)]="siteAccess.startDate" class='ml-1'></prime-datepicker>-->
+        </div>
+        <div *ngIf="collegeTypesSelector === 'CRNBC'" class="col d-inline-flex flex-column">
+          <label for="advancedPracticeCertification">Advanced Practice Certification</label>
+          <select id="advancedPracticeCertification" class="form-control drop-dl-box-26"
+                  [value]="advancedPracticeCertificationTypesSelector"
+                  (change)="advancedPracticeCertificationTypesSelector = $event.target.value">
+            <option value="pleaseSelect" disabled selected>Select</option>
+            <option *ngFor="let type of AdvancedPracticeCertificationTypes" value="{{type}}">
+              {{advancedPracticeCertificationValue(type)}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
 
+    <!-- Buttons -->
+    <ng-container *ngIf="collegeCurrValue().length
+                      && licenseNumberLength()
+                      && (  (  collegeTypesSelector === 'CPBC'
+                            && licenseClassCPCurrValue().length)
+                         || (  collegeTypesSelector === 'CRNBC'
+                            && licenseClassCRNCurrValue().length
+                            && advancedPracticeCertificationCurrValue().length)
+                         || (  collegeTypesSelector === 'CPSBC'
+                            && licenseClassCPSCurrValue().length))">
+      <span class='d-flex align-items-center'>
+        <ng-container *ngIf="collegeCurrValue().length">
+          <a class='mx-1'>
+            <i class="fa fa-times fa-2x" aria-label="Delete"></i>
+          </a>
+        </ng-container>
+        <a class='mx-1'>
+          <i class="fa fa-plus-circle fa-2x" aria-label="Add"></i>
+        </a>
+      </span>
+    </ng-container>
+  </div>
+</section>
+
+
+<section *ngIf="applicant.hasCollege === false
+         || (  collegeCurrValue().length
+            && licenseNumberLength()
+            && (  (  collegeTypesSelector === 'CPBC'
+                  && licenseClassCPCurrValue().length)
+               || (  collegeTypesSelector === 'CRNBC'
+                  && licenseClassCRNCurrValue().length
+                  && advancedPracticeCertificationCurrValue().length)
+               || (  collegeTypesSelector === 'CPSBC'
+                  && licenseClassCPSCurrValue().length)))" class="with-top-margin">
+  <div class="row">
+    <div class="d-flex justify-content-start align-items-center col-sm-4">
+      Do you have a Device Provider?
+    </div>
+    <div class="d-flex justify-content-end">
+      <prime-toggle [(data)]="applicant.isDeviceProvider"></prime-toggle>
+    </div>
+  </div>
+
+  <ng-container *ngIf="applicant.isDeviceProvider === true">
+    <div class='d-flex justify-content-between border p-3' *ngFor="let deviceProviderRecord of deviceProviderList; let i = index">
+      <div class="row">
+        <div class="col d-inline-flex flex-column">
+          <label for="deviceProviderNumber">Device Provider Number</label>
+          <input type="text" name="deviceProviderNumber" id="deviceProviderNumber"
+                 [(ngModel)]="deviceProviderRecord.dpNumber"
+                 maxlength="12" class="form-control">
+          <!--<input type="text" name="deviceProviderNumber" id="deviceProviderNumber"-->
+                 <!--[(ngModel)]="deviceProviderRecord.text"-->
+                 <!--maxlength="12" class="form-control">-->
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <ng-container *ngIf="deviceProviderList[i].dpNumber.length">
+        <span class='d-flex align-items-center'>
+          <ng-container *ngIf="i > 0">
+            <a class='mx-1' (click)="deleteDeviceProvider(i)">
+              <i class="fa fa-times fa-2x" aria-label="Delete"></i>
+            </a>
+          </ng-container>
+          <a class='mx-1' (click)="addDeviceProvider()">
+            <i class="fa fa-plus-circle fa-2x" aria-label="Add"></i>
+          </a>
+        </span>
+      </ng-container>
+    </div>
+  </ng-container>
+</section>
+
+
+<div *ngIf="applicant.isDeviceProvider === false
+         || deviceProviderList[0].dpNumber.length" class="with-top-margin">
+  <!--<div *ngIf="applicant.isDeviceProvider === false-->
+  <!--|| deviceProviderNumberLength()" class="with-top-margin">-->
+  <div class="row">
+    <div class="d-flex justify-content-start align-items-center col-sm-4">
+      Are you working on-behalf?
+    </div>
+    <div class="justify-content-end">
+      <prime-toggle [(data)]="applicant.isWorkingOnBehalf"></prime-toggle>
+    </div>
+  </div>
+
+  <div *ngIf="applicant.isWorkingOnBehalf === true" class='d-flex justify-content-between border p-3'>
+    <div class="row">
+      <div class="col d-inline-flex flex-column">
+        <label for="jobTitle">Job Title</label>
+        <select id="jobTitle" class="form-control row-dropbox-20"
+                [value]="jobTitleTypesSelector"
+                (change)="jobTitleTypesSelector = $event.target.value">
+          <option value="pleaseSelect" disabled selected>Select</option>
+          <option *ngFor="let type of JobTitleTypes" value="{{type}}">
+            {{jobTitleValue(type)}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <ng-container *ngIf="jobTitleCurrValue().length">
+      <span class='d-flex align-items-center'>
+        <ng-container *ngIf="collegeCurrValue().length">
+          <a class='mx-1'>
+            <i class="fa fa-times fa-2x" aria-label="Delete"></i>
+          </a>
+        </ng-container>
+        <a class='mx-1'>
+          <i class="fa fa-plus-circle fa-2x" aria-label="Add"></i>
+        </a>
+      </span>
+    </ng-container>
+  </div>
 </div>
+
+
+<section *ngIf="applicant.isWorkingOnBehalf === false
+             || jobTitleCurrValue().length"
+         class="row with-top-margin">
+  <div class="col-sm-8">
+    <div class="row">
+      <div class="col-sm-10 align-items-center">
+        Have you ever been the subject of an order or a conviction for an information contravention?
+      </div>
+      <div class="col-sm-2">
+        <prime-toggle [(data)]="applicant.informationContravention"></prime-toggle>
+      </div>
+    </div>
+    <div *ngIf="applicant.informationContravention === true">
+      <textarea class="selfDeclarationTextArea" placeholder="Please provide detail..."
+                name="informationContraventionDetail" id="informationContraventionDetail"></textarea>
+    </div>
+
+    <div class="row with-top-margin">
+      <div class="col-sm-10 align-items-center">
+        Have you ever had your registration with a governing body of a health profession suspended or cancelled?
+      </div>
+      <div class="col-sm-2">
+        <prime-toggle [(data)]="applicant.cancelledRegistration"></prime-toggle>
+      </div>
+    </div>
+    <div *ngIf="applicant.cancelledRegistration === true">
+      <textarea class="selfDeclarationTextArea" placeholder="Please provide detail..."
+                name="cancelledRegistrationDetail" id="cancelledRegistrationDetail"></textarea>
+    </div>
+
+    <div class="row with-top-margin">
+      <div class="col-sm-10 align-items-center">
+        Have you ever had Terms and Conditions imposed on your license as a result of disciplinary actions taken by a governing body?
+      </div>
+      <div class="col-sm-2">
+        <prime-toggle [(data)]="applicant.licenseCondition"></prime-toggle>
+      </div>
+    </div>
+    <div *ngIf="applicant.licenseCondition === true">
+      <textarea class="selfDeclarationTextArea" placeholder="Please provide detail..."
+                name="licenseConditionDetail" id="licenseConditionDetail"></textarea>
+    </div>
+
+    <div class="row with-top-margin">
+      <div class="col-sm-10 align-items-center">
+        Have you ever had your access to PharmaNet suspended or revoked?
+      </div>
+      <div class="col-sm-2">
+        <prime-toggle [(data)]="applicant.revokedAccess"></prime-toggle>
+      </div>
+    </div>
+    <div *ngIf="applicant.revokedAccess === true">
+      <textarea class="selfDeclarationTextArea" placeholder="Please provide detail..."
+                name="revokedAccessDetail" id="revokedAccessDetail"></textarea>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div *ngIf="applicant.informationContravention === true
+             || applicant.cancelledRegistration    === true
+             || applicant.licenseCondition         === true
+             || applicant.revokedAccess            === true">
+      <!-- <prime-file-uploader></prime-file-uploader>-->
+      <span class="note">Scan the document, or take a photo of it. Make sure that it's:</span>
+      <ul class="note">
+        <li>The entire document, from corner to corner</li>
+        <li>At least 1000 pixels wide x 1500 pixels tall</li>
+        <li>Rotated correctly (not upside down or sideways)</li>
+        <li>In focus and easy to read</li>
+        <li>A JPG, PNG, GIF or BMP file (<b>not a PDF</b>)</li>
+      </ul>
+    </div>
+  </div>
+</section>

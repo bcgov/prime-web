@@ -16,10 +16,10 @@
         </a>
       </div>
       <div  *ngIf="applicant.hasContactInfo; else emptySection" class="card-body d-flex justify-content-between">
-        <div>
+        <div class="photocol">
           <img class="photo" src="assets/photoPlaceholder.png" alt="Generic placeholder image">
         </div>
-        <div>
+        <div class="appcol">
           <p>{{applicant.name}}</p>
           <p>{{applicant.phone}}</p>
           <p>{{applicant.email}}</p>
@@ -78,5 +78,7 @@
 
 <hr class="invisible">
 
-<!-- TODO: Need to create new component, ApplicantEnrollmentList -->
-<!-- <prime-enrollment-list></prime-enrollment-list> -->
+<!--ApplicantEnrollmentList -->
+<prime-enrollment-list
+  [rowItems]="userSiteEnrollmentData">
+</prime-enrollment-list>

@@ -5,12 +5,12 @@ import {loadInOut, openState, openStateChild, openStateDisable} from '../../../.
 import {EnrollmentAlert, Site} from '../../../../models/sites.model';
 
 @Component({
-  selector: 'prime-provisioner-table',
-  templateUrl: './provisioner-table.component.html',
-  styleUrls: ['./provisioner-table.component.scss'],
+  selector: 'prime-provisioner-row',
+  templateUrl: './provisioner-row.component.html',
+  styleUrls: ['./provisioner-row.component.scss'],
   animations: [openState, openStateChild, loadInOut, openStateDisable]
 })
-export class ProvisionerTableComponent extends Base implements OnInit {
+export class ProvisionerRowComponent extends Base implements OnInit {
 
   @Input() rowData: Site;
   @Input() primaryType: 'User'|'Site'= 'Site';
@@ -35,7 +35,6 @@ export class ProvisionerTableComponent extends Base implements OnInit {
     this.siteName = name.substring(0, name.lastIndexOf(' ') - 1);
     this.siteNumber = 'Site ' + name.substring(name.lastIndexOf(' ') + 1);
     console.log(' site is ', this.rowData);
-    console.log('prodate ' ,this.rowData.provisionedDate);
 
   }
 
@@ -54,38 +53,32 @@ export class ProvisionerTableComponent extends Base implements OnInit {
     return arr[Math.ceil(Math.random() * arr.length) - 1];
   }
 
-
+  closeRow() {
+    this.openState = 'closed';
+  }
 
   /*
-
     toggleRow() {
       if (this.canOpen()){
         this.openState = this.openState === 'opened' ? 'closed' : 'opened';
-
         if (this.openState === 'opened'){
           this.onRowOpened.emit(this);
           // First row is open by default
           this.siteAccessRequiringAttention[0].open = open;
         }
-
       }
     }
-
     closeRow() {
       this.openState = 'closed';
     }
-
     expandedRowClick(row: EnrollmentRowChild){;
       this.siteAccessRequiringAttention.map(x => x.open = false);
       row.open = !row.open;
     }
-
     get siteAccessRequiringAttention(): any[] {
-
       if ( !this.rowData || !this.rowData.expandableRows ){
         return [];
       }
-
       // All this function does is generate titles for Site Access rows.
       if (this.primaryType === "Site"){
         return this.rowData.expandableRows.map(siteAccess => {
@@ -99,12 +92,7 @@ export class ProvisionerTableComponent extends Base implements OnInit {
           return siteAccess;
         });
       }
-
     }
-
-
-
-
     canOpen() {
       return this.siteAccessRequiringAttention.length >= 1;
     }

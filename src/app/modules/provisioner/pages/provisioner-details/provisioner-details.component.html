@@ -101,8 +101,68 @@
   </div>
 </div>
 
-<ng-template class="row" #siteDetails>
-  TODO: Get Site (in Controller) then set up data-binding
+<ng-template #siteDetails>
+
+  <div class="row">
+
+      <div class="col">
+        <div class="form-group row">
+          <label for="collection" class="col-sm-3 col-form-label">
+            Collection
+          </label>
+          <div class="col-sm-9">
+            <input type="text" disabled class="form-control" id="collection" name="collection" [value]="findCollectionFromSite(site)?.name">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="middleName" class="col-sm-3 col-form-label">
+            Site
+          </label>
+          <div class="col-sm-9">
+            <input type="text" disabled class="form-control" id="middleName" name="middleName" [value]="person?.middleName">
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="form-group row">
+          <label for="address" class="col-sm-3 col-form-label">
+            Address
+          </label>
+          <div class="col-sm-9">
+            <input type="text" disabled class="form-control" id="address" name="address" [value]="site?.address">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="PEC" class="col-sm-3 col-form-label">
+            PEC
+          </label>
+          <div class="col-sm-9">
+            <input type="text" disabled class="form-control" id="PEC" name="PEC" [value]="site?.PEC">
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="form-group row">
+          <label for="vendor" class="col-sm-3 col-form-label">
+            Vendor
+          </label>
+          <div class="col-sm-9">
+            <input type="text" disabled class="form-control" id="vendor" name="vendor" [value]="site?.vendor">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="siteType" class="col-sm-3 col-form-label">
+            Site
+          </label>
+          <div class="col-sm-9">
+            <input type="text" disabled class="form-control" id="siteType" name="siteType" [value]="site?.siteType">
+          </div>
+        </div>
+      </div>
+  </div>
+
 </ng-template>
 
 

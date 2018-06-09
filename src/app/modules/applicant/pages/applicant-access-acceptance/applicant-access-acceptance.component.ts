@@ -28,10 +28,28 @@ export class ApplicantAccessAcceptanceComponent implements OnInit {
 
   ngOnInit() {
 
-    //TODO: Remove this later, just for development
-    //this.dataService.user.accessAcceptance = {renewalDate: new Date(); }
+      for (let i = 0; i < this.accessAcceptances.length; i++) {
+        const item = this.accessAcceptances[i];
+        item.isAccepted = this.applicant.accessAcceptance[i];
+    }
+
   }
 
+  get applicant() {
+    return this.dataService.user;
+  }
+
+
+  shouldShowControls() {
+    let isChanged  = false;
+    for (let i = 0; i < this.accessAcceptances.length; i++) {
+      const item = this.accessAcceptances[i];
+      if( item.isAccepted !== this.applicant.accessAcceptance[i]){
+        isChanged =  true;
+      }
+    }
+    return isChanged;
+  }
 
   disableContinue() {
     return this.accessAcceptances
@@ -39,6 +57,19 @@ export class ApplicantAccessAcceptanceComponent implements OnInit {
       .filter(item => item === false).length >= 1;
 
   }
+
+  save() {
+    this.applicant.accessAcceptance = this.accessAcceptances.map(x => x.isAccepted)
+  }
+
+  cancel() {
+    for (let i = 0; i < this.accessAcceptances.length; i++) {
+      const item = this.accessAcceptances[i];
+      item.isAccepted = this.applicant.accessAcceptance[i];
+    }
+
+  }
+
 
   }
 

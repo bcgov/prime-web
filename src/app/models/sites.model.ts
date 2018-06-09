@@ -1,9 +1,10 @@
-import * as moment from "moment";
+import * as moment from 'moment';
 import { Base } from '../core/base/base.class';
-import { BadgeLevel } from '../modules/verifier/components/enrollment-row/enrollment-row.interface';
 import { EnrollmentStatus } from './enrollment-status.enum';
-import { Person, Role, Verifier } from './person.model';
+import { Person, Role, Verifier, Provisioner } from './person.model';
 import { Address } from './addresses.model';
+import {BadgeLevel} from '../core/enrollment-row/enrollment-row.class';
+import {s} from '@angular/core/src/render3';
 
 //-----------------------------------------------------------------------------
 // SITES
@@ -16,7 +17,14 @@ export class Site extends Base {
   siteAccess: SiteAccess[];
   siteType: string; //TODO: Change to Enum once we have all the types
   vendor: string;
-
+  PEC: string;
+  request: string;
+  siteClass: string;
+  accessRights: string;
+  startDate: string;
+  personalAccess: string;
+  tAndC: string;
+  endDate: string;
   posUserId: string;
   provisionedDate: string;
 
@@ -28,19 +36,19 @@ export class Site extends Base {
 
   get users(): Person[] {
     return this.siteAccess.map(siteAccess => siteAccess.person)
-      .filter(this.filterUnique)
+      .filter(this.filterUnique);
   }
 
   get activeUsers(): Person[] {
     return this.siteAccess.filter(x => x.status === EnrollmentStatus.Active)
-      .map(siteAccess => { return siteAccess.person})
-      .filter(this.filterUnique)
+      .map(siteAccess => { return siteAccess.person; })
+      .filter(this.filterUnique);
   }
 
   getUsersForStatus(status: EnrollmentStatus){
     return this.siteAccess.filter(x => x.status === status)
-      .map(siteAccess => { return siteAccess.person})
-      .filter(this.filterUnique)
+      .map(siteAccess => { return siteAccess.person; })
+      .filter(this.filterUnique);
   }
 
   get provisionedDateShort(): string {
@@ -55,7 +63,7 @@ export class Site extends Base {
   }
 
   private filterUnique(x, i, a){
-    return x && a.indexOf(x) === i
+    return x && a.indexOf(x) === i;
   }
 }
 
@@ -74,9 +82,10 @@ export class SiteAccess extends Base {
   vendor: Vendor;
   personalAccessToPharmaNet: boolean;
   verifier: Verifier; // "by" in xlsx designs -  responsible for approving
+  provisioner: Provisioner;
 
   // In-progress
-  progress: SiteAccessProgressSteps
+  progress: SiteAccessProgressSteps;
 
   // Are there changes to the data made by the user that have not been submitted? NOTE: Rudimentary for now in prototype.
   pendingChanges: boolean;
@@ -112,7 +121,7 @@ export class EnrollmentAlert {
     this.level = EnrollmentAlert.convertStatusToBadgeLevel(status);
   }
 
-  static convertStatusToBadgeLevel(status: EnrollmentStatus) : BadgeLevel {
+  static convertStatusToBadgeLevel(status: EnrollmentStatus): BadgeLevel {
     if (status === EnrollmentStatus.Pending){
         return BadgeLevel.Warning;
     }
@@ -153,6 +162,6 @@ export class EnrollmentAlert {
 export enum SiteAccessProgressSteps {
   Verifier = 'Verifier',
   Applicant = 'Applicant',
-  MoH = "MoH",
-  Provisioner = "Provisioner"
+  MoH = 'MoH',
+  Provisioner = 'Provisioner'
 }

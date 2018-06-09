@@ -3,7 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Person } from '../../../../models/person.model';
 import { PrimeDataService } from '../../../../services/prime-data.service';
-import {EnrollmentRowItem} from '../../../verifier/components/enrollment-row/enrollment-row.interface';
+import { Site } from '../../../../models/sites.model';
+import { Collection } from '../../../../models/collections.model';
+import { EnrollmentRowItem } from '../../../verifier/components/enrollment-row/enrollment-row.component';
 
 @Component({
   selector: 'prime-provisioner-details',
@@ -14,6 +16,7 @@ export class ProvisionerDetailsComponent implements OnInit {
   sub: Subscription;
   provisionByType: ProvisionByType;
   person: Person;
+  site: Site;
 
   constructor(private route: ActivatedRoute, private dataService: PrimeDataService) { }
 
@@ -33,7 +36,8 @@ export class ProvisionerDetailsComponent implements OnInit {
     // verifier-routing.module.ts for exaple with how it does it for
     // EnrollmentComponents
     this.person = this.dataService.people[0];
-    console.log('PROVDETAILS ngOnInit PERSON TARGET', this.person);
+    this.site = this.dataService.sites[0];
+    console.log('PROVDETAILS ngOnInit TARGET', { person: this.person, site: this.site });
   }
 
   ngOnDestroy() {
@@ -50,6 +54,10 @@ export class ProvisionerDetailsComponent implements OnInit {
 
   get provisionerSiteData(): EnrollmentRowItem[] {
     return this.dataService.getEnrollmentBySite();
+  }
+
+  findCollectionFromSite(site: Site): Collection {
+    return this.dataService.findCollectionFromSite(site)[0];
   }
 }
 

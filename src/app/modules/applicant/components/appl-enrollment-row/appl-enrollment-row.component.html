@@ -1,11 +1,18 @@
-
-
 <div *ngIf="rowData" class="enrollment-list-item" (click)="toggleRow()" [@openStateDisable]="openState">
 
   <div class="enrollment-text-container">
-    <span class="enrollment-text-main">{{siteName}}</span>
-    <span class="enrollment-text-main">{{siteNumber}} </span>
+    <span class="enrollment-text-main">{{rowData.title}}</span>
   </div>
+
+ <!--
+  <div>
+    <span>start</span>
+  </div>
+  <div>
+    <span>end</span>
+  </div>
+-->
+
 
   <table>
     <div *ngIf="siteStatus === 'Active'">
@@ -36,13 +43,16 @@
           [alerts]="siteAlert"
           [iconOnly]='false'>
         </prime-pill-badge>
-        <prime-info-button
-          [targetId]="rowData.objectId">
-        </prime-info-button>
+<!--        <prime-info-button
+          [targetId]="rowData.associatedObjectId">
+        </prime-info-button> -->
+ <!--       <i class="fa fa-edit text-muted" (click)="goToEnrollmentPage()"></i> -->
       </span>
   </div>
 </div>
 
+
+<!--
 <div [@openState]="openState">
   <div [@openStateChild]="openState"  class="expandable-container">
 
@@ -71,7 +81,7 @@
       </prime-enrollment-progress-row>
 
     </div>
-
-
   </div>
 </div>
+  -->
+

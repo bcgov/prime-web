@@ -2,6 +2,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ApplicantBreadcrumbsComponent } from './applicant-breadcrumbs.component';
 import {RouterTestingModule} from '@angular/router/testing';
+import { CoreModule } from '../../../core/core.module';
+import { AlertModule } from 'ngx-bootstrap';
+import { APP_BASE_HREF } from '@angular/common';
+import { ApplicantDataService } from '../../../../services/applicant-data.service';
+import { PrimeDataService } from '../../../../services/prime-data.service';
 
 describe('ApplicantBreadcrumbsComponent', () => {
   let component: ApplicantBreadcrumbsComponent;
@@ -10,7 +15,8 @@ describe('ApplicantBreadcrumbsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ApplicantBreadcrumbsComponent ],
-      imports: [RouterTestingModule]
+      imports: [RouterTestingModule, CoreModule, AlertModule.forRoot()],
+      providers: [{provide: APP_BASE_HREF, useValue: '/'}, ApplicantDataService, PrimeDataService]
     })
     .compileComponents();
   }));

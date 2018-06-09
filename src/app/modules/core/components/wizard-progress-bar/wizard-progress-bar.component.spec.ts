@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WizardProgressBarComponent } from './wizard-progress-bar.component';
+import { AlertModule, ProgressbarModule } from 'ngx-bootstrap';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('WizardProgressBarComponent', () => {
   let component: WizardProgressBarComponent;
@@ -8,7 +10,8 @@ describe('WizardProgressBarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WizardProgressBarComponent ]
+      declarations: [ WizardProgressBarComponent ],
+      imports: [AlertModule.forRoot(), ProgressbarModule.forRoot(), RouterTestingModule]
     })
     .compileComponents();
   }));
