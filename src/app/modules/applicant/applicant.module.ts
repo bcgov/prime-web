@@ -20,7 +20,7 @@ import { ApplicantSelfDeclarationComponent } from './pages/applicant-self-declar
     ApplicantRoutingModule,
     CoreModule,
     FormsModule,
-    AlertModule,
+    AlertModule
   ],
   declarations: [
     ApplicantDashboardComponent,
@@ -30,6 +30,7 @@ import { ApplicantSelfDeclarationComponent } from './pages/applicant-self-declar
     ApplicantAccessAcceptanceComponent,
     ApplicantBreadcrumbsComponent,
     ApplEnrollmentListComponent,
-    ApplEnrollmentRowComponent]
+    ApplEnrollmentRowComponent
+  ]
 })
 export class ApplicantModule { }
