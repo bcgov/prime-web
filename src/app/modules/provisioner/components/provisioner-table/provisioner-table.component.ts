@@ -2,8 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Base} from '../../../../core/base/base.class';
 import {Router} from '@angular/router';
 import {loadInOut, openState, openStateChild, openStateDisable} from '../../../../animations/animations';
-import {EnrollmentRowChild, EnrollmentRowItem} from '../../../verifier/components/enrollment-row/enrollment-row.interface';
-import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
 import {EnrollmentAlert, Site} from '../../../../models/sites.model';
 
 @Component({
@@ -15,17 +13,20 @@ import {EnrollmentAlert, Site} from '../../../../models/sites.model';
 export class ProvisionerTableComponent extends Base implements OnInit {
 
   @Input() rowData: Site;
-  @Input() primaryType: "User"|"Site" = "Site";
+  @Input() primaryType: 'User'|'Site'= 'Site';
 
   @Output() onRowOpened = new EventEmitter<any>();
-  public openState: string = 'closed';
+  openState: String = 'closed';
 
   siteNumber: String;
   siteName: string;
-  status: EnrollmentStatus;
+  alert: EnrollmentAlert[] = [];
+  siteStatus: string ;
+
+
 
   constructor( private router: Router) {
-    super();
+    super()
   }
 
   ngOnInit() {
@@ -34,68 +35,84 @@ export class ProvisionerTableComponent extends Base implements OnInit {
     this.siteName = name.substring(0, name.lastIndexOf(' ') - 1);
     this.siteNumber = 'Site ' + name.substring(name.lastIndexOf(' ') + 1);
     console.log(' site is ', this.rowData);
-    //this.siteAccessRequiringAttention.map(x => x.open = false);
+    console.log('prodate ' ,this.rowData.provisionedDate);
+
   }
 
-/*
 
-  toggleRow() {
-    if (this.canOpen()){
-      this.openState = this.openState === 'opened' ? 'closed' : 'opened';
+  get siteAlert() {
+    if (this.alert.length < 1) {
+      const randomStatusString: string = this.getRandomElFromArray(Object.keys(EnrollmentStatus));
+      const status = EnrollmentStatus[randomStatusString];
+      this.siteStatus = status;
+      this.alert.push(new EnrollmentAlert(status));
+    }
+    return this.alert;
+  }
 
-      if (this.openState === 'opened'){
-        this.onRowOpened.emit(this);
-        // First row is open by default
-        this.siteAccessRequiringAttention[0].open = open;
+  private getRandomElFromArray<T>(arr: T[]): T {
+    return arr[Math.ceil(Math.random() * arr.length) - 1];
+  }
+
+
+
+  /*
+
+    toggleRow() {
+      if (this.canOpen()){
+        this.openState = this.openState === 'opened' ? 'closed' : 'opened';
+
+        if (this.openState === 'opened'){
+          this.onRowOpened.emit(this);
+          // First row is open by default
+          this.siteAccessRequiringAttention[0].open = open;
+        }
+
+      }
+    }
+
+    closeRow() {
+      this.openState = 'closed';
+    }
+
+    expandedRowClick(row: EnrollmentRowChild){;
+      this.siteAccessRequiringAttention.map(x => x.open = false);
+      row.open = !row.open;
+    }
+
+    get siteAccessRequiringAttention(): any[] {
+
+      if ( !this.rowData || !this.rowData.expandableRows ){
+        return [];
+      }
+
+      // All this function does is generate titles for Site Access rows.
+      if (this.primaryType === "Site"){
+        return this.rowData.expandableRows.map(siteAccess => {
+          siteAccess.title = `${siteAccess.site.name} / ${siteAccess.person.name}`
+          return siteAccess;
+        });
+      }
+      else {
+        return this.rowData.expandableRows.map(siteAccess => {
+          siteAccess.title = `${siteAccess.site.name}`
+          return siteAccess;
+        });
       }
 
     }
-  }
 
-  closeRow() {
-    this.openState = 'closed';
-  }
 
-  expandedRowClick(row: EnrollmentRowChild){;
-    this.siteAccessRequiringAttention.map(x => x.open = false);
-    row.open = !row.open;
-  }
 
-  get siteAccessRequiringAttention(): any[] {
 
-    if ( !this.rowData || !this.rowData.expandableRows ){
-      return [];
+    canOpen() {
+      return this.siteAccessRequiringAttention.length >= 1;
     }
-
-    // All this function does is generate titles for Site Access rows.
-    if (this.primaryType === "Site"){
-      return this.rowData.expandableRows.map(siteAccess => {
-        siteAccess.title = `${siteAccess.site.name} / ${siteAccess.person.name}`
-        return siteAccess;
-      });
-    }
-    else {
-      return this.rowData.expandableRows.map(siteAccess => {
-        siteAccess.title = `${siteAccess.site.name}`
-        return siteAccess;
-      });
-    }
-
-  }
-
-  get allChildAlerts() {
-    return this.siteAccessRequiringAttention.map(x => x.alert);
-  }
-
-
-  canOpen() {
-    return this.siteAccessRequiringAttention.length >= 1;
-  }
-*/
+  */
 }
 
-enum SiteStatus {
-  active = "Active",
-  new = "New",
-  declined = "Declined",
+enum EnrollmentStatus {
+  active = 'Active',
+  new = 'New',
+  declined = 'Declined',
 }

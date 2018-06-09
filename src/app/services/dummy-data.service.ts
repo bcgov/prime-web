@@ -5,6 +5,7 @@ import { EnrollmentStatus } from '../models/enrollment-status.enum';
 import { Person } from '../models/person.model';
 import { Address } from '../models/addresses.model';
 import { Site, SiteAccess, SiteAccessProgressSteps } from '../models/sites.model';
+import moment = require('moment');
 
 
 
@@ -54,6 +55,8 @@ export class DummyDataService {
       site.siteType = this.getRandomElFromArray(['Pharmacy', 'Hospital'])
       site.vendor = this.getRandomElFromArray(['Intellisense', 'Ultracorp', 'Mediware', 'HealthInc']);
       site.name = this.generateSiteName(name);
+      site.posUserId = this.generatePosUserId();
+      site.provisionedDate = this.generateProvisionedDate();
       result.push(site);
     }
 
@@ -192,6 +195,19 @@ export class DummyDataService {
     address.city = 'Victoria';
     return address;
   }
+
+  private generatePosUserId(): string {
+    const posIds = ['T', 'SJ', 'OA', 'KL', 'M'];
+    return `${this.getRandomElFromArray(posIds)}${Math.ceil(Math.random() * 8000)} `;
+
+  }
+
+  private generateProvisionedDate(): string{
+    const today = new Date();
+    const pastDate = new Date(2017, 1, 0);
+    return moment(this.randomDate(today, pastDate)).format('DD/MM/YYYY');
+  }
+
 
   private randomDate(start: Date, end: Date): Date {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));

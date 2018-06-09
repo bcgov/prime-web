@@ -17,6 +17,8 @@ export class Site extends Base {
   siteType: string; //TODO: Change to Enum once we have all the types
   vendor: string;
 
+  posUserId: string;
+  provisionedDate: string;
 
   constructor() {
     super();
@@ -39,6 +41,10 @@ export class Site extends Base {
     return this.siteAccess.filter(x => x.status === status)
       .map(siteAccess => { return siteAccess.person})
       .filter(this.filterUnique)
+  }
+
+  get provisionedDateShort(): string {
+    return moment(this.provisionedDate).format('DD/MM/YYYY');
   }
 
   /** For type-guard. You very likely want to use the type guard INSTEAD of
@@ -135,6 +141,9 @@ export class EnrollmentAlert {
       return BadgeLevel.Info;
     }
 
+    if (status === 'New'){
+      return BadgeLevel.Warning;
+    }
   }
 }
 

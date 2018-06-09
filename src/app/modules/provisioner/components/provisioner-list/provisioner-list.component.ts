@@ -19,6 +19,7 @@ export class ProvisionerListComponent implements OnInit {
   ngOnInit() {
     for (let i = 0; i < this.rowItems.length; i++){
       this.sites.push(this.rowItems[i].sites[0]);
+
     }
   }
 

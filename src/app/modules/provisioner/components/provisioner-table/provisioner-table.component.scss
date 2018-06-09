@@ -60,6 +60,19 @@ $rowBgColor: white;
   }
 }
 
+table {
+  border-collapse: separate;
+}
+
+.provisioner-element-label {
+  font-size: $h6-font-size;
+}
+
+.provisioner-element-text{
+  padding-left: 0.5em;
+  background-color: lightgrey;
+}
+
 .enrollment-text-container {
   min-height: $rowHeight;
   cursor: pointer; // Click to expand
@@ -75,10 +88,7 @@ $rowBgColor: white;
     font-size: $h4-font-size;
   }
 
-  .enrollment-text-black{
-    font-size: $h4-font-size;
-    color: black;
-   }
+
   &>span:not(:last-of-type):after {
     font-size: $font-size-base;
     color: $gray-600;
