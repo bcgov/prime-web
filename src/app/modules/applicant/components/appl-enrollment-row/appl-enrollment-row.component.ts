@@ -1,8 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {EnrollmentRow, EnrollmentRowChild, RowState} from '../../../../core/enrollment-row/enrollment-row.class';
 import {loadInOut, openState, openStateChild, openStateDisable} from '../../../../animations/animations';
-import {Site, SiteAccess} from '../../../../models/sites.model';
-import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
+import {SiteAccess} from '../../../../models/sites.model';
 import {Collection} from '../../../../models/collections.model';
 
 // Specific to this component
@@ -39,58 +38,50 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
     if (!this.rowData) {
       return;
     }
-    this.siteAccessRequiringAttention.map(x => x.open = false);
   }
 
   // abstract method - defined in derived
   toggleRow() {
 
     if (this.canOpen()) {
-      this.openState = this.openState === RowState.Opened ? RowState.Closed : RowState.Opened ;
+      this.openState = this.openState === RowState.Opened ? RowState.Closed : RowState.Opened;
 
-      if (this.openState === RowState.Opened ) {
+      if (this.openState === RowState.Opened) {
         this.onRowOpened.emit(this);
-        // First row is open by default
-        this.siteAccessRequiringAttention[0].open = open;
       }
-
     }
   }
 
-  expandedRowClick(row: EnrollmentRowChild) {
+  expandedRowClick(row: EnrollmentRowChild){
+    console.log('expandedRowClick');
     this.siteAccessRequiringAttention.map(x => x.open = false);
     row.open = !row.open;
   }
 
+
   /*
-  ngOnDestroy() {
-    // Set all child rows to closed.
-    this.siteAccessRequiringAttention.map(x => x.open = false);
+    get allChildAlerts() {
+    }
+    */
+
+  canOpen() {
+    console.log('canOpen');
+    return this.siteAccessRequiringAttention.length >= 1;
   }
-  */
 
   /** This function is responsible for generating site access row titles depending on dashboard type */
   get siteAccessRequiringAttention(): any[] {
 
     if (!this.rowData || !this.rowData.expandableRows) {
+      console.log( 'No siteAccess Requiring attention');
       return [];
     }
-
-    // All this function does is generate titles for Site Access rows.
+     console.log('siteAccess require attention');
     return this.rowData.expandableRows.map(siteAccess => {
-      siteAccess.title = `${siteAccess.site.name} / ${siteAccess.person.name}`
+      siteAccess.title = `${siteAccess.site.name}`;
+      console.log('siteAccess.title ' + siteAccess.title);
       return siteAccess;
     });
   }
-
-
-  get allChildAlerts() {
-    return this.siteAccessRequiringAttention.map(x => x.alert);
-  }
-
-  canOpen() {
-    return this.siteAccessRequiringAttention.length >= 1;
-  }
 }
-
 
