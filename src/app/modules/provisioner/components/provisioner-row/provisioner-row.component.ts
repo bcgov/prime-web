@@ -1,8 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Base} from '../../../../core/base/base.class';
-import {Router} from '@angular/router';
+
 import {loadInOut, openState, openStateChild, openStateDisable} from '../../../../animations/animations';
-import {EnrollmentAlert, Site} from '../../../../models/sites.model';
+import {DeclinedReasons, EnrollmentAlert, Site, SiteAccess} from '../../../../models/sites.model';
+import { EnrollmentStatus } from '../../../../models/enrollment-status.enum';
+
 
 @Component({
   selector: 'prime-provisioner-row',
@@ -23,9 +25,17 @@ export class ProvisionerRowComponent extends Base implements OnInit {
   alert: EnrollmentAlert[] = [];
   siteStatus: string ;
 
+  siteAccessObject: SiteAccess;
 
+  declinedReasonSelector = 'pleaseSelect';
 
-  constructor( private router: Router) {
+  private _enrollmentStatus: string [] = [
+    EnrollmentStatus.Active,
+    EnrollmentStatus.Declined,
+    EnrollmentStatus.New,
+  ];
+
+  constructor( ) {
     super()
   }
 
@@ -36,71 +46,66 @@ export class ProvisionerRowComponent extends Base implements OnInit {
     this.siteNumber = 'Site ' + name.substring(name.lastIndexOf(' ') + 1);
     console.log(' site is ', this.rowData);
 
+    this.siteAccessObject = this.rowData.siteAccess[0];
   }
 
 
-  get siteAlert() {
+  declinedReasonValue(selection) {
+    return DeclinedReasons[selection];
+  }
+
+
+   get siteAlert() {
     if (this.alert.length < 1) {
-      const randomStatusString: string = this.getRandomElFromArray(Object.keys(EnrollmentStatus));
+      const randomStatusString: string = this.getRandomElFromArray(this._enrollmentStatus);
       const status = EnrollmentStatus[randomStatusString];
       this.siteStatus = status;
-      this.alert.push(new EnrollmentAlert(status));
+      this.alert[0] = new EnrollmentAlert(status);
     }
     return this.alert;
+  }
+
+  get newSiteAlert(){
+      const status = EnrollmentStatus['Declined'];
+      this.alert[0] = new EnrollmentAlert(status);
+     return this.alert;
+  }
+
+  get DeclinedReasons() {
+    return Object.keys(DeclinedReasons);
+  }
+
+  declinedReasonCurrValue() {
+    const selection = this.declinedReasonSelector;
+    return DeclinedReasons[selection] ? DeclinedReasons[selection] : '';
   }
 
   private getRandomElFromArray<T>(arr: T[]): T {
     return arr[Math.ceil(Math.random() * arr.length) - 1];
   }
 
-  closeRow() {
-    this.openState = 'closed';
-  }
-
-  /*
     toggleRow() {
       if (this.canOpen()){
         this.openState = this.openState === 'opened' ? 'closed' : 'opened';
         if (this.openState === 'opened'){
           this.onRowOpened.emit(this);
-          // First row is open by default
-          this.siteAccessRequiringAttention[0].open = open;
         }
       }
     }
+
     closeRow() {
       this.openState = 'closed';
     }
-    expandedRowClick(row: EnrollmentRowChild){;
-      this.siteAccessRequiringAttention.map(x => x.open = false);
-      row.open = !row.open;
-    }
-    get siteAccessRequiringAttention(): any[] {
-      if ( !this.rowData || !this.rowData.expandableRows ){
-        return [];
-      }
-      // All this function does is generate titles for Site Access rows.
-      if (this.primaryType === "Site"){
-        return this.rowData.expandableRows.map(siteAccess => {
-          siteAccess.title = `${siteAccess.site.name} / ${siteAccess.person.name}`
-          return siteAccess;
-        });
-      }
-      else {
-        return this.rowData.expandableRows.map(siteAccess => {
-          siteAccess.title = `${siteAccess.site.name}`
-          return siteAccess;
-        });
-      }
-    }
+
+
     canOpen() {
-      return this.siteAccessRequiringAttention.length >= 1;
+      return this.siteStatus === 'Declined';
     }
-  */
+
+  resetStatus(newStatus) {
+    return this.siteStatus = newStatus;
+  }
+
 }
 
-enum EnrollmentStatus {
-  active = 'Active',
-  new = 'New',
-  declined = 'Declined',
-}
+

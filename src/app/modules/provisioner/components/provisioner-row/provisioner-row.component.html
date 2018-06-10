@@ -20,8 +20,9 @@
   </table>
 
 
+
   <table>
-    <div *ngIf="siteStatus === 'New'">
+    <div *ngIf="siteStatus === 'New' || siteStatus === 'AcceptEnrollment'">
       <tr>
         <td class="provisioner-element-label">POS User Id</td>
         <td class="provisioner-element-label"> Date Provisioned</td>
@@ -34,19 +35,56 @@
   </table>
 
 
-  <div *ngIf="siteStatus === 'Declined'">
-    hereD
+  <div *ngIf="siteStatus === 'DeclinedEnrollment'">
+    <div class="col d-inline-flex flex-column">
+      <select id="declinedReason2" class="form-control drop-dl-box-15"
+              [value]="declinedReasonSelector" >
+        <option value="pleaseSelect" disabled selected>Select Reason</option>
+        <option *ngFor="let reason of DeclinedReasons" value="{{reason}}">
+          {{declinedReasonValue(reason)}}
+        </option>
+      </select>
+    </div>
   </div>
+
+
+  <div *ngIf="siteStatus === 'Declined'">
+  <div class="col d-inline-flex flex-column">
+    <select id="declinedReason1" class="form-control drop-dl-box-15"
+            [value]="declinedReasonSelector" disabled>
+      <option value="pleaseSelect" selected>{{declinedReasonValue('ACCESS_NO_lONGER_REQUIRED')}}</option>
+      <option  *ngFor="let reason of DeclinedReasons" value="{{reason}}">
+        {{declinedReasonValue(reason)}}
+      </option>
+    </select>
+  </div>
+</div>
 
   <div class="enrollment-actions">
       <span class="enrollment-icons">
-        <prime-pill-badge
-          [alerts]="siteAlert"
-          [iconOnly]='false'>
+        <div *ngIf="siteStatus === 'DeclinedEnrollment'; else regularEnrollment">
+           <prime-pill-badge
+             [alerts]="newSiteAlert"
+             [iconOnly]='false'>
         </prime-pill-badge>
+        </div>
+        <ng-template #regularEnrollment>
+          <prime-pill-badge
+            [alerts]="siteAlert"
+            [iconOnly]='false'>
+          </prime-pill-badge>
+        </ng-template>
         <prime-info-button
           [targetId]="rowData.objectId">
         </prime-info-button>
+         <div   *ngIf="siteStatus === 'New'" >
+           <button class="btn btn-danger btn-sm btn-circle" data-toggle="tooltip" data-placement="bottom"
+           title="Decline Enrollment" (click)="resetStatus('DeclinedEnrollment')">
+             <i class="fa fa-times"></i></button>
+          <button class="btn btn-success btn-sm btn-circle" data-toggle="tooltip" data-placement="bottom"
+           title="Accept Enrollment" (click)="resetStatus('AcceptEnrollment')">
+          <i class="fa fa-check"></i></button>
+         </div>
       </span>
   </div>
 </div>
@@ -82,32 +120,12 @@
 <div [@openState]="openState">
   <div [@openStateChild]="openState"  class="expandable-container">
 
-    <div class="enrollment-expandable" *ngFor="let siteAccess of rowData.siteAccess"
-         (click)="expandedRowClick(siteAccess)"
-    >
-      <div class="enrollment-text-container">
-        <span class="enrollment-text-main">{{siteAccess.title}}</span>
-      </div>
-      <div class="enrollment-actions">
-              <span class="enrollment-icons">
-
-                  <prime-pill-badge
-                    [alerts]="[siteAccess.alert]">
-                  </prime-pill-badge>
-
-                  <prime-info-button
-                    [targetId]="siteAccess.site.objectId">
-                  </prime-info-button>
-              </span>
-      </div>
-
+    <div class="enrollment-expandable" >
       <prime-enrollment-progress-row
-        [open]='siteAccess.open'
-        [data]='siteAccess'>
+        [open]='true'
+        [data]='siteAccessObject'>
       </prime-enrollment-progress-row>
-
     </div>
-
 
   </div>
 </div>

@@ -4,7 +4,6 @@ import { EnrollmentStatus } from './enrollment-status.enum';
 import { Person, Role, Verifier, Provisioner } from './person.model';
 import { Address } from './addresses.model';
 import {BadgeLevel} from '../core/enrollment-row/enrollment-row.class';
-import {s} from '@angular/core/src/render3';
 
 //-----------------------------------------------------------------------------
 // SITES
@@ -164,4 +163,9 @@ export enum SiteAccessProgressSteps {
   Applicant = 'Applicant',
   MoH = 'MoH',
   Provisioner = 'Provisioner'
+}
+
+export enum DeclinedReasons {
+  WRONG_SITE = 'Wrong Site',
+  ACCESS_NO_lONGER_REQUIRED = 'Access No Longer Required'
 }

@@ -8,6 +8,8 @@ import { EnrollmentProgressRowComponent } from '../../../../core/enrollment-prog
 import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {PillBadgeComponent} from '../../../../core/pill-badge/pill-badge.component';
+import {ProgressBarComponent} from '../../../../core/progress-bar/progress-bar.component';
 
 describe('ProvisionerRowComponent', () => {
   let component: ProvisionerRowComponent;
@@ -15,7 +17,7 @@ describe('ProvisionerRowComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProvisionerRowComponent, InfoButtonComponent, EnrollmentProgressRowComponent ],
+      declarations: [ ProvisionerRowComponent, InfoButtonComponent, EnrollmentProgressRowComponent,  ProgressBarComponent],
       imports: [ AlertModule, CoreModule, FormsModule, RouterTestingModule, NoopAnimationsModule ],
     })
     .compileComponents();
