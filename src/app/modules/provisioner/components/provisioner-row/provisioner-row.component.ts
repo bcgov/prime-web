@@ -1,10 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Base} from '../../../../core/base/base.class';
 import {Router} from '@angular/router';
 import {loadInOut, openState, openStateChild, openStateDisable} from '../../../../animations/animations';
-// import {EnrollmentRowChild, EnrollmentRowItem} from '../../../verifier/components/enrollment-row/enrollment-row.interface';
 import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
-import {EnrollmentAlert, Site} from '../../../../models/sites.model';
 import { EnrollmentRow, RowState, EnrollmentRowChild } from '../../../../core/enrollment-row/enrollment-row.class';
 import { EnrollmentRowItem } from '../../../verifier/components/enrollment-row/enrollment-row.component';
 

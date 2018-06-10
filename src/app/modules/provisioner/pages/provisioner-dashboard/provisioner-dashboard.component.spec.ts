@@ -7,7 +7,7 @@ import { EnrollmentRowComponent } from '../../../verifier/components/enrollment-
 import { EnrollmentProgressRowComponent } from '../../../../core/enrollment-progress-row/enrollment-progress-row.component';
 import { PillBadgeComponent } from '../../../../core/pill-badge/pill-badge.component';
 import { AddUserButtonComponent } from '../../../../core/add-user-button/add-user-button.component';
-import { InfoButtonComponent } from '../../../verifier/components/user-info-button/user-info-button.component';
+import { InfoButtonComponent } from '../../../../core/user-info-button/user-info-button.component';
 import { TooltipModule, ProgressbarModule } from 'ngx-bootstrap';
 import { ProgressBarComponent } from '../../../../core/progress-bar/progress-bar.component';
 import { MiniProgressBarComponent } from '../../../../core/mini-progress-bar/mini-progress-bar.component';

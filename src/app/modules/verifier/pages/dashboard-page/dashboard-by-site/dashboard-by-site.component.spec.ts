@@ -4,7 +4,7 @@ import { DashboardBySiteComponent } from './dashboard-by-site.component';
 import {EnrollmentListComponent} from '../../../components/enrollment-list/enrollment-list.component';
 import {EnrollmentRowComponent} from '../../../components/enrollment-row/enrollment-row.component';
 import {PillBadgeComponent} from '../../../../../core/pill-badge/pill-badge.component';
-import {InfoButtonComponent} from '../../../components/user-info-button/user-info-button.component';
+import {InfoButtonComponent} from '../../../../../core/user-info-button/user-info-button.component';
 import {EnrollmentProgressRowComponent} from '../../../../../core/enrollment-progress-row/enrollment-progress-row.component';
 import {TooltipModule} from 'ngx-bootstrap';
 import {FormsModule} from '@angular/forms';

@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SiteAccessWidgetsComponent } from './site-access-widgets.component';
-import {InfoButtonComponent} from '../user-info-button/user-info-button.component';
+import {InfoButtonComponent} from '../../../../core/user-info-button/user-info-button.component';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {TooltipModule} from 'ngx-bootstrap';
 import {FormsModule} from '@angular/forms';

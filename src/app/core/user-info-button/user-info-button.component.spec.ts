@@ -1,9 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InfoButtonComponent } from './user-info-button.component';
-import {DatepickerComponent} from '../../../../core/datepicker/datepicker.component';
-import {PrimeDataModule} from '../../../prime-data/prime-data.module';
-import {PillBadgeComponent} from '../../../../core/pill-badge/pill-badge.component';
+import {DatepickerComponent} from '../datepicker/datepicker.component';
+import {PrimeDataModule} from '../../modules/prime-data/prime-data.module';
+import {PillBadgeComponent} from '../pill-badge/pill-badge.component';
 import {FormsModule} from '@angular/forms';
 import {NgxMyDatePickerModule} from 'ngx-mydatepicker';
 import {BsModalService, ProgressbarModule, TooltipModule} from 'ngx-bootstrap';

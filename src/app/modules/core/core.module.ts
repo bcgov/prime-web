@@ -18,6 +18,7 @@ import { PrimeToggleComponent } from '../../core/toggle/toggle.component';
 import { WizardProgressBarComponent } from './components/wizard-progress-bar/wizard-progress-bar.component';
 import { CoreBreadcrumbComponent } from './components/core-breadcrumb/core-breadcrumb.component';
 import {EnrollmentProgressRowComponent} from '../../core/enrollment-progress-row/enrollment-progress-row.component';
+import {InfoButtonComponent} from '../../core/user-info-button/user-info-button.component';
 
 /** A list of all components that we want to both include and export. Since
  * CoreModule just exports components for other modules the list is pretty much
@@ -33,7 +34,8 @@ const componentList = [
   PrimeToggleComponent,
   WizardProgressBarComponent,
   CoreBreadcrumbComponent,
-  EnrollmentProgressRowComponent
+  EnrollmentProgressRowComponent,
+  InfoButtonComponent
 ];
 
 @NgModule({

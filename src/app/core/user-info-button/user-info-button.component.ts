@@ -1,11 +1,12 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { PrimeDataService } from '../../../../services/prime-data.service';
-import { Site, SiteAccess } from '../../../../models/sites.model';
-import { Person } from '../../../../models/person.model';
+import { PrimeDataService } from '../../services/prime-data.service';
+import { Site } from '../../models/sites.model';
+import { Person } from '../../models/person.model';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { cloneDeep } from 'lodash';
-import { growHorizontal } from '../../../../animations/animations';
-import { Collection } from '../../../../models/collections.model';
+import { growHorizontal } from '../../animations/animations';
+import { Collection } from '../../models/collections.model';
+
 
 @Component({
   selector: 'prime-info-button',
@@ -21,10 +22,10 @@ export class InfoButtonComponent implements OnInit {
   public target: Site | Person;
   public targetType: TargetType;
   public TargetTypeEnum: typeof TargetType = TargetType;
-  public editable: boolean = false;
+  public editable = false;
 
-  @ViewChild('personModal') personModalRef: ElementRef
-  @ViewChild('siteModal') siteModalRef: ElementRef
+  @ViewChild('personModal') personModalRef: ElementRef;
+  @ViewChild('siteModal') siteModalRef: ElementRef;
 
   /**
    * A clone of the "real" object in the dataservice, is set if an only if
@@ -50,7 +51,7 @@ export class InfoButtonComponent implements OnInit {
    */
   get collection(): Collection {
     if (!this.site){
-      throw "Cannot access Collection before having Site defined";
+      throw new Error('Cannot access Collection before having Site defined');
     }
 
     // For now, we assume there's only one collection for the site. May need to
@@ -66,7 +67,7 @@ export class InfoButtonComponent implements OnInit {
   openModal(event: Event){
     event.stopPropagation();
     if (!this.target){
-      this.loadTarget(this.targetId)
+      this.loadTarget(this.targetId);
     }
     this.modalRef = this.modalService.show(this.modalElementRef, {class: 'modal-lg'});
   }
@@ -76,7 +77,7 @@ export class InfoButtonComponent implements OnInit {
   }
 
   discard(){
-    let restore = this.lookupObjectId(this.target.objectId);
+    const restore = this.lookupObjectId(this.target.objectId);
     if (!Site.isSiteGuard(restore)){
       this.person = restore;
     }
@@ -89,11 +90,11 @@ export class InfoButtonComponent implements OnInit {
 
   save(){
     // The original object we want to update
-    let source = this.lookupObjectId(this.target.objectId);
+    const source = this.lookupObjectId(this.target.objectId);
 
     if (!Site.isSiteGuard(source)){
       source.name = this.person.name;
-      source.dateOfBirth = this.person.dateOfBirth
+      source.dateOfBirth = this.person.dateOfBirth;
       source.phone = this.person.phone;
       source.phoneSecondary = this.person.phoneSecondary;
       source.renewalDate = this.person.renewalDate;
@@ -121,7 +122,7 @@ export class InfoButtonComponent implements OnInit {
   }
 
   changeSite(siteObjectId, event){
-    this.loadTarget(siteObjectId)
+    this.loadTarget(siteObjectId);
   }
 
   private loadTarget(objectId){
@@ -138,18 +139,18 @@ export class InfoButtonComponent implements OnInit {
   }
 
   private lookupObjectId(objectId): Site | Person {
-    let person = this.dataService.findPersonByObjectId(objectId);
-    if (person) return person;
-    let site = this.dataService.findSiteByObjectId(objectId);
-    if (site) return site;
-    let collection = this.dataService.findCollectionByObjectId(objectId);
-    if (collection) return collection.members[0];
+    const person = this.dataService.findPersonByObjectId(objectId);
+    if (person) { return person; }
+    const site = this.dataService.findSiteByObjectId(objectId);
+    if (site) { return site; }
+    const collection = this.dataService.findCollectionByObjectId(objectId);
+    if (collection) { return collection.members[0]; }
 
-    throw "Unable to find objectId. Double check it's valid.";
+    throw new Error('Unable to find objectId. Double check it\'s valid.');
   }
 
   private get modalElementRef(): ElementRef {
-    if (this.targetType == TargetType.Person){
+    if (this.targetType === TargetType.Person){
       return this.personModalRef;
     }
     else {

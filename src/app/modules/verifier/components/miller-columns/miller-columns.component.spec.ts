@@ -5,7 +5,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {FormsModule} from '@angular/forms';
 import {ExpandingSearchComponent} from '../../../../core/expanding-search/expanding-search.component';
 import {AddUserButtonComponent} from '../../../../core/add-user-button/add-user-button.component';
-import {InfoButtonComponent} from '../user-info-button/user-info-button.component';
+import {InfoButtonComponent} from '../../../../core/user-info-button/user-info-button.component';
 import {MillerItemCheckboxComponent} from '../miller-item-checkbox/miller-item-checkbox.component';
 import {MiniProgressBarComponent} from '../../../../core/mini-progress-bar/mini-progress-bar.component';
 import {DatepickerComponent} from '../../../../core/datepicker/datepicker.component';

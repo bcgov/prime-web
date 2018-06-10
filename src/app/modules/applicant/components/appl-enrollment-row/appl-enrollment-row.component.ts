@@ -38,9 +38,9 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
     if (!this.rowData) {
       return;
     }
+    this.siteAccessRequiringAttention.map(x => x.open = false);
   }
 
-  // abstract method - defined in derived
   toggleRow() {
 
     if (this.canOpen()) {
@@ -48,27 +48,14 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
 
       if (this.openState === RowState.Opened) {
         this.onRowOpened.emit(this);
+        // First row is open by default
+        this.siteAccessRequiringAttention[0].open = open;
       }
     }
   }
 
-  expandedRowClick(row: EnrollmentRowChild){
-    console.log('expandedRowClick');
-    this.siteAccessRequiringAttention.map(x => x.open = false);
-    row.open = !row.open;
-  }
 
-
-  /*
-    get allChildAlerts() {
-    }
-    */
-
-  canOpen() {
-    console.log('canOpen');
-    return this.siteAccessRequiringAttention.length >= 1;
-  }
-
+  // abstract method - defined in derived
   /** This function is responsible for generating site access row titles depending on dashboard type */
   get siteAccessRequiringAttention(): any[] {
 

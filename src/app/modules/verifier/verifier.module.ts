@@ -7,7 +7,7 @@ import { DashboardByUserComponent } from './pages/dashboard-page/dashboard-by-us
 import { DashboardBySiteComponent } from './pages/dashboard-page/dashboard-by-site/dashboard-by-site.component';
 import { SiteEnrollmentComponent } from './pages/site-enrollment/site-enrollment.component';
 import { CoreModule } from '../core/core.module';
-import { InfoButtonComponent } from './components/user-info-button/user-info-button.component';
+import { InfoButtonComponent } from '../../core/user-info-button/user-info-button.component';
 import { MillerItemCheckboxComponent } from './components/miller-item-checkbox/miller-item-checkbox.component';
 import { EnrollmentListComponent } from './components/enrollment-list/enrollment-list.component';
 import { EnrollmentRowComponent } from './components/enrollment-row/enrollment-row.component';
@@ -33,7 +33,6 @@ import { TooltipModule } from 'ngx-bootstrap';
     DashboardBySiteComponent,
     UserEnrollmentComponent,
     SiteEnrollmentComponent,
-    InfoButtonComponent,
     MillerItemCheckboxComponent,
     EnrollmentListComponent,
     EnrollmentRowComponent,
@@ -41,7 +40,6 @@ import { TooltipModule } from 'ngx-bootstrap';
     SiteAccessWidgetsComponent
   ],
   exports: [
-    InfoButtonComponent,
     MillerItemCheckboxComponent,
     EnrollmentListComponent,
     EnrollmentRowComponent,
