@@ -29,6 +29,7 @@ export class ProvisionerRowComponent extends Base implements OnInit {
 
   declinedReasonSelector = 'pleaseSelect';
 
+
   private _enrollmentStatus: string [] = [
     EnrollmentStatus.Active,
     EnrollmentStatus.Declined,
@@ -47,6 +48,7 @@ export class ProvisionerRowComponent extends Base implements OnInit {
     console.log(' site is ', this.rowData);
 
     this.siteAccessObject = this.rowData.siteAccess[0];
+
   }
 
 

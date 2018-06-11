@@ -30,7 +30,7 @@ export class ProvisionerListComponent extends EnrollmentList implements OnInit {
   }
 
   ngOnInit() {
-    //this.data = this.rowItems;
+    this.data = this.rowItems;
     for (let i = 0; i < this.rowItems.length; i++){
       this.sites.push(this.rowItems[i].sites[0]);
 

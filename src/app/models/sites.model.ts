@@ -149,7 +149,7 @@ export class EnrollmentAlert {
       return BadgeLevel.Info;
     }
 
-    if (status === 'New'){
+    if (status === EnrollmentStatus.New){
       return BadgeLevel.Warning;
     }
   }

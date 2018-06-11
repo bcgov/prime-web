@@ -1,39 +1,38 @@
 <div *ngIf="rowData" class="enrollment-list-item" (click)="toggleRow()" [@openStateDisable]="openState">
 
-  <div class="enrollment-text-container">
+  <div class="enrollment-text-container" >
     <span class="enrollment-text-main">{{siteName}}</span>
-    <span class="enrollment-text-main">{{siteNumber}} </span>
+    <span class="enrollment-text-bold">{{siteNumber}} </span>
   </div>
 
-  <table>
-    <div *ngIf="siteStatus === 'Active'">
+  <div *ngIf="siteStatus === 'Active'">
+    <table >
       <tr>
-        <td class="provisioner-element-label">POS User Id</td>
+        <td class="provisioner-element-label" >POS User Id</td>
         <td class="provisioner-element-label"> Date Provisioned</td>
       </tr>
       <tr>
-        <td class="provisioner-element-text">{{rowData.posUserId}}</td>
+        <td class="provisioner-element-text" >{{rowData.posUserId}}</td>
         <td class="provisioner-element-text"> {{rowData.provisionedDate}}</td>
+        <td class="mr-2"></td>
       </tr>
-    </div>
-
-  </table>
-
+    </table>
+  </div>
 
 
-  <table>
-    <div *ngIf="siteStatus === 'New' || siteStatus === 'AcceptEnrollment'">
+  <div *ngIf="siteStatus === 'New' || siteStatus === 'AcceptEnrollment'">
+    <table>
       <tr>
         <td class="provisioner-element-label">POS User Id</td>
         <td class="provisioner-element-label"> Date Provisioned</td>
       </tr>
       <tr>
-        <td> <input type="text"></td>
-        <td > <input type="text"></td>
+        <td> <input type="text" size="8"></td>
+        <td > <input type="text" size="14"></td>
+        <td class="mr-2"></td>
       </tr>
-    </div>
   </table>
-
+ </div>
 
   <div *ngIf="siteStatus === 'DeclinedEnrollment'">
     <div class="col d-inline-flex flex-column">
@@ -74,10 +73,13 @@
             [iconOnly]='false'>
           </prime-pill-badge>
         </ng-template>
-        <prime-info-button
-          [targetId]="rowData.objectId">
+        <i class="fa fa-sticky-note-o mr-2" (click)="goToNotePage()"></i>
+        <div  class="mr-2">
+          <prime-info-button
+            [targetId]="rowData.objectId">
         </prime-info-button>
-         <div   *ngIf="siteStatus === 'New'" >
+        </div>
+         <div  class="mr-2" *ngIf="siteStatus === 'New'" >
            <button class="btn btn-danger btn-sm btn-circle" data-toggle="tooltip" data-placement="bottom"
            title="Decline Enrollment" (click)="resetStatus('DeclinedEnrollment')">
              <i class="fa fa-times"></i></button>
@@ -89,8 +91,8 @@
   </div>
 </div>
 
-<div *ngIf="siteStatus === 'New'">
-<table width="100%">
+<div class="table-responsive ml-2 border-top-0" *ngIf="siteStatus === 'New'" >
+<table width="100%" >
     <tr>
       <td class="provisioner-element-label" width = "10%">PEC</td>
       <td class="provisioner-element-label" width = "10%"> Request</td>
@@ -111,7 +113,7 @@
       <td class="provisioner-element-text"> {{rowData.startDate}}</td>
       <td class="provisioner-element-text">{{rowData.endDate}}</td>
       <td class="provisioner-element-text"> {{rowData.personalAccess}}</td>
-      <td><input type="checkbox" class="myCheckbox">T&C Enforceable </td>
+      <td class="provisioner-element-checkbox"><input type="checkbox" >T&C Enforceable </td>
     </tr>
 
 </table>

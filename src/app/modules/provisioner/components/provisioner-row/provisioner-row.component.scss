@@ -69,8 +69,12 @@ table {
 }
 
 .provisioner-element-text{
-  padding-left: 0.5em;
   background-color: lightgrey;
+}
+
+.provisioner-element-checkbox{
+  text-align: right;
+  padding-right: 1.5em;
 }
 
 .enrollment-text-container {
@@ -86,6 +90,9 @@ table {
     // and it leads to bad artifacts due to aliasing.
     // font-weight: 800;
     font-size: $h4-font-size;
+  }
+  .enrollment-text-bold{
+    font-weight: bolder;
   }
 
 
@@ -118,13 +125,6 @@ table {
     font-size: 1.75rem; //28px
   }
 }
-input[type="checkbox"] {
-  padding-right: 1.5em;
-  vertical-align: right;
-  position:relative;
-  white-space: nowrap;
-}
-
 
 .btn-circle {
   border-radius: 15px;
