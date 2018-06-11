@@ -9,25 +9,25 @@ export enum CollegeTypes {
 }
 
 /**
- * CPBC related license classes
+ * CPBC related licence classes
  */
-export enum LicenseClassCPTypes {
+export enum LicenceClassCPTypes {
   FULL    = 'Full Pharmacist',
   LIMITED = 'Limited Pharmacist'
 }
 
 /**
- * CRNBC related license classes
+ * CRNBC related licence classes
  */
-export enum LicenseClassCRNTypes {
+export enum LicenceClassCRNTypes {
   REGISTERED = 'Registered Nurse',
   TEMP       = 'Temp. Registered Nurse'
 }
 
 /**
- * CPSBC related license classes
+ * CPSBC related licence classes
  */
-export enum LicenseClassCPSTypes {
+export enum LicenceClassCPSTypes {
   GENERAL   = 'Full - General',
   SPECIALTY = 'Full - Specialty'
 }

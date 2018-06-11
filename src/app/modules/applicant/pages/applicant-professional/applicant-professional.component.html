@@ -32,11 +32,12 @@
             </option>
           </select>
         </div>
-        <div *ngIf="collegeCertificationList[i].collegeType !== 'pleaseSelect'" class="row">
+        <ng-container *ngIf="collegeCertificationList[i].collegeType !== 'pleaseSelect'">
           <div class="col d-inline-flex flex-column">
             <label for="collegeNumber">College Number</label>
             <input type="text" name="collegeNumber" id="collegeNumber"
-                   [value]="collegeCurrValue(type)" class="form-control" disabled>
+                   [value]="collegeCurrValue(collegeCertificationList[i].collegeType)"
+                   class="form-control" disabled>
           </div>
           <div class="col d-inline-flex flex-column">
             <label for="licenceNumber">Licence Number</label>
@@ -79,9 +80,10 @@
           </div>
           <div class="col d-inline-flex flex-column">
             <label for="">Licence Expiry</label>
-            <prime-datepicker [(date)]="applicant.licenceExpiry"></prime-datepicker>
             <!--TODO: wrong reference-->
             <!--<prime-datepicker size='mini' dateFormat="yyyy/mm/dd" [disabled]="!editable" [(date)]="siteAccess.startDate" class='ml-1'></prime-datepicker>-->
+            <!--<prime-datepicker dateFormat="yyyy/mm/dd" [(ngModel)]="collegeCertificationRecord.licenceExpiryDate"></prime-datepicker>-->
+            <prime-datepicker dateFormat="yyyy/mm/dd" [(date)]="collegeCertificationRecord.licenceExpiryDate"></prime-datepicker>
           </div>
           <div *ngIf="collegeCertificationList[i].collegeType === 'CRNBC'"
                class="col d-inline-flex flex-column">
@@ -94,7 +96,7 @@
               </option>
             </select>
           </div>
-        </div>
+        </ng-container>
       </div>
 
       <!-- Buttons -->
@@ -173,8 +175,6 @@
           <label for="jobTitle">Job Title</label>
           <select id="jobTitle" class="form-control row-dropbox-20"
                   [(ngModel)]="workingOnBehalfRecord.jobTitle">
-                  <!--[value]="jobTitleTypesSelector"-->
-                  <!--(change)="jobTitleTypesSelector = $event.target.value"-->
             <option value="pleaseSelect" disabled selected>Select</option>
             <option *ngFor="let type of JobTitleTypes" value="{{type}}">
               {{jobTitleValue(type)}}
@@ -185,7 +185,6 @@
 
       <!-- Buttons -->
       <ng-container *ngIf="workingOnBehalfList[i].jobTitle !== 'pleaseSelect' && i < JobTitleTypesCount()">
-        <!--<ng-container *ngIf="jobTitleCurrValue().length">-->
         <span class='d-flex align-items-center'>
           <ng-container *ngIf="i > 0">
             <a class='mx-1' (click)="deleteWorkingOnBehalf(i)">

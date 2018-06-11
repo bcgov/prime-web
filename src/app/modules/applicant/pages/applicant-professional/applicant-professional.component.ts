@@ -5,8 +5,7 @@ import { CollegeTypes,
   LicenceClassCRNTypes,
   LicenceClassCPSTypes,
   AdvancedPracticeCertificationTypes,
-  JobTitleTypes,
-  MaxLengthTypes } from '../../../../models/colleges.enum';
+  JobTitleTypes } from '../../../../models/colleges.enum';
 
 @Component({
   selector: 'prime-applicant-professional',
@@ -14,21 +13,15 @@ import { CollegeTypes,
   styleUrls: ['./applicant-professional.component.scss']
 })
 export class ApplicantProfessionalComponent implements OnInit {
-  // public collegeTypesSelector                       = 'pleaseSelect';
-  // public licenceClassCPTypesSelector                = 'pleaseSelect';
-  // public licenceClassCRNTypesSelector               = 'pleaseSelect';
-  // public licenceClassCPSTypesSelector               = 'pleaseSelect';
-  // public advancedPracticeCertificationTypesSelector = 'pleaseSelect';
-
-  // public licenceNumberSelector = '';
-
   public collegeCertificationList = [{
     collegeType: 'pleaseSelect',
     licenceNumber: '',
     licenceClassCPType: 'pleaseSelect',
     licenceClassCRNType: 'pleaseSelect',
     licenceClassCPSType: 'pleaseSelect',
-    advancedPracticeCertificationType: 'pleaseSelect' }];
+    licenceExpiryDate: '',
+    advancedPracticeCertificationType: 'pleaseSelect'
+  }];
 
   public deviceProviderList = [{ dpNumber: '' }];
 
@@ -43,7 +36,6 @@ export class ApplicantProfessionalComponent implements OnInit {
   ngOnInit() {
   }
 
-
   addCollegeCertification() {
     this.collegeCertificationList.push({
       collegeType: 'pleaseSelect',
@@ -51,7 +43,9 @@ export class ApplicantProfessionalComponent implements OnInit {
       licenceClassCPType: 'pleaseSelect',
       licenceClassCRNType: 'pleaseSelect',
       licenceClassCPSType: 'pleaseSelect',
-      advancedPracticeCertificationType: 'pleaseSelect' });
+      licenceExpiryDate: '',
+      advancedPracticeCertificationType: 'pleaseSelect'
+    });
   }
 
   deleteCollegeCertification(i){
@@ -119,41 +113,9 @@ export class ApplicantProfessionalComponent implements OnInit {
     return Object.keys(JobTitleTypes).length;
   }
 
-  // // Make enum accessible to template
-  // get MaxLengthTypes() {
-  //   return Object.keys(MaxLengthTypes);
-  // }
-
   collegeCurrValue(selection) {
     return CollegeTypes[selection];
-    // const selection = this.collegeTypesSelector;
-    // return CollegeTypes[selection] ? CollegeTypes[selection] : '';
   }
-
-  // licenceClassCPCurrValue() {
-  //   const selection = this.licenceClassCPTypesSelector;
-  //   return LicenceClassCPTypes[selection] ? LicenceClassCPTypes[selection] : '';
-  // }
-  //
-  // licenceClassCRNCurrValue() {
-  //   const selection = this.licenceClassCRNTypesSelector;
-  //   return LicenceClassCRNTypes[selection] ? LicenceClassCRNTypes[selection] : '';
-  // }
-  //
-  // licenceClassCPSCurrValue() {
-  //   const selection = this.licenceClassCPSTypesSelector;
-  //   return LicenceClassCPSTypes[selection] ? LicenceClassCPSTypes[selection] : '';
-  // }
-  //
-  // advancedPracticeCertificationCurrValue() {
-  //   const selection = this.advancedPracticeCertificationTypesSelector;
-  //   return AdvancedPracticeCertificationTypes[selection] ? AdvancedPracticeCertificationTypes[selection] : '';
-  // }
-  //
-  // jobTitleCurrValue() {
-  //   const selection = this.jobTitleTypesSelector;
-  //   return JobTitleTypes[selection] ? JobTitleTypes[selection] : '';
-  // }
 
   licenceClassCPValue(selection) {
     return LicenceClassCPTypes[selection];
@@ -175,56 +137,23 @@ export class ApplicantProfessionalComponent implements OnInit {
     return JobTitleTypes[selection];
   }
 
-  // maxLengthValue(selection) {
-  //   return MaxLengthTypes[selection];
-  // }
-
-  // licenceNumberLength() {
-  //   const selection = this.licenceNumberSelector;
-  //   return selection.length;
-  // }
-  //
-  // deviceProviderNumberLength() {
-  //   const selection = this.deviceProviderNumberSelector;
-  //   return selection.length;
-  // }
-  //
-  // get licenceNumberHasValue(): number {
-  //   return this.inputFields.licenceNumber.length();
-  // }
-
   collegeCertificationValid(i) {
     if(this.collegeCertificationList[i].collegeType !== 'pleaseSelect'
       && this.collegeCertificationList[i].licenceNumber.length
+      && this.collegeCertificationList[i].licenceExpiryDate.length !== 0
       && ((this.collegeCertificationList[i].collegeType === 'CPBC'
-          && this.collegeCertificationList[i].licenceClassCPType.length)
+          && this.collegeCertificationList[i].licenceClassCPType !== 'pleaseSelect')
         || (this.collegeCertificationList[i].collegeType === 'CRNBC'
-          && this.collegeCertificationList[i].licenceClassCRNType.length
-          && this.collegeCertificationList[i].advancedPracticeCertificationType.length)
+          && this.collegeCertificationList[i].licenceClassCRNType !== 'pleaseSelect'
+          && this.collegeCertificationList[i].advancedPracticeCertificationType !== 'pleaseSelect')
         || (this.collegeCertificationList[i].collegeType === 'CPSBC'
-          && this.collegeCertificationList[i].licenceClassCPSType.length))) {
+          && this.collegeCertificationList[i].licenceClassCPSType !== 'pleaseSelect'))) {
       return true;
     }
     else {
       return false;
     }
   }
-  // collegeCertificationValid(i) {
-  //   if(this.collegeCurrValue().length
-  //     && this.licenceNumberLength()
-  //     && ((this.collegeTypesSelector === 'CPBC'
-  //       && this.licenceClassCPCurrValue().length)
-  //       || (this.collegeTypesSelector === 'CRNBC'
-  //         && this.licenceClassCRNCurrValue().length
-  //         && this.advancedPracticeCertificationCurrValue().length)
-  //       || (this.collegeTypesSelector === 'CPSBC'
-  //         && this.licenceClassCPSCurrValue().length))) {
-  //     return true;
-  //   }
-  //   else {
-  //     return false;
-  //   }
-  // }
 
   displayDeviceProviderSection() {
     if(this.applicant.hasCollege === false || this.collegeCertificationValid(0)) {
