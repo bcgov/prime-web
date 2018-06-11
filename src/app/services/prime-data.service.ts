@@ -88,7 +88,7 @@ export class PrimeDataService {
         associatedObjectId: site.objectId,
         collections: this.findCollectionFromSite(site)
       };
-/*
+ /*
       const pending = site.siteAccess
         .filter(sa => sa.status === EnrollmentStatus.Pending);
       const expired = site.siteAccess

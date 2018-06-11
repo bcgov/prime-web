@@ -4,6 +4,9 @@ import {loadInOut, openState, openStateChild, openStateDisable} from '../../../.
 import {SiteAccess} from '../../../../models/sites.model';
 import {Collection} from '../../../../models/collections.model';
 import {Router} from '@angular/router';
+import * as moment from 'moment';
+import _date = moment.unitOfTime._date;
+import {SimpleDate} from '../../../../core/date/simple-date.interface';
 
 // Specific to this component
 export interface ApplEnrollmentRowItem {
@@ -55,6 +58,10 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
     }
   }
 
+  goToSiteAddressPage(){
+    //const link = '/verifier/enrollment/';
+    //this.router.navigate([link, this.rowData.associatedObjectId]);
+  }
 
   // abstract method - defined in derived
   /** This function is responsible for generating site access row titles depending on dashboard type */
@@ -68,11 +75,6 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
       siteAccess.title = `${siteAccess.site.name}`;
       return siteAccess;
     });
-  }
-
-  goToSiteAddressPage(){
-    //const link = '/verifier/enrollment/';
-    //this.router.navigate([link, this.rowData.associatedObjectId]);
   }
 }
 

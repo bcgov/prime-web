@@ -5,21 +5,26 @@
   </div>
 
   <div class="enrollment-actions">
-     <div>
-       Start <input type="date" id="startDt" disabled>
-      <!-- End <input type="date" id="endDt" disabled> -->
-       <span class="validity"></span>
-     </div>
-      <span class="enrollment-icons">
-        <prime-pill-badge
-          [alerts]="allChildAlerts"
-          [iconOnly]='false'>
-        </prime-pill-badge>
-        <prime-info-button
-          [targetId]="rowData.associatedObjectId">
-        </prime-info-button>
-        <i class="fa text-muted" (click)="goToSiteAddressPage()"></i>
-      </span>
+    <div>
+      <label for="startDt">
+        Start
+      </label>
+      <input type="date" id="startDt" disabled>
+      <label for="endDt">
+        End
+      </label>
+      <input type="date" id="endDt" disabled>
+    </div>
+    <span class="enrollment-icons">
+      <prime-pill-badge
+        [alerts]="allChildAlerts"
+        [iconOnly]='false'>
+      </prime-pill-badge>
+      <prime-info-button
+        [targetId]="rowData.associatedObjectId">
+      </prime-info-button>
+      <i class="fa text-muted" (click)="goToSiteAddressPage()"></i>
+    </span>
   </div>
 </div>
 
