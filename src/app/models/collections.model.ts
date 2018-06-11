@@ -25,10 +25,10 @@ export class Collection extends Group<Site> {
   }
 
   get allSiteAccess(): SiteAccess[] {
-    return [].concat(...this.members.map(site => site.siteAccess))
+    return [].concat(...this.members.map(site => site.siteAccess));
   }
 
   getSiteAccessWithStatus(status: EnrollmentStatus): SiteAccess[]{
     return this.allSiteAccess.filter(SA => SA.status === status);
   }
- };
+ }

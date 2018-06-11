@@ -1,38 +1,33 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { loadInOut, openState, openStateChild, openStateDisable } from '../../../../animations/animations';
-import {Site, SiteAccess} from '../../../../models/sites.model';
-import {Collection} from '../../../../models/collections.model';
-import {EnrollmentRow, EnrollmentRowChild, RowState} from '../../../../core/enrollment-row/enrollment-row.class';
-
-export interface EnrollmentRowItem {
-  title: string;
-  // TODO: Replace any with new interfaces
-  sites: Site[];
-  users?: any[];
-
-  /** associatedObjectId and title both refer to the same underlying object. By
-   * having an id, we can lookup from the EnrollmentRow -> item, e.g. when
-   * navigating between pages */
-  associatedObjectId: string;
-
-  /** Optional and only used in one config. */
-  collections?: Collection[];
-  expandableRows?: SiteAccess[];
-}
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Base} from '../../../../core/base/base.class';
+import {Router} from '@angular/router';
+import {loadInOut, openState, openStateChild, openStateDisable} from '../../../../animations/animations';
+// import {EnrollmentRowChild, EnrollmentRowItem} from '../../../verifier/components/enrollment-row/enrollment-row.interface';
+import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
+import {EnrollmentAlert, Site} from '../../../../models/sites.model';
+import { EnrollmentRow, RowState, EnrollmentRowChild } from '../../../../core/enrollment-row/enrollment-row.class';
+import { EnrollmentRowItem } from '../../../verifier/components/enrollment-row/enrollment-row.component';
 
 @Component({
-  selector: 'prime-enrollment-row',
-  templateUrl: './enrollment-row.component.html',
-  styleUrls: ['./enrollment-row.component.scss'],
+  selector: 'prime-provisioner-row',
+  templateUrl: './provisioner-row.component.html',
+  styleUrls: ['./provisioner-row.component.scss'],
   animations: [openState, openStateChild, loadInOut, openStateDisable]
 })
-export class EnrollmentRowComponent extends EnrollmentRow implements OnInit {
+// TODO: RENAME FILE!
+export class ProvisionerRowComponent extends EnrollmentRow implements OnInit {
 
+  // @Input() rowData: Site;
   @Input() rowData: EnrollmentRowItem;
   @Input() primaryType: "User"|"Site" = "Site";
 
-  constructor(private router: Router) {
+  @Output() onRowOpened = new EventEmitter<any>();
+
+  siteNumber: String;
+  siteName: string;
+  status: EnrollmentStatus;
+
+  constructor( private router: Router) {
     super();
   }
 
@@ -96,10 +91,10 @@ export class EnrollmentRowComponent extends EnrollmentRow implements OnInit {
   canOpen() {
     return this.siteAccessRequiringAttention.length >= 1;
   }
+}
 
-  goToEnrollmentPage(){
-    const link = '/verifier/enrollment/' + this.primaryType.toLowerCase();
-    this.router.navigate([link, this.rowData.associatedObjectId]);
-  }
-
+enum SiteStatus {
+  active = "Active",
+  new = "New",
+  declined = "Declined",
 }

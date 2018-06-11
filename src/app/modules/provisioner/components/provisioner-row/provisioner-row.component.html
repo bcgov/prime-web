@@ -1,18 +1,20 @@
+
+
 <div *ngIf="rowData" class="enrollment-list-item" (click)="toggleRow()" [@openStateDisable]="openState">
 
   <div class="enrollment-text-container">
     <span class="enrollment-text-main">{{rowData.title}}</span>
-  </div>
+    <!-- <span class="enrollment-text-main">{{siteNumber}} </span> -->
+      <ng-container *ngIf="primaryType === 'Site'">
+        <span class="enrollment-text-extra">({{rowData.sites.length}}) Sites</span>
+        <span class="enrollment-text-extra">({{rowData.users.length}}) Users</span>
+    </ng-container>
 
- <!--
-  <div>
-    <span>start</span>
+    <ng-container *ngIf="primaryType === 'User'">
+        <span class="enrollment-text-extra">({{rowData.collections.length}}) Collections</span>
+        <span class="enrollment-text-extra">({{rowData.sites.length}}) Sites</span>
+    </ng-container>
   </div>
-  <div>
-    <span>end</span>
-  </div>
--->
-
 
   <div class="enrollment-actions">
       <span class="enrollment-icons">
@@ -20,16 +22,13 @@
           [alerts]="allChildAlerts"
           [iconOnly]='false'>
         </prime-pill-badge>
-<!--        <prime-info-button
-          [targetId]="rowData.associatedObjectId">
-        </prime-info-button> -->
- <!--       <i class="fa fa-edit text-muted" (click)="goToEnrollmentPage()"></i> -->
+        <prime-info-button
+          [targetId]="rowData.objectId">
+        </prime-info-button>
       </span>
   </div>
 </div>
 
-
-<!--
 <div [@openState]="openState">
   <div [@openStateChild]="openState"  class="expandable-container">
 
@@ -58,7 +57,7 @@
       </prime-enrollment-progress-row>
 
     </div>
+
+
   </div>
 </div>
-  -->
-

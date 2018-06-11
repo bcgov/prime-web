@@ -1,9 +1,9 @@
 import * as moment from 'moment';
 import { Base } from '../core/base/base.class';
-import { BadgeLevel } from '../modules/verifier/components/enrollment-row/enrollment-row.interface';
 import { EnrollmentStatus } from './enrollment-status.enum';
 import { Person, Role, Verifier, Provisioner } from './person.model';
 import { Address } from './addresses.model';
+import {BadgeLevel} from '../core/enrollment-row/enrollment-row.class';
 
 //-----------------------------------------------------------------------------
 // SITES
@@ -16,6 +16,7 @@ export class Site extends Base {
   siteAccess: SiteAccess[];
   siteType: string; //TODO: Change to Enum once we have all the types
   vendor: string;
+  PEC: string;
 
 
   constructor() {

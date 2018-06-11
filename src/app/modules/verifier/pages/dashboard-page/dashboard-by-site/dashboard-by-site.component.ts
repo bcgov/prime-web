@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { EnrollmentRowItem } from '../../../components/enrollment-row/enrollment-row.interface';
 import { PrimeDataService } from '../../../../../services/prime-data.service';
+import {EnrollmentRowItem} from '../../../components/enrollment-row/enrollment-row.component';
 
 @Component({
   selector: 'prime-dashboard-by-site',

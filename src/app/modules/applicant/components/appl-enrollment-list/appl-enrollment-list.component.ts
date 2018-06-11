@@ -1,39 +1,27 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit, QueryList, ViewChildren} from '@angular/core';
-import {Base} from '../../../../core/base/base.class';
-import {ApplEnrollmentRowItem} from '../appl-enrollment-row/appl-enrollment-row.interface';
-import {ApplEnrollmentRowComponent} from '../appl-enrollment-row/appl-enrollment-row.component';
+import {ApplEnrollmentRowComponent, ApplEnrollmentRowItem} from '../appl-enrollment-row/appl-enrollment-row.component';
 import {ApplicantDataService} from '../../../../services/applicant-data.service';
-import {SiteAccess} from '../../../../models/sites.model';
 import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
-
-// Define for constant string
-export const defaultViewSelector = 'View All';
+import {defaultViewSelector, EnrollmentList} from '../../../../core/enrollment-list/enrollment-list.class';
 
 @Component({
-  selector: 'prime-appl-enrollment-list',
+  selector: 'prime-enrollment-list',
   templateUrl: './appl-enrollment-list.component.html',
   styleUrls: ['./appl-enrollment-list.component.scss']
 })
-export class ApplEnrollmentListComponent extends Base implements OnInit, OnDestroy, OnChanges {
+export class ApplEnrollmentListComponent extends EnrollmentList implements OnInit, OnDestroy {
 
-  @Input() rowItems: ApplEnrollmentRowItem[];
   @ViewChildren(ApplEnrollmentRowComponent) rowElements: QueryList<ApplEnrollmentRowComponent>
-  /** Internal representation of data used in for loops. Can be filtered by search. */
-  public data: ApplEnrollmentRowItem[];
 
   // Enrollment status for applicant
-  private _applEnrollmentStatus: string [] = [
+  private _enrollmentStatus: string [] = [
     EnrollmentStatus.Approved,
     EnrollmentStatus.Declined
   ];
 
-  // Valid values: EnrollmentStatus enums + "All"
-  public viewTypeSelector  = defaultViewSelector;
-
-  //Convert enum to iterable array
-  get EnrollmentStatus() {
-    return this._applEnrollmentStatus;
-  }
+  // TODO: Complete! Added this just to pass compilation checks, the logic isn't done.
+  declarationCheck: boolean = false;
+  save(){}
 
   constructor(private applicantDataService: ApplicantDataService) {
     super();
@@ -50,70 +38,28 @@ export class ApplEnrollmentListComponent extends Base implements OnInit, OnDestr
     console.log('OnInit (ApplEnrollmentListComponent): ' + this.data );
   }
 
-  /* OnChange implementation */
-  ngOnChanges(changes){
-    // Handle rows being added to rowItems, such as the "Add User Button" when on the user view
-    if (changes.rowItems && changes.rowItems.currentValue && changes.rowItems.previousValue
-    && changes.rowItems.currentValue.length > changes.rowItems.previousValue.length){
-      this.data = this.rowItems;
-    }
-  }
-
   /* OnDestroy implementation */
   ngOnDestroy(){
     this.applicantDataService.enrollmentViewTypeSelector = defaultViewSelector;
   }
 
+  // Abstract functions defined by derived class
+  //Convert enum to iterable array
+  get EnrollmentStatus() {
+    return this._enrollmentStatus;
+  }
+
   rowOpened(item: ApplEnrollmentRowComponent) {
-     console.log('rowOpened', { item, rowElements: this.rowElements });
+    console.log('rowOpened', { item, rowElements: this.rowElements });
     this.rowElements.filter(x => x !== item)
       .map(x => x.closeRow());
   }
 
   search(phrase){
-      this.searchSites(phrase);
+      // do nothing - TODO implement
   }
 
-  /**
-   * Filters all expandable rows, making sure changes propagate up to the top
-   * level rows. Just pass in a function which will filter, with its only
-   * parameter being the ExpandableRow/SiteAccess
-   *
-   * @private
-   * @param {(sa: SiteAccess) => boolean} fn Takes a SiteAccess as a parameter
-   * @memberof ApplEnrollmentListComponent
-   */
-  private deepSearch(fn: (sa: SiteAccess) => boolean    ){
-
-    // Clone the source data so our changes do not wind up persisting in the underlying data
-    let cloned = this.rowItems.map(x => Object.assign({}, x));
-
-    this.data = cloned.map(enrollmentRow => {
-      // Hide all subrows that don't match search results.
-      enrollmentRow.expandableRows = enrollmentRow.expandableRows
-        .filter(expandableRow => {
-          return fn(expandableRow);
-        });
-
-      return enrollmentRow;
-    }).filter(enrollmentRow => {
-      // Only show rows with search results
-      return enrollmentRow.expandableRows.length;
-    });
-  }
-
-  // Searches based on the expandable rows, per business requirements (i.e. site name, NOT collection name!)
-  searchSites(phrase) {
-
-    if (phrase.length === 0) {
-      return this.data = this.rowItems;
-    }
-
-    this.deepSearch(expandableRow => {
-      console.log('deepSearch ' + expandableRow.title );
-      return expandableRow.title.toLowerCase().indexOf(phrase.toLowerCase()) !== -1;
-    });
-  }
+  // PRIVATE
 
   // NOTE: This doesn't work properly with search. Fine for prototype for now, but will need to be resolved in future.
   viewTypes(type){

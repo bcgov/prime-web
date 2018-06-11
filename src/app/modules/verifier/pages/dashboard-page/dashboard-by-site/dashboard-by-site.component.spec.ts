@@ -5,7 +5,7 @@ import {EnrollmentListComponent} from '../../../components/enrollment-list/enrol
 import {EnrollmentRowComponent} from '../../../components/enrollment-row/enrollment-row.component';
 import {PillBadgeComponent} from '../../../../../core/pill-badge/pill-badge.component';
 import {InfoButtonComponent} from '../../../components/user-info-button/user-info-button.component';
-import {EnrollmentProgressRowComponent} from '../../../components/enrollment-progress-row/enrollment-progress-row.component';
+import {EnrollmentProgressRowComponent} from '../../../../../core/enrollment-progress-row/enrollment-progress-row.component';
 import {TooltipModule} from 'ngx-bootstrap';
 import {FormsModule} from '@angular/forms';
 import {DatepickerComponent} from '../../../../../core/datepicker/datepicker.component';
