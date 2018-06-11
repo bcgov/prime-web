@@ -5,15 +5,20 @@
   </div>
 
   <div class="enrollment-actions">
+     <div>
+       Start <input type="date" id="startDt" disabled>
+      <!-- End <input type="date" id="endDt" disabled> -->
+       <span class="validity"></span>
+     </div>
       <span class="enrollment-icons">
         <prime-pill-badge
           [alerts]="allChildAlerts"
           [iconOnly]='false'>
         </prime-pill-badge>
-<!--       <prime-info-button
+        <prime-info-button
           [targetId]="rowData.associatedObjectId">
-        </prime-info-button>-->
-<!--        <i class="fa fa-edit text-muted" (click)="goToEnrollmentPage()"></i>-->
+        </prime-info-button>
+        <i class="fa text-muted" (click)="goToSiteAddressPage()"></i>
       </span>
   </div>
 </div>

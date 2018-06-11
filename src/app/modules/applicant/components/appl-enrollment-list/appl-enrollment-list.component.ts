@@ -49,7 +49,6 @@ export class ApplEnrollmentListComponent extends EnrollmentList implements OnIni
   }
 
   rowOpened(item: ApplEnrollmentRowComponent) {
-    console.log('rowOpened', { item, rowElements: this.rowElements });
     this.rowElements.filter(x => x !== item)
       .map(x => x.closeRow());
   }
@@ -62,12 +61,11 @@ export class ApplEnrollmentListComponent extends EnrollmentList implements OnIni
 
   // NOTE: This doesn't work properly with search. Fine for prototype for now, but will need to be resolved in future.
   viewTypes(type){
-    console.log('viewTypes: ' + type);
+
     if (type === defaultViewSelector){
-      console.log ('default view');
       return this.data = this.rowItems;
     }
-    console.log('viewTypes - deepSearch');
+
     this.deepSearch(expandableRow => {
       return expandableRow.status.includes(type);
     });

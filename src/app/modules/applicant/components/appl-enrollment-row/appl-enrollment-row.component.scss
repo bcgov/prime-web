@@ -1,2 +1,12 @@
 @import 'variables.scss';
 @import '../../../../core/enrollment-row/enrollment-row.class';
+
+input:invalid+span:after {
+  content: '?';
+  padding-left: 5px;
+}
+
+input:valid+span:after {
+  content: '?';
+  padding-left: 5px;
+}

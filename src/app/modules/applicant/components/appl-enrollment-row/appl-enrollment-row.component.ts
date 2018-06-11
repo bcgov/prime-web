@@ -3,6 +3,7 @@ import {EnrollmentRow, EnrollmentRowChild, RowState} from '../../../../core/enro
 import {loadInOut, openState, openStateChild, openStateDisable} from '../../../../animations/animations';
 import {SiteAccess} from '../../../../models/sites.model';
 import {Collection} from '../../../../models/collections.model';
+import {Router} from '@angular/router';
 
 // Specific to this component
 export interface ApplEnrollmentRowItem {
@@ -28,7 +29,7 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
 
   @Input() rowData: ApplEnrollmentRowItem;
 
-  constructor() {
+  constructor(private router: Router) {
     super();
     console.log('ApplEnrollmentRowComponent');
   }
@@ -59,17 +60,19 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
   /** This function is responsible for generating site access row titles depending on dashboard type */
   get siteAccessRequiringAttention(): any[] {
 
-    console.log('SiteAccess Required attention');
     if (!this.rowData || !this.rowData.expandableRows) {
-      console.log( 'No siteAccess Requiring attention');
       return [];
     }
-     console.log('siteAccess require attention');
+
     return this.rowData.expandableRows.map(siteAccess => {
       siteAccess.title = `${siteAccess.site.name}`;
-      console.log('siteAccess.title ' + siteAccess.title);
       return siteAccess;
     });
+  }
+
+  goToSiteAddressPage(){
+    //const link = '/verifier/enrollment/';
+    //this.router.navigate([link, this.rowData.associatedObjectId]);
   }
 }
 
