@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import {AlertComponent} from '../../../../core/alert/alert.component';
 import { ProvisionerDashBarComponent } from './provisioner-dash-bar.component';
 
 describe('ProvisionerDashBarComponent', () => {
