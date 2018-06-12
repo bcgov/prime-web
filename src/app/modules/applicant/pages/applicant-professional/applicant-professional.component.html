@@ -43,7 +43,8 @@
             <label for="licenceNumber">Licence Number</label>
             <input type="text" name="licenceNumber" id="licenceNumber"
                    [(ngModel)]="collegeCertificationRecord.licenceNumber"
-                   maxlength="12" class="form-control" (input)="onChange()">
+                   maxlength="{{maxLengthValue('LICENCE_NUMBER')}}"
+                   class="form-control" (input)="onChange()">
           </div>
           <div *ngIf="collegeCertificationList[i].collegeType === 'CPBC'"
                class="col d-inline-flex flex-column">
@@ -80,7 +81,7 @@
           </div>
           <div class="col d-inline-flex flex-column">
             <label for="">Licence Expiry</label>
-            <!--TODO: wrong reference-->
+            <!--TODO: potentially wrong reference-->
             <!--<prime-datepicker size='mini' dateFormat="yyyy/mm/dd" [disabled]="!editable" [(date)]="siteAccess.startDate" class='ml-1'></prime-datepicker>-->
             <!--<prime-datepicker dateFormat="yyyy/mm/dd" [(ngModel)]="collegeCertificationRecord.licenceExpiryDate"></prime-datepicker>-->
             <prime-datepicker dateFormat="yyyy/mm/dd"
@@ -137,7 +138,8 @@
           <label for="deviceProviderNumber">Device Provider Number</label>
           <input type="text" name="deviceProviderNumber" id="deviceProviderNumber"
                  [(ngModel)]="deviceProviderRecord.dpNumber"
-                 maxlength="12" class="form-control" (input)="onChange()">
+                 maxlength="{{maxLengthValue('DEVICE_PROVIDER_NUMBER')}}"
+                 class="form-control" (input)="onChange()">
         </div>
       </div>
 
@@ -174,26 +176,27 @@
          *ngFor="let workingOnBehalfRecord of workingOnBehalfList; let i = index">
       <div class="row">
         <div class="col d-inline-flex flex-column">
-          <label for="jobTitle">Job Title</label>
-          <select id="jobTitle" class="form-control row-dropbox-20"
+          <label for="workingOnBehalfTitle">Job Title</label>
+          <select id="workingOnBehalfTitle" class="form-control row-dropbox-20"
                   [(ngModel)]="workingOnBehalfRecord.jobTitle" (input)="onChange()">
             <option value="pleaseSelect" disabled selected>Select</option>
-            <option *ngFor="let type of JobTitleTypes" value="{{type}}">
-              {{jobTitleValue(type)}}
+            <option *ngFor="let type of WorkingOnBehalfTitleTypes" value="{{type}}">
+              {{workingOnBehalfTitleValue(type)}}
             </option>
           </select>
         </div>
       </div>
 
       <!-- Buttons -->
-      <ng-container *ngIf="workingOnBehalfList[i].jobTitle !== 'pleaseSelect' && i < JobTitleTypesCount()">
+      <ng-container *ngIf="workingOnBehalfList[i].jobTitle !== 'pleaseSelect'
+      && i < WorkingOnBehalfTitleTypesCount()">
         <span class='d-flex align-items-center'>
           <ng-container *ngIf="i > 0">
             <a class='mx-1' (click)="deleteWorkingOnBehalf(i)">
               <i class="fa fa-times fa-2x" aria-label="Delete"></i>
             </a>
           </ng-container>
-          <ng-container *ngIf="i < JobTitleTypesCount() - 1">
+          <ng-container *ngIf="i < WorkingOnBehalfTitleTypesCount() - 1">
             <a class='mx-1' (click)="addWorkingOnBehalf()">
               <i class="fa fa-plus-circle fa-2x" aria-label="Add"></i>
             </a>
@@ -212,12 +215,13 @@
         Have you ever been the subject of an order or a conviction for an information contravention?
       </div>
       <div class="col-sm-2">
-        <prime-toggle [(data)]="applicant.informationContravention" (click)="onChange()"></prime-toggle>
+        <prime-toggle [(data)]="informationContravention.flag" (click)="onChange()"></prime-toggle>
       </div>
     </div>
-    <div *ngIf="applicant.informationContravention === true">
+    <div *ngIf="informationContravention.flag">
       <textarea class="selfDeclarationTextArea" placeholder="Please provide detail..."
                 name="informationContraventionDetail" id="informationContraventionDetail"
+                [(ngModel)]="informationContravention.detail"
                 (input)="onChange()"></textarea>
     </div>
 
@@ -226,12 +230,13 @@
         Have you ever had your registration with a governing body of a health profession suspended or cancelled?
       </div>
       <div class="col-sm-2">
-        <prime-toggle [(data)]="applicant.cancelledRegistration" (click)="onChange()"></prime-toggle>
+        <prime-toggle [(data)]="cancelledRegistration.flag" (click)="onChange()"></prime-toggle>
       </div>
     </div>
-    <div *ngIf="applicant.cancelledRegistration === true">
+    <div *ngIf="cancelledRegistration.flag">
       <textarea class="selfDeclarationTextArea" placeholder="Please provide detail..."
                 name="cancelledRegistrationDetail" id="cancelledRegistrationDetail"
+                [(ngModel)]="cancelledRegistration.detail"
                 (input)="onChange()"></textarea>
     </div>
 
@@ -240,12 +245,13 @@
         Have you ever had Terms and Conditions imposed on your licence as a result of disciplinary actions taken by a governing body?
       </div>
       <div class="col-sm-2">
-        <prime-toggle [(data)]="applicant.licenceCondition" (click)="onChange()"></prime-toggle>
+        <prime-toggle [(data)]="licenceCondition.flag" (click)="onChange()"></prime-toggle>
       </div>
     </div>
-    <div *ngIf="applicant.licenceCondition === true">
+    <div *ngIf="licenceCondition.flag">
       <textarea class="selfDeclarationTextArea" placeholder="Please provide detail..."
                 name="licenceConditionDetail" id="licenceConditionDetail"
+                [(ngModel)]="licenceCondition.detail"
                 (input)="onChange()"></textarea>
     </div>
 
@@ -254,20 +260,18 @@
         Have you ever had your access to PharmaNet suspended or revoked?
       </div>
       <div class="col-sm-2">
-        <prime-toggle [(data)]="applicant.revokedAccess" (click)="onChange()"></prime-toggle>
+        <prime-toggle [(data)]="revokedAccess.flag" (click)="onChange()"></prime-toggle>
       </div>
     </div>
-    <div *ngIf="applicant.revokedAccess === true">
+    <div *ngIf="revokedAccess.flag">
       <textarea class="selfDeclarationTextArea" placeholder="Please provide detail..."
                 name="revokedAccessDetail" id="revokedAccessDetail"
+                [(ngModel)]="revokedAccess.detail"
                 (input)="onChange()"></textarea>
     </div>
   </div>
   <div class="col-sm-4">
-    <div *ngIf="applicant.informationContravention === true
-             || applicant.cancelledRegistration    === true
-             || applicant.licenceCondition         === true
-             || applicant.revokedAccess            === true">
+    <div *ngIf="displayUploadSection()">
       <!-- <prime-file-uploader></prime-file-uploader>-->
       <span class="note">Scan the document, or take a photo of it. Make sure that it's:</span>
       <ul class="note">

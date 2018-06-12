@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { PrimeDataService } from '../../../../services/prime-data.service';
+// import { Person } from '../../../../models/person.model';
 import { CollegeTypes,
   LicenceClassCPTypes,
   LicenceClassCRNTypes,
   LicenceClassCPSTypes,
   AdvancedPracticeCertificationTypes,
-  JobTitleTypes } from '../../../../models/colleges.enum';
+  WorkingOnBehalfTitleTypes,
+  MaxLengthTypes,
+  SelfDeclaration } from '../../../../models/colleges.enum';
 
 @Component({
   selector: 'prime-applicant-professional',
@@ -13,6 +16,8 @@ import { CollegeTypes,
   styleUrls: ['./applicant-professional.component.scss']
 })
 export class ApplicantProfessionalComponent implements OnInit {
+  // private _user: Person;
+
   public collegeCertificationList = [{
     collegeType: 'pleaseSelect',
     licenceNumber: '',
@@ -28,12 +33,21 @@ export class ApplicantProfessionalComponent implements OnInit {
   public workingOnBehalfList = [{ jobTitle: 'pleaseSelect' }];
   public workingOnBehalfTotal = 0;
 
+  public informationContravention: SelfDeclaration = { flag: null, detail: null };
+  public cancelledRegistration: SelfDeclaration = { flag: null, detail: null };
+  public licenceCondition: SelfDeclaration = { flag: null, detail: null };
+  public revokedAccess: SelfDeclaration = { flag: null, detail: null };
+
   public hasChanged: boolean = false;
 
 
   constructor(private dataService: PrimeDataService) { }
 
   ngOnInit() {
+  }
+
+  get applicant() {
+    return this.dataService.user;
   }
 
   addCollegeCertification() {
@@ -71,7 +85,7 @@ export class ApplicantProfessionalComponent implements OnInit {
   }
 
   addWorkingOnBehalf() {
-    if(this.workingOnBehalfTotal < this.JobTitleTypesCount() - 1) {
+    if(this.workingOnBehalfTotal < this.WorkingOnBehalfTitleTypesCount() - 1) {
       this.workingOnBehalfList.push({ jobTitle: 'pleaseSelect' });
       this.workingOnBehalfTotal++;
 
@@ -85,10 +99,6 @@ export class ApplicantProfessionalComponent implements OnInit {
     this.workingOnBehalfTotal--;
 
     this.onChange();
-  }
-
-  get applicant() {
-    return this.dataService.user;
   }
 
   // Make enum accessible to template
@@ -117,12 +127,17 @@ export class ApplicantProfessionalComponent implements OnInit {
   }
 
   // Make enum accessible to template
-  get JobTitleTypes() {
-    return Object.keys(JobTitleTypes);
+  get WorkingOnBehalfTitleTypes() {
+    return Object.keys(WorkingOnBehalfTitleTypes);
   }
 
-  JobTitleTypesCount() {
-    return Object.keys(JobTitleTypes).length;
+  // Make enum accessible to template
+  get MaxLengthTypes() {
+    return Object.keys(MaxLengthTypes);
+  }
+
+  WorkingOnBehalfTitleTypesCount() {
+    return Object.keys(WorkingOnBehalfTitleTypes).length;
   }
 
   collegeCurrValue(selection) {
@@ -145,8 +160,12 @@ export class ApplicantProfessionalComponent implements OnInit {
     return AdvancedPracticeCertificationTypes[selection];
   }
 
-  jobTitleValue(selection) {
-    return JobTitleTypes[selection];
+  workingOnBehalfTitleValue(selection) {
+    return WorkingOnBehalfTitleTypes[selection];
+  }
+
+  maxLengthValue(selection) {
+    return MaxLengthTypes[selection];
   }
 
   collegeCertificationValid(i) {
@@ -197,6 +216,17 @@ export class ApplicantProfessionalComponent implements OnInit {
     }
   }
 
+  displayUploadSection() {
+    if(this.informationContravention.flag
+      || this.cancelledRegistration.flag
+      || this.licenceCondition.flag
+      || this.revokedAccess.flag) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 
   onChange() {
     this.hasChanged = true;
