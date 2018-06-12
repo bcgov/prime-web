@@ -46,26 +46,36 @@ export class ApplicantProfessionalComponent implements OnInit {
       licenceExpiryDate: '',
       advancedPracticeCertificationType: 'pleaseSelect'
     });
+
+    this.onChange();
   }
 
   deleteCollegeCertification(i){
     console.log(`delete index ${i}`, this.collegeCertificationList);
     this.collegeCertificationList.splice(i, 1);
+
+    this.onChange();
   }
 
   addDeviceProvider() {
     this.deviceProviderList.push({ dpNumber: '' });
+
+    this.onChange();
   }
 
   deleteDeviceProvider(i){
     console.log(`delete index ${i}`, this.deviceProviderList);
     this.deviceProviderList.splice(i, 1);
+
+    this.onChange();
   }
 
   addWorkingOnBehalf() {
     if(this.workingOnBehalfTotal < this.JobTitleTypesCount() - 1) {
       this.workingOnBehalfList.push({ jobTitle: 'pleaseSelect' });
       this.workingOnBehalfTotal++;
+
+      this.onChange();
     }
   }
 
@@ -73,6 +83,8 @@ export class ApplicantProfessionalComponent implements OnInit {
     console.log(`delete index ${i}`, this.workingOnBehalfList);
     this.workingOnBehalfList.splice(i, 1);
     this.workingOnBehalfTotal--;
+
+    this.onChange();
   }
 
   get applicant() {
