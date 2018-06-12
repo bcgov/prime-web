@@ -77,6 +77,10 @@ table {
   padding-right: 1.5em;
 }
 
+.color {
+  background-color: lightgrey;
+}
+
 .enrollment-text-container {
   min-height: $rowHeight;
   cursor: pointer; // Click to expand

@@ -6,7 +6,7 @@
   </div>
 
   <div *ngIf="siteStatus === 'Active'">
-    <table >
+    <table>
       <tr>
         <td class="provisioner-element-label" >POS User Id</td>
         <td class="provisioner-element-label"> Date Provisioned</td>
@@ -14,7 +14,7 @@
       <tr>
         <td class="provisioner-element-text" >{{rowData.posUserId}}</td>
         <td class="provisioner-element-text"> {{rowData.provisionedDate}}</td>
-        <td class="mr-2"></td>
+        <td class="px-1"></td>
       </tr>
     </table>
   </div>
@@ -29,7 +29,7 @@
       <tr>
         <td> <input type="text" size="8"></td>
         <td > <input type="text" size="14"></td>
-        <td class="mr-2"></td>
+        <td class="mr-3"></td>
       </tr>
   </table>
  </div>
@@ -49,24 +49,20 @@
 
   <div *ngIf="siteStatus === 'Declined'">
   <div class="col d-inline-flex flex-column">
-    <select id="declinedReason1" class="form-control drop-dl-box-15"
-            [value]="declinedReasonSelector" disabled>
+    <select id="declinedReason1" class="form-control drop-dl-box-15 color"
+          [value]="declinedReasonSelector" disabled>
       <option value="pleaseSelect" selected>{{declinedReasonValue('ACCESS_NO_lONGER_REQUIRED')}}</option>
-      <option  *ngFor="let reason of DeclinedReasons" value="{{reason}}">
-        {{declinedReasonValue(reason)}}
-      </option>
     </select>
   </div>
 </div>
 
   <div class="enrollment-actions">
       <span class="enrollment-icons">
-        <div *ngIf="siteStatus === 'DeclinedEnrollment'; else regularEnrollment">
-           <prime-pill-badge
+        <prime-pill-badge
+             *ngIf="siteStatus === 'DeclinedEnrollment'; else regularEnrollment"
              [alerts]="newSiteAlert"
              [iconOnly]='false'>
         </prime-pill-badge>
-        </div>
         <ng-template #regularEnrollment>
           <prime-pill-badge
             [alerts]="siteAlert"
@@ -74,35 +70,34 @@
           </prime-pill-badge>
         </ng-template>
         <i class="fa fa-sticky-note-o mr-2" (click)="goToNotePage()"></i>
-        <div  class="mr-2">
-          <prime-info-button
+        <prime-info-button
+            class="mr-2"
             [targetId]="rowData.objectId">
         </prime-info-button>
-        </div>
          <div  class="mr-2" *ngIf="siteStatus === 'New'" >
            <button class="btn btn-danger btn-sm btn-circle" data-toggle="tooltip" data-placement="bottom"
            title="Decline Enrollment" (click)="resetStatus('DeclinedEnrollment')">
              <i class="fa fa-times"></i></button>
           <button class="btn btn-success btn-sm btn-circle" data-toggle="tooltip" data-placement="bottom"
            title="Accept Enrollment" (click)="resetStatus('AcceptEnrollment')">
-          <i class="fa fa-check"></i></button>
+            <i class="fa fa-check"></i></button>
          </div>
       </span>
   </div>
 </div>
 
-<div class="table-responsive ml-2 border-top-0" *ngIf="siteStatus === 'New'" >
-<table width="100%" >
+<div class="table-responsive ml-2" *ngIf="siteStatus === 'New'" >
+  <table>
     <tr>
-      <td class="provisioner-element-label" width = "10%">PEC</td>
+      <td class="provisioner-element-label"  width = "8%">PEC</td>
       <td class="provisioner-element-label" width = "10%"> Request</td>
-      <td class="provisioner-element-label" width="8">Class</td>
-      <td class="provisioner-element-label" width="35"> Access Rights</td>
-      <td class="provisioner-element-label" width="6">T&C</td>
-      <td class="provisioner-element-label"width="8"> Start</td>
-      <td class="provisioner-element-label" width="8">End</td>
-      <td class="provisioner-element-label" width="30"> Personal Access</td>
-      <td width="10"></td>
+      <td class="provisioner-element-label" width = "8%" >Class</td>
+      <td class="provisioner-element-label"  width = "15%"> Access Rights</td>
+      <td class="provisioner-element-label" width = "6%" >T&C</td>
+      <td class="provisioner-element-label" width = "8%"> Start</td>
+      <td class="provisioner-element-label" width = "8%">End</td>
+      <td class="provisioner-element-label"  width = "15%"> Personal Access</td>
+      <td width="10%"></td>
     </tr>
     <tr>
       <td class="provisioner-element-text">{{rowData.PEC}}</td>
@@ -115,19 +110,16 @@
       <td class="provisioner-element-text"> {{rowData.personalAccess}}</td>
       <td class="provisioner-element-checkbox"><input type="checkbox" >T&C Enforceable </td>
     </tr>
-
-</table>
+  </table>
 </div>
 
 <div [@openState]="openState">
   <div [@openStateChild]="openState"  class="expandable-container">
-
     <div class="enrollment-expandable" >
       <prime-enrollment-progress-row
         [open]='true'
         [data]='siteAccessObject'>
       </prime-enrollment-progress-row>
     </div>
-
   </div>
 </div>
