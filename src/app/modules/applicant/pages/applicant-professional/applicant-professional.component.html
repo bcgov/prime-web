@@ -20,7 +20,7 @@
 
   <ng-container *ngIf="applicant.hasCollege === true">
     <div class='d-flex justify-content-between border p-3'
-         *ngFor="let collegeCertificationRecord of collegeCertificationList; let i = index">
+         *ngFor="let collegeCertificationRecord of applicant.collegeCertificationList; let i = index">
       <div class="row">
         <div class="col d-inline-flex flex-column">
           <label for="collegeTypesType">College Certification</label>
@@ -32,11 +32,11 @@
             </option>
           </select>
         </div>
-        <ng-container *ngIf="collegeCertificationList[i].collegeType !== 'pleaseSelect'">
+        <ng-container *ngIf="applicant.collegeCertificationList[i].collegeType !== 'pleaseSelect'">
           <div class="col d-inline-flex flex-column">
             <label for="collegeNumber">College Number</label>
             <input type="text" name="collegeNumber" id="collegeNumber"
-                   [value]="collegeCurrValue(collegeCertificationList[i].collegeType)"
+                   [value]="collegeCurrValue(applicant.collegeCertificationList[i].collegeType)"
                    class="form-control" disabled>
           </div>
           <div class="col d-inline-flex flex-column">
@@ -46,7 +46,7 @@
                    maxlength="{{maxLengthValue('LICENCE_NUMBER')}}"
                    class="form-control" (input)="onChange()">
           </div>
-          <div *ngIf="collegeCertificationList[i].collegeType === 'CPBC'"
+          <div *ngIf="applicant.collegeCertificationList[i].collegeType === 'CPBC'"
                class="col d-inline-flex flex-column">
             <label for="licenceClassCP">Licence Class</label>
             <select id="licenceClassCP" class="form-control drop-dl-box-17"
@@ -57,7 +57,7 @@
               </option>
             </select>
           </div>
-          <div *ngIf="collegeCertificationList[i].collegeType === 'CRNBC'"
+          <div *ngIf="applicant.collegeCertificationList[i].collegeType === 'CRNBC'"
                class="col d-inline-flex flex-column">
             <label for="licenceClassCRN">Licence Class</label>
             <select id="licenceClassCRN" class="form-control drop-dl-box-20"
@@ -68,7 +68,7 @@
               </option>
             </select>
           </div>
-          <div *ngIf="collegeCertificationList[i].collegeType === 'CPSBC'"
+          <div *ngIf="applicant.collegeCertificationList[i].collegeType === 'CPSBC'"
                class="col d-inline-flex flex-column">
             <label for="licenceClassCPS">Licence Class</label>
             <select id="licenceClassCPS" class="form-control drop-dl-box-15"
@@ -87,7 +87,7 @@
             <prime-datepicker dateFormat="yyyy/mm/dd"
                               [(date)]="collegeCertificationRecord.licenceExpiryDate"></prime-datepicker>
           </div>
-          <div *ngIf="collegeCertificationList[i].collegeType === 'CRNBC'"
+          <div *ngIf="applicant.collegeCertificationList[i].collegeType === 'CRNBC'"
                class="col d-inline-flex flex-column">
             <label for="advancedPracticeCertification">Advanced Practice Certification</label>
             <select id="advancedPracticeCertification" class="form-control drop-dl-box-26"
@@ -132,7 +132,7 @@
 
   <ng-container *ngIf="applicant.isDeviceProvider === true">
     <div class='d-flex justify-content-between border p-3'
-         *ngFor="let deviceProviderRecord of deviceProviderList; let i = index">
+         *ngFor="let deviceProviderRecord of applicant.deviceProviderList; let i = index">
       <div class="row">
         <div class="col d-inline-flex flex-column">
           <label for="deviceProviderNumber">Device Provider Number</label>
@@ -144,7 +144,7 @@
       </div>
 
       <!-- Buttons -->
-      <ng-container *ngIf="deviceProviderList[i].dpNumber.length">
+      <ng-container *ngIf="applicant.deviceProviderList[i].dpNumber.length">
         <span class='d-flex align-items-center'>
           <ng-container *ngIf="i > 0">
             <a class='mx-1' (click)="deleteDeviceProvider(i)">
@@ -173,7 +173,7 @@
 
   <ng-container *ngIf="applicant.isWorkingOnBehalf === true">
     <div class='d-flex justify-content-between border p-3'
-         *ngFor="let workingOnBehalfRecord of workingOnBehalfList; let i = index">
+         *ngFor="let workingOnBehalfRecord of applicant.workingOnBehalfList; let i = index">
       <div class="row">
         <div class="col d-inline-flex flex-column">
           <label for="workingOnBehalfTitle">Job Title</label>
@@ -188,7 +188,7 @@
       </div>
 
       <!-- Buttons -->
-      <ng-container *ngIf="workingOnBehalfList[i].jobTitle !== 'pleaseSelect'
+      <ng-container *ngIf="applicant.workingOnBehalfList[i].jobTitle !== 'pleaseSelect'
       && i < WorkingOnBehalfTitleTypesCount()">
         <span class='d-flex align-items-center'>
           <ng-container *ngIf="i > 0">
@@ -215,13 +215,14 @@
         Have you ever been the subject of an order or a conviction for an information contravention?
       </div>
       <div class="col-sm-2">
-        <prime-toggle [(data)]="informationContravention.flag" (click)="onChange()"></prime-toggle>
+        <prime-toggle [(data)]="applicant.informationContravention.flag"
+                      (click)="onChange()"></prime-toggle>
       </div>
     </div>
-    <div *ngIf="informationContravention.flag">
+    <div *ngIf="applicant.informationContravention.flag">
       <textarea class="selfDeclarationTextArea" placeholder="Please provide detail..."
                 name="informationContraventionDetail" id="informationContraventionDetail"
-                [(ngModel)]="informationContravention.detail"
+                [(ngModel)]="applicant.informationContravention.detail"
                 (input)="onChange()"></textarea>
     </div>
 
@@ -230,13 +231,14 @@
         Have you ever had your registration with a governing body of a health profession suspended or cancelled?
       </div>
       <div class="col-sm-2">
-        <prime-toggle [(data)]="cancelledRegistration.flag" (click)="onChange()"></prime-toggle>
+        <prime-toggle [(data)]="applicant.cancelledRegistration.flag"
+                      (click)="onChange()"></prime-toggle>
       </div>
     </div>
-    <div *ngIf="cancelledRegistration.flag">
+    <div *ngIf="applicant.cancelledRegistration.flag">
       <textarea class="selfDeclarationTextArea" placeholder="Please provide detail..."
                 name="cancelledRegistrationDetail" id="cancelledRegistrationDetail"
-                [(ngModel)]="cancelledRegistration.detail"
+                [(ngModel)]="applicant.cancelledRegistration.detail"
                 (input)="onChange()"></textarea>
     </div>
 
@@ -245,13 +247,14 @@
         Have you ever had Terms and Conditions imposed on your licence as a result of disciplinary actions taken by a governing body?
       </div>
       <div class="col-sm-2">
-        <prime-toggle [(data)]="licenceCondition.flag" (click)="onChange()"></prime-toggle>
+        <prime-toggle [(data)]="applicant.licenceCondition.flag"
+                      (click)="onChange()"></prime-toggle>
       </div>
     </div>
-    <div *ngIf="licenceCondition.flag">
+    <div *ngIf="applicant.licenceCondition.flag">
       <textarea class="selfDeclarationTextArea" placeholder="Please provide detail..."
                 name="licenceConditionDetail" id="licenceConditionDetail"
-                [(ngModel)]="licenceCondition.detail"
+                [(ngModel)]="applicant.licenceCondition.detail"
                 (input)="onChange()"></textarea>
     </div>
 
@@ -260,13 +263,13 @@
         Have you ever had your access to PharmaNet suspended or revoked?
       </div>
       <div class="col-sm-2">
-        <prime-toggle [(data)]="revokedAccess.flag" (click)="onChange()"></prime-toggle>
+        <prime-toggle [(data)]="applicant.revokedAccess.flag" (click)="onChange()"></prime-toggle>
       </div>
     </div>
-    <div *ngIf="revokedAccess.flag">
+    <div *ngIf="applicant.revokedAccess.flag">
       <textarea class="selfDeclarationTextArea" placeholder="Please provide detail..."
                 name="revokedAccessDetail" id="revokedAccessDetail"
-                [(ngModel)]="revokedAccess.detail"
+                [(ngModel)]="applicant.revokedAccess.detail"
                 (input)="onChange()"></textarea>
     </div>
   </div>

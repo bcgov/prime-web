@@ -62,7 +62,7 @@ export enum MaxLengthTypes {
 /**
  * Interface for self declaration
  */
-export interface SelfDeclaration {
+export interface ISelfDeclaration {
   flag: boolean,
   detail: string
 }

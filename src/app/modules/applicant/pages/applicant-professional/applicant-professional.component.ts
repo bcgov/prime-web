@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { PrimeDataService } from '../../../../services/prime-data.service';
-// import { Person } from '../../../../models/person.model';
+import { DummyDataService } from '../../../../services/dummy-data.service';
+import { Person } from '../../../../models/person.model';
+import { cloneDeep } from 'lodash';
 import { CollegeTypes,
   LicenceClassCPTypes,
   LicenceClassCRNTypes,
   LicenceClassCPSTypes,
   AdvancedPracticeCertificationTypes,
   WorkingOnBehalfTitleTypes,
-  MaxLengthTypes,
-  SelfDeclaration } from '../../../../models/colleges.enum';
+  MaxLengthTypes } from '../../../../models/colleges.enum';
 
 @Component({
   selector: 'prime-applicant-professional',
@@ -16,42 +17,28 @@ import { CollegeTypes,
   styleUrls: ['./applicant-professional.component.scss']
 })
 export class ApplicantProfessionalComponent implements OnInit {
-  // private _user: Person;
+  private _user: Person;
 
-  public collegeCertificationList = [{
-    collegeType: 'pleaseSelect',
-    licenceNumber: '',
-    licenceClassCPType: 'pleaseSelect',
-    licenceClassCRNType: 'pleaseSelect',
-    licenceClassCPSType: 'pleaseSelect',
-    licenceExpiryDate: '',
-    advancedPracticeCertificationType: 'pleaseSelect'
-  }];
-
-  public deviceProviderList = [{ dpNumber: '' }];
-
-  public workingOnBehalfList = [{ jobTitle: 'pleaseSelect' }];
   public workingOnBehalfTotal = 0;
-
-  public informationContravention: SelfDeclaration = { flag: null, detail: null };
-  public cancelledRegistration: SelfDeclaration = { flag: null, detail: null };
-  public licenceCondition: SelfDeclaration = { flag: null, detail: null };
-  public revokedAccess: SelfDeclaration = { flag: null, detail: null };
 
   public hasChanged: boolean = false;
 
-
-  constructor(private dataService: PrimeDataService) { }
+  constructor(private primeDataService: PrimeDataService, private dummyDataService: DummyDataService) { }
 
   ngOnInit() {
+    // DEV ONLY! TODO: Remove.
+    this.primeDataService.user = this.dummyDataService.createPeople(1)[0];
+
+    // Clone user clas
+    this._user = cloneDeep(this.primeDataService.user);
   }
 
-  get applicant() {
-    return this.dataService.user;
+  get applicant(): Person {
+    return this._user;
   }
 
   addCollegeCertification() {
-    this.collegeCertificationList.push({
+    this._user.collegeCertificationList.push({
       collegeType: 'pleaseSelect',
       licenceNumber: '',
       licenceClassCPType: 'pleaseSelect',
@@ -65,28 +52,28 @@ export class ApplicantProfessionalComponent implements OnInit {
   }
 
   deleteCollegeCertification(i){
-    console.log(`delete index ${i}`, this.collegeCertificationList);
-    this.collegeCertificationList.splice(i, 1);
+    console.log(`delete index ${i}`, this._user.collegeCertificationList);
+    this._user.collegeCertificationList.splice(i, 1);
 
     this.onChange();
   }
 
   addDeviceProvider() {
-    this.deviceProviderList.push({ dpNumber: '' });
+    this._user.deviceProviderList.push({ dpNumber: '' });
 
     this.onChange();
   }
 
   deleteDeviceProvider(i){
-    console.log(`delete index ${i}`, this.deviceProviderList);
-    this.deviceProviderList.splice(i, 1);
+    console.log(`delete index ${i}`, this._user.deviceProviderList);
+    this._user.deviceProviderList.splice(i, 1);
 
     this.onChange();
   }
 
   addWorkingOnBehalf() {
     if(this.workingOnBehalfTotal < this.WorkingOnBehalfTitleTypesCount() - 1) {
-      this.workingOnBehalfList.push({ jobTitle: 'pleaseSelect' });
+      this._user.workingOnBehalfList.push({ jobTitle: 'pleaseSelect' });
       this.workingOnBehalfTotal++;
 
       this.onChange();
@@ -94,8 +81,8 @@ export class ApplicantProfessionalComponent implements OnInit {
   }
 
   deleteWorkingOnBehalf(i){
-    console.log(`delete index ${i}`, this.workingOnBehalfList);
-    this.workingOnBehalfList.splice(i, 1);
+    console.log(`delete index ${i}`, this._user.workingOnBehalfList);
+    this._user.workingOnBehalfList.splice(i, 1);
     this.workingOnBehalfTotal--;
 
     this.onChange();
@@ -131,11 +118,6 @@ export class ApplicantProfessionalComponent implements OnInit {
     return Object.keys(WorkingOnBehalfTitleTypes);
   }
 
-  // Make enum accessible to template
-  get MaxLengthTypes() {
-    return Object.keys(MaxLengthTypes);
-  }
-
   WorkingOnBehalfTitleTypesCount() {
     return Object.keys(WorkingOnBehalfTitleTypes).length;
   }
@@ -169,16 +151,16 @@ export class ApplicantProfessionalComponent implements OnInit {
   }
 
   collegeCertificationValid(i) {
-    if(this.collegeCertificationList[i].collegeType !== 'pleaseSelect'
-      && this.collegeCertificationList[i].licenceNumber.length
-      && this.collegeCertificationList[i].licenceExpiryDate.length !== 0
-      && ((this.collegeCertificationList[i].collegeType === 'CPBC'
-          && this.collegeCertificationList[i].licenceClassCPType !== 'pleaseSelect')
-        || (this.collegeCertificationList[i].collegeType === 'CRNBC'
-          && this.collegeCertificationList[i].licenceClassCRNType !== 'pleaseSelect'
-          && this.collegeCertificationList[i].advancedPracticeCertificationType !== 'pleaseSelect')
-        || (this.collegeCertificationList[i].collegeType === 'CPSBC'
-          && this.collegeCertificationList[i].licenceClassCPSType !== 'pleaseSelect'))) {
+    if(  this._user.collegeCertificationList[i].collegeType !== 'pleaseSelect'
+      && this._user.collegeCertificationList[i].licenceNumber.length
+      && this._user.collegeCertificationList[i].licenceExpiryDate.length !== 0
+      && ((  this._user.collegeCertificationList[i].collegeType === 'CPBC'
+          && this._user.collegeCertificationList[i].licenceClassCPType !== 'pleaseSelect')
+        || ( this._user.collegeCertificationList[i].collegeType === 'CRNBC'
+          && this._user.collegeCertificationList[i].licenceClassCRNType !== 'pleaseSelect'
+          && this._user.collegeCertificationList[i].advancedPracticeCertificationType !== 'pleaseSelect')
+        || ( this._user.collegeCertificationList[i].collegeType === 'CPSBC'
+          && this._user.collegeCertificationList[i].licenceClassCPSType !== 'pleaseSelect'))) {
       return true;
     }
     else {
@@ -187,7 +169,7 @@ export class ApplicantProfessionalComponent implements OnInit {
   }
 
   displayDeviceProviderSection() {
-    if(this.applicant.hasCollege === false || this.collegeCertificationValid(0)) {
+    if(this._user.hasCollege === false || this.collegeCertificationValid(0)) {
       return true;
     }
     else {
@@ -197,7 +179,7 @@ export class ApplicantProfessionalComponent implements OnInit {
 
   displayWorkingOnBehalfSection() {
     if(this.displayDeviceProviderSection()
-      && (this.applicant.isDeviceProvider === false || this.deviceProviderList[0].dpNumber.length)) {
+      && (this._user.isDeviceProvider === false || this._user.deviceProviderList[0].dpNumber.length)) {
       return true;
     }
     else {
@@ -206,9 +188,9 @@ export class ApplicantProfessionalComponent implements OnInit {
   }
 
   displaySelfDeclarationSection() {
-    if(this.displayDeviceProviderSection()
+    if(  this.displayDeviceProviderSection()
       && this.displayWorkingOnBehalfSection()
-      && (this.applicant.isWorkingOnBehalf === false || this.workingOnBehalfList[0].jobTitle !== 'pleaseSelect')) {
+      && (this._user.isWorkingOnBehalf === false || this._user.workingOnBehalfList[0].jobTitle !== 'pleaseSelect')) {
       return true;
     }
     else {
@@ -217,10 +199,10 @@ export class ApplicantProfessionalComponent implements OnInit {
   }
 
   displayUploadSection() {
-    if(this.informationContravention.flag
-      || this.cancelledRegistration.flag
-      || this.licenceCondition.flag
-      || this.revokedAccess.flag) {
+    if(  this._user.informationContravention.flag
+      || this._user.cancelledRegistration.flag
+      || this._user.licenceCondition.flag
+      || this._user.revokedAccess.flag) {
       return true;
     }
     else {
@@ -233,11 +215,41 @@ export class ApplicantProfessionalComponent implements OnInit {
   }
 
   onSave(val: boolean){
+    // toggles
+    this.primeDataService.user.hasCollege        = this._user.hasCollege;
+    this.primeDataService.user.isDeviceProvider  = this._user.isDeviceProvider;
+    this.primeDataService.user.isWorkingOnBehalf = this._user.isWorkingOnBehalf;
+
+    // toggle related arrays
+    this.primeDataService.user.collegeCertificationList = this._user.collegeCertificationList;
+    this.primeDataService.user.deviceProviderList       = this._user.deviceProviderList;
+    this.primeDataService.user.workingOnBehalfList      = this._user.workingOnBehalfList;
+
+    // Self declaration related
+    this.primeDataService.user.informationContravention = this._user.informationContravention;
+    this.primeDataService.user.cancelledRegistration    = this._user.cancelledRegistration;
+    this.primeDataService.user.licenceCondition         = this._user.licenceCondition;
+    this.primeDataService.user.revokedAccess            = this._user.revokedAccess;
 
     this.hasChanged = false;
   }
 
   onCancel(val: boolean){
+    // toggles
+    this._user.hasCollege        = this.primeDataService.user.hasCollege;
+    this._user.isDeviceProvider  = this.primeDataService.user.isDeviceProvider;
+    this._user.isWorkingOnBehalf = this.primeDataService.user.isWorkingOnBehalf;
+
+    // toggle related arrays
+    this._user.collegeCertificationList = this.primeDataService.user.collegeCertificationList;
+    this._user.deviceProviderList       = this.primeDataService.user.deviceProviderList;
+    this._user.workingOnBehalfList      = this.primeDataService.user.workingOnBehalfList;
+
+    // Self declaration related
+    this._user.informationContravention = this.primeDataService.user.informationContravention;
+    this._user.cancelledRegistration    = this.primeDataService.user.cancelledRegistration;
+    this._user.licenceCondition         = this.primeDataService.user.licenceCondition;
+    this._user.revokedAccess            = this.primeDataService.user.revokedAccess;
 
     this.hasChanged = false;
   }
