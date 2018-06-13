@@ -3,6 +3,7 @@ import { EnrollmentRowItem } from '../../../verifier/components/enrollment-row/e
 import { EnrollmentList, defaultViewSelector } from '../../../../core/enrollment-list/enrollment-list.class';
 import { EnrollmentStatus } from '../../../../models/enrollment-status.enum';
 import { ProvisionerRowComponent } from '../provisioner-row/provisioner-row.component';
+import { Site } from '../../../../models/sites.model';
 
 @Component({
   selector: 'prime-provisioner-list',

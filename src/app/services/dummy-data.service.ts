@@ -5,8 +5,7 @@ import { EnrollmentStatus } from '../models/enrollment-status.enum';
 import { Person } from '../models/person.model';
 import { Address } from '../models/addresses.model';
 import { Site, SiteAccess, SiteAccessProgressSteps } from '../models/sites.model';
-import moment = require('moment');
-
+import * as moment from 'moment';
 
 /**
  * Responsible for generating dummy data, useful for development Not responsible
