@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AcceptRejectIconsComponent } from './accept-reject-icons.component';
+import { TooltipModule } from 'ngx-bootstrap';
 
 describe('AcceptRejectIconsComponent', () => {
   let component: AcceptRejectIconsComponent;
@@ -8,7 +9,8 @@ describe('AcceptRejectIconsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AcceptRejectIconsComponent ]
+      declarations: [ AcceptRejectIconsComponent ],
+      imports: [ TooltipModule.forRoot() ]
     })
     .compileComponents();
   }));

@@ -12,7 +12,7 @@ import {DatepickerComponent} from '../../../../core/datepicker/datepicker.compon
 import {NgxMyDatePickerModule} from 'ngx-mydatepicker';
 import {PrimeDataService} from '../../../../services/prime-data.service';
 
-fdescribe('ProvisionerRowComponent', () => {
+describe('ProvisionerRowComponent', () => {
   let component: ProvisionerRowComponent;
   let fixture: ComponentFixture<ProvisionerRowComponent>;
 
