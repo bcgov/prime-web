@@ -1,3 +1,14 @@
 @import 'variables.scss';
 @import '../../../../core/enrollment-row/enrollment-row.class';
 
+input[id="startDt"], input[id="endDt"] {
+  width: 10ch;
+}
+
+.dates-col {
+  padding: 0 1em 0 1em;
+}
+
+.enrollment-icons > i {
+  font-size: 2rem;
+}

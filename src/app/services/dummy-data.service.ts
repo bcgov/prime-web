@@ -169,6 +169,13 @@ export class DummyDataService {
     for (let site of sites) {
       this.createSiteAccessAndAssociate(site, person);
     }
+
+    // debugging
+    for (let siteaccess of person.siteAccess) {
+      console.log('Site: name: ' + siteaccess.site.name);
+      console.log('Start: ' + siteaccess.startDate + ', End : ' + siteaccess.endDate );
+      console.log('Status: ' + siteaccess.status);
+    }
   }
 
   // --- Helpers

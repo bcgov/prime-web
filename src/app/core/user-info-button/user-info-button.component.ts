@@ -18,6 +18,8 @@ export class InfoButtonComponent implements OnInit {
 
   /** The objectId of the target to look up. Must correspond to a Person or a Site, otherwise an error will be thrown. */
   @Input() targetId: string;
+  @Input() searchDomain: string = "default";
+
   modalRef: BsModalRef;
   public target: Site | Person;
   public targetType: TargetType;
@@ -139,6 +141,11 @@ export class InfoButtonComponent implements OnInit {
   }
 
   private lookupObjectId(objectId): Site | Person {
+
+    if (this.searchDomain !== "default"){
+
+    }
+
     const person = this.dataService.findPersonByObjectId(objectId);
     if (person) { return person; }
     const site = this.dataService.findSiteByObjectId(objectId);

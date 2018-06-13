@@ -5,15 +5,15 @@
   </div>
 
   <div class="enrollment-actions">
-    <div>
+    <div class="dates-col">
       <label for="startDt">
         Start
       </label>
-      <input type="date" id="startDt" disabled>
+      <input type="text" id="startDt" [value]="startDate" disabled>
       <label for="endDt">
         End
       </label>
-      <input type="date" id="endDt" disabled>
+      <input type="text" id="endDt" [value]="endDate" disabled>
     </div>
     <span class="enrollment-icons">
       <prime-pill-badge
@@ -22,8 +22,10 @@
       </prime-pill-badge>
       <prime-info-button
         [targetId]="rowData.associatedObjectId">
+        <!--[searchDomain]="person">-->
       </prime-info-button>
-      <i class="fa text-muted" (click)="goToSiteAddressPage()"></i>
+      <i class="fa fa-times-circle text-danger" (click)="onDecline()"></i>
+      <i class="fa fa-check-circle text-success" (click)="onAccept()"></i>
     </span>
   </div>
 </div>
@@ -31,9 +33,7 @@
 
 <div [@openState]="openState">
   <div [@openStateChild]="openState"  class="expandable-container">
-
-    <div class="enrollment-expandable" *ngFor="let siteAccess of siteAccessRequiringAttention"
-         (click)="expandedRowClick(siteAccess)">
+    <div class="enrollment-expandable" *ngFor="let siteAccess of siteAccessRequiringAttention">
 
       <prime-enrollment-progress-row
         [open]='siteAccess.open'

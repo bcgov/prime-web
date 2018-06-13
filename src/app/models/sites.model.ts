@@ -95,6 +95,10 @@ export class SiteAccess extends Base {
     return moment(this.endDate).format('DD/MM/YYYY');
   }
 
+  get startDateShort(): string {
+    return moment(this.startDate).format('DD/MM/YYYY');
+  }
+
   formatDateShort(date: Date){
     return moment(date).format('DD/MM/YYYY');
   }
