@@ -61,25 +61,6 @@ export class ProvisionerWidgetsComponent implements OnInit {
     return result.filter(sa => sa.progress === selection);
   }
 
-  /*calculatePieChartData() : {name: string, value: number}[] {
-    return this.EnrollmentStatus.map(status => {
-      return {
-        name: status,
-        value: this.siteAccess.filter(sa => sa.status === status ).length
-      }
-    })
-  }*/
-
-  /*
-  calculatePieChartData() : {name: string, value: number}[] {
-    const names = ['Active', 'Declined', 'New']
-    const foo = [ {name: 'Active' , value: 10}, {name: 'Declined' , value: 20} ];
-    const filteredFoo = foo.filter(function(itm){
-      return names.indexOf(itm.name) > -1;
-    });
-    return filteredFoo;
-  }
-  */
   calculatePieChartData() : {name: string, value: number}[] {
     const validStatusNamesArr = [EnrollmentStatus.Active.valueOf(), EnrollmentStatus.Declined.valueOf(), EnrollmentStatus.New.valueOf()]
 
