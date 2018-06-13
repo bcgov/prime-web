@@ -1,7 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EnrollmentProgressRowComponent } from './enrollment-progress-row.component';
-import {BsModalService} from 'ngx-bootstrap';
+import {BsModalService, ProgressbarModule} from 'ngx-bootstrap';
+import {ProgressBarComponent} from '../progress-bar/progress-bar.component';
 
 describe('EnrollmentProgressRowComponent', () => {
   let component: EnrollmentProgressRowComponent;
@@ -9,7 +10,8 @@ describe('EnrollmentProgressRowComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EnrollmentProgressRowComponent]
+      declarations: [ EnrollmentProgressRowComponent, ProgressBarComponent],
+      imports: [ProgressbarModule]
     })
     .compileComponents();
   }));

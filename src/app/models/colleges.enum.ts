@@ -9,25 +9,25 @@ export enum CollegeTypes {
 }
 
 /**
- * CPBC related license classes
+ * CPBC related licence classes
  */
-export enum LicenseClassCPTypes {
+export enum LicenceClassCPTypes {
   FULL    = 'Full Pharmacist',
   LIMITED = 'Limited Pharmacist'
 }
 
 /**
- * CRNBC related license classes
+ * CRNBC related licence classes
  */
-export enum LicenseClassCRNTypes {
+export enum LicenceClassCRNTypes {
   REGISTERED = 'Registered Nurse',
   TEMP       = 'Temp. Registered Nurse'
 }
 
 /**
- * CPSBC related license classes
+ * CPSBC related licence classes
  */
-export enum LicenseClassCPSTypes {
+export enum LicenceClassCPSTypes {
   GENERAL   = 'Full - General',
   SPECIALTY = 'Full - Specialty'
 }
@@ -45,7 +45,7 @@ export enum AdvancedPracticeCertificationTypes {
 /**
  * Entries related to Working on-behalf
  */
-export enum JobTitleTypes {
+export enum WorkingOnBehalfTitleTypes {
   MEDICA = 'Medica Office Assistant',
   OTHER  = 'Other'
 }
@@ -59,17 +59,17 @@ export enum MaxLengthTypes {
 }
 
 
+/**
+ * Interface for self declaration
+ */
+export interface ISelfDeclaration {
+  flag: boolean,
+  detail: string
+}
+
+
 // /** @deprecated */
 // export interface CollegeList {
 //   id: Colleges;
 //   text: string;
-// }
-
-
-// NEW Colleges Layout... Need to wait until Applicant section is done before solidifying what Collegs implementation we use.
-// export enum Colleges {
-//   None = "None",
-//   CPSBC = "College of Physicians and Surgeons of BC (CPSBC",
-//   CPBC = "College of Pharmacists Of BC (CPBC)",
-//   CRNBC = "College of Registered Nurses of BC (CRNBC)"
 // }

@@ -29,8 +29,8 @@ export class ApplicantDataService {
         route: 'professional',
       },
       {
-        title: 'Self Declaration',
-        route: 'self-declaration'
+        title: 'User Access Acceptance',
+        route: 'access-acceptance'
       }
     ];
   }

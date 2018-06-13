@@ -3,6 +3,7 @@ import { EnrollmentRowItem } from '../../../verifier/components/enrollment-row/e
 import { EnrollmentList, defaultViewSelector } from '../../../../core/enrollment-list/enrollment-list.class';
 import { EnrollmentStatus } from '../../../../models/enrollment-status.enum';
 import { ProvisionerRowComponent } from '../provisioner-row/provisioner-row.component';
+import { Site } from '../../../../models/sites.model';
 
 @Component({
   selector: 'prime-provisioner-list',
@@ -16,6 +17,8 @@ export class ProvisionerListComponent extends EnrollmentList implements OnInit {
 
   @ViewChildren(ProvisionerRowComponent) rowElements: QueryList<ProvisionerRowComponent>
 
+  sites: Site[] = [];
+
   private _enrollmentStatus: string [] = [
     EnrollmentStatus.Approved,
     EnrollmentStatus.Declined,
@@ -28,6 +31,10 @@ export class ProvisionerListComponent extends EnrollmentList implements OnInit {
 
   ngOnInit() {
     this.data = this.rowItems;
+    for (let i = 0; i < this.rowItems.length; i++){
+      this.sites.push(this.rowItems[i].sites[0]);
+
+    }
     console.log('OnInit (ProvisionerListComponent): ', this.data );
   }
 

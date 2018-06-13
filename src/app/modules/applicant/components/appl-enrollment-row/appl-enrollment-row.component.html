@@ -3,7 +3,6 @@
   <div class="enrollment-text-container">
     <span class="enrollment-text-main">{{rowData.title}}</span>
   </div>
-
   <div class="enrollment-actions">
     <div class="dates-col">
       <label for="startDt">
@@ -33,8 +32,8 @@
 
 <div [@openState]="openState">
   <div [@openStateChild]="openState"  class="expandable-container">
-    <div class="enrollment-expandable" *ngFor="let siteAccess of siteAccessRequiringAttention">
 
+    <div class="enrollment-expandable" *ngFor="let siteAccess of siteAccessRequiringAttention">
       <prime-enrollment-progress-row
         [open]='siteAccess.open'
         [data]='siteAccess'>

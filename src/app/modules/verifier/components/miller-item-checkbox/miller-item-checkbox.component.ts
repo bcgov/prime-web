@@ -52,6 +52,11 @@ export class MillerItemCheckboxComponent extends Base implements OnInit {
       this.deleteInitiatedSiteAccess(item, sa);
     }
 
+    // Pre-existing status exists, user has checked/unchecked.
+    if (!item.checked && sa && !this._allPendingChanges.includes(sa)) {
+      this._allPendingChanges.push(sa);
+    }
+
     item.checked = !item.checked;
     this.onPendingChanges.emit(this._allPendingChanges);
 

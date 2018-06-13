@@ -4,6 +4,13 @@ import { User } from './user.model';
 import * as moment from 'moment';
 import { EnrollmentStatus } from './enrollment-status.enum';
 import { Address } from './addresses.model';
+import { CollegeTypes,
+  LicenceClassCPTypes,
+  LicenceClassCRNTypes,
+  LicenceClassCPSTypes,
+  AdvancedPracticeCertificationTypes,
+  WorkingOnBehalfTitleTypes,
+  ISelfDeclaration } from './colleges.enum';
 
 /**
  * Information about person
@@ -57,11 +64,32 @@ export class Person extends Base {
   // distinction
   license;
   accessAcceptance = [false, false, false];
+
+  // toggles
   hasCollege: boolean;
   isDeviceProvider: boolean;
-  deviceProviderNumber;
   isWorkingOnBehalf: boolean;
-  workingOnBehalfTitle;
+
+  // toggle related arrays
+  collegeCertificationList = [{
+    collegeType: 'pleaseSelect',
+    licenceNumber: '',
+    licenceClassCPType: 'pleaseSelect',
+    licenceClassCRNType: 'pleaseSelect',
+    licenceClassCPSType: 'pleaseSelect',
+    licenceExpiryDate: '',
+    advancedPracticeCertificationType: 'pleaseSelect'
+  }];
+
+  deviceProviderList = [{ dpNumber: '' }];
+
+  workingOnBehalfList = [{ jobTitle: 'pleaseSelect' }];
+
+  // Self declaration related
+  informationContravention: ISelfDeclaration = { flag: null, detail: null };
+  cancelledRegistration:    ISelfDeclaration = { flag: null, detail: null };
+  licenceCondition:         ISelfDeclaration = { flag: null, detail: null };
+  revokedAccess:            ISelfDeclaration = { flag: null, detail: null };
   // END of Applicant datatypes.
 
 
