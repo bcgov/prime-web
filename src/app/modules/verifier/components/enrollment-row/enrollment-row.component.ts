@@ -55,16 +55,12 @@ export class EnrollmentRowComponent extends EnrollmentRow implements OnInit {
     }
   }
 
-  expandedRowClick(row: EnrollmentRowChild){
-    this.siteAccessRequiringAttention.map(x => x.open = false);
-    row.open = !row.open;
-  }
-
   ngOnDestroy(){
     // Set all child rows to closed.
     this.siteAccessRequiringAttention.map(x => x.open = false);
   }
 
+  // Abstract function
   /** This function is responsible for generating site access row titles depending on dashboard type */
   get siteAccessRequiringAttention(): any[] {
 
@@ -88,16 +84,7 @@ export class EnrollmentRowComponent extends EnrollmentRow implements OnInit {
 
   }
 
-
-  get allChildAlerts() {
-    return this.siteAccessRequiringAttention.map(x => x.alert);
-  }
-
-  canOpen() {
-    return this.siteAccessRequiringAttention.length >= 1;
-  }
-
-  goToEnrollmentPage(){
+   goToEnrollmentPage(){
     const link = '/verifier/enrollment/' + this.primaryType.toLowerCase();
     this.router.navigate([link, this.rowData.associatedObjectId]);
   }

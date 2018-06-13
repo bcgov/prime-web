@@ -1,5 +1,4 @@
 import {Component, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
-import {Site} from '../../../../models/sites.model';
 import { EnrollmentRowItem } from '../../../verifier/components/enrollment-row/enrollment-row.component';
 import { EnrollmentList, defaultViewSelector } from '../../../../core/enrollment-list/enrollment-list.class';
 import { EnrollmentStatus } from '../../../../models/enrollment-status.enum';

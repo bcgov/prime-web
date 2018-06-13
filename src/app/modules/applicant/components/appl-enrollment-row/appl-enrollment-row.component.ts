@@ -1,9 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {EnrollmentRow, EnrollmentRowChild, RowState} from '../../../../core/enrollment-row/enrollment-row.class';
 import {loadInOut, openState, openStateChild, openStateDisable} from '../../../../animations/animations';
-import {Site, SiteAccess} from '../../../../models/sites.model';
-import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
+import {SiteAccess} from '../../../../models/sites.model';
 import {Collection} from '../../../../models/collections.model';
+import {Router} from '@angular/router';
+import * as moment from 'moment';
+import _date = moment.unitOfTime._date;
+import {SimpleDate} from '../../../../core/date/simple-date.interface';
 
 // Specific to this component
 export interface ApplEnrollmentRowItem {
@@ -29,7 +32,7 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
 
   @Input() rowData: ApplEnrollmentRowItem;
 
-  constructor() {
+  constructor(private router: Router) {
     super();
     console.log('ApplEnrollmentRowComponent');
   }
@@ -42,33 +45,25 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
     this.siteAccessRequiringAttention.map(x => x.open = false);
   }
 
-  // abstract method - defined in derived
   toggleRow() {
 
     if (this.canOpen()) {
-      this.openState = this.openState === RowState.Opened ? RowState.Closed : RowState.Opened ;
+      this.openState = this.openState === RowState.Opened ? RowState.Closed : RowState.Opened;
 
-      if (this.openState === RowState.Opened ) {
+      if (this.openState === RowState.Opened) {
         this.onRowOpened.emit(this);
         // First row is open by default
         this.siteAccessRequiringAttention[0].open = open;
       }
-
     }
   }
 
-  expandedRowClick(row: EnrollmentRowChild) {
-    this.siteAccessRequiringAttention.map(x => x.open = false);
-    row.open = !row.open;
+  goToSiteAddressPage(){
+    //const link = '/verifier/enrollment/';
+    //this.router.navigate([link, this.rowData.associatedObjectId]);
   }
 
-  /*
-  ngOnDestroy() {
-    // Set all child rows to closed.
-    this.siteAccessRequiringAttention.map(x => x.open = false);
-  }
-  */
-
+  // abstract method - defined in derived
   /** This function is responsible for generating site access row titles depending on dashboard type */
   get siteAccessRequiringAttention(): any[] {
 
@@ -76,21 +71,10 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
       return [];
     }
 
-    // All this function does is generate titles for Site Access rows.
     return this.rowData.expandableRows.map(siteAccess => {
-      siteAccess.title = `${siteAccess.site.name} / ${siteAccess.person.name}`
+      siteAccess.title = `${siteAccess.site.name}`;
       return siteAccess;
     });
   }
-
-
-  get allChildAlerts() {
-    return this.siteAccessRequiringAttention.map(x => x.alert);
-  }
-
-  canOpen() {
-    return this.siteAccessRequiringAttention.length >= 1;
-  }
 }
-
 

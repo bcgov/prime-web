@@ -1,9 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+
 import {Base} from '../../../../core/base/base.class';
 
-import {loadInOut, openState, openStateChild, openStateDisable} from '../../../../animations/animations';
 import {DeclinedReasons, EnrollmentAlert, Site, SiteAccess} from '../../../../models/sites.model';
-import { EnrollmentStatus } from '../../../../models/enrollment-status.enum';
+import {loadInOut, openState, openStateChild, openStateDisable} from '../../../../animations/animations';
+import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
 
 
 @Component({
