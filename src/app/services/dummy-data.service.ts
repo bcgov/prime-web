@@ -5,6 +5,7 @@ import { EnrollmentStatus } from '../models/enrollment-status.enum';
 import { Person } from '../models/person.model';
 import { Address } from '../models/addresses.model';
 import { Site, SiteAccess, SiteAccessProgressSteps } from '../models/sites.model';
+import moment = require('moment');
 
 
 /**
@@ -53,7 +54,18 @@ export class DummyDataService {
       site.siteType = this.getRandomElFromArray(['Pharmacy', 'Hospital'])
       site.vendor = this.getRandomElFromArray(['Intellisense', 'Ultracorp', 'Mediware', 'HealthInc']);
       site.name = this.generateSiteName(name);
+
+      site.posUserId = this.generatePosUserId();
+      site.provisionedDate = this.generateProvisionedDate();
       site.PEC = this.generatePEC();
+      site.request = 'Add Access';
+      site.siteClass = 'Prescriber';
+      site.accessRights = 'Med Hist + Claims';
+      site.tAndC = '-';
+      site.startDate = this.generateStartDate();
+      site.endDate = this.generateEndDate();
+      site.personalAccess = 'I personally access PNET';
+
       result.push(site);
     }
 
@@ -206,10 +218,36 @@ export class DummyDataService {
     return address;
   }
 
+
+  private generatePosUserId(): string {
+    const posIds = ['T', 'SJ', 'OA', 'KL', 'M'];
+    return `${this.getRandomElFromArray(posIds)}${Math.ceil(Math.random() * 8000)} `;
+
+  }
+
+  private generateProvisionedDate(): string{
+    const today = new Date();
+    const pastDate = new Date(2017, 1, 0);
+    return moment(this.randomDate(today, pastDate)).format('DD/MM/YYYY');
+  }
+
+  private generateStartDate(): string{
+    const today = new Date();
+    const pastDate = new Date(2017, 1, 0);
+    return moment(this.randomDate(today, pastDate)).format('DD/MM/YYYY');
+  }
+
+  private generateEndDate(): string{
+    const today = new Date();
+    const pastDate = new Date(2020, 1, 0);
+    return moment(this.randomDate(today, pastDate)).format('DD/MM/YYYY');
+  }
+
   // Generates PEC for a Site
   private generatePEC(){
     return `BC00000A` + Math.ceil(Math.random() * 99);
   }
+
 
   private randomDate(start: Date, end: Date): Date {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));

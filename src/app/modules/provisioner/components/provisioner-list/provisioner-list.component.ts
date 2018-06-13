@@ -17,6 +17,8 @@ export class ProvisionerListComponent extends EnrollmentList implements OnInit {
 
   @ViewChildren(ProvisionerRowComponent) rowElements: QueryList<ProvisionerRowComponent>
 
+  sites: Site[] = [];
+
   private _enrollmentStatus: string [] = [
     EnrollmentStatus.Approved,
     EnrollmentStatus.Declined,
@@ -29,6 +31,10 @@ export class ProvisionerListComponent extends EnrollmentList implements OnInit {
 
   ngOnInit() {
     this.data = this.rowItems;
+    for (let i = 0; i < this.rowItems.length; i++){
+      this.sites.push(this.rowItems[i].sites[0]);
+
+    }
     console.log('OnInit (ProvisionerListComponent): ', this.data );
   }
 

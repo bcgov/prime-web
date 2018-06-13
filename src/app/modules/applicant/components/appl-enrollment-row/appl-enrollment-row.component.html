@@ -14,10 +14,33 @@
 -->
 
 
+  <table>
+    <div *ngIf="siteStatus === 'Active'">
+    <tr>
+      <td class="provisioner-element-label">POS User Id</td>
+      <td class="provisioner-element-label"> Date Provisioned</td>
+    </tr>
+    <tr>
+      <td class="provisioner-element-text">{{rowData.posUserId}}</td>
+      <td class="provisioner-element-text"> {{rowData.provisionedDate}}</td>
+    </tr>
+    </div>
+
+  </table>
+
+
+  <div *ngIf="siteStatus === 'New'">
+    hereN
+  </div>
+
+  <div *ngIf="siteStatus === 'Declined'">
+    hereD
+  </div>
+
   <div class="enrollment-actions">
       <span class="enrollment-icons">
         <prime-pill-badge
-          [alerts]="allChildAlerts"
+          [alerts]="siteAlert"
           [iconOnly]='false'>
         </prime-pill-badge>
 <!--        <prime-info-button
@@ -33,7 +56,7 @@
 <div [@openState]="openState">
   <div [@openStateChild]="openState"  class="expandable-container">
 
-    <div class="enrollment-expandable" *ngFor="let siteAccess of siteAccessRequiringAttention"
+    <div class="enrollment-expandable" *ngFor="let siteAccess of rowData.siteAccess"
          (click)="expandedRowClick(siteAccess)"
     >
       <div class="enrollment-text-container">
