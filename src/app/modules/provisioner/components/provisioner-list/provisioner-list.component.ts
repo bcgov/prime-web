@@ -1,9 +1,9 @@
 import {Component, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
-import {Site} from '../../../../models/sites.model';
 import { EnrollmentRowItem } from '../../../verifier/components/enrollment-row/enrollment-row.component';
 import { EnrollmentList, defaultViewSelector } from '../../../../core/enrollment-list/enrollment-list.class';
 import { EnrollmentStatus } from '../../../../models/enrollment-status.enum';
 import { ProvisionerRowComponent } from '../provisioner-row/provisioner-row.component';
+import { Site } from '../../../../models/sites.model';
 
 @Component({
   selector: 'prime-provisioner-list',
@@ -12,7 +12,7 @@ import { ProvisionerRowComponent } from '../provisioner-row/provisioner-row.comp
 })
 export class ProvisionerListComponent extends EnrollmentList implements OnInit {
 
-  @Input() rowItems: EnrollmentRowItem[];
+  @Input() rowItems: EnrollmentRowItem[] = [];
   @Input() primaryType: "User"|"Site" = "User";
 
   @ViewChildren(ProvisionerRowComponent) rowElements: QueryList<ProvisionerRowComponent>

@@ -5,8 +5,7 @@ import { EnrollmentStatus } from '../models/enrollment-status.enum';
 import { Person } from '../models/person.model';
 import { Address } from '../models/addresses.model';
 import { Site, SiteAccess, SiteAccessProgressSteps } from '../models/sites.model';
-import moment = require('moment');
-
+import * as moment from 'moment';
 
 /**
  * Responsible for generating dummy data, useful for development Not responsible
@@ -47,6 +46,7 @@ export class DummyDataService {
 
   /** Returns an array of sites with a random name. */
   createSites(count: number, name: string = "London Drugs"): Site[] {
+    console.log( 'Create : ' + count + ' sites.');
     const result: Site[] = [];
     for (let index = 0; index < count; index++) {
       const site = new Site();
@@ -176,7 +176,7 @@ export class DummyDataService {
     person.renewalDate =  this.randomDate(today, nearFuture);
 
     // Create sites for applicant dashboard
-    const sites = this.createSites( Math.ceil(Math.random() * 5) );
+    const sites = this.createSites( Math.ceil(Math.random() * 20) );
     for (let site of sites) {
       this.createSiteAccessAndAssociate(site, person);
     }

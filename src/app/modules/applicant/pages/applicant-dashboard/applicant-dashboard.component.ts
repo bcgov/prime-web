@@ -25,7 +25,6 @@ export class ApplicantDashboardComponent implements OnInit {
   }
 
   get userSiteEnrollmentData(): ApplEnrollmentRowItem[] {
-    console.log('userSiteEnrollmentData');
     return this.primeDataService.getUserSiteEnrollment();
   }
 

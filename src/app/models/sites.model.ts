@@ -152,6 +152,10 @@ export class EnrollmentAlert {
     if (status === EnrollmentStatus.New){
       return BadgeLevel.Warning;
     }
+
+    if (status === EnrollmentStatus.Approved){
+      return BadgeLevel.Success;
+    }
   }
 }
 

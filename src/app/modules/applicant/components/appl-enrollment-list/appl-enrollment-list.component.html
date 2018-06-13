@@ -8,7 +8,10 @@
         class='mr-2'>
       </prime-expanding-search>
 
-      <select id="enrollmentViewSelector" class="form-control enrollment-view-selector" [value]="viewTypeSelector" (change)="viewTypes($event.target.value)">
+      <select id="enrollmentViewSelector"
+              class="form-control enrollment-view-selector"
+              [value]="viewTypeSelector"
+              (change)="viewTypes($event.target.value)">
         <option value="View All">View All</option>
         <option *ngFor="let status of EnrollmentStatus" value="{{status}}">
           {{status}}

@@ -14,7 +14,7 @@ import {MiniProgressBarComponent} from '../../../../core/mini-progress-bar/mini-
 import {PillBadgeComponent} from '../../../../core/pill-badge/pill-badge.component';
 import {SiteAccessWidgetsComponent} from '../../components/site-access-widgets/site-access-widgets.component';
 import {DatepickerComponent} from '../../../../core/datepicker/datepicker.component';
-import {InfoButtonComponent} from '../../components/user-info-button/user-info-button.component';
+import {InfoButtonComponent} from '../../../../core/user-info-button/user-info-button.component';
 import {NgxMyDatePickerModule} from 'ngx-mydatepicker';
 import {APP_BASE_HREF} from '@angular/common';
 import {PrimeDataService} from '../../../../services/prime-data.service';

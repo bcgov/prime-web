@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MillerItemCheckboxComponent } from './miller-item-checkbox.component';
-import {InfoButtonComponent} from '../user-info-button/user-info-button.component';
+import {InfoButtonComponent} from '../../../../core/user-info-button/user-info-button.component';
 import {DatepickerComponent} from '../../../../core/datepicker/datepicker.component';
 import {FormsModule} from '@angular/forms';
 import {PillBadgeComponent} from '../../../../core/pill-badge/pill-badge.component';
