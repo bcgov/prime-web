@@ -81,7 +81,7 @@ export class ProvisionerWidgetsComponent implements OnInit {
   }
   */
   calculatePieChartData() : {name: string, value: number}[] {
-    const validStatusNamesArr = [EnrollmentStatus.Active.valueOf(), EnrollmentStatus.Declined.valueOf()]
+    const validStatusNamesArr = [EnrollmentStatus.Active.valueOf(), EnrollmentStatus.Declined.valueOf(), EnrollmentStatus.New.valueOf()]
 
     const statusArr = this.EnrollmentStatus.map(status => {
       return {
