@@ -96,7 +96,6 @@ export class InfoButtonComponent implements OnInit {
       source.name = this.person.name;
       source.dateOfBirth = this.person.dateOfBirth;
       source.phone = this.person.phone;
-      source.phoneSecondary = this.person.phoneSecondary;
       source.renewalDate = this.person.renewalDate;
       source.address.postal = this.person.address.postal;
       source.siteAccess = this.person.siteAccess;
