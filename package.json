@@ -39,6 +39,7 @@
     "ngx-mydatepicker": "^2.4.4",
     "rx-dom": "^7.0.3",
     "rxjs": "^6.2.1",
+    "rxjs-compat": "^6.2.1",
     "typescript": "2.7.2",
     "zone.js": "^0.8.26"
   },
