@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'prime-accept-reject-icons',
@@ -8,6 +8,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class AcceptRejectIconsComponent implements OnInit {
   @Output() onAccepted = new EventEmitter<boolean>();
   @Output() onRejected = new EventEmitter<boolean>();
+  @Input() labelAccept: string;
+  @Input() labelReject: string;
 
   constructor() { }
 

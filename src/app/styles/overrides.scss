@@ -129,3 +129,9 @@ h1, h2, h3,
 .card {
   border: 1px solid rgba(0, 0, 0, 0.125);
 }
+
+// This is for ngx-bootstrap's tooltip module.  This stops a flickering of the tooltip due to the mouse being over the tooltip.
+// https://github.com/valor-software/ngx-bootstrap/issues/3075
+.tooltip {
+  pointer-events: none;
+}

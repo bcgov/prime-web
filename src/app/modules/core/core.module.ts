@@ -36,7 +36,8 @@ const componentList = [
   WizardProgressBarComponent,
   CoreBreadcrumbComponent,
   EnrollmentProgressRowComponent,
-  InfoButtonComponent
+  InfoButtonComponent,
+  AcceptRejectIconsComponent,
 ];
 
 @NgModule({
@@ -52,7 +53,6 @@ const componentList = [
   ],
   declarations: [
     componentList,
-    AcceptRejectIconsComponent,
   ],
   exports: [
     componentList

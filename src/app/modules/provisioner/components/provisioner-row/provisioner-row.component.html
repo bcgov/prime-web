@@ -74,14 +74,13 @@
             class="mr-2"
             [targetId]="rowData.objectId">
         </prime-info-button>
-         <div  class="mr-2" *ngIf="siteStatus === 'New'" >
-           <button class="btn btn-danger btn-sm btn-circle" data-toggle="tooltip" data-placement="bottom"
-           title="Decline Enrollment" (click)="resetStatus('DeclinedEnrollment')">
-             <i class="fa fa-times"></i></button>
-          <button class="btn btn-success btn-sm btn-circle" data-toggle="tooltip" data-placement="bottom"
-           title="Accept Enrollment" (click)="resetStatus('AcceptEnrollment')">
-            <i class="fa fa-check"></i></button>
-         </div>
+
+        <prime-accept-reject-icons
+          (onAccepted)="resetStatus('DeclinedEnrollment')"
+          (onRejected)="resetStatus('AcceptEnrollment')"
+          labelAccept="Accept Enrollment"
+          labelReject="Decline Enrollment"
+        ></prime-accept-reject-icons>
       </span>
   </div>
 </div>

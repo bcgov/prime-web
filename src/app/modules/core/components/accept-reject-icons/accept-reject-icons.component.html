@@ -1,13 +1,21 @@
 <div class="mr-2">
 
-  <button class="btn btn-danger btn-sm btn-circle" data-toggle="tooltip" data-placement="bottom" title="Decline Enrollment"
-    (click)="onRejected.emit()">
-    <i class="fa fa-times"></i>
-  </button>
+  <a class='mx-1'
+    (click)="onRejected.emit()"
+    [tooltip]="labelReject"
+    [attr.aria-label]="labelReject"
+    delay="200"
+    container='body'>
+      <i class="fa fa-times-circle fa-2x text-danger"></i>
+  </a>
 
-  <button class="btn btn-success btn-sm btn-circle" data-toggle="tooltip" data-placement="bottom" title="Accept Enrollment"
-    (click)="onAccepted.emit()">
-    <i class="fa fa-check"></i>
-  </button>
+  <a class='mx-1'
+    (click)="onAccepted.emit()"
+    [tooltip]="labelAccept"
+    [attr.aria-label]="labelAccept"
+    delay="200"
+    container='body'>
+      <i class="fa fa-check-circle fa-2x text-success"></i>
+  </a>
 
 </div>
