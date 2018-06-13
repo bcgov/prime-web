@@ -6,7 +6,6 @@ import { NgForm } from '@angular/forms';
 // import {ModalDirective} from "ng2-bootstrap";
 // import {MspImage, MspImageError, MspImageProcessingError,
 //    MspImageScaleFactors, MspImageScaleFactorsImpl} from '../../model/msp-image';
-import { Observable ,  Observer } from 'rxjs';
 
 
 
