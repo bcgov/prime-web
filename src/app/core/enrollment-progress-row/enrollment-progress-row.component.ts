@@ -19,6 +19,7 @@ export class EnrollmentProgressRowComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    if (!this.data ) {return}
   }
 
   get openState(): string {
@@ -32,6 +33,7 @@ export class EnrollmentProgressRowComponent implements OnInit {
   }
 
   get activeStepIndex(): number {
+    if (!this.data) { return; }
     return Object.keys(SiteAccessProgressSteps).indexOf(this.data.progress);
   }
 

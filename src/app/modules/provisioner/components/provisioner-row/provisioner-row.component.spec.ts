@@ -10,8 +10,9 @@ import {ProgressBarComponent} from '../../../../core/progress-bar/progress-bar.c
 import {PillBadgeComponent} from '../../../../core/pill-badge/pill-badge.component';
 import {DatepickerComponent} from '../../../../core/datepicker/datepicker.component';
 import {NgxMyDatePickerModule} from 'ngx-mydatepicker';
+import {PrimeDataService} from '../../../../services/prime-data.service';
 
-describe('ProvisionerRowComponent', () => {
+fdescribe('ProvisionerRowComponent', () => {
   let component: ProvisionerRowComponent;
   let fixture: ComponentFixture<ProvisionerRowComponent>;
 
@@ -19,6 +20,7 @@ describe('ProvisionerRowComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ ProvisionerRowComponent ],
       imports: [ AlertModule, CoreModule, FormsModule, RouterTestingModule, NoopAnimationsModule ],
+      providers: [PrimeDataService]
     })
     .compileComponents();
   }));

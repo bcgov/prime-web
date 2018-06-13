@@ -54,7 +54,8 @@ export class ProvisionerRowComponent extends Base implements OnInit {
       const status = EnrollmentStatus[randomStatusString];
       this.siteStatus = status;
       this.alert[0] = new EnrollmentAlert(status);
-    } 
+
+    }
   }
 
 
