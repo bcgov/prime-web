@@ -20,8 +20,8 @@ export class ProvisionerRowComponent extends Base implements OnInit {
   @Output() onRowOpened = new EventEmitter<any>();
   openState: String = 'closed';
 
-  siteNumber: String;
   siteName: string;
+  siteNumber: String;
   alert: EnrollmentAlert[] = [];
   siteStatus: string ;
 

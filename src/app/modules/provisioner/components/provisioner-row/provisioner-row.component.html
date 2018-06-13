@@ -8,12 +8,12 @@
   <div *ngIf="siteStatus === 'Active'">
     <table>
       <tr>
-        <td class="provisioner-element-label" >POS User Id</td>
-        <td class="provisioner-element-label"> Date Provisioned</td>
+        <td class="provision-element-label" >POS User Id</td>
+        <td class="provision-element-label"> Date Provisioned</td>
       </tr>
       <tr>
-        <td class="provisioner-element-text" >{{rowData.posUserId}}</td>
-        <td class="provisioner-element-text"> {{rowData.provisionedDate}}</td>
+        <td class="provision-element-text" >{{rowData.posUserId}}</td>
+        <td class="provision-element-text"> {{rowData.provisionedDate}}</td>
         <td class="px-1"></td>
       </tr>
     </table>
@@ -23,8 +23,8 @@
   <div *ngIf="siteStatus === 'New' || siteStatus === 'AcceptEnrollment'">
     <table>
       <tr>
-        <td class="provisioner-element-label">POS User Id</td>
-        <td class="provisioner-element-label"> Date Provisioned</td>
+        <td class="provision-element-label">POS User Id</td>
+        <td class="provision-element-label"> Date Provisioned</td>
       </tr>
       <tr>
         <td> <input type="text" size="8"></td>
@@ -86,29 +86,31 @@
   </div>
 </div>
 
-<div class="table-responsive ml-2" *ngIf="siteStatus === 'New'" >
-  <table>
+<div class="table-responsive ml-2 " *ngIf="siteStatus === 'New'" >
+  <table >
     <tr>
-      <td class="provisioner-element-label"  width = "8%">PEC</td>
-      <td class="provisioner-element-label" width = "10%"> Request</td>
-      <td class="provisioner-element-label" width = "8%" >Class</td>
-      <td class="provisioner-element-label"  width = "15%"> Access Rights</td>
-      <td class="provisioner-element-label" width = "6%" >T&C</td>
-      <td class="provisioner-element-label" width = "8%"> Start</td>
-      <td class="provisioner-element-label" width = "8%">End</td>
-      <td class="provisioner-element-label"  width = "15%"> Personal Access</td>
-      <td width="10%"></td>
+      <td class="provision-element-label" width = "8%">PEC</td>
+      <td class="provision-element-label" width = "12%"> Request</td>
+      <td class="provision-element-label" width = "10%" >Class</td>
+      <td class="provision-element-label" width = "12%"> Access Rights</td>
+      <td class="provision-element-label" width = "8%" >T&C</td>
+      <td class="provision-element-label" width = "8%"> Start</td>
+      <td class="provision-element-label" width = "8%">End</td>
+      <td class="provision-element-label" width = "20%"> Personal Access</td>
+      <td width="5%"></td>
+      <td width="12%"></td>
     </tr>
     <tr>
-      <td class="provisioner-element-text">{{rowData.PEC}}</td>
-      <td class="provisioner-element-text"> {{rowData.request}}</td>
-      <td class="provisioner-element-text">{{rowData.siteClass}}</td>
-      <td class="provisioner-element-text"> {{rowData.accessRights}}</td>
-      <td class="provisioner-element-text">{{rowData.tAndC}}</td>
-      <td class="provisioner-element-text"> {{rowData.startDate}}</td>
-      <td class="provisioner-element-text">{{rowData.endDate}}</td>
-      <td class="provisioner-element-text"> {{rowData.personalAccess}}</td>
-      <td class="provisioner-element-checkbox"><input type="checkbox" >T&C Enforceable </td>
+      <td class="provision-element-text">{{rowData.PEC}}</td>
+      <td class="provision-element-text"> {{rowData.request}}</td>
+      <td class="provision-element-text">{{rowData.siteClass}}</td>
+      <td class="provision-element-text"> {{rowData.accessRights}}</td>
+      <td class="provision-element-text">{{rowData.tAndC}}</td>
+      <td class="provision-element-text"> {{rowData.startDate}}</td>
+      <td class="provision-element-text">{{rowData.endDate}}</td>
+      <td class="provision-element-text"> {{rowData.personalAccess}}</td>
+      <td></td>
+      <td class="mr-2"><input type="checkbox" >T&C Enforceable </td>
     </tr>
   </table>
 </div>
