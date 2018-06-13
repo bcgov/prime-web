@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Observable, Subject} from 'rx';
+import {Observable, Subject} from 'rxjs/Rx';
 
 @Injectable()
 export class ApplicantDataService {

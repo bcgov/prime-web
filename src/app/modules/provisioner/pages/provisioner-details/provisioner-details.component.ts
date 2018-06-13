@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rx';
+import { Subscription } from 'rxjs';
 import { Person } from '../../../../models/person.model';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { Site } from '../../../../models/sites.model';

@@ -10,7 +10,7 @@ import { routes } from '../../provisioner-routing.modules';
 import { ProvisionerDashboardComponent } from '../provisioner-dashboard/provisioner-dashboard.component';
 import { VerifierModule } from '../../../verifier/verifier.module';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rx';
+import { Observable } from 'rxjs';
 import { DummyDataService } from '../../../../services/dummy-data.service';
 import { ProvisionerWidgetsComponent } from '../../components/provisioner-widgets/provisioner-widgets.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
