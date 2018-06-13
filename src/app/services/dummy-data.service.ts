@@ -32,7 +32,6 @@ export class DummyDataService {
       person.name = this.generatePersonName();
       person.dateOfBirth = this.generateDateOfBirth();
       person.phone = '250-555-5555';
-      person.phoneSecondary = '604-555-5555';
       person.address = this.generateAddress();
       person.email = person.firstName[0].toLowerCase() + person.lastName.toLowerCase() + "@gmail.com";
       person.renewalDate =  this.randomDate(today, nearFuture);
@@ -166,7 +165,6 @@ export class DummyDataService {
 
     person.dateOfBirth = this.generateDateOfBirth();
     person.phone = '250-555-5555';
-    person.phoneSecondary = '604-555-5555';
     person.address = this.generateAddress();
     person.email = person.firstName[0].toLowerCase() + person.lastName.toLowerCase() + "@gmail.com";
 

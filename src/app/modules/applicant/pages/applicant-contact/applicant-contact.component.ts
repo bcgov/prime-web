@@ -46,9 +46,7 @@ export class ApplicantContactComponent implements OnInit {
 
     // Other updateable fields
     this.primeDataService.user.phone = this._user.phone;
-    this.primeDataService.user.phoneSecondary = this._user.phoneSecondary;
     this.primeDataService.user.email = this._user.email;
-    this.primeDataService.user.emailSecondary = this._user.emailSecondary;
 
     this.hasChanged = false;
   }
@@ -59,9 +57,7 @@ export class ApplicantContactComponent implements OnInit {
     this._user.mailAddress.copy(this.primeDataService.user.mailAddress); // empty object
 
     this._user.phone = this.primeDataService.user.phone;
-    this._user.phoneSecondary = this.primeDataService.user.phoneSecondary;
     this._user.email = this.primeDataService.user.email;
-    this._user.emailSecondary =   this.primeDataService.user.emailSecondary;
 
     this.hasChanged = false;
   }
