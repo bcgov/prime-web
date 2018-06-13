@@ -50,6 +50,15 @@ export class ProvisionerRowComponent extends Base implements OnInit {
 
     this.siteAccessObject = this.rowData.siteAccess[0];
 
+    console.log('ProvisionerRowComponent siteAccessObject', this.siteAccessObject);
+
+    if (this.alert.length < 1) {
+      const randomStatusString: string = this.getRandomElFromArray(this._enrollmentStatus);
+      const status = EnrollmentStatus[randomStatusString];
+      this.siteStatus = status;
+      this.alert[0] = new EnrollmentAlert(status);
+    }
+
   }
 
 
