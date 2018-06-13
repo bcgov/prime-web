@@ -8,7 +8,7 @@ import { EnrollmentProgressRowComponent } from '../../../../core/enrollment-prog
 import { PillBadgeComponent } from '../../../../core/pill-badge/pill-badge.component';
 import { AddUserButtonComponent } from '../../../../core/add-user-button/add-user-button.component';
 import { InfoButtonComponent } from '../../../verifier/components/user-info-button/user-info-button.component';
-import { TooltipModule, ProgressbarModule } from 'ngx-bootstrap';
+import {TooltipModule, ProgressbarModule, AlertModule} from 'ngx-bootstrap';
 import { ProgressBarComponent } from '../../../../core/progress-bar/progress-bar.component';
 import { MiniProgressBarComponent } from '../../../../core/mini-progress-bar/mini-progress-bar.component';
 import { FormsModule } from '@angular/forms';
@@ -34,7 +34,7 @@ describe('ProvisionerDashboardComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ProvisionerDashboardComponent, EnrollmentListComponent, EnrollmentRowComponent, EnrollmentProgressRowComponent, PillBadgeComponent, AddUserButtonComponent, InfoButtonComponent, MiniProgressBarComponent, DatepickerComponent, ProvisionerWidgetsComponent, AlertComponent, ProvisionerDashBarComponent ],
-      imports: [ TooltipModule.forRoot(),  ProgressbarModule.forRoot(), FormsModule, RouterTestingModule, NgxMyDatePickerModule.forRoot(), NgxChartsModule, NoopAnimationsModule],
+      imports: [ TooltipModule.forRoot(),  ProgressbarModule.forRoot(), FormsModule, RouterTestingModule, NgxMyDatePickerModule.forRoot(), NgxChartsModule, NoopAnimationsModule, AlertModule.forRoot()],
       providers: [VerifierService, {provide: APP_BASE_HREF, useValue: '/'}, PrimeDataService, ProvisionerService]
 
     })
