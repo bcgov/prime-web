@@ -62,8 +62,8 @@ export class EnrollmentListComponent extends EnrollmentList implements OnInit {
   }
 
   // NOTE: This doesn't work properly with search. Fine for prototype for now, but will need to be resolved in future.
-  viewTypes(type){
-    if (type === defaultViewSelector){
+  viewTypes(type: string){
+    if (type.toLowerCase() === "all"){
       return this.data = this.rowItems;
     }
 
