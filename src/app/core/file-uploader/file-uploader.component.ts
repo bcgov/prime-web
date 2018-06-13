@@ -6,12 +6,11 @@ import { NgForm } from '@angular/forms';
 // import {ModalDirective} from "ng2-bootstrap";
 // import {MspImage, MspImageError, MspImageProcessingError,
 //    MspImageScaleFactors, MspImageScaleFactorsImpl} from '../../model/msp-image';
-import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
-import 'rxjs/add/observable/fromEvent';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/catch';
+import { Observable ,  Observer } from 'rxjs';
+
+
+
+
 // import {BaseComponent} from "../base.component";
 // import {MspLogService} from "../../service/log.service";
 // import DataService from "../../service/msp-data.service";
