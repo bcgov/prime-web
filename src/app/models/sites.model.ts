@@ -126,7 +126,7 @@ export class EnrollmentAlert {
     }
 
     if (status === EnrollmentStatus.Expired){
-        return BadgeLevel.Danger;
+        return BadgeLevel.DangerLight;
     }
 
     if (status === EnrollmentStatus.Declined){
@@ -134,7 +134,7 @@ export class EnrollmentAlert {
     }
 
     if (status === EnrollmentStatus.Initiated){
-      return BadgeLevel.Info;
+      return BadgeLevel.InfoLight;
     }
 
     if (status === EnrollmentStatus.Incomplete){
@@ -150,7 +150,7 @@ export class EnrollmentAlert {
     }
 
     if (status === EnrollmentStatus.New){
-      return BadgeLevel.Warning;
+      return BadgeLevel.Attention;
     }
 
     if (status === EnrollmentStatus.Approved){
