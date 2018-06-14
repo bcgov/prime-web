@@ -66,10 +66,3 @@ export interface ISelfDeclaration {
   flag: boolean,
   detail: string;
 }
-
-
-// /** @deprecated */
-// export interface CollegeList {
-//   id: Colleges;
-//   text: string;
-// }
