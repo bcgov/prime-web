@@ -103,18 +103,19 @@
       </div>
 
       <!-- Buttons -->
-      <ng-container *ngIf="collegeCertificationValid(i)">
-        <span class='d-flex align-items-center'>
-          <ng-container *ngIf="i > 0">
-            <a class='mx-1' (click)="deleteCollegeCertification(i)">
-              <i class="fa fa-times fa-2x" aria-label="Delete"></i>
-            </a>
-          </ng-container>
+      <span class='d-flex align-items-center'>
+        <ng-container *ngIf="i > 0">
+          <a class='mx-1' (click)="deleteCollegeCertification(i)">
+            <i class="fa fa-times-circle fa-2x" aria-label="Delete"></i>
+          </a>
+        </ng-container>
+        <ng-container *ngIf="collegeCertificationValid(i)
+        && i === applicant.collegeCertificationList.length - 1">
           <a class='mx-1' (click)="addCollegeCertification()">
             <i class="fa fa-plus-circle fa-2x" aria-label="Add"></i>
           </a>
-        </span>
-      </ng-container>
+        </ng-container>
+      </span>
     </div>
   </ng-container>
 </section>
@@ -144,18 +145,19 @@
       </div>
 
       <!-- Buttons -->
-      <ng-container *ngIf="applicant.deviceProviderList[i].dpNumber.length">
-        <span class='d-flex align-items-center'>
-          <ng-container *ngIf="i > 0">
-            <a class='mx-1' (click)="deleteDeviceProvider(i)">
-              <i class="fa fa-times fa-2x" aria-label="Delete"></i>
-            </a>
-          </ng-container>
+      <span class='d-flex align-items-center'>
+        <ng-container *ngIf="i > 0">
+          <a class='mx-1' (click)="deleteDeviceProvider(i)">
+            <i class="fa fa-times-circle fa-2x" aria-label="Delete"></i>
+          </a>
+        </ng-container>
+        <ng-container *ngIf="applicant.deviceProviderList[i].dpNumber.length
+        && i === applicant.deviceProviderList.length - 1">
           <a class='mx-1' (click)="addDeviceProvider()">
             <i class="fa fa-plus-circle fa-2x" aria-label="Add"></i>
           </a>
-        </span>
-      </ng-container>
+        </ng-container>
+      </span>
     </div>
   </ng-container>
 </section>
@@ -188,21 +190,20 @@
       </div>
 
       <!-- Buttons -->
-      <ng-container *ngIf="applicant.workingOnBehalfList[i].jobTitle !== 'pleaseSelect'
-      && i < WorkingOnBehalfTitleTypesCount()">
-        <span class='d-flex align-items-center'>
-          <ng-container *ngIf="i > 0">
-            <a class='mx-1' (click)="deleteWorkingOnBehalf(i)">
-              <i class="fa fa-times fa-2x" aria-label="Delete"></i>
-            </a>
-          </ng-container>
-          <ng-container *ngIf="i < WorkingOnBehalfTitleTypesCount() - 1">
-            <a class='mx-1' (click)="addWorkingOnBehalf()">
-              <i class="fa fa-plus-circle fa-2x" aria-label="Add"></i>
-            </a>
-          </ng-container>
-        </span>
-      </ng-container>
+      <span class='d-flex align-items-center'>
+        <ng-container *ngIf="i > 0">
+          <a class='mx-1' (click)="deleteWorkingOnBehalf(i)">
+            <i class="fa fa-times-circle fa-2x" aria-label="Delete"></i>
+          </a>
+        </ng-container>
+        <ng-container *ngIf="applicant.workingOnBehalfList[i].jobTitle !== 'pleaseSelect'
+        && i === applicant.workingOnBehalfList.length - 1
+        && i < WorkingOnBehalfTitleTypesCount() - 1">
+          <a class='mx-1' (click)="addWorkingOnBehalf()">
+            <i class="fa fa-plus-circle fa-2x" aria-label="Add"></i>
+          </a>
+        </ng-container>
+      </span>
     </div>
   </ng-container>
 </div>
