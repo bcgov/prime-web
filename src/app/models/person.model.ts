@@ -44,9 +44,7 @@ export class Person extends Base {
   mailAddress: Address = new Address();
   dateOfBirth: Date;
   phone: PhoneNumber;
-  phoneSecondary: PhoneNumber;
   email: string;
-  emailSecondary: string;
   renewalDate: Date;
 
   //The different roles the person may have

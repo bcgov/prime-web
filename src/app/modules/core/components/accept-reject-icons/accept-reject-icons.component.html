@@ -1,0 +1,21 @@
+<div class="mr-2">
+
+  <a class='mx-1'
+    (click)="onRejected.emit()"
+    [tooltip]="labelReject"
+    [attr.aria-label]="labelReject"
+    delay="200"
+    container='body'>
+      <i class="fa fa-times-circle fa-2x text-danger"></i>
+  </a>
+
+  <a class='mx-1'
+    (click)="onAccepted.emit()"
+    [tooltip]="labelAccept"
+    [attr.aria-label]="labelAccept"
+    delay="200"
+    container='body'>
+      <i class="fa fa-check-circle fa-2x text-success"></i>
+  </a>
+
+</div>

@@ -13,6 +13,7 @@ import { WizardProgressBarComponent } from '../../../core/components/wizard-prog
 import { AlertModule, ProgressbarModule } from 'ngx-bootstrap';
 import { CoreBreadcrumbComponent } from '../../../core/components/core-breadcrumb/core-breadcrumb.component';
 import { ApplicantDataService } from '../../../../services/applicant-data.service';
+import { DummyDataService } from '../../../../services/dummy-data.service';
 
 describe('ApplicantProfessionalComponent', () => {
   let component: ApplicantProfessionalComponent;
@@ -22,7 +23,7 @@ describe('ApplicantProfessionalComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ ApplicantProfessionalComponent, ApplicantBreadcrumbsComponent, PrimeToggleComponent, DatepickerComponent, WizardProgressBarComponent, CoreBreadcrumbComponent],
       imports: [RouterTestingModule, NgxMyDatePickerModule.forRoot(), FormsModule, PrimeDataModule.forRoot(), AlertModule.forRoot(), ProgressbarModule.forRoot()],
-      providers: [PrimeDataService, ApplicantDataService]
+      providers: [PrimeDataService, ApplicantDataService, DummyDataService]
     })
     .compileComponents();
   }));

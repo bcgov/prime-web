@@ -8,7 +8,7 @@ import { EnrollmentProgressRowComponent } from '../../../../core/enrollment-prog
 import { PillBadgeComponent } from '../../../../core/pill-badge/pill-badge.component';
 import { AddUserButtonComponent } from '../../../../core/add-user-button/add-user-button.component';
 import { InfoButtonComponent } from '../../../../core/user-info-button/user-info-button.component';
-import { TooltipModule, ProgressbarModule } from 'ngx-bootstrap';
+import {TooltipModule, ProgressbarModule, AlertModule} from 'ngx-bootstrap';
 import { ProgressBarComponent } from '../../../../core/progress-bar/progress-bar.component';
 import { MiniProgressBarComponent } from '../../../../core/mini-progress-bar/mini-progress-bar.component';
 import { FormsModule } from '@angular/forms';
@@ -16,12 +16,15 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { DatepickerComponent } from '../../../../core/datepicker/datepicker.component';
 import { VerifierService } from '../../../../services/verifier.service';
 import { NgxMyDatePicker, NgxMyDatePickerModule } from 'ngx-mydatepicker';
+import { ProvisionerDashBarComponent } from '../../components/provisioner-dash-bar/provisioner-dash-bar.component';
 import { ProvisionerWidgetsComponent } from '../../components/provisioner-widgets/provisioner-widgets.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { APP_BASE_HREF } from '@angular/common';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { ProvisionerService } from '../../../../services/provisioner.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { AlertComponent } from '../../../../core/alert/alert.component';
+
 
 
 describe('ProvisionerDashboardComponent', () => {
@@ -30,8 +33,8 @@ describe('ProvisionerDashboardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProvisionerDashboardComponent, EnrollmentListComponent, EnrollmentRowComponent, EnrollmentProgressRowComponent, PillBadgeComponent, AddUserButtonComponent, InfoButtonComponent, MiniProgressBarComponent, DatepickerComponent, ProvisionerWidgetsComponent],
-      imports: [ TooltipModule.forRoot(),  ProgressbarModule.forRoot(), FormsModule, RouterTestingModule, NgxMyDatePickerModule.forRoot(), NgxChartsModule, NoopAnimationsModule],
+      declarations: [ ProvisionerDashboardComponent, EnrollmentListComponent, EnrollmentRowComponent, EnrollmentProgressRowComponent, PillBadgeComponent, AddUserButtonComponent, InfoButtonComponent, MiniProgressBarComponent, DatepickerComponent, ProvisionerWidgetsComponent, AlertComponent, ProvisionerDashBarComponent ],
+      imports: [ TooltipModule.forRoot(),  ProgressbarModule.forRoot(), FormsModule, RouterTestingModule, NgxMyDatePickerModule.forRoot(), NgxChartsModule, NoopAnimationsModule, AlertModule.forRoot()],
       providers: [VerifierService, {provide: APP_BASE_HREF, useValue: '/'}, PrimeDataService, ProvisionerService]
 
     })

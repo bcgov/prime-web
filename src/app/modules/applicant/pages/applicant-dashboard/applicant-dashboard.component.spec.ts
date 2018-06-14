@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ApplicantDashboardComponent } from './applicant-dashboard.component';
 import {AlertComponent} from '../../../../core/alert/alert.component';
-import {AlertModule} from 'ngx-bootstrap';
+import {AlertModule, BsModalService} from 'ngx-bootstrap';
 import {PrimeDataService} from '../../../../services/prime-data.service';
 import {DummyDataService} from '../../../../services/dummy-data.service';
 import { ApplEnrollmentListComponent } from '../../components/appl-enrollment-list/appl-enrollment-list.component';
@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { ApplicantDataService } from '../../../../services/applicant-data.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from '../../../core/core.module';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ApplicantDashboardComponent', () => {
   let component: ApplicantDashboardComponent;
@@ -20,8 +21,8 @@ describe('ApplicantDashboardComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ApplicantDashboardComponent, ApplEnrollmentListComponent, ApplEnrollmentRowComponent ],
-      imports: [AlertModule.forRoot(), FormsModule, NoopAnimationsModule, CoreModule],
-      providers: [PrimeDataService, DummyDataService, ApplicantDataService]
+      imports: [AlertModule.forRoot(), FormsModule, NoopAnimationsModule, CoreModule, RouterTestingModule],
+      providers: [PrimeDataService, DummyDataService, ApplicantDataService, BsModalService]
     })
     .compileComponents();
   }));

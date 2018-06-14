@@ -11,6 +11,9 @@ import { ProvisionerDetailsComponent } from './pages/provisioner-details/provisi
 import { FormsModule } from '@angular/forms';
 import { ProvisionerRowComponent } from './components/provisioner-row/provisioner-row.component';
 import { ProvisionerListComponent } from './components/provisioner-list/provisioner-list.component';
+import { ProvisionerDashBySiteComponent } from './pages/provisioner-dashboard/provisioner-dash-by-site/provisioner-dash-by-site.component';
+import { ProvisionerDashBarComponent } from './components/provisioner-dash-bar/provisioner-dash-bar.component';
+import { ProvisionerDashByUserComponent } from './pages/provisioner-dashboard/provisioner-dash-by-user/provisioner-dash-by-user.component';
 
 
 @NgModule({
@@ -30,7 +33,10 @@ import { ProvisionerListComponent } from './components/provisioner-list/provisio
     ProvisionerWidgetsComponent,
     ProvisionerDetailsComponent,
     ProvisionerRowComponent,
-    ProvisionerListComponent
+    ProvisionerListComponent,
+    ProvisionerDashBySiteComponent,
+    ProvisionerDashBarComponent,
+    ProvisionerDashByUserComponent
   ]
 })
 
