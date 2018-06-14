@@ -37,47 +37,47 @@ export class DummyDataService {
       person.renewalDate =  this.randomDate(today, nearFuture);
       person.primeUserId = person.firstName[0] + person.lastName + '--' + person.objectId.slice(0, 4);
 
-      person.hasCollege = true;
-      person.isDeviceProvider = true;
-      person.isWorkingOnBehalf = true;
-
+      // person.hasCollege = true;
+      // person.isDeviceProvider = true;
+      // person.isWorkingOnBehalf = true;
+      //
       // toggle related arrays
-      person.collegeCertificationList = [
-        { collegeType: 'CPBC',
-          licenceNumber: 'LN_CPBC1',
-          licenceClassCPType: 'FULL',
-          licenceClassCRNType: '',
-          licenceClassCPSType: '',
-          licenceExpiryDate: this.randomDate(person.dateOfBirth, today),
-          advancedPracticeCertificationType: '' },
-        { collegeType: 'CRNBC',
-          licenceNumber: 'LN_CRNBC1',
-          licenceClassCPType: '',
-          licenceClassCRNType: 'REGISTERED',
-          licenceClassCPSType: '',
-          licenceExpiryDate: this.randomDate(person.dateOfBirth, today),
-          advancedPracticeCertificationType: 'REMOTE'},
-        { collegeType: 'CPSBC',
-          licenceNumber: 'LN_CPSBC1',
-          licenceClassCPType: '',
-          licenceClassCRNType: '',
-          licenceClassCPSType: 'GENERAL',
-          licenceExpiryDate: this.randomDate(person.dateOfBirth, today),
-          advancedPracticeCertificationType: '' }];
-
-      person.deviceProviderList = [
-        { dpNumber: 'DPN_01' },
-        { dpNumber: 'DPN_02' },
-        { dpNumber: 'DPN_03' }];
-
-      person.workingOnBehalfList = [
-        { jobTitle: 'MEDICA' }];
-
-      // Self declaration related
-      person.informationContravention = { flag: true, detail: 'Information contravention related comment' };
-      person.cancelledRegistration    = { flag: true, detail: 'Cancelled registration related comment' };
-      person.licenceCondition         = { flag: true, detail: 'Terms and Conditions imposed related comment' };
-      person.revokedAccess            = { flag: true, detail: 'Revoked access related comment' };
+      // person.collegeCertificationList = [
+      //   { collegeType: 'CPBC',
+      //     licenceNumber: 'LN_CPBC1',
+      //     licenceClassCPType: 'FULL',
+      //     licenceClassCRNType: '',
+      //     licenceClassCPSType: '',
+      //     licenceExpiryDate: this.randomDate(person.dateOfBirth, today),
+      //     advancedPracticeCertificationType: '' },
+      //   { collegeType: 'CRNBC',
+      //     licenceNumber: 'LN_CRNBC1',
+      //     licenceClassCPType: '',
+      //     licenceClassCRNType: 'REGISTERED',
+      //     licenceClassCPSType: '',
+      //     licenceExpiryDate: this.randomDate(person.dateOfBirth, today),
+      //     advancedPracticeCertificationType: 'REMOTE'},
+      //   { collegeType: 'CPSBC',
+      //     licenceNumber: 'LN_CPSBC1',
+      //     licenceClassCPType: '',
+      //     licenceClassCRNType: '',
+      //     licenceClassCPSType: 'GENERAL',
+      //     licenceExpiryDate: this.randomDate(person.dateOfBirth, today),
+      //     advancedPracticeCertificationType: '' }];
+      //
+      // person.deviceProviderList = [
+      //   { dpNumber: 'DPN_01' },
+      //   { dpNumber: 'DPN_02' },
+      //   { dpNumber: 'DPN_03' }];
+      //
+      // person.workingOnBehalfList = [
+      //   { jobTitle: 'MEDICA' }];
+      //
+      // // Self declaration related
+      // person.informationContravention = { flag: true, detail: 'Information contravention related comment' };
+      // person.cancelledRegistration    = { flag: true, detail: 'Cancelled registration related comment' };
+      // person.licenceCondition         = { flag: true, detail: 'Terms and Conditions imposed related comment' };
+      // person.revokedAccess            = { flag: true, detail: 'Revoked access related comment' };
 
       result.push(person);
     }

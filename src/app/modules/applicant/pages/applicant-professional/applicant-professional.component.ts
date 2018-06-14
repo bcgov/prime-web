@@ -50,7 +50,7 @@ export class ApplicantProfessionalComponent implements OnInit {
       licenceClassCPType: 'pleaseSelect',
       licenceClassCRNType: 'pleaseSelect',
       licenceClassCPSType: 'pleaseSelect',
-      licenceExpiryDate: new Date(undefined),
+      licenceExpiryDate: null,
       advancedPracticeCertificationType: 'pleaseSelect'
     });
 
@@ -105,15 +105,15 @@ export class ApplicantProfessionalComponent implements OnInit {
     this.primeDataService.user.isWorkingOnBehalf = this._user.isWorkingOnBehalf;
 
     // toggle related arrays
-    this.primeDataService.user.collegeCertificationList = this._user.collegeCertificationList;
-    this.primeDataService.user.deviceProviderList       = this._user.deviceProviderList;
-    this.primeDataService.user.workingOnBehalfList      = this._user.workingOnBehalfList;
+    this.primeDataService.user.collegeCertificationList = cloneDeep(this._user.collegeCertificationList);
+    this.primeDataService.user.deviceProviderList       = cloneDeep(this._user.deviceProviderList);
+    this.primeDataService.user.workingOnBehalfList      = cloneDeep(this._user.workingOnBehalfList);
 
     // Self declaration related
-    this.primeDataService.user.informationContravention = this._user.informationContravention;
-    this.primeDataService.user.cancelledRegistration    = this._user.cancelledRegistration;
-    this.primeDataService.user.licenceCondition         = this._user.licenceCondition;
-    this.primeDataService.user.revokedAccess            = this._user.revokedAccess;
+    this.primeDataService.user.informationContravention = cloneDeep(this._user.informationContravention);
+    this.primeDataService.user.cancelledRegistration    = cloneDeep(this._user.cancelledRegistration);
+    this.primeDataService.user.licenceCondition         = cloneDeep(this._user.licenceCondition);
+    this.primeDataService.user.revokedAccess            = cloneDeep(this._user.revokedAccess);
 
     this.hasChanged = false;
   }
@@ -125,15 +125,15 @@ export class ApplicantProfessionalComponent implements OnInit {
     this._user.isWorkingOnBehalf = this.primeDataService.user.isWorkingOnBehalf;
 
     // toggle related arrays
-    this._user.collegeCertificationList = this.primeDataService.user.collegeCertificationList;
-    this._user.deviceProviderList       = this.primeDataService.user.deviceProviderList;
-    this._user.workingOnBehalfList      = this.primeDataService.user.workingOnBehalfList;
+    this._user.collegeCertificationList = cloneDeep(this.primeDataService.user.collegeCertificationList);
+    this._user.deviceProviderList       = cloneDeep(this.primeDataService.user.deviceProviderList);
+    this._user.workingOnBehalfList      = cloneDeep(this.primeDataService.user.workingOnBehalfList);
 
     // Self declaration related
-    this._user.informationContravention = this.primeDataService.user.informationContravention;
-    this._user.cancelledRegistration    = this.primeDataService.user.cancelledRegistration;
-    this._user.licenceCondition         = this.primeDataService.user.licenceCondition;
-    this._user.revokedAccess            = this.primeDataService.user.revokedAccess;
+    this._user.informationContravention = cloneDeep(this.primeDataService.user.informationContravention);
+    this._user.cancelledRegistration    = cloneDeep(this.primeDataService.user.cancelledRegistration);
+    this._user.licenceCondition         = cloneDeep(this.primeDataService.user.licenceCondition);
+    this._user.revokedAccess            = cloneDeep(this.primeDataService.user.revokedAccess);
 
     this.hasChanged = false;
   }
@@ -204,10 +204,6 @@ export class ApplicantProfessionalComponent implements OnInit {
     return MaxLengthTypes[selection];
   }
 
-  // CollegeCertificationCount() {
-  //   return Object.keys(WorkingOnBehalfTitleTypes).length;
-  // }
-
   //
   // Conditional layout related
   //
@@ -215,6 +211,7 @@ export class ApplicantProfessionalComponent implements OnInit {
   collegeCertificationValid(i) {
     if(  this._user.collegeCertificationList[i].collegeType !== 'pleaseSelect'
       && this._user.collegeCertificationList[i].licenceNumber.length
+      && this._user.collegeCertificationList[i].licenceExpiryDate !== null
       && this._user.collegeCertificationList[i].licenceExpiryDate.valueOf() > 0
       && ((  this._user.collegeCertificationList[i].collegeType === 'CPBC'
           && this._user.collegeCertificationList[i].licenceClassCPType !== 'pleaseSelect')
