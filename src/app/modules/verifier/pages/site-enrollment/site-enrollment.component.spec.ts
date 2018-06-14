@@ -5,7 +5,7 @@ import {MillerColumnsComponent} from '../../components/miller-columns/miller-col
 import {RouterTestingModule} from '@angular/router/testing';
 import {ExpandingSearchComponent} from '../../../../core/expanding-search/expanding-search.component';
 import {AddUserButtonComponent} from '../../../../core/add-user-button/add-user-button.component';
-import {InfoButtonComponent} from '../../components/user-info-button/user-info-button.component';
+import {InfoButtonComponent} from '../../../../core/user-info-button/user-info-button.component';
 import {MillerItemCheckboxComponent} from '../../components/miller-item-checkbox/miller-item-checkbox.component';
 import {FormsModule} from '@angular/forms';
 import {MiniProgressBarComponent} from '../../../../core/mini-progress-bar/mini-progress-bar.component';

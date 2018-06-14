@@ -6,6 +6,7 @@ import { ApplEnrollmentRowComponent } from '../appl-enrollment-row/appl-enrollme
 import { ApplicantDataService } from '../../../../services/applicant-data.service';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { InfoButtonComponent } from '../../../../core/user-info-button/user-info-button.component';
 
 describe('ApplEnrollmentListComponent', () => {
   let component: ApplEnrollmentListComponent;

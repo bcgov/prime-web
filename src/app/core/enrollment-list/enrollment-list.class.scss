@@ -3,8 +3,8 @@
 $listHeight: 25rem;
 .enrollment-item-container {
   border-top: none;
-  overflow-y: scroll;
   height: $listHeight;
+  overflow-y: scroll;
 
   // This is a hack-fix! These two lines visually cancel out (more or less), but
   // they allow the container to effectively have overflow-x: visible.
@@ -12,8 +12,8 @@ $listHeight: 25rem;
   // at the same time. It allows expanded rows to scale outside of their
   // container.
   //https://stackoverflow.com/questions/38460841/overflow-y-scroll-with-overflow-x-visible
-  margin: 0 -5rem;
-  padding: 0 5rem;
+ // margin: 0 -5rem;
+ // padding: 0 5rem;
 
   // We have to re-jigger borders due to the above hackfix
   .enrollment-item-inner {
@@ -26,7 +26,6 @@ $listHeight: 25rem;
 
 .enrollment-list-controls  {
   border: 2px solid $gray-300;
-
   // margin-bottom: 1em;
   min-height: 4em;
   padding: 1em;

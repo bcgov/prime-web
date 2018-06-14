@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { PrimeDataService } from '../../../../services/prime-data.service';
+import { DummyDataService } from '../../../../services/dummy-data.service';
+import { Person } from '../../../../models/person.model';
+import { cloneDeep } from 'lodash';
 import { CollegeTypes,
-  LicenseClassCPTypes,
-  LicenseClassCRNTypes,
-  LicenseClassCPSTypes,
+  LicenceClassCPTypes,
+  LicenceClassCRNTypes,
+  LicenceClassCPSTypes,
   AdvancedPracticeCertificationTypes,
-  JobTitleTypes,
+  WorkingOnBehalfTitleTypes,
   MaxLengthTypes } from '../../../../models/colleges.enum';
-// import { DeviceProvider } from '../../../../models/device-provider.model';
 
 @Component({
   selector: 'prime-applicant-professional',
@@ -15,50 +17,75 @@ import { CollegeTypes,
   styleUrls: ['./applicant-professional.component.scss']
 })
 export class ApplicantProfessionalComponent implements OnInit {
-  public collegeTypesSelector                       = 'pleaseSelect';
-  public licenseClassCPTypesSelector                = 'pleaseSelect';
-  public licenseClassCRNTypesSelector               = 'pleaseSelect';
-  public licenseClassCPSTypesSelector               = 'pleaseSelect';
-  public advancedPracticeCertificationTypesSelector = 'pleaseSelect';
-  public jobTitleTypesSelector                      = 'pleaseSelect';
+  private _user: Person;
 
-  public licenseNumberSelector = '';
-  public deviceProviderList = [{ dpNumber: '' }];
-  // public deviceProviderList = [{ text: '' }];
+  public workingOnBehalfTotal = 0;
 
-  // deviceProvider: DeviceProvider = { dpNumber: '' }
+  public hasChanged: boolean = false;
 
-
-  // /** Binds to the form inputs */
-  // public inputFields: {
-  //   licenseNumber?: string,
-  //   deviceProviderNumber?: string,
-  //   informationContraventionDetail?: string,
-  //   cancelledRegistrationDetail?: string,
-  //   licenseConditionDetail?: string,
-  //   revokedAccessDetail?: string
-  // } = {};
-
-  constructor(private dataService: PrimeDataService) { }
+  constructor(private primeDataService: PrimeDataService, private dummyDataService: DummyDataService) { }
 
   ngOnInit() {
+    // DEV ONLY! TODO: Remove.
+    this.primeDataService.user = this.dummyDataService.createPeople(1)[0];
+
+    // Clone user clas
+    this._user = cloneDeep(this.primeDataService.user);
   }
 
+  get applicant(): Person {
+    return this._user;
+  }
+
+  addCollegeCertification() {
+    this._user.collegeCertificationList.push({
+      collegeType: 'pleaseSelect',
+      licenceNumber: '',
+      licenceClassCPType: 'pleaseSelect',
+      licenceClassCRNType: 'pleaseSelect',
+      licenceClassCPSType: 'pleaseSelect',
+      licenceExpiryDate: '',
+      advancedPracticeCertificationType: 'pleaseSelect'
+    });
+
+    this.onChange();
+  }
+
+  deleteCollegeCertification(i){
+    console.log(`delete index ${i}`, this._user.collegeCertificationList);
+    this._user.collegeCertificationList.splice(i, 1);
+
+    this.onChange();
+  }
 
   addDeviceProvider() {
-    this.deviceProviderList.push({ dpNumber: '' });
-    // this.deviceProviderList.push({text: ''});
+    this._user.deviceProviderList.push({ dpNumber: '' });
+
+    this.onChange();
   }
 
   deleteDeviceProvider(i){
-    console.log(`delete index ${i}`, this.deviceProviderList);
-    // splice
-    // slice
-    //todo - remove item by index
+    console.log(`delete index ${i}`, this._user.deviceProviderList);
+    this._user.deviceProviderList.splice(i, 1);
+
+    this.onChange();
   }
 
-  get applicant() {
-    return this.dataService.user;
+  addWorkingOnBehalf() {
+    if(this.workingOnBehalfTotal < this.WorkingOnBehalfTitleTypesCount() - 1) {
+      this._user.workingOnBehalfList.push({ jobTitle: 'pleaseSelect' });
+      this.workingOnBehalfTotal++;
+
+      this.onChange();
+    }
+  }
+
+  deleteWorkingOnBehalf(i){
+    console.log(`delete index ${i}`, this._user.workingOnBehalfList);
+    this._user.workingOnBehalfList.splice(i, 1);
+    this.workingOnBehalfTotal--;
+
+    this.onChange();
   }
 
   // Make enum accessible to template
@@ -67,18 +94,18 @@ export class ApplicantProfessionalComponent implements OnInit {
   }
 
   // Make enum accessible to template
-  get LicenseClassCPTypes() {
-    return Object.keys(LicenseClassCPTypes);
+  get LicenceClassCPTypes() {
+    return Object.keys(LicenceClassCPTypes);
   }
 
   // Make enum accessible to template
-  get LicenseClassCRNTypes() {
-    return Object.keys(LicenseClassCRNTypes);
+  get LicenceClassCRNTypes() {
+    return Object.keys(LicenceClassCRNTypes);
   }
 
   // Make enum accessible to template
-  get LicenseClassCPSTypes() {
-    return Object.keys(LicenseClassCPSTypes);
+  get LicenceClassCPSTypes() {
+    return Object.keys(LicenceClassCPSTypes);
   }
 
   // Make enum accessible to template
@@ -87,80 +114,143 @@ export class ApplicantProfessionalComponent implements OnInit {
   }
 
   // Make enum accessible to template
-  get JobTitleTypes() {
-    return Object.keys(JobTitleTypes);
+  get WorkingOnBehalfTitleTypes() {
+    return Object.keys(WorkingOnBehalfTitleTypes);
   }
 
-  // Make enum accessible to template
-  get MaxLengthTypes() {
-    return Object.keys(MaxLengthTypes);
+  WorkingOnBehalfTitleTypesCount() {
+    return Object.keys(WorkingOnBehalfTitleTypes).length;
   }
 
-  collegeCurrValue() {
-    const selection = this.collegeTypesSelector;
-    return CollegeTypes[selection] ? CollegeTypes[selection] : '';
+  collegeCurrValue(selection) {
+    return CollegeTypes[selection];
   }
 
-  licenseClassCPCurrValue() {
-    const selection = this.licenseClassCPTypesSelector;
-    return LicenseClassCPTypes[selection] ? LicenseClassCPTypes[selection] : '';
+  licenceClassCPValue(selection) {
+    return LicenceClassCPTypes[selection];
   }
 
-  licenseClassCRNCurrValue() {
-    const selection = this.licenseClassCRNTypesSelector;
-    return LicenseClassCRNTypes[selection] ? LicenseClassCRNTypes[selection] : '';
+  licenceClassCRNValue(selection) {
+    return LicenceClassCRNTypes[selection];
   }
 
-  licenseClassCPSCurrValue() {
-    const selection = this.licenseClassCPSTypesSelector;
-    return LicenseClassCPSTypes[selection] ? LicenseClassCPSTypes[selection] : '';
-  }
-
-  advancedPracticeCertificationCurrValue() {
-    const selection = this.advancedPracticeCertificationTypesSelector;
-    return AdvancedPracticeCertificationTypes[selection] ? AdvancedPracticeCertificationTypes[selection] : '';
-  }
-
-  jobTitleCurrValue() {
-    const selection = this.jobTitleTypesSelector;
-    return JobTitleTypes[selection] ? JobTitleTypes[selection] : '';
-  }
-
-  licenseClassCPValue(selection) {
-    return LicenseClassCPTypes[selection];
-  }
-
-  licenseClassCRNValue(selection) {
-    return LicenseClassCRNTypes[selection];
-  }
-
-  licenseClassCPSValue(selection) {
-    return LicenseClassCPSTypes[selection];
+  licenceClassCPSValue(selection) {
+    return LicenceClassCPSTypes[selection];
   }
 
   advancedPracticeCertificationValue(selection) {
     return AdvancedPracticeCertificationTypes[selection];
   }
 
-  jobTitleValue(selection) {
-    return JobTitleTypes[selection];
+  workingOnBehalfTitleValue(selection) {
+    return WorkingOnBehalfTitleTypes[selection];
   }
 
-  // maxLengthValue(selection) {
-  //   return MaxLengthTypes[selection];
-  // }
-
-  licenseNumberLength() {
-    const selection = this.licenseNumberSelector;
-    return selection.length;
+  maxLengthValue(selection) {
+    return MaxLengthTypes[selection];
   }
 
-  // deviceProviderNumberLength() {
-  //   const selection = this.deviceProviderNumberSelector;
-  //   return selection.length;
-  // }
+  collegeCertificationValid(i) {
+    if(  this._user.collegeCertificationList[i].collegeType !== 'pleaseSelect'
+      && this._user.collegeCertificationList[i].licenceNumber.length
+      && this._user.collegeCertificationList[i].licenceExpiryDate.length !== 0
+      && ((  this._user.collegeCertificationList[i].collegeType === 'CPBC'
+          && this._user.collegeCertificationList[i].licenceClassCPType !== 'pleaseSelect')
+        || ( this._user.collegeCertificationList[i].collegeType === 'CRNBC'
+          && this._user.collegeCertificationList[i].licenceClassCRNType !== 'pleaseSelect'
+          && this._user.collegeCertificationList[i].advancedPracticeCertificationType !== 'pleaseSelect')
+        || ( this._user.collegeCertificationList[i].collegeType === 'CPSBC'
+          && this._user.collegeCertificationList[i].licenceClassCPSType !== 'pleaseSelect'))) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 
-  // get licenseNumberHasValue(): number {
-  //   return this.inputFields.licenseNumber.length();
-  // }
+  displayDeviceProviderSection() {
+    if(this._user.hasCollege === false || this.collegeCertificationValid(0)) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  displayWorkingOnBehalfSection() {
+    if(this.displayDeviceProviderSection()
+      && (this._user.isDeviceProvider === false || this._user.deviceProviderList[0].dpNumber.length)) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  displaySelfDeclarationSection() {
+    if(  this.displayDeviceProviderSection()
+      && this.displayWorkingOnBehalfSection()
+      && (this._user.isWorkingOnBehalf === false || this._user.workingOnBehalfList[0].jobTitle !== 'pleaseSelect')) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  displayUploadSection() {
+    if(  this._user.informationContravention.flag
+      || this._user.cancelledRegistration.flag
+      || this._user.licenceCondition.flag
+      || this._user.revokedAccess.flag) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  onChange() {
+    this.hasChanged = true;
+  }
+
+  onSave(val: boolean){
+    // toggles
+    this.primeDataService.user.hasCollege        = this._user.hasCollege;
+    this.primeDataService.user.isDeviceProvider  = this._user.isDeviceProvider;
+    this.primeDataService.user.isWorkingOnBehalf = this._user.isWorkingOnBehalf;
+
+    // toggle related arrays
+    this.primeDataService.user.collegeCertificationList = this._user.collegeCertificationList;
+    this.primeDataService.user.deviceProviderList       = this._user.deviceProviderList;
+    this.primeDataService.user.workingOnBehalfList      = this._user.workingOnBehalfList;
+
+    // Self declaration related
+    this.primeDataService.user.informationContravention = this._user.informationContravention;
+    this.primeDataService.user.cancelledRegistration    = this._user.cancelledRegistration;
+    this.primeDataService.user.licenceCondition         = this._user.licenceCondition;
+    this.primeDataService.user.revokedAccess            = this._user.revokedAccess;
+
+    this.hasChanged = false;
+  }
+
+  onCancel(val: boolean){
+    // toggles
+    this._user.hasCollege        = this.primeDataService.user.hasCollege;
+    this._user.isDeviceProvider  = this.primeDataService.user.isDeviceProvider;
+    this._user.isWorkingOnBehalf = this.primeDataService.user.isWorkingOnBehalf;
+
+    // toggle related arrays
+    this._user.collegeCertificationList = this.primeDataService.user.collegeCertificationList;
+    this._user.deviceProviderList       = this.primeDataService.user.deviceProviderList;
+    this._user.workingOnBehalfList      = this.primeDataService.user.workingOnBehalfList;
+
+    // Self declaration related
+    this._user.informationContravention = this.primeDataService.user.informationContravention;
+    this._user.cancelledRegistration    = this.primeDataService.user.cancelledRegistration;
+    this._user.licenceCondition         = this.primeDataService.user.licenceCondition;
+    this._user.revokedAccess            = this.primeDataService.user.revokedAccess;
+
+    this.hasChanged = false;
+  }
 }

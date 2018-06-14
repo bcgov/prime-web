@@ -21,14 +21,14 @@
 </div>
 
 
-
 <div class="enrollment-item-container">
   <div class="enrollment-item-inner">
     <prime-provisioner-row
-      *ngFor="let item of data"
+      *ngFor="let item of sites"
       [rowData]='item'
       [primaryType]='primaryType'
       (onRowOpened)='rowOpened($event)'>
     </prime-provisioner-row>
   </div>
 </div>
+

@@ -49,8 +49,21 @@ export abstract class EnrollmentRow extends Base {
     this.openState = RowState.Closed;
   }
 
+  canOpen() {
+    return this.siteAccessRequiringAttention.length >= 1;
+  }
+
+  expandedRowClick(row: EnrollmentRowChild) {
+    this.siteAccessRequiringAttention.map(x => x.open = false);
+    row.open = !row.open;
+  }
+
+  get allChildAlerts() {
+    return this.siteAccessRequiringAttention.map(x => x.alert);
+  }
+
   // Implemented by derived class
-  // abstract expandedRowClick<T>(row: T); //Original - desired!
-  abstract expandedRowClick(row); // Temp? - removes typing to pass warnings.
-  abstract canOpen();
+  /** This function is responsible for generating site access row titles depending on dashboard type */
+  abstract get siteAccessRequiringAttention(): any[];
+
 }
