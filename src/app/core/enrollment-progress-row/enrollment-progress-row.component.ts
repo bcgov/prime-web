@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { growVertical } from '../../animations/animations';
 import { SiteAccess, SiteAccessProgressSteps } from '../../models/sites.model';
 import {RowState} from '../enrollment-row/enrollment-row.class';
+import { EnrollmentStatus } from '../../models/enrollment-status.enum';
 
 
 @Component({
@@ -14,6 +15,20 @@ export class EnrollmentProgressRowComponent implements OnInit {
   @Input() open: boolean = false;
   @Input() data: SiteAccess;
 
+  get description(): string {
+    // const status = this.data.status;
+
+    if (this.data.status === EnrollmentStatus.Declined) {
+      return "Applicant declined access to this site."
+    }
+
+    let stage = this.data.progress.toString();
+    if (stage === SiteAccessProgressSteps.Provisioner) {
+      stage = stage + " Provisioning"
+    }
+
+    return `Request has been ${this.data.status} and is awaiting ${stage}`;
+  }
 
   constructor() { }
 

@@ -6,6 +6,7 @@ import { PrimeDataService } from '../../../../services/prime-data.service';
 import { Site } from '../../../../models/sites.model';
 import { Collection } from '../../../../models/collections.model';
 import { EnrollmentRowItem } from '../../../verifier/components/enrollment-row/enrollment-row.component';
+import { EnrollmentStatus } from '../../../../models/enrollment-status.enum';
 
 @Component({
   selector: 'prime-provisioner-details',
@@ -37,7 +38,6 @@ export class ProvisionerDetailsComponent implements OnInit {
     // EnrollmentComponents
     this.person = this.dataService.people[0];
     this.site = this.dataService.sites[0];
-    console.log('PROVDETAILS ngOnInit TARGET', { person: this.person, site: this.site });
   }
 
   ngOnDestroy() {
@@ -53,6 +53,11 @@ export class ProvisionerDetailsComponent implements OnInit {
   }
 
   get provisionerSiteData(): EnrollmentRowItem[] {
+    // The below is done to get data in good shape for demo! Should not be left in after.
+    const data = this.dataService.getEnrollmentBySite();
+    data[0].sites[0].siteAccess[0].status = EnrollmentStatus.New;
+    data[1].sites[0].siteAccess[0].status = EnrollmentStatus.New;
+    data[2].sites[0].siteAccess[0].status = EnrollmentStatus.Declined;
     return this.dataService.getEnrollmentBySite();
   }
 
