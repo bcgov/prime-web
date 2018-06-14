@@ -4,7 +4,7 @@
     <span class="enrollment-text-main">{{rowData.title}}</span>
   </div>
   <div class="enrollment-actions">
-    <div class="dates-col">
+    <div *ngIf="!isDeclinedEnrol()" class="dates-col">
       <label for="startDt">
         Start
       </label>
@@ -20,11 +20,11 @@
         [iconOnly]='false'>
       </prime-pill-badge>
       <prime-info-button
-        [targetId]="rowData.associatedObjectId">
-        <!--[searchDomain]="person">-->
+        [targetId]="rowData.associatedObjectId"
+        [searchDomain]="applicantSearch">
       </prime-info-button>
-      <i class="fa fa-times-circle text-danger" (click)="onDecline()"></i>
-      <i class="fa fa-check-circle text-success" (click)="onAccept()"></i>
+      <i *ngIf="isNewEnrol()" class="fa fa-times-circle text-danger" (click)="onDecline()"></i>
+      <i *ngIf="isNewEnrol()" class="fa fa-check-circle text-success" (click)="onAccept()"></i>
     </span>
   </div>
 </div>

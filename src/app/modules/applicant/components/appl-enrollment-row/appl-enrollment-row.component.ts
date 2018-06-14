@@ -8,6 +8,7 @@ import * as moment from 'moment';
 import _date = moment.unitOfTime._date;
 import {SimpleDate} from '../../../../core/date/simple-date.interface';
 import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
+import {SearchDomain} from '../../../../core/user-info-button/user-info-button.component';
 
 // Specific to this component
 export interface ApplEnrollmentRowItem {
@@ -32,6 +33,8 @@ export interface ApplEnrollmentRowItem {
 export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit {
 
   @Input() rowData: ApplEnrollmentRowItem;
+  public applicantSearch: SearchDomain = SearchDomain.Applicant; // Domain to search for user sites
+  public newEnrol: boolean[] = [];
 
   constructor() {
     super();
@@ -41,6 +44,7 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
     if (!this.rowData) {
       return;
     }
+
     this.siteAccessRequiringAttention.map(x => x.open = false);
   }
 
@@ -60,6 +64,18 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
     return this.siteAccessRequiringAttention.map(x => { return x.endDateShort; });
   }
 
+  isNewEnrol() {
+    return this.siteAccessRequiringAttention.filter(x => {
+      return x.status === EnrollmentStatus.New;
+    }).length > 0;
+  }
+
+  isDeclinedEnrol() {
+    return this.siteAccessRequiringAttention.filter(x => {
+      return x.status === EnrollmentStatus.Declined;
+    }).length > 0;
+  }
+
   // Override functions
   canOpen(){
     console.log('my class canOpen');
@@ -68,9 +84,8 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
 
   get allChildAlerts() {
     console.log('my class allChildAlerts');
-  //  let status = this.siteAccessRequiringAttention.map(x => { return x.status; } );
+    console.log('isNewEnrol() ', this.isNewEnrol() );
 
-   // if ( EnrollmentStatus.New === status ) {}
     return this.siteAccessRequiringAttention.map(x => x.alert);
   }
 

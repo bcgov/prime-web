@@ -175,16 +175,10 @@ export class DummyDataService {
 
     // Create sites for applicant dashboard
     const sites = this.createSites( Math.ceil(Math.random() * 20) );
-    for (let site of sites) {
-      this.createSiteAccessAndAssociate(site, person);
-    }
-
-    // debugging
-    for (let siteaccess of person.siteAccess) {
-      console.log('Site: name: ' + siteaccess.site.name);
-      console.log('Start: ' + siteaccess.startDate + ', End : ' + siteaccess.endDate );
-      console.log('Status: ' + siteaccess.status);
-    }
+    sites.map(site => {
+      const sa = this.createSiteAccessAndAssociate(site, person);
+      console.log('Site Access: ', sa );
+    });
   }
 
   // --- Helpers

@@ -3,6 +3,7 @@ import { PrimeDataService } from '../../../../services/prime-data.service';
 import { Person } from '../../../../models/person.model';
 import { DummyDataService } from '../../../../services/dummy-data.service';
 import {ApplEnrollmentRowItem} from '../../components/appl-enrollment-row/appl-enrollment-row.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'prime-applicant-dashboard',
@@ -11,7 +12,8 @@ import {ApplEnrollmentRowItem} from '../../components/appl-enrollment-row/appl-e
 })
 export class ApplicantDashboardComponent implements OnInit {
 
-  constructor(private primeDataService: PrimeDataService, private dummyDataService: DummyDataService) {}
+  constructor(private primeDataService: PrimeDataService,
+              private dummyDataService: DummyDataService) {}
 
   ngOnInit() {
     // TODO: Make sure this only fires once! Don't want to overwrite user behaviour.

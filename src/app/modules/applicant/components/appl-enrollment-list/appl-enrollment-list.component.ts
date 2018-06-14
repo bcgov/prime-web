@@ -19,9 +19,9 @@ export class ApplEnrollmentListComponent extends EnrollmentList implements OnIni
     EnrollmentStatus.Declined
   ];
 
-  // TODO: Complete! Added this just to pass compilation checks, the logic isn't done.
-  declarationCheck = false;
-  save(){}
+  save(){
+    console.log('save data');
+  }
 
   constructor(private applicantDataService: ApplicantDataService) {
     super();
@@ -49,6 +49,7 @@ export class ApplEnrollmentListComponent extends EnrollmentList implements OnIni
   }
 
   rowOpened(item: ApplEnrollmentRowComponent) {
+    console.log('rowOpened');
     this.rowElements.filter(x => x !== item)
       .map(x => x.closeRow());
   }
