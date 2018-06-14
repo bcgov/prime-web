@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { growVertical } from '../../animations/animations';
 import { SiteAccess, SiteAccessProgressSteps } from '../../models/sites.model';
 import {RowState} from '../enrollment-row/enrollment-row.class';
-import {s} from '@angular/core/src/render3';
 
 
 @Component({
@@ -35,6 +34,16 @@ export class EnrollmentProgressRowComponent implements OnInit {
   get activeStepIndex(): number {
     if (!this.data) { return; }
     return Object.keys(SiteAccessProgressSteps).indexOf(this.data.progress);
+  }
+
+  // TODO: Remove! This is for development only. The important bit is that it
+  // changes this.data.progress
+  incrementStatusDevOnly(){
+      const arr = Object.keys(SiteAccessProgressSteps);
+      let newIndex = arr.indexOf(this.data.progress) + 1;
+      if (newIndex >= arr.length) { newIndex = 0 }
+      const newStatus = arr[newIndex];
+      this.data.progress = SiteAccessProgressSteps[newStatus]
   }
 
 }

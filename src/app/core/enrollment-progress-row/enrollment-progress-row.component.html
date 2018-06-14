@@ -27,11 +27,14 @@
         <!-- The progress bar line / dots -->
         <div class="progressSlider--bar">
           <div class="progressBarMarker"
-            *ngFor="let x of iterableNumberOfSteps; let i = index"
-            [ngClass]="{active: i == activeStepIndex}">
+            *ngFor="let x of iterableNumberOfSteps">
           </div>
+          <div class="progressSlider--dot"
+          [style.left]="activeStepIndex * 33 + '%'"></div>
         </div>
       </div>
+      <!-- TODO: Remove the below click! Left in for dev/demo purposes. -->
+      <!-- <p class='m-0 btn btn-sm btn-link' (click)="incrementStatusDevOnly()" ><small>DEV: Increment Progress</small></p> -->
     </div>
   </div>
 
