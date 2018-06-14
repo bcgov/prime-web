@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy, OnInit, QueryList, ViewChildren} from '@angular/core';
 import { VerifierService } from '../../../../services/verifier.service';
 import { EnrollmentRowComponent } from '../enrollment-row/enrollment-row.component';
 import {defaultViewSelector, EnrollmentList} from '../../../../core/enrollment-list/enrollment-list.class';
@@ -8,7 +8,7 @@ import {defaultViewSelector, EnrollmentList} from '../../../../core/enrollment-l
   templateUrl: './enrollment-list.component.html',
   styleUrls: ['./enrollment-list.component.scss']
 })
-export class EnrollmentListComponent extends EnrollmentList implements OnInit {
+export class EnrollmentListComponent extends EnrollmentList implements OnInit, OnChanges, OnDestroy {
 
   @ViewChildren(EnrollmentRowComponent) rowElements: QueryList<EnrollmentRowComponent>
 

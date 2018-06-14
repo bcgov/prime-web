@@ -1,9 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { DummyDataService } from '../../../../services/dummy-data.service';
 import { Person } from '../../../../models/person.model';
 import { cloneDeep } from 'lodash';
-import {Address} from '../../../../models/addresses.model';
 
 @Component({
   selector: 'prime-applicant-contact',
@@ -16,13 +15,10 @@ export class ApplicantContactComponent implements OnInit {
   public hasChanged: boolean = false;
 
 
-  constructor(private primeDataService: PrimeDataService, private dummyDataService: DummyDataService) { }
+  constructor(private primeDataService: PrimeDataService) { }
 
   ngOnInit() {
-    // DEV ONLY! TODO: Remove.
-    //this.primeDataService.user = this.dummyDataService.createPeople(1)[0];
-
-    // Clone user clas
+    // Clone user class
     this._user = cloneDeep(this.primeDataService.user);
   }
 

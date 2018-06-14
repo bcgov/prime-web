@@ -4,7 +4,7 @@ import { Collection } from '../models/collections.model';
 import { EnrollmentStatus } from '../models/enrollment-status.enum';
 import { Person } from '../models/person.model';
 import { Address } from '../models/addresses.model';
-import { Site, SiteAccess, SiteAccessProgressSteps } from '../models/sites.model';
+import {AccessReasons, DeclinedReasons, Site, SiteAccess, SiteAccessProgressSteps} from '../models/sites.model';
 import * as moment from 'moment';
 
 /**
@@ -100,8 +100,19 @@ export class DummyDataService {
     let randomStatusString : string = this.getRandomElFromArray(Object.keys(EnrollmentStatus));
     let status: EnrollmentStatus = EnrollmentStatus[randomStatusString];
     SA.status = status;
+    if (SA.status === EnrollmentStatus.Declined){
+      // Set declined reason
+      let randomReasonString : string = this.getRandomElFromArray(Object.keys(DeclinedReasons));
+      let declinedReason: DeclinedReasons = DeclinedReasons[randomReasonString];
+      SA.declinedReason = declinedReason;
+    }
     SA.site = site;
     SA.person = person;
+
+     // Set personal or not personal access
+     let randomAccesstring : string = this.getRandomElFromArray(Object.keys(AccessReasons));
+     let accessReason: DeclinedReasons = AccessReasons[randomAccesstring];
+     SA.accessReason = accessReason;
 
     // End date is at most 4mo in future
     const today = new Date();
@@ -152,33 +163,6 @@ export class DummyDataService {
 
 
     return result.filter(x => x); //filter out null
-  }
-
-  /** Edits the Person in place, setting it up for the Applicant module */
-  setPersonToApplicant(person: Person): void {
-
-    // TODO: Don't overwrite values if there's something already there!
-    person.name = "James Smith";
-    person.phone = "250-592-8553"
-    person.email = "jsmith@email.com";
-    person.renewalDate = new Date(2018, 10, 12);
-
-    person.dateOfBirth = this.generateDateOfBirth();
-    person.phone = '250-555-5555';
-    person.address = this.generateAddress();
-    person.email = person.firstName[0].toLowerCase() + person.lastName.toLowerCase() + "@gmail.com";
-
-    const today = new Date();
-    /** We want nearFuture show that they show up in Upcoming Renewals */
-    const nearFuture =  new Date(today.getFullYear(), today.getMonth() + 4, today.getDate())
-    person.renewalDate =  this.randomDate(today, nearFuture);
-
-    // Create sites for applicant dashboard
-    const sites = this.createSites( Math.ceil(Math.random() * 20) );
-    sites.map(site => {
-      const sa = this.createSiteAccessAndAssociate(site, person);
-      console.log('Site Access: ', sa );
-    });
   }
 
   // --- Helpers

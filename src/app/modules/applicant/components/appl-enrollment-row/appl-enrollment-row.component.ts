@@ -1,14 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {EnrollmentRow, EnrollmentRowChild, RowState} from '../../../../core/enrollment-row/enrollment-row.class';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {EnrollmentRow} from '../../../../core/enrollment-row/enrollment-row.class';
 import {loadInOut, openState, openStateChild, openStateDisable} from '../../../../animations/animations';
-import {SiteAccess} from '../../../../models/sites.model';
-import {Collection} from '../../../../models/collections.model';
-import {Router} from '@angular/router';
-import * as moment from 'moment';
-import _date = moment.unitOfTime._date;
-import {SimpleDate} from '../../../../core/date/simple-date.interface';
+import {DeclinedReasons, SiteAccess} from '../../../../models/sites.model';
 import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
 import {SearchDomain} from '../../../../core/user-info-button/user-info-button.component';
+import { cloneDeep } from 'lodash';
 
 // Specific to this component
 export interface ApplEnrollmentRowItem {
@@ -20,7 +16,6 @@ export interface ApplEnrollmentRowItem {
   associatedObjectId: string;
 
   /** Optional and only used in one config. */
-  collections?: Collection[];
   expandableRows?: SiteAccess[];
 }
 
@@ -33,8 +28,14 @@ export interface ApplEnrollmentRowItem {
 export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit {
 
   @Input() rowData: ApplEnrollmentRowItem;
+
+  public acceptedEnroll: boolean = false;
+
   public applicantSearch: SearchDomain = SearchDomain.Applicant; // Domain to search for user sites
-  public newEnrol: boolean[] = [];
+
+  public declinedReasonSelector: string = 'Please Select';
+
+  private _data: ApplEnrollmentRowItem;
 
   constructor() {
     super();
@@ -45,15 +46,41 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
       return;
     }
 
+    //Clone data - new enrollments may have changes
+    this._data = cloneDeep(this.rowData);
+    this.acceptedEnroll = false;
     this.siteAccessRequiringAttention.map(x => x.open = false);
   }
 
+  // onAccept and OnDecline
   onAccept() {
     console.log('Accept enrollment');
+    this.acceptedEnroll = true;
   }
 
-  onDecline() {
+  onDeclined() {
     console.log('Declined enrollment');
+  }
+
+  onProgressChange( $event ){
+    console.log('onProgressChange');
+  }
+
+  get declinedReasons() {
+    return [
+      DeclinedReasons.WRONG_SITE,
+      DeclinedReasons.ACCESS_NO_lONGER_REQUIRED
+    ];
+  }
+
+  get hasDeclinedReason() {
+    return this.siteAccessRequiringAttention.filter(x =>  x.declinedReason ).length !== 0;
+  }
+
+  get userDeclinedReason() {
+    return this.siteAccessRequiringAttention.map(x => {
+      return x.declinedReason;
+    });
   }
 
   get startDate() {
@@ -67,37 +94,24 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
   isNewEnrol() {
     return this.siteAccessRequiringAttention.filter(x => {
       return x.status === EnrollmentStatus.New;
-    }).length > 0;
+    }).length !== 0;
   }
 
   isDeclinedEnrol() {
     return this.siteAccessRequiringAttention.filter(x => {
       return x.status === EnrollmentStatus.Declined;
-    }).length > 0;
-  }
-
-  // Override functions
-  canOpen(){
-    console.log('my class canOpen');
-    return super.canOpen();
-  }
-
-  get allChildAlerts() {
-    console.log('my class allChildAlerts');
-    console.log('isNewEnrol() ', this.isNewEnrol() );
-
-    return this.siteAccessRequiringAttention.map(x => x.alert);
+    }).length !== 0;
   }
 
   // abstract method - defined in derived
   /** This function is responsible for generating site access row titles depending on dashboard type */
   get siteAccessRequiringAttention(): any[] {
 
-    if (!this.rowData || !this.rowData.expandableRows) {
+    if (!this._data || !this._data.expandableRows) {
       return [];
     }
 
-    return this.rowData.expandableRows.map(siteAccess => {
+    return this._data.expandableRows.map(siteAccess => {
       siteAccess.title = `${siteAccess.site.name}`;
       return siteAccess;
     });

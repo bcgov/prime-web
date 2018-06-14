@@ -86,8 +86,9 @@ export class PrimeDataService {
         title: site.name,
         associatedObjectId: site.objectId,
       };
-      rowItem.collections = this.findCollectionFromSites(this.user.sites);
-      rowItem.expandableRows = site.siteAccess;
+
+      // 1:1 relationship - user has one site access per site
+      rowItem.expandableRows = [site.siteAccess[0]];
 
       result.push(rowItem);
     });

@@ -13,14 +13,12 @@ export class ApplEnrollmentListComponent extends EnrollmentList implements OnIni
 
   @ViewChildren(ApplEnrollmentRowComponent) rowElements: QueryList<ApplEnrollmentRowComponent>;
 
-  // Enrollment status for applicant
-  private _enrollmentStatus: string [] = [
-    EnrollmentStatus.Approved,
-    EnrollmentStatus.Declined
-  ];
-
-  save(){
+  onSave(){
     console.log('save data');
+  }
+
+  onCancel() {
+    console.log('cancel changes');
   }
 
   constructor(private applicantDataService: ApplicantDataService) {
@@ -45,7 +43,10 @@ export class ApplEnrollmentListComponent extends EnrollmentList implements OnIni
   // Abstract functions defined by derived class
   //Convert enum to iterable array
   get EnrollmentStatus() {
-    return this._enrollmentStatus;
+    return [
+      EnrollmentStatus.Approved,
+      EnrollmentStatus.Declined
+    ];
   }
 
   rowOpened(item: ApplEnrollmentRowComponent) {

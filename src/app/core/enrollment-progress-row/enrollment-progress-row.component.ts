@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { growVertical } from '../../animations/animations';
 import { SiteAccess, SiteAccessProgressSteps } from '../../models/sites.model';
 import {RowState} from '../enrollment-row/enrollment-row.class';
-import {s} from '@angular/core/src/render3';
 
 
 @Component({
@@ -19,7 +18,7 @@ export class EnrollmentProgressRowComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    if (!this.data ) {return}
+    if (!this.data ) { return; }
   }
 
   get openState(): string {
