@@ -27,7 +27,10 @@ export enum BadgeLevel {
   Warning = 'warning',
   Danger = 'danger',
   Info = 'info',
-  Success = 'success'
+  Success = 'success',
+  Attention = 'attention',
+  InfoLight = 'info-light',
+  DangerLight = 'danger-light'
 }
 
 export enum RowState {
