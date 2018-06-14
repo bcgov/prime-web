@@ -3,6 +3,7 @@ import { PrimeDataService } from '../../../../services/prime-data.service';
 import { Person } from '../../../../models/person.model';
 import { DummyDataService } from '../../../../services/dummy-data.service';
 import {ApplEnrollmentRowItem} from '../../components/appl-enrollment-row/appl-enrollment-row.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'prime-applicant-dashboard',
@@ -11,13 +12,16 @@ import {ApplEnrollmentRowItem} from '../../components/appl-enrollment-row/appl-e
 })
 export class ApplicantDashboardComponent implements OnInit {
 
-  constructor(private primeDataService: PrimeDataService, private dummyDataService: DummyDataService) {}
+  constructor(private primeDataService: PrimeDataService,
+              private dummyDataService: DummyDataService,
+              private router: Router) {}
 
   ngOnInit() {
-    // TODO: Make sure this only fires once! Don't want to overwrite user behaviour.
-    // TODO: Need to move this so it always excutes on ALL applicants, but only once. Maybe need ApplicantComponent like AppComponent?
-    // ALTERNATIVELY: JUST REMOVE THIS! Users can fill it out themselves.
-    this.dummyDataService.setPersonToApplicant(this.applicant);
+    if (!this.applicant.hasContactInfo) {
+      console.log('Redirect to contact page');
+      const link = '/applicant/contact';
+      this.router.navigate([link]);
+    }
   }
 
   get applicant(): Person {
@@ -39,39 +43,4 @@ export class ApplicantDashboardComponent implements OnInit {
   get accessAcceptanceDone(): boolean {
     return !!this.applicant.accessAcceptance;
   }
-
-  updatesRequiringUserAction(): string[] {
-    let result = [];
-
-    if (!this.contactDone){
-      result.push('Contact');
-    }
-
-    if (!this.professionalDone){
-      result.push('Professional');
-    }
-
-    if (!this.accessAcceptanceDone){
-      result.push('User Access Acceptance');
-    }
-
-    return result;
-  }
-
-  get updatesRequiringUserActionText(): string {
-    let items = this.updatesRequiringUserAction();
-    if (items.length === 0 ) { return; }
-    if (items.length === 1 ) {
-      return `Please update ${items[0]}`;
-    }
-    else if (items.length > 1 ) {
-      let beforeAnd: string[] = items.slice(0, items.length - 1);
-      let afterAnd: string = items[items.length - 1 ];
-
-      return `Please update ${ beforeAnd.join(', ') } and ${afterAnd}`
-    }
-  }
-
-  // Enrollment
-
 }

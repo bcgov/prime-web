@@ -35,7 +35,7 @@ export class EnrollmentProgressRowComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    if (!this.data ) {return}
+    if (!this.data ) { return; }
   }
 
   get openState(): string {

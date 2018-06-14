@@ -1,0 +1,52 @@
+<div class='d-flex justify-content-between progress-row-content' [@growVertical] *ngIf="open">
+
+  <div class="col">
+    <i class="fa fa-quote-left fa-2x fa-pull-left" aria-hidden="true"></i>
+    <p><em>Request has been approved and is awaiting PoS Provisioning</em></p>
+    <p><small>Requested Date: {{ data ? data.formatDateShort(data.requestDate) : 'n/a'}}</small></p>
+  </div>
+
+  <div class="col">
+    <div class="progressSlider">
+      <!-- Labels -->
+      <div class="progressSlider--text">
+        <div class="progressItem">
+          <div class="progressText">Verifier</div>
+        </div>
+        <div class="progressItem">
+          <div class="progressText">Applicant</div>
+        </div>
+        <div class="progressItem">
+          <div class="progressText">MoH</div>
+        </div>
+        <div class="progressItem active">
+          <div class="progressText">Provisioner</div>
+        </div>
+      </div>
+
+      <!-- The progress bar line / dots -->
+      <div class="progressSlider--bar">
+        <div class="progressBarMarker"
+             *ngFor="let x of iterableNumberOfSteps; let i = index"
+             [ngClass]="{active: i == activeStepIndex}">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col d-inline-flex flex-column access-reason">
+    <!-- New enrollments -->
+    <select *ngIf="!disableReason" id="accessReason"
+            class="form-control drop-dl-box-15 color">
+      <option *ngFor="let reason of accessReason" value="{{reason}}">
+        {{reason}}
+      </option>
+    </select>
+
+    <select *ngIf="disableReason" [disabled]="disableReason" id="accessReason" class="form-control drop-dl-box-15 color">
+      <option *ngIf="disableReason" value="{{data.accessReason}}" selected>
+        {{data.accessReason}}
+      </option>
+    </select>
+  </div>
+</div>

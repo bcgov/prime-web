@@ -81,25 +81,14 @@ export class PrimeDataService {
   getUserSiteEnrollment(): ApplEnrollmentRowItem[] {
     const result: ApplEnrollmentRowItem[] = [];
 
-    //NOT sure this is correct??
     this.user.sites.map(site => {
       const rowItem: ApplEnrollmentRowItem = {
         title: site.name,
         associatedObjectId: site.objectId,
-        collections: this.findCollectionFromSite(site)
       };
- /*
-      const pending = site.siteAccess
-        .filter(sa => sa.status === EnrollmentStatus.Pending);
-      const expired = site.siteAccess
-        .filter(sa => sa.status === EnrollmentStatus.Expired);
-      const declined = site.siteAccess
-        .filter(sa => sa.status === EnrollmentStatus.Declined);
 
-
-      const problemAccess = pending.concat(expired, declined);
-      rowItem.expandableRows = problemAccess;*/
-      rowItem.expandableRows = site.siteAccess;
+      // 1:1 relationship - user has one site access per site
+      rowItem.expandableRows = [site.siteAccess[0]];
 
       result.push(rowItem);
     });
@@ -191,6 +180,10 @@ export class PrimeDataService {
 
   findCollectionByObjectId(objectId: string): Collection{
     return this.collections.find(col => col.objectId === objectId);
+  }
+
+  findUserSiteByObjectId(objectId: string): Site{
+    return this.user.sites.find(site => site.objectId === objectId);
   }
 
   private filterUnique(x, i, a){

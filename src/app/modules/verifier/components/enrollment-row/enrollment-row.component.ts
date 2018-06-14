@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { loadInOut, openState, openStateChild, openStateDisable } from '../../../../animations/animations';
 import {Site, SiteAccess} from '../../../../models/sites.model';
@@ -27,7 +27,7 @@ export interface EnrollmentRowItem {
   styleUrls: ['./enrollment-row.component.scss'],
   animations: [openState, openStateChild, loadInOut, openStateDisable]
 })
-export class EnrollmentRowComponent extends EnrollmentRow implements OnInit {
+export class EnrollmentRowComponent extends EnrollmentRow implements OnInit, OnDestroy {
 
   @Input() rowData: EnrollmentRowItem;
   @Input() primaryType: "User"|"Site" = "Site";

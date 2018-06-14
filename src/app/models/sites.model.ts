@@ -74,7 +74,8 @@ export class SiteAccess extends Base {
   // person: Role;
   person: Person;
   status: EnrollmentStatus;
-  reason: string;
+  declinedReason: string;
+  accessReason: string;
   requestDate: Date; // when SiteRequest was initiated
   startDate: Date;
   endDate: Date;
@@ -105,6 +106,10 @@ export class SiteAccess extends Base {
 
   get endDateShort(): string {
     return moment(this.endDate).format('DD/MM/YYYY');
+  }
+
+  get startDateShort(): string {
+    return moment(this.startDate).format('DD/MM/YYYY');
   }
 
   formatDateShort(date: Date){
@@ -172,4 +177,9 @@ export enum SiteAccessProgressSteps {
 export enum DeclinedReasons {
   WRONG_SITE = 'Wrong Site',
   ACCESS_NO_lONGER_REQUIRED = 'Access No Longer Required'
+}
+
+export enum AccessReasons {
+  PERSONAL_ACCESS = 'I personally access PNET',
+  NOT_PERSONAL_ACCESS = 'Not for personal access'
 }

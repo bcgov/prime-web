@@ -100,7 +100,7 @@
     <h4 class="modal-title">{{collection.name}}</h4>
 
 
-    <form class="form-inline">
+    <form *ngIf="!isApplicantSite()" class="form-inline">
       <select class="form-control" [value]="site.objectId"
         (change)="changeSite($event.target.value, $event)">
         <option *ngFor="let memberSite of collection.members" value="{{memberSite.objectId}}">
@@ -109,7 +109,7 @@
       </select>
     </form>
 
-    <button class="btn btn-default pull-right" *ngIf="!editable" (click)="edit()">Edit</button>
+    <button class="btn btn-default pull-right" *ngIf="!editable && !isApplicantSite()" (click)="edit()">Edit</button>
 
     <span *ngIf="editable">
         <button class="btn btn-primary pull-right mx-2" (click)="save()">Save</button>
@@ -141,7 +141,7 @@
 
       </div>
 
-      <div class="card">
+      <div *ngIf="!isApplicantSite()" class="card">
           <div class="card-header">
             Enrollments ( {{site.siteAccess.length}} )
           </div>

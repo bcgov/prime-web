@@ -43,5 +43,6 @@ export class AppComponent implements OnInit {
     this.primeDataService.collections = dummyCollections;
     this.primeDataService.sites = dummySites;
     this.primeDataService.people = dummyPeople;
+    this.primeDataService.user = this.primeDataService.people[0];
   }
 }
