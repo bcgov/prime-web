@@ -114,42 +114,22 @@
     <div class="col">
       <div class="form-group row">
         <label for="phone" class="col-sm-3 col-form-label">
-          Primary Phone
+          Phone
         </label>
         <div class="col-sm-9">
           <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="applicant.phone" (input) = "onChange()">
         </div>
       </div>
-
+    </div>
+    <div class="col">
       <div class="form-group row">
         <label for="email" class="col-sm-3 col-form-label">
-          Primary Email
+          Email
         </label>
         <div class="col-sm-9">
           <input type="text" class="form-control" id="email" name="email" [(ngModel)]="applicant.email" (input) = "onChange()">
         </div>
       </div>
-
-    </div>
-    <div class="col">
-      <div class="form-group row">
-        <label for="phoneSecondary" class="col-sm-3 col-form-label">
-          Alternate Phone
-        </label>
-        <div class="col-sm-9">
-          <input type="text" class="form-control" id="phoneSecondary" name="phoneSecondary" [(ngModel)]="applicant.phoneSecondary" (input) = "onChange()">
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <label for="emailSecondary" class="col-sm-3 col-form-label">
-          Alternate Email
-        </label>
-        <div class="col-sm-9">
-          <input type="text" class="form-control" id="emailSecondary" name="emailSecondary" [(ngModel)]="applicant.emailSecondary" (input) = "onChange()">
-        </div>
-      </div>
-
     </div>
 
     <!-- We want this Contact Information section to appear to have 3 columns so it aligns with the Regstration Information section. -->

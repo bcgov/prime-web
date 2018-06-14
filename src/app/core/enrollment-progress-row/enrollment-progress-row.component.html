@@ -3,7 +3,7 @@
     <div class="col">
       <i class="fa fa-quote-left fa-2x fa-pull-left" aria-hidden="true"></i>
       <p><em>Request has been approved and is awaiting PoS Provisioning</em></p>
-      <p><small>Requested Date: {{ data.formatDateShort(data.requestDate)}}</small></p>
+      <p><small>Requested Date: {{ data ? data.formatDateShort(data.requestDate) : 'n/a'}}</small></p>
     </div>
 
     <div class="col">

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { DummyDataService } from './services/dummy-data.service';
 import { environment } from './../environments/environment';
-import 'rxjs/add/operator/filter';
+//import 'rxjs/add/operator/filter';
 
 // import { EnrollmentRowItem, EnrollmentRowChild, EnrollmentStatus, BadgeLevel } from './core/enrollment-row/enrollment-row.interface';
 // import { User } from './models/user.model';
