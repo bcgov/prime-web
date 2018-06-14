@@ -77,7 +77,7 @@ export class Person extends Base {
     licenceClassCPType: 'pleaseSelect',
     licenceClassCRNType: 'pleaseSelect',
     licenceClassCPSType: 'pleaseSelect',
-    licenceExpiryDate: '',
+    licenceExpiryDate: <Date> null,
     advancedPracticeCertificationType: 'pleaseSelect'
   }];
 

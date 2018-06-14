@@ -64,7 +64,7 @@ export enum MaxLengthTypes {
  */
 export interface ISelfDeclaration {
   flag: boolean,
-  detail: string
+  detail: string;
 }
 
 
