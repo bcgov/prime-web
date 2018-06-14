@@ -75,9 +75,11 @@
             [targetId]="rowData.objectId">
         </prime-info-button>
 
+
         <prime-accept-reject-icons
-          (onAccepted)="resetStatus('DeclinedEnrollment')"
-          (onRejected)="resetStatus('AcceptEnrollment')"
+          *ngIf="siteStatus === 'New'"
+          (onAccepted)="resetStatus('AcceptEnrollment')"
+          (onRejected)="resetStatus('DeclinedEnrollment')"
           labelAccept="Accept Enrollment"
           labelReject="Decline Enrollment"
         ></prime-accept-reject-icons>
@@ -119,7 +121,7 @@
     <div class="enrollment-expandable" >
       <prime-enrollment-progress-row
         [open]='true'
-        [data]='siteAccessObject'>
+        [data]='siteAccessObject'> 
       </prime-enrollment-progress-row>
     </div>
   </div>
