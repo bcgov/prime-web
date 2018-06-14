@@ -54,11 +54,15 @@
   @include badge-light($color-info);
 }
 
+.bg-info-light {background-color: saturate(lighten($color-info, 20%), 20%);}
+
 .badge-danger-light {
   @include badge-light($color-danger);
   background-color: saturate(lighten($color-danger, 50%), 20%);
   i { color: darken($color-danger, 10%)}
 }
+
+.bg-danger-light { background-color: saturate(lighten($color-danger, 50%), 20%)}
 
 .badge-warning-light {
   @include badge-light($color-warning);

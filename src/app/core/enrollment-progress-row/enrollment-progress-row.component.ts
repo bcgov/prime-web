@@ -16,18 +16,20 @@ export class EnrollmentProgressRowComponent implements OnInit {
   @Input() data: SiteAccess;
 
   get description(): string {
-    // const status = this.data.status;
+    const status = this.data.status.toLowerCase();
+    let stage = this.data.progress.toString();
+    if (stage === SiteAccessProgressSteps.Provisioner) {
+      stage = "PoS Provisioning"
+    }
 
     if (this.data.status === EnrollmentStatus.Declined) {
       return "Applicant declined access to this site."
     }
-
-    let stage = this.data.progress.toString();
-    if (stage === SiteAccessProgressSteps.Provisioner) {
-      stage = stage + " Provisioning"
+    else if (this.data.status === EnrollmentStatus.Expired){
+      return `Request has ${status} and is waiting for ${stage}`
     }
 
-    return `Request has been ${this.data.status} and is awaiting ${stage}`;
+    return `Request has been ${status} and is awaiting ${stage}`;
   }
 
   constructor() { }
