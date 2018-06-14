@@ -35,6 +35,7 @@ export class DatepickerComponent implements OnInit {
   constructor() { }
 
   convertDateToSimpleDate(date: Date):IMyDate {
+    if (date === null ) { return null }
     return {
       year: date.getFullYear(),
       month: date.getMonth() + 1,
@@ -65,6 +66,10 @@ export class DatepickerComponent implements OnInit {
       this.datepickerOptions.selectorHeight = '185px';
       this.datepickerOptions.selectorWidth = '201px';
     }
+
+    this.model = {
+      date: this.convertDateToSimpleDate(this.date)
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -82,7 +87,9 @@ export class DatepickerComponent implements OnInit {
   }
 
   clearDate(){
-    this.ngxdp.clearDate();
+    if (this.ngxdp) {
+      this.ngxdp.clearDate();
+    }
   }
 
   get hasValidDate(): boolean {
