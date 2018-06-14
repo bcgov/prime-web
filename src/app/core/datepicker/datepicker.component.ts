@@ -14,8 +14,8 @@ import { INgxMyDpOptions, IMyDateModel, IMyDate } from 'ngx-mydatepicker';
 export class DatepickerComponent implements OnInit {
   /** Component size can be reduced, see Datepickersizes for options */
   @Input() size: DatepickerSizes = DatepickerSizes.DEFAULT;
-  @Input() date: IMyDate | Date;
-  @Output() dateChange = new EventEmitter<IMyDate | Date>();
+  @Input() date: Date;
+  @Output() dateChange = new EventEmitter<Date>();
   @Input() disabled: boolean;
 
   /** Format for how to display the date to the user. */
@@ -43,6 +43,10 @@ export class DatepickerComponent implements OnInit {
     }
    }
   convertSimpleDateToDate(date: IMyDate):Date {
+    // When ngx-mydatepicker is cleared, it returns {year: 0, month: 0, day: 0}
+    if (date.year === 0){
+      return null;
+    }
     return new Date(date.year, date.month - 1, date.day);
   }
 
@@ -91,18 +95,11 @@ export class DatepickerComponent implements OnInit {
   }
 
   onDateChanged(event): void {
-
     if (event.date) {
-      // Always emit a Date, convert if necessary
+      // Always emit a Date (or null), convert if necessary
       let date = this.isDate(event.date) ? event.date : this.convertSimpleDateToDate(event.date);
 
-      // User has cleared the date, so we want to return null.
-      if (date.year === 0 && date.month === 0 && date.day === 0) {
-        this.dateChange.emit(null);
-      }
-      else {
-        this.dateChange.emit(date);
-      }
+      this.dateChange.emit(date);
     }
   }
 
