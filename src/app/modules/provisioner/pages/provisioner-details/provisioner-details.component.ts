@@ -38,6 +38,10 @@ export class ProvisionerDetailsComponent implements OnInit {
     // EnrollmentComponents
     this.person = this.dataService.people[0];
     this.site = this.dataService.sites[0];
+    //Set first 2 rows to 'New'
+    this.dataService.collections[0].members[0].siteAccess[0].status = EnrollmentStatus.New;
+    this.dataService.collections[1].members[0].siteAccess[0].status = EnrollmentStatus.New;
+
   }
 
   ngOnDestroy() {
@@ -53,11 +57,6 @@ export class ProvisionerDetailsComponent implements OnInit {
   }
 
   get provisionerSiteData(): EnrollmentRowItem[] {
-    // The below is done to get data in good shape for demo! Should not be left in after.
-    const data = this.dataService.getEnrollmentBySite();
-    data[0].sites[0].siteAccess[0].status = EnrollmentStatus.New;
-    data[1].sites[0].siteAccess[0].status = EnrollmentStatus.New;
-    data[2].sites[0].siteAccess[0].status = EnrollmentStatus.Declined;
     return this.dataService.getEnrollmentBySite();
   }
 

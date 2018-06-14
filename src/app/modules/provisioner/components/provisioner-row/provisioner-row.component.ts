@@ -23,7 +23,6 @@ export class ProvisionerRowComponent extends Base implements OnInit {
 
   siteName: string;
   siteNumber: String;
-  alert: EnrollmentAlert[] = [];
   siteStatus: string;
   siteAccessObject: SiteAccess;
 
@@ -69,28 +68,38 @@ export class ProvisionerRowComponent extends Base implements OnInit {
     return arr[Math.ceil(Math.random() * arr.length) - 1];
   }
 
-    toggleRow() {
-      if (this.canOpen()){
-        this.openState = this.openState === 'opened' ? 'closed' : 'opened';
-        if (this.openState === 'opened'){
-          this.onRowOpened.emit(this);
-        }
+  toggleRow() {
+    if (this.canOpen()) {
+      this.openState = this.openState === 'opened' ? 'closed' : 'opened';
+      if (this.openState === 'opened') {
+        this.onRowOpened.emit(this);
       }
     }
+  }
 
-    closeRow() {
-      this.openState = 'closed';
-    }
+  closeRow() {
+    this.openState = 'closed';
+  }
 
 
-    canOpen() {
-      return this.siteStatus === 'Declined';
-    }
+  canOpen() {
+    return this.siteStatus === 'Declined';
+  }
 
   resetStatus(newStatus) {
     return this.siteStatus = newStatus;
   }
 
+  accept() {
+    this.siteStatus = 'AcceptEnrollment';
+    //Status stays New, no need to change
+    // this.rowData.siteAccess[0].status = EnrollmentStatus.
+  }
+
+  reject(){
+    this.siteStatus = 'DeclinedEnrollment';
+    this.rowData.siteAccess[0].status = EnrollmentStatus.Declined;
+  }
 }
 
 

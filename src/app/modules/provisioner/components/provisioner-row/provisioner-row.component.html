@@ -69,8 +69,8 @@
         </prime-info-button>
         <prime-accept-reject-icons
           *ngIf="siteStatus === 'New'"
-          (onAccepted)="resetStatus('AcceptEnrollment')"
-          (onRejected)="resetStatus('DeclinedEnrollment')"
+          (onAccepted)="accept()"
+          (onRejected)="reject()"
           labelAccept="Accept Enrollment"
           labelReject="Decline Enrollment"
         ></prime-accept-reject-icons>

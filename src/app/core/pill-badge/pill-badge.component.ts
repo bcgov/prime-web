@@ -25,13 +25,17 @@ export class PillBadgeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    if (!this.alerts || !this.alerts.length){ return}
+    if (!this.alerts || !this.alerts.length){ return }
     this.count = this.alerts.length;
 
+    this.processInput();
+  }
+
+  private processInput() {
     // Process Array
-    if (this.alerts && this.alerts.length){
+    if (this.alerts && this.alerts.length) {
       const alertTypes = this.alerts.map(x => x.status)
-      .filter(this.filterUnique);
+        .filter(this.filterUnique);
 
       // Break each "type" of alert into a distinc element/text/colour
       this.distinctBadges = alertTypes.map(type => {
@@ -44,6 +48,12 @@ export class PillBadgeComponent implements OnInit {
       });
 
 
+    }
+  }
+
+  ngOnChanges(changes){
+    if (changes['alerts']){
+      this.processInput();
     }
   }
 
