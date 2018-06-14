@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProvisionerDetailsComponent } from './provisioner-details.component';
 import { CoreModule } from '../../../core/core.module';
-import { ProvisionerModule } from '../../provisioner.module';
 import { ProvisionerRowComponent } from '../../components/provisioner-row/provisioner-row.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PrimeDataService } from '../../../../services/prime-data.service';
@@ -10,12 +9,14 @@ import { routes } from '../../provisioner-routing.modules';
 import { ProvisionerDashboardComponent } from '../provisioner-dashboard/provisioner-dashboard.component';
 import { VerifierModule } from '../../../verifier/verifier.module';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { of } from 'rxjs';
 import { DummyDataService } from '../../../../services/dummy-data.service';
 import { ProvisionerWidgetsComponent } from '../../components/provisioner-widgets/provisioner-widgets.component';
+import { ProvisionerDashBarComponent } from '../../components/provisioner-dash-bar/provisioner-dash-bar.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { TooltipModule } from 'ngx-bootstrap';
 import { ProvisionerListComponent } from '../../components/provisioner-list/provisioner-list.component';
+import { ProvisionerDashBySiteComponent } from '../provisioner-dashboard/provisioner-dash-by-site/provisioner-dash-by-site.component';
 
 describe('ProvisionerDetailsComponent', () => {
   let component: ProvisionerDetailsComponent;
@@ -23,14 +24,14 @@ describe('ProvisionerDetailsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProvisionerDetailsComponent, ProvisionerRowComponent, ProvisionerDashboardComponent, ProvisionerWidgetsComponent, ProvisionerListComponent, ProvisionerRowComponent  ],
+      declarations: [ ProvisionerDetailsComponent, ProvisionerRowComponent, ProvisionerDashboardComponent, ProvisionerWidgetsComponent, ProvisionerListComponent, ProvisionerRowComponent, ProvisionerDashBySiteComponent, ProvisionerDashBarComponent  ],
       imports: [ CoreModule, RouterTestingModule.withRoutes(routes), VerifierModule, NgxChartsModule, TooltipModule.forRoot() ],
       providers: [ PrimeDataService,
 
         // Mock the route "data" fields
         {
           provide: ActivatedRoute,
-          useValue: { data: Observable.of({type: "user"}) }
+          useValue: { data: of({type: "user"}) }
         }
       ]
     })

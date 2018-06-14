@@ -1,8 +1,15 @@
-<p>
-  provisioner-dashboard works!
-</p>
+<prime-alert>
+  System Notification: Server will be down for 2 hours maitenance at 14:30 PT.
+</prime-alert>
 
-<prime-enrollment-list></prime-enrollment-list>
+<prime-provisioner-dash-bar>
+</prime-provisioner-dash-bar>
+
+<!-- <router-outlet name="dashboard"></router-outlet> -->
+<router-outlet></router-outlet>
+
+<hr>
+
 <prime-provisioner-widgets
   [siteAccess]="siteAccesses"
   [people]="people">

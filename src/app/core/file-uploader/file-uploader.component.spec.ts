@@ -9,10 +9,10 @@ import { FileUploaderComponent } from './file-uploader.component';
 // import {MspLogService} from "../../service/log.service";
 // import DataService from "../../service/msp-data.service";
 // import {LogEntry} from "../logging/log-entry.model";
-import {Http, Headers, RequestOptions, ConnectionBackend, HttpModule} from '@angular/http';
-import moment = require('moment');
-
+// import {HttpClient, Headers, RequestOptions, ConnectionBackend, HttpClientModule} from '@angular/http';
+import * as moment from 'moment';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -25,7 +25,7 @@ describe('FileUploaderComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [FileUploaderComponent],
-      imports: [FormsModule, HttpModule, ModalModule.forRoot()],
+      imports: [FormsModule, HttpClientModule, ModalModule.forRoot()],
     });
   });
   it ('should work', () => {

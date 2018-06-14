@@ -12,7 +12,7 @@ import { Site } from '../../../../models/sites.model';
 })
 export class ProvisionerListComponent extends EnrollmentList implements OnInit {
 
-  @Input() rowItems: EnrollmentRowItem[];
+  @Input() rowItems: EnrollmentRowItem[] = [];
   @Input() primaryType: "User"|"Site" = "User";
 
   @ViewChildren(ProvisionerRowComponent) rowElements: QueryList<ProvisionerRowComponent>
