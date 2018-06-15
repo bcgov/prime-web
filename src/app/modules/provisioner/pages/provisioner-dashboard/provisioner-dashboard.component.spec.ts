@@ -17,7 +17,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { DatepickerComponent } from '../../../../core/datepicker/datepicker.component';
 import { VerifierService } from '../../../../services/verifier.service';
 import { NgxMyDatePicker, NgxMyDatePickerModule } from 'ngx-mydatepicker';
-import { ProvisionerDashBarComponent } from '../../components/provisioner-dash-bar/provisioner-dash-bar.component';
 import { ProvisionerWidgetsComponent } from '../../components/provisioner-widgets/provisioner-widgets.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { APP_BASE_HREF } from '@angular/common';
@@ -25,6 +24,7 @@ import { PrimeDataService } from '../../../../services/prime-data.service';
 import { ProvisionerService } from '../../../../services/provisioner.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { AlertComponent } from '../../../../core/alert/alert.component';
+import {DashboardBarComponent} from "../../../../core/dashboard-bar/dashboard-bar.component";
 
 
 
@@ -34,7 +34,7 @@ describe('ProvisionerDashboardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProvisionerDashboardComponent, EnrollmentListComponent, EnrollmentRowComponent, EnrollmentProgressRowComponent, PillBadgeComponent, AddUserButtonComponent, InfoButtonComponent, MiniProgressBarComponent, DatepickerComponent, ProvisionerWidgetsComponent, AlertComponent, ProvisionerDashBarComponent ],
+      declarations: [ ProvisionerDashboardComponent, EnrollmentListComponent, EnrollmentRowComponent, EnrollmentProgressRowComponent, PillBadgeComponent, AddUserButtonComponent, InfoButtonComponent, MiniProgressBarComponent, DatepickerComponent, ProvisionerWidgetsComponent, AlertComponent, DashboardBarComponent ],
       imports: [ TooltipModule.forRoot(),  ProgressbarModule.forRoot(), FormsModule, RouterTestingModule, NgxMyDatePickerModule.forRoot(), NgxChartsModule, NoopAnimationsModule, AlertModule.forRoot()],
       providers: [VerifierService, {provide: APP_BASE_HREF, useValue: '/'}, PrimeDataService, ProvisionerService]
 

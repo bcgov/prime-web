@@ -12,7 +12,6 @@ import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { DummyDataService } from '../../../../services/dummy-data.service';
 import { ProvisionerWidgetsComponent } from '../../components/provisioner-widgets/provisioner-widgets.component';
-import { ProvisionerDashBarComponent } from '../../components/provisioner-dash-bar/provisioner-dash-bar.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { TooltipModule } from 'ngx-bootstrap';
 import { ProvisionerListComponent } from '../../components/provisioner-list/provisioner-list.component';
@@ -24,7 +23,7 @@ describe('ProvisionerDetailsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProvisionerDetailsComponent, ProvisionerRowComponent, ProvisionerDashboardComponent, ProvisionerWidgetsComponent, ProvisionerListComponent, ProvisionerRowComponent, ProvisionerDashBySiteComponent, ProvisionerDashBarComponent  ],
+      declarations: [ ProvisionerDetailsComponent, ProvisionerRowComponent, ProvisionerDashboardComponent, ProvisionerWidgetsComponent, ProvisionerListComponent, ProvisionerRowComponent, ProvisionerDashBySiteComponent  ],
       imports: [ CoreModule, RouterTestingModule.withRoutes(routes), VerifierModule, NgxChartsModule, TooltipModule.forRoot() ],
       providers: [ PrimeDataService,
 

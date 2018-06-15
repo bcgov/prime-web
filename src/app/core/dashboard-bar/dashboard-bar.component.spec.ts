@@ -9,6 +9,10 @@ import {BsModalService, ComponentLoaderFactory, PositioningService, ProgressbarM
 import {NgxMyDatePickerModule} from 'ngx-mydatepicker';
 import {PrimeDataService} from '../../services/prime-data.service';
 import {DummyDataService} from '../../services/dummy-data.service';
+import { RouterModule } from '@angular/router';
+import {APP_BASE_HREF} from '@angular/common';
+
+
 
 describe('DashboardBarComponent', () => {
   let component: DashboardBarComponent;
@@ -17,8 +21,16 @@ describe('DashboardBarComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ DashboardBarComponent, AddUserButtonComponent, MiniProgressBarComponent, DatepickerComponent],
-      imports: [FormsModule, ProgressbarModule.forRoot(), NgxMyDatePickerModule.forRoot()],
-      providers: [ComponentLoaderFactory, BsModalService, PositioningService, PrimeDataService, DummyDataService]
+      imports: [FormsModule, ProgressbarModule.forRoot(), NgxMyDatePickerModule.forRoot(),
+                RouterModule.forRoot([
+                  {
+                    path: '**',
+                    redirectTo: 'dashboard'
+                  }
+                ])
+      ],
+      providers: [{provide: APP_BASE_HREF, useValue: '/'},
+        ComponentLoaderFactory, BsModalService, PositioningService, PrimeDataService, DummyDataService]
 
     })
     .compileComponents();

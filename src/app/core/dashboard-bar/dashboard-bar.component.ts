@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'prime-dashboard-bar',
@@ -7,9 +8,16 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class DashboardBarComponent implements OnInit {
   @Input() hideAddUserButton: boolean = false;
-  @Input() nextPageLink: boolean = false;
+  isProvisionerDashboard: boolean = false;
+  isVerifierDashboard: boolean = false;
 
-  constructor() { }
+  constructor(public router: Router) {
+    if (this.router.url.indexOf('/provisioner/dashboard/') > -1) {
+      this.isProvisionerDashboard = true;
+    } else {
+      this.isVerifierDashboard = true;
+    }
+  }
 
   ngOnInit() {
   }

@@ -39,6 +39,7 @@ import { RequiredValidationErrorsComponent } from './validation/required-validat
 import {TooltipModule} from 'ngx-bootstrap';
 import { HeaderFooterModule } from './modules/header-footer/header-footer.module';
 import { ProvisionerService } from './services/provisioner.service';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -81,6 +82,7 @@ import { ProvisionerService } from './services/provisioner.service';
     MyDateRangePickerModule,
     ButtonsModule.forRoot(),
     HeaderFooterModule,
+    RouterModule
   ],
   providers: [
     ApplicantDataService,
