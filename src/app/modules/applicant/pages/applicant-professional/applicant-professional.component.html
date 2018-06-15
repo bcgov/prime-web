@@ -273,7 +273,9 @@
   </div>
   <div class="col-sm-4">
     <div *ngIf="displayUploadSection()">
-      <!-- <prime-file-uploader></prime-file-uploader>-->
+      <div class="d-flex justify-content-start align-items-center">
+        <i class="fa fa-upload fa-2x mx-2" aria-label="Delete"></i><h2>Upload your documents</h2>
+      </div>
       <span class="note">Scan the document, or take a photo of it. Make sure that it's:</span>
       <ul class="note">
         <li>The entire document, from corner to corner</li>
@@ -282,6 +284,9 @@
         <li>In focus and easy to read</li>
         <li>A JPG, PNG, GIF or BMP file (<b>not a PDF</b>)</li>
       </ul>
+      <prime-file-uploader>
+        <span class="note">Please upload required ID documents</span>
+      </prime-file-uploader>
     </div>
   </div>
 </section>

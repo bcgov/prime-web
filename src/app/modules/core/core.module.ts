@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AlertComponent } from '../../core/alert/alert.component';
 import { PillBadgeComponent } from '../../core/pill-badge/pill-badge.component';
 import { DashboardBarComponent } from '../../core/dashboard-bar/dashboard-bar.component';
-import { AlertModule, TooltipModule, ProgressbarModule } from 'ngx-bootstrap';
+import {AlertModule, TooltipModule, ProgressbarModule, BsModalService, ModalModule} from 'ngx-bootstrap';
 import { AddUserButtonComponent } from '../../core/add-user-button/add-user-button.component';
 import { MiniProgressBarComponent } from '../../core/mini-progress-bar/mini-progress-bar.component';
 import { ExpandingSearchComponent } from '../../core/expanding-search/expanding-search.component';
@@ -20,6 +20,7 @@ import { CoreBreadcrumbComponent } from './components/core-breadcrumb/core-bread
 import {EnrollmentProgressRowComponent} from '../../core/enrollment-progress-row/enrollment-progress-row.component';
 import {InfoButtonComponent} from '../../core/user-info-button/user-info-button.component';
 import { AcceptRejectIconsComponent } from './components/accept-reject-icons/accept-reject-icons.component';
+import {FileUploaderComponent} from '../../core/file-uploader/file-uploader.component';
 
 /** A list of all components that we want to both include and export. Since
  * CoreModule just exports components for other modules the list is pretty much
@@ -38,6 +39,7 @@ const componentList = [
   EnrollmentProgressRowComponent,
   InfoButtonComponent,
   AcceptRejectIconsComponent,
+  FileUploaderComponent,
 ];
 
 @NgModule({
@@ -50,6 +52,7 @@ const componentList = [
     ProgressbarModule.forRoot(),
     RouterModule,
     NgxMyDatePickerModule.forRoot(),
+    ModalModule.forRoot(),
   ],
   declarations: [
     componentList,

@@ -1,4 +1,10 @@
-$note-color: #202020;
+//@import "~bootstrap/scss/functions";
+//@import "~bootstrap/scss/variables";
+
+// TODO: use imported name for color-primary
+$color-primary: #036;
+
+$note-color: #252525;
 $note-font-size: 85%;
 $placeholder-color: $note-color;
 $placeholder-font-size: $note-font-size;
@@ -39,6 +45,10 @@ $placeholder-font-size: $note-font-size;
 
 .fa-times-circle {
   color: red;
+}
+
+.fa-upload {
+  color: $color-primary;
 }
 
 .with-top-margin {
