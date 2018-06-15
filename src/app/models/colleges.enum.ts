@@ -64,12 +64,5 @@ export enum MaxLengthTypes {
  */
 export interface ISelfDeclaration {
   flag: boolean,
-  detail: string
+  detail: string;
 }
-
-
-// /** @deprecated */
-// export interface CollegeList {
-//   id: Colleges;
-//   text: string;
-// }

@@ -81,9 +81,6 @@
           </div>
           <div class="col d-inline-flex flex-column">
             <label for="">Licence Expiry</label>
-            <!--TODO: potentially wrong reference-->
-            <!--<prime-datepicker size='mini' dateFormat="yyyy/mm/dd" [disabled]="!editable" [(date)]="siteAccess.startDate" class='ml-1'></prime-datepicker>-->
-            <!--<prime-datepicker dateFormat="yyyy/mm/dd" [(ngModel)]="collegeCertificationRecord.licenceExpiryDate"></prime-datepicker>-->
             <prime-datepicker dateFormat="yyyy/mm/dd"
                               [(date)]="collegeCertificationRecord.licenceExpiryDate"></prime-datepicker>
           </div>
@@ -103,18 +100,19 @@
       </div>
 
       <!-- Buttons -->
-      <ng-container *ngIf="collegeCertificationValid(i)">
-        <span class='d-flex align-items-center'>
-          <ng-container *ngIf="i > 0">
-            <a class='mx-1' (click)="deleteCollegeCertification(i)">
-              <i class="fa fa-times fa-2x" aria-label="Delete"></i>
-            </a>
-          </ng-container>
+      <span class='d-flex align-items-center'>
+        <ng-container *ngIf="i > 0">
+          <a class='mx-1' (click)="deleteCollegeCertification(i)">
+            <i class="fa fa-times-circle fa-2x" aria-label="Delete"></i>
+          </a>
+        </ng-container>
+        <ng-container *ngIf="collegeCertificationValid(i)
+        && i === applicant.collegeCertificationList.length - 1">
           <a class='mx-1' (click)="addCollegeCertification()">
             <i class="fa fa-plus-circle fa-2x" aria-label="Add"></i>
           </a>
-        </span>
-      </ng-container>
+        </ng-container>
+      </span>
     </div>
   </ng-container>
 </section>
@@ -144,18 +142,19 @@
       </div>
 
       <!-- Buttons -->
-      <ng-container *ngIf="applicant.deviceProviderList[i].dpNumber.length">
-        <span class='d-flex align-items-center'>
-          <ng-container *ngIf="i > 0">
-            <a class='mx-1' (click)="deleteDeviceProvider(i)">
-              <i class="fa fa-times fa-2x" aria-label="Delete"></i>
-            </a>
-          </ng-container>
+      <span class='d-flex align-items-center'>
+        <ng-container *ngIf="i > 0">
+          <a class='mx-1' (click)="deleteDeviceProvider(i)">
+            <i class="fa fa-times-circle fa-2x" aria-label="Delete"></i>
+          </a>
+        </ng-container>
+        <ng-container *ngIf="applicant.deviceProviderList[i].dpNumber.length
+        && i === applicant.deviceProviderList.length - 1">
           <a class='mx-1' (click)="addDeviceProvider()">
             <i class="fa fa-plus-circle fa-2x" aria-label="Add"></i>
           </a>
-        </span>
-      </ng-container>
+        </ng-container>
+      </span>
     </div>
   </ng-container>
 </section>
@@ -188,21 +187,20 @@
       </div>
 
       <!-- Buttons -->
-      <ng-container *ngIf="applicant.workingOnBehalfList[i].jobTitle !== 'pleaseSelect'
-      && i < WorkingOnBehalfTitleTypesCount()">
-        <span class='d-flex align-items-center'>
-          <ng-container *ngIf="i > 0">
-            <a class='mx-1' (click)="deleteWorkingOnBehalf(i)">
-              <i class="fa fa-times fa-2x" aria-label="Delete"></i>
-            </a>
-          </ng-container>
-          <ng-container *ngIf="i < WorkingOnBehalfTitleTypesCount() - 1">
-            <a class='mx-1' (click)="addWorkingOnBehalf()">
-              <i class="fa fa-plus-circle fa-2x" aria-label="Add"></i>
-            </a>
-          </ng-container>
-        </span>
-      </ng-container>
+      <span class='d-flex align-items-center'>
+        <ng-container *ngIf="i > 0">
+          <a class='mx-1' (click)="deleteWorkingOnBehalf(i)">
+            <i class="fa fa-times-circle fa-2x" aria-label="Delete"></i>
+          </a>
+        </ng-container>
+        <ng-container *ngIf="applicant.workingOnBehalfList[i].jobTitle !== 'pleaseSelect'
+        && i === applicant.workingOnBehalfList.length - 1
+        && i < WorkingOnBehalfTitleTypesCount() - 1">
+          <a class='mx-1' (click)="addWorkingOnBehalf()">
+            <i class="fa fa-plus-circle fa-2x" aria-label="Add"></i>
+          </a>
+        </ng-container>
+      </span>
     </div>
   </ng-container>
 </div>
@@ -275,7 +273,9 @@
   </div>
   <div class="col-sm-4">
     <div *ngIf="displayUploadSection()">
-      <!-- <prime-file-uploader></prime-file-uploader>-->
+      <div class="d-flex justify-content-start align-items-center">
+        <i class="fa fa-upload fa-2x mx-2" aria-label="Delete"></i><h2>Upload your documents</h2>
+      </div>
       <span class="note">Scan the document, or take a photo of it. Make sure that it's:</span>
       <ul class="note">
         <li>The entire document, from corner to corner</li>
@@ -284,6 +284,9 @@
         <li>In focus and easy to read</li>
         <li>A JPG, PNG, GIF or BMP file (<b>not a PDF</b>)</li>
       </ul>
+      <prime-file-uploader>
+        <span class="note">Please upload required ID documents</span>
+      </prime-file-uploader>
     </div>
   </div>
 </section>

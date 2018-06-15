@@ -6,6 +6,7 @@ import { PrimeDataService } from '../../../../services/prime-data.service';
 import { Site } from '../../../../models/sites.model';
 import { Collection } from '../../../../models/collections.model';
 import { EnrollmentRowItem } from '../../../verifier/components/enrollment-row/enrollment-row.component';
+import { EnrollmentStatus } from '../../../../models/enrollment-status.enum';
 
 @Component({
   selector: 'prime-provisioner-details',
@@ -37,7 +38,10 @@ export class ProvisionerDetailsComponent implements OnInit {
     // EnrollmentComponents
     this.person = this.dataService.people[0];
     this.site = this.dataService.sites[0];
-    console.log('PROVDETAILS ngOnInit TARGET', { person: this.person, site: this.site });
+    //Set first 2 rows to 'New'
+    this.dataService.collections[0].members[0].siteAccess[0].status = EnrollmentStatus.New;
+    this.dataService.collections[1].members[0].siteAccess[0].status = EnrollmentStatus.New;
+
   }
 
   ngOnDestroy() {

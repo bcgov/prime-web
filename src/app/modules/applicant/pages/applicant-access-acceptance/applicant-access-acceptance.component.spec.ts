@@ -11,7 +11,6 @@ import { AlertModule } from 'ngx-bootstrap';
 import { APP_BASE_HREF } from '@angular/common';
 import { ApplicantDataService } from '../../../../services/applicant-data.service';
 
-
 describe('ApplicantAccessAcceptanceComponent', () => {
   let component: ApplicantAccessAcceptanceComponent;
   let fixture: ComponentFixture<ApplicantAccessAcceptanceComponent>;

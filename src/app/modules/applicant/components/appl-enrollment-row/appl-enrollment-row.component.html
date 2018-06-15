@@ -4,15 +4,29 @@
     <span class="enrollment-text-main">{{rowData.title}}</span>
   </div>
   <div class="enrollment-actions">
-    <div>
+    <div *ngIf="!isDeclinedEnrol()" class="dates-col">
       <label for="startDt">
         Start
       </label>
-      <input type="date" id="startDt" disabled>
+      <input type="text" id="startDt" [value]="startDate" disabled>
       <label for="endDt">
         End
       </label>
-      <input type="date" id="endDt" disabled>
+      <input type="text" id="endDt" [value]="endDate" disabled>
+    </div>
+    <div *ngIf="isDeclinedEnrol()">
+      <div class="col d-inline-flex flex-column">
+        <select *ngIf="!hasDeclinedReason" id="declinedReason" class="form-control drop-dl-box-15 color"
+                (change)="setDeclinedReason($event.target.value)">
+          <option value="Please Select">Please Select</option>
+          <option *ngFor="let reason of declinedReasons" value="{{reason}}">
+            {{reason}}
+          </option>
+        </select>
+        <select *ngIf="hasDeclinedReason" disabled id="declinedReason" class="form-control drop-dl-box-15 color">
+          <option value="{{userDeclinedReason}}" selected>{{userDeclinedReason}}</option>
+        </select>
+      </div>
     </div>
     <span class="enrollment-icons">
       <prime-pill-badge
@@ -20,23 +34,31 @@
         [iconOnly]='false'>
       </prime-pill-badge>
       <prime-info-button
-        [targetId]="rowData.associatedObjectId">
+        [targetId]="rowData.associatedObjectId"
+        [searchDomain]="applicantSearch">
       </prime-info-button>
-      <i class="fa text-muted" (click)="goToSiteAddressPage()"></i>
+      <prime-accept-reject-icons *ngIf="isNewEnrol() && !acceptedEnroll"
+          (onAccepted)="onAccept()"
+          (onRejected)="onDeclined()"
+          labelAccept="Accept Enrollment"
+          labelReject="Decline Enrollment">
+      </prime-accept-reject-icons>
     </span>
   </div>
 </div>
 
 
-<div [@openState]="openState">
+<div *ngIf="!isNewEnrol() || (isNewEnrol() && acceptedEnroll)" [@openState]="openState">
   <div [@openStateChild]="openState"  class="expandable-container">
-    <div class="enrollment-expandable" *ngFor="let siteAccess of siteAccessRequiringAttention"
-         (click)="expandedRowClick(siteAccess)">
 
-      <prime-enrollment-progress-row
-        [open]='siteAccess.open'
-        [data]='siteAccess'>
-      </prime-enrollment-progress-row>
+    <div class="enrollment-expandable" *ngFor="let siteAccess of siteAccessRequiringAttention"
+      (click)="expandedRowClick(siteAccess)">
+      <prime-app-enrollment-progress-row
+        [open]="siteAccess.open"
+        [data]="siteAccess"
+        [disableReason] = "!isNewEnrol()"
+        (updated)="onProgressChange()">
+      </prime-app-enrollment-progress-row>
 
     </div>
   </div>

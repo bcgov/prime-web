@@ -11,7 +11,7 @@
 
       <label for="enrollmentViewSelector" class='d-none d-sm-flex mr-0 mr-sm-2'>View</label>
       <select id="enrollmentViewSelector" class="form-control enrollment-view-selector" [value]="viewTypeSelector" (change)="viewTypes($event.target.value)">
-          <option value="All">All</option>
+          <option value="View All">All</option>
           <option *ngFor="let status of EnrollmentStatus" value="{{status}}">
             {{status}}
           </option>

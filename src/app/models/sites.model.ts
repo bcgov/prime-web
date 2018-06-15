@@ -74,7 +74,8 @@ export class SiteAccess extends Base {
   // person: Role;
   person: Person;
   status: EnrollmentStatus;
-  reason: string;
+  declinedReason: string;
+  accessReason: string;
   requestDate: Date; // when SiteRequest was initiated
   startDate: Date;
   endDate: Date;
@@ -107,6 +108,10 @@ export class SiteAccess extends Base {
     return moment(this.endDate).format('DD/MM/YYYY');
   }
 
+  get startDateShort(): string {
+    return moment(this.startDate).format('DD/MM/YYYY');
+  }
+
   formatDateShort(date: Date){
     return moment(date).format('DD/MM/YYYY');
   }
@@ -126,7 +131,7 @@ export class EnrollmentAlert {
     }
 
     if (status === EnrollmentStatus.Expired){
-        return BadgeLevel.Danger;
+        return BadgeLevel.DangerLight;
     }
 
     if (status === EnrollmentStatus.Declined){
@@ -134,7 +139,7 @@ export class EnrollmentAlert {
     }
 
     if (status === EnrollmentStatus.Initiated){
-      return BadgeLevel.Info;
+      return BadgeLevel.InfoLight;
     }
 
     if (status === EnrollmentStatus.Incomplete){
@@ -150,7 +155,7 @@ export class EnrollmentAlert {
     }
 
     if (status === EnrollmentStatus.New){
-      return BadgeLevel.Warning;
+      return BadgeLevel.Attention;
     }
 
     if (status === EnrollmentStatus.Approved){
@@ -172,4 +177,9 @@ export enum SiteAccessProgressSteps {
 export enum DeclinedReasons {
   WRONG_SITE = 'Wrong Site',
   ACCESS_NO_lONGER_REQUIRED = 'Access No Longer Required'
+}
+
+export enum AccessReasons {
+  PERSONAL_ACCESS = 'I personally access PNET',
+  NOT_PERSONAL_ACCESS = 'Not for personal access'
 }

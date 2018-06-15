@@ -59,25 +59,18 @@
   <div class="enrollment-actions">
       <span class="enrollment-icons">
         <prime-pill-badge
-             *ngIf="siteStatus === 'DeclinedEnrollment'; else regularEnrollment"
-             [alerts]="newSiteAlert"
-             [iconOnly]='false'>
-        </prime-pill-badge>
-        <ng-template #regularEnrollment>
-          <prime-pill-badge
-            [alerts]="siteAlert"
+            [alerts]="[siteAccessObject.alert]"
             [iconOnly]='false'>
-          </prime-pill-badge>
-        </ng-template>
+        </prime-pill-badge>
         <i class="fa fa-sticky-note-o mr-2" (click)="goToNotePage()"></i>
         <prime-info-button
             class="mr-2"
             [targetId]="rowData.objectId">
         </prime-info-button>
-
         <prime-accept-reject-icons
-          (onAccepted)="resetStatus('DeclinedEnrollment')"
-          (onRejected)="resetStatus('AcceptEnrollment')"
+          *ngIf="siteStatus === 'New'"
+          (onAccepted)="accept()"
+          (onRejected)="reject()"
           labelAccept="Accept Enrollment"
           labelReject="Decline Enrollment"
         ></prime-accept-reject-icons>

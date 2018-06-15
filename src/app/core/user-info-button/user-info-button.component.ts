@@ -8,6 +8,14 @@ import { growHorizontal } from '../../animations/animations';
 import { Collection } from '../../models/collections.model';
 
 
+// Enum for domains
+export enum SearchDomain {
+  Default = 'default',
+  Applicant = 'applicant',
+  Site = 'site',
+  Users = 'users'
+}
+
 @Component({
   selector: 'prime-info-button',
   templateUrl: './user-info-button.component.html',
@@ -18,6 +26,8 @@ export class InfoButtonComponent implements OnInit {
 
   /** The objectId of the target to look up. Must correspond to a Person or a Site, otherwise an error will be thrown. */
   @Input() targetId: string;
+  @Input() searchDomain: string = SearchDomain.Default;
+
   modalRef: BsModalRef;
   public target: Site | Person;
   public targetType: TargetType;
@@ -120,6 +130,10 @@ export class InfoButtonComponent implements OnInit {
     siteAccess.endDate = evt;
   }
 
+  public isApplicantSite(): boolean {
+    return  SearchDomain.Applicant === this.searchDomain;
+  }
+
   changeSite(siteObjectId, event){
     this.loadTarget(siteObjectId);
   }
@@ -138,12 +152,28 @@ export class InfoButtonComponent implements OnInit {
   }
 
   private lookupObjectId(objectId): Site | Person {
-    const person = this.dataService.findPersonByObjectId(objectId);
-    if (person) { return person; }
-    const site = this.dataService.findSiteByObjectId(objectId);
-    if (site) { return site; }
-    const collection = this.dataService.findCollectionByObjectId(objectId);
-    if (collection) { return collection.members[0]; }
+
+    console.log('Using search domain: ' + this.searchDomain);
+    switch (this.searchDomain ) {
+      case SearchDomain.Applicant:
+        console.log('Search person domain');
+        const userSite = this.dataService.findUserSiteByObjectId(objectId);
+        if (userSite) {
+          console.log('returning site', userSite);
+          return userSite; }
+        break;
+
+      case SearchDomain.Default:
+      case SearchDomain.Site:
+      case SearchDomain.Users:
+        const person = this.dataService.findPersonByObjectId(objectId);
+        if (person) { return person; }
+        const site = this.dataService.findSiteByObjectId(objectId);
+        if (site) { return site; }
+        const collection = this.dataService.findCollectionByObjectId(objectId);
+        if (collection) { return collection.members[0]; }
+        break;
+    }
 
     throw new Error('Unable to find objectId. Double check it\'s valid.');
   }

@@ -27,7 +27,10 @@ export enum BadgeLevel {
   Warning = 'warning',
   Danger = 'danger',
   Info = 'info',
-  Success = 'success'
+  Success = 'success',
+  Attention = 'attention',
+  InfoLight = 'info-light',
+  DangerLight = 'danger-light'
 }
 
 export enum RowState {
@@ -49,7 +52,21 @@ export abstract class EnrollmentRow extends Base {
     this.openState = RowState.Closed;
   }
 
+  toggleRow() {
+
+    if (this.canOpen()) {
+      this.openState = this.openState === RowState.Opened ? RowState.Closed : RowState.Opened;
+
+      if (this.openState === RowState.Opened) {
+        this.onRowOpened.emit(this);
+        // First row is open by default
+        this.siteAccessRequiringAttention[0].open = open;
+      }
+    }
+  }
+
   canOpen() {
+    console.log('canOpen');
     return this.siteAccessRequiringAttention.length >= 1;
   }
 

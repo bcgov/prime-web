@@ -31,11 +31,17 @@ export class ApplicantProfessionalComponent implements OnInit {
 
     // Clone user clas
     this._user = cloneDeep(this.primeDataService.user);
+
+    this.workingOnBehalfTotal = this._user.workingOnBehalfList.length - 1;
   }
 
   get applicant(): Person {
     return this._user;
   }
+
+  //
+  // Record related
+  //
 
   addCollegeCertification() {
     this._user.collegeCertificationList.push({
@@ -44,7 +50,7 @@ export class ApplicantProfessionalComponent implements OnInit {
       licenceClassCPType: 'pleaseSelect',
       licenceClassCRNType: 'pleaseSelect',
       licenceClassCPSType: 'pleaseSelect',
-      licenceExpiryDate: '',
+      licenceExpiryDate: null,
       advancedPracticeCertificationType: 'pleaseSelect'
     });
 
@@ -87,6 +93,54 @@ export class ApplicantProfessionalComponent implements OnInit {
 
     this.onChange();
   }
+
+  onChange() {
+    this.hasChanged = true;
+  }
+
+  onSave(val: boolean){
+    // toggles
+    this.primeDataService.user.hasCollege        = this._user.hasCollege;
+    this.primeDataService.user.isDeviceProvider  = this._user.isDeviceProvider;
+    this.primeDataService.user.isWorkingOnBehalf = this._user.isWorkingOnBehalf;
+
+    // toggle related arrays
+    this.primeDataService.user.collegeCertificationList = cloneDeep(this._user.collegeCertificationList);
+    this.primeDataService.user.deviceProviderList       = cloneDeep(this._user.deviceProviderList);
+    this.primeDataService.user.workingOnBehalfList      = cloneDeep(this._user.workingOnBehalfList);
+
+    // Self declaration related
+    this.primeDataService.user.informationContravention = cloneDeep(this._user.informationContravention);
+    this.primeDataService.user.cancelledRegistration    = cloneDeep(this._user.cancelledRegistration);
+    this.primeDataService.user.licenceCondition         = cloneDeep(this._user.licenceCondition);
+    this.primeDataService.user.revokedAccess            = cloneDeep(this._user.revokedAccess);
+
+    this.hasChanged = false;
+  }
+
+  onCancel(val: boolean){
+    // toggles
+    this._user.hasCollege        = this.primeDataService.user.hasCollege;
+    this._user.isDeviceProvider  = this.primeDataService.user.isDeviceProvider;
+    this._user.isWorkingOnBehalf = this.primeDataService.user.isWorkingOnBehalf;
+
+    // toggle related arrays
+    this._user.collegeCertificationList = cloneDeep(this.primeDataService.user.collegeCertificationList);
+    this._user.deviceProviderList       = cloneDeep(this.primeDataService.user.deviceProviderList);
+    this._user.workingOnBehalfList      = cloneDeep(this.primeDataService.user.workingOnBehalfList);
+
+    // Self declaration related
+    this._user.informationContravention = cloneDeep(this.primeDataService.user.informationContravention);
+    this._user.cancelledRegistration    = cloneDeep(this.primeDataService.user.cancelledRegistration);
+    this._user.licenceCondition         = cloneDeep(this.primeDataService.user.licenceCondition);
+    this._user.revokedAccess            = cloneDeep(this.primeDataService.user.revokedAccess);
+
+    this.hasChanged = false;
+  }
+
+  //
+  // Enum related
+  //
 
   // Make enum accessible to template
   get CollegeTypes() {
@@ -150,10 +204,15 @@ export class ApplicantProfessionalComponent implements OnInit {
     return MaxLengthTypes[selection];
   }
 
+  //
+  // Conditional layout related
+  //
+
   collegeCertificationValid(i) {
     if(  this._user.collegeCertificationList[i].collegeType !== 'pleaseSelect'
       && this._user.collegeCertificationList[i].licenceNumber.length
-      && this._user.collegeCertificationList[i].licenceExpiryDate.length !== 0
+      && this._user.collegeCertificationList[i].licenceExpiryDate !== null
+      && this._user.collegeCertificationList[i].licenceExpiryDate.valueOf() > 0
       && ((  this._user.collegeCertificationList[i].collegeType === 'CPBC'
           && this._user.collegeCertificationList[i].licenceClassCPType !== 'pleaseSelect')
         || ( this._user.collegeCertificationList[i].collegeType === 'CRNBC'
@@ -208,49 +267,5 @@ export class ApplicantProfessionalComponent implements OnInit {
     else {
       return false;
     }
-  }
-
-  onChange() {
-    this.hasChanged = true;
-  }
-
-  onSave(val: boolean){
-    // toggles
-    this.primeDataService.user.hasCollege        = this._user.hasCollege;
-    this.primeDataService.user.isDeviceProvider  = this._user.isDeviceProvider;
-    this.primeDataService.user.isWorkingOnBehalf = this._user.isWorkingOnBehalf;
-
-    // toggle related arrays
-    this.primeDataService.user.collegeCertificationList = this._user.collegeCertificationList;
-    this.primeDataService.user.deviceProviderList       = this._user.deviceProviderList;
-    this.primeDataService.user.workingOnBehalfList      = this._user.workingOnBehalfList;
-
-    // Self declaration related
-    this.primeDataService.user.informationContravention = this._user.informationContravention;
-    this.primeDataService.user.cancelledRegistration    = this._user.cancelledRegistration;
-    this.primeDataService.user.licenceCondition         = this._user.licenceCondition;
-    this.primeDataService.user.revokedAccess            = this._user.revokedAccess;
-
-    this.hasChanged = false;
-  }
-
-  onCancel(val: boolean){
-    // toggles
-    this._user.hasCollege        = this.primeDataService.user.hasCollege;
-    this._user.isDeviceProvider  = this.primeDataService.user.isDeviceProvider;
-    this._user.isWorkingOnBehalf = this.primeDataService.user.isWorkingOnBehalf;
-
-    // toggle related arrays
-    this._user.collegeCertificationList = this.primeDataService.user.collegeCertificationList;
-    this._user.deviceProviderList       = this.primeDataService.user.deviceProviderList;
-    this._user.workingOnBehalfList      = this.primeDataService.user.workingOnBehalfList;
-
-    // Self declaration related
-    this._user.informationContravention = this.primeDataService.user.informationContravention;
-    this._user.cancelledRegistration    = this.primeDataService.user.cancelledRegistration;
-    this._user.licenceCondition         = this.primeDataService.user.licenceCondition;
-    this._user.revokedAccess            = this.primeDataService.user.revokedAccess;
-
-    this.hasChanged = false;
   }
 }

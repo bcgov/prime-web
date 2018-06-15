@@ -1,26 +1,77 @@
 @import 'variables.scss';
 
+@mixin badge-border-dark($color, $percentage: 10%){
+  border: 2px solid darken($color, $percentage);
+}
+
+@mixin badge-border-light($color, $percentage: 15%){
+  border: 2px solid lighten($color, $percentage);
+}
+
+@mixin badge-light($color){
+  background-color: saturate(lighten($color, 20%), 20%);
+  @include badge-border-dark($color, 0%);
+  i { color: darken($color, 45%) }
+}
+
 :host {
   display: inline-flex;
 }
 
 .badge {
   position: relative;
+  &:first-of-type {margin-left: 1em;}
   margin-right: 1em;
   font-size: 0.8rem;
-  i { font-size: 0.9rem; }
+  i {
+    font-size: 0.9rem;
+    margin-right: 0.2em;
+  }
 
   // Slight increase from bootstrap
   padding: 0.3em 0.7em;
 }
 
 .badge-warning {
-  border: 2px solid darken($color-warning, 25%);
+  @include badge-border-dark($color-warning, 25%);
   i { color: darken($color-warning, 40%)}
 }
 
 .badge-danger {
-  border: 2px solid darken($color-danger, 10%);
+  @include badge-border-dark($color-danger);
+}
+
+.badge-success {
+  @include badge-border-light($color-success);
+}
+
+.badge-info {
+  @include badge-border-dark($color-info, 20%);
+  i { color: darken($color-info, 70%)}
+}
+
+.badge-info-light {
+  @include badge-light($color-info);
+}
+
+.bg-info-light {background-color: saturate(lighten($color-info, 20%), 20%);}
+
+.badge-danger-light {
+  @include badge-light($color-danger);
+  background-color: saturate(lighten($color-danger, 50%), 20%);
+  i { color: darken($color-danger, 10%)}
+}
+
+.bg-danger-light { background-color: saturate(lighten($color-danger, 50%), 20%)}
+
+.badge-warning-light {
+  @include badge-light($color-warning);
+}
+
+.badge-attention {
+  background-color: saturate(lighten($color-success, 50%), 40%);
+  @include badge-border-dark($color-success, 0%);
+  i { color: $color-success }
 }
 
 .count {

@@ -23,9 +23,7 @@ export class ProvisionerRowComponent extends Base implements OnInit {
 
   siteName: string;
   siteNumber: String;
-  alert: EnrollmentAlert[] = [];
-  siteStatus: string ;
-
+  siteStatus: string;
   siteAccessObject: SiteAccess;
 
   declinedReasonSelector = 'pleaseSelect';
@@ -46,38 +44,15 @@ export class ProvisionerRowComponent extends Base implements OnInit {
     const name =   this.rowData.name;
     this.siteName = name.substring(0, name.lastIndexOf(' ') - 1);
     this.siteNumber = 'Site ' + name.substring(name.lastIndexOf(' ') + 1);
-    console.log(' site is ', this.rowData);
+    // console.log(' site is ', this.rowData);
 
     this.siteAccessObject = this.rowData.siteAccess[0];
-    if (this.alert.length < 1) {
-      const randomStatusString: string = this.getRandomElFromArray(this._enrollmentStatus);
-      const status = EnrollmentStatus[randomStatusString];
-      this.siteStatus = status;
-      this.alert[0] = new EnrollmentAlert(status);
-
-    }
+    this.siteStatus = this.siteAccessObject.status;
   }
 
 
   declinedReasonValue(selection) {
     return DeclinedReasons[selection];
-  }
-
-
-   get siteAlert() {
-    if (this.alert.length < 1) {
-      const randomStatusString: string = this.getRandomElFromArray(this._enrollmentStatus);
-      const status = EnrollmentStatus[randomStatusString];
-      this.siteStatus = status;
-      this.alert[0] = new EnrollmentAlert(status);
-    }
-    return this.alert;
-  }
-
-  get newSiteAlert(){
-      const status = EnrollmentStatus['Declined'];
-      this.alert[0] = new EnrollmentAlert(status);
-     return this.alert;
   }
 
   get DeclinedReasons() {
@@ -93,28 +68,38 @@ export class ProvisionerRowComponent extends Base implements OnInit {
     return arr[Math.ceil(Math.random() * arr.length) - 1];
   }
 
-    toggleRow() {
-      if (this.canOpen()){
-        this.openState = this.openState === 'opened' ? 'closed' : 'opened';
-        if (this.openState === 'opened'){
-          this.onRowOpened.emit(this);
-        }
+  toggleRow() {
+    if (this.canOpen()) {
+      this.openState = this.openState === 'opened' ? 'closed' : 'opened';
+      if (this.openState === 'opened') {
+        this.onRowOpened.emit(this);
       }
     }
+  }
 
-    closeRow() {
-      this.openState = 'closed';
-    }
+  closeRow() {
+    this.openState = 'closed';
+  }
 
 
-    canOpen() {
-      return this.siteStatus === 'Declined';
-    }
+  canOpen() {
+    return this.siteStatus === 'Declined';
+  }
 
   resetStatus(newStatus) {
     return this.siteStatus = newStatus;
   }
 
+  accept() {
+    this.siteStatus = 'AcceptEnrollment';
+    //Status stays New, no need to change
+    // this.rowData.siteAccess[0].status = EnrollmentStatus.
+  }
+
+  reject(){
+    this.siteStatus = 'DeclinedEnrollment';
+    this.rowData.siteAccess[0].status = EnrollmentStatus.Declined;
+  }
 }
 
 

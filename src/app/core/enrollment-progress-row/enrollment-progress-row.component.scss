@@ -31,6 +31,7 @@ p:first-of-type, .fa-quote-left {
 
 .progressSlider--bar {
   display: flex;
+  position: relative;
   flex-basis: calc(100% - 20px);
   justify-content: space-between;
   background: $gray-500;
@@ -38,6 +39,18 @@ p:first-of-type, .fa-quote-left {
   margin: 0.75em auto;
 }
 
+.progressSlider--dot {
+  display: block;
+  width: 15px;
+  height: 15px;
+  background: #00800080;
+  position: absolute;
+  transform: translateY(-50%) translateX(-20%);
+  left: 0;
+  transition: 0.3s;
+  background: $gray-600;
+  border-radius: 100%;
+}
 
 .progressBarMarker {
   height: 8px;
@@ -45,8 +58,4 @@ p:first-of-type, .fa-quote-left {
   border-radius: 100%;
   background: $gray-600;
   transform: translateY(-33%);  //Center vertically
-  &.active {
-    height: 15px;
-    width: 15px;
-  }
 }

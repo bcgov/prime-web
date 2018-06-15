@@ -54,7 +54,7 @@ import { RouterModule } from '@angular/router';
     CalendarDayValidatorDirective,
     CalendarMonthValidatorDirective,
     CalendarFutureDatesDirective,
-    FileUploaderComponent,
+    // FileUploaderComponent,
     // CaptchaComponent,
     // PrimeToggleComponent, //Moving to CoreModule
     PrimeFormFooterComponent,
