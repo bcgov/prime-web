@@ -53,7 +53,7 @@ import { ProvisionerService } from './services/provisioner.service';
     CalendarDayValidatorDirective,
     CalendarMonthValidatorDirective,
     CalendarFutureDatesDirective,
-    FileUploaderComponent,
+    // FileUploaderComponent,
     // CaptchaComponent,
     // PrimeToggleComponent, //Moving to CoreModule
     PrimeFormFooterComponent,

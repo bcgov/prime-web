@@ -41,7 +41,7 @@ export class DummyDataService {
       // person.isDeviceProvider = true;
       // person.isWorkingOnBehalf = true;
       //
-      // toggle related arrays
+      // // toggle related arrays
       // person.collegeCertificationList = [
       //   { collegeType: 'CPBC',
       //     licenceNumber: 'LN_CPBC1',
