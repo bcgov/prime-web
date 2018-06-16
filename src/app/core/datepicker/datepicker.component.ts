@@ -35,7 +35,7 @@ export class DatepickerComponent implements OnInit {
   constructor() { }
 
   convertDateToSimpleDate(date: Date):IMyDate {
-    if (date === null ) { return null }
+    if (date === null || date === undefined ) { return null }
     return {
       year: date.getFullYear(),
       month: date.getMonth() + 1,
