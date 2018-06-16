@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnDestroy, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, QueryList, ViewChildren} from '@angular/core';
 import {ApplEnrollmentRowComponent, ApplEnrollmentRowItem} from '../appl-enrollment-row/appl-enrollment-row.component';
 import {ApplicantDataService} from '../../../../services/applicant-data.service';
 import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
@@ -13,13 +13,11 @@ export class ApplEnrollmentListComponent extends EnrollmentList implements OnIni
 
   @ViewChildren(ApplEnrollmentRowComponent) rowElements: QueryList<ApplEnrollmentRowComponent>;
 
-  onSave(){
-    console.log('save data');
-  }
+  @Output() onCancel = new EventEmitter<boolean>();
+  @Output() onSave = new EventEmitter<boolean>();
 
-  onCancel() {
-    console.log('cancel changes');
-  }
+  /* Flag to indicate that information page has been updated */
+  public updated: boolean;
 
   constructor(private applicantDataService: ApplicantDataService) {
     super();
@@ -33,10 +31,11 @@ export class ApplEnrollmentListComponent extends EnrollmentList implements OnIni
   /* OnInit implementation */
   ngOnInit() {
     this.data = this.rowItems;
+    this.updated = false;
   }
 
   /* OnDestroy implementation */
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.applicantDataService.enrollmentViewTypeSelector = defaultViewSelector;
   }
 
@@ -55,8 +54,27 @@ export class ApplEnrollmentListComponent extends EnrollmentList implements OnIni
       .map(x => x.closeRow());
   }
 
-  search(phrase){
+  search(phrase) {
     console.log( 'search');
+  }
+
+  // Save button clicked
+  save() {
+    console.log('save data');
+    this.onSave.emit(true);
+    this.updated = true;
+  }
+
+  // Cancel button clicked
+  cancel() {
+    console.log('cancel changes');
+    this.onCancel.emit(true);
+  }
+
+  // Updated information
+  onChange() {
+    console.log('Enrollment list - onchange');
+    this.updated = true;
   }
 
   // PRIVATE

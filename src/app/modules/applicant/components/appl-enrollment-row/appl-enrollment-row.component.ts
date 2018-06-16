@@ -4,7 +4,6 @@ import {loadInOut, openState, openStateChild, openStateDisable} from '../../../.
 import {DeclinedReasons, SiteAccess} from '../../../../models/sites.model';
 import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
 import {SearchDomain} from '../../../../core/user-info-button/user-info-button.component';
-import { cloneDeep } from 'lodash';
 
 // Specific to this component
 export interface ApplEnrollmentRowItem {
@@ -28,14 +27,12 @@ export interface ApplEnrollmentRowItem {
 export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit {
 
   @Input() rowData: ApplEnrollmentRowItem;
+  @Output() onChange = new EventEmitter<boolean>();
 
   public acceptedEnroll: boolean = false;
-
   public applicantSearch: SearchDomain = SearchDomain.Applicant; // Domain to search for user sites
 
   public declinedReasonSelector: string = 'Please Select';
-
-  private _data: ApplEnrollmentRowItem;
 
   constructor() {
     super();
@@ -45,21 +42,19 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
     if (!this.rowData) {
       return;
     }
-
-    //Clone data - new enrollments may have changes
-    this._data = cloneDeep(this.rowData);
     this.acceptedEnroll = false;
     this.siteAccessRequiringAttention.map(x => x.open = false);
   }
 
-  // onAccept and OnDecline
   onAccept() {
     console.log('Accept enrollment');
     this.acceptedEnroll = true;
+    this.onChange.emit(true);
   }
 
-  onDeclined() {
+  onDecline() {
     console.log('Declined enrollment');
+    this.onChange.emit(true);
   }
 
   onProgressChange( $event ){
@@ -67,10 +62,7 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
   }
 
   get declinedReasons() {
-    return [
-      DeclinedReasons.WRONG_SITE,
-      DeclinedReasons.ACCESS_NO_lONGER_REQUIRED
-    ];
+    return Object.keys(DeclinedReasons);
   }
 
   get hasDeclinedReason() {
@@ -107,11 +99,11 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
   /** This function is responsible for generating site access row titles depending on dashboard type */
   get siteAccessRequiringAttention(): any[] {
 
-    if (!this._data || !this._data.expandableRows) {
+    if (!this.rowData || !this.rowData.expandableRows) {
       return [];
     }
 
-    return this._data.expandableRows.map(siteAccess => {
+    return this.rowData.expandableRows.map(siteAccess => {
       siteAccess.title = `${siteAccess.site.name}`;
       return siteAccess;
     });

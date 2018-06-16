@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { Person } from '../../../../models/person.model';
-import { DummyDataService } from '../../../../services/dummy-data.service';
 import {ApplEnrollmentRowItem} from '../../components/appl-enrollment-row/appl-enrollment-row.component';
 import {Router} from '@angular/router';
+import {cloneDeep} from 'lodash';
 
 @Component({
   selector: 'prime-applicant-dashboard',
@@ -12,8 +12,10 @@ import {Router} from '@angular/router';
 })
 export class ApplicantDashboardComponent implements OnInit {
 
+  // Cloned data, original data only updated on save
+  private _userEnrol: ApplEnrollmentRowItem[];
+
   constructor(private primeDataService: PrimeDataService,
-              private dummyDataService: DummyDataService,
               private router: Router) {}
 
   ngOnInit() {
@@ -22,6 +24,8 @@ export class ApplicantDashboardComponent implements OnInit {
       const link = '/applicant/contact';
       this.router.navigate([link]);
     }
+
+    this._userEnrol = cloneDeep(this.primeDataService.getUserSiteEnrollment());
   }
 
   get applicant(): Person {
@@ -29,7 +33,8 @@ export class ApplicantDashboardComponent implements OnInit {
   }
 
   get userSiteEnrollmentData(): ApplEnrollmentRowItem[] {
-    return this.primeDataService.getUserSiteEnrollment();
+
+    return this._userEnrol;
   }
 
   get contactDone(): boolean {
@@ -42,5 +47,15 @@ export class ApplicantDashboardComponent implements OnInit {
 
   get accessAcceptanceDone(): boolean {
     return !!this.applicant.accessAcceptance;
+  }
+
+  // Applicant information needs to be updated
+  onSave() {
+    console.log('dashboard component save data');
+  }
+
+  // Applicant data needs to be reset
+  onCancel() {
+    console.log('dashboard component cancel data');
   }
 }

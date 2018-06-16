@@ -23,11 +23,9 @@ export class ApplicantProfessionalComponent implements OnInit {
 
   public hasChanged: boolean = false;
 
-  constructor(private primeDataService: PrimeDataService, private dummyDataService: DummyDataService) { }
+  constructor(private primeDataService: PrimeDataService) { }
 
   ngOnInit() {
-    // DEV ONLY! TODO: Remove.
-    this.primeDataService.user = this.dummyDataService.createPeople(1)[0];
 
     // Clone user clas
     this._user = cloneDeep(this.primeDataService.user);

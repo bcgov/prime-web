@@ -76,5 +76,7 @@
 
 <!--ApplicantEnrollmentList -->
 <prime-enrollment-list
-  [rowItems]="userSiteEnrollmentData">
+  [rowItems]="userSiteEnrollmentData"
+  (onCancel)="onCancel($event)"
+  (OnSave)="onSave($event)">
 </prime-enrollment-list>

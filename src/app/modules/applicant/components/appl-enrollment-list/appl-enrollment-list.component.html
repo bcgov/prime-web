@@ -20,9 +20,8 @@
     </form>
   </div>
   <div>
-    <!-- Buttons not functional - copied from another component -->
-    <button type="button" class="btn btn-default mx-2" (click)="onCancel()">Cancel</button>
-    <button type="button" class="btn btn-primary mx-2" (click)="onSave()">Save</button>
+    <button [disabled]="!updated" type="button" class="btn btn-default mx-2" (click)="cancel()">Cancel</button>
+    <button [disabled]="!updated" type="button" class="btn btn-primary mx-2" (click)="save()">Save</button>
   </div>
 </div>
 
@@ -30,8 +29,9 @@
   <div class="enrollment-item-inner">
     <prime-enrollment-row
       *ngFor="let item of data"
-      [rowData]='item'
-      (onRowOpened)='rowOpened($event)'>
+      [rowData]="item"
+      (onChange) = "onChange($event)"
+      (onRowOpened)="rowOpened($event)">
     </prime-enrollment-row>
   </div>
 </div>

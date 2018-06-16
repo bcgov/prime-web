@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {EnrollmentProgressRowComponent} from '../../../../core/enrollment-progress-row/enrollment-progress-row.component';
 import {growVertical} from '../../../../animations/animations';
 import {AccessReasons} from '../../../../models/sites.model';
@@ -13,16 +13,20 @@ export class AppEnrollmentProgressRowComponent extends EnrollmentProgressRowComp
 
   @Input() disableReason: boolean = true;
 
-  @Output() updated = new EventEmitter<any>();
-
-  constructor() {
+   constructor() {
     super();
   }
 
+  get accessReasons() {
+    return Object.keys(AccessReasons);
+  }
+
   get accessReason() {
-    return [
-      AccessReasons.PERSONAL_ACCESS,
-      AccessReasons.NOT_PERSONAL_ACCESS
-    ];
+    return this.data.accessReason;
+  }
+
+  set accessReason(value: string) {
+     console.log('access reason: ', value);
+    this.data.accessReason = value;
   }
 }
