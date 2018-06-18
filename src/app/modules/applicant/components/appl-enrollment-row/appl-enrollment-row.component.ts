@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {EnrollmentRow} from '../../../../core/enrollment-row/enrollment-row.class';
-import {loadInOut, openState, openStateChild, openStateDisable} from '../../../../animations/animations';
-import {DeclinedReasons, SiteAccess} from '../../../../models/sites.model';
+import {fadeIn, loadInOut, openState, openStateChild, openStateDisable} from '../../../../animations/animations';
+import {AccessReasons, DeclinedReasons, SiteAccess} from '../../../../models/sites.model';
 import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
 import {SearchDomain} from '../../../../core/user-info-button/user-info-button.component';
 
@@ -30,9 +30,8 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
   @Output() onChange = new EventEmitter<boolean>();
 
   public acceptedEnroll: boolean = false;
+  public declinedEnroll: boolean = false;
   public applicantSearch: SearchDomain = SearchDomain.Applicant; // Domain to search for user sites
-
-  public declinedReasonSelector: string = 'Please Select';
 
   constructor() {
     super();
@@ -42,7 +41,6 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
     if (!this.rowData) {
       return;
     }
-    this.acceptedEnroll = false;
     this.siteAccessRequiringAttention.map(x => x.open = false);
   }
 
@@ -54,25 +52,27 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
 
   onDecline() {
     console.log('Declined enrollment');
+    this.declinedEnroll = true;
     this.onChange.emit(true);
   }
 
-  onProgressChange( $event ){
-    console.log('onProgressChange');
+  onSelect($event) {
+    console.log('onSelect ', $event);
   }
 
   get declinedReasons() {
-    return Object.keys(DeclinedReasons);
+    const list = Object.keys(DeclinedReasons);
+    return list.map( x => {return DeclinedReasons[x]; });
   }
 
-  get hasDeclinedReason() {
-    return this.siteAccessRequiringAttention.filter(x =>  x.declinedReason ).length !== 0;
-  }
+  get declinedReason() {
+    const declinedreason = this.siteAccessRequiringAttention.map(x => {
+      return x.declinedReason; }).filter( x => x);
 
-  get userDeclinedReason() {
-    return this.siteAccessRequiringAttention.map(x => {
-      return x.declinedReason;
-    });
+    if (declinedreason.length !== 0) {
+      return declinedreason[0];
+    }
+    return 'Please Select';
   }
 
   get startDate() {

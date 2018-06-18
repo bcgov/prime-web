@@ -19,9 +19,15 @@
       </select>
     </form>
   </div>
-  <div>
-    <button [disabled]="!updated" type="button" class="btn btn-default mx-2" (click)="cancel()">Cancel</button>
-    <button [disabled]="!updated" type="button" class="btn btn-primary mx-2" (click)="save()">Save</button>
+  <div class='controls'>
+    <div *ngIf="!showSaveMessage" >
+      <button [disabled]="!updated" type="button" class="btn btn-default mx-2" (click)="cancel()">Cancel</button>
+      <button [disabled]="!updated" type="button" class="btn btn-primary mx-2" (click)="save()">Save</button>
+    </div>
+
+    <div  *ngIf="showSaveMessage" [@fadeIn]>
+      <alert type='success' (onClosed)="reset()">Saved...</alert>
+    </div>
   </div>
 </div>
 
@@ -30,7 +36,7 @@
     <prime-enrollment-row
       *ngFor="let item of data"
       [rowData]="item"
-      (onChange) = "onChange($event)"
+      (onChange) = "onChange()"
       (onRowOpened)="rowOpened($event)">
     </prime-enrollment-row>
   </div>

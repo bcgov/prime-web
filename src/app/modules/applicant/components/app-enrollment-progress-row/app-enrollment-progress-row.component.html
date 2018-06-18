@@ -2,7 +2,7 @@
 
   <div class="col">
     <i class="fa fa-quote-left fa-2x fa-pull-left" aria-hidden="true"></i>
-    <p><em>Request has been approved and is awaiting PoS Provisioning</em></p>
+    <p><em>{{description}}</em></p>
     <p><small>Requested Date: {{ data ? data.formatDateShort(data.requestDate) : 'n/a'}}</small></p>
   </div>
 
@@ -27,9 +27,10 @@
       <!-- The progress bar line / dots -->
       <div class="progressSlider--bar">
         <div class="progressBarMarker"
-             *ngFor="let x of iterableNumberOfSteps; let i = index"
-             [ngClass]="{active: i == activeStepIndex}">
+             *ngFor="let x of iterableNumberOfSteps">
         </div>
+        <div class="progressSlider--dot"
+             [style.left]="activeStepIndex * 33 + '%'"></div>
       </div>
     </div>
   </div>
@@ -39,7 +40,9 @@
     <select *ngIf="!disableReason"
             id="accessReason"
             class="form-control drop-dl-box-15 color"
-            [value]="accessReason">
+            [value]="accessReason"
+            (change)="onSelect($event)">
+      <option value="Please Select">Please Select</option>
       <option *ngFor="let reason of accessReasons" value="{{reason}}">
         {{reason}}
       </option>

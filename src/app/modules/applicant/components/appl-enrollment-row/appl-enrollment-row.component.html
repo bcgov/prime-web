@@ -4,7 +4,7 @@
     <span class="enrollment-text-main">{{rowData.title}}</span>
   </div>
   <div class="enrollment-actions">
-    <div *ngIf="!isDeclinedEnrol()" class="dates-col">
+    <div *ngIf="!isDeclinedEnrol() && !declinedEnroll" class="dates-col">
       <label for="startDt">
         Start
       </label>
@@ -16,17 +16,20 @@
     </div>
     <div *ngIf="isDeclinedEnrol()">
       <div class="col d-inline-flex flex-column">
-        <select *ngIf="!hasDeclinedReason" id="declinedReason" class="form-control drop-dl-box-15 color"
-                (change)="setDeclinedReason($event.target.value)">
-          <option value="Please Select">Please Select</option>
-          <option *ngFor="let reason of declinedReasons" value="{{reason}}">
-            {{reason}}
-          </option>
-        </select>
-        <select *ngIf="hasDeclinedReason" disabled id="declinedReason" class="form-control drop-dl-box-15 color">
-          <option value="{{userDeclinedReason}}" selected>{{userDeclinedReason}}</option>
+        <select disabled id="declinedReason" class="form-control drop-dl-box-15 color">
+          <option value="{{declinedReason}}" selected>{{declinedReason}}</option>
         </select>
       </div>
+    </div>
+    <div *ngIf="isNewEnrol() && declinedEnroll">
+      <select id="declinedReason" class="form-control drop-dl-box-15 color"
+              [value]="declinedReason"
+              (change)="onSelect($event)">
+        <option value="Please Select">Please Select</option>
+        <option *ngFor="let reason of declinedReasons" value="{{reason}}">
+          {{reason}}
+        </option>
+      </select>
     </div>
     <span class="enrollment-icons">
       <prime-pill-badge
@@ -37,7 +40,7 @@
         [targetId]="rowData.associatedObjectId"
         [searchDomain]="applicantSearch">
       </prime-info-button>
-      <prime-accept-reject-icons *ngIf="isNewEnrol() && !acceptedEnroll"
+      <prime-accept-reject-icons *ngIf="isNewEnrol() && !acceptedEnroll && !declinedEnroll"
           (onAccepted)="onAccept()"
           (onRejected)="onDecline()"
           labelAccept="Accept Enrollment"
@@ -56,8 +59,7 @@
       <prime-app-enrollment-progress-row
         [open]="siteAccess.open"
         [data]="siteAccess"
-        [disableReason] = "!isNewEnrol()"
-        (updated)="onProgressChange()">
+        [disableReason] = "!isNewEnrol()">
       </prime-app-enrollment-progress-row>
 
     </div>

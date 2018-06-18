@@ -12,9 +12,6 @@ import {cloneDeep} from 'lodash';
 })
 export class ApplicantDashboardComponent implements OnInit {
 
-  // Cloned data, original data only updated on save
-  private _userEnrol: ApplEnrollmentRowItem[];
-
   constructor(private primeDataService: PrimeDataService,
               private router: Router) {}
 
@@ -24,8 +21,6 @@ export class ApplicantDashboardComponent implements OnInit {
       const link = '/applicant/contact';
       this.router.navigate([link]);
     }
-
-    this._userEnrol = cloneDeep(this.primeDataService.getUserSiteEnrollment());
   }
 
   get applicant(): Person {
@@ -34,7 +29,7 @@ export class ApplicantDashboardComponent implements OnInit {
 
   get userSiteEnrollmentData(): ApplEnrollmentRowItem[] {
 
-    return this._userEnrol;
+    return this.primeDataService.getUserSiteEnrollment();
   }
 
   get contactDone(): boolean {

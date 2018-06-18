@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 import {EnrollmentProgressRowComponent} from '../../../../core/enrollment-progress-row/enrollment-progress-row.component';
 import {growVertical} from '../../../../animations/animations';
 import {AccessReasons} from '../../../../models/sites.model';
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'prime-app-enrollment-progress-row',
@@ -18,15 +19,18 @@ export class AppEnrollmentProgressRowComponent extends EnrollmentProgressRowComp
   }
 
   get accessReasons() {
-    return Object.keys(AccessReasons);
+     const list = Object.keys(AccessReasons);
+     return list.map( x => {return AccessReasons[x]; });
   }
 
   get accessReason() {
-    return this.data.accessReason;
+     if (isNullOrUndefined(this.data.accessReason)) {
+       return 'Please Select';
+     }
+     return this.data.accessReason;
   }
 
-  set accessReason(value: string) {
-     console.log('access reason: ', value);
-    this.data.accessReason = value;
+  onSelect($event){
+     this.data.accessReason = $event;
   }
 }
