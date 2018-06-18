@@ -81,12 +81,17 @@ export class EnrollmentRowComponent extends EnrollmentRow implements OnInit, OnD
         return siteAccess;
       });
     }
-
   }
 
    goToEnrollmentPage(){
-    const link = '/verifier/enrollment/' + this.primaryType.toLowerCase();
-    this.router.navigate([link, this.rowData.associatedObjectId]);
+    //If user selects details from verifier dash, then go to verifier details
+    if (this.router.url.indexOf('/verifier/') > -1) {
+      const link = '/verifier/details/' + this.primaryType.toLowerCase();
+      this.router.navigate([link, this.rowData.associatedObjectId]);
+    //Else if user selects details from provisioner dash, then go to provisioner details
+    } else if (this.router.url.indexOf('/provisioner/') > -1) {
+       const link = '/provisioner/details/' + this.primaryType.toLowerCase();
+       this.router.navigate([link, this.rowData.associatedObjectId]);
+     }
+    }
   }
-
-}

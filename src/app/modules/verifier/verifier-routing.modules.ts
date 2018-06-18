@@ -33,7 +33,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'enrollment',
+    path: 'details',
     children: [
       /**
        * Enrollment routes below must be duplicated, one with /:id and one
