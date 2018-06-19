@@ -1,5 +1,7 @@
 //@import "~bootstrap/scss/functions";
 //@import "~bootstrap/scss/variables";
+@import 'variables.scss';
+
 
 // TODO: use imported name for color-primary
 $color-primary: #036;
@@ -17,26 +19,6 @@ $placeholder-font-size: $note-font-size;
 .note {
   color: $note-color;
   font-size: $note-font-size;
-}
-
-.drop-dl-box-15 {
-  min-width: 4em;
-  max-width: 15em;
-}
-
-.drop-dl-box-17 {
-  min-width: 4em;
-  max-width: 17em;
-}
-
-.drop-dl-box-20 {
-  min-width: 4em;
-  max-width: 20em;
-}
-
-.drop-dl-box-26 {
-  min-width: 4em;
-  max-width: 26em;
 }
 
 .fa-plus-circle {
@@ -71,4 +53,26 @@ $placeholder-font-size: $note-font-size;
 :-moz-placeholder { /* Firefox 18- */
   color: $placeholder-color;
   font-size: $placeholder-font-size;
+}
+
+
+.applicant-row {
+  display: flex;
+  flex-flow: row wrap;
+
+  > .applicant-row--item {
+    width: auto;
+    padding: 0.5em 1em;
+    @include media-breakpoint-down(sm){
+      flex-basis: 100%;
+    }
+  }
+
+  @include media-breakpoint-up(md){
+    > .applicant-row--dropdown {
+      flex-basis: 30%;
+    }
+  }
+
+
 }

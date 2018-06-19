@@ -17,3 +17,11 @@
   // itself, seems to mostly happen in tight row layouts like the info modal.
   z-index: 0;
 }
+
+.float-label-append {
+  margin-bottom: calc(0.5rem + 2px);
+}
+
+.has-float-label {
+  flex-basis: calc(100% - 36px);
+}

@@ -1,5 +1,9 @@
 @import 'variables.scss';
 
+:host {
+  min-width: 8rem;
+}
+
 @mixin badge-border-dark($color, $percentage: 10%){
   border: 2px solid darken($color, $percentage);
 }

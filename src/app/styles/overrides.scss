@@ -135,3 +135,21 @@ h1, h2, h3,
 .tooltip {
   pointer-events: none;
 }
+
+
+.has-float-label {
+  > span, label {
+    white-space: nowrap;
+  }
+
+  select.form-control:not([size]):not([multiple]) {
+    height: calc(2.5rem + 2px);
+  }
+}
+
+// Shrink font from 150% to 125% and verticall center
+.has-float-label input:placeholder-shown:not(:focus) + *, .has-float-label select:placeholder-shown:not(:focus) + *, .has-float-label textarea:placeholder-shown:not(:focus) + * {
+  font-size: 125%;
+  opacity: .5;
+  top: .5em;
+}

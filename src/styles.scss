@@ -77,6 +77,7 @@
  @import "~font-awesome/scss/stacked";
  @import "~font-awesome/scss/icons";
  @import "~font-awesome/scss/screen-reader";
+ @import "~float-label-css/dist/float-label";
 
 @import "overrides";
 @import "additions";
@@ -213,4 +214,16 @@ thead tr.ng2-smart-titles .ng2-smart-th {padding-left: 0}
 // @media(min-width: $screen-lg) {
   .nowrap-lg { white-space: nowrap;}
   .wrap-lg { white-space: normal;}
+}
+
+.prime-input-small {
+  max-width: 10rem;
+}
+
+.prime-input-medium {
+  max-width: 20rem;
+}
+
+.prime-input-large {
+  max-width: 30rem;
 }

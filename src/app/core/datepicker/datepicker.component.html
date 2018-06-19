@@ -2,24 +2,24 @@
 
     <form *ngSwitchCase="DatepickerSizes.DEFAULT">
         <div class="input-group">
-            <input class="form-control" placeholder="Select a date"
-              ngx-mydatepicker name="mydate"
-              [(ngModel)]="model"
-              [options]="datepickerOptions"
-              #dp="ngx-mydatepicker"
-              (dateChanged)="onDateChanged($event)"
-              (click)="dp.toggleCalendar()"
-              [disabled]="disabled"/>
+          <label class="has-float-label">
+              <input class="form-control" placeholder="Select a date"
+                ngx-mydatepicker name="mydate"
+                [(ngModel)]="model"
+                [options]="datepickerOptions"
+                #dp="ngx-mydatepicker"
+                (dateChanged)="onDateChanged($event)"
+                [disabled]="disabled"/>
 
-            <span class="input-group-append">
-                <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
-                    <i class="fa fa-calendar"></i>
-                </button>
-                <button type="button" class="btn btn-default" (click)="clearDate()" [disabled]="disabled || !hasValidDate">
-                    <i class="fa fa-close"></i>
-                </button>
-            </span>
+            <span>{{labelText}}</span>
+          </label>
+          <span class="input-group-append float-label-append">
+              <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
+                  <i class="fa fa-calendar"></i>
+              </button>
+          </span>
         </div>
+
     </form>
 
     <form *ngSwitchCase="DatepickerSizes.MINI">

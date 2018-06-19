@@ -17,6 +17,8 @@ export class DatepickerComponent implements OnInit {
   @Input() date: Date;
   @Output() dateChange = new EventEmitter<Date>();
   @Input() disabled: boolean;
+  @Input() labelText: string;
+
 
   /** Format for how to display the date to the user. */
   @Input() dateFormat: string = 'dd/mm/yyyy';

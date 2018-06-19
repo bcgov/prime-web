@@ -10,13 +10,11 @@
 
 <div>
   <ul *ngFor="let item of accessAcceptances">
-
-    <h3><b>Section / Clause</b></h3>
-
-    <textarea disabled value={{item.acceptanceClause}}></textarea>
-
-    <input  type="checkbox" class="myCheckbox" [(ngModel)]="item.isAccepted">
-
+    <span class="has-float-label">
+      <h3><b>Section / Clause</b></h3>
+      <textarea disabled value={{item.acceptanceClause}}></textarea>
+      <input type="checkbox" class="myCheckbox" [(ngModel)]="item.isAccepted">
+    </span>
   </ul>
 </div>
 
