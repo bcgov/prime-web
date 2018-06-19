@@ -142,7 +142,7 @@ export class DummyDataService {
     let randomStatusString : string = this.getRandomElFromArray(Object.keys(EnrollmentStatus));
     let status: EnrollmentStatus = EnrollmentStatus[randomStatusString];
     SA.status = status;
-    if (SA.status === EnrollmentStatus.Declined){
+    if (SA.status === EnrollmentStatus.Declined) {
       // Set declined reason
       let randomReasonString : string = this.getRandomElFromArray(Object.keys(DeclinedReasons));
       let declinedReason: DeclinedReasons = DeclinedReasons[randomReasonString];
@@ -152,9 +152,11 @@ export class DummyDataService {
     SA.person = person;
 
      // Set personal or not personal access
-     let randomAccesstring : string = this.getRandomElFromArray(Object.keys(AccessReasons));
-     let accessReason: DeclinedReasons = AccessReasons[randomAccesstring];
-     SA.accessReason = accessReason;
+     if (SA.status !== EnrollmentStatus.New) {
+       let randomAccesstring: string = this.getRandomElFromArray(Object.keys(AccessReasons));
+       let accessReason: DeclinedReasons = AccessReasons[randomAccesstring];
+       SA.accessReason = accessReason;
+     }
 
     // End date is at most 4mo in future
     const today = new Date();

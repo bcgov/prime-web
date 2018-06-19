@@ -76,5 +76,7 @@
 
 <!--ApplicantEnrollmentList -->
 <prime-enrollment-list
-  [rowItems]="userSiteEnrollmentData">
+  [rowItems]="userSiteEnrollmentData"
+  (onCancel)="onCancel()"
+  (onSave)="onSave()">
 </prime-enrollment-list>
