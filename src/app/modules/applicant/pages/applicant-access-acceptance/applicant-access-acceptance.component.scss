@@ -1,22 +1,21 @@
 textarea {
   background-color: lightgrey;
-  width: 92%;
+  width: 90%;
   height: 7em;
   vertical-align:middle;
-  padding-right: 1.2em;
-  padding-left:  1.2em;
   font-size: medium;
 }
 
 
 input[type="checkbox"] {
-  padding-right: 1.5em;
   vertical-align:middle;
   position:relative;
   white-space: nowrap;
+
 }
 
 .myCheckbox {
   width: 22px;
   height: 22px;
+  margin-left: 1.2em;
 }
