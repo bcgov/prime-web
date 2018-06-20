@@ -18,6 +18,7 @@ export class ProvisionerDetailsComponent implements OnInit {
   provisionByType: ProvisionByType;
   person: Person;
   site: Site;
+  collection: Collection;
 
   constructor(private route: ActivatedRoute, private dataService: PrimeDataService) { }
 
@@ -36,11 +37,21 @@ export class ProvisionerDetailsComponent implements OnInit {
     // TODO: DEV ONLY REMOVE! Change this to get userId via URL param, look at
     // verifier-routing.module.ts for exaple with how it does it for
     // EnrollmentComponents
-    this.person = this.dataService.people[0];
-    this.site = this.dataService.sites[0];
+    //this.person = this.dataService.people[0];
+    //this.site = this.dataService.sites[0];
     //Set first 2 rows to 'New'
-    this.dataService.collections[0].members[0].siteAccess[0].status = EnrollmentStatus.New;
-    this.dataService.collections[1].members[0].siteAccess[0].status = EnrollmentStatus.New;
+    //this.dataService.collections[0].members[0].siteAccess[0].status = EnrollmentStatus.New;
+    //this.dataService.collections[1].members[0].siteAccess[0].status = EnrollmentStatus.New;
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      if (this.IS_SHOWING_PERSON) {
+        this.person = this.dataService.findPersonByObjectId(id);
+      } else {
+        this.collection = this.dataService.findCollectionByObjectId(id);
+        //get first arr value for prototype purposes
+        this.site = this.collection.members[0];
+      }
+    }
 
   }
 
@@ -61,7 +72,7 @@ export class ProvisionerDetailsComponent implements OnInit {
   }
 
   findCollectionFromSite(site: Site): Collection {
-    return this.dataService.findCollectionFromSite(site)[0];
+    return this.dataService.findCollectionFromSite(site)[1];
   }
 }
 
