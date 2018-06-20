@@ -33,6 +33,7 @@ export class ProvisionerListComponent extends EnrollmentList implements OnInit {
     this.data = this.rowItems;
     for (let i = 0; i < this.rowItems.length; i++){
       this.sites.push(this.rowItems[i].sites[0]);
+      console.log('OnInit get site list', this.rowItems[i].sites[0]);
 
     }
     console.log('OnInit (ProvisionerListComponent): ', this.data );

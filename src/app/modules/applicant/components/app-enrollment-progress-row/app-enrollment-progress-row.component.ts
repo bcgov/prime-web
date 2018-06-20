@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {EnrollmentProgressRowComponent} from '../../../../core/enrollment-progress-row/enrollment-progress-row.component';
 import {growVertical} from '../../../../animations/animations';
 import {AccessReasons} from '../../../../models/sites.model';
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'prime-app-enrollment-progress-row',
@@ -13,16 +14,23 @@ export class AppEnrollmentProgressRowComponent extends EnrollmentProgressRowComp
 
   @Input() disableReason: boolean = true;
 
-  @Output() updated = new EventEmitter<any>();
-
-  constructor() {
+   constructor() {
     super();
   }
 
+  get accessReasons() {
+     const list = Object.keys(AccessReasons);
+     return list.map( x => {return AccessReasons[x]; });
+  }
+
   get accessReason() {
-    return [
-      AccessReasons.PERSONAL_ACCESS,
-      AccessReasons.NOT_PERSONAL_ACCESS
-    ];
+     if (isNullOrUndefined(this.data.accessReason)) {
+       return 'Please Select';
+     }
+     return this.data.accessReason;
+  }
+
+  onSelect($event){
+     this.data.accessReason = $event;
   }
 }

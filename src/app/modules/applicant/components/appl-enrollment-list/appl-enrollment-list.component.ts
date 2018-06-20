@@ -1,25 +1,27 @@
-import {Component, Input, OnChanges, OnDestroy, OnInit, QueryList, ViewChildren} from '@angular/core';
-import {ApplEnrollmentRowComponent, ApplEnrollmentRowItem} from '../appl-enrollment-row/appl-enrollment-row.component';
+import {Component, EventEmitter, OnDestroy, OnInit, Output, QueryList, ViewChildren} from '@angular/core';
+import {ApplEnrollmentRowComponent} from '../appl-enrollment-row/appl-enrollment-row.component';
 import {ApplicantDataService} from '../../../../services/applicant-data.service';
 import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
 import {defaultViewSelector, EnrollmentList} from '../../../../core/enrollment-list/enrollment-list.class';
+import {fadeIn} from '../../../../animations/animations';
 
 @Component({
   selector: 'prime-enrollment-list',
   templateUrl: './appl-enrollment-list.component.html',
-  styleUrls: ['./appl-enrollment-list.component.scss']
+  styleUrls: ['./appl-enrollment-list.component.scss'],
+  animations: [fadeIn]
 })
 export class ApplEnrollmentListComponent extends EnrollmentList implements OnInit, OnDestroy {
 
   @ViewChildren(ApplEnrollmentRowComponent) rowElements: QueryList<ApplEnrollmentRowComponent>;
 
-  onSave(){
-    console.log('save data');
-  }
+  @Output() onCancel = new EventEmitter<boolean>();
+  @Output() onSave = new EventEmitter<boolean>();
 
-  onCancel() {
-    console.log('cancel changes');
-  }
+  public showSaveMessage: boolean = false;
+
+  /* Flag to indicate that information page has been updated */
+  public updated: boolean = false;
 
   constructor(private applicantDataService: ApplicantDataService) {
     super();
@@ -36,17 +38,15 @@ export class ApplEnrollmentListComponent extends EnrollmentList implements OnIni
   }
 
   /* OnDestroy implementation */
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.applicantDataService.enrollmentViewTypeSelector = defaultViewSelector;
   }
 
   // Abstract functions defined by derived class
   //Convert enum to iterable array
   get EnrollmentStatus() {
-    return [
-      EnrollmentStatus.Approved,
-      EnrollmentStatus.Declined
-    ];
+    const list = Object.keys(EnrollmentStatus);
+    return list.map( x => {return EnrollmentStatus[x]; });
   }
 
   rowOpened(item: ApplEnrollmentRowComponent) {
@@ -55,8 +55,33 @@ export class ApplEnrollmentListComponent extends EnrollmentList implements OnIni
       .map(x => x.closeRow());
   }
 
-  search(phrase){
+  search(phrase) {
     console.log( 'search');
+    this.deepSearch(phrase);
+  }
+
+  // Save button clicked
+  save() {
+    console.log('save data');
+    this.showSaveMessage = true;
+    this.onSave.emit(true);
+  }
+
+  // Cancel button clicked
+  cancel() {
+    console.log('cancel changes');
+    this.onCancel.emit(true);
+    this.reset();
+  }
+
+  // Updated information
+  onChange() {
+    console.log('Enrollment list - onchange');
+    this.updated = true;
+  }
+
+  reset(){
+    this.showSaveMessage = false;
   }
 
   // PRIVATE

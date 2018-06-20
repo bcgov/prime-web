@@ -34,7 +34,8 @@ export class SiteAccessWidgetsComponent implements OnInit {
     // it continually breaks / infinitely grows.  The height value determines if
     // the entire legend is visible.
     this.pieChartDimension = [
-      this.pieChartContainer.nativeElement.offsetWidth,
+      // HACKFIX! Changing the first value here necessary for UX changes and adding site-wide container. Need to fix and do CSS changes later when there's time.
+      this.pieChartContainer.nativeElement.offsetWidth - 50,
       this.pieChartContainer.nativeElement.offsetHeight,
     ]
   }

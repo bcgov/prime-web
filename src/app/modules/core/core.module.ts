@@ -21,6 +21,7 @@ import {EnrollmentProgressRowComponent} from '../../core/enrollment-progress-row
 import {InfoButtonComponent} from '../../core/user-info-button/user-info-button.component';
 import { AcceptRejectIconsComponent } from './components/accept-reject-icons/accept-reject-icons.component';
 import {FileUploaderComponent} from '../../core/file-uploader/file-uploader.component';
+import { PageFrameworkComponent } from './components/page-framework/page-framework.component';
 
 /** A list of all components that we want to both include and export. Since
  * CoreModule just exports components for other modules the list is pretty much
@@ -40,6 +41,7 @@ const componentList = [
   InfoButtonComponent,
   AcceptRejectIconsComponent,
   FileUploaderComponent,
+  PageFrameworkComponent,
 ];
 
 @NgModule({
