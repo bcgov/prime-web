@@ -47,9 +47,7 @@ export class ProvisionerDetailsComponent implements OnInit {
       if (this.IS_SHOWING_PERSON) {
         this.person = this.dataService.findPersonByObjectId(id);
       } else {
-        this.collection = this.dataService.findCollectionByObjectId(id);
-        //get first arr value for prototype purposes
-        this.site = this.collection.members[0];
+        this.site = this.dataService.findSiteByObjectId(id);
       }
     }
 
@@ -72,7 +70,7 @@ export class ProvisionerDetailsComponent implements OnInit {
   }
 
   findCollectionFromSite(site: Site): Collection {
-    return this.dataService.findCollectionFromSite(site)[1];
+    return this.dataService.findCollectionFromSite(site)[0];
   }
 }
 

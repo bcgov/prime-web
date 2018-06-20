@@ -75,7 +75,7 @@
             Collection
           </label>
           <div class="col-sm-9">
-            <input type="text" disabled class="form-control" id="collection" name="collection" [value]="collection?.name">
+            <input type="text" disabled class="form-control" id="collection" name="collection" [value]="findCollectionFromSite(site).name">
           </div>
         </div>
         <div class="form-group row">
@@ -83,7 +83,7 @@
             Site
           </label>
           <div class="col-sm-9">
-            <input type="text" disabled class="form-control" id="name" name="name" [value]="site?.name">
+            <input type="text" disabled class="form-control" id="name" name="name" [value]="site?.name.split(' ').splice(-1)">
           </div>
         </div>
       </div>
