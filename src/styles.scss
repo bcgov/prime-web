@@ -231,7 +231,7 @@ thead tr.ng2-smart-titles .ng2-smart-th {padding-left: 0}
   max-width: 45rem;
 }
 
-@include media-breakpoint-down(lg) {
+@include media-breakpoint-down(md) {
   .prime-input-small, .prime-input-medium, .prime-input-large {
     width: 100%;
   }
