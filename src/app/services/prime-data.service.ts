@@ -24,6 +24,23 @@ export class PrimeDataService {
   /** The logged in user interacting with the webapp. When in the Applicant dashboard, this would be the applicant. */
   user: Person = new Person();
 
+  getProvisionerBySite(): EnrollmentRowItem[] {
+
+    const result: EnrollmentRowItem[] = [];
+    this.sites.map (site => {
+      const rowItem: EnrollmentRowItem = {
+        //concat collection name with substringed site name - returns "<collection_name> | <site_number>"
+        title: this.findCollectionFromSite(site)[0].name + ' | ' + site.name.split(' ').splice(-1),
+        associatedObjectId: site.objectId,
+        sites: null,
+        users: null
+      };
+      rowItem.expandableRows = site.siteAccess;
+      result.push(rowItem);
+    });
+
+    return result;
+  }
 
   getEnrollmentBySite(): EnrollmentRowItem[] {
 

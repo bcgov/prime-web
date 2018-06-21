@@ -150,42 +150,64 @@
 
 <ng-template #siteDetails>
 
-  <div>
-    <label class="has-float-label d-block">
-      <input type="text" disabled class="form-control" id="collection" name="collection" [value]="findCollectionFromSite(site)?.name">
+  <div class="row">
 
-      <span>Collection</span>
-    </label>
+      <div class="col">
+        <div class="form-group row">
+          <label for="collection" class="col-sm-3 col-form-label">
+            Collection
+          </label>
+          <div class="col-sm-9">
+            <input type="text" disabled class="form-control" id="collection" name="collection" [value]="findCollectionFromSite(site).name">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="middleName" class="col-sm-3 col-form-label">
+            Site
+          </label>
+          <div class="col-sm-9">
+            <input type="text" disabled class="form-control" id="name" name="name" [value]="site?.name.split(' ').splice(-1)">
+          </div>
+        </div>
+      </div>
 
-    <label class="has-float-label d-block">
-      <input type="text" disabled class="form-control" id="middleName" name="middleName" [value]="person?.middleName">
+      <div class="col">
+        <div class="form-group row">
+          <label for="address" class="col-sm-3 col-form-label">
+            Address
+          </label>
+          <div class="col-sm-9">
+            <input type="text" disabled class="form-control" id="address" name="address" [value]="site?.address">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="PEC" class="col-sm-3 col-form-label">
+            PEC
+          </label>
+          <div class="col-sm-9">
+            <input type="text" disabled class="form-control" id="PEC" name="PEC" [value]="site?.PEC">
+          </div>
+        </div>
+      </div>
 
-      <span>Site</span>
-    </label>
-
-    <label class="has-float-label d-block">
-      <input type="text" disabled class="form-control" id="address" name="address" [value]="site?.address">
-
-      <span>Address</span>
-    </label>
-
-    <label class="has-float-label d-block">
-      <input type="text" disabled class="form-control" id="PEC" name="PEC" [value]="site?.PEC">
-
-      <span>PEC</span>
-    </label>
-
-    <label class="has-float-label d-block">
-      <input type="text" disabled class="form-control" id="vendor" name="vendor" [value]="site?.vendor">
-
-      <span>Vendor</span>
-    </label>
-
-    <label class="has-float-label d-block">
-      <input type="text" disabled class="form-control" id="siteType" name="siteType" [value]="site?.siteType">
-
-      <span>Site</span>
-    </label>
+      <div class="col">
+        <div class="form-group row">
+          <label for="vendor" class="col-sm-3 col-form-label">
+            Vendor
+          </label>
+          <div class="col-sm-9">
+            <input type="text" disabled class="form-control" id="vendor" name="vendor" [value]="site?.vendor">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="siteType" class="col-sm-3 col-form-label">
+            Site
+          </label>
+          <div class="col-sm-9">
+            <input type="text" disabled class="form-control" id="siteType" name="siteType" [value]="site?.siteType">
+          </div>
+        </div>
+      </div>
   </div>
 
 </ng-template>
