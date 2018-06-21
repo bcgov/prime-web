@@ -1,9 +1,4 @@
-<div class="card p-2">
-  <p>This section is for development only! Easily navigate between pages.</p>
-  <p><a routerLink="/provisioner/details/user">Provision by User</a> &amp; <a routerLink="/provisioner/details/site">Provision by Site</a></p>
-</div>
 
-<hr>
 
 <prime-core-breadcrumb>
   <div left>
@@ -12,167 +7,135 @@
   </div>
 </prime-core-breadcrumb>
 
+<prime-page-framework>
 
-<hr>
-
-<div *ngIf="IS_SHOWING_PERSON; else siteDetails">
-  <h2 class='prime-title' id="userInfo">User Information</h2>
-  <div class="row ml-5">
-    <div class="col">
-      <div class="form-group row">
-        <label for="lastName" class="col-sm-5 col-form-label">
+  <div class="row" *ngIf="IS_SHOWING_PERSON; else siteDetails">
+    <div class="col mx-3">
+      <div class="form-group row has-float-label">
+        <label for="lastName">
           Last Name
         </label>
-        <div class="col-sm-7">
-          <input type="text" readonly class="form-control" id="lastName" name="lastName" [value]="person?.lastName">
-        </div>
+        <input type="text" disabled class="form-control" id="lastName" name="lastName" [value]="person?.lastName">
       </div>
 
-      <div class="form-group row">
-        <label for="middleName" class="col-sm-5 col-form-label">
+      <div class="form-group row has-float-label">
+        <label for="middleName">
           Middle Name
         </label>
-        <div class="col-sm-7">
-          <input type="text" readonly class="form-control" id="middleName" name="middleName" [value]="person?.middleName">
-        </div>
+        <input type="text" disabled class="form-control" id="middleName" name="middleName" [value]="person?.middleName">
       </div>
 
-      <div class="form-group row">
-        <label for="firstName" class="col-sm-5 col-form-label">
+      <div class="form-group row has-float-label">
+        <label for="firstName">
           First Name
         </label>
-        <div class="col-sm-7">
-          <input type="text" readonly class="form-control" id="firstName" name="firstName" [value]="person?.firstName">
-        </div>
+        <input type="text" disabled class="form-control" id="firstName" name="firstName" [value]="person?.firstName">
       </div>
     </div>
 
-    <div class="col">
-      <div class="form-group row">
-        <label for="lastName" class="col-sm-5 col-form-label">
+    <div class="col mx-3">
+      <div class="form-group row has-float-label">
+        <label for="lastName">
           Prime User ID
         </label>
-        <div class="col-sm-7">
-          <input type="text" readonly class="form-control" id="primeUserId" name="primeUserId" [value]="person?.primeUserId">
-        </div>
+        <input type="text" disabled class="form-control" id="primeUserId" name="primeUserId" [value]="person?.primeUserId">
       </div>
 
-      <div class="form-group row">
-        <label for="middleName" class="col-sm-5 col-form-label">
+      <div class="form-group row has-float-label">
+        <label for="middleName">
           College Number
         </label>
-        <div class="col-sm-7">
-          <input type="text" readonly class="form-control" id="collegeNumber" name="collegeNumber" value="TODO">
-        </div>
+        <input type="text" disabled class="form-control" id="collegeNumber" name="collegeNumber" value="TODO">
       </div>
 
-      <div class="form-group row">
-        <label for="firstName" class="col-sm-5 col-form-label">
+      <div class="form-group row has-float-label">
+        <label for="firstName">
           License Number
         </label>
-        <div class="col-sm-7">
-          <input type="text" readonly class="form-control" id="licenseNumber" name="licenseNumber" value="TODO">
-        </div>
+        <input type="text" disabled class="form-control" id="licenseNumber" name="licenseNumber" value="TODO">
       </div>
     </div>
 
 
-    <div class="col">
-      <div class="form-group row">
-        <label for="email" class="col-sm-3 col-form-label">
+    <div class="col mx-3">
+      <div class="form-group row has-float-label">
+        <label for="email">
           Email
         </label>
-        <div class="col-sm-9">
-          <input type="text" readonly class="form-control" id="email" name="email" [value]="person?.email">
-        </div>
+        <input type="text" disabled class="form-control" id="email" name="email" [value]="person?.email">
       </div>
-      <div class="form-group row">
-        <label for="phone" class="col-sm-5 col-form-label">
+      <div class="form-group row has-float-label">
+        <label for="phone">
           Phone number
         </label>
-        <div class="col-sm-7">
-          <input type="text" readonly class="form-control" id="phone" name="phone" [value]="person?.phone">
-        </div>
+        <input type="text" disabled class="form-control" id="phone" name="phone" [value]="person?.phone">
       </div>
     </div>
+
   </div>
-</div>
 
+  <ng-template #siteDetails>
+    <div class="row">
 
-<ng-template #siteDetails>
-  <h2 class='prime-title' id="siteInfo">Site Information</h2>
-  <div class="row ml-5">
-    <div class="col">
-      <div class="form-group row">
-        <label for="email" class="col-sm-3 col-form-label">
-          Collection
-        </label>
-        <div class="col-sm-8">
-          <input type="text" readonly class="form-control" id="collection" name="collection" [value]="findCollectionFromSite(site)?.name">
+      <div class="col mx-3">
+        <div class="form-group row has-float-label">
+          <label for="collection">
+            Collection
+          </label>
+          <input type="text" disabled class="form-control" id="collection" name="collection" [value]="findCollectionFromSite(site)?.name">
+        </div>
+        <div class="form-group row has-float-label">
+          <label for="middleName">
+            Site
+          </label>
+          <input type="text" disabled class="form-control" id="name" name="name" [value]="site?.name.split(' ').splice(-1)">
         </div>
       </div>
-      <div class="form-group row">
-        <label for="phone" class="col-sm-3 col-form-label">
-          Site
-        </label>
-        <div class="col-sm-8">
-          <input type="text" readonly class="form-control" id="middleName" name="middleName" [value]="person?.middleName">
+
+      <div class="col mx-3">
+        <div class="form-group row has-float-label">
+          <label for="address">
+            Address
+          </label>
+          <input type="text" disabled class="form-control" id="address" name="address" [value]="site?.address">
+        </div>
+        <div class="form-group row has-float-label">
+          <label for="PEC">
+            PEC
+          </label>
+          <input type="text" disabled class="form-control" id="PEC" name="PEC" [value]="site?.PEC">
         </div>
       </div>
+
+      <div class="col mx-3">
+        <div class="form-group row has-float-label">
+          <label for="vendor">
+            Vendor
+          </label>
+          <input type="text" disabled class="form-control" id="vendor" name="vendor" [value]="site?.vendor">
+        </div>
+        <div class="form-group row has-float-label">
+          <label for="siteType">
+            Site
+          </label>
+          <input type="text" disabled class="form-control" id="siteType" name="siteType" [value]="site?.siteType">
+        </div>
+      </div>
+
     </div>
+  </ng-template>
 
-    <div class="col">
-      <div class="form-group row">
-        <label for="email" class="col-sm-3 col-form-label">
-          Address
-        </label>
-        <div class="col-sm-9">
-          <input type="text" readonly class="form-control" id="address" name="address" [value]="site?.address">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="phone" class="col-sm-3 col-form-label">
-          PEC
-        </label>
-        <div class="col-sm-8">
-          <input type="text" readonly class="form-control" id="PEC" name="PEC" [value]="site?.PEC">
-        </div>
-      </div>
-    </div>
-
-    <div class="col">
-      <div class="form-group row">
-        <label for="email" class="col-sm-3 col-form-label">
-          Vendor
-        </label>
-        <div class="col-sm-8">
-          <input type="text" readonly class="form-control" id="vendor" name="vendor" [value]="site?.vendor">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="phone" class="col-sm-3 col-form-label">
-          Site Type
-        </label>
-        <div class="col-sm-8">
-          <input type="text" readonly class="form-control" id="siteType" name="siteType" [value]="site?.siteType">
-        </div>
-      </div>
-    </div>
-  </div>
-</ng-template>
+</prime-page-framework>
 
 <div *ngIf="IS_SHOWING_PERSON; else userList">
   <prime-provisioner-list
     [rowItems]="provisionerSiteData"
-    primaryType='Site'
+    primaryType='User'
   ></prime-provisioner-list>
 </div>
 <ng-template #userList>
   <prime-provisioner-list
     [rowItems]="provisionerUserData"
-    primaryType='User'
+    primaryType='Site'
   ></prime-provisioner-list>
 </ng-template>
-
-
-

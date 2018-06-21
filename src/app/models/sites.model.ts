@@ -4,6 +4,7 @@ import { EnrollmentStatus } from './enrollment-status.enum';
 import { Person, Role, Verifier, Provisioner } from './person.model';
 import { Address } from './addresses.model';
 import {BadgeLevel} from '../core/enrollment-row/enrollment-row.class';
+import {st} from '@angular/core/src/render3';
 
 //-----------------------------------------------------------------------------
 // SITES
@@ -26,6 +27,7 @@ export class Site extends Base {
   endDate: string;
   posUserId: string;
   provisionedDate: string;
+  collegeId: string;
 
   constructor() {
     super();

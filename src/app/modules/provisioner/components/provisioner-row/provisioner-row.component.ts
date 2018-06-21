@@ -2,9 +2,10 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 import {Base} from '../../../../core/base/base.class';
 
-import {DeclinedReasons, EnrollmentAlert, Site, SiteAccess} from '../../../../models/sites.model';
+import {DeclinedReasons, Site, SiteAccess} from '../../../../models/sites.model';
 import {loadInOut, openState, openStateChild, openStateDisable} from '../../../../animations/animations';
 import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
+import {EnrollmentRowItem} from '../../../verifier/components/enrollment-row/enrollment-row.component';
 
 
 @Component({
@@ -15,8 +16,8 @@ import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
 })
 export class ProvisionerRowComponent extends Base implements OnInit {
 
-  @Input() rowData: Site;
-  @Input() primaryType: 'User'|'Site'= 'Site';
+  @Input() rowData: EnrollmentRowItem;
+  @Input() primaryType: 'User'|'Site';
 
   @Output() onRowOpened = new EventEmitter<any>();
   openState: String = 'closed';
@@ -41,12 +42,12 @@ export class ProvisionerRowComponent extends Base implements OnInit {
 
   ngOnInit() {
     if (!this.rowData ) {return}
-    const name =   this.rowData.name;
+    console.log('ngOnInit get row data is ' , this.rowData);
+
+    const name = this.rowData.sites[0].name;
     this.siteName = name.substring(0, name.lastIndexOf(' ') - 1);
     this.siteNumber = 'Site ' + name.substring(name.lastIndexOf(' ') + 1);
-    // console.log(' site is ', this.rowData);
-
-    this.siteAccessObject = this.rowData.siteAccess[0];
+    this.siteAccessObject = this.rowData.sites[0].siteAccess[0];
     this.siteStatus = this.siteAccessObject.status;
   }
 
@@ -86,9 +87,6 @@ export class ProvisionerRowComponent extends Base implements OnInit {
     return this.siteStatus === 'Declined';
   }
 
-  resetStatus(newStatus) {
-    return this.siteStatus = newStatus;
-  }
 
   accept() {
     this.siteStatus = 'AcceptEnrollment';
@@ -98,7 +96,7 @@ export class ProvisionerRowComponent extends Base implements OnInit {
 
   reject(){
     this.siteStatus = 'DeclinedEnrollment';
-    this.rowData.siteAccess[0].status = EnrollmentStatus.Declined;
+    this.rowData.sites[0].siteAccess[0].status = EnrollmentStatus.Declined;
   }
 }
 
