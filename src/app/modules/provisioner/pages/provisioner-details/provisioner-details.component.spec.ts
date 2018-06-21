@@ -16,6 +16,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { TooltipModule } from 'ngx-bootstrap';
 import { ProvisionerListComponent } from '../../components/provisioner-list/provisioner-list.component';
 import { ProvisionerDashBySiteComponent } from '../provisioner-dashboard/provisioner-dash-by-site/provisioner-dash-by-site.component';
+import { ProvisionerDashByUserComponent } from '../provisioner-dashboard/provisioner-dash-by-user/provisioner-dash-by-user.component';
 
 describe('ProvisionerDetailsComponent', () => {
   let component: ProvisionerDetailsComponent;
@@ -23,14 +24,17 @@ describe('ProvisionerDetailsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProvisionerDetailsComponent, ProvisionerRowComponent, ProvisionerDashboardComponent, ProvisionerWidgetsComponent, ProvisionerListComponent, ProvisionerRowComponent, ProvisionerDashBySiteComponent  ],
+      declarations: [ ProvisionerDetailsComponent, ProvisionerRowComponent, ProvisionerDashboardComponent, ProvisionerWidgetsComponent, ProvisionerListComponent, ProvisionerRowComponent, ProvisionerDashBySiteComponent, ProvisionerDashByUserComponent  ],
       imports: [ CoreModule, RouterTestingModule.withRoutes(routes), VerifierModule, NgxChartsModule, TooltipModule.forRoot() ],
       providers: [ PrimeDataService,
 
         // Mock the route "data" fields
         {
           provide: ActivatedRoute,
-          useValue: { data: of({type: "user"}) }
+          useValue: {
+            data: of({type: "user"}),
+            snapshot: { paramMap:  { get: () => { return null; } } }
+          }
         }
       ]
     })

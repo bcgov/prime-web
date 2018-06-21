@@ -7,7 +7,7 @@ import { ApplicantProfessionalComponent } from './pages/applicant-professional/a
 
 
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: 'dashboard',
     component: ApplicantDashboardComponent,

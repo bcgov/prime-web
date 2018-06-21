@@ -12,10 +12,117 @@
   </div>
 </prime-core-breadcrumb>
 
-
-<!-- <hr> -->
+<hr>
 
 <prime-page-framework>
+
+<div class="row" *ngIf="IS_SHOWING_PERSON; else siteDetails">
+  <div class="col">
+    <div class="form-group row">
+      <label for="lastName" class="col-md-4 col-form-label">
+        Last Name
+      </label>
+      <div class="col-sm-8">
+        <input type="text" disabled class="form-control" id="lastName" name="lastName" [value]="person?.lastName">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="middleName" class="col-md-4 col-form-label">
+        Middle Name
+      </label>
+      <div class="col-sm-8">
+        <input type="text" disabled class="form-control" id="middleName" name="middleName" [value]="person?.middleName">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="firstName" class="col-md-4 col-form-label">
+        First Name
+      </label>
+      <div class="col-sm-8">
+        <input type="text" disabled class="form-control" id="firstName" name="firstName" [value]="person?.firstName">
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="form-group row">
+      <label for="lastName" class="col-sm-3 col-form-label">
+        Prime User ID
+      </label>
+      <div class="col-sm-9">
+        <input type="text" disabled class="form-control" id="primeUserId" name="primeUserId" [value]="person?.primeUserId">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="middleName" class="col-sm-3 col-form-label">
+        College Number
+      </label>
+      <div class="col-sm-9">
+        <input type="text" disabled class="form-control" id="collegeNumber" name="collegeNumber" value="TODO">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="firstName" class="col-sm-3 col-form-label">
+        License Number
+      </label>
+      <div class="col-sm-9">
+        <input type="text" disabled class="form-control" id="licenseNumber" name="licenseNumber" value="TODO">
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col">
+    <div class="form-group row">
+      <label for="email" class="col-sm-3 col-form-label">
+        Email
+      </label>
+      <div class="col-sm-9">
+        <input type="text" disabled class="form-control" id="email" name="email" [value]="person?.email">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="phone" class="col-sm-3 col-form-label">
+        Phone number
+      </label>
+      <div class="col-sm-9">
+        <input type="text" disabled class="form-control" id="phone" name="phone" [value]="person?.phone">
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!--
+<div *ngIf="IS_SHOWING_PERSON; else siteDetails">
+
+
+  <label class="has-float-label d-block">
+    <input type="text" disabled class="form-control" id="lastName" name="lastName" [value]="person?.lastName">
+    <span>Last Name</span>
+  </label>
+
+  <label class="has-float-label d-block">
+    <input type="text" disabled class="form-control" id="middleName" name="middleName" [value]="person?.middleName">
+
+    <span>Middle Name</span>
+  </label>
+
+  <label class="has-float-label d-block">
+    <input type="text" disabled class="form-control" id="firstName" name="firstName" [value]="person?.firstName">
+
+    <span>First Name</span>
+  </label>
+
+  <label class="has-float-label d-block">
+    <input type="text" disabled class="form-control" id="primeUserId" name="primeUserId" [value]="person?.primeUserId">
+
+    <span>Prime User ID</span>
+  </label>
 
   <div *ngIf="IS_SHOWING_PERSON; else siteDetails">
 
@@ -24,88 +131,74 @@
       <span>Last Name</span>
     </label>
 
-    <label class="has-float-label d-block">
-      <input type="text" disabled class="form-control" id="middleName" name="middleName" [value]="person?.middleName">
+    <span>Phone Number</span>
+  </label>
+</div> -->
 
-      <span>Middle Name</span>
-    </label>
 
-    <label class="has-float-label d-block">
-      <input type="text" disabled class="form-control" id="firstName" name="firstName" [value]="person?.firstName">
-
-      <span>First Name</span>
-    </label>
-
-    <label class="has-float-label d-block">
-      <input type="text" disabled class="form-control" id="primeUserId" name="primeUserId" [value]="person?.primeUserId">
-
-      <span>Prime User ID</span>
-    </label>
-
-    <label class="has-float-label d-block">
-      <input type="text" disabled class="form-control" id="collegeNumber" name="collegeNumber" value="TODO">
-
-      <span>College Number</span>
-    </label>
-
-    <label class="has-float-label d-block">
-      <input type="text" disabled class="form-control" id="licenseNumber" name="licenseNumber" value="TODO">
-
-      <span>License Number</span>
-    </label>
-
-    <label class="has-float-label d-block">
-      <input type="text" disabled class="form-control" id="email" name="email" [value]="person?.email">
-
-      <span>Email</span>
-    </label>
-
-    <label class="has-float-label d-block">
-      <input type="text" disabled class="form-control" id="phone" name="phone" [value]="person?.phone">
-
-      <span>Phone Number</span>
-    </label>
-  </div>
 
   <ng-template #siteDetails>
 
-    <div>
-      <label class="has-float-label d-block">
-        <input type="text" disabled class="form-control" id="collection" name="collection" [value]="findCollectionFromSite(site)?.name">
 
-        <span>Collection</span>
-      </label>
+  <div class="row">
 
-      <label class="has-float-label d-block">
-        <input type="text" disabled class="form-control" id="middleName" name="middleName" [value]="person?.middleName">
-
-        <span>Site</span>
-      </label>
-
-      <label class="has-float-label d-block">
-        <input type="text" disabled class="form-control" id="address" name="address" [value]="site?.address">
-
-        <span>Address</span>
-      </label>
-
-      <label class="has-float-label d-block">
-        <input type="text" disabled class="form-control" id="PEC" name="PEC" [value]="site?.PEC">
-
-        <span>PEC</span>
-      </label>
-
-      <label class="has-float-label d-block">
-        <input type="text" disabled class="form-control" id="vendor" name="vendor" [value]="site?.vendor">
-
-        <span>Vendor</span>
-      </label>
-
-      <label class="has-float-label d-block">
-        <input type="text" disabled class="form-control" id="siteType" name="siteType" [value]="site?.siteType">
-
-        <span>Site</span>
-      </label>
+    <div class="col">
+      <div class="form-group row">
+        <label for="collection" class="col-sm-3 col-form-label">
+          Collection
+        </label>
+        <div class="col-sm-9">
+          <input type="text" disabled class="form-control" id="collection" name="collection" [value]="findCollectionFromSite(site)?.name">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="middleName" class="col-sm-3 col-form-label">
+          Site
+        </label>
+        <div class="col-sm-9">
+          <input type="text" disabled class="form-control" id="name" name="name" [value]="site?.name.split(' ').splice(-1)">
+        </div>
+      </div>
     </div>
+
+    <div class="col">
+      <div class="form-group row">
+        <label for="address" class="col-sm-3 col-form-label">
+          Address
+        </label>
+        <div class="col-sm-9">
+          <input type="text" disabled class="form-control" id="address" name="address" [value]="site?.address">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="PEC" class="col-sm-3 col-form-label">
+          PEC
+        </label>
+        <div class="col-sm-9">
+          <input type="text" disabled class="form-control" id="PEC" name="PEC" [value]="site?.PEC">
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="form-group row">
+        <label for="vendor" class="col-sm-3 col-form-label">
+          Vendor
+        </label>
+        <div class="col-sm-9">
+          <input type="text" disabled class="form-control" id="vendor" name="vendor" [value]="site?.vendor">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="siteType" class="col-sm-3 col-form-label">
+          Site
+        </label>
+        <div class="col-sm-9">
+          <input type="text" disabled class="form-control" id="siteType" name="siteType" [value]="site?.siteType">
+        </div>
+      </div>
+    </div>
+</div>
 
   </ng-template>
 
