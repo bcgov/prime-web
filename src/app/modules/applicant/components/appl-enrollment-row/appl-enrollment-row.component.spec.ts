@@ -5,7 +5,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from '../../../core/core.module';
 import { RouterTestingModule } from '@angular/router/testing';
 
-describe('ApplEnrollmentRowComponent', () => {
+xdescribe('ApplEnrollmentRowComponent', () => {
   let component: ApplEnrollmentRowComponent;
   let fixture: ComponentFixture<ApplEnrollmentRowComponent>;
 

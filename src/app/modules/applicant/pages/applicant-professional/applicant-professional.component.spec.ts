@@ -10,10 +10,12 @@ import {FormsModule} from '@angular/forms';
 import {PrimeDataModule} from '../../../prime-data/prime-data.module';
 import {PrimeDataService} from '../../../../services/prime-data.service';
 import { WizardProgressBarComponent } from '../../../core/components/wizard-progress-bar/wizard-progress-bar.component';
-import { AlertModule, ProgressbarModule } from 'ngx-bootstrap';
+import { AlertModule, ProgressbarModule, ModalModule } from 'ngx-bootstrap';
 import { CoreBreadcrumbComponent } from '../../../core/components/core-breadcrumb/core-breadcrumb.component';
 import { ApplicantDataService } from '../../../../services/applicant-data.service';
 import { DummyDataService } from '../../../../services/dummy-data.service';
+import { FileUploaderComponent } from '../../../../core/file-uploader/file-uploader.component';
+import { PageFrameworkComponent } from '../../../core/components/page-framework/page-framework.component';
 
 describe('ApplicantProfessionalComponent', () => {
   let component: ApplicantProfessionalComponent;
@@ -21,8 +23,8 @@ describe('ApplicantProfessionalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ApplicantProfessionalComponent, ApplicantBreadcrumbsComponent, PrimeToggleComponent, DatepickerComponent, WizardProgressBarComponent, CoreBreadcrumbComponent],
-      imports: [RouterTestingModule, NgxMyDatePickerModule.forRoot(), FormsModule, PrimeDataModule.forRoot(), AlertModule.forRoot(), ProgressbarModule.forRoot()],
+      declarations: [ ApplicantProfessionalComponent, ApplicantBreadcrumbsComponent, PrimeToggleComponent, DatepickerComponent, WizardProgressBarComponent, CoreBreadcrumbComponent, FileUploaderComponent, PageFrameworkComponent],
+      imports: [RouterTestingModule, NgxMyDatePickerModule.forRoot(), FormsModule, PrimeDataModule.forRoot(), AlertModule.forRoot(), ProgressbarModule.forRoot(), ModalModule.forRoot()],
       providers: [PrimeDataService, ApplicantDataService, DummyDataService]
     })
     .compileComponents();

@@ -16,6 +16,8 @@ export class EnrollmentProgressRowComponent implements OnInit {
   @Input() data: SiteAccess;
 
   get description(): string {
+    if (!this.data) { return }
+
     const status = this.data.status.toLowerCase();
     let stage = this.data.progress.toString();
     if (stage === SiteAccessProgressSteps.Provisioner) {
