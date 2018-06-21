@@ -1,5 +1,5 @@
 <prime-applicant-breadcrumbs
-  pageName="User Access Acceptance"
+  pageName="Access Acceptance"
   previousPageLink="/applicant/professional"
   [shouldDisableContinue]="disableContinue()"
   [showControls]="shouldShowControls()"
@@ -7,16 +7,16 @@
   (onCancel)="cancel()">
 </prime-applicant-breadcrumbs>
 
+<prime-page-framework>
 
-<div>
-  <ul *ngFor="let item of accessAcceptances">
-    <span class="has-float-label">
-      <h3><b>Section / Clause</b></h3>
-      <textarea disabled value={{item.acceptanceClause}}></textarea>
-      <input type="checkbox" class="myCheckbox" [(ngModel)]="item.isAccepted">
-    </span>
-  </ul>
-</div>
+  <div>
+    <ul *ngFor="let item of accessAcceptances">
+      <span class="has-float-label">
+        <h3><b>Section / Clause</b></h3>
+        <textarea disabled value={{item.acceptanceClause}}></textarea>
+        <input type="checkbox" class="myCheckbox" [(ngModel)]="item.isAccepted">
+      </span>
+    </ul>
+  </div>
 
-
-
+</prime-page-framework>

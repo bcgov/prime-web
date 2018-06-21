@@ -24,12 +24,15 @@ $container-max-widths: (
     sm: 540,
     md: 720px,
     lg: 960px,
-    xl: 1140px
+    // xl: 1140px
+    xl: 1400px
 );
 
 //------------------------------------------------------------------------------
 // Custom Variables
 //------------------------------------------------------------------------------
+
+$container-gutter-size: 5rem;
 
 $color-primary: #036;
 $color-secondary: #fcba19;

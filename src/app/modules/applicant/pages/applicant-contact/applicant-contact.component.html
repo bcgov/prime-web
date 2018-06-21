@@ -18,7 +18,7 @@
       </div>
 
       <label class="has-float-label">
-        <input type="text" class="form-control input-readonly" id="lastName" name="lastName" [ngModel]="applicant?.lastName" disabled
+        <input type="text" class="form-control input-readonly prime-input-large" id="lastName" name="lastName" [ngModel]="applicant?.lastName" disabled
           placeholder=" ">
         <span>Last Name</span>
       </label>
@@ -30,14 +30,14 @@
 
 
       <label class="has-float-label">
-        <input type="text" class="form-control" id="firstName" name="firstName" [ngModel]="applicant?.firstName" disabled>
+        <input type="text" class="form-control prime-input-large" id="firstName" name="firstName" [ngModel]="applicant?.firstName" disabled>
         <span>First Name</span>
       </label>
 
 
 
       <label class="has-float-label">
-        <input type="text" class="form-control" id="address" name="address" [ngModel]="applicant.address?.street" disabled>
+        <input type="text" class="form-control prime-input-large" id="address" name="address" [ngModel]="applicant.address?.street" disabled>
         <span>Address</span>
       </label>
 
@@ -73,11 +73,11 @@
   <form>
     <div>
       <label class="has-float-label">
-        <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="applicant.phone" (input)="onChange()" placeholder=" ">
+        <input type="text" class="form-control prime-input-large" id="phone" name="phone" [(ngModel)]="applicant.phone" (input)="onChange()" placeholder=" ">
         <span>Phone</span>
       </label>
       <label class="has-float-label">
-        <input type="text" class="form-control" id="email" name="email" [(ngModel)]="applicant.email" (input)="onChange()" placeholder=" ">
+        <input type="text" class="form-control prime-input-large" id="email" name="email" [(ngModel)]="applicant.email" (input)="onChange()" placeholder=" ">
         <span>Email</span>
       </label>
       <!-- We want this Contact Information section to appear to have 3 columns so it aligns with the Regstration Information section. -->
@@ -97,8 +97,8 @@
 
 
         <div class="has-float-label">
-          <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control" id="mailAdress" name="mailAddress" [(ngModel)]="applicant.mailAddress.street" (input) = "onChange()"  placeholder=" ">
-          <input *ngIf = "applicant.useRegAddress" type="text" class="form-control" id="mailAdress" name="mailAddress" [ngModel]="applicant.address?.street" (ngModelChange)="updateStreet($event)"  placeholder=" ">
+          <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control prime-input-large" id="mailAdress" name="mailAddress" [(ngModel)]="applicant.mailAddress.street" (input) = "onChange()"  placeholder=" ">
+          <input *ngIf = "applicant.useRegAddress" type="text" class="form-control prime-input-large" id="mailAdress" name="mailAddress" [ngModel]="applicant.address?.street" (ngModelChange)="updateStreet($event)"  placeholder=" ">
           <label for="mailAdress">Address</label>
         </div>
 

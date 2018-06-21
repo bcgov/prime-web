@@ -1,5 +1,9 @@
-<prime-applicant-breadcrumbs pageName="Professional" nextPageLink="/applicant/access-acceptance" previousPageLink="/applicant/contact"
-  [showControls]="hasChanged" (onSave)="onSave($event)" (onCancel)="onCancel($event)">
+<prime-applicant-breadcrumbs
+  pageName="Professional"
+  nextPageLink="/applicant/access-acceptance" previousPageLink="/applicant/contact"
+  [showControls]="hasChanged"
+  (onSave)="onSave($event)"
+  (onCancel)="onCancel($event)">
 </prime-applicant-breadcrumbs>
 
 <prime-page-framework>
@@ -13,7 +17,7 @@
     <ng-container *ngIf="applicant.hasCollege === true">
       <div class='applicant-row border p-3' *ngFor="let collegeCertificationRecord of applicant.collegeCertificationList; let i = index">
 
-          <div class="applicant-row--item applicant-row--dropdown">
+          <div class="applicant-row--item prime-input-large">
             <label class="has-float-label">
               <select id="collegeTypesType" class="form-control" [(ngModel)]="collegeCertificationRecord.collegeType" (input)="onChange()">
                 <option value="pleaseSelect" disabled selected>Select</option>
@@ -26,21 +30,21 @@
 
           </div>
           <ng-container *ngIf="applicant.collegeCertificationList[i].collegeType !== 'pleaseSelect'">
-            <div class="applicant-row--item">
+            <div class="applicant-row--item prime-input-medium">
               <label class="has-float-label">
                 <input type="text" name="collegeNumber" id="collegeNumber" [value]="collegeCurrValue(applicant.collegeCertificationList[i].collegeType)"
                   class="form-control" disabled>
                 <span>College number</span>
               </label>
             </div>
-            <div class="applicant-row--item">
+            <div class="applicant-row--item prime-input-medium">
               <label class="has-float-label">
                 <input type="text" name="licenceNumber" id="licenceNumber" [(ngModel)]="collegeCertificationRecord.licenceNumber" maxlength="{{maxLengthValue('LICENCE_NUMBER')}}"
                   class="form-control" (input)="onChange()" placeholder=" ">
                 <span>License Number</span>
               </label>
             </div>
-            <div *ngIf="applicant.collegeCertificationList[i].collegeType === 'CPBC'" class="applicant-row--item">
+            <div *ngIf="applicant.collegeCertificationList[i].collegeType === 'CPBC'" class="applicant-row--item prime-input-large">
               <label class="has-float-label">
                 <select id="licenceClassCP" class="form-control" [(ngModel)]="collegeCertificationRecord.licenceClassCPType"
                   (input)="onChange()">
@@ -52,7 +56,7 @@
                 <span>License Class</span>
               </label>
             </div>
-            <div *ngIf="applicant.collegeCertificationList[i].collegeType === 'CRNBC'" class="applicant-row--item">
+            <div *ngIf="applicant.collegeCertificationList[i].collegeType === 'CRNBC'" class="applicant-row--item prime-input-large">
               <label class="has-float-label">
                 <select id="licenceClassCRN" class="form-control" [(ngModel)]="collegeCertificationRecord.licenceClassCRNType"
                   (input)="onChange()">
@@ -64,7 +68,7 @@
                 <span>License Class</span>
               </label>
             </div>
-            <div *ngIf="applicant.collegeCertificationList[i].collegeType === 'CPSBC'" class="applicant-row--item">
+            <div *ngIf="applicant.collegeCertificationList[i].collegeType === 'CPSBC'" class="applicant-row--item prime-input-large">
               <label class="has-float-label">
                 <select id="licenceClassCPS" class="form-control" [(ngModel)]="collegeCertificationRecord.licenceClassCPSType" (input)="onChange()">
                   <option value="pleaseSelect" disabled selected>Select</option>
@@ -75,11 +79,11 @@
                 <span>License Class</span>
               </label>
             </div>
-            <div class="applicant-row--item">
+            <div class="applicant-row--item prime-input-medium">
               <!-- <label for="">Licence Expiry</label> -->
               <prime-datepicker dateFormat="yyyy/mm/dd" [(date)]="collegeCertificationRecord.licenceExpiryDate" labelText="License Expiry"></prime-datepicker>
             </div>
-            <div *ngIf="applicant.collegeCertificationList[i].collegeType === 'CRNBC'" class="applicant-row--item">
+            <div *ngIf="applicant.collegeCertificationList[i].collegeType === 'CRNBC'" class="applicant-row--item prime-input-large">
               <label class="has-float-label">
                 <select id="advancedPracticeCertification" class="form-control" [(ngModel)]="collegeCertificationRecord.advancedPracticeCertificationType"
                   (input)="onChange()">
@@ -122,7 +126,7 @@
 
 
     <ng-container *ngIf="applicant.isDeviceProvider === true">
-      <div class='d-flex justify-content-between border p-3' *ngFor="let deviceProviderRecord of applicant.deviceProviderList; let i = index">
+      <div class='d-flex justify-content-between border p-3 prime-input-medium' *ngFor="let deviceProviderRecord of applicant.deviceProviderList; let i = index">
           <label class="has-float-label">
             <input type="text" name="deviceProviderNumber" id="deviceProviderNumber" [(ngModel)]="deviceProviderRecord.dpNumber" maxlength="{{maxLengthValue('DEVICE_PROVIDER_NUMBER')}}"
               class="form-control" (input)="onChange()">
@@ -156,9 +160,9 @@
     </label>
 
     <ng-container *ngIf="applicant.isWorkingOnBehalf === true">
-      <div class='d-flex justify-content-between border p-3' *ngFor="let workingOnBehalfRecord of applicant.workingOnBehalfList; let i = index">
-        <div class="row">
-          <div class="col d-inline-flex flex-column">
+      <div class='applicant-row border p-3' *ngFor="let workingOnBehalfRecord of applicant.workingOnBehalfList; let i = index">
+        <div>
+          <div class="applicant-row--item prime-input-large">
             <label class="has-float-label">
               <select id="workingOnBehalfTitle" class="form-control row-dropbox-20" [(ngModel)]="workingOnBehalfRecord.jobTitle" (input)="onChange()">
                 <option value="pleaseSelect" disabled selected>Select</option>
@@ -172,7 +176,7 @@
         </div>
 
         <!-- Buttons -->
-        <span class='d-flex align-items-center'>
+        <span class='d-flex align-items-center ml-auto'>
           <ng-container *ngIf="i > 0">
             <a class='mx-1' (click)="deleteWorkingOnBehalf(i)">
               <i class="fa fa-times-circle fa-2x" aria-label="Delete"></i>

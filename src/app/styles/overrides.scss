@@ -138,6 +138,11 @@ h1, h2, h3,
 
 
 .has-float-label {
+  > input:focus {
+    box-shadow: none !important; //Override Bootstrap styling for .form-control
+    border-color: $color-primary;
+  }
+
   > span, label {
     white-space: nowrap;
   }
@@ -153,3 +158,5 @@ h1, h2, h3,
   opacity: .5;
   top: .5em;
 }
+
+
