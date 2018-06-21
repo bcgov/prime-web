@@ -19,7 +19,7 @@ export interface ApplEnrollmentRowItem {
 }
 
 @Component({
-  selector: 'prime-enrollment-row',
+  selector: 'prime-appl-enrollment-row',
   templateUrl: './appl-enrollment-row.component.html',
   styleUrls: ['./appl-enrollment-row.component.scss'],
   animations: [openState, openStateChild, loadInOut, openStateDisable]

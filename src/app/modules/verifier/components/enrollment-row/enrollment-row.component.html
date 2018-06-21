@@ -4,8 +4,8 @@
       <span class="enrollment-text-main">{{rowData.title}}</span>
 
        <ng-container *ngIf="primaryType === 'Site'">
-          <span class="enrollment-text-extra">({{rowData.sites.length}}) Sites</span>
-          <span class="enrollment-text-extra">({{rowData.users.length}}) Users</span>
+          <span *ngIf="rowData.sites != null" class="enrollment-text-extra">({{rowData.sites.length}}) Sites</span>
+          <span *ngIf="rowData.sites != null" class="enrollment-text-extra">({{rowData.users.length}}) Users</span>
        </ng-container>
 
        <ng-container *ngIf="primaryType === 'User'">

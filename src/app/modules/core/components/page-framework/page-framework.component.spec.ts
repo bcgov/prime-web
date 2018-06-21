@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PageFrameworkComponent } from './page-framework.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('PageFrameworkComponent', () => {
   let component: PageFrameworkComponent;
@@ -8,7 +9,8 @@ describe('PageFrameworkComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PageFrameworkComponent ]
+      declarations: [ PageFrameworkComponent ],
+      imports: [ RouterTestingModule ]
     })
     .compileComponents();
   }));

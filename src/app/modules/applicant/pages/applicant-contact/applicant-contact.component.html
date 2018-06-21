@@ -13,9 +13,6 @@
   <form>
 
     <div>
-      <div class="row toprow">
-        <img class="photo" src="assets/photoPlaceholder.png" alt="Generic placeholder image">
-      </div>
 
       <label class="has-float-label">
         <input type="text" class="form-control input-readonly" id="lastName" name="lastName" [ngModel]="applicant?.lastName" disabled
@@ -136,5 +133,10 @@
     </div>
 
   </form>
+  <div right>
+    <div>
+      <img class="photo pull-right" src="assets/photoPlaceholder.png" alt="Generic placeholder image">
+    </div>
+  </div>
 
 </prime-page-framework>
