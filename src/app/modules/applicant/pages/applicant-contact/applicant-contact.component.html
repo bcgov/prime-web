@@ -15,7 +15,7 @@
     <div>
 
       <label class="has-float-label">
-        <input type="text" class="form-control input-readonly" id="lastName" name="lastName" [ngModel]="applicant?.lastName" disabled
+        <input type="text" class="form-control input-readonly prime-input-large" id="lastName" name="lastName" [ngModel]="applicant?.lastName" disabled
           placeholder=" ">
         <span>Last Name</span>
       </label>
@@ -27,14 +27,14 @@
 
 
       <label class="has-float-label">
-        <input type="text" class="form-control" id="firstName" name="firstName" [ngModel]="applicant?.firstName" disabled>
+        <input type="text" class="form-control prime-input-large" id="firstName" name="firstName" [ngModel]="applicant?.firstName" disabled>
         <span>First Name</span>
       </label>
 
 
 
       <label class="has-float-label">
-        <input type="text" class="form-control" id="address" name="address" [ngModel]="applicant.address?.street" disabled>
+        <input type="text" class="form-control prime-input-large" id="address" name="address" [ngModel]="applicant.address?.street" disabled>
         <span>Address</span>
       </label>
 
@@ -70,11 +70,11 @@
   <form>
     <div>
       <label class="has-float-label">
-        <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="applicant.phone" (input)="onChange()" placeholder=" ">
+        <input type="text" class="form-control prime-input-large" id="phone" name="phone" [(ngModel)]="applicant.phone" (input)="onChange()" placeholder=" ">
         <span>Phone</span>
       </label>
       <label class="has-float-label">
-        <input type="text" class="form-control" id="email" name="email" [(ngModel)]="applicant.email" (input)="onChange()" placeholder=" ">
+        <input type="text" class="form-control prime-input-large" id="email" name="email" [(ngModel)]="applicant.email" (input)="onChange()" placeholder=" ">
         <span>Email</span>
       </label>
       <!-- We want this Contact Information section to appear to have 3 columns so it aligns with the Regstration Information section. -->
@@ -91,44 +91,35 @@
 
     <div>
 
+      <div class="has-float-label">
+        <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control prime-input-large" id="mailAdress" name="mailAddress" [(ngModel)]="applicant.mailAddress.street" (input) = "onChange()"  placeholder=" ">
+        <input *ngIf = "applicant.useRegAddress" type="text" class="form-control prime-input-large" id="mailAdress" name="mailAddress" [ngModel]="applicant.address?.street" (ngModelChange)="updateStreet($event)"  placeholder=" ">
+        <label for="mailAdress">Address</label>
+      </div>
 
+      <div class="has-float-label">
+        <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control prime-input-medium" id="mailProvince" name="mailProvince" [(ngModel)]="applicant.mailAddress.province" (input) = "onChange()" placeholder=" ">
+        <input *ngIf = "applicant.useRegAddress" type="text" class="form-control prime-input-medium" id="mailProvince" name="mailProvince" [ngModel]="applicant.address?.province" (ngModelChange)="updateProvince($event)" placeholder=" ">
+        <label for="mailProvince">Province</label>
+      </div>
 
-        <div class="has-float-label">
-          <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control" id="mailAdress" name="mailAddress" [(ngModel)]="applicant.mailAddress.street" (input) = "onChange()"  placeholder=" ">
-          <input *ngIf = "applicant.useRegAddress" type="text" class="form-control" id="mailAdress" name="mailAddress" [ngModel]="applicant.address?.street" (ngModelChange)="updateStreet($event)"  placeholder=" ">
-          <label for="mailAdress">Address</label>
-        </div>
+      <div class="has-float-label">
+          <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control prime-input-small" id="mailPostal" name="mailPostal" [(ngModel)]="applicant.mailAddress.postal" (input) = "onChange()" placeholder=" ">
+          <input *ngIf = "applicant.useRegAddress" type="text" class="form-control prime-input-small" id="mailPostal" name="mailPostal" [ngModel]="applicant.address?.postal" (ngModelChange)="updatePostal($event)" placeholder=" ">
+          <label for="mailPostal">Postal Code</label>
+      </div>
 
-        <div class="has-float-label">
-          <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control prime-input-medium" id="mailProvince" name="mailProvince" [(ngModel)]="applicant.mailAddress.province" (input) = "onChange()" placeholder=" ">
-          <input *ngIf = "applicant.useRegAddress" type="text" class="form-control prime-input-medium" id="mailProvince" name="mailProvince" [ngModel]="applicant.address?.province" (ngModelChange)="updateProvince($event)" placeholder=" ">
-          <label for="mailProvince">Province</label>
-        </div>
+      <div class="has-float-label">
+          <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control prime-input-medium" id="mailCity" name="mailCity" [(ngModel)]="applicant.mailAddress.city" (input) = "onChange()" placeholder=" ">
+          <input *ngIf = "applicant.useRegAddress" type="text" class="form-control prime-input-medium" id="mailCity" name="mailCity" [ngModel]="applicant.address?.city" (ngModelChange)="updateCity($event)" placeholder=" ">
+        <label for="mailCity">City</label>
+      </div>
 
-
-
-
-
-        <label class="has-float-label">
-            <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control prime-input-small" id="mailPostal" name="mailPostal" [(ngModel)]="applicant.mailAddress.postal" (input) = "onChange()" placeholder=" ">
-            <input *ngIf = "applicant.useRegAddress" type="text" class="form-control prime-input-small" id="mailPostal" name="mailPostal" [ngModel]="applicant.address?.postal" (ngModelChange)="updatePostal($event)" placeholder=" ">
-          <span>Postal Code</span>
-        </label>
-
-        <label class="has-float-label">
-            <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control prime-input-medium" id="mailCity" name="mailCity" [(ngModel)]="applicant.mailAddress.city" (input) = "onChange()" placeholder=" ">
-            <input *ngIf = "applicant.useRegAddress" type="text" class="form-control prime-input-medium" id="mailCity" name="mailCity" [ngModel]="applicant.address?.city" (ngModelChange)="updateCity($event)" placeholder=" ">
-          <span>City</span>
-        </label>
-
-
-
-
-        <label class="has-float-label">
-          <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control prime-input-medium" id="mailCountry" name="mailCountry" [(ngModel)]="applicant.mailAddress.country" (input) = "onChange()" placeholder=" ">
-          <input *ngIf = "applicant.useRegAddress" type="text" class="form-control prime-input-medium" id="mailCountry" name="mailCountry" [ngModel]="applicant.address?.country" (ngModelChange)="updateCountry($event)" placeholder=" ">
-          <span>Country</span>
-        </label>
+      <div class="has-float-label">
+        <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control prime-input-medium" id="mailCountry" name="mailCountry" [(ngModel)]="applicant.mailAddress.country" (input) = "onChange()" placeholder=" ">
+        <input *ngIf = "applicant.useRegAddress" type="text" class="form-control prime-input-medium" id="mailCountry" name="mailCountry" [ngModel]="applicant.address?.country" (ngModelChange)="updateCountry($event)" placeholder=" ">
+        <label for="mailCountry">Country</label>
+      </div>
 
     </div>
 

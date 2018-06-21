@@ -1,5 +1,5 @@
 <prime-applicant-breadcrumbs
-  pageName="User Access Acceptance"
+  pageName="Access Acceptance"
   previousPageLink="/applicant/professional"
   [shouldDisableContinue]="disableContinue()"
   [showControls]="shouldShowControls()"
@@ -7,28 +7,26 @@
   (onCancel)="cancel()">
 </prime-applicant-breadcrumbs>
 
-
 <prime-page-framework>
+
   <h2 class='prime-title' id="uaa">User Access Acceptance </h2>
 
   <div>
-    <ul *ngFor="let item of accessAcceptances">
-      <h3>Section / Clause
+    <span class="has-float-label" *ngFor="let item of accessAcceptances">
+      <h3><b>Section / Clause</b></h3>
       <textarea disabled value={{item.acceptanceClause}}></textarea>
-      <input type="checkbox" class="myCheckbox" [(ngModel)]="item.isAccepted"></h3>
-    </ul>
+      <input type="checkbox" class="myCheckbox" [(ngModel)]="item.isAccepted">
+    </span>
   </div>
 
   <h2 class='prime-title' id='declare'>Declare</h2>
-    <div>
-      <ul>
-      <h4 align="center"><input type="checkbox" class="myCheckbox" [(ngModel)]="isDeclareChecked">
-      <b>I declare the information I provided is accurate.</b></h4>
-      </ul>
-    </div>
+  <div>
+    <ul>
+      <h4 align="center">
+        <input type="checkbox" class="myCheckbox" [(ngModel)]="isDeclareChecked">
+        <b>I declare the information I provided is accurate.</b>
+      </h4>
+    </ul>
+  </div>
+
 </prime-page-framework>
-
-
-
-
-

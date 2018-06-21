@@ -138,8 +138,26 @@ h1, h2, h3,
 
 
 .has-float-label {
+
+  > input {
+    border: 1px solid $gray-400;
+    border-radius: 0.25rem;
+  }
+
+  > input.disabled, > input:disabled {
+    border-color: $gray-500;
+  }
+
+  > input:focus {
+    box-shadow: none !important; //Override Bootstrap styling for .form-control
+    border-color: $color-primary;
+  }
+
   > span, label {
     white-space: nowrap;
+
+    // Add padding, due to new border
+    left: 0.5em;
   }
 
   select.form-control:not([size]):not([multiple]) {
@@ -147,9 +165,18 @@ h1, h2, h3,
   }
 }
 
-// Shrink font from 150% to 125% and verticall center
-.has-float-label input:placeholder-shown:not(:focus) + *, .has-float-label select:placeholder-shown:not(:focus) + *, .has-float-label textarea:placeholder-shown:not(:focus) + * {
-  font-size: 125%;
-  opacity: .5;
-  top: .5em;
+.has-float-label + .has-float-label {
+  margin-top: 0.5em;
 }
+
+
+.has-float-label input:placeholder-shown:not(:focus) + *, .has-float-label select:placeholder-shown:not(:focus) + *, .has-float-label textarea:placeholder-shown:not(:focus) + * {
+  // Shrink font from 150% to 125% and verticall center
+  font-size: 125%;
+  // opacity: .5; // Removed to meet accessibility standards
+  top: .5em;
+  opacity: 1; // Accessibility standards
+  color: #494949cc; // Font is eqivalent to opacity 0.8, meeting AA standard
+}
+
+
