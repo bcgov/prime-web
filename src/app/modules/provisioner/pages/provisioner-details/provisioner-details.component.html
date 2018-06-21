@@ -6,7 +6,6 @@
 </prime-core-breadcrumb>
 
 <prime-page-framework>
-  <!-- <hr> -->
 
   <div class="row" *ngIf="IS_SHOWING_PERSON; else siteDetails">
     <div class="col mx-3">
@@ -120,8 +119,8 @@
           <input type="text" disabled class="form-control" id="siteType" name="siteType" [value]="site?.siteType">
         </div>
       </div>
-    </div>
 
+    </div>
   </ng-template>
 
 </prime-page-framework>
@@ -130,4 +129,3 @@
     [rowItems]="provisionerSiteData"
     primaryType='Site'
   ></prime-provisioner-list>
-
