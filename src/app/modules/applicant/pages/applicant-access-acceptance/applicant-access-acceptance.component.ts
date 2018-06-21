@@ -9,6 +9,8 @@ import {PrimeDataService} from '../../../../services/prime-data.service';
 })
 export class ApplicantAccessAcceptanceComponent implements OnInit {
 
+  isDeclareChecked: boolean ;
+
   accessAcceptances = [
     new ApplicantAccessAcceptance( 'oiweruwioresfsfdsfsdfssdfsfsdfsfdsdfjsfdjsjfsdfslfjsldfsdklfksfdskfjsjfklsflsfjl' +
       'wejifojwoifjwjiofjwojefwiaojefwiojfeoiwjfiowjfowjefoiwjfiowjefoiwejfi' +
@@ -26,12 +28,16 @@ export class ApplicantAccessAcceptanceComponent implements OnInit {
 
   constructor(private dataService: PrimeDataService) { }
 
+
+
   ngOnInit() {
 
       for (let i = 0; i < this.accessAcceptances.length; i++) {
         const item = this.accessAcceptances[i];
         item.isAccepted = this.applicant.accessAcceptance[i];
     }
+
+    this.isDeclareChecked = false;
 
   }
 
@@ -70,7 +76,6 @@ export class ApplicantAccessAcceptanceComponent implements OnInit {
 
   }
 
-
-  }
+}
 
 
