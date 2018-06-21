@@ -1,22 +1,21 @@
 <div class="enrollment-list-controls bg-light">
   <div>
     <form class="form-inline">
-      <prime-expanding-search
-        (input)="search($event.target.value)"
-        placeholder="Sites"
-        alwaysShow=true
-        class='mr-2'>
-      </prime-expanding-search>
+      <span class="has-float-label">
+        <input class="form-control bg-transparent" type="search" placeholder="Sites" aria-label="Sites" (input)="search($event.target.value)">
+        <span>Sites</span>
+      </span>
 
-      <select id="enrollmentViewSelector"
-              class="form-control enrollment-view-selector"
-              [value]="viewTypeSelector"
-              (change)="viewTypes($event.target.value)">
-        <option value="View All">View All</option>
-        <option *ngFor="let status of EnrollmentStatus" value="{{status}}">
-          {{status}}
-        </option>
-      </select>
+      <label class="has-float-label mx-2">
+        <select id="enrollmentViewSelector" class="form-control enrollment-view-selector" [value]="viewTypeSelector" (change)="viewTypes($event.target.value)">
+          <option value="View All">All</option>
+          <option *ngFor="let status of EnrollmentStatus" value="{{status}}">
+            {{status}}
+          </option>
+        </select>
+        <span>View</span>
+      </label>
+
     </form>
   </div>
   <div class='controls'>

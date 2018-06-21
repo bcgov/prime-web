@@ -4,6 +4,8 @@
 
 <prime-page-framework>
 
+  <h2 class='prime-title' id="profInfo">Professional Information</h2>
+
   <section class='my-3'>
     <label>
       <div>Do you have a college certification?</div>
@@ -193,6 +195,7 @@
 
   <section *ngIf="displaySelfDeclarationSection()">
 
+    <h2 class='prime-title' id="selfDeclaration">Self Declaration</h2>
     <hr>
 
     <div class='my-3'>
@@ -259,23 +262,25 @@
   </section>
 
 
-  <div right *ngIf="displayUploadSection()">
-    <div class="d-flex justify-content-start align-items-center">
-      <i class="fa fa-upload fa-2x mx-2" aria-label="Delete"></i>
-      <h2>Upload your documents</h2>
+  <div right>
+    <div *ngIf="displayUploadSection()">
+      <div class="d-flex justify-content-start align-items-center">
+        <i class="fa fa-upload fa-2x mx-2" aria-label="Delete"></i>
+        <h2>Upload your documents</h2>
+      </div>
+      <span class="note">Scan the document, or take a photo of it. Make sure that it's:</span>
+      <ul class="note">
+        <li>The entire document, from corner to corner</li>
+        <li>At least 1000 pixels wide x 1500 pixels tall</li>
+        <li>Rotated correctly (not upside down or sideways)</li>
+        <li>In focus and easy to read</li>
+        <li>A JPG, PNG, GIF or BMP file (
+          <b>not a PDF</b>)</li>
+      </ul>
+      <prime-file-uploader>
+        <span class="note">Please upload required ID documents</span>
+      </prime-file-uploader>
     </div>
-    <span class="note">Scan the document, or take a photo of it. Make sure that it's:</span>
-    <ul class="note">
-      <li>The entire document, from corner to corner</li>
-      <li>At least 1000 pixels wide x 1500 pixels tall</li>
-      <li>Rotated correctly (not upside down or sideways)</li>
-      <li>In focus and easy to read</li>
-      <li>A JPG, PNG, GIF or BMP file (
-        <b>not a PDF</b>)</li>
-    </ul>
-    <prime-file-uploader>
-      <span class="note">Please upload required ID documents</span>
-    </prime-file-uploader>
   </div>
 
 
