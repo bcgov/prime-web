@@ -125,7 +125,9 @@ export class PrimeDataService {
   }
 
   //TODO: Change to search on objectId? because if object is cloned...
-  findCollectionFromSite(site: Site): Collection[] {;
+  findCollectionFromSite(site: Site): Collection[] {
+    if (!site) { return [] }
+
     return this.collections.map(collection => {
       // Lookup based on objectId, so it works even if the Site is cloned from original
       const exists = collection.members
