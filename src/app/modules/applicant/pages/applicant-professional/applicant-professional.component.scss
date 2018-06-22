@@ -37,25 +37,6 @@ $placeholder-font-size: $note-font-size;
   margin-top: 10px;
 }
 
-// the following entries are related to the placeholder
-::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  color: $placeholder-color;
-  font-size: $placeholder-font-size;
-}
-::-moz-placeholder { /* Firefox 19+ */
-  color: $placeholder-color;
-  font-size: $placeholder-font-size;
-}
-:-ms-input-placeholder { /* IE 10+ */
-  color: $placeholder-color;
-  font-size: $placeholder-font-size;
-}
-:-moz-placeholder { /* Firefox 18- */
-  color: $placeholder-color;
-  font-size: $placeholder-font-size;
-}
-
-
 .applicant-row {
   display: flex;
   flex-flow: row wrap;
@@ -72,6 +53,10 @@ $placeholder-font-size: $note-font-size;
       flex-basis: 30%;
     }
   }
+}
 
-
+.sameLevel {
+  position: relative;
+  top: 500px;
+  background-color: yellow;
 }
