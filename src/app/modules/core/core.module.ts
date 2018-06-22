@@ -22,6 +22,9 @@ import {InfoButtonComponent} from '../../core/user-info-button/user-info-button.
 import { AcceptRejectIconsComponent } from './components/accept-reject-icons/accept-reject-icons.component';
 import {FileUploaderComponent} from '../../core/file-uploader/file-uploader.component';
 import { PageFrameworkComponent } from './components/page-framework/page-framework.component';
+import { PostalCodeComponent } from './components/postal-code/postal-code.component';
+import { TextMaskModule } from 'angular2-text-mask';
+
 
 /** A list of all components that we want to both include and export. Since
  * CoreModule just exports components for other modules the list is pretty much
@@ -42,6 +45,7 @@ const componentList = [
   AcceptRejectIconsComponent,
   FileUploaderComponent,
   PageFrameworkComponent,
+  PostalCodeComponent,
 ];
 
 @NgModule({
@@ -55,6 +59,7 @@ const componentList = [
     RouterModule,
     NgxMyDatePickerModule.forRoot(),
     ModalModule.forRoot(),
+    TextMaskModule,
   ],
   declarations: [
     componentList,

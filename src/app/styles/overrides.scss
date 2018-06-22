@@ -139,7 +139,7 @@ h1, h2, h3,
 
 .has-float-label {
 
-  > input {
+  > input, > select {
     border: 1px solid $gray-400;
     border-radius: 0.25rem;
   }
@@ -148,7 +148,7 @@ h1, h2, h3,
     border-color: $gray-500;
   }
 
-  > input:focus {
+  > input:focus, > select:focus {
     box-shadow: none !important; //Override Bootstrap styling for .form-control
     border-color: $color-primary;
   }

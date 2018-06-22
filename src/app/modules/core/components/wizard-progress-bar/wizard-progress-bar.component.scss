@@ -8,7 +8,7 @@
 
 .step-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 progressbar {
@@ -36,7 +36,8 @@ progressbar {
     bottom: 100%;
   }
 
-  &:not(.active) .step-text { opacity: 0.85;}
+  &:not(.active) .step-text { opacity: 0.8;}
+  &:not(.active):before { background: $gray-400; }
 
   // Take the text out of the CSS layout with position absolute so that the
   // width of the text does not mess up the math of the positioning of the

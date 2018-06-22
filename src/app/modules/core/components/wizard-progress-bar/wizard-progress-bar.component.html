@@ -6,7 +6,7 @@
 
 <div class="step-container" #stepContainer>
 
-  <div class="step" #steps  *ngFor="let step of progressSteps" [ngClass]="{active: step.isActive}">
+  <div class="step" #steps  *ngFor="let step of progressSteps; let i = index;" [ngClass]="{active: i === activeIndex}">
     <span class="step-text">{{step.title}}</span>
   </div>
 

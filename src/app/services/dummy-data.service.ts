@@ -239,7 +239,7 @@ export class DummyDataService {
     const address = new Address();
 
     address.street = `${Math.ceil(Math.random() * 8000)} ${this.getRandomElFromArray(streetNames)} St.`;
-    address.postal = 'V9R 2VR';
+    address.postal = 'V8R 2N9';
     address.country = 'Canada';
     address.province = 'British Columbia';
     address.city = 'Victoria';

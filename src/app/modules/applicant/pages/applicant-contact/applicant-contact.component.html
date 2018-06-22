@@ -58,10 +58,8 @@
         <span>Date of Birth</span>
       </label>
 
-      <label class="has-float-label">
-        <input type="text" class="form-control prime-input-small" id="postal" name="postal" [ngModel]="applicant.address?.postal" disabled>
-        <span>Postal Code</span>
-      </label>
+      <prime-postal-code [value]="applicant.address?.postal"  disabled='true'></prime-postal-code>
+
     </div>
   </form>
 
@@ -103,11 +101,9 @@
         <label for="mailProvince">Province</label>
       </div>
 
-      <div class="has-float-label">
-          <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control prime-input-small" id="mailPostal" name="mailPostal" [(ngModel)]="applicant.mailAddress.postal" (input) = "onChange()" placeholder=" ">
-          <input *ngIf = "applicant.useRegAddress" type="text" class="form-control prime-input-small" id="mailPostal" name="mailPostal" [ngModel]="applicant.address?.postal" (ngModelChange)="updatePostal($event)" placeholder=" ">
-          <label for="mailPostal">Postal Code</label>
-      </div>
+      <prime-postal-code *ngIf = "!applicant.useRegAddress" [(value)]="applicant.mailAddress.postal" ></prime-postal-code>
+
+      <prime-postal-code *ngIf = "applicant.useRegAddress" [value]="applicant.address?.postal" (valueChange)="updatePostal($event)" ></prime-postal-code>
 
       <div class="has-float-label">
           <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control prime-input-medium" id="mailCity" name="mailCity" [(ngModel)]="applicant.mailAddress.city" (input) = "onChange()" placeholder=" ">

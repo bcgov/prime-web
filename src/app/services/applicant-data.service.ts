@@ -31,6 +31,10 @@ export class ApplicantDataService {
       {
         title: 'Access Acceptance',
         route: 'access-acceptance'
+      },
+      {
+        title: "Sites",
+        route: "dashboard"
       }
     ];
   }
