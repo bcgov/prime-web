@@ -4,6 +4,7 @@ import { loadInOut, openState, openStateChild, openStateDisable } from '../../..
 import {Site, SiteAccess} from '../../../../models/sites.model';
 import {Collection} from '../../../../models/collections.model';
 import {EnrollmentRow, EnrollmentRowChild, RowState} from '../../../../core/enrollment-row/enrollment-row.class';
+import {Person} from '../../../../models/person.model';
 
 export interface EnrollmentRowItem {
   title: string;

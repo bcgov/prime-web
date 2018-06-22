@@ -1,9 +1,16 @@
 <div *ngIf="rowData" class="enrollment-list-item" (click)="toggleRow()" [@openStateDisable]="openState">
 
   <div class="enrollment-text-container" >
-    <span class="enrollment-text-main">{{siteName}}</span>
-    <span class="enrollment-text-bold">{{siteNumber}} </span>
+    <ng-container *ngIf="primaryType === 'User'">
+      <span class="enrollment-text-main">{{siteName}}</span>
+      <span class="enrollment-text-bold">{{siteNumber}} </span>
+    </ng-container>
+    <ng-container *ngIf="primaryType === 'Site'">
+      <span class="enrollment-text-bold">{{rowData.title}}  </span>
+    </ng-container>
   </div>
+
+
 
   <div *ngIf="siteStatus === 'Active'">
     <table>
@@ -12,8 +19,8 @@
         <td class="provision-element-label"> Date Provisioned</td>
       </tr>
       <tr>
-        <td class="provision-element-text" >{{rowData.posUserId}}</td>
-        <td class="provision-element-text"> {{rowData.provisionedDate}}</td>
+        <td class="provision-element-text" >{{rowData.sites[0].posUserId}}</td>
+        <td class="provision-element-text"> {{rowData.sites[0].provisionedDate}}</td>
         <td class="px-1"></td>
       </tr>
     </table>
@@ -62,6 +69,7 @@
             [alerts]="[siteAccessObject.alert]"
             [iconOnly]='false'>
         </prime-pill-badge>
+        <i *ngIf="primaryType === 'Site' && siteStatus === 'New'" class="fa fa-flag-o mr-2" style="color: red"></i>
         <i class="fa fa-sticky-note-o mr-2" (click)="goToNotePage()"></i>
         <prime-info-button
             class="mr-2"
@@ -81,7 +89,8 @@
 <div class="table-responsive ml-2 " *ngIf="siteStatus === 'New'" >
   <table >
     <tr>
-      <td class="provision-element-label" width = "8%">PEC</td>
+      <td *ngIf="primaryType === 'User'" class="provision-element-label" width = "8%">PEC</td>
+      <td *ngIf="primaryType === 'Site'" class="provision-element-label" width = "8%">College ID</td>
       <td class="provision-element-label" width = "12%"> Request</td>
       <td class="provision-element-label" width = "10%" >Class</td>
       <td class="provision-element-label" width = "12%"> Access Rights</td>
@@ -93,14 +102,15 @@
       <td width="12%"></td>
     </tr>
     <tr>
-      <td class="provision-element-text">{{rowData.PEC}}</td>
-      <td class="provision-element-text"> {{rowData.request}}</td>
-      <td class="provision-element-text">{{rowData.siteClass}}</td>
-      <td class="provision-element-text"> {{rowData.accessRights}}</td>
-      <td class="provision-element-text">{{rowData.tAndC}}</td>
-      <td class="provision-element-text"> {{rowData.startDate}}</td>
-      <td class="provision-element-text">{{rowData.endDate}}</td>
-      <td class="provision-element-text"> {{rowData.personalAccess}}</td>
+      <td *ngIf="primaryType === 'User'" class="provision-element-text">{{rowData.sites[0].PEC}}</td>
+      <td *ngIf="primaryType === 'Site'" class="provision-element-text">{{rowData.sites[0].collegeId}} </td>
+      <td class="provision-element-text"> {{rowData.sites[0].request}}</td>
+      <td class="provision-element-text">{{rowData.sites[0].siteClass}}</td>
+      <td class="provision-element-text"> {{rowData.sites[0].accessRights}}</td>
+      <td class="provision-element-text">{{rowData.sites[0].tAndC}}</td>
+      <td class="provision-element-text"> {{rowData.sites[0].startDate}}</td>
+      <td class="provision-element-text">{{rowData.sites[0].endDate}}</td>
+      <td class="provision-element-text"> {{rowData.sites[0].personalAccess}}</td>
       <td></td>
       <td class="mr-2"><input type="checkbox" >T&C Enforceable </td>
     </tr>

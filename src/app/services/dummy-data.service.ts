@@ -106,6 +106,7 @@ export class DummyDataService {
       site.startDate = this.generateStartDate();
       site.endDate = this.generateEndDate();
       site.personalAccess = 'I personally access PNET';
+      site.collegeId = this.generateCollegeId();
 
       result.push(site);
     }
@@ -281,6 +282,8 @@ export class DummyDataService {
   }
 
 
-
+  private generateCollegeId (){
+    return 'P1 - ' + Math.ceil(Math.random() * 999999);
+  }
 
 }

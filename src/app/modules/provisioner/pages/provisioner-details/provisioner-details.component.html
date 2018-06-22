@@ -125,7 +125,15 @@
 
 </prime-page-framework>
 
+<div *ngIf="IS_SHOWING_PERSON; else userList">
   <prime-provisioner-list
     [rowItems]="provisionerSiteData"
+    primaryType='User'
+  ></prime-provisioner-list>
+</div>
+<ng-template #userList>
+  <prime-provisioner-list
+    [rowItems]="provisionerUserData"
     primaryType='Site'
   ></prime-provisioner-list>
+</ng-template>

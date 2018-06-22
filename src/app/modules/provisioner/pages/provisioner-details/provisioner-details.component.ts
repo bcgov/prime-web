@@ -69,6 +69,10 @@ export class ProvisionerDetailsComponent implements OnInit {
     return this.dataService.getEnrollmentBySite();
   }
 
+  get provisionerUserData(): EnrollmentRowItem[] {
+    return this.dataService.getEnrollmentByUser();
+  }
+
   findCollectionFromSite(site: Site): Collection {
     return this.dataService.findCollectionFromSite(site)[0];
   }
