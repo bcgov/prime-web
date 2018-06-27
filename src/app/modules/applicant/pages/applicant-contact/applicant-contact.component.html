@@ -15,13 +15,12 @@
     <div>
 
       <label class="has-float-label">
-        <input type="text" class="form-control input-readonly prime-input-large" id="lastName" name="lastName" [ngModel]="applicant?.lastName" disabled
-          placeholder=" ">
+        <input type="text" class="form-control input-readonly prime-input-large" id="lastName" name="lastName" [ngModel]="applicant?.lastName" disabled>
         <span>Last Name</span>
       </label>
 
       <label class="has-float-label">
-        <input type="text" class="form-control prime-input-small" id="middleName" name="middleName" [ngModel]="applicant?.middleName" disabled placeholder=" ">
+        <input type="text" class="form-control prime-input-small" id="middleName" name="middleName" [ngModel]="applicant?.middleName" disabled>
         <span>Middle Name</span>
       </label>
 
@@ -75,7 +74,6 @@
         <input type="text" class="form-control prime-input-large" id="email" name="email" [(ngModel)]="applicant.email" (input)="onChange()" placeholder=" ">
         <span>Email</span>
       </label>
-      <!-- We want this Contact Information section to appear to have 3 columns so it aligns with the Regstration Information section. -->
     </div>
   </form>
 
