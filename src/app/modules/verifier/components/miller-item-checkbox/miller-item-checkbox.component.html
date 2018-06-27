@@ -27,7 +27,7 @@
   <div *ngIf="getSiteAccessForItem(item)?.pendingChanges" class='d-flex justify-content-around' [@growVertical]>
     <span class='d-inline-flex align-items-baseline mb-1'>Start
       <prime-datepicker size='mini' dateFormat="yyyy/mm/dd"
-      [(date)]="today"
+      [(date)]=selectedSiteAccess[0].requestDate
       class='ml-1'></prime-datepicker>
     </span>
 
