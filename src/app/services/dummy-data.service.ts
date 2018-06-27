@@ -103,9 +103,9 @@ export class DummyDataService {
       site.siteClass = 'Prescriber';
       site.accessRights = 'Med Hist + Claims';
       site.tAndC = '-';
-      site.startDate = this.generateStartDate();
-      site.endDate = this.generateEndDate();
-      site.personalAccess = 'I personally access PNET';
+      site.startDate = this.generateStartDate(); // This should be in stiteAccess
+      site.endDate = this.generateEndDate(); // This should be in stiteAccess
+      site.personalAccess = 'I personally access PNET'; // This should be in stiteAccess
       site.collegeId = this.generateCollegeId();
 
       result.push(site);
@@ -140,7 +140,7 @@ export class DummyDataService {
     }
 
     const SA: SiteAccess = new SiteAccess();
-    const randomStatusString : string = this.getRandomElFromArray(Object.keys(EnrollmentStatus));
+    const randomStatusString: string = this.getRandomElFromArray(Object.keys(EnrollmentStatus));
     const status: EnrollmentStatus = EnrollmentStatus[randomStatusString];
     SA.status = status;
     if (SA.status === EnrollmentStatus.Declined) {
@@ -210,6 +210,8 @@ export class DummyDataService {
     return result.filter(x => x); //filter out null
   }
 
+
+  // Data for demo
   createSiteAccessAndAssociateDemo(site: Site, person: Person, access: string): SiteAccess  {
 
     if (person.sites.includes(site)) {
@@ -234,18 +236,28 @@ export class DummyDataService {
     let sa: SiteAccess;
 
     //EnrollmentStatus,AccessReason,DeclinedReason,requestDate,startDate,endDate,SiteAccessProgressSteps
-    // spaces after commons cause the enums to be undefined
+    // spaces after commons cause the enums to be undefined, Date format: MM-DD-YYYY
     const access = [
-      EnrollmentStatus.New + ',null,null,2018-05-16,2018-06-01,null,' + SiteAccessProgressSteps.Applicant
-      , EnrollmentStatus.Active + ',' + AccessReasons.NOT_PERSONAL_ACCESS + ', null,2018-05-16,2018-06-01,null,'
-      + SiteAccessProgressSteps.Provisioner
-      , EnrollmentStatus.Approved + ',' + AccessReasons.PERSONAL_ACCESS + ',null,2018-05-16,2018-06-01,null,'
-      + SiteAccessProgressSteps.Provisioner
+      EnrollmentStatus.New + ',null,null,05-05-2018,06-06-2018,06-06-2019,' + SiteAccessProgressSteps.Applicant //0
+      , EnrollmentStatus.Active + ',' + AccessReasons.NOT_PERSONAL_ACCESS + ', null,05-01-2018,05-16-2018,05-16-2019,'
+      + SiteAccessProgressSteps.Provisioner //1
+      , EnrollmentStatus.Approved + ',' + AccessReasons.PERSONAL_ACCESS + ',null,05-14-2018,06-06-2018,06-06-2019,'
+      + SiteAccessProgressSteps.Provisioner //2
       , EnrollmentStatus.Declined + ',' + AccessReasons.PERSONAL_ACCESS + ',' + DeclinedReasons.ACCESS_NO_lONGER_REQUIRED
-      + ',2017-05-16, 2017-06-01,2018-06-01,' + SiteAccessProgressSteps.Provisioner
+      + ',05-15-2017,06-01-2017,01-06-2018,' + SiteAccessProgressSteps.Provisioner //3
+      , EnrollmentStatus.Declined + ',' + AccessReasons.PERSONAL_ACCESS + ',' + DeclinedReasons.WRONG_SITE
+      + ',03-16-2018,04-01-2018,4-01-2019,' + SiteAccessProgressSteps.Applicant //4
+      , EnrollmentStatus.Pending + ',' + AccessReasons.PERSONAL_ACCESS + ',null,06-11-2018,06-27-2018,06-27-2018,'
+      + SiteAccessProgressSteps.Applicant //5
+      , EnrollmentStatus.Pending + ',' + AccessReasons.PERSONAL_ACCESS + ',null,05-18-2018,06-01-2018,06-01-2019,'
+      + SiteAccessProgressSteps.MoH //6
+      , EnrollmentStatus.Pending + ',' + AccessReasons.PERSONAL_ACCESS + ',null,06-01-2018,06-16-2018,06-16-2019,'
+      + SiteAccessProgressSteps.Provisioner //7
+      , EnrollmentStatus.Expired + ',' + AccessReasons.PERSONAL_ACCESS + ',null,04-16-2017,05-01-2017,04-16-2018,'
+      + SiteAccessProgressSteps.Provisioner //8
     ];
 
-    // First Person - New, Active, Approved, & Declined statuses
+    // First Person - New, Active, Approved, & Declined by Provisioner
     sa = this.createSiteAccessAndAssociateDemo(collections[0].members[0], people[0], access[0]);
     result.push(sa);
     sa = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[0], access[1]);
@@ -255,21 +267,23 @@ export class DummyDataService {
     sa = this.createSiteAccessAndAssociateDemo(collections[1].members[2], people[0], access[3]);
     result.push(sa);
 
-    /*
-    // Make sure at least each site has one person
-    collection.members.map(site => {
-      const person = this.getRandomElFromArray(people);
-      const sa: SiteAccess = this.createSiteAccessAndAssociateDemo(site, person, access);
-      result.push(sa);
-    });
+    // Second Person - Declined by Applicant, Pending with MoH
+    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[3], people[1], access[4]);
+    result.push(sa);
+    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[0], people[1], access[6]);
+    result.push(sa);
 
-    // Make sure ALL people have one active Site Access
-    people.map(person => {
-      const site = this.getRandomElFromArray(collection.members);
-      const sa: SiteAccess = this.createSiteAccessAndAssociateDemo(site, person, access);
-      result.push(sa);
-    });
-  */
+    // Third Person - Expired
+    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[1], people[2], access[8]);
+    result.push(sa);
+
+    // Fourth Person - Pending with Applicant
+    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[2], people[3], access[5]);
+    result.push(sa);
+
+    // Fourth Person - Pending with Provisioner
+    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[3], people[4], access[7]);
+    result.push(sa);
 
     return result.filter(x => x); //filter out null
   }
