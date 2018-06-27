@@ -10,6 +10,15 @@ export class Address extends Base {
   private _province: string;
   private _city: string;
 
+  // Just for development with dummy data, likely to be removed later on.
+  setAddress( addr: string ) {
+    const addStr = addr.split(',');
+    this._street = addStr[0];
+    this._city = addStr[1];
+    this._province = addStr[2];
+    this._country = addStr[3];
+    this._postal = addStr[4];
+  }
 
   /** Overwrite the native JavaScript toString method to determine how the
    * object should be printed, instead of [object Object].  This provides a

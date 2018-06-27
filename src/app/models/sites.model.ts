@@ -58,7 +58,7 @@ export class Site extends Base {
 
   /** For type-guard. You very likely want to use the type guard INSTEAD of
    * accessing this variable directly. */
-  _isSite: boolean = true;
+  _isSite = true;
   static isSiteGuard(x: any): x is Site {
     return x._isSite !== undefined;
   }
@@ -117,7 +117,21 @@ export class SiteAccess extends Base {
   formatDateShort(date: Date){
     return moment(date).format('DD/MM/YYYY');
   }
+
+  // Set demo data
+  setSiteAccess( access: string ) {
+    const data = access.split(',');
+
+    this.status = EnrollmentStatus[data[0]];
+    if (null !== data[1]) { this.accessReason = data[1]; }
+    if (null !== data[2]) { this.declinedReason = data[2]; }
+    if (null !== data[3]) { this.requestDate = new Date(data[3]); }
+    if (null !== data[4]) { this.requestDate = new Date(data[4]); }
+    if (null !== data[5]) { this.requestDate = new Date(data[5]); }
+    if (null !== data[6]) { this.progress = SiteAccessProgressSteps[data[6]]; }
+  }
 }
+
 class Vendor extends Base { }
 
 export class EnrollmentAlert {
