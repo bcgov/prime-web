@@ -25,7 +25,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    const dummyCollections = this.dummyDataService.createCollectionsWithSites([
+    // DEVELOPMENT DATA (random generation)
+    /* const dummyCollections = this.dummyDataService.createCollectionsWithSites([
       "London Drugs - North",
       "London Drugs - South",
       "Rexall Vancouver Island - All",
@@ -44,5 +45,20 @@ export class AppComponent implements OnInit {
     this.primeDataService.sites = dummySites;
     this.primeDataService.people = dummyPeople;
     this.primeDataService.user = this.primeDataService.people[0];
+    */
+
+    // STAKEHOLDER DATA (specific scenarios)
+    const dummyCollections = this.dummyDataService.createCollectionsDemo();
+    this.primeDataService.collections = dummyCollections;
+    const dummySites = [].concat(... dummyCollections.map(collection => collection.members ) ); //flatten array
+    this.primeDataService.sites = dummySites;
+
+    const dummyPeople = this.dummyDataService.createPeopleDemo();
+    this.primeDataService.people = dummyPeople;
+    this.primeDataService.user = this.primeDataService.people[0];
+
+    const SA = this.dummyDataService.populateSiteAccessFromCollectionDemo( dummyCollections, dummyPeople );
+    this.primeDataService.siteAccesses.push(... SA);
+
   }
 }

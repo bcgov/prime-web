@@ -25,7 +25,7 @@ export class DummyDataService {
     const result: Person[] = [];
     const today = new Date();
     /** We want nearFuture show that they show up in Upcoming Renewals */
-    const nearFuture =  new Date(today.getFullYear(), today.getMonth() + 4, today.getDate())
+    const nearFuture =  new Date(today.getFullYear(), today.getMonth() + 4, today.getDate());
 
     for (let index = 0; index < count; index++) {
       const person = new Person();
@@ -33,7 +33,7 @@ export class DummyDataService {
       person.dateOfBirth = this.generateDateOfBirth();
       person.phone = '250-555-5555';
       person.address = this.generateAddress();
-      person.email = person.firstName[0].toLowerCase() + person.lastName.toLowerCase() + "@gmail.com";
+      person.email = person.firstName[0].toLowerCase() + person.lastName.toLowerCase() + '@gmail.com';
       person.renewalDate =  this.randomDate(today, nearFuture);
       person.primeUserId = person.firstName[0] + person.lastName + '--' + person.objectId.slice(0, 4);
 
@@ -86,13 +86,13 @@ export class DummyDataService {
   }
 
   /** Returns an array of sites with a random name. */
-  createSites(count: number, name: string = "London Drugs"): Site[] {
+  createSites(count: number, name: string = 'London Drugs'): Site[] {
     console.log( 'Create : ' + count + ' sites.');
     const result: Site[] = [];
     for (let index = 0; index < count; index++) {
       const site = new Site();
       site.address = this.generateAddress();
-      site.siteType = this.getRandomElFromArray(['Pharmacy', 'Hospital'])
+      site.siteType = this.getRandomElFromArray(['Pharmacy', 'Hospital']);
       site.vendor = this.getRandomElFromArray(['Intellisense', 'Ultracorp', 'Mediware', 'HealthInc']);
       site.name = this.generateSiteName(name);
 
@@ -103,9 +103,9 @@ export class DummyDataService {
       site.siteClass = 'Prescriber';
       site.accessRights = 'Med Hist + Claims';
       site.tAndC = '-';
-      site.startDate = this.generateStartDate();
-      site.endDate = this.generateEndDate();
-      site.personalAccess = 'I personally access PNET';
+      site.startDate = this.generateStartDate(); // This should be in stiteAccess
+      site.endDate = this.generateEndDate(); // This should be in stiteAccess
+      site.personalAccess = 'I personally access PNET'; // This should be in stiteAccess
       site.collegeId = this.generateCollegeId();
 
       result.push(site);
@@ -115,14 +115,14 @@ export class DummyDataService {
   }
 
   /** Returns an array of collections that come populated with sites. */
-  createCollectionsWithSites(names: string[] = ["London Drugs"], siteCount: number = 5): Collection[] {
+  createCollectionsWithSites(names: string[] = ['London Drugs'], siteCount: number = 5): Collection[] {
     const result: Collection[] = [];
 
     names.forEach(name => {
       const sites = this.createSites(siteCount, name);
-      let collection = new Collection(name, sites);
+      const collection = new Collection(name, sites);
       result.push(collection);
-    })
+    });
 
 
     return result;
@@ -140,13 +140,13 @@ export class DummyDataService {
     }
 
     const SA: SiteAccess = new SiteAccess();
-    let randomStatusString : string = this.getRandomElFromArray(Object.keys(EnrollmentStatus));
-    let status: EnrollmentStatus = EnrollmentStatus[randomStatusString];
+    const randomStatusString: string = this.getRandomElFromArray(Object.keys(EnrollmentStatus));
+    const status: EnrollmentStatus = EnrollmentStatus[randomStatusString];
     SA.status = status;
     if (SA.status === EnrollmentStatus.Declined) {
       // Set declined reason
-      let randomReasonString : string = this.getRandomElFromArray(Object.keys(DeclinedReasons));
-      let declinedReason: DeclinedReasons = DeclinedReasons[randomReasonString];
+      const randomReasonString : string = this.getRandomElFromArray(Object.keys(DeclinedReasons));
+      const declinedReason: DeclinedReasons = DeclinedReasons[randomReasonString];
       SA.declinedReason = declinedReason;
     }
     SA.site = site;
@@ -154,15 +154,15 @@ export class DummyDataService {
 
      // Set personal or not personal access
      if (SA.status !== EnrollmentStatus.New) {
-       let randomAccesstring: string = this.getRandomElFromArray(Object.keys(AccessReasons));
-       let accessReason: DeclinedReasons = AccessReasons[randomAccesstring];
+       const randomAccesstring: string = this.getRandomElFromArray(Object.keys(AccessReasons));
+       const accessReason: DeclinedReasons = AccessReasons[randomAccesstring];
        SA.accessReason = accessReason;
      }
 
     // End date is at most 4mo in future
     const today = new Date();
-    const sixMonthsFuture =  new Date(today.getFullYear(), today.getMonth() + 4, today.getDate())
-    const endDate = this.randomDate(today, sixMonthsFuture)
+    const sixMonthsFuture =  new Date(today.getFullYear(), today.getMonth() + 4, today.getDate());
+    const endDate = this.randomDate(today, sixMonthsFuture);
     SA.endDate = endDate;
 
     // Request date is any time in the past.
@@ -171,12 +171,12 @@ export class DummyDataService {
 
     // Random Progress status. Not necessarily logical. For example, a user that
     // has status=active should not have an in progress status.
-    let randomProgressString : string = this.getRandomElFromArray(Object.keys(SiteAccessProgressSteps));
-    let progress: SiteAccessProgressSteps = SiteAccessProgressSteps[randomProgressString];
+    const randomProgressString : string = this.getRandomElFromArray(Object.keys(SiteAccessProgressSteps));
+    const progress: SiteAccessProgressSteps = SiteAccessProgressSteps[randomProgressString];
     SA.progress = progress;
 
 
-    person.siteAccess.push(SA)
+    person.siteAccess.push(SA);
     site.siteAccess.push(SA);
 
     return SA;
@@ -194,38 +194,199 @@ export class DummyDataService {
       const person = this.getRandomElFromArray(people);
       const sa: SiteAccess = this.createSiteAccessAndAssociate(site, person);
       result.push(sa);
-    })
+    });
 
     // Make sure ALL people have one active Site Access, for dev purposes. Can be removed.
     people.map(person => {
       // Assume they have at least 1 site w/o any
-      const site = this.getRandomElFromArray(collection.members)
+      const site = this.getRandomElFromArray(collection.members);
       const sa: SiteAccess = this.createSiteAccessAndAssociate(site, person);
       if (sa) { sa.status = EnrollmentStatus.Active; }
       else { person.siteAccess[0].status = EnrollmentStatus.Active; }
       result.push(sa);
-    })
+    });
 
 
     return result.filter(x => x); //filter out null
   }
+
+
+  // Data for demo
+  createSiteAccessAndAssociateDemo(site: Site, person: Person, access: string): SiteAccess  {
+
+    if (person.sites.includes(site)) {
+      return null;
+    }
+
+    const SA: SiteAccess = new SiteAccess();
+
+    SA.site = site;
+    SA.person = person;
+
+    SA.setSiteAccess( access );
+
+    person.siteAccess.push(SA);
+    site.siteAccess.push(SA);
+
+      return SA;
+  }
+
+  populateSiteAccessFromCollectionDemo( collections: Collection[], people: Person[] ): SiteAccess[] {
+    const result: SiteAccess[] = [];
+    let sa: SiteAccess;
+
+    //EnrollmentStatus,AccessReason,DeclinedReason,requestDate,startDate,endDate,SiteAccessProgressSteps
+    // spaces after commons cause the enums to be undefined, Date format: MM-DD-YYYY
+    const access = [
+      EnrollmentStatus.New + ',null,null,05-05-2018,06-06-2018,06-06-2019,' + SiteAccessProgressSteps.Applicant //0
+      , EnrollmentStatus.Active + ',' + AccessReasons.NOT_PERSONAL_ACCESS + ', null,05-01-2018,05-16-2018,05-16-2019,'
+      + SiteAccessProgressSteps.Provisioner //1
+      , EnrollmentStatus.Approved + ',' + AccessReasons.PERSONAL_ACCESS + ',null,05-14-2018,06-06-2018,06-06-2019,'
+      + SiteAccessProgressSteps.Provisioner //2
+      , EnrollmentStatus.Declined + ',' + AccessReasons.PERSONAL_ACCESS + ',' + DeclinedReasons.ACCESS_NO_lONGER_REQUIRED
+      + ',05-15-2017,06-01-2017,01-06-2018,' + SiteAccessProgressSteps.Provisioner //3
+      , EnrollmentStatus.Declined + ',' + AccessReasons.PERSONAL_ACCESS + ',' + DeclinedReasons.WRONG_SITE
+      + ',03-16-2018,04-01-2018,4-01-2019,' + SiteAccessProgressSteps.Applicant //4
+      , EnrollmentStatus.Pending + ',' + AccessReasons.PERSONAL_ACCESS + ',null,06-11-2018,06-27-2018,06-27-2018,'
+      + SiteAccessProgressSteps.Applicant //5
+      , EnrollmentStatus.Pending + ',' + AccessReasons.PERSONAL_ACCESS + ',null,05-18-2018,06-01-2018,06-01-2019,'
+      + SiteAccessProgressSteps.MoH //6
+      , EnrollmentStatus.Pending + ',' + AccessReasons.PERSONAL_ACCESS + ',null,06-01-2018,06-16-2018,06-16-2019,'
+      + SiteAccessProgressSteps.Provisioner //7
+      , EnrollmentStatus.Expired + ',' + AccessReasons.PERSONAL_ACCESS + ',null,04-16-2017,05-01-2017,04-16-2018,'
+      + SiteAccessProgressSteps.Provisioner //8
+    ];
+
+    // First Person - New, Active, Approved, & Declined by Provisioner
+    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[0], people[0], access[0]);
+    result.push(sa);
+    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[0], access[1]);
+    result.push(sa);
+    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[2], people[0], access[2]);
+    result.push(sa);
+    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[2], people[0], access[3]);
+    result.push(sa);
+
+    // Second Person - Declined by Applicant, Pending with MoH
+    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[3], people[1], access[4]);
+    result.push(sa);
+    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[0], people[1], access[6]);
+    result.push(sa);
+
+    // Third Person - Expired
+    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[1], people[2], access[8]);
+    result.push(sa);
+
+    // Fourth Person - Pending with Applicant
+    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[2], people[3], access[5]);
+    result.push(sa);
+
+    // Fourth Person - Pending with Provisioner
+    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[3], people[4], access[7]);
+    result.push(sa);
+
+    return result.filter(x => x); //filter out null
+  }
+
+  // Data for Stakeholder demonstration
+  createPeopleDemo(): Person[] {
+
+    const names = [ 'Bob A Hunt'
+                  , 'Alice R Smith'
+                  , 'Ellen H Jones'
+                  , 'James C Stewart'
+                  , 'Kate B Mason' ];
+    const address = [ '11 Kings Way, Victoria, British Columbia, Canada, V8R 2N9'
+                    , '234 Main Street, Victoria, British Columbia, Canada, V8R 1V9'
+                    , '1234 Fort Street, Victoria, British Columbia, Canada, V8T 3R9'
+                    , '1267 Yates Street, Victoria, British Columbia, Canada, V8R 4E8'
+                    , '34 Douglas Street, Victoria, British Columbia, Canada, V8T 2R9' ];
+
+    const result: Person[] = [];
+
+    const today = new Date();
+
+    for ( let index = 0; index < names.length; index++ ) {
+      const person = new Person();
+      person.name = names[index];
+      person.dateOfBirth = this.generateDateOfBirth();
+      person.address = new Address();
+      person.address.setAddress( address[index] );
+
+      // Set renewal date one year from today
+      person.renewalDate = new Date( today.getFullYear(), today.getMonth() + 12, today.getDate() );
+      person.primeUserId = person.firstName[0] + person.lastName + '--' + person.objectId.slice(0, 4);
+
+      result.push( person );
+    }
+    return result;
+  }
+
+  /** Returns an array of sites with a random name. */
+  createSitesDemo( name: string ): Site[] {
+    const result: Site[] = [];
+
+    const vendors = ['Intellisense', 'Ultracorp', 'Mediware', 'HealthInc'];
+
+    const address = [ '1234 Rainbow Way, Victoria, British Columbia, Canada, V8R 2N9'
+                    , '54-a Mainland Street, Victoria, British Columbia, Canada, V8R 1V9'
+                    , '34 Fort Gary Street, Victoria, British Columbia, Canada, V8T 3R9'
+                    , '12667 Bow Street, Victoria, British Columbia, Canada, V8R 4E8'
+                    , '3673 Douglas Street, Victoria, British Columbia, Canada, V8T 2R9' ];
+
+    for (let index = 0; index < 4; index++) {
+      const site = new Site();
+      site.address = new Address();
+      site.address.setAddress( address[index] );
+      site.siteType = this.getRandomElFromArray(['Pharmacy', 'Hospital']);
+
+      site.vendor = vendors[index];
+      site.name = this.generateSiteName(name);
+      site.posUserId = this.generatePosUserId();
+      site.provisionedDate = this.generateProvisionedDate();
+      site.PEC = this.generatePEC();
+      site.request = 'Add Access';
+      site.siteClass = 'Prescriber';
+      site.accessRights = 'Med Hist + Claims';
+      site.tAndC = '-';
+      site.startDate = this.generateStartDate();
+      result.push(site);
+    }
+
+    return result;
+  }
+
+  // Collections with sites
+  createCollectionsDemo(): Collection[] {
+    const result: Collection[] = [];
+    const names = [ 'Organization A', 'Organization B' ];
+
+    names.forEach( name => {
+      const sites = this.createSitesDemo( name );
+      const collection = new Collection( name, sites );
+      result.push(collection);
+    });
+
+    return result;
+  }
+
 
   // --- Helpers
   private getRandomElFromArray<T>(arr: T[]): T {
     return arr[Math.ceil(Math.random() * arr.length) - 1];
   }
 
-  private generateSiteName(siteName: string = "London Drugs"): string {
-    let id = Math.ceil(Math.random() * 8000)
+  private generateSiteName(siteName: string = 'London Drugs'): string {
+    const id = Math.ceil(Math.random() * 8000);
     return `${siteName} - ${id}`;
   }
 
   private generatePersonName(): string {
     const firstNames = ['Bob', 'Alice', 'Fred', 'Ellen', 'James', 'Tom', 'Greg', 'Kate'];
     const lastNames = ['Hunt', 'Smith', 'Jones', 'Stewart', 'Mason'];
-    const middleInitials = ['A', 'R', 'H', 'B', 'C', 'D']
+    const middleInitials = ['A', 'R', 'H', 'B', 'C', 'D'];
 
-    return `${this.getRandomElFromArray(firstNames)} ${this.getRandomElFromArray(middleInitials)} ${this.getRandomElFromArray(lastNames)}`
+    return `${this.getRandomElFromArray(firstNames)} ${this.getRandomElFromArray(middleInitials)} ${this.getRandomElFromArray(lastNames)}`;
   }
 
   private generateDateOfBirth(): Date {
