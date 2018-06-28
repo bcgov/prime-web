@@ -145,7 +145,7 @@ export class DummyDataService {
     SA.status = status;
     if (SA.status === EnrollmentStatus.Declined) {
       // Set declined reason
-      const randomReasonString : string = this.getRandomElFromArray(Object.keys(DeclinedReasons));
+      const randomReasonString: string = this.getRandomElFromArray(Object.keys(DeclinedReasons));
       const declinedReason: DeclinedReasons = DeclinedReasons[randomReasonString];
       SA.declinedReason = declinedReason;
     }
@@ -171,7 +171,7 @@ export class DummyDataService {
 
     // Random Progress status. Not necessarily logical. For example, a user that
     // has status=active should not have an in progress status.
-    const randomProgressString : string = this.getRandomElFromArray(Object.keys(SiteAccessProgressSteps));
+    const randomProgressString: string = this.getRandomElFromArray(Object.keys(SiteAccessProgressSteps));
     const progress: SiteAccessProgressSteps = SiteAccessProgressSteps[randomProgressString];
     SA.progress = progress;
 
@@ -238,22 +238,22 @@ export class DummyDataService {
     //EnrollmentStatus,AccessReason,DeclinedReason,requestDate,startDate,endDate,SiteAccessProgressSteps
     // spaces after commons cause the enums to be undefined, Date format: MM-DD-YYYY
     const access = [
-      EnrollmentStatus.New + ',null,null,05-05-2018,06-06-2018,06-06-2019,' + SiteAccessProgressSteps.Applicant //0
-      , EnrollmentStatus.Active + ',' + AccessReasons.NOT_PERSONAL_ACCESS + ', null,05-01-2018,05-16-2018,05-16-2019,'
+      EnrollmentStatus.New + ',,,05-05-2018,06-06-2018,06-06-2019,' + SiteAccessProgressSteps.Applicant //0
+      , EnrollmentStatus.Active + ',' + AccessReasons.NOT_PERSONAL_ACCESS + ', ,05-01-2018,05-16-2018,05-16-2019,'
       + SiteAccessProgressSteps.Provisioner //1
-      , EnrollmentStatus.Approved + ',' + AccessReasons.PERSONAL_ACCESS + ',null,05-14-2018,06-06-2018,06-06-2019,'
+      , EnrollmentStatus.Approved + ',' + AccessReasons.PERSONAL_ACCESS + ',,05-14-2018,06-06-2018,06-06-2019,'
       + SiteAccessProgressSteps.Provisioner //2
       , EnrollmentStatus.Declined + ',' + AccessReasons.PERSONAL_ACCESS + ',' + DeclinedReasons.ACCESS_NO_lONGER_REQUIRED
       + ',05-15-2017,06-01-2017,01-06-2018,' + SiteAccessProgressSteps.Provisioner //3
       , EnrollmentStatus.Declined + ',' + AccessReasons.PERSONAL_ACCESS + ',' + DeclinedReasons.WRONG_SITE
       + ',03-16-2018,04-01-2018,4-01-2019,' + SiteAccessProgressSteps.Applicant //4
-      , EnrollmentStatus.Pending + ',' + AccessReasons.PERSONAL_ACCESS + ',null,06-11-2018,06-27-2018,06-27-2018,'
+      , EnrollmentStatus.Pending + ',' + AccessReasons.PERSONAL_ACCESS + ',,06-11-2018,06-27-2018,06-27-2018,'
       + SiteAccessProgressSteps.Applicant //5
-      , EnrollmentStatus.Pending + ',' + AccessReasons.PERSONAL_ACCESS + ',null,05-18-2018,06-01-2018,06-01-2019,'
+      , EnrollmentStatus.Pending + ',' + AccessReasons.PERSONAL_ACCESS + ',,05-18-2018,06-01-2018,06-01-2019,'
       + SiteAccessProgressSteps.MoH //6
-      , EnrollmentStatus.Pending + ',' + AccessReasons.PERSONAL_ACCESS + ',null,06-01-2018,06-16-2018,06-16-2019,'
+      , EnrollmentStatus.Pending + ',' + AccessReasons.PERSONAL_ACCESS + ',,06-01-2018,06-16-2018,06-16-2019,'
       + SiteAccessProgressSteps.Provisioner //7
-      , EnrollmentStatus.Expired + ',' + AccessReasons.PERSONAL_ACCESS + ',null,04-16-2017,05-01-2017,04-16-2018,'
+      , EnrollmentStatus.Expired + ',' + AccessReasons.PERSONAL_ACCESS + ',,04-16-2017,05-01-2017,04-16-2018,'
       + SiteAccessProgressSteps.Provisioner //8
     ];
 
