@@ -29,6 +29,7 @@ export class MillerItemCheckboxComponent extends Base implements OnInit {
   ngOnInit() {
     const today = new Date();
     this.today =  { year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate() }
+    //console.log(this.selectedSiteAccess[0].requestDate);
   }
 
   ngOnDestroy(){
