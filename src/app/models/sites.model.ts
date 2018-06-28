@@ -79,7 +79,7 @@ export class SiteAccess extends Base {
   status: EnrollmentStatus;
   declinedReason: string;
   accessReason: string;
-  requestDate: Date; // when SiteRequest was initiated
+  requestDate: Date; // Date site access is requested, submitted to processed
   startDate: Date;
   endDate: Date;
   vendor: Vendor;
