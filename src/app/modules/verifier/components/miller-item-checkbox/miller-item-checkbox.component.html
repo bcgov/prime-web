@@ -16,7 +16,6 @@
     <span class="icons-group d-flex align-items-center">
         <prime-pill-badge
           *ngIf="getSiteAccessForItem(item)?.alert"
-          iconOnly=true
           [alerts]="[getSiteAccessForItem(item)?.alert]">
         </prime-pill-badge>
 
@@ -24,7 +23,7 @@
         <prime-info-button [targetId]="item.objectId" ></prime-info-button>
     </span>
   </a>
-  <div *ngIf="getSiteAccessForItem(item)?.pendingChanges" class='d-flex justify-content-around' [@growVertical]>
+  <div *ngIf="showNewEnrollment(item)" class='d-flex justify-content-around' [@growVertical]>
     <span class='d-inline-flex align-items-baseline mb-1'>Start
       <prime-datepicker size='mini' dateFormat="yyyy/mm/dd"
       [(date)]=selectedSiteAccess[0].requestDate
@@ -35,4 +34,24 @@
       <prime-datepicker size='mini' dateFormat="yyyy/mm/dd" class='ml-1'></prime-datepicker>
     </span>
   </div>
+
+  <div *ngIf="showEndEnrollment(item)" class='d-flex justify-content-around' [@growVertical]>
+      <span class='d-inline-flex align-items-baseline mb-1'>Start
+        <prime-datepicker size='mini' dateFormat="yyyy/mm/dd"
+        [(date)]=selectedSiteAccess[0].requestDate
+        class='ml-1'></prime-datepicker>
+      </span>
+
+      <select name="reasonForDeactivation" id="reasonForDeactivation" class='mx-2' [(ngModel)]="getSiteAccessForItem(item).declinedReason">
+        <option value="noLongerEmployee">No Longer employed</option>
+        <option value="contractExpiration">Contract termination</option>
+        <option value="tempAccess">Temp Access</option>
+        <option value="changedLocation">No longer works at this site</option>
+      </select>
+
+
+
+    </div>
+
+
 </li>
