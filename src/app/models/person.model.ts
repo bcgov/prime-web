@@ -60,7 +60,6 @@ export class Person extends Base {
   // refactor Applicant into a different Role (like Verifier/Provisioner), but
   // if ALL People were previously Applicants, then there's no need to make the
   // distinction
-  license;
   accessAcceptance = [false, false, false];
 
   // toggles

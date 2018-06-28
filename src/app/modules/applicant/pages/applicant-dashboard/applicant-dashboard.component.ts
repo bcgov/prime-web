@@ -16,10 +16,17 @@ export class ApplicantDashboardComponent implements OnInit {
               private router: Router) {}
 
   ngOnInit() {
-    if (!this.applicant.hasContactInfo) {
-      console.log('Redirect to contact page');
+
+    // Redirect to contact page to be completed, if applicant is missing information
+    if (!this.contactDone) {
       const link = '/applicant/contact';
       this.router.navigate([link]);
+    } else if (!this.professionalDone) {
+      const link = '/applicant/professional';
+      this.router.navigate([link]);
+    //} else if (!this.accessAcceptanceDone) {
+    //  const link = '/applicant/access-acceptance';
+    //  this.router.navigate([link]);
     }
   }
 
@@ -37,7 +44,10 @@ export class ApplicantDashboardComponent implements OnInit {
   }
 
   get professionalDone(): boolean {
-    return !!this.applicant.license;
+    console.log( 'professional: ', this.applicant.collegeCertificationList );
+    console.log( 'len of array: ' + this.applicant.collegeCertificationList.length );
+    // Data in the array, professional information assumed complete
+    return this.applicant.collegeCertificationList.length > 0;
   }
 
   get accessAcceptanceDone(): boolean {
