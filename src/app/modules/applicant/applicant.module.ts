@@ -11,7 +11,6 @@ import { ApplicantBreadcrumbsComponent } from './components/applicant-breadcrumb
 import { ApplEnrollmentListComponent } from './components/appl-enrollment-list/appl-enrollment-list.component';
 import { ApplEnrollmentRowComponent } from './components/appl-enrollment-row/appl-enrollment-row.component';
 import { AlertModule } from 'ngx-bootstrap';
-import { ApplicantSelfDeclarationComponent } from './pages/applicant-self-declaration/applicant-self-declaration.component';
 import { AppEnrollmentProgressRowComponent } from './components/app-enrollment-progress-row/app-enrollment-progress-row.component';
 
 
@@ -27,7 +26,6 @@ import { AppEnrollmentProgressRowComponent } from './components/app-enrollment-p
     ApplicantDashboardComponent,
     ApplicantContactComponent,
     ApplicantProfessionalComponent,
-    ApplicantSelfDeclarationComponent,
     ApplicantAccessAcceptanceComponent,
     ApplicantBreadcrumbsComponent,
     ApplEnrollmentListComponent,
