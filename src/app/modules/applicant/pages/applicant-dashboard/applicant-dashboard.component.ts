@@ -17,7 +17,7 @@ import {moment} from 'ngx-bootstrap/chronos/test/chain';
 export class ApplicantDashboardComponent implements OnInit {
 
   private _dateFormat = 'MMM DD, YYYY';
-  private _originalEnrollSnapshot: ApplEnrollmentRowItem[];
+  private _userEnrollment: ApplEnrollmentRowItem[];
 
   constructor(private primeDataService: PrimeDataService,
               private router: Router) {}
@@ -36,8 +36,8 @@ export class ApplicantDashboardComponent implements OnInit {
     //  this.router.navigate([link]);
     }
 
-    // Save the original enrollment so we can restore it if the user wants to cancel changes
-    this._originalEnrollSnapshot = cloneDeep( this.primeDataService.getUserSiteEnrollment());
+    // All changes will be done to the copy until user wants to save
+    this._userEnrollment = cloneDeep( this.primeDataService.getUserSiteEnrollment() );
   }
 
   get applicant(): Person {
@@ -49,7 +49,7 @@ export class ApplicantDashboardComponent implements OnInit {
    * @returns {ApplEnrollmentRowItem[]}
    */
   get userSiteEnrollmentData(): ApplEnrollmentRowItem[] {
-    return this._originalEnrollSnapshot;
+    return this._userEnrollment;
   }
 
   get contactDone(): boolean {
@@ -91,5 +91,7 @@ export class ApplicantDashboardComponent implements OnInit {
   // Applicant data needs to be reset
   onCancel() {
     console.log('dashboard component cancel data');
+    // Copy original data back in to working variable
+    this._userEnrollment = cloneDeep( this.primeDataService.getUserSiteEnrollment() );
   }
 }

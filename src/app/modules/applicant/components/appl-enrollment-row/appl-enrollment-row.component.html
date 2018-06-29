@@ -15,8 +15,8 @@
         <prime-datepicker size="mini" [dateFormat]="dateFormat"
                           [(date)]="endDate"
                           class="ml-1"
-                          [disabled]="!isActive()"
-                          [hideClearButton]="!isActive()"></prime-datepicker>
+                          [disabled]="!isActive() && !isNewEnrol()"
+                          [hideClearButton]="!isActive() && !isNewEnrol()"></prime-datepicker>
     </span>
     </div>
     <div *ngIf="isDeclinedEnrol()">

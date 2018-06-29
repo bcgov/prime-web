@@ -12,7 +12,7 @@
 
   <section class='my-3'>
     <label>
-      <div>Do you have a college certification?</div>
+      <div>Do you have a college registration?</div>
       <prime-toggle [(data)]="applicant.hasCollege" (click)="onChange()"></prime-toggle>
     </label>
 
@@ -27,7 +27,7 @@
                   {{type === 'CPBC' ? 'Pharmacists of BC' : type}}
                 </option>
               </select>
-              <span>College Certification</span>
+              <span>College Registration</span>
             </label>
 
           </div>
@@ -122,33 +122,20 @@
   <section *ngIf="displayDeviceProviderSection()" class='my-3'>
 
     <label>
-      <div>Do you have a Device Provider?</div>
+      <div>Are you a Device Provider?</div>
       <prime-toggle [(data)]="applicant.isDeviceProvider" (click)="onChange()"></prime-toggle>
     </label>
 
-
+    <!-- TODO: Need to fix - only one device number -->
     <ng-container *ngIf="applicant.isDeviceProvider === true">
-      <div class='d-flex justify-content-between border p-3 prime-input-medium' *ngFor="let deviceProviderRecord of applicant.deviceProviderList; let i = index">
+      <div class='d-flex justify-content-between border p-3 prime-input-medium'
+           *ngFor="let deviceProviderRecord of applicant.deviceProviderList; let i = index">
           <label class="has-float-label">
-            <input type="text" name="deviceProviderNumber" id="deviceProviderNumber" [(ngModel)]="deviceProviderRecord.dpNumber" maxlength="{{maxLengthValue('DEVICE_PROVIDER_NUMBER')}}"
+            <input type="text" name="deviceProviderNumber" id="deviceProviderNumber"
+                   [(ngModel)]="deviceProviderRecord.dpNumber" maxlength="{{maxLengthValue('DEVICE_PROVIDER_NUMBER')}}"
               class="form-control" (input)="onChange()">
             <span>Device Provider Number</span>
           </label>
-
-        <!-- Buttons -->
-        <span class='d-flex align-items-center'>
-          <ng-container *ngIf="i > 0">
-            <a class='mx-1' (click)="deleteDeviceProvider(i)">
-              <i class="fa fa-times-circle fa-2x" aria-label="Delete"></i>
-            </a>
-          </ng-container>
-          <ng-container *ngIf="applicant.deviceProviderList[i].dpNumber.length
-          && i === applicant.deviceProviderList.length - 1">
-            <a class='mx-1' (click)="addDeviceProvider()">
-              <i class="fa fa-plus-circle fa-2x" aria-label="Add"></i>
-            </a>
-          </ng-container>
-        </span>
       </div>
     </ng-container>
   </section>

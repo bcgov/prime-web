@@ -60,6 +60,8 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
 
   pendingChanges( item: SiteAccess ) {
     console.log( 'Pending Change: ', item );
+    const access = this.rowData.expandableRows.find(sa => sa.objectId === item.objectId);
+    access.accessReason = item.accessReason;
   }
 
   /**
