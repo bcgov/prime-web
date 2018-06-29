@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, ViewChild } from '@angular/core';
 import { INgxMyDpOptions, IMyDate, NgxMyDatePickerDirective } from 'ngx-mydatepicker';
+import * as moment from 'moment';
 
 
 /**
@@ -20,10 +21,12 @@ export class DatepickerComponent implements OnInit {
   @Input() labelText: string;
 
 
+
   /** Format for how to display the date to the user. */
   @Input() dateFormat: string = 'dd/mm/yyyy';
 
   /** Datetime model used to interface with ngx-datepicker. */
+  //model: any;
   model: any;
 
   // Make enum accessible in HTML
@@ -59,7 +62,8 @@ export class DatepickerComponent implements OnInit {
   ngOnInit() {
 
     this.datepickerOptions = {
-      dateFormat: this.dateFormat,
+      // dateFormat: this.dateFormat,
+      dateFormat: "yyyy-mm-dd",
       sunHighlight: false,
     };
 
@@ -68,10 +72,7 @@ export class DatepickerComponent implements OnInit {
       this.datepickerOptions.selectorHeight = '185px';
       this.datepickerOptions.selectorWidth = '201px';
     }
-
-    this.model = {
-      date: this.convertDateToSimpleDate(this.date)
-    }
+    this.model =  { date: moment(this.date).format('YYYY-MM-DD') }
   }
 
   ngOnChanges(changes: SimpleChanges) {

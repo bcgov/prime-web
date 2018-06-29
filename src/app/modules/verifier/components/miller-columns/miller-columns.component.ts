@@ -6,6 +6,7 @@ import { Collection } from '../../../../models/collections.model';
 import { Person } from '../../../../models/person.model';
 import { Site, SiteAccess } from '../../../../models/sites.model';
 import { MillerColumn, MillerColumnConfig, MillerItem } from './miller-columns.interface';
+import { PrimeDataService } from '../../../../services/prime-data.service';
 
 const TIMING = "500ms";
 @Component({
@@ -58,16 +59,15 @@ export class MillerColumnsComponent implements OnInit {
   // @Input() columnTitles: string[];
   private columnOrder: string[]  = ['Collections', 'Sites', 'People'];
 
-  // private _columns: MillerItem[][];
-  //TODO: Make interface!
-  // private _columns: any;
   private _columns:  MillerColumn[];
+  private _originalColumnSnapshot:  MillerColumn[];
   public changesMade: boolean = false;
   private MINIMUM_COLUMNS = 3;
   public declarationCheck: boolean = false;
   public saveSuccess: boolean;
+  public pendingSiteAccess: SiteAccess[];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private dataService: PrimeDataService) { }
 
   ngOnInit() {
     if (!this.config) {return}
@@ -89,7 +89,7 @@ export class MillerColumnsComponent implements OnInit {
 
 
     // Check if there's a pre-selected id in the config
-      if (this.config.options && this.config.options.preselectObjectId){
+    if (this.config.options && this.config.options.preselectObjectId){
       const preselectObjectId = this.config.options.preselectObjectId;
       // Selected item will be in first column, regardless of primaryColumn
       const preselectItem = this._columns[0].items
@@ -106,6 +106,8 @@ export class MillerColumnsComponent implements OnInit {
       this.openColumnFromItem(this._columns[1].items[0])
     }
 
+    // Save the original columns so we can restore it if the user wants to cancel changes
+    this._originalColumnSnapshot = cloneDeep(this._columns);
   }
 
 
@@ -156,6 +158,7 @@ export class MillerColumnsComponent implements OnInit {
   onCheck(pending: SiteAccess[]){
     this.saveSuccess = false;
     this.changesMade = pending.length >= 1;
+    this.pendingSiteAccess = pending;
     console.log('onCheck', pending);
   }
 
@@ -191,14 +194,31 @@ export class MillerColumnsComponent implements OnInit {
     }
   }
 
+  // TODO: Verify it works with SITE MillerColumn
+  //Works with USER MillerColumn
   public save(): void {
+    this.pendingSiteAccess.map(siteAccess =>  {
+      //Go from our copy to the original in dataService
+      const orig = this.dataService.findSiteAccessByObjectId(siteAccess.objectId);
+      orig.status = siteAccess.status;
+      orig.endDate = siteAccess.endDate;
+      orig.startDate = siteAccess.startDate;
+      orig.declinedReason = siteAccess.declinedReason
+    })
+
+    this.pendingSiteAccess = this.pendingSiteAccess.map(siteAccess => {
+      siteAccess.pendingChanges = false;
+      return siteAccess;
+    })
+
+    this._originalColumnSnapshot = cloneDeep(this._columns);
     this.changesMade = false;
     this.saveSuccess = true;
-    this.declarationCheck = false;
-    // TODO: Create SiteAccess object between Site and selected person
-    // Need to get selected user and selected site. Functions:
-      // getUserSelection < works (at least for one table type)
-      // TODO: need fn to get selected SITE, from checkbox column
+  }
+
+  public cancel(): void {
+    this._columns = cloneDeep(this._originalColumnSnapshot);
+    this.changesMade = false;
   }
 
   public backLink(): string {
@@ -259,10 +279,16 @@ export class MillerColumnsComponent implements OnInit {
     return (<Site[]>col)[0]._isSite !== undefined;
   }
 
+  isPeopleColumn(col: Site[] | Collection[] | Person[] | MillerItem[] ): col is Person[]{
+    return (<Person[]>col)[0].firstName !== undefined;
+  }
+
   /** Calculates column statuses based on selections in previous columns. INCOMPLETE! Does not handle enrollment/site page. .*/
   private recalculateColumnStatus(column: any[], originalSelection: MillerItem ): MillerItem[] {
     // Clone the column so that when we filter out irrelevant data it doesn't destroy the underlying data.
     column = cloneDeep(column);
+
+    // console.log('recalculateColumnStatus', column, originalSelection);
 
     if (this.IS_PEOPLE_TABLE && this.isSiteColumn(column)) { // Last column
       // First selection is Person, so we filter SA's based on that
@@ -278,11 +304,20 @@ export class MillerColumnsComponent implements OnInit {
 
       // Now that we've filtered out irrelevant SA's, we can easily check items
       // that have Active SAs.
+
+      // TODO: Should also include NEW
+      // debugger;
+
       column
         .filter(item => item.siteAccess.length)
-        .filter(item => item.siteAccess[0].status === 'Active')
+        .filter(item => item.siteAccess[0].status === 'Active' || item.siteAccess[0].status === 'New')
         .map(item => item.checked = true);
     }
+    else if (! this.IS_PEOPLE_TABLE && this.isPeopleColumn(column)){
+      console.log('TODO IMPLEMENT LOGIC!', column)
+    }
+
+
 
     //TODO: Have to do filtering for the other table type
 

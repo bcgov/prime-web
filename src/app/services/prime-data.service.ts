@@ -205,6 +205,10 @@ export class PrimeDataService {
     return this.user.sites.find(site => site.objectId === objectId);
   }
 
+  findSiteAccessByObjectId(objectId: string): SiteAccess {
+    return this.siteAccesses.find(sa=> sa.objectId === objectId);
+  }
+
   private filterUnique(x, i, a){
     return x && a.indexOf(x) === i;
   }
