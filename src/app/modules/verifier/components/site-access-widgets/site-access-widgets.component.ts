@@ -57,7 +57,8 @@ export class SiteAccessWidgetsComponent implements OnInit {
   // TODO: CHange this so it filters on PEOPLE RENEWAL DATE! Not SA daysUntilExpiry
   upcomingRenewals(days: number){
     // Copy the array so our sorting doesn't mess up other places
-    let people = this.people.concat();
+    // Don't get records that have a null renewal date
+    let people = this.people.concat().filter(p => p.renewalDate);
 
     // Expiring soon = Beginning of array
     people.sort((a, b) => {
