@@ -19,51 +19,67 @@
         <span aria-hidden="true">&times;</span>
         </button> -->
     </div>
+
     <div class="modal-body">
-        <form class="form-inline align-items-start">
-            <div class="d-flex flex-column align-items-end">
-                <span class='d-flex flex-row'>
-                    <label for="lastName">Last Name</label>
-                    <input type="text" class="form-control mb-2 mr-sm-2" id="lastName" name="lastName" placeholder=""  [(ngModel)]="searchQuery.lastName" tabindex="1">
-                </span>
+      <div class ="row">
+        <div class="col mx-2">
+          <div class="form-group row has-float-label">
+            <label for="lastName">
+              Last Name
+            </label>
+            <input type="text" class="form-control mb-2 mr-sm-2" id="lastName" name="lastName" placeholder="" [(ngModel)]="searchQuery.lastName" tabindex="1">
+          </div>
+          <div class="form-group row has-float-label">
+            <label for="middleName">
+              Middle Name
+            </label>
+            <input type="text"  class="form-control mb-2 mr-sm-2" id="middleName" name="middleName" placeholder="" [(ngModel)]="searchQuery.middleName" tabindex="3">
+          </div>
+          <div class="form-group row has-float-label">
+            <label for="primeUserID">
+              PRIME UserID
+            </label>
+            <input type="text"  class="form-control mb-2 mr-sm-2" id="primeUserID" name="primeUserID" placeholder="" [(ngModel)]="searchQuery.primeUserID" tabindex="5">
+          </div>
+          <div class="form-group row has-float-label" *ngIf="showAdditionalFields">
+            <label for="email">
+              Email
+            </label>
+            <input type="text"  class="form-control mb-2 mr-sm-2" id="email" name="email" placeholder="" [(ngModel)]="searchQuery.email" tabindex="7">
+          </div>
+        </div>
+        <div class="col mx-2">
+          <div class="form-group row has-float-label">
+            <label for="firstName">
+              First Name
+            </label>
+            <input type="text"  class="form-control mb-2 mr-sm-2" id="firstName" name="firstName" placeholder="" [(ngModel)]="searchQuery.firstName" tabindex="2">
+          </div>
+          <div class="form-group row has-float-label">
+            <label for="DoB">
+              Date of Birth
+            </label>
+            <input type="text" class="form-control mb-2 mr-sm-2" id="DoB" name="DoB" placeholder="" [(ngModel)]="searchQuery.dateOfBirth" tabindex="4">
+          </div>
+          <div class="form-group row has-float-label" *ngIf="showAdditionalFields">
+            <label for="phone">
+              Phone
+            </label>
+            <input type="text"  class="form-control mb-2 mr-sm-2" id="phone" name="phone" placeholder="" [(ngModel)]="searchQuery.phone" tabindex="6">
+          </div>
+          <div class="form-group row has-float-label" *ngIf="showAdditionalFields">
+            <label for="postal">
+              Postal Code
+            </label>
+            <input type="text"  class="form-control mb-2 mr-sm-2" id="postal" name="postal" placeholder="" [(ngModel)]="searchQuery.postal" tabindex="8">
+          </div>
+        </div>
+      </div>
 
-                <span class='d-flex flex-row'>
-                    <label for="firstName">First Name</label>
-                    <input type="text" class="form-control mb-2 mr-sm-2" id="firstName" name="firstName" placeholder=""  tabindex="3" [(ngModel)]="searchQuery.firstName" >
-                </span>
 
-                <span class='d-flex flex-row'>
-                    <label for="DoB">Date of Birth</label>
-                    <input type="text" class="form-control mb-2 mr-sm-2" id="DoB" name="DoB" placeholder=""   [(ngModel)]="searchQuery.dateOfBirth" tabindex="5">
-                </span>
-                <span class='d-flex flex-row' *ngIf="showAdditionalFields">
-                  <label for="phone">Phone</label>
-                  <input type="text" class="form-control mb-2 mr-sm-2" id="phone" name="phone" placeholder=""   [(ngModel)]="searchQuery.phone" tabindex="5">
-                </span>
-            </div>
-            <div class="d-flex flex-column align-items-end">
-                <span class='d-flex flex-row'>
-                    <label for="middleName">Middle Name (optional)</label>
-                    <input type="text" class="form-control mb-2 mr-sm-2" id="middleName" name="middleName" placeholder=""  [(ngModel)]="searchQuery.middleName" tabindex="2">
-                </span>
 
-                <span class='d-flex flex-row'>
-                    <label for="primeUserID">PRIME UserID</label>
-                    <input type="text" class="form-control mb-2 mr-sm-2" id="primeUserID" name="primeUserID" placeholder=""  [(ngModel)]="searchQuery.primeUserId"  tabindex="4">
-                </span>
 
-                <span class='d-flex flex-row' *ngIf="showAdditionalFields">
-                  <label for="email">Email</label>
-                    <input type="text" class="form-control mb-2 mr-sm-2" id="email" name="email" placeholder=""  tabindex="3" [(ngModel)]="searchQuery.email" >
-                </span>
 
-                <span class='d-flex flex-row' *ngIf="showAdditionalFields">
-                  <label for="postal">Postal Code</label>
-                    <input type="text" class="form-control mb-2 mr-sm-2" id="postal" name="postal" placeholder=""  tabindex="3" [(ngModel)]="searchQuery.postal" >
-                </span>
-
-            </div>
-        </form>
 
 
       <ul class='list-group list-group-flush' *ngIf="showSearchResults">
@@ -90,13 +106,13 @@
 
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" (click)="clearSearch()">
+        <button type="button" class="btn btn-default" (click)="clearSearch()" tabindex="9">
             Clear All
         </button>
-        <button type="button" class="btn btn-primary" [disabled]="!canAddUser()" (click)="addUser()">
+        <button type="button" class="btn btn-primary" [disabled]="!canAddUser()" (click)="addUser()" tabindex="10">
             Add User
         </button>
-        <button type="button" class="btn btn-default" [disabled]="!canFindUser()" (click)="findUser()">
+        <button type="button" class="btn btn-default" [disabled]="!canFindUser()" (click)="findUser()" tabindex="11">
             Find User
         </button>
     </div>
