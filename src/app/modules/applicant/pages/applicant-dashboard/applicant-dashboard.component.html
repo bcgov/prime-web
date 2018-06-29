@@ -34,13 +34,13 @@
           <i class="fa fa-edit fa-2x text-muted"></i>
         </a>
       </div>
-      <div
+      <div *ngIf="professionalDone"
       class="card-body d-flex justify-content-between">
 
         <div>
-          <p>{{applicant.collegeCertificationList[0].collegeType}}</p>
-          <p>License Number: {{applicant.collegeCertificationList[0].licenceNumber}}</p>
-          <p>License Expiry Date: {{applicant.collegeCertificationList[0].licenceExpiryDate | date:"yy/MM/dd"}}</p>
+          <p>{{collegeType}}</p>
+          <p>License Number: {{licenceNumber}}</p>
+          <p>License Expiry Date: {{licenceExpiryDate}}</p>
         </div>
 
         <i class="fa fa-check-circle text-success fa-3x pull-right" aria-hidden="true"></i>
@@ -58,7 +58,7 @@
       </div>
       <div  *ngIf="applicant.accessAcceptance; else emptySection" class="card-body d-flex justify-content-between">
 
-        <p>Renewal Date: {{applicant.renewalDate | date:"yyyy/MM/dd"}}</p>
+        <p>Renewal Date: {{renewalDate}}</p>
         <i class="fa fa-check-circle text-success fa-3x pull-right" aria-hidden="true"></i>
 
       </div>

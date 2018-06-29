@@ -11,6 +11,7 @@ import { CollegeTypes,
   AdvancedPracticeCertificationTypes,
   WorkingOnBehalfTitleTypes,
   ISelfDeclaration } from './colleges.enum';
+import {isNullOrUndefined} from 'util';
 
 /**
  * Information about person
@@ -36,6 +37,23 @@ export class Person extends Base {
     else if (names.length === 3) {
       this.middleName = names[1];
       this.lastName = names[2];
+    }
+  }
+
+  // Just for development with dummy data for DEMO - TODO: Remove after development
+  set demoData( data: string ) {
+
+    const _data = data.split(',' );
+    const today = new Date();
+
+    this.name = _data[ 0 ];
+
+    if (!isNullOrUndefined( _data[1] )) { this.dateOfBirth = new Date( _data[1] ); }
+    if (!isNullOrUndefined( _data[2] )) {
+      this.renewalDate = new Date( today.getFullYear(), today.getMonth(), today.getDate() +  parseInt( _data[2], 10 ) );
+    } else {
+      // default renewal date 1 year
+      this.renewalDate = new Date( today.getFullYear(), today.getMonth() + 12, today.getDate() );
     }
   }
 
