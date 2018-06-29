@@ -32,7 +32,7 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
   public acceptedEnroll = false;
   public declinedEnroll = false;
   public applicantSearch: SearchDomain = SearchDomain.Applicant; // Domain to search for user sites
-  public dateFormat = 'YYYY/MM/DD';
+  public dateFormat = 'yyyy/mm/dd';
 
   constructor() {
     super();

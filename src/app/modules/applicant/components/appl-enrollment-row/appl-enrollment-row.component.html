@@ -6,12 +6,12 @@
   <div class="enrollment-actions">
     <div *ngIf="!isDeclinedEnrol() && !declinedEnroll" class="dates-col d-flex justify-content-around">
       <span class="d-inline-flex align-items-baseline mb-1">Start
-        <prime-datepicker disabled size="mini" dateFormat="dateFormat"
+        <prime-datepicker disabled size="mini" [dateFormat]="dateFormat"
                           [(date)]="startDate"
                           class="ml-1"></prime-datepicker>
       </span>
       <span class="d-inline-flex align-items-baseline mb-1">End
-        <prime-datepicker size="mini" dateFormat="dateFormat"
+        <prime-datepicker size="mini" [dateFormat]="dateFormat"
                           [(date)]="endDate"
                           class="ml-1"
                           [disabled]="!isActive()"></prime-datepicker>
