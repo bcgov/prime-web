@@ -4,15 +4,18 @@
     <span class="enrollment-text-main">{{rowData.title}}</span>
   </div>
   <div class="enrollment-actions">
-    <div *ngIf="!isDeclinedEnrol() && !declinedEnroll" class="dates-col">
-      <label for="startDt">
-        Start
-      </label>
-      <input type="text" id="startDt" [value]="startDate" disabled>
-      <label for="endDt">
-        End
-      </label>
-      <input type="text" id="endDt" [value]="endDate" disabled>
+    <div *ngIf="!isDeclinedEnrol() && !declinedEnroll" class="dates-col d-flex justify-content-around">
+      <span class='d-inline-flex align-items-baseline mb-1'>Start
+        <prime-datepicker disabled size='mini' dateFormat="dateFormat"
+                          [(date)]=startDate
+                          class='ml-1'></prime-datepicker>
+      </span>
+      <span class='d-inline-flex align-items-baseline mb-1'>End
+        <prime-datepicker size='mini' dateFormat="dateFormat"
+                          [(date)]=endDate
+                          class='ml-1'
+                          [disabled]="!isActive()"></prime-datepicker>
+    </span>
     </div>
     <div *ngIf="isDeclinedEnrol()">
       <div class="col d-inline-flex flex-column">
