@@ -13,6 +13,7 @@ import {PillBadgeComponent} from '../../../../core/pill-badge/pill-badge.compone
 import {ProgressBarComponent} from '../../../../core/progress-bar/progress-bar.component';
 import {ProgressbarModule, TooltipModule} from 'ngx-bootstrap';
 import {NgxMyDatePickerModule} from 'ngx-mydatepicker';
+import {PrimeDataService} from '../../../../services/prime-data.service';
 
 describe('MillerColumnsComponent', () => {
   let component: MillerColumnsComponent;
@@ -21,7 +22,8 @@ describe('MillerColumnsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ MillerColumnsComponent, ExpandingSearchComponent, AddUserButtonComponent, InfoButtonComponent, MillerItemCheckboxComponent, MiniProgressBarComponent, DatepickerComponent, PillBadgeComponent, ProgressBarComponent],
-      imports: [RouterTestingModule, FormsModule, ProgressbarModule.forRoot(), NgxMyDatePickerModule.forRoot(), TooltipModule.forRoot()]
+      imports: [RouterTestingModule, FormsModule, ProgressbarModule.forRoot(), NgxMyDatePickerModule.forRoot(), TooltipModule.forRoot()],
+      providers: [ PrimeDataService ]
     })
     .compileComponents();
   }));

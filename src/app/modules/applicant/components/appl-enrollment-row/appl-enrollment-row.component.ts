@@ -32,7 +32,7 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
   public acceptedEnroll = false;
   public declinedEnroll = false;
   public applicantSearch: SearchDomain = SearchDomain.Applicant; // Domain to search for user sites
-  public dateFormat = 'yyyy/mm/dd';
+  public dateFormat = 'YYYY/MM/DD';
 
   constructor() {
     super();
@@ -92,25 +92,25 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
     this.siteAccessRequiringAttention[0].endDate = endDt;
   }
 
-  isNewEnrol() {
+  isNewEnrol(): boolean {
     return this.siteAccessRequiringAttention.filter(x => {
       return x.status === EnrollmentStatus.New;
     }).length !== 0;
   }
 
-  isDeclinedEnrol() {
+  isDeclinedEnrol(): boolean {
     return this.siteAccessRequiringAttention.filter(x => {
       return x.status === EnrollmentStatus.Declined;
     }).length !== 0;
   }
 
-  isActive() {
+  isActive(): boolean {
     return this.siteAccessRequiringAttention.filter(x => {
       return x.status === EnrollmentStatus.Active;
     }).length !== 0;
   }
 
-  isShowProgress() {
+  isShowProgress(): boolean {
     return this.siteAccessRequiringAttention.filter(x => {
       return (x.status !== EnrollmentStatus.Expired && x.status !== EnrollmentStatus.Active);
     }).length !== 0;
