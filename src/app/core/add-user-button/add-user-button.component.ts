@@ -24,15 +24,16 @@ export class AddUserButtonComponent implements OnInit {
   constructor(private modalService: BsModalService, private dataService: PrimeDataService, private dummyDataService: DummyDataService) { }
 
   ngOnInit() {
-
     // Clear out the form inputs when the modal closes
     this.modalService.onHide.subscribe(() => {
       this.clearSearch();
     });
+
   }
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
+    this.modalService.onHidden.subscribe(() => {this.addUserSelected = false});
   }
 
 
