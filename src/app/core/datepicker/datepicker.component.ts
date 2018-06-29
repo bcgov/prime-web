@@ -30,6 +30,9 @@ export class DatepickerComponent implements OnInit {
   /** Equivalent to setting disableBefore to tomorrow. */
   @Input() onlyFutureDates: boolean;
 
+  /** Hides the clear 'x' button on mini datepicker. */
+  @Input() hideClearButton: boolean = false;
+
 
 
   /** Format for how to display the date to the user. */
@@ -97,8 +100,11 @@ export class DatepickerComponent implements OnInit {
       this.datepickerOptions.disableUntil = this.convertDateToSimpleDate(today);
     }
 
-    this.model =  {
-      date: moment(this.date).format( this.dateFormat.toUpperCase() )
+
+    if (this.date){
+      this.model =  {
+        date: moment(this.date).format( this.dateFormat.toUpperCase() )
+      }
     }
   }
 

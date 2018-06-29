@@ -23,7 +23,7 @@
     </form>
 
     <form *ngSwitchCase="DatepickerSizes.MINI">
-        <div class="input-group datepicker--mini">
+        <div class="input-group datepicker--mini" [ngClass]="{'hide-clear': hideClearButton}">
             <button type="button" class='btn btn-outline-primary btn-sm'
               ngx-mydatepicker
               name="mydate"
@@ -37,8 +37,8 @@
             </button>
             <input type="hidden" name="date" [value]="model?.date" />
 
-            <span class="input-group-append">
-                <button type="button" class="btn btn-outline-primary" (click)="dp.clearDate()" [disabled]="disabled || !hasValidDate" >
+            <span class="input-group-append" *ngIf='!hideClearButton'>
+                <button type="button" class="btn btn-outline-primary" (click)="dp.clearDate()" [disabled]="disabled" >
                     <i class="fa fa-close"></i>
                 </button>
             </span>
