@@ -16,7 +16,7 @@ import {moment} from 'ngx-bootstrap/chronos/test/chain';
 })
 export class ApplicantDashboardComponent implements OnInit {
 
-  private _dateFormat = 'DD/MM/YYYY';
+  private _dateFormat = 'MMM DD, YYYY';
 
   constructor(private primeDataService: PrimeDataService,
               private router: Router) {}

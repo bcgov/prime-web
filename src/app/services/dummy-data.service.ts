@@ -334,7 +334,7 @@ export class DummyDataService {
       const site = new Site();
       site.address = new Address();
       site.address.setAddress( address[index % siteInfo.length] );
-      site.siteDemoData = `${name} - ${siteNumber + index},BCOOOOO${pec}${index},{siteInfo[index]}`;
+      site.siteDemoData = `${name} - ${siteNumber + index},${pec}${index},{siteInfo[index]}`;
 
       site.posUserId = this.generatePosUserId(); // TODO: remove random generate
       site.provisionedDate = this.generateProvisionedDate(); // TODO: remove random generate
@@ -353,7 +353,7 @@ export class DummyDataService {
   createCollectionsDemo(): Collection[] {
     const result: Collection[] = [];
 
-    const names = [ 'Organization A,1000,A0', 'Organization B,2000,B0' ];
+    const names = [ 'Organization A,1000,BCOOOOOA0', 'Organization B,2000,BCOOOOOB0' ];
 
     names.forEach( name => {
       const _data = name.split( ',' );

@@ -24,7 +24,6 @@ export class AppEnrollmentProgressRowComponent extends EnrollmentProgressRowComp
   }
 
   get accessReason() {
-      console.log( 'AccessReason', this.data.accessReason );
      if (isNullOrUndefined(this.data.accessReason) || 0 === this.data.accessReason.length) {
        return 'Please Select';
      }

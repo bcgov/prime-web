@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {EnrollmentRow} from '../../../../core/enrollment-row/enrollment-row.class';
-import {fadeIn, loadInOut, openState, openStateChild, openStateDisable} from '../../../../animations/animations';
+import {loadInOut, openState, openStateChild, openStateDisable} from '../../../../animations/animations';
 import {DeclinedReasons, SiteAccess} from '../../../../models/sites.model';
 import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
 import {SearchDomain} from '../../../../core/user-info-button/user-info-button.component';
@@ -32,6 +32,7 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
   public acceptedEnroll = false;
   public declinedEnroll = false;
   public applicantSearch: SearchDomain = SearchDomain.Applicant; // Domain to search for user sites
+  public dateFormat = 'yyyy/mm/dd';
 
   constructor() {
     super();
@@ -75,27 +76,41 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
     return 'Please Select';
   }
 
-  get startDate() {
-    return this.siteAccessRequiringAttention.map(x => { return x.startDateShort; });
+  get startDate(): Date {
+    return this.siteAccessRequiringAttention[0].startDate;
   }
 
-  get endDate() {
-    return this.siteAccessRequiringAttention.map(x => { return x.endDateShort; });
+  set startDate( startDt: Date ) {
+    this.siteAccessRequiringAttention[0].startDate = startDt;
   }
 
-  isNewEnrol() {
+  get endDate(): Date {
+    return this.siteAccessRequiringAttention[0].endDate;
+  }
+
+  set endDate( endDt: Date ) {
+    this.siteAccessRequiringAttention[0].endDate = endDt;
+  }
+
+  isNewEnrol(): boolean {
     return this.siteAccessRequiringAttention.filter(x => {
       return x.status === EnrollmentStatus.New;
     }).length !== 0;
   }
 
-  isDeclinedEnrol() {
+  isDeclinedEnrol(): boolean {
     return this.siteAccessRequiringAttention.filter(x => {
       return x.status === EnrollmentStatus.Declined;
     }).length !== 0;
   }
 
-  isShowProgress() {
+  isActive(): boolean {
+    return this.siteAccessRequiringAttention.filter(x => {
+      return x.status === EnrollmentStatus.Active;
+    }).length !== 0;
+  }
+
+  isShowProgress(): boolean {
     return this.siteAccessRequiringAttention.filter(x => {
       return (x.status !== EnrollmentStatus.Expired && x.status !== EnrollmentStatus.Active);
     }).length !== 0;

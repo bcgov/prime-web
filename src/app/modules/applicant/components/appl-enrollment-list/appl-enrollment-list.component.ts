@@ -50,13 +50,11 @@ export class ApplEnrollmentListComponent extends EnrollmentList implements OnIni
   }
 
   rowOpened(item: ApplEnrollmentRowComponent) {
-    console.log('rowOpened');
     this.rowElements.filter(x => x !== item)
       .map(x => x.closeRow());
   }
 
   search(phrase) {
-    console.log( 'search');
     this.deepSearch(phrase);
   }
 

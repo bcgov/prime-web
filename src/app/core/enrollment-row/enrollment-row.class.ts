@@ -66,7 +66,6 @@ export abstract class EnrollmentRow extends Base {
   }
 
   canOpen() {
-    console.log('canOpen');
     return this.siteAccessRequiringAttention.length >= 1;
   }
 

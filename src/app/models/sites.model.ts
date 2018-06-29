@@ -82,6 +82,8 @@ export class Site extends Base {
 
 // The record of a specific user's access to a specific site
 export class SiteAccess extends Base {
+
+  private _dateFormat = 'YYYY/MM/DD';
   site: Site;
   // Displayed to user
   title: string;
@@ -119,15 +121,15 @@ export class SiteAccess extends Base {
   }
 
   get endDateShort(): string {
-    return moment(this.endDate).format('DD/MM/YYYY');
+    return moment(this.endDate).format(this._dateFormat);
   }
 
   get startDateShort(): string {
-    return moment(this.startDate).format('DD/MM/YYYY');
+    return moment(this.startDate).format(this._dateFormat);
   }
 
   formatDateShort(date: Date){
-    return moment(date).format('DD/MM/YYYY');
+    return moment(date).format(this._dateFormat);
   }
 
   // Set demo data
