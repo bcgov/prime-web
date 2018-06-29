@@ -16,7 +16,7 @@
       Enrollment has been updated
     </div>
 
-    <button type="button" class="btn btn-default mx-2" [disabled]="!changesMade">Cancel</button>
+    <button type="button" class="btn btn-default mx-2" [disabled]="!changesMade" (click)="cancel()">Cancel</button>
     <button type="button" class="btn btn-primary mx-2" [disabled]="!changesMade" (click)="save()">Save</button>
   </span>
 </div>

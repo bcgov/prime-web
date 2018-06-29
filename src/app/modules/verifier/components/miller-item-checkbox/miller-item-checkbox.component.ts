@@ -4,6 +4,7 @@ import { EnrollmentStatus } from '../../../../models/enrollment-status.enum';
 import { Person } from '../../../../models/person.model';
 import { Site, SiteAccess } from '../../../../models/sites.model';
 import { Base } from '../../../../core/base/base.class';
+
 @Component({
   selector: 'prime-miller-item-checkbox',
   templateUrl: './miller-item-checkbox.component.html',
@@ -29,7 +30,6 @@ export class MillerItemCheckboxComponent extends Base implements OnInit {
   ngOnInit() {
     const today = new Date();
     this.today =  { year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate() }
-    //console.log(this.selectedSiteAccess[0].requestDate);
   }
 
   ngOnDestroy(){
@@ -39,25 +39,40 @@ export class MillerItemCheckboxComponent extends Base implements OnInit {
 
   onItemClick(event, item) {
     const sa = this.getSiteAccessForItem(item);
-    if (sa && sa.status === EnrollmentStatus.Active){
-      sa.pendingChanges = item.checked;
+
+    if (sa) {
+      sa.pendingChanges = true;
     }
+
+
+    // if (sa && sa.status === EnrollmentStatus.Active){
+    //   sa.pendingChanges = item.checked;
+    // }
 
     if (typeof sa === 'undefined') {
       // User has selected a blank item, creating new SA.
+      console.log('onItemClick1', {item, sa})
       this.initiateSiteAccess(item);
     }
 
     if (item.checked && this._allPendingChanges.includes(sa)) {
       // User is undoing a change they haven't saved. Delete SA.
+      console.log('onItemClick2', {item, sa})
       this.deleteInitiatedSiteAccess(item, sa);
+      sa.pendingChanges = false;
     }
 
-    // Pre-existing status exists, user has checked/unchecked.
-    if (!item.checked && sa && !this._allPendingChanges.includes(sa)) {
-      this._allPendingChanges.push(sa);
+    if (item.checked && sa && (sa.status === EnrollmentStatus.Active || sa.status === EnrollmentStatus.New)){
+      console.log('onItemClick4-NEW, unchecking active/new', {item, sa})
+      this.removeExistingEnrollment(item, sa);
     }
 
+    if (!item.checked && sa && sa.status === null){
+      console.log('onItemClick5-NEW, undoing, restoring active', {item, sa})
+      this.undoRemoveExistingEnrollment(item, sa);
+    }
+
+    console.log('onItemClick-END', {item, sa})
     item.checked = !item.checked;
     this.onPendingChanges.emit(this._allPendingChanges);
 
@@ -67,8 +82,42 @@ export class MillerItemCheckboxComponent extends Base implements OnInit {
     }
   }
 
+  showNewEnrollment(item){
+    const sa = this.getSiteAccessForItem(item);
+    if (item.checked && sa) {
+      return sa.pendingChanges && sa.status === EnrollmentStatus.Initiated;
+    }
+
+    return false;
+  }
+
+  showEndEnrollment(item){
+    const sa = this.getSiteAccessForItem(item);
+    if (!item.checked && sa) {
+      return sa.pendingChanges && sa.status !== EnrollmentStatus.Initiated;
+    }
+
+    return false;
+  }
+
+  private removeExistingEnrollment(item, sa: SiteAccess){
+    sa.status = null;
+    sa.declinedReason = 'noLongerEmployee';
+    sa.pendingChanges = true;
+    this._allPendingChanges.push(sa);
+  }
+
+  private undoRemoveExistingEnrollment(item, sa: SiteAccess){
+    sa.pendingChanges = false;
+    if (sa.status === null) {
+      sa.status = EnrollmentStatus.Active;
+    }
+    this._allPendingChanges = this._allPendingChanges.filter(x => x !== sa);
+  }
+
   private initiateSiteAccess(item){
     const sa = new SiteAccess();
+    sa.pendingChanges = true;
     sa.status = EnrollmentStatus.Initiated;
     item.siteAccess.push(sa);
     // Assign SA to the item depending on type of item (person or site)

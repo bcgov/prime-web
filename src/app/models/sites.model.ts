@@ -5,6 +5,7 @@ import { Person, Role, Verifier, Provisioner } from './person.model';
 import { Address } from './addresses.model';
 import {BadgeLevel} from '../core/enrollment-row/enrollment-row.class';
 import {st} from '@angular/core/src/render3';
+import {isNullOrUndefined} from 'util';
 
 //-----------------------------------------------------------------------------
 // SITES
@@ -28,6 +29,17 @@ export class Site extends Base {
   posUserId: string; // This should be in stiteAccess
   provisionedDate: string; // This should be in stiteAccess
   collegeId: string; // This should be in stiteAccess or person as CollegeID related to person not site
+
+  // set data for demo
+  set siteDemoData( data: string ) {
+
+    const _data = data.split( ',' );
+
+    this.name = _data[0];
+    this.PEC = _data[1]
+    this.siteType = _data[2];
+    this.vendor = _data[3];
+  }
 
   constructor() {
     super();
@@ -78,7 +90,7 @@ export class SiteAccess extends Base {
   status: EnrollmentStatus;
   declinedReason: string;
   accessReason: string;
-  requestDate: Date; // when SiteRequest was initiated
+  requestDate: Date; // Date site access is requested, submitted to processed
   startDate: Date;
   endDate: Date;
   vendor: Vendor;
@@ -119,16 +131,16 @@ export class SiteAccess extends Base {
   }
 
   // Set demo data
-  setSiteAccess( access: string ) {
+  set siteAccessDemo( access: string ) {
     const data = access.split(',');
 
     this.status = EnrollmentStatus[data[0]];
-    if (null !== data[1]) { this.accessReason = data[1]; }
-    if (null !== data[2]) { this.declinedReason = data[2]; }
-    if (null !== data[3]) { this.requestDate = new Date(data[3]); }
-    if (null !== data[4]) { this.startDate = new Date(data[4]); }
-    if (null !== data[5]) { this.endDate = new Date(data[5]); }
-    if (null !== data[6]) { this.progress = SiteAccessProgressSteps[data[6]]; }
+    if (!isNullOrUndefined(data[1])) { this.accessReason = data[1]; }
+    if (!isNullOrUndefined(data[2])){ this.declinedReason = data[2]; }
+    if (!isNullOrUndefined(data[3])) { this.requestDate = new Date(data[3]); }
+    if (!isNullOrUndefined(data[4])) { this.startDate = new Date(data[4]); }
+    if (!isNullOrUndefined(data[5])) { this.endDate = new Date(data[5]); }
+    if (!isNullOrUndefined(data[6])) { this.progress = SiteAccessProgressSteps[data[6]]; }
   }
 }
 

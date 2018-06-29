@@ -3,7 +3,7 @@
   <div class="col">
     <i class="fa fa-quote-left fa-2x fa-pull-left" aria-hidden="true"></i>
     <p><em>{{description}}</em></p>
-    <p><small>Requested Date: {{ data ? data.formatDateShort(data.requestDate) : 'n/a'}}</small></p>
+    <p><small>Submitted Date: {{ data ? data.formatDateShort(data.requestDate) : 'n/a'}}</small></p>
   </div>
 
   <div class="col">
@@ -42,7 +42,7 @@
             class="form-control drop-dl-box-15 color"
             [value]="accessReason"
             (change)="onSelect($event)">
-      <option value="Please Select">Please Select</option>
+      <option value="Please Select" selected>Please Select</option>
       <option *ngFor="let reason of accessReasons" value="{{reason}}">
         {{reason}}
       </option>
@@ -50,10 +50,8 @@
 
     <select *ngIf="disableReason"
             id="accessReason"
-            class="form-control drop-dl-box-15 color">
-      <option value="{{accessReason}}" selected disabled>
-        {{accessReason}}
-      </option>
+            class="form-control drop-dl-box-15 color" disabled>
+      <option value="{{accessReason}}" selected>{{accessReason}}</option>
     </select>
   </div>
 </div>

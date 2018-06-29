@@ -11,6 +11,7 @@ import { CollegeTypes,
   AdvancedPracticeCertificationTypes,
   WorkingOnBehalfTitleTypes,
   ISelfDeclaration } from './colleges.enum';
+import {isNullOrUndefined} from 'util';
 
 /**
  * Information about person
@@ -39,6 +40,23 @@ export class Person extends Base {
     }
   }
 
+  // Just for development with dummy data for DEMO - TODO: Remove after development
+  set demoData( data: string ) {
+
+    const _data = data.split(',' );
+    const today = new Date();
+
+    this.name = _data[ 0 ];
+
+    if (!isNullOrUndefined( _data[1] )) { this.dateOfBirth = new Date( _data[1] ); }
+    if (!isNullOrUndefined( _data[2] )) {
+      this.renewalDate = new Date( today.getFullYear(), today.getMonth(), today.getDate() +  parseInt( _data[2], 10 ) );
+    } else {
+      // default renewal date 1 year
+      this.renewalDate = new Date( today.getFullYear(), today.getMonth() + 12, today.getDate() );
+    }
+  }
+
   address: Address;
   useRegAddress: Boolean = false;
   mailAddress: Address = new Address();
@@ -60,7 +78,6 @@ export class Person extends Base {
   // refactor Applicant into a different Role (like Verifier/Provisioner), but
   // if ALL People were previously Applicants, then there's no need to make the
   // distinction
-  license;
   accessAcceptance = [false, false, false];
 
   // toggles

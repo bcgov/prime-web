@@ -24,13 +24,14 @@ export class AppEnrollmentProgressRowComponent extends EnrollmentProgressRowComp
   }
 
   get accessReason() {
-     if (isNullOrUndefined(this.data.accessReason)) {
+      console.log( 'AccessReason', this.data.accessReason );
+     if (isNullOrUndefined(this.data.accessReason) || 0 === this.data.accessReason.length) {
        return 'Please Select';
      }
      return this.data.accessReason;
   }
 
   onSelect($event){
-     this.data.accessReason = $event;
+     console.log( 'onSelect', $event );
   }
 }

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {EnrollmentRow} from '../../../../core/enrollment-row/enrollment-row.class';
 import {fadeIn, loadInOut, openState, openStateChild, openStateDisable} from '../../../../animations/animations';
-import {AccessReasons, DeclinedReasons, SiteAccess} from '../../../../models/sites.model';
+import {DeclinedReasons, SiteAccess} from '../../../../models/sites.model';
 import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
 import {SearchDomain} from '../../../../core/user-info-button/user-info-button.component';
 
@@ -29,8 +29,8 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
   @Input() rowData: ApplEnrollmentRowItem;
   @Output() onChange = new EventEmitter<boolean>();
 
-  public acceptedEnroll: boolean = false;
-  public declinedEnroll: boolean = false;
+  public acceptedEnroll = false;
+  public declinedEnroll = false;
   public applicantSearch: SearchDomain = SearchDomain.Applicant; // Domain to search for user sites
 
   constructor() {
@@ -92,6 +92,12 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
   isDeclinedEnrol() {
     return this.siteAccessRequiringAttention.filter(x => {
       return x.status === EnrollmentStatus.Declined;
+    }).length !== 0;
+  }
+
+  isShowProgress() {
+    return this.siteAccessRequiringAttention.filter(x => {
+      return (x.status !== EnrollmentStatus.Expired && x.status !== EnrollmentStatus.Active);
     }).length !== 0;
   }
 
