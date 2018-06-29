@@ -62,9 +62,9 @@ export class DatepickerComponent implements OnInit {
   ngOnInit() {
 
     this.datepickerOptions = {
-      // dateFormat: this.dateFormat,
-      dateFormat: "yyyy-mm-dd",
+      dateFormat: this.dateFormat,
       sunHighlight: false,
+      appendSelectorToBody: true,
     };
 
     if (this.size === DatepickerSizes.MINI) {
@@ -72,7 +72,9 @@ export class DatepickerComponent implements OnInit {
       this.datepickerOptions.selectorHeight = '185px';
       this.datepickerOptions.selectorWidth = '201px';
     }
-    this.model =  { date: moment(this.date).format('YYYY-MM-DD') }
+    this.model =  {
+      date: moment(this.date).format( this.dateFormat.toUpperCase() )
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {

@@ -25,19 +25,19 @@
   </a>
   <div *ngIf="showNewEnrollment(item)" class='d-flex justify-content-around' [@growVertical]>
     <span class='d-inline-flex align-items-baseline mb-1'>Start
-      <prime-datepicker size='mini' dateFormat="yyyy/mm/dd"
+      <prime-datepicker size='mini' dateFormat="yyyy-mm-dd"
       [(date)]=selectedSiteAccess[0].requestDate
       class='ml-1'></prime-datepicker>
     </span>
 
     <span class='d-inline-flex align-items-baseline mb-1'>End
-      <prime-datepicker size='mini' dateFormat="yyyy/mm/dd" class='ml-1'></prime-datepicker>
+      <prime-datepicker size='mini' dateFormat="yyyy-mm-dd" class='ml-1'></prime-datepicker>
     </span>
   </div>
 
   <div *ngIf="showEndEnrollment(item)" class='d-flex justify-content-around' [@growVertical]>
       <span class='d-inline-flex align-items-baseline mb-1'>Start
-        <prime-datepicker size='mini' dateFormat="yyyy/mm/dd"
+        <prime-datepicker size='mini' dateFormat="yyyy-mm-dd"
         [(date)]=selectedSiteAccess[0].requestDate
         class='ml-1'></prime-datepicker>
       </span>
