@@ -358,7 +358,7 @@ export class DummyDataService {
     names.forEach( name => {
       const _data = name.split( ',' );
       const sites = this.createSitesDemo( _data[0], parseInt( _data[1], 10 ), _data[2] );
-      const collection = new Collection( name, sites );
+      const collection = new Collection( _data[0], sites );
       result.push(collection);
     });
 
