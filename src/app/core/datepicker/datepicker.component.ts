@@ -21,6 +21,16 @@ export class DatepickerComponent implements OnInit {
   @Input() labelText: string;
 
 
+  /** Dates **before** disableUntil will not be valid selections.  Maps to a ngx-mydatepicker option, but we convert IMyDate to Date  */
+  @Input() disableUntil: Date;
+
+  /** Dates **after** disableSince will not be valid selections.  Maps to a ngx-mydatepicker option, but we convert IMyDate to Date */
+  @Input() disableSince: Date;
+
+  /** Equivalent to setting disableBefore to tomorrow. */
+  @Input() onlyFutureDates: boolean;
+
+
 
   /** Format for how to display the date to the user. */
   @Input() dateFormat: string = 'dd/mm/yyyy';
@@ -56,6 +66,7 @@ export class DatepickerComponent implements OnInit {
   }
 
   isDate(x: any): x is Date {
+    if (!x) return false;
     return x.getDate !== undefined;
   }
 
@@ -72,6 +83,20 @@ export class DatepickerComponent implements OnInit {
       this.datepickerOptions.selectorHeight = '185px';
       this.datepickerOptions.selectorWidth = '201px';
     }
+
+    if (this.isDate(this.disableSince)){
+      this.datepickerOptions.disableSince = this.convertDateToSimpleDate(this.disableSince);
+    }
+
+    if (this.isDate(this.disableUntil)){
+      this.datepickerOptions.disableUntil = this.convertDateToSimpleDate(this.disableSince);
+    }
+
+    if (this.onlyFutureDates){
+      const today = new Date();
+      this.datepickerOptions.disableUntil = this.convertDateToSimpleDate(today);
+    }
+
     this.model =  {
       date: moment(this.date).format( this.dateFormat.toUpperCase() )
     }
