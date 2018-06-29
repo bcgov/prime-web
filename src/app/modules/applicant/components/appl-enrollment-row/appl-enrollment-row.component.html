@@ -8,13 +8,15 @@
       <span class="d-inline-flex align-items-baseline mb-1">Start
         <prime-datepicker disabled size="mini" [dateFormat]="dateFormat"
                           [(date)]="startDate"
-                          class="ml-1"></prime-datepicker>
+                          class="ml-1"
+                          hideClearButton="true"></prime-datepicker>
       </span>
       <span class="d-inline-flex align-items-baseline mb-1">End
         <prime-datepicker size="mini" [dateFormat]="dateFormat"
                           [(date)]="endDate"
                           class="ml-1"
-                          [disabled]="!isActive()"></prime-datepicker>
+                          [disabled]="!isActive()"
+                          [hideClearButton]="!isActive()"></prime-datepicker>
     </span>
     </div>
     <div *ngIf="isDeclinedEnrol()">
