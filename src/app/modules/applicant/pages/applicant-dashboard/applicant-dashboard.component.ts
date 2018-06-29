@@ -17,6 +17,7 @@ import {moment} from 'ngx-bootstrap/chronos/test/chain';
 export class ApplicantDashboardComponent implements OnInit {
 
   private _dateFormat = 'MMM DD, YYYY';
+  private _originalEnrollSnapshot: ApplEnrollmentRowItem[];
 
   constructor(private primeDataService: PrimeDataService,
               private router: Router) {}
@@ -34,15 +35,21 @@ export class ApplicantDashboardComponent implements OnInit {
     //  const link = '/applicant/access-acceptance';
     //  this.router.navigate([link]);
     }
+
+    // Save the original enrollment so we can restore it if the user wants to cancel changes
+    this._originalEnrollSnapshot = cloneDeep( this.primeDataService.getUserSiteEnrollment());
   }
 
   get applicant(): Person {
     return this.primeDataService.user;
   }
 
+  /**
+   * List of enrollments for the user
+   * @returns {ApplEnrollmentRowItem[]}
+   */
   get userSiteEnrollmentData(): ApplEnrollmentRowItem[] {
-
-    return this.primeDataService.getUserSiteEnrollment();
+    return this._originalEnrollSnapshot;
   }
 
   get contactDone(): boolean {

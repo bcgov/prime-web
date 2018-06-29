@@ -252,14 +252,16 @@ export class DummyDataService {
       + SiteAccessProgressSteps.Provisioner //8
     ];
 
-    // First Person - New, Active, Approved, & Declined by Provisioner
-    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[0], people[0], access[0]);
+    // First Person - 2 New, Active, Approved, & Declined by Provisioner
+    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[0], people[0], access[0]); // New
     result.push(sa);
-    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[0], access[1]);
+    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[3], people[0], access[0]); // New
     result.push(sa);
-    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[2], people[0], access[2]);
+    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[0], access[1]); // Active
     result.push(sa);
-    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[2], people[0], access[3]);
+    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[2], people[0], access[2]); // Approved
+    result.push(sa);
+    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[2], people[0], access[3]); // Declined
     result.push(sa);
 
     // Second Person - Declined by Applicant, Pending with MoH

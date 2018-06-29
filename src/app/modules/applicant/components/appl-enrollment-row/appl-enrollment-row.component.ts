@@ -4,6 +4,7 @@ import {loadInOut, openState, openStateChild, openStateDisable} from '../../../.
 import {DeclinedReasons, SiteAccess} from '../../../../models/sites.model';
 import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
 import {SearchDomain} from '../../../../core/user-info-button/user-info-button.component';
+import {isNullOrUndefined} from "util";
 
 // Specific to this component
 export interface ApplEnrollmentRowItem {
@@ -42,7 +43,7 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
     if (!this.rowData) {
       return;
     }
-    this.siteAccessRequiringAttention.map(x => x.open = false);
+    return this.siteAccessRequiringAttention.map(x => x.open = false);
   }
 
   onAccept() {
@@ -57,23 +58,35 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
     this.onChange.emit(true);
   }
 
-  onSelect($event) {
-    console.log('onSelect ', $event);
+  pendingChanges( item: SiteAccess ) {
+    console.log( 'Pending Change: ', item );
   }
 
+  /**
+   * Get the possible reasons for declining the site access
+   * @returns {any[]}
+   */
   get declinedReasons() {
     const list = Object.keys(DeclinedReasons);
     return list.map( x => {return DeclinedReasons[x]; });
   }
 
-  get declinedReason() {
-    const declinedreason = this.siteAccessRequiringAttention.map(x => {
-      return x.declinedReason; }).filter( x => x);
+  /**
+   * Get the reason why access was declined
+   * @returns {string}
+   */
+  get declinedReason(): string {
 
-    if (declinedreason.length !== 0) {
-      return declinedreason[0];
+    if (isNullOrUndefined( this.siteAccessRequiringAttention[0].declinedReason ) ||
+        0 === this.siteAccessRequiringAttention[0].declinedReason.length ) {
+      return 'Please Select';
     }
-    return 'Please Select';
+    return this.siteAccessRequiringAttention[0].declinedReason;
+  }
+
+  set declinedReason( reason: string ) {
+    this.siteAccessRequiringAttention[0].pendingChanges = true;
+    this.siteAccessRequiringAttention[0].declinedReason = reason;
   }
 
   get startDate(): Date {
@@ -89,6 +102,7 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
   }
 
   set endDate( endDt: Date ) {
+    this.siteAccessRequiringAttention[0].pendingChanges = true;
     this.siteAccessRequiringAttention[0].endDate = endDt;
   }
 

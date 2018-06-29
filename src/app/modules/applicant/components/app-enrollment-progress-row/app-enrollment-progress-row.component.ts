@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {EnrollmentProgressRowComponent} from '../../../../core/enrollment-progress-row/enrollment-progress-row.component';
 import {growVertical} from '../../../../animations/animations';
-import {AccessReasons} from '../../../../models/sites.model';
+import {AccessReasons, SiteAccess} from '../../../../models/sites.model';
 import {isNullOrUndefined} from "util";
 
 @Component({
@@ -13,6 +13,7 @@ import {isNullOrUndefined} from "util";
 export class AppEnrollmentProgressRowComponent extends EnrollmentProgressRowComponent {
 
   @Input() disableReason: boolean = true;
+  @Output() onPendingChange = new EventEmitter<SiteAccess>();
 
    constructor() {
     super();
@@ -30,7 +31,9 @@ export class AppEnrollmentProgressRowComponent extends EnrollmentProgressRowComp
      return this.data.accessReason;
   }
 
-  onSelect($event){
-     console.log( 'onSelect', $event );
+  set accessReason( reason: string ) {
+     console.log( 'accessReason: ' + reason );
+     this.data.accessReason = reason;
+     this.onPendingChange.emit( this.data );
   }
 }
