@@ -6,9 +6,18 @@ input[id="startDt"], input[id="endDt"] {
 }
 
 .dates-col {
-  padding: 0 1em 0 1em;
+  padding: 0 1em;
+
+  // Consistent sizing regardless if datepicker clearButton is hidden, but still this is a codesmell. Once we have hi-fidelity designs we can re-implement rows to be equally sized.
+  > span:last-of-type {
+    min-width: 145px;
+  }
 }
 
 .enrollment-icons > i {
   font-size: 2rem;
+}
+
+.enrollment-actions {
+  min-width:  35rem;
 }

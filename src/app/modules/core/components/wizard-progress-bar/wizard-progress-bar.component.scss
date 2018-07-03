@@ -1,9 +1,7 @@
 @import 'variables.scss';
 
 :host {
-  // TODO: REFINE
   flex: 1;
-  // padding: 0 10em; //TODO: Remove this and add padding from PARENT as it's going to be on a case by case basis.
 }
 
 .step-container {

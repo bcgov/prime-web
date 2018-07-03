@@ -2,7 +2,10 @@
 
 <ng-template #personModal>
   <div class="modal-header">
-      <h4 class="modal-title">{{person.name}}</h4>
+      <span class="modal-title">
+        <img class="img-thumbnail" src="assets/photoPlaceholder.png" alt="Generic placeholder image">
+        <h4 class='d-inline pl-3'>{{person.name}}</h4>
+      </span>
       <button class="btn btn-default pull-right" *ngIf="!editable" (click)="edit()">Edit</button>
 
       <span *ngIf="editable">
@@ -12,47 +15,57 @@
 
   </div>
   <div class="modal-body">
-    <form>
+    <form class='row'>
+      <div class="col">
 
-      <label class="has-float-label">
-        <input type="text" disabled class="form-control" id="lastName" name="lastName" [(ngModel)]="person.lastName">
-        <span>Last Name</span>
-      </label>
+        <label class="has-float-label">
+          <input type="text" disabled class="form-control" id="lastName" name="lastName" [(ngModel)]="person.lastName">
+          <span>Last Name</span>
+        </label>
 
-      <label class="has-float-label">
-        <input type="text" disabled class="form-control" id="firstName" name="firstName" [(ngModel)]="person.firstName">
-        <span>First Name</span>
-      </label>
+        <label class="has-float-label">
+          <input type="text" disabled class="form-control" id="middleName" name="middleName" [(ngModel)]="person.middleName">
+          <span>Middle Name</span>
+        </label>
 
-      <label class="has-float-label">
-        <input type="text" disabled class="form-control" id="middleName" name="middleName" [(ngModel)]="person.middleName">
-        <span>Middle Name</span>
-      </label>
+        <label class="has-float-label">
+          <input type="text" disabled class="form-control" id="primaryPhone" name="primaryPhone" [(ngModel)]="person.phone">
+          <span>Phone</span>
+        </label>
 
-      <label class="has-float-label">
-        <input type="text" disabled class="form-control" id="DOB" name="DOB" [(ngModel)]="person.dateOfBirth">
-        <span>Date of Birth</span>
-      </label>
+        <label class="has-float-label">
+          <input type="text" disabled class="form-control" id="renewalDate" name="renewalDate" [(ngModel)]="person.renewalDate">
+          <span>Renewal Date</span>
+        </label>
 
-      <label class="has-float-label">
-        <input type="text" disabled class="form-control" id="primaryPhone" name="primaryPhone" [(ngModel)]="person.phone">
-        <span>Phone</span>
-      </label>
+        <label class="has-float-label">
+          <input type="text" disabled class="form-control" id="PosID" name="PosID" [(ngModel)]="person.PoSId">
+          <span>PoS ID</span>
+        </label>
+      </div>
 
-      <label class="has-float-label">
-        <input type="text" disabled class="form-control" id="email" name="email" [(ngModel)]="person.email">
-        <span>Email</span>
-      </label>
+      <div class="col">
+        <label class="has-float-label">
+          <input type="text" disabled class="form-control" id="firstName" name="firstName" [(ngModel)]="person.firstName">
+          <span>First Name</span>
+        </label>
 
-      <label class="has-float-label">
-        <input type="text" disabled class="form-control" id="renewalDate" name="renewalDate" [(ngModel)]="person.renewalDate">
-        <span>Renewal Date</span>
-      </label>
+        <label class="has-float-label">
+          <input type="text" disabled class="form-control" id="DOB" name="DOB" [(ngModel)]="person.dateOfBirth">
+          <span>Date of Birth</span>
+        </label>
 
-      <label class="has-float-label">
-        <input type="text" disabled class="form-control" id="postal" name="postal" [(ngModel)]="person.address.postal">
-        <span>Postal Code</span>
-      </label>
+        <label class="has-float-label">
+          <input type="text" disabled class="form-control" id="email" name="email" [(ngModel)]="person.email">
+          <span>Email</span>
+        </label>
+
+        <label class="has-float-label">
+          <input type="text" disabled class="form-control" id="postal" name="postal" [(ngModel)]="person.address.postal">
+          <span>Postal Code</span>
+        </label>
+      </div>
+
     </form>
 
       <div class="card">
@@ -154,25 +167,10 @@
         <option value="changedLocation">Changed Location</option>
       </select>
 
-      <!-- TODO: Move these to attribtues on the SiteAccess object, and then randomly generate them in DummyDataService. -->
-      <span class='d-flex flex-column px-2'>
-        <span class='nowrap'>Med Hist</span>
-        <span class='nowrap'>Daytime</span>
-      </span>
-
       <prime-pill-badge
         class='ml-2'
-        *ngIf="siteAccess.alert.status === 'Expired' || siteAccess.alert.status === 'Active'; else iconOnly"
         [alerts]="[siteAccess.alert]">
       </prime-pill-badge>
-
-      <ng-template #iconOnly>
-        <prime-pill-badge
-          class='ml-2'
-          iconOnly=true
-          [alerts]="[siteAccess.alert]">
-        </prime-pill-badge>
-      </ng-template>
 
     </span>
 

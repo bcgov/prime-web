@@ -18,6 +18,7 @@ import {isNullOrUndefined} from 'util';
  */
 export class Person extends Base {
   primeUserId: PrimeUserID; //human-readable, like a user-name - "JSmith"
+  PoSId: string;
 
   firstName: string;
   middleName: string;
@@ -74,15 +75,20 @@ export class Person extends Base {
   /** Corresponds to collection's objectId */
   associationId?: string[];
 
-  // License applies to Applicants. Does it apply to all Persons? Possibly
-  // refactor Applicant into a different Role (like Verifier/Provisioner), but
-  // if ALL People were previously Applicants, then there's no need to make the
-  // distinction
   accessAcceptance = [false, false, false];
+  /** The user has declared all information provided is accurate  */
+  isDeclaredCheck = false;
 
   // toggles
   hasCollege: boolean;
-  isDeviceProvider: boolean;
+  _isDeviceProvider: boolean;
+  get isDeviceProvider(): boolean {
+    return this._isDeviceProvider;
+  }
+  set isDeviceProvider(newVal: boolean) {
+    this._isDeviceProvider = newVal;
+    this.deviceProviderNumber = undefined;
+  }
   isWorkingOnBehalf: boolean;
 
   // toggle related arrays
@@ -96,7 +102,7 @@ export class Person extends Base {
     advancedPracticeCertificationType: 'pleaseSelect'
   }];
 
-  deviceProviderList = [{ dpNumber: '' }];
+  deviceProviderNumber: number;
 
   workingOnBehalfList = [{ jobTitle: 'pleaseSelect' }];
 

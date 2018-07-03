@@ -2,9 +2,6 @@
 
 .miller-container {
   display: flex;
-  // TODO: Ems?
-  // min-height: 400px;
-
   position: relative;
   perspective: 800px;
 }
@@ -109,22 +106,6 @@
   & > h4 {
     margin-bottom: 0;
     align-self: center;
-  }
-}
-
-.blank-column {
-  // Don't show as 'open' for mobile.
-  z-index: -100;
-  position: relative;
-  flex: 1;
-  // visibility: hidden; //TODO: ENABLE!
-
-  // DEMO PURPOSES ONLY! TODO: CAN BE REMOVED!
-  & > h2 {
-    position: absolute;
-    top: 0%;
-    font-size: 86px;
-    color: rgba(0, 51, 102, 0.075)
   }
 }
 

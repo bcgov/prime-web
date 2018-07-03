@@ -145,5 +145,12 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
       return siteAccess;
     });
   }
+
+  canOpen(): boolean{
+    // Don't open on New or Active rows, unless user has Accepted the New row
+    return this.rowData.expandableRows.filter(sa => {
+      return (sa.status !== EnrollmentStatus.New && sa.status !== EnrollmentStatus.Active) || this.acceptedEnroll
+    }).length >= 1;
+  }
 }
 

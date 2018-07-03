@@ -60,5 +60,10 @@ export class AppComponent implements OnInit {
     const SA = this.dummyDataService.populateSiteAccessFromCollectionDemo( dummyCollections, dummyPeople );
     this.primeDataService.siteAccesses.push(... SA);
 
+
+    if (environment.useDeveloperDummyData){
+      this.primeDataService.people[0].email = 'avoidredirect@env.com';
+      this.primeDataService.people[0].phone = '555-555-5555';
+    }
   }
 }
