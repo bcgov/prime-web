@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AppEnrollmentProgressRowComponent } from './app-enrollment-progress-row.component';
+import { FormsModule } from '@angular/forms';
 
 describe('AppEnrollmentProgressRowComponent', () => {
   let component: AppEnrollmentProgressRowComponent;
@@ -8,7 +9,8 @@ describe('AppEnrollmentProgressRowComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AppEnrollmentProgressRowComponent ]
+      declarations: [ AppEnrollmentProgressRowComponent ],
+      imports: [ FormsModule ]
     })
     .compileComponents();
   }));

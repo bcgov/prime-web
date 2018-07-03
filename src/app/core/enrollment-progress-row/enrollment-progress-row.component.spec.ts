@@ -4,6 +4,7 @@ import { EnrollmentProgressRowComponent } from './enrollment-progress-row.compon
 import {BsModalService, ProgressbarModule} from 'ngx-bootstrap';
 import {ProgressBarComponent} from '../progress-bar/progress-bar.component';
 import { RouterTestingModule } from '@angular/router/testing';
+import { FormsModule } from '@angular/forms';
 
 describe('EnrollmentProgressRowComponent', () => {
   let component: EnrollmentProgressRowComponent;
@@ -12,7 +13,7 @@ describe('EnrollmentProgressRowComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ EnrollmentProgressRowComponent, ProgressBarComponent],
-      imports: [ProgressbarModule, RouterTestingModule]
+      imports: [ProgressbarModule, RouterTestingModule, FormsModule]
     })
     .compileComponents();
   }));
