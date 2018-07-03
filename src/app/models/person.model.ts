@@ -134,13 +134,6 @@ export class Person extends Base {
   }
 }
 
-//class Name {
-//  firstName: string;
-//  lastName: string;
-//  middleName: string;
-//  get fullName(): string { return this.firstName + this.lastName; }
-//}
-
 interface PhoneNumber { }
 interface PrimeUserID { }
 

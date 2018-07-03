@@ -34,13 +34,23 @@
           <i class="fa fa-edit fa-2x text-muted"></i>
         </a>
       </div>
-      <div *ngIf="professionalDone"
+      <div *ngIf="applicant.hasCollege"
       class="card-body d-flex justify-content-between">
 
         <div>
           <p>{{collegeType}}</p>
           <p>License Number: {{licenceNumber}}</p>
           <p>License Expiry Date: {{licenceExpiryDate}}</p>
+        </div>
+
+        <i class="fa fa-check-circle text-success fa-3x pull-right" aria-hidden="true"></i>
+
+      </div>
+      <div *ngIf="applicant.isWorkingOnBehalf"
+           class="card-body d-flex justify-content-between">
+
+        <div>
+          <p>Job Title: {{jobTitle}}</p>
         </div>
 
         <i class="fa fa-check-circle text-success fa-3x pull-right" aria-hidden="true"></i>

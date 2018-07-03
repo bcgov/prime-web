@@ -156,7 +156,7 @@ export class EnrollmentAlert {
   }
 
   static convertStatusToBadgeLevel(status: EnrollmentStatus): BadgeLevel {
-    if (status === EnrollmentStatus.Pending){
+    if (status === EnrollmentStatus.Provisioning){
         return BadgeLevel.Warning;
     }
 

@@ -1,12 +1,37 @@
-/** The reason we're showing the notification in the first place. */
+/** The reason we're showing the notification in the first place.
+ * TODO:  Verify that definition for enrollment statuses are correct
+ */
 export enum EnrollmentStatus {
-  New = 'New',
-  Initiated = 'Initiated',
-  Pending = 'Pending',
-  Incomplete = 'Incomplete',
-  Returned = 'Returned to applicant',
-  Declined = 'Declined',
-  Approved = 'Approved',
+  /**
+   * Applicant has active enrollment and site access granted
+   */
   Active = 'Active',
-  Expired = 'Expired'
+  Approved = 'Approved', // TODO: figure out whether this is required if so when does it happen
+  /**
+   * Applicant and provisioner can decline site access
+   * verifier can decline enrollment for site access
+   */
+  Declined = 'Declined',
+  /**
+   * Applicant general enrollment expired for PharmaNet access
+   */
+  Expired = 'Expired',
+  Incomplete = 'Incomplete', // TODO: figure out when this happens
+  /**
+   * Verifier initiates enrollment
+   */
+  Initiated = 'Initiated',
+  /**
+   * New site/site access for applicant to accept or decline
+   */
+  New = 'New',
+  /**
+   * Provisioner to grant site access for applicant
+   */
+  Provisioning = 'Provisioning',
+  Returned = 'Returned to applicant',
+  /**
+   * MoH reviews
+   */
+  Review = 'Review'
 }

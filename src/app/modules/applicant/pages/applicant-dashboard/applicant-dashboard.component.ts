@@ -4,7 +4,7 @@ import { Person } from '../../../../models/person.model';
 import {ApplEnrollmentRowItem} from '../../components/appl-enrollment-row/appl-enrollment-row.component';
 import {Router} from '@angular/router';
 import {cloneDeep} from 'lodash';
-import {CollegeTypes} from '../../../../models/colleges.enum';
+import {CollegeTypes, WorkingOnBehalfTitleTypes} from '../../../../models/colleges.enum';
 import {isNullOrUndefined} from 'util';
 import {moment} from 'ngx-bootstrap/chronos/test/chain';
 
@@ -28,9 +28,9 @@ export class ApplicantDashboardComponent implements OnInit {
     if (!this.contactDone) {
       const link = '/applicant/contact';
       this.router.navigate([link]);
-   // } else if (!this.professionalDone) {
-    //  const link = '/applicant/professional';
-   //   this.router.navigate([link]);
+    } else if (this.professionalDone) {
+      const link = '/applicant/professional';
+      this.router.navigate([link]);
     //} else if (!this.accessAcceptanceDone) {
     //  const link = '/applicant/access-acceptance';
     //  this.router.navigate([link]);
@@ -57,7 +57,7 @@ export class ApplicantDashboardComponent implements OnInit {
   }
 
   get professionalDone(): boolean {
-    return this.applicant.hasCollege;
+    return this.applicant.hasCollege || this.applicant.isWorkingOnBehalf;
   }
 
   get accessAcceptanceDone(): boolean {
@@ -77,6 +77,11 @@ export class ApplicantDashboardComponent implements OnInit {
   get licenceExpiryDate(): string {
     const expiryDate = this.applicant.collegeCertificationList[0].licenceExpiryDate;
     return (isNullOrUndefined( expiryDate )) ? 'n/a' : moment( expiryDate ).format( this._dateFormat );
+  }
+
+  get jobTitle(): string {
+    const obj = Object.keys( WorkingOnBehalfTitleTypes ).filter(x => x === this.applicant.workingOnBehalfList[0].jobTitle );
+    return (obj.length > 0) ? WorkingOnBehalfTitleTypes[obj[0]] : 'n/a';
   }
 
   get renewalDate(): string {

@@ -233,33 +233,39 @@ export class DummyDataService {
     //EnrollmentStatus,AccessReason,DeclinedReason,requestDate,startDate,endDate,SiteAccessProgressSteps
     // spaces after commons cause the enums to be undefined, Date format: MM-DD-YYYY
     const access = [
-      EnrollmentStatus.New + ',,,05-05-2018,06-06-2018,06-06-2019,' + SiteAccessProgressSteps.Applicant //0
-      , EnrollmentStatus.Active + ',' + AccessReasons.NOT_PERSONAL_ACCESS + ', ,05-01-2018,05-16-2018,05-16-2019,'
+      EnrollmentStatus.New + ',,,' + this.setNewDate(Datefield.day, -30) + ',' + this.setNewDate(Datefield.day, -15)
+      + ',,' + SiteAccessProgressSteps.Applicant //0
+      , EnrollmentStatus.Active + ',' + AccessReasons.NOT_PERSONAL_ACCESS + ',,+ ' + this.setNewDate(Datefield.day, -(6 * 30))
+      + ',' + this.setNewDate(Datefield.day, -(5.5 * 30)) + ',' + this.setNewDate(Datefield.month, 7) + ','
       + SiteAccessProgressSteps.Provisioner //1
-      , EnrollmentStatus.Pending + ',' + AccessReasons.PERSONAL_ACCESS + ',,05-14-2018,06-06-2018,06-06-2019,'
+      , EnrollmentStatus.Provisioning + ',' + AccessReasons.PERSONAL_ACCESS + ',,' + this.setNewDate(Datefield.day, -(2 * 30))
+      + ',' + this.setNewDate(Datefield.day, -(1.5 * 30)) + ',' + this.setNewDate(Datefield.month, 10) + ','
       + SiteAccessProgressSteps.Provisioner //2
+      // TODO: Use date function to set demo dates
       , EnrollmentStatus.Declined + ',' + AccessReasons.PERSONAL_ACCESS + ',' + DeclinedReasons.ACCESS_NO_lONGER_REQUIRED
       + ',05-15-2017,06-01-2017,01-06-2018,' + SiteAccessProgressSteps.Provisioner //3
       , EnrollmentStatus.Declined + ',' + AccessReasons.PERSONAL_ACCESS + ',' + DeclinedReasons.WRONG_SITE
       + ',03-16-2018,04-01-2018,4-01-2019,' + SiteAccessProgressSteps.Applicant //4
-      , EnrollmentStatus.Pending + ',' + AccessReasons.PERSONAL_ACCESS + ',,06-11-2018,06-27-2018,06-27-2018,'
+      , EnrollmentStatus.Initiated + ',' + AccessReasons.PERSONAL_ACCESS + ',,06-11-2018,06-27-2018,06-27-2018,'
       + SiteAccessProgressSteps.Applicant //5
-      , EnrollmentStatus.Pending + ',' + AccessReasons.PERSONAL_ACCESS + ',,05-18-2018,06-01-2018,06-01-2019,'
+      , EnrollmentStatus.Review + ',' + AccessReasons.PERSONAL_ACCESS + ',,05-18-2018,06-01-2018,06-01-2019,'
       + SiteAccessProgressSteps.MoH //6
-      , EnrollmentStatus.Pending + ',' + AccessReasons.PERSONAL_ACCESS + ',,06-01-2018,06-16-2018,06-16-2019,'
+      , EnrollmentStatus.Provisioning + ',' + AccessReasons.PERSONAL_ACCESS + ',,06-01-2018,06-16-2018,06-16-2019,'
       + SiteAccessProgressSteps.Provisioner //7
       , EnrollmentStatus.Expired + ',' + AccessReasons.PERSONAL_ACCESS + ',,04-16-2017,05-01-2017,04-16-2018,'
       + SiteAccessProgressSteps.Provisioner //8
+      , EnrollmentStatus.New + ',,,' + this.setNewDate(Datefield.day, -2) + ',' + this.setNewDate(Datefield.day, 0)
+      + ',,' + SiteAccessProgressSteps.Applicant //9
     ];
 
     // First Person - 2 New, Active, Approved
     sa = this.createSiteAccessAndAssociateDemo(collections[0].members[0], people[0], access[0]); // New
     result.push(sa);
-    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[3], people[0], access[0]); // New
+    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[3], people[0], access[9]); // New
     result.push(sa);
     sa = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[0], access[1]); // Active
     result.push(sa);
-    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[2], people[0], access[2]); // Approved
+    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[2], people[0], access[2]); // Provisioning
     result.push(sa);
 
     // Second Person - Declined by Applicant, Pending with MoH
@@ -313,7 +319,7 @@ export class DummyDataService {
   }
 
   /** Returns an array of sites with a random name. */
-  createSitesDemo( name: string, siteNumber: number, pec: string ): Site[] {
+  createSitesDemo( name: string, siteNumber: number, pec: string, userID ): Site[] {
     const result: Site[] = [];
 
     const siteInfo = [
@@ -336,13 +342,13 @@ export class DummyDataService {
       site.address.setAddress( address[index % siteInfo.length] );
       site.siteDemoData = `${name} - ${siteNumber + index},${pec}${index},${siteInfo[index]}`;
 
-      site.posUserId = this.generatePosUserId(); // TODO: remove random generate
-      site.provisionedDate = this.generateProvisionedDate(); // TODO: remove random generate
+      site.posUserId = `${userID}${(1000 * index) + index}`;
+ //     site.provisionedDate = this.generateProvisionedDate(); // TODO: remove random generate
       site.request = 'Add Access';
       site.siteClass = 'Prescriber';
-      site.accessRights = 'Med Hist + Claims';
+ //     site.accessRights = 'Med Hist + Claims';
       site.tAndC = '-';
-      site.startDate = this.generateStartDate(); // TODO: remove random generate
+      site.startDate = Date();
       result.push(site);
     }
 
@@ -353,11 +359,12 @@ export class DummyDataService {
   createCollectionsDemo(): Collection[] {
     const result: Collection[] = [];
 
-    const names = [ 'Organization A,1000,BCOOOOOA0', 'Organization B,2000,BCOOOOOB0' ];
+    const names = [ 'Organization A,1000,BCOOOOOA0,SJ'
+                  , 'Organization B,2000,BCOOOOOB0,KL' ];
 
     names.forEach( name => {
       const _data = name.split( ',' );
-      const sites = this.createSitesDemo( _data[0], parseInt( _data[1], 10 ), _data[2] );
+      const sites = this.createSitesDemo( _data[0], parseInt( _data[1], 10 ), _data[2], _data[3] );
       const collection = new Collection( _data[0], sites );
       result.push(collection);
     });
@@ -412,19 +419,19 @@ export class DummyDataService {
   private generateProvisionedDate(): string{
     const today = new Date();
     const pastDate = new Date(2017, 1, 0);
-    return moment(this.randomDate(today, pastDate)).format('DD/MM/YYYY');
+    return moment(this.randomDate(today, pastDate)).format('YYYY/MM/DD');
   }
 
   private generateStartDate(): string{
     const today = new Date();
     const pastDate = new Date(2017, 1, 0);
-    return moment(this.randomDate(today, pastDate)).format('DD/MM/YYYY');
+    return moment(this.randomDate(today, pastDate)).format('YYYY/MM/DD');
   }
 
   private generateEndDate(): string{
     const today = new Date();
     const pastDate = new Date(2020, 1, 0);
-    return moment(this.randomDate(today, pastDate)).format('DD/MM/YYYY');
+    return moment(this.randomDate(today, pastDate)).format('YYYY/MM/DD');
   }
 
   // Generates PEC for a Site
@@ -442,4 +449,30 @@ export class DummyDataService {
     return 'P1 - ' + Math.ceil(Math.random() * 999999);
   }
 
+  private setNewDate(fld: Datefield, adjustment: number): string {
+    const today = new Date();
+    let newDate = today;
+
+    switch (fld) {
+      case Datefield.day:
+        newDate = new Date(today.getFullYear(), today.getMonth(), today.getDay() + adjustment );
+        break;
+      case Datefield.month:
+        newDate = new Date(today.getFullYear(), today.getMonth() + adjustment, today.getDay() );
+        break;
+      case Datefield.year:
+        newDate = new Date(today.getFullYear() + adjustment, today.getMonth(), today.getDay() );
+        break;
+      default:
+        // current date
+    }
+    return moment( newDate ).format('YYYY/MM/DD');
+  }
+
+}
+
+enum Datefield {
+  day = 0,
+  month = 1,
+  year = 2
 }
