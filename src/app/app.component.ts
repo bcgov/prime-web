@@ -62,8 +62,10 @@ export class AppComponent implements OnInit {
 
 
     if (environment.useDeveloperDummyData){
-      this.primeDataService.people[0].email = 'avoidredirect@env.com';
-      this.primeDataService.people[0].phone = '555-555-5555';
+      let applicant = this.primeDataService.people[0];
+      applicant.email = 'avoidredirect@env.com';
+      applicant.phone = '555-555-5555';
+      applicant.isWorkingOnBehalf = true;
     }
   }
 }
