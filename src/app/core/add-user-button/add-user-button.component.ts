@@ -17,6 +17,8 @@ export class AddUserButtonComponent implements OnInit {
   public searchResultsPeople: Person[] = [];
   public showSearchResults: boolean;
   public addUserSelected: boolean = false;
+  public today: Date = new Date();
+  public endDateStr: String = 'Optional';
 
   /** Binds to the form inputs used to generate search queries. Each field should correspond in name and type with attribtues on a Person object */
   public searchQuery: {lastName?: string, middleName?: string, firstName?: string, primeUserId?: string, dateOfBirth?: Date} = {};
@@ -98,6 +100,7 @@ export class AddUserButtonComponent implements OnInit {
     this.searchQuery = {};
     this.searchResultsPeople = [];
     this.showSearchResults = false;
+    this.addUserSelected = false;
   }
 
 

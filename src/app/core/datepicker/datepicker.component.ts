@@ -103,7 +103,7 @@ export class DatepickerComponent implements OnInit {
 
     if (this.date){
       this.model =  {
-        date: moment(this.date).format( this.dateFormat.toUpperCase() )
+        date: this.date ? moment(this.date).format( this.dateFormat.toUpperCase() ) : undefined
       }
     }
   }

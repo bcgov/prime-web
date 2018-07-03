@@ -93,11 +93,11 @@
           <span class='d-flex justify-content-between align-items-center'>
 
             <span class='d-inline-flex align-items-baseline mb-1'>Start
-              <prime-datepicker size='mini' dateFormat="yyyy/mm/dd" class='ml-1'></prime-datepicker>
+              <prime-datepicker size='mini' dateFormat="yyyy/mm/dd" class='ml-1' ></prime-datepicker>
             </span>
 
-            <span class='d-inline-flex align-items-baseline mb-1'>End
-              <prime-datepicker size='mini' dateFormat="yyyy/mm/dd" [(date)]="person.renewalDate" class='ml-1'></prime-datepicker>
+            <span class='d-inline-flex align-items-baseline mb-1'>End (Optional)
+              <prime-datepicker size='mini' dateFormat="yyyy/mm/dd" class='ml-1'></prime-datepicker>
             </span>
 
           </span>
@@ -109,11 +109,11 @@
         <button type="button" class="btn btn-default" (click)="clearSearch()" tabindex="9">
             Clear All
         </button>
-        <button type="button" class="btn btn-primary" [disabled]="!canAddUser()" (click)="addUser()" tabindex="10">
-            Add User
-        </button>
         <button type="button" class="btn btn-default" [disabled]="!canFindUser()" (click)="findUser()" tabindex="11">
             Find User
         </button>
+      <button type="button" class="btn btn-default" [disabled]="!canAddUser()" (click)="addUser()" tabindex="10">
+        Add User
+      </button>
     </div>
 </ng-template>
