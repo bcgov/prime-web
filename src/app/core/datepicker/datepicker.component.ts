@@ -99,8 +99,9 @@ export class DatepickerComponent implements OnInit, OnChanges {
       const today = new Date();
       this.datepickerOptions.disableUntil = this.convertDateToSimpleDate(today);
     }
-    this.model =  {
-        date: this.date ? moment(this.date).format( this.dateFormat.toUpperCase() ) : undefined
+
+    this.model = {
+      date: this.date ? moment(this.date).format(this.dateFormat.toUpperCase()) : undefined
     };
   }
 

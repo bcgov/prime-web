@@ -55,12 +55,13 @@
             </label>
             <input type="text"  class="form-control mb-2 mr-sm-2" id="firstName" name="firstName" placeholder="" [(ngModel)]="searchQuery.firstName" tabindex="2">
           </div>
-          <div class="form-group row has-float-label">
-            <label for="DoB">
-              Date of Birth
-            </label>
-            <input type="text" class="form-control mb-2 mr-sm-2" id="DoB" name="DoB" placeholder="" [(ngModel)]="searchQuery.dateOfBirth" tabindex="4">
+
+
+          <div class='form-control mb-2 mr-sm-2'>Date of Birth
+              <prime-datepicker id="DoB" name="DoB" placeholder="" size='mini' dateFormat="yyyy/mm/dd" class='ml-1' [(date)]="searchQuery.dateOfBirth" ></prime-datepicker>
           </div>
+
+
           <div class="form-group row has-float-label" *ngIf="showAdditionalFields">
             <label for="phone">
               Phone
@@ -93,11 +94,11 @@
           <span class='d-flex justify-content-between align-items-center'>
 
             <span class='d-inline-flex align-items-baseline mb-1'>Start
-              <prime-datepicker size='mini' dateFormat="yyyy/mm/dd" class='ml-1' ></prime-datepicker>
+              <prime-datepicker size='mini' dateFormat="yyyy/mm/dd" class='ml-1' [(date)]="today"></prime-datepicker>
             </span>
 
             <span class='d-inline-flex align-items-baseline mb-1'>End (Optional)
-              <prime-datepicker size='mini' dateFormat="yyyy/mm/dd" class='ml-1'></prime-datepicker>
+              <prime-datepicker size='mini' dateFormat="yyyy/mm/dd" class='ml-1' [(date)]="endDate" ></prime-datepicker>
             </span>
 
           </span>
