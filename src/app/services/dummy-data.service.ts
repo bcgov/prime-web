@@ -236,7 +236,7 @@ export class DummyDataService {
       EnrollmentStatus.New + ',,,05-05-2018,06-06-2018,06-06-2019,' + SiteAccessProgressSteps.Applicant //0
       , EnrollmentStatus.Active + ',' + AccessReasons.NOT_PERSONAL_ACCESS + ', ,05-01-2018,05-16-2018,05-16-2019,'
       + SiteAccessProgressSteps.Provisioner //1
-      , EnrollmentStatus.Approved + ',' + AccessReasons.PERSONAL_ACCESS + ',,05-14-2018,06-06-2018,06-06-2019,'
+      , EnrollmentStatus.Pending + ',' + AccessReasons.PERSONAL_ACCESS + ',,05-14-2018,06-06-2018,06-06-2019,'
       + SiteAccessProgressSteps.Provisioner //2
       , EnrollmentStatus.Declined + ',' + AccessReasons.PERSONAL_ACCESS + ',' + DeclinedReasons.ACCESS_NO_lONGER_REQUIRED
       + ',05-15-2017,06-01-2017,01-06-2018,' + SiteAccessProgressSteps.Provisioner //3
@@ -252,7 +252,7 @@ export class DummyDataService {
       + SiteAccessProgressSteps.Provisioner //8
     ];
 
-    // First Person - 2 New, Active, Approved, & Declined by Provisioner
+    // First Person - 2 New, Active, Approved
     sa = this.createSiteAccessAndAssociateDemo(collections[0].members[0], people[0], access[0]); // New
     result.push(sa);
     sa = this.createSiteAccessAndAssociateDemo(collections[0].members[3], people[0], access[0]); // New
@@ -260,8 +260,6 @@ export class DummyDataService {
     sa = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[0], access[1]); // Active
     result.push(sa);
     sa = this.createSiteAccessAndAssociateDemo(collections[0].members[2], people[0], access[2]); // Approved
-    result.push(sa);
-    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[2], people[0], access[3]); // Declined
     result.push(sa);
 
     // Second Person - Declined by Applicant, Pending with MoH
@@ -336,7 +334,7 @@ export class DummyDataService {
       const site = new Site();
       site.address = new Address();
       site.address.setAddress( address[index % siteInfo.length] );
-      site.siteDemoData = `${name} - ${siteNumber + index},${pec}${index},{siteInfo[index]}`;
+      site.siteDemoData = `${name} - ${siteNumber + index},${pec}${index},${siteInfo[index]}`;
 
       site.posUserId = this.generatePosUserId(); // TODO: remove random generate
       site.provisionedDate = this.generateProvisionedDate(); // TODO: remove random generate
