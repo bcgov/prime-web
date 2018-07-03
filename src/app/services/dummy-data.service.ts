@@ -312,6 +312,8 @@ export class DummyDataService {
       person.address = new Address();
       person.address.setAddress( address[index] );
       person.primeUserId = person.firstName[0] + person.lastName + '--' + person.objectId.slice(0, 4);
+      person.PoSId = person.firstName[0] + person.lastName[0] + 107; //Gibberish, not sure what these IDs really look like.
+
 
       result.push( person );
     }

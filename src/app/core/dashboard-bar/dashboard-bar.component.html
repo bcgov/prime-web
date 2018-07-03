@@ -1,16 +1,16 @@
 <div class='dashboard-container'>
     <nav class="nav">
       <a *ngIf="isProvisionerDashboard" [routerLink]="['/provisioner/dashboard/user']">
-        <button class="btn btn-default btn-block">By User</button>
+        <button class="btn btn-default btn-block">Provision by User</button>
       </a>
       <a *ngIf="isProvisionerDashboard" [routerLink]="['/provisioner/dashboard/site']">
-        <button class="btn btn-default btn-block">By Site</button>
+        <button class="btn btn-default btn-block">Provision by Site</button>
       </a>
       <a *ngIf="isVerifierDashboard" [routerLink]="['/verifier/dashboard/user']">
-        <button class="btn btn-default btn-block">By User</button>
+        <button class="btn btn-default btn-block">Enroll by User</button>
       </a>
       <a *ngIf="isVerifierDashboard" [routerLink]="['/verifier/dashboard/site']">
-        <button class="btn btn-default btn-block">By Site</button>
+        <button class="btn btn-default btn-block">Enroll by Site</button>
       </a>
 
       <prime-add-user-button

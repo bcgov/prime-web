@@ -71,10 +71,8 @@ export class AddUserButtonComponent implements OnInit {
   }
 
   addUser(){
-    // TODO: Only add SELECTED users! Currently this just adds all users as long as one user is selected.
     this.dataService.people.push(... this.searchResultsPeople);
     this.modalRef.hide();
-
   }
 
   canAddUser(): boolean {

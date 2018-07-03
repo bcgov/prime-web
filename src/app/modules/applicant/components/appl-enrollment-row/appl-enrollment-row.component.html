@@ -2,16 +2,21 @@
 
   <div class="enrollment-text-container">
     <span class="enrollment-text-main">{{rowData.title}}</span>
+    <prime-info-button
+      class='mx-2'
+      [targetId]="rowData.associatedObjectId"
+      [searchDomain]="applicantSearch">
+    </prime-info-button>
   </div>
   <div class="enrollment-actions">
-    <div *ngIf="!isDeclinedEnrol() && !declinedEnroll" class="dates-col d-flex justify-content-around">
-      <span class="d-inline-flex align-items-baseline mb-1">Start
+    <div *ngIf="!isDeclinedEnrol() && !declinedEnroll" class="dates-col">
+      <span class="d-inline-flex align-items-center p-2 border-left">Start
         <prime-datepicker disabled size="mini" [dateFormat]="dateFormat"
                           [(date)]="startDate"
                           class="ml-1"
                           hideClearButton="true"></prime-datepicker>
       </span>
-      <span class="d-inline-flex align-items-baseline mb-1">End
+      <span class="d-inline-flex align-items-center p-2 border-left border-right">End
         <prime-datepicker size="mini" [dateFormat]="dateFormat"
                           [(date)]="endDate"
                           class="ml-1"
@@ -45,10 +50,6 @@
         [alerts]="allChildAlerts"
         [iconOnly]='false'>
       </prime-pill-badge>
-      <prime-info-button
-        [targetId]="rowData.associatedObjectId"
-        [searchDomain]="applicantSearch">
-      </prime-info-button>
       <prime-accept-reject-icons *ngIf="isNewEnrol() && !acceptedEnroll && !declinedEnroll"
           (onAccepted)="onAccept()"
           (onRejected)="onDecline()"

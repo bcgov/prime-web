@@ -12,3 +12,8 @@ prime-pill-badge {
   width: 80px; // Hackfix for prototype only. Should change entire row layout to use bootstrap columns, but this is quicker.
 
 }
+
+
+.modal-header .img-thumbnail {
+  max-height: 4rem;
+}

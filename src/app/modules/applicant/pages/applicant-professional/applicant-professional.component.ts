@@ -62,35 +62,22 @@ export class ApplicantProfessionalComponent implements OnInit {
     this.onChange();
   }
 
-  addDeviceProvider() {
-    this._user.deviceProviderList.push({ dpNumber: '' });
+  // addWorkingOnBehalf() {
+  //   if(this.workingOnBehalfTotal < this.WorkingOnBehalfTitleTypesCount() - 1) {
+  //     this._user.workingOnBehalfList.push({ jobTitle: 'pleaseSelect' });
+  //     this.workingOnBehalfTotal++;
 
-    this.onChange();
-  }
+  //     this.onChange();
+  //   }
+  // }
 
-  deleteDeviceProvider(i){
-    console.log(`delete index ${i}`, this._user.deviceProviderList);
-    this._user.deviceProviderList.splice(i, 1);
+  // deleteWorkingOnBehalf(i){
+  //   console.log(`delete index ${i}`, this._user.workingOnBehalfList);
+  //   this._user.workingOnBehalfList.splice(i, 1);
+  //   this.workingOnBehalfTotal--;
 
-    this.onChange();
-  }
-
-  addWorkingOnBehalf() {
-    if(this.workingOnBehalfTotal < this.WorkingOnBehalfTitleTypesCount() - 1) {
-      this._user.workingOnBehalfList.push({ jobTitle: 'pleaseSelect' });
-      this.workingOnBehalfTotal++;
-
-      this.onChange();
-    }
-  }
-
-  deleteWorkingOnBehalf(i){
-    console.log(`delete index ${i}`, this._user.workingOnBehalfList);
-    this._user.workingOnBehalfList.splice(i, 1);
-    this.workingOnBehalfTotal--;
-
-    this.onChange();
-  }
+  //   this.onChange();
+  // }
 
   onChange() {
     this.hasChanged = true;
@@ -104,7 +91,7 @@ export class ApplicantProfessionalComponent implements OnInit {
 
     // toggle related arrays
     this.primeDataService.user.collegeCertificationList = cloneDeep(this._user.collegeCertificationList);
-    this.primeDataService.user.deviceProviderList       = cloneDeep(this._user.deviceProviderList);
+    this.primeDataService.user.deviceProviderNumber       = cloneDeep(this._user.deviceProviderNumber);
     this.primeDataService.user.workingOnBehalfList      = cloneDeep(this._user.workingOnBehalfList);
 
     // Self declaration related
@@ -124,7 +111,7 @@ export class ApplicantProfessionalComponent implements OnInit {
 
     // toggle related arrays
     this._user.collegeCertificationList = cloneDeep(this.primeDataService.user.collegeCertificationList);
-    this._user.deviceProviderList       = cloneDeep(this.primeDataService.user.deviceProviderList);
+    this._user.deviceProviderNumber       = cloneDeep(this.primeDataService.user.deviceProviderNumber);
     this._user.workingOnBehalfList      = cloneDeep(this.primeDataService.user.workingOnBehalfList);
 
     // Self declaration related
@@ -234,25 +221,29 @@ export class ApplicantProfessionalComponent implements OnInit {
     }
   }
 
+  //FIXME: SHOULD only display if previous two sections are No. Currently it shows REGARDLESS of what the users answer is.
   displayWorkingOnBehalfSection() {
-    if(this.displayDeviceProviderSection()
-      && (this._user.isDeviceProvider === false || this._user.deviceProviderList[0].dpNumber.length)) {
-      return true;
+    if (this.displayDeviceProviderSection()){
+      return this._user.isDeviceProvider === false;
     }
-    else {
-      return false;
-    }
+    return false;
   }
 
   displaySelfDeclarationSection() {
-    if(  this.displayDeviceProviderSection()
-      && this.displayWorkingOnBehalfSection()
-      && (this._user.isWorkingOnBehalf === false || this._user.workingOnBehalfList[0].jobTitle !== 'pleaseSelect')) {
+    // User has filled out 'on behalf' section
+    if (this.displayWorkingOnBehalfSection() && this._user.workingOnBehalfList[0].jobTitle !== "pleaseSelect"){
       return true;
     }
-    else {
-      return false;
+    // User has filled out device provider
+    else if (this.displayDeviceProviderSection() && this._user.deviceProviderNumber) {
+      return true;
     }
+    // User has said 'no' to each section
+    else if (this.displayDeviceProviderSection() && this.displayWorkingOnBehalfSection() && this._user.isWorkingOnBehalf === false) {
+      return true;
+    }
+
+    return false;
   }
 
   displayUploadSection() {
