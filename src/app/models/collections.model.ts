@@ -20,8 +20,11 @@ export class Collection extends Group<Site> {
   }
 
   get allUsers(): Person[] {
-    // flatten array
-    return [].concat(...this.members.map(site => site.users));
+    return [].concat(...this.members.map(site => site.users))
+      .filter((person, index, arr) => {
+        //Filter out duplicate results, e.g. if one person is enrolled to multiple sites in a collection that person should only show up once.
+        return arr.indexOf(person) === index;
+      })
   }
 
   get allSiteAccess(): SiteAccess[] {

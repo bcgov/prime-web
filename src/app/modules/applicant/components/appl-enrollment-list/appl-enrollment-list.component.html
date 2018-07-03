@@ -19,8 +19,7 @@
     </form>
   </div>
   <div>
-    <!--*ngIf="showSaveMessage" [@fadeIn]> -->
-    <alert type='success'>Saved...</alert>
+    <alert *ngIf="showSaveMessage" [@fadeIn] class='d-inline-block' type='success'>Saved...</alert>
     <button [disabled]="!updated" type="button" class="btn btn-default mx-2" (click)="cancel()">Cancel</button>
     <button [disabled]="!updated" type="button" class="btn btn-primary mx-2" (click)="save()">Save</button>
   </div>

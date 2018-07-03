@@ -126,14 +126,12 @@
       <prime-toggle [(data)]="applicant.isDeviceProvider" (click)="onChange()"></prime-toggle>
     </label>
 
-    <!-- TODO: Need to fix - only one device number -->
     <ng-container *ngIf="applicant.isDeviceProvider === true">
-      <div class='d-flex justify-content-between border p-3 prime-input-medium'
-           *ngFor="let deviceProviderRecord of applicant.deviceProviderList; let i = index">
+      <div class='d-flex justify-content-between border p-3'>
           <label class="has-float-label">
-            <input type="text" name="deviceProviderNumber" id="deviceProviderNumber"
-                   [(ngModel)]="deviceProviderRecord.dpNumber" maxlength="{{maxLengthValue('DEVICE_PROVIDER_NUMBER')}}"
-              class="form-control" (input)="onChange()">
+            <input type="text" name="deviceProviderNumber" id="deviceProviderNumber" placeholder=" "
+                   [(ngModel)]=" applicant.deviceProviderNumber" maxlength="{{maxLengthValue('DEVICE_PROVIDER_NUMBER')}}"
+              class="form-control prime-input-large" (input)="onChange()">
             <span>Device Provider Number</span>
           </label>
       </div>
@@ -164,21 +162,6 @@
           </div>
         </div>
 
-        <!-- Buttons -->
-        <span class='d-flex align-items-center ml-auto'>
-          <ng-container *ngIf="i > 0">
-            <a class='mx-1' (click)="deleteWorkingOnBehalf(i)">
-              <i class="fa fa-times-circle fa-2x" aria-label="Delete"></i>
-            </a>
-          </ng-container>
-          <ng-container *ngIf="applicant.workingOnBehalfList[i].jobTitle !== 'pleaseSelect'
-          && i === applicant.workingOnBehalfList.length - 1
-          && i < WorkingOnBehalfTitleTypesCount() - 1">
-            <a class='mx-1' (click)="addWorkingOnBehalf()">
-              <i class="fa fa-plus-circle fa-2x" aria-label="Add"></i>
-            </a>
-          </ng-container>
-        </span>
       </div>
     </ng-container>
   </div>

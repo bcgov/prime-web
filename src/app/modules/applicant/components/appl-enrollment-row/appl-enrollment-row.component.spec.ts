@@ -5,6 +5,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from '../../../core/core.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppEnrollmentProgressRowComponent } from '../app-enrollment-progress-row/app-enrollment-progress-row.component';
+import { FormsModule } from '@angular/forms';
 
 describe('ApplEnrollmentRowComponent', () => {
   let component: ApplEnrollmentRowComponent;
@@ -13,7 +14,7 @@ describe('ApplEnrollmentRowComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ApplEnrollmentRowComponent, AppEnrollmentProgressRowComponent ],
-      imports: [NoopAnimationsModule, CoreModule, RouterTestingModule]
+      imports: [NoopAnimationsModule, CoreModule, RouterTestingModule, FormsModule]
     })
     .compileComponents();
   }));

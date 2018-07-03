@@ -18,7 +18,7 @@ export class AddUserButtonComponent implements OnInit {
   public showSearchResults: boolean;
   public addUserSelected: boolean = false;
   public today: Date = new Date();
-  public endDateStr: String = 'Optional';
+  public endDate: Date = null
 
   /** Binds to the form inputs used to generate search queries. Each field should correspond in name and type with attribtues on a Person object */
   public searchQuery: {lastName?: string, middleName?: string, firstName?: string, primeUserId?: string, dateOfBirth?: Date} = {};
@@ -71,10 +71,8 @@ export class AddUserButtonComponent implements OnInit {
   }
 
   addUser(){
-    // TODO: Only add SELECTED users! Currently this just adds all users as long as one user is selected.
     this.dataService.people.push(... this.searchResultsPeople);
     this.modalRef.hide();
-
   }
 
   canAddUser(): boolean {
