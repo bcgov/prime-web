@@ -4,6 +4,7 @@ import {ApplicantDataService} from '../../../../services/applicant-data.service'
 import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
 import {defaultViewSelector, EnrollmentList} from '../../../../core/enrollment-list/enrollment-list.class';
 import {fadeIn} from '../../../../animations/animations';
+import { cloneDeep } from 'lodash';
 
 @Component({
   selector: 'prime-enrollment-list',
@@ -14,8 +15,6 @@ import {fadeIn} from '../../../../animations/animations';
 export class ApplEnrollmentListComponent extends EnrollmentList implements OnInit, OnDestroy {
 
   @ViewChildren(ApplEnrollmentRowComponent) rowElements: QueryList<ApplEnrollmentRowComponent>;
-
-  @Output() onCancel = new EventEmitter<boolean>();
   @Output() onSave = new EventEmitter<boolean>();
 
   public showSaveMessage: boolean = false;
@@ -34,7 +33,9 @@ export class ApplEnrollmentListComponent extends EnrollmentList implements OnIni
 
   /* OnInit implementation */
   ngOnInit() {
-    this.data = this.rowItems;
+    if (this.rowItems) {
+      this.data = cloneDeep( this.rowItems );
+    }
   }
 
   /* OnDestroy implementation */
@@ -63,22 +64,23 @@ export class ApplEnrollmentListComponent extends EnrollmentList implements OnIni
     console.log('save data');
     this.showSaveMessage = true;
     this.onSave.emit(true);
+    this.updated = false;
   }
 
   // Cancel button clicked
   cancel() {
     console.log('cancel changes');
-    this.onCancel.emit(true);
-    this.reset();
+    this.updated = false;
+
+    // Restore original values
+    this.data = cloneDeep( this.rowItems );
   }
 
   // Updated information
-  onChange() {
-    console.log('Enrollment list - onchange');
+  onChange($event) {
+    console.log('Enrollment list - onchange', $event);
+    // TODO: add to pending progress row list
     this.updated = true;
-  }
-
-  reset(){
     this.showSaveMessage = false;
   }
 

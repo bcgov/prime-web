@@ -54,11 +54,13 @@ export class PrimeDataService {
         sites: collection.members,
         users: collection.allUsers
       };
-      const pending = collection.getSiteAccessWithStatus(EnrollmentStatus.Pending);
+      // TODO: Remove no pending - need to determine what values need to be
+      //const pending = collection.getSiteAccessWithStatus(EnrollmentStatus.Pending);
       const expired = collection.getSiteAccessWithStatus(EnrollmentStatus.Expired);
       const declined = collection.getSiteAccessWithStatus(EnrollmentStatus.Declined);
 
-      const problemAccess = pending.concat(expired, declined);
+      //const problemAccess = pending.concat(expired, declined);
+      const problemAccess = expired.concat(declined);
       rowItem.expandableRows = problemAccess;
       result.push(rowItem);
     });
@@ -79,14 +81,15 @@ export class PrimeDataService {
         collections: this.findCollectionFromSites(person.sites)
       };
 
-      const pending = person.siteAccess
-        .filter(sa => sa.status === EnrollmentStatus.Pending);
+    //  const pending = person.siteAccess
+     //   .filter(sa => sa.status === EnrollmentStatus.Pending); TODO: Remove no pending - need to determine what values need to be
       const expired = person.siteAccess
         .filter(sa => sa.status === EnrollmentStatus.Expired);
       const declined = person.siteAccess
         .filter(sa => sa.status === EnrollmentStatus.Declined);
 
-      const problemAccess = pending.concat(expired, declined);
+  //    const problemAccess = pending.concat(expired, declined);
+      const problemAccess = expired.concat(declined);
       rowItem.expandableRows = problemAccess;
 
       result.push(rowItem);
@@ -95,6 +98,10 @@ export class PrimeDataService {
     return result;
   }
 
+  /**
+   * Creates a copy of all the enrollments for a given user
+   * @returns {ApplEnrollmentRowItem[]}
+   */
   getUserSiteEnrollment(): ApplEnrollmentRowItem[] {
     const result: ApplEnrollmentRowItem[] = [];
 

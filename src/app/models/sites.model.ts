@@ -35,10 +35,10 @@ export class Site extends Base {
 
     const _data = data.split( ',' );
 
-    this.name = _data[0];
-    this.PEC = _data[1]
-    this.siteType = _data[2];
-    this.vendor = _data[3];
+    if (_data[0]) { this.name = _data[0]; }
+    if (_data[1]) { this.PEC = _data[1]; }
+    if (_data[2]) { this.siteType = _data[2]; }
+    if (_data[3]) { this.vendor = _data[3]; }
   }
 
   constructor() {
@@ -137,12 +137,12 @@ export class SiteAccess extends Base {
     const data = access.split(',');
 
     this.status = EnrollmentStatus[data[0]];
-    if (!isNullOrUndefined(data[1])) { this.accessReason = data[1]; }
-    if (!isNullOrUndefined(data[2])){ this.declinedReason = data[2]; }
-    if (!isNullOrUndefined(data[3])) { this.requestDate = new Date(data[3]); }
-    if (!isNullOrUndefined(data[4])) { this.startDate = new Date(data[4]); }
-    if (!isNullOrUndefined(data[5])) { this.endDate = new Date(data[5]); }
-    if (!isNullOrUndefined(data[6])) { this.progress = SiteAccessProgressSteps[data[6]]; }
+    if (data[1]) { this.accessReason = data[1]; }
+    if (data[2]){ this.declinedReason = data[2]; }
+    if (data[3]) { this.requestDate = new Date(data[3]); }
+    if (data[4]) { this.startDate = new Date(data[4]); }
+    if (data[5]) { this.endDate = new Date(data[5]); }
+    if (data[6]) { this.progress = SiteAccessProgressSteps[data[6]]; }
   }
 }
 

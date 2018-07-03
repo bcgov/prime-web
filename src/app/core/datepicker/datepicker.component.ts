@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, ViewChild } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter, SimpleChanges, ViewChild, OnChanges} from '@angular/core';
 import { INgxMyDpOptions, IMyDate, NgxMyDatePickerDirective } from 'ngx-mydatepicker';
 import * as moment from 'moment';
 
@@ -12,7 +12,7 @@ import * as moment from 'moment';
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.scss']
 })
-export class DatepickerComponent implements OnInit {
+export class DatepickerComponent implements OnInit, OnChanges {
   /** Component size can be reduced, see Datepickersizes for options */
   @Input() size: DatepickerSizes = DatepickerSizes.DEFAULT;
   @Input() date: Date;
@@ -99,17 +99,14 @@ export class DatepickerComponent implements OnInit {
       const today = new Date();
       this.datepickerOptions.disableUntil = this.convertDateToSimpleDate(today);
     }
-
-
-    if (this.date){
-      this.model =  {
+    this.model =  {
         date: this.date ? moment(this.date).format( this.dateFormat.toUpperCase() ) : undefined
-      }
-    }
+    };
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    // Parent component has passed in null, so we have to manually clear the input. This leads to 2 change detection cycles. We could refactor it down to one, but the performance hit is minimal for such a simple component.
+    // Parent component has passed in null, so we have to manually clear the input. This leads to 2 change detection cycles.
+    // We could refactor it down to one, but the performance hit is minimal for such a simple component.
     if (this.date === null){
       this.clearDate();
     }

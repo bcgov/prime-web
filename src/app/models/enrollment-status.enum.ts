@@ -1,5 +1,6 @@
 /** The reason we're showing the notification in the first place.
- * TODO:  Verify that definition for enrollment statuses are correct
+ * TODO:  Verify that definition for enrollment statuses are correct - determine what statuses are required
+ * should be same for all pages (verifier, applicant, provisioner)
  */
 export enum EnrollmentStatus {
   /**

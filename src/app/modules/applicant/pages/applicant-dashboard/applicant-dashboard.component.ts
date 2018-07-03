@@ -17,7 +17,6 @@ import {moment} from 'ngx-bootstrap/chronos/test/chain';
 export class ApplicantDashboardComponent implements OnInit {
 
   private _dateFormat = 'MMM DD, YYYY';
-  private _userEnrollment: ApplEnrollmentRowItem[];
 
   constructor(private primeDataService: PrimeDataService,
               private router: Router) {}
@@ -28,16 +27,13 @@ export class ApplicantDashboardComponent implements OnInit {
     if (!this.contactDone) {
       const link = '/applicant/contact';
       this.router.navigate([link]);
-    } else if (this.professionalDone) {
+    } else if (!this.professionalDone) {
       const link = '/applicant/professional';
       this.router.navigate([link]);
     //} else if (!this.accessAcceptanceDone) {
     //  const link = '/applicant/access-acceptance';
     //  this.router.navigate([link]);
     }
-
-    // All changes will be done to the copy until user wants to save
-    this._userEnrollment = cloneDeep( this.primeDataService.getUserSiteEnrollment() );
   }
 
   get applicant(): Person {
@@ -49,7 +45,8 @@ export class ApplicantDashboardComponent implements OnInit {
    * @returns {ApplEnrollmentRowItem[]}
    */
   get userSiteEnrollmentData(): ApplEnrollmentRowItem[] {
-    return this._userEnrollment;
+    // functions creates a copy of data - uses map functionality
+    return this.primeDataService.getUserSiteEnrollment();
   }
 
   get contactDone(): boolean {
@@ -57,6 +54,9 @@ export class ApplicantDashboardComponent implements OnInit {
   }
 
   get professionalDone(): boolean {
+    if (isNullOrUndefined( this.applicant.hasCollege ) && isNullOrUndefined( this.applicant.isWorkingOnBehalf ) ) {
+      return false;
+    }
     return this.applicant.hasCollege || this.applicant.isWorkingOnBehalf;
   }
 
@@ -91,12 +91,7 @@ export class ApplicantDashboardComponent implements OnInit {
   // Applicant information needs to be updated
   onSave() {
     console.log('dashboard component save data');
-  }
 
-  // Applicant data needs to be reset
-  onCancel() {
-    console.log('dashboard component cancel data');
-    // Copy original data back in to working variable
-    this._userEnrollment = cloneDeep( this.primeDataService.getUserSiteEnrollment() );
+    //TODO: save all pending changes to the original array
   }
 }

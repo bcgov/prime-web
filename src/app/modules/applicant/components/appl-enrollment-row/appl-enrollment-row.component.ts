@@ -4,7 +4,8 @@ import {loadInOut, openState, openStateChild, openStateDisable} from '../../../.
 import {DeclinedReasons, SiteAccess} from '../../../../models/sites.model';
 import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
 import {SearchDomain} from '../../../../core/user-info-button/user-info-button.component';
-import {isNullOrUndefined} from "util";
+import {isNullOrUndefined} from 'util';
+import { cloneDeep } from 'lodash';
 
 // Specific to this component
 export interface ApplEnrollmentRowItem {
@@ -28,12 +29,14 @@ export interface ApplEnrollmentRowItem {
 export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit {
 
   @Input() rowData: ApplEnrollmentRowItem;
-  @Output() onChange = new EventEmitter<boolean>();
+  @Output() onChange = new EventEmitter<SiteAccess>();
 
   public acceptedEnroll = false;
   public declinedEnroll = false;
   public applicantSearch: SearchDomain = SearchDomain.Applicant; // Domain to search for user sites
   public dateFormat = 'yyyy/mm/dd';
+
+  private _data: ApplEnrollmentRowItem[];
 
   constructor() {
     super();
@@ -43,25 +46,23 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
     if (!this.rowData) {
       return;
     }
+    this._data = cloneDeep( this.rowData );
     return this.siteAccessRequiringAttention.map(x => x.open = false);
   }
 
   onAccept() {
     console.log('Accept enrollment');
     this.acceptedEnroll = true;
-    this.onChange.emit(true);
   }
 
   onDecline() {
     console.log('Declined enrollment');
     this.declinedEnroll = true;
-    this.onChange.emit(true);
   }
 
   pendingChanges( item: SiteAccess ) {
     console.log( 'Pending Change: ', item );
-    const access = this.rowData.expandableRows.find(sa => sa.objectId === item.objectId);
-    access.accessReason = item.accessReason;
+    this.onChange.emit( item );
   }
 
   /**

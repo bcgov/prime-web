@@ -2,7 +2,8 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 import {EnrollmentProgressRowComponent} from '../../../../core/enrollment-progress-row/enrollment-progress-row.component';
 import {growVertical} from '../../../../animations/animations';
 import {AccessReasons, SiteAccess} from '../../../../models/sites.model';
-import {isNullOrUndefined} from "util";
+import {isNullOrUndefined} from 'util';
+import { cloneDeep } from 'lodash';
 
 @Component({
   selector: 'prime-app-enrollment-progress-row',
@@ -10,13 +11,21 @@ import {isNullOrUndefined} from "util";
   styleUrls: ['./app-enrollment-progress-row.component.scss'],
   animations: [growVertical]
 })
-export class AppEnrollmentProgressRowComponent extends EnrollmentProgressRowComponent {
+export class AppEnrollmentProgressRowComponent extends EnrollmentProgressRowComponent implements OnInit{
 
   @Input() disableReason: boolean = true;
   @Output() onPendingChange = new EventEmitter<SiteAccess>();
 
+  private _data; // copy of data
+
    constructor() {
     super();
+  }
+
+  ngOnInit() {
+    if (this.data) {
+      this._data = cloneDeep( this.data );
+    }
   }
 
   get accessReasons() {
@@ -25,15 +34,15 @@ export class AppEnrollmentProgressRowComponent extends EnrollmentProgressRowComp
   }
 
   get accessReason() {
-     if (isNullOrUndefined(this.data.accessReason) || 0 === this.data.accessReason.length) {
+     if (isNullOrUndefined(this._data.accessReason) || 0 === this._data.accessReason.length) {
        return 'Please Select';
      }
-     return this.data.accessReason;
+     return this._data.accessReason;
   }
 
   set accessReason( reason: string ) {
      console.log( 'accessReason: ' + reason );
-     this.data.accessReason = reason;
-     this.onPendingChange.emit( this.data );
+     this._data.accessReason = reason;
+     this.onPendingChange.emit( this._data );
   }
 }

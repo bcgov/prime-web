@@ -18,15 +18,11 @@
 
     </form>
   </div>
-  <div class='controls'>
-    <div *ngIf="!showSaveMessage" >
-      <button [disabled]="!updated" type="button" class="btn btn-default mx-2" (click)="cancel()">Cancel</button>
-      <button [disabled]="!updated" type="button" class="btn btn-primary mx-2" (click)="save()">Save</button>
-    </div>
-
-    <div  *ngIf="showSaveMessage" [@fadeIn]>
-      <alert type='success' (onClosed)="reset()">Saved...</alert>
-    </div>
+  <div>
+    <!--*ngIf="showSaveMessage" [@fadeIn]> -->
+    <alert type='success'>Saved...</alert>
+    <button [disabled]="!updated" type="button" class="btn btn-default mx-2" (click)="cancel()">Cancel</button>
+    <button [disabled]="!updated" type="button" class="btn btn-primary mx-2" (click)="save()">Save</button>
   </div>
 </div>
 
