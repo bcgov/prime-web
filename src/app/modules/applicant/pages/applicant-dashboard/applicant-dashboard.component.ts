@@ -89,8 +89,8 @@ export class ApplicantDashboardComponent implements OnInit {
   }
 
   // Applicant information needs to be updated
-  onSave() {
-    console.log('dashboard component save data');
+  onSave( $event ) {
+    console.log('dashboard component save data', $event);
 
     //TODO: save all pending changes to the original array
   }

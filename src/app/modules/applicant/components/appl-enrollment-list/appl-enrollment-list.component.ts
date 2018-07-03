@@ -1,10 +1,11 @@
 import {Component, EventEmitter, OnDestroy, OnInit, Output, QueryList, ViewChildren} from '@angular/core';
-import {ApplEnrollmentRowComponent} from '../appl-enrollment-row/appl-enrollment-row.component';
+import {ApplEnrollmentRowComponent, ApplEnrollmentRowItem} from '../appl-enrollment-row/appl-enrollment-row.component';
 import {ApplicantDataService} from '../../../../services/applicant-data.service';
 import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
 import {defaultViewSelector, EnrollmentList} from '../../../../core/enrollment-list/enrollment-list.class';
 import {fadeIn} from '../../../../animations/animations';
 import { cloneDeep } from 'lodash';
+import {SiteAccess} from '../../../../models/sites.model';
 
 @Component({
   selector: 'prime-enrollment-list',
@@ -15,12 +16,15 @@ import { cloneDeep } from 'lodash';
 export class ApplEnrollmentListComponent extends EnrollmentList implements OnInit, OnDestroy {
 
   @ViewChildren(ApplEnrollmentRowComponent) rowElements: QueryList<ApplEnrollmentRowComponent>;
-  @Output() onSave = new EventEmitter<boolean>();
+  @Output() onSave = new EventEmitter<ApplEnrollmentRowItem[]>();
 
   public showSaveMessage: boolean = false;
 
   /* Flag to indicate that information page has been updated */
   public updated: boolean = false;
+
+  // List of Pending updates
+  private _pendingUpdates: ApplEnrollmentRowItem[] = [];
 
   constructor(private applicantDataService: ApplicantDataService) {
     super();
@@ -46,7 +50,7 @@ export class ApplEnrollmentListComponent extends EnrollmentList implements OnIni
   // Abstract functions defined by derived class
   //Convert enum to iterable array
   get EnrollmentStatus() {
-    const list = Object.keys(EnrollmentStatus);
+    const list = Object.keys( EnrollmentStatus );
     return list.map( x => {return EnrollmentStatus[x]; });
   }
 
@@ -63,7 +67,7 @@ export class ApplEnrollmentListComponent extends EnrollmentList implements OnIni
   save() {
     console.log('save data');
     this.showSaveMessage = true;
-    this.onSave.emit(true);
+    this.onSave.emit( this._pendingUpdates ); //Send list of updates
     this.updated = false;
   }
 
@@ -72,14 +76,30 @@ export class ApplEnrollmentListComponent extends EnrollmentList implements OnIni
     console.log('cancel changes');
     this.updated = false;
 
+    //TODO: clear pending list (_pendingUpdates)
+
     // Restore original values
     this.data = cloneDeep( this.rowItems );
   }
 
   // Updated information
-  onChange($event) {
-    console.log('Enrollment list - onchange', $event);
-    // TODO: add to pending progress row list
+  onChange( item: ApplEnrollmentRowItem ) {
+    console.log('Enrollment list - onchange', item);
+
+    if ( this._pendingUpdates.length === 0 ) {
+      // empty array
+      this._pendingUpdates.push( item );
+    } else {
+      // data in array
+      //const obj = this._pendingUpdates.find(rowItem => rowItem.associatedObjectId === item.associatedObjectId);
+      //if (obj) {
+      //  // TODO: Figure out what needs to be updated
+      //} else {
+      //  // Add to the list
+      //  this._pendingUpdates.push(item);
+      //}
+    }
+
     this.updated = true;
     this.showSaveMessage = false;
   }

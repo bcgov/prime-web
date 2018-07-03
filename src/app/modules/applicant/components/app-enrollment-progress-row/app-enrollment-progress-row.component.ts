@@ -42,6 +42,7 @@ export class AppEnrollmentProgressRowComponent extends EnrollmentProgressRowComp
 
   set accessReason( reason: string ) {
      console.log( 'accessReason: ' + reason );
+     this._data.pendingChanges = true;
      this._data.accessReason = reason;
      this.onPendingChange.emit( this._data );
   }

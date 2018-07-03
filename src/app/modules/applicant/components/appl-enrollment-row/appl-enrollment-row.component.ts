@@ -29,14 +29,14 @@ export interface ApplEnrollmentRowItem {
 export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit {
 
   @Input() rowData: ApplEnrollmentRowItem;
-  @Output() onChange = new EventEmitter<SiteAccess>();
+  @Output() onChange = new EventEmitter<ApplEnrollmentRowItem>();
 
   public acceptedEnroll = false;
   public declinedEnroll = false;
   public applicantSearch: SearchDomain = SearchDomain.Applicant; // Domain to search for user sites
   public dateFormat = 'yyyy/mm/dd';
 
-  private _data: ApplEnrollmentRowItem[];
+  private _data;
 
   constructor() {
     super();
@@ -62,7 +62,14 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
 
   pendingChanges( item: SiteAccess ) {
     console.log( 'Pending Change: ', item );
-    this.onChange.emit( item );
+
+    // Changes that occur on the enrollment progress row
+    this.siteAccessRequiringAttention[0].onPendingChange = item.pendingChanges;
+    this.siteAccessRequiringAttention[0].accessReason = item.accessReason;
+
+    console.log( 'row data: ', this._data )
+    // Send changes for this row
+    this.onChange.emit( this._data );
   }
 
   /**
@@ -137,11 +144,11 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
   /** This function is responsible for generating site access row titles depending on dashboard type */
   get siteAccessRequiringAttention(): any[] {
 
-    if (!this.rowData || !this.rowData.expandableRows) {
+    if (!this._data || !this._data.expandableRows) {
       return [];
     }
 
-    return this.rowData.expandableRows.map(siteAccess => {
+    return this._data.expandableRows.map(siteAccess => {
       siteAccess.title = `${siteAccess.site.name}`;
       return siteAccess;
     });
