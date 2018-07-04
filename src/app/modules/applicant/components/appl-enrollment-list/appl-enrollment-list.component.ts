@@ -16,15 +16,15 @@ import {SiteAccess} from '../../../../models/sites.model';
 export class ApplEnrollmentListComponent extends EnrollmentList implements OnInit, OnDestroy {
 
   @ViewChildren(ApplEnrollmentRowComponent) rowElements: QueryList<ApplEnrollmentRowComponent>;
-  @Output() onSave = new EventEmitter<ApplEnrollmentRowItem[]>();
+  @Output() onSave = new EventEmitter<SiteAccess[]>();
 
-  public showSaveMessage: boolean = false;
+  public showSaveMessage = false;
 
   /* Flag to indicate that information page has been updated */
-  public updated: boolean = false;
+  public updated = false;
 
   // List of Pending updates
-  private _pendingUpdates: ApplEnrollmentRowItem[] = [];
+  private _pendingUpdates: SiteAccess[] = [];
 
   constructor(private applicantDataService: ApplicantDataService) {
     super();
@@ -65,39 +65,39 @@ export class ApplEnrollmentListComponent extends EnrollmentList implements OnIni
 
   // Save button clicked
   save() {
-    console.log('save data');
     this.showSaveMessage = true;
     this.onSave.emit( this._pendingUpdates ); //Send list of updates
     this.updated = false;
+    this.rowItems = cloneDeep( this.data );
   }
 
   // Cancel button clicked
   cancel() {
-    console.log('cancel changes');
     this.updated = false;
 
-    //TODO: clear pending list (_pendingUpdates)
+    // Clear pending update list
+    while (this._pendingUpdates.length > 0) {
+      this._pendingUpdates.pop();
+    }
 
     // Restore original values
     this.data = cloneDeep( this.rowItems );
   }
 
-  // Updated information
-  onChange( item: ApplEnrollmentRowItem ) {
-    console.log('Enrollment list - onchange', item);
-
-    if ( this._pendingUpdates.length === 0 ) {
-      // empty array
-      this._pendingUpdates.push( item );
+  /**
+   * Record changes in a list
+   * @param {ApplEnrollmentRowItem} item
+   */
+  onChange( item: SiteAccess ) {
+    const obj = this._pendingUpdates.find(sa => sa.objectId === item.objectId);
+    if (obj) {
+      // Update possible fields that could change
+      obj.accessReason = item.accessReason;
+      obj.declinedReason = item.declinedReason;
+      obj.endDate = item.endDate;
     } else {
-      // data in array
-      //const obj = this._pendingUpdates.find(rowItem => rowItem.associatedObjectId === item.associatedObjectId);
-      //if (obj) {
-      //  // TODO: Figure out what needs to be updated
-      //} else {
-      //  // Add to the list
-      //  this._pendingUpdates.push(item);
-      //}
+      // Add to the list
+      this._pendingUpdates.push( item );
     }
 
     this.updated = true;
