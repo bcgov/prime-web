@@ -1,10 +1,11 @@
 import {Component, EventEmitter, OnDestroy, OnInit, Output, QueryList, ViewChildren} from '@angular/core';
-import {ApplEnrollmentRowComponent} from '../appl-enrollment-row/appl-enrollment-row.component';
+import {ApplEnrollmentRowComponent, ApplEnrollmentRowItem} from '../appl-enrollment-row/appl-enrollment-row.component';
 import {ApplicantDataService} from '../../../../services/applicant-data.service';
 import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
 import {defaultViewSelector, EnrollmentList} from '../../../../core/enrollment-list/enrollment-list.class';
 import {fadeIn} from '../../../../animations/animations';
 import { cloneDeep } from 'lodash';
+import {SiteAccess} from '../../../../models/sites.model';
 
 @Component({
   selector: 'prime-enrollment-list',
@@ -15,12 +16,15 @@ import { cloneDeep } from 'lodash';
 export class ApplEnrollmentListComponent extends EnrollmentList implements OnInit, OnDestroy {
 
   @ViewChildren(ApplEnrollmentRowComponent) rowElements: QueryList<ApplEnrollmentRowComponent>;
-  @Output() onSave = new EventEmitter<boolean>();
+  @Output() onSave = new EventEmitter<SiteAccess[]>();
 
-  public showSaveMessage: boolean = false;
+  public showSaveMessage = false;
 
   /* Flag to indicate that information page has been updated */
-  public updated: boolean = false;
+  public updated = false;
+
+  // List of Pending updates
+  private _pendingUpdates: SiteAccess[] = [];
 
   constructor(private applicantDataService: ApplicantDataService) {
     super();
@@ -46,7 +50,7 @@ export class ApplEnrollmentListComponent extends EnrollmentList implements OnIni
   // Abstract functions defined by derived class
   //Convert enum to iterable array
   get EnrollmentStatus() {
-    const list = Object.keys(EnrollmentStatus);
+    const list = Object.keys( EnrollmentStatus );
     return list.map( x => {return EnrollmentStatus[x]; });
   }
 
@@ -61,25 +65,41 @@ export class ApplEnrollmentListComponent extends EnrollmentList implements OnIni
 
   // Save button clicked
   save() {
-    console.log('save data');
     this.showSaveMessage = true;
-    this.onSave.emit(true);
+    this.onSave.emit( this._pendingUpdates ); //Send list of updates
     this.updated = false;
+    this.rowItems = cloneDeep( this.data );
   }
 
   // Cancel button clicked
   cancel() {
-    console.log('cancel changes');
     this.updated = false;
+
+    // Clear pending update list
+    while (this._pendingUpdates.length > 0) {
+      this._pendingUpdates.pop();
+    }
 
     // Restore original values
     this.data = cloneDeep( this.rowItems );
   }
 
-  // Updated information
-  onChange($event) {
-    console.log('Enrollment list - onchange', $event);
-    // TODO: add to pending progress row list
+  /**
+   * Record changes in a list
+   * @param {ApplEnrollmentRowItem} item
+   */
+  onChange( item: SiteAccess ) {
+    const obj = this._pendingUpdates.find(sa => sa.objectId === item.objectId);
+    if (obj) {
+      // Update possible fields that could change
+      obj.accessReason = item.accessReason;
+      obj.declinedReason = item.declinedReason;
+      obj.endDate = item.endDate;
+    } else {
+      // Add to the list
+      this._pendingUpdates.push( item );
+    }
+
     this.updated = true;
     this.showSaveMessage = false;
   }

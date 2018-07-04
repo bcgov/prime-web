@@ -7,6 +7,8 @@ import {cloneDeep} from 'lodash';
 import {CollegeTypes, WorkingOnBehalfTitleTypes} from '../../../../models/colleges.enum';
 import {isNullOrUndefined} from 'util';
 import {moment} from 'ngx-bootstrap/chronos/test/chain';
+import {forEach} from '@angular/router/src/utils/collection';
+import {Site, SiteAccess} from '../../../../models/sites.model';
 
 
 @Component({
@@ -89,9 +91,14 @@ export class ApplicantDashboardComponent implements OnInit {
   }
 
   // Applicant information needs to be updated
-  onSave() {
-    console.log('dashboard component save data');
+  onSave( updateList: SiteAccess[] ) {
 
-    //TODO: save all pending changes to the original array
+    updateList.map(sa =>  {
+      //Go from our copy to the original in dataService
+      const orig = this.primeDataService.findUserSiteAccessByObjectId( sa.objectId );
+      orig.endDate = sa.endDate;
+      orig.declinedReason = sa.declinedReason;
+      orig.accessReason = sa.accessReason;
+    });
   }
 }
