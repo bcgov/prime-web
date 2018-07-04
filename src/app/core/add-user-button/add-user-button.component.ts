@@ -21,7 +21,8 @@ export class AddUserButtonComponent implements OnInit {
   public endDate: Date = null
 
   /** Binds to the form inputs used to generate search queries. Each field should correspond in name and type with attribtues on a Person object */
-  public searchQuery: {lastName?: string, middleName?: string, firstName?: string, primeUserId?: string, dateOfBirth?: Date} = {};
+  public searchQuery: {lastName?: string, middleName?: string, firstName?: string, primeUserId?: string,
+    dateOfBirth?: Date, email?: string, postal?: string, phone?: string } = {};
 
   constructor(private modalService: BsModalService, private dataService: PrimeDataService, private dummyDataService: DummyDataService) { }
 
@@ -82,11 +83,34 @@ export class AddUserButtonComponent implements OnInit {
   }
 
   canFindUser(): boolean {
-    return this.currentProgressStep >= this.maxProgressSteps;
+    let flag = false;
+    //return this.currentProgressStep >= this.maxProgressSteps;
+    if ((this.searchQuery.lastName != null && this.searchQuery.lastName.length >= 1) &&
+        (this.searchQuery.firstName != null && this.searchQuery.firstName.length >= 1) &&
+        ((this.searchQuery.primeUserId != null && this.searchQuery.primeUserId.length >= 1) ||
+         (this.searchQuery.dateOfBirth != null &&
+           ((this.searchQuery.email != null &&  this.searchQuery.email.length >= 1) ||
+            (this.searchQuery.phone != null &&  this.searchQuery.phone.length >= 1) ||
+            (this.searchQuery.postal != null &&  this.searchQuery.postal.length >= 1))
+         )
+        )
+       ) {
+        flag = true;
+      }
+    return flag;
   }
 
   get showAdditionalFields(): boolean {
-    return !!this.searchQuery.dateOfBirth;
+    //return !!this.searchQuery.dateOfBirth;
+    let flag = false;
+    //return this.currentProgressStep >= this.maxProgressSteps;
+    //Returns true only if prime id, email or both first and last name are valid
+    if ((this.searchQuery.lastName != null && this.searchQuery.lastName.length >= 1) &&
+      (this.searchQuery.firstName != null && this.searchQuery.firstName.length >= 1) &&
+      (this.searchQuery.dateOfBirth != null)) {
+      flag = true;
+    }
+    return flag;
   }
 
   get maxProgressSteps(): number {
