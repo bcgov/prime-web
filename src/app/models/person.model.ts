@@ -11,13 +11,13 @@ import { CollegeTypes,
   AdvancedPracticeCertificationTypes,
   WorkingOnBehalfTitleTypes,
   ISelfDeclaration } from './colleges.enum';
-import {isNullOrUndefined} from 'util';
 
 /**
  * Information about person
  */
 export class Person extends Base {
   primeUserId: PrimeUserID; //human-readable, like a user-name - "JSmith"
+  PoSId: string;
 
   firstName: string;
   middleName: string;
@@ -46,10 +46,11 @@ export class Person extends Base {
     const _data = data.split(',' );
     const today = new Date();
 
+    // existing function in class
     this.name = _data[ 0 ];
 
-    if (!isNullOrUndefined( _data[1] )) { this.dateOfBirth = new Date( _data[1] ); }
-    if (!isNullOrUndefined( _data[2] )) {
+    if (_data[1]) { this.dateOfBirth = new Date( _data[1] ); }
+    if (_data[2]) {
       this.renewalDate = new Date( today.getFullYear(), today.getMonth(), today.getDate() +  parseInt( _data[2], 10 ) );
     } else {
       // default renewal date 1 year
@@ -74,15 +75,20 @@ export class Person extends Base {
   /** Corresponds to collection's objectId */
   associationId?: string[];
 
-  // License applies to Applicants. Does it apply to all Persons? Possibly
-  // refactor Applicant into a different Role (like Verifier/Provisioner), but
-  // if ALL People were previously Applicants, then there's no need to make the
-  // distinction
   accessAcceptance = [false, false, false];
+  /** The user has declared all information provided is accurate  */
+  isDeclaredCheck = false;
 
   // toggles
   hasCollege: boolean;
-  isDeviceProvider: boolean;
+  _isDeviceProvider: boolean;
+  get isDeviceProvider(): boolean {
+    return this._isDeviceProvider;
+  }
+  set isDeviceProvider(newVal: boolean) {
+    this._isDeviceProvider = newVal;
+    this.deviceProviderNumber = undefined;
+  }
   isWorkingOnBehalf: boolean;
 
   // toggle related arrays
@@ -96,7 +102,7 @@ export class Person extends Base {
     advancedPracticeCertificationType: 'pleaseSelect'
   }];
 
-  deviceProviderList = [{ dpNumber: '' }];
+  deviceProviderNumber: number;
 
   workingOnBehalfList = [{ jobTitle: 'pleaseSelect' }];
 
@@ -133,13 +139,6 @@ export class Person extends Base {
     return expiry.diff(today, 'days');
   }
 }
-
-//class Name {
-//  firstName: string;
-//  lastName: string;
-//  middleName: string;
-//  get fullName(): string { return this.firstName + this.lastName; }
-//}
 
 interface PhoneNumber { }
 interface PrimeUserID { }

@@ -288,13 +288,10 @@ export class MillerColumnsComponent implements OnInit {
     // Clone the column so that when we filter out irrelevant data it doesn't destroy the underlying data.
     column = cloneDeep(column);
 
-    // console.log('recalculateColumnStatus', column, originalSelection);
-
+    // Special filtering operations for last column for 2 table types
     if (this.IS_PEOPLE_TABLE && this.isSiteColumn(column)) { // Last column
-      // First selection is Person, so we filter SA's based on that
       let selection = this.getUserSelection();
-      // Now, we filter the new column and strip all SA's not related to user
-       column = column.map(site => {
+      column = column.map(site => {
         site.siteAccess = site.siteAccess.filter(sa => {
           // Since we clone, we have to check on ID not pure identity
           return sa.person.objectId === selection.objectId;
@@ -304,22 +301,26 @@ export class MillerColumnsComponent implements OnInit {
 
       // Now that we've filtered out irrelevant SA's, we can easily check items
       // that have Active SAs.
+      column
+        .filter(item => item.siteAccess.length)
+        .filter(item => item.siteAccess[0].status === 'Active' || item.siteAccess[0].status === 'New')
+        .map(item => item.checked = true);
+    }
+    else if (!this.IS_PEOPLE_TABLE && this.isPeopleColumn(column)) {
+      let selection = this.getSiteSelection();
 
-      // TODO: Should also include NEW
-      // debugger;
+      column = column.map(person => {
+        person.siteAccess = person.siteAccess.filter(sa => {
+          return sa.site.objectId === selection.objectId;
+        })
+        return person;
+      })
 
       column
         .filter(item => item.siteAccess.length)
         .filter(item => item.siteAccess[0].status === 'Active' || item.siteAccess[0].status === 'New')
         .map(item => item.checked = true);
     }
-    else if (! this.IS_PEOPLE_TABLE && this.isPeopleColumn(column)){
-      console.log('TODO IMPLEMENT LOGIC!', column)
-    }
-
-
-
-    //TODO: Have to do filtering for the other table type
 
     // Sort so all checked items are at the top
     column.sort((a, b) => {
@@ -342,8 +343,10 @@ export class MillerColumnsComponent implements OnInit {
     }
   }
 
-  public getSiteSelection(){
-    //TODO!
+  public getSiteSelection(): Site{
+    if (!this.IS_PEOPLE_TABLE){
+      return this._columns[1].items.filter(x => open)[0];
+    }
   }
 
   /** Returns all the SiteAccesses of the selected item in the primary (left

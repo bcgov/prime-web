@@ -37,21 +37,17 @@
 
   <div class="col d-inline-flex flex-column access-reason">
     <!-- New enrollments -->
-    <select *ngIf="!disableReason"
-            id="accessReason"
+    <select *ngIf="!disableReason" id="reasonForAccess"
+            class="form-control drop-dl-box-15 color"
+            [(ngModel)]="accessReason">
+      <option value="Please Select" selected>Please Select</option>
+      <option *ngFor="let reason of accessReasons" [value]="reason">{{reason}}</option>
+    </select>
+    <select *ngIf="disableReason" id="reasonForAccess"
             class="form-control drop-dl-box-15 color"
             [value]="accessReason"
-            (change)="onSelect($event)">
-      <option value="Please Select" selected>Please Select</option>
-      <option *ngFor="let reason of accessReasons" value="{{reason}}">
-        {{reason}}
-      </option>
-    </select>
-
-    <select *ngIf="disableReason"
-            id="accessReason"
-            class="form-control drop-dl-box-15 color" disabled>
-      <option value="{{accessReason}}" selected>{{accessReason}}</option>
+            disabled>
+      <option [value]="accessReason" selected>{{accessReason}}</option>
     </select>
   </div>
 </div>

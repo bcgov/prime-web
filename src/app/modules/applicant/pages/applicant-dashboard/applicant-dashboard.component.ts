@@ -4,7 +4,7 @@ import { Person } from '../../../../models/person.model';
 import {ApplEnrollmentRowItem} from '../../components/appl-enrollment-row/appl-enrollment-row.component';
 import {Router} from '@angular/router';
 import {cloneDeep} from 'lodash';
-import {CollegeTypes} from '../../../../models/colleges.enum';
+import {CollegeTypes, WorkingOnBehalfTitleTypes} from '../../../../models/colleges.enum';
 import {isNullOrUndefined} from 'util';
 import {moment} from 'ngx-bootstrap/chronos/test/chain';
 
@@ -16,7 +16,7 @@ import {moment} from 'ngx-bootstrap/chronos/test/chain';
 })
 export class ApplicantDashboardComponent implements OnInit {
 
-  private _dateFormat = 'DD/MM/YYYY';
+  private _dateFormat = 'MMM DD, YYYY';
 
   constructor(private primeDataService: PrimeDataService,
               private router: Router) {}
@@ -27,9 +27,9 @@ export class ApplicantDashboardComponent implements OnInit {
     if (!this.contactDone) {
       const link = '/applicant/contact';
       this.router.navigate([link]);
-   // } else if (!this.professionalDone) {
-    //  const link = '/applicant/professional';
-   //   this.router.navigate([link]);
+    } else if (!this.professionalDone) {
+      const link = '/applicant/professional';
+      this.router.navigate([link]);
     //} else if (!this.accessAcceptanceDone) {
     //  const link = '/applicant/access-acceptance';
     //  this.router.navigate([link]);
@@ -40,8 +40,12 @@ export class ApplicantDashboardComponent implements OnInit {
     return this.primeDataService.user;
   }
 
+  /**
+   * List of enrollments for the user
+   * @returns {ApplEnrollmentRowItem[]}
+   */
   get userSiteEnrollmentData(): ApplEnrollmentRowItem[] {
-
+    // functions creates a copy of data - uses map functionality
     return this.primeDataService.getUserSiteEnrollment();
   }
 
@@ -50,7 +54,10 @@ export class ApplicantDashboardComponent implements OnInit {
   }
 
   get professionalDone(): boolean {
-    return this.applicant.hasCollege;
+    if (isNullOrUndefined( this.applicant.hasCollege ) && isNullOrUndefined( this.applicant.isWorkingOnBehalf ) ) {
+      return false;
+    }
+    return this.applicant.hasCollege || this.applicant.isWorkingOnBehalf;
   }
 
   get accessAcceptanceDone(): boolean {
@@ -72,6 +79,11 @@ export class ApplicantDashboardComponent implements OnInit {
     return (isNullOrUndefined( expiryDate )) ? 'n/a' : moment( expiryDate ).format( this._dateFormat );
   }
 
+  get jobTitle(): string {
+    const obj = Object.keys( WorkingOnBehalfTitleTypes ).filter(x => x === this.applicant.workingOnBehalfList[0].jobTitle );
+    return (obj.length > 0) ? WorkingOnBehalfTitleTypes[obj[0]] : 'n/a';
+  }
+
   get renewalDate(): string {
     return (isNullOrUndefined( this.applicant.renewalDate )) ? 'n/a' : moment( this.applicant.renewalDate ).format( this._dateFormat );
   }
@@ -79,10 +91,7 @@ export class ApplicantDashboardComponent implements OnInit {
   // Applicant information needs to be updated
   onSave() {
     console.log('dashboard component save data');
-  }
 
-  // Applicant data needs to be reset
-  onCancel() {
-    console.log('dashboard component cancel data');
+    //TODO: save all pending changes to the original array
   }
 }

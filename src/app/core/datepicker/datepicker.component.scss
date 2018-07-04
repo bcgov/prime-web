@@ -1,7 +1,8 @@
 .datepicker--mini {
   display: flex;
   flex-wrap: nowrap; // Never break line with the 'x' btn
-  > .btn {
+
+  &:not(.hide-clear) > .btn {
     // Make button and .input-group-append play nice.
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;

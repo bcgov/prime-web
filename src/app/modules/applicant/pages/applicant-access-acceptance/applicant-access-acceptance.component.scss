@@ -1,12 +1,13 @@
+$textAreaWidth: 90%;
+
 textarea {
   background-color: lightgrey;
-  width: 90%;
+  width: $textAreaWidth;
   height: 7em;
   vertical-align:middle;
   font-size: medium;
   padding: 0.5em;
 }
-
 
 input[type="checkbox"] {
   vertical-align:middle;
@@ -22,3 +23,8 @@ input[type="checkbox"] {
   margin-right: 0.6em;
 }
 
+hr {
+  margin-left: 0;
+  width: $textAreaWidth;
+  margin-top: 3rem; //Artifically higher to align wrt h2 and textareas spacing
+}

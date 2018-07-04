@@ -2,31 +2,45 @@
 
   <div class="enrollment-text-container">
     <span class="enrollment-text-main">{{rowData.title}}</span>
+    <prime-info-button
+      class='mx-2'
+      [targetId]="rowData.associatedObjectId"
+      [searchDomain]="applicantSearch">
+    </prime-info-button>
   </div>
   <div class="enrollment-actions">
     <div *ngIf="!isDeclinedEnrol() && !declinedEnroll" class="dates-col">
-      <label for="startDt">
-        Start
-      </label>
-      <input type="text" id="startDt" [value]="startDate" disabled>
-      <label for="endDt">
-        End
-      </label>
-      <input type="text" id="endDt" [value]="endDate" disabled>
+      <span class="d-inline-flex align-items-center p-2 border-left">Start
+        <prime-datepicker disabled size="mini" [dateFormat]="dateFormat"
+                          [(date)]="startDate"
+                          class="ml-1"
+                          hideClearButton="true"></prime-datepicker>
+      </span>
+      <span class="d-inline-flex align-items-center p-2 border-left border-right">End
+        <prime-datepicker size="mini" [dateFormat]="dateFormat"
+                          [(date)]="endDate"
+                          class="ml-1"
+                          [disabled]="!isActive() && !isNewEnrol()"
+                          [hideClearButton]="!isActive() && !isNewEnrol()"></prime-datepicker>
+    </span>
     </div>
     <div *ngIf="isDeclinedEnrol()">
       <div class="col d-inline-flex flex-column">
-        <select id="declinedReason" class="form-control drop-dl-box-15 color" disabled>
-          <option value="{{declinedReason}}" selected>{{declinedReason}}</option>
+        <select name="reasonForDecline"
+                id="reasonForDecline"
+                class="orm-control drop-dl-box-15 color"
+                [value]="declinedReason" disabled>
+          <option [value]="declinedReason" selected>{{declinedReason}}</option>
         </select>
       </div>
     </div>
     <div *ngIf="isNewEnrol() && declinedEnroll">
-      <select id="declinedReason" class="form-control drop-dl-box-15 color"
-              [value]="declinedReason"
-              (change)="onSelect($event)">
+      <select name="reasonForDecline"
+              id="reasonForDecline"
+              class="orm-control drop-dl-box-15 color"
+              [(ngModel)]="declinedReason">
         <option value="Please Select" selected>Please Select</option>
-        <option *ngFor="let reason of declinedReasons" value="{{reason}}">
+        <option *ngFor="let reason of declinedReasons" [value]="reason">
           {{reason}}
         </option>
       </select>
@@ -36,10 +50,6 @@
         [alerts]="allChildAlerts"
         [iconOnly]='false'>
       </prime-pill-badge>
-      <prime-info-button
-        [targetId]="rowData.associatedObjectId"
-        [searchDomain]="applicantSearch">
-      </prime-info-button>
       <prime-accept-reject-icons *ngIf="isNewEnrol() && !acceptedEnroll && !declinedEnroll"
           (onAccepted)="onAccept()"
           (onRejected)="onDecline()"
@@ -59,7 +69,8 @@
       <prime-app-enrollment-progress-row
         [open]="siteAccess.open"
         [data]="siteAccess"
-        [disableReason] = "!isNewEnrol()">
+        [disableReason]="!isNewEnrol()"
+        (onPendingChange)="pendingChanges($event)">
       </prime-app-enrollment-progress-row>
 
     </div>

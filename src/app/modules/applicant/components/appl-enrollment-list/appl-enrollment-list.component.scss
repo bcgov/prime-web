@@ -1,2 +1,12 @@
 @import 'variables.scss';
 @import '../../../../core/enrollment-list/enrollment-list.class';
+
+.controls {
+  // Keeps the size of the element fixed even if it changes due to replacing the buttons with text.
+  flex-basis: 10.5rem;
+  min-width: 10.5rem;
+}
+
+.save-message {
+  display: inline;
+}

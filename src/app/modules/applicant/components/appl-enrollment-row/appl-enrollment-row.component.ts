@@ -1,9 +1,11 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {EnrollmentRow} from '../../../../core/enrollment-row/enrollment-row.class';
-import {fadeIn, loadInOut, openState, openStateChild, openStateDisable} from '../../../../animations/animations';
+import {loadInOut, openState, openStateChild, openStateDisable} from '../../../../animations/animations';
 import {DeclinedReasons, SiteAccess} from '../../../../models/sites.model';
 import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
 import {SearchDomain} from '../../../../core/user-info-button/user-info-button.component';
+import {isNullOrUndefined} from 'util';
+import { cloneDeep } from 'lodash';
 
 // Specific to this component
 export interface ApplEnrollmentRowItem {
@@ -27,11 +29,14 @@ export interface ApplEnrollmentRowItem {
 export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit {
 
   @Input() rowData: ApplEnrollmentRowItem;
-  @Output() onChange = new EventEmitter<boolean>();
+  @Output() onChange = new EventEmitter<SiteAccess>();
 
   public acceptedEnroll = false;
   public declinedEnroll = false;
   public applicantSearch: SearchDomain = SearchDomain.Applicant; // Domain to search for user sites
+  public dateFormat = 'yyyy/mm/dd';
+
+  private _data: ApplEnrollmentRowItem[];
 
   constructor() {
     super();
@@ -41,61 +46,88 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
     if (!this.rowData) {
       return;
     }
-    this.siteAccessRequiringAttention.map(x => x.open = false);
+    this._data = cloneDeep( this.rowData );
+    return this.siteAccessRequiringAttention.map(x => x.open = false);
   }
 
   onAccept() {
     console.log('Accept enrollment');
     this.acceptedEnroll = true;
-    this.onChange.emit(true);
   }
 
   onDecline() {
     console.log('Declined enrollment');
     this.declinedEnroll = true;
-    this.onChange.emit(true);
   }
 
-  onSelect($event) {
-    console.log('onSelect ', $event);
+  pendingChanges( item: SiteAccess ) {
+    console.log( 'Pending Change: ', item );
+    this.onChange.emit( item );
   }
 
+  /**
+   * Get the possible reasons for declining the site access
+   * @returns {any[]}
+   */
   get declinedReasons() {
     const list = Object.keys(DeclinedReasons);
     return list.map( x => {return DeclinedReasons[x]; });
   }
 
-  get declinedReason() {
-    const declinedreason = this.siteAccessRequiringAttention.map(x => {
-      return x.declinedReason; }).filter( x => x);
+  /**
+   * Get the reason why access was declined
+   * @returns {string}
+   */
+  get declinedReason(): string {
 
-    if (declinedreason.length !== 0) {
-      return declinedreason[0];
+    if (isNullOrUndefined( this.siteAccessRequiringAttention[0].declinedReason ) ||
+        0 === this.siteAccessRequiringAttention[0].declinedReason.length ) {
+      return 'Please Select';
     }
-    return 'Please Select';
+    return this.siteAccessRequiringAttention[0].declinedReason;
   }
 
-  get startDate() {
-    return this.siteAccessRequiringAttention.map(x => { return x.startDateShort; });
+  set declinedReason( reason: string ) {
+    this.siteAccessRequiringAttention[0].pendingChanges = true;
+    this.siteAccessRequiringAttention[0].declinedReason = reason;
   }
 
-  get endDate() {
-    return this.siteAccessRequiringAttention.map(x => { return x.endDateShort; });
+  get startDate(): Date {
+    return this.siteAccessRequiringAttention[0].startDate;
   }
 
-  isNewEnrol() {
+  set startDate( startDt: Date ) {
+    this.siteAccessRequiringAttention[0].startDate = startDt;
+  }
+
+  get endDate(): Date {
+    return this.siteAccessRequiringAttention[0].endDate;
+  }
+
+  set endDate( endDt: Date ) {
+    this.siteAccessRequiringAttention[0].pendingChanges = true;
+    this.siteAccessRequiringAttention[0].endDate = endDt;
+  }
+
+  isNewEnrol(): boolean {
     return this.siteAccessRequiringAttention.filter(x => {
       return x.status === EnrollmentStatus.New;
     }).length !== 0;
   }
 
-  isDeclinedEnrol() {
+  isDeclinedEnrol(): boolean {
     return this.siteAccessRequiringAttention.filter(x => {
       return x.status === EnrollmentStatus.Declined;
     }).length !== 0;
   }
 
-  isShowProgress() {
+  isActive(): boolean {
+    return this.siteAccessRequiringAttention.filter(x => {
+      return x.status === EnrollmentStatus.Active;
+    }).length !== 0;
+  }
+
+  isShowProgress(): boolean {
     return this.siteAccessRequiringAttention.filter(x => {
       return (x.status !== EnrollmentStatus.Expired && x.status !== EnrollmentStatus.Active);
     }).length !== 0;
@@ -113,6 +145,13 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
       siteAccess.title = `${siteAccess.site.name}`;
       return siteAccess;
     });
+  }
+
+  canOpen(): boolean{
+    // Don't open on New or Active rows, unless user has Accepted the New row
+    return this.rowData.expandableRows.filter(sa => {
+      return (sa.status !== EnrollmentStatus.New && sa.status !== EnrollmentStatus.Active) || this.acceptedEnroll
+    }).length >= 1;
   }
 }
 

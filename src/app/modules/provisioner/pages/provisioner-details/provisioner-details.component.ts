@@ -34,14 +34,6 @@ export class ProvisionerDetailsComponent implements OnInit {
         }
       });
 
-    // TODO: DEV ONLY REMOVE! Change this to get userId via URL param, look at
-    // verifier-routing.module.ts for exaple with how it does it for
-    // EnrollmentComponents
-    //this.person = this.dataService.people[0];
-    //this.site = this.dataService.sites[0];
-    //Set first 2 rows to 'New'
-    //this.dataService.collections[0].members[0].siteAccess[0].status = EnrollmentStatus.New;
-    //this.dataService.collections[1].members[0].siteAccess[0].status = EnrollmentStatus.New;
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       if (this.IS_SHOWING_PERSON) {

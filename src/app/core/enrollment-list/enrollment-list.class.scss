@@ -39,3 +39,9 @@ $listHeight: 25rem;
 .enrollment-view-selector {
   min-width: 5em;
 }
+
+.has-float-label + .has-float-label {
+  margin-top: initial;
+
+  select { height: auto;}
+}
