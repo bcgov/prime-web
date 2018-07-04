@@ -12,16 +12,20 @@
     <div *ngIf="!isDeclinedStatus() && !isDeclined()" class="dates-col">
       <span class="d-inline-flex align-items-center p-2 border-left">Start
         <prime-datepicker disabled size="mini" [dateFormat]="dateFormat"
-                          [(date)]="startDate"
-                          class="ml-1"
-                          hideClearButton="true"></prime-datepicker>
+            [(date)]="startDate"
+            class="ml-1"
+            clearButton="invisible">
+        </prime-datepicker>
       </span>
       <span class="d-inline-flex align-items-center p-2 border-left border-right">End
-        <prime-datepicker size="mini" [dateFormat]="dateFormat"
-                          [(date)]="endDate"
-                          class="ml-1"
-                          [disabled]="!isActiveStatus() && !isNewStatus()"
-                          [hideClearButton]="!isActiveStatus() && !isNewStatus()"></prime-datepicker>
+        <prime-datepicker
+            size="mini"
+            [dateFormat]="dateFormat"
+            [(date)]="endDate"
+            class="ml-1"
+            [disabled]="!isActiveStatus() && !isNewStatus()"
+            [clearButton]="(!isActiveStatus() && !isNewStatus()) ? 'invisible' : '' ">
+        </prime-datepicker>
     </span>
     </div>
     <div *ngIf="isDeclinedStatus()">
@@ -50,7 +54,8 @@
         [alerts]="allChildAlerts"
         [iconOnly]='false'>
       </prime-pill-badge>
-      <prime-accept-reject-icons *ngIf="isNewStatus() && !isAccepted() && !isDeclined()"
+
+      <prime-accept-reject-icons [ngClass]="{invisible: !(isNewStatus() && !isAccepted() && !isDeclined())}"
           (onAccepted)="onAccept()"
           (onRejected)="onDecline()"
           labelAccept="Accept Enrollment"

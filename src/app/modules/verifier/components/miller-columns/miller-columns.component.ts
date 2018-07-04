@@ -200,10 +200,37 @@ export class MillerColumnsComponent implements OnInit {
     this.pendingSiteAccess.map(siteAccess =>  {
       //Go from our copy to the original in dataService
       const orig = this.dataService.findSiteAccessByObjectId(siteAccess.objectId);
-      orig.status = siteAccess.status;
-      orig.endDate = siteAccess.endDate;
-      orig.startDate = siteAccess.startDate;
-      orig.declinedReason = siteAccess.declinedReason
+
+      // Value exists, so we need to update it
+      if (orig){
+        orig.status = siteAccess.status;
+        orig.endDate = siteAccess.endDate;
+        orig.startDate = siteAccess.startDate;
+        orig.declinedReason = siteAccess.declinedReason
+        console.log('Updating existing SiteAccess', siteAccess);
+      }
+      else {
+        // SiteAccess doesn't exist, so it's a brand new one. We just need to insert it.
+        let origPerson, origSite;
+        if (this.IS_PEOPLE_TABLE) {
+          const objectId = this.getUserSelection().objectId;
+          origPerson = this.dataService.findPersonByObjectId(objectId)
+          origSite = this.dataService.findSiteByObjectId(siteAccess.site.objectId)
+        }
+        else {
+          const objectId = this.getSiteSelection().objectId;
+          origSite = this.dataService.findSiteByObjectId(objectId);
+          origPerson = this.dataService.findPersonByObjectId(siteAccess.person.objectId);
+        }
+
+        siteAccess.person = origPerson;
+        siteAccess.site = origSite;
+        origSite.siteAccess.push(siteAccess);
+        origPerson.siteAccess.push(siteAccess);
+
+        this.dataService.siteAccesses.push(siteAccess);
+        console.log("Saving new SiteAccess", siteAccess);
+      }
     })
 
     this.pendingSiteAccess = this.pendingSiteAccess.map(siteAccess => {
@@ -303,7 +330,7 @@ export class MillerColumnsComponent implements OnInit {
       // that have Active SAs.
       column
         .filter(item => item.siteAccess.length)
-        .filter(item => item.siteAccess[0].status === 'Active' || item.siteAccess[0].status === 'New')
+        .filter(item => item.siteAccess[0].status === 'Active' || item.siteAccess[0].status === 'New' || item.siteAccess[0].status === 'Initiated')
         .map(item => item.checked = true);
     }
     else if (!this.IS_PEOPLE_TABLE && this.isPeopleColumn(column)) {
@@ -318,7 +345,7 @@ export class MillerColumnsComponent implements OnInit {
 
       column
         .filter(item => item.siteAccess.length)
-        .filter(item => item.siteAccess[0].status === 'Active' || item.siteAccess[0].status === 'New')
+        .filter(item => item.siteAccess[0].status === 'Active' || item.siteAccess[0].status === 'New' || item.siteAccess[0].status === 'Initiated')
         .map(item => item.checked = true);
     }
 

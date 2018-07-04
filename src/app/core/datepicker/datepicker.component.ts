@@ -30,8 +30,20 @@ export class DatepickerComponent implements OnInit, OnChanges {
   /** Equivalent to setting disableBefore to tomorrow. */
   @Input() onlyFutureDates: boolean;
 
-  /** Hides the clear 'x' button on mini datepicker. */
-  @Input() hideClearButton: boolean = false;
+  /**
+   * Control visibility of the clear 'x' button on the mini datepicker.
+   *
+   * **'visible'** is default, button exists
+   *
+   * **'none'** means the element does not exist
+   *
+   * **'invisible'** means the element takes up space but is not visible / cannot be
+   * used.
+   *
+   * Invisible is useful when you want to make sure a datepicker is the same
+   * size as a visible one.
+   */
+  @Input() clearButton: 'visible' | 'invisible' | 'none' = 'visible';
 
 
 

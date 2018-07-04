@@ -5,17 +5,14 @@ input[id="startDt"], input[id="endDt"] {
   width: 12ch;
 }
 
-.enrollment-list-item {
-  min-height: 4em;
-}
 
 .dates-col {
   padding: 0 1em;
   &, > span {  height: 100%; }
 
-  // Consistent sizing regardless if datepicker clearButton is hidden, but still this is a codesmell. Once we have hi-fidelity designs we can re-implement rows to be equally sized.
-  > span:last-of-type {
-    min-width: 145px;
+
+  prime-datepicker {
+    min-width: 8rem; //Enforce consistent size between date and "Select a Date"
   }
 }
 
