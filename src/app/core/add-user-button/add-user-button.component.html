@@ -22,58 +22,40 @@
 
     <div class="modal-body">
       <div class ="row">
+
         <div class="col mx-2">
-          <div class="form-group row has-float-label">
-            <label for="lastName">
-              Last Name
-            </label>
-            <input type="text" class="form-control mb-2 mr-sm-2" id="lastName" name="lastName" placeholder="" [(ngModel)]="searchQuery.lastName" tabindex="1">
-          </div>
-          <div class="form-group row has-float-label">
-            <label for="middleName">
-              Middle Name
-            </label>
-            <input type="text"  class="form-control mb-2 mr-sm-2" id="middleName" name="middleName" placeholder="" [(ngModel)]="searchQuery.middleName" tabindex="3">
-          </div>
-          <div class="form-group row has-float-label">
-            <label for="primeUserID">
-              PRIME UserID
-            </label>
-            <input type="text"  class="form-control mb-2 mr-sm-2" id="primeUserID" name="primeUserID" placeholder="" [(ngModel)]="searchQuery.primeUserID" tabindex="5">
-          </div>
-          <div class="form-group row has-float-label" *ngIf="showAdditionalFields">
-            <label for="email">
-              Email
-            </label>
-            <input type="text"  class="form-control mb-2 mr-sm-2" id="email" name="email" placeholder="" [(ngModel)]="searchQuery.email" tabindex="7">
-          </div>
+          <label for="lastName" class="has-float-label">
+            <input type="text" class="form-control mb-2 mr-sm-2" id="lastName" name="lastName" placeholder=" " [(ngModel)]="searchQuery.lastName" tabindex="1">
+            <span>Last Name</span>
+          </label>
+          <label for="middleName" class="has-float-label">
+            <input type="text" class="form-control mb-2 mr-sm-2" id="middleName" name="middleName" placeholder=" " [(ngModel)]="searchQuery.middleName" tabindex="1">
+            <span>Middle Name</span>
+          </label>
+          <prime-datepicker id="DoB" name="DoB" placeholder=" "  dateFormat="yyyy/mm/dd" [(date)]="searchQuery.dateOfBirth" labelText="Date of Birth" tabindex="1"></prime-datepicker>
         </div>
+
         <div class="col mx-2">
-          <div class="form-group row has-float-label">
-            <label for="firstName">
-              First Name
-            </label>
-            <input type="text"  class="form-control mb-2 mr-sm-2" id="firstName" name="firstName" placeholder="" [(ngModel)]="searchQuery.firstName" tabindex="2">
-          </div>
-
-
-          <div class='form-control mb-2 mr-sm-2'>Date of Birth
-              <prime-datepicker id="DoB" name="DoB" placeholder="" size='mini' dateFormat="yyyy/mm/dd" class='ml-1' [(date)]="searchQuery.dateOfBirth" ></prime-datepicker>
-          </div>
-
-
-          <div class="form-group row has-float-label" *ngIf="showAdditionalFields">
-            <label for="phone">
-              Phone
-            </label>
-            <input type="text"  class="form-control mb-2 mr-sm-2" id="phone" name="phone" placeholder="" [(ngModel)]="searchQuery.phone" tabindex="6">
-          </div>
-          <div class="form-group row has-float-label" *ngIf="showAdditionalFields">
-            <label for="postal">
-              Postal Code
-            </label>
-            <input type="text"  class="form-control mb-2 mr-sm-2" id="postal" name="postal" placeholder="" [(ngModel)]="searchQuery.postal" tabindex="8">
-          </div>
+          <label for="firstName" class="has-float-label">
+            <input type="text" class="form-control mb-2 mr-sm-2" id="firstName" name="firstName" placeholder=" " [(ngModel)]="searchQuery.firstName" tabindex="1">
+            <span>First Name</span>
+          </label>
+          <label for="primeUserId" class="has-float-label">
+            <input type="text" class="form-control mb-2 mr-sm-2" id="primeUserId" name="primeUserId" placeholder=" " [(ngModel)]="searchQuery.primeUserId" tabindex="1">
+            <span>PRIME User ID</span>
+          </label>
+          <label for="email" class="has-float-label" *ngIf="showAdditionalFields">
+            <input type="text" class="form-control mb-2 mr-sm-2" id="email" name="email" placeholder=" " [(ngModel)]="searchQuery.email" tabindex="1">
+            <span>Email</span>
+          </label>
+          <label for="phone" class="has-float-label" *ngIf="showAdditionalFields">
+            <input type="text" class="form-control mb-2 mr-sm-2" id="phone" name="phone" placeholder=" " [(ngModel)]="searchQuery.phone" tabindex="1">
+            <span>Phone</span>
+          </label>
+          <label for="postal" class="has-float-label" *ngIf="showAdditionalFields">
+            <input type="text" class="form-control mb-2 mr-sm-2" id="postal" name="postal" placeholder=" " [(ngModel)]="searchQuery.postal" tabindex="1">
+            <span>Postal Code</span>
+          </label>
         </div>
       </div>
 
@@ -107,14 +89,19 @@
 
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" (click)="clearSearch()" tabindex="9">
+        <button type="button" class="btn btn-default" (click)="clearSearch()" tabindex="1">
             Clear All
         </button>
-        <button type="button" class="btn btn-default" [disabled]="!canFindUser()" (click)="findUser()" tabindex="11">
+        <button type="button" class="btn btn-default" [disabled]="!canFindUser()" (click)="findUser()" tabindex="1">
             Find User
         </button>
-      <button type="button" class="btn btn-default" [disabled]="!canAddUser()" (click)="addUser()" tabindex="10">
+      <div *ngIf="addUserSelected; else elseBlock">
+        <button type="button"  class="btn btn-primary" [disabled]="!canAddUser()" (click)="addUser()" tabindex="1">
+          Add User
+        </button>
+      </div>
+      <ng-template #elseBlock><button type="button"  class="btn btn-default" [disabled]="!canAddUser()" (click)="addUser()" tabindex="1">
         Add User
-      </button>
+      </button></ng-template>
     </div>
 </ng-template>
