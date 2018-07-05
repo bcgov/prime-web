@@ -12,32 +12,112 @@ import { CollegeTypes,
   WorkingOnBehalfTitleTypes,
   ISelfDeclaration } from './colleges.enum';
 
+/* class for a person's name */
+class Name {
+  private _first: string;
+  private _middle: string;
+  private _last: string;
+
+  set firstName( name: string ) {
+    this._first = name;
+  }
+
+  get firstName(): string {
+    return this._first;
+  }
+
+  set middleName( name: string ) {
+    this._middle = name;
+  }
+
+  get middleName(): string {
+    return this._middle;
+  }
+
+  set lastName( name: string ) {
+    this._last = name;
+  }
+
+  get lastName(): string {
+    return this._last;
+  }
+
+  // Returns first, middle and last names
+  get fullName(): string {
+    return `${this._first} ${this._middle} ${this._last}`;
+  }
+
+  set fullName( name: string ) {
+    const names = name.split(' ');
+
+    this._first = names[0];
+    if (names.length === 2) {
+      this._last = names[1];
+    }
+    else if (names.length === 3) {
+      this._middle = names[1];
+      this._last = names[2];
+    }
+  }
+
+  // Returns only first and last names
+  get name(): string {
+    return `${this._first} ${this._last}`;
+  }
+}
+
+
+
 /**
  * Information about person
  */
 export class Person extends Base {
+
   primeUserId: PrimeUserID; //human-readable, like a user-name - "JSmith"
   PoSId: string;
 
-  firstName: string;
-  middleName: string;
-  lastName: string;
+ //firstName: string;
+  //middleName: string;
+  //lastName: string;
 
+  private _legalName: Name = new Name();
+  private _preferName: Name;
+  private _hasPreferName = false;
+
+  /* Returns name of person depending on preferedName flag */
   get name(): string {
-    return `${this.firstName} ${this.lastName}`;
+    if ( this.hasPreferName ) {
+      return this._preferName.name;
+    }
+    return this._legalName.name;
   }
 
   // Just for development with dummy data, likely to be removed later on.
   set name(fullName: string) {
-    const names = fullName.split(' ');
-    this.firstName = names[0];
-    if (names.length === 2) {
-      this.lastName = names[1];
-    }
-    else if (names.length === 3) {
-      this.middleName = names[1];
-      this.lastName = names[2];
-    }
+    // Assumption is this sets the legal name for person
+    this._legalName.fullName = fullName;
+
+  }
+
+  // Legal name only - prevent code breakage
+  get firstName(): string {
+    return this._legalName.firstName;
+  }
+  get middleName(): string {
+    return this._legalName.middleName;
+  }
+  get lastName(): string {
+    return this._legalName.lastName;
+  }
+
+  /* Sets the prefered name flag */
+  set hasPreferedName( flag: boolean ) {
+    this._hasPreferName = flag;
+  }
+
+  /* Gets the prefered Name flag */
+  get hasPreferName(): boolean {
+    return this._hasPreferName;
   }
 
   // Just for development with dummy data for DEMO - TODO: Remove after development
