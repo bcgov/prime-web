@@ -95,13 +95,9 @@
         <button type="button" class="btn btn-default" [disabled]="!canFindUser()" (click)="findUser()" tabindex="1">
             Find User
         </button>
-      <div *ngIf="addUserSelected; else elseBlock">
-        <button type="button"  class="btn btn-primary" [disabled]="!canAddUser()" (click)="addUser()" tabindex="1">
-          Add User
+        <button type="button" class="btn" [disabled]="!canAddUser()" (click)="addUser()" tabindex="1" [ngClass]="{' btn-default' : !canAddUser(), 'btn-primary': canAddUser() }" >
+            Add User
         </button>
-      </div>
-      <ng-template #elseBlock><button type="button"  class="btn btn-default" [disabled]="!canAddUser()" (click)="addUser()" tabindex="1">
-        Add User
-      </button></ng-template>
+
     </div>
 </ng-template>
