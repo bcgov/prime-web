@@ -13,7 +13,7 @@ export class LoadingSpinnerDirective {
   /** Width of the element before we make any changes to it. */
   private originalWidth: string;
   /** Hardcoded width of the element when the content is replaced with the spinner. */
-  private SPINNER_WIDTH: string = "40px";
+  private SPINNER_WIDTH: string = '40px';
 
   @Input('primeLoadingSpinner') showSpinner: boolean;
 
@@ -28,8 +28,8 @@ export class LoadingSpinnerDirective {
   }
 
   ngOnInit(){
-    this.originalWidth = this.el.nativeElement.offsetWidth + "px";
-    this.el.nativeElement.style.transition = "width 0.3s";
+    this.originalWidth = this.el.nativeElement.offsetWidth + 'px';
+    this.el.nativeElement.style.transition = 'width 0.3s';
     // Change the width from auto to the fixed value so we can animate the width change after.
     this.el.nativeElement.style.width = this.originalWidth;
   }

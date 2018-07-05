@@ -13,12 +13,12 @@ import { DummyDataService } from '../../services/dummy-data.service';
 export class AddUserButtonComponent implements OnInit {
   @Input() iconOnly: boolean = false;
   modalRef: BsModalRef;
-  progress: any = []
+  progress: any = [];
   public searchResultsPeople: Person[] = [];
   public showSearchResults: boolean;
   public addUserSelected: boolean = false;
   public today: Date = new Date();
-  public endDate: Date = null
+  public endDate: Date = null;
 
   /** Binds to the form inputs used to generate search queries. Each field should correspond in name and type with attribtues on a Person object */
   public searchQuery: {lastName?: string, middleName?: string, firstName?: string, primeUserId?: string,
@@ -36,7 +36,7 @@ export class AddUserButtonComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
-    this.modalService.onHidden.subscribe(() => {this.addUserSelected = false});
+    this.modalService.onHidden.subscribe(() => {this.addUserSelected = false; });
   }
 
 
@@ -56,14 +56,14 @@ export class AddUserButtonComponent implements OnInit {
     const person = this.dummyDataService.createPeople(1)[0];
 
     // Copy over the shared defined properties, ignore the rest.
-    for (var key in this.searchQuery) {
+    for (const key in this.searchQuery) {
       if (this.searchQuery.hasOwnProperty(key) && person.hasOwnProperty(key) ) {
          person[key] = this.searchQuery[key];
       }
     }
     person.email = `${person.firstName[0].toLowerCase()}${person.lastName.toLowerCase()}@gmail.com`;
 
-    person.renewalDate = null //We don't want the set date from dummyDataService
+    person.renewalDate = null; //We don't want the set date from dummyDataService
 
 
     // Only return one result (prototype only)
