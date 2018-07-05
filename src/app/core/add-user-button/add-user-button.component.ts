@@ -105,7 +105,8 @@ export class AddUserButtonComponent implements OnInit {
     //Returns true only if prime id, email or both first and last name are valid
     if ((this.searchQuery.lastName != null && this.searchQuery.lastName.length >= 1) &&
       (this.searchQuery.firstName != null && this.searchQuery.firstName.length >= 1) &&
-      (this.searchQuery.dateOfBirth != null)) {
+      (this.searchQuery.dateOfBirth != null && this.searchQuery.dateOfBirth.toString().length >= 1)) {
+      debugger
       flag = true;
     }
     return flag;

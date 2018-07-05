@@ -126,7 +126,7 @@ export class DatepickerComponent implements OnInit, OnChanges {
   }
 
   onDateChanged(event): void {
-    if (event.jsdate) {
+    if (event.jsdate || event.jsdate === null) {
       // Always emit a Date (or null), convert if necessary
       this.dateChange.emit(event.jsdate);
     }
