@@ -8,7 +8,7 @@ import { Site, SiteAccess } from '../../../../models/sites.model';
 import { MillerColumn, MillerColumnConfig, MillerItem } from './miller-columns.interface';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 
-const TIMING = "500ms";
+const TIMING = '500ms';
 @Component({
   selector: 'prime-miller-columns',
   templateUrl: './miller-columns.component.html',
@@ -24,15 +24,6 @@ const TIMING = "500ms";
           style({opacity: 1, transform: 'translateX(0)',     offset: 1.0})
         ]))
       ]),
-      // TODO: Disabling the :leave animation for now as it was itnerfering with the :enter one.
-      // transition('* => void', [
-      //   animate(TIMING, keyframes([
-      //     style({opacity: 1, transform: 'translateX(0)',     offset: 0}),
-      //     // style({opacity: 1, transform: 'translateX(5px)', offset: 0.5}),
-      //     style({opacity: 1, transform: 'translateX(15px)', offset: 0.6}),
-      //     style({opacity: 0, transform: 'translateX(-100%) translateZ(-500px)',  offset: 1.0})
-      //   ]))
-      // ])
     ]),
     // Alternate "flip" animation that matches Farzad's designs more.
     trigger('flipInOut', [
@@ -54,27 +45,23 @@ const TIMING = "500ms";
 export class MillerColumnsComponent implements OnInit {
 
   @Input() config: MillerColumnConfig;
-
-  // TODO: Changing columnOrder should re-arrange data
-  // @Input() columnTitles: string[];
   private columnOrder: string[]  = ['Collections', 'Sites', 'People'];
-
   private _columns:  MillerColumn[];
   private _originalColumnSnapshot:  MillerColumn[];
   public changesMade: boolean = false;
-  private MINIMUM_COLUMNS = 3;
   public declarationCheck: boolean = false;
   public saveSuccess: boolean;
   public pendingSiteAccess: SiteAccess[];
+  public showLoadingSpinner: boolean = false;
 
   constructor(private router: Router, private dataService: PrimeDataService) { }
 
   ngOnInit() {
-    if (!this.config) {return}
+    if (!this.config) {return; }
     // Modify column ordering based on config
       if (this.config.options &&
        this.config.options.primaryColumn &&
-        this.config.options.primaryColumn.toLowerCase() === "people"){
+        this.config.options.primaryColumn.toLowerCase() === 'people'){
           this.columnOrder = ['People', 'Collections', 'Sites'];
     }
 
@@ -85,7 +72,7 @@ export class MillerColumnsComponent implements OnInit {
         items: this.config.data[this.columnOrder[0].toLowerCase()],
         index: 0,
       }
-    ]
+    ];
 
 
     // Check if there's a pre-selected id in the config
@@ -93,17 +80,17 @@ export class MillerColumnsComponent implements OnInit {
       const preselectObjectId = this.config.options.preselectObjectId;
       // Selected item will be in first column, regardless of primaryColumn
       const preselectItem = this._columns[0].items
-        .find(item => item.objectId === preselectObjectId)
+        .find(item => item.objectId === preselectObjectId);
 
       if (!preselectItem) {
-        console.error("MillerColumnsComponent config.options.preselectObjectId refers to an object which does not exist! Removed objectId from url.");
+        console.error('MillerColumnsComponent config.options.preselectObjectId refers to an object which does not exist! Removed objectId from url.');
         this.router.navigate(['/verifier/enrollment/']);
         return;
       }
 
       this.openColumnFromItem(preselectItem);
       // Open second column too. Currently just opens the top item, no advanced logic. Potentially could open an item it does not have SA's with, but should be rare.
-      this.openColumnFromItem(this._columns[1].items[0])
+      this.openColumnFromItem(this._columns[1].items[0]);
     }
 
     // Save the original columns so we can restore it if the user wants to cancel changes
@@ -112,14 +99,14 @@ export class MillerColumnsComponent implements OnInit {
 
 
   // get columns() : MillerItem[][] {
-  get columns() : any {
+  get columns(): any {
     return this._columns;
   }
 
   public get IS_PEOPLE_TABLE(): boolean {
    return !!(this.config.options &&
       this.config.options.primaryColumn &&
-      this.config.options.primaryColumn.toLowerCase() === "people");
+      this.config.options.primaryColumn.toLowerCase() === 'people');
   }
 
 
@@ -129,17 +116,17 @@ export class MillerColumnsComponent implements OnInit {
       // Remove from search results without modifying array order.
       x.hidden = x.name.toLowerCase().indexOf(phrase.toLowerCase()) === -1;
       return x;
-    })
+    });
   }
 
 
   onItemClick(item: MillerItem){
-    if (item.open) return; //It's already open, don't re-create it.
+    if (item.open) { return; } //It's already open, don't re-create it.
     this.openColumnFromItem(item);
   }
 
   openColumnFromItem(item: MillerItem){
-    let colIndex = this.findColumnIndexFromItem(item);
+    const colIndex = this.findColumnIndexFromItem(item);
     // Close other items in the same column
     this._columns[colIndex]['items'].filter(x => x !== item)
     .map(x => x.open = false);
@@ -170,7 +157,7 @@ export class MillerColumnsComponent implements OnInit {
   //TODO: Column interface + move fn location
   private closeColumnByIndex(index){
     this.cleanUpChildColumns(index);
-    this._columns = [... this._columns.slice(0, index)]
+    this._columns = [... this._columns.slice(0, index)];
   }
 
 
@@ -186,17 +173,41 @@ export class MillerColumnsComponent implements OnInit {
         title: this.columnOrder[newIndex],
         items: newItems,
         index: newIndex,
-      }
-      this._columns = [... this._columns.slice(0, newIndex), newCol]
+      };
+      this._columns = [... this._columns.slice(0, newIndex), newCol];
     }
     else {
       this.closeColumnByIndex(newIndex);
     }
   }
 
-  // TODO: Verify it works with SITE MillerColumn
-  //Works with USER MillerColumn
+  /** Saves the data and updates the UI */
   public save(): void {
+
+    this.showLoadingSpinner = true;
+
+    this.saveData();
+
+    this.changesMade = false;
+    setTimeout(() => {
+      this.showLoadingSpinner = false;
+      this.saveSuccess = true;
+    }, 3000);
+  }
+
+  /** Cancels the users changes and reverts back to previous state, including what columns are open.  */
+  public cancel(): void {
+    this._columns = cloneDeep(this._originalColumnSnapshot);
+    this.changesMade = false;
+  }
+
+  public backLink(): string {
+    const linkType = this.IS_PEOPLE_TABLE ? 'user' : 'site';
+    return `/verifier/dashboard/${linkType}`;
+  }
+
+  /** Handles data operations necessary to save, does not handle UI per se, but statuses will update due to changes in underlying data. */
+  private saveData(){
     this.pendingSiteAccess.map(siteAccess =>  {
       //Go from our copy to the original in dataService
       const orig = this.dataService.findSiteAccessByObjectId(siteAccess.objectId);
@@ -206,7 +217,7 @@ export class MillerColumnsComponent implements OnInit {
         orig.status = siteAccess.status;
         orig.endDate = siteAccess.endDate;
         orig.startDate = siteAccess.startDate;
-        orig.declinedReason = siteAccess.declinedReason
+        orig.declinedReason = siteAccess.declinedReason;
         console.log('Updating existing SiteAccess', siteAccess);
       }
       else {
@@ -214,8 +225,8 @@ export class MillerColumnsComponent implements OnInit {
         let origPerson, origSite;
         if (this.IS_PEOPLE_TABLE) {
           const objectId = this.getUserSelection().objectId;
-          origPerson = this.dataService.findPersonByObjectId(objectId)
-          origSite = this.dataService.findSiteByObjectId(siteAccess.site.objectId)
+          origPerson = this.dataService.findPersonByObjectId(objectId);
+          origSite = this.dataService.findSiteByObjectId(siteAccess.site.objectId);
         }
         else {
           const objectId = this.getSiteSelection().objectId;
@@ -229,51 +240,22 @@ export class MillerColumnsComponent implements OnInit {
         origPerson.siteAccess.push(siteAccess);
 
         this.dataService.siteAccesses.push(siteAccess);
-        console.log("Saving new SiteAccess", siteAccess);
+        console.log('Saving new SiteAccess', siteAccess);
       }
-    })
+    });
 
     this.pendingSiteAccess = this.pendingSiteAccess.map(siteAccess => {
       siteAccess.pendingChanges = false;
       return siteAccess;
-    })
+    });
 
     this._originalColumnSnapshot = cloneDeep(this._columns);
-    this.changesMade = false;
-    this.saveSuccess = true;
-  }
-
-  public cancel(): void {
-    this._columns = cloneDeep(this._originalColumnSnapshot);
-    this.changesMade = false;
-  }
-
-  public backLink(): string {
-    let linkType = this.IS_PEOPLE_TABLE ? "user" : "site";
-    return `/verifier/dashboard/${linkType}`
-  }
-
-  // TODO:! Build breadcrumb like mobile for http://pebbleroad.github.io/taxonomy-browser/build/#
-  buildBreadCrumb(column: MillerColumn){
-    // let title = '';
-    // for (let index = column.index; index < this._columns.length; index++) {
-    //   const col = this._columns[index];
-    //   console.log(`${column.title} -- ${col.title}`)
-    //   title += col.title;
-    // }
-    // console.log(`${column.title} == ${title}\n`)
-
-    // return `Breadcrumb - ${title}`;
-    return column.title;
   }
 
   /**
    * Returns the column that the provided item belongs to (from this._columns)
    */
   private findColumnIndexFromItem(item: MillerItem): number{
-    let result;
-
-    //Loop through all columns
     for (let colIndex = 0; colIndex < this._columns.length; colIndex++) {
       const column = this._columns[colIndex];
       // Loop through items in columns to find match
@@ -294,7 +276,7 @@ export class MillerColumnsComponent implements OnInit {
     .filter((x: any) => {
       if (!x.associationId) return true;
       return x.associationId.indexOf(item.objectId) !== -1;
-    })
+    });
 
     // Second, update new column attributes on selections in previous columns
     data = this.recalculateColumnStatus(data, item);
@@ -317,7 +299,7 @@ export class MillerColumnsComponent implements OnInit {
 
     // Special filtering operations for last column for 2 table types
     if (this.IS_PEOPLE_TABLE && this.isSiteColumn(column)) { // Last column
-      let selection = this.getUserSelection();
+      const selection = this.getUserSelection();
       column = column.map(site => {
         site.siteAccess = site.siteAccess.filter(sa => {
           // Since we clone, we have to check on ID not pure identity
@@ -334,14 +316,14 @@ export class MillerColumnsComponent implements OnInit {
         .map(item => item.checked = true);
     }
     else if (!this.IS_PEOPLE_TABLE && this.isPeopleColumn(column)) {
-      let selection = this.getSiteSelection();
+      const selection = this.getSiteSelection();
 
       column = column.map(person => {
         person.siteAccess = person.siteAccess.filter(sa => {
           return sa.site.objectId === selection.objectId;
-        })
+        });
         return person;
-      })
+      });
 
       column
         .filter(item => item.siteAccess.length)
@@ -386,7 +368,7 @@ export class MillerColumnsComponent implements OnInit {
       return (this._columns[0].items.filter(x => x.open)[0] as any).siteAccess;
     }
     else { // items are Collections
-      return (this._columns[0].items.filter(x => x.open)[0] as any).allSiteAccess
+      return (this._columns[0].items.filter(x => x.open)[0] as any).allSiteAccess;
     }
 
   }
