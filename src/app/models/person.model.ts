@@ -75,6 +75,7 @@ export class Person extends Base {
 
   primeUserId: PrimeUserID; //human-readable, like a user-name - "JSmith"
   PoSId: string;
+  dateFormat: string = 'YYYY/MM/DD';
 
  //firstName: string;
   //middleName: string;
