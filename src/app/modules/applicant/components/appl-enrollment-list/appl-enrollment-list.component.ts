@@ -5,7 +5,7 @@ import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
 import {defaultViewSelector, EnrollmentList} from '../../../../core/enrollment-list/enrollment-list.class';
 import {fadeIn} from '../../../../animations/animations';
 import { cloneDeep } from 'lodash';
-import {SiteAccess} from '../../../../models/sites.model';
+import {SiteAccess, SiteAccessProgressSteps} from '../../../../models/sites.model';
 
 @Component({
   selector: 'prime-enrollment-list',
@@ -19,6 +19,7 @@ export class ApplEnrollmentListComponent extends EnrollmentList implements OnIni
   @Output() onSave = new EventEmitter<SiteAccess[]>();
 
   public showSaveMessage = false;
+  public loadingSpinner = false;
 
   /* Flag to indicate that information page has been updated */
   public updated = false;
@@ -50,7 +51,14 @@ export class ApplEnrollmentListComponent extends EnrollmentList implements OnIni
   // Abstract functions defined by derived class
   //Convert enum to iterable array
   get EnrollmentStatus() {
-    const list = Object.keys( EnrollmentStatus );
+    const allCurrentStatuses = this.data
+      .filter(x => x.expandableRows.length)
+      .map(x => x.expandableRows[0].status);
+
+    // Only show statues that are in the currently displayed list in the table
+    const list = Object.keys( EnrollmentStatus ).filter(status => {
+      return allCurrentStatuses.indexOf(status) !== -1;
+    })
     return list.map( x => {return EnrollmentStatus[x]; });
   }
 
@@ -65,8 +73,30 @@ export class ApplEnrollmentListComponent extends EnrollmentList implements OnIni
 
   // Save button clicked
   save() {
-    this.showSaveMessage = true;
-    this.onSave.emit( this._pendingUpdates ); //Send list of updates
+    this.loadingSpinner = true;
+    setTimeout(() => {
+      this.loadingSpinner = false;
+      this.showSaveMessage = true;
+
+      // Change status to 'Provisioning' or 'Declined' based on user action
+      this._pendingUpdates = this._pendingUpdates.map(sa => {
+        if (sa.declinedReason){
+          sa.status = EnrollmentStatus.Declined;
+        } else if (sa.accessReason){
+          sa.status = EnrollmentStatus.Provisioning;
+          sa.progress = SiteAccessProgressSteps.Provisioner;
+        }
+        return sa;
+      })
+
+      // Close the row but only after updating the UI so user can see the animated change
+      setTimeout( () => {
+        this.rowElements.map(x => x.closeRow());
+      }, 300)
+
+      this.onSave.emit( this._pendingUpdates ); //Send list of updates
+    }, 3000)
+
     this.updated = false;
     this.rowItems = cloneDeep( this.data );
   }

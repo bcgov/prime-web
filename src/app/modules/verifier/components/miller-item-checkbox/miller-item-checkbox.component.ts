@@ -44,35 +44,30 @@ export class MillerItemCheckboxComponent extends Base implements OnInit {
       sa.pendingChanges = true;
     }
 
-
-    // if (sa && sa.status === EnrollmentStatus.Active){
-    //   sa.pendingChanges = item.checked;
-    // }
-
     if (typeof sa === 'undefined') {
       // User has selected a blank item, creating new SA.
-      console.log('onItemClick1', {item, sa})
+      // console.log('onItemClick1', {item, sa})
       this.initiateSiteAccess(item);
     }
 
     if (item.checked && this._allPendingChanges.includes(sa)) {
       // User is undoing a change they haven't saved. Delete SA.
-      console.log('onItemClick2', {item, sa})
+      // console.log('onItemClick2', {item, sa})
       this.deleteInitiatedSiteAccess(item, sa);
       sa.pendingChanges = false;
     }
 
     if (item.checked && sa && (sa.status === EnrollmentStatus.Active || sa.status === EnrollmentStatus.New)){
-      console.log('onItemClick4-NEW, unchecking active/new', {item, sa})
+      // console.log('onItemClick4-NEW, unchecking active/new', {item, sa})
       this.removeExistingEnrollment(item, sa);
     }
 
     if (!item.checked && sa && sa.status === null){
-      console.log('onItemClick5-NEW, undoing, restoring active', {item, sa})
+      // console.log('onItemClick5-NEW, undoing, restoring active', {item, sa})
       this.undoRemoveExistingEnrollment(item, sa);
     }
 
-    console.log('onItemClick-END', {item, sa})
+    // console.log('onItemClick-END', {item, sa})
     item.checked = !item.checked;
     this.onPendingChanges.emit(this._allPendingChanges);
 

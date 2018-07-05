@@ -16,8 +16,14 @@ input[id="startDt"], input[id="endDt"] {
   }
 }
 
-.enrollment-icons > i {
-  font-size: 2rem;
+.enrollment-icons {
+  height: 100%;
+}
+
+prime-accept-reject-icons {
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .enrollment-actions {

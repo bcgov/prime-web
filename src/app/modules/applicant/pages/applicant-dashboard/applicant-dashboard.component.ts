@@ -99,6 +99,7 @@ export class ApplicantDashboardComponent implements OnInit {
       orig.endDate = sa.endDate;
       orig.declinedReason = sa.declinedReason;
       orig.accessReason = sa.accessReason;
+      orig.status = sa.status;
     });
   }
 }

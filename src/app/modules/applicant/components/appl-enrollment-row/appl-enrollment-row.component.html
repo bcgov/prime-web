@@ -55,7 +55,7 @@
         [iconOnly]='false'>
       </prime-pill-badge>
 
-      <prime-accept-reject-icons [ngClass]="{invisible: !(isNewStatus() && !isAccepted() && !isDeclined())}"
+      <prime-accept-reject-icons [ngClass]="{invisible: !(isNewStatus() && !isAccepted() && !isDeclined())}" class='border-left'
           (onAccepted)="onAccept()"
           (onRejected)="onDecline()"
           labelAccept="Accept Enrollment"
