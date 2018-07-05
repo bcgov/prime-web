@@ -24,6 +24,7 @@ import {FileUploaderComponent} from '../../core/file-uploader/file-uploader.comp
 import { PageFrameworkComponent } from './components/page-framework/page-framework.component';
 import { PostalCodeComponent } from './components/postal-code/postal-code.component';
 import { TextMaskModule } from 'angular2-text-mask';
+import { LoadingSpinnerDirective } from './directives/loading-spinner.directive';
 
 
 /** A list of all components that we want to both include and export. Since
@@ -46,6 +47,7 @@ const componentList = [
   FileUploaderComponent,
   PageFrameworkComponent,
   PostalCodeComponent,
+  LoadingSpinnerDirective,
 ];
 
 @NgModule({

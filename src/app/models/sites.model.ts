@@ -157,39 +157,43 @@ export class EnrollmentAlert {
 
   static convertStatusToBadgeLevel(status: EnrollmentStatus): BadgeLevel {
     if (status === EnrollmentStatus.Provisioning){
-        return BadgeLevel.Warning;
+        return BadgeLevel.Yellow;
     }
 
     if (status === EnrollmentStatus.Expired){
-        return BadgeLevel.DangerLight;
+        return BadgeLevel.RedLight;
     }
 
     if (status === EnrollmentStatus.Declined){
-        return BadgeLevel.Danger;
+        return BadgeLevel.Red;
     }
 
     if (status === EnrollmentStatus.Initiated){
-      return BadgeLevel.InfoLight;
+      return BadgeLevel.Yellow;
     }
 
     if (status === EnrollmentStatus.Incomplete){
-      return BadgeLevel.Warning;
+      return BadgeLevel.Yellow;
     }
 
     if (status === EnrollmentStatus.Active){
-      return BadgeLevel.Success;
+      return BadgeLevel.Green;
     }
 
     if (status === EnrollmentStatus.Returned){
-      return BadgeLevel.Info;
+      return BadgeLevel.Yellow;
     }
 
     if (status === EnrollmentStatus.New){
-      return BadgeLevel.Attention;
+      return BadgeLevel.GreenLight;
     }
 
     if (status === EnrollmentStatus.Approved){
-      return BadgeLevel.Success;
+      return BadgeLevel.Green;
+    }
+
+    if (status === EnrollmentStatus.Review){
+      return BadgeLevel.YellowLight;
     }
   }
 }

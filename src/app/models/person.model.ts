@@ -12,32 +12,207 @@ import { CollegeTypes,
   WorkingOnBehalfTitleTypes,
   ISelfDeclaration } from './colleges.enum';
 
+/* class for a person's name */
+class Name {
+  private _first: string;
+  private _middle: string;
+  private _last: string;
+
+  /**
+   * Sets the first name for the person
+   * @param {string} name
+   */
+  set firstName( name: string ) {
+    this._first = name;
+  }
+
+  /**
+   * Gets the first name for the person
+   * @returns {string}
+   */
+  get firstName(): string {
+    return this._first ? this._first : '';
+  }
+
+  /**
+   * Sets the middle name for the person
+   * @param {string} name
+   */
+  set middleName( name: string ) {
+    this._middle = name;
+  }
+
+  /**
+   * Gets the middle name of the person
+   * @returns {string}
+   */
+  get middleName(): string {
+    return this._middle ? this._middle : '';
+  }
+
+  /**
+   * Sets the last name for the person
+   * @param {string} name
+   */
+  set lastName( name: string ) {
+    this._last = name;
+  }
+
+  /**
+   * Gets the last name for person
+   * @returns {string}
+   */
+  get lastName(): string {
+    return this._last ? this._last : '';
+  }
+
+  /**
+   * Returns first, middle and last names
+   *
+   * @returns {string}
+   */
+  get fullName(): string {
+
+    let name: string;
+
+    if (this._first) { name = this._first; }
+    if (this._middle) {
+      if (name) { name = name.concat( ' ', this._middle); }
+      else { name = this._middle; }
+    }
+    if (this._last) {
+      if (name) { name = name.concat( ' ', this._last ); }
+      else { name = this._last; }
+    }
+    return name ? name : '';
+  }
+
+  /**
+   * Set the full name (first, middle and last)
+   *
+   * @param {string} name
+   */
+  set fullName( name: string ) {
+
+    const names = name.split(' ');
+
+    this._first = names[0];
+    if (names.length === 2) {
+      this._last = names[1];
+    }
+    else if (names.length === 3) {
+      this._middle = names[1];
+      this._last = names[2];
+    }
+  }
+
+  /**
+   * Returns only first and last names
+   *
+   * @returns {string}
+   */
+  get name(): string {
+
+    let name: string;
+
+    if (this._first) { name = this._first; }
+    if (this._last) {
+      if (name) { name = name.concat( ' ', this._last ); }
+      else { name = this._last; }
+    }
+    return name ? name : '';
+  }
+}
+
 /**
  * Information about person
  */
 export class Person extends Base {
+
   primeUserId: PrimeUserID; //human-readable, like a user-name - "JSmith"
   PoSId: string;
+  dateFormat: string = 'YYYY/MM/DD';
 
-  firstName: string;
-  middleName: string;
-  lastName: string;
+  private _legalName: Name = new Name();
+  private _preferName: Name = new Name();
+  private _hasPreferName = false;
 
+  /**
+   * Returns name of person depending on preferedName flag
+   *
+   * @returns {string}
+   */
   get name(): string {
-    return `${this.firstName} ${this.lastName}`;
+
+    let name: string;
+    if (this.hasPreferName && this._preferName.firstName) {
+      name = this._preferName.firstName;
+    } else {
+      name = this._legalName.firstName;
+    }
+
+    if (this.hasPreferName && this._preferName.lastName) {
+      name = name.concat(' ', this._preferName.lastName);
+    } else {
+      name = name.concat(' ', this._legalName.lastName);
+    }
+
+   return name;
+  }
+
+  /**
+   * Gets the legal name for the person
+   * @returns {string}
+   */
+  get legalName(): string {
+    return this._legalName.fullName;
   }
 
   // Just for development with dummy data, likely to be removed later on.
   set name(fullName: string) {
-    const names = fullName.split(' ');
-    this.firstName = names[0];
-    if (names.length === 2) {
-      this.lastName = names[1];
-    }
-    else if (names.length === 3) {
-      this.middleName = names[1];
-      this.lastName = names[2];
-    }
+    // Assumption is this sets the legal name for person
+    this._legalName.fullName = fullName;
+
+  }
+
+  // Legal name only - prevent code breakage
+  get firstName(): string {
+    return this._legalName.firstName;
+  }
+  get middleName(): string {
+    return this._legalName.middleName;
+  }
+  get lastName(): string {
+    return this._legalName.lastName;
+  }
+
+  set preferFirstName( name: string ) {
+    this._preferName.firstName = name;
+  }
+  get preferFirstName(): string {
+    return this._preferName.firstName;
+  }
+  set preferMiddleName( name: string ) {
+    this._preferName.middleName = name;
+  }
+  get preferMiddleName(): string {
+    return this._preferName.middleName;
+  }
+  set preferLastName( name: string ) {
+    this._preferName.lastName = name;
+  }
+  get preferLastName(): string {
+    return this._preferName.lastName;
+  }
+
+  /* Sets the prefered name flag */
+  set hasPreferName( flag: boolean ) {
+    this._hasPreferName = flag;
+  }
+
+  /* Gets the prefered Name flag */
+  get hasPreferName(): boolean {
+    return this._hasPreferName;
   }
 
   // Just for development with dummy data for DEMO - TODO: Remove after development
@@ -131,6 +306,14 @@ export class Person extends Base {
 
   get hasContactInfo(): boolean {
     return !!(this.name && this.phone && this.email);
+  }
+
+  get renewalDateShort(): string {
+    return moment(this.renewalDate).format(this.dateFormat);
+  }
+
+  get dateOfBirthShort(): string {
+    return moment(this.dateOfBirth).format(this.dateFormat);
   }
 
   get daysUntilRenewalDate(): number {

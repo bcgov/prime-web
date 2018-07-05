@@ -24,13 +24,12 @@ export interface EnrollmentAlerts {
 // Corresponds to the Bootstrap classes we're using for notifications.
 // Lower case for CSS classes
 export enum BadgeLevel {
-  Warning = 'warning',
-  Danger = 'danger',
-  Info = 'info',
-  Success = 'success',
-  Attention = 'attention',
-  InfoLight = 'info-light',
-  DangerLight = 'danger-light'
+  Yellow = 'warning',
+  Red = 'danger',
+  Green = 'success',
+  GreenLight = 'attention',
+  YellowLight = 'warning-light',
+  RedLight = 'danger-light'
 }
 
 export enum RowState {

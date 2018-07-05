@@ -15,21 +15,29 @@
     <div>
 
       <label class="has-float-label">
-        <input type="text" class="form-control input-readonly prime-input-large" id="lastName" name="lastName" [ngModel]="applicant?.lastName" disabled>
-        <span>Last Name</span>
+        <input type="text" class="form-control input-readonly prime-input-large" id="legalName" name="legalName" [ngModel]="applicant.legalName" disabled>
+        <span>Legal Name</span>
       </label>
 
-      <label class="has-float-label">
-        <input type="text" class="form-control prime-input-small" id="middleName" name="middleName" [ngModel]="applicant?.middleName" disabled>
-        <span>Middle Name</span>
-      </label>
+      <!-- Section for setting the person's preferred name if it differs from his/her legal name-->
+      <a href="javascript:void(0)" (click)="showPreferredNames()">(optional) Set Preferred Name</a>
+      <div *ngIf="applicant.hasPreferName">
+        <label class="has-float-label">
+          <input type="text" class="form-control prime-input-large" id="lastName" name="lastName" [(ngModel)]="applicant.preferLastName" (input)="onChange()">
+          <span>Preferred Last Name</span>
+        </label>
+
+        <label class="has-float-label">
+          <input type="text" class="form-control prime-input-small" id="middleName" name="middleName" [(ngModel)]="applicant.preferMiddleName" (input)="onChange()">
+          <span>Preferred Middle Name</span>
+        </label>
 
 
-      <label class="has-float-label">
-        <input type="text" class="form-control prime-input-large" id="firstName" name="firstName" [ngModel]="applicant?.firstName" disabled>
-        <span>First Name</span>
-      </label>
-
+        <label class="has-float-label">
+          <input type="text" class="form-control prime-input-large" id="firstName" name="firstName" [(ngModel)]="applicant.preferFirstName" (input)="onChange()">
+          <span> Preferred First Name</span>
+        </label>
+      </div>
 
 
       <label class="has-float-label">

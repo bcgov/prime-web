@@ -9,22 +9,26 @@
     </prime-info-button>
   </div>
   <div class="enrollment-actions">
-    <div *ngIf="!isDeclinedEnrol() && !declinedEnroll" class="dates-col">
+    <div *ngIf="!isDeclinedStatus() && !isDeclined()" class="dates-col">
       <span class="d-inline-flex align-items-center p-2 border-left">Start
         <prime-datepicker disabled size="mini" [dateFormat]="dateFormat"
-                          [(date)]="startDate"
-                          class="ml-1"
-                          hideClearButton="true"></prime-datepicker>
+            [(date)]="startDate"
+            class="ml-1"
+            clearButton="invisible">
+        </prime-datepicker>
       </span>
       <span class="d-inline-flex align-items-center p-2 border-left border-right">End
-        <prime-datepicker size="mini" [dateFormat]="dateFormat"
-                          [(date)]="endDate"
-                          class="ml-1"
-                          [disabled]="!isActive() && !isNewEnrol()"
-                          [hideClearButton]="!isActive() && !isNewEnrol()"></prime-datepicker>
+        <prime-datepicker
+            size="mini"
+            [dateFormat]="dateFormat"
+            [(date)]="endDate"
+            class="ml-1"
+            [disabled]="!isActiveStatus() && !isNewStatus()"
+            [clearButton]="(!isActiveStatus() && !isNewStatus()) ? 'invisible' : '' ">
+        </prime-datepicker>
     </span>
     </div>
-    <div *ngIf="isDeclinedEnrol()">
+    <div *ngIf="isDeclinedStatus()">
       <div class="col d-inline-flex flex-column">
         <select name="reasonForDecline"
                 id="reasonForDecline"
@@ -34,7 +38,7 @@
         </select>
       </div>
     </div>
-    <div *ngIf="isNewEnrol() && declinedEnroll">
+    <div *ngIf="isNewStatus() && isDeclined()">
       <select name="reasonForDecline"
               id="reasonForDecline"
               class="orm-control drop-dl-box-15 color"
@@ -50,7 +54,8 @@
         [alerts]="allChildAlerts"
         [iconOnly]='false'>
       </prime-pill-badge>
-      <prime-accept-reject-icons *ngIf="isNewEnrol() && !acceptedEnroll && !declinedEnroll"
+
+      <prime-accept-reject-icons [ngClass]="{invisible: !(isNewStatus() && !isAccepted() && !isDeclined())}" class='border-left'
           (onAccepted)="onAccept()"
           (onRejected)="onDecline()"
           labelAccept="Accept Enrollment"
@@ -61,7 +66,7 @@
 </div>
 
 
-<div *ngIf="(!isNewEnrol() && isShowProgress()) || (isNewEnrol() && acceptedEnroll)" [@openState]="openState">
+<div *ngIf="(!isNewStatus() && isShowProgress()) || (isNewStatus() && isAccepted())" [@openState]="openState">
   <div [@openStateChild]="openState"  class="expandable-container">
 
     <div class="enrollment-expandable" *ngFor="let siteAccess of siteAccessRequiringAttention"
@@ -69,7 +74,7 @@
       <prime-app-enrollment-progress-row
         [open]="siteAccess.open"
         [data]="siteAccess"
-        [disableReason]="!isNewEnrol()"
+        [disableReason]="!isNewStatus()"
         (onPendingChange)="pendingChanges($event)">
       </prime-app-enrollment-progress-row>
 

@@ -5,13 +5,6 @@
   </span>
 
   <span class='d-inline-flex align-items-center'>
-    <!-- <div class="form-check mb-2 mr-sm-2" *ngIf="changesMade">
-      <input class="form-check-input" type="checkbox" id="declaration" [(ngModel)]="declarationCheck">
-      <label class="form-check-label" for="declaration">
-        I declare the information I provided is accurate
-      </label>
-    </div> -->
-
     <div class="mb-2 mr-sm-2 bg-info" *ngIf="saveSuccess">
       Enrollment has been updated
     </div>
@@ -24,7 +17,6 @@
 <div class="miller-container">
   <div class="miller-column" *ngFor="let column of columns; let colIndex = index;" [@loadInOut]>
     <div class='miller-column-title'>
-
       <prime-expanding-search
         (onChange)="filterColumn($event, colIndex)"
         placeholder="{{column.title}}"
@@ -32,17 +24,11 @@
         class='mr-2'>
       </prime-expanding-search>
 
-
-        <div class='d-flex align-items-center'>
-          <prime-add-user-button
-            *ngIf="column.title.toLowerCase() === 'people'"
-            iconOnly=true
-            class='fix-right'>
-          </prime-add-user-button>
-
-          <!-- Close button. Not in current designs, but absolutely necessary for mobile (otherwise there's no back!) -->
-          <i *ngIf="colIndex >= 1" (click)="onClickColTitle(column)" class="fa fa-times-circle close-button"></i>
-        </div>
+      <prime-add-user-button
+        *ngIf="column.title.toLowerCase() === 'people'"
+        iconOnly=true
+        class='fix-right'>
+      </prime-add-user-button>
     </div>
 
 
@@ -72,7 +58,6 @@
       </ng-container>
 
       <!-- Final Column, multi-selection plus custom logic. -->
-      <!-- TODO: Potentially split into two different components here, depending on if the final column is People or Sites. -->
       <ng-container *ngIf="colIndex === 2">
         <prime-miller-item-checkbox
           [items]="column['items']"

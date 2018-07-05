@@ -21,7 +21,7 @@
   <div>
     <alert *ngIf="showSaveMessage" [@fadeIn] class='d-inline-block' type='success'>Saved...</alert>
     <button [disabled]="!updated" type="button" class="btn btn-default mx-2" (click)="cancel()">Cancel</button>
-    <button [disabled]="!updated" type="button" class="btn btn-primary mx-2" (click)="save()">Save</button>
+    <button [disabled]="!updated" type="button" class="btn btn-primary mx-2" (click)="save()" [primeLoadingSpinner]="loadingSpinner" >Save</button>
   </div>
 </div>
 
@@ -30,7 +30,7 @@
     <prime-appl-enrollment-row
       *ngFor="let item of data"
       [rowData]="item"
-      (onChange) = "onChange()"
+      (onChange) = "onChange($event)"
       (onRowOpened)="rowOpened($event)">
     </prime-appl-enrollment-row>
   </div>

@@ -1,7 +1,7 @@
 @import 'variables.scss';
 
 :host {
-  min-width: 8rem;
+  min-width: 8.5rem;
 }
 
 @mixin badge-border-dark($color, $percentage: 10%){
