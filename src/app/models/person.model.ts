@@ -213,6 +213,14 @@ export class Person extends Base {
     return !!(this.name && this.phone && this.email);
   }
 
+  get renewalDateShort(): string {
+    return moment(this.renewalDate).format(this.dateFormat);
+  }
+
+  get dateOfBirthShort(): string {
+    return moment(this.dateOfBirth).format(this.dateFormat);
+  }
+
   get daysUntilRenewalDate(): number {
     const expiry = moment(this.renewalDate);
     const today = moment();

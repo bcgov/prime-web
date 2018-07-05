@@ -13,6 +13,11 @@
           <span class="enrollment-text-extra">({{rowData.sites.length}}) Sites</span>
        </ng-container>
 
+       <prime-info-button
+          class='mx-2'
+          [targetId]="rowData.associatedObjectId">
+        </prime-info-button>
+
     </div>
 
     <div class="enrollment-actions">
@@ -21,10 +26,7 @@
           [alerts]="allChildAlerts"
           [iconOnly]='false'>
         </prime-pill-badge>
-        <prime-info-button
-          [targetId]="rowData.associatedObjectId">
-        </prime-info-button>
-        <i class="fa fa-edit text-muted" (click)="goToEnrollmentPage()"></i>
+        <i class="fa fa-edit text-muted mr-2" (click)="goToEnrollmentPage()"></i>
       </span>
     </div>
   </div>

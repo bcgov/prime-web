@@ -5,7 +5,7 @@
     container='body'
     [isDisabled]='!iconOnly'>
       <i class="fa" [ngClass]="{
-          'fa-exclamation-circle' : badge.level === 'warning',
+          'fa-exclamation-circle' : badge.level.includes('warning'),
           'fa-exclamation-triangle' : badge.level.includes('info') || badge.level.includes('danger') || badge.level.includes('attention'),
           'fa-check' : badge.level === 'success'
         }">
