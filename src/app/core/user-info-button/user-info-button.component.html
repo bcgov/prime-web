@@ -15,19 +15,17 @@
 
   </div>
   <div class="modal-body">
+    <div class="row">
+      <div class="col">
+        <label class="has-float-label">
+          <input type="text" disabled class="form-control" id="legalName" name="legalName" [(ngModel)]="person.name">
+          <span>Legal Name</span>
+        </label>
+      </div>
+    </div>
+
     <form class='row'>
       <div class="col">
-
-        <label class="has-float-label">
-          <input type="text" disabled class="form-control" id="lastName" name="lastName" [(ngModel)]="person.lastName">
-          <span>Last Name</span>
-        </label>
-
-        <label class="has-float-label">
-          <input type="text" disabled class="form-control" id="middleName" name="middleName" [(ngModel)]="person.middleName">
-          <span>Middle Name</span>
-        </label>
-
         <label class="has-float-label">
           <input type="text" disabled class="form-control" id="primaryPhone" name="primaryPhone" [(ngModel)]="person.phone">
           <span>Phone</span>
@@ -45,11 +43,6 @@
       </div>
 
       <div class="col">
-        <label class="has-float-label">
-          <input type="text" disabled class="form-control" id="firstName" name="firstName" [(ngModel)]="person.firstName">
-          <span>First Name</span>
-        </label>
-
         <label class="has-float-label">
           <input type="text" disabled class="form-control" id="DOB" name="DOB" [ngModel]="person.dateOfBirthShort">
           <span>Date of Birth</span>
