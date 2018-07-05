@@ -4,7 +4,7 @@ import { Person } from '../../../../models/person.model';
 import {ApplEnrollmentRowItem} from '../../components/appl-enrollment-row/appl-enrollment-row.component';
 import {Router} from '@angular/router';
 import {cloneDeep} from 'lodash';
-import {CollegeTypes, WorkingOnBehalfTitleTypes} from '../../../../models/colleges.enum';
+import {CollegeTypes, WorkingOnBehalfTitleTypes, CollegeHelper} from '../../../../models/colleges.enum';
 import {isNullOrUndefined} from 'util';
 import {moment} from 'ngx-bootstrap/chronos/test/chain';
 import {forEach} from '@angular/router/src/utils/collection';
@@ -67,8 +67,9 @@ export class ApplicantDashboardComponent implements OnInit {
   }
 
   get collegeType(): string {
-    const obj = Object.keys( CollegeTypes ).filter(x => x === this.applicant.collegeCertificationList[0].collegeType );
-    return (obj.length > 0) ? obj[0] : 'n/a';
+    const college = CollegeHelper.getFullCollegeNameFromString(this.applicant.collegeCertificationList[0].collegeType);
+
+    return college ? college : 'n/a';
   }
 
   get licenceNumber(): string {

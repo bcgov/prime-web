@@ -8,6 +8,32 @@ export enum CollegeTypes {
   CPSBC = '91' /**College of Physicians and Surgeons of BC (CPSBC)*/
 }
 
+export class CollegeHelper {
+
+  /** Takes a string of a key in CollegeTypes. Useful when you already are iterating on the CollegeTypes enum. */
+  static getFullCollegeNameFromString(name: string): string{
+    return CollegeHelper.getFullCollegeName(CollegeTypes[name])
+  }
+
+  /** Returns the full college name from the enum type  */
+  static getFullCollegeName(collegeType: CollegeTypes): string{
+    let fullName;
+    switch (collegeType) {
+      case CollegeTypes.CPBC:
+        fullName = 'Pharmacists of BC (CPBC)';
+        break;
+      case CollegeTypes.CPSBC:
+        fullName = 'College of Physicians and Surgeons of BC (CPSBC)';
+        break;
+      case CollegeTypes.CRNBC:
+        fullName = 'College of Registered Nurses of BC (CRNBC)';
+        break;
+    }
+
+    return fullName;
+  }
+}
+
 /**
  * CPBC related licence classes
  */

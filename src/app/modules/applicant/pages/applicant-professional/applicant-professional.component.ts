@@ -9,7 +9,8 @@ import { CollegeTypes,
   LicenceClassCPSTypes,
   AdvancedPracticeCertificationTypes,
   WorkingOnBehalfTitleTypes,
-  MaxLengthTypes } from '../../../../models/colleges.enum';
+  MaxLengthTypes,
+  CollegeHelper} from '../../../../models/colleges.enum';
 
 @Component({
   selector: 'prime-applicant-professional',
@@ -244,6 +245,10 @@ export class ApplicantProfessionalComponent implements OnInit {
     }
 
     return false;
+  }
+
+  getFullCollegeName(name: string){
+    return CollegeHelper.getFullCollegeNameFromString(name);
   }
 
   displayUploadSection() {

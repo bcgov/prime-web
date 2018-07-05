@@ -19,7 +19,8 @@
     </form>
   </div>
   <div>
-    <alert *ngIf="showSaveMessage" [@fadeIn] class='d-inline-block' type='success'>Saved...</alert>
+    <prime-alert inlineBlock='true' *ngIf="showSaveMessage" [@fadeIn] dismissable='' type='success'>Saved...</prime-alert>
+
     <button [disabled]="!updated" type="button" class="btn btn-default mx-2" (click)="cancel()">Cancel</button>
     <button [disabled]="!updated" type="button" class="btn btn-primary mx-2" (click)="save()" [primeLoadingSpinner]="loadingSpinner" >Save</button>
   </div>

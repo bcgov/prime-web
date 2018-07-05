@@ -126,14 +126,16 @@ export class DatepickerComponent implements OnInit, OnChanges {
   }
 
   onDateChanged(event): void {
-    if (event.jsdate) {
-      // Always emit a Date (or null), convert if necessary
+    if (event.jsdate || event.jsdate === null) {
+      // Always emit a Date (or null)
       this.dateChange.emit(event.jsdate);
     }
   }
 
   clearDate(){
     if (this.ngxdp) {
+      // We don't need to emit here, because by changing date we'll trigger onDateChanged automatically.
+      this.date = null;
       this.ngxdp.clearDate();
     }
   }

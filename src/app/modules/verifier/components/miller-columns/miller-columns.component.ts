@@ -362,7 +362,6 @@ export class MillerColumnsComponent implements OnInit {
    * most) column. These are already existing site accesses, not new ones we
    * will have to save, etc. */
   public getSelectedSiteAccess(){
-    // TODO: Add types
 
     if (this.IS_PEOPLE_TABLE){ // items are Sites
       return (this._columns[0].items.filter(x => x.open)[0] as any).siteAccess;

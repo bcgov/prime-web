@@ -24,7 +24,8 @@
               <select id="collegeTypesType" class="form-control" [(ngModel)]="collegeCertificationRecord.collegeType" (input)="onChange()">
                 <option value="pleaseSelect" disabled selected>Select</option>
                 <option *ngFor="let type of CollegeTypes" value="{{type}}">
-                  {{type === 'CPBC' ? 'Pharmacists of BC' : type}}
+                  <!-- {{type === 'CPBC' ? 'Pharmacists of BC' : type}} -->
+                    {{ getFullCollegeName(type) }}
                 </option>
               </select>
               <span>College Registration</span>

@@ -161,7 +161,11 @@ h1, h2, h3,
   }
 
   select.form-control:not([size]):not([multiple]) {
-    height: calc(2.5rem + 2px);
+    min-height: calc(2.5rem + 2px); //For single line
+
+    // Handles text wrapping to multiple lines
+    white-space: pre-wrap;
+    height: auto;
   }
 }
 
