@@ -51,9 +51,16 @@ export class ApplEnrollmentListComponent extends EnrollmentList implements OnIni
   // Abstract functions defined by derived class
   //Convert enum to iterable array
   get EnrollmentStatus() {
-    const allCurrentStatuses = this.data
-      .filter(x => x.expandableRows.length)
-      .map(x => x.expandableRows[0].status);
+    let allCurrentStatuses;
+    if (this.data){
+      allCurrentStatuses = this.data
+        .filter(x => x.expandableRows.length && x.expandableRows[0].status)
+        .map(x => x.expandableRows[0].status);
+    }
+    else {
+      // If we have no items, then show all
+      allCurrentStatuses = Object.keys( EnrollmentStatus );
+    }
 
     // Only show statues that are in the currently displayed list in the table
     const list = Object.keys( EnrollmentStatus ).filter(status => {
