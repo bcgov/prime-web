@@ -18,36 +18,82 @@ class Name {
   private _middle: string;
   private _last: string;
 
+  /**
+   * Sets the first name for the person
+   * @param {string} name
+   */
   set firstName( name: string ) {
     this._first = name;
   }
 
+  /**
+   * Gets the first name for the person
+   * @returns {string}
+   */
   get firstName(): string {
-    return this._first;
+    return this._first ? this._first : '';
   }
 
+  /**
+   * Sets the middle name for the person
+   * @param {string} name
+   */
   set middleName( name: string ) {
     this._middle = name;
   }
 
+  /**
+   * Gets the middle name of the person
+   * @returns {string}
+   */
   get middleName(): string {
-    return this._middle;
+    return this._middle ? this._middle : '';
   }
 
+  /**
+   * Sets the last name for the person
+   * @param {string} name
+   */
   set lastName( name: string ) {
     this._last = name;
   }
 
+  /**
+   * Gets the last name for person
+   * @returns {string}
+   */
   get lastName(): string {
-    return this._last;
+    return this._last ? this._last : '';
   }
 
-  // Returns first, middle and last names
+  /**
+   * Returns first, middle and last names
+   *
+   * @returns {string}
+   */
   get fullName(): string {
-    return `${this._first} ${this._middle} ${this._last}`;
+
+    let name: string;
+
+    if (this._first) { name = this._first; }
+    if (this._middle) {
+      if (name) { name = name.concat( ' ', this._middle); }
+      else { name = this._middle; }
+    }
+    if (this._last) {
+      if (name) { name = name.concat( ' ', this._last ); }
+      else { name = this._last; }
+    }
+    return name ? name : '';
   }
 
+  /**
+   * Set the full name (first, middle and last)
+   *
+   * @param {string} name
+   */
   set fullName( name: string ) {
+
     const names = name.split(' ');
 
     this._first = names[0];
@@ -60,13 +106,23 @@ class Name {
     }
   }
 
-  // Returns only first and last names
+  /**
+   * Returns only first and last names
+   *
+   * @returns {string}
+   */
   get name(): string {
-    return `${this._first} ${this._last}`;
+
+    let name: string;
+
+    if (this._first) { name = this._first; }
+    if (this._last) {
+      if (name) { name = name.concat( ' ', this._last ); }
+      else { name = this._last; }
+    }
+    return name ? name : '';
   }
 }
-
-
 
 /**
  * Information about person
@@ -81,14 +137,33 @@ export class Person extends Base {
   private _preferName: Name = new Name();
   private _hasPreferName = false;
 
-  /* Returns name of person depending on preferedName flag */
+  /**
+   * Returns name of person depending on preferedName flag
+   *
+   * @returns {string}
+   */
   get name(): string {
-    if ( this.hasPreferName ) {
-      return this._preferName.name;
+
+    let name: string;
+    if (this.hasPreferName && this._preferName.firstName) {
+      name = this._preferName.firstName;
+    } else {
+      name = this._legalName.firstName;
     }
-    return this._legalName.name;
+
+    if (this.hasPreferName && this._preferName.lastName) {
+      name = name.concat(' ', this._preferName.lastName);
+    } else {
+      name = name.concat(' ', this._legalName.lastName);
+    }
+
+   return name;
   }
 
+  /**
+   * Gets the legal name for the person
+   * @returns {string}
+   */
   get legalName(): string {
     return this._legalName.fullName;
   }

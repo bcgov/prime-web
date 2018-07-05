@@ -26,6 +26,13 @@ export class ApplicantContactComponent implements OnInit {
     return this._user;
   }
 
+  /**
+   * Toggle to show the fields to set the preferrred names
+   */
+  showPreferredNames() {
+    this.applicant.hasPreferName = !this.applicant.hasPreferName;
+  }
+
   onChange() {
     this.hasChanged = true;
   }
