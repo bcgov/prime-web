@@ -77,12 +77,8 @@ export class Person extends Base {
   PoSId: string;
   dateFormat: string = 'YYYY/MM/DD';
 
- //firstName: string;
-  //middleName: string;
-  //lastName: string;
-
   private _legalName: Name = new Name();
-  private _preferName: Name;
+  private _preferName: Name = new Name();
   private _hasPreferName = false;
 
   /* Returns name of person depending on preferedName flag */
@@ -91,6 +87,10 @@ export class Person extends Base {
       return this._preferName.name;
     }
     return this._legalName.name;
+  }
+
+  get legalName(): string {
+    return this._legalName.fullName;
   }
 
   // Just for development with dummy data, likely to be removed later on.
@@ -111,8 +111,27 @@ export class Person extends Base {
     return this._legalName.lastName;
   }
 
+  set preferFirstName( name: string ) {
+    this._preferName.firstName = name;
+  }
+  get preferFirstName(): string {
+    return this._preferName.firstName;
+  }
+  set preferMiddleName( name: string ) {
+    this._preferName.middleName = name;
+  }
+  get preferMiddleName(): string {
+    return this._preferName.middleName;
+  }
+  set preferLastName( name: string ) {
+    this._preferName.lastName = name;
+  }
+  get preferLastName(): string {
+    return this._preferName.lastName;
+  }
+
   /* Sets the prefered name flag */
-  set hasPreferedName( flag: boolean ) {
+  set hasPreferName( flag: boolean ) {
     this._hasPreferName = flag;
   }
 

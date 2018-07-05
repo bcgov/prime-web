@@ -44,6 +44,13 @@ export class ApplicantContactComponent implements OnInit {
     this.primeDataService.user.phone = this._user.phone;
     this.primeDataService.user.email = this._user.email;
 
+    // Preferred Name fields
+    if ( this._user.hasPreferName ) {
+      this.primeDataService.user.hasPreferName = this._user.hasPreferName;
+      this.primeDataService.user.preferFirstName = this._user.preferFirstName;
+      this.primeDataService.user.preferMiddleName = this._user.preferMiddleName;
+      this.primeDataService.user.preferLastName = this._user.preferLastName;
+    }
     this.hasChanged = false;
   }
 
