@@ -186,6 +186,31 @@ export class Person extends Base {
     return this._legalName.lastName;
   }
 
+  set firstName(name: string) {
+    if (this.preferFirstName){
+      this.preferFirstName = name;
+    }
+    else {
+      this._legalName.firstName = name;
+    }
+  }
+  set middleName(name: string) {
+    if (this.preferMiddleName){
+      this.preferMiddleName = name;
+    }
+    else {
+      this._legalName.middleName = name;
+    }
+  }
+  set lastName(name: string) {
+    if (this.preferLastName){
+      this.preferLastName = name;
+    }
+    else {
+      this._legalName.lastName = name;
+    }
+  }
+
   set preferFirstName( name: string ) {
     this._preferName.firstName = name;
   }

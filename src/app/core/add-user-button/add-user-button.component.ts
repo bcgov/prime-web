@@ -57,13 +57,15 @@ export class AddUserButtonComponent implements OnInit {
 
     // Copy over the shared defined properties, ignore the rest.
     for (const key in this.searchQuery) {
-      if (this.searchQuery.hasOwnProperty(key) && person.hasOwnProperty(key) ) {
+      if (key in person) { // Don't use hasOwnProperty, inheriting prop is fine
          person[key] = this.searchQuery[key];
       }
     }
     person.email = `${person.firstName[0].toLowerCase()}${person.lastName.toLowerCase()}@gmail.com`;
 
     person.renewalDate = null; //We don't want the set date from dummyDataService
+
+    console.log('findUser found:', person);
 
 
     // Only return one result (prototype only)
