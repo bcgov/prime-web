@@ -18,6 +18,7 @@ import {ProgressBarComponent} from '../../../../core/progress-bar/progress-bar.c
 import {PrimeDataService} from '../../../../services/prime-data.service';
 import {DummyDataService} from '../../../../services/dummy-data.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { LoadingSpinnerDirective } from '../../../core/directives/loading-spinner.directive';
 
 describe('UserEnrollmentComponent', () => {
   let component: UserEnrollmentComponent;
@@ -25,7 +26,7 @@ describe('UserEnrollmentComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserEnrollmentComponent, MillerColumnsComponent, ExpandingSearchComponent, InfoButtonComponent, MillerItemCheckboxComponent, AddUserButtonComponent, DatepickerComponent, PillBadgeComponent, ProgressBarComponent, MiniProgressBarComponent],
+      declarations: [ UserEnrollmentComponent, MillerColumnsComponent, ExpandingSearchComponent, InfoButtonComponent, MillerItemCheckboxComponent, AddUserButtonComponent, DatepickerComponent, PillBadgeComponent, ProgressBarComponent, MiniProgressBarComponent, LoadingSpinnerDirective],
       imports: [RouterTestingModule, FormsModule, NgxMyDatePickerModule.forRoot(), TooltipModule.forRoot(), ProgressbarModule.forRoot(), BrowserAnimationsModule],
       providers: [PrimeDataService, BsModalService, DummyDataService]
     })

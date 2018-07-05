@@ -14,6 +14,7 @@ import {ProgressBarComponent} from '../../../../core/progress-bar/progress-bar.c
 import {ProgressbarModule, TooltipModule} from 'ngx-bootstrap';
 import {NgxMyDatePickerModule} from 'ngx-mydatepicker';
 import {PrimeDataService} from '../../../../services/prime-data.service';
+import { LoadingSpinnerDirective } from '../../../core/directives/loading-spinner.directive';
 
 describe('MillerColumnsComponent', () => {
   let component: MillerColumnsComponent;
@@ -21,7 +22,7 @@ describe('MillerColumnsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MillerColumnsComponent, ExpandingSearchComponent, AddUserButtonComponent, InfoButtonComponent, MillerItemCheckboxComponent, MiniProgressBarComponent, DatepickerComponent, PillBadgeComponent, ProgressBarComponent],
+      declarations: [ MillerColumnsComponent, ExpandingSearchComponent, AddUserButtonComponent, InfoButtonComponent, MillerItemCheckboxComponent, MiniProgressBarComponent, DatepickerComponent, PillBadgeComponent, ProgressBarComponent, LoadingSpinnerDirective],
       imports: [RouterTestingModule, FormsModule, ProgressbarModule.forRoot(), NgxMyDatePickerModule.forRoot(), TooltipModule.forRoot()],
       providers: [ PrimeDataService ]
     })

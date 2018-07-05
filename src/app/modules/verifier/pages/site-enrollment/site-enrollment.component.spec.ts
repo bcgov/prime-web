@@ -16,6 +16,7 @@ import {ProgressbarModule, TooltipModule} from 'ngx-bootstrap';
 import {NgxMyDatePickerModule} from 'ngx-mydatepicker';
 import {PrimeDataService} from '../../../../services/prime-data.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { LoadingSpinnerDirective } from '../../../core/directives/loading-spinner.directive';
 
 describe('SiteEnrollmentComponent', () => {
   let component: SiteEnrollmentComponent;
@@ -23,7 +24,7 @@ describe('SiteEnrollmentComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SiteEnrollmentComponent, MillerColumnsComponent, ExpandingSearchComponent , AddUserButtonComponent, InfoButtonComponent, MillerItemCheckboxComponent, MiniProgressBarComponent, DatepickerComponent, PillBadgeComponent, MiniProgressBarComponent],
+      declarations: [ SiteEnrollmentComponent, MillerColumnsComponent, ExpandingSearchComponent , AddUserButtonComponent, InfoButtonComponent, MillerItemCheckboxComponent, MiniProgressBarComponent, DatepickerComponent, PillBadgeComponent, MiniProgressBarComponent, LoadingSpinnerDirective],
       imports: [RouterTestingModule, FormsModule, ProgressbarModule.forRoot(), NgxMyDatePickerModule.forRoot(), TooltipModule.forRoot(), BrowserAnimationsModule],
       providers: [PrimeDataService]
     })
