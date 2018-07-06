@@ -29,10 +29,13 @@ export class InfoButtonComponent implements OnInit {
   @Input() searchDomain: string = SearchDomain.Default;
 
   modalRef: BsModalRef;
+  /** The data model to be loaded and displayed in the info modal. */
   public target: Site | Person;
   public targetType: TargetType;
   public TargetTypeEnum: typeof TargetType = TargetType;
   public editable = false;
+  /** An array that keeps track if we should show the reason for deactivation dropdown besides a given enrollment. */
+  public shouldShowreasonForDeactivation: boolean[] = [];
 
   @ViewChild('personModal') personModalRef: ElementRef;
   @ViewChild('siteModal') siteModalRef: ElementRef;
@@ -76,9 +79,8 @@ export class InfoButtonComponent implements OnInit {
 
   openModal(event: Event){
     event.stopPropagation();
-    if (!this.target){
-      this.loadTarget(this.targetId);
-    }
+    //Load target every time, get any changes to data
+    this.loadTarget(this.targetId);
     this.modalRef = this.modalService.show(this.modalElementRef, {class: 'modal-lg'});
   }
 
@@ -103,17 +105,10 @@ export class InfoButtonComponent implements OnInit {
     const source = this.lookupObjectId(this.target.objectId);
 
     if (!Site.isSiteGuard(source)){
-      source.name = this.person.name;
-      source.dateOfBirth = this.person.dateOfBirth;
-      source.phone = this.person.phone;
-      source.renewalDate = this.person.renewalDate;
-      source.address.postal = this.person.address.postal;
       source.siteAccess = this.person.siteAccess;
     }
     else {
-      source.vendor = this.site.vendor;
-      source.address.street = this.site.address.street;
-      source.siteType = this.site.siteType;
+      source.siteAccess = this.site.siteAccess;
     }
 
     this.doneEditting();
@@ -124,7 +119,6 @@ export class InfoButtonComponent implements OnInit {
     this.loadTarget(this.target.objectId);
   }
 
-  public shouldShowreasonForDeactivation: boolean[] = [];
   onSetEndDate(evt: Date, siteAccess){
     this.shouldShowreasonForDeactivation[siteAccess.objectId] = !!evt;
     siteAccess.endDate = evt;
@@ -153,14 +147,11 @@ export class InfoButtonComponent implements OnInit {
 
   private lookupObjectId(objectId): Site | Person {
 
-    console.log('Using search domain: ' + this.searchDomain);
+    // console.log('Using search domain: ' + this.searchDomain);
     switch (this.searchDomain ) {
       case SearchDomain.Applicant:
-        console.log('Search person domain');
         const userSite = this.dataService.findUserSiteByObjectId(objectId);
-        if (userSite) {
-          console.log('returning site', userSite);
-          return userSite; }
+        if (userSite) { return userSite; }
         break;
 
       case SearchDomain.Default:
@@ -189,7 +180,7 @@ export class InfoButtonComponent implements OnInit {
 
 }
 
-enum TargetType {
+export enum TargetType {
   Site,
   Person
 }
