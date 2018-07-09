@@ -9,11 +9,11 @@
     <div class='controls'>
         <div *ngIf="!showSaveMessage && showControls">
           <button type="button" class="btn btn-default mx-2" (click)="cancel()">Cancel</button>
-          <button type="button" class="btn btn-primary mx-2" (click)="save()">Save</button>
+          <button type="button" class="btn btn-primary mx-2" (click)="save()">Submit</button>
         </div>
 
         <div  *ngIf="showSaveMessage" [@fadeIn]>
-          <alert type='success' (onClosed)="reset()">Saved...</alert>
+          <alert type='success' (onClosed)="reset()">Submitted...</alert>
         </div>
     </div>
 

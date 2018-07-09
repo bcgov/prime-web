@@ -19,10 +19,10 @@
     </form>
   </div>
   <div>
-    <prime-alert inlineBlock='true' *ngIf="showSaveMessage" [@fadeIn] dismissable='' type='success'>Saved...</prime-alert>
+    <prime-alert inlineBlock='true' *ngIf="showSaveMessage" [@fadeIn] dismissable='' type='success'>Submitted...</prime-alert>
 
     <button [disabled]="!updated" type="button" class="btn btn-default mx-2" (click)="cancel()">Cancel</button>
-    <button [disabled]="!updated" type="button" class="btn btn-primary mx-2" (click)="save()" [primeLoadingSpinner]="loadingSpinner" >Save</button>
+    <button [disabled]="!updated" type="button" class="btn btn-primary mx-2" (click)="save()" [primeLoadingSpinner]="loadingSpinner" >Submit</button>
   </div>
 </div>
 
