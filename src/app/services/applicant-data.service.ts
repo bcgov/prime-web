@@ -29,7 +29,7 @@ export class ApplicantDataService {
         route: 'professional',
       },
       {
-        title: 'Access Acceptance',
+        title: 'User Access Acceptance',
         route: 'access-acceptance'
       },
       {
