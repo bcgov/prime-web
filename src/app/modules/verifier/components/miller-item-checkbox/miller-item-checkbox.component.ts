@@ -16,6 +16,7 @@ export class MillerItemCheckboxComponent extends Base implements OnInit {
   //TODO: Add interface for miller items
   @Input() items: any[];
   @Input() selectedSiteAccess;
+  @Input() primarySelection: Person | Site;
   @Output() onPendingChanges = new EventEmitter<any>();
   /** Incomplete! Idea is it will store all pending changes, and after the user
    * clicks 'Save' then we empty this array and store the data in the real data
@@ -116,7 +117,24 @@ export class MillerItemCheckboxComponent extends Base implements OnInit {
     sa.status = EnrollmentStatus.Initiated;
     item.siteAccess.push(sa);
     // Assign SA to the item depending on type of item (person or site)
-    Site.isSiteGuard(item) ? sa.site = item : sa.person = item;
+
+    console.log('initiateSiteAccess', item, this.primarySelection);
+
+    if (Person.isPersonGuard(item) && Site.isSiteGuard(this.primarySelection)){
+      sa.startDate = item.defaultStartDate;
+      sa.endDate = item.defaultEndDate;
+      sa.person = item;
+      sa.site = this.primarySelection;
+    }
+    else if (Site.isSiteGuard(item) && Person.isPersonGuard(this.primarySelection)){
+      sa.startDate = this.primarySelection.defaultStartDate;
+      sa.endDate = this.primarySelection.defaultEndDate;
+      sa.person = this.primarySelection;
+      sa.site = item;
+    }
+
+
+    // Set dates by getting person's defaultStartDate / defaultEndDate
     this._allPendingChanges.push(sa);
   }
 

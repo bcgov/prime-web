@@ -266,6 +266,11 @@ export class Person extends Base {
   email: string;
   renewalDate: Date;
 
+  /** The default date to use when creating a new Site Access for this person. Maps to `startDate` on SiteAccess. This should be the current date.*/
+  defaultStartDate: Date =  new Date();
+  /** The default date to use when creating a new Site Access for this person. Maps to `endDate on SiteAccess. */
+  defaultEndDate: Date;
+
   //The different roles the person may have
   user?: User;
   verifier?: Verifier;
@@ -345,6 +350,13 @@ export class Person extends Base {
     const expiry = moment(this.renewalDate);
     const today = moment();
     return expiry.diff(today, 'days');
+  }
+
+  /** For type-guard. You very likely want to use the type guard INSTEAD of
+   * accessing this variable directly. */
+  _isPerson = true;
+  static isPersonGuard(x: any): x is Person {
+    return x._isPerson !== undefined;
   }
 }
 

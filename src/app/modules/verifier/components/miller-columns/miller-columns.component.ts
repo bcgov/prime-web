@@ -350,11 +350,22 @@ export class MillerColumnsComponent implements OnInit {
     if (this.IS_PEOPLE_TABLE){
       return this._columns[0].items.filter(x => x.open)[0];
     }
+    return null;
   }
 
   public getSiteSelection(): Site{
     if (!this.IS_PEOPLE_TABLE){
       return this._columns[1].items.filter(x => open)[0];
+    }
+    return null;
+  }
+
+  public getSelection(): Person | Site {
+    if (this.IS_PEOPLE_TABLE){
+      return this.getUserSelection();
+    }
+    else {
+      return this.getSiteSelection();
     }
   }
 

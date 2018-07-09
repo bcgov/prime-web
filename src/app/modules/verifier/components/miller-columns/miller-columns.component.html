@@ -62,6 +62,7 @@
         <prime-miller-item-checkbox
           [items]="column['items']"
           [selectedSiteAccess]='getSelectedSiteAccess()'
+          [primarySelection]='getSelection()'
           (onPendingChanges)="onCheck($event)">
         </prime-miller-item-checkbox>
 
