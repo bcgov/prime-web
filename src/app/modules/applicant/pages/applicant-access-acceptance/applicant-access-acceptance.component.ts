@@ -52,7 +52,8 @@ export class ApplicantAccessAcceptanceComponent implements OnInit {
   }
 
   disableContinue() {
-    return this.allCheckboxes.filter(item => item !== true).length >= 1;
+    return !this.isDeclareChecked;
+    // return this.allCheckboxes.filter(item => item !== true).length >= 1;
   }
 
   save() {
