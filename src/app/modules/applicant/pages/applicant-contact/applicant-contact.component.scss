@@ -2,3 +2,9 @@
     width: auto;
     height: 128px;
 }
+
+
+.z-top {
+  position: relative;
+  z-index: 10;
+}
