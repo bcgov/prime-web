@@ -73,6 +73,12 @@ export enum AdvancedPracticeCertificationTypes {
  */
 export enum WorkingOnBehalfTitleTypes {
   MEDICA = 'Medica Office Assistant',
+  REG_CLERK = 'Registration Clerk',
+  WARD_CLERK = 'Ward Clerk',
+  PHARM_ASSIST = 'Pharmacy Assistant',
+  PHARM_TECH = 'Pharmacy Technicain',
+  NURSE = 'Nurse (not Nurse Practicitioner)',
+  MIDWIVES = 'Midwives',
   OTHER  = 'Other'
 }
 

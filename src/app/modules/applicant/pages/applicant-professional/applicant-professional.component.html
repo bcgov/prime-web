@@ -81,9 +81,9 @@
                 <span>License Class</span>
               </label>
             </div>
-            <div class="applicant-row--item prime-input-medium">
+            <div class="applicant-row--item prime-input-large">
               <!-- <label for="">Licence Expiry</label> -->
-              <prime-datepicker dateFormat="yyyy/mm/dd" [(date)]="collegeCertificationRecord.licenceExpiryDate" labelText="License Expiry"></prime-datepicker>
+              <prime-datepicker dateFormat="yyyy/mm/dd" [(date)]="collegeCertificationRecord.licenceExpiryDate" labelText="Registration Renewal"></prime-datepicker>
             </div>
             <div *ngIf="applicant.collegeCertificationList[i].collegeType === 'CRNBC'" class="applicant-row--item prime-input-large">
               <label class="has-float-label">
@@ -148,18 +148,23 @@
 
     <ng-container *ngIf="applicant.isWorkingOnBehalf === true">
       <div class='applicant-row border p-3' *ngFor="let workingOnBehalfRecord of applicant.workingOnBehalfList; let i = index">
-        <div>
-          <div class="applicant-row--item prime-input-large">
+        <div class="applicant-row--item prime-input-large">
+          <label class="has-float-label">
+            <select id="workingOnBehalfTitle" class="form-control row-dropbox-20" [(ngModel)]="workingOnBehalfRecord.jobTitle" (input)="onChange()">
+              <option value="pleaseSelect" disabled selected>Select</option>
+              <option *ngFor="let type of WorkingOnBehalfTitleTypes" value="{{type}}">
+                {{workingOnBehalfTitleValue(type)}}
+              </option>
+            </select>
+            <span>Job Title</span>
+          </label>
+        </div>
+
+        <div class="applicant-row--item" *ngIf="applicant.workingOnBehalfList[0].jobTitle === 'OTHER'">
             <label class="has-float-label">
-              <select id="workingOnBehalfTitle" class="form-control row-dropbox-20" [(ngModel)]="workingOnBehalfRecord.jobTitle" (input)="onChange()">
-                <option value="pleaseSelect" disabled selected>Select</option>
-                <option *ngFor="let type of WorkingOnBehalfTitleTypes" value="{{type}}">
-                  {{workingOnBehalfTitleValue(type)}}
-                </option>
-              </select>
-              <span>Job Title</span>
+              <input type="text" class='prime-input-large' placeholder=" " [(ngModel)]="applicant.workingOnBehalfOtherReason"/>
+              <span>Working on-behalf title</span>
             </label>
-          </div>
         </div>
 
       </div>

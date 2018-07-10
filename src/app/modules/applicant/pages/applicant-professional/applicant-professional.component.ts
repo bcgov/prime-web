@@ -232,9 +232,15 @@ export class ApplicantProfessionalComponent implements OnInit {
 
   displaySelfDeclarationSection() {
     // User has filled out 'on behalf' section
-    if (this.displayWorkingOnBehalfSection() && this._user.workingOnBehalfList[0].jobTitle !== "pleaseSelect"){
+    if (this.displayWorkingOnBehalfSection() && this._user.workingOnBehalfList[0].jobTitle !== 'pleaseSelect' && this._user.workingOnBehalfList[0].jobTitle !== 'OTHER'){
       return true;
     }
+
+    // If the user has filled out the 'Other' reason
+    if (this._user.workingOnBehalfOtherReason && this._user.workingOnBehalfList.length){
+      return true;
+    }
+
     // User has filled out device provider
     else if (this.displayDeviceProviderSection() && this._user.deviceProviderNumber) {
       return true;

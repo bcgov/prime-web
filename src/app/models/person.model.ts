@@ -295,6 +295,7 @@ export class Person extends Base {
     this.deviceProviderNumber = undefined;
   }
   isWorkingOnBehalf: boolean;
+  workingOnBehalfOtherReason: string;
 
   // toggle related arrays
   collegeCertificationList = [{

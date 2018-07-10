@@ -8,6 +8,8 @@
 
 <prime-page-framework>
 
+  <img class="photo pull-right" src="assets/photoPlaceholder.png" alt="Generic placeholder image">
+
   <h2 class='prime-title' id="regInfo">Registration Information</h2>
 
   <form>
@@ -20,7 +22,8 @@
       </label>
 
       <!-- Section for setting the person's preferred name if it differs from his/her legal name-->
-      <a class='mx-4 align-top' href="javascript:void(0)" (click)="showPreferredNames()">(optional) Set Preferred Name</a>
+      <a class='mx-4 align-top' href="javascript:void(0)" (click)="showPreferredNames()">{{applicant.hasPreferName ? 'Hide Preferred Name' : '(optional) Set Preferred Name'}}
+      </a>
       <div *ngIf="applicant.hasPreferName">
         <label class="has-float-label">
           <input type="text" class="form-control prime-input-large" id="lastName" name="lastName" [(ngModel)]="applicant.preferLastName" (input)="onChange()" placeholder=" ">
@@ -41,18 +44,14 @@
 
 
       <label class="has-float-label">
+        <input type="text" class="form-control prime-input-medium" id="DoB" name="DoB" [ngModel]="applicant.dateOfBirth | date:'MM/dd/yyyy'" disabled>
+        <span>Date of Birth</span>
+      </label>
+
+
+      <label class="has-float-label">
         <input type="text" class="form-control prime-input-large" id="address" name="address" [ngModel]="applicant.address?.street" disabled>
         <span>Address</span>
-      </label>
-
-      <label class="has-float-label">
-        <input type="text" class="form-control prime-input-medium" id="country" name="country" [ngModel]="applicant.address?.country" disabled>
-        <span>Country</span>
-      </label>
-
-      <label class="has-float-label">
-        <input type="text" class="form-control prime-input-medium" id="province" name="province" [ngModel]="applicant.address?.province" disabled>
-        <span>Province</span>
       </label>
 
       <label class="has-float-label">
@@ -61,11 +60,17 @@
       </label>
 
       <label class="has-float-label">
-        <input type="text" class="form-control prime-input-small" id="DoB" name="DoB" [ngModel]="applicant.dateOfBirth | date:'MM/dd/yyyy'" disabled>
-        <span>Date of Birth</span>
+        <input type="text" class="form-control prime-input-medium" id="province" name="province" [ngModel]="applicant.address?.province" disabled>
+        <span>Province</span>
       </label>
 
       <prime-postal-code [value]="applicant.address?.postal"  disabled='true'></prime-postal-code>
+
+
+      <label class="has-float-label">
+        <input type="text" class="form-control prime-input-medium" id="country" name="country" [ngModel]="applicant.address?.country" disabled>
+        <span>Country</span>
+      </label>
 
     </div>
   </form>
@@ -102,6 +107,12 @@
       </div>
 
       <div class="has-float-label">
+        <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control prime-input-medium" id="mailCity" name="mailCity" [(ngModel)]="applicant.mailAddress.city" (input) = "onChange()" placeholder=" ">
+        <input *ngIf = "applicant.useRegAddress" type="text" class="form-control prime-input-medium" id="mailCity" name="mailCity" [ngModel]="applicant.address?.city" (ngModelChange)="updateCity($event)" placeholder=" ">
+        <label for="mailCity">City</label>
+      </div>
+
+      <div class="has-float-label">
         <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control prime-input-medium" id="mailProvince" name="mailProvince" [(ngModel)]="applicant.mailAddress.province" (input) = "onChange()" placeholder=" ">
         <input *ngIf = "applicant.useRegAddress" type="text" class="form-control prime-input-medium" id="mailProvince" name="mailProvince" [ngModel]="applicant.address?.province" (ngModelChange)="updateProvince($event)" placeholder=" ">
         <label for="mailProvince">Province</label>
@@ -112,12 +123,6 @@
       <prime-postal-code *ngIf = "applicant.useRegAddress" [value]="applicant.address?.postal" (valueChange)="updatePostal($event)" ></prime-postal-code>
 
       <div class="has-float-label">
-          <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control prime-input-medium" id="mailCity" name="mailCity" [(ngModel)]="applicant.mailAddress.city" (input) = "onChange()" placeholder=" ">
-          <input *ngIf = "applicant.useRegAddress" type="text" class="form-control prime-input-medium" id="mailCity" name="mailCity" [ngModel]="applicant.address?.city" (ngModelChange)="updateCity($event)" placeholder=" ">
-        <label for="mailCity">City</label>
-      </div>
-
-      <div class="has-float-label">
         <input *ngIf = "!applicant.useRegAddress" type="text" class="form-control prime-input-medium" id="mailCountry" name="mailCountry" [(ngModel)]="applicant.mailAddress.country" (input) = "onChange()" placeholder=" ">
         <input *ngIf = "applicant.useRegAddress" type="text" class="form-control prime-input-medium" id="mailCountry" name="mailCountry" [ngModel]="applicant.address?.country" (ngModelChange)="updateCountry($event)" placeholder=" ">
         <label for="mailCountry">Country</label>
@@ -126,10 +131,5 @@
     </div>
 
   </form>
-  <div right>
-    <div>
-      <img class="photo pull-right" src="assets/photoPlaceholder.png" alt="Generic placeholder image">
-    </div>
-  </div>
 
 </prime-page-framework>
