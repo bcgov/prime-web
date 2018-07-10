@@ -172,22 +172,12 @@ thead tr.ng2-smart-titles .ng2-smart-th {padding-left: 0}
   .wrap-lg { white-space: normal;}
 }
 
-.prime-input-small {
-  width: 10%;
-  min-width: 5rem;
-  max-width: 15rem;
-}
-
-.prime-input-medium {
-  width: 20%;
-  min-width: 10rem;
-  max-width: 30rem;
-}
-
+.prime-input-small,
+.prime-input-medium,
 .prime-input-large {
-  width: 30%;
-  min-width: 15rem;
-  max-width: 45rem;
+  width: 50%;
+  min-width: 16rem;
+  max-width: 48rem;
 }
 
 @include media-breakpoint-down(md) {

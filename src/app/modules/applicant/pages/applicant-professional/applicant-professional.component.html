@@ -128,10 +128,10 @@
 
     <ng-container *ngIf="applicant.isDeviceProvider === true">
       <div class='d-flex justify-content-between border p-3'>
-          <label class="has-float-label">
+          <label class="has-float-label prime-input-large">
             <input type="text" name="deviceProviderNumber" id="deviceProviderNumber" placeholder=" "
                    [(ngModel)]=" applicant.deviceProviderNumber" maxlength="{{maxLengthValue('DEVICE_PROVIDER_NUMBER')}}"
-              class="form-control prime-input-large" (input)="onChange()">
+              class="form-control" (input)="onChange()">
             <span>Device Provider Number</span>
           </label>
       </div>
