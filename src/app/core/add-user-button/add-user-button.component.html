@@ -12,12 +12,9 @@
     <div class="modal-header">
         <h4 class="modal-title">Find and add a new user</h4>
 
-        <prime-mini-progress-bar [maxSteps]='maxProgressSteps' [currentStep]='currentProgressStep'>
-        </prime-mini-progress-bar>
-
-        <!-- <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-        <span aria-hidden="true">&times;</span>
-        </button> -->
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 
     <div class="modal-body">
@@ -33,6 +30,10 @@
             <span>Middle Name</span>
           </label>
           <prime-datepicker id="DoB" name="DoB" placeholder=" "  dateFormat="yyyy/mm/dd" [(date)]="searchQuery.dateOfBirth" labelText="Date of Birth" tabindex="1"></prime-datepicker>
+          <label for="postal" class="has-float-label">
+              <input type="text" class="form-control mb-2 mr-sm-2" id="postal" name="postal" placeholder=" " [(ngModel)]="searchQuery.postal" tabindex="1">
+              <span>Postal Code</span>
+            </label>
         </div>
 
         <div class="col mx-2">
@@ -44,17 +45,13 @@
             <input type="text" class="form-control mb-2 mr-sm-2" id="primeUserId" name="primeUserId" placeholder=" " [(ngModel)]="searchQuery.primeUserId" tabindex="1">
             <span>PRIME User ID</span>
           </label>
-          <label for="email" class="has-float-label" *ngIf="showAdditionalFields">
+          <label for="email" class="has-float-label">
             <input type="text" class="form-control mb-2 mr-sm-2" id="email" name="email" placeholder=" " [(ngModel)]="searchQuery.email" tabindex="1">
             <span>Email</span>
           </label>
-          <label for="phone" class="has-float-label" *ngIf="showAdditionalFields">
+          <label for="phone" class="has-float-label">
             <input type="text" class="form-control mb-2 mr-sm-2" id="phone" name="phone" placeholder=" " [(ngModel)]="searchQuery.phone" tabindex="1">
             <span>Phone</span>
-          </label>
-          <label for="postal" class="has-float-label" *ngIf="showAdditionalFields">
-            <input type="text" class="form-control mb-2 mr-sm-2" id="postal" name="postal" placeholder=" " [(ngModel)]="searchQuery.postal" tabindex="1">
-            <span>Postal Code</span>
           </label>
         </div>
       </div>

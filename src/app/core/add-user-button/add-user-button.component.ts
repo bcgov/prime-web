@@ -85,46 +85,10 @@ export class AddUserButtonComponent implements OnInit {
   }
 
   canFindUser(): boolean {
-    return (this.currentProgressStep >= this.maxProgressSteps) && this.showAdditionalFields;
-    /*
-    let flag = false;
-
-    if ((this.searchQuery.lastName != null && this.searchQuery.lastName.length >= 1) &&
-        (this.searchQuery.firstName != null && this.searchQuery.firstName.length >= 1) &&
-        ((this.searchQuery.primeUserId != null && this.searchQuery.primeUserId.length >= 1) ||
-         (this.searchQuery.dateOfBirth != null &&
-           ((this.searchQuery.email != null &&  this.searchQuery.email.length >= 1) ||
-            (this.searchQuery.phone != null &&  this.searchQuery.phone.length >= 1) ||
-            (this.searchQuery.postal != null &&  this.searchQuery.postal.length >= 1))
-         )
-        )
-       ) {
-        flag = true;
-      }
-    return flag;
-    */
-  }
-
-  get showAdditionalFields(): boolean {
-    //return !!this.searchQuery.dateOfBirth;
-    let flag = true;
-    //return this.currentProgressStep >= this.maxProgressSteps;
-    //Returns true only if prime id, email or both first and last name are valid
-    /*
-    if ((this.searchQuery.lastName != null && this.searchQuery.lastName.length >= 1) &&
-      (this.searchQuery.firstName != null && this.searchQuery.firstName.length >= 1) &&
-      (this.searchQuery.dateOfBirth != null && this.searchQuery.dateOfBirth.toString().length >= 1)) {
-      flag = true;
-    }
-    */
-    return flag;
+    return (this.currentProgressStep >= this.maxProgressSteps)
   }
 
   get maxProgressSteps(): number {
-    /*if (this.showAdditionalFields) {
-      return 4;
-    }
-    return 3;*/
     return 1;
   }
 
