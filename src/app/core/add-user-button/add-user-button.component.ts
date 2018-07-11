@@ -54,6 +54,8 @@ export class AddUserButtonComponent implements OnInit {
    */
   findUser(){
     const person = this.dummyDataService.createPeople(1)[0];
+    // If there is already a checkbox selection from a previous search in the same modal session, clear it out
+    this.addUserSelected = false;
 
     // Copy over the shared defined properties, ignore the rest.
     for (const key in this.searchQuery) {
@@ -83,8 +85,10 @@ export class AddUserButtonComponent implements OnInit {
   }
 
   canFindUser(): boolean {
+    return (this.currentProgressStep >= this.maxProgressSteps) && this.showAdditionalFields;
+    /*
     let flag = false;
-    //return this.currentProgressStep >= this.maxProgressSteps;
+
     if ((this.searchQuery.lastName != null && this.searchQuery.lastName.length >= 1) &&
         (this.searchQuery.firstName != null && this.searchQuery.firstName.length >= 1) &&
         ((this.searchQuery.primeUserId != null && this.searchQuery.primeUserId.length >= 1) ||
@@ -98,27 +102,30 @@ export class AddUserButtonComponent implements OnInit {
         flag = true;
       }
     return flag;
+    */
   }
 
   get showAdditionalFields(): boolean {
     //return !!this.searchQuery.dateOfBirth;
-    let flag = false;
+    let flag = true;
     //return this.currentProgressStep >= this.maxProgressSteps;
     //Returns true only if prime id, email or both first and last name are valid
+    /*
     if ((this.searchQuery.lastName != null && this.searchQuery.lastName.length >= 1) &&
       (this.searchQuery.firstName != null && this.searchQuery.firstName.length >= 1) &&
       (this.searchQuery.dateOfBirth != null && this.searchQuery.dateOfBirth.toString().length >= 1)) {
-      debugger
       flag = true;
     }
+    */
     return flag;
   }
 
   get maxProgressSteps(): number {
-    if (this.showAdditionalFields) {
+    /*if (this.showAdditionalFields) {
       return 4;
     }
-    return 3;
+    return 3;*/
+    return 1;
   }
 
   clearSearch(){
