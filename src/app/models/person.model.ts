@@ -281,6 +281,12 @@ export class Person extends Base {
   associationId?: string[];
 
   accessAcceptance = [false, false, false];
+
+  /** Has the user NOT accepted all UAAs or are there UAAs requiring their attention? Generally this manifests as some sort of warning icon displayed to the Applicant. */
+  hasUAARequiringAttention(): boolean {
+    return this.accessAcceptance.filter(x => x === false).length >= 1;
+  }
+
   /** The user has declared all information provided is accurate  */
   isDeclaredCheck = false;
 
