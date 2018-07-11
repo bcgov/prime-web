@@ -147,28 +147,38 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
     this.onChange.emit( this.siteAccessRequiringAttention[0] );
   }
 
+  shouldHideAcceptRejectControls(): boolean {
+
+    if (this.isAccepted() || this.isDeclined() ){
+      return true;
+    }
+
+    // For now don't hide Initiated or New. Not clear on what the difference between these two is, but we're honouring the distinction here.
+    return !(this.isInitiatedStatus() || this.isNewStatus())
+  }
+
   isNewStatus(): boolean {
-    return this.siteAccessRequiringAttention.filter(x => {
-      return x.status === EnrollmentStatus.New;
-    }).length !== 0;
+    return this.filterStatus(x => x.status === EnrollmentStatus.New);
   }
 
   isDeclinedStatus(): boolean {
-    return this.siteAccessRequiringAttention.filter(x => {
-      return x.status === EnrollmentStatus.Declined;
-    }).length !== 0;
+    return this.filterStatus(x => x.status === EnrollmentStatus.Declined);
   }
 
   isActiveStatus(): boolean {
-    return this.siteAccessRequiringAttention.filter(x => {
-      return x.status === EnrollmentStatus.Active;
-    }).length !== 0;
+    return this.filterStatus(x => x.status === EnrollmentStatus.Active);
+  }
+
+  isInitiatedStatus(): boolean {
+    return this.filterStatus(x => x.status === EnrollmentStatus.Initiated);
   }
 
   isShowProgress(): boolean {
-    return this.siteAccessRequiringAttention.filter(x => {
-      return (x.status !== EnrollmentStatus.Expired && x.status !== EnrollmentStatus.Active);
-    }).length !== 0;
+    return this.filterStatus(x => (x.status !== EnrollmentStatus.Expired && x.status !== EnrollmentStatus.Active));
+  }
+
+  filterStatus(fn: (sa: SiteAccess) => boolean    ){
+    return this.siteAccessRequiringAttention.filter(fn).length !== 0;
   }
 
   // abstract method - defined in derived

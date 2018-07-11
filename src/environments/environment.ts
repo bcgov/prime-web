@@ -8,4 +8,5 @@ export const environment = {
 
   /** Configures dummy data in a way that's convenient for developers, such as having values which already pass validation. */
   useDeveloperDummyData: true,
+  skipRedirects: true,
 };

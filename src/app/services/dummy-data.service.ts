@@ -255,7 +255,12 @@ export class DummyDataService {
       , EnrollmentStatus.Expired + ',' + AccessReasons.PERSONAL_ACCESS + ',,04-16-2017,05-01-2017,04-16-2018,'
       + SiteAccessProgressSteps.Provisioner //8
       , EnrollmentStatus.New + ',,,' + this.setNewDate(Datefield.day, -2) + ',' + this.setNewDate(Datefield.day, 0)
-      + ',,' + SiteAccessProgressSteps.Applicant //9
+      + ',,' + SiteAccessProgressSteps.Applicant //9,
+
+      ,
+
+      EnrollmentStatus.Active + ',,,' + this.setNewDate(Datefield.day, 60) + ',' + this.setNewDate(Datefield.day,15)
+      + ',,' + SiteAccessProgressSteps.Provisioner //10
     ];
 
     // First Person - 2 New, Active, Approved
@@ -284,6 +289,7 @@ export class DummyDataService {
 
     // Fourth Person - Pending with Provisioner
     sa = this.createSiteAccessAndAssociateDemo(collections[0].members[3], people[4], access[7]);
+    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[4], access[10]);
     result.push(sa);
 
     return result.filter(x => x); //filter out null
