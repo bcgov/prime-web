@@ -290,6 +290,9 @@ export class Person extends Base {
   /** The user has declared all information provided is accurate  */
   isDeclaredCheck = false;
 
+  /** Tracks whether a user is 'New' or not, i.e. recently added via Add New User modal.  A user is no longer new the moment any enrollmens have been changed and saved. Currently on the miller column pages all enrollments should be pre-selected for new users.*/
+  isNewUser: boolean;
+
   // toggles
   hasCollege: boolean;
   _isDeviceProvider: boolean;
