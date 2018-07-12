@@ -30,13 +30,12 @@
   <div *ngIf="siteStatus === 'New' || siteStatus === 'AcceptEnrollment'">
     <table>
       <tr>
-        <td class="provision-element-label">POS User Id</td>
-        <td class="provision-element-label"> Date Provisioned</td>
-      </tr>
-      <tr>
-        <td> <input type="text" size="8"></td>
-        <td > <input type="text" size="14"></td>
-        <td class="mr-3"></td>
+        <label for="posuid" class="has-float-label">
+          <input type="text" class="form-control mb-2 mr-sm-2" id="posuid" name="posuid" placeholder=" " tabindex="1">
+          <span>POS User ID</span>
+        </label>
+        <td><prime-datepicker id="DoB" name="DoB" placeholder=" "  dateFormat="yyyy/mm/dd" labelText="Date Provisioned" tabindex="1"></prime-datepicker></td>
+
       </tr>
   </table>
  </div>
