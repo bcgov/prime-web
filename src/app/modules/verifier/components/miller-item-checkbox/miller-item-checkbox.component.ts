@@ -29,8 +29,23 @@ export class MillerItemCheckboxComponent extends Base implements OnInit {
 
   public today;
   ngOnInit() {
+    if (!this.items){
+      return;
+    }
+
     const today = new Date();
     this.today =  { year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate() }
+
+    // Preprocess pre-checked items for 'New' users by pre-selecting all fields
+    this.items
+      .filter(x => x.checked && this.getSiteAccessForItem(x) === undefined)
+      .map(x => this.initiateSiteAccess(x));
+
+    // If any pending changes created due to the above pre-processing
+    if (this._allPendingChanges.length){
+      this.onPendingChanges.emit(this._allPendingChanges);
+    }
+
   }
 
   ngOnDestroy(){

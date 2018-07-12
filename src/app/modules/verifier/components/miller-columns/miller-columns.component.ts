@@ -50,7 +50,7 @@ export class MillerColumnsComponent implements OnInit {
   private _originalColumnSnapshot:  MillerColumn[];
   public changesMade: boolean = false;
   public declarationCheck: boolean = false;
-  public saveSuccess: boolean;
+  public saveSuccess: boolean = false;
   public pendingSiteAccess: SiteAccess[];
   public showLoadingSpinner: boolean = false;
 
@@ -186,6 +186,12 @@ export class MillerColumnsComponent implements OnInit {
 
     this.showLoadingSpinner = true;
 
+    // The user is no longer 'New' once they've had enrollments saved.
+    if (this.shouldPreCheckAllBoxes()){
+      const user = this.getUserSelection();
+      user.isNewUser = false;
+    }
+
     this.saveData();
 
     this.changesMade = false;
@@ -312,10 +318,20 @@ export class MillerColumnsComponent implements OnInit {
 
       // Now that we've filtered out irrelevant SA's, we can easily check items
       // that have Active SAs.
-      column
-        .filter(item => item.siteAccess.length)
-        .filter(item => item.siteAccess[0].status === 'Active' || item.siteAccess[0].status === 'New' || item.siteAccess[0].status === 'Initiated')
-        .map(item => item.checked = true);
+
+      if (this.shouldPreCheckAllBoxes()){
+        console.log('Should precheck all items!');
+        const preChecked = column.map(item => item.checked = true);
+        if (preChecked.length) this.changesMade = true;
+      }
+      else {
+        column
+          .filter(item => item.siteAccess.length)
+          .filter(item => item.siteAccess[0].status === 'Active' || item.siteAccess[0].status === 'New' || item.siteAccess[0].status === 'Initiated')
+          .map(item => item.checked = true);
+      }
+
+
     }
     else if (!this.IS_PEOPLE_TABLE && this.isPeopleColumn(column)) {
       const selection = this.getSiteSelection();
@@ -347,6 +363,10 @@ export class MillerColumnsComponent implements OnInit {
     // Add "Active" badge
     return column;
   }
+
+  // private calculateFinalColumn(column){
+
+  // }
 
   public getUserSelection(): Person{
     if (this.IS_PEOPLE_TABLE){
@@ -383,6 +403,11 @@ export class MillerColumnsComponent implements OnInit {
       return (this._columns[0].items.filter(x => x.open)[0] as any).allSiteAccess;
     }
 
+  }
+
+  public shouldPreCheckAllBoxes(): boolean {
+    const user = this.getUserSelection();
+    return user && user.isNewUser;
   }
 
   private cleanUpChildColumns(index){

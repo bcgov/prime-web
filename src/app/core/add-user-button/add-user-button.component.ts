@@ -68,8 +68,7 @@ export class AddUserButtonComponent implements OnInit {
     // Ensure user has to fill out Applicant contact info
     person.email = null;
     person.phone = null;
-    // Set the Applicant to the recently found/created user
-    this.dataService.user = person;
+    person.isNewUser = true;
     // Only return one result (prototype only)
     this.searchResultsPeople = [person];
     console.log('findUser found:', person);
@@ -78,6 +77,9 @@ export class AddUserButtonComponent implements OnInit {
 
   addUser(){
     this.dataService.people.push(... this.searchResultsPeople);
+    // Set the Applicant to the recently found/created user
+    this.dataService.user = this.searchResultsPeople[0];
+    console.log('Setting Applicant to new user', {user: this.dataService.user});
     this.modalRef.hide();
   }
 
