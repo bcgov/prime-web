@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { cloneDeep } from 'lodash';
 import { Collection } from '../../../../models/collections.model';
 import { Person } from '../../../../models/person.model';
-import { Site, SiteAccess } from '../../../../models/sites.model';
+import { Site, SiteAccess, SiteAccessProgressSteps } from '../../../../models/sites.model';
 import { MillerColumn, MillerColumnConfig, MillerItem } from './miller-columns.interface';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 
@@ -218,6 +218,7 @@ export class MillerColumnsComponent implements OnInit {
         orig.endDate = siteAccess.endDate;
         orig.startDate = siteAccess.startDate;
         orig.declinedReason = siteAccess.declinedReason;
+        orig.progress = SiteAccessProgressSteps.Applicant;
         console.log('Updating existing SiteAccess', siteAccess);
       }
       else {
@@ -234,6 +235,7 @@ export class MillerColumnsComponent implements OnInit {
           origPerson = this.dataService.findPersonByObjectId(siteAccess.person.objectId);
         }
 
+        siteAccess.progress = SiteAccessProgressSteps.Applicant;
         siteAccess.person = origPerson;
         siteAccess.site = origSite;
         origSite.siteAccess.push(siteAccess);

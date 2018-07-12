@@ -9,6 +9,7 @@ import {isNullOrUndefined} from 'util';
 import {moment} from 'ngx-bootstrap/chronos/test/chain';
 import {forEach} from '@angular/router/src/utils/collection';
 import {Site, SiteAccess} from '../../../../models/sites.model';
+import { environment } from 'environments/environment';
 
 
 @Component({
@@ -26,6 +27,11 @@ export class ApplicantDashboardComponent implements OnInit {
   ngOnInit() {
 
     // Redirect to contact page to be completed, if applicant is missing information
+
+    if (environment.skipRedirects){
+      return;
+    }
+
     if (!this.contactDone) {
       const link = '/applicant/contact';
       this.router.navigate([link]);

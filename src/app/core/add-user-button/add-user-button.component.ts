@@ -63,15 +63,16 @@ export class AddUserButtonComponent implements OnInit {
          person[key] = this.searchQuery[key];
       }
     }
-    person.email = `${person.firstName[0].toLowerCase()}${person.lastName.toLowerCase()}@gmail.com`;
-
-    person.renewalDate = null; //We don't want the set date from dummyDataService
-
-    console.log('findUser found:', person);
-
-
+    //We don't want the set date from dummyDataService
+    person.renewalDate = null;
+    // Ensure user has to fill out Applicant contact info
+    person.email = null;
+    person.phone = null;
+    // Set the Applicant to the recently found/created user
+    this.dataService.user = person;
     // Only return one result (prototype only)
     this.searchResultsPeople = [person];
+    console.log('findUser found:', person);
     this.showSearchResults = true;
   }
 

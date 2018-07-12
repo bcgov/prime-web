@@ -59,8 +59,9 @@ export class PrimeDataService {
       const expired = collection.getSiteAccessWithStatus(EnrollmentStatus.Expired);
       const declined = collection.getSiteAccessWithStatus(EnrollmentStatus.Declined);
 
-      //const problemAccess = pending.concat(expired, declined);
-      const problemAccess = expired.concat(declined);
+      const active = collection.getSiteAccessWithStatus(EnrollmentStatus.Active);
+
+      const problemAccess = expired.concat(declined, active);
       rowItem.expandableRows = problemAccess;
       result.push(rowItem);
     });
@@ -81,15 +82,14 @@ export class PrimeDataService {
         collections: this.findCollectionFromSites(person.sites)
       };
 
-    //  const pending = person.siteAccess
-     //   .filter(sa => sa.status === EnrollmentStatus.Pending); TODO: Remove no pending - need to determine what values need to be
       const expired = person.siteAccess
         .filter(sa => sa.status === EnrollmentStatus.Expired);
       const declined = person.siteAccess
         .filter(sa => sa.status === EnrollmentStatus.Declined);
+      const active = person.siteAccess
+        .filter(sa => sa.status === EnrollmentStatus.Active);
 
-  //    const problemAccess = pending.concat(expired, declined);
-      const problemAccess = expired.concat(declined);
+      const problemAccess = expired.concat(declined, active);
       rowItem.expandableRows = problemAccess;
 
       result.push(rowItem);
@@ -111,8 +111,13 @@ export class PrimeDataService {
         associatedObjectId: site.objectId,
       };
 
+      // Filter out Site Acceesses that don't apply to the user. Since we have
+      // the Site object, we also have all the SiteAccess instances for it even
+      // if they apply to other users.
+      const filteredSAs = site.siteAccess.filter(sa => sa.person === this.user);
+
       // 1:1 relationship - user has one site access per site
-      rowItem.expandableRows = [site.siteAccess[0]];
+      rowItem.expandableRows = [filteredSAs[0]]
 
       result.push(rowItem);
     });
