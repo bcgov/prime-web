@@ -35,7 +35,7 @@
     </div>
   </div>
 
-  <div class="col d-inline-flex flex-column access-reason">
+  <div *ngIf="isAccepted" class="col d-inline-flex flex-column access-reason">
     <!-- New enrollments -->
     <select *ngIf="!disableReason" id="reasonForAccess"
             class="form-control drop-dl-box-15 color"
@@ -48,6 +48,22 @@
             [value]="accessReason"
             disabled>
       <option [value]="accessReason" selected>{{accessReason}}</option>
+    </select>
+  </div>
+
+  <div *ngIf="isDeclined" class="col d-inline-flex flex-column access-reason">
+    <!-- New enrollments -->
+    <select *ngIf="!disableReason" id="reasonForAccess"
+            class="form-control drop-dl-box-15 color"
+            [(ngModel)]="declineReason">
+      <option value="Please Select" selected>Please Select</option>
+      <option *ngFor="let reason of declineReasons" [value]="reason">{{reason}}</option>
+    </select>
+    <select *ngIf="disableReason" id="reasonForAccess"
+            class="form-control drop-dl-box-15 color"
+            [value]="declineReason"
+            disabled>
+      <option [value]="declineReason" selected>{{declineReason}}</option>
     </select>
   </div>
 </div>

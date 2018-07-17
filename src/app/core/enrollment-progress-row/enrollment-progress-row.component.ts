@@ -28,7 +28,11 @@ export class EnrollmentProgressRowComponent implements OnInit {
       return "Applicant declined access to this site."
     }
     else if (this.data.status === EnrollmentStatus.Expired){
-      return `Request has ${status} and is waiting for ${stage}`
+      //Currently this assumes that if it's Expired, the Stage is also Applicant
+      return `Applicant has been informed of access expiry and must renew access.`
+    }
+    else if (this.data.status === EnrollmentStatus.Active){
+      return `Request has been approved and is awaiting ${stage}`
     }
 
     return `Request has been ${status} and is awaiting ${stage}`;

@@ -16,4 +16,16 @@ export class AcceptRejectIconsComponent implements OnInit {
   ngOnInit() {
   }
 
+  reject($event: Event){
+    this.onRejected.emit();
+    $event.stopPropagation();
+    return false;
+  }
+
+  accept($event: Event){
+    this.onAccepted.emit();
+    $event.stopPropagation();
+    return false;
+  }
+
 }

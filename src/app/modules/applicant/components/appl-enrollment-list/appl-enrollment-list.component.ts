@@ -88,8 +88,11 @@ export class ApplEnrollmentListComponent extends EnrollmentList implements OnIni
       // Change status to 'Provisioning' or 'Declined' based on user action
       this._pendingUpdates = this._pendingUpdates.map(sa => {
         if (sa.declinedReason){
+          console.log('DECLINING', sa);
           sa.status = EnrollmentStatus.Declined;
+          sa.progress = SiteAccessProgressSteps.Verifier;
         } else if (sa.accessReason){
+          console.log('ACCEPTING', sa);
           sa.status = EnrollmentStatus.Provisioning;
           sa.progress = SiteAccessProgressSteps.Provisioner;
         }
@@ -99,7 +102,7 @@ export class ApplEnrollmentListComponent extends EnrollmentList implements OnIni
       // Close the row but only after updating the UI so user can see the animated change
       setTimeout( () => {
         this.rowElements.map(x => x.closeRow());
-      }, 300)
+      }, 500)
 
       this.onSave.emit( this._pendingUpdates ); //Send list of updates
     }, 3000)

@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, Input } from '@angular/core';
+import { Component, OnInit, TemplateRef, Input, Output, EventEmitter } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { PrimeDataService } from '../../services/prime-data.service';
@@ -12,6 +12,7 @@ import { DummyDataService } from '../../services/dummy-data.service';
 })
 export class AddUserButtonComponent implements OnInit {
   @Input() iconOnly: boolean = false;
+  @Output() onAddNewUser = new EventEmitter<Person>();
   modalRef: BsModalRef;
   progress: any = [];
   public searchResultsPeople: Person[] = [];
@@ -81,6 +82,7 @@ export class AddUserButtonComponent implements OnInit {
     this.dataService.user = this.searchResultsPeople[0];
     console.log('Setting Applicant to new user', {user: this.dataService.user});
     this.modalRef.hide();
+    this.onAddNewUser.emit(this.searchResultsPeople[0]);
   }
 
   canAddUser(): boolean {

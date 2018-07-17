@@ -245,7 +245,7 @@ export class DummyDataService {
       , EnrollmentStatus.Declined + ',' + AccessReasons.PERSONAL_ACCESS + ',' + DeclinedReasons.ACCESS_NO_lONGER_REQUIRED
       + ',05-15-2017,06-01-2017,01-06-2018,' + SiteAccessProgressSteps.Provisioner //3
       , EnrollmentStatus.Declined + ',' + AccessReasons.PERSONAL_ACCESS + ',' + DeclinedReasons.WRONG_SITE
-      + ',03-16-2018,04-01-2018,4-01-2019,' + SiteAccessProgressSteps.Applicant //4
+      + ',03-16-2018,04-01-2018,4-01-2019,' + SiteAccessProgressSteps.Verifier //4
       , EnrollmentStatus.Initiated + ',' + AccessReasons.PERSONAL_ACCESS + ',,06-11-2018,06-27-2018,06-27-2018,'
       + SiteAccessProgressSteps.Applicant //5
       , EnrollmentStatus.Review + ',' + AccessReasons.PERSONAL_ACCESS + ',,05-18-2018,06-01-2018,06-01-2019,'
@@ -253,7 +253,7 @@ export class DummyDataService {
       , EnrollmentStatus.Provisioning + ',' + AccessReasons.PERSONAL_ACCESS + ',,06-01-2018,06-16-2018,06-16-2019,'
       + SiteAccessProgressSteps.Provisioner //7
       , EnrollmentStatus.Expired + ',' + AccessReasons.PERSONAL_ACCESS + ',,04-16-2017,05-01-2017,04-16-2018,'
-      + SiteAccessProgressSteps.Provisioner //8
+      + SiteAccessProgressSteps.Applicant //8
       , EnrollmentStatus.New + ',,,' + this.setNewDate(Datefield.day, -2) + ',' + this.setNewDate(Datefield.day, 0)
       + ',,' + SiteAccessProgressSteps.Applicant //9,
 

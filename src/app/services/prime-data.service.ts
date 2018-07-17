@@ -60,8 +60,10 @@ export class PrimeDataService {
       const declined = collection.getSiteAccessWithStatus(EnrollmentStatus.Declined);
 
       const active = collection.getSiteAccessWithStatus(EnrollmentStatus.Active);
+      const initiated = collection.getSiteAccessWithStatus(EnrollmentStatus.Initiated);
 
-      const problemAccess = expired.concat(declined, active);
+
+      const problemAccess = expired.concat(declined, active, initiated);
       rowItem.expandableRows = problemAccess;
       result.push(rowItem);
     });
@@ -89,7 +91,10 @@ export class PrimeDataService {
       const active = person.siteAccess
         .filter(sa => sa.status === EnrollmentStatus.Active);
 
-      const problemAccess = expired.concat(declined, active);
+      const initiated = person.siteAccess
+        .filter(sa => sa.status === EnrollmentStatus.Initiated);
+
+      const problemAccess = expired.concat(declined, active, initiated);
       rowItem.expandableRows = problemAccess;
 
       result.push(rowItem);

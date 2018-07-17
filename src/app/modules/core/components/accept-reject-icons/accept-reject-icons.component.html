@@ -20,7 +20,7 @@
   </a> -->
 
   <button class="btn btn-danger mx-2"
-    (click)="onRejected.emit()"
+    (click)="reject($event)"
     [attr.aria-label]="labelReject"
     [tooltip]="labelReject"
     delay="200"
@@ -29,7 +29,7 @@
   </button>
 
   <button class="btn btn-success mx-2"
-    (click)="onAccepted.emit()"
+    (click)="accept($event)"
     [attr.aria-label]="labelAccept"
     [tooltip]="labelAccept"
     delay="200"

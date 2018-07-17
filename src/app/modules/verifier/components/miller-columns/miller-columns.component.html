@@ -27,6 +27,7 @@
       <prime-add-user-button
         *ngIf="column.title.toLowerCase() === 'people'"
         iconOnly=true
+        (onAddNewUser)="refreshFinalColumn()"
         class='fix-right'>
       </prime-add-user-button>
     </div>
