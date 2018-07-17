@@ -7,6 +7,7 @@ import { Site } from '../../../../models/sites.model';
 import { Collection } from '../../../../models/collections.model';
 import { EnrollmentRowItem } from '../../../verifier/components/enrollment-row/enrollment-row.component';
 import { EnrollmentStatus } from '../../../../models/enrollment-status.enum';
+import {CollegeTypes} from "../../../../models/colleges.enum";
 
 @Component({
   selector: 'prime-provisioner-details',
@@ -68,7 +69,13 @@ export class ProvisionerDetailsComponent implements OnInit {
   findCollectionFromSite(site: Site): Collection {
     return this.dataService.findCollectionFromSite(site)[0];
   }
+
+  collegeCurrValue(selection) {
+    return CollegeTypes[selection];
+  }
 }
+
+
 
 enum ProvisionByType {
   user = "user",
