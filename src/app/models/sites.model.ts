@@ -86,18 +86,12 @@ export class SiteAccess extends Base {
   verifier: Verifier; // "by" in xlsx designs -  responsible for approving
   provisioner: Provisioner;
 
-  //ARC- START NEW PROPERTIES (FROM SITE ACCESS)
-  // PEC: string;
   request: string;
   siteClass: string;
-  accessRights: string; // This should be in stiteAccess
-  // startDate: string; // This should be in stiteAccess
-  // personalAccess: string; // This should be in stiteAccess -- REPLACED WITH "acceptReason"
+  accessRights: string;
   tAndC: string;
-  // endDate: string; // This should be in stiteAccess
-  posUserId: string; // This should be in stiteAccess
-  provisionedDate: Date; // This should be in stiteAccess
-  //ARC - END NEW PROPERTIES (FROM SITE ACCESS)
+  posUserId: string;
+  provisionedDate: Date;
 
   // In-progress
   progress: SiteAccessProgressSteps;
@@ -147,19 +141,6 @@ export class SiteAccess extends Base {
     if (data[8]) { this.siteClass = data[8]; }
     if (data[9]) { this.accessRights = data[9]; }
     if (data[10]) { this.tAndC = data[10]; }
-
-    //  PEC: string;
-    // request: string;
-    // siteClass: string;
-    // accessRights: string; // This should be in stiteAccess
-    // startDate: string; // This should be in stiteAccess
-    // personalAccess: string; // This should be in stiteAccess
-    // tAndC: string;
-    // endDate: string; // This should be in stiteAccess
-    // posUserId: string; // This should be in stiteAccess
-    // provisionedDate: string; // This should be in stiteAccess
-    // collegeId: string; // This should be in stiteAccess or person as CollegeID related to person not site
-
   }
 }
 

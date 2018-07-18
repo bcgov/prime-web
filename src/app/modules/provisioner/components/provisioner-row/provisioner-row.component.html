@@ -2,8 +2,8 @@
 
   <div class="enrollment-text-container" >
     <ng-container *ngIf="primaryType === 'User'">
-      <span class="enrollment-text-main">{{siteName}}</span>
-      <span class="enrollment-text-bold">{{siteNumber}} </span>
+      <span class="enrollment-text-main">{{orgName}}</span>
+      <span class="enrollment-text-bold">{{title}} </span>
     </ng-container>
     <ng-container *ngIf="primaryType === 'Site'">
       <span class="enrollment-text-bold">{{rowData.title}}  </span>
@@ -19,8 +19,8 @@
         <td class="provision-element-label"> Date Provisioned</td>
       </tr>
       <tr>
-        <td class="provision-element-text" >{{rowData.sites[0].posUserId}}</td>
-        <td class="provision-element-text"> {{rowData.sites[0].provisionedDate}}</td>
+        <td class="provision-element-text" >{{siteAccessObject.posUserId}}</td>
+        <td class="provision-element-text"> {{siteAccessObject.provisionedDate}}</td>
         <td class="px-1"></td>
       </tr>
     </table>
@@ -93,7 +93,7 @@
       <td class="provision-element-label" width = "12%"> Request</td>
       <td class="provision-element-label" width = "10%" >Class</td>
       <td class="provision-element-label" width = "12%"> Access Rights</td>
-      <td class="provision-element-label" width = "8%" >T&C</td>
+      <td class="provision-element-label" width = "8%" >T&amp;C</td>
       <td class="provision-element-label" width = "8%"> Start</td>
       <td class="provision-element-label" width = "8%">End</td>
       <td class="provision-element-label" width = "20%"> Personal Access</td>
@@ -101,17 +101,17 @@
       <td width="12%"></td>
     </tr>
     <tr>
-      <td *ngIf="primaryType === 'User'" class="provision-element-text">{{rowData.sites[0].PEC}}</td>
-      <td *ngIf="primaryType === 'Site'" class="provision-element-text">{{rowData.sites[0].collegeId}} </td>
-      <td class="provision-element-text"> {{rowData.sites[0].request}}</td>
-      <td class="provision-element-text">{{rowData.sites[0].siteClass}}</td>
-      <td class="provision-element-text"> {{rowData.sites[0].accessRights}}</td>
-      <td class="provision-element-text">{{rowData.sites[0].tAndC}}</td>
-      <td class="provision-element-text"> {{rowData.sites[0].startDate}}</td>
-      <td class="provision-element-text">{{rowData.sites[0].endDate}}</td>
-      <td class="provision-element-text"> {{rowData.sites[0].personalAccess}}</td>
+      <td *ngIf="primaryType === 'User'" class="provision-element-text">{{rowData.site.PEC}}</td>
+      <td *ngIf="primaryType === 'Site'" class="provision-element-text">TODO - collegeID?</td>
+      <td class="provision-element-text"> {{siteAccessObject.request}}</td>
+      <td class="provision-element-text">{{siteAccessObject.siteClass}}</td>
+      <td class="provision-element-text"> {{siteAccessObject.accessRights}}</td>
+      <td class="provision-element-text">{{siteAccessObject.tAndC}}</td>
+      <td class="provision-element-text"> {{siteAccessObject.startDateShort}}</td>
+      <td class="provision-element-text">{{siteAccessObject.endDateShort}}</td>
+      <td class="provision-element-text"> {{siteAccessObject.accessReason}}</td>
       <td></td>
-      <td class="mr-2"><input type="checkbox" >T&C Enforceable </td>
+      <td class="mr-2"><input type="checkbox" >T&amp;C Enforceable </td>
     </tr>
   </table>
 </div>

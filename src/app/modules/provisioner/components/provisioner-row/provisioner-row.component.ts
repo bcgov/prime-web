@@ -16,7 +16,10 @@ import {EnrollmentRowItem} from '../../../verifier/components/enrollment-row/enr
 })
 export class ProvisionerRowComponent extends Base implements OnInit {
 
-  @Input() rowData: EnrollmentRowItem;
+  // TODO - Restore interface once we have it.
+  // @Input() rowData: EnrollmentRowItem;
+  @Input() rowData: any;
+
   @Input() primaryType: 'User'|'Site';
 
   @Output() onRowOpened = new EventEmitter<any>();
@@ -37,18 +40,38 @@ export class ProvisionerRowComponent extends Base implements OnInit {
   ];
 
   constructor( ) {
-    super()
+    super();
   }
 
   ngOnInit() {
-    if (!this.rowData ) {return}
+    if (!this.rowData ) { return; }
     console.log('ngOnInit get row data is ' , this.rowData);
 
-    const name = this.rowData.sites[0].name;
-    this.siteName = name.substring(0, name.lastIndexOf(' ') - 1);
-    this.siteNumber = 'Site ' + name.substring(name.lastIndexOf(' ') + 1);
-    this.siteAccessObject = this.rowData.sites[0].siteAccess[0];
+    // Note - this part handles the "By Site" and "By User" layouts, how they can have different inputs. Merge if possible.
+    // Assumes 1 enrollment per site.
+    if (this.rowData.sites){
+      this.siteAccessObject = this.rowData.sites[0].siteAccess[0];
+    }
+    else {
+      this.siteAccessObject  = this.rowData.siteAccess[0];
+    }
+
     this.siteStatus = this.siteAccessObject.status;
+  }
+
+  get title(): string {
+    if (this.primaryType === 'User' ){
+      const name = this.rowData.site.name;
+      return 'Site ' + name.substring(name.lastIndexOf(' ') + 1);
+    }
+    else {
+      return 'TITLE SITE';
+    }
+  }
+
+  get orgName(): String {
+    const name = this.rowData.site.name;
+    return name.substring(0, name.lastIndexOf(' ') - 1);
   }
 
 
@@ -97,6 +120,16 @@ export class ProvisionerRowComponent extends Base implements OnInit {
   reject(){
     this.siteStatus = 'DeclinedEnrollment';
     this.rowData.sites[0].siteAccess[0].status = EnrollmentStatus.Declined;
+  }
+
+  // TODO: Likely wrong and needs to work for 'Site' and 'User!'
+  // TODO: Why can't we get SiteAccess obj directly? from dataService? look at the byuser approach and get that sorted first, then circle back to kyle
+  get siteAccess(): SiteAccess{
+    return this.rowData.sites[0].siteAccess[0];
+  }
+
+  goToNotePage(){
+    console.log('todo');
   }
 }
 

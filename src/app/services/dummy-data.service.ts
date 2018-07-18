@@ -222,7 +222,7 @@ export class DummyDataService {
     //EnrollmentStatus,AccessReason,DeclinedReason,requestDate,startDate,endDate,SiteAccessProgressSteps
     // spaces after commons cause the enums to be undefined, Date format: MM-DD-YYYY
     const access = [
-      EnrollmentStatus.New + ',,,' + this.setNewDate(Datefield.day, -30) + ',' + this.setNewDate(Datefield.day, -15)
+      EnrollmentStatus.New + ',' + AccessReasons.PERSONAL_ACCESS + ',,' + this.setNewDate(Datefield.day, -30) + ',' + this.setNewDate(Datefield.day, -15)
       + ',,' + SiteAccessProgressSteps.Applicant + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //0
       , EnrollmentStatus.Active + ',' + AccessReasons.NOT_PERSONAL_ACCESS + ',,+ ' + this.setNewDate(Datefield.day, -(6 * 30))
       + ',' + this.setNewDate(Datefield.day, -(5.5 * 30)) + ',' + this.setNewDate(Datefield.month, 7) + ','
@@ -243,12 +243,12 @@ export class DummyDataService {
       + SiteAccessProgressSteps.Provisioner + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //7
       , EnrollmentStatus.Expired + ',' + AccessReasons.PERSONAL_ACCESS + ',,04-16-2017,05-01-2017,04-16-2018,'
       + SiteAccessProgressSteps.Applicant + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--'//8
-      , EnrollmentStatus.New + ',,,' + this.setNewDate(Datefield.day, -2) + ',' + this.setNewDate(Datefield.day, 0)
+      , EnrollmentStatus.New + ',' + AccessReasons.PERSONAL_ACCESS  + ',,' + this.setNewDate(Datefield.day, -2) + ',' + this.setNewDate(Datefield.day, 0)
       + ',,' + SiteAccessProgressSteps.Applicant + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //9,
 
       ,
 
-      EnrollmentStatus.Active + ',,,' + this.setNewDate(Datefield.day, 60) + ',' + this.setNewDate(Datefield.day,15)
+      EnrollmentStatus.Active + ',,,' + this.setNewDate(Datefield.day, 60) + ',' + this.setNewDate(Datefield.day, 15)
       + ',,' + SiteAccessProgressSteps.Provisioner //10
     ];
 

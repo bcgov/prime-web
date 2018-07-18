@@ -42,6 +42,24 @@ export class PrimeDataService {
     return result;
   }
 
+  getProvisionerByUser(user: Person) {
+
+    const result = [];
+
+    console.log('getProvisionerByUser', user);
+
+    user.sites.map(site => {
+      const rowItem = {
+        title: site.name,
+        siteAccess: site.siteAccess.filter(x => x.person === user),
+        site: site,
+      }
+      result.push(rowItem);
+    });
+
+    return result;
+  }
+
   getEnrollmentBySite(): EnrollmentRowItem[] {
 
     // By Site means collections at the top level
