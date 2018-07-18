@@ -102,14 +102,14 @@
     </tr>
     <tr>
       <td *ngIf="primaryType === 'User'" class="provision-element-text">{{rowData.sites[0].PEC}}</td>
-      <td *ngIf="primaryType === 'Site'" class="provision-element-text">{{rowData.sites[0].collegeId}} </td>
-      <td class="provision-element-text"> {{rowData.sites[0].request}}</td>
-      <td class="provision-element-text">{{rowData.sites[0].siteClass}}</td>
-      <td class="provision-element-text"> {{rowData.sites[0].accessRights}}</td>
-      <td class="provision-element-text">{{rowData.sites[0].tAndC}}</td>
-      <td class="provision-element-text"> {{rowData.sites[0].startDate}}</td>
-      <td class="provision-element-text">{{rowData.sites[0].endDate}}</td>
-      <td class="provision-element-text"> {{rowData.sites[0].personalAccess}}</td>
+      <td *ngIf="primaryType === 'Site'" class="provision-element-text">{{rowData.extraRow.collegeId}}</td>
+      <td class="provision-element-text"> {{rowData.extraRow.request}}</td>
+      <td class="provision-element-text">{{rowData.extraRow.class}}</td>
+      <td class="provision-element-text"> {{rowData.extraRow.accessRights}}</td>
+      <td class="provision-element-text">{{rowData.extraRow.termsAndConditions}}</td>
+      <td class="provision-element-text"> {{rowData.extraRow.startDate}}</td>
+      <td class="provision-element-text">{{rowData.extraRow.endDate}}</td>
+      <td class="provision-element-text"> {{rowData.extraRow.personalAccess}}</td>
       <td></td>
       <td class="mr-2"><input type="checkbox" >T&C Enforceable </td>
     </tr>

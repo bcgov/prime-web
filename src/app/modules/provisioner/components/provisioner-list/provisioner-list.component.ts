@@ -3,6 +3,7 @@ import { EnrollmentRowItem } from '../../../verifier/components/enrollment-row/e
 import { EnrollmentList, defaultViewSelector } from '../../../../core/enrollment-list/enrollment-list.class';
 import { EnrollmentStatus } from '../../../../models/enrollment-status.enum';
 import { ProvisionerRowComponent } from '../provisioner-row/provisioner-row.component';
+import { ProvisionerRowItem } from '../provisioner-row/provisioner-row.component';
 import { Site } from '../../../../models/sites.model';
 
 @Component({
@@ -12,7 +13,7 @@ import { Site } from '../../../../models/sites.model';
 })
 export class ProvisionerListComponent extends EnrollmentList implements OnInit {
 
-  @Input() rowItems: EnrollmentRowItem[] = [];
+  @Input() rowItems: ProvisionerRowItem[] = [];
   @Input() primaryType: "User"|"Site" = "User";
 
   @ViewChildren(ProvisionerRowComponent) rowElements: QueryList<ProvisionerRowComponent>

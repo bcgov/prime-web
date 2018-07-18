@@ -6,7 +6,14 @@ import {DeclinedReasons, Site, SiteAccess} from '../../../../models/sites.model'
 import {loadInOut, openState, openStateChild, openStateDisable} from '../../../../animations/animations';
 import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
 import {EnrollmentRowItem} from '../../../verifier/components/enrollment-row/enrollment-row.component';
+import {Collection} from "../../../../models/collections.model";
 
+export interface ProvisionerRowItem {
+  title: string;
+  siteAccess: SiteAccess;
+  extraRow: object;
+  associatedObjectId: string;
+}
 
 @Component({
   selector: 'prime-provisioner-row',
@@ -14,9 +21,10 @@ import {EnrollmentRowItem} from '../../../verifier/components/enrollment-row/enr
   styleUrls: ['./provisioner-row.component.scss'],
   animations: [openState, openStateChild, loadInOut, openStateDisable]
 })
+
 export class ProvisionerRowComponent extends Base implements OnInit {
 
-  @Input() rowData: EnrollmentRowItem;
+  @Input() rowData: ProvisionerRowItem;
   @Input() primaryType: 'User'|'Site';
 
   @Output() onRowOpened = new EventEmitter<any>();
@@ -41,13 +49,12 @@ export class ProvisionerRowComponent extends Base implements OnInit {
   }
 
   ngOnInit() {
-    if (!this.rowData ) {return}
+    if (!this.rowData ) {return};
     console.log('ngOnInit get row data is ' , this.rowData);
 
-    const name = this.rowData.sites[0].name;
-    this.siteName = name.substring(0, name.lastIndexOf(' ') - 1);
-    this.siteNumber = 'Site ' + name.substring(name.lastIndexOf(' ') + 1);
-    this.siteAccessObject = this.rowData.sites[0].siteAccess[0];
+    //const name = this.rowData.title;
+    //this.collegeId = this.rowData.collegeId;
+    this.siteAccessObject = this.rowData.siteAccess;
     this.siteStatus = this.siteAccessObject.status;
   }
 
@@ -91,12 +98,12 @@ export class ProvisionerRowComponent extends Base implements OnInit {
   accept() {
     this.siteStatus = 'AcceptEnrollment';
     //Status stays New, no need to change
-    // this.rowData.siteAccess[0].status = EnrollmentStatus.
+    //this.rowData.siteAccess[0].status = EnrollmentStatus.
   }
 
   reject(){
     this.siteStatus = 'DeclinedEnrollment';
-    this.rowData.sites[0].siteAccess[0].status = EnrollmentStatus.Declined;
+    this.rowData.siteAccess[0].status = EnrollmentStatus.Declined;
   }
 }
 

@@ -125,6 +125,33 @@ export class PrimeDataService {
     return result;
   }
 
+  getProvisionerDetailsBySite(site: Site) {
+    let result = [];
+
+    // this.users.map( ... )
+
+    site.users.map(user => {
+      const rowItem = {
+        title: user.name,
+        siteAccess: user.siteAccess[0],
+        extraRow: {
+          collegeId: 'foo',
+          request: user.siteAccess[0].requestDate,
+          class: 'class',
+          accessRights: 'access',
+          termsAndConditions: 'T&C',
+          startDate: user.siteAccess[0].startDate,
+          endDate: user.siteAccess[0].endDate,
+          personalAccess: user.siteAccess[0].personalAccessToPharmaNet
+        },
+        associatedObjectId: user.objectId,
+      };
+      result.push(rowItem);
+    })
+
+    return result;
+  }
+
   findCollectionFromSites(sites: Site[]): Collection[] {
     const result: Collection[] = [];
     for (let index = 0; index < sites.length; index++) {
