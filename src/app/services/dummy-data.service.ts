@@ -4,7 +4,7 @@ import { Collection } from '../models/collections.model';
 import { EnrollmentStatus } from '../models/enrollment-status.enum';
 import { Person } from '../models/person.model';
 import { Address } from '../models/addresses.model';
-import {AccessReasons, DeclinedReasons, Site, SiteAccess, SiteAccessProgressSteps} from '../models/sites.model';
+import {AccessReasons, DeclinedReasons, Site, SiteAccess, SiteAccessProgressSteps, ProvisionRequestOptions, AccessClass, AccessRights} from '../models/sites.model';
 import * as moment from 'moment';
 import {DateFormatter} from 'ngx-bootstrap';
 
@@ -96,18 +96,7 @@ export class DummyDataService {
       site.siteType = this.getRandomElFromArray(['Pharmacy', 'Hospital']);
       site.vendor = this.getRandomElFromArray(['Intellisense', 'Ultracorp', 'Mediware', 'HealthInc']);
       site.name = this.generateSiteName(name);
-
-      site.posUserId = this.generatePosUserId();
-      site.provisionedDate = this.generateProvisionedDate();
       site.PEC = this.generatePEC();
-      site.request = 'Add Access';
-      site.siteClass = 'Prescriber';
-      site.accessRights = 'Med Hist + Claims';
-      site.tAndC = '-';
-      site.startDate = this.generateStartDate(); // This should be in stiteAccess
-      site.endDate = this.generateEndDate(); // This should be in stiteAccess
-      site.personalAccess = 'I personally access PNET'; // This should be in stiteAccess
-      site.collegeId = this.generateCollegeId();
 
       result.push(site);
     }
@@ -234,28 +223,28 @@ export class DummyDataService {
     // spaces after commons cause the enums to be undefined, Date format: MM-DD-YYYY
     const access = [
       EnrollmentStatus.New + ',,,' + this.setNewDate(Datefield.day, -30) + ',' + this.setNewDate(Datefield.day, -15)
-      + ',,' + SiteAccessProgressSteps.Applicant //0
+      + ',,' + SiteAccessProgressSteps.Applicant + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //0
       , EnrollmentStatus.Active + ',' + AccessReasons.NOT_PERSONAL_ACCESS + ',,+ ' + this.setNewDate(Datefield.day, -(6 * 30))
       + ',' + this.setNewDate(Datefield.day, -(5.5 * 30)) + ',' + this.setNewDate(Datefield.month, 7) + ','
-      + SiteAccessProgressSteps.Provisioner //1
+      + SiteAccessProgressSteps.Provisioner + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //1
       , EnrollmentStatus.Provisioning + ',' + AccessReasons.PERSONAL_ACCESS + ',,' + this.setNewDate(Datefield.day, -(2 * 30))
       + ',' + this.setNewDate(Datefield.day, -(1.5 * 30)) + ',' + this.setNewDate(Datefield.month, 10) + ','
-      + SiteAccessProgressSteps.Provisioner //2
+      + SiteAccessProgressSteps.Provisioner + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //2
       // TODO: Use date function to set demo dates
       , EnrollmentStatus.Declined + ',' + AccessReasons.PERSONAL_ACCESS + ',' + DeclinedReasons.ACCESS_NO_lONGER_REQUIRED
-      + ',05-15-2017,06-01-2017,01-06-2018,' + SiteAccessProgressSteps.Provisioner //3
+      + ',05-15-2017,06-01-2017,01-06-2018,' + SiteAccessProgressSteps.Provisioner + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //3
       , EnrollmentStatus.Declined + ',' + AccessReasons.PERSONAL_ACCESS + ',' + DeclinedReasons.WRONG_SITE
-      + ',03-16-2018,04-01-2018,4-01-2019,' + SiteAccessProgressSteps.Verifier //4
+      + ',03-16-2018,04-01-2018,4-01-2019,' + SiteAccessProgressSteps.Verifier + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //4
       , EnrollmentStatus.Initiated + ',' + AccessReasons.PERSONAL_ACCESS + ',,06-11-2018,06-27-2018,06-27-2018,'
-      + SiteAccessProgressSteps.Applicant //5
+      + SiteAccessProgressSteps.Applicant + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //5
       , EnrollmentStatus.Review + ',' + AccessReasons.PERSONAL_ACCESS + ',,05-18-2018,06-01-2018,06-01-2019,'
-      + SiteAccessProgressSteps.MoH //6
+      + SiteAccessProgressSteps.MoH + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //6
       , EnrollmentStatus.Provisioning + ',' + AccessReasons.PERSONAL_ACCESS + ',,06-01-2018,06-16-2018,06-16-2019,'
-      + SiteAccessProgressSteps.Provisioner //7
+      + SiteAccessProgressSteps.Provisioner + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //7
       , EnrollmentStatus.Expired + ',' + AccessReasons.PERSONAL_ACCESS + ',,04-16-2017,05-01-2017,04-16-2018,'
-      + SiteAccessProgressSteps.Applicant //8
+      + SiteAccessProgressSteps.Applicant + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--'//8
       , EnrollmentStatus.New + ',,,' + this.setNewDate(Datefield.day, -2) + ',' + this.setNewDate(Datefield.day, 0)
-      + ',,' + SiteAccessProgressSteps.Applicant //9,
+      + ',,' + SiteAccessProgressSteps.Applicant + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //9,
 
       ,
 
@@ -349,14 +338,6 @@ export class DummyDataService {
       site.address = new Address();
       site.address.setAddress( address[index % siteInfo.length] );
       site.siteDemoData = `${name} - ${siteNumber + index},${pec}${index},${siteInfo[index]}`;
-
-      site.posUserId = `${userID}${(1000 * index) + index}`;
- //     site.provisionedDate = this.generateProvisionedDate(); // TODO: remove random generate
-      site.request = 'Add Access';
-      site.siteClass = 'Prescriber';
- //     site.accessRights = 'Med Hist + Claims';
-      site.tAndC = '-';
-      site.startDate = Date();
       result.push(site);
     }
 

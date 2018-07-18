@@ -19,16 +19,6 @@ export class Site extends Base {
   siteType: string; //TODO: Change to Enum once we have all the types
   vendor: string;
   PEC: string;
-  request: string;
-  siteClass: string;
-  accessRights: string; // This should be in stiteAccess
-  startDate: string; // This should be in stiteAccess
-  personalAccess: string; // This should be in stiteAccess
-  tAndC: string;
-  endDate: string; // This should be in stiteAccess
-  posUserId: string; // This should be in stiteAccess
-  provisionedDate: string; // This should be in stiteAccess
-  collegeId: string; // This should be in stiteAccess or person as CollegeID related to person not site
 
   // set data for demo
   set siteDemoData( data: string ) {
@@ -64,9 +54,6 @@ export class Site extends Base {
       .filter(this.filterUnique);
   }
 
-  get provisionedDateShort(): string {
-    return moment(this.provisionedDate).format('DD/MM/YYYY');
-  }
 
   /** For type-guard. You very likely want to use the type guard INSTEAD of
    * accessing this variable directly. */
@@ -87,7 +74,6 @@ export class SiteAccess extends Base {
   site: Site;
   // Displayed to user
   title: string;
-  // person: Role;
   person: Person;
   status: EnrollmentStatus;
   declinedReason: string;
@@ -99,6 +85,19 @@ export class SiteAccess extends Base {
   personalAccessToPharmaNet: boolean;
   verifier: Verifier; // "by" in xlsx designs -  responsible for approving
   provisioner: Provisioner;
+
+  //ARC- START NEW PROPERTIES (FROM SITE ACCESS)
+  // PEC: string;
+  request: string;
+  siteClass: string;
+  accessRights: string; // This should be in stiteAccess
+  // startDate: string; // This should be in stiteAccess
+  // personalAccess: string; // This should be in stiteAccess -- REPLACED WITH "acceptReason"
+  tAndC: string;
+  // endDate: string; // This should be in stiteAccess
+  posUserId: string; // This should be in stiteAccess
+  provisionedDate: Date; // This should be in stiteAccess
+  //ARC - END NEW PROPERTIES (FROM SITE ACCESS)
 
   // In-progress
   progress: SiteAccessProgressSteps;
@@ -143,6 +142,24 @@ export class SiteAccess extends Base {
     if (data[4]) { this.startDate = new Date(data[4]); }
     if (data[5]) { this.endDate = new Date(data[5]); }
     if (data[6]) { this.progress = SiteAccessProgressSteps[data[6]]; }
+
+    if (data[7]) { this.request = data[7]; }
+    if (data[8]) { this.siteClass = data[8]; }
+    if (data[9]) { this.accessRights = data[9]; }
+    if (data[10]) { this.tAndC = data[10]; }
+
+    //  PEC: string;
+    // request: string;
+    // siteClass: string;
+    // accessRights: string; // This should be in stiteAccess
+    // startDate: string; // This should be in stiteAccess
+    // personalAccess: string; // This should be in stiteAccess
+    // tAndC: string;
+    // endDate: string; // This should be in stiteAccess
+    // posUserId: string; // This should be in stiteAccess
+    // provisionedDate: string; // This should be in stiteAccess
+    // collegeId: string; // This should be in stiteAccess or person as CollegeID related to person not site
+
   }
 }
 
@@ -216,4 +233,17 @@ export enum DeclinedReasons {
 export enum AccessReasons {
   PERSONAL_ACCESS = 'I personally access PNET',
   NOT_PERSONAL_ACCESS = 'Not for personal access'
+}
+
+export enum ProvisionRequestOptions {
+  ADD = 'Add Access'
+}
+
+export enum AccessClass {
+  PRESCRIBER = 'Prescriber'
+}
+
+export enum AccessRights {
+  MED_HIST_AND_CLAIMS = 'Med Hist + Claims',
+  MED_HIST = 'Med Hist'
 }
