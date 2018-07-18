@@ -7,6 +7,7 @@ import { Site, SiteAccess } from '../models/sites.model';
 import {EnrollmentRowItem} from '../modules/verifier/components/enrollment-row/enrollment-row.component';
 import {ApplEnrollmentRowItem} from '../modules/applicant/components/appl-enrollment-row/appl-enrollment-row.component';
 import {CollegeTypes} from "../models/colleges.enum";
+import { ProvisionerRowItem } from '../modules/provisioner/components/provisioner-row/provisioner-row.component';
 
 
 @Injectable()
@@ -132,47 +133,32 @@ export class PrimeDataService {
     return result;
   }
 
-  getProvisionerDetailsBySite(site: Site) {
-    let result = [];
-
-    // this.users.map( ... )
+  getProvisionerDetailsBySite(site: Site): ProvisionerRowItem[] {
+    const result = [];
 
     site.users.map(user => {
-      const rowItem = {
+      const rowItem: ProvisionerRowItem = {
         title: user.name,
-        PoSId: user.PoSId,
-        provisionedDate: user.siteAccess[0].provisionedDate,
-        siteAccess: user.siteAccess[0],
-        extraRow: {
-          collegeId: user.collegeCertificationList[0].collegeType,
-          request: user.siteAccess[0].request,
-          siteClass: user.siteAccess[0].siteClass,
-          accessRights: user.siteAccess[0].accessRights,
-          tAndC: user.siteAccess[0].tAndC,
-          startDate: user.siteAccess[0].startDate,
-          endDate: user.siteAccess[0].endDate,
-          personalAccessToPharmaNet: user.siteAccess[0].personalAccessToPharmaNet
-        },
+        siteAccess: user.siteAccess.filter(sa => sa.site === site),
+        collegeId: user.collegeCertificationList[0].collegeType,
         associatedObjectId: user.objectId,
       };
       result.push(rowItem);
-    })
+    });
 
     return result;
   }
 
-  getProvisionerDetailsByUser(user: Person) {
-
+  getProvisionerDetailsByUser(user: Person): ProvisionerRowItem[] {
     const result = [];
 
-    console.log('getProvisionerByUser', user);
-
     user.sites.map(site => {
-      const rowItem = {
+      const rowItem: ProvisionerRowItem = {
         title: site.name,
         siteAccess: site.siteAccess.filter(x => x.person === user),
         site: site,
-      }
+        associatedObjectId: site.objectId
+      };
       result.push(rowItem);
     });
 

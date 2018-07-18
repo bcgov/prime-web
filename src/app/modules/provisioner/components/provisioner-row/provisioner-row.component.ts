@@ -10,11 +10,10 @@ import {Collection} from "../../../../models/collections.model";
 
 export interface ProvisionerRowItem {
   title: string;
-  PoSId: string;
-  provisionedDate: string;
-  siteAccess: SiteAccess;
-  extraRow: object;
+  siteAccess: SiteAccess[];
+  site?: Site;
   associatedObjectId: string;
+  collegeId?: string;
 }
 
 @Component({
@@ -27,8 +26,8 @@ export interface ProvisionerRowItem {
 export class ProvisionerRowComponent extends Base implements OnInit {
 
   // TODO - Restore interface!
-  @Input() rowData: any;
-  // @Input() rowData: ProvisionerRowItem;S
+  // @Input() rowData: any;
+  @Input() rowData: ProvisionerRowItem;S
 
 
   @Input() primaryType: 'User'|'Site';
@@ -60,13 +59,13 @@ export class ProvisionerRowComponent extends Base implements OnInit {
 
     // Note - this part handles the "By Site" and "By User" layouts, how they can have different inputs. Merge if possible.
     // Assumes 1 enrollment per site.
-    if (this.rowData.sites){
-      this.siteAccessObject = this.rowData.sites[0].siteAccess[0];
-    }
-    else {
-      this.siteAccessObject  = this.rowData.siteAccess[0];
-    }
-
+    // if (this.rowData.sites){
+    //   this.siteAccessObject = this.rowData.sites[0].siteAccess[0];
+    // }
+    // else {
+    //   this.siteAccessObject  = this.rowData.siteAccess[0];
+    // }
+    this.siteAccessObject  = this.rowData.siteAccess[0];
     this.siteStatus = this.siteAccessObject.status;
   }
 
@@ -83,6 +82,18 @@ export class ProvisionerRowComponent extends Base implements OnInit {
   get orgName(): String {
     const name = this.rowData.site.name;
     return name.substring(0, name.lastIndexOf(' ') - 1);
+  }
+
+  getCollege(): string{
+    if (this.primaryType !== 'Site') {
+      // In current designs, we should NEVER care about college except for Site tables.
+      return null;
+    }
+    if (!this.rowData.collegeId || this.rowData.collegeId.length === 0 || this.rowData.collegeId === 'pleaseSelect'){
+      return 'n/a';
+    }
+
+    return this.rowData.collegeId;
   }
 
 
@@ -134,10 +145,10 @@ export class ProvisionerRowComponent extends Base implements OnInit {
   }
 
   // TODO: Likely wrong and needs to work for 'Site' and 'User!'
-  // TODO: Why can't we get SiteAccess obj directly? from dataService? look at the byuser approach and get that sorted first, then circle back to kyle
-  get siteAccess(): SiteAccess{
-    return this.rowData.sites[0].siteAccess[0];
-  }
+  // // TODO: Why can't we get SiteAccess obj directly? from dataService? look at the byuser approach and get that sorted first, then circle back to kyle
+  // get siteAccess(): SiteAccess{
+  //   return this.rowData.sites[0].siteAccess[0];
+  // }
 
   goToNotePage(){
     console.log('todo');
