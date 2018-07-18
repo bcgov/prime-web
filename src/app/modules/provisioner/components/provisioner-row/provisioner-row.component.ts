@@ -10,6 +10,8 @@ import {Collection} from "../../../../models/collections.model";
 
 export interface ProvisionerRowItem {
   title: string;
+  PoSId: string;
+  provisionedDate: string;
   siteAccess: SiteAccess;
   extraRow: object;
   associatedObjectId: string;
@@ -53,7 +55,7 @@ export class ProvisionerRowComponent extends Base implements OnInit {
     console.log('ngOnInit get row data is ' , this.rowData);
 
     //const name = this.rowData.title;
-    //this.collegeId = this.rowData.collegeId;
+    //this.rowData.extraRow.collegeId = 'Foo1';
     this.siteAccessObject = this.rowData.siteAccess;
     this.siteStatus = this.siteAccessObject.status;
   }

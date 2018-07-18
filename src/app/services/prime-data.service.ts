@@ -6,6 +6,7 @@ import { Person } from '../models/person.model';
 import { Site, SiteAccess } from '../models/sites.model';
 import {EnrollmentRowItem} from '../modules/verifier/components/enrollment-row/enrollment-row.component';
 import {ApplEnrollmentRowItem} from '../modules/applicant/components/appl-enrollment-row/appl-enrollment-row.component';
+import {CollegeTypes} from "../models/colleges.enum";
 
 
 @Injectable()
@@ -138,16 +139,18 @@ export class PrimeDataService {
     site.users.map(user => {
       const rowItem = {
         title: user.name,
+        PoSId: user.PoSId,
+        provisionedDate: user.siteAccess[0].provisionedDate,
         siteAccess: user.siteAccess[0],
         extraRow: {
-          collegeId: 'foo',
-          request: user.siteAccess[0].requestDate,
-          class: 'class',
-          accessRights: 'access',
-          termsAndConditions: 'T&C',
+          collegeId: user.collegeCertificationList[0].collegeType,
+          request: user.siteAccess[0].request,
+          siteClass: user.siteAccess[0].siteClass,
+          accessRights: user.siteAccess[0].accessRights,
+          tAndC: user.siteAccess[0].tAndC,
           startDate: user.siteAccess[0].startDate,
           endDate: user.siteAccess[0].endDate,
-          personalAccess: user.siteAccess[0].personalAccessToPharmaNet
+          personalAccessToPharmaNet: user.siteAccess[0].personalAccessToPharmaNet
         },
         associatedObjectId: user.objectId,
       };
