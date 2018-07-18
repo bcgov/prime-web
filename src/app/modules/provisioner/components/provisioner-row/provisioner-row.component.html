@@ -21,6 +21,8 @@
       <tr>
         <td class="provision-element-text" >{{siteAccessObject.posUserId}}</td>
         <td class="provision-element-text"> {{siteAccessObject.provisionedDate}}</td>
+        <!-- <td class="provision-element-text" >{{rowData.PoSId}}</td> -->
+        <!-- <td class="provision-element-text"> {{rowData.provisionedDate}}</td> -->
         <td class="px-1"></td>
       </tr>
     </table>
@@ -110,6 +112,15 @@
       <td class="provision-element-text"> {{siteAccessObject.startDateShort}}</td>
       <td class="provision-element-text">{{siteAccessObject.endDateShort}}</td>
       <td class="provision-element-text"> {{siteAccessObject.accessReason}}</td>
+      <!-- <td *ngIf="primaryType === 'User'" class="provision-element-text">{{rowData.sites[0].PEC}}</td>
+      <td *ngIf="primaryType === 'Site'" class="provision-element-text">{{rowData.extraRow.collegeId}}</td>
+      <td class="provision-element-text"> {{rowData.extraRow.request}}</td>
+      <td class="provision-element-text">{{rowData.extraRow.siteClass}}</td>
+      <td class="provision-element-text"> {{rowData.extraRow.accessRights}}</td>
+      <td class="provision-element-text">{{rowData.extraRow.tAndC}}</td>
+      <td class="provision-element-text"> {{rowData.extraRow.startDate}}</td>
+      <td class="provision-element-text">{{rowData.extraRow.endDate}}</td>
+      <td class="provision-element-text"> {{rowData.extraRow.personalAccessToPharmaNet}}</td> -->
       <td></td>
       <td class="mr-2"><input type="checkbox" >T&amp;C Enforceable </td>
     </tr>

@@ -6,6 +6,7 @@ import { Person } from '../models/person.model';
 import { Site, SiteAccess } from '../models/sites.model';
 import {EnrollmentRowItem} from '../modules/verifier/components/enrollment-row/enrollment-row.component';
 import {ApplEnrollmentRowItem} from '../modules/applicant/components/appl-enrollment-row/appl-enrollment-row.component';
+import {CollegeTypes} from "../models/colleges.enum";
 
 
 @Injectable()
@@ -42,23 +43,6 @@ export class PrimeDataService {
     return result;
   }
 
-  getProvisionerByUser(user: Person) {
-
-    const result = [];
-
-    console.log('getProvisionerByUser', user);
-
-    user.sites.map(site => {
-      const rowItem = {
-        title: site.name,
-        siteAccess: site.siteAccess.filter(x => x.person === user),
-        site: site,
-      }
-      result.push(rowItem);
-    });
-
-    return result;
-  }
 
   getEnrollmentBySite(): EnrollmentRowItem[] {
 
@@ -142,6 +126,53 @@ export class PrimeDataService {
       // 1:1 relationship - user has one site access per site
       rowItem.expandableRows = [filteredSAs[0]]
 
+      result.push(rowItem);
+    });
+
+    return result;
+  }
+
+  getProvisionerDetailsBySite(site: Site) {
+    let result = [];
+
+    // this.users.map( ... )
+
+    site.users.map(user => {
+      const rowItem = {
+        title: user.name,
+        PoSId: user.PoSId,
+        provisionedDate: user.siteAccess[0].provisionedDate,
+        siteAccess: user.siteAccess[0],
+        extraRow: {
+          collegeId: user.collegeCertificationList[0].collegeType,
+          request: user.siteAccess[0].request,
+          siteClass: user.siteAccess[0].siteClass,
+          accessRights: user.siteAccess[0].accessRights,
+          tAndC: user.siteAccess[0].tAndC,
+          startDate: user.siteAccess[0].startDate,
+          endDate: user.siteAccess[0].endDate,
+          personalAccessToPharmaNet: user.siteAccess[0].personalAccessToPharmaNet
+        },
+        associatedObjectId: user.objectId,
+      };
+      result.push(rowItem);
+    })
+
+    return result;
+  }
+
+  getProvisionerDetailsByUser(user: Person) {
+
+    const result = [];
+
+    console.log('getProvisionerByUser', user);
+
+    user.sites.map(site => {
+      const rowItem = {
+        title: site.name,
+        siteAccess: site.siteAccess.filter(x => x.person === user),
+        site: site,
+      }
       result.push(rowItem);
     });
 

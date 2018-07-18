@@ -6,7 +6,16 @@ import {DeclinedReasons, Site, SiteAccess} from '../../../../models/sites.model'
 import {loadInOut, openState, openStateChild, openStateDisable} from '../../../../animations/animations';
 import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
 import {EnrollmentRowItem} from '../../../verifier/components/enrollment-row/enrollment-row.component';
+import {Collection} from "../../../../models/collections.model";
 
+export interface ProvisionerRowItem {
+  title: string;
+  PoSId: string;
+  provisionedDate: string;
+  siteAccess: SiteAccess;
+  extraRow: object;
+  associatedObjectId: string;
+}
 
 @Component({
   selector: 'prime-provisioner-row',
@@ -14,11 +23,13 @@ import {EnrollmentRowItem} from '../../../verifier/components/enrollment-row/enr
   styleUrls: ['./provisioner-row.component.scss'],
   animations: [openState, openStateChild, loadInOut, openStateDisable]
 })
+
 export class ProvisionerRowComponent extends Base implements OnInit {
 
-  // TODO - Restore interface once we have it.
-  // @Input() rowData: EnrollmentRowItem;
+  // TODO - Restore interface!
   @Input() rowData: any;
+  // @Input() rowData: ProvisionerRowItem;S
+
 
   @Input() primaryType: 'User'|'Site';
 
@@ -114,12 +125,12 @@ export class ProvisionerRowComponent extends Base implements OnInit {
   accept() {
     this.siteStatus = 'AcceptEnrollment';
     //Status stays New, no need to change
-    // this.rowData.siteAccess[0].status = EnrollmentStatus.
+    //this.rowData.siteAccess[0].status = EnrollmentStatus.
   }
 
   reject(){
     this.siteStatus = 'DeclinedEnrollment';
-    this.rowData.sites[0].siteAccess[0].status = EnrollmentStatus.Declined;
+    this.rowData.siteAccess[0].status = EnrollmentStatus.Declined;
   }
 
   // TODO: Likely wrong and needs to work for 'Site' and 'User!'
