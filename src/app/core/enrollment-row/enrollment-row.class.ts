@@ -64,6 +64,13 @@ export abstract class EnrollmentRow extends Base {
     }
   }
 
+  /** Opens the row if not already open. */
+  openRow(){
+    if ( this.openState === RowState.Closed){
+      this.toggleRow();
+    }
+  }
+
   canOpen() {
     return this.siteAccessRequiringAttention.length >= 1;
   }

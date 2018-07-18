@@ -132,9 +132,6 @@ export class MillerItemCheckboxComponent extends Base implements OnInit {
     sa.status = EnrollmentStatus.Initiated;
     item.siteAccess.push(sa);
     // Assign SA to the item depending on type of item (person or site)
-
-    console.log('initiateSiteAccess', item, this.primarySelection);
-
     if (Person.isPersonGuard(item) && Site.isSiteGuard(this.primarySelection)){
       sa.startDate = item.defaultStartDate;
       sa.endDate = item.defaultEndDate;

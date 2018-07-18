@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {EnrollmentRow} from '../../../../core/enrollment-row/enrollment-row.class';
+import {EnrollmentRow, RowState} from '../../../../core/enrollment-row/enrollment-row.class';
 import {loadInOut, openState, openStateChild, openStateDisable} from '../../../../animations/animations';
 import {DeclinedReasons, SiteAccess} from '../../../../models/sites.model';
 import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
@@ -52,10 +52,13 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
 
   onAccept() {
     this._acceptedEnroll = true;
+
+    this.openRow();
   }
 
   onDecline() {
     this._declinedEnroll = true;
+    this.openRow();
   }
 
   /**
@@ -94,6 +97,7 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
 
     // Changes that occur on the enrollment progress row
     this.siteAccessRequiringAttention[0].accessReason = item.accessReason;
+    this.siteAccessRequiringAttention[0].declinedReason = item.declinedReason;
 
     // Send changes for this row
     this.onChange.emit( this.siteAccessRequiringAttention[0] );
@@ -196,10 +200,12 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
   }
 
   canOpen(): boolean{
-    // Don't open on New or Active rows, unless user has Accepted the New row
-    return this.rowData.expandableRows.filter(sa => {
-      return (sa.status !== EnrollmentStatus.New && sa.status !== EnrollmentStatus.Active) || this._acceptedEnroll;
-    }).length >= 1;
+    // return (this.isNewStatus() || this.isInitiatedStatus());
+    return true;
+    // // Don't open on New or Active rows, unless user has Accepted the New row
+    // return this.rowData.expandableRows.filter(sa => {
+    //   return (sa.status !== EnrollmentStatus.New && sa.status !== EnrollmentStatus.Active) || this._acceptedEnroll;
+    // }).length >= 1;
   }
 }
 

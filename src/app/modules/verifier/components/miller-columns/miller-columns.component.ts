@@ -89,8 +89,13 @@ export class MillerColumnsComponent implements OnInit {
       }
 
       this.openColumnFromItem(preselectItem);
-      // Open second column too. Currently just opens the top item, no advanced logic. Potentially could open an item it does not have SA's with, but should be rare.
-      this.openColumnFromItem(this._columns[1].items[0]);
+
+      //Only open second column if they're not a new user and we are only displaying; we don't want to pre-open columns that are also pre-checked
+      if (!this.shouldPreCheckAllBoxes()){
+        // Open second column too. Currently just opens the top item, no advanced logic. Potentially could open an item it does not have SA's with, but should be rare.
+        this.openColumnFromItem(this._columns[1].items[0]);
+      }
+      
     }
 
     // Save the original columns so we can restore it if the user wants to cancel changes
@@ -283,6 +288,7 @@ export class MillerColumnsComponent implements OnInit {
     let data = this.config.data[this.columnOrder[targetColIndex].toLowerCase()]
     .filter((x: any) => {
       if (!x.associationId) return true;
+      if (x.isNewUser) return true;
       return x.associationId.indexOf(item.objectId) !== -1;
     });
 
@@ -300,7 +306,6 @@ export class MillerColumnsComponent implements OnInit {
     return (<Person[]>col)[0].firstName !== undefined;
   }
 
-  /** Calculates column statuses based on selections in previous columns. INCOMPLETE! Does not handle enrollment/site page. .*/
   private recalculateColumnStatus(column: any[], originalSelection: MillerItem ): MillerItem[] {
     // Clone the column so that when we filter out irrelevant data it doesn't destroy the underlying data.
     column = cloneDeep(column);
@@ -364,9 +369,10 @@ export class MillerColumnsComponent implements OnInit {
     return column;
   }
 
-  // private calculateFinalColumn(column){
-
-  // }
+  refreshFinalColumn(){
+    // Just need to re-open the last column by re-opening the current open item in the penultimate column
+    this.openColumnFromItem(this._columns[1].items.filter(x => x.open)[0]);
+  }
 
   public getUserSelection(): Person{
     if (this.IS_PEOPLE_TABLE){
