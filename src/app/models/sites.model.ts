@@ -92,6 +92,11 @@ export class SiteAccess extends Base {
   tAndC: string;
   posUserId: string;
   provisionedDate: Date;
+  provisionedStatus: ProvisionedStatus = ProvisionedStatus.NOT_PROVISIONED;
+
+  get isProvisioned(): boolean {
+    return !!(this.provisionedStatus === ProvisionedStatus.PROVISIONED && this.provisionedDate)
+  }
 
   // In-progress
   progress: SiteAccessProgressSteps;
@@ -227,4 +232,12 @@ export enum AccessClass {
 export enum AccessRights {
   MED_HIST_AND_CLAIMS = 'Med Hist + Claims',
   MED_HIST = 'Med Hist'
+}
+
+export enum ProvisionedStatus {
+  PROVISIONED,
+  /** The provisioner has actively rejected the request */
+  REJECTED,
+  /** Not provisioned just means it has no status, it's similar to undefined. The user might have yet to make a decision. */
+  NOT_PROVISIONED,
 }

@@ -1,4 +1,4 @@
-<div class="enrollment-list-controls bg-light">
+<!-- <div class="enrollment-list-controls bg-light">
   <form class="form-inline">
     <input class="form-control" type="search" placeholder="Search" aria-label="Search" (input)="search($event.target.value)">
   </form>
@@ -18,7 +18,34 @@
     </select>
   </form>
 
-</div>
+</div> -->
+<div class="enrollment-list-controls bg-light">
+    <div>
+      <form class="form-inline">
+        <span class="has-float-label">
+          <input class="form-control bg-transparent" type="search" placeholder="Sites" aria-label="Sites" (input)="search($event.target.value)">
+          <span>Sites</span>
+        </span>
+  
+        <label class="has-float-label mx-2">
+          <select id="enrollmentViewSelector" class="form-control enrollment-view-selector" [value]="viewTypeSelector" (change)="viewTypes($event.target.value)">
+            <option value="View All">All</option>
+            <option *ngFor="let status of EnrollmentStatus" value="{{status}}">
+              {{status}}
+            </option>
+          </select>
+          <span>View</span>
+        </label>
+  
+      </form>
+    </div>
+    <div>
+      <prime-alert inlineBlock='true' *ngIf="showSaveMessage" [@fadeIn] dismissable='' type='success'>Submitted...</prime-alert>
+  
+      <button [disabled]="!updated" type="button" class="btn btn-default mx-2" (click)="cancel()">Cancel</button>
+      <button [disabled]="!updated" type="button" class="btn btn-primary mx-2" (click)="save()" [primeLoadingSpinner]="loadingSpinner" >Submit</button>
+    </div>
+  </div>
 
 
 <div class="enrollment-item-container">
@@ -27,7 +54,8 @@
       *ngFor="let item of data"
       [rowData]='item'
       [primaryType]='primaryType'
-      (onRowOpened)='rowOpened($event)'>
+      (onRowOpened)='rowOpened($event)'
+      (siteAccessChange)='onSiteAccessChange($event)'>
     </prime-provisioner-row>
   </div>
 </div>
