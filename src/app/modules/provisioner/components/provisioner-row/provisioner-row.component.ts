@@ -176,6 +176,7 @@ export class ProvisionerRowComponent extends EnrollmentRow implements OnInit {
   }
 
   get isNew(): boolean {
+    if (!this.siteAccessObject) return false;
 
     if (!(this.siteAccessObject.status === EnrollmentStatus.New || this.siteAccessObject.status === EnrollmentStatus.Provisioning)){
       return false;
