@@ -7,13 +7,15 @@ import {loadInOut, openState, openStateChild, openStateDisable} from '../../../.
 import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
 import {EnrollmentRowItem} from '../../../verifier/components/enrollment-row/enrollment-row.component';
 import {Collection} from "../../../../models/collections.model";
+import {CollegeTypes} from "../../../../models/colleges.enum";
 
 export interface ProvisionerRowItem {
   title: string;
   siteAccess: SiteAccess[];
   site?: Site;
   associatedObjectId: string;
-  collegeId?: string;
+  collegeNumber?: string;
+  licenseNumber?: string;
 }
 
 @Component({
@@ -84,16 +86,28 @@ export class ProvisionerRowComponent extends Base implements OnInit {
     return name.substring(0, name.lastIndexOf(' ') - 1);
   }
 
-  getCollege(): string{
+  getCollegeNumber(): string{
     if (this.primaryType !== 'Site') {
       // In current designs, we should NEVER care about college except for Site tables.
       return null;
     }
-    if (!this.rowData.collegeId || this.rowData.collegeId.length === 0 || this.rowData.collegeId === 'pleaseSelect'){
+    if (!this.rowData.collegeNumber || this.rowData.collegeNumber.length === 0 || this.rowData.collegeNumber === 'pleaseSelect'){
       return 'n/a';
     }
 
-    return this.rowData.collegeId;
+    return CollegeTypes[this.rowData.collegeNumber];
+  }
+
+  getLicenseNumber(): string{
+    if (this.primaryType !== 'Site') {
+      // In current designs, we should NEVER care about college except for Site tables.
+      return null;
+    }
+    if (!this.rowData.licenseNumber || this.rowData.licenseNumber.length === 0){
+      return 'n/a';
+    }
+
+    return this.rowData.licenseNumber;
   }
 
 

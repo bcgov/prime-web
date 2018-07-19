@@ -140,7 +140,8 @@ export class PrimeDataService {
       const rowItem: ProvisionerRowItem = {
         title: user.name,
         siteAccess: user.siteAccess.filter(sa => sa.site === site),
-        collegeId: user.collegeCertificationList[0].collegeType,
+        collegeNumber: user.collegeCertificationList[0].collegeType,
+        licenseNumber: user.collegeCertificationList[0].licenceNumber,
         associatedObjectId: user.objectId,
       };
       result.push(rowItem);

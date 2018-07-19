@@ -89,7 +89,8 @@
   <table >
     <tr>
       <td *ngIf="primaryType === 'User'" class="provision-element-label" width = "8%">PEC</td>
-      <td *ngIf="primaryType === 'Site'" class="provision-element-label" width = "8%">College ID</td>
+      <td *ngIf="primaryType === 'Site'" class="provision-element-label" width = "8%">College Number</td>
+      <td *ngIf="primaryType === 'Site'" class="provision-element-label" width = "8%">License Number</td>
       <td class="provision-element-label" width = "12%"> Request</td>
       <td class="provision-element-label" width = "10%" >Class</td>
       <td class="provision-element-label" width = "12%"> Access Rights</td>
@@ -102,7 +103,8 @@
     </tr>
     <tr>
       <td *ngIf="primaryType === 'User'" class="provision-element-text">{{rowData.site.PEC}}</td>
-      <td *ngIf="primaryType === 'Site'" class="provision-element-text">{{ getCollege() }}</td>
+      <td *ngIf="primaryType === 'Site'" class="provision-element-text">{{ getCollegeNumber() }}</td>
+      <td *ngIf="primaryType === 'Site'" class="provision-element-text">{{ getLicenseNumber() }}</td>
       <td class="provision-element-text"> {{siteAccessObject.request}}</td>
       <td class="provision-element-text">{{siteAccessObject.siteClass}}</td>
       <td class="provision-element-text"> {{siteAccessObject.accessRights}}</td>
