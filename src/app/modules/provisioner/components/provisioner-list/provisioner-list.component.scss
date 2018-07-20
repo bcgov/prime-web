@@ -1,4 +1,5 @@
 @import 'variables.scss';
+@import '../../../../core/enrollment-list/enrollment-list.class';
 
 .enrollment-list-controls {
   border: 2px solid $gray-300;
@@ -9,15 +10,7 @@ $listHeight: 25rem;
   border-top: none;
   overflow-y: scroll;
   height: $listHeight;
-
-  // This is a hack-fix! These two lines visually cancel out (more or less), but
-  // they allow the container to effectively have overflow-x: visible.
-  // Technically, overflow-y scroll and overflow-x visible do not work together
-  // at the same time. It allows expanded rows to scale outside of their
-  // container.
-  //https://stackoverflow.com/questions/38460841/overflow-y-scroll-with-overflow-x-visible
-  margin: 0 -5rem;
-  padding: 0 5rem;
+  overflow-x: hidden;
 
   // We have to re-jigger borders due to the above hackfix
   .enrollment-item-inner {

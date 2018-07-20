@@ -153,7 +153,14 @@ export class PrimeDataService {
   getProvisionerDetailsByUser(user: Person): ProvisionerRowItem[] {
     const result = [];
 
-    user.sites.map(site => {
+    // Filter out any rows with EnrollmentStatus === New, just for prototype and until statuses are sorted out.
+    user.sites.filter(site => {
+      return site.siteAccess
+        .filter(sa => sa.person === user)
+        .filter(sa => sa.status !== EnrollmentStatus.New).length >= 1;
+    }).map(site => {
+    // user.sites.map(site => {
+
       const rowItem: ProvisionerRowItem = {
         title: site.name,
         siteAccess: site.siteAccess.filter(x => x.person === user),

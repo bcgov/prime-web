@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Person } from '../../../../models/person.model';
 import { PrimeDataService } from '../../../../services/prime-data.service';
@@ -22,7 +22,7 @@ export class ProvisionerDetailsComponent implements OnInit {
   site: Site;
   collection: Collection;
 
-  constructor(private route: ActivatedRoute, private dataService: PrimeDataService) { }
+  constructor(private route: ActivatedRoute, private dataService: PrimeDataService, private router: Router) { }
 
   ngOnInit() {
     this.sub = this.route.data
@@ -45,6 +45,17 @@ export class ProvisionerDetailsComponent implements OnInit {
       }
     }
 
+    // If no ID, or neither person or site is defined, we want to redirect back
+    // This usually happens when the user refreshes the page and the objectId's are re-generated
+    if (!id || id.length === 0 || ( !this.person && !this.site ) ){
+      const url = this.router.url.split('/');
+      url.pop(); //Remove objectID, which we know is last item in array
+      const type = url.pop(); //Will be 'user' or 'string';
+      this.router.navigate([`/provisioner/dashboard/${type}`]);
+      console.error('Provisioner Details objectId (in url) refers to an object which does not exist! Removed objectId from URl and navigated back to Provisioner Dashboard.');
+      return;
+    }
+
   }
 
   ngOnDestroy() {
@@ -60,10 +71,12 @@ export class ProvisionerDetailsComponent implements OnInit {
   }
 
   get provisionerSiteData(): ProvisionerRowItem[] {
+    if (!this.person) return null;
     return this.dataService.getProvisionerDetailsByUser(this.person);
   }
 
   get provisionerUserData(): ProvisionerRowItem[] {
+    if (!this.site) return null;
     return this.dataService.getProvisionerDetailsBySite(this.site);
   }
 
@@ -72,7 +85,7 @@ export class ProvisionerDetailsComponent implements OnInit {
   }
 
   collegeCurrValue(selection) {
-    return CollegeTypes[selection];
+    return CollegeTypes[selection] ? CollegeTypes[selection] : '';
   }
 }
 

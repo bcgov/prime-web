@@ -60,13 +60,13 @@
         <label for="email">
           Email
         </label>
-        <input type="text" disabled class="form-control" id="email" name="email" [value]="person?.email">
+        <input type="text" disabled class="form-control" id="email" name="email" [value]="person?.email ? person.email : ''">
       </div>
       <div class="form-group row has-float-label">
         <label for="phone">
           Phone number
         </label>
-        <input type="text" disabled class="form-control" id="phone" name="phone" [value]="person?.phone">
+        <input type="text" disabled class="form-control" id="phone" name="phone" [value]="person?.phone ? person.phone : ''">
       </div>
     </div>
 

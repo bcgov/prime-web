@@ -4,6 +4,7 @@ import { ProvisionerListComponent } from './provisioner-list.component';
 import { ProvisionerRowComponent } from '../provisioner-row/provisioner-row.component';
 import { CoreModule } from '../../../core/core.module';
 import { FormsModule } from '@angular/forms';
+import { PrimeDataService } from '../../../../services/prime-data.service';
 
 describe('ProvisionerListComponent', () => {
   let component: ProvisionerListComponent;
@@ -12,7 +13,8 @@ describe('ProvisionerListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ProvisionerListComponent, ProvisionerRowComponent ],
-      imports: [ CoreModule, FormsModule ]
+      imports: [ CoreModule, FormsModule ],
+      providers: [PrimeDataService]
     })
     .compileComponents();
   }));

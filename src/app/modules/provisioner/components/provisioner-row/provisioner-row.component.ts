@@ -2,12 +2,14 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 import {Base} from '../../../../core/base/base.class';
 
-import {DeclinedReasons, Site, SiteAccess} from '../../../../models/sites.model';
+import {DeclinedReasons, Site, SiteAccess, ProvisionedStatus} from '../../../../models/sites.model';
 import {loadInOut, openState, openStateChild, openStateDisable} from '../../../../animations/animations';
 import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
 import {EnrollmentRowItem} from '../../../verifier/components/enrollment-row/enrollment-row.component';
 import {Collection} from "../../../../models/collections.model";
 import {CollegeTypes} from "../../../../models/colleges.enum";
+import { EnrollmentRow, RowState } from '../../../../core/enrollment-row/enrollment-row.class';
+import { cloneDeep } from 'lodash';
 
 export interface ProvisionerRowItem {
   title: string;
@@ -25,17 +27,24 @@ export interface ProvisionerRowItem {
   animations: [openState, openStateChild, loadInOut, openStateDisable]
 })
 
-export class ProvisionerRowComponent extends Base implements OnInit {
+export class ProvisionerRowComponent extends EnrollmentRow implements OnInit {
 
-  // TODO - Restore interface!
-  // @Input() rowData: any;
-  @Input() rowData: ProvisionerRowItem;S
-
+  @Input() rowData: ProvisionerRowItem;
+  /** An unchanged copy of rowData on init, meant to track if user has made changes */
+  private rowDataOnInit: ProvisionerRowItem;
 
   @Input() primaryType: 'User'|'Site';
 
   @Output() onRowOpened = new EventEmitter<any>();
-  openState: String = 'closed';
+  @Output() siteAccessChange = new EventEmitter<SiteAccess>();
+
+
+  get siteAccessRequiringAttention(): any[] {
+    if (!this.rowData) {
+      return [];
+    }
+    return this.rowData.siteAccess;
+  }
 
   siteName: string;
   siteNumber: String;
@@ -57,18 +66,10 @@ export class ProvisionerRowComponent extends Base implements OnInit {
 
   ngOnInit() {
     if (!this.rowData ) { return; }
-    console.log('ngOnInit get row data is ' , this.rowData);
-
-    // Note - this part handles the "By Site" and "By User" layouts, how they can have different inputs. Merge if possible.
-    // Assumes 1 enrollment per site.
-    // if (this.rowData.sites){
-    //   this.siteAccessObject = this.rowData.sites[0].siteAccess[0];
-    // }
-    // else {
-    //   this.siteAccessObject  = this.rowData.siteAccess[0];
-    // }
     this.siteAccessObject  = this.rowData.siteAccess[0];
     this.siteStatus = this.siteAccessObject.status;
+
+    this.rowDataOnInit = cloneDeep(this.rowData);
   }
 
   get title(): string {
@@ -77,6 +78,7 @@ export class ProvisionerRowComponent extends Base implements OnInit {
       return 'Site ' + name.substring(name.lastIndexOf(' ') + 1);
     }
     else {
+      //TODO
       return 'TITLE SITE';
     }
   }
@@ -130,15 +132,15 @@ export class ProvisionerRowComponent extends Base implements OnInit {
 
   toggleRow() {
     if (this.canOpen()) {
-      this.openState = this.openState === 'opened' ? 'closed' : 'opened';
-      if (this.openState === 'opened') {
+      this.openState = this.openState === RowState.Opened ? RowState.Closed : RowState.Opened;
+      if (this.openState === RowState.Opened) {
         this.onRowOpened.emit(this);
       }
     }
   }
 
   closeRow() {
-    this.openState = 'closed';
+    this.openState = RowState.Closed;
   }
 
 
@@ -149,20 +151,51 @@ export class ProvisionerRowComponent extends Base implements OnInit {
 
   accept() {
     this.siteStatus = 'AcceptEnrollment';
+    this.siteAccessObject.provisionedDate = new Date();
+    this.siteAccessObject.provisionedStatus = ProvisionedStatus.PROVISIONED;
     //Status stays New, no need to change
     //this.rowData.siteAccess[0].status = EnrollmentStatus.
+    this.siteAccessChange.emit(this.siteAccessObject);
   }
 
   reject(){
     this.siteStatus = 'DeclinedEnrollment';
-    this.rowData.siteAccess[0].status = EnrollmentStatus.Declined;
+    this.siteAccessObject.provisionedStatus = ProvisionedStatus.REJECTED;
+    this.siteAccessObject.status = EnrollmentStatus.Declined;
+    // this.rowData.siteAccess[0].status = EnrollmentStatus.Declined; //old
+    this.siteAccessChange.emit(this.siteAccessObject)
   }
 
-  // TODO: Likely wrong and needs to work for 'Site' and 'User!'
-  // // TODO: Why can't we get SiteAccess obj directly? from dataService? look at the byuser approach and get that sorted first, then circle back to kyle
-  // get siteAccess(): SiteAccess{
-  //   return this.rowData.sites[0].siteAccess[0];
-  // }
+  // TODO - Replace SiteStatus with these calls
+  get isAccepted(): boolean {
+    return this.siteAccessObject.isProvisioned;
+  }
+
+  get isRejected(): boolean {
+    return this.siteAccessObject.provisionedStatus === ProvisionedStatus.REJECTED;
+  }
+
+  get isNew(): boolean {
+    if (!this.siteAccessObject) return false;
+
+    if (!(this.siteAccessObject.status === EnrollmentStatus.New || this.siteAccessObject.status === EnrollmentStatus.Provisioning)){
+      return false;
+    }
+
+    if (!(this.siteAccessObject.provisionedStatus === ProvisionedStatus.NOT_PROVISIONED)) {
+      return false;
+    }
+
+    return true;
+    // return this.siteAccessObject.status === EnrollmentStatus.New && this.siteAccessObject.provisionedStatus === ProvisionedStatus.NOT_PROVISIONED;
+  }
+
+  // If the row was declined prior to any user action (on the page at this time)
+  get isPreviouslyRejected(): boolean {
+    // We need to check if it was 'rejected' at the time of component load.
+    return this.rowDataOnInit.siteAccess[0].status === EnrollmentStatus.Declined;
+  }
+
 
   goToNotePage(){
     console.log('todo');
