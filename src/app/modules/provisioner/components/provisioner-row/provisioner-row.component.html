@@ -85,7 +85,7 @@
   </div>
 </div>
 
-<div class="table-responsive ml-2 " *ngIf="isNew" >
+<div [@growVertical] class="provisioner-table-container table-responsive ml-2 " *ngIf="isNew || showProvisionerDetailsRowOverride" >
   <table >
     <tr>
       <td *ngIf="primaryType === 'User'" class="provision-element-label" width = "8%">PEC</td>
