@@ -41,17 +41,20 @@
           >
           <div class="enrollment-text-container">
             <span class="enrollment-text-main">{{siteAccess.title}}</span>
+
+
+            <prime-info-button
+              class='mx-2'
+              [targetId]="siteAccess.site.objectId">
+            </prime-info-button>
           </div>
           <div class="enrollment-actions">
-              <span class="enrollment-icons">
+              <span class="enrollment-icons mr-5">
 
                   <prime-pill-badge
                     [alerts]="[siteAccess.alert]">
                   </prime-pill-badge>
 
-                  <prime-info-button
-                    [targetId]="siteAccess.site.objectId">
-                  </prime-info-button>
               </span>
           </div>
 
