@@ -1,11 +1,12 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { PrimeDataService } from '../../services/prime-data.service';
-import { Site } from '../../models/sites.model';
+import {Site, SiteAccess, SiteAccessProgressSteps} from '../../models/sites.model';
 import { Person } from '../../models/person.model';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { cloneDeep } from 'lodash';
 import { growHorizontal } from '../../animations/animations';
 import { Collection } from '../../models/collections.model';
+import {EnrollmentStatus} from "../../models/enrollment-status.enum";
 
 
 // Enum for domains
@@ -103,13 +104,36 @@ export class InfoButtonComponent implements OnInit {
   save(){
     // The original object we want to update
     const source = this.lookupObjectId(this.target.objectId);
+    console.log(source)
 
     if (!Site.isSiteGuard(source)){
+      //Change status to provisioning when an enrolment is being ended
+      for (var i = 0; i < source.siteAccess.length; i++) {
+        if (source.siteAccess[i].endDateShort != this.person.siteAccess[i].endDateShort) {
+          this.person.siteAccess[i].status = EnrollmentStatus.Provisioning;
+          this.person.siteAccess[i].progress = SiteAccessProgressSteps.Provisioner;
+        }
+      }
       source.siteAccess = this.person.siteAccess;
+
+      //source.siteAccess[0].status = EnrollmentStatus.Provisioning;
+      // Change status to 'Provisioning' based on user action
+
+      /*source.siteAccess = source.siteAccess.map(sa => {
+        if (sa.endDate){
+          console.log('ENDING ENROLMENT', sa);
+          sa.status = EnrollmentStatus.Provisioning;
+          sa.progress = SiteAccessProgressSteps.Provisioner;
+        }
+        return sa;
+      })*/
+
     }
     else {
       source.siteAccess = this.site.siteAccess;
     }
+
+
 
     this.doneEditting();
   }
@@ -177,6 +201,7 @@ export class InfoButtonComponent implements OnInit {
       return this.siteModalRef;
     }
   }
+
 
 }
 
