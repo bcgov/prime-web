@@ -107,30 +107,37 @@ export class InfoButtonComponent implements OnInit {
     console.log(source)
 
     if (!Site.isSiteGuard(source)){
-      //Change status to provisioning when an enrolment is being ended
-      for (var i = 0; i < source.siteAccess.length; i++) {
-        if (source.siteAccess[i].endDateShort != this.person.siteAccess[i].endDateShort) {
+      for (let i = 0; i < this.person.siteAccess.length; i++) {
+        const sourceSA = source.siteAccess[i];
+        const personSA = this.person.siteAccess[i];
+        //Change status to provisioning when an enrolment is being ended
+        if (source.siteAccess[i].endDateShort != this.person.siteAccess[i].endDateShort && this.person.siteAccess[i].endDate != null) {
           this.person.siteAccess[i].status = EnrollmentStatus.Provisioning;
           this.person.siteAccess[i].progress = SiteAccessProgressSteps.Provisioner;
         }
+        sourceSA.status = personSA.status;
+        sourceSA.accessReason = personSA.accessReason;
+        sourceSA.startDate = personSA.startDate;
+        sourceSA.endDate = personSA.endDate;
       }
-      source.siteAccess = this.person.siteAccess;
 
-      //source.siteAccess[0].status = EnrollmentStatus.Provisioning;
-      // Change status to 'Provisioning' based on user action
-
-      /*source.siteAccess = source.siteAccess.map(sa => {
-        if (sa.endDate){
-          console.log('ENDING ENROLMENT', sa);
-          sa.status = EnrollmentStatus.Provisioning;
-          sa.progress = SiteAccessProgressSteps.Provisioner;
-        }
-        return sa;
-      })*/
-
+      //source.siteAccess = this.person.siteAccess;
     }
     else {
-      source.siteAccess = this.site.siteAccess;
+      for (let i = 0; i < this.site.siteAccess.length; i++) {
+        const sourceSA = source.siteAccess[i];
+        const siteSA = this.site.siteAccess[i];
+        //Change status to provisioning when an enrolment is being ended
+        if (source.siteAccess[i].endDateShort != this.site.siteAccess[i].endDateShort && this.site.siteAccess[i].endDate != null) {
+          this.site.siteAccess[i].status = EnrollmentStatus.Provisioning;
+          this.site.siteAccess[i].progress = SiteAccessProgressSteps.Provisioner;
+        }
+        sourceSA.status = siteSA.status;
+        sourceSA.accessReason = siteSA.accessReason;
+        sourceSA.startDate = siteSA.startDate;
+        sourceSA.endDate = siteSA.endDate;
+      }
+      //source.siteAccess = this.site.siteAccess;
     }
 
 
@@ -142,7 +149,7 @@ export class InfoButtonComponent implements OnInit {
     this.editable = false;
     this.loadTarget(this.target.objectId);
   }
-
+  
   onSetEndDate(evt: Date, siteAccess){
     this.shouldShowreasonForDeactivation[siteAccess.objectId] = !!evt;
     siteAccess.endDate = evt;
