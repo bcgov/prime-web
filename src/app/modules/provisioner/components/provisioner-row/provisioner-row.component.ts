@@ -3,7 +3,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Base} from '../../../../core/base/base.class';
 
 import {DeclinedReasons, Site, SiteAccess, ProvisionedStatus} from '../../../../models/sites.model';
-import {loadInOut, openState, openStateChild, openStateDisable} from '../../../../animations/animations';
+import {loadInOut, openState, openStateChild, openStateDisable, growVertical} from '../../../../animations/animations';
 import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
 import {EnrollmentRowItem} from '../../../verifier/components/enrollment-row/enrollment-row.component';
 import {Collection} from "../../../../models/collections.model";
@@ -24,7 +24,7 @@ export interface ProvisionerRowItem {
   selector: 'prime-provisioner-row',
   templateUrl: './provisioner-row.component.html',
   styleUrls: ['./provisioner-row.component.scss'],
-  animations: [openState, openStateChild, loadInOut, openStateDisable]
+  animations: [openState, openStateChild, loadInOut, openStateDisable, growVertical]
 })
 
 export class ProvisionerRowComponent extends EnrollmentRow implements OnInit {
@@ -38,6 +38,9 @@ export class ProvisionerRowComponent extends EnrollmentRow implements OnInit {
   @Output() onRowOpened = new EventEmitter<any>();
   @Output() siteAccessChange = new EventEmitter<SiteAccess>();
 
+
+  /** Force showing of the provisioner details row outside of the default business logic. This is used when clicking on the row; */
+  public showProvisionerDetailsRowOverride: boolean = false;
 
   get siteAccessRequiringAttention(): any[] {
     if (!this.rowData) {
@@ -137,6 +140,8 @@ export class ProvisionerRowComponent extends EnrollmentRow implements OnInit {
         this.onRowOpened.emit(this);
       }
     }
+    // Custom provisioner functionality: Also toggle visibility of the override row.
+    this.showProvisionerDetailsRowOverride = !this.showProvisionerDetailsRowOverride;
   }
 
   closeRow() {
