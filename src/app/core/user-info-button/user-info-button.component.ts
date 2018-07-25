@@ -1,11 +1,12 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { PrimeDataService } from '../../services/prime-data.service';
-import { Site, SiteAccess } from '../../models/sites.model';
+import { Site, SiteAccess, SiteAccessProgressSteps } from '../../models/sites.model';
 import { Person } from '../../models/person.model';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { cloneDeep } from 'lodash';
 import { growHorizontal } from '../../animations/animations';
 import { Collection } from '../../models/collections.model';
+import {EnrollmentStatus} from "../../models/enrollment-status.enum";
 
 
 // Enum for domains
@@ -103,13 +104,43 @@ export class InfoButtonComponent implements OnInit {
   save(){
     // The original object we want to update
     const source = this.lookupObjectId(this.target.objectId);
+    console.log(source)
 
     if (!Site.isSiteGuard(source)){
-      source.siteAccess = this.person.siteAccess;
+      for (let i = 0; i < this.person.siteAccess.length; i++) {
+        const sourceSA = source.siteAccess[i];
+        const personSA = this.person.siteAccess[i];
+        //Change status to provisioning when an enrolment is being ended
+        if (source.siteAccess[i].endDateShort != this.person.siteAccess[i].endDateShort && this.person.siteAccess[i].endDate != null) {
+          this.person.siteAccess[i].status = EnrollmentStatus.Provisioning;
+          this.person.siteAccess[i].progress = SiteAccessProgressSteps.Provisioner;
+        }
+        sourceSA.status = personSA.status;
+        sourceSA.accessReason = personSA.accessReason;
+        sourceSA.startDate = personSA.startDate;
+        sourceSA.endDate = personSA.endDate;
+      }
+
+      //source.siteAccess = this.person.siteAccess;
     }
     else {
-      source.siteAccess = this.site.siteAccess;
+      for (let i = 0; i < this.site.siteAccess.length; i++) {
+        const sourceSA = source.siteAccess[i];
+        const siteSA = this.site.siteAccess[i];
+        //Change status to provisioning when an enrolment is being ended
+        if (source.siteAccess[i].endDateShort != this.site.siteAccess[i].endDateShort && this.site.siteAccess[i].endDate != null) {
+          this.site.siteAccess[i].status = EnrollmentStatus.Provisioning;
+          this.site.siteAccess[i].progress = SiteAccessProgressSteps.Provisioner;
+        }
+        sourceSA.status = siteSA.status;
+        sourceSA.accessReason = siteSA.accessReason;
+        sourceSA.startDate = siteSA.startDate;
+        sourceSA.endDate = siteSA.endDate;
+      }
+      //source.siteAccess = this.site.siteAccess;
     }
+
+
 
     this.doneEditting();
   }
@@ -118,7 +149,7 @@ export class InfoButtonComponent implements OnInit {
     this.editable = false;
     this.loadTarget(this.target.objectId);
   }
-
+  
   onSetEndDate(evt: Date, siteAccess){
     this.shouldShowreasonForDeactivation[siteAccess.objectId] = !!evt;
     siteAccess.endDate = evt;
@@ -185,6 +216,7 @@ export class InfoButtonComponent implements OnInit {
       return this.siteModalRef;
     }
   }
+
 
 }
 
