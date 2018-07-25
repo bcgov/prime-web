@@ -149,7 +149,7 @@ export class InfoButtonComponent implements OnInit {
     this.editable = false;
     this.loadTarget(this.target.objectId);
   }
-  
+
   onSetEndDate(evt: Date, siteAccess){
     this.shouldShowreasonForDeactivation[siteAccess.objectId] = !!evt;
     siteAccess.endDate = evt;

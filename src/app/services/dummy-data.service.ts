@@ -78,7 +78,7 @@ export class DummyDataService {
       // // Self declaration related
       // person.informationContravention = { flag: true, detail: 'Information contravention related comment' };
       // person.cancelledRegistration    = { flag: true, detail: 'Cancelled registration related comment' };
-      // person.licenceCondition         = { flag: true, detail: 'Terms and Conditions imposed related comment' };
+      // person.licenceCondition         = { flag: true, detail: 'Limits and Conditions imposed related comment' };
       // person.revokedAccess            = { flag: true, detail: 'Revoked access related comment' };
 
       result.push(person);
