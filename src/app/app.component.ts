@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
 import { DummyDataService } from './services/dummy-data.service';
 import { environment } from './../environments/environment';
-//import 'rxjs/add/operator/filter';
-
-// import { EnrollmentRowItem, EnrollmentRowChild, EnrollmentStatus, BadgeLevel } from './core/enrollment-row/enrollment-row.interface';
-// import { User } from './models/user.model';
 import { UserService } from './services/user.service';
 import { PrimeDataService } from './services/prime-data.service';
 
@@ -62,10 +57,13 @@ export class AppComponent implements OnInit {
 
 
     if (environment.useDeveloperDummyData){
-      let applicant = this.primeDataService.people[0];
-      applicant.email = 'avoidredirect@env.com';
-      applicant.phone = '555-555-5555';
+      const applicant = this.primeDataService.people[0];
+
       applicant.isWorkingOnBehalf = true;
+      applicant.isDeviceProvider = false;
+      applicant.hasCollege = false;
+      applicant.workingOnBehalfList[0].jobTitle = 'MEDICA';
+      applicant.isDeclaredCheck = true;
     }
   }
 }

@@ -263,6 +263,8 @@ export class Person extends Base {
   mailAddress: Address = new Address();
   dateOfBirth: Date;
   phone: PhoneNumber;
+  phoneExtension: string;
+  hasInternationalPhoneNumber: boolean = false;
   email: string;
   renewalDate: Date;
 
@@ -345,7 +347,8 @@ export class Person extends Base {
   }
 
   get hasContactInfo(): boolean {
-    return !!(this.name && this.phone && this.email);
+    const hasBasics = !!(this.name && this.phone && this.email);
+    return hasBasics && !this.mailAddress.isEmpty();
   }
 
   get renewalDateShort(): string {

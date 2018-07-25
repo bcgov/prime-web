@@ -1,9 +1,8 @@
 <prime-applicant-breadcrumbs
   pageName="Contact"
   nextPageLink="/applicant/professional"
-  [showControls]="hasChanged"
-  (onSave)="onSave($event)"
-  (onCancel)="onCancel($event)">
+  [shouldDisableContinue]="!canContinue()"
+  (onSave)="onSave($event)">
 </prime-applicant-breadcrumbs>
 
 <prime-page-framework>
@@ -80,10 +79,22 @@
 
   <form>
     <div>
+
+      <label>
+          I have an international (non-Canadian) phone-number
+        <prime-toggle [(data)]="applicant.hasInternationalPhoneNumber" (click) = "onInternationalPhoneNumberChange()"></prime-toggle>
+      </label>
+
       <label class="has-float-label">
-        <input type="text" class="form-control prime-input-large" id="phone" name="phone" [(ngModel)]="applicant.phone" (input)="onChange()" placeholder=" ">
+        <input type="text" [textMask]="{mask: getPhoneMask()}" class="form-control prime-input-large" id="phone" name="phone" [(ngModel)]="applicant.phone" (input)="onChange()" placeholder=" ">
         <span>Phone</span>
       </label>
+
+      <label class="has-float-label">
+          <input type="text" class="form-control prime-input-large" id="phoneExt" name="phoneExt" [(ngModel)]="applicant.phoneExtension" (input)="onChange()" placeholder=" ">
+          <span>Extension Number</span>
+        </label>
+
       <label class="has-float-label">
         <input type="text" class="form-control prime-input-large" id="email" name="email" [(ngModel)]="applicant.email" (input)="onChange()" placeholder=" ">
         <span>Email</span>

@@ -66,9 +66,8 @@ export class AddUserButtonComponent implements OnInit {
     }
     //We don't want the set date from dummyDataService
     person.renewalDate = null;
-    // Ensure user has to fill out Applicant contact info
-    person.email = null;
-    person.phone = null;
+    // Re-create email based on new name
+    person.email = `${person.name[0].toLowerCase()}${person.lastName.toLowerCase()}@gmail.com`;
     person.isNewUser = true;
     // Only return one result (prototype only)
     this.searchResultsPeople = [person];

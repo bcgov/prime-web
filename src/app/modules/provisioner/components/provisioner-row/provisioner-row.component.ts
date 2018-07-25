@@ -158,8 +158,7 @@ export class ProvisionerRowComponent extends EnrollmentRow implements OnInit {
     this.siteStatus = 'AcceptEnrollment';
     this.siteAccessObject.provisionedDate = new Date();
     this.siteAccessObject.provisionedStatus = ProvisionedStatus.PROVISIONED;
-    //Status stays New, no need to change
-    //this.rowData.siteAccess[0].status = EnrollmentStatus.
+    this.siteAccessObject.status = EnrollmentStatus.Active;
     this.siteAccessChange.emit(this.siteAccessObject);
   }
 

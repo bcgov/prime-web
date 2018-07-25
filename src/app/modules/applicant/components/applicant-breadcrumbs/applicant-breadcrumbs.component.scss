@@ -8,9 +8,10 @@ prime-applicant-breadcrumbs {
   }
 
   .controls {
-    // Keeps the size of the element fixed even if it changes due to replacing the buttons with text.
-    flex-basis: 11.5rem;
-    min-width: 11.5rem;
+    // Match the width of the left-most breadcrumb text.
+    min-width: calc(15em + 100px);
+    display: flex;
+    justify-content: flex-end;
   }
 
  .breadcrumb-text {

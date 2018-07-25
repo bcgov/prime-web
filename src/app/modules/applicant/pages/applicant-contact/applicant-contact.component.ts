@@ -4,6 +4,8 @@ import { DummyDataService } from '../../../../services/dummy-data.service';
 import { Person } from '../../../../models/person.model';
 import { cloneDeep } from 'lodash';
 
+const NUMBER = /\d/;
+
 @Component({
   selector: 'prime-applicant-contact',
   templateUrl: './applicant-contact.component.html',
@@ -13,7 +15,9 @@ export class ApplicantContactComponent implements OnInit {
   private _user: Person;
 
   public hasChanged: boolean = false;
+  public hasEverChanged: boolean = false;
 
+  private phoneMask = ['(', NUMBER, NUMBER, NUMBER, ')', '-', NUMBER, NUMBER, NUMBER, '-', NUMBER, NUMBER, NUMBER, NUMBER];
 
   constructor(private primeDataService: PrimeDataService) { }
 
@@ -26,6 +30,14 @@ export class ApplicantContactComponent implements OnInit {
     return this._user;
   }
 
+  canContinue(): boolean {
+    if (!this.hasEverChanged){
+      return true;
+    }
+
+    return this.hasChanged;
+  }
+
   /**
    * Toggle to show the fields to set the preferrred names
    */
@@ -35,6 +47,13 @@ export class ApplicantContactComponent implements OnInit {
 
   onChange() {
     this.hasChanged = true;
+    this.hasEverChanged = true;
+  }
+
+  onInternationalPhoneNumberChange() {
+    this.applicant.phone = '';
+    this.applicant.phoneExtension = '';
+    this.onChange();
   }
 
   onSave(val: boolean){
@@ -61,17 +80,6 @@ export class ApplicantContactComponent implements OnInit {
     this.hasChanged = false;
   }
 
-  onCancel(val: boolean){
-    // Reset editable fields cancel
-    this._user.useRegAddress = false;
-    this._user.mailAddress.copy(this.primeDataService.user.mailAddress); // empty object
-
-    this._user.phone = this.primeDataService.user.phone;
-    this._user.email = this.primeDataService.user.email;
-
-    this.hasChanged = false;
-  }
-
   // Update mailAddress with information in the input field that the user is
   // currently updating
   updateStreet(event) {
@@ -93,6 +101,16 @@ export class ApplicantContactComponent implements OnInit {
   updatePostal(event) {
     this.copyRegAddress();
     this._user.mailAddress.postal = event;
+  }
+
+  getPhoneMask(): (RegExp | string )[] | false {
+    if (!this.applicant.hasInternationalPhoneNumber ){
+      // return  { mask: this.phoneMask };
+      return this.phoneMask;
+    }
+
+    //TODO: FINISH THIS OFF AND TEST THAT TOGGLING ACTUALLY WORKS
+    return false;
   }
 
   // Copy registration address into mailing

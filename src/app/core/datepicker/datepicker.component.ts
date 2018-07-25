@@ -112,8 +112,9 @@ export class DatepickerComponent implements OnInit, OnChanges {
       this.datepickerOptions.disableUntil = this.convertDateToSimpleDate(today);
     }
 
+    //Reverted to using jsdate instead of date on model because it fixed issue with undefined/undefined/undefined when returning to Applicant Prof page.
     this.model = {
-      date: this.date ? moment(this.date).format(this.dateFormat.toUpperCase()) : undefined
+      jsdate: this.date
     };
   }
 

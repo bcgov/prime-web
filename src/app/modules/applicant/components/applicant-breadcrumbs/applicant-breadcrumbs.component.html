@@ -7,30 +7,8 @@
 
   <span right class='d-flex'>
     <div class='controls'>
-        <div *ngIf="!showSaveMessage && showControls">
-          <button type="button" class="btn btn-default mx-2" (click)="cancel()">Cancel</button>
-          <button type="button" class="btn btn-primary mx-2" (click)="save()">Submit</button>
-        </div>
-
-        <div  *ngIf="showSaveMessage" [@fadeIn]>
-          <alert type='success' (onClosed)="reset()">Submitted...</alert>
-        </div>
+      <button type="button" class="btn btn-primary mx-2" (click)="continue()" [disabled]='!canContinue()' [ngClass]="{'btn-primary': !isButtonSubmitting, 'btn-secondary': isButtonSubmitting}">{{ isButtonSubmitting ? 'Submit' : 'Continue'}}</button>
     </div>
-
-    <a class='mx-3' *ngIf="this.previousPageLink" routerLink="{{ this.previousPageLink }}" [ngClass]="{'disabled' : this.disableNavControls }">
-      <i class="fa fa-arrow-circle-left fa-2x" aria-label="Previous page"></i>
-    </a>
-    <ng-container  *ngIf="this.nextPageLink; else backToDashboard" >
-      <a class='mx-3' routerLink="{{ this.nextPageLink }}" [ngClass]="{'disabled' : this.disableNavControls }">
-        <i class="fa fa-arrow-circle-right fa-2x" aria-label="Next page"></i>
-      </a>
-    </ng-container>
   </span>
 
 </prime-core-breadcrumb>
-
-<ng-template #backToDashboard>
-    <a class='mr-3 btn p-0' [ngClass]="{'disabled': this.shouldDisableContinue || this.disableNavControls}" routerLink="/applicant">
-      <i class="fa fa-check-circle text-success fa-2x" aria-label="Back to Dashboard"></i>
-    </a>
-</ng-template>

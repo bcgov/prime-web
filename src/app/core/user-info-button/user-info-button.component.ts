@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { PrimeDataService } from '../../services/prime-data.service';
-import { Site } from '../../models/sites.model';
+import { Site, SiteAccess } from '../../models/sites.model';
 import { Person } from '../../models/person.model';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { cloneDeep } from 'lodash';
@@ -130,6 +130,14 @@ export class InfoButtonComponent implements OnInit {
 
   changeSite(siteObjectId, event){
     this.loadTarget(siteObjectId);
+  }
+
+  disableEditStartDate(siteAccess: SiteAccess): boolean {
+    if (siteAccess.isActive){
+      return true;
+    }
+
+    return false;
   }
 
   private loadTarget(objectId){

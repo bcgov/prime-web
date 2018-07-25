@@ -98,6 +98,10 @@ export class SiteAccess extends Base {
     return !!(this.provisionedStatus === ProvisionedStatus.PROVISIONED && this.provisionedDate)
   }
 
+  get isActive(): boolean {
+    return this.status === EnrollmentStatus.Active;
+  }
+
   // In-progress
   progress: SiteAccessProgressSteps;
 

@@ -26,25 +26,6 @@ export class PrimeDataService {
   /** The logged in user interacting with the webapp. When in the Applicant dashboard, this would be the applicant. */
   user: Person = new Person();
 
-  getProvisionerBySite(): EnrollmentRowItem[] {
-
-    const result: EnrollmentRowItem[] = [];
-    this.sites.map (site => {
-      const rowItem: EnrollmentRowItem = {
-        //concat collection name with substringed site name - returns "<collection_name> | <site_number>"
-        title: this.findCollectionFromSite(site)[0].name + ' | ' + site.name.split(' ').splice(-1),
-        associatedObjectId: site.objectId,
-        sites: null,
-        users: null
-      };
-      rowItem.expandableRows = site.siteAccess;
-      result.push(rowItem);
-    });
-
-    return result;
-  }
-
-
   getEnrollmentBySite(): EnrollmentRowItem[] {
 
     // By Site means collections at the top level
@@ -57,14 +38,10 @@ export class PrimeDataService {
         sites: collection.members,
         users: collection.allUsers
       };
-      // TODO: Remove no pending - need to determine what values need to be
-      //const pending = collection.getSiteAccessWithStatus(EnrollmentStatus.Pending);
       const expired = collection.getSiteAccessWithStatus(EnrollmentStatus.Expired);
       const declined = collection.getSiteAccessWithStatus(EnrollmentStatus.Declined);
-
       const active = collection.getSiteAccessWithStatus(EnrollmentStatus.Active);
       const initiated = collection.getSiteAccessWithStatus(EnrollmentStatus.Initiated);
-
 
       const problemAccess = expired.concat(declined, active, initiated);
       rowItem.expandableRows = problemAccess;
@@ -126,6 +103,55 @@ export class PrimeDataService {
 
       // 1:1 relationship - user has one site access per site
       rowItem.expandableRows = [filteredSAs[0]]
+
+      result.push(rowItem);
+    });
+
+    return result;
+  }
+
+  getProvisionerByUser(): EnrollmentRowItem[] {
+    const result: EnrollmentRowItem[] = [];
+
+    // SiteAccess still as expandableRows, just higher levels which are changed?
+
+    this.people.map(person => {
+      const rowItem: EnrollmentRowItem = {
+        title: person.name,
+        associatedObjectId: person.objectId,
+        sites: person.sites,
+        collections: this.findCollectionFromSites(person.sites)
+      };
+
+      const active = person.siteAccess
+        .filter(sa => sa.status === EnrollmentStatus.Active);
+      const initiated = person.siteAccess
+        .filter(sa => sa.status === EnrollmentStatus.Initiated);
+      const provisioning = person.siteAccess
+        .filter(sa => sa.status === EnrollmentStatus.Provisioning);
+
+      const problemAccess = active.concat(initiated, provisioning);
+      rowItem.expandableRows = problemAccess;
+
+      result.push(rowItem);
+    });
+
+    return result;
+  }
+
+  getProvisionerBySite(): EnrollmentRowItem[] {
+
+    const result: EnrollmentRowItem[] = [];
+    this.sites.map (site => {
+      const rowItem: EnrollmentRowItem = {
+        //concat collection name with substringed site name - returns "<collection_name> | <site_number>"
+        title: this.findCollectionFromSite(site)[0].name + ' | ' + site.name.split(' ').splice(-1),
+        associatedObjectId: site.objectId,
+        sites: null,
+        users: null
+      };
+      rowItem.expandableRows = site.siteAccess
+        .filter(sa => sa.status === EnrollmentStatus.Active || sa.status === EnrollmentStatus.Initiated || sa.status === EnrollmentStatus.Provisioning);
 
       result.push(rowItem);
     });

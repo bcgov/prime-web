@@ -33,6 +33,7 @@ export class DummyDataService {
       person.name = this.generatePersonName();
       person.dateOfBirth = this.generateDateOfBirth();
       person.phone = '250-555-5555';
+      person.phoneExtension = '#305';
       person.address = this.generateAddress();
       person.email = person.firstName[0].toLowerCase() + person.lastName.toLowerCase() + '@gmail.com';
       person.renewalDate =  this.randomDate(today, nearFuture);
@@ -267,6 +268,8 @@ export class DummyDataService {
     result.push(sa);
     sa = this.createSiteAccessAndAssociateDemo(collections[1].members[0], people[1], access[6]);
     result.push(sa);
+    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[0], people[1], access[2]);
+    result.push(sa);
 
     // Third Person - Expired
     sa = this.createSiteAccessAndAssociateDemo(collections[1].members[1], people[2], access[8]);
@@ -305,6 +308,9 @@ export class DummyDataService {
       const person = new Person();
       person.demoData = persons[index];
       person.address = new Address();
+      person.phoneExtension = '#305';
+      person.phone = '250-555-5555';
+      person.email = `${person.name[0].toLowerCase()}${person.lastName.toLowerCase()}@gmail.com`;
       person.address.setAddress( address[index] );
       person.primeUserId = person.firstName[0] + person.lastName + '--' + person.objectId.slice(0, 4);
       person.PoSId = person.firstName[0] + person.lastName[0] + 107; //Gibberish, not sure what these IDs really look like.

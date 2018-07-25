@@ -12,6 +12,8 @@ import { ApplEnrollmentListComponent } from './components/appl-enrollment-list/a
 import { ApplEnrollmentRowComponent } from './components/appl-enrollment-row/appl-enrollment-row.component';
 import { AlertModule } from 'ngx-bootstrap';
 import { AppEnrollmentProgressRowComponent } from './components/app-enrollment-progress-row/app-enrollment-progress-row.component';
+import { TextMaskModule } from 'angular2-text-mask';
+import { ApplicantReviewPageComponent } from './pages/applicant-review-page/applicant-review-page.component';
 
 
 @NgModule({
@@ -20,7 +22,8 @@ import { AppEnrollmentProgressRowComponent } from './components/app-enrollment-p
     ApplicantRoutingModule,
     CoreModule,
     FormsModule,
-    AlertModule
+    AlertModule,
+    TextMaskModule
   ],
   declarations: [
     ApplicantDashboardComponent,
@@ -30,7 +33,8 @@ import { AppEnrollmentProgressRowComponent } from './components/app-enrollment-p
     ApplicantBreadcrumbsComponent,
     ApplEnrollmentListComponent,
     ApplEnrollmentRowComponent,
-    AppEnrollmentProgressRowComponent
+    AppEnrollmentProgressRowComponent,
+    ApplicantReviewPageComponent
   ]
 })
 export class ApplicantModule { }

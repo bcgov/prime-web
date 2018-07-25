@@ -35,22 +35,6 @@ export class ApplicantAccessAcceptanceComponent implements OnInit {
   }
 
 
-  shouldShowControls() {
-    let isChanged = false;
-    for (let i = 0; i < this.accessAcceptances.length; i++) {
-      const item = this.accessAcceptances[i];
-      if (item.isAccepted !== this.applicant.accessAcceptance[i]) {
-        isChanged = true;
-      }
-    }
-
-    if (this.isDeclareChecked !== this.applicant.isDeclaredCheck) {
-      isChanged = true;
-    }
-
-    return isChanged;
-  }
-
   disableContinue() {
     return !this.isDeclareChecked;
     // return this.allCheckboxes.filter(item => item !== true).length >= 1;
@@ -58,12 +42,7 @@ export class ApplicantAccessAcceptanceComponent implements OnInit {
 
   save() {
     this.applicant.accessAcceptance = this.accessAcceptances.map(x => x.isAccepted)
-
     this.applicant.isDeclaredCheck = this.isDeclareChecked;
-  }
-
-  cancel() {
-    this.loadDataFromApplicant();
   }
 
 

@@ -12,7 +12,7 @@ export class ProvisionerDashByUserComponent{
   constructor(private dataService: PrimeDataService) { }
 
   get enrollmentByUserData(): EnrollmentRowItem[] {
-    return this.dataService.getEnrollmentByUser();
+    return this.dataService.getProvisionerByUser();
   }
 
 }

@@ -33,8 +33,8 @@ export class ApplicantDataService {
         route: 'access-acceptance'
       },
       {
-        title: "Sites",
-        route: "dashboard"
+        title: 'Review',
+        route: 'review'
       }
     ];
   }
