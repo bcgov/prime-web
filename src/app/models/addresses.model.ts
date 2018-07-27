@@ -29,6 +29,10 @@ export class Address extends Base {
     return `${this.street}, ${this.city}`;
   }
 
+  get fullAddress(){
+    return `${this.street}, ${this.city}, ${this.province}, ${this.postal}, ${this.country}`;
+  }
+
   /* Setter/Getter functions*/
   get city(): string {
     return !(isNullOrUndefined(this._city)) ? this._city : null;

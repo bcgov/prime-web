@@ -2,7 +2,8 @@
   pageName="Professional"
   nextPageLink="/applicant/access-acceptance"
   previousPageLink="/applicant/contact"
-  (onSave)="onSave($event)">
+  (onSave)="onSave($event)"
+  [shouldDisableContinue]='displayCannotContinueErrors()'>
 </prime-applicant-breadcrumbs>
 
 <prime-page-framework>
@@ -237,6 +238,10 @@
 
     </div>
 
+  </section>
+
+  <section *ngIf="displayCannotContinueErrors()">
+    <h2 class='text-danger'>The selections you have made above make you ineligible to continue.</h2>
   </section>
 
 

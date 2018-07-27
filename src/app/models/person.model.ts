@@ -319,6 +319,31 @@ export class Person extends Base {
     advancedPracticeCertificationType: 'pleaseSelect'
   }];
 
+  /** Gets the human readable appropriate license class string based on the collegeType. If no index is provided it gets the first item. */
+  getLicenseClassByIndex(index: number = 0){
+    if (!this.hasCollege){
+      return 'n/a';
+    }
+    if (this.collegeCertificationList[index].collegeType === 'CPBC'){
+      return LicenceClassCPTypes[this.collegeCertificationList[index].licenceClassCPType];
+    }
+    if (this.collegeCertificationList[index].collegeType === 'CRNBC'){
+
+      // If user has Advanced Practice Cert, append to end of string.
+      let advanced;
+      if (this.collegeCertificationList[index].advancedPracticeCertificationType !== 'pleaseSelect') {
+        advanced = ` (${AdvancedPracticeCertificationTypes[this.collegeCertificationList[index].advancedPracticeCertificationType]})`;
+      }
+
+      return LicenceClassCRNTypes[this.collegeCertificationList[index].licenceClassCRNType] + (advanced ? advanced : '');
+    }
+    if (this.collegeCertificationList[index].collegeType === 'CPSBC'){
+      return LicenceClassCPSTypes[this.collegeCertificationList[index].licenceClassCPSType];
+    }
+
+    return 'n/a';
+  }
+
   deviceProviderNumber: number;
 
   workingOnBehalfList = [{ jobTitle: 'pleaseSelect' }];

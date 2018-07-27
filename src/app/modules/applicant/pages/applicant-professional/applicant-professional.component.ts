@@ -214,7 +214,7 @@ export class ApplicantProfessionalComponent implements OnInit {
   }
 
   displayDeviceProviderSection() {
-    if(this._user.hasCollege === false || this.collegeCertificationValid(0)) {
+    if(this.collegeCertificationValid(0) && this._user.collegeCertificationList[0].collegeType === 'CPBC') {
       return true;
     }
     else {
@@ -227,10 +227,22 @@ export class ApplicantProfessionalComponent implements OnInit {
     if (this.displayDeviceProviderSection()){
       return this._user.isDeviceProvider === false;
     }
+    else if (this.collegeCertificationValid(0)) {
+      return this._user.collegeCertificationList[0].collegeType !== 'CPBC';
+    }
+    else if (this.applicant.hasCollege === false){
+      return true;
+    }
+
     return false;
   }
 
   displaySelfDeclarationSection() {
+
+    if (this._user.hasCollege === false && this._user.isWorkingOnBehalf === false){
+      return false;
+    }
+
     // User has filled out 'on behalf' section
     if (this.displayWorkingOnBehalfSection() && this._user.workingOnBehalfList[0].jobTitle !== 'pleaseSelect' && this._user.workingOnBehalfList[0].jobTitle !== 'OTHER'){
       return true;
@@ -246,11 +258,19 @@ export class ApplicantProfessionalComponent implements OnInit {
       return true;
     }
     // User has said 'no' to each section
-    else if (this.displayDeviceProviderSection() && this.displayWorkingOnBehalfSection() && this._user.isWorkingOnBehalf === false) {
-      return true;
-    }
+    // else if (this.displayDeviceProviderSection() && this.displayWorkingOnBehalfSection() && this._user.isWorkingOnBehalf === false) {
+    //   return true;
+    // }
 
     return false;
+  }
+
+  displayCannotContinueErrors(){
+    if (this._user.isDeviceProvider){
+      return false;
+    }
+
+    return this._user.hasCollege === false && this._user.isWorkingOnBehalf === false;
   }
 
   getFullCollegeName(name: string){

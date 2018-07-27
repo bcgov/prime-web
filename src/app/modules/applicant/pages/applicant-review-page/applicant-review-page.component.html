@@ -1,9 +1,5 @@
-<prime-applicant-breadcrumbs
-  pageName="Access Acceptance"
-  previousPageLink="/applicant/access-acceptance"
-  nextPageLink="/applicant/dashboard"
-  [shouldDisableContinue]="false"
-  [isButtonSubmitting]='true'>
+<prime-applicant-breadcrumbs pageName="Access Acceptance" previousPageLink="/applicant/access-acceptance" nextPageLink="/applicant/dashboard"
+  [shouldDisableContinue]="false" [isButtonSubmitting]='true'>
 </prime-applicant-breadcrumbs>
 
 <prime-page-framework>
@@ -11,12 +7,174 @@
   <h2 class='prime-title' id="review-and-submit">Applicant Review &amp; Submit</h2>
 
 
-  <p>
-    applicant-review-page works!
-  </p>
-  
+  <div class="row">
+    <div class="col-md-6">
+
+
+      <h2 class='prime-title'>Contact Information
+        <i class="fa fa-pencil float-right pointer" aria-hidden="true" (click)="goToContactPage()"></i>
+      </h2>
+      <section class="bg-light">
+
+
+        <div class="row p-md-1">
+          <div class="col-md-6">Name</div>
+          <div class="col-md-6 font-weight-bold">{{applicant.name}}</div>
+        </div>
+        <div class="row p-md-1">
+          <div class="col-md-6">Date of Birth</div>
+          <div class="col-md-6 font-weight-bold">{{applicant.dateOfBirth | date: 'MM/dd/yyy'}}</div>
+        </div>
+        <div class="row p-md-1">
+          <div class="col-md-6">Phone</div>
+          <div class="col-md-6 font-weight-bold">{{applicant.phone}}</div>
+        </div>
+        <div class="row p-md-1">
+          <div class="col-md-6">Extension Number</div>
+          <div class="col-md-6 font-weight-bold">{{applicant.phoneExtension}}</div>
+        </div>
+        <div class="row p-md-1">
+          <div class="col-md-6">Email</div>
+          <div class="col-md-6 font-weight-bold">{{applicant.email}}</div>
+        </div>
+
+        <div class="row p-md-1">
+          <div class="col-md-6">Address</div>
+          <div class="col-md-6 font-weight-bold">{{applicant.address.fullAddress}}</div>
+        </div>
+
+
+        <!-- <div class="form-group has-float-label">
+          <label for="name">
+            Name
+          </label>
+          <input type="text" disabled class="form-control" id="name" name="name" [value]="applicant?.name">
+        </div>
+
+        <div class="form-group has-float-label">
+          <label for="dateOfBirth">
+            Date of Birth
+          </label>
+          <input type="text" disabled class="form-control" id="dateOfBirth" name="dateOfBirth" [value]="applicant.dateOfBirth | date:'MM/dd/yyyy'">
+        </div>
+
+        <div class="form-group has-float-label">
+          <label for="phone">
+            Phone
+          </label>
+          <input type="text" disabled class="form-control" id="phone" name="phone" [value]="applicant?.phone">
+        </div>
+
+        <div class="form-group has-float-label">
+          <label for="extNumber">
+            Extension Number
+          </label>
+          <input type="text" disabled class="form-control" id="extNumber" name="extNumber" [value]="applicant?.phoneExtension">
+        </div>
+
+
+        <div class="form-group has-float-label">
+          <label for="email">
+            Email
+          </label>
+          <input type="text" disabled class="form-control" id="email" name="email" [value]="applicant?.email">
+        </div> -->
+
+
+      </section>
+
+      <h2 class='prime-title'>Professional Information
+        <i class="fa fa-pencil float-right pointer" aria-hidden="true" (click)="goToProfessionalPage()"></i>
+      </h2>
+
+      <section class="bg-light">
+
+        <ng-container *ngIf="applicant.hasCollege">
+          <div class="row p-md-1">
+            <div class="col-md-6">College Type</div>
+            <div class="col-md-6 font-weight-bold">{{collegeType}}</div>
+          </div>
+          <div class="row p-md-1">
+            <div class="col-md-6">License Class</div>
+            <div class="col-md-6 font-weight-bold">{{applicant.getLicenseClassByIndex()}}</div>
+          </div>
+          <div class="row p-md-1">
+            <div class="col-md-6">License Number</div>
+            <div class="col-md-6 font-weight-bold">{{applicant.collegeCertificationList[0].licenceNumber}}</div>
+          </div>
+
+          <div class="row p-md-1">
+            <div class="col-md-6">License Expiry Date</div>
+            <div class="col-md-6 font-weight-bold">{{licenceExpiryDate}}</div>
+          </div>
+        </ng-container>
+
+
+        <div class="row p-md-1" *ngIf="applicant.isWorkingOnBehalf">
+          <div class="col-md-6">Job Title</div>
+          <div class="col-md-6 font-weight-bold">{{jobTitle}}</div>
+        </div>
+
+      </section>
+
+    </div>
+    <div class="col-md-6">
+
+
+
+
+
+      <h2 class='prime-title'>Self Declaration
+        <i class="fa fa-pencil float-right pointer" aria-hidden="true" (click)="goToProfessionalPage()"></i>
+      </h2>
+
+      <section class="bg-light">
+
+
+        <div class="row p-md-1">
+          <div class="col-md-8">Have you ever been the subject of an order or a conviction for an information contravention?</div>
+          <div class="col-md-3 offset-md-1 font-weight-bold">{{ getSelfDeclarationAnswer(applicant.informationContravention.flag) }}</div>
+        </div>
+
+        <div class="row p-md-1">
+          <div class="col-md-8">Have you ever had your registration with a governing body of a health profession suspended or cancelled?</div>
+          <div class="col-md-3 offset-md-1 font-weight-bold">{{ getSelfDeclarationAnswer(applicant.cancelledRegistration.flag) }}</div>
+        </div>
+
+        <div class="row p-md-1">
+          <div class="col-md-8">Have you ever had Terms and Conditions imposed on your licence as a result of disciplinary actions taken by a governing
+            body?
+          </div>
+          <div class="col-md-3 offset-md-1 font-weight-bold">{{ getSelfDeclarationAnswer(applicant.licenceCondition.flag) }} </div>
+        </div>
+
+        <div class="row p-md-1">
+          <div class="col-md-8">Have you ever had your access to PharmaNet suspended or revoked?</div>
+          <div class="col-md-3 offset-md-1 font-weight-bold">{{ getSelfDeclarationAnswer(applicant.revokedAccess.flag) }}</div>
+        </div>
+
+      </section>
+
+      <h2 class='prime-title'>User Access Acceptance
+        <i class="fa fa-pencil float-right pointer" aria-hidden="true" (click)="goToUAAPage()"></i>
+      </h2>
+
+      <section class="bg-light">
+        <div class="row p-md-1" *ngFor="let clause of applicant.accessAcceptance; let i = index;">
+          <div class="col-md-8">Clause {{i + 1}}</div>
+          <div class="col-md-3 offset-md-1 font-weight-bold">{{ getUAAAnswer( clause ) }}</div>
+        </div>
+
+        <div class="row p-md-1">
+          <div class="col-md-8">I declare that all information I provided is accurate</div>
+          <div class="col-md-3 offset-md-1 font-weight-bold">{{ applicant.isDeclaredCheck ? 'Yes' : 'No' }}</div>
+        </div>
+      </section>
+
+
+    </div>
+  </div>
 
 
 
 </prime-page-framework>
-
