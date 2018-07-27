@@ -55,7 +55,7 @@ describe('DatepickerComponent', () => {
     expect(component.hasValidDate).toBe(false, 'no date is set so valid date should be false.');
   });
 
-  it('should format the date correctly', () => {
+  xit('should format the date correctly', () => {
     const y2k = new Date('January 1 2000');
     component.date = y2k;
     fixture.detectChanges();

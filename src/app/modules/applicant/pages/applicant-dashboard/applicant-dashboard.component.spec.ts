@@ -19,6 +19,8 @@ import { ApplicantContactComponent } from '../applicant-contact/applicant-contac
 import { ApplicantAccessAcceptanceComponent } from '../applicant-access-acceptance/applicant-access-acceptance.component';
 import { ApplicantProfessionalComponent } from '../applicant-professional/applicant-professional.component';
 import { ApplicantBreadcrumbsComponent } from '../../components/applicant-breadcrumbs/applicant-breadcrumbs.component';
+import { ApplicantReviewPageComponent } from '../applicant-review-page/applicant-review-page.component';
+import { TextMaskModule } from 'angular2-text-mask';
 
 describe('ApplicantDashboardComponent', () => {
   let component: ApplicantDashboardComponent;
@@ -26,8 +28,8 @@ describe('ApplicantDashboardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ApplicantDashboardComponent, ApplEnrollmentListComponent, ApplEnrollmentRowComponent, AppEnrollmentProgressRowComponent, ApplicantContactComponent, ApplicantAccessAcceptanceComponent, ApplicantProfessionalComponent, ApplicantBreadcrumbsComponent ],
-      imports: [AlertModule.forRoot(), FormsModule, NoopAnimationsModule, CoreModule, RouterTestingModule.withRoutes(routes), ModalModule.forRoot()],
+      declarations: [ ApplicantDashboardComponent, ApplEnrollmentListComponent, ApplEnrollmentRowComponent, AppEnrollmentProgressRowComponent, ApplicantContactComponent, ApplicantAccessAcceptanceComponent, ApplicantProfessionalComponent, ApplicantBreadcrumbsComponent, ApplicantReviewPageComponent ],
+      imports: [AlertModule.forRoot(), FormsModule, NoopAnimationsModule, CoreModule, RouterTestingModule.withRoutes(routes), ModalModule.forRoot(), TextMaskModule],
       providers: [PrimeDataService, DummyDataService, ApplicantDataService]
     })
     .compileComponents();

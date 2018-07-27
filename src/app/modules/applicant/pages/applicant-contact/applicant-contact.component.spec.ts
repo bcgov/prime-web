@@ -11,6 +11,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { Address } from '../../../../models/addresses.model';
 import { AlertModule } from 'ngx-bootstrap';
 import { ApplicantDataService } from '../../../../services/applicant-data.service';
+import { TextMaskModule } from 'angular2-text-mask';
 
 describe('ApplicantContactComponent', () => {
   let component: ApplicantContactComponent;
@@ -19,7 +20,7 @@ describe('ApplicantContactComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ApplicantContactComponent, ApplicantBreadcrumbsComponent],
-      imports: [RouterTestingModule, FormsModule, CoreModule, AlertModule.forRoot()],
+      imports: [RouterTestingModule, FormsModule, CoreModule, AlertModule.forRoot(), TextMaskModule],
       providers: [PrimeDataService, DummyDataService, {provide: APP_BASE_HREF, useValue: '/'}, ApplicantDataService]
     })
     .compileComponents();
