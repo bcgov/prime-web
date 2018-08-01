@@ -309,6 +309,7 @@ export class DummyDataService {
       person.demoData = persons[index];
       person.address = new Address();
       person.phoneExtension = '#305';
+      person._hasCompletedWizard = false;
       person.phone = '250-555-5555';
       person.email = `${person.name[0].toLowerCase()}${person.lastName.toLowerCase()}@gmail.com`;
       person.address.setAddress( address[index] );

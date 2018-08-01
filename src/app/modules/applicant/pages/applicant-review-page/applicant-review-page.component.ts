@@ -37,6 +37,10 @@ export class ApplicantReviewPageComponent implements OnInit {
     return (obj.length > 0) ? WorkingOnBehalfTitleTypes[obj[0]] : 'n/a';
   }
 
+  onSetHasCompletedWizardFlag(val: boolean){
+    //This person has completed the wizard process so set their flag to true
+    this.dataService.user._hasCompletedWizard = true;
+  }
 
   /** Converts a boolean (from one of the Self Declaration answers) to a human readable string. */
   getSelfDeclarationAnswer(val: boolean): string{

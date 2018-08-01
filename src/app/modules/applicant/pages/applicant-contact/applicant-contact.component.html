@@ -1,8 +1,12 @@
 <prime-applicant-breadcrumbs
   pageName="Contact"
+  previousPageLink="/applicant/dashboard"
   nextPageLink="/applicant/professional"
   [shouldDisableContinue]="!canContinue()"
-  (onSave)="onSave($event)">
+  (onSave)="onSave($event)"
+  (onCancel)="onCancel($event)"
+  [hasCompletedWizardFlag]="applicant._hasCompletedWizard"
+  [contactHasChanged]="hasChanged">
 </prime-applicant-breadcrumbs>
 
 <prime-page-framework>

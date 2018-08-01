@@ -1,13 +1,20 @@
 <prime-core-breadcrumb>
-  <span left class='breadcrumb-text'>Dashboard / {{this.pageName}} </span>
+  <span *ngIf="!hasCompletedWizardFlag" left class='breadcrumb-text'>Dashboard / {{this.pageName}} </span>
+  <span *ngIf="hasCompletedWizardFlag" left class='breadcrumb-text'><a routerLink="/applicant/dashboard">Dashboard</a> / {{this.pageName}} </span>
+
 
   <!-- TODO - Re-enable this when we've time to implement a responsive solution. For now we just hide it. -->
-  <prime-wizard-progress-bar center [progressSteps]="progressSteps" class='d-none d-lg-block'>
+  <
+  <prime-wizard-progress-bar *ngIf="!hasCompletedWizardFlag" center [progressSteps]="progressSteps" class='d-none d-lg-block'>
   </prime-wizard-progress-bar>
 
   <span right class='d-flex'>
-    <div class='controls'>
+    <div *ngIf="!hasCompletedWizardFlag" class='controls'>
       <button type="button" class="btn btn-primary mx-2" (click)="continue()" [disabled]='!canContinue()' [ngClass]="{'btn-primary': !isButtonSubmitting, 'btn-secondary': isButtonSubmitting}">{{ isButtonSubmitting ? 'Submit' : 'Continue'}}</button>
+    </div>
+    <div *ngIf="hasCompletedWizardFlag" class='controls'>
+      <button type="button" class="btn btn-primary mx-2" (click)="cancel()" [disabled]='!contactHasChanged'>Cancel</button>
+      <button type="button" class="btn btn-primary mx-2" (click)="continue()" [disabled]='!contactHasChanged'>Save</button>
     </div>
   </span>
 

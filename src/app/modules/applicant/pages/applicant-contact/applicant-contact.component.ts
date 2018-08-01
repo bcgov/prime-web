@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { DummyDataService } from '../../../../services/dummy-data.service';
 import { Person } from '../../../../models/person.model';
@@ -12,6 +12,7 @@ const NUMBER = /\d/;
   styleUrls: ['./applicant-contact.component.scss']
 })
 export class ApplicantContactComponent implements OnInit {
+
   private _user: Person;
 
   public hasChanged: boolean = false;
@@ -24,6 +25,7 @@ export class ApplicantContactComponent implements OnInit {
   ngOnInit() {
     // Clone user class
     this._user = cloneDeep(this.primeDataService.user);
+
   }
 
   get applicant(): Person {
@@ -56,8 +58,12 @@ export class ApplicantContactComponent implements OnInit {
     this.onChange();
   }
 
-  onSave(val: boolean){
+  onCancel(val: boolean) {
+    this._user = cloneDeep(this.primeDataService.user);
+    this.hasChanged = false;
+  }
 
+  onSave(val: boolean){
     // Use registration address as mailing address.
     if ( this._user.useRegAddress ) {
       this.primeDataService.user.mailAddress.copy(this._user.address);
@@ -79,6 +85,8 @@ export class ApplicantContactComponent implements OnInit {
     }
     this.hasChanged = false;
   }
+
+
 
   // Update mailAddress with information in the input field that the user is
   // currently updating

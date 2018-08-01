@@ -295,6 +295,15 @@ export class Person extends Base {
   /** Tracks whether a user is 'New' or not, i.e. recently added via Add New User modal.  A user is no longer new the moment any enrollmens have been changed and saved. Currently on the miller column pages all enrollments should be pre-selected for new users.*/
   isNewUser: boolean;
 
+  // Tracks whether the user has gone through the wizard process at least once
+  _hasCompletedWizard: boolean;
+  get hasCompletedWizard(): boolean {
+    return this._hasCompletedWizard;
+  }
+  set hasCompletedWizard(newVal: boolean) {
+    this._hasCompletedWizard = newVal;
+  }
+
   // toggles
   hasCollege: boolean;
   _isDeviceProvider: boolean;

@@ -15,10 +15,15 @@ export class ApplicantBreadcrumbsComponent implements OnInit {
   @Input() nextPageLink: string;
   @Input() previousPageLink: string;
   @Input() shouldDisableContinue: boolean;
+  @Input() contactHasChanged: boolean;
   /** If true, the button colour will be made to stand out more */
   @Input() isButtonSubmitting: boolean = false;
+  @Input() hasCompletedWizardFlag: boolean;
 
   @Output() onSave = new EventEmitter<boolean>();
+  @Output() onCancel = new EventEmitter<boolean>();
+  @Output() onSetHasCompletedWizardFlag = new EventEmitter<boolean>();
+
   public showSaveMessage: boolean = false;
 
   constructor(private applicantDataService: ApplicantDataService, private router: Router) { }
@@ -41,11 +46,25 @@ export class ApplicantBreadcrumbsComponent implements OnInit {
 
   continue(){
     this.save();
-    this.router.navigate([this.nextPageLink]);
+    if (!this.hasCompletedWizardFlag) {
+      if (this.router.url === '/applicant/review') {
+        this.setHasCompletedWizardFlag();
+      }
+      this.router.navigate([this.nextPageLink]);
+    }
+  }
+
+  setHasCompletedWizardFlag(){
+    this.onSetHasCompletedWizardFlag.emit(true);
   }
 
   canContinue(): boolean {
     return !this.shouldDisableContinue;
+  }
+
+  cancel(){
+    //this.router.navigate([this.previousPageLink]);
+    this.onCancel.emit(true);
   }
 
 
