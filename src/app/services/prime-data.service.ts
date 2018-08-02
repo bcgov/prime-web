@@ -185,7 +185,6 @@ export class PrimeDataService {
         .filter(sa => sa.person === user)
         .filter(sa => sa.status !== EnrollmentStatus.New).length >= 1;
     }).map(site => {
-    // user.sites.map(site => {
 
       const rowItem: ProvisionerRowItem = {
         title: site.name,
@@ -193,10 +192,14 @@ export class PrimeDataService {
         site: site,
         associatedObjectId: site.objectId
       };
+
+
       result.push(rowItem);
     });
 
-    return result;
+    // For prototype: Only show Provisioning or Active items in Provisioner Details screen
+    return result
+      .filter(rowItem => rowItem.siteAccess[0].status === EnrollmentStatus.Provisioning || rowItem.siteAccess[0].status === EnrollmentStatus.Active)
   }
 
   findCollectionFromSites(sites: Site[]): Collection[] {

@@ -75,6 +75,10 @@ export class ProvisionerRowComponent extends EnrollmentRow implements OnInit {
     this.rowDataOnInit = cloneDeep(this.rowData);
   }
 
+  onChange(ev){
+    this.siteAccessChange.emit(this.siteAccessObject);
+  }
+
   get title(): string {
     if (this.primaryType === 'User' ){
       const name = this.rowData.site.name;

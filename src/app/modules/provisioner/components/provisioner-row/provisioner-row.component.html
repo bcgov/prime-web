@@ -11,31 +11,15 @@
   </div>
 
 
-
-  <div *ngIf="siteStatus === 'Active'">
-    <table>
-      <tr>
-        <td class="provision-element-label" >POS User Id</td>
-        <td class="provision-element-label"> Date Provisioned</td>
-      </tr>
-      <tr>
-        <td class="provision-element-text" >{{siteAccessObject.posUserId}}</td>
-        <td class="provision-element-text"> {{siteAccessObject.provisionedDate}}</td>
-        <td class="px-1"></td>
-      </tr>
-    </table>
-  </div>
-
-
-  <div *ngIf="isNew || isAccepted">
+  <div *ngIf="isNew || isAccepted || siteStatus === 'Active'">
     <table>
       <tr>
         <label class="has-float-label">
-          <input type="text" class="form-control mb-2 mr-sm-2" id="posuid" name="posuid" placeholder=" " tabindex="1">
+          <input type="text" class="form-control mb-2 mr-sm-2" id="posuid" name="posuid" placeholder=" " tabindex="1" [(ngModel)]="siteAccessObject.posUserId" (change)="onChange($event)">
           <span>POS User ID</span>
         </label>
 
-        <td><prime-datepicker id="DoB" name="DoB" placeholder=" "  dateFormat="yyyy/mm/dd" labelText="Date Provisioned" tabindex="1"></prime-datepicker></td>
+        <td><prime-datepicker (change)="onChange($event)" [(date)]="siteAccessObject.provisionedDate" id="DoB" name="DoB" placeholder=" "  dateFormat="yyyy/mm/dd" labelText="Date Provisioned" tabindex="1"></prime-datepicker></td>
 
       </tr>
   </table>

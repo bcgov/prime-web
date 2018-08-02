@@ -114,6 +114,7 @@ export class ProvisionerListComponent extends EnrollmentList implements OnInit {
   private updateSiteAccess(target: SiteAccess, source: SiteAccess): SiteAccess {
     target.provisionedStatus = source.provisionedStatus;
     target.provisionedDate = source.provisionedDate;
+    target.posUserId = source.posUserId;
     target.status = source.status;
     return target;
   }

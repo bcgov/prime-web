@@ -249,8 +249,8 @@ export class DummyDataService {
 
       ,
 
-      EnrollmentStatus.Active + ',,,' + this.setNewDate(Datefield.day, 60) + ',' + this.setNewDate(Datefield.day, 15)
-      + ',,' + SiteAccessProgressSteps.Provisioner //10
+      EnrollmentStatus.Active + ',' +  AccessReasons.PERSONAL_ACCESS + ',,' + this.setNewDate(Datefield.day, 60) + ',' + this.setNewDate(Datefield.day, 15)
+      + ',,' + SiteAccessProgressSteps.Provisioner + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--'  //10
     ];
 
     // First Person - 2 New, Active, Approved
@@ -274,9 +274,13 @@ export class DummyDataService {
     // Third Person - Expired
     sa = this.createSiteAccessAndAssociateDemo(collections[1].members[1], people[2], access[8]);
     result.push(sa);
+    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[2], access[1]);
+    result.push(sa);
 
     // Fourth Person - Pending with Applicant
     sa = this.createSiteAccessAndAssociateDemo(collections[1].members[2], people[3], access[5]);
+    result.push(sa);
+    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[3], access[1]);
     result.push(sa);
 
     // Fourth Person - Pending with Provisioner
