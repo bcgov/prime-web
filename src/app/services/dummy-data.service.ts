@@ -223,8 +223,11 @@ export class DummyDataService {
     //EnrollmentStatus,AccessReason,DeclinedReason,requestDate,startDate,endDate,SiteAccessProgressSteps
     // spaces after commons cause the enums to be undefined, Date format: MM-DD-YYYY
     const access = [
-      EnrollmentStatus.New + ',,,' + this.setNewDate(Datefield.day, -30) + ',' + this.setNewDate(Datefield.day, -15)
-      + ',,' + SiteAccessProgressSteps.Applicant + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //0
+      /*EnrollmentStatus.New + ',,,' + this.setNewDate(Datefield.day, -30) + ',' + this.setNewDate(Datefield.day, -15)
+      + ',,' + SiteAccessProgressSteps.Applicant + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //0*/
+      EnrollmentStatus.Active + ',,,' + this.setNewDate(Datefield.day, -(6 * 30))
+      + ',' + this.setNewDate(Datefield.day, -(5.5 * 30)) + ',' + this.setNewDate(Datefield.month, 7) + ','
+      + SiteAccessProgressSteps.Provisioner + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //0
       , EnrollmentStatus.Active + ',,,' + this.setNewDate(Datefield.day, -(6 * 30))
       + ',' + this.setNewDate(Datefield.day, -(5.5 * 30)) + ',' + this.setNewDate(Datefield.month, 7) + ','
       + SiteAccessProgressSteps.Provisioner + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //1
@@ -232,20 +235,38 @@ export class DummyDataService {
       + ',' + this.setNewDate(Datefield.day, -(1.5 * 30)) + ',' + this.setNewDate(Datefield.month, 10) + ','
       + SiteAccessProgressSteps.Provisioner + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //2
       // TODO: Use date function to set demo dates
-      , EnrollmentStatus.Declined + ',' + AccessReasons.PERSONAL_ACCESS + ',' + DeclinedReasons.ACCESS_NO_lONGER_REQUIRED
-      + ',05-15-2017,06-01-2017,01-06-2018,' + SiteAccessProgressSteps.Provisioner + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //3
-      , EnrollmentStatus.Declined + ',' + AccessReasons.PERSONAL_ACCESS + ',' + DeclinedReasons.WRONG_SITE
-      + ',03-16-2018,04-01-2018,4-01-2019,' + SiteAccessProgressSteps.Verifier + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //4
-      , EnrollmentStatus.Initiated + ',' + AccessReasons.PERSONAL_ACCESS + ',,06-11-2018,06-27-2018,06-27-2018,'
-      + SiteAccessProgressSteps.Applicant + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //5
-      , EnrollmentStatus.Review + ',' + AccessReasons.PERSONAL_ACCESS + ',,05-18-2018,06-01-2018,06-01-2019,'
-      + SiteAccessProgressSteps.MoH + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //6
+      /*, EnrollmentStatus.Declined + ',' + AccessReasons.PERSONAL_ACCESS + ',' + DeclinedReasons.ACCESS_NO_lONGER_REQUIRED
+      + ',05-15-2017,06-01-2017,01-06-2018,' + SiteAccessProgressSteps.Provisioner + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //3*/
+      , EnrollmentStatus.Active + ',,,' + this.setNewDate(Datefield.day, -(6 * 30))
+      + ',' + this.setNewDate(Datefield.day, -(5.5 * 30)) + ',' + this.setNewDate(Datefield.month, 7) + ','
+      + SiteAccessProgressSteps.Provisioner + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //3
+      /*, EnrollmentStatus.Declined + ',' + AccessReasons.PERSONAL_ACCESS + ',' + DeclinedReasons.WRONG_SITE
+      + ',03-16-2018,04-01-2018,4-01-2019,' + SiteAccessProgressSteps.Verifier + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //4*/
+      , EnrollmentStatus.Active + ',,,' + this.setNewDate(Datefield.day, -(6 * 30))
+      + ',' + this.setNewDate(Datefield.day, -(5.5 * 30)) + ',' + this.setNewDate(Datefield.month, 7) + ','
+      + SiteAccessProgressSteps.Provisioner + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //4
+      /*, EnrollmentStatus.Initiated + ',' + AccessReasons.PERSONAL_ACCESS + ',,06-11-2018,06-27-2018,06-27-2018,'
+      + SiteAccessProgressSteps.Applicant + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //5*/
+      , EnrollmentStatus.Active + ',,,' + this.setNewDate(Datefield.day, -(6 * 30))
+      + ',' + this.setNewDate(Datefield.day, -(5.5 * 30)) + ',' + this.setNewDate(Datefield.month, 7) + ','
+      + SiteAccessProgressSteps.Provisioner + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //5
+      /*, EnrollmentStatus.Review + ',' + AccessReasons.PERSONAL_ACCESS + ',,05-18-2018,06-01-2018,06-01-2019,'
+      + SiteAccessProgressSteps.MoH + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //6*/
+      , EnrollmentStatus.Active + ',,,' + this.setNewDate(Datefield.day, -(6 * 30))
+      + ',' + this.setNewDate(Datefield.day, -(5.5 * 30)) + ',' + this.setNewDate(Datefield.month, 7) + ','
+      + SiteAccessProgressSteps.Provisioner + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //6
       , EnrollmentStatus.Provisioning + ',' + AccessReasons.PERSONAL_ACCESS + ',,06-01-2018,06-16-2018,06-16-2019,'
       + SiteAccessProgressSteps.Provisioner + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //7
-      , EnrollmentStatus.Expired + ',' + AccessReasons.PERSONAL_ACCESS + ',,04-16-2017,05-01-2017,04-16-2018,'
-      + SiteAccessProgressSteps.Applicant + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--'//8
-      , EnrollmentStatus.New + ',,,' + this.setNewDate(Datefield.day, -2) + ',' + this.setNewDate(Datefield.day, 0)
-      + ',,' + SiteAccessProgressSteps.Applicant + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //9,
+      /*, EnrollmentStatus.Expired + ',' + AccessReasons.PERSONAL_ACCESS + ',,04-16-2017,05-01-2017,04-16-2018,'
+      + SiteAccessProgressSteps.Applicant + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--'//8*/
+      , EnrollmentStatus.Active + ',,,' + this.setNewDate(Datefield.day, -(6 * 30))
+      + ',' + this.setNewDate(Datefield.day, -(5.5 * 30)) + ',' + this.setNewDate(Datefield.month, 7) + ','
+      + SiteAccessProgressSteps.Provisioner + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //8
+      /*, EnrollmentStatus.New + ',,,' + this.setNewDate(Datefield.day, -2) + ',' + this.setNewDate(Datefield.day, 0)
+      + ',,' + SiteAccessProgressSteps.Applicant + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //9,*/
+      , EnrollmentStatus.Active + ',,,' + this.setNewDate(Datefield.day, -(6 * 30))
+      + ',' + this.setNewDate(Datefield.day, -(5.5 * 30)) + ',' + this.setNewDate(Datefield.month, 7) + ','
+      + SiteAccessProgressSteps.Provisioner + ',' + ProvisionRequestOptions.ADD + ',' + AccessClass.PRESCRIBER + ',' + AccessRights.MED_HIST + ',' + '--' //9,
 
       ,
 
