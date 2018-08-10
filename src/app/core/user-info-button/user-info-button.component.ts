@@ -173,7 +173,6 @@ export class InfoButtonComponent implements OnInit {
 
   private loadTarget(objectId){
     this.target = this.lookupObjectId(objectId);
-
     if (Site.isSiteGuard(this.target)){
       this.targetType = TargetType.Site;
       this.site = cloneDeep(this.target);

@@ -113,8 +113,9 @@ export class DatepickerComponent implements OnInit, OnChanges {
     }
 
     //Reverted to using jsdate instead of date on model because it fixed issue with undefined/undefined/undefined when returning to Applicant Prof page.
+    //2018-08-10 KPS Using jsdate causes the Select a date issue documented in prime-138
     this.model = {
-      jsdate: this.date
+      date: this.date
     };
   }
 

@@ -141,13 +141,12 @@
 <ng-template #enrollmentDetails let-siteAccess="siteAccess">
     <span class='d-flex justify-content-between align-items-center'>
       <span class='d-inline-flex align-items-baseline ml-2'>Start
-        <prime-datepicker size='mini' dateFormat="yyyy/mm/dd" [disabled]="!editable || disableEditStartDate(siteAccess)" [(date)]="siteAccess.startDate" class='ml-1'></prime-datepicker>
+        <prime-datepicker size='mini' dateFormat="yyyy/mm/dd" [disabled]="!editable || disableEditStartDate(siteAccess)" [(date)]="siteAccess.startDateShort" class='ml-1'></prime-datepicker>
       </span>
 
       <span class='d-inline-flex align-items-baseline ml-2'>End
-        <prime-datepicker size='mini' dateFormat="yyyy/mm/dd" [disabled]="!editable"  [date]="siteAccess.endDate" (dateChange)="onSetEndDate($event, siteAccess)" class='ml-1'></prime-datepicker>
+        <prime-datepicker size='mini' dateFormat="yyyy/mm/dd" [disabled]="!editable"  [date]="siteAccess.endDateShort" (dateChange)="onSetEndDate($event, siteAccess)" class='ml-1'></prime-datepicker>
       </span>
-
       <!-- TODO: Get values programmatically, and save!
         SiteAccess.status should be updated, just need to add a
         (change) to the select and do the logic in the controller -->

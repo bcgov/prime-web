@@ -151,7 +151,26 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
     this.onChange.emit( this.siteAccessRequiringAttention[0] );
   }
 
-  shouldHideAcceptRejectControls(): boolean {
+  get startDateShort(): Date {
+    return this.siteAccessRequiringAttention[0].startDateShort;
+  }
+
+  set startDateShort( startDt: Date ) {
+    this.siteAccessRequiringAttention[0].startDateShort = startDt;
+  }
+
+  get endDateShort(): Date {
+    return this.siteAccessRequiringAttention[0].endDateShort;
+  }
+
+  set endDateShort( endDt: Date ) {
+    this.siteAccessRequiringAttention[0].endDateShort = endDt;
+
+    // Send changes for this row
+    this.onChange.emit(this.siteAccessRequiringAttention[0]);
+  }
+
+    shouldHideAcceptRejectControls(): boolean {
 
     if (this.isAccepted() || this.isDeclined() ){
       return true;

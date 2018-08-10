@@ -12,7 +12,7 @@
     <div *ngIf="!isDeclinedStatus() && !isDeclined()" class="dates-col">
       <span class="d-inline-flex align-items-center p-2 border-left">Start
         <prime-datepicker disabled size="mini" [dateFormat]="dateFormat"
-            [(date)]="startDate"
+            [(date)]="startDateShort"
             class="ml-1"
             clearButton="invisible">
         </prime-datepicker>
@@ -21,7 +21,7 @@
         <prime-datepicker
             size="mini"
             [dateFormat]="dateFormat"
-            [(date)]="endDate"
+            [(date)]="endDateShort"
             class="ml-1"
             [disabled]="!isActiveStatus() && !isNewStatus()"
             [clearButton]="(!isActiveStatus() && !isNewStatus()) ? 'invisible' : '' ">
