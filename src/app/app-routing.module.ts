@@ -65,6 +65,10 @@ const routes: Routes = [
     loadChildren: "app/modules/provisioner/provisioner.module#ProvisionerModule"
   },
   {
+    path: "register",
+    loadChildren: "app/modules/registration/registration.module#RegistrationModule"
+  },
+  {
     path: '**',
     redirectTo: ''
   }
