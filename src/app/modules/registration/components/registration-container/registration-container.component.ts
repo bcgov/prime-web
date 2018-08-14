@@ -1,3 +1,8 @@
+/**
+ * NOTE:  We may want to use this module for applicant, modify to be prime-breadcrumb-container
+ */
+
+
 import { Component, OnInit } from '@angular/core';
 import {pageRoutes} from '../../registration-page-routing.module';
 import {WizardProgressItem} from '../../../core/components/wizard-progress-bar/wizard-progress-bar.component';
@@ -44,12 +49,19 @@ export class RegistrationContainerComponent implements OnInit {
     let idx = this.progressSteps.findIndex( x => {
       return this.router.url.endsWith( x.route ); } );
 
+    let prefix;
+
     // Case were route is blank
-    if ( -1 === idx ) { idx = 0; }
+    if ( -1 === idx ) {
+      prefix = this.router.url;
+      idx = 0;
+    } else  {
+      prefix = this.router.url.slice(0 , (this.router.url.length - this.progressSteps[idx].route.length) );
+    }
 
     if ( this.progressSteps.length > idx + 1 ) {
       // Navigate next page
-      this.router.navigate(['/register/' + this.progressSteps[idx + 1].route] );
+      this.router.navigate( [prefix + '/' + this.progressSteps[idx + 1].route]);
     }
   }
 }
