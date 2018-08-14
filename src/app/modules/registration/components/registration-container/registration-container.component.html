@@ -1,10 +1,20 @@
 <prime-core-breadcrumb>
-
   <prime-wizard-progress-bar
+    class='d-none d-lg-block p-md-2 col-md-4 offset-md-4'
     center
     [progressSteps]="progressSteps"
-    [allowLinks]="true">
+    [allowLinks]="allowLinks">
   </prime-wizard-progress-bar>
+
+
+  <span right class='d-flex'>
+    <div class='controls'>
+      <button type="button"
+              class="btn btn-primary mx-2"
+              (click)="continue()">{{'Continue'}}</button>
+
+    </div>
+  </span>
 
 </prime-core-breadcrumb>
 
