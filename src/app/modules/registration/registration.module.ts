@@ -9,6 +9,7 @@ import { LoginComponent } from './pages/login/login.component';
 import {CoreModule} from '../core/core.module';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import {RegCompleteComponent} from './pages/complete/reg-complete.component';
+import { RegistrationContainerComponent } from './components/registration-container/registration-container.component';
 
 @NgModule({
   imports: [
@@ -21,9 +22,9 @@ import {RegCompleteComponent} from './pages/complete/reg-complete.component';
     ProfileComponent,
     DocumentUploadComponent,
     SecurityComponent,
-    LoginComponent,
     DashboardComponent,
-    RegCompleteComponent
+    RegCompleteComponent,
+    RegistrationContainerComponent
   ]
 })
 export class RegistrationModule { }

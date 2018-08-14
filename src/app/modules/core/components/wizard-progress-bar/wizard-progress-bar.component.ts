@@ -9,6 +9,7 @@ import { Base } from '../../../../core/base/base.class';
 })
 export class WizardProgressBarComponent extends Base implements OnInit {
   @Input() progressSteps: WizardProgressItem[] = [];
+  @Input() allowLinks: boolean = false;
   @ViewChild('stepContainer') stepContainer: ElementRef
   @ViewChildren('steps') steps: QueryList<ElementRef>;
 
@@ -36,7 +37,7 @@ export class WizardProgressBarComponent extends Base implements OnInit {
 
 }
 
-interface WizardProgressItem {
+export interface WizardProgressItem {
   title: string;
   route: string;
 }

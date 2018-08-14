@@ -1,16 +1,12 @@
 import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {NewAccountComponent} from './pages/new-account/new-account.component';
-import {ProfileComponent} from './pages/profile/profile.component';
-import {LoginComponent} from './pages/login/login.component';
 import {DashboardComponent} from './pages/dashboard/dashboard.component';
 import {RegCompleteComponent} from './pages/complete/reg-complete.component';
+import {RegistrationContainerComponent} from './components/registration-container/registration-container.component';
+import {pageRoutes} from './registration-page-routing.module';
 
 export const routes: Routes = [
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
   {
     path: 'dashboard',
     component: DashboardComponent,
@@ -20,16 +16,13 @@ export const routes: Routes = [
     component: NewAccountComponent,
   },
   {
-    path: 'profile',
-    component: ProfileComponent,
-  },
-  {
     path: 'registration-complete',
     component: RegCompleteComponent,
   },
   {
     path: '',
-    redirectTo: 'login'
+    component: RegistrationContainerComponent,
+    children: pageRoutes
   },
   {
     path: '**',

@@ -4,10 +4,23 @@
   [animate]="true">
 </progressbar>
 
-<div class="step-container" #stepContainer>
+<div *ngIf="!allowLinks" class="step-container" #stepContainer>
 
   <div class="step" #steps  *ngFor="let step of progressSteps; let i = index;" [ngClass]="{active: i === activeIndex}">
     <span class="step-text">{{step.title}}</span>
   </div>
+
+
+</div>
+
+<div *ngIf="allowLinks" class="step-container" #stepContainer>
+
+  <a *ngFor="let step of progressSteps; let i = index;" [routerLink]="step.route">
+
+    <div class="step" #steps  [ngClass]="{active: i === activeIndex}">
+      <span class="step-text">{{step.title}}</span>
+    </div>
+
+  </a>
 
 </div>
