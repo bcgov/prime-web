@@ -45,23 +45,24 @@ export class RegistrationContainerComponent implements OnInit {
    * Navigates through the pages
    */
   continue() {
+    let url;
+
     // Find current index of URL
     let idx = this.progressSteps.findIndex( x => {
       return this.router.url.endsWith( x.route ); } );
 
-    let prefix;
-
     // Case were route is blank
     if ( -1 === idx ) {
-      prefix = this.router.url;
       idx = 0;
-    } else  {
-      prefix = this.router.url.slice(0 , (this.router.url.length - this.progressSteps[idx].route.length) );
     }
 
-    if ( this.progressSteps.length > idx + 1 ) {
-      // Navigate next page
-      this.router.navigate( [prefix + '/' + this.progressSteps[idx + 1].route]);
-    }
+    // Get URL prefix
+    const idxEndPrefix = this.router.url.lastIndexOf( '/' );
+    const prefix = (idxEndPrefix === 0 ) ? this.router.url : this.router.url.slice( 0 , idxEndPrefix );
+
+    // Navigate next page
+    url = prefix + '/' + ((this.progressSteps.length > idx + 1) ?  this.progressSteps[idx + 1].route : 'dashboard') ;
+
+    this.router.navigate( [url] );
   }
 }

@@ -1,3 +1,36 @@
-<prime-page-framework>
-  new account works! - Registration wireframe
-</prime-page-framework>
+<div class="p-md-2">
+<h1>Application Guidance</h1>
+There are two ways to register for PRIME account. If you have BC Services Card already you can register below. If you do not have BC Services Card, you can still register below.
+</div>
+
+
+<section class='dashboard-cards row'>
+  <div class="col">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between">
+        BC Services Card
+      </div>
+      <div class="card-body d-flex justify-content-between">
+        Button to register
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between">
+        BC Ministry of Health
+      </div>
+      <div class="card-body d-flex justify-content-between">
+        <div class="p-md-4">
+        For standard registration please start your registration here.
+        </div>
+
+        <button type="button"
+                class="btn btn-primary"
+                (click)="continueStandardReg()">{{'Register'}}</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
