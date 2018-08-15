@@ -3,10 +3,10 @@ import {Router} from '@angular/router';
 
 @Component({
   selector: 'prime-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  templateUrl: './id-proofing.component.html',
+  styleUrls: ['./id-proofing.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class IdProofingComponent implements OnInit {
 
   constructor( private router: Router ) { }
 

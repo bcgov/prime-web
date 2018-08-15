@@ -56,13 +56,13 @@ export class RegistrationContainerComponent implements OnInit {
       idx = 0;
     }
 
-    // Get URL prefix
-    const idxEndPrefix = this.router.url.lastIndexOf( '/' );
-    const prefix = (idxEndPrefix === 0 ) ? this.router.url : this.router.url.slice( 0 , idxEndPrefix );
-
     // Navigate next page
-    url = prefix + '/' + ((this.progressSteps.length > idx + 1) ?  this.progressSteps[idx + 1].route : 'dashboard') ;
+    if (this.progressSteps.length > idx + 1) {
+      // Get URL prefix
+      const idxEndPrefix = this.router.url.lastIndexOf( '/' );
+      const prefix = (idxEndPrefix === 0 ) ? this.router.url : this.router.url.slice( 0 , idxEndPrefix );
 
-    this.router.navigate( [url] );
+      this.router.navigate( [prefix + '/' + this.progressSteps[idx + 1].route ] );
+    }
   }
 }

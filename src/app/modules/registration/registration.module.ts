@@ -7,7 +7,7 @@ import { SecurityComponent } from './pages/security/security.component';
 import {NewAccountComponent} from './pages/new-account/new-account.component';
 import { LoginComponent } from './pages/login/login.component';
 import {CoreModule} from '../core/core.module';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { IdProofingComponent } from './pages/id-proofing/id-proofing.component';
 import {RegCompleteComponent} from './pages/complete/reg-complete.component';
 import { RegistrationContainerComponent } from './components/registration-container/registration-container.component';
 
@@ -22,7 +22,7 @@ import { RegistrationContainerComponent } from './components/registration-contai
     ProfileComponent,
     DocumentUploadComponent,
     SecurityComponent,
-    DashboardComponent,
+    IdProofingComponent,
     RegCompleteComponent,
     RegistrationContainerComponent
   ]

@@ -18,12 +18,26 @@ export class NewAccountComponent implements OnInit {
    */
   continueStandardReg() {
 
-    // Get URL prefix
-    const idxEndPrefix = this.router.url.lastIndexOf( '/' );
-    const prefix = (idxEndPrefix === 0 ) ? this.router.url : this.router.url.slice( 0 , idxEndPrefix );
-
     // Navigate next page
-    this.router.navigate( [prefix + '/' + 'profile'] ) ;
+    this.router.navigate( [this.getUrlPrefix( this.router.url ) + '/' + 'profile'] );
   }
 
+  /**
+   *
+   */
+  continueIdProofing() {
+    // Navigate next page
+    this.router.navigate( [this.getUrlPrefix( this.router.url ) + '/' + 'id-proofing'] );
+  }
+
+  /**
+   *
+   * @param {string} url
+   * @returns {string}
+   */
+  private getUrlPrefix( url: string ): string {
+    // Get URL prefix
+    const idxEndPrefix = this.router.url.lastIndexOf( '/' );
+    return (idxEndPrefix === 0 ) ? this.router.url : this.router.url.slice( 0 , idxEndPrefix );
+  }
 }
