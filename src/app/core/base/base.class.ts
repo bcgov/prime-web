@@ -9,7 +9,7 @@ export class Base {
   public objectId: string = UUID.UUID().toString();
 
   /** A default dateFormat to be used in moment and other model formatters. */
-  public dateFormat = 'YYYY/MM/DD';
+  public dateFormat = 'MMM. dd, yyyy';
 
   constructor() { }
 

@@ -9,10 +9,12 @@
 <prime-page-framework>
 
   <h2 class='prime-title' id="profInfo">Professional Information</h2>
+  <div>The information you provide here about your professional associations is used along with the information about your place(s) of work to assign you to a user class, which will determine the PharmaNet Access Privileges you will receive.
+  </div>
 
   <section class='my-3'>
     <label>
-      <div>Do you have a college registration?</div>
+      <div>Are you a regulated health care professional?</div>
       <prime-toggle [(data)]="applicant.hasCollege" (click)="onChange()"></prime-toggle>
     </label>
 
@@ -36,14 +38,14 @@
               <label class="has-float-label">
                 <input type="text" name="collegeNumber" id="collegeNumber" [value]="collegeCurrValue(applicant.collegeCertificationList[i].collegeType)"
                   class="form-control" disabled>
-                <span>College number</span>
+                <span>College Number</span>
               </label>
             </div>
             <div class="applicant-row--item prime-input-medium">
               <label class="has-float-label">
                 <input type="text" name="licenceNumber" id="licenceNumber" [(ngModel)]="collegeCertificationRecord.licenceNumber" maxlength="{{maxLengthValue('LICENCE_NUMBER')}}"
                   class="form-control" (input)="onChange()" placeholder=" ">
-                <span>License Number</span>
+                <span>Practitioner College ID</span>
               </label>
             </div>
             <div *ngIf="applicant.collegeCertificationList[i].collegeType === 'CPBC'" class="applicant-row--item prime-input-large">
@@ -55,7 +57,7 @@
                     {{licenceClassCPValue(type)}}
                   </option>
                 </select>
-                <span>License Class</span>
+                <span>Licence Class</span>
               </label>
             </div>
             <div *ngIf="applicant.collegeCertificationList[i].collegeType === 'CRNBC'" class="applicant-row--item prime-input-large">
@@ -83,7 +85,7 @@
             </div>
             <div class="applicant-row--item prime-input-large">
               <!-- <label for="">Licence Expiry</label> -->
-              <prime-datepicker dateFormat="yyyy/mm/dd" [(date)]="collegeCertificationRecord.licenceExpiryDate" labelText="Registration Renewal"></prime-datepicker>
+              <prime-datepicker dateFormat="mmm. dd, yyyy" [(date)]="collegeCertificationRecord.licenceExpiryDate" labelText="Registration Renewal Date"></prime-datepicker>
             </div>
             <div *ngIf="applicant.collegeCertificationList[i].collegeType === 'CRNBC'" class="applicant-row--item prime-input-large">
               <label class="has-float-label">
@@ -123,6 +125,7 @@
 
     <label>
       <div>Are you a Device Provider?</div>
+      <div>A Device Provider is enrolled in the device provider class, and associated sub-classes, under the Pharmaceutical Services Act, Provider Regulation.</div>
       <prime-toggle [(data)]="applicant.isDeviceProvider" (click)="onChange()"></prime-toggle>
     </label>
 
@@ -142,7 +145,7 @@
   <div *ngIf="displayWorkingOnBehalfSection()" class='my-3'>
 
     <label>
-      <div>Are you working on-behalf?</div>
+      <div>Are you accessing PharmaNet on behalf of a regulated health care professional or a Device Provider?</div>
       <prime-toggle [(data)]="applicant.isWorkingOnBehalf" (click)="onChange()"></prime-toggle>
     </label>
 
@@ -163,7 +166,7 @@
         <div class="applicant-row--item" *ngIf="applicant.workingOnBehalfList[0].jobTitle === 'OTHER'">
             <label class="has-float-label">
               <input type="text" class='prime-input-large' placeholder=" " [(ngModel)]="applicant.workingOnBehalfOtherReason"/>
-              <span>Working on-behalf title</span>
+              <span>On-Behalf-of User Job Title</span>
             </label>
         </div>
 
@@ -175,6 +178,7 @@
   <section *ngIf="displaySelfDeclarationSection()">
 
     <h2 class='prime-title' id="selfDeclaration">Self Declaration</h2>
+    <div>The information you provide here will determine whether or not a manual review is required. Upload any supporting documents as needed.</div>
     <hr>
 
     <div class='my-3'>
@@ -183,7 +187,7 @@
     </div>
     <div *ngIf="applicant.informationContravention.flag">
       <label class="has-float-label">
-        <span>Please provide detail</span>
+        <span>Please provide details</span>
         <textarea class="selfDeclarationTextArea" name="informationContraventionDetail" id="informationContraventionDetail" [(ngModel)]="applicant.informationContravention.detail"
           (input)="onChange()"></textarea>
       </label>
@@ -197,7 +201,7 @@
     </div>
     <div *ngIf="applicant.cancelledRegistration.flag">
       <label class="has-float-label">
-        <span>Please provide detail</span>
+        <span>Please provide details</span>
         <textarea class="selfDeclarationTextArea" name="cancelledRegistrationDetail" id="cancelledRegistrationDetail" [(ngModel)]="applicant.cancelledRegistration.detail"
           (input)="onChange()"></textarea>
       </label>
@@ -205,7 +209,7 @@
 
     <div class='my-3'>
       <div>
-        Have you ever had Limits and Conditions imposed on your licence as a result of disciplinary actions taken by a governing body?
+        Have you ever had Limits and Conditions imposed on your licence as a result of disciplinary actions taken by the governing body of a Health Profession?
       </div>
       <prime-toggle [(data)]="applicant.licenceCondition.flag" (click)="onChange()"></prime-toggle>
 
@@ -213,7 +217,7 @@
     <div *ngIf="applicant.licenceCondition.flag">
 
       <label class="has-float-label">
-        <span>Please provide detail</span>
+        <span>Please provide details</span>
         <textarea class="selfDeclarationTextArea" name="licenceConditionDetail" id="licenceConditionDetail"
           [(ngModel)]="applicant.licenceCondition.detail" (input)="onChange()"></textarea>
       </label>
@@ -230,7 +234,7 @@
     <div *ngIf="applicant.revokedAccess.flag">
 
       <label class="has-float-label">
-        <span>Please provide detail</span>
+        <span>Please provide details</span>
         <textarea class="selfDeclarationTextArea" name="revokedAccessDetail" id="revokedAccessDetail"
           [(ngModel)]="applicant.revokedAccess.detail" (input)="onChange()"></textarea>
       </label>

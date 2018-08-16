@@ -216,13 +216,13 @@ export enum SiteAccessProgressSteps {
 }
 
 export enum DeclinedReasons {
-  WRONG_SITE = 'Wrong Site',
-  ACCESS_NO_lONGER_REQUIRED = 'Access No Longer Required'
+  ACCESS_NO_lONGER_REQUIRED = 'Access no longer required',
+  WRONG_SITE = 'Wrong site'
 }
 
 export enum AccessReasons {
-  PERSONAL_ACCESS = 'I personally access PNET',
-  NOT_PERSONAL_ACCESS = 'Not for personal access'
+  PERSONAL_ACCESS = 'I will access PharmaNet myself',
+  NOT_PERSONAL_ACCESS = 'I will not access PharmaNet myself. Someone else will access PharmaNet on my behalf.'
 }
 
 export enum ProvisionRequestOptions {
