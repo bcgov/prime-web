@@ -214,7 +214,10 @@ export class ApplicantProfessionalComponent implements OnInit {
   }
 
   displayDeviceProviderSection() {
-    if(this.collegeCertificationValid(0) && this._user.collegeCertificationList[0].collegeType === 'CPBC') {
+    if (this.collegeCertificationValid(0) && this._user.collegeCertificationList[0].collegeType === 'CPBC') {
+      return true;
+    }
+    else if (this.applicant.hasCollege === false) {
       return true;
     }
     else {
@@ -224,7 +227,7 @@ export class ApplicantProfessionalComponent implements OnInit {
 
   //FIXME: SHOULD only display if previous two sections are No. Currently it shows REGARDLESS of what the users answer is.
   displayWorkingOnBehalfSection() {
-    if (this.displayDeviceProviderSection()){
+    /*if (this.displayDeviceProviderSection()){
       return this._user.isDeviceProvider === false;
     }
     else if (this.collegeCertificationValid(0)) {
@@ -232,15 +235,22 @@ export class ApplicantProfessionalComponent implements OnInit {
     }
     else if (this.applicant.hasCollege === false){
       return true;
-    }
+    }*/
+    if (this.applicant.hasCollege === true){
+      return false;
+    };
 
-    return false;
+    return true;
   }
 
   displaySelfDeclarationSection() {
 
-    if (this._user.hasCollege === false && this._user.isWorkingOnBehalf === false){
+   /* if (this._user.hasCollege === false && this._user.isWorkingOnBehalf === false){
       return false;
+    }
+
+    if (this._user.hasCollege === true) {
+      return true;
     }
 
     // User has filled out 'on behalf' section
@@ -256,13 +266,13 @@ export class ApplicantProfessionalComponent implements OnInit {
     // User has filled out device provider
     else if (this.displayDeviceProviderSection() && this._user.deviceProviderNumber) {
       return true;
-    }
+    }*/
     // User has said 'no' to each section
     // else if (this.displayDeviceProviderSection() && this.displayWorkingOnBehalfSection() && this._user.isWorkingOnBehalf === false) {
     //   return true;
     // }
 
-    return false;
+    return true;
   }
 
   displayCannotContinueErrors(){
