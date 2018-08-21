@@ -32,7 +32,7 @@ export class ApplEnrollmentRowComponent extends EnrollmentRow implements OnInit 
   @Output() onChange = new EventEmitter<ApplEnrollmentRowItem>();
 
   public applicantSearch: SearchDomain = SearchDomain.Applicant; // Domain to search for user sites
-  public dateFormat = 'yyyy/mm/dd';
+  public dateFormat = 'mmm. dd, yyyy';
 
   // copy of row data
   private _data;

@@ -28,7 +28,7 @@
       <div class="col">
         <label class="has-float-label">
           <input type="text" disabled class="form-control" id="primaryPhone" name="primaryPhone" [(ngModel)]="person.phone">
-          <span>Phone</span>
+          <span>Phone Number</span>
         </label>
 
         <label class="has-float-label">
@@ -80,7 +80,7 @@
 
 <ng-template #siteModal>
   <div class="modal-header">
-    <h4 class="modal-title">{{collection.name}}</h4>
+    <h4 class="modal-title">{{site.name}}</h4>
 
 
     <form *ngIf="!isApplicantSite()" class="form-inline">
@@ -103,7 +103,7 @@
   <div class="modal-body">
       <div class="container">
         <label class="has-float-label">
-          <input type="text" disabled class="form-control" id="address" name="address" [(ngModel)]="site.address.street">
+          <input type="text" disabled class="form-control" id="address" name="address" [(ngModel)]="site.address">
           <span>Address</span>
         </label>
 

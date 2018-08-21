@@ -3,7 +3,7 @@
     <form *ngSwitchCase="DatepickerSizes.DEFAULT">
         <div class="input-group">
           <label class="has-float-label">
-              <input class="form-control" placeholder="Select a date"
+              <input class="form-control" placeholder=" Please Select"
                 ngx-mydatepicker name="mydate"
                 [(ngModel)]="model"
                 [options]="datepickerOptions"
@@ -33,7 +33,7 @@
               (dateChanged)="onDateChanged($event)"
               (click)="dp.toggleCalendar()"
               [disabled]="disabled">
-              {{ model?.formatted || model?.date || 'Select a date' }}
+              {{ model?.formatted || model?.date || 'Please Select' }}
             </button>
             <input type="hidden" name="date" [value]="model?.date" />
 

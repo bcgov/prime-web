@@ -14,6 +14,9 @@
   <img class="photo pull-right" src="assets/photoPlaceholder.png" alt="Generic placeholder image">
 
   <h2 class='prime-title' id="regInfo">Registration Information</h2>
+  <div>This information is from your ID document or as provided at Registration. Your name as known by other people will be used by Verifiers to find you in PRIME. If you prefer to go by another name that was not provided at Registration, select “(optional) Set Preferred Name” and enter your preferred name in full. Otherwise, your legal name will be used to find you in PRIME.
+  </div>
+
 
   <form>
 
@@ -48,7 +51,7 @@
 
 
       <label class="has-float-label">
-        <input type="text" class="form-control prime-input-medium" id="DoB" name="DoB" [ngModel]="applicant.dateOfBirth | date:'MM/dd/yyyy'" disabled>
+        <input type="text" class="form-control prime-input-medium" id="DoB" name="DoB" [ngModel]="applicant.dateOfBirth | date:'MMM. dd, yyyy'" disabled>
         <span>Date of Birth</span>
       </label>
 
@@ -91,7 +94,7 @@
 
       <label class="has-float-label">
         <input type="text" [textMask]="{mask: getPhoneMask()}" class="form-control prime-input-large" id="phone" name="phone" [(ngModel)]="applicant.phone" (input)="onChange()" placeholder=" ">
-        <span>Phone</span>
+        <span>Phone Number</span>
       </label>
 
       <label class="has-float-label">
@@ -110,7 +113,7 @@
 
   <form>
     <label>
-      Use my Registration Information for mailing address
+      Use the address from my Registration Information as my mailing address
       <prime-toggle [(data)]="applicant.useRegAddress" (click) = "onChange()"></prime-toggle>
     </label>
 

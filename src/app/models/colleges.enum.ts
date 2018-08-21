@@ -3,9 +3,10 @@
  * Professional Information college choices
  */
 export enum CollegeTypes {
+  //These should appear in alphanum order according to the name, not acronym or number
   CPBC  = 'P1' /**College of Pharmacists Of BC (CPBC)*/,
-  CRNBC = '96' /**College of Registered Nurses of BC (CRNBC)*/,
-  CPSBC = '91' /**College of Physicians and Surgeons of BC (CPSBC)*/
+  CPSBC = '91' /**College of Physicians and Surgeons of BC (CPSBC)*/,
+  CRNBC = '96' /**College of Registered Nurses of BC (CRNBC)*/
 }
 
 export class CollegeHelper {
@@ -20,7 +21,7 @@ export class CollegeHelper {
     let fullName;
     switch (collegeType) {
       case CollegeTypes.CPBC:
-        fullName = 'Pharmacists of BC (CPBC)';
+        fullName = 'College of Pharmacists of BC (CPBC)';
         break;
       case CollegeTypes.CPSBC:
         fullName = 'College of Physicians and Surgeons of BC (CPSBC)';
@@ -47,7 +48,7 @@ export enum LicenceClassCPTypes {
  */
 export enum LicenceClassCRNTypes {
   REGISTERED = 'Registered Nurse',
-  TEMP       = 'Temp. Registered Nurse'
+  TEMP       = 'Temporary Registered Nurse'
 }
 
 /**
@@ -72,13 +73,13 @@ export enum AdvancedPracticeCertificationTypes {
  * Entries related to Working on-behalf
  */
 export enum WorkingOnBehalfTitleTypes {
-  MEDICA = 'Medica Office Assistant',
+  MEDICA = 'Medical Office Assistant',
+  MIDWIVES = 'Midwife',
+  NURSE = 'Nurse (not Nurse Practitioner)',
+  PHARM_ASSIST = 'Pharmacy Assistant',
+  PHARM_TECH = 'Pharmacy Technician',
   REG_CLERK = 'Registration Clerk',
   WARD_CLERK = 'Ward Clerk',
-  PHARM_ASSIST = 'Pharmacy Assistant',
-  PHARM_TECH = 'Pharmacy Technicain',
-  NURSE = 'Nurse (not Nurse Practicitioner)',
-  MIDWIVES = 'Midwives',
   OTHER  = 'Other'
 }
 
