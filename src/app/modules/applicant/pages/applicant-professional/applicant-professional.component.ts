@@ -236,11 +236,11 @@ export class ApplicantProfessionalComponent implements OnInit {
     else if (this.applicant.hasCollege === false){
       return true;
     }*/
-    if (this.applicant.hasCollege === true){
+    if (this.applicant.hasCollege === false && this.applicant.isDeviceProvider === false){
+      return true;
+    } else {
       return false;
     };
-
-    return true;
   }
 
   displaySelfDeclarationSection() {
