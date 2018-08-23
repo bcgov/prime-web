@@ -41,6 +41,7 @@ import { HeaderFooterModule } from './modules/header-footer/header-footer.module
 import { ProvisionerService } from './services/provisioner.service';
 import { RouterModule } from '@angular/router';
 import {LoginComponent} from './modules/registration/pages/login/login.component';
+import {ProfileComponent} from "./modules/registration/pages/profile/profile.component";
 
 
 

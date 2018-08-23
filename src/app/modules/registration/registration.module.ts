@@ -10,11 +10,13 @@ import {CoreModule} from '../core/core.module';
 import { IdProofingComponent } from './pages/id-proofing/id-proofing.component';
 import {RegCompleteComponent} from './pages/complete/reg-complete.component';
 import { RegistrationContainerComponent } from './components/registration-container/registration-container.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   imports: [
     CommonModule,
     CoreModule,
+    FormsModule,
     RegistrationRoutingModule
   ],
   declarations: [
