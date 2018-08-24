@@ -21,12 +21,12 @@ export class ProfileComponent implements OnInit {
     //this._user = cloneDeep(this.primeDataService.user);
   }
 
-  get applicant(): Person {
+  get registrant(): Person {
     return this._user;
   }
 
   getPhoneMask(): (RegExp | string )[] | false {
-    if (!this.applicant.hasInternationalPhoneNumber ){
+    if (!this.registrant.hasInternationalPhoneNumber ){
       // return  { mask: this.phoneMask };
       return this.phoneMask;
     }
