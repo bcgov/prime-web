@@ -1,2 +1,104 @@
-security works!
+<prime-page-framework>
 
+  <h2 class='prime-title' id="regInfo">Prime Account</h2>
+  <form>
+    <div>
+      <label class="has-float-label">
+        <input type="text" class="form-control prime-input-large" id="regLastName" name="regLastName" ([ngModel])="registrant.lastName" placeholder=" ">
+        <span>User ID</span>
+      </label>
+
+      <label class="has-float-label">
+        <input type="text" class="form-control prime-input-large" id="regMiddleName" name="regMiddleName" ([ngModel])="registrant.middleName" placeholder=" ">
+        <span>New Password</span>
+      </label>
+
+      <label class="has-float-label">
+        <input type="text" class="form-control prime-input-large" id="regFirstName" name="regFirstName" ([ngModel])="registrant.firstName" placeholder=" ">
+        <span>Confirm Password</span>
+      </label>
+    </div>
+  </form>
+  <h2 class='prime-title' id="regInfo">1 - Step Verification</h2>
+    <form>
+      <div class="prime-input-large">
+        <label class="has-float-label">
+          <select class="form-control">
+            <option value="" default disabled>Security Question 1</option>
+            <option value="pet">What is the name of your first pet?</option>
+            <option value="teacher">What was the last name of your favourite teacher?</option>
+            <option value="town">What town was your mother born in?</option>
+          </select>
+        </label>
+      </div>
+      <label class="has-float-label">
+        <input type="text" class="form-control prime-input-large" id="regLastName" name="regLastName" ([ngModel])="registrant.lastName" placeholder=" ">
+        <span>Security Question 1 Answer</span>
+      </label>
+
+      <div class="prime-input-large">
+        <label class="has-float-label">
+          <select class="form-control">
+            <option value="" default disabled>Security Question 2</option>
+            <option value="pet">What is the name of your first pet?</option>
+            <option value="teacher">What was the last name of your favourite teacher?</option>
+            <option value="town">What town was your mother born in?</option>
+          </select>
+        </label>
+      </div>
+      <label class="has-float-label">
+        <input type="text" class="form-control prime-input-large" id="regLastName" name="regLastName" ([ngModel])="registrant.lastName" placeholder=" ">
+        <span>Security Question 2 Answer</span>
+      </label>
+
+      <div class="prime-input-large">
+        <label class="has-float-label">
+          <select class="form-control">
+            <option value="" default disabled>Security Question 3</option>
+            <option value="pet">What is the name of your first pet?</option>
+            <option value="teacher">What was the last name of your favourite teacher?</option>
+            <option value="town">What town was your mother born in?</option>
+          </select>
+        </label>
+      </div>
+      <label class="has-float-label">
+        <input type="text" class="form-control prime-input-large" id="regLastName" name="regLastName" ([ngModel])="registrant.lastName" placeholder=" ">
+        <span>Security Question 3 Answer</span>
+      </label>
+    </form>
+    <h2 class='prime-title' id="regInfo">2 - Step Verification</h2>
+    <span>Secondary Security (please select at least one)</span>
+    <form>
+      <div>
+        <input type="checkbox" id="scales" name="feature"
+               value="scales" />
+        <label for="scales">SMS/Text</label>
+        <label class="has-float-label">
+          <input type="text" class="form-control prime-input-large" id="phone" name="phone" ([ngModel])="registrant.phone" placeholder=" ">
+          <span>Phone</span>
+        </label>
+      </div>
+
+      <hr>
+      <div>
+        <input type="checkbox" id="horns" name="feature"
+               value="horns" />
+        <label for="horns">Physical Security Key</label>
+        <label class="has-float-label">
+          <input type="text" class="form-control prime-input-large" id="phone" name="phone" ([ngModel])="registrant.phone" placeholder=" " disabled>
+          <span>Instructions to follow</span>
+        </label>
+      </div>
+
+      <hr>
+      <div>
+        <input type="checkbox" id="claws" name="feature"
+               value="claws" />
+        <label for="claws">Mobile App Authentication</label>
+      </div>
+      <img class="img-thumbnail" src="assets/mobile_app_icon_android.png" alt="Generic placeholder image">
+      <img class="img-thumbnail" src="assets/mobile_app_icon_apple.png" alt="Generic placeholder image">
+      <img class="img-thumbnail" src="assets/mobile_app_icon_windows.png" alt="Generic placeholder image">
+    </form>
+
+</prime-page-framework>
