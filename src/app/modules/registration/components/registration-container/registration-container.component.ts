@@ -65,4 +65,28 @@ export class RegistrationContainerComponent implements OnInit {
       this.router.navigate( [prefix + '/' + this.progressSteps[idx + 1].route ] );
     }
   }
+
+  back() {
+    let url;
+
+    // Find current index of URL
+    let idx = this.progressSteps.findIndex( x => {
+      return this.router.url.endsWith( x.route ); } );
+
+    // Case were route is blank
+    if ( -1 === idx ) {
+      idx = 0;
+    }
+
+    // Navigate previous page
+      // Get URL prefix
+      const idxEndPrefix = this.router.url.lastIndexOf( '/' );
+      const prefix = (idxEndPrefix === 0 ) ? this.router.url : this.router.url.slice( 0 , idxEndPrefix );
+
+      this.router.navigate( [prefix + '/' + this.progressSteps[idx - 1].route ] );
+  }
+
+  submit() {
+    this.router.navigate(['/register/registration-complete']);
+  }
 }

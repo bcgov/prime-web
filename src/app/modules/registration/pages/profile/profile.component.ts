@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
   constructor(private primeDataService: PrimeDataService) { }
 
   ngOnInit() {
-    //this._user = cloneDeep(this.primeDataService.user);
+    this._user = cloneDeep(this.primeDataService.user);
   }
 
   get registrant(): Person {

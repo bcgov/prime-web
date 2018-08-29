@@ -1,0 +1,71 @@
+<button type="button" class="btn btn-outline-primary" (click)="openModal(template)">
+  Login
+</button>
+<ng-template #template>
+  <div class="modal-header">
+    <h4 *ngIf="showOptions" class="modal-title">Select a method to verify yourself</h4>
+    <h4 *ngIf="showVerifyPIN" class="modal-title">Enter your PIN</h4>
+
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div *ngIf="showOptions" class="modal-body">
+    <form>
+      <div>
+        <input type="checkbox" id="scales" name="feature"
+               value="scales" />
+        <label for="scales">SMS/Text</label>
+        <label class="has-float-label">
+          <input type="text" class="form-control prime-input-large" id="regMFAPhone" name="regMFAPhone" [(ngModel)]="registrant.phone" placeholder=" ">
+          <span>Phone</span>
+        </label>
+      </div>
+
+      <hr>
+      <div>
+        <input type="checkbox" id="horns" name="feature"
+               value="horns" />
+        <label for="horns">Physical Security Key</label>
+        <label class="has-float-label">
+          <input type="text" class="form-control prime-input-large" placeholder=" " disabled>
+          <span>Instructions to follow</span>
+        </label>
+      </div>
+
+      <hr>
+      <div>
+        <input type="checkbox" id="claws" name="feature"
+               value="claws" />
+        <label for="claws">Mobile App Authentication</label>
+      </div>
+      <img class="img-thumbnail" src="assets/mobile_app_icon_android.png" alt="Generic placeholder image">
+      <img class="img-thumbnail" src="assets/mobile_app_icon_apple.png" alt="Generic placeholder image">
+      <img class="img-thumbnail" src="assets/mobile_app_icon_windows.png" alt="Generic placeholder image">
+    </form>
+  </div>
+
+  <div *ngIf="showVerifyPIN" class="modal-body">
+    <form>
+      <div>
+        <label class="has-float-label">
+          <input type="text" class="form-control prime-input-large" placeholder=" ">
+          <span>PIN</span>
+        </label>
+      </div>
+
+      <div><a href="javascript:void(0)" (click)="chooseOption()">Try a different method</a>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="modalRef.hide()" tabindex="1">
+      Cancel
+    </button>
+    <button type="button" class="btn btn-default" (click)="sendPIN()" tabindex="1">
+      Send PIN
+    </button>
+  </div>
+</ng-template>

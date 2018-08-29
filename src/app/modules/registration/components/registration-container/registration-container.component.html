@@ -6,12 +6,19 @@
     [allowLinks]="allowLinks">
   </prime-wizard-progress-bar>
 
-
   <span right class='d-flex'>
     <div class='controls'>
-      <button type="button"
+      <button *ngIf="router.url != '/register/profile'" type="button"
               class="btn btn-primary mx-2"
-              (click)="continue()">{{'Continue'}}</button>
+              (click)="back()">{{'Back'}}</button>
+      <div *ngIf="router.url != '/register/security';then continueButton else submitButton"></div>
+      <ng-template #continueButton>
+        <button type="button" class="btn btn-primary mx-2" (click)="continue()">{{'Continue'}}</button>
+      </ng-template>
+      <ng-template #submitButton>
+        <button type="button" class="btn btn-primary mx-2" (click)="submit()">{{'Submit'}}</button>
+      </ng-template>
+
 
     </div>
   </span>

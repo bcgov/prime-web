@@ -11,6 +11,7 @@ import { IdProofingComponent } from './pages/id-proofing/id-proofing.component';
 import {RegCompleteComponent} from './pages/complete/reg-complete.component';
 import { RegistrationContainerComponent } from './components/registration-container/registration-container.component';
 import {FormsModule} from "@angular/forms";
+import { RegLoginMfaComponent } from './components/reg-login-mfa/reg-login-mfa.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import {FormsModule} from "@angular/forms";
     SecurityComponent,
     IdProofingComponent,
     RegCompleteComponent,
-    RegistrationContainerComponent
+    RegistrationContainerComponent,
+    RegLoginMfaComponent
   ]
 })
 export class RegistrationModule { }
