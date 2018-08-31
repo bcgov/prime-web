@@ -18,7 +18,7 @@ export class RegistrationContainerComponent implements OnInit {
 
   public allowLinks: boolean = !environment.production ? true : false;
 
-  constructor( private router: Router ) { }
+  constructor( public router: Router ) { }
 
   ngOnInit() {
     this.progressSteps = pageRoutes.map(x => {
