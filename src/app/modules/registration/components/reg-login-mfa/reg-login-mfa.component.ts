@@ -4,6 +4,8 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {PrimeDataService} from "../../../../services/prime-data.service";
 import {Person} from "../../../../models/person.model";
 import { cloneDeep } from 'lodash';
+import {Router} from '@angular/router';
+
 
 
 @Component({
@@ -17,8 +19,9 @@ export class RegLoginMfaComponent implements OnInit {
   private _user: Person;
   showOptions = true;
   showVerifyPIN = false;
+  showVerifiedPIN = false;
 
-  constructor(private primeDataService: PrimeDataService, private modalService: BsModalService){ }
+  constructor(private primeDataService: PrimeDataService, private modalService: BsModalService, private router: Router){ }
 
   ngOnInit() {
     this._user = cloneDeep(this.primeDataService.user);
@@ -41,6 +44,16 @@ export class RegLoginMfaComponent implements OnInit {
   chooseOption() {
     this.showOptions = true;
     this.showVerifyPIN = false;
+  }
+
+  verifyPIN() {
+    this.showVerifyPIN = false;
+    this.showVerifiedPIN = true;
+  }
+
+  verifiedPIN() {
+    this.modalRef.hide();
+    this.router.navigate(['/register/id-proofing']);
   }
 
 }

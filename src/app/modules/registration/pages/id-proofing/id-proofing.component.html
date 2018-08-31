@@ -12,8 +12,12 @@
         </a>
       </div>
       <div class="card-body d-flex justify-content-between">
-        Some data
-
+        <div class="appcol">
+          <p>James Smith</p>
+          <p>250 658 2222</p>
+          <p>email@mail.com</p>
+        </div>
+        <i class="fa fa-check-circle text-success fa-3x pull-right" aria-hidden="true"></i>
       </div>
     </div>
   </div>
@@ -26,7 +30,14 @@
         </a>
       </div>
       <div class="card-body d-flex justify-content-between">
-        Some data
+        <div class="photocol">
+          <img class="photo" src="assets/photoPlaceholder.png" alt="Generic placeholder image">
+        </div>
+        <div class="appcol">
+          <p>Driver's License</p>
+          <p>Passport</p>
+        </div>
+        <i class="fa fa-check-circle text-success fa-3x pull-right" aria-hidden="true"></i>
       </div>
     </div>
   </div>
@@ -39,9 +50,44 @@
         </a>
       </div>
       <div class="card-body d-flex justify-content-between">
-        Some data
+        <div class="appcol">
+          <p>1 - Step Verification</p>
+          <p>2 - Step Verification</p>
+        </div>
+        <i class="fa fa-check-circle text-success fa-3x pull-right" aria-hidden="true"></i>
      </div>
     </div>
   </div>
 </section>
+
+<div>
+
+  <h2>ID Proofing</h2>
+  <label>
+    ID Proofing boilerplate - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes
+  </label>
+  <hr>
+  <div class="container" style="border:1px solid lightgrey">
+    <div class="leftpane">
+      <img style="padding:5px;" src="assets/live_video_chat.png" alt="Generic placeholder image">
+    </div>
+    <div class="rightpane">
+      <label>
+        Please complete ID Proofing by verifying your account information with a PRIME agent. Once you are ready, start the live video chat.
+      </label>
+      <ul>
+        <li>Turn webcam on</li>
+        <li>Check your audio</li>
+        <li>Start live video chat when you're ready</li>
+      </ul>
+    </div>
+    <div align="center">
+      <i class="fa fa-exclamation-triangle text-warning fa-3x" aria-hidden="true"></i>
+    </div>
+    <div align="center" >
+      <button type="button" class="btn btn-primary mx-2" (click)="startVideoChat()">{{'Start Live Video Chat'}}</button>
+    </div>
+  </div>
+
+</div>
 

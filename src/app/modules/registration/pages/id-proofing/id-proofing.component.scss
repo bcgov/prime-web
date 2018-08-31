@@ -1,0 +1,34 @@
+.photocol {
+  height: 70%;
+  width: 25%;
+}
+
+.photo {
+  width: 95%;
+  height: 80%;
+}
+
+.appcol {
+  width: 65%;
+}
+
+.container {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.leftpane {
+  width: 65%;
+  height: 100%;
+  float: left;
+  border-collapse: collapse;
+}
+
+.rightpane {
+  width: 35%;
+  height: 100%;
+  position: relative;
+  float: right;
+  border-collapse: collapse;
+}

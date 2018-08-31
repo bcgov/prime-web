@@ -21,8 +21,4 @@ export class RegCompleteComponent implements OnInit {
     return this._user;
   }
 
-  login() {
-
-  }
-
 }

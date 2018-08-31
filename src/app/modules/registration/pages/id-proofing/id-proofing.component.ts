@@ -24,4 +24,8 @@ export class IdProofingComponent implements OnInit {
     return prefix + route;
   }
 
+  startVideoChat() {
+
+  }
+
 }
