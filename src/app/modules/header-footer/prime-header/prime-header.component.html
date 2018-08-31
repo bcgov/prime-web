@@ -8,18 +8,20 @@
       </a>
       <span class="title px-2 mt-1" role="banner">PRIME</span>
     </div>
-    <div *ngIf="showControlOptions()" class='d-flex'>
+    <div class='d-flex'>
+      <div *ngIf="showControlOptions()" >
+        <!--  For these links make sure that the routerLink is identical to the value passed in routeIsActive() -->
+        <a class="btn btn-outline-secondary mx-2" routerLink="/verifier" [ngClass]="{active: routeIsActive('/verifier')}" role="button">
+          V
+        </a>
+        <a class="btn btn-outline-secondary mx-2" routerLink="/applicant" [ngClass]="{active: routeIsActive('/applicant')}" role="button">
+          U
+        </a>
+        <a class="btn btn-outline-secondary mx-2" routerLink="/provisioner" [ngClass]="{active: routeIsActive('/provisioner')}" role="button">
+          P
+        </a>
 
-      <!--  For these links make sure that the routerLink is identical to the value passed in routeIsActive() -->
-      <a class="btn btn-outline-secondary mx-2" routerLink="/verifier" [ngClass]="{active: routeIsActive('/verifier')}" role="button">
-        V
-      </a>
-      <a class="btn btn-outline-secondary mx-2" routerLink="/applicant" [ngClass]="{active: routeIsActive('/applicant')}" role="button">
-        A
-      </a>
-      <a class="btn btn-outline-secondary mx-2" routerLink="/provisioner" [ngClass]="{active: routeIsActive('/provisioner')}" role="button">
-        P
-      </a>
+      </div>
 
       <div class="separator"></div>
 

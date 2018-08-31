@@ -14,9 +14,8 @@
   <div *ngIf="showOptions" class="modal-body">
     <form>
       <div>
-        <input type="checkbox" id="scales" name="feature"
-               value="scales" />
-        <label for="scales">SMS/Text</label>
+        <input type="checkbox" name="smsCheck" [(ngModel)]="mfaSms" />
+        <label>SMS/Text</label>
         <label class="has-float-label">
           <input type="text" class="form-control prime-input-large" id="regMFAPhone" name="regMFAPhone" [(ngModel)]="registrant.phone" placeholder=" ">
           <span>Phone</span>
@@ -25,9 +24,8 @@
 
       <hr>
       <div>
-        <input type="checkbox" id="horns" name="feature"
-               value="horns" />
-        <label for="horns">Physical Security Key</label>
+        <input type="checkbox" name="fobCheck" [(ngModel)]="mfaFob" />
+        <label>Physical Security Key</label>
         <label class="has-float-label">
           <input type="text" class="form-control prime-input-large" placeholder=" " disabled>
           <span>Instructions to follow</span>
@@ -36,9 +34,8 @@
 
       <hr>
       <div>
-        <input type="checkbox" id="claws" name="feature"
-               value="claws" />
-        <label for="claws">Mobile App Authentication</label>
+        <input type="checkbox" name="appCheck"[(ngModel)]="mfaApp" />
+        <label>Mobile App Authentication</label>
       </div>
       <img class="img-thumbnail" src="assets/mobile_app_icon_android.png" alt="Generic placeholder image">
       <img class="img-thumbnail" src="assets/mobile_app_icon_apple.png" alt="Generic placeholder image">
@@ -50,7 +47,7 @@
     <form>
       <div>
         <label class="has-float-label">
-          <input type="text" class="form-control prime-input-large" placeholder=" ">
+          <input type="text" id="pin" name="pin" class="form-control prime-input-large" [(ngModel)]="pin" placeholder=" ">
           <span>PIN</span>
         </label>
       </div>
@@ -77,10 +74,10 @@
       Later
     </button>
 
-    <button *ngIf="showOptions" type="button" class="btn btn-default" (click)="sendPIN()" tabindex="1">
+    <button *ngIf="showOptions" type="button" class="btn btn-default" (click)="sendPIN()" tabindex="1" [disabled]="!mfaOptionCheck()">
       Send PIN
     </button>
-    <button *ngIf="showVerifyPIN" type="button" class="btn btn-default" (click)="verifyPIN()" tabindex="1">
+    <button *ngIf="showVerifyPIN" type="button" class="btn btn-default" (click)="verifyPIN()" tabindex="1" [disabled]="!pinCheck()">
       Verify PIN
     </button>
     <button *ngIf="showVerifiedPIN" type="button" class="btn btn-default" (click)="verifiedPIN()" tabindex="1">

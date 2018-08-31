@@ -20,6 +20,10 @@ export class RegLoginMfaComponent implements OnInit {
   showOptions = true;
   showVerifyPIN = false;
   showVerifiedPIN = false;
+  pin: string;
+  mfaSms: boolean = false;
+  mfaFob: boolean = false;
+  mfaApp: boolean = false;
 
   constructor(private primeDataService: PrimeDataService, private modalService: BsModalService, private router: Router){ }
 
@@ -54,6 +58,22 @@ export class RegLoginMfaComponent implements OnInit {
   verifiedPIN() {
     this.modalRef.hide();
     this.router.navigate(['/register/id-proofing']);
+  }
+
+  pinCheck() {
+    let result = false;
+    if (this.pin != null) {
+      result = this.pin.length > 0;
+    }
+    return result;
+  }
+
+  mfaOptionCheck() {
+    let result = false;
+    if (this.mfaSms || this.mfaFob || this.mfaApp) {
+      result = true;
+    }
+    return result;
   }
 
 }

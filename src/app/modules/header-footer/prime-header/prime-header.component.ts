@@ -18,6 +18,6 @@ export class PrimeHeaderComponent implements OnInit {
   }
 
   showControlOptions(): boolean {
-    return !this.router.url.includes('register');
+    return !(this.router.url.includes('register') || this.router.url === '/login');
   }
 }
