@@ -1,0 +1,65 @@
+
+<prime-page-framework>
+
+  <h2 class='prime-title' id="regInfo">Registration Information</h2>
+  <form>
+    <div>
+      <label class="has-float-label">
+        <input type="text" class="form-control prime-input-large" id="regLastName" name="regLastName" ([ngModel])="registrant.lastName" placeholder=" ">
+        <span>Last Name</span>
+      </label>
+
+      <label class="has-float-label">
+        <input type="text" class="form-control prime-input-large" id="regMiddleName" name="regMiddleName" ([ngModel])="registrant.middleName" placeholder=" ">
+        <span>Middle Name</span>
+      </label>
+
+      <label class="has-float-label">
+        <input type="text" class="form-control prime-input-large" id="regFirstName" name="regFirstName" ([ngModel])="registrant.firstName" placeholder=" ">
+        <span>First Name</span>
+      </label>
+
+      <div class="applicant-row--item prime-input-large">
+      <prime-datepicker dateFormat="yyyy/mm/dd" ([ngModel])="registrant.dateOfBirth" labelText="Date of Birth"></prime-datepicker>
+      </div>
+
+
+      <label class="has-float-label">
+        <input type="text" class="form-control prime-input-large" id="regAddress" name="regAddress" ([ngModel])="registrant.address?.street" placeholder=" ">
+        <span>Address</span>
+      </label>
+
+      <label class="has-float-label">
+        <input type="text" class="form-control prime-input-large" id="regCity" name="regCity" ([ngModel])="registrant.address?.city" placeholder=" ">
+        <span>City</span>
+      </label>
+
+      <label class="has-float-label">
+        <input type="text" class="form-control prime-input-large" id="regProvince" name="regProvince" ([ngModel])="registrant.address?.province" placeholder=" ">
+        <span>Province</span>
+      </label>
+
+      <prime-postal-code ([value])="registrant.address?.postal" ></prime-postal-code>
+
+      <label class="has-float-label">
+        <input type="text" class="form-control prime-input-large" id="regCountry" name="regCountry" ([ngModel])="registrant.address?.country" placeholder=" ">
+        <span>Country</span>
+      </label>
+    </div>
+  </form>
+
+  <h2 class='prime-title' id='contactInfo'>Contact Information</h2>
+  <form>
+    <div>
+      <label class="has-float-label">
+        <input type="text" class="form-control prime-input-large" id="phone" name="phone" ([ngModel])="registrant.phone" placeholder=" ">
+        <span>Phone</span>
+      </label>
+
+      <label class="has-float-label">
+        <input type="text" class="form-control prime-input-large" id="email" name="email" ([ngModel])="registrant.email" placeholder=" ">
+        <span>Email</span>
+      </label>
+    </div>
+  </form>
+</prime-page-framework>

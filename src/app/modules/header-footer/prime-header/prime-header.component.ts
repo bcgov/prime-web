@@ -16,4 +16,8 @@ export class PrimeHeaderComponent implements OnInit {
   routeIsActive(url: string): boolean {
     return this.router.url.includes(url);
   }
+
+  showControlOptions(): boolean {
+    return !(this.router.url.includes('register') || this.router.url === '/login');
+  }
 }
