@@ -25,7 +25,6 @@ export class ApplicantContactComponent implements OnInit {
   ngOnInit() {
     // Clone user class
     this._user = cloneDeep(this.primeDataService.user);
-
   }
 
   get applicant(): Person {
@@ -82,8 +81,17 @@ export class ApplicantContactComponent implements OnInit {
       this.primeDataService.user.preferFirstName = this._user.preferFirstName;
       this.primeDataService.user.preferMiddleName = this._user.preferMiddleName;
       this.primeDataService.user.preferLastName = this._user.preferLastName;
+      console.log("Has Prefer Name = true");
+    } else {
+      this.primeDataService.user.hasPreferName = this._user.hasPreferName;
+      this.primeDataService.user.preferFirstName = null;
+      this.primeDataService.user.preferMiddleName = null;
+      this.primeDataService.user.preferLastName = null;
     }
     this.hasChanged = false;
+    console.log(this.applicant.preferLastName);
+    console.log(this._user.preferLastName);
+    console.log(this.primeDataService.user);
   }
 
 
@@ -110,6 +118,15 @@ export class ApplicantContactComponent implements OnInit {
     this.copyRegAddress();
     this._user.mailAddress.postal = event;
   }
+  updatePrefLastName(event) {
+    this._user.preferLastName = event;
+  }
+  updatePrefMiddleName(event) {
+    this._user.preferMiddleName = event;
+  }
+  updatePrefFirstName(event) {
+    this._user.preferFirstName = event;
+  }
 
   getPhoneMask(): (RegExp | string )[] | false {
     if (!this.applicant.hasInternationalPhoneNumber ){
@@ -120,6 +137,7 @@ export class ApplicantContactComponent implements OnInit {
     //TODO: FINISH THIS OFF AND TEST THAT TOGGLING ACTUALLY WORKS
     return false;
   }
+
 
   // Copy registration address into mailing
   private copyRegAddress() {
