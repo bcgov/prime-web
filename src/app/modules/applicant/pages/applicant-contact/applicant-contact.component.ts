@@ -81,7 +81,6 @@ export class ApplicantContactComponent implements OnInit {
       this.primeDataService.user.preferFirstName = this._user.preferFirstName;
       this.primeDataService.user.preferMiddleName = this._user.preferMiddleName;
       this.primeDataService.user.preferLastName = this._user.preferLastName;
-      console.log("Has Prefer Name = true");
     } else {
       this.primeDataService.user.hasPreferName = this._user.hasPreferName;
       this.primeDataService.user.preferFirstName = null;
@@ -89,9 +88,6 @@ export class ApplicantContactComponent implements OnInit {
       this.primeDataService.user.preferLastName = null;
     }
     this.hasChanged = false;
-    console.log(this.applicant.preferLastName);
-    console.log(this._user.preferLastName);
-    console.log(this.primeDataService.user);
   }
 
 

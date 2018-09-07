@@ -10,7 +10,7 @@ import {CoreModule} from '../core/core.module';
 import { IdProofingComponent } from './pages/id-proofing/id-proofing.component';
 import {RegCompleteComponent} from './pages/complete/reg-complete.component';
 import { RegistrationContainerComponent } from './components/registration-container/registration-container.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule} from '@angular/forms';
 import { RegLoginMfaComponent } from './components/reg-login-mfa/reg-login-mfa.component';
 import { CollectionNoticeComponent } from './components/collection-notice/collection-notice.component';
 
