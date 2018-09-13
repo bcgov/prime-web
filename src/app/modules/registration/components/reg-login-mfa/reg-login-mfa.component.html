@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-outline-primary" (click)="openModal(template)">
+<button type="button" class="btn btn-primary mx-2" (click)="openModal(template)">
   Login
 </button>
 <ng-template #template>
@@ -14,17 +14,18 @@
   <div *ngIf="showOptions" class="modal-body">
     <form>
       <div>
-        <input type="checkbox" name="smsCheck" [(ngModel)]="mfaSms" />
+        <input type="radio" name="mfaOption" value="sms" [(ngModel)]="mfaSms" />
         <label>SMS/Text</label>
         <label class="has-float-label">
-          <input type="text" class="form-control prime-input-large" id="regMFAPhone" name="regMFAPhone" [(ngModel)]="registrant.phone" placeholder=" ">
+          <input type="text" class="form-control prime-input-large" id="regMFAPhone" name="regMFAPhone" [ngModel]="this.registrant.mfaOptionSMSPhone ? this.maskPhone(this.registrant?.mfaOptionSMSPhone) : null" placeholder=" " disabled>
           <span>Phone</span>
         </label>
       </div>
 
       <hr>
+
       <div>
-        <input type="checkbox" name="fobCheck" [(ngModel)]="mfaFob" />
+        <input type="radio" name="mfaOption" value="key" [(ngModel)]="mfaKey" />
         <label>Physical Security Key</label>
         <label class="has-float-label">
           <input type="text" class="form-control prime-input-large" placeholder=" " disabled>
@@ -33,8 +34,9 @@
       </div>
 
       <hr>
+
       <div>
-        <input type="checkbox" name="appCheck"[(ngModel)]="mfaApp" />
+        <input type="radio" name="mfaOption" value="app" [(ngModel)]="mfaApp" >
         <label>Mobile App Authentication</label>
       </div>
       <img class="img-thumbnail" src="assets/mobile_app_icon_android.png" alt="Generic placeholder image">

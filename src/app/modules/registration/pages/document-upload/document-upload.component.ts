@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {PrimeDataService} from "../../../../services/prime-data.service";
+import {Person} from "../../../../models/person.model";
 
 @Component({
   selector: 'prime-document-upload',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DocumentUploadComponent implements OnInit {
 
-  constructor() { }
+  constructor(private primeDataService: PrimeDataService) { }
 
   ngOnInit() {
+  }
+
+  get registrant(): Person {
+    return this.primeDataService.user;
   }
 
 }

@@ -13,10 +13,10 @@
               (click)="back()">{{'Back'}}</button>
       <div *ngIf="router.url != '/register/security';then continueButton else submitButton"></div>
       <ng-template #continueButton>
-        <button type="button" class="btn btn-primary mx-2" (click)="continue()">{{'Continue'}}</button>
+        <button type="button" class="btn btn-primary mx-2" (click)="continue()" [disabled]="!canContinue()">{{'Continue'}}</button>
       </ng-template>
       <ng-template #submitButton>
-        <button type="button" class="btn btn-primary mx-2" (click)="submit()">{{'Submit'}}</button>
+        <button type="button" class="btn btn-primary mx-2" (click)="submit()" [disabled]="!canContinue()">{{'Submit'}}</button>
       </ng-template>
 
 

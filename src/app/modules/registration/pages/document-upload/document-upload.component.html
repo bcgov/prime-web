@@ -6,20 +6,17 @@
   <br/>
   <div class="leftpane">
     <div>
-      <input type="checkbox" id="dl" name="dl"
-             value="dl" />
+      <input type="checkbox" id="dl" name="dl" [(ngModel)]="registrant.hasDriversLicense"/>
       <label for="dl">Driver's License</label>
     </div>
 
     <div>
-      <input type="checkbox" id="bcsc" name="bcsc"
-             value="bcsc" />
+      <input type="checkbox" id="bcsc" name="bcsc" [(ngModel)]="registrant.hasServicesCard"/>
       <label for="bcsc">BC Services Card</label>
     </div>
 
     <div>
-      <input type="checkbox" id="passport" name="passport"
-             value="passport" />
+      <input type="checkbox" id="passport" name="passport" [(ngModel)]="registrant.hasPassport"/>
       <label for="passport">Passport</label>
     </div>
   </div>
@@ -34,8 +31,7 @@
       <li>At least 1000 pixels wide x 1500 pixels tall</li>
       <li>Rotated correctly (not upside down or sideways)</li>
       <li>In focus and easy to read</li>
-      <li>A JPG, PNG, GIF or BMP file (
-        <b>not a PDF</b>)</li>
+      <li>A JPG, PNG, GIF, BMP or PDF file</li>
     </ul>
     <prime-file-uploader>
       <span class="note">Please upload required supporting  documents</span>

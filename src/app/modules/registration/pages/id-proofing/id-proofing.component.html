@@ -13,9 +13,9 @@
       </div>
       <div class="card-body d-flex justify-content-between">
         <div class="appcol">
-          <p>James Smith</p>
-          <p>250 658 2222</p>
-          <p>email@mail.com</p>
+          <p>{{registrant.name}}</p>
+          <p>{{registrant.phone}}</p>
+          <p>{{registrant.email}}</p>
         </div>
         <i class="fa fa-check-circle text-success fa-3x pull-right" aria-hidden="true"></i>
       </div>
@@ -34,8 +34,9 @@
           <img class="photo" src="assets/photoPlaceholder.png" alt="Generic placeholder image">
         </div>
         <div class="appcol">
-          <p>Driver's License</p>
-          <p>Passport</p>
+          <p *ngIf="registrant.hasDriversLicense">Driver's License</p>
+          <p *ngIf="registrant.hasPassport">Passport</p>
+          <p *ngIf="registrant.hasServicesCard">BC Services Card</p>
         </div>
         <i class="fa fa-check-circle text-success fa-3x pull-right" aria-hidden="true"></i>
       </div>

@@ -4,7 +4,7 @@
   <div>
     <label class="has-float-label">
       <input type="text" class="form-control prime-input-large" id="regCompleteRegID" name="regCompleteRegID" [ngModel]="registrant.primeUserId" placeholder=" " disabled>
-      <span>Registration ID</span>
+      <span>User ID</span>
     </label>
   </div>
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc accuan eget.
@@ -15,12 +15,12 @@
   <form >
     <div>
       <label class="has-float-label">
-        <input type="text" class="form-control prime-input-large" id="regCompleteUserID" name="regCompleteUserID" [(ngModel)]="registrant.primeUserId" placeholder=" ">
+        <input type="text" class="form-control prime-input-large" id="regCompleteUserID" name="regCompleteUserID" [(ngModel)]="registrant.primeUserId" [disabled]="true" placeholder=" ">
         <span>User ID</span>
       </label>
 
       <label class="has-float-label">
-        <input type="password" class="form-control prime-input-large" id="regCompletePW" name="regCompletePW" ([ngModel])="registrant.email" placeholder=" ">
+        <input type="password" class="form-control prime-input-large" id="regCompletePW" name="regCompletePW" placeholder=" ">
         <span>Password</span>
       </label>
       <prime-reg-login-mfa>

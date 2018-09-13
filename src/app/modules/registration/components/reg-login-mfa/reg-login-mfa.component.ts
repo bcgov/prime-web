@@ -22,18 +22,22 @@ export class RegLoginMfaComponent implements OnInit {
   showVerifiedPIN = false;
   pin: string;
   mfaSms: boolean = false;
-  mfaFob: boolean = false;
+  mfaKey: boolean = false;
   mfaApp: boolean = false;
+  maskedPhone: String;
 
   constructor(private primeDataService: PrimeDataService, private modalService: BsModalService, private router: Router){ }
 
   ngOnInit() {
-    this._user = cloneDeep(this.primeDataService.user);
-    this._user.phone = '(604) 2** **84';
+    /*if (registrant.mfaOptionSMSPhone) {
+      console.log(this.maskPhone('2504741234');
+      this.maskedPhone = this.maskPhone(this.registrant.mfaOptionSMSPhone);
+    }*/
+
   }
 
   get registrant(): Person {
-    return this._user;
+    return this.primeDataService.user;
   }
 
   openModal(template: TemplateRef<any>) {
@@ -70,10 +74,13 @@ export class RegLoginMfaComponent implements OnInit {
 
   mfaOptionCheck() {
     let result = false;
-    if (this.mfaSms || this.mfaFob || this.mfaApp) {
+    if (this.mfaSms || this.mfaKey || this.mfaApp) {
       result = true;
     }
     return result;
   }
 
+  maskPhone(phoneNumber: String) {
+    return '**' + phoneNumber.substr(2, phoneNumber.length -4) + '***';
+  }
 }

@@ -12,17 +12,17 @@ const NUMBER = /\d/;
 })
 export class ProfileComponent implements OnInit {
 
-  private _user: Person;
   private phoneMask = ['(', NUMBER, NUMBER, NUMBER, ')', '-', NUMBER, NUMBER, NUMBER, '-', NUMBER, NUMBER, NUMBER, NUMBER];
+  public hasChanged: boolean = false;
+  public hasEverChanged: boolean = false;
 
   constructor(private primeDataService: PrimeDataService) { }
 
   ngOnInit() {
-    this._user = cloneDeep(this.primeDataService.user);
   }
 
   get registrant(): Person {
-    return this._user;
+    return this.primeDataService.user;
   }
 
   getPhoneMask(): (RegExp | string )[] | false {
@@ -34,5 +34,4 @@ export class ProfileComponent implements OnInit {
     //TODO: FINISH THIS OFF AND TEST THAT TOGGLING ACTUALLY WORKS
     return false;
   }
-
 }

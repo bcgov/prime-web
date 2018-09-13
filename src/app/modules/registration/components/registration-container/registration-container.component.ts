@@ -8,6 +8,8 @@ import {pageRoutes} from '../../registration-page-routing.module';
 import {WizardProgressItem} from '../../../core/components/wizard-progress-bar/wizard-progress-bar.component';
 import {Router} from '@angular/router';
 import {environment} from '../../../../../environments/environment';
+import {PrimeDataService} from "../../../../services/prime-data.service";
+import {Person} from "../../../../models/person.model";
 
 @Component({
   selector: 'prime-registration-container',
@@ -18,7 +20,7 @@ export class RegistrationContainerComponent implements OnInit {
 
   public allowLinks: boolean = !environment.production ? true : false;
 
-  constructor( public router: Router ) { }
+  constructor( public router: Router, private primeDataService: PrimeDataService ) { }
 
   ngOnInit() {
     this.progressSteps = pageRoutes.map(x => {
@@ -27,6 +29,10 @@ export class RegistrationContainerComponent implements OnInit {
         route: x.path,
       };
     });
+  }
+
+  get registrant(): Person {
+    return this.primeDataService.user;
   }
 
   progressSteps: WizardProgressItem[];
@@ -39,6 +45,55 @@ export class RegistrationContainerComponent implements OnInit {
    */
   convertRouteToTitle(routePath: string): string{
     return routePath.split('-').map(x => x[0].toUpperCase() + x.slice(1)).join(' ');
+  }
+
+  canContinue() {
+    let retVal: boolean = false;
+
+    //Profile Page
+    if (this.router.url === '/register/profile') {
+      if (this.registrant.lastName && this.registrant.firstName && this.registrant.dateOfBirth &&
+          this.registrant.address && this.registrant.address.city && this.registrant.address.province &&
+          this.registrant.address.postal && this.registrant.address.country && this.registrant.phone &&
+          this.registrant.email) {
+          //User must set a preferred first and last name if they opt to set a preferred name
+          if (this.registrant.hasPreferName) {
+            if (this.registrant.preferLastName && this.registrant.preferFirstName) {
+              retVal = true;
+            }
+          } else {
+            retVal = true;
+          }
+      }
+    }
+
+    //Document Upload Page
+    if (this.router.url === '/register/document-upload') {
+      //User must select at least one document type
+      if (this.registrant.hasDriversLicense || this.registrant.hasServicesCard || this.registrant.hasPassport) {
+        retVal = true;
+      }
+    }
+
+    //Document Security Page
+    if (this.router.url === '/register/security') {
+
+      //User must select at least one mfa option
+      if (this.registrant.primeUserId && this.registrant.securityAnswer1 && this.registrant.securityAnswer2 &&
+          this.registrant.securityAnswer3 &&
+         (this.registrant.mfaOptionSMS || this.registrant.mfaOptionKey || this.registrant.mfaOptionApp)
+      ) {
+        //If the user selects the phone mfa option, they must have a phone number
+        if (this.registrant.mfaOptionSMS) {
+          if (this.registrant.mfaOptionSMSPhone) {
+            retVal = true;
+          }
+        } else {
+          retVal = true;
+        }
+      }
+    }
+    return retVal;
   }
 
   /**

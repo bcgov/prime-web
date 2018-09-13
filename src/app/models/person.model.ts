@@ -268,6 +268,23 @@ export class Person extends Base {
   email: string;
   renewalDate: Date;
 
+  //For registration document upload
+  hasDriversLicense: boolean = false;
+  hasServicesCard: boolean = false;
+  hasPassport: boolean = false;
+
+  //For registration security
+  securityQuestion1: String;
+  securityQuestion2: String;
+  securityQuestion3: String;
+  securityAnswer1: String;
+  securityAnswer2: String;
+  securityAnswer3: String;
+  mfaOptionSMS: boolean = false;
+  mfaOptionSMSPhone: PhoneNumber;
+  mfaOptionKey: boolean = false;
+  mfaOptionApp: boolean = false;
+
   /** The default date to use when creating a new Site Access for this person. Maps to `startDate` on SiteAccess. This should be the current date.*/
   defaultStartDate: Date =  new Date();
   /** The default date to use when creating a new Site Access for this person. Maps to `endDate on SiteAccess. */
