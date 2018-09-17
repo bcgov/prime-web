@@ -1,0 +1,53 @@
+<div class="enrollment-list-controls bg-light">
+  <div>
+    <form class="form-inline">
+      <span class="has-float-label">
+        <input class="form-control bg-transparent" type="search" placeholder="Sites" aria-label="Sites" (input)="search($event.target.value)">
+        <span>Search</span> 
+      </span>
+
+      <label class="has-float-label mx-2">
+        <select id="enrollmentViewSelector" class="form-control enrollment-view-selector" [value]="viewTypeSelector" (change)="viewTypes($event.target.value)">
+          <option value="View All">All</option>
+          <option *ngFor="let status of EnrollmentStatus" value="{{status}}">
+            {{status}}
+          </option>
+        </select>
+        <span>View</span>
+      </label>
+
+    </form>
+  </div>
+  <div>
+    <!-- <prime-alert inlineBlock='true' *ngIf="showSaveMessage" [@fadeIn] dismissable='' type='success'>Submitted.</prime-alert> -->
+
+    <prime-add-pharma-net-organization></prime-add-pharma-net-organization>
+
+    <button [disabled]="!updated" type="button" class="btn btn-default mx-2" (click)="cancel()">Cancel</button>
+    <button [disabled]="!updated" type="button" class="btn btn-primary mx-2" (click)="save()" [primeLoadingSpinner]="loadingSpinner" >Submit</button>
+  </div>
+</div>
+
+<div class="enrollment-item-container">
+  <div class="enrollment-item-inner">
+    <ng-container *ngIf='data?.length; else emptyState'>
+      <prime-pharma-net-access-row  *ngFor='let item of data'>
+      </prime-pharma-net-access-row>
+
+    </ng-container>
+    <!-- <prime-appl-enrollment-row
+      *ngFor="let item of data"
+      [rowData]="item"
+      (onChange) = "onChange($event)"
+      (onRowOpened)="rowOpened($event)">
+    </prime-appl-enrollment-row> -->
+  </div>
+</div>
+
+<ng-template #emptyState>
+  <span class="text-center">
+    <!-- Use padding instead of margin so we don't mess up borders -->
+    <h3 class='m-0 p-2 pt-4'>No organizations selected</h3>
+    <p class='m-0 p-2'>Try adding an organization by clicking "Add Organization" above.</p>
+  </span>
+</ng-template>

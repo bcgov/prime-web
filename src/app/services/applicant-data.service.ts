@@ -29,6 +29,10 @@ export class ApplicantDataService {
         route: 'professional',
       },
       {
+        title: 'PharmaNet Access',
+        route: 'pharma-net',
+      },
+      {
         title: 'User Access Agreement',
         route: 'access-acceptance'
       },
