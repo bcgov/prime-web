@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { EnrollmentList, defaultViewSelector } from '../../../../core/enrollment-list/enrollment-list.class';
 import { EnrollmentStatus } from '../../../../models/enrollment-status.enum';
+import { cloneDeep } from 'lodash';
+
 
 @Component({
   selector: 'prime-pharma-net-access-list',
@@ -22,6 +24,9 @@ export class PharmaNetAccessListComponent extends EnrollmentList implements OnIn
   public loadingSpinner: boolean = false;
 
   ngOnInit() {
+    if (this.rowItems) {
+      this.data = cloneDeep( this.rowItems );
+    }
   }
 
   cancel() {

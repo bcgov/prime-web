@@ -27,7 +27,7 @@ import { AddPharmaNetOrganizationComponent } from './components/add-pharma-net-o
     CoreModule,
     FormsModule,
     AlertModule,
-    TextMaskModule
+    TextMaskModule,
   ],
   declarations: [
     ApplicantDashboardComponent,

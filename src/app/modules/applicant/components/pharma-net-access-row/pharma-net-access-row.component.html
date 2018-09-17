@@ -1,3 +1,136 @@
-<p>
-  pharma-net-access-row works!
-</p>
+<div *ngIf="rowData"
+     class="enrollment-list-item org-row"
+     (click)="toggleRow()">
+  <!-- Having openStateDisable on parent div wound up broking @rotate180 -->
+  <div class="enrollment-text-container">
+    <span class="enrollment-text-main">
+      <i class='fa fa-caret-down'
+         [@rotate180]='openState'></i> {{rowData.title}}</span>
+  </div>
+
+  <div class="enrollment-actions">
+
+
+    <label class="has-float-label mx-2">
+      <!-- TODO - Handle selection here! Right now value isn't saved at all. -->
+      <select id="enrollmentViewSelector"
+              class="form-control">
+        <option *ngFor="let status of accessType"
+                value="{{status}}">
+          {{status}}
+        </option>
+      </select>
+      <span>Access Type</span>
+    </label>
+
+    <div class="dates-col">
+      <span class="d-inline-flex align-items-center p-2 border-left">Start
+        <prime-datepicker disabled
+                          size="mini"
+                          [dateFormat]="dateFormat"
+                          [(date)]="startDateShort"
+                          class="ml-1"
+                          clearButton="invisible">
+        </prime-datepicker>
+      </span>
+      <span class="d-inline-flex align-items-center p-2 border-left border-right">End
+        <prime-datepicker size="mini"
+                          [dateFormat]="dateFormat"
+                          [(date)]="endDateShort"
+                          class="ml-1">
+        </prime-datepicker>
+      </span>
+    </div>
+
+    <!-- TODO - Handle showing this only when is open. need to also store 'open' value somewhere apprporiate, not on data model as it's view related -->
+    <prime-accept-reject-icons *ngIf="openState === 'opened'"
+                               [@growHorizontal]
+                               (onAccepted)="onAcceptOrg()"
+                               (onRejected)="onRejectOrg()"
+                               labelAccept="Accept Enrollment"
+                               labelReject="Decline Enrollment">
+    </prime-accept-reject-icons>
+  </div>
+
+
+</div>
+
+
+<!-- Nested rows for siteAccess + all other sites without an SA. Need to iterate on sites for the organization -->
+<div [@openState]="openState">
+  <div [@openStateChild]="openState"
+       class="expandable-container">
+
+      <!-- TODO verify if correct - removed .enrollment-expandable -->
+       <div class="enrollment-expandable"
+         *ngFor="let siteAccess of rowData.allSiteAccess()"
+         (click)="expandedRowClick(siteAccess)">
+
+
+      <div class='d-flex justify-content-between w-100'[@growVertical]>
+        <div>
+          Site {{siteAccess.site.name}}
+        </div>
+
+        <div class='d-flex'>
+
+          <label class="has-float-label mx-2">
+            <!-- TODO - Handle selection here! Right now value isn't saved at all. -->
+            <select id="enrollmentViewSelector"
+                    class="form-control">
+              <option *ngFor="let status of accessType"
+                      value="{{status}}">
+                {{status}}
+              </option>
+            </select>
+            <span>Access Type</span>
+          </label>
+
+          <div class="dates-col">
+            <span class="d-inline-flex align-items-center p-2 border-left">Start
+              <prime-datepicker disabled
+                                size="mini"
+                                [dateFormat]="dateFormat"
+                                [(date)]="startDateShort"
+                                class="ml-1"
+                                clearButton="invisible">
+              </prime-datepicker>
+            </span>
+            <span class="d-inline-flex align-items-center p-2 border-left border-right">End
+              <prime-datepicker size="mini"
+                                [dateFormat]="dateFormat"
+                                [(date)]="endDateShort"
+                                class="ml-1">
+              </prime-datepicker>
+            </span>
+          </div>
+
+
+          <prime-pill-badge class='ml-2 align-self-center'
+                            [alerts]="[siteAccess.alert]">
+          </prime-pill-badge>
+
+
+          <prime-accept-reject-icons (onAccepted)="onAcceptSite(item)"
+                                     (onRejected)="onRejectSite(item)"
+                                     labelAccept="Accept Enrollment"
+                                     labelReject="Decline Enrollment">
+          </prime-accept-reject-icons>
+        </div>
+
+
+      </div>
+
+
+      <!-- <prime-app-enrollment-progress-row
+          [open]="siteAccess.open"
+          [data]="siteAccess"
+          [disableReason]="!(isNewStatus() || isInitiatedStatus())"
+          (onPendingChange)="pendingChanges($event)"
+          [isDeclined]="isDeclined()"
+          [isAccepted]="isAccepted()">
+        </prime-app-enrollment-progress-row> -->
+
+    </div>
+  </div>
+</div>

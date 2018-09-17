@@ -1,6 +1,7 @@
 import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
 
-const TIMING = "250ms";
+const TIMING = '250ms';
+// const TIMING = "1500ms";
 
 
 export const openState = trigger('openState', [
@@ -46,7 +47,8 @@ export const openStateDisable = trigger('openStateDisable', [
   })),
   state('opened', style({
     opacity: 0.75,
-    background: '#e9ecef' //$gray-200
+    // background: '#e9ecef' //$gray-200
+    background: 'darkgray' //$gray-200
   })),
   transition('closed => opened', animate(`${TIMING} ease-in`)),
   transition('opened => closed', animate(`${TIMING} ease-out`))
@@ -109,3 +111,13 @@ export const fadeIn = trigger('fadeIn', [
   ]),
 ])
 
+
+export const rotate180 = trigger('rotate180', [
+  state('closed', style({
+    transform: 'rotate(0)',
+  })),
+  state('opened', style({
+    transform: 'rotate(-180deg)',
+  })),
+  transition('closed <=> opened', animate(`${TIMING} ease-in`)),
+]);

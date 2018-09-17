@@ -7,6 +7,7 @@ import { Address } from '../models/addresses.model';
 import {AccessReasons, DeclinedReasons, Site, SiteAccess, SiteAccessProgressSteps, ProvisionRequestOptions, AccessClass, AccessRights} from '../models/sites.model';
 import * as moment from 'moment';
 import {DateFormatter} from 'ngx-bootstrap';
+import { PharmaNetOrganization } from '../models/organization.model';
 
 /**
  * Responsible for generating dummy data, useful for development Not responsible
@@ -391,6 +392,20 @@ export class DummyDataService {
     });
 
     return result;
+  }
+
+  createPharmaNetOrganizations(count: number, withSites?: Site[]){
+    const orgs: PharmaNetOrganization[] = [];
+    const sitesPerOrg = 5;
+    for (let index = 0; index < count; index++) {
+      let sites = [];
+      while (withSites && sites.length < sitesPerOrg) {
+        sites.push(this.getRandomElFromArray(withSites));
+      }
+      const newOrg = new PharmaNetOrganization(`Org ${index + 1}`, sites);
+      orgs.push(newOrg);
+    }
+    return orgs;
   }
 
 

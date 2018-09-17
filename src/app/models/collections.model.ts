@@ -5,7 +5,7 @@ import { Person } from './person.model';
 
 
 
-abstract class Group<T> extends Base {
+export abstract class Group<T> extends Base {
   find() { };
   contains() { }; // just an example
   members: T[];

@@ -3,6 +3,7 @@ import { DummyDataService } from './services/dummy-data.service';
 import { environment } from './../environments/environment';
 import { UserService } from './services/user.service';
 import { PrimeDataService } from './services/prime-data.service';
+import { PharmaNetOrganization } from './models/organization.model';
 
 
 @Component({
@@ -65,5 +66,22 @@ export class AppComponent implements OnInit {
       applicant.workingOnBehalfList[0].jobTitle = 'MEDICA';
       applicant.isDeclaredCheck = true;
     }
+
+
+    // Hardcode instances of PharmaNetOrgs. This is not 'dummy' data, but
+    // default data the user will pick from. The user's selection wind up on the
+    // person model
+    // PROBLEM - This requires Sites to be pre-existing
+    // this.primeDataService.pharmaNetOrgs = [
+    //   new PharmaNetOrganization('Org 1', []),
+    //   new PharmaNetOrganization('Org 2', []),
+    //   new PharmaNetOrganization('Org 3', []),
+    //   new PharmaNetOrganization('Org 4', []),
+    //   new PharmaNetOrganization('Org 5', []),
+    // ];
+
+    this.primeDataService.pharmaNetOrgs = this.dummyDataService.createPharmaNetOrganizations(5, this.primeDataService.sites);
+
+    console.log('Instantiated pharmaNet orgs', this.primeDataService.pharmaNetOrgs);
   }
 }
