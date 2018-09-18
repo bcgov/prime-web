@@ -3,7 +3,8 @@ import { DummyDataService } from './services/dummy-data.service';
 import { environment } from './../environments/environment';
 import { UserService } from './services/user.service';
 import { PrimeDataService } from './services/prime-data.service';
-
+import {Person} from './models/person.model';
+import { Address } from './models/addresses.model';
 
 @Component({
   selector: 'app-root',
@@ -50,7 +51,15 @@ export class AppComponent implements OnInit {
 
     const dummyPeople = this.dummyDataService.createPeopleDemo();
     this.primeDataService.people = dummyPeople;
-    this.primeDataService.user = this.primeDataService.people[0];
+
+    //clearing the Dummy data for the USER
+    if (environment.useDeveloperDummyDataForUser){
+      this.primeDataService.user = this.primeDataService.people[0];
+    } else {
+      // just set up blank data
+      this.primeDataService.user = new Person();
+      this.primeDataService.user.address = new Address();
+    }
 
     const SA = this.dummyDataService.populateSiteAccessFromCollectionDemo( dummyCollections, dummyPeople );
     this.primeDataService.siteAccesses.push(... SA);
