@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { EnrollmentRow, RowState } from '../../../../core/enrollment-row/enrollment-row.class';
 import { openState, openStateChild, loadInOut, openStateDisable, rotate180, growVertical, growHorizontal } from '../../../../animations/animations';
-import { SiteAccess } from '../../../../models/sites.model';
 import { PharmaNetOrganization } from '../../../../models/organization.model';
 
 /** An interface */
@@ -33,6 +32,10 @@ export class PharmaNetAccessRowComponent extends EnrollmentRow implements OnInit
 
   ngOnInit() {
     console.log('pharmanet row init, openState -', this.openState);
+  }
+
+  isOpen(): boolean {
+    return this.openState === RowState.Opened;
   }
 
   // Replace the inheritied method as our behaviour diverges

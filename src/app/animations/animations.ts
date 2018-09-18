@@ -47,8 +47,8 @@ export const openStateDisable = trigger('openStateDisable', [
   })),
   state('opened', style({
     opacity: 0.75,
-    // background: '#e9ecef' //$gray-200
-    background: 'darkgray' //$gray-200
+    background: '#e9ecef' //$gray-200
+    // background: 'darkgray' //$gray-200
   })),
   transition('closed => opened', animate(`${TIMING} ease-in`)),
   transition('opened => closed', animate(`${TIMING} ease-out`))

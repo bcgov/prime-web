@@ -394,12 +394,11 @@ export class DummyDataService {
     return result;
   }
 
-  createPharmaNetOrganizations(count: number, withSites?: Site[]){
+  createPharmaNetOrganizations(count: number, withSites?: Site[], siteCountPerOrg: number = 5){
     const orgs: PharmaNetOrganization[] = [];
-    const sitesPerOrg = 5;
     for (let index = 0; index < count; index++) {
       let sites = [];
-      while (withSites && sites.length < sitesPerOrg) {
+      while (withSites && sites.length < siteCountPerOrg) {
         sites.push(this.getRandomElFromArray(withSites));
       }
       const newOrg = new PharmaNetOrganization(`Org ${index + 1}`, sites);

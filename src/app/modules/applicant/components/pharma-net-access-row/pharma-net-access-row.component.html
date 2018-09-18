@@ -43,7 +43,7 @@
     </div>
 
     <!-- TODO - Handle showing this only when is open. need to also store 'open' value somewhere apprporiate, not on data model as it's view related -->
-    <prime-accept-reject-icons *ngIf="openState === 'opened'"
+    <prime-accept-reject-icons *ngIf="isOpen()"
                                [@growHorizontal]
                                (onAccepted)="onAcceptOrg()"
                                (onRejected)="onRejectOrg()"
@@ -57,9 +57,8 @@
 
 
 <!-- Nested rows for siteAccess + all other sites without an SA. Need to iterate on sites for the organization -->
-<div [@openState]="openState">
-  <div [@openStateChild]="openState"
-       class="expandable-container">
+<div [@growVertical] *ngIf="isOpen()" class='pharmanet-site'>
+  <div class="expandable-container">
 
       <!-- TODO verify if correct - removed .enrollment-expandable -->
        <div class="enrollment-expandable"
