@@ -3,8 +3,13 @@ import { DummyDataService } from './services/dummy-data.service';
 import { environment } from './../environments/environment';
 import { UserService } from './services/user.service';
 import { PrimeDataService } from './services/prime-data.service';
+<<<<<<< HEAD
 import {Person} from './models/person.model';
 import { Address } from './models/addresses.model';
+=======
+import { PharmaNetOrganization } from './models/organization.model';
+
+>>>>>>> prime-152-new
 
 @Component({
   selector: 'app-root',
@@ -74,5 +79,8 @@ export class AppComponent implements OnInit {
       applicant.workingOnBehalfList[0].jobTitle = 'MEDICA';
       applicant.isDeclaredCheck = true;
     }
+
+
+    this.primeDataService.pharmaNetOrgs = this.dummyDataService.createPharmaNetOrganizations(5, 3);
   }
 }

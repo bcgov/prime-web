@@ -1,0 +1,125 @@
+<div *ngIf="rowData" class="enrollment-list-item org-row" (click)="toggleRow()">
+  <div class="enrollment-text-container">
+    <span class="enrollment-text-main">
+      <i class='fa fa-caret-down' [@rotate180]='openState'></i> 
+        {{rowData.title}}
+      </span>
+  </div>
+
+  <!-- Stop propagation so that click events on e.g. the dropdown won't bubble up to toggleRow() -->
+  <div class="enrollment-actions" (click)="$event.stopPropagation()" >
+
+    <!-- TODO - Temp removed, will be in "return visit" (possibly in separate component) -->
+    <!-- <label class="has-float-label mx-2">
+      <select class="form-control">
+        <option *ngFor="let status of accessType"
+                value="{{status}}">
+          {{status}}
+        </option>
+      </select>
+      <span>Access Type</span>
+    </label> -->
+
+    <div class="dates-col">
+      <span class="d-inline-flex align-items-center p-2 border-left">Start
+        <prime-datepicker 
+                          size="mini"
+                          dateFormat='yyyy/mm/dd'
+                          [date]="orgStartDate"
+                          (dateChange)="onOrgStartDate($event)"
+                          onlyFutureDates='true'
+                          class="ml-1"
+                          clearButton="invisible">
+        </prime-datepicker>
+      </span>
+      <span class="d-inline-flex align-items-center p-2 border-left border-right">End
+        <prime-datepicker size="mini"
+                          dateFormat='yyyy/mm/dd'
+                          [(date)]="orgEndDate"
+                          (dateChange)="onOrgEndDate($event)"
+                          class="ml-1">
+        </prime-datepicker>
+      </span>
+    </div>
+
+    <!-- TODO - Temp removed, will be in "return visit" (possibly in separate component) -->
+    <!-- <prime-accept-reject-icons *ngIf="shouldShowOrgActionButtons()"
+                               [@growHorizontal]
+                               (onAccepted)="onAcceptOrg()"
+                               (onRejected)="onRejectOrg()"
+                               labelAccept="Accept Enrollment"
+                               labelReject="Decline Enrollment">
+    </prime-accept-reject-icons> -->
+  </div>
+</div>
+
+
+<!-- Nested rows for all the sites -->
+<div [@growVertical] *ngIf="isOpen()" class='pharmanet-site'>
+  <div class="expandable-container">
+
+       <div class="enrollment-expandable"
+         *ngFor="let siteAccess of subRowData"
+         (click)="expandedRowClick(siteAccess)">
+
+
+      <div class='d-flex align-items-center justify-content-between w-100'[@growVertical]>
+        <div>Site {{siteAccess.site.name}}</div>
+
+        <div class='d-flex align-items-center'>
+
+          <!-- TODO - Temp removed, will be in "return visit" (possibly in separate component) -->
+          <!-- <label class="has-float-label mx-2">
+            <select id="enrollmentViewSelector"
+                    class="form-control">
+              <option *ngFor="let status of accessType"
+                      value="{{status}}">
+                {{status}}
+              </option>
+            </select>
+            <span>Access Type</span>
+          </label> -->
+
+          <div class="dates-col">
+            <span class="d-inline-flex align-items-center p-2 border-left">Start
+              <prime-datepicker [disabled]="!isActionableRow(siteAccess)"
+                                size="mini"
+                                dateFormat="yyyy/mm/dd" 
+                                [(date)]="siteAccess.startDate"
+                                onlyFutureDates='true'
+                                class="ml-1"
+                                clearButton="invisible">
+              </prime-datepicker>              
+            </span>
+            <span class="d-inline-flex align-items-center p-2 border-left border-right">End
+              <prime-datepicker [disabled]="!isActionableRow(siteAccess)"
+                                size="mini"
+                                dateFormat="yyyy/mm/dd"
+                                [(date)]="siteAccess.endDate"
+                                class="ml-1">
+              </prime-datepicker>
+            </span>
+          </div>
+
+
+          <prime-pill-badge class='ml-2 align-self-center' [alerts]="[siteAccess.alert]">
+          </prime-pill-badge>
+
+          <!-- TODO - Temp removed, will be in "return visit" (possibly in separate component) -->
+          <!-- <prime-accept-reject-icons *ngIf="isActionableRow(siteAccess); else editExisting"
+                                    (onAccepted)="onAcceptSite(siteAccess)"
+                                    (onRejected)="onRejectSite(siteAccess)"
+                                    labelAccept="Accept Enrollment"
+                                    labelReject="Decline Enrollment">
+          </prime-accept-reject-icons> -->
+
+          <ng-template #editExisting>
+            <i class="fa fa-pencil text-muted edit-icon"></i>
+          </ng-template>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

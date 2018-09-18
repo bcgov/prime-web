@@ -1,0 +1,43 @@
+@import 'variables.scss';
+@import '../../../../core/enrollment-row/enrollment-row.class';
+
+$rowBgColor: $gray-200;
+
+$rowPadding: 1em;
+
+.org-row {
+    // background: rgba(0,0,0, 0.03);
+    background: $rowBgColor;
+}
+
+.enrollment-list-item {
+  transition: 0.25s;
+  padding-right: $rowPadding;
+  &:hover {
+    background: darken($rowBgColor, 5%);
+  }
+}
+.enrollment-expandable {
+  justify-content: space-between;
+  background: white;
+  padding: 0 $rowPadding;
+}
+
+select {
+  background-color: white;
+}
+
+.dates-col {
+  padding: 0 1em;
+  &, > span {  height: 100%; }
+
+
+  prime-datepicker {
+    min-width: 8rem; //Enforce consistent size between date and "Select a Date"
+  }
+}
+
+.edit-icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+}

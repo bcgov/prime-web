@@ -14,6 +14,10 @@ import { AlertModule } from 'ngx-bootstrap';
 import { AppEnrollmentProgressRowComponent } from './components/app-enrollment-progress-row/app-enrollment-progress-row.component';
 import { TextMaskModule } from 'angular2-text-mask';
 import { ApplicantReviewPageComponent } from './pages/applicant-review-page/applicant-review-page.component';
+import { PharmaNetAccessListComponent } from './components/pharma-net-access-list/pharma-net-access-list.component';
+import { PharmaNetPageComponent } from './pages/pharma-net-page/pharma-net-page.component';
+import { PharmaNetAccessRowComponent } from './components/pharma-net-access-row/pharma-net-access-row.component';
+import { AddPharmaNetOrganizationComponent } from './components/add-pharma-net-organization/add-pharma-net-organization.component';
 
 
 @NgModule({
@@ -23,7 +27,7 @@ import { ApplicantReviewPageComponent } from './pages/applicant-review-page/appl
     CoreModule,
     FormsModule,
     AlertModule,
-    TextMaskModule
+    TextMaskModule,
   ],
   declarations: [
     ApplicantDashboardComponent,
@@ -34,7 +38,11 @@ import { ApplicantReviewPageComponent } from './pages/applicant-review-page/appl
     ApplEnrollmentListComponent,
     ApplEnrollmentRowComponent,
     AppEnrollmentProgressRowComponent,
-    ApplicantReviewPageComponent
+    ApplicantReviewPageComponent,
+    PharmaNetAccessListComponent,
+    PharmaNetPageComponent,
+    PharmaNetAccessRowComponent,
+    AddPharmaNetOrganizationComponent
   ]
 })
 export class ApplicantModule { }

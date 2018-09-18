@@ -111,21 +111,30 @@ export class DatepickerComponent implements OnInit, OnChanges {
       const today = new Date();
       this.datepickerOptions.disableUntil = this.convertDateToSimpleDate(today);
     }
-   //Reverted to using jsdate instead of date on model because it fixed issue with undefined/undefined/undefined when returning to Applicant Prof page.
-    //2018-08-10 KPS Using jsdate causes the Select a date issue documented in prime-138
-   // workaround added to handle both date formats
+
+    this.loadModel();
+  }
+
+  private loadModel() {
+    // Reverted to using jsdate instead of date on model because it fixed issue with undefined/undefined/undefined when returning to Applicant Prof page.
+    // 2018-08-10 KPS Using jsdate causes the Select a date issue documented in prime-138
+    // workaround added to handle both date formats
     if (this.date instanceof Date) {
       this.model = {
-       //  date: this.date
-       jsdate: this.date
-      };
-    } else {
-      this.model = {
-         date: this.date
-      //  jsdate: this.date
+        //  date: this.date
+        jsdate: this.date
       };
     }
-
+    else {
+      this.model = {
+        date: this.date
+        //  jsdate: this.date
+      };
+    }
+    // Mini needs to have the formatted field set to display the initial text.
+    if (this.size === DatepickerSizes.MINI && this.date instanceof Date) {
+      this.model.formatted = moment(this.date).format(this.dateFormat.toUpperCase());
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -133,6 +142,11 @@ export class DatepickerComponent implements OnInit, OnChanges {
     // We could refactor it down to one, but the performance hit is minimal for such a simple component.
     if (this.date === null){
       this.clearDate();
+    }
+    else {
+      // If another datecomponent has editted the date, we need to re-load our
+      // model to reflect changes in this component
+      this.loadModel();
     }
   }
 

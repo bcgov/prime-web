@@ -7,6 +7,7 @@ import { Address } from '../models/addresses.model';
 import {AccessReasons, DeclinedReasons, Site, SiteAccess, SiteAccessProgressSteps, ProvisionRequestOptions, AccessClass, AccessRights} from '../models/sites.model';
 import * as moment from 'moment';
 import {DateFormatter} from 'ngx-bootstrap';
+import { PharmaNetOrganization } from '../models/organization.model';
 
 /**
  * Responsible for generating dummy data, useful for development Not responsible
@@ -89,7 +90,7 @@ export class DummyDataService {
 
   /** Returns an array of sites with a random name. */
   createSites(count: number, name: string = 'London Drugs'): Site[] {
-    console.log( 'Create : ' + count + ' sites.');
+    // console.log( 'Create : ' + count + ' sites.');
     const result: Site[] = [];
     for (let index = 0; index < count; index++) {
       const site = new Site();
@@ -391,6 +392,19 @@ export class DummyDataService {
     });
 
     return result;
+  }
+
+
+  createPharmaNetOrganizations(count: number, siteCountPerOrg: number = 5){
+    const orgs: PharmaNetOrganization[] = [];
+    for (let index = 0; index < count; index++) {
+      // Generate NEW sites, not found in dataService.sites!
+      const sites = this.createSites(siteCountPerOrg, `Org ${index + 1}`);
+
+      const newOrg = new PharmaNetOrganization(`Org ${index + 1}`, sites);
+      orgs.push(newOrg);
+    }
+    return orgs;
   }
 
 
