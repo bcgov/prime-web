@@ -90,7 +90,7 @@ export class DummyDataService {
 
   /** Returns an array of sites with a random name. */
   createSites(count: number, name: string = 'London Drugs'): Site[] {
-    console.log( 'Create : ' + count + ' sites.');
+    // console.log( 'Create : ' + count + ' sites.');
     const result: Site[] = [];
     for (let index = 0; index < count; index++) {
       const site = new Site();
@@ -394,13 +394,13 @@ export class DummyDataService {
     return result;
   }
 
-  createPharmaNetOrganizations(count: number, withSites?: Site[], siteCountPerOrg: number = 5){
+
+  createPharmaNetOrganizations(count: number, siteCountPerOrg: number = 5){
     const orgs: PharmaNetOrganization[] = [];
     for (let index = 0; index < count; index++) {
-      let sites = [];
-      while (withSites && sites.length < siteCountPerOrg) {
-        sites.push(this.getRandomElFromArray(withSites));
-      }
+      // Generate NEW sites, not found in dataService.sites!
+      const sites = this.createSites(siteCountPerOrg, `Org ${index + 1}`);
+
       const newOrg = new PharmaNetOrganization(`Org ${index + 1}`, sites);
       orgs.push(newOrg);
     }

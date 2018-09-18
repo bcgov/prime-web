@@ -1,7 +1,54 @@
-<button *ngIf="!iconOnly" type="button" class="btn btn-outline-primary" (click)="openModal(template)">
+<button type="button" class="btn btn-outline-primary" (click)="openModal(template)">
     Add Organization <i class="fa fa-plus-square"></i>
 </button>
 
 <ng-template #template>
   <!-- todo - get from add-user-button.component.html -->
+
+  <div class="modal-header">
+      <h4 class="modal-title">Find and add a Organizations</h4>
+
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+
+  <div class="modal-body">
+
+    <div class="row">
+      <div class="col">
+
+        <label  class="has-float-label">
+          <input type="text" class="form-control mb-2 mr-sm-2" id="orgName" name="orgName" placeholder=" " [(ngModel)]="searchQuery.orgName" tabindex="1">
+          <span>Organization Name</span>
+        </label>
+
+        <label  class="has-float-label">
+          <input type="text" class="form-control mb-2 mr-sm-2" id="orgCity" name="orgCity" placeholder=" " [(ngModel)]="searchQuery.orgCity" tabindex="1">
+          <span>City (optional)</span>
+        </label>
+
+      </div>
+      <div class="col">
+          <label class="has-float-label mx-2">
+              <select class="form-control">
+                <option value="Select Type">Select Type</option>
+                <option *ngFor="let types of orgTypes"
+                        value="{{types}}">
+                  {{types}}
+                </option>
+              </select>
+              <span>Type (optional)</span>
+            </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+      <button type="button" class="btn" tabindex="1" >
+          TODO - Find Organization
+      </button>
+
+  </div>
+
 </ng-template>

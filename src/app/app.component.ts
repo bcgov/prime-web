@@ -68,8 +68,6 @@ export class AppComponent implements OnInit {
     }
 
 
-    this.primeDataService.pharmaNetOrgs = this.dummyDataService.createPharmaNetOrganizations(5, this.primeDataService.sites, 2);
-
-    console.log('Instantiated pharmaNet orgs', this.primeDataService.pharmaNetOrgs);
+    this.primeDataService.pharmaNetOrgs = this.dummyDataService.createPharmaNetOrganizations(5, 3);
   }
 }

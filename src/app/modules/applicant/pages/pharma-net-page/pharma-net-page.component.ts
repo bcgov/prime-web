@@ -13,13 +13,10 @@ export class PharmaNetPageComponent implements OnInit {
   constructor(private dataService: PrimeDataService) { }
 
   ngOnInit() {
-    
-    // TODO - Remove! Temp only during dev
-    // This simulates the user has already selected 3 orgs
-    // ? TODO - Change name of vars to be more clear
+    // TODO - Remove! Temp only during dev - simulates user has already selected 3 orgs
     this.applicant.pharmaNetOrganizations = this.dataService.pharmaNetOrgs.slice(0, 3);
 
-    console.log('data', this.applicant.pharmaNetOrganizations);
+    console.log('selected pharmaNetData', this.applicant.pharmaNetOrganizations);
   }
 
   get applicant(): Person {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 
 @Component({
   selector: 'prime-add-pharma-net-organization',
@@ -7,13 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddPharmaNetOrganizationComponent implements OnInit {
 
-  constructor() { }
+  public modalRef: BsModalRef;
+  public searchQuery: {orgName?: string, orgCity?: string, orgType?: string} = {};
+
+  public orgTypes = ['todo', 'test', 'get list'];
+
+  constructor(private modalService: BsModalService) { }
 
   ngOnInit() {
   }
 
   openModal(event){
-    console.log('TODO open modal');
+    this.modalService.show(event);
   }
 
 }
