@@ -111,12 +111,21 @@ export class DatepickerComponent implements OnInit, OnChanges {
       const today = new Date();
       this.datepickerOptions.disableUntil = this.convertDateToSimpleDate(today);
     }
-
-    //Reverted to using jsdate instead of date on model because it fixed issue with undefined/undefined/undefined when returning to Applicant Prof page.
+   //Reverted to using jsdate instead of date on model because it fixed issue with undefined/undefined/undefined when returning to Applicant Prof page.
     //2018-08-10 KPS Using jsdate causes the Select a date issue documented in prime-138
-    this.model = {
-      date: this.date
-    };
+   // workaround added to handle both date formats
+    if (this.date instanceof Date) {
+      this.model = {
+       //  date: this.date
+       jsdate: this.date
+      };
+    } else {
+      this.model = {
+         date: this.date
+      //  jsdate: this.date
+      };
+    }
+
   }
 
   ngOnChanges(changes: SimpleChanges) {
