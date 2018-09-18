@@ -18,7 +18,7 @@ import { PharmaNetAccessListComponent } from './components/pharma-net-access-lis
 import { PharmaNetPageComponent } from './pages/pharma-net-page/pharma-net-page.component';
 import { PharmaNetAccessRowComponent } from './components/pharma-net-access-row/pharma-net-access-row.component';
 import { AddPharmaNetOrganizationComponent } from './components/add-pharma-net-organization/add-pharma-net-organization.component';
-
+import { CompleteSubmissionComponent} from './pages/complete-submission/complete-submission.component';
 
 @NgModule({
   imports: [
@@ -42,7 +42,8 @@ import { AddPharmaNetOrganizationComponent } from './components/add-pharma-net-o
     PharmaNetAccessListComponent,
     PharmaNetPageComponent,
     PharmaNetAccessRowComponent,
-    AddPharmaNetOrganizationComponent
+    AddPharmaNetOrganizationComponent,
+    CompleteSubmissionComponent
   ]
 })
 export class ApplicantModule { }

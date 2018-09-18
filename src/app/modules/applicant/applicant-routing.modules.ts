@@ -6,7 +6,7 @@ import { ApplicantAccessAcceptanceComponent } from './pages/applicant-access-acc
 import { ApplicantProfessionalComponent } from './pages/applicant-professional/applicant-professional.component';
 import { ApplicantReviewPageComponent } from './pages/applicant-review-page/applicant-review-page.component';
 import { PharmaNetPageComponent } from './pages/pharma-net-page/pharma-net-page.component';
-
+import { CompleteSubmissionComponent} from './pages/complete-submission/complete-submission.component';
 
 
 export const routes: Routes = [
@@ -25,6 +25,10 @@ export const routes: Routes = [
   {
     path: 'pharma-net',
     component: PharmaNetPageComponent
+  },
+  {
+    path: 'complete-submission',
+    component: CompleteSubmissionComponent,
   },
   {
     path: 'professional',

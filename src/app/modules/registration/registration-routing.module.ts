@@ -17,7 +17,7 @@ export const routes: Routes = [
   },
   {
     path: 'registration-complete',
-    component: RegCompleteComponent,
+    component: RegCompleteComponent
   },
   {
     path: '',

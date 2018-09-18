@@ -49,8 +49,11 @@ export class ApplicantBreadcrumbsComponent implements OnInit {
     if (!this.hasCompletedWizardFlag) {
       if (this.router.url === '/applicant/review') {
         this.setHasCompletedWizardFlag();
+        this.router.navigate(['/applicant/complete-submission']);
       }
-      this.router.navigate([this.nextPageLink]);
+      else {
+        this.router.navigate([this.nextPageLink]);
+      }
     }
   }
 
@@ -66,7 +69,5 @@ export class ApplicantBreadcrumbsComponent implements OnInit {
     //this.router.navigate([this.previousPageLink]);
     this.onCancel.emit(true);
   }
-
-
 
 }
