@@ -5,7 +5,7 @@ import { ApplicantContactComponent } from './pages/applicant-contact/applicant-c
 import { ApplicantAccessAcceptanceComponent } from './pages/applicant-access-acceptance/applicant-access-acceptance.component';
 import { ApplicantProfessionalComponent } from './pages/applicant-professional/applicant-professional.component';
 import { ApplicantReviewPageComponent } from './pages/applicant-review-page/applicant-review-page.component';
-
+import { CompleteSubmissionComponent} from './pages/complete-submission/complete-submission.component';
 
 
 export const routes: Routes = [
@@ -20,6 +20,10 @@ export const routes: Routes = [
   {
     path: 'access-acceptance',
     component: ApplicantAccessAcceptanceComponent,
+  },
+  {
+    path: 'complete-submission',
+    component: CompleteSubmissionComponent,
   },
   {
     path: 'professional',

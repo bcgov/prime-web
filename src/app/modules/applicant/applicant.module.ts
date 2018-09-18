@@ -14,7 +14,7 @@ import { AlertModule } from 'ngx-bootstrap';
 import { AppEnrollmentProgressRowComponent } from './components/app-enrollment-progress-row/app-enrollment-progress-row.component';
 import { TextMaskModule } from 'angular2-text-mask';
 import { ApplicantReviewPageComponent } from './pages/applicant-review-page/applicant-review-page.component';
-
+import { CompleteSubmissionComponent} from './pages/complete-submission/complete-submission.component';
 
 @NgModule({
   imports: [
@@ -34,7 +34,8 @@ import { ApplicantReviewPageComponent } from './pages/applicant-review-page/appl
     ApplEnrollmentListComponent,
     ApplEnrollmentRowComponent,
     AppEnrollmentProgressRowComponent,
-    ApplicantReviewPageComponent
+    ApplicantReviewPageComponent,
+    CompleteSubmissionComponent
   ]
 })
 export class ApplicantModule { }
