@@ -79,7 +79,7 @@
         <input type="checkbox" id="secSms" name="secSms" [(ngModel)]="registrant.mfaOptionSMS"/>
         <label for="secSms">SMS/Text</label>
         <label class="has-float-label">
-          <input type="text" class="form-control prime-input-large" id="secPhone" name="secPhone" [(ngModel)]="registrant.mfaOptionSMSPhone" placeholder=" ">
+          <input type="text" [textMask]="{mask: getPhoneMask()}" class="form-control prime-input-large" id="secPhone" name="secPhone" [(ngModel)]="registrant.mfaOptionSMSPhone" placeholder=" ">
           <span>Phone</span>
         </label>
       </div>
