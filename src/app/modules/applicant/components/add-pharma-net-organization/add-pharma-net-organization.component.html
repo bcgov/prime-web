@@ -1,10 +1,8 @@
-<button type="button" class="btn btn-outline-primary" (click)="openModal(template)">
+<button type="button" class="btn btn-outline-primary" (click)="openModal()">
     Add Organization <i class="fa fa-plus-square"></i>
 </button>
 
 <ng-template #template>
-  <!-- todo - get from add-user-button.component.html -->
-
   <div class="modal-header">
       <h4 class="modal-title">Find and add a Organizations</h4>
 
@@ -31,8 +29,8 @@
       </div>
       <div class="col">
           <label class="has-float-label mx-2">
-              <select class="form-control">
-                <option value="Select Type">Select Type</option>
+              <select class="form-control" (input)='updateOrgType($event.target.value)'>
+                <option name='orgTypeSelect' value="Select Type">Select Type</option>
                 <option *ngFor="let types of orgTypes"
                         value="{{types}}">
                   {{types}}
@@ -42,13 +40,31 @@
             </label>
       </div>
     </div>
+
+
+    <ul class="list-group list-group-flush" *ngIf='showSearchResults'>
+      <li class='list-group-item d-flex justify-content-between align-items-center' *ngFor="let org of searchResults" (click)='org.isSelected = !org.isSelected'>
+          <div class="checkbox checkbox-success checkbox-inline">
+              <input class="input-lg" id="selectOrg_{{org.objectId}}" type="checkbox" [(ngModel)]='org.isSelected' (click)='$event.stopPropagation()'>
+              <label class="" for="selectOrg_{{org.objectId}}" (click)='$event.stopPropagation()'>{{org.title}}</label>
+          </div>
+      </li>
+    </ul>
+
   </div>
 
   <div class="modal-footer">
-      <button type="button" class="btn" tabindex="1" >
-          TODO - Find Organization
+      <button type="button" class="btn btn-default" tabindex="1" (click)="find()" *ngIf='!showSearchResults'>
+          Find Organization
       </button>
 
+      <button type="button" class="btn btn-default" tabindex="1" (click)="cancel()" *ngIf='showSearchResults'>
+          Cancel
+      </button>
+
+      <button type="button" class="btn btn-default" tabindex="1" (click)="addOrg()" *ngIf='showSearchResults'>
+          Add Organization
+      </button>
   </div>
 
 </ng-template>

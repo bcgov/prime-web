@@ -1,13 +1,12 @@
 
 import { Injectable } from '@angular/core';
-import { Collection } from '../models/collections.model';
+import { PharmaNetOrganization, PharmaNetOrgTypes } from '../models/organizations.model';
 import { EnrollmentStatus } from '../models/enrollment-status.enum';
 import { Person } from '../models/person.model';
 import { Address } from '../models/addresses.model';
 import {AccessReasons, DeclinedReasons, Site, SiteAccess, SiteAccessProgressSteps, ProvisionRequestOptions, AccessClass, AccessRights} from '../models/sites.model';
 import * as moment from 'moment';
 import {DateFormatter} from 'ngx-bootstrap';
-import { PharmaNetOrganization } from '../models/organization.model';
 
 /**
  * Responsible for generating dummy data, useful for development Not responsible
@@ -107,12 +106,12 @@ export class DummyDataService {
   }
 
   /** Returns an array of collections that come populated with sites. */
-  createCollectionsWithSites(names: string[] = ['London Drugs'], siteCount: number = 5): Collection[] {
-    const result: Collection[] = [];
+  createCollectionsWithSites(names: string[] = ['London Drugs'], siteCount: number = 5): PharmaNetOrganization[] {
+    const result: PharmaNetOrganization[] = [];
 
     names.forEach(name => {
       const sites = this.createSites(siteCount, name);
-      const collection = new Collection(name, sites);
+      const collection = new PharmaNetOrganization(name, sites);
       result.push(collection);
     });
 
@@ -178,7 +177,7 @@ export class DummyDataService {
    * Returns an array of SiteAccess objects that have been associated to the
    * inputted collection and people.
    */
-  populateSiteAccessFromCollection(collection: Collection, people: Person[]): SiteAccess[] {
+  populateSiteAccessFromCollection(collection: PharmaNetOrganization, people: Person[]): SiteAccess[] {
     const result: SiteAccess[] = [];
 
     // Make sure at least each site has one person
@@ -217,7 +216,7 @@ export class DummyDataService {
       return SA;
   }
 
-  populateSiteAccessFromCollectionDemo( collections: Collection[], people: Person[] ): SiteAccess[] {
+  populateSiteAccessFromCollectionDemo( collections: PharmaNetOrganization[], people: Person[] ): SiteAccess[] {
     const result: SiteAccess[] = [];
     let sa: SiteAccess;
 
@@ -378,35 +377,36 @@ export class DummyDataService {
   }
 
   // Collections with sites
-  createCollectionsDemo(): Collection[] {
-    const result: Collection[] = [];
+  createCollectionsDemo(): PharmaNetOrganization[] {
+    const result: PharmaNetOrganization[] = [];
 
-    const names = [ 'Organization A,1000,BCOOOOOA0,SJ'
-                  , 'Organization B,2000,BCOOOOOB0,KL' ];
+    const inputs = [
+      { name: 'HA - Fraser Health', city: 'Vancouver', type: PharmaNetOrgTypes.HealthAuthority },
+      { name: 'HA - Northern Health', city: 'Vancouver', type: PharmaNetOrgTypes.HealthAuthority },
+      { name: 'HA - Interior Health', city: 'Victoria', type: PharmaNetOrgTypes.HealthAuthority },
+      { name: 'HA- Vancouver Island Health', city: 'Victoria', type: PharmaNetOrgTypes.HealthAuthority },
+      { name: 'HA - FNHA', city: 'Victoria', type: PharmaNetOrgTypes.HealthAuthority },
+      { name: 'HA - Vancouver Coastal', city: 'Vancouver', type: PharmaNetOrgTypes.HealthAuthority },
+      { name: 'HA - PHSA', city: 'Victoria', type: PharmaNetOrgTypes.HealthAuthority },
+      { name: 'Pharmacy - Shoppers Drug Mart', city: 'Victoria', type: PharmaNetOrgTypes.Pharmacy },
+      { name: 'Pharmacy - Save on Foods', city: 'Victoria', type: PharmaNetOrgTypes.Pharmacy },
+      { name: 'Pharmacy - Loblaws', city: 'Victoria', type: PharmaNetOrgTypes.Pharmacy },
+      { name: 'Pharmacy - Community St Anthony', city: 'Victoria', type: PharmaNetOrgTypes.Pharmacy },
+      { name: 'Pharmacy - PharmaSave', city: 'Victoria', type: PharmaNetOrgTypes.Pharmacy },
+      { name: 'Community Practice - West', city: 'Victoria', type: PharmaNetOrgTypes.CommunityPractice },
+      { name: 'Community Practice - North', city: 'Victoria', type: PharmaNetOrgTypes.CommunityPractice },
+      { name: 'Community Practice - East', city: 'Victoria', type: PharmaNetOrgTypes.CommunityPractice },
+      { name: 'Community Practice - South', city: 'Victoria', type: PharmaNetOrgTypes.CommunityPractice },
+    ];
 
-    names.forEach( name => {
-      const _data = name.split( ',' );
-      const sites = this.createSitesDemo( _data[0], parseInt( _data[1], 10 ), _data[2], _data[3] );
-      const collection = new Collection( _data[0], sites );
+    inputs.forEach( input => {
+      const sites = this.createSitesDemo(input.name, 1, this.generatePersonName(), this.generatePosUserId());
+      const collection = new PharmaNetOrganization(input.name, sites, input.type, input.city);
       result.push(collection);
     });
 
     return result;
   }
-
-
-  createPharmaNetOrganizations(count: number, siteCountPerOrg: number = 5){
-    const orgs: PharmaNetOrganization[] = [];
-    for (let index = 0; index < count; index++) {
-      // Generate NEW sites, not found in dataService.sites!
-      const sites = this.createSites(siteCountPerOrg, `Org ${index + 1}`);
-
-      const newOrg = new PharmaNetOrganization(`Org ${index + 1}`, sites);
-      orgs.push(newOrg);
-    }
-    return orgs;
-  }
-
 
   // --- Helpers
   private getRandomElFromArray<T>(arr: T[]): T {

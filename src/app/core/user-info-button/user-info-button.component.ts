@@ -5,7 +5,7 @@ import { Person } from '../../models/person.model';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { cloneDeep } from 'lodash';
 import { growHorizontal } from '../../animations/animations';
-import { Collection } from '../../models/collections.model';
+import { PharmaNetOrganization } from '../../models/organizations.model';
 import {EnrollmentStatus} from "../../models/enrollment-status.enum";
 
 
@@ -60,10 +60,10 @@ export class InfoButtonComponent implements OnInit {
    * function as appropriate.
    *
    * @readonly
-   * @type {Collection}
+   * @type {PharmaNetOrganization}
    * @memberof InfoButtonComponent
    */
-  get collection(): Collection {
+  get collection(): PharmaNetOrganization {
     if (!this.site){
       throw new Error('Cannot access Collection before having Site defined');
     }

@@ -11,7 +11,7 @@ import { CollegeTypes,
   AdvancedPracticeCertificationTypes,
   WorkingOnBehalfTitleTypes,
   ISelfDeclaration } from './colleges.enum';
-import { PharmaNetOrganization } from './organization.model';
+import { PharmaNetOrganization } from './organizations.model';
 
 /* class for a person's name */
 class Name {
@@ -303,7 +303,7 @@ export class Person extends Base {
   accessAcceptance = [false, false, false];
 
   /** The orgs the user has selected */
-  pharmaNetOrganizations: PharmaNetOrganization[] = [];
+  selectedPharmaNetOrgs: PharmaNetOrganization[] = [];
   
   /** Has the user NOT accepted all UAAs or are there UAAs requiring their attention? Generally this manifests as some sort of warning icon displayed to the Applicant. */
   hasUAARequiringAttention(): boolean {

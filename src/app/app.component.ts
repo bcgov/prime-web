@@ -5,7 +5,6 @@ import { UserService } from './services/user.service';
 import { PrimeDataService } from './services/prime-data.service';
 import {Person} from './models/person.model';
 import { Address } from './models/addresses.model';
-import { PharmaNetOrganization } from './models/organization.model';
 
 
 @Component({
@@ -23,31 +22,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    // DEVELOPMENT DATA (random generation)
-    /* const dummyCollections = this.dummyDataService.createCollectionsWithSites([
-      "London Drugs - North",
-      "London Drugs - South",
-      "Rexall Vancouver Island - All",
-      "SDM Vancouver Island"
-    ], 5);
-    const dummyPeople = this.dummyDataService.createPeople(5);
-    const dummySites = [].concat(... dummyCollections.map(collection => collection.members)); //flatten array
-
-    // Create Site Access objects + associate with people/collections
-    dummyCollections.map(collection => {
-      const SA = this.dummyDataService.populateSiteAccessFromCollection(collection, dummyPeople)
-      this.primeDataService.siteAccesses.push(... SA);
-    });
-
-    this.primeDataService.collections = dummyCollections;
-    this.primeDataService.sites = dummySites;
-    this.primeDataService.people = dummyPeople;
-    this.primeDataService.user = this.primeDataService.people[0];
-    */
-
     // STAKEHOLDER DATA (specific scenarios)
     const dummyCollections = this.dummyDataService.createCollectionsDemo();
-    this.primeDataService.collections = dummyCollections;
+    this.primeDataService.organizations = dummyCollections;
     const dummySites = [].concat(... dummyCollections.map(collection => collection.members ) ); //flatten array
     this.primeDataService.sites = dummySites;
 
@@ -77,7 +54,5 @@ export class AppComponent implements OnInit {
       applicant.isDeclaredCheck = true;
     }
 
-
-    this.primeDataService.pharmaNetOrgs = this.dummyDataService.createPharmaNetOrganizations(5, 3);
   }
 }

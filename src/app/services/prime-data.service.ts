@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MillerColumnConfig } from '../modules/verifier/components/miller-columns/miller-columns.interface';
-import { Collection } from '../models/collections.model';
+import { PharmaNetOrganization } from '../models/organizations.model';
 import { EnrollmentStatus } from '../models/enrollment-status.enum';
 import { Person } from '../models/person.model';
 import { Site, SiteAccess } from '../models/sites.model';
@@ -8,7 +8,6 @@ import {EnrollmentRowItem} from '../modules/verifier/components/enrollment-row/e
 import {ApplEnrollmentRowItem} from '../modules/applicant/components/appl-enrollment-row/appl-enrollment-row.component';
 import {CollegeTypes} from "../models/colleges.enum";
 import { ProvisionerRowItem } from '../modules/provisioner/components/provisioner-row/provisioner-row.component';
-import { PharmaNetOrganization } from '../models/organization.model';
 
 
 @Injectable()
@@ -18,14 +17,11 @@ export class PrimeDataService {
 
   /** List of all sites the front-end app has access to currently */
   sites: Site[] = [];
-  /** List of all collections the front-end app has access to currently */
-  collections: Collection[] = [];
+  /** List of all collections/pharmaNetOrgs the front-end app has access to currently */
+  organizations: PharmaNetOrganization[] = [];
   /** List of all people the front-end app has access to currently */
   people: Person[] = [];
   siteAccesses: SiteAccess[] = [];
-
-  /** List of all PharmaNetOrgs; the user selects a subset from this list.  */
-  pharmaNetOrgs: PharmaNetOrganization[] = [];
 
   /** The logged in user interacting with the webapp. When in the Applicant dashboard, this would be the applicant. */
   user: Person = new Person();
@@ -35,9 +31,9 @@ export class PrimeDataService {
     // By Site means collections at the top level
     const result: EnrollmentRowItem[] = [];
 
-    this.collections.map(collection => {
+    this.organizations.map(collection => {
       const rowItem: EnrollmentRowItem = {
-        title: collection.name,
+        title: collection.title,
         associatedObjectId: collection.objectId,
         sites: collection.members,
         users: collection.allUsers
@@ -149,7 +145,7 @@ export class PrimeDataService {
     this.sites.map (site => {
       const rowItem: EnrollmentRowItem = {
         //concat collection name with substringed site name - returns "<collection_name> | <site_number>"
-        title: this.findCollectionFromSite(site)[0].name + ' | ' + site.name.split(' ').splice(-1),
+        title: this.findCollectionFromSite(site)[0].title + ' | ' + site.name.split(' ').splice(-1),
         associatedObjectId: site.objectId,
         sites: null,
         users: null
@@ -206,8 +202,8 @@ export class PrimeDataService {
       .filter(rowItem => rowItem.siteAccess[0].status === EnrollmentStatus.Provisioning || rowItem.siteAccess[0].status === EnrollmentStatus.Active)
   }
 
-  findCollectionFromSites(sites: Site[]): Collection[] {
-    const result: Collection[] = [];
+  findCollectionFromSites(sites: Site[]): PharmaNetOrganization[] {
+    const result: PharmaNetOrganization[] = [];
     for (let index = 0; index < sites.length; index++) {
       const site = sites[index];
       const collection = this.findCollectionFromSite(site);
@@ -218,10 +214,10 @@ export class PrimeDataService {
   }
 
   //TODO: Change to search on objectId? because if object is cloned...
-  findCollectionFromSite(site: Site): Collection[] {
+  findCollectionFromSite(site: Site): PharmaNetOrganization[] {
     if (!site) { return [] }
 
-    return this.collections.map(collection => {
+    return this.organizations.map(collection => {
       // Lookup based on objectId, so it works even if the Site is cloned from original
       const exists = collection.members
         .map(site => site.objectId)
@@ -232,7 +228,7 @@ export class PrimeDataService {
   }
 
   getMillerColumnDataByUser(): MillerColumnConfig {
-    const collectionMiller = this.collections.map(collection => {
+    const collectionMiller = this.organizations.map(collection => {
       collection.members = this.setAssociationId(collection.objectId, collection.members);
       return collection;
     });
@@ -255,7 +251,7 @@ export class PrimeDataService {
   getMillerColumnDataByCollection(): MillerColumnConfig {
 
 
-    this.collections.map(collection => {
+    this.organizations.map(collection => {
       collection.members = this.setAssociationId(collection.objectId, collection.members);
 
       //Also set association id from Person->Site
@@ -272,7 +268,7 @@ export class PrimeDataService {
 
     const result = {
       data: {
-        collections: this.collections,
+        collections: this.organizations,
         sites: this.sites,
         people: this.people,
       },
@@ -290,8 +286,8 @@ export class PrimeDataService {
     return this.sites.find(site => site.objectId === objectId);
   }
 
-  findCollectionByObjectId(objectId: string): Collection{
-    return this.collections.find(col => col.objectId === objectId);
+  findCollectionByObjectId(objectId: string): PharmaNetOrganization{
+    return this.organizations.find(col => col.objectId === objectId);
   }
 
   findUserSiteByObjectId(objectId: string): Site{

@@ -2,7 +2,7 @@ import { animate, keyframes, style, transition, trigger } from '@angular/animati
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { cloneDeep } from 'lodash';
-import { Collection } from '../../../../models/collections.model';
+import { PharmaNetOrganization } from '../../../../models/organizations.model';
 import { Person } from '../../../../models/person.model';
 import { Site, SiteAccess, SiteAccessProgressSteps } from '../../../../models/sites.model';
 import { MillerColumn, MillerColumnConfig, MillerItem } from './miller-columns.interface';
@@ -298,11 +298,11 @@ export class MillerColumnsComponent implements OnInit {
   }
 
 
-  isSiteColumn(col: Site[] | Collection[] | Person[] | MillerItem[] | any[]): col is Site[] {
+  isSiteColumn(col: Site[] | PharmaNetOrganization[] | Person[] | MillerItem[] | any[]): col is Site[] {
     return (<Site[]>col)[0]._isSite !== undefined;
   }
 
-  isPeopleColumn(col: Site[] | Collection[] | Person[] | MillerItem[] ): col is Person[]{
+  isPeopleColumn(col: Site[] | PharmaNetOrganization[] | Person[] | MillerItem[] ): col is Person[]{
     return (<Person[]>col)[0].firstName !== undefined;
   }
 

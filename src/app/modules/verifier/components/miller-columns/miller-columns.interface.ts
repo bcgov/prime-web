@@ -1,4 +1,4 @@
-import { Collection } from '../../../../models/collections.model';
+import { PharmaNetOrganization } from '../../../../models/organizations.model';
 import { Person } from '../../../../models/person.model';
 import { Site } from '../../../../models/sites.model';
 
@@ -37,7 +37,7 @@ export interface MillerItem {
 export interface MillerColumnConfig {
   //Required
   data: {
-    collections: Collection[],
+    collections: PharmaNetOrganization[],
     sites: Site[],
     people: Person[],
   },

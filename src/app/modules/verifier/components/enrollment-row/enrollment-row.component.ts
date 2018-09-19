@@ -2,7 +2,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { loadInOut, openState, openStateChild, openStateDisable } from '../../../../animations/animations';
 import {Site, SiteAccess} from '../../../../models/sites.model';
-import {Collection} from '../../../../models/collections.model';
+import {PharmaNetOrganization} from '../../../../models/organizations.model';
 import {EnrollmentRow, EnrollmentRowChild, RowState} from '../../../../core/enrollment-row/enrollment-row.class';
 import {Person} from '../../../../models/person.model';
 
@@ -18,7 +18,7 @@ export interface EnrollmentRowItem {
   associatedObjectId: string;
 
   /** Optional and only used in one config. */
-  collections?: Collection[];
+  collections?: PharmaNetOrganization[];
   expandableRows?: SiteAccess[];
 }
 

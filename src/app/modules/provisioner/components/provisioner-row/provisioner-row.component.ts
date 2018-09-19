@@ -6,7 +6,7 @@ import {DeclinedReasons, Site, SiteAccess, ProvisionedStatus} from '../../../../
 import {loadInOut, openState, openStateChild, openStateDisable, growVertical} from '../../../../animations/animations';
 import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
 import {EnrollmentRowItem} from '../../../verifier/components/enrollment-row/enrollment-row.component';
-import {Collection} from "../../../../models/collections.model";
+import {PharmaNetOrganization} from "../../../../models/organizations.model";
 import {CollegeTypes} from "../../../../models/colleges.enum";
 import { EnrollmentRow, RowState } from '../../../../core/enrollment-row/enrollment-row.class';
 import { cloneDeep } from 'lodash';
