@@ -31,7 +31,7 @@ describe('UserInfoButtonComponent', () => {
 
     // Create Dummy Data in Data Service, copied from app.component.ts
     const dummyCollections = dummyDataService.createCollectionsDemo();
-    component['dataService'].collections = dummyCollections;
+    component['dataService'].organizations = dummyCollections;
     const dummySites = [].concat(... dummyCollections.map(collection => collection.members ) ); //flatten array
     component['dataService'].sites = dummySites;
 

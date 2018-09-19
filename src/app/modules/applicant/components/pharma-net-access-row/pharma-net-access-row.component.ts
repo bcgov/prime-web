@@ -1,46 +1,38 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { EnrollmentRow, RowState } from '../../../../core/enrollment-row/enrollment-row.class';
 import { openState, openStateChild, loadInOut, openStateDisable, rotate180, growVertical, growHorizontal } from '../../../../animations/animations';
-import { PharmaNetOrganization } from '../../../../models/organization.model';
 import { SiteAccess } from '../../../../models/sites.model';
 import { EnrollmentStatus } from '../../../../models/enrollment-status.enum';
 import { PrimeDataService } from '../../../../services/prime-data.service';
+import { PharmaNetOrganization } from '../../../../models/organizations.model';
 
-/** An interface */
-export interface PharmaNetRow extends PharmaNetOrganization {
-  open: boolean;
-}
 
 @Component({
   selector: 'prime-pharma-net-access-row',
   templateUrl: './pharma-net-access-row.component.html',
   styleUrls: ['./pharma-net-access-row.component.scss'],
-  // TODO - REmove unused animations here (loadinOut?, openSTATe/ openStatedisable?)
   animations: [openState, openStateChild, loadInOut, rotate180, growVertical, growHorizontal]
 })
 export class PharmaNetAccessRowComponent extends EnrollmentRow implements OnInit {
 
   @Input() rowData: PharmaNetOrganization;
-  // @Output() onChange = new EventEmitter<PharmaNetOrganization>(); //todo - use same type as above
 
   /** A copy of rowData */
-  private _data; 
+  private _data;
 
   public subRowData: SiteAccess[];
 
-  // TODO!
-  public accessType = ['Personal Access', 'Test', 'Todo'];
 
   public orgStartDate: Date = new Date();
   public orgEndDate: Date;
 
-  constructor(private dataService: PrimeDataService) { 
+  constructor(private dataService: PrimeDataService) {
     super();
   }
 
   ngOnInit() {
     this.subRowData = this.rowData.setupNewEnrollments(this.dataService.user);
-    console.log('pharmaNetRow data', {rowData: this.rowData, subRowData: this.subRowData}); 
+    // console.log('pharmaNetRow data', {rowData: this.rowData, subRowData: this.subRowData});
   }
 
   isOpen(): boolean {
@@ -70,7 +62,7 @@ export class PharmaNetAccessRowComponent extends EnrollmentRow implements OnInit
   }
 
   onOrgStartDate(newDate: Date){
-    this.subRowData = this.subRowData.map(sa => { 
+    this.subRowData = this.subRowData.map(sa => {
       sa.startDate = newDate;
       return sa;
     });
@@ -85,8 +77,16 @@ export class PharmaNetAccessRowComponent extends EnrollmentRow implements OnInit
     this.orgEndDate = newDate;
   }
 
-  // These will only be necessary when returning for multiple times.  Might be
-  // splitting that to a separate component.
+  // Remove the org, which removes the entire row and destroys the component
+  removeOrg(){
+    this.dataService.user.selectedPharmaNetOrgs = this.dataService.user.selectedPharmaNetOrgs
+      .filter(x => x !== this.rowData);
+  }
+
+  // BELOW LINES ONLY NECESSARY WHEN USER IS RETURNING AFTER FIRST VISIT
+  // may split into separate component?
+
+  // public accessType = ['Personal Access', 'Test', 'Todo']; // replace with PharmaNetOrgType
 
   // onAcceptSite(sa: SiteAccess){
   //   sa.status = EnrollmentStatus.Active;
@@ -96,21 +96,20 @@ export class PharmaNetAccessRowComponent extends EnrollmentRow implements OnInit
   //   sa.status = EnrollmentStatus.Declined;
   // }
 
-  // onAcceptOrg(org: PharmaNetOrganization){ 
+  // onAcceptOrg(org: PharmaNetOrganization){
   //   org.me
   // }
 
   // onRejectOrg(org: PharmaNetOrganization){}
 
 
-  // TODO - Remove? Pretty sure it's not being used at all.
   get siteAccessRequiringAttention(): any[] {
 
     if (!this.rowData){
       return [];
     }
 
-    return this.rowData.allSiteAccess();
+    return this.rowData.allSiteAccess;
   }
 
 }

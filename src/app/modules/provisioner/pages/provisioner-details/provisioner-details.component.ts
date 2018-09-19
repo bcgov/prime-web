@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { Person } from '../../../../models/person.model';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { Site } from '../../../../models/sites.model';
-import { Collection } from '../../../../models/collections.model';
+import { PharmaNetOrganization } from '../../../../models/organizations.model';
 import { EnrollmentRowItem } from '../../../verifier/components/enrollment-row/enrollment-row.component';
 import { EnrollmentStatus } from '../../../../models/enrollment-status.enum';
 import {CollegeTypes} from "../../../../models/colleges.enum";
@@ -20,7 +20,7 @@ export class ProvisionerDetailsComponent implements OnInit {
   provisionByType: ProvisionByType;
   person: Person;
   site: Site;
-  collection: Collection;
+  collection: PharmaNetOrganization;
 
   constructor(private route: ActivatedRoute, private dataService: PrimeDataService, private router: Router) { }
 
@@ -80,7 +80,7 @@ export class ProvisionerDetailsComponent implements OnInit {
     return this.dataService.getProvisionerDetailsBySite(this.site);
   }
 
-  findCollectionFromSite(site: Site): Collection {
+  findCollectionFromSite(site: Site): PharmaNetOrganization {
     return this.dataService.findCollectionFromSite(site)[0];
   }
 

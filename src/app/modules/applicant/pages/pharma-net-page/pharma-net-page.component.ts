@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { Person } from '../../../../models/person.model';
-import { PharmaNetOrganization } from '../../../../models/organization.model';
 
 @Component({
   selector: 'prime-pharma-net-page',
@@ -12,15 +11,18 @@ export class PharmaNetPageComponent implements OnInit {
 
   constructor(private dataService: PrimeDataService) { }
 
-  ngOnInit() {
-    // TODO - Remove! Temp only during dev - simulates user has already selected 3 orgs
-    this.applicant.pharmaNetOrganizations = this.dataService.pharmaNetOrgs.slice(0, 3);
+  hasSelectedOrg = false;
 
-    console.log('selected pharmaNetData', this.applicant.pharmaNetOrganizations);
+  ngOnInit() {
+  }
+
+  ngDoCheck (){
+    this.hasSelectedOrg = this.applicant.selectedPharmaNetOrgs.length > 0;
   }
 
   get applicant(): Person {
     return this.dataService.user;
   }
+  
 
 }

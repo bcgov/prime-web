@@ -10,11 +10,11 @@ export abstract class Group<T> extends Base {
   contains() { }; // just an example
   members: T[];
   // Displayed name to user
-  name: string;
+  title: string;
 }
-export class Collection extends Group<Site> {
+export class PharmaNetOrganization extends Group<Site> {
 
-  constructor(public name: string, sites: Site[]){
+  constructor(public title: string, sites: Site[], public type?: PharmaNetOrgTypes, public city?: string){
     super();
     this.members = sites;
   }
@@ -34,4 +34,25 @@ export class Collection extends Group<Site> {
   getSiteAccessWithStatus(status: EnrollmentStatus): SiteAccess[]{
     return this.allSiteAccess.filter(SA => SA.status === status);
   }
+
+   /** Sets new blank SiteAccess for each site, ready for user to modify */
+   setupNewEnrollments(enrollmentSubject: Person): SiteAccess[] {
+    this.members = this.members.map(site => {
+        const sa = new SiteAccess();
+        sa.site = site;
+        sa.person = enrollmentSubject;
+        sa.status = EnrollmentStatus.New;
+        sa.startDate = new Date();
+        site.siteAccess = [ sa ];
+        return site;
+    });
+
+    return this.allSiteAccess;
+  }
  }
+
+export enum PharmaNetOrgTypes {
+  HealthAuthority = 'HA',
+  Pharmacy = 'Pharmacy',
+  CommunityPractice = 'Community Practice'
+}

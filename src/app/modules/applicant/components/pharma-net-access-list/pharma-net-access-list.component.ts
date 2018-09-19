@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { EnrollmentList, defaultViewSelector } from '../../../../core/enrollment-list/enrollment-list.class';
 import { EnrollmentStatus } from '../../../../models/enrollment-status.enum';
 import { cloneDeep } from 'lodash';
+import { PharmaNetOrgTypes } from '../../../../models/organizations.model';
+import { RowState } from '../../../../core/enrollment-row/enrollment-row.class';
+import { AddPharmaNetOrganizationComponent } from '../add-pharma-net-organization/add-pharma-net-organization.component';
 
 
 @Component({
@@ -15,41 +18,28 @@ export class PharmaNetAccessListComponent extends EnrollmentList implements OnIn
     super();
   }
 
-  EnrollmentStatus: EnrollmentStatus[] = [
-    EnrollmentStatus.New,
-    EnrollmentStatus.Active,
-    EnrollmentStatus.Declined,
-  ];
+  EnrollmentStatus: EnrollmentStatus[] = [ ];
 
-  public loadingSpinner: boolean = false;
+  public orgTypes;
 
   ngOnInit() {
-    if (this.rowItems) {
-      this.data = cloneDeep( this.rowItems );
-    }
+    this.orgTypes = Object.keys(PharmaNetOrgTypes).map(x => PharmaNetOrgTypes[x]);
   }
 
-  cancel() {
-    console.log('TODO cancel');
-  }
-
-  save() {
-    console.log('TODO save');
+  ngOnChanges(){
+    this.data = this.rowItems;
   }
 
   search(phrase) {
-    console.log('TODO VERIFY - search - ', phrase);
-    // this.deepSearch(phrase);
+    this.data = this.rowItems.filter(x => x.title.toLowerCase().includes(phrase.toLowerCase()));
   }
 
-  rowOpened(item) {
-    console.log('TODO - rowOpened, close other rows', item);
-    // this.rowElements.filter(x => x !== item)s
-    // .map(x => x.closeRow());
+  rowOpened() { 
+    return null;
   }
 
-  onChange(event) {
-    console.log('onChange', event);
+  addOrg(component: AddPharmaNetOrganizationComponent){
+    component.openModal();
   }
 
   viewTypes(type) {
@@ -58,8 +48,13 @@ export class PharmaNetAccessListComponent extends EnrollmentList implements OnIn
       return this.data = this.rowItems;
     }
 
-    this.deepSearch(expandableRow => {
-      return expandableRow.status.includes(type);
+
+    this.data = this.rowItems.filter(x => {
+      let target = x.type.toLowerCase();
+      if (type === 'HA'){
+        target = target.replace('pharmacy', '');
+      }
+      return target.toLowerCase().includes(type.toLowerCase());
     });
   }
 
