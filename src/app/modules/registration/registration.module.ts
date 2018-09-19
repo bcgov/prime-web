@@ -13,13 +13,15 @@ import { RegistrationContainerComponent } from './components/registration-contai
 import {FormsModule} from '@angular/forms';
 import { RegLoginMfaComponent } from './components/reg-login-mfa/reg-login-mfa.component';
 import { CollectionNoticeComponent } from './components/collection-notice/collection-notice.component';
+import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   imports: [
     CommonModule,
     CoreModule,
     FormsModule,
-    RegistrationRoutingModule
+    RegistrationRoutingModule,
+    TextMaskModule
   ],
   declarations: [
     NewAccountComponent,
