@@ -17,6 +17,9 @@ export class PharmaNetAccessRowComponent extends EnrollmentRow implements OnInit
 
   @Input() rowData: PharmaNetOrganization;
 
+  /** If true, hide all sites and only display orgs. */
+  @Input() orgsOnly: boolean;
+
   /** A copy of rowData */
   private _data;
 

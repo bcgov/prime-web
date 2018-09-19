@@ -41,3 +41,13 @@ select {
   font-size: 1.5rem;
   cursor: pointer;
 }
+
+.orgOnly {
+  cursor: default;
+
+  .enrollment-text-container, 
+  .enrollment-expandable,
+  .enrollment-list-item {
+    cursor: default;
+  }
+}

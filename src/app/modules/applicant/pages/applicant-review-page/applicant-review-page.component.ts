@@ -64,4 +64,8 @@ export class ApplicantReviewPageComponent implements OnInit {
     this.router.navigate(['applicant/access-acceptance']);
   }
 
+  goToPharmaNetPage(){
+    this.router.navigate(['applicant/pharma-net']);
+  }
+
 }

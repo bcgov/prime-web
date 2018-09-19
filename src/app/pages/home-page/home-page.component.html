@@ -4,20 +4,9 @@
 
 <section>
 
-  <!--
-    Demo page is broken. Need to create a DemoModule and set it up to restore it, when time is available.
-
-    <a routerLink="/demo">
+  <a routerLink="/login">
     <button class="btn btn-block btn-lg btn-secondary">
-      Demo page
-    </button>
-  </a>
-
-  <hr> -->
-
-  <a routerLink="/verifier">
-    <button class="btn btn-block btn-lg btn-secondary">
-      Verifier Dashboard (new)
+      Registration
     </button>
   </a>
 
@@ -25,7 +14,16 @@
 
   <a routerLink="/applicant">
     <button class="btn btn-block btn-lg btn-secondary">
-      Applicant Dashboard (new)
+      Applicant Enrollment - New
+    </button>
+  </a>
+
+  <hr class="invisible">
+
+  <a routerLink="/applicant">
+    <!-- Idea, only show as undisabled when Applicant Enrollment - New has been completed and we have data? -->
+    <button class="btn btn-block btn-lg btn-secondary disabled">
+      Applicant Enrollment - Change
     </button>
   </a>
 
@@ -33,15 +31,15 @@
 
   <a routerLink="/provisioner">
     <button class="btn btn-block btn-lg btn-secondary">
-      Provisioner Dashboard (new)
+      Provisioner
     </button>
   </a>
 
   <hr class="invisible">
 
-  <a routerLink="/login">
+  <a href='#'>
     <button class="btn btn-block btn-lg btn-secondary">
-      Register (new)
+      User Guide
     </button>
   </a>
 

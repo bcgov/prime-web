@@ -1,7 +1,7 @@
-<div *ngIf="rowData" class="enrollment-list-item org-row" (click)="toggleRow()">
+<div *ngIf="rowData" class="enrollment-list-item org-row" (click)="toggleRow()" [ngClass]='{orgOnly: orgsOnly}'>
   <div class="enrollment-text-container">
     <span class="enrollment-text-main">
-      <i class='fa fa-caret-down' [@rotate180]='openState'></i> 
+      <i class='fa fa-caret-down' [@rotate180]='openState' *ngIf='!orgsOnly'></i> 
         {{rowData.title}}
       </span>
   </div>
@@ -59,7 +59,7 @@
 
 
 <!-- Nested rows for all the sites -->
-<div [@growVertical] *ngIf="isOpen()" class='pharmanet-site'>
+<div [@growVertical] *ngIf="!orgsOnly && isOpen()" class='pharmanet-site'>
   <div class="expandable-container">
 
        <div class="enrollment-expandable"

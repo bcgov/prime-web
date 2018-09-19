@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { EnrollmentList, defaultViewSelector } from '../../../../core/enrollment-list/enrollment-list.class';
 import { EnrollmentStatus } from '../../../../models/enrollment-status.enum';
 import { cloneDeep } from 'lodash';
@@ -13,6 +13,9 @@ import { AddPharmaNetOrganizationComponent } from '../add-pharma-net-organizatio
   styleUrls: ['./pharma-net-access-list.component.scss']
 })
 export class PharmaNetAccessListComponent extends EnrollmentList implements OnInit {
+
+  /** If true, hide all sites, and only show organizations. This config is used for registrants. */
+  @Input() orgsOnly: boolean;
 
   constructor() {
     super();
