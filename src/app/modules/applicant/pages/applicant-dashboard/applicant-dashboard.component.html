@@ -41,7 +41,7 @@
           <ng-container *ngIf="applicant.hasCollege">
             <p>{{collegeType}}</p>
             <p>Practitioner College ID: {{licenceNumber}}</p>
-            <p>Registration Renewal Date: {{licenceExpiryDate | date: 'MMM. dd, yyyy'}}</p>
+            <p>Registration Renewal Date: {{ licenceExpiryDate }}</p>
           </ng-container>
           <p *ngIf="applicant.isWorkingOnBehalf">Job Title: {{jobTitle}}</p>
         </div>

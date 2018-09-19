@@ -12,20 +12,24 @@
 
   <hr class="invisible">
 
-  <a routerLink="/applicant">
-    <button class="btn btn-block btn-lg btn-secondary">
-      Applicant Enrollment - New
+  <a routerLink="/applicant/contact">
+    <button class="btn btn-block btn-lg btn-secondary" [disabled]='!registrationCompleted()'>
+      Applicant Enrollment &mdash; New
     </button>
   </a>
+
+  <p class="text-muted" *ngIf="!registrationCompleted()">Complete <em>Registration</em> first</p>
 
   <hr class="invisible">
 
   <a routerLink="/applicant">
-    <!-- Idea, only show as undisabled when Applicant Enrollment - New has been completed and we have data? -->
-    <button class="btn btn-block btn-lg btn-secondary disabled">
-      Applicant Enrollment - Change
+    <button class="btn btn-block btn-lg btn-secondary" [disabled]='!applicationNewCompleted()'>
+      Applicant Enrollment &mdash; Change
     </button>
   </a>
+
+  <p class="text-muted" *ngIf="!applicationNewCompleted()">Complete <em>Application Enrollment &mdash; New</em> first</p>
+
 
   <hr class="invisible">
 

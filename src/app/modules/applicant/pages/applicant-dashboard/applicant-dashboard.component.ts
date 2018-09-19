@@ -32,16 +32,17 @@ export class ApplicantDashboardComponent implements OnInit {
       return;
     }
 
-    if (!this.contactDone) {
-      const link = '/applicant/contact';
-      this.router.navigate([link]);
-    } else if (!this.professionalDone) {
-      const link = '/applicant/professional';
-      this.router.navigate([link]);
-    //} else if (!this.accessAcceptanceDone) {
-    //  const link = '/applicant/access-acceptance';
-    //  this.router.navigate([link]);
-    }
+    // Disabled redirects for now
+    // if (!this.contactDone) {
+    //   const link = '/applicant/contact';
+    //   this.router.navigate([link]);
+    // } else if (!this.professionalDone) {
+    //   const link = '/applicant/professional';
+    //   this.router.navigate([link]);
+    // //} else if (!this.accessAcceptanceDone) {
+    // //  const link = '/applicant/access-acceptance';
+    // //  this.router.navigate([link]);
+    // }
   }
 
   get applicant(): Person {
@@ -62,7 +63,7 @@ export class ApplicantDashboardComponent implements OnInit {
   }
 
   get professionalDone(): boolean {
-    if (isNullOrUndefined( this.applicant.hasCollege ) && isNullOrUndefined( this.applicant.isWorkingOnBehalf ) ) {
+    if (this.applicant.hasCollege && this.applicant.isWorkingOnBehalf ) {
       return false;
     }
     return this.applicant.hasCollege || this.applicant.isWorkingOnBehalf;
@@ -80,12 +81,12 @@ export class ApplicantDashboardComponent implements OnInit {
 
   get licenceNumber(): string {
     const licence = this.applicant.collegeCertificationList[0].licenceNumber;
-    return (isNullOrUndefined( licence )) ? 'n/a' : licence;
+    return licence ? 'n/a' : licence;
   }
 
   get licenceExpiryDate(): string {
     const expiryDate = this.applicant.collegeCertificationList[0].licenceExpiryDate;
-    return (isNullOrUndefined( expiryDate )) ? 'n/a' : moment( expiryDate ).format( this._dateFormat );
+    return expiryDate ? 'n/a' : moment( expiryDate ).format( this._dateFormat );
   }
 
   get jobTitle(): string {
@@ -94,7 +95,7 @@ export class ApplicantDashboardComponent implements OnInit {
   }
 
   get renewalDate(): string {
-    return (isNullOrUndefined( this.applicant.renewalDate )) ? 'n/a' : moment( this.applicant.renewalDate ).format( this._dateFormat );
+    return this.applicant.renewalDate ? 'n/a' : moment( this.applicant.renewalDate ).format( this._dateFormat );
   }
 
   // Applicant information needs to be updated

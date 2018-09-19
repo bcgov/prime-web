@@ -213,18 +213,21 @@ export class Person extends Base {
   }
 
   set preferFirstName( name: string ) {
+    this.hasPreferName = true;
     this._preferName.firstName = name;
   }
   get preferFirstName(): string {
     return this._preferName.firstName;
   }
   set preferMiddleName( name: string ) {
+    this.hasPreferName = true;
     this._preferName.middleName = name;
   }
   get preferMiddleName(): string {
     return this._preferName.middleName;
   }
   set preferLastName( name: string ) {
+    this.hasPreferName = true;
     this._preferName.lastName = name;
   }
   get preferLastName(): string {
@@ -399,6 +402,11 @@ export class Person extends Base {
 
   canAccess(site: Site): boolean {
     return this.sites.indexOf(site) !== -1;
+  }
+
+  get hasRegistrationInfo(): boolean {
+    const hasBasics = !!(this.name && this.phone && this.email);
+    return hasBasics;
   }
 
   get hasContactInfo(): boolean {

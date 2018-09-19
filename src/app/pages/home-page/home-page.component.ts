@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PrimeDataService } from '../../services/prime-data.service';
 
 @Component({
   selector: 'prime-home-page',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dataService: PrimeDataService) { }
 
   ngOnInit() {
+  }
+
+
+  registrationCompleted(): boolean {
+
+    // User has filled out name/email/phone from registration
+    return this.dataService.user.hasRegistrationInfo;
+  }
+
+  applicationNewCompleted(): boolean {
+    // User has filled out the Professional screen from applicant
+    return this.dataService.user.hasCollege || this.dataService.user.isWorkingOnBehalf;
   }
 
 }

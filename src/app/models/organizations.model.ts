@@ -19,6 +19,9 @@ export class PharmaNetOrganization extends Group<Site> {
     this.members = sites;
   }
 
+  public startDate: Date;
+  public endDate: Date;
+
   get allUsers(): Person[] {
     return [].concat(...this.members.map(site => site.users))
       .filter((person, index, arr) => {

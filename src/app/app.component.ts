@@ -38,6 +38,10 @@ export class AppComponent implements OnInit {
       // just set up blank data
       this.primeDataService.user = new Person();
       this.primeDataService.user.address = new Address();
+
+      // TODO - As this user is NOT in this.primeDataService.people, it won't be found when iterating through people across the app.
+      // But we can't just add it, because as-is it'd break, because the Person doesn't have any name to display.
+      // We'll need the person to appear in workflows like Provisioner
     }
 
     const SA = this.dummyDataService.populateSiteAccessFromCollectionDemo( dummyCollections, dummyPeople );

@@ -59,60 +59,53 @@
     </div>
   </form>
 
-  <h2 class='prime-title' id="prefName">Preferred Name (optional)</h2>
-  <form>
+  <ng-container *ngIf="applicant.hasPreferName">
 
-    <label>
-      By default, your preferred name is set to your legal name. I want to change my preferred name
-      <prime-toggle [(data)]="applicant.hasPreferName" (click) = "onChange()"></prime-toggle>
-    </label>
+    <h2 class='prime-title' id="prefName">Preferred Name (optional)</h2>
+    <form>
+      <div >
+        <div class="has-float-label">
+          <input type="text" class="form-control prime-input-large" id="prefLastName" name="prefLastName" [ngModel]="applicant.preferLastName ? applicant.preferLastName : applicant.lastName" (ngModelChange)="updatePrefLastName($event)" (input)="onChange()" placeholder=" " disabled>
+          <label for="prefLastName">Preferred Last Name</label>
+        </div>
 
-    <div>
+        <div class="has-float-label">
+          <input type="text" class="form-control prime-input-large" id="prefMiddleName" name="prefMiddleName" [ngModel]="applicant.preferMiddleName ? applicant.preferMiddleName : applicant.middleName" (ngModelChange)="updatePrefMiddleName($event)" (input)="onChange()" placeholder=" " disabled>
+          <label for="prefMiddleName">Preferred Middle Name</label>
+        </div>
 
-      <div class="has-float-label">
-        <input *ngIf = "!applicant.hasPreferName" type="text" class="form-control prime-input-large" id="prefLastName" name="prefLastName" [(ngModel)]="applicant.lastName" (input)="onChange()" placeholder=" " [disabled]="!applicant.hasPreferName">
-        <input *ngIf = "applicant.hasPreferName" type="text" class="form-control prime-input-large" id="prefLastName" name="prefLastName" [ngModel]="applicant.preferLastName ? applicant.preferLastName : applicant.lastName" (ngModelChange)="updatePrefLastName($event)" (input)="onChange()" placeholder=" ">
-        <label for="prefLastName">Preferred Last Name</label>
+        <div class="has-float-label">
+          <input type="text" class="form-control prime-input-large" id="prefFirstName" name="prefFirstName" [ngModel]="applicant.preferFirstName ? applicant.preferFirstName : applicant.firstName" (ngModelChange)="updatePrefFirstName($event)" (input)="onChange()" placeholder=" " disabled>
+          <label for="prefFirstName">Preferred First Name</label>
+        </div>
+
       </div>
 
-      <div class="has-float-label">
-        <input *ngIf = "!applicant.hasPreferName" type="text" class="form-control prime-input-large" id="prefMiddleName" name="prefMiddleName" [(ngModel)]="applicant.middleName" (input)="onChange()" placeholder=" " [disabled]="!applicant.hasPreferName">
-        <input *ngIf = "applicant.hasPreferName" type="text" class="form-control prime-input-large" id="prefMiddleName" name="prefMiddleName" [ngModel]="applicant.preferMiddleName ? applicant.preferMiddleName : applicant.middleName" (ngModelChange)="updatePrefMiddleName($event)" (input)="onChange()" placeholder=" ">
-        <label for="prefMiddleName">Preferred Middle Name</label>
-      </div>
-
-      <div class="has-float-label">
-        <input *ngIf = "!applicant.hasPreferName" type="text" class="form-control prime-input-large" id="prefFirstName" name="prefFirstName" [(ngModel)]="applicant.firstName" (input)="onChange()" placeholder=" " [disabled]="!applicant.hasPreferName">
-        <input *ngIf = "applicant.hasPreferName" type="text" class="form-control prime-input-large" id="prefFirstName" name="prefFirstName" [ngModel]="applicant.preferFirstName ? applicant.preferFirstName : applicant.firstName" (ngModelChange)="updatePrefFirstName($event)" (input)="onChange()" placeholder=" ">
-        <label for="prefFirstName">Preferred First Name</label>
-      </div>
-
-    </div>
-
-  </form>
+    </form>
+  </ng-container>
 
   <h2 class='prime-title' id='contactInfo'>Contact Information</h2>
 
   <form>
     <div>
 
-      <label>
+      <!-- <label>
           I have an international (non-Canadian) phone-number
         <prime-toggle [(data)]="applicant.hasInternationalPhoneNumber" (click) = "onInternationalPhoneNumberChange()"></prime-toggle>
-      </label>
+      </label> -->
 
       <label class="has-float-label">
-        <input type="text" [textMask]="{mask: getPhoneMask()}" class="form-control prime-input-large" id="phone" name="phone" [(ngModel)]="applicant.phone" (input)="onChange()" placeholder=" ">
+        <input type="text" [textMask]="{mask: getPhoneMask()}" class="form-control prime-input-large" id="phone" name="phone" [(ngModel)]="applicant.phone" (input)="onChange()" placeholder=" " disabled>
         <span>Phone Number</span>
       </label>
 
       <label class="has-float-label">
-          <input type="text" class="form-control prime-input-large" id="phoneExt" name="phoneExt" [(ngModel)]="applicant.phoneExtension" (input)="onChange()" placeholder=" ">
+          <input type="text" class="form-control prime-input-large" id="phoneExt" name="phoneExt" [(ngModel)]="applicant.phoneExtension" (input)="onChange()" placeholder=" " disabled>
           <span>Extension Number</span>
         </label>
 
       <label class="has-float-label">
-        <input type="text" class="form-control prime-input-large" id="email" name="email" [(ngModel)]="applicant.email" (input)="onChange()" placeholder=" ">
+        <input type="text" class="form-control prime-input-large" id="email" name="email" [(ngModel)]="applicant.email" (input)="onChange()" placeholder=" " disabled>
         <span>Email</span>
       </label>
     </div>
