@@ -15,15 +15,20 @@ export class ProfileComponent implements OnInit {
   private phoneMask = ['(', NUMBER, NUMBER, NUMBER, ')', '-', NUMBER, NUMBER, NUMBER, '-', NUMBER, NUMBER, NUMBER, NUMBER];
   public hasChanged: boolean = false;
   public hasEverChanged: boolean = false;
+  /** Did the user use a BC Services Card to register before? If so, some info is read-only. */
+  public usedBCSC = false;
 
   constructor(private primeDataService: PrimeDataService) { }
 
   ngOnInit() {
+    this.usedBCSC = !!this.registrant.pairingCode;
   }
 
   get registrant(): Person {
     return this.primeDataService.user;
   }
+
+
 
   getPhoneMask(): (RegExp | string )[] | false {
     if (!this.registrant.hasInternationalPhoneNumber ){

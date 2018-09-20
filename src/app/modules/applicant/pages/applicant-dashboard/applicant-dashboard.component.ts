@@ -6,6 +6,8 @@ import {Router} from '@angular/router';
 import {WorkingOnBehalfTitleTypes, CollegeHelper} from '../../../../models/colleges.enum';
 import {moment} from 'ngx-bootstrap/chronos/test/chain';
 import { environment } from 'environments/environment';
+import { EnrollmentStatus } from '../../../../models/enrollment-status.enum';
+import { Site } from '../../../../models/sites.model';
 
 
 @Component({
@@ -97,8 +99,9 @@ export class ApplicantDashboardComponent implements OnInit {
 
   // TODO - This function must be completed once we have appropriate data.
   // Believe if sites are set for the user by a Provisoiner then sites will be flagged
+  // Need to check for provisioner via... Statuses. New?
   showPharmaNetAccessWarning(): boolean {
-    return false;
+    return this.sitesRequiringAttention >= 1;
   }
 
   get orgCount(): number {
@@ -106,23 +109,19 @@ export class ApplicantDashboardComponent implements OnInit {
   }
 
   get siteCount(): number {
-    if (!this.applicant.selectedPharmaNetOrgs.length) return 0;
+    return this.getAllSites().filter(site => site.siteAccess[0].status !== null).length;
+  }
+
+  get sitesRequiringAttention(): number {
+    return this.getAllSites().filter(site => site.siteAccess[0].status === EnrollmentStatus.New).length;
+  }
+
+  private getAllSites(): Site[] {
+    if (!this.applicant.selectedPharmaNetOrgs.length) return [];
 
     return this.applicant.selectedPharmaNetOrgs
       .map(orgs => orgs.members) // get all sites
-      .reduce( (a, b) => a.concat(b)).length; // concat into single array get # of sites
+      .reduce( (a, b) => a.concat(b)) // concat into single array get # of sites
   }
-
-  // // Applicant information needs to be updated
-  // onSave( updateList: SiteAccess[] ) {
-
-  //   updateList.map(sa =>  {
-  //     //Go from our copy to the original in dataService
-  //     const orig = this.primeDataService.findUserSiteAccessByObjectId( sa.objectId );
-  //     orig.endDate = sa.endDate;
-  //     orig.declinedReason = sa.declinedReason;
-  //     orig.accessReason = sa.accessReason;
-  //     orig.status = sa.status;
-  //   });
-  // }
+  
 }

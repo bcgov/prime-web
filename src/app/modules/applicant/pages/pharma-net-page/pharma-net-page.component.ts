@@ -16,6 +16,10 @@ export class PharmaNetPageComponent implements OnInit {
   ngOnInit() {
   }
 
+  get orgsOnly(): boolean {
+    return !!this.applicant.pairingCode;
+  }
+
   ngDoCheck (){
     this.hasSelectedOrg = this.applicant.selectedPharmaNetOrgs.length > 0;
   }

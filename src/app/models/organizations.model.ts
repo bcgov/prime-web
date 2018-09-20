@@ -44,7 +44,7 @@ export class PharmaNetOrganization extends Group<Site> {
         const sa = new SiteAccess();
         sa.site = site;
         sa.person = enrollmentSubject;
-        sa.status = EnrollmentStatus.New;
+        sa.status = null; // Null means they haven't been provisioned yet. Filtered in Applicant Dashboard cards.
         sa.startDate = new Date();
         site.siteAccess = [ sa ];
         return site;

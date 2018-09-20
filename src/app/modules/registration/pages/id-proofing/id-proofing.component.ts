@@ -30,8 +30,8 @@ export class IdProofingComponent implements OnInit {
     return prefix + route;
   }
 
-  startVideoChat() {
-
+  get usedBCSC(): boolean {
+    return !!this.registrant.pairingCode;
   }
 
 }

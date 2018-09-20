@@ -5,44 +5,53 @@
   <form>
     <div>
       <label class="has-float-label">
-        <input type="text" class="form-control prime-input-large" id="regLastName" name="regLastName" [(ngModel)]="registrant.lastName" placeholder=" ">
+        <input type="text" class="form-control prime-input-large" id="regLastName" name="regLastName" [(ngModel)]="registrant.lastName" placeholder=" " [disabled]="usedBCSC">
         <span>Last Name</span>
       </label>
 
       <label class="has-float-label">
-        <input type="text" class="form-control prime-input-large" id="regMiddleName" name="regMiddleName" [(ngModel)]="registrant.middleName" placeholder=" ">
+        <input type="text" class="form-control prime-input-large" id="regMiddleName" name="regMiddleName" [(ngModel)]="registrant.middleName" placeholder=" " [disabled]="usedBCSC">
         <span>Middle Name</span>
       </label>
 
       <label class="has-float-label">
-        <input type="text" class="form-control prime-input-large" id="regFirstName" name="regFirstName" [(ngModel)]="registrant.firstName" placeholder=" ">
+        <input type="text" class="form-control prime-input-large" id="regFirstName" name="regFirstName" [(ngModel)]="registrant.firstName" placeholder=" " [disabled]="usedBCSC">
         <span>First Name</span>
       </label>
 
-      <div class="applicant-row--item prime-input-large">
-      <prime-datepicker dateFormat="yyyy/mm/dd" [(date)]="registrant.dateOfBirth" labelText="Date of Birth"></prime-datepicker>
+      <div *ngIf="!usedBCSC; else dobReadOnly" class="applicant-row--item prime-input-large">
+        <prime-datepicker  dateFormat="yyyy/mm/dd" [(date)]="registrant.dateOfBirth" labelText="Date of Birth" ></prime-datepicker>
       </div>
+
+      <ng-template #dobReadOnly>
+        <label class="has-float-label">
+          <input type="text" class="form-control prime-input-large" id="dob" name="dob" disabled [value]="registrant.dateOfBirthShort">        
+          <span>Date of Birth</span>
+        </label>
+      </ng-template>
 
 
       <label class="has-float-label">
-        <input type="text" class="form-control prime-input-large" id="regAddress" name="regAddress" [(ngModel)]="registrant.address.street" placeholder=" ">
+        <input type="text" class="form-control prime-input-large" id="regAddress" name="regAddress" [(ngModel)]="registrant.address.street" placeholder=" " [disabled]="usedBCSC">
         <span>Address</span>
       </label>
 
       <label class="has-float-label">
-        <input type="text" class="form-control prime-input-large" id="regCity" name="regCity" [(ngModel)]="registrant.address.city" placeholder=" ">
+        <input type="text" class="form-control prime-input-large" id="regCity" name="regCity" [(ngModel)]="registrant.address.city" placeholder=" " [disabled]="usedBCSC">
         <span>City</span>
       </label>
 
       <label class="has-float-label">
-        <input type="text" class="form-control prime-input-large" id="regProvince" name="regProvince" [(ngModel)]="registrant.address.province" placeholder=" ">
+        <input type="text" class="form-control prime-input-large" id="regProvince" name="regProvince" [(ngModel)]="registrant.address.province" placeholder=" " [disabled]="usedBCSC">
         <span>Province</span>
       </label>
 
-      <prime-postal-code [(value)]="registrant.address.postal" ></prime-postal-code>
+      <!-- For some reason [disabled] is broken on postal code, this is a quick little workaround. -->
+      <prime-postal-code *ngIf='usedBCSC' [(value)]="registrant.address.postal" disabled></prime-postal-code>
+      <prime-postal-code *ngIf='!usedBCSC' [(value)]="registrant.address.postal"></prime-postal-code>
 
       <label class="has-float-label">
-        <input type="text" class="form-control prime-input-large" id="regCountry" name="regCountry" [(ngModel)]="registrant.address.country" placeholder=" ">
+        <input type="text" class="form-control prime-input-large" id="regCountry" name="regCountry" [(ngModel)]="registrant.address.country" placeholder=" " [disabled]="usedBCSC">
         <span>Country</span>
       </label>
     </div>

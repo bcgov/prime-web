@@ -38,10 +38,11 @@ export class BcscLoginComponent implements OnInit {
     return prefix + route;
   }
 
-  /**
-   * go to dashboard when done.
-   */
   continue() {
-    this.router.navigate( ['/dashboard'] );
+
+    // Simulate a pairingCode has been added, as that's how we consider BCSC to be completed
+    this.onPairingCode('123');
+
+    this.router.navigate( ['/register/profile'] );
   }
 }

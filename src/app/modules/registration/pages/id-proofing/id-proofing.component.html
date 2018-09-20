@@ -1,4 +1,4 @@
-<prime-alert>
+<prime-alert *ngIf="!usedBCSC">
   Account: Please complete the "ID Proofing" video chat to complete your registration.
 </prime-alert>
 
@@ -21,7 +21,7 @@
       </div>
     </div>
   </div>
-  <div class="col">
+  <div class="col" *ngIf="!usedBCSC">
     <div class="card">
       <div class="card-header d-flex justify-content-between">
         Document
@@ -53,7 +53,7 @@
       <div class="card-body d-flex justify-content-between">
         <div class="appcol">
           <p>1 - Step Verification</p>
-          <p>2 - Step Verification</p>
+          <p *ngIf="!usedBCSC">2 - Step Verification</p>
         </div>
         <i class="fa fa-check-circle text-success fa-3x pull-right" aria-hidden="true"></i>
      </div>
@@ -82,11 +82,12 @@
         <li>Start live video chat when you're ready</li>
       </ul>
     </div>
-    <div align="center">
-      <i class="fa fa-exclamation-triangle text-warning fa-3x" aria-hidden="true"></i>
+    <div>
+      <i *ngIf="!usedBCSC" class="fa fa-exclamation-triangle text-warning fa-3x" aria-hidden="true"></i>
+      <i *ngIf="usedBCSC" class="fa fa-check-circle text-success fa-3x" aria-hidden="true"></i>
     </div>
-    <div align="center" >
-      <button type="button" class="btn btn-primary mx-2" (click)="startVideoChat()">{{'Start Live Video Chat'}}</button>
+    <div >
+      <button type="button" class="btn btn-primary mx-2">Start Live Video Chat</button>
     </div>
   </div>
 

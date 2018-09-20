@@ -1,24 +1,26 @@
 <prime-page-framework>
 
-  <h2 class='prime-title' id="secPrimeAccount">Prime Account</h2>
-  <form>
-    <div>
-      <label class="has-float-label">
-        <input type="text" class="form-control prime-input-large" id="secUserID" name="secUserID" [(ngModel)]="registrant.primeUserId" placeholder=" ">
-        <span>User ID</span>
-      </label>
+  <ng-container *ngIf="!usedBCSC">
+    <h2 class='prime-title' id="secPrimeAccount">Prime Account</h2>
+    <form>
+      <div>
+        <label class="has-float-label">
+          <input type="text" class="form-control prime-input-large" id="secUserID" name="secUserID" [(ngModel)]="registrant.primeUserId" placeholder=" ">
+          <span>User ID</span>
+        </label>
 
-      <label class="has-float-label">
-        <input type="password" class="form-control prime-input-large" id="secPwd" name="secPwd" placeholder=" ">
-        <span>New Password</span>
-      </label>
+        <label class="has-float-label">
+          <input type="password" class="form-control prime-input-large" id="secPwd" name="secPwd" placeholder=" ">
+          <span>New Password</span>
+        </label>
 
-      <label class="has-float-label">
-        <input type="password" class="form-control prime-input-large" id="secPwdConfirm" name="secPwdConfirm" placeholder=" ">
-        <span>Confirm Password</span>
-      </label>
-    </div>
-  </form>
+        <label class="has-float-label">
+          <input type="password" class="form-control prime-input-large" id="secPwdConfirm" name="secPwdConfirm" placeholder=" ">
+          <span>Confirm Password</span>
+        </label>
+      </div>
+    </form>
+  </ng-container>
   <h2 class='prime-title' id="secStep1">1 - Step Verification</h2>
     <form>
       <div class="prime-input-large">
@@ -72,36 +74,38 @@
         <span>Security Question 3 Answer</span>
       </label>
     </form>
-    <h2 class='prime-title' id="secStep2">2 - Step Verification</h2>
-    <span>Secondary Security (please select at least one)</span>
-    <form>
-      <div>
-        <input type="checkbox" id="secSms" name="secSms" [(ngModel)]="registrant.mfaOptionSMS"/>
-        <label for="secSms">SMS/Text</label>
-        <label class="has-float-label">
-          <input type="text" [textMask]="{mask: getPhoneMask()}" class="form-control prime-input-large" id="secPhone" name="secPhone" [(ngModel)]="registrant.mfaOptionSMSPhone" placeholder=" ">
-          <span>Phone</span>
-        </label>
-      </div>
+    <ng-container *ngIf="!usedBCSC">
+      <h2 class='prime-title' id="secStep2">2 - Step Verification</h2>
+      <span>Secondary Security (please select at least one)</span>
+      <form>
+        <div>
+          <input type="checkbox" id="secSms" name="secSms" [(ngModel)]="registrant.mfaOptionSMS"/>
+          <label for="secSms">SMS/Text</label>
+          <label class="has-float-label">
+            <input type="text" [textMask]="{mask: getPhoneMask()}" class="form-control prime-input-large" id="secPhone" name="secPhone" [(ngModel)]="registrant.mfaOptionSMSPhone" placeholder=" ">
+            <span>Phone</span>
+          </label>
+        </div>
 
-      <hr>
-      <div>
-        <input type="checkbox" id="secFob" name="secFob" [(ngModel)]="registrant.mfaOptionKey"/>
-        <label for="secFob">Physical Security Key</label>
-        <label class="has-float-label">
-          <input type="text" class="form-control prime-input-large" id="secFobInstr" name="secFobInstr" placeholder=" " disabled>
-          <span>Instructions to follow</span>
-        </label>
-      </div>
+        <hr>
+        <div>
+          <input type="checkbox" id="secFob" name="secFob" [(ngModel)]="registrant.mfaOptionKey"/>
+          <label for="secFob">Physical Security Key</label>
+          <label class="has-float-label">
+            <input type="text" class="form-control prime-input-large" id="secFobInstr" name="secFobInstr" placeholder=" " disabled>
+            <span>Instructions to follow</span>
+          </label>
+        </div>
 
-      <hr>
-      <div>
-        <input type="checkbox" id="secApp" name="secApp" [(ngModel)]="registrant.mfaOptionApp"/>
-        <label for="secApp">Mobile App Authentication</label>
-      </div>
-      <img class="img-thumbnail" src="assets/mobile_app_icon_android.png" alt="Generic placeholder image">
-      <img class="img-thumbnail" src="assets/mobile_app_icon_apple.png" alt="Generic placeholder image">
-      <img class="img-thumbnail" src="assets/mobile_app_icon_windows.png" alt="Generic placeholder image">
-    </form>
+        <hr>
+        <div>
+          <input type="checkbox" id="secApp" name="secApp" [(ngModel)]="registrant.mfaOptionApp"/>
+          <label for="secApp">Mobile App Authentication</label>
+        </div>
+        <img class="img-thumbnail" src="assets/mobile_app_icon_android.png" alt="Generic placeholder image">
+        <img class="img-thumbnail" src="assets/mobile_app_icon_apple.png" alt="Generic placeholder image">
+        <img class="img-thumbnail" src="assets/mobile_app_icon_windows.png" alt="Generic placeholder image">
+      </form>
+      </ng-container> 
 
 </prime-page-framework>

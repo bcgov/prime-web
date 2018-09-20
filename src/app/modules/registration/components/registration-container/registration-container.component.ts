@@ -29,6 +29,13 @@ export class RegistrationContainerComponent implements OnInit {
         route: x.path,
       };
     });
+
+    // Disable the document upload page if user has used BCSC
+    if (this.registrant.pairingCode){
+      this.progressSteps = this.progressSteps.filter(step => {
+        return step.route !== 'document-upload';
+      })
+    }
   }
 
   get registrant(): Person {
@@ -78,6 +85,10 @@ export class RegistrationContainerComponent implements OnInit {
     //Document Security Page
     if (this.router.url === '/register/security') {
 
+      if (this.registrant.pairingCode && this.registrant.securityAnswer1 && this.registrant.securityAnswer2 && this.registrant.securityAnswer3){
+        return true;
+      }
+
       //User must select at least one mfa option
       if (this.registrant.primeUserId && this.registrant.securityAnswer1 && this.registrant.securityAnswer2 &&
           this.registrant.securityAnswer3 &&
@@ -100,11 +111,10 @@ export class RegistrationContainerComponent implements OnInit {
    * Navigates through the pages
    */
   continue() {
-    let url;
-
     // Find current index of URL
     let idx = this.progressSteps.findIndex( x => {
-      return this.router.url.endsWith( x.route ); } );
+      return this.router.url.endsWith( x.route );
+    });
 
     // Case were route is blank
     if ( -1 === idx ) {
@@ -142,6 +152,12 @@ export class RegistrationContainerComponent implements OnInit {
   }
 
   submit() {
-    this.router.navigate(['/register/registration-complete']);
+    let url = '/register/registration-complete';
+
+    if (this.registrant.pairingCode.length){
+      url = 'register/id-proofing';
+    }
+
+    this.router.navigate([url]);
   }
 }

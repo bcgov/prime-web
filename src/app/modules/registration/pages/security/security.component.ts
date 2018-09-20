@@ -24,6 +24,11 @@ export class SecurityComponent implements OnInit {
   get registrant(): Person {
     return this.primeDataService.user;
   }
+
+  get usedBCSC(): boolean {
+    return !!this.registrant.pairingCode;
+  }
+
   getPhoneMask(): (RegExp | string )[] | false {
     if (!this.registrant.hasInternationalPhoneNumber) {
       // return  { mask: this.phoneMask };
