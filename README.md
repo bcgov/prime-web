@@ -7,9 +7,8 @@ Prime-web used [angular-scaffold](https://github.com/bcgov/angular-scaffold) as 
 
 ### Prerequisites
 
-1. yarn `npm i -g yarn`
-2. angular-cli `npm i -g @angular/cli`
-3. Node 6.9.x or greater
+1. angular-cli `npm i -g @angular/cli`
+2. Node 8.9.x or greater
 
 Verify angular-cli is installed by running `ng -v`. Since `ng -v` is dependent upon the folder it's executed in (i.e. it looks in `node_modules/`), it's fine if some of the fields show "error." 
 
@@ -18,11 +17,9 @@ Verify angular-cli is installed by running `ng -v`. Since `ng -v` is dependent u
 ```bash
 git clone https://github.com/bcgov/prime-web
 cd prime-web
-yarn
-npm start # Runs a local dev server
+npm install
+npm run dev # Runs a local dev server
 ```
-
-There currently is a bug in the latest version of Yarn (1.0.1) which will lead to multiple "unmet peer dependency" warnings when installing. These errors can safely be ignored, or you can force downgrade to 0.27.5 ([Issue 1](https://github.com/angular/angular-cli/issues/7658), [Issue 2](https://github.com/yarnpkg/yarn/issues/4433))
 
 After install, it's recommended you run tests below to ensure everything is working.
 
