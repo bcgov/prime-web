@@ -20,6 +20,13 @@ export class BcscLoginComponent implements OnInit {
     return this.primeDataService.user;
   }
 
+  onPairingCode(code){
+    // If user sets pairing code, we pull up dummy data from a generated user
+    // This is us simulating getting data from a backend
+    this.primeDataService.user = this.primeDataService.people[0];
+    this.primeDataService.user.pairingCode = code;
+  }
+
   /**
    * Returns the URL with appropriate prefix
    * @param {string} route

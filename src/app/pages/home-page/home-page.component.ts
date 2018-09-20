@@ -17,12 +17,12 @@ export class HomePageComponent implements OnInit {
   registrationCompleted(): boolean {
 
     // User has filled out name/email/phone from registration
-    return this.dataService.user.hasRegistrationInfo;
+    return this.dataService.user.hasRegistrationInfo || !!this.dataService.user.pairingCode;
   }
 
   applicationNewCompleted(): boolean {
-    // User has filled out the Professional screen from applicant
-    return this.dataService.user.hasCollege || this.dataService.user.isWorkingOnBehalf;
+    // User has filled out the PharmaNet screen from applicant
+    return this.dataService.user.selectedPharmaNetOrgs.length >= 1;
   }
 
 }

@@ -7,7 +7,7 @@
   <form>
     <div>
       <label class="has-float-label">
-        <input type="text" class="form-control prime-input-large" id="regLastName" name="regPairingCode" [(ngModel)]="registrant.pairingCode" placeholder=" ">
+        <input type="text" class="form-control prime-input-large" id="regLastName" name="regPairingCode" [ngModel]="registrant.pairingCode" (ngModelChange)='onPairingCode($event)' placeholder=" ">
         <span>Pairing Code</span>
       </label>
     </div>
