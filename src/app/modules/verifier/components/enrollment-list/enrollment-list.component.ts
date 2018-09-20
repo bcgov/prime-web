@@ -2,6 +2,7 @@ import {Component, Input, OnChanges, OnDestroy, OnInit, QueryList, ViewChildren}
 import { VerifierService } from '../../../../services/verifier.service';
 import { EnrollmentRowComponent } from '../enrollment-row/enrollment-row.component';
 import {defaultViewSelector, EnrollmentList} from '../../../../core/enrollment-list/enrollment-list.class';
+import { EnrollmentStatus } from '../../../../models/enrollment-status.enum';
 
 @Component({
   selector: 'prime-enrollment-list',
@@ -19,6 +20,7 @@ export class EnrollmentListComponent extends EnrollmentList implements OnInit, O
   //Convert enum to iterable array
   get EnrollmentStatus() {
     return Object.keys(this.verifierService.VerifierEnrollmentStatus);
+    // return [ EnrollmentStatus.Active]
   }
 
   constructor(private verifierService: VerifierService) {

@@ -8,6 +8,7 @@ import {EnrollmentRowItem} from '../modules/verifier/components/enrollment-row/e
 import {ApplEnrollmentRowItem} from '../modules/applicant/components/appl-enrollment-row/appl-enrollment-row.component';
 import {CollegeTypes} from "../models/colleges.enum";
 import { ProvisionerRowItem } from '../modules/provisioner/components/provisioner-row/provisioner-row.component';
+import { OrganizationAccess } from '../models/organization-access.model';
 
 
 @Injectable()
@@ -22,6 +23,8 @@ export class PrimeDataService {
   /** List of all people the front-end app has access to currently */
   people: Person[] = [];
   siteAccesses: SiteAccess[] = [];
+
+  organizationAccess: OrganizationAccess[] = [];
 
   /** The logged in user interacting with the webapp. When in the Applicant dashboard, this would be the applicant. */
   user: Person = new Person();

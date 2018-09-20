@@ -86,7 +86,7 @@
 
       <section class="bg-light">
 
-          <div class="row p-md-1" *ngFor='let org of applicant.selectedPharmaNetOrgs; let i = index'>
+          <div class="row p-md-1" *ngFor='let org of applicant.allOrganizations(); let i = index'>
             <div class="col-md-6">PharmaNet Organization {{ i + 1 }}</div>
             <div class="col-md-6 font-weight-bold">{{org.title}}</div>
           </div>

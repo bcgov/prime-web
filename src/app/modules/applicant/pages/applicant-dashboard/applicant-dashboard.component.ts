@@ -105,7 +105,7 @@ export class ApplicantDashboardComponent implements OnInit {
   }
 
   get orgCount(): number {
-    return this.applicant.selectedPharmaNetOrgs.length;
+    return this.applicant.allOrganizations().length;
   }
 
   get siteCount(): number {
@@ -117,9 +117,9 @@ export class ApplicantDashboardComponent implements OnInit {
   }
 
   private getAllSites(): Site[] {
-    if (!this.applicant.selectedPharmaNetOrgs.length) return [];
+    if (!this.applicant.allOrganizations().length) return [];
 
-    return this.applicant.selectedPharmaNetOrgs
+    return this.applicant.allOrganizations()
       .map(orgs => orgs.members) // get all sites
       .reduce( (a, b) => a.concat(b)) // concat into single array get # of sites
   }

@@ -6,6 +6,4 @@
 >
 </prime-applicant-breadcrumbs>
 
-<prime-page-framework>
-  <prime-pharma-net-access-list [orgsOnly]='orgsOnly' [rowItems]="applicant.selectedPharmaNetOrgs"></prime-pharma-net-access-list>
-</prime-page-framework>
+<prime-pharma-net-access-list  [rowItems]="applicant.allOrganizations()"></prime-pharma-net-access-list>

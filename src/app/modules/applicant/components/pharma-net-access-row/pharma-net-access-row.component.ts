@@ -5,6 +5,7 @@ import { SiteAccess } from '../../../../models/sites.model';
 import { EnrollmentStatus } from '../../../../models/enrollment-status.enum';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { PharmaNetOrganization } from '../../../../models/organizations.model';
+import { OrganizationAccess } from '../../../../models/organization-access.model';
 
 
 @Component({
@@ -17,14 +18,11 @@ export class PharmaNetAccessRowComponent extends EnrollmentRow implements OnInit
 
   @Input() rowData: PharmaNetOrganization;
 
-  /** If true, hide all sites and only display orgs. */
-  @Input() orgsOnly: boolean;
-
-  /** A copy of rowData */
-  private _data;
+  /** If true, hide all sites and only display orgs. For the prototype, this
+   * simulates that the Org has not yet had sites provisioned for the user. */
+  public orgsOnly: boolean = true;
 
   public subRowData: SiteAccess[];
-
 
   public orgStartDate: Date = new Date();
   public orgEndDate: Date;
@@ -34,11 +32,30 @@ export class PharmaNetAccessRowComponent extends EnrollmentRow implements OnInit
   }
 
   ngOnInit() {
-    // TODO - calling this overwrites SiteAccess status - need to only write if not already setup?
+    // ! Ideally we shouldn't be configuring our data here, but it's fine for prototype.
     this.subRowData = this.rowData.setupNewEnrollments(this.dataService.user);
-    // have to handle case where user has just wiped their orgs.
-    this.subRowData = this.rowData.allSiteAccess;
-    // console.log('pharmaNetRow data', {rowData: this.rowData, subRowData: this.subRowData});
+
+    // We only need to update on init
+    this.orgsOnly = this.calculateOrgOnly();
+  }
+
+  /** Determines if we should restrict the row to orgOnly - i.e. before the Provisoiner has selected sites */
+  calculateOrgOnly(): boolean {
+    return this.rowData.members.filter(site => {
+      return site.siteAccess.length && site.siteAccess[0].status !== null;
+    }).length === 0;
+  }
+
+  /**
+   * The OrgAccess for the Org for this row.
+   */
+  getOrgAccess(): OrganizationAccess{
+
+    const result = this.rowData.organizationAccess.find(oa => oa.person === this.dataService.user);
+    if (!result){
+      throw new Error('Unable to find OrganizationAccess for organization with objID - ' + this.rowData.objectId)
+    }
+    return result;
   }
 
   isOpen(): boolean {
@@ -85,12 +102,12 @@ export class PharmaNetAccessRowComponent extends EnrollmentRow implements OnInit
 
   // Remove the org, which removes the entire row and destroys the component
   removeOrg(){
-    this.dataService.user.selectedPharmaNetOrgs = this.dataService.user.selectedPharmaNetOrgs
-      .filter(x => x !== this.rowData);
+    // ! TODO Bug - This does not (but should) delete/change the status of the SiteAccess too, currently they're orphaned.
+    this.dataService.user.organizationAccess = this.dataService.organizationAccess.filter(oa => {
+      return oa.organization !== this.rowData;
+    });
   }
 
-  // BELOW LINES ONLY NECESSARY WHEN USER IS RETURNING AFTER FIRST VISIT
-  // may split into separate component?
 
   // public accessType = ['Personal Access', 'Test', 'Todo']; // replace with PharmaNetOrgType
 
@@ -103,12 +120,21 @@ export class PharmaNetAccessRowComponent extends EnrollmentRow implements OnInit
   }
 
   onAcceptOrg(org: PharmaNetOrganization){
-    // org.me
-    console.log('Accept org');
+    this.subRowData = this.subRowData.map(siteAccess => {
+      if (siteAccess.status === EnrollmentStatus.New){
+        this.onAcceptSite(siteAccess);
+      }
+      return siteAccess;
+    });
   }
 
-  onRejectOrg(org: PharmaNetOrganization){
-    console.log('Reject org');
+  onRejectOrg(org: PharmaNetOrganization) {
+    this.subRowData = this.subRowData.map(siteAccess => {
+      if (siteAccess.status === EnrollmentStatus.New) {
+        this.onRejectSite(siteAccess);
+      }
+      return siteAccess;
+    });
   }
 
 

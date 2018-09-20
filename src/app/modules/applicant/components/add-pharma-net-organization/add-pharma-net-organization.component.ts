@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { PharmaNetOrganization, PharmaNetOrgTypes } from '../../../../models/organizations.model';
 import { PrimeDataService } from '../../../../services/prime-data.service';
+import { OrganizationAccess } from '../../../../models/organization-access.model';
 
 interface PharmaNetSearchResult extends PharmaNetOrganization {
   isSelected: boolean;
@@ -48,7 +49,7 @@ export class AddPharmaNetOrganizationComponent implements OnInit {
     })
     .filter(org => {
         // filter out any orgs that have already been added
-        return !this.dataService.user.selectedPharmaNetOrgs.includes(org);
+        return !this.dataService.user.allOrganizations().includes(org);
     })
     .filter(org => {
       if (this.searchQuery.orgCity){
@@ -93,7 +94,16 @@ export class AddPharmaNetOrganizationComponent implements OnInit {
 
   addOrg(){
     const selected = this.searchResults.filter(x => x.isSelected);
-    this.dataService.user.selectedPharmaNetOrgs = this.dataService.user.selectedPharmaNetOrgs.concat(selected);
+
+    // Create OrgAccess for each
+
+    selected.map(org => {
+      const oa = new OrganizationAccess(this.dataService.user, org);
+      this.dataService.organizationAccess.push(oa);
+      this.dataService.user.organizationAccess.push(oa);
+      org.organizationAccess.push(oa);
+    });
+
     this.closeModal();
   }
 

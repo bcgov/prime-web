@@ -14,8 +14,6 @@ import { AddPharmaNetOrganizationComponent } from '../add-pharma-net-organizatio
 })
 export class PharmaNetAccessListComponent extends EnrollmentList implements OnInit {
 
-  /** If true, hide all sites, and only show organizations. This config is used for registrants. */
-  @Input() orgsOnly: boolean;
 
   constructor() {
     super();

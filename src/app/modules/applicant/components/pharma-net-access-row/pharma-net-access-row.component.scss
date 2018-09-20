@@ -29,6 +29,7 @@ select {
 
 .dates-col {
   padding: 0 1em;
+  white-space: nowrap;
   &, > span {  height: 100%; }
 
 

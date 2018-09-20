@@ -12,32 +12,17 @@ export class PharmaNetPageComponent implements OnInit {
 
   constructor(private dataService: PrimeDataService) { }
 
-  hasSelectedOrg = false;
-  public orgsOnly: boolean = true;
+  public hasSelectedOrg = false;
 
   ngOnInit() {
-    console.log('orgsOnly?', this.orgsOnly, 'pairingCode', this.applicant.pairingCode);
-    this.orgsOnly = this.calcOrgsOnly();
-  }
-
-
-  // Quick and dirty prototype function. It checks if any of the Orgs>Sites>SiteAccess have status !== null
-  // If they're null, then we want to hide the org.
-  calcOrgsOnly(): boolean {
-    return this.applicant.selectedPharmaNetOrgs.filter(org => {
-      return org.members.filter(site => {
-        return site.siteAccess.length && site.siteAccess[0].status !== null;
-      }).length >= 1;
-    }).length === 0;
   }
 
   ngDoCheck (){
-    this.hasSelectedOrg = this.applicant.selectedPharmaNetOrgs.length > 0;
+    this.hasSelectedOrg = this.applicant.organizationAccess.length > 0;
   }
 
   get applicant(): Person {
     return this.dataService.user;
   }
-  
 
 }

@@ -13,6 +13,7 @@ import { CollegeTypes,
   ISelfDeclaration } from './colleges.enum';
 import {MspImage} from './msp-image';
 import { PharmaNetOrganization } from './organizations.model';
+import { OrganizationAccess } from './organization-access.model';
 
 /* class for a person's name */
 class Name {
@@ -319,7 +320,11 @@ export class Person extends Base {
   accessAcceptance = [false, false, false];
 
   /** The orgs the user has selected */
-  selectedPharmaNetOrgs: PharmaNetOrganization[] = [];
+  organizationAccess: OrganizationAccess[] = [];
+  allOrganizations(): PharmaNetOrganization[] {
+    return this.organizationAccess.map(oa => oa.organization);
+  }
+
 
   /** Has the user NOT accepted all UAAs or are there UAAs requiring their attention? Generally this manifests as some sort of warning icon displayed to the Applicant. */
   hasUAARequiringAttention(): boolean {

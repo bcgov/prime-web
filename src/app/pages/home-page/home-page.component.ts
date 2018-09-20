@@ -19,13 +19,20 @@ export class HomePageComponent implements OnInit {
 
     // The idea here is time has passed, the Provisioner has made changes requiring the Applicant to deal with them
     // Set all sites in the orgs as New
-    this.dataService.user.selectedPharmaNetOrgs = this.dataService.user.selectedPharmaNetOrgs.map(org => {
+    // this.dataService.user.selectedPharmaNetOrgs = this.dataService.user.selectedPharmaNetOrgs.map(org => {
+    //   org.members = org.members.map(site => {
+    //     site.siteAccess[0].status = EnrollmentStatus.New;
+    //     return site;
+    //   });
+    //   return org;
+    // });
+
+    this.dataService.user.allOrganizations().map(org => {
       org.members = org.members.map(site => {
         site.siteAccess[0].status = EnrollmentStatus.New;
         return site;
-      });
-      return org;
-    });
+      })
+    })
 
 
     this.router.navigate([ '/applicant/dashboard' ]);
@@ -40,7 +47,7 @@ export class HomePageComponent implements OnInit {
 
   applicationNewCompleted(): boolean {
     // User has filled out the PharmaNet screen from applicant
-    return this.dataService.user.selectedPharmaNetOrgs.length >= 1;
+    return this.dataService.user.organizationAccess.length >= 1;
   }
 
 }
