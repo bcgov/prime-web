@@ -76,7 +76,7 @@
   <form>
     <div>
       <label class="has-float-label">
-        <input type="text" class="form-control prime-input-large" id="phone" name="phone" [(ngModel)]="registrant.phone" placeholder=" ">
+        <input type="text" class="form-control prime-input-large" id="phone" name="phone" [(ngModel)]="registrant.phone" placeholder=" " [textMask]='{mask: getPhoneMask()}'>
         <span>Phone</span>
       </label>
 

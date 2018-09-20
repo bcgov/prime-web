@@ -3,7 +3,7 @@
 </prime-alert>
 
 <section class='dashboard-cards row'>
-  <div class="col">
+  <div class="col-sm-6">
     <div class="card">
       <div class="card-header d-flex justify-content-between">
         Contact Information
@@ -26,7 +26,7 @@
       </div>
     </div>
   </div>
-  <div class="col">
+  <div class="col-sm-6">
     <div class="card">
       <div class="card-header d-flex justify-content-between">
         Professional Information
@@ -51,7 +51,7 @@
       </div>
     </div>
   </div>
-  <div class="col">
+  <div class="col-sm-6 mt-4">
     <div class="card">
       <div class="card-header d-flex justify-content-between">
         User Access Agreement
@@ -66,6 +66,27 @@
       </div>
     </div>
   </div>
+
+  <div class="col-sm-6 mt-4">
+    <div class="card {{ showPharmaNetAccessWarning() ? 'card-warning' : '' }}">
+      <div class="card-header d-flex justify-content-between">
+        PharmaNet Access
+        <a routerLink="/applicant/pharma-net">
+          <i class="fa fa-edit fa-2x text-muted"></i>
+        </a>
+      </div>
+      <div class="card-body d-flex justify-content-between align-items-center" *ngIf='!showPharmaNetAccessWarning(); else pharmaNetAccessWarning'>
+        <div class="pharma-net-container">
+          <span class="pharma-net-fact"><span class="circle-num">{{ orgCount }}</span> Organization</span>
+          <span class="pharma-net-fact"><span class="circle-num">{{ siteCount }}</span> Sites</span>
+        </div>
+
+        <i class="fa fa-check-circle text-success fa-3x pull-right" aria-hidden="true"></i>
+      </div>
+    </div>
+  </div>
+
+
 </section>
 
 <ng-template #emptySection>
@@ -74,11 +95,15 @@
   </div>
 </ng-template>
 
-<hr class="invisible">
 
-<!--ApplicantEnrollmentList
-<prime-enrollment-list
-  [rowItems]="userSiteEnrollmentData"
-  (onSave)="onSave($event)">
-</prime-enrollment-list>
--->
+<ng-template #pharmaNetAccessWarning>
+  <div class="card-body d-flex justify-content-between align-items-center" >
+    <div class="pharma-net-container">
+        <span class="pharma-net-fact"><span class="circle-num circle-num-warning">{{ siteCount }}</span> <span class='text-bold'> NEW</span> Sites need your attention</span>
+      </div>
+
+      <i class="fa fa-exclamation-circle text-warning fa-3x pull-right" aria-hidden="true"></i>
+      <!-- <i class="fa fa-check-circle text-success fa-3x pull-right" aria-hidden="true"></i> -->
+
+  </div>
+</ng-template>

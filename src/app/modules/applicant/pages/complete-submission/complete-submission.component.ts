@@ -15,7 +15,8 @@ export class CompleteSubmissionComponent implements OnInit {
 
   ngOnInit() {
   }
-  goToDashboard() {
-    this.router.navigate(['applicant/dashboard']);
+  continue() {
+    // Navigate to homepage. User can go to dashboard via Applicant Changes
+    this.router.navigate(['/']);
   }
 }

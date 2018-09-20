@@ -1,21 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { Person } from '../../../../models/person.model';
 import {ApplEnrollmentRowItem} from '../../components/appl-enrollment-row/appl-enrollment-row.component';
 import {Router} from '@angular/router';
-import {cloneDeep} from 'lodash';
-import {CollegeTypes, WorkingOnBehalfTitleTypes, CollegeHelper} from '../../../../models/colleges.enum';
-import {isNullOrUndefined} from 'util';
+import {WorkingOnBehalfTitleTypes, CollegeHelper} from '../../../../models/colleges.enum';
 import {moment} from 'ngx-bootstrap/chronos/test/chain';
-import {forEach} from '@angular/router/src/utils/collection';
-import {Site, SiteAccess} from '../../../../models/sites.model';
 import { environment } from 'environments/environment';
 
 
 @Component({
   selector: 'prime-applicant-dashboard',
   templateUrl: './applicant-dashboard.component.html',
-  styleUrls: ['./applicant-dashboard.component.scss']
+  styleUrls: ['./applicant-dashboard.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ApplicantDashboardComponent implements OnInit {
 
@@ -98,16 +95,34 @@ export class ApplicantDashboardComponent implements OnInit {
     return this.applicant.renewalDate ? 'n/a' : moment( this.applicant.renewalDate ).format( this._dateFormat );
   }
 
-  // Applicant information needs to be updated
-  onSave( updateList: SiteAccess[] ) {
-
-    updateList.map(sa =>  {
-      //Go from our copy to the original in dataService
-      const orig = this.primeDataService.findUserSiteAccessByObjectId( sa.objectId );
-      orig.endDate = sa.endDate;
-      orig.declinedReason = sa.declinedReason;
-      orig.accessReason = sa.accessReason;
-      orig.status = sa.status;
-    });
+  // TODO - This function must be completed once we have appropriate data.
+  // Believe if sites are set for the user by a Provisoiner then sites will be flagged
+  showPharmaNetAccessWarning(): boolean {
+    return false;
   }
+
+  get orgCount(): number {
+    return this.applicant.selectedPharmaNetOrgs.length;
+  }
+
+  get siteCount(): number {
+    if (!this.applicant.selectedPharmaNetOrgs.length) return 0;
+
+    return this.applicant.selectedPharmaNetOrgs
+      .map(orgs => orgs.members) // get all sites
+      .reduce( (a, b) => a.concat(b)).length; // concat into single array get # of sites
+  }
+
+  // // Applicant information needs to be updated
+  // onSave( updateList: SiteAccess[] ) {
+
+  //   updateList.map(sa =>  {
+  //     //Go from our copy to the original in dataService
+  //     const orig = this.primeDataService.findUserSiteAccessByObjectId( sa.objectId );
+  //     orig.endDate = sa.endDate;
+  //     orig.declinedReason = sa.declinedReason;
+  //     orig.accessReason = sa.accessReason;
+  //     orig.status = sa.status;
+  //   });
+  // }
 }
