@@ -5,6 +5,7 @@ import {IdProofingComponent} from './pages/id-proofing/id-proofing.component';
 import {RegCompleteComponent} from './pages/complete/reg-complete.component';
 import {RegistrationContainerComponent} from './components/registration-container/registration-container.component';
 import {pageRoutes} from './registration-page-routing.module';
+import {BcscLoginComponent} from './pages/bcsc-login/bcsc-login.component';
 
 export const routes: Routes = [
   {
@@ -18,6 +19,10 @@ export const routes: Routes = [
   {
     path: 'registration-complete',
     component: RegCompleteComponent
+  },
+  {
+    path: 'bcsc-login',
+    component: BcscLoginComponent
   },
   {
     path: '',

@@ -30,6 +30,10 @@ export class NewAccountComponent implements OnInit {
     this.router.navigate( [this.getUrlPrefix( this.router.url ) + '/' + 'id-proofing'] );
   }
 
+  bcscLogin() {
+    // Navigate to the bcsc registration
+    this.router.navigate( [this.getUrlPrefix( this.router.url ) + '/' + 'bcsc-login'] );
+  }
   /**
    *
    * @param {string} url

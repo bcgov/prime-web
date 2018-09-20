@@ -133,7 +133,6 @@ export class Person extends Base {
   primeUserId: PrimeUserID; //human-readable, like a user-name - "JSmith"
   PoSId: string;
   dateFormat: string = 'YYYY/MM/DD';
-
   private _legalName: Name = new Name();
   private _preferName: Name = new Name();
   private _hasPreferName = false;
@@ -268,6 +267,7 @@ export class Person extends Base {
   hasInternationalPhoneNumber: boolean = false;
   email: string;
   renewalDate: Date;
+  pairingCode: string;
 
   //For registration document upload
   hasDriversLicense: boolean = false;
@@ -304,7 +304,7 @@ export class Person extends Base {
 
   /** The orgs the user has selected */
   selectedPharmaNetOrgs: PharmaNetOrganization[] = [];
-  
+
   /** Has the user NOT accepted all UAAs or are there UAAs requiring their attention? Generally this manifests as some sort of warning icon displayed to the Applicant. */
   hasUAARequiringAttention(): boolean {
     return this.accessAcceptance.filter(x => x === false).length >= 1;
