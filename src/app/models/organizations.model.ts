@@ -22,6 +22,8 @@ export class PharmaNetOrganization extends Group<Site> {
   public startDate: Date;
   public endDate: Date;
 
+  private _hasBeenSetup: boolean = false;
+
   get allUsers(): Person[] {
     return [].concat(...this.members.map(site => site.users))
       .filter((person, index, arr) => {
@@ -40,15 +42,21 @@ export class PharmaNetOrganization extends Group<Site> {
 
    /** Sets new blank SiteAccess for each site, ready for user to modify */
    setupNewEnrollments(enrollmentSubject: Person): SiteAccess[] {
-    this.members = this.members.map(site => {
-        const sa = new SiteAccess();
-        sa.site = site;
-        sa.person = enrollmentSubject;
-        sa.status = null; // Null means they haven't been provisioned yet. Filtered in Applicant Dashboard cards.
-        sa.startDate = new Date();
-        site.siteAccess = [ sa ];
-        return site;
-    });
+    
+    // Prototype workaround, can only be called once, stops it from overwriting future data
+    if (!this._hasBeenSetup){
+      this.members = this.members.map(site => {
+          const sa = new SiteAccess();
+          sa.site = site;
+          sa.person = enrollmentSubject;
+          sa.status = null; // Null means they haven't been provisioned yet. Filtered in Applicant Dashboard cards.
+          sa.startDate = new Date();
+          site.siteAccess = [ sa ]; // strips away any SA's that might apply to other users
+          return site;
+      });
+      this._hasBeenSetup = true;
+    }
+    else { console.log('Already setup PharmaNetOrg - bypassing.')}
 
     return this.allSiteAccess;
   }

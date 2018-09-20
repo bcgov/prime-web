@@ -41,18 +41,18 @@
       </span>
     </div>
 
-    <button type="button" class="close pull-right" aria-label="Close" (click)="removeOrg()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-
-    <!-- TODO - Temp removed, will be in "return visit" (possibly in separate component) -->
-    <!-- <prime-accept-reject-icons *ngIf="shouldShowOrgActionButtons()"
+    <prime-accept-reject-icons *ngIf="!orgsOnly && shouldShowOrgActionButtons()"
                                [@growHorizontal]
                                (onAccepted)="onAcceptOrg()"
                                (onRejected)="onRejectOrg()"
                                labelAccept="Accept Enrollment"
                                labelReject="Decline Enrollment">
-    </prime-accept-reject-icons> -->
+    </prime-accept-reject-icons>
+
+
+    <button type="button" class="close pull-right" aria-label="Close" (click)="removeOrg()">
+        <span aria-hidden="true">&times;</span>
+      </button>
   </div>
 </div>
 
@@ -111,13 +111,13 @@
           <prime-pill-badge class='ml-2 align-self-center' [alerts]="[siteAccess.alert]">
           </prime-pill-badge>
 
-          <!-- TODO - Temp removed, will be in "return visit" (possibly in separate component) -->
-          <!-- <prime-accept-reject-icons *ngIf="isActionableRow(siteAccess); else editExisting"
+          <prime-accept-reject-icons *ngIf="isActionableRow(siteAccess); else editExisting"
                                     (onAccepted)="onAcceptSite(siteAccess)"
                                     (onRejected)="onRejectSite(siteAccess)"
                                     labelAccept="Accept Enrollment"
-                                    labelReject="Decline Enrollment">
-          </prime-accept-reject-icons> -->
+                                    labelReject="Decline Enrollment"
+                                    class='site-accept-reject'>
+          </prime-accept-reject-icons>
 
           <ng-template #editExisting>
             <i class="fa fa-pencil text-muted edit-icon"></i>

@@ -34,7 +34,10 @@ export class PharmaNetAccessRowComponent extends EnrollmentRow implements OnInit
   }
 
   ngOnInit() {
+    // TODO - calling this overwrites SiteAccess status - need to only write if not already setup?
     this.subRowData = this.rowData.setupNewEnrollments(this.dataService.user);
+    // have to handle case where user has just wiped their orgs.
+    this.subRowData = this.rowData.allSiteAccess;
     // console.log('pharmaNetRow data', {rowData: this.rowData, subRowData: this.subRowData});
   }
 
@@ -91,19 +94,22 @@ export class PharmaNetAccessRowComponent extends EnrollmentRow implements OnInit
 
   // public accessType = ['Personal Access', 'Test', 'Todo']; // replace with PharmaNetOrgType
 
-  // onAcceptSite(sa: SiteAccess){
-  //   sa.status = EnrollmentStatus.Active;
-  // }
+  onAcceptSite(sa: SiteAccess){
+    sa.status = EnrollmentStatus.Active;
+  }
 
-  // onRejectSite(sa: SiteAccess){
-  //   sa.status = EnrollmentStatus.Declined;
-  // }
+  onRejectSite(sa: SiteAccess){
+    sa.status = EnrollmentStatus.Declined;
+  }
 
-  // onAcceptOrg(org: PharmaNetOrganization){
-  //   org.me
-  // }
+  onAcceptOrg(org: PharmaNetOrganization){
+    // org.me
+    console.log('Accept org');
+  }
 
-  // onRejectOrg(org: PharmaNetOrganization){}
+  onRejectOrg(org: PharmaNetOrganization){
+    console.log('Reject org');
+  }
 
 
   get siteAccessRequiringAttention(): any[] {
