@@ -154,7 +154,7 @@ export class RegistrationContainerComponent implements OnInit {
   submit() {
     let url = '/register/registration-complete';
 
-    if (this.registrant.pairingCode.length){
+    if (this.registrant.pairingCode){
       url = 'register/id-proofing';
     }
 
