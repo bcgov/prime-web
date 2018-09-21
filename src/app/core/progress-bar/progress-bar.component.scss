@@ -1,45 +1,5 @@
 @import "variables.scss";
 
-.step-container {
-  display: flex;
-  justify-content: space-between;
-}
-
-.step {
-  $markerSize: 1em;
-  position: relative;
-  transform: translateX(-$markerSize / 2);
-  margin-top: 0.25rem;
-
-  &:before {
-    content: " ";
-    position: absolute;
-    width: $markerSize;
-    height: $markerSize;
-    border-radius: 100%;
-    background: white;
-    border: 3px solid $color-primary;
-
-    // Center above
-    right: 0;
-    left: 0;
-    margin: 0 auto;
-    bottom: 100%;
-  }
-
-  &:not(.active) .step-text { opacity: 0.8;}
-  &:not(.active):before { background: $gray-400; }
-
-  // Take the text out of the CSS layout with position absolute so that the
-  // width of the text does not mess up the math of the positioning of the
-  // elements.
-  .step-text {
-    position: absolute;
-    transform: translateX(-33%);
-    white-space: nowrap;
-  }
-}
-
 .progressBar {
     text-align: left;
     display: table;
