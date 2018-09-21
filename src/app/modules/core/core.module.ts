@@ -25,6 +25,7 @@ import { PageFrameworkComponent } from './components/page-framework/page-framewo
 import { PostalCodeComponent } from './components/postal-code/postal-code.component';
 import { TextMaskModule } from 'angular2-text-mask';
 import { LoadingSpinnerDirective } from './directives/loading-spinner.directive';
+import {ThumbnailComponentComponent} from '../../core/thumbnail-component/thumbnail-component.component';
 
 
 /** A list of all components that we want to both include and export. Since
@@ -48,6 +49,7 @@ const componentList = [
   PageFrameworkComponent,
   PostalCodeComponent,
   LoadingSpinnerDirective,
+  ThumbnailComponentComponent
 ];
 
 @NgModule({

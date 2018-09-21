@@ -33,7 +33,7 @@
       <li>In focus and easy to read</li>
       <li>A JPG, PNG, GIF, BMP or PDF file</li>
     </ul>
-    <prime-file-uploader>
+    <prime-file-uploader #fileUploader  [images]="registrant.images"  (onAddDocument)="addDocument($event)" >
       <span class="note">Please upload required supporting  documents</span>
     </prime-file-uploader>
   </div>

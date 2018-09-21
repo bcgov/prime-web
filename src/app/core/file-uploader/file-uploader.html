@@ -21,9 +21,8 @@
     </div>
     <div class="preview-zone">
       <div *ngFor="let mspImage of images" class="preview-item">
-        {{mspImage | json}}
-        <!-- <msp-thumbnail [imageObject] ="mspImage" (delete) = "deleteImage($event)">
-        </msp-thumbnail> -->
+         <prime-thumbnail-component [imageObject] ="mspImage" (delete) = "deleteImage($event)">
+        </prime-thumbnail-component>
       </div>
     </div>
 

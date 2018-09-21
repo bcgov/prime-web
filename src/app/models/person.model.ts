@@ -11,6 +11,7 @@ import { CollegeTypes,
   AdvancedPracticeCertificationTypes,
   WorkingOnBehalfTitleTypes,
   ISelfDeclaration } from './colleges.enum';
+import {MspImage} from './msp-image';
 import { PharmaNetOrganization } from './organizations.model';
 
 /* class for a person's name */
@@ -66,6 +67,7 @@ class Name {
   get lastName(): string {
     return this._last ? this._last : '';
   }
+
 
   /**
    * Returns first, middle and last names
@@ -136,6 +138,7 @@ export class Person extends Base {
   private _legalName: Name = new Name();
   private _preferName: Name = new Name();
   private _hasPreferName = false;
+  private _images: MspImage[];
 
   /**
    * Returns name of person depending on preferedName flag
@@ -160,6 +163,16 @@ export class Person extends Base {
    return name;
   }
 
+  get images(): MspImage[]{
+    if(!this._images){
+      this._images = new Array<MspImage>();;
+    }
+    return this._images;
+  }
+
+  set images(imgs: MspImage[]){
+    this._images = imgs;
+  }
   /**
    * Gets the legal name for the person
    * @returns {string}

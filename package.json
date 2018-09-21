@@ -42,7 +42,12 @@
     "rx-dom": "^7.0.3",
     "rxjs": "^6.2.1",
     "typescript": "2.7.2",
-    "zone.js": "^0.8.26"
+    "zone.js": "^0.8.26",
+    "@types/node": "^10.0.9",
+    "@types/pdfjs-dist": "^0.1.2",
+    "blueimp-canvas-to-blob": "^3.14.0",
+    "blueimp-load-image": "^2.18.0",
+    "sha1": "^1.1.1"
   },
   "devDependencies": {
     "@types/jasmine": "2.5.38",
@@ -60,6 +65,7 @@
     "protractor": "~5.1.0",
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
+    "pdfjs-dist": "^2.0.550",
     "@angular-devkit/build-angular": "~0.6.8"
   }
 }
