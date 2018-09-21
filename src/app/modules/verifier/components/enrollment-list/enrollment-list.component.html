@@ -8,9 +8,15 @@
 
   <form class="form-inline">
 
-    <button class='btn btn-default mr-3' (click)="sort()">
+    <label class="has-float-label">
+      <button class='btn btn-default mr-3' (click)="sort()">
         <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
-    </button>
+      </button>
+      <prime-add-user-button>
+        class='fix-right'>
+      </prime-add-user-button>
+    </label>
+    <!--
       <label class="has-float-label">
         <select id="enrollmentViewSelector" class="form-control enrollment-view-selector" [value]="viewTypeSelector" (change)="viewTypes($event.target.value)">
             <option value="View All">All</option>
@@ -20,16 +26,9 @@
         </select>
         <span>View</span>
       </label>
+      -->
   </form>
-
-  <span class="has-float-label">
-    <prime-add-user-button
-      class='fix-right'>
-    </prime-add-user-button>
-  </span>
-
 </div>
-
 
 <div class="enrollment-item-container">
   <div class="enrollment-item-inner">
