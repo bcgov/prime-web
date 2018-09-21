@@ -4,6 +4,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
 import { Base } from '../../../../core/base/base.class';
 
+// ADVANCED / WORKING WITH MOBILE
 @Component({
   selector: 'prime-wizard-progress-bar',
   templateUrl: './wizard-progress-bar.component.html',

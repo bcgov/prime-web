@@ -14,6 +14,8 @@ export class WizardProgressBarComponent extends Base implements OnInit {
   @ViewChild('stepContainer') stepContainer: ElementRef;
   @ViewChildren('steps') steps: QueryList<ElementRef<HTMLAnchorElement>>;
 
+  @Input() allowLink: boolean = false;
+
   public activeIndex: number;
 
   constructor(private router: Router, private cd: ChangeDetectorRef) {
@@ -21,20 +23,12 @@ export class WizardProgressBarComponent extends Base implements OnInit {
    }
 
   ngOnInit() {
-
-    // Update the progress bar view on route change and _only_ route chaange.
-    // Skip most of Angular's ChangeDetection in favour of manually optimizing.
-    this.router.events.pipe(
-      filter(ev => ev instanceof NavigationEnd),
-      map((ev: NavigationEnd) => ev.url)
-    ).subscribe(url => {
-      this.activeIndex = this.getActiveIndex(url);
-      this.cd.detectChanges();
-      this.scrollStepIntoView();
-    });
-
     // Must schedule first run manually, or bar won't be set.
     this.activeIndex = this.getActiveIndex(this.router.url);
+  }
+
+  ngAfterViewInit(){
+    this.scrollStepIntoView();
   }
 
   calculateProgressPercentage(): Number {
