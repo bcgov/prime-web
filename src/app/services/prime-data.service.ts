@@ -128,13 +128,8 @@ export class PrimeDataService {
 
       const active = person.siteAccess
         .filter(sa => sa.status === EnrollmentStatus.Active);
-      const initiated = person.siteAccess
-        .filter(sa => sa.status === EnrollmentStatus.Initiated);
-      const provisioning = person.siteAccess
-        .filter(sa => sa.status === EnrollmentStatus.Provisioning);
 
-      const problemAccess = active.concat(initiated, provisioning);
-      rowItem.expandableRows = problemAccess;
+      rowItem.expandableRows = active;
 
       result.push(rowItem);
     });
@@ -154,7 +149,7 @@ export class PrimeDataService {
         users: null
       };
       rowItem.expandableRows = site.siteAccess
-        .filter(sa => sa.status === EnrollmentStatus.Active || sa.status === EnrollmentStatus.Initiated || sa.status === EnrollmentStatus.Provisioning);
+        .filter(sa => sa.status === EnrollmentStatus.Active);
 
       result.push(rowItem);
     });
