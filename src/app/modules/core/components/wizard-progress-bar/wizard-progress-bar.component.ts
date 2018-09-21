@@ -18,6 +18,7 @@ export class WizardProgressBarComponent extends Base implements OnInit {
    }
 
   ngOnInit() {
+    console.log('wizard progress bar init')
   }
 
   calculateProgressPercentage(): Number {

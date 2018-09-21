@@ -49,7 +49,8 @@ const componentList = [
   PageFrameworkComponent,
   PostalCodeComponent,
   LoadingSpinnerDirective,
-  ThumbnailComponentComponent
+  ThumbnailComponentComponent,
+  WizardProgressBarComponent
 ];
 
 @NgModule({
