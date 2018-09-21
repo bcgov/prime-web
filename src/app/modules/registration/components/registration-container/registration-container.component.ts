@@ -63,14 +63,7 @@ export class RegistrationContainerComponent implements OnInit {
           this.registrant.address && this.registrant.address.city && this.registrant.address.province &&
           this.registrant.address.postal && this.registrant.address.country && this.registrant.phone &&
           this.registrant.email) {
-          //User must set a preferred first and last name if they opt to set a preferred name
-          if (this.registrant.hasPreferName) {
-            if (this.registrant.preferLastName && this.registrant.preferFirstName) {
-              retVal = true;
-            }
-          } else {
-            retVal = true;
-          }
+          retVal = true;
       }
     }
 
