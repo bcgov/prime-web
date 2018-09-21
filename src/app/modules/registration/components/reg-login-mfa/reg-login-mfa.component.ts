@@ -81,6 +81,7 @@ export class RegLoginMfaComponent implements OnInit {
   }
 
   maskPhone(phoneNumber: String) {
-    return '**' + phoneNumber.substr(2, phoneNumber.length -4) + '***';
+    const noBrackets = phoneNumber.replace(/\(/g , '').replace(/\)/g, '');
+    return '**' + noBrackets.substr(2, noBrackets.length - 4) + '***';
   }
 }
