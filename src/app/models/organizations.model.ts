@@ -79,7 +79,7 @@ export class PharmaNetOrganization extends Group<Site> {
  }
 
 export enum PharmaNetOrgTypes {
-  HealthAuthority = 'HA',
+  HealthAuthority = 'Health Authority',
   Pharmacy = 'Pharmacy',
   CommunityPractice = 'Community Practice'
 }
