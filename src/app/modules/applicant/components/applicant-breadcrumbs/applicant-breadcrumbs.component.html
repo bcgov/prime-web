@@ -1,4 +1,4 @@
-<prime-core-breadcrumb>
+<prime-core-breadcrumb [horizontalScroll]='"true"'>
   <span *ngIf="!hasCompletedWizardFlag" left class='breadcrumb-text'>Dashboard / {{this.pageName}} </span>
   <span *ngIf="hasCompletedWizardFlag" left class='breadcrumb-text'><a routerLink="/applicant/dashboard">Dashboard</a> / {{this.pageName}} </span>
 

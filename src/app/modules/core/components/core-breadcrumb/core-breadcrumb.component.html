@@ -1,7 +1,18 @@
-<nav class="breadcrumb d-flex justify-content-between">
+<nav class="breadcrumb d-flex justify-content-between" *ngIf="horizontalScroll">
     <ng-content select="[left]"></ng-content>
-    <div class="horizontal-scroll">
-        <ng-content class='d-flex' select="[center]"></ng-content>
-    </div>
+    <span class="horizontal-scroll">
+        <ng-container *ngTemplateOutlet="centerContent"></ng-container>
+    </span>
     <ng-content select="[right]"></ng-content>
 </nav>
+
+<nav class="breadcrumb d-flex justify-content-between" *ngIf="!horizontalScroll">
+    <ng-content select="[left]"></ng-content>
+    <ng-container *ngTemplateOutlet="centerContent"></ng-container>
+    <ng-content select="[right]"></ng-content>
+</nav>
+
+
+<ng-template #centerContent>
+    <ng-content class='d-flex' select="[center]"></ng-content>    
+</ng-template>
