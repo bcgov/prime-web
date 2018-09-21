@@ -2,7 +2,7 @@
 
     <div class="enrollment-text-container">
       <span class="enrollment-text-main">{{rowData.title}}</span>
-
+       <!--
        <ng-container *ngIf="primaryType === 'Site'">
           <span *ngIf="rowData.sites != null" class="enrollment-text-extra">({{rowData.sites.length}}) Sites</span>
           <span *ngIf="rowData.sites != null" class="enrollment-text-extra">({{rowData.users.length}}) Users</span>
@@ -12,12 +12,11 @@
           <span class="enrollment-text-extra">({{rowData.collections.length}}) Collections</span>
           <span class="enrollment-text-extra">({{rowData.sites.length}}) Sites</span>
        </ng-container>
-
+       -->
        <prime-info-button
           class='mx-2'
           [targetId]="rowData.associatedObjectId">
-        </prime-info-button>
-
+       </prime-info-button>
     </div>
 
     <div class="enrollment-actions">
