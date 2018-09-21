@@ -97,9 +97,6 @@ export class ApplicantDashboardComponent implements OnInit {
     return this.applicant.renewalDate ? 'n/a' : moment( this.applicant.renewalDate ).format( this._dateFormat );
   }
 
-  // TODO - This function must be completed once we have appropriate data.
-  // Believe if sites are set for the user by a Provisoiner then sites will be flagged
-  // Need to check for provisioner via... Statuses. New?
   showPharmaNetAccessWarning(): boolean {
     return this.sitesRequiringAttention >= 1;
   }
