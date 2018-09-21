@@ -35,8 +35,6 @@ export class ProfileComponent implements OnInit {
       // return  { mask: this.phoneMask };
       return this.phoneMask;
     }
-
-    //TODO: FINISH THIS OFF AND TEST THAT TOGGLING ACTUALLY WORKS
     return false;
   }
 }
