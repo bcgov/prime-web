@@ -445,7 +445,7 @@ export class DummyDataService {
   }
 
 
-  private generatePosUserId(): string {
+  generatePosUserId(): string {
     const posIds = ['T', 'SJ', 'OA', 'KL', 'M'];
     return `${this.getRandomElFromArray(posIds)}${Math.ceil(Math.random() * 8000)} `;
 

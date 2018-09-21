@@ -65,8 +65,7 @@ export class PharmaNetOrganization extends Group<Site> {
             sa.endDate = oa.endDate;
           }
           else {
-            sa.startDate = new Date();
-            debugger;
+            throw new Error('Trying to setup an org when an OA doesn\'t exist');
           }
 
           site.siteAccess = [ sa ]; // strips away any SA's that might apply to other users
@@ -74,7 +73,6 @@ export class PharmaNetOrganization extends Group<Site> {
       });
       this._hasBeenSetup = true;
     }
-    else { console.log('Already setup PharmaNetOrg - bypassing.')}
 
     return this.allSiteAccess;
   }

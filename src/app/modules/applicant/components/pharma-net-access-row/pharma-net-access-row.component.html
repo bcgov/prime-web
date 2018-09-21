@@ -86,6 +86,12 @@
             <span>Access Type</span>
           </label> -->
 
+          <label class="has-float-label">
+            <input type="text" class="form-control input-readonly pos-input" [value]="siteAccess.posUserId ? siteAccess.posUserId : 'n/a'" disabled>
+            <span>PoS User ID</span>
+          </label>
+    
+
           <div class="dates-col">
             <span class="d-inline-flex align-items-center p-2 border-left">Start
               <prime-datepicker [disabled]="!isActionableRow(siteAccess)"
@@ -106,6 +112,16 @@
               </prime-datepicker>
             </span>
           </div>
+
+          <label class="has-float-label mx-2">
+            <select class="form-control access-type-selector" [(ngModel)]='siteAccess.personalAccess' >
+              <option *ngFor="let status of accessType"
+                      value="{{status}}">
+                {{status}}
+              </option>
+            </select>
+            <span>Personal Access</span>
+          </label>
 
 
           <!-- Only show accept/declined -->

@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { EnrollmentList, defaultViewSelector } from '../../../../core/enrollment-list/enrollment-list.class';
 import { EnrollmentStatus } from '../../../../models/enrollment-status.enum';
 import { cloneDeep } from 'lodash';
 import { PharmaNetOrgTypes } from '../../../../models/organizations.model';
 import { RowState } from '../../../../core/enrollment-row/enrollment-row.class';
 import { AddPharmaNetOrganizationComponent } from '../add-pharma-net-organization/add-pharma-net-organization.component';
+import { EventEmitter } from 'events';
 
 
 @Component({
@@ -13,7 +14,6 @@ import { AddPharmaNetOrganizationComponent } from '../add-pharma-net-organizatio
   styleUrls: ['./pharma-net-access-list.component.scss']
 })
 export class PharmaNetAccessListComponent extends EnrollmentList implements OnInit {
-
 
   constructor() {
     super();

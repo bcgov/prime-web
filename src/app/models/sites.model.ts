@@ -93,6 +93,7 @@ export class SiteAccess extends Base {
   posUserId: string;
   provisionedDate: Date;
   provisionedStatus: ProvisionedStatus = ProvisionedStatus.NOT_PROVISIONED;
+  personalAccess: PersonalAccessType;
 
   get isProvisioned(): boolean {
     return !!(this.provisionedStatus === ProvisionedStatus.PROVISIONED && this.provisionedDate)
@@ -244,4 +245,9 @@ export enum ProvisionedStatus {
   REJECTED,
   /** Not provisioned just means it has no status, it's similar to undefined. The user might have yet to make a decision. */
   NOT_PROVISIONED,
+}
+
+export enum PersonalAccessType {
+  Yes = 'Yes',
+  No = 'No',
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { EnrollmentRow, RowState } from '../../../../core/enrollment-row/enrollment-row.class';
 import { openState, openStateChild, loadInOut, openStateDisable, rotate180, growVertical, growHorizontal } from '../../../../animations/animations';
-import { SiteAccess } from '../../../../models/sites.model';
+import { SiteAccess, PersonalAccessType } from '../../../../models/sites.model';
 import { EnrollmentStatus } from '../../../../models/enrollment-status.enum';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { PharmaNetOrganization } from '../../../../models/organizations.model';
@@ -26,6 +26,8 @@ export class PharmaNetAccessRowComponent extends EnrollmentRow implements OnInit
 
   public orgStartDate: Date = new Date();
   public orgEndDate: Date;
+
+  public accessType = Object.keys(PersonalAccessType);
 
   constructor(private dataService: PrimeDataService) {
     super();

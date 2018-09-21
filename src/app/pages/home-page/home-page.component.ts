@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PrimeDataService } from '../../services/prime-data.service';
 import { Router } from '@angular/router';
 import { EnrollmentStatus } from '../../models/enrollment-status.enum';
+import { DummyDataService } from '../../services/dummy-data.service';
+import { PersonalAccessType } from '../../models/sites.model';
 
 @Component({
   selector: 'prime-home-page',
@@ -10,7 +12,7 @@ import { EnrollmentStatus } from '../../models/enrollment-status.enum';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor(private dataService: PrimeDataService, private router: Router) { }
+  constructor(private dataService: PrimeDataService, private router: Router, private dummyDataService: DummyDataService) { }
 
   ngOnInit() {
   }
@@ -30,6 +32,8 @@ export class HomePageComponent implements OnInit {
     this.dataService.user.allOrganizations().map(org => {
       org.members = org.members.map(site => {
         site.siteAccess[0].status = EnrollmentStatus.New;
+        site.siteAccess[0].posUserId = this.dummyDataService.generatePosUserId();
+        site.siteAccess[0].personalAccess = PersonalAccessType.Yes;
         return site;
       })
     })
