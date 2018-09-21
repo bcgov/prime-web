@@ -24,6 +24,9 @@ export class BcscLoginComponent implements OnInit {
     // If user sets pairing code, we pull up dummy data from a generated user
     // This is us simulating getting data from a backend
     this.primeDataService.user = this.primeDataService.people[0];
+    this.primeDataService.user.phone = undefined;
+    this.primeDataService.user.phoneExtension = undefined;
+    this.primeDataService.user.email = undefined;
     this.primeDataService.user.pairingCode = code;
   }
 
