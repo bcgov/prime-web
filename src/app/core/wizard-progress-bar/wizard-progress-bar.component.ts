@@ -61,11 +61,11 @@ export class WizardProgressBarComponent extends Base implements OnInit {
   private scrollStepIntoView() {
     const target = this.steps.toArray()[this.activeIndex];
     const container = document.getElementsByClassName('horizontal-scroll');
-    if (container.length === 1) {
+    if (container.length) {
       // Since we're already breaking out of Angular, we try and be safe by using a try/catch.
       // Otherwise an error here could halt execution,
       try {
-        container[0].scrollLeft = target.nativeElement.offsetLeft - (window.outerWidth / 2);  
+        container[0].scrollLeft = target.nativeElement.offsetLeft - (window.innerWidth / 2);  
       } catch (error) {}
       
     }
