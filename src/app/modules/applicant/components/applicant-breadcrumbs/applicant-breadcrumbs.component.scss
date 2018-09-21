@@ -9,7 +9,8 @@ prime-applicant-breadcrumbs {
 
   .controls {
     // Match the width of the left-most breadcrumb text.
-    min-width: calc(15em + 100px);
+    // min-width: calc(15em + 100px);
+    min-width: 14em;
     display: flex;
     justify-content: flex-end;
   }
@@ -17,7 +18,8 @@ prime-applicant-breadcrumbs {
  .breadcrumb-text {
    // Keeps the wizard progress bar centered, because this is the difference in widths between the breadcrumb text and the arrows/buttons.
   //  margin-right: 100px;
-   min-width: calc(15em + 100px); // Roughly the width of the largest text, "Access Acceptance." Tries to keep it consistently sized regardless of currently displayed text.
+  //  min-width: calc(15em + 100px); // Roughly the width of the largest text, "Access Acceptance." Tries to keep it consistently sized regardless of currently displayed text.
+   min-width: 14em;
  }
  // Override defaults, shrink vertically.
  .alert, .alert .close {

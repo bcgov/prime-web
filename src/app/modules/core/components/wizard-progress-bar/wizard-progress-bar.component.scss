@@ -2,6 +2,12 @@
 
 :host {
   flex: 1;
+
+  //Styling to handle .horizontal-overflow (in core-breadcrumb.component.scss)
+  padding: 0 2em;
+  min-height: 2em;
+  min-width: 750px;
+  display: inline-block;
 }
 
 .step-container {
@@ -11,12 +17,14 @@
 
 progressbar {
   background-color: $gray-500;
+  height: 0.5rem;
 }
 
 .step {
   $markerSize: 1em;
   position: relative;
   transform: translateX(-$markerSize / 2);
+  margin-top: 0.25rem;
 
   &:before {
     content: " ";
@@ -51,9 +59,4 @@ progressbar {
 .progress-background {
   width: 100%;
   background-color: blue;
-}
-
-a.disabled {
-  pointer-events:  none;
-  cursor: default;
 }

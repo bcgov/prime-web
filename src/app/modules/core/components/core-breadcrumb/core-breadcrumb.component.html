@@ -1,5 +1,7 @@
 <nav class="breadcrumb d-flex justify-content-between">
     <ng-content select="[left]"></ng-content>
-    <ng-content class='d-flex' select="[center]"></ng-content>
+    <div class="horizontal-scroll">
+        <ng-content class='d-flex' select="[center]"></ng-content>
+    </div>
     <ng-content select="[right]"></ng-content>
 </nav>
