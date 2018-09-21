@@ -56,6 +56,11 @@ export class EnrollmentRowComponent extends EnrollmentRow implements OnInit, OnD
     }
   }
 
+  canOpen() {
+    if (this.primaryType === 'User')
+      return false;
+  }
+
   ngOnDestroy(){
     // Set all child rows to closed.
     this.siteAccessRequiringAttention.map(x => x.open = false);
