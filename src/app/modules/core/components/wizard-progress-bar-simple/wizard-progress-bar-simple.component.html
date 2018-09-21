@@ -1,0 +1,19 @@
+<progressbar
+  [value]="calculateProgressPercentage()"
+  [max]="100"
+  [animate]="true">
+</progressbar>
+
+<div class="step-container" #stepContainer>
+
+  <a *ngFor="let step of progressSteps; let i = index;"
+     [routerLink]="allowLinks ? step.route : null"
+     [class.disabled]="!allowLinks">
+
+    <div class="step" #steps  [ngClass]="{active: i === activeIndex}">
+      <span class="step-text">{{step.title}}</span>
+    </div>
+
+  </a>
+
+</div>
