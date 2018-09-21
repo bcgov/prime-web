@@ -52,13 +52,14 @@ export class EnrollmentRowComponent extends EnrollmentRow implements OnInit, OnD
         // First row is open by default
         this.siteAccessRequiringAttention[0].open = open;
       }
-
     }
   }
 
   canOpen() {
-    if (this.primaryType === 'User')
+    if (this.primaryType === "User")
       return false;
+    else
+      return true;
   }
 
   ngOnDestroy(){
