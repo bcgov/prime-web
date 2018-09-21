@@ -33,7 +33,7 @@ export class ApplicantDataService {
         route: 'pharma-net',
       },
       {
-        title: 'User Access Agreement',
+        title: 'Terms & Conditions of Access',
         route: 'access-acceptance'
       },
       {

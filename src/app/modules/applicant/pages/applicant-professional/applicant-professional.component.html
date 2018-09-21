@@ -9,7 +9,8 @@
 <prime-page-framework>
 
   <h2 class='prime-title' id="profInfo">Professional Information</h2>
-  <div>The information you provide here about your professional associations is used along with the information about your place(s) of work to assign you to a user class, which will determine the PharmaNet Access Privileges you will receive.
+  <div>Your professional information is used to assign you to a user class,
+    which helps determine the PharmaNet access privileges you will receive.
   </div>
 
   <section class='my-3'>
@@ -69,7 +70,7 @@
                     {{licenceClassCRNValue(type)}}
                   </option>
                 </select>
-                <span>License Class</span>
+                <span>Licence Class</span>
               </label>
             </div>
             <div *ngIf="applicant.collegeCertificationList[i].collegeType === 'CPSBC'" class="applicant-row--item prime-input-large">
@@ -177,7 +178,7 @@
 
   <section *ngIf="displaySelfDeclarationSection()">
 
-    <h2 class='prime-title' id="selfDeclaration">Self Declaration</h2>
+    <h2 class='prime-title' id="selfDeclaration">Self Declaration  Professional History</h2>
     <div>The information you provide here will determine whether or not a manual review is required. Upload any supporting documents as needed.</div>
     <hr>
 

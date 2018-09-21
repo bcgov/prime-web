@@ -57,16 +57,16 @@
             <div class="col-md-6 font-weight-bold">{{collegeType}}</div>
           </div>
           <div class="row p-md-1">
-            <div class="col-md-6">License Class</div>
-            <div class="col-md-6 font-weight-bold">{{applicant.getLicenseClassByIndex()}}</div>
+            <div class="col-md-6">Licence Class</div>
+            <div class="col-md-6 font-weight-bold">{{applicant.getLicenceClassByIndex()}}</div>
           </div>
           <div class="row p-md-1">
-            <div class="col-md-6">License Number</div>
+            <div class="col-md-6">Licence Number</div>
             <div class="col-md-6 font-weight-bold">{{applicant.collegeCertificationList[0].licenceNumber}}</div>
           </div>
 
           <div class="row p-md-1">
-            <div class="col-md-6">License Expiry Date</div>
+            <div class="col-md-6">Licence Expiry Date</div>
             <div class="col-md-6 font-weight-bold">{{licenceExpiryDate | date: 'MMM. dd, yyyy'}}</div>
           </div>
         </ng-container>
@@ -131,7 +131,7 @@
 
       </section>
 
-      <h2 class='prime-title'>User Access Acceptance
+      <h2 class='prime-title'>Terms & Conditions of Access
         <i class="fa fa-pencil float-right pointer" aria-hidden="true" (click)="goToUAAPage()"></i>
       </h2>
 

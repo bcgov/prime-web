@@ -371,8 +371,8 @@ export class Person extends Base {
     advancedPracticeCertificationType: 'pleaseSelect'
   }];
 
-  /** Gets the human readable appropriate license class string based on the collegeType. If no index is provided it gets the first item. */
-  getLicenseClassByIndex(index: number = 0){
+  /** Gets the human readable appropriate licence class string based on the collegeType. If no index is provided it gets the first item. */
+  getLicenceClassByIndex(index: number = 0){
     if (!this.hasCollege){
       return 'n/a';
     }
@@ -478,7 +478,7 @@ export abstract class Role extends Base {
 
 // class User extends Role {
 //   college: Colleges[];
-//   license: License;
+//   licence: Licence;
 //   isDeviceProvider: boolean;
 //   PoSUserId: string;
 // }

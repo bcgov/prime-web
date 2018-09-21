@@ -165,7 +165,7 @@ export class PrimeDataService {
         title: user.name,
         siteAccess: user.siteAccess.filter(sa => sa.site === site),
         collegeNumber: user.collegeCertificationList[0].collegeType,
-        licenseNumber: user.collegeCertificationList[0].licenceNumber,
+        licenceNumber: user.collegeCertificationList[0].licenceNumber,
         associatedObjectId: user.objectId,
       };
       result.push(rowItem);
