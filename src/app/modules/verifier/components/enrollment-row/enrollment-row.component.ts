@@ -78,7 +78,7 @@ export class EnrollmentRowComponent extends EnrollmentRow implements OnInit, OnD
     // All this function does is generate titles for Site Access rows.
     if (this.primaryType === "Site"){
       return this.rowData.expandableRows.map(siteAccess => {
-        siteAccess.title = `${siteAccess.site.name} / ${siteAccess.person.name}`;
+        siteAccess.title = `${siteAccess.site.name}`;
         return siteAccess;
       });
     }
