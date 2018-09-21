@@ -75,13 +75,13 @@
     <tr>
       <td *ngIf="primaryType === 'User'" class="provision-element-label" width = "8%">PEC</td>
       <td *ngIf="primaryType === 'Site'" class="provision-element-label" width = "8%">College Number</td>
-      <td *ngIf="primaryType === 'Site'" class="provision-element-label" width = "8%">License Number</td>
-      <td class="provision-element-label" width = "12%"> Request</td>
-      <td class="provision-element-label" width = "10%" >Class</td>
-      <td class="provision-element-label" width = "12%"> Access Rights</td>
+      <td *ngIf="primaryType === 'Site'" class="provision-element-label" width = "8%">Licence Number</td>
+      <td class="provision-element-label" width = "12%"> Request Type</td>
+      <td class="provision-element-label" width = "10%" >User Class</td>
+      <td class="provision-element-label" width = "12%"> Access Privileges</td>
       <td class="provision-element-label" width = "8%" >L&amp;C</td>
-      <td class="provision-element-label" width = "8%"> Start</td>
-      <td class="provision-element-label" width = "8%">End</td>
+      <td class="provision-element-label" width = "8%"> Start Date</td>
+      <td class="provision-element-label" width = "8%">End Date</td>
       <td class="provision-element-label" width = "20%"> Personal Access</td>
       <td width="2%"></td>
       <td width="12%"></td>
@@ -89,7 +89,7 @@
     <tr>
       <td *ngIf="primaryType === 'User'" class="provision-element-text">{{rowData.site.PEC}}</td>
       <td *ngIf="primaryType === 'Site'" class="provision-element-text">{{ getCollegeNumber() }}</td>
-      <td *ngIf="primaryType === 'Site'" class="provision-element-text">{{ getLicenseNumber() }}</td>
+      <td *ngIf="primaryType === 'Site'" class="provision-element-text">{{ getLicenceNumber() }}</td>
       <td class="provision-element-text"> {{siteAccessObject.request}}</td>
       <td class="provision-element-text">{{siteAccessObject.siteClass}}</td>
       <td class="provision-element-text"> {{siteAccessObject.accessRights}}</td>

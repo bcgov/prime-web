@@ -17,7 +17,7 @@ export interface ProvisionerRowItem {
   site?: Site;
   associatedObjectId: string;
   collegeNumber?: string;
-  licenseNumber?: string;
+  licenceNumber?: string;
 }
 
 @Component({
@@ -107,16 +107,16 @@ export class ProvisionerRowComponent extends EnrollmentRow implements OnInit {
     return CollegeTypes[this.rowData.collegeNumber];
   }
 
-  getLicenseNumber(): string{
+  getLicenceNumber(): string{
     if (this.primaryType !== 'Site') {
       // In current designs, we should NEVER care about college except for Site tables.
       return null;
     }
-    if (!this.rowData.licenseNumber || this.rowData.licenseNumber.length === 0){
+    if (!this.rowData.licenceNumber || this.rowData.licenceNumber.length === 0){
       return 'n/a';
     }
 
-    return this.rowData.licenseNumber;
+    return this.rowData.licenceNumber;
   }
 
 

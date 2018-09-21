@@ -70,7 +70,7 @@ export class RegistrationContainerComponent implements OnInit {
     //Document Upload Page
     if (this.router.url === '/register/document-upload') {
       //User must select at least one document type
-      if (this.registrant.hasDriversLicense || this.registrant.hasServicesCard || this.registrant.hasPassport) {
+      if (this.registrant.hasDriversLicence || this.registrant.hasServicesCard || this.registrant.hasPassport) {
         retVal = true;
       }
     }
