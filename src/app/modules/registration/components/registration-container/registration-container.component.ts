@@ -69,9 +69,13 @@ export class RegistrationContainerComponent implements OnInit {
 
     //Document Upload Page
     if (this.router.url === '/register/document-upload') {
-      //User must select at least one document type
-      if (this.registrant.hasDriversLicense || this.registrant.hasServicesCard || this.registrant.hasPassport) {
-        retVal = true;
+      // User must select at least one document type and provide expiry date
+      if (this.registrant.hasDriversLicense && this.registrant.driverLicenseExpiry){
+        return true;
+      }
+
+      if (this.registrant.hasPassport && this.registrant.passportExpiry){
+        return true;
       }
     }
 

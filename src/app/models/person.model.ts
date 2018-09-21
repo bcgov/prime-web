@@ -288,8 +288,9 @@ export class Person extends Base {
 
   //For registration document upload
   hasDriversLicense: boolean = false;
-  hasServicesCard: boolean = false;
   hasPassport: boolean = false;
+  driverLicenseExpiry: Date;
+  passportExpiry: Date;
 
   //For registration security
   securityQuestion1: String;

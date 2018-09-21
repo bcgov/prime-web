@@ -3,38 +3,58 @@
   <div>
     Prior to ID Proofing, please upload supporting documents. Please upload a scanned image of any of the following:
   </div>
-  <br/>
-  <div class="leftpane">
-    <div>
-      <input type="checkbox" id="dl" name="dl" [(ngModel)]="registrant.hasDriversLicense"/>
-      <label for="dl">Driver's License</label>
-    </div>
+  
 
-    <div>
-      <input type="checkbox" id="bcsc" name="bcsc" [(ngModel)]="registrant.hasServicesCard"/>
-      <label for="bcsc">BC Services Card</label>
-    </div>
+  <div class="row mt-4">
+    <div class="col-6 mt-4">
+      <div class=''>
+        <span>
+          <input type="checkbox" id="dl" name="dl" [(ngModel)]="registrant.hasDriversLicense"/>
+          <label for="dl">Driver's License</label>
+        </span>
+        <prime-datepicker *ngIf='registrant.hasDriversLicense'
+                          [(date)]='registrant.driverLicenseExpiry'
+                          id="dlExpiry"
+                          name="dlExpiry"
+                          placeholder=" "
+                          dateFormat="yyyy/mm/dd"
+                          labelText="License Expiry"
+                          class=''
+                          tabindex="1"></prime-datepicker>
+        
 
-    <div>
-      <input type="checkbox" id="passport" name="passport" [(ngModel)]="registrant.hasPassport"/>
-      <label for="passport">Passport</label>
+      </div>
+
+      <div class=''>
+        <input type="checkbox" id="passport" name="passport" [(ngModel)]="registrant.hasPassport"/>
+        <label for="passport">Passport</label>
+        <prime-datepicker *ngIf='registrant.hasPassport'
+                          [(date)]='registrant.passportExpiry'
+                          id="passportExpiry"
+                          name="passportExpiry"
+                          placeholder=" "
+                          dateFormat="yyyy/mm/dd"
+                          labelText="License Expiry"
+                          class=''
+                          tabindex="1"></prime-datepicker>
+      </div>
     </div>
-  </div>
-  <div class="rightpane">
-    <div class="d-flex justify-content-start align-items-center">
-      <i class="fa fa-upload fa-2x mx-2" aria-label="Delete"></i>
-      <h2>Upload your documents</h2>
+    <div class="col-6">
+      <div class="d-flex justify-content-start align-items-center">
+        <i class="fa fa-upload fa-2x mx-2" aria-label="Delete"></i>
+        <h2>Upload your documents</h2>
+      </div>
+      <span class="note">Scan the document, or take a photo of it. Make sure that it's:</span>
+      <ul class="note">
+        <li>The entire document, from corner to corner</li>
+        <li>At least 1000 pixels wide x 1500 pixels tall</li>
+        <li>Rotated correctly (not upside down or sideways)</li>
+        <li>In focus and easy to read</li>
+        <li>A JPG, PNG, GIF, BMP or PDF file</li>
+      </ul>
+      <prime-file-uploader #fileUploader  [images]="registrant.images"  (onAddDocument)="addDocument($event)" >
+        <span class="note">Please upload required supporting  documents</span>
+      </prime-file-uploader>
     </div>
-    <span class="note">Scan the document, or take a photo of it. Make sure that it's:</span>
-    <ul class="note">
-      <li>The entire document, from corner to corner</li>
-      <li>At least 1000 pixels wide x 1500 pixels tall</li>
-      <li>Rotated correctly (not upside down or sideways)</li>
-      <li>In focus and easy to read</li>
-      <li>A JPG, PNG, GIF, BMP or PDF file</li>
-    </ul>
-    <prime-file-uploader #fileUploader  [images]="registrant.images"  (onAddDocument)="addDocument($event)" >
-      <span class="note">Please upload required supporting  documents</span>
-    </prime-file-uploader>
   </div>
 </prime-page-framework>
