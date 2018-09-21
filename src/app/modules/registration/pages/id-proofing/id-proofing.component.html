@@ -36,7 +36,6 @@
         <div class="appcol">
           <p *ngIf="registrant.hasDriversLicense">Driver's License</p>
           <p *ngIf="registrant.hasPassport">Passport</p>
-          <p *ngIf="registrant.hasServicesCard">BC Services Card</p>
         </div>
         <i class="fa fa-check-circle text-success fa-3x pull-right" aria-hidden="true"></i>
       </div>
@@ -72,7 +71,7 @@
     <div class="leftpane">
       <img style="padding:5px;" src="assets/live_video_chat.png" alt="Generic placeholder image">
     </div>
-    <div class="rightpane">
+    <div class="rightpane" *ngIf="!usedBCSC; else hasBSCSNoIDProofing">
       <label>
         Please complete ID Proofing by verifying your account information with a PRIME agent. Once you are ready, start the live video chat.
       </label>
@@ -82,14 +81,17 @@
         <li>Start live video chat when you're ready</li>
       </ul>
     </div>
-    <div>
+    <div class='text-center'>
       <i *ngIf="!usedBCSC" class="fa fa-exclamation-triangle text-warning fa-3x" aria-hidden="true"></i>
       <i *ngIf="usedBCSC" class="fa fa-check-circle text-success fa-3x" aria-hidden="true"></i>
     </div>
     <div >
-      <button type="button" class="btn btn-primary mx-2">Start Live Video Chat</button>
+      <button *ngIf="!usedBCSC" type="button" class="btn btn-primary mx-2">Start Live Video Chat</button>
     </div>
   </div>
 
 </div>
 
+<ng-template #hasBSCSNoIDProofing>
+  <p class="label mt-4">As you have registered using your BC Services Card, ID proofing is not necessary.</p>
+</ng-template>
