@@ -57,7 +57,4 @@ export class ProgressBarComponent extends Base implements OnInit {
     }
     return routeIndex < activeRouteIndex;
   }
-
-
-
 }
