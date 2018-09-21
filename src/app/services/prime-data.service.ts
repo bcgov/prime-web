@@ -29,6 +29,33 @@ export class PrimeDataService {
   /** The logged in user interacting with the webapp. When in the Applicant dashboard, this would be the applicant. */
   user: Person = new Person();
 
+  /**
+   * for the provisioner site table
+   * @returns {EnrollmentRowItem[]}
+   */
+  getEnrollmentByOrganization(): EnrollmentRowItem[] {
+
+    // By Site means collections at the top level
+    const result: EnrollmentRowItem[] = [];
+
+    this.organizations.forEach(organization => {
+      const rowItem: EnrollmentRowItem = {
+        title: organization.title,
+        associatedObjectId: organization.objectId,
+        sites: organization.members,
+        users: organization.allUsers
+      };
+      rowItem.expandableRows = organization.getSiteAccessWithStatus(EnrollmentStatus.Active);
+      result.push(rowItem);
+    });
+
+    return result;
+  }
+
+  /**
+   * Old interface for site
+   * @returns {EnrollmentRowItem[]}
+   */
   getEnrollmentBySite(): EnrollmentRowItem[] {
 
     // By Site means collections at the top level
