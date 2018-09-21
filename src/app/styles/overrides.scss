@@ -181,6 +181,11 @@ h1, h2, h3,
   top: .5em;
   opacity: 1; // Accessibility standards
   color: #494949eb; // Font is eqivalent to opacity 0.8, meeting AA standard
+
+  // Further reducing size
+  font-size: 115%;
+  top: 0.65em;
+  left: 0.3em;
 }
 
 
