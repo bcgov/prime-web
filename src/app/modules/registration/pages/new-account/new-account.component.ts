@@ -1,5 +1,8 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
 import {Router} from '@angular/router';
+import { PrimeDataService } from '../../../../services/prime-data.service';
+import { Person } from '../../../../models/person.model';
+import { Address } from '../../../../models/addresses.model';
 
 @Component({
   selector: 'prime-new-account',
@@ -8,7 +11,7 @@ import {Router} from '@angular/router';
 })
 export class NewAccountComponent implements OnInit {
 
-  constructor( private router: Router) { }
+  constructor( private router: Router, private primeDataService: PrimeDataService) { }
 
   ngOnInit() {
   }
@@ -17,6 +20,11 @@ export class NewAccountComponent implements OnInit {
    *
    */
   continueStandardReg() {
+    // Reset the user to a non BCSC user
+    this.primeDataService.user = new Person();
+    this.primeDataService.user.address = new Address();
+    this.primeDataService.user.pairingCode = undefined;
+    // NOTE - This new user is NOT in the user list for provisoiner as it's not in dataService.people
 
     // Navigate next page
     this.router.navigate( [this.getUrlPrefix( this.router.url ) + '/' + 'profile'] );
