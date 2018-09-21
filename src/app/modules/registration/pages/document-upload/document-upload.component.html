@@ -4,21 +4,19 @@
     Prior to ID Proofing, please upload supporting documents. Please upload a scanned image of any of the following:
   </div>
   <br/>
-  <div class="leftpane">
+  <div class="leftpane" >
     <div>
       <input type="checkbox" id="dl" name="dl" [(ngModel)]="registrant.hasDriversLicense"/>
       <label for="dl">Driver's License</label>
     </div>
-
-    <div>
-      <input type="checkbox" id="bcsc" name="bcsc" [(ngModel)]="registrant.hasServicesCard"/>
-      <label for="bcsc">BC Services Card</label>
-    </div>
+    <prime-datepicker id="DriverLicExpiry" name="DriverLicExpiry" placeholder=" "  dateFormat="yyyy/mm/dd" [(date)]="YYYY/MM/DD" labelText="DL Expiry"></prime-datepicker>
 
     <div>
       <input type="checkbox" id="passport" name="passport" [(ngModel)]="registrant.hasPassport"/>
       <label for="passport">Passport</label>
     </div>
+    <prime-datepicker id="PPExpiry" name="PPExpiry" placeholder=" "  dateFormat="yyyy/mm/dd" [(date)]="YYYY/MM/DD" labelText="Passport Expiry"></prime-datepicker>
+
   </div>
   <div class="rightpane">
     <div class="d-flex justify-content-start align-items-center">

@@ -1,12 +1,14 @@
 .leftpane {
-  width: 25%;
+  padding-right: 30px;
+  width: 30%;
   height: 100%;
   float: left;
   border-collapse: collapse;
 }
 
 .rightpane {
-  width: 75%;
+  padding-left: 30px;
+  width: 70%;
   height: 100%;
   position: relative;
   float: right;
