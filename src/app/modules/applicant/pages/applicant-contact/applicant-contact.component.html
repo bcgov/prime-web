@@ -60,30 +60,28 @@
     </div>
   </form>
 
-  <ng-container *ngIf="applicant.hasPreferName">
 
-    <h2 class='prime-title' id="prefName">Preferred Name</h2>
-    <form>
-      <div >
-        <div class="has-float-label">
-          <input type="text" class="form-control prime-input-large" id="prefLastName" name="prefLastName" [ngModel]="applicant.preferLastName ? applicant.preferLastName : applicant.lastName" (ngModelChange)="updatePrefLastName($event)" (input)="onChange()" placeholder=" " disabled>
-          <label for="prefLastName">Preferred Last Name</label>
-        </div>
-
-        <div class="has-float-label">
-          <input type="text" class="form-control prime-input-large" id="prefMiddleName" name="prefMiddleName" [ngModel]="applicant.preferMiddleName ? applicant.preferMiddleName : applicant.middleName" (ngModelChange)="updatePrefMiddleName($event)" (input)="onChange()" placeholder=" " disabled>
-          <label for="prefMiddleName">Preferred Middle Name</label>
-        </div>
-
-        <div class="has-float-label">
-          <input type="text" class="form-control prime-input-large" id="prefFirstName" name="prefFirstName" [ngModel]="applicant.preferFirstName ? applicant.preferFirstName : applicant.firstName" (ngModelChange)="updatePrefFirstName($event)" (input)="onChange()" placeholder=" " disabled>
-          <label for="prefFirstName">Preferred First Name</label>
-        </div>
-
+  <h2 class='prime-title' id="prefName">Preferred Name (optional)</h2>
+  <form>
+    <div>
+      <div class="has-float-label">
+        <input type="text" class="form-control prime-input-large" id="prefLastName" name="prefLastName" [ngModel]="applicant.preferLastName ? applicant.preferLastName : applicant.lastName" (ngModelChange)="updatePrefLastName($event)" (input)="onChange()" placeholder=" ">
+        <label for="prefLastName">Preferred Last Name</label>
       </div>
 
-    </form>
-  </ng-container>
+      <div class="has-float-label">
+        <input type="text" class="form-control prime-input-large" id="prefMiddleName" name="prefMiddleName" [ngModel]="applicant.preferMiddleName ? applicant.preferMiddleName : applicant.middleName" (ngModelChange)="updatePrefMiddleName($event)" (input)="onChange()" placeholder=" ">
+        <label for="prefMiddleName">Preferred Middle Name</label>
+      </div>
+
+      <div class="has-float-label">
+        <input type="text" class="form-control prime-input-large" id="prefFirstName" name="prefFirstName" [ngModel]="applicant.preferFirstName ? applicant.preferFirstName : applicant.firstName" (ngModelChange)="updatePrefFirstName($event)" (input)="onChange()" placeholder=" ">
+        <label for="prefFirstName">Preferred First Name</label>
+      </div>
+
+    </div>
+
+  </form>
 
   <h2 class='prime-title' id='contactInfo'>Contact Information</h2>
 
