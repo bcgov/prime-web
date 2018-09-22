@@ -275,39 +275,51 @@ export class DummyDataService {
     ];
 
     // First Person - 2 New, Active, Approved
-    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[0], people[0], access[0]); // New
+    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[0], people[0], access[1]); // New
     result.push(sa);
-    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[3], people[0], access[9]); // New
+    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[3], people[0], access[1]); // New
     result.push(sa);
     sa = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[0], access[1]); // Active
     result.push(sa);
-    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[2], people[0], access[2]); // Provisioning
+    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[2], people[0], access[1]); // Provisioning
     result.push(sa);
 
     // Second Person - Declined by Applicant, Pending with MoH
-    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[3], people[1], access[4]);
+    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[3], people[1], access[1]);
     result.push(sa);
-    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[0], people[1], access[6]);
+    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[0], people[1], access[1]);
     result.push(sa);
-    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[0], people[1], access[2]);
+    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[0], people[1], access[1]);
     result.push(sa);
 
     // Third Person - Expired
-    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[1], people[2], access[8]);
+    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[1], people[2], access[1]);
     result.push(sa);
     sa = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[2], access[1]);
     result.push(sa);
 
     // Fourth Person - Pending with Applicant
-    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[2], people[3], access[5]);
+    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[2], people[3], access[1]);
     result.push(sa);
     sa = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[3], access[1]);
     result.push(sa);
 
     // Fourth Person - Pending with Provisioner
-    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[3], people[4], access[7]);
-    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[4], access[10]);
+    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[3], people[4], access[1]);
+    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[4], access[1]);
     result.push(sa);
+
+    collections.map(org => {
+      //check if org is missing any siteAccess
+      if (org.allSiteAccess.length === 0){
+
+        org.members.map(site => {
+          sa = this.createSiteAccessAndAssociateDemo(site, people[1], access[1]); // Active
+          result.push(sa);
+        })
+
+      }
+    })
 
     return result.filter(x => x); //filter out null
   }

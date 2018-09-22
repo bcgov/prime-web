@@ -46,6 +46,7 @@ export class PrimeDataService {
         users: organization.allUsers
       };
       rowItem.expandableRows = organization.getSiteAccessWithStatus(EnrollmentStatus.Active);
+      console.log('Adding expandableRows', organization.title, rowItem.expandableRows.length);
       result.push(rowItem);
     });
 

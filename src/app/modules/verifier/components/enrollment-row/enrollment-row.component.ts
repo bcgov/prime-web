@@ -72,6 +72,7 @@ export class EnrollmentRowComponent extends EnrollmentRow implements OnInit, OnD
   get siteAccessRequiringAttention(): any[] {
 
     if ( !this.rowData || !this.rowData.expandableRows ){
+      debugger;
       return [];
     }
 
