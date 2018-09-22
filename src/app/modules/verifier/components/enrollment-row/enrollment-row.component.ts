@@ -72,13 +72,14 @@ export class EnrollmentRowComponent extends EnrollmentRow implements OnInit, OnD
   get siteAccessRequiringAttention(): any[] {
 
     if ( !this.rowData || !this.rowData.expandableRows ){
+      debugger;
       return [];
     }
 
     // All this function does is generate titles for Site Access rows.
     if (this.primaryType === "Site"){
       return this.rowData.expandableRows.map(siteAccess => {
-        siteAccess.title = `${siteAccess.site.name} / ${siteAccess.person.name}`;
+        siteAccess.title = `${siteAccess.site.name}`;
         return siteAccess;
       });
     }
@@ -90,7 +91,7 @@ export class EnrollmentRowComponent extends EnrollmentRow implements OnInit, OnD
     }
   }
 
-   goToEnrollmentPage(){
+   goToEnrollmentPage(objectId?: string){
     //If user selects details from verifier dash, then go to verifier details
     if (this.router.url.indexOf('/verifier/') > -1) {
       const link = '/verifier/details/' + this.primaryType.toLowerCase();
@@ -98,7 +99,8 @@ export class EnrollmentRowComponent extends EnrollmentRow implements OnInit, OnD
     //Else if user selects details from provisioner dash, then go to provisioner details
     } else if (this.router.url.indexOf('/provisioner/') > -1) {
        const link = '/provisioner/details/' + this.primaryType.toLowerCase();
-       this.router.navigate([link, this.rowData.associatedObjectId]);
+       console.log('URL', [link, objectId]);
+       this.router.navigate([link, objectId]);
      }
     }
   }

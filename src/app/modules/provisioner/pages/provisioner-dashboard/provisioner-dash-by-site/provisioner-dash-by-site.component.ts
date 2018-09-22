@@ -12,7 +12,7 @@ export class ProvisionerDashBySiteComponent{
   constructor(private dataService: PrimeDataService) { }
 
   get enrollmentBySiteData(): EnrollmentRowItem[] {
-    return this.dataService.getProvisionerBySite();
+    return this.dataService.getEnrollmentByOrganization();
   }
 
 }
