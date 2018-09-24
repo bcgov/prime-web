@@ -70,10 +70,17 @@ export class ProvisionerDetailsComponent implements OnInit {
     return this.provisionByType === ProvisionByType.site;
   }
 
+  // no longer used.removed as a part of PRIME-164
   get provisionerSiteData(): ProvisionerRowItem[] {
     if (!this.person) return null;
     return this.dataService.getProvisionerDetailsByUser(this.person);
   }
+
+  get provisionerOrgSiteData(): ProvisionerRowItem[] {
+    if (!this.person) return null;
+    return this.dataService.getProvisionerOrgDetailsByUser(this.person);
+  }
+
 
   get provisionerUserData(): ProvisionerRowItem[] {
     if (!this.site) return null;

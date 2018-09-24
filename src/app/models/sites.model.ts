@@ -245,6 +245,7 @@ export enum ProvisionedStatus {
   REJECTED,
   /** Not provisioned just means it has no status, it's similar to undefined. The user might have yet to make a decision. */
   NOT_PROVISIONED,
+  NEW
 }
 
 export enum PersonalAccessType {
