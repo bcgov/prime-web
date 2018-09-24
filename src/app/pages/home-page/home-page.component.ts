@@ -31,6 +31,12 @@ export class HomePageComponent implements OnInit {
 
     this.dataService.user.allOrganizations().map(org => {
       org.members = org.members.map(site => {
+
+        //Don't modify siteAccess if user has already accepted/rejected
+        if (site.siteAccess[0].status === EnrollmentStatus.Active || site.siteAccess[0].status === EnrollmentStatus.Declined){
+          return site;
+        }
+
         site.siteAccess[0].status = EnrollmentStatus.New;
         site.siteAccess[0].posUserId = this.dummyDataService.generatePosUserId();
         site.siteAccess[0].personalAccess = PersonalAccessType.Yes;
