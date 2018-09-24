@@ -203,11 +203,14 @@ export class PrimeDataService {
 
   getProvisionerOrgDetailsByUser(user: Person): ProvisionerRowItem[] {
     const result = [];
-    user.allOrganiationWithSitesForUser().map(org => {
+    user.allOrganizations().map(org => {
+      const siteAccess = org.allSiteAccess.filter(x => x.person === user);
+      const sites = siteAccess.map(sa => sa.site);
+
       const rowItem: ProvisionerRowItem = {
         title: org.title,
-        siteAccess: org.allSiteAccess.filter(x => x.person === user),
-        site: org.members,
+        siteAccess: siteAccess,
+        site: sites,
         associatedObjectId: org.objectId
       }
       result.push(rowItem);

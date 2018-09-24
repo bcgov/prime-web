@@ -257,19 +257,6 @@ export class Person extends Base {
     return this._hasPreferName;
   }
 
-  allOrganiationWithSitesForUser(){
-      return this.allOrganizations().map(org => {
-      org.members = org.members.filter(site => {
-        return site.siteAccess.find(sa => {
-             return sa.person.objectId === this.objectId;
-        })
-      });
-      return org;
-
-    })
-   // return this.allOrganizations();
-  }
-
   // Just for development with dummy data for DEMO - TODO: Remove after development
   set demoData( data: string ) {
 
