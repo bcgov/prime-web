@@ -87,6 +87,8 @@ export class ProvisionerRowComponent extends EnrollmentRow implements OnInit {
     //default value YES
     this.rowData.site.map(site => {
       site.siteAccess[0].personalAccess  = ( site.siteAccess[0].personalAccess === undefined) ? PersonalAccessType.Yes : site.siteAccess[0].personalAccess  ;
+      console.log(site.siteAccess[0].status);
+      //site.siteAccess[0].status = this.isNewStatus(site.siteAccess[0]) ? EnrollmentStatus.New :   site.siteAccess[0].status;
     });
     this.rowDataOnInit = cloneDeep(this.rowData);
   }
@@ -232,6 +234,8 @@ export class ProvisionerRowComponent extends EnrollmentRow implements OnInit {
     return true;
     // return this.siteAccessObject.status === EnrollmentStatus.New && this.siteAccessObject.provisionedStatus === ProvisionedStatus.NOT_PROVISIONED;
   }
+
+
 
   // If the row was declined prior to any user action (on the page at this time)
   get isPreviouslyRejected(): boolean {

@@ -107,8 +107,8 @@
 <div [@growVertical] class="provisioner-table-container table-responsive ml-2 " *ngIf=" (isNew || showProvisionerDetailsRowOverride) && primaryType === 'User'" >
   <table >
     <tr>
-      <td *ngIf="primaryType === 'User'" class="provision-element-label" width = "12%"></td>
-      <td *ngIf="primaryType === 'User'" class="provision-element-label" width = "8%">Site Type</td>
+      <td *ngIf="primaryType === 'User'" class="provision-element-label" width = "13%"></td>
+      <td *ngIf="primaryType === 'User'" class="provision-element-label" width = "7%">Site Type</td>
       <td *ngIf="primaryType === 'User'" class="provision-element-label" width = "8%">Start Date</td>
       <td *ngIf="primaryType === 'User'" class="provision-element-label" width = "8%">End Date</td>
       <td class="provision-element-label" width = "8%"> POS User ID</td>
@@ -150,7 +150,11 @@
       </td>
       <!--status -->
       <td class="provision-element-label">
-        {{ getProvisionedStatus (rowDataSite.siteAccess[0]) }}
+
+        <prime-pill-badge
+          [alerts]="[rowDataSite.siteAccess[0].alert]"
+          [iconOnly]='false'>
+        </prime-pill-badge>
        </td>
 
 
