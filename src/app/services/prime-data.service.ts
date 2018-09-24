@@ -201,6 +201,24 @@ export class PrimeDataService {
     return result;
   }
 
+  getProvisionerOrgDetailsByUser(user: Person): ProvisionerRowItem[] {
+    debugger;
+    const result = [];
+    user.allOrganiationWithSitesForUser().map(org => {
+      const rowItem: ProvisionerRowItem = {
+        title: org.title,
+        siteAccess: org.allSiteAccess.filter(x => x.person === user),
+        site: org.members,
+        associatedObjectId: org.objectId
+      }
+      result.push(rowItem);
+    }) ;
+
+    return result;
+  }
+
+  // no longer used..
+
   getProvisionerDetailsByUser(user: Person): ProvisionerRowItem[] {
     const result = [];
 
@@ -214,8 +232,8 @@ export class PrimeDataService {
       const rowItem: ProvisionerRowItem = {
         title: site.name,
         siteAccess: site.siteAccess.filter(x => x.person === user),
-        site: site,
-        associatedObjectId: site.objectId
+        site:  user.sites,
+        associatedObjectId: site.objectId,
       };
 
 

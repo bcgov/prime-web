@@ -7,6 +7,7 @@ import { Address } from '../models/addresses.model';
 import {AccessReasons, DeclinedReasons, Site, SiteAccess, SiteAccessProgressSteps, ProvisionRequestOptions, AccessClass, AccessRights} from '../models/sites.model';
 import * as moment from 'moment';
 import {DateFormatter} from 'ngx-bootstrap';
+import { OrganizationAccess } from '../models/organization-access.model';
 
 /**
  * Responsible for generating dummy data, useful for development Not responsible
@@ -118,7 +119,7 @@ export class DummyDataService {
 
     return result;
   }
-   /**
+  /**
    * Creates a Site Access with a random status that's associated to the input
    * parameters.  It does  modify the inputted Person and Site objects to
    * associate them with the Site Access.
@@ -143,12 +144,12 @@ export class DummyDataService {
     SA.site = site;
     SA.person = person;
 
-     // Set personal or not personal access
-     if (SA.status !== EnrollmentStatus.New) {
-       const randomAccesstring: string = this.getRandomElFromArray(Object.keys(AccessReasons));
-       const accessReason: DeclinedReasons = AccessReasons[randomAccesstring];
-       SA.accessReason = accessReason;
-     }
+    // Set personal or not personal access
+    if (SA.status !== EnrollmentStatus.New) {
+      const randomAccesstring: string = this.getRandomElFromArray(Object.keys(AccessReasons));
+      const accessReason: DeclinedReasons = AccessReasons[randomAccesstring];
+      SA.accessReason = accessReason;
+    }
 
     // End date is at most 4mo in future
     const today = new Date();
@@ -203,7 +204,7 @@ export class DummyDataService {
 
 
   // Data for demo
-  createSiteAccessAndAssociateDemo(site: Site, person: Person, access: string): SiteAccess  {
+  createSiteAccessAndAssociateDemo(site: Site, person: Person, access: string, organization: PharmaNetOrganization)  {
 
     const SA: SiteAccess = new SiteAccess();
 
@@ -213,7 +214,14 @@ export class DummyDataService {
     person.siteAccess.push(SA);
     site.siteAccess.push(SA);
 
-      return SA;
+    const orgAccess = new OrganizationAccess(person, organization);
+    person.organizationAccess.push(orgAccess);
+    organization.organizationAccess.push(orgAccess);
+
+
+    // TODO - RETURN ORG ACCESS! ADAM
+    // return { siteAccess: SA, orgAccess: orgAccess};
+    return SA;
   }
 
   populateSiteAccessFromCollectionDemo( collections: PharmaNetOrganization[], people: Person[] ): SiteAccess[] {
@@ -275,38 +283,38 @@ export class DummyDataService {
     ];
 
     // First Person - 2 New, Active, Approved
-    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[0], people[0], access[1]); // New
+    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[0], people[0], access[1], collections[0]); // New
     result.push(sa);
-    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[3], people[0], access[1]); // New
+    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[3], people[0], access[1], collections[0]); // New
     result.push(sa);
-    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[0], access[1]); // Active
+    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[0], access[1], collections[0]); // Active
     result.push(sa);
-    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[2], people[0], access[1]); // Provisioning
+    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[2], people[0], access[2], collections[0]); // Provisioning
     result.push(sa);
 
     // Second Person - Declined by Applicant, Pending with MoH
-    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[3], people[1], access[1]);
+    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[3], people[1], access[1], collections[1]);
     result.push(sa);
-    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[0], people[1], access[1]);
+    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[0], people[1], access[1], collections[1]);
     result.push(sa);
-    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[0], people[1], access[1]);
+    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[0], people[1], access[1], collections[0]);
     result.push(sa);
 
     // Third Person - Expired
-    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[1], people[2], access[1]);
+    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[1], people[2], access[1], collections[1]);
     result.push(sa);
-    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[2], access[1]);
+    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[2], access[1], collections[0]);
     result.push(sa);
 
     // Fourth Person - Pending with Applicant
-    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[2], people[3], access[1]);
+    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[2], people[3], access[1], collections[1]);
     result.push(sa);
-    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[3], access[1]);
+    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[3], access[1], collections[0]);
     result.push(sa);
 
     // Fourth Person - Pending with Provisioner
-    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[3], people[4], access[1]);
-    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[4], access[1]);
+    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[3], people[4], access[1], collections[0]);
+    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[4], access[1], collections[0]);
     result.push(sa);
 
     collections.map(org => {
@@ -314,7 +322,7 @@ export class DummyDataService {
       if (org.allSiteAccess.length === 0){
 
         org.members.map(site => {
-          sa = this.createSiteAccessAndAssociateDemo(site, people[1], access[1]); // Active
+          sa = this.createSiteAccessAndAssociateDemo(site, people[1], access[1], org); // Active
           result.push(sa);
         })
 
@@ -329,15 +337,15 @@ export class DummyDataService {
 
     // Full name, DOB, # days before renewal (null = default 1 year)
     const persons = [ 'Bob A Hunt,01-16-1971,30'
-                    , 'Alice R Smith,04-09-1960,60'
-                    , 'Ellen H Jones,12-12-1969,90'
-                    , 'James C Stewart,07-20-1980'
-                    , 'Kate B Mason,11-29-1979' ];
+      , 'Alice R Smith,04-09-1960,60'
+      , 'Ellen H Jones,12-12-1969,90'
+      , 'James C Stewart,07-20-1980'
+      , 'Kate B Mason,11-29-1979' ];
     const address = [ '11 Kings Way, Victoria, British Columbia, Canada, V8R 2N9'
-                    , '234 Main Street, Victoria, British Columbia, Canada, V8R 1V9'
-                    , '1234 Fort Street, Victoria, British Columbia, Canada, V8T 3R9'
-                    , '1267 Yates Street, Victoria, British Columbia, Canada, V8R 4E8'
-                    , '34 Douglas Street, Victoria, British Columbia, Canada, V8T 2R9' ];
+      , '234 Main Street, Victoria, British Columbia, Canada, V8R 1V9'
+      , '1234 Fort Street, Victoria, British Columbia, Canada, V8T 3R9'
+      , '1267 Yates Street, Victoria, British Columbia, Canada, V8R 4E8'
+      , '34 Douglas Street, Victoria, British Columbia, Canada, V8T 2R9' ];
 
     const result: Person[] = [];
 
@@ -364,17 +372,17 @@ export class DummyDataService {
     const result: Site[] = [];
 
     const siteInfo = [
-        'Pharmacy,Intellisense'
+      'Pharmacy,Intellisense'
       , 'Pharmacy,Ultracorp'
       , 'Pharmacy,Mediware'
       , 'Pharmacy,HealthInc'
     ];
 
     const address = [ '1234 Rainbow Way, Victoria, British Columbia, Canada, V8R 2N9'
-                    , '54-a Mainland Street, Victoria, British Columbia, Canada, V8R 1V9'
-                    , '34 Fort Gary Street, Victoria, British Columbia, Canada, V8T 3R9'
-                    , '12667 Bow Street, Victoria, British Columbia, Canada, V8R 4E8'
-                  ];
+      , '54-a Mainland Street, Victoria, British Columbia, Canada, V8R 1V9'
+      , '34 Fort Gary Street, Victoria, British Columbia, Canada, V8T 3R9'
+      , '12667 Bow Street, Victoria, British Columbia, Canada, V8R 4E8'
+    ];
 
 
     for (let index = 0; index < siteInfo.length; index++) {
@@ -457,7 +465,7 @@ export class DummyDataService {
   }
 
 
-  generatePosUserId(): string {
+   generatePosUserId(): string {
     const posIds = ['T', 'SJ', 'OA', 'KL', 'M'];
     return `${this.getRandomElFromArray(posIds)}${Math.ceil(Math.random() * 8000)} `;
 
@@ -511,7 +519,7 @@ export class DummyDataService {
         newDate = new Date(today.getFullYear() + adjustment, today.getMonth(), today.getDay() );
         break;
       default:
-        // current date
+      // current date
     }
     return moment( newDate ).format('YYYY/MM/DD');
   }

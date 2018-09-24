@@ -4,7 +4,7 @@ import { EnrollmentList, defaultViewSelector } from '../../../../core/enrollment
 import { EnrollmentStatus } from '../../../../models/enrollment-status.enum';
 import { ProvisionerRowComponent } from '../provisioner-row/provisioner-row.component';
 import { ProvisionerRowItem } from '../provisioner-row/provisioner-row.component';
-import { Site, SiteAccess } from '../../../../models/sites.model';
+import { Site, SiteAccess,ProvisionedStatus } from '../../../../models/sites.model';
 import { cloneDeep } from 'lodash';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { fadeIn } from '../../../../animations/animations';
@@ -112,10 +112,14 @@ export class ProvisionerListComponent extends EnrollmentList implements OnInit {
   }
 
   private updateSiteAccess(target: SiteAccess, source: SiteAccess): SiteAccess {
-    target.provisionedStatus = source.provisionedStatus;
+   target.provisionedStatus = ProvisionedStatus.PROVISIONED ;
+
+    target.personalAccess = source.personalAccess;
     target.provisionedDate = source.provisionedDate;
     target.posUserId = source.posUserId;
     target.status = source.status;
+    target.startDate = source.startDate ;
+    target.endDate = source.endDate ;
     return target;
   }
 

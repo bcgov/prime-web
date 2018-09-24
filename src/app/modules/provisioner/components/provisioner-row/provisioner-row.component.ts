@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 import {Base} from '../../../../core/base/base.class';
 
-import {DeclinedReasons, Site, SiteAccess, ProvisionedStatus} from '../../../../models/sites.model';
+import {DeclinedReasons, Site, SiteAccess, ProvisionedStatus, PersonalAccessType } from '../../../../models/sites.model';
 import {loadInOut, openState, openStateChild, openStateDisable, growVertical} from '../../../../animations/animations';
 import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
 import {EnrollmentRowItem} from '../../../verifier/components/enrollment-row/enrollment-row.component';
@@ -14,7 +14,7 @@ import { cloneDeep } from 'lodash';
 export interface ProvisionerRowItem {
   title: string;
   siteAccess: SiteAccess[];
-  site?: Site;
+  site?: Site[];
   associatedObjectId: string;
   collegeNumber?: string;
   licenceNumber?: string;
@@ -47,7 +47,18 @@ export class ProvisionerRowComponent extends EnrollmentRow implements OnInit {
       return [];
     }
     return this.rowData.siteAccess;
+
   }
+
+  get sites(): Site[] {
+    if (!this.rowData) {
+      return [];
+    }
+
+    return this.rowData.site;
+
+  }
+
 
   siteName: string;
   siteNumber: String;
@@ -55,6 +66,8 @@ export class ProvisionerRowComponent extends EnrollmentRow implements OnInit {
   siteAccessObject: SiteAccess;
 
   declinedReasonSelector = 'pleaseSelect';
+  public accessType = Object.keys(PersonalAccessType);
+  public provisionedStatusType = Object.keys(ProvisionedStatus);
 
 
   private _enrollmentStatus: string [] = [
@@ -71,17 +84,38 @@ export class ProvisionerRowComponent extends EnrollmentRow implements OnInit {
     if (!this.rowData ) { return; }
     this.siteAccessObject  = this.rowData.siteAccess[0];
     this.siteStatus = this.siteAccessObject.status;
-
+    //default value YES
+    this.rowData.site.map(site => {
+      site.siteAccess[0].personalAccess  = ( site.siteAccess[0].personalAccess === undefined) ? PersonalAccessType.Yes : site.siteAccess[0].personalAccess  ;
+    });
     this.rowDataOnInit = cloneDeep(this.rowData);
   }
 
-  onChange(ev){
-    this.siteAccessChange.emit(this.siteAccessObject);
+  onChangeStartDate(ev , item:SiteAccess) {
+    item.startDate = ev;
+    this.siteAccessChange.emit(item);
+  }
+  onChangeEndDate(ev , item:SiteAccess) {
+    item.endDate = ev;
+    this.siteAccessChange.emit(item);
+  }
+
+  onChangeprovisionedDate(ev , item:SiteAccess) {
+    item.provisionedDate = ev;
+    this.siteAccessChange.emit(item);
+  }
+
+  getProvisionedStatus( item:SiteAccess) {
+   return item.provisionedStatus ==ProvisionedStatus.PROVISIONED ? "PROVISIONED" :"NEW" ;
+  }
+
+  onChange(ev , item:SiteAccess){
+    this.siteAccessChange.emit(item);
   }
 
   get title(): string {
     if (this.primaryType === 'User' ){
-      const name = this.rowData.site.name;
+      const name = this.rowData.title;
       return 'Site ' + name.substring(name.lastIndexOf(' ') + 1);
     }
     else {
@@ -91,7 +125,8 @@ export class ProvisionerRowComponent extends EnrollmentRow implements OnInit {
   }
 
   get orgName(): String {
-    const name = this.rowData.site.name;
+
+    const name = this.rowData.title;//TODO check this saravan
     return name.substring(0, name.lastIndexOf(' ') - 1);
   }
 
@@ -183,7 +218,7 @@ export class ProvisionerRowComponent extends EnrollmentRow implements OnInit {
     return this.siteAccessObject.provisionedStatus === ProvisionedStatus.REJECTED;
   }
 
-  get isNew(): boolean {
+  get  isNew(): boolean {
     if (!this.siteAccessObject) return false;
 
     if (!(this.siteAccessObject.status === EnrollmentStatus.New || this.siteAccessObject.status === EnrollmentStatus.Provisioning)){
