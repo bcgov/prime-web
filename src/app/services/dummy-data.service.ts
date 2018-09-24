@@ -205,6 +205,7 @@ export class DummyDataService {
 
   // Data for demo
   createSiteAccessAndAssociateDemo(site: Site, person: Person, access: string, organization: PharmaNetOrganization)  {
+    const result = [];
 
     const SA: SiteAccess = new SiteAccess();
 
@@ -213,12 +214,14 @@ export class DummyDataService {
     SA.siteAccessDemo = access;
     person.siteAccess.push(SA);
     site.siteAccess.push(SA);
+    result.push(SA);
 
     // find if orgAccess already exists by org
     if (!person.allOrganizations().find(x => x === organization)){
       const orgAccess = new OrganizationAccess(person, organization);
       person.organizationAccess.push(orgAccess);
       organization.organizationAccess.push(orgAccess);
+      result.push(orgAccess);
     }
 
     
@@ -226,12 +229,16 @@ export class DummyDataService {
 
     // TODO - RETURN ORG ACCESS! ADAM
     // return { siteAccess: SA, orgAccess: orgAccess};
-    return SA;
+    // return SA;
+    // return [SA]
+    return result;
   }
 
-  populateSiteAccessFromCollectionDemo( collections: PharmaNetOrganization[], people: Person[] ): SiteAccess[] {
+  populateSiteAccessFromCollectionDemo( collections: PharmaNetOrganization[], people: Person[] ): {siteAccess: SiteAccess[], orgAccess: OrganizationAccess[]} {
     const result: SiteAccess[] = [];
+    const orgResult: OrganizationAccess[] = [];
     let sa: SiteAccess;
+    let oa: OrganizationAccess;
 
     //EnrollmentStatus,AccessReason,DeclinedReason,requestDate,startDate,endDate,SiteAccessProgressSteps
     // spaces after commons cause the enums to be undefined, Date format: MM-DD-YYYY
@@ -288,55 +295,70 @@ export class DummyDataService {
     ];
 
     // First Person - 2 New, Active, Approved
-    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[0], people[0], access[1], collections[0]); // New
+    [sa, oa] = this.createSiteAccessAndAssociateDemo(collections[0].members[0], people[0], access[1], collections[0]); // New
     result.push(sa);
-    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[3], people[0], access[1], collections[0]); // New
+    orgResult.push(oa);
+    [sa, oa] = this.createSiteAccessAndAssociateDemo(collections[0].members[3], people[0], access[1], collections[0]); // New
     result.push(sa);
-    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[0], access[1], collections[0]); // Active
+    orgResult.push(oa);
+    [sa, oa] = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[0], access[1], collections[0]); // Active
     result.push(sa);
-    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[2], people[0], access[2], collections[0]); // Provisioning
+    orgResult.push(oa);
+    [sa, oa] = this.createSiteAccessAndAssociateDemo(collections[0].members[2], people[0], access[2], collections[0]); // Provisioning
     result.push(sa);
+    orgResult.push(oa);
 
     // Second Person - Declined by Applicant, Pending with MoH
-    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[3], people[1], access[1], collections[1]);
+    [sa, oa] = this.createSiteAccessAndAssociateDemo(collections[1].members[3], people[1], access[1], collections[1]);
     result.push(sa);
-    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[0], people[1], access[1], collections[1]);
+    orgResult.push(oa);
+    [sa, oa] = this.createSiteAccessAndAssociateDemo(collections[1].members[0], people[1], access[1], collections[1]);
     result.push(sa);
-    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[0], people[1], access[1], collections[0]);
+    orgResult.push(oa);
+    [sa, oa] = this.createSiteAccessAndAssociateDemo(collections[0].members[0], people[1], access[1], collections[0]);
     result.push(sa);
+    orgResult.push(oa);
 
     // Third Person - Expired
-    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[1], people[2], access[1], collections[1]);
+    [sa, oa] = this.createSiteAccessAndAssociateDemo(collections[1].members[1], people[2], access[1], collections[1]);
     result.push(sa);
-    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[2], access[1], collections[0]);
+    orgResult.push(oa);
+    [sa, oa] = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[2], access[1], collections[0]);
     result.push(sa);
+    orgResult.push(oa);
 
     // Fourth Person - Pending with Applicant
-    sa = this.createSiteAccessAndAssociateDemo(collections[1].members[2], people[3], access[1], collections[1]);
+    [sa, oa] = this.createSiteAccessAndAssociateDemo(collections[1].members[2], people[3], access[1], collections[1]);
     result.push(sa);
-    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[3], access[1], collections[0]);
+    orgResult.push(oa);
+    [sa, oa] = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[3], access[1], collections[0]);
     result.push(sa);
-
-    console.log('created 2 sa for', people[3], sa);
+    orgResult.push(oa);
 
     // Fourth Person - Pending with Provisioner
-    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[3], people[4], access[1], collections[0]);
-    sa = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[4], access[1], collections[0]);
+    [sa, oa] = this.createSiteAccessAndAssociateDemo(collections[0].members[3], people[4], access[1], collections[0]);
+    [sa, oa] = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[4], access[1], collections[0]);
     result.push(sa);
+    orgResult.push(oa);
 
     collections.map(org => {
       //check if org is missing any siteAccess
       if (org.allSiteAccess.length === 0){
 
         org.members.map(site => {
-          sa = this.createSiteAccessAndAssociateDemo(site, people[1], access[1], org); // Active
+          [sa, oa] = this.createSiteAccessAndAssociateDemo(site, people[1], access[1], org); // Active
           result.push(sa);
+          orgResult.push(oa);
         })
 
       }
     })
 
-    return result.filter(x => x); //filter out null
+    return {
+      siteAccess: result.filter(x => x),
+      orgAccess: orgResult.filter(x => x),
+    }
+
   }
 
   // Data for Stakeholder demonstration

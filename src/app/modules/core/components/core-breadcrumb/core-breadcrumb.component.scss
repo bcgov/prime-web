@@ -12,17 +12,31 @@
 }
 
 .horizontal-scroll {
-  overflow-x: scroll;
+  overflow-x: auto;
   overflow-y: hidden;
+
+  position: relative; // for offsetParent/offsetLeft
+
+  // prototype kludge - magic # that lines up with when scrollbar has to appear
+  // basically it's the wizard min-width (750px) + everything else in the page
+  $wizardMinWidth: 750px;
+  $otherPageWidth: 573px;
+  $breakPoint: $wizardMinWidth + $otherPageWidth; //1323px
+  @media(max-width: $breakPoint){
+    padding-bottom: 1em;
+  }
+
 }
 
+
+// Scrollbar styles, commented out for prototype, use native browser scrollbars
 
 // Chrome + Safari (webkit) scrollbar styling - not IE / FF.
-.horizontal-scroll::-webkit-scrollbar {
-  background: transparent; 
-  height: 5px;
-}
-.horizontal-scroll::-webkit-scrollbar-thumb {
-  background: $color-secondary-nav;
-  border-radius: 10px;
-} 
+// .horizontal-scroll::-webkit-scrollbar {
+//   background: transparent; 
+//   height: 5px;
+// }
+// .horizontal-scroll::-webkit-scrollbar-thumb {
+//   background: $color-secondary-nav;
+//   border-radius: 10px;
+// } 

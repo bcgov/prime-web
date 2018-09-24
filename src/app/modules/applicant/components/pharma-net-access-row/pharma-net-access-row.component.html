@@ -27,7 +27,6 @@
                           dateFormat='yyyy/mm/dd'
                           [date]='getOrgAccess().startDate'
                           (dateChange)='onOrgStartDate($event)'
-                          onlyFutureDates='true'
                           class="ml-1"
                           clearButton="invisible">
         </prime-datepicker>
@@ -100,7 +99,6 @@
                                 size="mini"
                                 dateFormat="yyyy/mm/dd" 
                                 [(date)]="siteAccess.startDate"
-                                onlyFutureDates='true'
                                 class="ml-1"
                                 clearButton="invisible">
               </prime-datepicker>              
@@ -108,6 +106,7 @@
             <span class="d-inline-flex align-items-center p-2 border-left border-right">End
               <prime-datepicker [disabled]="!isActionableRow(siteAccess)"
                                 size="mini"
+                                onlyFutureDates='true'
                                 dateFormat="yyyy/mm/dd"
                                 [(date)]="siteAccess.endDate"
                                 class="ml-1">

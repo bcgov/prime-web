@@ -28,10 +28,13 @@ export class WizardProgressBarComponent extends Base implements OnInit {
   }
 
   ngAfterViewInit(){
-    this.scrollStepIntoView();
+    setTimeout( () => {
+      this.scrollStepIntoView();
+      this.cd.detectChanges();
+    }, 0)
   }
 
-  calculateProgressPercentage(): Number {
+  calculateProgressPercentage(): number {
     const denominator = this.progressSteps.length - 1;
     const numerator = this.activeIndex;
 
@@ -59,11 +62,15 @@ export class WizardProgressBarComponent extends Base implements OnInit {
       // Since we're already breaking out of Angular, we try and be safe by using a try/catch.
       // Otherwise an error here could halt execution,
       try {
-        container[0].scrollLeft = target.nativeElement.offsetLeft - (window.innerWidth / 2);
+        const targetOffset = target.nativeElement.offsetLeft;
+        const scrollOffset = targetOffset - ((container[0] as HTMLElement).offsetWidth / 2 );
+        container[0].scrollLeft = scrollOffset;
+        // console.log({targetOffset, scrollOffset});
       } catch (error) {
-        console.log('scroll exception', error);
+        // console.log('scroll exception', error);
       }
-      
+
+      // console.log('scrollstepIntoView', container, container[0].scrollLeft);
     }
   }
 

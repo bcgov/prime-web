@@ -46,9 +46,9 @@ export class AppComponent implements OnInit {
       // be okay as we force user through Reg first which makes it valid.
     }
 
-    const SA = this.dummyDataService.populateSiteAccessFromCollectionDemo( dummyCollections, dummyPeople );
-    this.primeDataService.siteAccesses.push(... SA);
-
+    const access = this.dummyDataService.populateSiteAccessFromCollectionDemo( dummyCollections, dummyPeople );
+    this.primeDataService.siteAccesses.push(... access.siteAccess);
+    this.primeDataService.organizationAccess.push(... access.orgAccess);
 
     if (environment.useDeveloperDummyData){
       const applicant = this.primeDataService.people[0];

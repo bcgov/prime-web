@@ -36,6 +36,10 @@ export class PharmaNetAccessRowComponent extends EnrollmentRow implements OnInit
 
     // We only need to update on init
     this.orgsOnly = this.calculateOrgOnly();
+
+    if (this.hasActionableSites()){
+      this.openRow();
+    }
   }
 
   /** Determines if we should restrict the row to orgOnly - i.e. before the Provisoiner has selected sites */
@@ -61,7 +65,7 @@ export class PharmaNetAccessRowComponent extends EnrollmentRow implements OnInit
     return this.openState === RowState.Opened;
   }
 
-  shouldShowOrgActionButtons(): boolean {
+  hasActionableSites(): boolean {
     // The org row is actionable if any of its children are actionable
     return this.subRowData
       .map(this.isActionableRow)
