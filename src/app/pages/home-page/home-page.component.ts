@@ -31,9 +31,22 @@ export class HomePageComponent implements OnInit {
 
     this.dataService.user.allOrganizations().map(org => {
       org.members = org.members.map(site => {
-        site.siteAccess[0].status = EnrollmentStatus.New;
-        site.siteAccess[0].posUserId = this.dummyDataService.generatePosUserId();
-        site.siteAccess[0].personalAccess = PersonalAccessType.Yes;
+
+        const siteAccess = site.siteAccess.find(sa => sa.person === this.dataService.user);
+
+        //Don't modify siteAccess if user has already accepted/rejected
+        if (siteAccess.status === EnrollmentStatus.Active || siteAccess.status === EnrollmentStatus.Declined){
+          return site;
+        }
+
+        const orgAccess = org.organizationAccess.find(oa => oa.person === this.dataService.user);
+
+        siteAccess.startDate = orgAccess.startDate;
+        siteAccess.endDate = orgAccess.endDate;
+
+        siteAccess.status = EnrollmentStatus.New;
+        siteAccess.posUserId = this.dummyDataService.generatePosUserId();
+        siteAccess.personalAccess = PersonalAccessType.Yes;
         return site;
       })
     })

@@ -24,9 +24,6 @@ export class PharmaNetAccessRowComponent extends EnrollmentRow implements OnInit
 
   public subRowData: SiteAccess[];
 
-  public orgStartDate: Date = new Date();
-  public orgEndDate: Date;
-
   public accessType = Object.keys(PersonalAccessType);
 
   constructor(private dataService: PrimeDataService) {
@@ -91,7 +88,7 @@ export class PharmaNetAccessRowComponent extends EnrollmentRow implements OnInit
       sa.startDate = newDate;
       return sa;
     });
-    this.orgStartDate = newDate;
+    this.getOrgAccess().startDate = newDate;
   }
 
   onOrgEndDate(newDate: Date) {
@@ -99,7 +96,7 @@ export class PharmaNetAccessRowComponent extends EnrollmentRow implements OnInit
       sa.endDate = newDate;
       return sa;
     });
-    this.orgEndDate = newDate;
+    this.getOrgAccess().endDate = newDate;
   }
 
   // Remove the org, which removes the entire row and destroys the component

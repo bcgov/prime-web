@@ -88,23 +88,23 @@
   <form>
     <div>
 
-      <!-- <label>
+      <label>
           I have an international (non-Canadian) phone-number
         <prime-toggle [(data)]="applicant.hasInternationalPhoneNumber" (click) = "onInternationalPhoneNumberChange()"></prime-toggle>
-      </label> -->
+      </label>
 
       <label class="has-float-label">
-        <input type="text" [textMask]="{mask: getPhoneMask()}" class="form-control prime-input-large" id="phone" name="phone" [(ngModel)]="applicant.phone" (input)="onChange()" placeholder=" " disabled>
+        <input type="text" [textMask]="{mask: getPhoneMask()}" class="form-control prime-input-large" id="phone" name="phone" [(ngModel)]="applicant.phone" (input)="onChange()" placeholder=" ">
         <span>Phone Number</span>
       </label>
 
       <label class="has-float-label">
-          <input type="text" class="form-control prime-input-large" id="phoneExt" name="phoneExt" [(ngModel)]="applicant.phoneExtension" (input)="onChange()" placeholder=" " disabled>
+          <input type="text" class="form-control prime-input-large" id="phoneExt" name="phoneExt" [(ngModel)]="applicant.phoneExtension" (input)="onChange()" placeholder=" ">
           <span>Extension Number (optional)</span>
         </label>
 
       <label class="has-float-label">
-        <input type="text" class="form-control prime-input-large" id="email" name="email" [(ngModel)]="applicant.email" (input)="onChange()" placeholder=" " disabled>
+        <input type="text" class="form-control prime-input-large" id="email" name="email" [(ngModel)]="applicant.email" (input)="onChange()" placeholder=" ">
         <span>Email</span>
       </label>
     </div>
