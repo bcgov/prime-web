@@ -89,7 +89,9 @@ export class PharmaNetAccessRowComponent extends EnrollmentRow implements OnInit
 
   onOrgStartDate(newDate: Date){
     this.subRowData = this.subRowData.map(sa => {
-      sa.startDate = newDate;
+      if (this.isActionableRow(sa)){
+        sa.startDate = newDate;
+      }
       return sa;
     });
     this.getOrgAccess().startDate = newDate;
@@ -97,7 +99,9 @@ export class PharmaNetAccessRowComponent extends EnrollmentRow implements OnInit
 
   onOrgEndDate(newDate: Date) {
     this.subRowData = this.subRowData.map(sa => {
-      sa.endDate = newDate;
+      if (this.isActionableRow(sa)){
+        sa.endDate = newDate;
+      }
       return sa;
     });
     this.getOrgAccess().endDate = newDate;
