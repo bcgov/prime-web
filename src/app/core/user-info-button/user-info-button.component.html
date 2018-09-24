@@ -19,31 +19,21 @@
     <div class="row">
       <div class="col">
         <label class="has-float-label">
-          <input type="text" disabled class="form-control" id="legalName" name="legalName" [(ngModel)]="person.name">
+          <input type="text" disabled class="form-control" id="legalName" name="legalName" [(ngModel)]="person.legalName">
           <span>Legal Name</span>
+        </label>
+      </div>
+      <div class="col">
+        <label class="has-float-label">
+          <input type="text" disabled class="form-control" id="prefName" name="prefName" [(ngModel)]="person.name">
+          <span>Preferred Name</span>
         </label>
       </div>
     </div>
 
     <form class='row'>
       <div class="col">
-        <label class="has-float-label">
-          <input type="text" disabled class="form-control" id="primaryPhone" name="primaryPhone" [(ngModel)]="person.phone">
-          <span>Phone Number</span>
-        </label>
 
-        <label class="has-float-label">
-          <input type="text" disabled class="form-control" id="renewalDate" name="renewalDate" [ngModel]="person.renewalDateShort">
-          <span>Renewal Date</span>
-        </label>
-
-        <label class="has-float-label">
-          <input type="text" disabled class="form-control" id="PosID" name="PosID" [(ngModel)]="person.PoSId">
-          <span>PoS ID</span>
-        </label>
-      </div>
-
-      <div class="col">
         <label class="has-float-label">
           <input type="text" disabled class="form-control" id="DOB" name="DOB" [ngModel]="person.dateOfBirthShort">
           <span>Date of Birth</span>
@@ -54,11 +44,34 @@
           <span>Email</span>
         </label>
 
+
         <label class="has-float-label">
           <input type="text" disabled class="form-control" id="postal" name="postal" [(ngModel)]="person.address.postal">
           <span>Postal Code</span>
         </label>
+
+
       </div>
+
+      <div class="col">
+
+        <label class="has-float-label">
+          <input type="text" disabled class="form-control" id="primaryPhone" name="primaryPhone" [(ngModel)]="person.phone">
+          <span>Phone Number</span>
+        </label>
+
+        <label class="has-float-label">
+          <input type="text" disabled class="form-control" id="renewalDate" name="renewalDate" [ngModel]="person.renewalDateShort">
+          <span>Renewal Date</span>
+        </label>
+        <label class="has-float-label">
+          <input type="text" disabled class="form-control" id="userclass" name="userclass" value="Pharmacist">
+          <span>User Class</span>
+        </label>
+
+      </div>
+
+
 
     </form>
 <!--
