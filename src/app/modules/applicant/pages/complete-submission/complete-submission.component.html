@@ -1,14 +1,32 @@
 <prime-page-framework>
 
-  <h1 id="regInfo">Account Created Successfully</h1>
-  <div>
-  <h2>New text to be provided by BSA by Tue</h2>
-  </div>
+<ng-container *ngIf="showApplicantNewText; else applicantChangeText">
+  
+    <h1 id="regInfo">Enrollment Completed</h1>
+    <div>
+      <h2>
+        Your enrollment application was submitted successfully.
+        Please wait for the provisioner to provision PharmaNet access for you.
+        You will be asked to confirm the provisioning once the provisioner completes their tasks.
+      </h2>
+    </div>
+</ng-container>
   <div>
     <label class="has-float-label">
-      <button type="button" class="btn btn-primary mx-2" (click)="continue()" tabindex="0">Ok</button>
+      <button type="button"
+              class="btn btn-primary mx-2"
+              (click)="continue()"
+              tabindex="0">Ok</button>
     </label>
   </div>
 
 </prime-page-framework>
 
+<ng-template #applicantChangeText>
+    <h1 id="regInfo">Provisioning Confirmed</h1>
+    <div>
+      <h2>
+        Thank you for confirming the provisioning at the specific sites. You now have access to PharmaNet at those confirmed sites.
+      </h2>
+    </div>
+</ng-template>
