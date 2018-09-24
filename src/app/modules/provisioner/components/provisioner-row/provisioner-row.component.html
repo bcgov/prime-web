@@ -107,13 +107,13 @@
 <div [@growVertical] class="provisioner-table-container table-responsive ml-2 " *ngIf=" (isNew || showProvisionerDetailsRowOverride) && primaryType === 'User'" >
   <table >
     <tr>
-      <td *ngIf="primaryType === 'User'" class="provision-element-label" width = "13%"></td>
-      <td *ngIf="primaryType === 'User'" class="provision-element-label" width = "7%">Site Type</td>
-      <td *ngIf="primaryType === 'User'" class="provision-element-label" width = "8%">Start Date</td>
-      <td *ngIf="primaryType === 'User'" class="provision-element-label" width = "8%">End Date</td>
-      <td class="provision-element-label" width = "8%"> POS User ID</td>
-      <td class="provision-element-label" width = "8%" >Personal Access</td>
-      <td class="provision-element-label" width = "8%">Date Provisioned</td>
+      <td *ngIf="primaryType === 'User'" class="provision-element-label" width = "11%"></td>
+      <td *ngIf="primaryType === 'User'" class="provision-element-label" width = "5%">Site Type</td>
+      <td *ngIf="primaryType === 'User'" class="provision-element-label" width = "5%">Start Date</td>
+      <td *ngIf="primaryType === 'User'" class="provision-element-label" width = "5%">End Date</td>
+      <td class="provision-element-label" width = "6%"> POS User ID</td>
+      <td class="provision-element-label" width = "6%" >Personal Access</td>
+      <td class="provision-element-label" width = "5%">Date Provisioned</td>
       <td class="provision-element-label" width = "6%" >Status</td>
     </tr>
     <tr *ngFor="let rowDataSite of sites">
@@ -151,10 +151,15 @@
       <!--status -->
       <td class="provision-element-label">
 
-        <prime-pill-badge
+        <select class="form-control access-type-selector" [(ngModel)]='rowDataSite.siteAccess[0].status'>
+          <option value="{{rowDataSite.siteAccess[0].status}}">{{rowDataSite.siteAccess[0].status != 'Provisioning' ? '' :'Provisioning'}}
+          </option>
+        </select>
+
+    <!--    <prime-pill-badge
           [alerts]="[rowDataSite.siteAccess[0].alert]"
           [iconOnly]='false'>
-        </prime-pill-badge>
+        </prime-pill-badge>-->
        </td>
 
 

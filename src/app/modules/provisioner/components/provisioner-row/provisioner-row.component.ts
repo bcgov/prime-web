@@ -87,8 +87,7 @@ export class ProvisionerRowComponent extends EnrollmentRow implements OnInit {
     //default value YES
     this.rowData.site.map(site => {
       site.siteAccess[0].personalAccess  = ( site.siteAccess[0].personalAccess === undefined) ? PersonalAccessType.Yes : site.siteAccess[0].personalAccess  ;
-      console.log(site.siteAccess[0].status);
-      //site.siteAccess[0].status = this.isNewStatus(site.siteAccess[0]) ? EnrollmentStatus.New :   site.siteAccess[0].status;
+      site.siteAccess[0].provisionedDate =  new Date();
     });
     this.rowDataOnInit = cloneDeep(this.rowData);
   }
