@@ -1,17 +1,19 @@
 <div *ngIf="rowData" class="enrollment-list-item" (click)="toggleRow()" [@openStateDisable]="openState">
 
-  <div class="enrollment-text-container" >
+  <div class="enrollment-text-container" *ngIf="primaryType === 'User'" >
     <ng-container *ngIf="primaryType === 'User'">
       <span class="enrollment-text-main font-weight-bold">{{orgName}}</span>
       <!--<span class="enrollment-text-bold">{{title}} </span>-->
     </ng-container>
-    <ng-container *ngIf="primaryType === 'Site'">
+   <!--  no longer needed. commented as a part of PRIME-174
+   <ng-container *ngIf="primaryType === 'Site'">
       <span class="enrollment-text-bold">{{rowData.title}}  </span>
-    </ng-container>
+    </ng-container>-->
   </div>
 
 
-  <div *ngIf="(isNew || isAccepted || siteStatus === 'Active')  && primaryType === 'Site'" > <!--dont show it for user-->
+ <!--  no longer needed. commented as a part of PRIME-174
+  <div *ngIf="(isNew || isAccepted || siteStatus === 'Active')  && primaryType === 'Site'" > &lt;!&ndash;dont show it for user&ndash;&gt;
 
     <table>
       <tr>
@@ -24,9 +26,10 @@
 
       </tr>
   </table>
- </div>
+ </div>-->
 
-  <div *ngIf="isRejected  && primaryType === 'Site'">  <!--dont show it for user-->
+ <!--  no longer needed. commented as a part of PRIME-174
+ <div *ngIf="isRejected  && primaryType === 'Site'">  &lt;!&ndash;dont show it for user&ndash;&gt;
     <div class="col d-inline-flex flex-column">
       <select id="declinedReason2" class="form-control drop-dl-box-15"
               [value]="declinedReasonSelector" >
@@ -36,19 +39,19 @@
         </option>
       </select>
     </div>
-  </div>
+  </div>-->
 
   <!-- TODO: Handle this case.  Note that 'declined' is not the same as 'DeclinedEnrollment" (isRejected). Maybe make a new one, isDeclined? isPreviouslyRejected? Unsure. -->
-  <div *ngIf="isPreviouslyRejected  && primaryType === 'Site'">
+<!--  no longer needed. commented as a part of PRIME-174 <div *ngIf="isPreviouslyRejected  && primaryType === 'Site'">
   <div class="col d-inline-flex flex-column">
     <select id="declinedReason1" class="form-control drop-dl-box-15 color"
           [value]="declinedReasonSelector" disabled>
       <option value="pleaseSelect" selected>{{declinedReasonValue('ACCESS_NO_lONGER_REQUIRED')}}</option>
     </select>
   </div>
-</div>
+</div>-->
 
-  <div class="enrollment-actions" *ngIf=" primaryType === 'Site'">
+<!--  no longer needed. commented as a part of PRIME-174 <div class="enrollment-actions" *ngIf=" primaryType === 'Site'">
       <span class="enrollment-icons">
         <prime-pill-badge
             [alerts]="[siteAccessObject.alert]"
@@ -68,38 +71,57 @@
           labelReject="Decline Enrollment"
         ></prime-accept-reject-icons>
       </span>
-  </div>
+  </div>-->
 </div>
 
-<div [@growVertical] class="provisioner-table-container table-responsive ml-2 " *ngIf=" (isNew || showProvisionerDetailsRowOverride) && primaryType === 'Site'" >
-  <table >
+<div [@growVertical] class="provisioner-table-container table-responsive ml-2 " *ngIf=" primaryType === 'Site'">
+  <table  >
     <tr>
-      <td *ngIf="primaryType === 'User'" class="provision-element-label" width = "8%">PEC</td>
-      <td *ngIf="primaryType === 'Site'" class="provision-element-label" width = "8%">College Number</td>
-      <td *ngIf="primaryType === 'Site'" class="provision-element-label" width = "8%">Licence Number</td>
-      <td class="provision-element-label" width = "12%"> Request Type</td>
-      <td class="provision-element-label" width = "10%" >User Class</td>
-      <td class="provision-element-label" width = "12%"> Access Privileges</td>
-      <td class="provision-element-label" width = "8%" >L&amp;C</td>
-      <td class="provision-element-label" width = "8%"> Start Date</td>
-      <td class="provision-element-label" width = "8%">End Date</td>
-      <td class="provision-element-label" width = "20%"> Personal Access</td>
-      <td width="2%"></td>
-      <td width="12%"></td>
+      <td *ngIf="primaryType === 'Site'" class="enrollment-text-main font-weight-bold " width = "20%">User</td>
+      <td class="enrollment-text-main font-weight-bold" width = "10%"> Start Date</td>
+      <td class="enrollment-text-main font-weight-bold" width = "10%">End Date</td>
+      <td *ngIf="primaryType === 'Site'" class="enrollment-text-main font-weight-bold" width = "10%">Pos User ID</td>
+      <td class="enrollment-text-main font-weight-bold" width = "10%"> Personal Access</td>
+      <td class="enrollment-text-main font-weight-bold" width = "10%">Date Provisioned</td>
+      <td class="enrollment-text-main font-weight-bold" width = "10%">Status</td>
+
     </tr>
-    <tr *ngFor="let rowDataSite of sites()">
-      <td *ngIf="primaryType === 'User'" class="provision-element-text">{{rowData.site.PEC}}</td>
-      <td *ngIf="primaryType === 'Site'" class="provision-element-text">{{ getCollegeNumber() }}</td>
-      <td *ngIf="primaryType === 'Site'" class="provision-element-text">{{ getLicenceNumber() }}</td>
-      <td class="provision-element-text"> {{siteAccessObject.request}}</td>
-      <td class="provision-element-text">{{siteAccessObject.siteClass}}</td>
-      <td class="provision-element-text"> {{siteAccessObject.accessRights}}</td>
-      <td class="provision-element-text">{{siteAccessObject.tAndC}}</td>
-      <td class="provision-element-text"> {{siteAccessObject.startDateShort}}</td>
-      <td class="provision-element-text">{{siteAccessObject.endDateShort}}</td>
-      <td class="provision-element-text"> {{siteAccessObject.accessReason}}</td>
-      <td></td>
-      <td class="mr-2"><input type="checkbox" >L&amp;C Enforceable </td>
+    <tr >
+      <td *ngIf="primaryType === 'Site'" class="provision-element-text">{{rowData.title}}   <prime-info-button [targetId]="rowData.associatedObjectId" ></prime-info-button> </td>
+      <td *ngIf="primaryType === 'Site'" ><prime-datepicker size="mini" (dateChange)="onChangeStartDate($event ,rowData.siteAccess[0])" [(date)]="rowData.siteAccess[0].startDate" id="startDateShort" name="startDateShort" placeholder=" "  dateFormat="yyyy/mm/dd"  tabindex="1"></prime-datepicker></td>
+      <td *ngIf="primaryType === 'Site'" ><prime-datepicker size="mini" (dateChange)="onChangeEndDate($event ,rowData.siteAccess[0])" [(date)]="rowData.siteAccess[0].endDateShort" id="endDateShort" name="endDateShort" placeholder=" "  dateFormat="yyyy/mm/dd"  tabindex="1"></prime-datepicker></td>
+      <td class="provision-element-label">  <input type="text" class="form-control mb-2 mr-sm-2" id="posuid" (change)="onChange($event , rowData.siteAccess[0])" name="posuid" placeholder=" " tabindex="1" [(ngModel)]="rowData.siteAccess[0].posUserId" (change)="onChange($event, rowData.siteAccess[0])">
+      </td>
+      <!--Personal Access -->
+      <td class="provision-element-label">
+
+        <select class="form-control access-type-selector" [(ngModel)]='rowData.siteAccess[0].personalAccess' (change)="onChange($event, rowData.siteAccess[0])" >
+          <option *ngFor="let status of accessType"
+                  value="{{status}}">
+            {{status}}
+          </option>
+        </select>
+
+      </td>
+
+      <!-- DateProvisioned -->
+      <td class="provision-element-label">
+        <prime-datepicker size="mini"  (dateChange)="onChangeprovisionedDate($event ,rowData.siteAccess[0])" [(date)]='rowData.siteAccess[0].provisionedDate' id="provisionDateShort" name="provisionDateShort" placeholder=" "  dateFormat="yyyy/mm/dd"  tabindex="1"></prime-datepicker>
+      </td>
+      <!--status -->
+      <td class="provision-element-label">
+
+        <select class="form-control access-type-selector" [(ngModel)]='rowData.siteAccess[0].status'>
+          <option value="{{rowData.siteAccess[0].status}}">{{rowData.siteAccess[0].status != 'Provisioning' ? '' :'Provisioning'}}
+          </option>
+        </select>
+
+        <!--    <prime-pill-badge
+              [alerts]="[rowDataSite.siteAccess[0].alert]"
+              [iconOnly]='false'>
+            </prime-pill-badge>-->
+      </td>
+
     </tr>
   </table>
 </div>

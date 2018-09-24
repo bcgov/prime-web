@@ -80,15 +80,21 @@ export class ProvisionerRowComponent extends EnrollmentRow implements OnInit {
     super();
   }
 
-  ngOnInit() {
+  ngOnInit() {    
     if (!this.rowData ) { return; }
     this.siteAccessObject  = this.rowData.siteAccess[0];
     this.siteStatus = this.siteAccessObject.status;
     //default value YES
-    this.rowData.site.map(site => {
-      site.siteAccess[0].personalAccess  = ( site.siteAccess[0].personalAccess === undefined) ? PersonalAccessType.Yes : site.siteAccess[0].personalAccess  ;
-      site.siteAccess[0].provisionedDate =  new Date();
-    });
+    if ( this.primaryType==='User' && this.rowData.site) {
+      this.rowData.site.map(site => {
+        site.siteAccess[0].personalAccess  = ( site.siteAccess[0].personalAccess === undefined) ? PersonalAccessType.Yes : site.siteAccess[0].personalAccess  ;
+        site.siteAccess[0].provisionedDate =  new Date();
+      });
+    }
+    if ( this.primaryType==='Site' && this.rowData) {
+      this.rowData.siteAccess[0].personalAccess  = ( this.rowData.siteAccess[0].personalAccess === undefined) ? PersonalAccessType.Yes : this.rowData.siteAccess[0].personalAccess  ;
+      this.rowData.siteAccess[0].provisionedDate =  new Date();
+    }
     this.rowDataOnInit = cloneDeep(this.rowData);
   }
 
