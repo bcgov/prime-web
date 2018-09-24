@@ -8,70 +8,73 @@
 <prime-page-framework>
 
   <div class="row" *ngIf="IS_SHOWING_PERSON; else siteDetails">
-    <div class="col mx-3">
+     <div class="col mx-3">
       <div class="form-group row has-float-label">
-        <label for="lastName">
-          Last Name
+        <label for="legalName">
+          Legal Name
         </label>
-        <input type="text" disabled class="form-control" id="lastName" name="lastName" [value]="person?.lastName">
+        <input type="text" disabled class="form-control" id="legalName" name="legalName" [value]="person?.legalName">
       </div>
 
-      <div class="form-group row has-float-label">
-        <label for="middleName">
-          Middle Name
-        </label>
-        <input type="text" disabled class="form-control" id="middleName" name="middleName" [value]="person?.middleName">
-      </div>
+       <div class="form-group row has-float-label">
+         <label for="DOB">
+           Date of Birth
+         </label>
+         <input type="text" disabled class="form-control" id="DOB" name="DOB" [value]="person.dateOfBirthShort">
+       </div>
 
-      <div class="form-group row has-float-label">
-        <label for="firstName">
-          First Name
-        </label>
-        <input type="text" disabled class="form-control" id="firstName" name="firstName" [value]="person?.firstName">
-      </div>
+       <div class="form-group row has-float-label">
+         <label for="email">
+           Email
+         </label>
+         <input type="text" disabled class="form-control" id="email" name="email" [value]="person?.email ? person.email : ''">
+       </div>
+
+       <div class="form-group row has-float-label">
+         <label for="postcalCode">
+           Email
+         </label>
+         <input type="text" disabled class="form-control" id="postcalCode" name="postcalCode" [value]="person.address.postal">
+       </div>
 
 
-    </div>
 
-    <div class="col mx-3">
-      <div class="form-group row has-float-label">
-        <label for="middleName">
-          College Number
-        </label>
-        <input type="text" disabled class="form-control" id="collegeNumber" name="collegeNumber" [value]="collegeCurrValue(person?.collegeCertificationList[0].collegeType)">
-      </div>
-
-      <div class="form-group row has-float-label">
-        <label for="firstName">
-          Practitioner College ID
-        </label>
-        <input type="text" disabled class="form-control" id="licenceNumber" name="licenceNumber" [value]="person?.collegeCertificationList[0].licenceNumber">
-      </div>
-
-      <div class="form-group row has-float-label">
-        <label for="userclass">
-          User Class
-        </label>
-        <input type="text" disabled class="form-control" id="userclass" name="licenseNumber" value="Pharmacist">
-      </div>
-
-    </div>
-
+     </div>
 
     <div class="col mx-3">
+
       <div class="form-group row has-float-label">
-        <label for="email">
-          Email
+        <label for="prefName">
+          Preferred Name
         </label>
-        <input type="text" disabled class="form-control" id="email" name="email" [value]="person?.email ? person.email : ''">
+        <input type="text" disabled class="form-control" id="prefName" name="prefName" [value]="person?.name">
       </div>
+
+
       <div class="form-group row has-float-label">
         <label for="phone">
           Phone Number
         </label>
         <input type="text" disabled class="form-control" id="phone" name="phone" [value]="person?.phone ? person.phone : ''">
       </div>
+
+      <div class="form-group row has-float-label">
+        <label for="renewalDate">
+          Renewal Date
+        </label>
+        <input type="text" disabled class="form-control" id="renewalDate" name="renewalDate" [value]="person?.renewalDateShort ? person.renewalDateShort : ''">
+      </div>
+
+
+      <div class="form-group row has-float-label">
+        <label for="userclass">
+         User Class
+        </label>
+        <input type="text" disabled class="form-control" id="userclass" name="userclass" value="Pharmacist">
+      </div>
     </div>
+
+
   </div>
 
   <div class="row"  *ngIf="IS_SHOWING_PERSON; else siteDetails">
