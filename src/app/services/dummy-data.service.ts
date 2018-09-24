@@ -214,9 +214,14 @@ export class DummyDataService {
     person.siteAccess.push(SA);
     site.siteAccess.push(SA);
 
-    const orgAccess = new OrganizationAccess(person, organization);
-    person.organizationAccess.push(orgAccess);
-    organization.organizationAccess.push(orgAccess);
+    // find if orgAccess already exists by org
+    if (!person.allOrganizations().find(x => x === organization)){
+      const orgAccess = new OrganizationAccess(person, organization);
+      person.organizationAccess.push(orgAccess);
+      organization.organizationAccess.push(orgAccess);
+    }
+
+    
 
 
     // TODO - RETURN ORG ACCESS! ADAM
@@ -311,6 +316,8 @@ export class DummyDataService {
     result.push(sa);
     sa = this.createSiteAccessAndAssociateDemo(collections[0].members[1], people[3], access[1], collections[0]);
     result.push(sa);
+
+    console.log('created 2 sa for', people[3], sa);
 
     // Fourth Person - Pending with Provisioner
     sa = this.createSiteAccessAndAssociateDemo(collections[0].members[3], people[4], access[1], collections[0]);
