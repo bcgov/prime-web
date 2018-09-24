@@ -1,7 +1,7 @@
 <div *ngIf="rowData" class="enrollment-list-item" (click)="toggleRow()" [@openStateDisable]="openState">
 
     <div class="enrollment-text-container">
-      <span class="enrollment-text-main">{{rowData.title}}</span>
+      <span class="enrollment-text-main no-separator">{{rowData.title}}</span>
        <!--
        <ng-container *ngIf="primaryType === 'Site'">
           <span *ngIf="rowData.sites != null" class="enrollment-text-extra">({{rowData.sites.length}}) Sites</span>
@@ -43,11 +43,11 @@
           <div class="enrollment-text-container">
             <span class="enrollment-text-main">{{siteAccess.title}}</span>
 
-<!-- 
             <prime-info-button
               class='mx-2'
               [targetId]="siteAccess.site.objectId">
-            </prime-info-button> -->
+            </prime-info-button>
+
           </div>
           <div class="enrollment-actions">
               <span class="enrollment-icons mr-5">

@@ -18,7 +18,7 @@ export class CompleteSubmissionComponent implements OnInit {
 
   ngOnInit() {
     // If any sites are Active or Declined, show the other text
-    this.showApplicantNewText = this.dataService.user.allOrganiationWithSitesForUser()
+    this.showApplicantNewText = this.dataService.user.allOrganizations()
       .map(org => {
         const sa = org.getSiteAccessWithStatus(EnrollmentStatus.Active);
         sa.concat(org.getSiteAccessWithStatus(EnrollmentStatus.Declined));
