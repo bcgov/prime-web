@@ -78,8 +78,8 @@ export class AddUserButtonComponent implements OnInit {
   addUser(){
     this.dataService.people.push(... this.searchResultsPeople);
     // Set the Applicant to the recently found/created user
-    this.dataService.user = this.searchResultsPeople[0];
-    console.log('Setting Applicant to new user', {user: this.dataService.user});
+    // this.dataService.user = this.searchResultsPeople[0];
+    // console.log('Setting Applicant to new user', {user: this.dataService.user});
     this.modalRef.hide();
     this.onAddNewUser.emit(this.searchResultsPeople[0]);
   }

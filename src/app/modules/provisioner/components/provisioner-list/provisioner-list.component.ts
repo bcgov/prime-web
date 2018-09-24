@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {Component, Input, OnInit, QueryList, ViewChildren, ChangeDetectorRef, Output, EventEmitter} from '@angular/core';
 import { EnrollmentRowItem } from '../../../verifier/components/enrollment-row/enrollment-row.component';
 import { EnrollmentList, defaultViewSelector } from '../../../../core/enrollment-list/enrollment-list.class';
 import { EnrollmentStatus } from '../../../../models/enrollment-status.enum';
@@ -8,6 +8,7 @@ import { Site, SiteAccess,ProvisionedStatus } from '../../../../models/sites.mod
 import { cloneDeep } from 'lodash';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { fadeIn } from '../../../../animations/animations';
+import { Person } from '../../../../models/person.model';
 
 @Component({
   selector: 'prime-provisioner-list',
@@ -19,6 +20,9 @@ export class ProvisionerListComponent extends EnrollmentList implements OnInit {
 
   @Input() rowItems: ProvisionerRowItem[] = [];
   @Input() primaryType: 'User'|'Site' = 'User';
+
+  @Output() change = new EventEmitter<boolean>(false);
+  @Input() parentSite: Site;
   public showSaveMessage = false;
   public loadingSpinner = false;
   private _pendingUpdates: SiteAccess[] = [];
@@ -32,7 +36,7 @@ export class ProvisionerListComponent extends EnrollmentList implements OnInit {
     EnrollmentStatus.New,
   ];
 
-  constructor(private dataService: PrimeDataService) {
+  constructor(private dataService: PrimeDataService, private cd: ChangeDetectorRef) {
     super();
   }
 
@@ -44,8 +48,29 @@ export class ProvisionerListComponent extends EnrollmentList implements OnInit {
     }
   }
 
+  ngOnChanges(changes){
+    if (this.rowItems && this.data && this.rowItems.length !== this.data.length){
+      this.data = cloneDeep(this.rowItems);
+    }
+  }
+
   get EnrollmentStatus() {
     return this._enrollmentStatus;
+  }
+
+  onAddNewPerson(person: Person){
+    // Goal - have them show up in the current page, so they need to be associated with the org
+    //TODO  Need to associate with the SITE.
+    console.log('onAddNewPerson', person);
+    const sa = new SiteAccess();
+    sa.site = this.parentSite;
+    sa.person = person;
+    person.siteAccess.push(sa);
+    this.parentSite.siteAccess.push(sa);
+
+    this.dataService.siteAccesses.push(sa);
+    // this.cd.detectChanges();
+    this.change.emit(true);
   }
 
   rowOpened(item) {

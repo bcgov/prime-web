@@ -44,8 +44,7 @@
 
       <button [disabled]="!updated" type="button" class="btn btn-default mx-2" (click)="cancel()">Cancel</button>
       <button [disabled]="!updated" type="button" class="btn btn-primary mx-2" (click)="save()" [primeLoadingSpinner]="loadingSpinner" >Save</button>
-      <prime-add-user-button>
-        class='fix-right'>
+      <prime-add-user-button *ngIf="primaryType === 'Site'" (onAddNewUser)="onAddNewPerson($event)">
       </prime-add-user-button>
     </div>
   </div>

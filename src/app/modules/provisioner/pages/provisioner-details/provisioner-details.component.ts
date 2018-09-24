@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Person } from '../../../../models/person.model';
@@ -22,7 +22,7 @@ export class ProvisionerDetailsComponent implements OnInit {
   site: Site;
   collection: PharmaNetOrganization;
 
-  constructor(private route: ActivatedRoute, private dataService: PrimeDataService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private dataService: PrimeDataService, private router: Router, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.sub = this.route.data
