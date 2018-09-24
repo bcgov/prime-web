@@ -72,7 +72,6 @@ export class EnrollmentRowComponent extends EnrollmentRow implements OnInit, OnD
   get siteAccessRequiringAttention(): any[] {
 
     if ( !this.rowData || !this.rowData.expandableRows ){
-      debugger;
       return [];
     }
 
@@ -92,6 +91,7 @@ export class EnrollmentRowComponent extends EnrollmentRow implements OnInit, OnD
   }
 
    goToEnrollmentPage(objectId?: string){
+     console.log('goToEnrollmentPage', objectId)
     //If user selects details from verifier dash, then go to verifier details
     if (this.router.url.indexOf('/verifier/') > -1) {
       const link = '/verifier/details/' + this.primaryType.toLowerCase();
