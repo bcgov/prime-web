@@ -75,7 +75,7 @@ $rowBgColor: white;
       // font-weight: 800;
       font-size: $h4-font-size;
     }
-    &>span:not(:last-of-type):after {
+    &>span:not(:last-of-type):not(.no-separator):after {
         font-size: $font-size-base;
         color: $gray-600;
         content: " / "

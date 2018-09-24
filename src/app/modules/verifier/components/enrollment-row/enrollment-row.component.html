@@ -1,7 +1,7 @@
 <div *ngIf="rowData" class="enrollment-list-item" (click)="toggleRow()" [@openStateDisable]="openState">
 
     <div class="enrollment-text-container">
-      <span class="enrollment-text-main">{{rowData.title}}</span>
+      <span class="enrollment-text-main no-separator">{{rowData.title}}</span>
        <!--
        <ng-container *ngIf="primaryType === 'Site'">
           <span *ngIf="rowData.sites != null" class="enrollment-text-extra">({{rowData.sites.length}}) Sites</span>
