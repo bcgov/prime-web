@@ -25,7 +25,8 @@
         <prime-datepicker 
                           size="mini"
                           dateFormat='yyyy/mm/dd'
-                          [(date)]='getOrgAccess().startDate'
+                          [date]='getOrgAccess().startDate'
+                          (dateChange)='onOrgStartDate($event)'
                           onlyFutureDates='true'
                           class="ml-1"
                           clearButton="invisible">
@@ -34,7 +35,8 @@
       <span class="d-inline-flex align-items-center p-2 border-left border-right">End
         <prime-datepicker size="mini"
                           dateFormat='yyyy/mm/dd'
-                          [(date)]='getOrgAccess().endDate'
+                          [date]='getOrgAccess().endDate'
+                          (dateChange)="onOrgEndDate($event)"
                           onlyFutureDates='true'
                           class="ml-1">
         </prime-datepicker>
