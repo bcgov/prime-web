@@ -202,7 +202,6 @@ export class PrimeDataService {
   }
 
   getProvisionerOrgDetailsByUser(user: Person): ProvisionerRowItem[] {
-    debugger;
     const result = [];
     user.allOrganiationWithSitesForUser().map(org => {
       const rowItem: ProvisionerRowItem = {
