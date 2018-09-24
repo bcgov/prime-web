@@ -44,10 +44,10 @@
 
     <div class="search-wrapper">
       <ul class="list-group list-group-flush" *ngIf='showSearchResults'>
-        <li class='list-group-item d-flex justify-content-between align-items-center' *ngFor="let org of searchResults" (click)='org.isSelected = !org.isSelected'>
+        <li class='list-group-item' *ngFor="let org of searchResults" (click)='org.isSelected = !org.isSelected'>
             <div class="checkbox checkbox-success checkbox-inline">
                 <input class="input-lg" id="selectOrg_{{org.objectId}}" type="checkbox" [(ngModel)]='org.isSelected' (click)='$event.stopPropagation()'>
-                <label class="" for="selectOrg_{{org.objectId}}" (click)='$event.stopPropagation()'>{{org.title}}</label>
+                <label class="" for="selectOrg_{{org.objectId}}" (click)='$event.stopPropagation()' class='ml-1'>{{org.title}}</label>
             </div>
         </li>
       </ul>
