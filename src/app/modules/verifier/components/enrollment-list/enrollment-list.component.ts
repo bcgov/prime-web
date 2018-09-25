@@ -3,6 +3,10 @@ import { VerifierService } from '../../../../services/verifier.service';
 import { EnrollmentRowComponent } from '../enrollment-row/enrollment-row.component';
 import {defaultViewSelector, EnrollmentList} from '../../../../core/enrollment-list/enrollment-list.class';
 import { EnrollmentStatus } from '../../../../models/enrollment-status.enum';
+import { Person } from '../../../../models/person.model';
+import { PrimeDataService } from '../../../../services/prime-data.service';
+import { OrganizationAccess } from '../../../../models/organization-access.model';
+import { SiteAccess } from '../../../../models/sites.model';
 
 @Component({
   selector: 'prime-enrollment-list',
@@ -23,7 +27,7 @@ export class EnrollmentListComponent extends EnrollmentList implements OnInit, O
     // return [ EnrollmentStatus.Active]
   }
 
-  constructor(private verifierService: VerifierService) {
+  constructor(private verifierService: VerifierService, private dataService: PrimeDataService) {
     super();
 
     verifierService.$enrollmentViewType.subscribe(viewType => {
@@ -77,6 +81,29 @@ export class EnrollmentListComponent extends EnrollmentList implements OnInit, O
   sort() {
     // Temporary solution for prototype before actual sorting is implemented.
     this.rowItems.reverse();
+  }
+
+  configureUserWithOrgs(person: Person){
+    const orgs = this.dataService.organizations.slice(0, 2);
+
+    orgs.map(org => {
+      const orgAccess = new OrganizationAccess(person, org);
+      person.organizationAccess.push(orgAccess);
+      org.organizationAccess.push(orgAccess);
+      this.dataService.organizationAccess.push(orgAccess);
+
+      // Associate with all sites for now
+      org.members.map(site => {
+        const sa = new SiteAccess();
+        sa.site = site;
+        sa.person = person;
+        site.siteAccess.push(sa);
+        person.siteAccess.push(sa);
+        this.dataService.siteAccesses.push(sa);
+      });
+
+    });
+
   }
 
 }

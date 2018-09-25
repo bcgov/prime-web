@@ -258,15 +258,14 @@ export class PrimeDataService {
     return result;
   }
 
-  //TODO: Change to search on objectId? because if object is cloned...
-  findCollectionFromSite(site: Site): PharmaNetOrganization[] {
-    if (!site) { return [] }
+  findCollectionFromSite(targetSite: Site): PharmaNetOrganization[] {
+    if (!targetSite) { return [] }
 
     return this.organizations.map(collection => {
       // Lookup based on objectId, so it works even if the Site is cloned from original
       const exists = collection.members
         .map(site => site.objectId)
-        .includes(site.objectId);
+        .includes(targetSite.objectId);
 
       if (exists) return collection;
     }).filter(x => x); //Remove undefined

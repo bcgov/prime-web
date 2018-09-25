@@ -9,6 +9,7 @@ import { cloneDeep } from 'lodash';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { fadeIn } from '../../../../animations/animations';
 import { Person } from '../../../../models/person.model';
+import { OrganizationAccess } from '../../../../models/organization-access.model';
 
 @Component({
   selector: 'prime-provisioner-list',
@@ -59,8 +60,6 @@ export class ProvisionerListComponent extends EnrollmentList implements OnInit {
   }
 
   onAddNewPerson(person: Person){
-    // Goal - have them show up in the current page, so they need to be associated with the org
-    //TODO  Need to associate with the SITE.
     console.log('onAddNewPerson', person);
     const sa = new SiteAccess();
     sa.site = this.parentSite;
@@ -68,9 +67,20 @@ export class ProvisionerListComponent extends EnrollmentList implements OnInit {
     person.siteAccess.push(sa);
     this.parentSite.siteAccess.push(sa);
 
+    // For prototype, we simulate as if the user already has org selected    
+    const orgs = this.dataService.findCollectionFromSite(this.parentSite);
+
+    if (orgs.length){
+      const org = orgs[0];
+      const orgAccess = new OrganizationAccess(person, org);
+      person.organizationAccess.push(orgAccess);
+      org.organizationAccess.push(orgAccess);
+      this.dataService.organizationAccess.push(orgAccess);
+    }
+
+    console.log('New Person created, associated with site')
+
     this.dataService.siteAccesses.push(sa);
-    // this.cd.detectChanges();
-    this.change.emit(true);
   }
 
   rowOpened(item) {

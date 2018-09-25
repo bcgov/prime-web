@@ -12,8 +12,8 @@
       <button class='btn btn-default mr-3' (click)="sort()">
         <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
       </button>
-      <prime-add-user-button>
-        class='fix-right'>
+      <prime-add-user-button
+      (onAddNewUser)='configureUserWithOrgs($event)'>
       </prime-add-user-button>
     </label>
     <!--
