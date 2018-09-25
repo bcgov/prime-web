@@ -106,6 +106,7 @@ export class ProvisionerListComponent extends EnrollmentList implements OnInit {
       this._pendingUpdates.map(sa => {
         const orig: SiteAccess = this.dataService.findSiteAccessByObjectId(sa.objectId);
         orig.status = EnrollmentStatus.Provisioning ;
+        sa.status = EnrollmentStatus.Provisioning ;
         this.updateSiteAccess(orig, sa);
       });
 
@@ -156,6 +157,7 @@ export class ProvisionerListComponent extends EnrollmentList implements OnInit {
       source.status = EnrollmentStatus.EnrolmentRequested ;
       target.status = EnrollmentStatus.EnrolmentRequested ;
     }*/
+    console.log("status"+target.status);
     target.personalAccess = source.personalAccess;
     target.provisionedDate = source.provisionedDate;
     target.posUserId = source.posUserId;
