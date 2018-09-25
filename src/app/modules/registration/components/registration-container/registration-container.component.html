@@ -8,9 +8,6 @@
 
   <span right class='d-flex'>
     <div class='controls'>
-      <button *ngIf="router.url != '/register/profile'" type="button"
-              class="btn btn-primary mx-2"
-              (click)="back()">{{'Back'}}</button>
       <div *ngIf="router.url != '/register/security';then continueButton else submitButton"></div>
       <ng-template #continueButton>
         <button type="button" class="btn btn-primary mx-2" (click)="continue()" [disabled]="!canContinue()">{{'Continue'}}</button>

@@ -128,6 +128,8 @@ export class RegistrationContainerComponent implements OnInit {
     }
   }
 
+  /*
+  //KPS Back button was removed from registration process so this code is no longer needed
   back() {
     let url;
 
@@ -147,7 +149,7 @@ export class RegistrationContainerComponent implements OnInit {
 
       this.router.navigate( [prefix + '/' + this.progressSteps[idx - 1].route ] );
   }
-
+  */
   submit() {
     let url = '/register/registration-complete';
 
