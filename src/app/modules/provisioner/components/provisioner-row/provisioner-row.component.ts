@@ -132,9 +132,8 @@ export class ProvisionerRowComponent extends EnrollmentRow implements OnInit {
   }
 
   get orgName(): String {
-
-    const name = this.rowData.title;//TODO check this saravan
-    return name.substring(0, name.lastIndexOf(' ') - 1);
+    const name = this.rowData.title;
+    return name;
   }
 
   getCollegeNumber(): string{
