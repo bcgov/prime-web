@@ -131,6 +131,12 @@ export class ProvisionerRowComponent extends EnrollmentRow implements OnInit {
     }
   }
 
+
+  getSiteAccessFromSite(site: Site) : SiteAccess {
+    // we have a list of siteAccess, need to check if it inclues site
+    return this.rowData.siteAccess.find(sa => sa.site.objectId === site.objectId);
+  }
+
   get orgName(): String {
     const name = this.rowData.title;
     return name;
