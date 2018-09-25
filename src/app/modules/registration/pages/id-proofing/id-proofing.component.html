@@ -12,6 +12,9 @@
         </a>
       </div>
       <div class="card-body d-flex justify-content-between">
+        <div class="photocol" *ngIf="usedBCSC">
+          <img class="photo" src="assets/photoPlaceholder.png" alt="Generic placeholder image">
+        </div>
         <div class="appcol">
           <p>{{registrant.name}}</p>
           <p>{{registrant.phone}}</p>
