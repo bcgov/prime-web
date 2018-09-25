@@ -139,14 +139,19 @@ export class ProvisionerRowComponent extends EnrollmentRow implements OnInit {
     let sa = this.rowData.siteAccess.find(sa => sa.site.objectId === site.objectId);
     if (!sa){
       const user = this.dataService.findPersonByObjectId(this.rowData.associatedObjectId);
+      const org = this.dataService.findCollectionFromSite(site)[0];
+      const origSite = org.members.find(originalSite => originalSite.objectId === site.objectId)
+
       sa = new SiteAccess();
       sa.personalAccess = PersonalAccessType.Yes ;
       sa.provisionedDate = today ;
       sa.person = user;
-      sa.site = site;
+      sa.site = origSite;
       user.siteAccess.push(sa);
-      site.siteAccess.push(sa);
+      origSite.siteAccess.push(sa);
       this.dataService.siteAccesses.push(sa);
+
+      this.rowData.siteAccess.push(sa);
     }
 
     return sa;

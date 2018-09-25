@@ -204,7 +204,7 @@ export class PrimeDataService {
   getProvisionerOrgDetailsByUser(user: Person): ProvisionerRowItem[] {
     const result = [];
     user.allOrganizations().map(org => {
-      const siteAccess = org.allSiteAccess.filter(x => x.person === user);
+      const siteAccess = org.allSiteAccess.filter(x => x.person.objectId === user.objectId);
 
       // We want this to return ALL sites for a given org. 
       // It's likely user won't have siteAccess for all sites in the org - that's fine

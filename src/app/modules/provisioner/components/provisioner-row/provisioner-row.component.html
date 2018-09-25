@@ -151,8 +151,9 @@
 
 
 
-      <td *ngIf="primaryType === 'User'" ><prime-datepicker size="mini" (dateChange)="onChangeStartDate($event ,getSiteAccessFromSite(rowDataSite))" [(date)]="getSiteAccessFromSite(rowDataSite).startDate" id="startDateShort" name="startDateShort" placeholder=" "  dateFormat="yyyy/mm/dd"  tabindex="1"></prime-datepicker></td>
-      <td *ngIf="primaryType === 'User'" ><prime-datepicker size="mini" (dateChange)="onChangeEndDate($event ,getSiteAccessFromSite(rowDataSite))" [(date)]="getSiteAccessFromSite(rowDataSite).endDateShort" id="endDateShort" name="endDateShort" placeholder=" "  dateFormat="yyyy/mm/dd"  tabindex="1"></prime-datepicker></td>
+      
+      <td *ngIf="primaryType === 'User'" ><prime-datepicker size="mini" (dateChange)="onChangeStartDate($event, getSiteAccessFromSite(rowDataSite))" [date]="getSiteAccessFromSite(rowDataSite).startDate" id="startDateShort" name="startDateShort" placeholder=" "  dateFormat="yyyy/mm/dd"  tabindex="1"></prime-datepicker></td>
+      <td *ngIf="primaryType === 'User'" ><prime-datepicker size="mini" (dateChange)="onChangeEndDate($event, getSiteAccessFromSite(rowDataSite))" [date]="getSiteAccessFromSite(rowDataSite).endDate" id="endDateShort" name="endDateShort" placeholder=" "  dateFormat="yyyy/mm/dd"  tabindex="1"></prime-datepicker></td>
       <td class="provision-element-label">  <input type="text" class="form-control mb-2 mr-sm-2" id="posuid" (change)="onChange($event , rowDataSite.siteAccess[0])" name="posuid" placeholder=" " tabindex="1" [(ngModel)]="rowDataSite.siteAccess[0].posUserId" (change)="onChange($event, rowDataSite.siteAccess[0])">
       </td>
       <!--Personal Access -->
