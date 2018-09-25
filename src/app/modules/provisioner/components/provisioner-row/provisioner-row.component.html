@@ -159,7 +159,7 @@
       <!--Personal Access -->
       <td class="provision-element-label">
 
-        <select class="form-control access-type-selector" [(ngModel)]='getSiteAccessFromSite(rowDataSite).personalAccess' (change)="onChange($event, getSiteAccessFromSite(rowDataSite) )" >
+        <select class="form-control access-type-selector mb-2 mr-sm-2" [(ngModel)]='getSiteAccessFromSite(rowDataSite).personalAccess' (change)="onChange($event, getSiteAccessFromSite(rowDataSite) )" >
           <option *ngFor="let status of accessType"
                   value="{{status}}">
             {{status}}
@@ -173,15 +173,17 @@
       </td>
       <!--status -->
       <td class="provision-element-label">
-        <select class="form-control access-type-selector" [(ngModel)]='getSiteAccessFromSite(rowDataSite).status'>
+        <select class="form-control status-dropdown mb-2" [(ngModel)]='getSiteAccessFromSite(rowDataSite).status'>
           <option value="{{getSiteAccessFromSite(rowDataSite).status}}">{{ getSiteAccessFromSite(rowDataSite).status}}
           </option>
         </select>
 
-    <!--    <prime-pill-badge
-          [alerts]="[rowDataSite.siteAccess[0].alert]"
+
+
+       <!-- <prime-pill-badge
+          [alerts]="[getSiteAccessFromSite(rowDataSite).alert]"
           [iconOnly]='false'>
-        </prime-pill-badge>-->
+        </prime-pill-badge> -->
        </td>
 
 

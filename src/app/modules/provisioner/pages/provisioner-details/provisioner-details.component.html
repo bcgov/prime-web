@@ -34,7 +34,7 @@
          <label for="postcalCode">
            Postal Code
          </label>
-         <input type="text" disabled class="form-control" id="postcalCode" name="postcalCode" [value]="person.address.postal">
+         <input type="text" disabled class="form-control" id="postcalCode" name="postcalCode" [value]="person?.address.postal">
        </div>
 
 
@@ -62,7 +62,7 @@
         <label for="renewalDate">
           Renewal Date
         </label>
-        <input type="text" disabled class="form-control" id="renewalDate" name="renewalDate" [value]="person?.renewalDateShort">
+        <input type="text" disabled class="form-control" id="renewalDate" name="renewalDate" [value]="person?.renewalDateShort" >
       </div>
 
 

@@ -72,10 +72,6 @@ table {
   font-size: $h6-font-size;
 }
 
-.provision-element-text{
-  background-color: lightgrey;
-}
-
 .color {
   background-color: lightgrey;
 }
@@ -131,4 +127,16 @@ table {
 
 .btn-circle {
   border-radius: 15px;
+}
+
+prime-datepicker {
+  background: $color-white;
+  display: inline-block;
+}
+
+.status-dropdown {
+  width: auto;
+  min-width: 100%;
+
+  white-space: normal;
 }
