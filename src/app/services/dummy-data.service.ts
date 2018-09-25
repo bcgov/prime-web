@@ -4,7 +4,7 @@ import { PharmaNetOrganization, PharmaNetOrgTypes } from '../models/organization
 import { EnrollmentStatus } from '../models/enrollment-status.enum';
 import { Person } from '../models/person.model';
 import { Address } from '../models/addresses.model';
-import {AccessReasons, DeclinedReasons, Site, SiteAccess, SiteAccessProgressSteps, ProvisionRequestOptions, AccessClass, AccessRights} from '../models/sites.model';
+import {AccessReasons, DeclinedReasons, Site, SiteAccess, SiteAccessProgressSteps, ProvisionRequestOptions, AccessClass, AccessRights, PersonalAccessType} from '../models/sites.model';
 import * as moment from 'moment';
 import {DateFormatter} from 'ngx-bootstrap';
 import { OrganizationAccess } from '../models/organization-access.model';
@@ -220,9 +220,10 @@ export class DummyDataService {
       const past =  new Date(today.getFullYear(), today.getMonth(), today.getDate() - 10);
       SA.startDate = this.randomDate(today, past);
       SA.provisionedDate = this.randomDate(today, past);
+      SA.personalAccess = PersonalAccessType.Yes;
+      SA.endDate = null;
     }
     else {
-      // TODO - Incomplete, not working yet.
       SA.provisionedDate = null;
       SA.personalAccess = null;
     }
