@@ -212,6 +212,21 @@ export class DummyDataService {
     SA.site = site;
     SA.person = person;
     SA.siteAccessDemo = access;
+
+    //Hardcoding for prototype related to PRIME-198 - all active should also have posUserID
+    if (SA.status === EnrollmentStatus.Active){
+      SA.posUserId = this.generatePosUserId();
+      const today = new Date();
+      const past =  new Date(today.getFullYear(), today.getMonth(), today.getDate() - 10);
+      SA.startDate = this.randomDate(today, past);
+      SA.provisionedDate = this.randomDate(today, past);
+    }
+    else {
+      // TODO - Incomplete, not working yet.
+      SA.provisionedDate = null;
+      SA.personalAccess = null;
+    }
+
     person.siteAccess.push(SA);
     site.siteAccess.push(SA);
     result.push(SA);

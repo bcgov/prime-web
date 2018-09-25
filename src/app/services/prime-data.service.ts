@@ -45,7 +45,13 @@ export class PrimeDataService {
         sites: organization.members,
         users: organization.allUsers
       };
-      rowItem.expandableRows = organization.getSiteAccessWithStatus(EnrollmentStatus.Active);
+      rowItem.expandableRows = organization.getSiteAccessWithStatus(EnrollmentStatus.Active)
+        .filter((sa, i, arr) => { // filter out any duplicate sites
+          return arr.map(innerSiteAccess => innerSiteAccess.site.name)
+            .indexOf(sa.site.name) === i;
+        });
+
+
       result.push(rowItem);
     });
 

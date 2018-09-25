@@ -87,17 +87,18 @@ export class ProvisionerRowComponent extends EnrollmentRow implements OnInit {
     this.siteAccessObject  = this.rowData.siteAccess[0];
     this.siteStatus = this.siteAccessObject.status;
     //default value YES
+    // NOTE BELOW MAY NOT BE WORKING, STILL IN DEV
     if ( this.primaryType==='User' && this.rowData.site) {
       this.rowData.site.map(site => {
-        this.getSiteAccessFromSite(site).personalAccess  = (  this.getSiteAccessFromSite(site).personalAccess === undefined) ? PersonalAccessType.Yes :  this.getSiteAccessFromSite(site).personalAccess  ;
-        if (!this.getSiteAccessFromSite(site).provisionedDate){
-          this.getSiteAccessFromSite(site).provisionedDate =  new Date();
-        }
+        // this.getSiteAccessFromSite(site).personalAccess  = (  this.getSiteAccessFromSite(site).personalAccess === undefined) ? PersonalAccessType.Yes :  this.getSiteAccessFromSite(site).personalAccess  ;
+        // if (!this.getSiteAccessFromSite(site).provisionedDate){
+        //   this.getSiteAccessFromSite(site).provisionedDate =  new Date();
+        // }
       });
     }
     if ( this.primaryType==='Site' && this.rowData) {
-      this.rowData.siteAccess[0].personalAccess  = ( this.rowData.siteAccess[0].personalAccess === undefined) ? PersonalAccessType.Yes : this.rowData.siteAccess[0].personalAccess  ;
-      this.rowData.siteAccess[0].provisionedDate =  new Date();
+      // this.rowData.siteAccess[0].personalAccess  = ( this.rowData.siteAccess[0].personalAccess === undefined) ? PersonalAccessType.Yes : this.rowData.siteAccess[0].personalAccess  ;
+      // this.rowData.siteAccess[0].provisionedDate =  new Date();
     }
     this.rowDataOnInit = cloneDeep(this.rowData);
   }

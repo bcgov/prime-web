@@ -53,6 +53,7 @@
               <span class="enrollment-icons mr-5">
 
                   <prime-pill-badge
+                    *ngIf='primaryType === "User"'
                     [alerts]="[siteAccess.alert]">
                   </prime-pill-badge>
 

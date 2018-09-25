@@ -69,6 +69,11 @@ export class AddUserButtonComponent implements OnInit {
     // Re-create email based on new name
     person.email = `${person.name[0].toLowerCase()}${person.lastName.toLowerCase()}@gmail.com`;
     person.isNewUser = true;
+    let future: any = new Date();
+    future = future.setMonth(future.getMonth() + 2);
+    person.renewalDate = future;
+
+
     // Only return one result (prototype only)
     this.searchResultsPeople = [person];
     console.log('findUser found:', person);
