@@ -205,12 +205,15 @@ export class PrimeDataService {
     const result = [];
     user.allOrganizations().map(org => {
       const siteAccess = org.allSiteAccess.filter(x => x.person === user);
-      const sites = siteAccess.map(sa => sa.site);
+
+      // We want this to return ALL sites for a given org. 
+      // It's likely user won't have siteAccess for all sites in the org - that's fine
+      // The details component may have to create SA's on the fly as user makes changes
 
       const rowItem: ProvisionerRowItem = {
         title: org.title,
         siteAccess: siteAccess,
-        site: sites,
+        site: org.members,
         associatedObjectId: org.objectId
       }
       result.push(rowItem);
