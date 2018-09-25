@@ -214,7 +214,7 @@ export class PrimeDataService {
         title: org.title,
         siteAccess: siteAccess,
         site: org.members,
-        associatedObjectId: org.objectId
+        associatedObjectId: user.objectId,
       }
       result.push(rowItem);
     }) ;

@@ -10,6 +10,8 @@ import {PharmaNetOrganization} from "../../../../models/organizations.model";
 import {CollegeTypes} from "../../../../models/colleges.enum";
 import { EnrollmentRow, RowState } from '../../../../core/enrollment-row/enrollment-row.class';
 import { cloneDeep } from 'lodash';
+import { Person } from '../../../../models/person.model';
+import { PrimeDataService } from '../../../../services/prime-data.service';
 
 export interface ProvisionerRowItem {
   title: string;
@@ -76,7 +78,7 @@ export class ProvisionerRowComponent extends EnrollmentRow implements OnInit {
     EnrollmentStatus.New,
   ];
 
-  constructor( ) {
+  constructor( private dataService: PrimeDataService ) {
     super();
   }
 
@@ -134,7 +136,18 @@ export class ProvisionerRowComponent extends EnrollmentRow implements OnInit {
 
   getSiteAccessFromSite(site: Site) : SiteAccess {
     // we have a list of siteAccess, need to check if it inclues site
-    return this.rowData.siteAccess.find(sa => sa.site.objectId === site.objectId);
+    let sa = this.rowData.siteAccess.find(sa => sa.site.objectId === site.objectId);
+    if (!sa){
+      const user = this.dataService.findPersonByObjectId(this.rowData.associatedObjectId);
+      sa = new SiteAccess();
+      sa.person = user;
+      sa.site = site;
+      user.siteAccess.push(sa);
+      site.siteAccess.push(sa);
+      this.dataService.siteAccesses.push(sa);
+    }
+
+    return sa;
   }
 
   get orgName(): String {
