@@ -1,6 +1,6 @@
 <label class="has-float-label">
     <input type="text"
-      class="form-control prime-input-medium"
+      class="form-control {{ fullWidth ? 'w-100' : 'prime-input-medium'}}"
       id="postal{{objectId}}"
       name="postal"
       [ngModel]='value'

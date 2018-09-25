@@ -30,10 +30,7 @@
             <span>Middle Name</span>
           </label>
           <prime-datepicker id="DoB" name="DoB" placeholder=" "  dateFormat="yyyy/mm/dd" [(date)]="searchQuery.dateOfBirth" labelText="Date of Birth" tabindex="1"></prime-datepicker>
-          <label for="postal" class="has-float-label">
-              <input type="text" class="form-control mb-2 mr-sm-2" id="postal" name="postal" placeholder=" " [(ngModel)]="searchQuery.postal" tabindex="1">
-              <span>Postal Code</span>
-            </label>
+          <prime-postal-code fullWidth='true' [(value)]='searchQuery.postal'></prime-postal-code>
         </div>
 
         <div class="col mx-2">

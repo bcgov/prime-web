@@ -14,6 +14,8 @@ export class PostalCodeComponent extends Base implements OnInit {
   @Input() value: string;
   @Output() valueChange: EventEmitter<string> = new EventEmitter<string>();
 
+  @Input() fullWidth: boolean = false;
+
   @Input() disabled: boolean;
 
   public mask = [LETTER, NUMBER, LETTER, SPACE, NUMBER, LETTER, NUMBER]
