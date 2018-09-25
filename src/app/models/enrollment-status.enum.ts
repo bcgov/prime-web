@@ -31,6 +31,7 @@ export enum EnrollmentStatus {
    */
   Provisioning = 'Provisioning',
   Returned = 'Returned to applicant',
+  EnrolmentRequested = 'Enrollment Requested' ,
   /**
    * MoH reviews
    */

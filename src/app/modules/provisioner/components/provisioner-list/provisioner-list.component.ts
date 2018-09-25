@@ -67,7 +67,7 @@ export class ProvisionerListComponent extends EnrollmentList implements OnInit {
     person.siteAccess.push(sa);
     this.parentSite.siteAccess.push(sa);
 
-    // For prototype, we simulate as if the user already has org selected    
+    // For prototype, we simulate as if the user already has org selected
     const orgs = this.dataService.findCollectionFromSite(this.parentSite);
 
     if (orgs.length){
@@ -148,8 +148,13 @@ export class ProvisionerListComponent extends EnrollmentList implements OnInit {
 
   private updateSiteAccess(target: SiteAccess, source: SiteAccess): SiteAccess {
   // target.provisionedStatus = ProvisionedStatus.Provisioning ;
-    source.status = EnrollmentStatus.Provisioning ;
-    target.status = EnrollmentStatus.Provisioning ;
+    if ( source.status &&   source.status!= EnrollmentStatus.EnrolmentRequested) {
+      source.status = EnrollmentStatus.Provisioning ;
+      target.status = EnrollmentStatus.Provisioning ;
+    } else {
+      source.status = EnrollmentStatus.EnrolmentRequested ;
+      target.status = EnrollmentStatus.EnrolmentRequested ;
+    }
     target.personalAccess = source.personalAccess;
     target.provisionedDate = source.provisionedDate;
     target.posUserId = source.posUserId;
