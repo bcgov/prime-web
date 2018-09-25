@@ -21,7 +21,7 @@ export interface ProvisionerRowItem {
   collegeNumber?: string;
   licenceNumber?: string;
 }
-
+const today = new Date();
 @Component({
   selector: 'prime-provisioner-row',
   templateUrl: './provisioner-row.component.html',
@@ -82,15 +82,15 @@ export class ProvisionerRowComponent extends EnrollmentRow implements OnInit {
     super();
   }
 
-  ngOnInit() {    
+  ngOnInit() {
     if (!this.rowData ) { return; }
     this.siteAccessObject  = this.rowData.siteAccess[0];
     this.siteStatus = this.siteAccessObject.status;
     //default value YES
     if ( this.primaryType==='User' && this.rowData.site) {
       this.rowData.site.map(site => {
-        site.siteAccess[0].personalAccess  = ( site.siteAccess[0].personalAccess === undefined) ? PersonalAccessType.Yes : site.siteAccess[0].personalAccess  ;
-        site.siteAccess[0].provisionedDate =  new Date();
+        this.getSiteAccessFromSite(site).personalAccess  = (  this.getSiteAccessFromSite(site).personalAccess === undefined) ? PersonalAccessType.Yes :  this.getSiteAccessFromSite(site).personalAccess  ;
+        this.getSiteAccessFromSite(site).provisionedDate =  new Date();
       });
     }
     if ( this.primaryType==='Site' && this.rowData) {
@@ -140,6 +140,8 @@ export class ProvisionerRowComponent extends EnrollmentRow implements OnInit {
     if (!sa){
       const user = this.dataService.findPersonByObjectId(this.rowData.associatedObjectId);
       sa = new SiteAccess();
+      sa.personalAccess = PersonalAccessType.Yes ;
+      sa.provisionedDate = today ;
       sa.person = user;
       sa.site = site;
       user.siteAccess.push(sa);
