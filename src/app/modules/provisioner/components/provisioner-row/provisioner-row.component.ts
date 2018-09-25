@@ -90,7 +90,9 @@ export class ProvisionerRowComponent extends EnrollmentRow implements OnInit {
     if ( this.primaryType==='User' && this.rowData.site) {
       this.rowData.site.map(site => {
         this.getSiteAccessFromSite(site).personalAccess  = (  this.getSiteAccessFromSite(site).personalAccess === undefined) ? PersonalAccessType.Yes :  this.getSiteAccessFromSite(site).personalAccess  ;
-        this.getSiteAccessFromSite(site).provisionedDate =  new Date();
+        if (!this.getSiteAccessFromSite(site).provisionedDate){
+          this.getSiteAccessFromSite(site).provisionedDate =  new Date();
+        }
       });
     }
     if ( this.primaryType==='Site' && this.rowData) {
