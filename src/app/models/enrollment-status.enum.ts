@@ -29,10 +29,10 @@ export enum EnrollmentStatus {
   /**
    * Provisioner to grant site access for applicant
    */
-  Provisioning = 'Provisioning',
+  Provisioning = 'Provisioning Requested',
   Returned = 'Returned to applicant',
-  EnrolmentRequested = 'Enrollment Requested' ,
-  /**
+
+   /**
    * MoH reviews
    */
   Review = 'Review'
