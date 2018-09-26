@@ -40,49 +40,57 @@
         </label>
 
         <label class="has-float-label">
-          <input type="text" disabled class="form-control" id="email" name="email" [(ngModel)]="person.email">
-          <span>Email</span>
+            <input type="text" disabled class="form-control" id="email" name="email" [(ngModel)]="person.email">
+            <span>Email</span>
         </label>
 
-
+           
         <label class="has-float-label">
-          <input type="text" disabled class="form-control" id="postal" name="postal" [(ngModel)]="person.address.postal">
-          <span>Postal Code</span>
-        </label>
+            <input type="text" disabled class="form-control" id="userclass" name="userclass" value="Pharmacist">
+            <span>User Class</span>
+          </label>
+
 
 
       </div>
 
       <div class="col">
-
+      
         <label class="has-float-label">
           <input type="text" disabled class="form-control" id="primaryPhone" name="primaryPhone" [(ngModel)]="person.phone">
           <span>Phone Number</span>
         </label>
-
-        <label class="has-float-label">
-          <input type="text" disabled class="form-control" id="renewalDate" name="renewalDate" [ngModel]="person.renewalDateShort">
-          <span>Renewal Date</span>
-        </label>
-        <label class="has-float-label">
-          <input type="text" disabled class="form-control" id="userclass" name="userclass" value="Pharmacist">
-          <span>User Class</span>
-        </label>
-
-        <div class="has-float-label">
-            <label for="limits">
-              Practitioner College ID
-            </label>
-            <input type="text" disabled class="form-control" id="limits" name="limits"  [value]="person?.getLicenseNumber()">
-          </div>
-
-      </div>
-
       
+      
+        <label class="has-float-label">
+          <input type="text" disabled class="form-control" id="postal" name="postal" [(ngModel)]="person.address.postal">
+          <span>Postal Code</span>
+        </label>
+      
+        <div class="has-float-label">
+          <label for="limits">
+            Practitioner College ID
+          </label>
+          <input type="text" disabled class="form-control" id="limits" name="limits" [value]="person?.getLicenseNumber()">
+        </div>
+      
+      </div>
 
 
 
     </form>
+
+    <div class="row">
+      <div class="col">
+
+          <label class="has-float-label">
+              <input type="text" disabled class="form-control" id="renewalDate" name="renewalDate" [ngModel]="person.renewalDateShort">
+              <span>Renewal Date</span>
+            </label>
+
+        </div>
+    </div>
+
 <!--
       <div class="card">
         <div class="card-header">
