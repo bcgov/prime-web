@@ -168,6 +168,10 @@ export class EnrollmentAlert {
         return BadgeLevel.Yellow;
     }
 
+    if (status === EnrollmentStatus.Ended){
+      return BadgeLevel.RedLight;
+    }
+
     if (status === EnrollmentStatus.Expired){
         return BadgeLevel.RedLight;
     }

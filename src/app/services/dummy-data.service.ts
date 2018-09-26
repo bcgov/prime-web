@@ -227,6 +227,8 @@ export class DummyDataService {
     else {
       SA.provisionedDate = null;
       SA.personalAccess = null;
+      SA.endDate = null;
+      SA.startDate = null;
     }
 
     person.siteAccess.push(SA);
@@ -241,13 +243,6 @@ export class DummyDataService {
       result.push(orgAccess);
     }
 
-    
-
-
-    // TODO - RETURN ORG ACCESS! ADAM
-    // return { siteAccess: SA, orgAccess: orgAccess};
-    // return SA;
-    // return [SA]
     return result;
   }
 
@@ -406,10 +401,7 @@ export class DummyDataService {
       person.address.setAddress( address[index] );
       person.primeUserId = person.firstName[0] + person.lastName + '--' + person.objectId.slice(0, 4);
       person.PoSId = person.firstName[0] + person.lastName[0] + 107; //Gibberish, not sure what these IDs really look like.
-
-      // Add 1 college ID per user
-      const collegeIDs = Object.keys(CollegeTypes).map(x => CollegeTypes[x]);
-      person.collegeCertificationList[0].licenceNumber = collegeIDs[index % collegeIDs.length];
+      person.collegeCertificationList[0].licenceNumber = Math.ceil(Math.random() * 80000).toString();
 
       result.push( person );
     }

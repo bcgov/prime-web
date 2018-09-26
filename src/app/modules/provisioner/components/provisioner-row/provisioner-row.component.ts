@@ -89,11 +89,11 @@ export class ProvisionerRowComponent extends EnrollmentRow implements OnInit {
     this.rowDataOnInit = cloneDeep(this.rowData);
   }
 
-  onChangeStartDate(ev , item:SiteAccess) {
+  onChangeStartDate(ev: Date, item: SiteAccess) {
     item.startDate = ev;
     this.siteAccessChange.emit(item);
   }
-  onChangeEndDate(ev , item:SiteAccess) {
+  onChangeEndDate(ev: Date, item: SiteAccess) {
     item.endDate = ev;
     this.siteAccessChange.emit(item);
   }

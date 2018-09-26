@@ -35,5 +35,7 @@ export enum EnrollmentStatus {
    /**
    * MoH reviews
    */
-  Review = 'Review'
+  Review = 'Review',
+
+  Ended = 'Ended',
 }

@@ -103,10 +103,18 @@ export class ProvisionerListComponent extends EnrollmentList implements OnInit {
 
     setTimeout(() => {
 
+      const now = new Date();
+
       this._pendingUpdates.map(sa => {
         const orig: SiteAccess = this.dataService.findSiteAccessByObjectId(sa.objectId);
-        orig.status = EnrollmentStatus.Provisioning ;
-        sa.status = EnrollmentStatus.Provisioning ;
+
+        if (sa.endDate && sa.endDate.getDate && now > sa.endDate){
+          sa.status = EnrollmentStatus.Ended;
+        }
+        else {
+          sa.status = EnrollmentStatus.Provisioning;
+        }
+
         this.updateSiteAccess(orig, sa);
       });
 
@@ -122,6 +130,7 @@ export class ProvisionerListComponent extends EnrollmentList implements OnInit {
   onSiteAccessChange(item: SiteAccess){
     this.showSaveMessage = false; //Now there are pending unsaved changes, so hide message.
     const found = this._pendingUpdates.find(sa => sa.objectId === item.objectId);
+    console.log('ProvList, onSiteAccessChange', {item, found})
     if (found){
       this.updateSiteAccess(found, item);
     } else {
@@ -149,14 +158,6 @@ export class ProvisionerListComponent extends EnrollmentList implements OnInit {
   }
 
   private updateSiteAccess(target: SiteAccess, source: SiteAccess): SiteAccess {
-  // target.provisionedStatus = ProvisionedStatus.Provisioning ;
-   /* if ( source.status &&   source.status!= EnrollmentStatus.EnrolmentRequested) {
-      source.status = EnrollmentStatus.Provisioning ;
-      target.status = EnrollmentStatus.Provisioning ;
-    } else {
-      source.status = EnrollmentStatus.EnrolmentRequested ;
-      target.status = EnrollmentStatus.EnrolmentRequested ;
-    }*/
     console.log("status"+target.status);
     target.personalAccess = source.personalAccess;
     target.provisionedDate = source.provisionedDate;
