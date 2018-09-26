@@ -27,6 +27,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { LoadingSpinnerDirective } from './directives/loading-spinner.directive';
 import {ThumbnailComponentComponent} from '../../core/thumbnail-component/thumbnail-component.component';
 import { WizardProgressBarSimpleComponent } from './components/wizard-progress-bar-simple/wizard-progress-bar-simple.component';
+import { PhoneNumberComponent } from './components/phone-number/phone-number.component';
 
 
 /** A list of all components that we want to both include and export. Since
@@ -52,7 +53,8 @@ const componentList = [
   LoadingSpinnerDirective,
   ThumbnailComponentComponent,
   WizardProgressBarComponent,
-  WizardProgressBarSimpleComponent
+  WizardProgressBarSimpleComponent,
+  PhoneNumberComponent
 ];
 
 @NgModule({

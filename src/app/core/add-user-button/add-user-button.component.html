@@ -46,10 +46,7 @@
             <input type="text" class="form-control mb-2 mr-sm-2" id="email" name="email" placeholder=" " [(ngModel)]="searchQuery.email" tabindex="1">
             <span>Email</span>
           </label>
-          <label for="phone" class="has-float-label">
-            <input type="text" class="form-control mb-2 mr-sm-2" id="phone" name="phone" placeholder=" " [(ngModel)]="searchQuery.phone" tabindex="1">
-            <span>Phone Number</span>
-          </label>
+          <prime-phone-number [(value)]='searchQuery.phone' fullWidth='true'></prime-phone-number>
         </div>
       </div>
 

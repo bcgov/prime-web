@@ -67,7 +67,7 @@ import {ProfileComponent} from "./modules/registration/pages/profile/profile.com
     DemoPageComponent,
     HomePageComponent,
     BlankPageComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,11 @@
+<label class="has-float-label">
+  <input type="text"
+         class="form-control {{ fullWidth ? 'w-100' : 'prime-input-large'}}"
+         id="phone_{{objectId}}"
+         name="phone_{{objectId}}"
+         [ngModel]='value'
+         (ngModelChange)="valueChange.emit($event)"
+         placeholder=" "
+         [textMask]='phoneMask'>
+  <span>Phone</span>
+</label>
