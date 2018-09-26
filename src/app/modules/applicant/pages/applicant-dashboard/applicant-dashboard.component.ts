@@ -113,6 +113,16 @@ export class ApplicantDashboardComponent implements OnInit {
     return this.getAllSites().filter(site => site.siteAccess[0].status === EnrollmentStatus.New).length;
   }
 
+  // Enrollment is requested when the user 
+  // TODO rename? think it's opposite of what it is now
+  get hasHandledSites(): boolean {
+    const handledSites = this.getAllSites().filter(site => {
+      const sa = site.siteAccess.find(sa => sa.person.objectId === this.applicant.objectId);
+      return sa.status === EnrollmentStatus.Active || sa.status === EnrollmentStatus.Declined;
+    })
+    return handledSites.length > 0;
+  }
+
   private getAllSites(): Site[] {
     if (!this.applicant.allOrganizations().length) return [];
 

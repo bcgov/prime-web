@@ -55,9 +55,9 @@ export class PharmaNetAccessRowComponent extends EnrollmentRow implements OnInit
   getOrgAccess(): OrganizationAccess{
 
     const result = this.rowData.organizationAccess.find(oa => oa.person === this.dataService.user);
-    if (!result){
-      throw new Error('Unable to find OrganizationAccess for organization with objID - ' + this.rowData.objectId)
-    }
+    // if (!result){
+    //   throw new Error('Unable to find OrganizationAccess for organization with objID - ' + this.rowData.objectId)
+    // }
     return result;
   }
 
@@ -110,8 +110,8 @@ export class PharmaNetAccessRowComponent extends EnrollmentRow implements OnInit
   // Remove the org, which removes the entire row and destroys the component
   removeOrg(){
     // ! TODO Bug - This does not (but should) delete/change the status of the SiteAccess too, currently they're orphaned.
-    this.dataService.user.organizationAccess = this.dataService.organizationAccess.filter(oa => {
-      return oa.organization !== this.rowData;
+    this.dataService.user.organizationAccess = this.dataService.user.organizationAccess.filter(oa => {
+      return oa.organization.objectId !== this.rowData.objectId;
     });
   }
 
