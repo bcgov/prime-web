@@ -24,7 +24,7 @@
 
           <div class="applicant-row--item prime-input-large">
             <label class="has-float-label">
-              <select id="collegeTypesType" class="form-control" [(ngModel)]="collegeCertificationRecord.collegeType" (input)="onChange()">
+              <select id="collegeTypesType" class="form-control" [(ngModel)]="collegeCertificationRecord.collegeType" (input)="onCha<!-- <label for="">Licence Expiry</label> -->nge()">
                 <option value="pleaseSelect" disabled selected>Select</option>
                 <option *ngFor="let type of CollegeTypes" value="{{type}}">
                     {{ getFullCollegeName(type) }}
@@ -85,7 +85,7 @@
               </label>
             </div>
             <div class="applicant-row--item prime-input-large">
-              <!-- <label for="">Licence Expiry</label> -->
+
               <prime-datepicker dateFormat="mmm. dd, yyyy" [(date)]="collegeCertificationRecord.licenceExpiryDate" labelText="Registration Renewal Date"></prime-datepicker>
             </div>
             <div *ngIf="applicant.collegeCertificationList[i].collegeType === 'CRNBC'" class="applicant-row--item prime-input-large">
