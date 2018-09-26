@@ -140,3 +140,18 @@ prime-datepicker {
 
   white-space: normal;
 }
+
+.flex-table-row {
+  display: flex;
+}
+
+.flex-table-row > td {
+  flex: 1;
+
+  &:first-child {
+    flex: 1.5;
+    // min-width: 13em;
+  }
+  &:nth-child(2) {flex: 0.5}
+
+}

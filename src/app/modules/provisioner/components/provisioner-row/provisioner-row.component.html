@@ -77,19 +77,19 @@
 <div [@growVertical] class="provisioner-table-container table-responsive ml-2 " *ngIf=" primaryType === 'Site'">
   <table  >
     <tr>
-      <td *ngIf="primaryType === 'Site'" class="enrollment-text-main font-weight-bold " width = "20%">User</td>
+      <td class="enrollment-text-main font-weight-bold " width = "20%">User</td>
       <td class="enrollment-text-main font-weight-bold" width = "10%"> Start Date</td>
       <td class="enrollment-text-main font-weight-bold" width = "10%">End Date</td>
-      <td *ngIf="primaryType === 'Site'" class="enrollment-text-main font-weight-bold" width = "10%">Pos User ID</td>
+      <td class="enrollment-text-main font-weight-bold" width = "10%">Pos User ID</td>
       <td class="enrollment-text-main font-weight-bold" width = "10%"> Personal Access</td>
       <td class="enrollment-text-main font-weight-bold" width = "10%">Date Provisioned</td>
       <td class="enrollment-text-main font-weight-bold" width = "10%">Status</td>
 
     </tr>
     <tr >
-      <td *ngIf="primaryType === 'Site'" class="provision-element-text">{{rowData.title}}   <prime-info-button [targetId]="rowData.associatedObjectId" ></prime-info-button> </td>
-      <td *ngIf="primaryType === 'Site'" ><prime-datepicker size="mini" (dateChange)="onChangeStartDate($event ,rowData.siteAccess[0])" [(date)]="rowData.siteAccess[0].startDate" id="startDateShort" name="startDateShort" placeholder=" "  dateFormat="yyyy/mm/dd"  tabindex="1"></prime-datepicker></td>
-      <td *ngIf="primaryType === 'Site'" ><prime-datepicker size="mini" (dateChange)="onChangeEndDate($event ,rowData.siteAccess[0])" [(date)]="rowData.siteAccess[0].endDate" id="endDateShort" name="endDateShort" placeholder=" "  dateFormat="yyyy/mm/dd"  tabindex="1"></prime-datepicker></td>
+      <td class="provision-element-text">{{rowData.title}}   <prime-info-button [targetId]="rowData.associatedObjectId" ></prime-info-button> </td>
+      <td><prime-datepicker size="mini" (dateChange)="onChangeStartDate($event ,rowData.siteAccess[0])" [(date)]="rowData.siteAccess[0].startDate" id="startDateShort" name="startDateShort" placeholder=" "  dateFormat="yyyy/mm/dd"  tabindex="1"></prime-datepicker></td>
+      <td><prime-datepicker size="mini" (dateChange)="onChangeEndDate($event ,rowData.siteAccess[0])" [(date)]="rowData.siteAccess[0].endDate" id="endDateShort" name="endDateShort" placeholder=" "  dateFormat="yyyy/mm/dd"  tabindex="1"></prime-datepicker></td>
       <td class="provision-element-label">  <input type="text" class="form-control mb-2 mr-sm-2" id="posuid" (change)="onChange($event , rowData.siteAccess[0])" name="posuid" placeholder=" " tabindex="1" [(ngModel)]="rowData.siteAccess[0].posUserId" (change)="onChange($event, rowData.siteAccess[0])">
       </td>
       <!--Personal Access -->
@@ -128,50 +128,83 @@
 
 <div [@growVertical] class="provisioner-table-container table-responsive ml-2 " *ngIf=" (isNew || showProvisionerDetailsRowOverride) && primaryType === 'User'" >
   <table >
-    <tr>
-      <td *ngIf="primaryType === 'User'" class="provision-element-label" width = "11%"></td>
-      <td *ngIf="primaryType === 'User'" class="provision-element-label" width = "5%">Site Type</td>
-      <td *ngIf="primaryType === 'User'" class="provision-element-label" width = "5%">Start Date</td>
-      <td *ngIf="primaryType === 'User'" class="provision-element-label" width = "5%">End Date</td>
+    <tr class='flex-table-row'>
+      <td class="provision-element-label" width = "11%"></td>
+      <td class="provision-element-label" width = "5%">Site Type</td>
+      <td class="provision-element-label" width = "5%">Start Date</td>
+      <td class="provision-element-label" width = "5%">End Date</td>
       <td class="provision-element-label" width = "6%"> POS User ID</td>
       <td class="provision-element-label" width = "6%" >Personal Access</td>
       <td class="provision-element-label" width = "5%">Date Provisioned</td>
       <td class="provision-element-label" width = "6%" >Status</td>
     </tr>
-    <tr *ngFor="let rowDataSite of sites">
-      <td *ngIf="primaryType === 'User'" class="provision-element-text">
-        <!--<input type="text" class="form-control mb-2 mr-sm-2" id="name" name="name" placeholder=" " tabindex="1" [(ngModel)]="rowDataSite.name" (change)="onChange($event)">-->
+    <tr class='flex-table-row' *ngFor="let rowDataSite of sites">
+      <td class="provision-element-text">
         {{rowDataSite.name}}
-        <prime-info-button [targetId]="rowDataSite.objectId" ></prime-info-button>
+        <prime-info-button [targetId]="rowDataSite.objectId"></prime-info-button>
       </td>
-      <td *ngIf="primaryType === 'User'" class="provision-element-text">
- <!--       <input type="text" class="form-control mb-2 mr-sm-2" id="title" name="title" placeholder=" " tabindex="1" [(ngModel)]="rowDataSite.siteType" (change)="onChange($event)">
- -->  {{ rowDataSite.siteType }}
+      <td class="provision-element-text">
+        {{ rowDataSite.siteType }}
       </td>
-
-
-
-
-      <td *ngIf="primaryType === 'User'" ><prime-datepicker size="mini" (dateChange)="onChangeStartDate($event, getSiteAccessFromSite(rowDataSite))" [date]="getSiteAccessFromSite(rowDataSite).startDate" id="startDateShort" name="startDateShort" placeholder=" "  dateFormat="yyyy/mm/dd"  tabindex="1"></prime-datepicker></td>
-      <td *ngIf="primaryType === 'User'" ><prime-datepicker size="mini" (dateChange)="onChangeEndDate($event, getSiteAccessFromSite(rowDataSite))" [date]="getSiteAccessFromSite(rowDataSite).endDate" id="endDateShort" name="endDateShort" placeholder=" "  dateFormat="yyyy/mm/dd"  tabindex="1"></prime-datepicker></td>
-      <td class="provision-element-label">  <input type="text" class="form-control mb-2 mr-sm-2" id="posuid" (change)="onChange($event , getSiteAccessFromSite(rowDataSite))" name="posuid" placeholder=" " tabindex="1" [(ngModel)]="getSiteAccessFromSite(rowDataSite).posUserId" (change)="onChange($event, rowDataSite.siteAccess[0])">
+    
+      <td>
+        <!-- Start Date -->
+        <prime-datepicker size="mini"
+                          (dateChange)="onChangeStartDate($event, getSiteAccessFromSite(rowDataSite))"
+                          [date]="getSiteAccessFromSite(rowDataSite).startDate"
+                          id="startDateShort"
+                          name="startDateShort"
+                          placeholder=" "
+                          dateFormat="yyyy/mm/dd"
+                          tabindex="1"></prime-datepicker>
+      </td>
+      <td>
+        <!-- End Date -->
+        <prime-datepicker size="mini"
+                          (dateChange)="onChangeEndDate($event, getSiteAccessFromSite(rowDataSite))"
+                          [date]="getSiteAccessFromSite(rowDataSite).endDate"
+                          id="endDateShort"
+                          name="endDateShort"
+                          placeholder=" "
+                          dateFormat="yyyy/mm/dd"
+                          tabindex="1"></prime-datepicker>
+      </td>
+      <!-- POS User ID -->
+      <td class="provision-element-label"> <input type="text"
+               class="form-control mb-2 mr-sm-2"
+               id="posuid"
+               (change)="onChange($event , getSiteAccessFromSite(rowDataSite))"
+               name="posuid"
+               placeholder=" "
+               tabindex="1"
+               [(ngModel)]="getSiteAccessFromSite(rowDataSite).posUserId"
+               (change)="onChange($event, rowDataSite.siteAccess[0])">
       </td>
       <!--Personal Access -->
       <td class="provision-element-label">
-
-        <select class="form-control access-type-selector mb-2 mr-sm-2" [(ngModel)]='getSiteAccessFromSite(rowDataSite).personalAccess' (change)="onChange($event, getSiteAccessFromSite(rowDataSite) )" >
+    
+        <select class="form-control access-type-selector mb-2 mr-sm-2"
+                [(ngModel)]='getSiteAccessFromSite(rowDataSite).personalAccess'
+                (change)="onChange($event, getSiteAccessFromSite(rowDataSite) )">
           <option *ngFor="let status of accessType"
                   value="{{status}}">
             {{status}}
           </option>
         </select>
-
-       </td>
+    
+      </td>
       <!-- DateProvisioned -->
       <td class="provision-element-label">
-        <prime-datepicker size="mini"  (dateChange)="onChangeprovisionedDate($event ,getSiteAccessFromSite(rowDataSite))" [(date)]='getSiteAccessFromSite(rowDataSite).provisionedDate' id="provisionDateShort" name="provisionDateShort" placeholder=" "  dateFormat="yyyy/mm/dd"  tabindex="1"></prime-datepicker>
+        <prime-datepicker size="mini"
+                          (dateChange)="onChangeprovisionedDate($event ,getSiteAccessFromSite(rowDataSite))"
+                          [(date)]='getSiteAccessFromSite(rowDataSite).provisionedDate'
+                          id="provisionDateShort"
+                          name="provisionDateShort"
+                          placeholder=" "
+                          dateFormat="yyyy/mm/dd"
+                          tabindex="1"></prime-datepicker>
       </td>
-      <!--status -->
+      <!--Status -->
       <td class="provision-element-label">
         <!-- <select class="form-control status-dropdown mb-2" [(ngModel)]='getSiteAccessFromSite(rowDataSite).status'>
           <option value="{{getSiteAccessFromSite(rowDataSite).status}}">{{ getSiteAccessFromSite(rowDataSite).status}}
