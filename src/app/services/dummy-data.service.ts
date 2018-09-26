@@ -8,6 +8,7 @@ import {AccessReasons, DeclinedReasons, Site, SiteAccess, SiteAccessProgressStep
 import * as moment from 'moment';
 import {DateFormatter} from 'ngx-bootstrap';
 import { OrganizationAccess } from '../models/organization-access.model';
+import { CollegeTypes } from '../models/colleges.enum';
 
 /**
  * Responsible for generating dummy data, useful for development Not responsible
@@ -406,6 +407,9 @@ export class DummyDataService {
       person.primeUserId = person.firstName[0] + person.lastName + '--' + person.objectId.slice(0, 4);
       person.PoSId = person.firstName[0] + person.lastName[0] + 107; //Gibberish, not sure what these IDs really look like.
 
+      // Add 1 college ID per user
+      const collegeIDs = Object.keys(CollegeTypes).map(x => CollegeTypes[x]);
+      person.collegeCertificationList[0].licenceNumber = collegeIDs[index % collegeIDs.length];
 
       result.push( person );
     }

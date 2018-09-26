@@ -371,6 +371,13 @@ export class Person extends Base {
     advancedPracticeCertificationType: 'pleaseSelect'
   }];
 
+  // Returns the license number; if multiple it returns them comma-separated
+  getLicenseNumber(): string{
+    return this.collegeCertificationList
+      .map(college => college.licenceNumber)
+      .join(', ');
+  }
+
   /** Gets the human readable appropriate licence class string based on the collegeType. If no index is provided it gets the first item. */
   getLicenceClassByIndex(index: number = 0){
     if (!this.hasCollege){
