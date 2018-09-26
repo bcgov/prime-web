@@ -2,6 +2,15 @@
 
 :host {
   min-width: 8.5rem;
+  display: inline-flex;
+
+
+  // These 3 lines make it split into multiple lines, helps with long labels
+  // like 'Provisioning Requested'
+  span {white-space: normal}
+  i { display: inline;}
+  max-width: 100px;
+  
 }
 
 @mixin badge-border-dark($color, $percentage: 10%){
@@ -18,9 +27,6 @@
   i { color: darken($color, 45%) }
 }
 
-:host {
-  display: inline-flex;
-}
 
 .badge {
   position: relative;
