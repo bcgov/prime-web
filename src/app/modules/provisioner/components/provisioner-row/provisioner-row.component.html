@@ -95,7 +95,7 @@
       <!--Personal Access -->
       <td class="provision-element-label">
 
-        <select class="form-control access-type-selector" [(ngModel)]='rowData.siteAccess[0].personalAccess' (change)="onChange($event, rowData.siteAccess[0])" >
+        <select class="form-control access-type-selector mb-2" [(ngModel)]='rowData.siteAccess[0].personalAccess' (change)="onChange($event, rowData.siteAccess[0])" >
           <option *ngFor="let status of accessType"
                   value="{{status}}">
             {{status}}
