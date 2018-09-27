@@ -16,7 +16,7 @@
       <td class="enrollment-text-main font-weight-bold" width = "10%">Pos User ID</td>
       <td class="enrollment-text-main font-weight-bold" width = "10%"> Personal Access</td>
       <td class="enrollment-text-main font-weight-bold" width = "10%">Date Provisioned</td>
-      <td class="enrollment-text-main font-weight-bold" width = "10%">Status</td>
+      <td class="enrollment-text-main font-weight-bold" width = "10%" align="center">Status</td>
 
     </tr>
     <tr >
@@ -51,7 +51,7 @@
         <prime-datepicker size="mini"  (dateChange)="onChangeprovisionedDate($event ,rowData.siteAccess[0])" [(date)]='rowData.siteAccess[0].provisionedDate' id="provisionDateShort" name="provisionDateShort" placeholder=" "  dateFormat="yyyy/mm/dd"  tabindex="1"></prime-datepicker>
       </td>
       <!--status -->
-      <td class="provision-element-label">
+      <td class="provision-element-label" align="right">
 
         <!-- <select class="form-control access-type-selector" [(ngModel)]='rowData.siteAccess[0].status'>
           <option value="{{rowData.siteAccess[0].status}}">{{rowData.siteAccess[0].status}}
@@ -63,6 +63,7 @@
           [alerts]="[rowData.siteAccess[0].alert]"
           [iconOnly]='false'>
         </prime-pill-badge>
+
 
         <!--    <prime-pill-badge
               [alerts]="[rowDataSite.siteAccess[0].alert]"
