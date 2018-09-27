@@ -3,7 +3,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Base} from '../../../../core/base/base.class';
 
 import {DeclinedReasons, Site, SiteAccess, ProvisionedStatus, PersonalAccessType } from '../../../../models/sites.model';
-import {loadInOut, openState, openStateChild, openStateDisable, growVertical} from '../../../../animations/animations';
+import {loadInOut, openState, openStateChild, openStateDisable, growVertical, rotate180} from '../../../../animations/animations';
 import {EnrollmentStatus} from '../../../../models/enrollment-status.enum';
 import {EnrollmentRowItem} from '../../../verifier/components/enrollment-row/enrollment-row.component';
 import {PharmaNetOrganization} from "../../../../models/organizations.model";
@@ -26,7 +26,7 @@ const today = new Date();
   selector: 'prime-provisioner-row',
   templateUrl: './provisioner-row.component.html',
   styleUrls: ['./provisioner-row.component.scss'],
-  animations: [openState, openStateChild, loadInOut, openStateDisable, growVertical]
+  animations: [openState, openStateChild, loadInOut, openStateDisable, growVertical, rotate180]
 })
 
 export class ProvisionerRowComponent extends EnrollmentRow implements OnInit {
