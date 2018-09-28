@@ -9,6 +9,7 @@ import * as moment from 'moment';
 import {DateFormatter} from 'ngx-bootstrap';
 import { OrganizationAccess } from '../models/organization-access.model';
 import { CollegeTypes } from '../models/colleges.enum';
+import { PrimeDataService } from './prime-data.service';
 
 /**
  * Responsible for generating dummy data, useful for development Not responsible
@@ -467,6 +468,29 @@ export class DummyDataService {
     });
 
     return result;
+  }
+
+  /**
+   * Populate a PrimeDataService with demo data.  Ignoring minor fields like
+   * PosUSerID data will remain the same between refreshes.
+   */
+  populateWithDemoData(dataService: PrimeDataService){
+    // STAKEHOLDER DATA (specific scenarios)
+    const dummyCollections = this.createCollectionsDemo();
+    dataService.organizations = dummyCollections;
+    const dummySites = [].concat(... dummyCollections.map(collection => collection.members ) ); //flatten array
+    dataService.sites = dummySites;
+
+    const dummyPeople = this.createPeopleDemo();
+    dataService.people = dummyPeople;
+
+    // just set up blank data - note, user is not in the .people array and would not showup in lists
+    dataService.user = new Person();
+    dataService.user.address = new Address();
+
+    const access = this.populateSiteAccessFromCollectionDemo( dummyCollections, dummyPeople );
+    dataService.siteAccesses.push(... access.siteAccess);
+    dataService.organizationAccess.push(... access.orgAccess);
   }
 
   // --- Helpers

@@ -13,6 +13,8 @@ import { ProvisionerRowComponent } from './components/provisioner-row/provisione
 import { ProvisionerListComponent } from './components/provisioner-list/provisioner-list.component';
 import { ProvisionerDashBySiteComponent } from './pages/provisioner-dashboard/provisioner-dash-by-site/provisioner-dash-by-site.component';
 import { ProvisionerDashByUserComponent } from './pages/provisioner-dashboard/provisioner-dash-by-user/provisioner-dash-by-user.component';
+import { PrimeDataService } from '../../services/prime-data.service';
+import { DummyDataService } from '../../services/dummy-data.service';
 
 
 @NgModule({
@@ -26,7 +28,10 @@ import { ProvisionerDashByUserComponent } from './pages/provisioner-dashboard/pr
     FormsModule
 
   ],
-  providers: [],
+  providers: [
+    PrimeDataService,
+    DummyDataService
+  ],
   declarations: [
     ProvisionerDashboardComponent,
     ProvisionerWidgetsComponent,
@@ -38,4 +43,10 @@ import { ProvisionerDashByUserComponent } from './pages/provisioner-dashboard/pr
   ]
 })
 
-export class ProvisionerModule { }
+export class ProvisionerModule {
+   // This constructor fires when (and only when) the module is lazyloaded, so
+   // should be a max of once.
+  constructor(private dataService: PrimeDataService, private dummyDataService: DummyDataService){
+    this.dummyDataService.populateWithDemoData(this.dataService);
+  }
+}

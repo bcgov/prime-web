@@ -9,12 +9,16 @@ import {ApplEnrollmentRowItem} from '../modules/applicant/components/appl-enroll
 import {CollegeTypes} from "../models/colleges.enum";
 import { ProvisionerRowItem } from '../modules/provisioner/components/provisioner-row/provisioner-row.component';
 import { OrganizationAccess } from '../models/organization-access.model';
+import { Base } from '../core/base/base.class';
 
 
 @Injectable()
-export class PrimeDataService {
+export class PrimeDataService extends Base {
 
-  constructor() { }
+  constructor() { 
+    super();
+    // console.log('PrimeDataService init - ', this.objectId);
+  }
 
   /** List of all sites the front-end app has access to currently */
   sites: Site[] = [];

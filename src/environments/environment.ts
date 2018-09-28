@@ -7,7 +7,5 @@ export const environment = {
   production: false,
 
   /** Configures dummy data in a way that's convenient for developers, such as having values which already pass validation. */
-  useDeveloperDummyData: false, // A little broken due to latest prototype sprint
   skipRedirects: true,
-  useDeveloperDummyDataForUser: false
 };
