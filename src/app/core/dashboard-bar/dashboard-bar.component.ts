@@ -11,9 +11,7 @@ export class DashboardBarComponent implements OnInit {
   @Input() hideAddUserButton: boolean = false;
   isProvisionerDashboard: boolean = false;
   isVerifierDashboard: boolean = false;
-
   byUserActive: boolean = true;
-  // bySiteActive: boolean = false;
 
   constructor(public router: Router) {
     if (this.router.url.indexOf('/provisioner/dashboard/') > -1) {
