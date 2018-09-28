@@ -70,7 +70,8 @@
   <div class="col-sm-6 mt-4">
     <div class="card {{ showPharmaNetAccessWarning() ? 'card-warning' : '' }}">
       <div class="card-header d-flex justify-content-between">
-        PharmaNet Access
+        <label *ngIf="showPharmaNetAccessWarning">PharmaNet Access</label>
+        <label *ngIf="!showPharmaNetAccessWarning">Active Enrolment</label>
         <a routerLink="/applicant/pharma-net">
           <i class="fa fa-edit fa-2x text-muted"></i>
         </a>
