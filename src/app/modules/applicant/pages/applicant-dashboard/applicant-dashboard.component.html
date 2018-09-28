@@ -82,9 +82,7 @@
           <span class="pharma-net-fact"><span class="circle-num">{{ siteCount }}</span> Sites</span>
         </div>
 
-        <!-- TODO - toggle between icon and text as appropriate -->
-
-        <p class="text-success text-bold" *ngIf='!hasHandledSites; else checkMark'>Enrollment Requested</p>
+        <p class="text-success text-bold" *ngIf='!hasHandledSites; else checkMark'>Enrolment Requested</p>
         <ng-template #checkMark><i class="fa fa-check-circle text-success fa-3x pull-right" aria-hidden="true"></i></ng-template>
       </div>
     </div>
