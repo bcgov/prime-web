@@ -83,7 +83,10 @@
         </div>
 
         <p class="text-success text-bold" *ngIf='!hasHandledSites; else checkMark'>Enrolment Requested</p>
-        <ng-template #checkMark><i class="fa fa-check-circle text-success fa-3x pull-right" aria-hidden="true"></i></ng-template>
+        <ng-template #checkMark>
+          <p class="text-success text-bold">Enrolment Active</p>
+          <i class="fa fa-check-circle text-success fa-3x pull-right" aria-hidden="true"></i>
+        </ng-template>
       </div>
     </div>
   </div>
