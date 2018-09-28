@@ -29,7 +29,7 @@ export enum EnrollmentStatus {
   /**
    * Provisioner to grant site access for applicant
    */
-  Provisioning = 'Provisioning Requested',
+  Provisioning = 'Confirmation Requested',
   Returned = 'Returned to applicant',
 
    /**

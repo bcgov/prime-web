@@ -27,7 +27,7 @@ export class CollegeHelper {
         fullName = 'College of Physicians and Surgeons of BC (CPSBC)';
         break;
       case CollegeTypes.CRNBC:
-        fullName = 'College of Registered Nurses of BC (CRNBC)';
+        fullName = 'BC College of Nursing Professionals (BCCNP)';
         break;
     }
 
