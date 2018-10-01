@@ -13,7 +13,7 @@ import { Address } from './models/addresses.model';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'Prime – Applicant Enrolment';
+  title = 'PRIME – Applicant Enrolment';
 
 
   constructor(private userService: UserService,
