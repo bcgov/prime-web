@@ -2,7 +2,8 @@
 <prime-page-framework>
 
   <h2 class='prime-title' id="regInfo">Registration Information</h2>
-  Enter your identity information exactly as it appears on any valid government-issued photo ID.
+  <div *ngIf="!usedBCSC">Enter your identity information exactly as it appears on any valid government-issued photo ID.</div>
+  <div *ngIf="usedBCSC">Your identity information comes from your BC Services Card.</div>
 
   <form>
     <div>
@@ -27,7 +28,7 @@
 
       <ng-template #dobReadOnly>
         <label class="has-float-label">
-          <input type="text" class="form-control prime-input-large" id="dob" name="dob" disabled [value]="registrant.dateOfBirthShort">        
+          <input type="text" class="form-control prime-input-large" id="dob" name="dob" disabled [value]="registrant.dateOfBirthShort">
           <span>Date of Birth</span>
         </label>
       </ng-template>
