@@ -1,8 +1,8 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import {PrimeDataService} from "../../../../services/prime-data.service";
-import {Person} from "../../../../models/person.model";
+import {PrimeDataService} from '../../../../services/prime-data.service';
+import {Person} from '../../../../models/person.model';
 import { cloneDeep } from 'lodash';
 import {Router} from '@angular/router';
 

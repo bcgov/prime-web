@@ -40,7 +40,7 @@ describe('UserInfoButtonComponent', () => {
     component['dataService'].user = component['dataService'].people[0];
 
     const SA = dummyDataService.populateSiteAccessFromCollectionDemo( dummyCollections, dummyPeople );
-    component['dataService'].siteAccesses.push(... SA);
+    component['dataService'].siteAccesses.push(... SA.siteAccess);
 
   });
 
