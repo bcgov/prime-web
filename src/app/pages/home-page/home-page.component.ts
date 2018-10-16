@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { EnrollmentStatus } from '../../models/enrollment-status.enum';
 import { DummyDataService } from '../../services/dummy-data.service';
 import { PersonalAccessType } from '../../models/sites.model';
+import { Logger } from '../../services/logger.service';
 
 @Component({
   selector: 'prime-home-page',
@@ -12,7 +13,7 @@ import { PersonalAccessType } from '../../models/sites.model';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor(private dataService: PrimeDataService, private router: Router, private dummyDataService: DummyDataService) { }
+  constructor(private dataService: PrimeDataService, private router: Router, private dummyDataService: DummyDataService, private logger: Logger) { }
 
   ngOnInit() {
   }
@@ -43,7 +44,7 @@ export class HomePageComponent implements OnInit {
       })
     })
 
-
+    this.logApplicantChange();
     this.router.navigate([ '/applicant/dashboard' ]);
   }
 
@@ -57,6 +58,24 @@ export class HomePageComponent implements OnInit {
   applicationNewCompleted(): boolean {
     // User has filled out the PharmaNet screen from applicant
     return this.dataService.user.organizationAccess.length >= 1;
+  }
+
+  openUserGuide(){
+    this.logger.log({event: 'navigation', url: 'userguide.pdf'});
+    window.open('/assets/userguide.pdf', '_blank', 'fullscreen=yes');
+    return false;
+  }
+
+  logApplicantNew(){
+    this.logger.log({event: 'applicantNew'});
+  }
+
+  logApplicantChange(){
+    this.logger.log({event: 'applicantChange'});
+  }
+
+  logProvisioner(){
+    this.logger.log({event: 'provisioner'});
   }
 
 }

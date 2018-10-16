@@ -5,7 +5,11 @@
 
 export const environment = {
   production: false,
-
+  loggingURL: '/fpcare/api/logging',
   /** Configures dummy data in a way that's convenient for developers, such as having values which already pass validation. */
   skipRedirects: true,
+  /** console.log() HTTP requests from our API and Log services */
+  logHTTPRequestsToConsole: true,
+  /** Should logs be sent to Splunk? If false, no logs are made. */
+  enableLogging: false,
 };
