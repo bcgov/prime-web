@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   skipRedirects: false,
-  loggingURL: '/fpcare/api/logging',
+  loggingURL: '/prime/api/logging',
   logHTTPRequestsToConsole: false,
   enableLogging: true,
 };
