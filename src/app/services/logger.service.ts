@@ -28,6 +28,7 @@ export class Logger extends AbstractHttpService {
 
   constructor(protected http: HttpClient) {
     super(http);
+    console.log('logging', {enabled: environment.enableLogging, loggingUrl: environment.loggingURL});
   }
 
   /**
