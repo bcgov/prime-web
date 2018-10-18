@@ -77,7 +77,7 @@ http {
             gzip_types      *;
 
             # Deploy-time configurable
-            %HTTP_BASIC%
+            # %HTTP_BASIC%
         }
 
         location /api {
@@ -94,9 +94,9 @@ http {
                 XXX1proxy_set_header Authorization "Splunk %SPLUNK_AUTH_TOKEN%"; proxy_set_header http_host "%HOSTNAME%"; proxy_pass_header Authorization; proxy_pass_header http_host; proxy_pass_header request_method; proxy_pass_header http_x_forwarded_host; proxy_pass http://splunk-forwarder:8080/log;XXX2
             }
 
-            # location /api/captcha/ {
-            #     proxy_pass http://mygovbc-captcha-service:8080/;
-            # }
+            location /api/captcha/ {
+                proxy_pass http://mygovbc-captcha-service:8080/;
+            }
         }
 
         # redirect server error pages to the static page /50x.html
