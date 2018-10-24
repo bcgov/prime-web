@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { Person } from '../../../../models/person.model';
 import { Address } from '../../../../models/addresses.model';
+import { Logger } from '../../../../services/logger.service';
 
 @Component({
   selector: 'prime-new-account',
@@ -11,7 +12,7 @@ import { Address } from '../../../../models/addresses.model';
 })
 export class NewAccountComponent implements OnInit {
 
-  constructor( private router: Router, private primeDataService: PrimeDataService) { }
+  constructor( private router: Router, private primeDataService: PrimeDataService, private logger: Logger) { }
 
   ngOnInit() {
   }
@@ -27,6 +28,7 @@ export class NewAccountComponent implements OnInit {
     // NOTE - This new user is NOT in the user list for provisoiner as it's not in dataService.people
 
     // Navigate next page
+    this.logger.log({event: 'standardReg'});
     this.router.navigate( [this.getUrlPrefix( this.router.url ) + '/' + 'profile'] );
   }
 
@@ -40,6 +42,7 @@ export class NewAccountComponent implements OnInit {
 
   bcscLogin() {
     // Navigate to the bcsc registration
+    this.logger.log({event: 'bcscReg'});
     this.router.navigate( [this.getUrlPrefix( this.router.url ) + '/' + 'bcsc-login'] );
   }
   /**
