@@ -13,6 +13,7 @@ import { FileUploaderComponent } from './file-uploader.component';
 import * as moment from 'moment';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { HttpClientModule } from '@angular/common/http';
+import {ThumbnailComponentComponent} from "../thumbnail-component/thumbnail-component.component";
 
 
 
@@ -24,7 +25,7 @@ describe('FileUploaderComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [FileUploaderComponent],
+      declarations: [FileUploaderComponent, ThumbnailComponentComponent],
       imports: [FormsModule, HttpClientModule, ModalModule.forRoot()],
     });
   });

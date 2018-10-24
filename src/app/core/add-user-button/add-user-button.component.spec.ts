@@ -9,6 +9,9 @@ import {FormsModule} from '@angular/forms';
 import {BsModalService, ComponentLoaderFactory, PositioningService, ProgressbarModule} from 'ngx-bootstrap';
 import {DummyDataService} from '../../services/dummy-data.service';
 import {PrimeDataService} from '../../services/prime-data.service';
+import {PostalCodeComponent} from "../../modules/core/components/postal-code/postal-code.component";
+import {PhoneNumberComponent} from "../../modules/core/components/phone-number/phone-number.component";
+import {TextMaskModule} from "angular2-text-mask";
 
 describe('AddUserButtonComponent', () => {
   let component: AddUserButtonComponent;
@@ -16,8 +19,8 @@ describe('AddUserButtonComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddUserButtonComponent, MiniProgressBarComponent, DatepickerComponent],
-      imports: [PrimeDataModule.forRoot(), FormsModule, ProgressbarModule.forRoot(), NgxMyDatePickerModule.forRoot()],
+      declarations: [ AddUserButtonComponent, MiniProgressBarComponent, DatepickerComponent, PostalCodeComponent, PhoneNumberComponent],
+      imports: [PrimeDataModule.forRoot(), FormsModule, ProgressbarModule.forRoot(), NgxMyDatePickerModule.forRoot(), TextMaskModule],
       providers: [ComponentLoaderFactory, BsModalService, PositioningService, DummyDataService, PrimeDataService]
     })
     .compileComponents();

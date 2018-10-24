@@ -11,6 +11,9 @@ import {PrimeDataService} from '../../services/prime-data.service';
 import {DummyDataService} from '../../services/dummy-data.service';
 import { RouterModule } from '@angular/router';
 import {APP_BASE_HREF} from '@angular/common';
+import {PostalCodeComponent} from "../../modules/core/components/postal-code/postal-code.component";
+import {TextMaskModule} from "angular2-text-mask";
+import {PhoneNumberComponent} from "../../modules/core/components/phone-number/phone-number.component";
 
 
 
@@ -20,8 +23,8 @@ describe('DashboardBarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DashboardBarComponent, AddUserButtonComponent, MiniProgressBarComponent, DatepickerComponent],
-      imports: [FormsModule, ProgressbarModule.forRoot(), NgxMyDatePickerModule.forRoot(),
+      declarations: [ DashboardBarComponent, AddUserButtonComponent, MiniProgressBarComponent, DatepickerComponent, PostalCodeComponent, PhoneNumberComponent],
+      imports: [FormsModule, ProgressbarModule.forRoot(), NgxMyDatePickerModule.forRoot(), TextMaskModule,
                 RouterModule.forRoot([
                   {
                     path: '**',
