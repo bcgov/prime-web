@@ -81,8 +81,7 @@ http {
         }
 
         location /api {
-            # Must be removed until mygovbc-msp-service is deployed, otherwise pod will crashed.
-            # proxy_pass http://mygovbc-msp-service:8080/;
+            proxy_pass http://mygovbc-msp-service:8080/;
 
             location /api/logging {
                 if ( $request_method !~ ^(POST|HEAD|OPTIONS)$ ) {
@@ -95,10 +94,19 @@ http {
                 XXX1proxy_set_header Authorization "Splunk %SPLUNK_AUTH_TOKEN%"; proxy_set_header http_host "%HOSTNAME%"; proxy_pass_header Authorization; proxy_pass_header http_host; proxy_pass_header request_method; proxy_pass_header http_x_forwarded_host; proxy_pass http://splunk-forwarder:8080/log;XXX2
             }
 
-            # Must be commented out until CAPTCHA is deployed, otherwise pod will crash.
-            # location /api/captcha/ {
-            #     proxy_pass http://mygovbc-captcha-service:8080/;
-            # }
+            location /api/env {
+                if ( $request_method !~ ^(POST|HEAD|OPTIONS)$ ) {
+                    return 405;
+                }
+                if ( $request_method ~ ^(HEAD|OPTIONS)$ ) {
+                    return 200;
+                }
+                proxy_set_header Authorization "spaenv %SPA_ENV_AUTH_TOKEN%"; proxy_set_header http_host "%HOSTNAME%"; proxy_pass_header Authorization; proxy_pass_header http_host; proxy_pass_header request_method; proxy_pass_header http_x_forwarded_host; proxy_pass_header SPA_ENV_NAME; proxy_pass http://spa-env-server:8080/env;
+            }
+
+            location /api/captcha/ {
+                 proxy_pass http://mygovbc-captcha-service:8080/;
+            }
         }
 
         # redirect server error pages to the static page /50x.html
