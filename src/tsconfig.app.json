@@ -6,7 +6,6 @@
     "baseUrl": "",
     "types": [
       "node",
-      "jasmine"
     ],
     "typeRoots": [ "../node_modules/@types" ],
     "skipLibCheck": true
