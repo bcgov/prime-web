@@ -113,7 +113,9 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "Prime:serve"
+            "webdriverUpdate":false,
+            "devServerTarget": "Prime:serve",
+            "port": 4305
           },
           "configurations": {
             "production": {
