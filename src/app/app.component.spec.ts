@@ -1,44 +1,31 @@
 import { TestBed, async } from '@angular/core/testing';
-import {
-  RouterTestingModule
-} from '@angular/router/testing';
-
+import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { ProgressBarComponent } from './core/progress-bar/progress-bar.component';
-import { ApplicantDataService } from './services/applicant-data.service';
-import { DummyDataService } from './services/dummy-data.service';
-import {UserService} from './services/user.service';
-import {PrimeDataService} from './services/prime-data.service';
-import { PrimeHeaderComponent } from './modules/header-footer/prime-header/prime-header.component';
-import { HeaderFooterModule } from './modules/header-footer/header-footer.module';
-
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule
+      ],
       declarations: [
-        AppComponent,
-        ProgressBarComponent,
+        AppComponent
       ],
-      providers: [
-        ApplicantDataService,
-        DummyDataService,
-        UserService,
-        PrimeDataService
-      ],
-      imports: [RouterTestingModule, HeaderFooterModule]
     }).compileComponents();
   }));
-
   it('should create the app', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));
-
-  it('should render title in a span tag', async(() => {
+  it(`should have as title 'app'`, async(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect(app.title).toEqual('app');
+  }));
+  it('should render title in a h1 tag', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('span.title').textContent).toContain('PRIME');
+    expect(compiled.querySelector('h1').textContent).toContain('Welcome to Prime!');
   }));
 });

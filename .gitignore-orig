@@ -30,10 +30,19 @@
 /coverage
 /libpeerconnection.log
 npm-debug.log
-yarn-error.log
 testem.log
 /typings
+*.org
+*.org#
+*.org~
+
+# e2e
+/e2e/*.js
+/e2e/*.map
 
 # System Files
 .DS_Store
 Thumbs.db
+
+# We want this removed during the prototype phase.
+package-lock.json
