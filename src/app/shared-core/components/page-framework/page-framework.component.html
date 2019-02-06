@@ -34,6 +34,14 @@
         </div>
       </div>
     </ng-container>
+
+    <ng-container *ngSwitchCase="'blank'">
+      <div class="col-sm-12">
+        <div class="px-lg-5 px-md-3">
+          <ng-container *ngTemplateOutlet="content"></ng-container>
+        </div>
+      </div>
+    </ng-container>
 </div>
 <ng-content select='common-form-action-bar'></ng-content>
 

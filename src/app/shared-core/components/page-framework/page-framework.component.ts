@@ -25,7 +25,7 @@ export class PageFrameworkComponent implements OnInit {
 
   constructor(private elem: ElementRef) { }
 
-  @Input() layout: 'single' | 'double' | 'default' = 'default';
+  @Input() layout: 'single' | 'double' | 'blank' | 'default' = 'default';
 
   ngOnInit() {
   }
