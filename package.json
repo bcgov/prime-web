@@ -22,13 +22,15 @@
     "@angular/platform-browser": "^6.0.3",
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
+    "angular2-uuid": "^1.1.1",
     "bootstrap": "^4.0.0",
     "core-js": "^2.5.4",
     "font-awesome": "^4.6.3",
     "moment": "^2.24.0",
     "mygovbc-bootstrap-theme": "^0.4.0",
     "rxjs": "6.2.1",
-    "zone.js": "^0.8.26"
+    "zone.js": "^0.8.26",
+    "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.6.8",
