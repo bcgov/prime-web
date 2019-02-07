@@ -87,3 +87,25 @@ header .nav-link {
   height: 0;
   &:focus { opacity: 1; height: auto; }
 }
+
+.container-fluid {
+  padding: 0 $container-gutter-size;
+
+  @include media-breakpoint-down(md){
+    padding: 0 ($container-gutter-size / 2);
+  }
+
+  @include media-breakpoint-down(sm){
+    padding: 0 ($container-gutter-size / 5);
+  }
+}
+
+// TODO: add to schematics for when project is generated
+#app {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#wrap {
+  margin-bottom: 5rem;
+}
