@@ -10,27 +10,27 @@ const routes: Routes = [
   {
     path: '',
     component: HomePageComponent,
-    data: { breadcrumb: 'Home'}
+    data: { title: 'Home'}
   },
   {
     path: 'moh-profile',
     component: ApplProfileComponent,
-    data: { breadcrumb: 'Profile'}
+    data: { title: 'Profile'}
   },
   {
     path: 'moh-doc-upload',
     component: ApplDocUploadComponent,
-    data: { breadcrumb: 'Upload Documents'}
+    data: { title: 'Upload Documents'}
   },
   {
     path: 'moh-account',
     component: ApplAccountComponent,
-    data: { breadcrumb: 'Account'}
+    data: { title: 'Account'}
   },
   {
     path: 'moh-security',
     component: ApplSecurityComponent,
-    data: { breadcrumb: 'Security'}
+    data: { title: 'Security'}
   }
 ];
 
