@@ -6,29 +6,36 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 /** These imports will change when moved to moh-common-styles project */
-import { FormActionBarComponent } from './shared-core/components/form-action-bar/form-action-bar.component';
-import { PageFrameworkComponent } from './shared-core/components/page-framework/page-framework.component';
 import { PasswordComponent } from './shared-core/components/password/password.component';
-import { WizardProgressBarComponent } from './shared-core/components/wizard-progress-bar/wizard-progress-bar.component';
-import { CoreBreadcrumbComponent } from './shared-core/components/core-breadcrumb/core-breadcrumb.component';
-import { ProgressbarModule } from 'ngx-bootstrap';
+
+
+/** Pages (Appl* will be removed later when registration flow coded - just page development) */
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { ApplProfileComponent } from './modules/registration/components/appl-profile/appl-profile.component';
+import { ApplAccountComponent } from './modules/registration/components/appl-account/appl-account.component';
+import { ApplSecurityComponent } from './modules/registration/components/appl-security/appl-security.component';
+import { ApplDocUploadComponent } from './modules/registration/components/appl-doc-upload/appl-doc-upload.component';
+import { PageFrameworkComponent } from './shared-core/components/page-framework/page-framework.component';
+import { FormActionBarComponent } from './shared-core/components/form-action-bar/form-action-bar.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PageFrameworkComponent,
-    FormActionBarComponent,
     PasswordComponent,
-    WizardProgressBarComponent,
-    CoreBreadcrumbComponent
+    HomePageComponent,
 
+    ApplProfileComponent,
+    ApplAccountComponent,
+    ApplSecurityComponent,
+    ApplDocUploadComponent,
+    PageFrameworkComponent,
+    FormActionBarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    ProgressbarModule.forRoot(),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
