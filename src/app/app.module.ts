@@ -9,8 +9,8 @@ import { AppComponent } from './app.component';
 import { FormActionBarComponent } from './shared-core/components/form-action-bar/form-action-bar.component';
 import { PageFrameworkComponent } from './shared-core/components/page-framework/page-framework.component';
 import { PasswordComponent } from './shared-core/components/password/password.component';
-import { WizardProgressBarComponent } from './shared-core/wizard-progress-bar/wizard-progress-bar.component';
-import { CoreBreadcrumbComponent } from './shared-core/core-breadcrumb/core-breadcrumb.component';
+import { WizardProgressBarComponent } from './shared-core/components/wizard-progress-bar/wizard-progress-bar.component';
+import { CoreBreadcrumbComponent } from './shared-core/components/core-breadcrumb/core-breadcrumb.component';
 import { ProgressbarModule } from 'ngx-bootstrap';
 
 
