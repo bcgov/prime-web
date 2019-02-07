@@ -5,11 +5,11 @@ import { Component, OnInit, ElementRef, Input, ViewEncapsulation } from '@angula
  * consistent layout.  It applies to most pages, but should NOT be used on
  * Dashboards, or full-width table components.
  *
- * <fpcare-page-framework>
+ * <common-page-framework>
  *  <div>This will go in the middle column</div>
  *  <p>So will this</p>
  *  <div right> This will go in the right column</div>
- * </fpcare-page-framework>
+ * </common-page-framework>
  *
  * @export
  * @class PageFrameworkComponent

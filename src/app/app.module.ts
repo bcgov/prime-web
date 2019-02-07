@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -8,19 +9,26 @@ import { AppComponent } from './app.component';
 import { FormActionBarComponent } from './shared-core/components/form-action-bar/form-action-bar.component';
 import { PageFrameworkComponent } from './shared-core/components/page-framework/page-framework.component';
 import { PasswordComponent } from './shared-core/components/password/password.component';
-import { FormsModule } from '@angular/forms';
+import { WizardProgressBarComponent } from './shared-core/wizard-progress-bar/wizard-progress-bar.component';
+import { CoreBreadcrumbComponent } from './shared-core/core-breadcrumb/core-breadcrumb.component';
+import { ProgressbarModule } from 'ngx-bootstrap';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     PageFrameworkComponent,
     FormActionBarComponent,
-    PasswordComponent
+    PasswordComponent,
+    WizardProgressBarComponent,
+    CoreBreadcrumbComponent
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ProgressbarModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
