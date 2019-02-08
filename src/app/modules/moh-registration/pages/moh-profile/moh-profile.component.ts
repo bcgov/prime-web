@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./moh-profile.component.scss']
 })
 export class MohProfileComponent implements OnInit {
-
+  
   constructor() { }
 
   ngOnInit() {

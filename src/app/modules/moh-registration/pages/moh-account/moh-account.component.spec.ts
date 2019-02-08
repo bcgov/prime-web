@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PrimeContainerComponent } from './prime-container.component';
+import { MohAccountComponent } from './moh-account.component';
 
-describe('PrimeContainerComponent', () => {
-  let component: PrimeContainerComponent;
-  let fixture: ComponentFixture<PrimeContainerComponent>;
+describe('MohAccountComponent', () => {
+  let component: MohAccountComponent;
+  let fixture: ComponentFixture<MohAccountComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PrimeContainerComponent ]
+      declarations: [ MohAccountComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PrimeContainerComponent);
+    fixture = TestBed.createComponent(MohAccountComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

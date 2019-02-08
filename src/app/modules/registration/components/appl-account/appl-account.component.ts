@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-appl-account',
+  selector: 'prime-appl-account',
   templateUrl: './appl-account.component.html',
   styleUrls: ['./appl-account.component.scss']
 })

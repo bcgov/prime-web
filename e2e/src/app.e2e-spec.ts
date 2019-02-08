@@ -9,6 +9,10 @@ describe('workspace-project App', () => {
 
   it('should display Prime in banner', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Prime');
+    expect(page.getParagraphText()).toEqual(newFunction());
   });
 });
+function newFunction(): any {
+  return 'Prime';
+}
+

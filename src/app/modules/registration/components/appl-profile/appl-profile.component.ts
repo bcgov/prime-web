@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ApplProfileComponent implements OnInit {
 
   @Input() editIdentityInfo: boolean = true;
-
+  
   constructor() { }
 
   ngOnInit() {
