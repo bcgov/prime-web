@@ -9,7 +9,15 @@ import * as zxcvbn from 'zxcvbn';
  *  b) FormsModule
  */
 
-/**  Interface for passing in error messages */
+/**
+ * Interface for passing in error messages
+ * Example:
+ *  errorMessages = {
+ *       required: this.componentLabel + ' is required.',
+ *       minLength: this.componentLabel + ' must be ' + this.minLen + ' characters.',
+ *       criteria: this.componentLabel + ' does not meet password criteria.'
+ *     }
+ */
 export interface PasswordErrorMsg {
   required: string;
   minLength?: string;
@@ -51,15 +59,6 @@ export class PasswordComponent extends Base implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-
-    // Use default messages when no error messages are provided
-    if ( !this.errorMessages ) {
-      this.errorMessages = {
-        required: this.componentLabel + ' is required.',
-        minLength: this.componentLabel + ' must be ' + this.minLen + ' characters.',
-        criteria: this.componentLabel + ' does not meet password criteria.'
-      };
-    }
   }
 
   ngOnChanges(changes) {
