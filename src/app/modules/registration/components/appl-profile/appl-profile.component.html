@@ -1,3 +1,68 @@
-<common-page-framework layout='blank'>
-  appl-profile works!
-</common-page-framework>
+
+  <h1>Profile Information</h1>
+
+  <div>
+    <h2 class='border-bottom'>Your Information</h2>
+
+    <p>
+      Prior to identity-proofing, please upload the front and back of a valid
+      government-issued photo ID.
+    </p>
+
+    <div class="form-group col-sm-4 p-sm-0">
+      <label class="control-label">First Name</label>
+      <input class="form-control"
+             name="first_name"
+             id="first_name"
+             [disabled]='!editIdentityInfo' />
+    </div>
+
+    <div class="form-group col-sm-4 p-sm-0">
+      <label class="control-label">Middle Name</label>
+      <input class="form-control"
+             name="middle_name"
+             id="middle_name"
+             [disabled]='!editIdentityInfo' />
+    </div>
+
+    <div class="form-group col-sm-4 p-sm-0">
+      <label class="control-label">Last Name</label>
+      <input class="form-control"
+             name="last_name"
+             id="last_name"
+             [disabled]='!editIdentityInfo' />
+    </div>
+  </div>
+
+  <div>
+    <h2 class='border-bottom'>Preferred Name (Optional)</h2>
+
+    <p>
+      If you have a name that is different than your legal name that people know you by,
+      enter your full preferred name.
+    </p>
+
+    <div class="form-group col-sm-4 p-sm-0">
+        <label class="control-label">Preferred First Name</label>
+        <input class="form-control" name="pref_first_name" id="pref_first_name" />
+      </div>
+
+      <div class="form-group col-sm-4 p-sm-0">
+        <label class="control-label">Preferred Middle Name</label>
+        <input class="form-control" name="pref_middle_name" id="pref_middle_name" />
+      </div>
+
+      <div class="form-group col-sm-4 p-sm-0">
+        <label class="control-label">Preferred Last Name</label>
+        <input class="form-control" name="pref_last_name" id="pref_last_name" />
+      </div>
+  </div>
+
+  <div class='d-flex'>
+    <div class='col-sm-6 pl-0'>
+      <h2 class='border-bottom'>Address</h2>
+    </div>
+    <div class='col-sm-6 pr-0'>
+      <h2 class='border-bottom'>Mailing Address</h2>
+    </div>
+  </div>

@@ -7,18 +7,14 @@ import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { fakeBackendProvider } from './fake-backend/fake-backend';
 
-/** These imports will change when moved to moh-common-styles project */
-import { PasswordComponent } from './shared-core/components/password/password.component';
+import { RegistrationModule } from './modules/registration/registration.module';
 
+/** These imports will change when moved to moh-common-styles project */
+import { SharedCoreModule } from './shared-core/shared-core.module';
 
 /** Pages (Appl* will be removed later when registration flow coded - just page development) */
 import { HomePageComponent } from './pages/home-page/home-page.component';
-import { ApplProfileComponent } from './modules/registration/components/appl-profile/appl-profile.component';
-import { ApplAccountComponent } from './modules/registration/components/appl-account/appl-account.component';
-import { ApplSecurityComponent } from './modules/registration/components/appl-security/appl-security.component';
-import { ApplDocUploadComponent } from './modules/registration/components/appl-doc-upload/appl-doc-upload.component';
-import { PageFrameworkComponent } from './shared-core/components/page-framework/page-framework.component';
-import { FormActionBarComponent } from './shared-core/components/form-action-bar/form-action-bar.component';
+import { BcscProfileComponent } from './modules/bcsc-registration/pages/bcsc-profile/bcsc-profile.component';
 
 // List of providers for applicant
 const providerList: any = [
@@ -34,20 +30,14 @@ if ( environment.useMockBackend ) {
 @NgModule({
   declarations: [
     AppComponent,
-    PasswordComponent,
-    HomePageComponent,
-
-    ApplProfileComponent,
-    ApplAccountComponent,
-    ApplSecurityComponent,
-    ApplDocUploadComponent,
-    PageFrameworkComponent,
-    FormActionBarComponent
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    RegistrationModule,
+    SharedCoreModule
   ],
   providers: [
     providerList
