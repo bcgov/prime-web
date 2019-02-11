@@ -3,7 +3,7 @@ import { WizardProgressItem } from '../../../../shared-core/components/wizard-pr
 import { routes } from '../../moh-registration-routing.module';
 
 @Component({
-  selector: 'moh-container',
+  selector: 'prime-moh-container',
   templateUrl: './moh-container.component.html',
   styleUrls: ['./moh-container.component.scss']
 })
@@ -14,6 +14,7 @@ export class MohContainerComponent implements OnInit {
 
   constructor() {
 
+    console.log( 'moh container constructor' );
     // Interface for wizard progress items
     this.progressSteps = routes.map(page => {
       if (page.path !== '') {
@@ -24,6 +25,7 @@ export class MohContainerComponent implements OnInit {
       }
     }).filter(x => x);
   }
+
   ngOnInit() {
     console.log( 'moh-container' );
   }

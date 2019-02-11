@@ -8,13 +8,14 @@ import { environment } from '../environments/environment';
 import { fakeBackendProvider } from './fake-backend/fake-backend';
 
 import { RegistrationModule } from './modules/registration/registration.module';
+import { PrimeDataModule } from './modules/prime-data/prime-data.module';
 
 /** These imports will change when moved to moh-common-styles project */
 import { SharedCoreModule } from './shared-core/shared-core.module';
 
 /** Pages (Appl* will be removed later when registration flow coded - just page development) */
 import { HomePageComponent } from './pages/home-page/home-page.component';
-import { BcscProfileComponent } from './modules/bcsc-registration/pages/bcsc-profile/bcsc-profile.component';
+
 
 // List of providers for applicant
 const providerList: any = [
@@ -37,6 +38,7 @@ if ( environment.useMockBackend ) {
     AppRoutingModule,
     FormsModule,
     RegistrationModule,
+    PrimeDataModule.forRoot(),
     SharedCoreModule
   ],
   providers: [

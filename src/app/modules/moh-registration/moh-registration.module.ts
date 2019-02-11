@@ -11,9 +11,9 @@ import { MohAccountComponent } from './pages/moh-account/moh-account.component';
 @NgModule({
   imports: [
     CommonModule,
+    SharedCoreModule,
     MohRegistrationRoutingModule,
-    RegistrationModule,
-    SharedCoreModule
+    RegistrationModule
   ],
   declarations: [
     MohContainerComponent,

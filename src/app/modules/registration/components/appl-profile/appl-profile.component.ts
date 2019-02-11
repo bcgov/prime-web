@@ -1,4 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Address } from '../../../../shared-core/models/address.model';
+
+/** Interface for names */
+export interface NameObj {
+  first: string;
+  middle: string;
+  last: string;
+}
 
 @Component({
   selector: 'prime-appl-profile',
@@ -8,7 +16,11 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ApplProfileComponent implements OnInit {
 
   @Input() editIdentityInfo: boolean = true;
-  
+  @Input() legalName: NameObj;
+  @Input() preferName: NameObj;
+  @Input() address: Address;
+  @Input() mailAddress: Address;
+
   constructor() { }
 
   ngOnInit() {
