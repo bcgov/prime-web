@@ -12,5 +12,9 @@ export const pageRoutes: Routes = [
     path: 'moh-account',
     component: MohAccountComponent,
     data: { title: 'MoH Account'}
-  }
+  },
+  {
+    path: '',
+    redirectTo: 'moh-profile'
+}
 ];

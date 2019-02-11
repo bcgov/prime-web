@@ -10,7 +10,6 @@ export class MohProfileComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log( 'profile' );
   }
 
   continue() {

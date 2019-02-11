@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WizardProgressItem } from '../../../../shared-core/components/wizard-progress-bar/wizard-progress-bar.component';
 import { pageRoutes } from '../../moh-registration-page-routing.module';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'prime-moh-container',
@@ -12,7 +13,7 @@ export class MohContainerComponent implements OnInit {
   /** Route items for the stepper */
   progressSteps: WizardProgressItem[];
 
-  constructor() {
+  constructor( public router: Router ) {
     // Interface for wizard progress items
     this.progressSteps = pageRoutes.map(page => {
       if (page.path !== '') {
@@ -25,7 +26,9 @@ export class MohContainerComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log( 'moh-container' );
+    console.log( 'moh-container  url: ' + this.router.url );
+
+
   }
   /**
    * Converts a lower case string of a route in a user readable title.  e.g.
