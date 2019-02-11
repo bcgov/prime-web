@@ -1,22 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MohProfileComponent } from './pages/moh-profile/moh-profile.component';
-import { MohAccountComponent } from './pages/moh-account/moh-account.component';
+import { MohContainerComponent } from './components/moh-container/moh-container.component';
+import { pageRoutes } from './moh-registration-page-routing.module';
 
 export const routes: Routes = [
   {
-    path: 'moh-profile',
-    component: MohProfileComponent,
-    data: { title: 'MoH Profile'}
-  },
-  {
-    path: 'moh-account',
-    component: MohAccountComponent,
-    data: { title: 'MoH Account'}
-  },
-  {
     path: '',
-    redirectTo: 'moh-profile'
+    component: MohContainerComponent,
+    children: pageRoutes
+  },
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full'
   }
 ];
 

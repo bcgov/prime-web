@@ -37,6 +37,11 @@ const routes: Routes = [
   {
     path: 'bcsc-registration',
     loadChildren: 'app/modules/bcsc-registration/bcsc-registration.module#BcscRegistrationModule'
+  },
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full'
   }
 
 ];

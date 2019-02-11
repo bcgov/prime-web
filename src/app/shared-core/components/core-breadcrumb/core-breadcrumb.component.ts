@@ -33,7 +33,6 @@ export class CoreBreadcrumbComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log( 'bread crumb' );
   }
 
 }

@@ -12,4 +12,7 @@ export class MohAccountComponent implements OnInit {
   ngOnInit() {
   }
 
+  continue() {
+    console.log( 'button pushed' );
+  }
 }

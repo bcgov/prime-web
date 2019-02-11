@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WizardProgressItem } from '../../../../shared-core/components/wizard-progress-bar/wizard-progress-bar.component';
-import { routes } from '../../moh-registration-routing.module';
+import { pageRoutes } from '../../moh-registration-page-routing.module';
 
 @Component({
   selector: 'prime-moh-container',
@@ -13,10 +13,8 @@ export class MohContainerComponent implements OnInit {
   progressSteps: WizardProgressItem[];
 
   constructor() {
-
-    console.log( 'moh container constructor' );
     // Interface for wizard progress items
-    this.progressSteps = routes.map(page => {
+    this.progressSteps = pageRoutes.map(page => {
       if (page.path !== '') {
         return {
           title: this.convertRouteToTitle(page.path),
