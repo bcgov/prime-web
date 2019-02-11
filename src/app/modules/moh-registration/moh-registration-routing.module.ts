@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MohContainerComponent } from './components/moh-container/moh-container.component';
-import { pageRoutes } from './moh-registration-page-routing.module';
+import { mohPages } from './moh-registration-page-routing.module';
 
 export const routes: Routes = [
   {
     path: '',
     component: MohContainerComponent,
-    children: pageRoutes
+    children: mohPages
   },
   {
     path: '**',

@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { BcscProfileComponent } from './pages/bcsc-profile/bcsc-profile.component';
+import { BcscContainerComponent } from './components/bcsc-container/bcsc-container.component';
+import { bcscPages } from './bcsc-registration-page-routing.module';
 
 const routes: Routes = [
   {
-    path: 'bcsc-profile',
-    component: BcscProfileComponent,
-    data: { title: 'BCSC Profile'}
+    path: '',
+    component: BcscContainerComponent,
+    children: bcscPages
   },
   {
-    path: '',
-    redirectTo: 'bcsc-profile'
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full'
   }
 ];
 

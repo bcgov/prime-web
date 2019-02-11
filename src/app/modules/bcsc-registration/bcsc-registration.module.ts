@@ -5,6 +5,7 @@ import { BcscRegistrationRoutingModule } from './bcsc-registration-routing.modul
 import { RegistrationModule } from '../registration/registration.module';
 import { SharedCoreModule } from '../../shared-core/shared-core.module';
 import { BcscProfileComponent } from './pages/bcsc-profile/bcsc-profile.component';
+import { BcscContainerComponent } from './components/bcsc-container/bcsc-container.component';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { BcscProfileComponent } from './pages/bcsc-profile/bcsc-profile.componen
     SharedCoreModule
   ],
   declarations: [
+    BcscContainerComponent,
     BcscProfileComponent
   ]
 })
