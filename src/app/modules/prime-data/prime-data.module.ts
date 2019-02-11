@@ -1,5 +1,5 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { PrimeDataService } from 'src/app/services/prime-data.service';
+import { PrimeDataService } from '../../services/prime-data.service';
 
 @NgModule({})
 export class PrimeDataModule {
