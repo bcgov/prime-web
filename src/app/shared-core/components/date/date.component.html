@@ -25,6 +25,7 @@
            (ngModelChange)="setDay($event)"
            #dayRef="ngModel"
            [required]="required"
+           commonDateFieldFormat
            commonDayValidation
            maxlength="2"
            min="1"
@@ -40,6 +41,8 @@
            (ngModelChange)="setYear($event)"
            #yearRef="ngModel"
            [required]="required"
+           commonDateFieldFormat
+           maxlength="4"
            min="1830"
            max="2300"
            step="1" />

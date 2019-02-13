@@ -10,6 +10,7 @@ import { ProgressbarModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
 import { DateComponent } from './components/date/date.component';
 import { DayValidationDirective } from './components/date/day-validation.directive';
+import { DateFieldFormatDirective } from './components/date/date-field-format.directive';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { DayValidationDirective } from './components/date/day-validation.directi
     PasswordComponent,
     WizardProgressBarComponent,
     DateComponent,
-    DayValidationDirective
+    DayValidationDirective,
+    DateFieldFormatDirective
   ],
   exports: [
     CoreBreadcrumbComponent,
@@ -34,7 +36,8 @@ import { DayValidationDirective } from './components/date/day-validation.directi
     PasswordComponent,
     WizardProgressBarComponent,
     DateComponent,
-    DayValidationDirective
+    DayValidationDirective,
+    DateFieldFormatDirective
   ],
   providers: [
     NgForm

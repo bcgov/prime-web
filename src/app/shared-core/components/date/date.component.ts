@@ -55,11 +55,7 @@ export class DateComponent extends Base implements OnInit {
   }
 
   setDay( value: string ): void {
-    let val = value.toString();
-    if ( val.length > 2 ) {
-      val = val.substr( 0, 2 );
-    }
-    const day = this.getNumericValue( val );
+    const day = this.getNumericValue( value );
 
     console.log(  'Ref: ', this.dayRef + ' date: ', this.date );
     if ( this.date ) {
@@ -70,12 +66,7 @@ export class DateComponent extends Base implements OnInit {
   }
 
   setYear( value: string ): void {
-    let val = value.toString();
-    if ( val.length > 4 ) {
-      val = val.substr( 0, 4 );
-    }
-
-    const year = this.getNumericValue( val );
+    const year = this.getNumericValue( value );
     console.log( 'year: ', year + ' Ref: ', this.yearRef );
     if ( this.date ) {
       this.date.year = year;
