@@ -25,6 +25,8 @@
            (ngModelChange)="setDay($event)"
            #dayRef="ngModel"
            [required]="required"
+           commonDayValidation
+           maxlength="2"
            min="1"
            max="31" />
 

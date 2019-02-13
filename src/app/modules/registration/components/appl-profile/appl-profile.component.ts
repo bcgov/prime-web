@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Address } from '../../../../shared-core/models/address.model';
 import { ControlContainer, NgForm } from '@angular/forms';
+import { SimpleDate } from 'src/app/shared-core/interfaces/simple-date.interface';
 
 /** Interface for names */
 export interface NameObj {
@@ -21,10 +22,16 @@ export interface NameObj {
 export class ApplProfileComponent implements OnInit {
 
   @Input() editIdentityInfo: boolean = true;
-  @Input() legalName: NameObj;
-  @Input() preferName: NameObj;
-  @Input() address: Address;
-  @Input() mailAddress: Address;
+
+
+
+  public legalName: NameObj;
+  public preferName: NameObj;
+  public address: Address;
+  public mailAddress: Address;
+
+
+  public dob: SimpleDate = { month: null, day: null, year: null };
 
   constructor() { }
 

@@ -49,23 +49,37 @@ export class DateComponent extends Base implements OnInit {
     const month = this.getNumericValue( value );
     console.log( 'month: ', month );
     if ( this.date ) {
-      this.date.month = month;
+      this.date.month = month - 1;
+      this.onDateChange.emit( this.date );
     }
   }
 
   setDay( value: string ): void {
-    const day = this.getNumericValue( value );
-    console.log( 'day: ', day + ' Ref: ', this.dayRef );
+    let val = value.toString();
+    if ( val.length > 2 ) {
+      val = val.substr( 0, 2 );
+    }
+    const day = this.getNumericValue( val );
+
+    console.log(  'Ref: ', this.dayRef + ' date: ', this.date );
     if ( this.date ) {
+      console.log( 'day: ', day + ' Ref: ', this.dayRef );
       this.date.day = day;
+      this.onDateChange.emit( this.date );
     }
   }
 
   setYear( value: string ): void {
-    const year = this.getNumericValue( value );
+    let val = value.toString();
+    if ( val.length > 4 ) {
+      val = val.substr( 0, 4 );
+    }
+
+    const year = this.getNumericValue( val );
     console.log( 'year: ', year + ' Ref: ', this.yearRef );
     if ( this.date ) {
       this.date.year = year;
+      this.onDateChange.emit( this.date );
     }
   }
 

@@ -32,9 +32,10 @@
             [disabled]="!editIdentityInfo" />
   </div>
 
- <!----> <div class="col-sm-4 p-sm-0">
-    <common-date [disabled]="!editIdentityInfo"></common-date>
-  </div>-->
+  <div class="col-sm-4 p-sm-0">
+    <common-date [disabled]="!editIdentityInfo"
+                 [(date)]="dob"></common-date>
+  </div>
 </div>
 
 <div>
