@@ -1,11 +1,13 @@
 <common-page-framework layout='blank'>
 
-  <prime-appl-profile>
-    <p identityInstruct>
-      Prior to identity-proofing, please upload the front and back of a valid
-      government-issued photo ID.
-    </p>
-  </prime-appl-profile>
+  <form #formRef='ngForm'>
+    <prime-appl-profile>
+      <p identityInstruct>
+        Prior to identity-proofing, please upload the front and back of a valid
+        government-issued photo ID.
+      </p>
+    </prime-appl-profile>
+  </form>
 
   <!-- Display bar during registration -->
   <common-form-action-bar (btnClick)="continue()">

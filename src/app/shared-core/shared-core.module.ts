@@ -8,6 +8,8 @@ import { WizardProgressBarComponent } from './components/wizard-progress-bar/wiz
 import { NgForm, FormsModule } from '@angular/forms';
 import { ProgressbarModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
+import { DateComponent } from './components/date/date.component';
+import { DateValidationDirective } from './components/date/date-validation.directive';
 
 @NgModule({
   imports: [
@@ -21,14 +23,18 @@ import { RouterModule } from '@angular/router';
     FormActionBarComponent,
     PageFrameworkComponent,
     PasswordComponent,
-    WizardProgressBarComponent
+    WizardProgressBarComponent,
+    DateComponent,
+    DateValidationDirective
   ],
   exports: [
     CoreBreadcrumbComponent,
     FormActionBarComponent,
     PageFrameworkComponent,
     PasswordComponent,
-    WizardProgressBarComponent
+    WizardProgressBarComponent,
+    DateComponent,
+    DateValidationDirective
   ],
   providers: [
     NgForm

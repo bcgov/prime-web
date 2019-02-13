@@ -1,4 +1,3 @@
-
 <h1>Profile Information</h1>
 
 <div>
@@ -32,6 +31,10 @@
             [value]="legalName?.last"
             [disabled]="!editIdentityInfo" />
   </div>
+
+ <!----> <div class="col-sm-4 p-sm-0">
+    <common-date [disabled]="!editIdentityInfo"></common-date>
+  </div>-->
 </div>
 
 <div>
@@ -45,24 +48,24 @@
   <div class="form-group col-sm-4 p-sm-0">
       <label class="control-label">Preferred First Name</label>
       <input class="form-control"
-             name="pref_first_name"
-             id="pref_first_name"
-             [value]='preferName?.first' />
+            name="pref_first_name"
+            id="pref_first_name"
+            [value]='preferName?.first' />
     </div>
 
     <div class="form-group col-sm-4 p-sm-0">
       <label class="control-label">Preferred Middle Name</label>
       <input class="form-control"
-             name="pref_middle_name"
-             id="pref_middle_name"
-             [value]='preferName?.middle' />
+            name="pref_middle_name"
+            id="pref_middle_name"
+            [value]='preferName?.middle' />
     </div>
 
     <div class="form-group col-sm-4 p-sm-0">
       <label class="control-label">Preferred Last Name</label>
       <input class="form-control"
-             name="pref_last_name"
-             id="pref_last_name"
+            name="pref_last_name"
+            id="pref_last_name"
             [value]='preferName?.last'/>
     </div>
 </div>
