@@ -18,7 +18,7 @@ export class DateFieldFormatDirective {
       trimmed = trimmed.replace(/[^\d]/g, '');
     }
 
-    trimmed = trimmed.substr( 0, Number( maxlen ) ;
+    trimmed = trimmed.substr( 0, Number( maxlen ) );
 
     input.value = trimmed;
     this.ngModelChange.emit( trimmed );

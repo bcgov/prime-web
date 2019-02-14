@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { DateComponent } from './components/date/date.component';
 import { DayValidationDirective } from './components/date/day-validation.directive';
 import { DateFieldFormatDirective } from './components/date/date-field-format.directive';
+import { YearValidateDirective } from './components/date/year-validate.directive';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { DateFieldFormatDirective } from './components/date/date-field-format.di
     WizardProgressBarComponent,
     DateComponent,
     DayValidationDirective,
-    DateFieldFormatDirective
+    DateFieldFormatDirective,
+    YearValidateDirective
   ],
   exports: [
     CoreBreadcrumbComponent,
@@ -37,7 +39,8 @@ import { DateFieldFormatDirective } from './components/date/date-field-format.di
     WizardProgressBarComponent,
     DateComponent,
     DayValidationDirective,
-    DateFieldFormatDirective
+    DateFieldFormatDirective,
+    YearValidateDirective
   ],
   providers: [
     NgForm

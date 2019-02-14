@@ -12,7 +12,7 @@
             [required]="required">
       <!-- We show the blank option so the user can clear out their data.-->
       <option value="null" label="-- month --" selected [disabled]='required'></option>
-      <option *ngFor="let month of monthList; let i = index;" [value]="i+1">{{month}}</option>
+      <option *ngFor="let month of monthList; let i = index;" [value]="i">{{month}}</option>
     </select>
 
     <label class="visuallyhidden" for="day{{objectId}}">Day</label>
@@ -27,9 +27,7 @@
            [required]="required"
            commonDateFieldFormat
            commonDayValidation
-           maxlength="2"
-           min="1"
-           max="31" />
+           maxlength="2" />
 
     <label class="visuallyhidden" for="year{{objectId}}">Year</label>
     <input type="number"
@@ -42,10 +40,8 @@
            #yearRef="ngModel"
            [required]="required"
            commonDateFieldFormat
-           maxlength="4"
-           min="1830"
-           max="2300"
-           step="1" />
+           [commonYearValidate]="restrictDate"
+           maxlength="4" />
 
   </div>
 

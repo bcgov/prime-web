@@ -19,7 +19,8 @@ import * as moment from 'moment';
   viewProviders: [ { provide: ControlContainer, useExisting: NgForm } ]
 })
 export class DateComponent extends Base implements OnInit {
-
+  // Exists for unit testing to validate errors set
+  @ViewChild( 'monthRef' ) monthRef: ElementRef;
   @ViewChild( 'dayRef' ) dayRef: ElementRef;
   @ViewChild( 'yearRef') yearRef: ElementRef;
 
@@ -29,7 +30,7 @@ export class DateComponent extends Base implements OnInit {
   @Input() label: string = 'Date';
   @Input() date: SimpleDate;
   /** Can be one of: "future", "past". "future" includes today, "past" does not. */
-  @Input() restrictDate: 'future' | 'past' = 'past';
+  @Input() restrictDate: 'future' | 'past' | 'any' = 'any';
 
   @Output() onDateChange: EventEmitter<SimpleDate> = new EventEmitter<SimpleDate>();
 
@@ -43,31 +44,40 @@ export class DateComponent extends Base implements OnInit {
   }
 
   ngOnInit() {
+    if ( this.useCurrentDate ) {
+      // Set date to current date
+      this.date.month = moment().month();
+      this.date.day = moment().date();
+      this.date.year = moment().year();
+    }
   }
 
+  /** Set the month and notify caller of change */
   setMonth( value: string ): void {
     const month = this.getNumericValue( value );
-    console.log( 'month: ', month );
+    console.log( 'monthRef: ', this.monthRef );
     if ( this.date ) {
-      this.date.month = month - 1;
+      this.date.month = month;
       this.onDateChange.emit( this.date );
     }
   }
 
+  /** Set the day and notify caller of change */
   setDay( value: string ): void {
     const day = this.getNumericValue( value );
 
-    console.log(  'Ref: ', this.dayRef + ' date: ', this.date );
+    console.log(  'dayRef: ', this.dayRef );
     if ( this.date ) {
-      console.log( 'day: ', day + ' Ref: ', this.dayRef );
       this.date.day = day;
       this.onDateChange.emit( this.date );
     }
   }
 
+  /** Set the yera and notify caller of change */
   setYear( value: string ): void {
     const year = this.getNumericValue( value );
-    console.log( 'year: ', year + ' Ref: ', this.yearRef );
+
+    console.log( 'yearRef: ', this.yearRef );
     if ( this.date ) {
       this.date.year = year;
       this.onDateChange.emit( this.date );

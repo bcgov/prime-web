@@ -11,26 +11,33 @@ import * as moment from 'moment';
 export class DayValidationDirective implements Validator {
 
   validate( control: FormControl ): {[key: string]: any} | null {
-    const month = control.parent.get( 'month' );
-    const year = control.parent.get( 'year' );
+    const date = control.parent.value;
 
-    if ( month.value && year.value) {
-
-      // Determine days in month
-      let daysInMonth: number = moment(`${year.value}-${month.value}`, 'YYYY-MM').daysInMonth();
-      if ( isNaN( daysInMonth ) ) {
-        daysInMonth = 31;
-      }
-
-      // Validate days
-      const day: number = parseInt( control.value, 10 );
-      console.log( 'day: ' + day);
-      if ( day > daysInMonth || day < 1 ) {
-        return { 'calendarDayOutOfRange': true };
-      }
+    if ( !control.value ) {
+      return null; // empty value
     }
 
-    return null;
+    const day: number = parseInt( control.value, 10 );
+
+    // Only process of value is numeric
+    if ( !isNaN( day ) ) {
+
+      if ( !isNaN( date.month )  && !isNaN( date.year ) ) {
+        // Determine days in month
+        let daysInMonth: number = moment(`${date.year}-${date.month}`, 'YYYY-MM').daysInMonth();
+        if ( isNaN( daysInMonth ) ) {
+          daysInMonth = 31;
+        }
+
+        // Validate days
+        if ( day > daysInMonth || day < 1 ) {
+          return { 'dayOutOfRange': true };
+        }
+      }
+      return null;
+    }
+
+    return { 'invalidValue': true };
   }
 
 }
