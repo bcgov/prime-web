@@ -6,8 +6,9 @@ import { YearValidateDirective } from './year-validate.directive';
 import { DayValidationDirective } from './day-validation.directive';
 import { FormsModule, NgForm } from '@angular/forms';
 import * as moment from 'moment';
+import { By } from '@angular/platform-browser';
 
-describe('DateComponent (not using current date)', () => {
+fdescribe('DateComponent (not using current date)', () => {
   let component: DateComponent;
   let fixture: ComponentFixture<DateComponent>;
 
@@ -50,6 +51,12 @@ describe('DateComponent (not using current date)', () => {
 
   it('should allow any dates range by default', () => {
     expect(component.restrictDate).toBe('any');
+  });
+
+  it('should detect incomplete dates', () => {
+      expect(component.monthRef.errors.required).toBe(true);
+      expect(component.dayRef.errors.required).toBe(true);
+      expect(component.yearRef.errors.required).toBe(true);
   });
 });
 
