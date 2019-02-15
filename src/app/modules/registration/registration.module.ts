@@ -5,7 +5,8 @@ import { ApplProfileComponent } from './components/appl-profile/appl-profile.com
 import { ApplAccountComponent } from './components/appl-account/appl-account.component';
 import { ApplSecurityComponent } from './components/appl-security/appl-security.component';
 import { ApplDocUploadComponent } from './components/appl-doc-upload/appl-doc-upload.component';
-import { SharedCoreModule } from '../../shared-core/shared-core.module';
+// import { SharedCoreModule } from '../../shared-core/shared-core.module';
+import { SharedCoreModule } from 'moh-common-lib';
 import { FormsModule, NgForm } from '@angular/forms';
 
 @NgModule({

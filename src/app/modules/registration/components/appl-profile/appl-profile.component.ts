@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Address } from '../../../../shared-core/models/address.model';
+import { Address } from 'moh-common-lib';
 import { ControlContainer, NgForm } from '@angular/forms';
-import { SimpleDate } from '../../../../shared-core/interfaces/simple-date.interface';
+import { SimpleDate } from 'moh-common-lib';
 
 /** Interface for names */
 export interface NameObj {

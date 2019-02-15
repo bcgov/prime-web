@@ -1,0 +1,133 @@
+
+
+* Logging - Splunk
+  Goal: Track engagement and sessions.
+  Can't accurately track per-PERSON, as can be multiple people demoing on the same machine (same IP).
+** TODO Splunk-logger setup in OpenShift - DEV+PROD
+*** DONE Configure prime-web
+    CLOSED: [2018-11-07 Wed 16:10]
+**** DONE Update nginx.conf, adding /api/logging
+     CLOSED: [2018-10-17 Wed 14:53]
+**** DONE Add env vars necessary for nginx.conf
+     CLOSED: [2018-10-17 Wed 14:53]
+- USE_SPLUNK_FORWARDER and SPLUNK_AUTH_TOKEN to prime-web (ref: fpcare-on-nginx)
+- HOSTNAME is built-in, and it is the pod name from OpenShift
+**** DONE Update run script to copy over new env values (copy from fpc)
+     CLOSED: [2018-10-17 Wed 15:47]
+**** DONE Fix OpenShift logging - it's trying to log to fpcare/ instead of prime/ can't figure out why
+     CLOSED: [2018-10-18 Thu 16:39]
+*** TODO Configure prime-web for TEST
+**** Update openshift envs
+-splunk-forwarder and 
+prime-web SPLUNK_AUTH_TOKEN === splunk-forwarder SERVICE_AUTH_TOKEN
+
+DEV
+prime-web SPLUNK_AUTH_TOKEN 35c8791f-e6f3-411f-8b50-fa948e728881
+prime-web USE_SPLUNK_FORWARDER true
+splunk-forwarder SERVICE_AUTH_TOKEN 35c8791f-e6f3-411f-8b50-fa948e728881
+
+TEST
+- add USE_SPLUNK_FORWARDER
+- add SPLUNK_AUTH_TOKEN 9DAF9A5E-64D9-4013-BFE4-C5AACFB699DE
+
+** DONE Angular logger service ported from FPC
+   CLOSED: [2018-10-16 Tue 12:40]
+** DONE Events to log/track
+   CLOSED: [2018-10-17 Wed 13:55]
+*** DONE page change
+    CLOSED: [2018-10-16 Tue 13:44]
+*** DONE user guide clicked
+    CLOSED: [2018-10-16 Tue 13:44]
+*** DONE going through Applicant New -> Applicant Change
+    CLOSED: [2018-10-16 Tue 13:43]
+*** DONE registration
+    CLOSED: [2018-10-16 Tue 13:44]
+*** DONE Session length
+    CLOSED: [2018-10-16 Tue 13:43]
+*** DONE Inactivity
+    CLOSED: [2018-10-16 Tue 14:07]
+*** DONE change log session length to use window.beforeunload (like jquery form abandonment plugin)
+    CLOSED: [2018-10-17 Wed 12:13]
+*** DONE Sticky or tricky pages
+    CLOSED: [2018-10-16 Tue 13:58]
+** TODO Queries / Write-ups
+*** TODO Provide direct-links to Splunk queries in email.
+*** ? - Can we get sessions via applicationId?
+*** Different Modules/Section
+**** BCSC reg + Non-BCSC Reg
+**** Applicant Change + Applicant New
+**** Provisioner
+*** Tracking a session's navigation path (+ user guide)
+*** Page length (sticky or tricky pages)
+*** Session length
+    
+** Deploy Changes - OpenShift issues
+Cause seemed to be nginx.conf referencing captcha service which doesn't exist.  Trying ne wbuild now.
+
+
+Changes - had deleted a bunch of broken deployments (prime-dev > deployments). 
+	- Left pipelines alone, didn't delete any
+
+BUG:
+
+    --> Scaling up prime-web-88 from 0 to 2, scaling down prime-web-83 from 2 to 0 (keep 2 pods available, don't exceed 3pods)
+	Scaling prime-web-88 up to 1
+    error: timed out waiting for any update progress to be made
+
+
+* OAuth / Authentication
+  
+- keycloak :: identity broker in OpenShift - https://www.keycloak.org/
+
+** Meetings
+*** 11/07/2018 -  Review Prime Registration SA
+/Reviewing OAuth architecture and planning POC in OpenShift/
+
+- going to be integrating Keycloak with our MAXIMUS services
+- the BCSC OAuth server it'll talk to is not yet setup (we can still configure our app to talk to keycloak)
+- one technical issue: account has to be created before 2fa token, so we may have to create accounts (u/p) earlier in process
+
+**** TODO Next week setup Keycloak to test proof of concept
+
+
+*** 02/04/2019 -  UX Design Overview (Farzad)
+
+Begin on bundle 1 shortly with kristin.
+
+Cards referenced: https://gcpe-mygovbc-msp-demo.pathfinder.gov.bc.ca/demo/index.html
+- entire card is clickable
+- also have a BLUE 'continue/register' button, that's a redundancy and helps with screen readers.
+- card or button clicked
+- cards will also need some "flip" to show their back for some of them (e.g. on forgot your password). Doesn't have to flip, but some animation to change content.
+
+
+* Prime Development
+** Project Start
+
+Use 'ng new' as basis, and 'ng-add'+ a schematic to configure the project (Backup plan: just pre-make a folder and put it in the Git repo subfolder to clone).
+
+'ng add' schematic -
+https://github.com/angular/material2/blob/master/src/lib/schematics/ng-add/index.ts (also look at parent folder)
+
+
+
+
+*** New Project Requirements
+**** TODO Loading new package.json deps (edit file or just have an 'npm install <xxx> --save' step?)
+- mygovbc-bootstrap-theme
+
+**** TODO Importing CSS (edit style.scss)
+**** TODO Starter page, super simple with example styles.
+
+**** TODO Commit new project to new branch in prime folder
+** TODO Get Cristina estimates - high/med/low complex blocks and then assign the blocks
+next couple days, do with Kristin who is booking a room tomorrow afternoon.
+*** DONE Get estimate spreadsheet from Jam. In email archive, found. 
+    CLOSED: [2019-02-04 Mon 18:08]
+
+
+* Meetings
+** FDS Discussion - 07/02/2019
+
+Documents: SharePoint > Design > FDS Scenarios
+
