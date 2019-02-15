@@ -10,8 +10,8 @@ import { fakeBackendProvider } from './fake-backend/fake-backend';
 import { RegistrationModule } from './modules/registration/registration.module';
 import { PrimeDataModule } from './modules/prime-data/prime-data.module';
 
-/** These imports will change when moved to moh-common-styles project */
-import { SharedCoreModule } from './shared-core/shared-core.module';
+/* moh-common-lib should be setup via npm link for now, but will eventually be on npm. */
+import { SharedCoreModule } from 'moh-common-lib';
 
 /** Pages (Appl* will be removed later when registration flow coded - just page development) */
 import { HomePageComponent } from './pages/home-page/home-page.component';
