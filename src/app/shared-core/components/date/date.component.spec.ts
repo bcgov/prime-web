@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, tick } from '@angular/core/testing';
 
 import { DateComponent } from './date.component';
 import { DateFieldFormatDirective } from './date-field-format.directive';
@@ -6,11 +6,11 @@ import { YearValidateDirective } from './year-validate.directive';
 import { DayValidationDirective } from './day-validation.directive';
 import { FormsModule, NgForm } from '@angular/forms';
 import * as moment from 'moment';
-import { By } from '@angular/platform-browser';
 
 fdescribe('DateComponent (not using current date)', () => {
   let component: DateComponent;
   let fixture: ComponentFixture<DateComponent>;
+  const form = new NgForm( null, null);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -53,16 +53,37 @@ fdescribe('DateComponent (not using current date)', () => {
     expect(component.restrictDate).toBe('any');
   });
 
+  it('should display text  label for component', () => {
+    component.label = 'This a test';
+    fixture.detectChanges();
+
+    const legendText = fixture.nativeElement.querySelector('legend');
+    expect( legendText.textContent).toContain('This a test');
+  });
+
   it('should detect incomplete dates', () => {
+    fixture.whenStable().then( () => {
       expect(component.monthRef.errors.required).toBe(true);
       expect(component.dayRef.errors.required).toBe(true);
       expect(component.yearRef.errors.required).toBe(true);
+    });
+  });
+
+  it('should allow incomplete dates when optional', () => {
+    component.required = false;
+    fixture.detectChanges();
+    fixture.whenStable().then( () => {
+      expect(component.monthRef.errors).toBeNull();
+      expect(component.dayRef.errors).toBeNull();
+      expect(component.yearRef.errors).toBeNull();
+    });
   });
 });
 
 fdescribe('DateComponent (using current date)', () => {
   let component: DateComponent;
   let fixture: ComponentFixture<DateComponent>;
+  const form = new NgForm( null, null);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -97,17 +118,25 @@ fdescribe('DateComponent (using current date)', () => {
     expect(component.date.year).toEqual(todayDate.year);
   });
 
-  it('should reject future dates when restricted to past dates', () => {
+  it('should reject todays date when restricted to past dates', () => {
     component.restrictDate = 'past';
     fixture.detectChanges();
-    fixture.whenStable().then(() => {
+    fixture.whenStable().then(()  => {
       expect(component.yearRef.errors.noFutureDatesAllowed).toBe(true);
     });
   });
 
-  it('should reject past dates when restricted to future dates', () => {
-    component.date.year -= 1;
+  it('should accept todays date when restricted to future dates', () => {
     component.restrictDate = 'future';
+    fixture.detectChanges();
+    fixture.whenStable().then(()  => {
+      expect(component.yearRef.errors).toBeNull();
+    });
+  });
+
+  it('should reject past dates when restricted to future dates', () => {
+    component.restrictDate = 'future';
+    component.date.year -= 1;
     fixture.detectChanges();
     fixture.whenStable().then(() => {
       expect(component.yearRef.errors.noPastDatesAllowed).toBe(true);
@@ -137,11 +166,65 @@ fdescribe('DateComponent (using current date)', () => {
       expect(component.dayRef.errors.dayOutOfRange).toBe(true);
     });
   });
-
-  // TODO: Code module so that if day/month updated then yearvalidation triggered
-  //       if month/year updated then dayvalidation triggered
-  //       create edge cases for past/future dates
 });
+// TODO: Figure out why when more than one test controls do not get created on
+//       first test...
+xdescribe('DateComponent (Trigger validations)', () => {
+    let component: DateComponent;
+    let fixture: ComponentFixture<DateComponent>;
+    let form: NgForm;
+
+    beforeEach(async(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          DateComponent,
+          DateFieldFormatDirective,
+          YearValidateDirective,
+          DayValidationDirective
+        ],
+        imports: [ FormsModule ],
+        providers: [ NgForm ]
+      })
+      .compileComponents();
+    }));
+
+    beforeEach(() => {
+      form = new NgForm( null, null);
+      fixture = TestBed.createComponent(DateComponent);
+      component = fixture.componentInstance;
+    });
+
+    it('should trigger day validation when month changes', () => {
+      component.date = { month: 1, day: 30, year: 1999 };
+      fixture.detectChanges();
+      expect(component.dayRef.errors).toBeNull();
+
+      component.setMonth('2');
+      fixture.detectChanges();
+      fixture.whenStable().then(() => {
+        setTimeout( () => {
+          console.log( '1b. dayRef.errors: ', component.dayRef.errors );
+          expect(component.dayRef.errors.dayOutOfRange).toBe(true);
+        }, 30);
+      });
+    });
+
+    it('should trigger day validation when year changes', () => {
+
+      component.date = { month: 2, day: 29, year: 2000 };
+      fixture.detectChanges();
+      expect(component.dayRef.errors).toBeNull();
+
+      component.setYear('2001');
+      fixture.detectChanges();
+      fixture.whenStable().then(() => {
+        setTimeout( () => {
+          console.log( '2. dayRef.errors: ', component.dayRef.errors );
+          expect(component.dayRef.errors.dayOutOfRange).toBe(true);
+        }, 30);
+      });
+    });
+  });
 
 
 /**
@@ -183,15 +266,7 @@ fdescribe('DateComponent (using current date)', () => {
 
   }));
 
-  xit('should reject future dates when restricted to past dates', async(() => {
-    component.restrictDate = 'past';
-    component.setToToday();
-    component.setYearValueOnModel(component.date.year + 1 + '');
-    fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      expect(component.isValid()).toBe(false);
-    });
-  }));
+
 
   xit('should accept past dates when restricted to past dates.', async(() => {
     component.restrictDate = 'past';

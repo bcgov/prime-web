@@ -18,13 +18,19 @@ export class DayValidationDirective implements Validator {
     }
 
     const day: number = parseInt( control.value, 10 );
+    console.log( 'day: ', day );
 
-    // Only process of value is numeric
     if ( !isNaN( day ) ) {
 
+      console.log( 'parent: ', date );
+      // Only process of value is numeric
       if ( !isNaN( date.month )  && !isNaN( date.year ) ) {
+
         // Determine days in month
-        let daysInMonth: number = moment(`${date.year}-${date.month}`, 'YYYY-MM').daysInMonth();
+        const str = `${date.year}-${date.month}`;
+        let daysInMonth: number = moment(str, 'YYYY-MM').daysInMonth();
+        console.log( 'str: ', str + ', dayInMonth: ', daysInMonth );
+
         if ( isNaN( daysInMonth ) ) {
           daysInMonth = 31;
         }
@@ -34,6 +40,7 @@ export class DayValidationDirective implements Validator {
           return { 'dayOutOfRange': true };
         }
       }
+
       return null;
     }
 

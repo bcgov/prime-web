@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { Base } from '../../models/base';
 import { SimpleDate } from '../../interfaces/simple-date.interface';
 import { ControlContainer, NgForm } from '@angular/forms';
@@ -8,6 +8,16 @@ import * as moment from 'moment';
  * Component NPM package dependencies:
  * a) moment
  */
+
+export interface DateErrorMsg {
+  required: string;
+  dayOutOfRange?: string;
+  yearDistantPast?: string;
+  yearDistantFuture?: string;
+  noPastDatesAllowed?: string;
+  noFutureDatesAllowed?: string;
+  invalidValue?: string;
+}
 
 @Component({
   selector: 'common-date',
@@ -31,6 +41,7 @@ export class DateComponent extends Base implements OnInit {
   @Input() date: SimpleDate;
   /** Can be one of: "future", "past". "future" includes today, "past" does not. */
   @Input() restrictDate: 'future' | 'past' | 'any' = 'any';
+  @Input() errorMessages: DateErrorMsg;
 
   @Output() onDateChange: EventEmitter<SimpleDate> = new EventEmitter<SimpleDate>();
 
@@ -39,7 +50,7 @@ export class DateComponent extends Base implements OnInit {
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
 
-  constructor() {
+  constructor(private form: NgForm, private cd: ChangeDetectorRef) {
     super();
   }
 
@@ -55,9 +66,11 @@ export class DateComponent extends Base implements OnInit {
   /** Set the month and notify caller of change */
   setMonth( value: string ): void {
     const month = this.getNumericValue( value );
-    console.log( 'monthRef: ', this.monthRef );
+
+    // console.log( 'monthRef: ', this.monthRef );
     if ( this.date ) {
       this.date.month = month;
+      this.triggerDayValidation();
       this.onDateChange.emit( this.date );
     }
   }
@@ -66,7 +79,7 @@ export class DateComponent extends Base implements OnInit {
   setDay( value: string ): void {
     const day = this.getNumericValue( value );
 
-    console.log(  'dayRef: ', this.dayRef );
+    // console.log(  'dayRef: ', this.dayRef );
     if ( this.date ) {
       this.date.day = day;
       this.onDateChange.emit( this.date );
@@ -77,11 +90,29 @@ export class DateComponent extends Base implements OnInit {
   setYear( value: string ): void {
     const year = this.getNumericValue( value );
 
-    console.log( 'yearRef: ', this.yearRef );
+    // console.log( 'yearRef: ', this.yearRef );
     if ( this.date ) {
       this.date.year = year;
+      this.triggerDayValidation();
       this.onDateChange.emit( this.date );
     }
+  }
+
+  /**
+   * Force the `day` input to run it's directives again. Important in cases
+   * where user fills fields out of order, e.g. sets days to 31 then month to
+   * Februrary.
+   */
+  private triggerDayValidation() {
+    // We have to wrap this in a timeout, otherwise it runs before Angular has updated the values
+    setTimeout( () => {
+      console.log( 'constrols: ', this.form.controls );
+      if ( this.form.controls['day'] ) {
+        console.log( 'Trigger day validation' );
+        this.form.controls['day'].updateValueAndValidity();
+        this.cd.detectChanges();
+      }
+    }, 0);
   }
 
   /** Convert string to numeric value or null if not */

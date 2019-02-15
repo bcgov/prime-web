@@ -12,7 +12,7 @@
             [required]="required">
       <!-- We show the blank option so the user can clear out their data.-->
       <option value="null" label="-- month --" selected [disabled]='required'></option>
-      <option *ngFor="let month of monthList; let i = index;" [value]="i">{{month}}</option>
+      <option *ngFor="let month of monthList; let i = index;" [value]="i + 1">{{month}}</option>
     </select>
 
     <label class="visuallyhidden" for="day{{objectId}}">Day</label>
@@ -53,9 +53,33 @@
     class='error-container'
     aria-live="assertive">
   <div class="text-danger"
-       *ngIf="monthRef?.errors?.required || dayRef?.errors?.required || yearRef?.errors?.required">
-       Valid date is required.
-
+       *ngIf="(monthRef?.errors?.required || dayRef?.errors?.required || yearRef?.errors?.required ) && errorMessages?.required">
+       {{errorMessages.required}}
+  </div>
+  <div class="text-danger"
+      *ngIf="dayRef?.errors?.dayOutOfRange && errorMessages?.dayOutOfRange">
+       {{errorMessages.dayOutOfRange}}
+  </div>
+  <div class="text-danger"
+       *ngIf="yearRef?.errors?.yearDistantPast && errorMessages?.yearDistantPast">
+       {{errorMessages.yearDistantPast}}
+  </div>
+  <div class="text-danger"
+       *ngIf="yearRef?.errors?.yearDistantFuture && errorMessages?.yearDistantFuture">
+       {{errorMessages.yearDistantFuture}}
+  </div>
+  <div class="text-danger"
+        *ngIf="yearRef?.errors?.noPastDatesAllowed && errorMessages?.noPastDatesAllowed">
+        {{errorMessages.noPastDatesAllowed}}
+  </div>
+  <div class="text-danger"
+       *ngIf="yearRef?.errors?.noFutureDatesAllowed && errorMessages?.noFutureDatesAllowed">
+       {{errorMessages.noFutureDatesAllowed}}
+  </div>
+  <!-- Case should not happen until something is not formatted correctly-->
+  <div class="text-danger"
+       *ngIf="(dayRef?.errors?.invalidValue || yearRef?.errors?.invalidValue) && errorMessages?.invalidValue">
+       {{errorMessages.invalidValue}}
   </div>
 </div>
 

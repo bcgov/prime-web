@@ -2,6 +2,8 @@ import { Directive, forwardRef, Input } from '@angular/core';
 import { NG_VALIDATORS, Validator, FormControl } from '@angular/forms';
 import * as moment from 'moment';
 
+// TODO:  Create a message structure to pass in error messages similar to password module.
+
 @Directive({
   selector: '[commonYearValidate]',
   providers: [
@@ -15,6 +17,8 @@ export class YearValidateDirective implements Validator  {
   validate( control: FormControl ): {[key: string]: any} | null {
     const date = control.parent.value;
 
+    console.log( 'validate year: ', control.value );
+
     if ( !control.value ) {
       return null; // empty value
     }
@@ -26,11 +30,11 @@ export class YearValidateDirective implements Validator  {
       const currentYear = moment().get( 'y' );
 
       if ( currentYear - year > 150 ) {
-        return {'yearDistantPast': true};
+        return { 'yearDistantPast': true };
       }
 
       if ( year - currentYear > 150 ) {
-        return {'yearDistantFuture': true};
+        return { 'yearDistantFuture': true} ;
       }
 
       // Check whether dates can be present or past
@@ -45,11 +49,11 @@ export class YearValidateDirective implements Validator  {
           * accepting past dates.  We accomplish this by comparing diff against 1.
           */
           if ( diff < -1 && this.commonYearValidate === 'future' ) {
-            return {'noPastDatesAllowed': true};
+            return { 'noPastDatesAllowed': true };
           }
 
           if ( diff >= -1 && this.commonYearValidate === 'past' ) {
-            return {'noFutureDatesAllowed': true};
+            return { 'noFutureDatesAllowed': true };
           }
       }
 
