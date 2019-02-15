@@ -54,7 +54,7 @@ export class PasswordComponent extends Base implements OnInit, OnChanges {
   public pswdStrength: number;
   public strengthPercentage = 0;
 
-  constructor() {
+  constructor( private form: NgForm ) {
     super();
   }
 
