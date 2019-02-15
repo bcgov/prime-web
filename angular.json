@@ -34,7 +34,8 @@
               "includePaths": [
                 "src/app/styles"
               ]
-            }
+            },
+            "preserveSymlinks": true
           },
           "configurations": {
             "production": {
