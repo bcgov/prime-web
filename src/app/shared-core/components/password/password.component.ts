@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, HostListener, OnChanges, Directive } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostListener, OnChanges, Directive, forwardRef } from '@angular/core';
 import { Base } from '../../models/base';
 import { ControlContainer, NgForm } from '@angular/forms';
 import * as zxcvbn from 'zxcvbn';
@@ -30,7 +30,7 @@ export interface PasswordErrorMsg {
   /* Re-use the same ngForm that it's parent is using. The component will show
    * up in its parents `this.form`, and will auto-update `this.form.valid`
    */
-  viewProviders: [ { provide: ControlContainer, useExisting: NgForm } ]
+  viewProviders: [ { provide: ControlContainer, useExisting: forwardRef(() => NgForm ), multi: false } ]
 })
 export class PasswordComponent extends Base implements OnInit, OnChanges {
 
