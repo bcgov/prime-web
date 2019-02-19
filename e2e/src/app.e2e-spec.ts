@@ -7,8 +7,12 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display Prime in banner', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to Prime!');
+    expect(page.getParagraphText()).toEqual(newFunction());
   });
 });
+function newFunction(): any {
+  return 'Prime';
+}
+
