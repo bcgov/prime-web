@@ -10,7 +10,7 @@
     <input class="form-control"
             name="first_name"
             id="first_name"
-            [value]="legalName?.first"
+            [(value)]="registrant.firstName"
             [disabled]="!editIdentityInfo" />
   </div>
 
@@ -19,7 +19,7 @@
     <input class="form-control"
             name="middle_name"
             id="middle_name"
-            [value]="legalName?.middle"
+            [(value)]="registrant.middleName"
             [disabled]="!editIdentityInfo" />
   </div>
 
@@ -28,14 +28,14 @@
     <input class="form-control"
             name="last_name"
             id="last_name"
-            [value]="legalName?.last"
+            [(value)]="registrant.lastName"
             [disabled]="!editIdentityInfo" />
   </div>
 
   <div class="col-sm-4 p-sm-0">
     <common-date [disabled]="!editIdentityInfo"
                  [label]="'Birthdate'"
-                 [(date)]="dob"></common-date>
+                 [(date)]="registrant.dateOfBirth"></common-date>
   </div>
 </div>
 
@@ -52,7 +52,7 @@
       <input class="form-control"
             name="pref_first_name"
             id="pref_first_name"
-            [value]='preferName?.first' />
+            [(value)]='registrant.preferredFirstName' />
     </div>
 
     <div class="form-group col-sm-4 p-sm-0">
@@ -60,7 +60,7 @@
       <input class="form-control"
             name="pref_middle_name"
             id="pref_middle_name"
-            [value]='preferName?.middle' />
+            [(value)]='registrant.preferredMiddleName' />
     </div>
 
     <div class="form-group col-sm-4 p-sm-0">
@@ -68,7 +68,7 @@
       <input class="form-control"
             name="pref_last_name"
             id="pref_last_name"
-            [value]='preferName?.last'/>
+            [(value)]='registrant.preferLastName'/>
     </div>
 </div>
 

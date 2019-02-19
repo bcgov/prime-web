@@ -30,7 +30,7 @@ export interface PasswordErrorMsg {
   /* Re-use the same ngForm that it's parent is using. The component will show
    * up in its parents `this.form`, and will auto-update `this.form.valid`
    */
-  viewProviders: [ { provide: ControlContainer, useExisting: forwardRef(() => NgForm ), multi: false } ]
+  viewProviders: [ { provide: ControlContainer, useExisting: forwardRef(() => NgForm ) } ]
 })
 export class PasswordComponent extends Base implements OnInit, OnChanges {
 
