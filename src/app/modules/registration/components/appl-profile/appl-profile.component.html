@@ -10,7 +10,8 @@
     <input class="form-control"
             name="first_name"
             id="first_name"
-            [(value)]="registrant.firstName"
+            [ngModel]="registrant?.firstName"
+            (ngModelChange)="setFirstName($event)"
             [disabled]="!editIdentityInfo" />
   </div>
 
@@ -19,7 +20,8 @@
     <input class="form-control"
             name="middle_name"
             id="middle_name"
-            [(value)]="registrant.middleName"
+            [ngModel]="registrant?.middleName"
+            (ngModelChange)="setMiddleName($event)"
             [disabled]="!editIdentityInfo" />
   </div>
 
@@ -28,7 +30,8 @@
     <input class="form-control"
             name="last_name"
             id="last_name"
-            [(value)]="registrant.lastName"
+            [ngModel]="registrant?.lastName"
+            (ngModelChange)="setLastName($event)"
             [disabled]="!editIdentityInfo" />
   </div>
 
@@ -52,7 +55,8 @@
       <input class="form-control"
             name="pref_first_name"
             id="pref_first_name"
-            [(value)]='registrant.preferredFirstName' />
+            [ngModel]="registrant?.preferredFirstName"
+            (ngModelChange)="setPreferredFirstName($event)" />
     </div>
 
     <div class="form-group col-sm-4 p-sm-0">
@@ -60,7 +64,8 @@
       <input class="form-control"
             name="pref_middle_name"
             id="pref_middle_name"
-            [(value)]='registrant.preferredMiddleName' />
+            [ngModel]="registrant?.preferredMiddleName"
+            (ngModelChange)="setPreferredMiddleName($event)" />
     </div>
 
     <div class="form-group col-sm-4 p-sm-0">
@@ -68,13 +73,16 @@
       <input class="form-control"
             name="pref_last_name"
             id="pref_last_name"
-            [(value)]='registrant.preferLastName'/>
+            [ngModel]="registrant?.preferredLastName"
+            (ngModelChange)="setPreferredLastName($event)"/>
     </div>
 </div>
 
 <div class='d-flex'>
   <div class='col-sm-6 pl-0'>
     <h2 class='border-bottom'>Address</h2>
+    <prime-address [disabled]="!editIdentityInfo"
+                   [(address)]='registrant.address'></prime-address>
   </div>
   <div class='col-sm-6 pr-0'>
     <h2 class='border-bottom'>Mailing Address</h2>

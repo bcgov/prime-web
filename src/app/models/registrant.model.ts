@@ -6,7 +6,7 @@ export class Registrant extends Person {
   /** Parts of a person's name */
   public preferredFirstName: string;
   public preferredMiddleName: string;
-  public prefferedLastName: string;
+  public preferedLastName: string;
 
   /** Identify and mailing addresses */
   public address: Address = new Address();
@@ -17,7 +17,7 @@ export class Registrant extends Person {
     super.copy( object );
     this.preferredFirstName = object.preferredFirstName;
     this.preferredMiddleName = object.preferredMiddleName;
-    this.prefferedLastName = object.prefferedLastName;
+    this.preferedLastName = object.preferedLastName;
 
     this.address.copy( object.address );
     this.mailAddress.copy( object.mailAddress );

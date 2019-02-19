@@ -1,0 +1,61 @@
+<div class="form-group col-sm-8 p-sm-0">
+  <!--To be modified to drop down -->
+  <label for="country_{{objectId}}">Country</label>
+  <input class="form-control"
+          spellcheck="false"
+          type="text"
+          id="country_{{objectId}}"
+          name="country"
+          [ngModel]="address?.country"
+          (ngModelChange)="setCounty($event)"
+          [disabled]="disabled" />
+</div>
+
+<div class="form-group col-sm-8 p-sm-0">
+  <!--To be modified to drop down -->
+  <label for="province_{{objectId}}">Province</label>
+  <input class="form-control"
+          spellcheck="false"
+          type="text"
+          id="province_{{objectId}}"
+          name="province"
+          [ngModel]="address?.province"
+          (ngModelChange)="setProvince($event)"
+          [disabled]="disabled" />
+</div>
+
+<div class="form-group col-sm-8 p-sm-0">
+  <label for="street_{objectId}}">Full street address or rural route</label>
+  <input class="form-control"
+          spellcheck="false"
+          type="text"
+          id="street_{{objectId}}"
+          name="street"
+          [ngModel]="address?.street"
+          (ngModelChange)="setStreet($event)"
+          [disabled]="disabled" />
+</div>
+
+<div class="form-group col-sm-8 p-sm-0">
+  <label for="city_{objectId}}">City</label>
+  <input class="form-control"
+          spellcheck="false"
+          type="text"
+          id="city_{{objectId}}"
+          name="city"
+          [ngModel]="address?.city"
+          (ngModelChange)="setCity($event)"
+          [disabled]="disabled" />
+</div>
+
+<div class="form-group col-sm-4 p-sm-0">
+  <label for="postalCode_{objectId}}">Postal Code</label>
+  <input class="form-control"
+          spellcheck="false"
+          type="text"
+          id="postalCode_{{objectId}}"
+          name="postalCode"
+          [ngModel]="address?.postal"
+          (ngModelChange)="setPostalCode($event)"
+          [disabled]="disabled" />
+</div>

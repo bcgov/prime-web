@@ -12,6 +12,7 @@ import { DateComponent } from './components/date/date.component';
 import { DayValidationDirective } from './components/date/day-validation.directive';
 import { DateFieldFormatDirective } from './components/date/date-field-format.directive';
 import { YearValidateDirective } from './components/date/year-validate.directive';
+import { GeocoderService } from './services/geocoder.service';
 
 @NgModule({
   imports: [

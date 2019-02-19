@@ -31,4 +31,30 @@ export class ApplProfileComponent implements OnInit {
   get registrant(): Registrant {
     return this.primeDataService.registrant;
   }
+
+  /** Start - Methods to set data entered by user */
+  setFirstName( name: string ) {
+      this.registrant.firstName = name;
+  }
+
+  setMiddleName( name: string ) {
+    this.registrant.middleName = name;
+  }
+
+  setLastName( name: string ) {
+    this.registrant.lastName = name;
+  }
+
+  setPreferredFirstName( name: string ) {
+    this.registrant.preferredFirstName = name;
+  }
+
+  setPreferredMiddleName( name: string ) {
+    this.registrant.preferredMiddleName = name;
+  }
+
+  setPreferredLastName( name: string ) {
+    this.registrant.preferedLastName = name;
+  }
+  /** End - Methods to set data entered by user */
 }
