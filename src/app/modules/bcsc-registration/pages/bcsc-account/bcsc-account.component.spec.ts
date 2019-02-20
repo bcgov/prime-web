@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BcscAccountComponent } from './bcsc-account.component';
+import { RegistrationModule } from '../../../registration/registration.module';
+import { SharedCoreModule } from '../../../../shared-core/shared-core.module';
 
 describe('BcscAccountComponent', () => {
   let component: BcscAccountComponent;
@@ -8,7 +10,11 @@ describe('BcscAccountComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BcscAccountComponent ]
+      declarations: [ BcscAccountComponent ],
+      imports: [
+        RegistrationModule,
+        SharedCoreModule
+      ]
     })
     .compileComponents();
   }));

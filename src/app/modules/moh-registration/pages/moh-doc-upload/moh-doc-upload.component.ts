@@ -12,4 +12,7 @@ export class MohDocUploadComponent implements OnInit {
   ngOnInit() {
   }
 
+  continue() {
+    console.log( 'button pushed' );
+  }
 }

@@ -1,12 +1,12 @@
-import { Person } from '../shared-core/models/person.model';
-import { Address } from '../shared-core/models/address.model';
+import { Person } from '../../../shared-core/models/person.model';
+import { Address } from '../../../shared-core/models/address.model';
 
 export class Registrant extends Person {
 
   /** Parts of a person's name */
   public preferredFirstName: string;
   public preferredMiddleName: string;
-  public preferedLastName: string;
+  public preferredLastName: string;
 
   /** Identify and mailing addresses */
   public address: Address = new Address();
@@ -17,7 +17,7 @@ export class Registrant extends Person {
     super.copy( object );
     this.preferredFirstName = object.preferredFirstName;
     this.preferredMiddleName = object.preferredMiddleName;
-    this.preferedLastName = object.preferedLastName;
+    this.preferredLastName = object.preferredLastName;
 
     this.address.copy( object.address );
     this.mailAddress.copy( object.mailAddress );

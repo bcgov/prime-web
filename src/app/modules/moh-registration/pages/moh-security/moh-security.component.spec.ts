@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MohSecurityComponent } from './moh-security.component';
+import { RegistrationModule } from '../../../registration/registration.module';
+import { SharedCoreModule } from '../../../../shared-core/shared-core.module';
 
 describe('MohSecurityComponent', () => {
   let component: MohSecurityComponent;
@@ -8,7 +10,11 @@ describe('MohSecurityComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MohSecurityComponent ]
+      declarations: [ MohSecurityComponent ],
+      imports: [
+        RegistrationModule,
+        SharedCoreModule
+      ]
     })
     .compileComponents();
   }));

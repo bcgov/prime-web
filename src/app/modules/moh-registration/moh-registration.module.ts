@@ -10,6 +10,7 @@ import { MohAccountComponent } from './pages/moh-account/moh-account.component';
 import { FormsModule } from '@angular/forms';
 import { MohSecurityComponent } from './pages/moh-security/moh-security.component';
 import { MohDocUploadComponent } from './pages/moh-doc-upload/moh-doc-upload.component';
+import { MohConfirmationComponent } from './pages/moh-confirmation/moh-confirmation.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { MohDocUploadComponent } from './pages/moh-doc-upload/moh-doc-upload.com
     MohProfileComponent,
     MohAccountComponent,
     MohSecurityComponent,
-    MohDocUploadComponent
+    MohDocUploadComponent,
+    MohConfirmationComponent
   ]
 })
 export class MohRegistrationModule { }

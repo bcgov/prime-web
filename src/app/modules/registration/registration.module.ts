@@ -10,6 +10,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { AddressComponent } from './components/address/address.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PageSectionsComponent } from './components/page-sections/page-sections.component';
+import { ApplConfirmationComponent } from './components/appl-confirmation/appl-confirmation.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { PageSectionsComponent } from './components/page-sections/page-sections.
     ApplSecurityComponent,
     ApplDocUploadComponent,
     AddressComponent,
-    PageSectionsComponent
+    PageSectionsComponent,
+    ApplConfirmationComponent
   ],
   exports: [
     ApplProfileComponent,
@@ -32,7 +34,8 @@ import { PageSectionsComponent } from './components/page-sections/page-sections.
     ApplSecurityComponent,
     ApplDocUploadComponent,
     AddressComponent,
-    PageSectionsComponent
+    PageSectionsComponent,
+    ApplConfirmationComponent
   ]
 })
 export class RegistrationModule { }

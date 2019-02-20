@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BcscContainerComponent } from './bcsc-container.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { SharedCoreModule } from '../../../../shared-core/shared-core.module';
 
 describe('MohContainerComponent', () => {
   let component: BcscContainerComponent;
@@ -8,7 +10,11 @@ describe('MohContainerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BcscContainerComponent ]
+      declarations: [ BcscContainerComponent ],
+      imports: [
+        RouterTestingModule ,
+        SharedCoreModule
+      ]
     })
     .compileComponents();
   }));

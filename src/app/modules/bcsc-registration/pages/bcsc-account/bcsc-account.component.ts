@@ -12,4 +12,7 @@ export class BcscAccountComponent implements OnInit {
   ngOnInit() {
   }
 
+  continue() {
+    console.log( 'button pushed' );
+  }
 }

@@ -1,16 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MohDocUploadComponent } from './moh-doc-upload.component';
+import { MohConfirmationComponent } from './moh-confirmation.component';
 import { RegistrationModule } from '../../../registration/registration.module';
 import { SharedCoreModule } from '../../../../shared-core/shared-core.module';
 
-describe('MohDocUploadComponent', () => {
-  let component: MohDocUploadComponent;
-  let fixture: ComponentFixture<MohDocUploadComponent>;
+describe('MohConfirmationComponent', () => {
+  let component: MohConfirmationComponent;
+  let fixture: ComponentFixture<MohConfirmationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MohDocUploadComponent ],
+      declarations: [ MohConfirmationComponent ],
       imports: [
         RegistrationModule,
         SharedCoreModule
@@ -20,7 +20,7 @@ describe('MohDocUploadComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MohDocUploadComponent);
+    fixture = TestBed.createComponent(MohConfirmationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
