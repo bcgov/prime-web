@@ -6,6 +6,8 @@ import { RegistrationModule } from '../registration/registration.module';
 import { SharedCoreModule } from '../../shared-core/shared-core.module';
 import { BcscProfileComponent } from './pages/bcsc-profile/bcsc-profile.component';
 import { BcscContainerComponent } from './components/bcsc-container/bcsc-container.component';
+import { BcscAccountComponent } from './pages/bcsc-account/bcsc-account.component';
+import { BcscConfirmationComponent } from './pages/bcsc-confirmation/bcsc-confirmation.component';
 
 @NgModule({
   imports: [
@@ -16,7 +18,9 @@ import { BcscContainerComponent } from './components/bcsc-container/bcsc-contain
   ],
   declarations: [
     BcscContainerComponent,
-    BcscProfileComponent
+    BcscProfileComponent,
+    BcscAccountComponent,
+    BcscConfirmationComponent
   ]
 })
 export class BcscRegistrationModule { }

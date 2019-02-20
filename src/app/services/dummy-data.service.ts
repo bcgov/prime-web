@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Registrant } from '../models/registrant.model';
+import { Registrant } from '../modules/registration/models/registrant.model';
+
 
 /**
  * Dummy data for development purposes

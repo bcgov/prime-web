@@ -3,7 +3,8 @@ import { Address } from '../../../../shared-core/models/address.model';
 import { ControlContainer, NgForm } from '@angular/forms';
 import { SimpleDate } from '../../../../shared-core/interfaces/simple-date.interface';
 import { PrimeDataService } from '../../../../services/prime-data.service';
-import { Registrant } from '../../../../models/registrant.model';
+import { Registrant } from '../../models/registrant.model';
+
 
 @Component({
   selector: 'prime-appl-profile',
@@ -54,7 +55,7 @@ export class ApplProfileComponent implements OnInit {
   }
 
   setPreferredLastName( name: string ) {
-    this.registrant.preferedLastName = name;
+    this.registrant.preferredLastName = name;
   }
   /** End - Methods to set data entered by user */
 }

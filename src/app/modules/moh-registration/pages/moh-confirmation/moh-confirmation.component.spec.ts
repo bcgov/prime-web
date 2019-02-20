@@ -1,16 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MohAccountComponent } from './moh-account.component';
+import { MohConfirmationComponent } from './moh-confirmation.component';
 import { RegistrationModule } from '../../../registration/registration.module';
 import { SharedCoreModule } from '../../../../shared-core/shared-core.module';
 
-describe('MohAccountComponent', () => {
-  let component: MohAccountComponent;
-  let fixture: ComponentFixture<MohAccountComponent>;
+describe('MohConfirmationComponent', () => {
+  let component: MohConfirmationComponent;
+  let fixture: ComponentFixture<MohConfirmationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MohAccountComponent ],
+      declarations: [ MohConfirmationComponent ],
       imports: [
         RegistrationModule,
         SharedCoreModule
@@ -20,7 +20,7 @@ describe('MohAccountComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MohAccountComponent);
+    fixture = TestBed.createComponent(MohConfirmationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
