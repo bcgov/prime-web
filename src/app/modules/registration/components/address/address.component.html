@@ -7,7 +7,7 @@
           id="country_{{objectId}}"
           name="country"
           [ngModel]="address?.country"
-          (ngModelChange)="setCounty($event)"
+          (ngModelChange)="address.country = $event"
           [disabled]="disabled" />
 </div>
 
@@ -20,7 +20,7 @@
           id="province_{{objectId}}"
           name="province"
           [ngModel]="address?.province"
-          (ngModelChange)="setProvince($event)"
+          (ngModelChange)="address.province = $event"
           [disabled]="disabled" />
 </div>
 
@@ -32,7 +32,7 @@
           id="street_{{objectId}}"
           name="street"
           [ngModel]="address?.street"
-          (ngModelChange)="setStreet($event)"
+          (ngModelChange)="address.street = $event"
           [disabled]="disabled" />
 </div>
 
@@ -44,7 +44,7 @@
           id="city_{{objectId}}"
           name="city"
           [ngModel]="address?.city"
-          (ngModelChange)="setCity($event)"
+          (ngModelChange)="address.city = $event"
           [disabled]="disabled" />
 </div>
 
@@ -56,6 +56,6 @@
           id="postalCode_{{objectId}}"
           name="postalCode"
           [ngModel]="address?.postal"
-          (ngModelChange)="setPostalCode($event)"
+          (ngModelChange)="address.postal = $event"
           [disabled]="disabled" />
 </div>

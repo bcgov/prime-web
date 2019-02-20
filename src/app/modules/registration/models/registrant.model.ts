@@ -11,6 +11,7 @@ export class Registrant extends Person {
   /** Identify and mailing addresses */
   public address: Address = new Address();
   public mailAddress: Address = new Address();
+  public identityIsMailingAddress = true;
 
   /* Copy function */
   copy( object: Registrant ) {

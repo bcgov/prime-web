@@ -1,7 +1,7 @@
 <h1>Profile Information</h1>
 
 <div>
-  <h2 class='border-bottom'>Your Information</h2>
+  <h2 class="border-bottom">Your Information</h2>
 
   <ng-content select="[identityInstruct]"></ng-content>
 
@@ -12,7 +12,7 @@
               name="first_name"
               id="first_name"
               [ngModel]="registrant?.firstName"
-              (ngModelChange)="setFirstName($event)"
+              (ngModelChange)="registrant.firstName = $event"
               [disabled]="!editIdentityInfo" />
     </div>
 
@@ -22,7 +22,7 @@
               name="middle_name"
               id="middle_name"
               [ngModel]="registrant?.middleName"
-              (ngModelChange)="setMiddleName($event)"
+              (ngModelChange)="registrant.middleName = $event"
               [disabled]="!editIdentityInfo" />
     </div>
 
@@ -32,7 +32,7 @@
               name="last_name"
               id="last_name"
               [ngModel]="registrant?.lastName"
-              (ngModelChange)="setLastName($event)"
+              (ngModelChange)="registrant.LastName = $event"
               [disabled]="!editIdentityInfo" />
     </div>
 
@@ -47,7 +47,7 @@
 </div>
 
 <div>
-  <h2 class='border-bottom'>Preferred Name (Optional)</h2>
+  <h2 class="border-bottom">Preferred Name (Optional)</h2>
 
   <p>
     If you have a name that is different than your legal name that people know you by,
@@ -61,7 +61,7 @@
             name="pref_first_name"
             id="pref_first_name"
             [ngModel]="registrant?.preferredFirstName"
-            (ngModelChange)="setPreferredFirstName($event)" />
+            (ngModelChange)="registrant.preferredFirstName = $event" />
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
@@ -70,7 +70,7 @@
             name="pref_middle_name"
             id="pref_middle_name"
             [ngModel]="registrant?.preferredMiddleName"
-            (ngModelChange)="setPreferredMiddleName($event)" />
+            (ngModelChange)="registrant.preferredMiddleName = $event" />
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
@@ -79,19 +79,39 @@
             name="pref_last_name"
             id="pref_last_name"
             [ngModel]="registrant?.preferredLastName"
-            (ngModelChange)="setPreferredLastName($event)"/>
+            (ngModelChange)="registrant.preferredLastName = $event"/>
     </div>
     <aside>TIPS</aside>
   </prime-page-sections>
 </div>
 
 <prime-page-sections layout='double'>
-    <h2 class='border-bottom'>Address</h2>
+    <h2 class="border-bottom">Address</h2>
     <prime-address [disabled]="!editIdentityInfo"
-                    [(address)]='registrant.address'></prime-address>
-
+                   [(address)]='registrant.address'></prime-address>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox"
+             class="custom-control-input"
+             id="isMailingAddress"
+             [checked]="registrant.identityIsMailingAddress"
+             (click)="toggleCheckBox()"/>
+      <label class="custom-control-label" for="isMailingAddress">
+        This is my mailing address.
+      </label>
+    </div>
   <aside>
-    <h2 class='border-bottom'>Mailing Address</h2>
+    <h2 class="border-bottom">Mailing Address</h2>
+    <div *ngIf='!registrant.identityIsMailingAddress; else NoMailingAddress'>
+        <prime-address [(address)]='registrant.mailAddress'></prime-address>
+    </div>
   </aside>
 </prime-page-sections>
+
+<ng-template #NoMailingAddress>
+  <div class="mail-address-container">
+    <button type="button"
+            class="btn btn-lg btn-warning mx-auto d-block"
+            (click)="toggleCheckBox()">My mailing address is different.</button>
+  </div>
+</ng-template>
 
