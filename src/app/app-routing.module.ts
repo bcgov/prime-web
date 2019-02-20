@@ -6,6 +6,7 @@ import { ApplAccountComponent } from './modules/registration/components/appl-acc
 import { ApplSecurityComponent } from './modules/registration/components/appl-security/appl-security.component';
 import { MohProfileComponent } from './modules/moh-registration/pages/moh-profile/moh-profile.component';
 import { BcscProfileComponent } from './modules/bcsc-registration/pages/bcsc-profile/bcsc-profile.component';
+import { ApplConfirmationComponent } from './modules/registration/components/appl-confirmation/appl-confirmation.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,11 @@ const routes: Routes = [
     path: 'moh-security',
     component: ApplSecurityComponent,
     data: { title: 'Security'}
+  },
+  {
+    path: 'moh-confirmation',
+    component: ApplConfirmationComponent,
+    data: { title: 'Confirmation'}
   },
 
   // Lazy loading modules below
