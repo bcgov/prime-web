@@ -1,5 +1,5 @@
-import { Person } from '../../../shared-core/models/person.model';
-import { Address } from '../../../shared-core/models/address.model';
+import { Person } from 'moh-common-lib';
+import { Address } from 'moh-common-lib';
 
 export class Registrant extends Person {
 
