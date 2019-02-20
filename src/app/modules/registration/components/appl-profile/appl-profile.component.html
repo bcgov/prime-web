@@ -5,38 +5,45 @@
 
   <ng-content select="[identityInstruct]"></ng-content>
 
-  <div class="form-group col-sm-4 p-sm-0">
-    <label class="control-label">First Name</label>
-    <input class="form-control"
-            name="first_name"
-            id="first_name"
-            [value]="legalName?.first"
-            [disabled]="!editIdentityInfo" />
-  </div>
+  <prime-page-sections layout='tips'>
+    <div class="form-group col-sm-6 p-sm-0">
+      <label class="control-label">First Name</label>
+      <input class="form-control"
+              name="first_name"
+              id="first_name"
+              [ngModel]="registrant?.firstName"
+              (ngModelChange)="setFirstName($event)"
+              [disabled]="!editIdentityInfo" />
+    </div>
 
-  <div class="form-group col-sm-4 p-sm-0">
-    <label class="control-label">Middle Name</label>
-    <input class="form-control"
-            name="middle_name"
-            id="middle_name"
-            [value]="legalName?.middle"
-            [disabled]="!editIdentityInfo" />
-  </div>
+    <div class="form-group col-sm-6 p-sm-0">
+      <label class="control-label">Middle Name</label>
+      <input class="form-control"
+              name="middle_name"
+              id="middle_name"
+              [ngModel]="registrant?.middleName"
+              (ngModelChange)="setMiddleName($event)"
+              [disabled]="!editIdentityInfo" />
+    </div>
 
-  <div class="form-group col-sm-4 p-sm-0">
-    <label class="control-label">Last Name</label>
-    <input class="form-control"
-            name="last_name"
-            id="last_name"
-            [value]="legalName?.last"
-            [disabled]="!editIdentityInfo" />
-  </div>
+    <div class="form-group col-sm-6 p-sm-0">
+      <label class="control-label">Last Name</label>
+      <input class="form-control"
+              name="last_name"
+              id="last_name"
+              [ngModel]="registrant?.lastName"
+              (ngModelChange)="setLastName($event)"
+              [disabled]="!editIdentityInfo" />
+    </div>
 
-  <div class="col-sm-4 p-sm-0">
-    <common-date [disabled]="!editIdentityInfo"
-                 [label]="'Birthdate'"
-                 [(date)]="dob"></common-date>
-  </div>
+    <div class="col-sm-6 p-sm-0">
+      <common-date [disabled]="!editIdentityInfo"
+                  [label]="'Birthdate'"
+                  [(date)]="registrant.dateOfBirth"></common-date>
+    </div>
+
+    <aside>TIPS</aside>
+  </prime-page-sections>
 </div>
 
 <div>
@@ -47,36 +54,44 @@
     enter your full preferred name.
   </p>
 
-  <div class="form-group col-sm-4 p-sm-0">
+  <prime-page-sections layout='tips'>
+    <div class="form-group col-sm-6 p-sm-0">
       <label class="control-label">Preferred First Name</label>
       <input class="form-control"
             name="pref_first_name"
             id="pref_first_name"
-            [value]='preferName?.first' />
+            [ngModel]="registrant?.preferredFirstName"
+            (ngModelChange)="setPreferredFirstName($event)" />
     </div>
 
-    <div class="form-group col-sm-4 p-sm-0">
+    <div class="form-group col-sm-6 p-sm-0">
       <label class="control-label">Preferred Middle Name</label>
       <input class="form-control"
             name="pref_middle_name"
             id="pref_middle_name"
-            [value]='preferName?.middle' />
+            [ngModel]="registrant?.preferredMiddleName"
+            (ngModelChange)="setPreferredMiddleName($event)" />
     </div>
 
-    <div class="form-group col-sm-4 p-sm-0">
+    <div class="form-group col-sm-6 p-sm-0">
       <label class="control-label">Preferred Last Name</label>
       <input class="form-control"
             name="pref_last_name"
             id="pref_last_name"
-            [value]='preferName?.last'/>
+            [ngModel]="registrant?.preferredLastName"
+            (ngModelChange)="setPreferredLastName($event)"/>
     </div>
+    <aside>TIPS</aside>
+  </prime-page-sections>
 </div>
 
-<div class='d-flex'>
-  <div class='col-sm-6 pl-0'>
+<prime-page-sections layout='double'>
     <h2 class='border-bottom'>Address</h2>
-  </div>
-  <div class='col-sm-6 pr-0'>
+    <prime-address [disabled]="!editIdentityInfo"
+                    [(address)]='registrant.address'></prime-address>
+
+  <aside>
     <h2 class='border-bottom'>Mailing Address</h2>
-  </div>
-</div>
+  </aside>
+</prime-page-sections>
+

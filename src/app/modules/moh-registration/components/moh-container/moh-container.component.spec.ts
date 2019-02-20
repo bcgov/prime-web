@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MohContainerComponent } from './moh-container.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { SharedCoreModule } from 'moh-common-lib';
 
 describe('MohContainerComponent', () => {
   let component: MohContainerComponent;
@@ -8,7 +10,11 @@ describe('MohContainerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MohContainerComponent ]
+      declarations: [ MohContainerComponent ],
+      imports: [
+        SharedCoreModule,
+        RouterTestingModule
+      ]
     })
     .compileComponents();
   }));
