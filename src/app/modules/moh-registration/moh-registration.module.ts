@@ -8,6 +8,8 @@ import { SharedCoreModule } from '../../shared-core/shared-core.module';
 import { MohContainerComponent } from './components/moh-container/moh-container.component';
 import { MohAccountComponent } from './pages/moh-account/moh-account.component';
 import { FormsModule } from '@angular/forms';
+import { MohSecurityComponent } from './pages/moh-security/moh-security.component';
+import { MohDocUploadComponent } from './pages/moh-doc-upload/moh-doc-upload.component';
 
 @NgModule({
   imports: [
@@ -20,7 +22,9 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     MohContainerComponent,
     MohProfileComponent,
-    MohAccountComponent
+    MohAccountComponent,
+    MohSecurityComponent,
+    MohDocUploadComponent
   ]
 })
 export class MohRegistrationModule { }

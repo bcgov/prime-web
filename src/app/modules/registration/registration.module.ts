@@ -9,6 +9,7 @@ import { SharedCoreModule } from '../../shared-core/shared-core.module';
 import { FormsModule, NgForm } from '@angular/forms';
 import { AddressComponent } from './components/address/address.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PageSectionsComponent } from './components/page-sections/page-sections.component';
 
 @NgModule({
   imports: [
@@ -22,14 +23,16 @@ import { HttpClientModule } from '@angular/common/http';
     ApplAccountComponent,
     ApplSecurityComponent,
     ApplDocUploadComponent,
-    AddressComponent
+    AddressComponent,
+    PageSectionsComponent
   ],
   exports: [
     ApplProfileComponent,
     ApplAccountComponent,
     ApplSecurityComponent,
     ApplDocUploadComponent,
-    AddressComponent
+    AddressComponent,
+    PageSectionsComponent
   ]
 })
 export class RegistrationModule { }
