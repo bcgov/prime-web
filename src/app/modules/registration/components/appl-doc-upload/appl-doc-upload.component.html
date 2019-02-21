@@ -1,6 +1,51 @@
-<p>
+<!-- TODO - Fix issue where duplicate common-page-frameworks appear 
+http://localhost:4305/moh-registration/upload-documents // wraps this component in a page-framework
+vs
+http://localhost:4305/moh-doc-upload // doesn't
 
-  appl-doc-upload works!
+should be made consistent. discuss with Kristin
+I propose that common-page-frameowrks should never be added via a container because that
+removes the layout control from the individual page. So we should change the first link 
+so it works and leave the second link as is
+-->
+<common-page-framework layout='blank'>
 
-</p>
+  <form #formRef='ngForm'>
 
+    <h2>Identity Documents</h2>
+    <prime-page-sections layout='tips'>
+      <p>Prior to identity-proofing upload the front and back of at least one valid government-issued photo ID</p>
+
+      <aside>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta quidem dolorum vel blanditiis. Similique error
+        beatae dicta enim ea obcaecati minima quasi, aut, quo molestias quae. Rerum atque excepturi nobis!
+      </aside>
+    </prime-page-sections>
+
+
+    <h2 class='border-bottom'>Driver's License</h2>
+    <prime-page-sections layout='tips'>
+      <p>appl-doc-upload works!</p>
+
+      <aside>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta quidem dolorum vel blanditiis. Similique error
+        beatae dicta enim ea obcaecati minima quasi, aut, quo molestias quae. Rerum atque excepturi nobis!
+      </aside>
+    </prime-page-sections>
+
+    <h2 class='border-bottom'>Passport</h2>
+    <prime-page-sections layout='tips'>
+      <p>appl-doc-upload works!</p>
+
+      <aside>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta quidem dolorum vel blanditiis. Similique error
+        beatae dicta enim ea obcaecati minima quasi, aut, quo molestias quae. Rerum atque excepturi nobis!
+      </aside>
+    </prime-page-sections>
+  </form>
+
+  <!-- Display bar during registration -->
+  <common-form-action-bar>
+  </common-form-action-bar>
+
+</common-page-framework>
