@@ -19,10 +19,6 @@ export class ApplProfileComponent implements OnInit {
 
   @Input() editIdentityInfo: boolean = true;
 
-  public address: Address;
-  public mailAddress: Address;
-
-
   constructor( private primeDataService: PrimeDataService ) {
   }
 
@@ -33,29 +29,7 @@ export class ApplProfileComponent implements OnInit {
     return this.primeDataService.registrant;
   }
 
-  /** Start - Methods to set data entered by user */
-  setFirstName( name: string ) {
-      this.registrant.firstName = name;
+  toggleCheckBox() {
+    this.registrant.identityIsMailingAddress = !this.registrant.identityIsMailingAddress;
   }
-
-  setMiddleName( name: string ) {
-    this.registrant.middleName = name;
-  }
-
-  setLastName( name: string ) {
-    this.registrant.lastName = name;
-  }
-
-  setPreferredFirstName( name: string ) {
-    this.registrant.preferredFirstName = name;
-  }
-
-  setPreferredMiddleName( name: string ) {
-    this.registrant.preferredMiddleName = name;
-  }
-
-  setPreferredLastName( name: string ) {
-    this.registrant.preferredLastName = name;
-  }
-  /** End - Methods to set data entered by user */
 }
