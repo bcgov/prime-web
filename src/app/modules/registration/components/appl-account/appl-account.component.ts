@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { Registrant } from '../../models/registrant.model';
 
@@ -8,6 +8,8 @@ import { Registrant } from '../../models/registrant.model';
   styleUrls: ['./appl-account.component.scss']
 })
 export class ApplAccountComponent implements OnInit {
+
+  @Input() mohCredientials: boolean = true;
 
   /** TODO: Figure out how to set this correctly */
   public passwordCriteria: string =

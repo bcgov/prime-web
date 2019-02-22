@@ -1,9 +1,9 @@
-<h1>Accounts</h1>
-<p>
-  Please provide the Account Holder's personal information.
-</p>
+<h1>Account</h1>
 
-<div>
+<ng-content select="[AccountInstruct]"></ng-content>
+
+<div *ngIf="mohCredientials">
+
   <h2 class="border-bottom">Prime Account</h2>
 
   <prime-page-sections layout='tips'>
@@ -38,3 +38,24 @@
 </div>
 
 
+<div>
+  <h2 class="border-bottom">Security Questions</h2>
+
+  <prime-page-sections layout='tips'>
+
+    <aside>TIPS</aside>
+
+  </prime-page-sections>
+
+</div>
+
+<div>
+  <h2 class="border-bottom">Contact</h2>
+
+  <prime-page-sections layout='tips'>
+
+    <aside>TIPS</aside>
+
+  </prime-page-sections>
+
+</div>
