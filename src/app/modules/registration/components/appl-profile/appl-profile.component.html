@@ -32,14 +32,14 @@
               name="last_name"
               id="last_name"
               [ngModel]="registrant?.lastName"
-              (ngModelChange)="registrant.LastName = $event"
+              (ngModelChange)="registrant.lastName = $event"
               [disabled]="!editIdentityInfo" />
     </div>
 
     <div class="col-sm-6 p-sm-0">
       <common-date [disabled]="!editIdentityInfo"
-                  [label]="'Birthdate'"
-                  [(date)]="registrant.dateOfBirth"></common-date>
+                   [label]="'Birthdate'"
+                   [(date)]="registrant.dateOfBirth"></common-date>
     </div>
 
     <aside>TIPS</aside>

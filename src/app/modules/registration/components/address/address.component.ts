@@ -26,4 +26,6 @@ export class AddressComponent extends Base implements OnInit {
 
   ngOnInit() {
   }
+
+  // TODO: Add geocoder to this module for BC addresses only
 }

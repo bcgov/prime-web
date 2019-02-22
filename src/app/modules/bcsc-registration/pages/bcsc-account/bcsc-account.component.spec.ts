@@ -3,6 +3,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BcscAccountComponent } from './bcsc-account.component';
 import { RegistrationModule } from '../../../registration/registration.module';
 import { SharedCoreModule } from '../../../../shared-core/shared-core.module';
+import { FormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { PrimeDataService } from '../../../../services/prime-data.service';
 
 describe('BcscAccountComponent', () => {
   let component: BcscAccountComponent;
@@ -13,7 +16,12 @@ describe('BcscAccountComponent', () => {
       declarations: [ BcscAccountComponent ],
       imports: [
         RegistrationModule,
-        SharedCoreModule
+        SharedCoreModule,
+        FormsModule,
+        RouterTestingModule
+      ],
+      providers: [
+        PrimeDataService
       ]
     })
     .compileComponents();
