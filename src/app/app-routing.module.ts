@@ -20,11 +20,6 @@ const routes: Routes = [
     data: { title: 'Upload Documents'}
   },
   {
-    path: 'moh-account',
-    component: ApplAccountComponent,
-    data: { title: 'Account'}
-  },
-  {
     path: 'moh-security',
     component: ApplSecurityComponent,
     data: { title: 'Security'}
