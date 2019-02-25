@@ -31,9 +31,13 @@
     "moment": "^2.24.0",
     "mygovbc-bootstrap-theme": "^0.4.0",
     "ngx-bootstrap": "^3.2.0",
+    "ngx-mydatepicker": "^2.4.5",
     "popper.js": "^1.14.7",
     "rxjs": "^6.2.1",
-    "zone.js": "^0.8.26"
+    "zone.js": "^0.8.26",
+    "blueimp-load-image": "^2.20.1",
+    "pdfjs-dist": "^2.0.550",
+    "sha1": "^1.1.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.6.8",
