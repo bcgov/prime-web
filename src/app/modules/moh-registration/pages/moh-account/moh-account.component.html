@@ -1,6 +1,14 @@
 <common-page-framework layout='blank'>
 
-  <prime-appl-account></prime-appl-account>
+  <form #formRef='ngForm'>
+    <prime-appl-account>
+
+      <p AccountInstruct>
+        Please provide the Account Holder's personal information.
+      </p>
+
+      </prime-appl-account>
+  </form>
 
   <!-- Display bar during registration -->
   <common-form-action-bar (btnClick)="continue()">

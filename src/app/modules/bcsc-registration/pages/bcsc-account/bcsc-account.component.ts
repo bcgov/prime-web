@@ -1,18 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { AbstractForm } from '../../../../shared-core/models/abstract-form';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bcsc-account',
   templateUrl: './bcsc-account.component.html',
   styleUrls: ['./bcsc-account.component.scss']
 })
-export class BcscAccountComponent implements OnInit {
+export class BcscAccountComponent extends AbstractForm implements OnInit {
 
-  constructor() { }
+    constructor( protected router: Router ) {
+      super( router );
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
-  continue() {
-    console.log( 'button pushed' );
-  }
+    continue() {
+      console.log( 'form: ', this.form );
+    }
 }

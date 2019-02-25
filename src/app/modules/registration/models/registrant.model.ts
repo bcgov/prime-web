@@ -11,6 +11,13 @@ export class Registrant extends Person {
   /** Identify and mailing addresses */
   public address: Address = new Address();
   public mailAddress: Address = new Address();
+  public identityIsMailingAddress = true;
+
+  /** Account information */
+  public userID: string;
+  public password: string;
+  public emailAddress: string;
+  public smsPhone: string;
 
   /* Copy function */
   copy( object: Registrant ) {
@@ -21,5 +28,10 @@ export class Registrant extends Person {
 
     this.address.copy( object.address );
     this.mailAddress.copy( object.mailAddress );
+
+    this.userID = object.userID;
+    this.password = object.password;
+    this.emailAddress = object.emailAddress;
+    this.smsPhone = object.smsPhone;
   }
 }

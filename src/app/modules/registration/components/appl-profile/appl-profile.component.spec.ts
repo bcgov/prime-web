@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ApplProfileComponent } from './appl-profile.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { SharedCoreModule } from 'moh-common-lib';
 import { RegistrationModule } from '../../registration.module';
 import { PageSectionsComponent } from '../page-sections/page-sections.component';
@@ -26,7 +26,8 @@ describe('ApplProfileComponent', () => {
         HttpClientTestingModule
       ],
       providers: [
-        PrimeDataService
+        PrimeDataService,
+        NgForm
       ]
     })
     .compileComponents();
