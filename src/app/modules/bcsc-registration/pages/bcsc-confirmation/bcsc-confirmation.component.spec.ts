@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BcscConfirmationComponent } from './bcsc-confirmation.component';
 import { RegistrationModule } from '../../../registration/registration.module';
-import { SharedCoreModule } from '../../../../shared-core/shared-core.module';
+import { SharedCoreModule } from 'moh-common-lib';
 
 describe('BcscConfirmationComponent', () => {
   let component: BcscConfirmationComponent;

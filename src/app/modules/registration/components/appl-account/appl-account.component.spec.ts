@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ApplAccountComponent } from './appl-account.component';
 import { FormsModule, NgForm } from '@angular/forms';
-import { SharedCoreModule } from '../../../../shared-core/shared-core.module';
+import { SharedCoreModule } from 'moh-common-lib';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { PageSectionsComponent } from '../page-sections/page-sections.component';

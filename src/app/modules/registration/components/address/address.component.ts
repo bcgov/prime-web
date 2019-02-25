@@ -1,7 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, forwardRef } from '@angular/core';
-import { GeocoderService } from '../../../../shared-core/services/geocoder.service';
-import { Base } from '../../../../shared-core/models/base';
-import { Address } from '../../../../shared-core/models/address.model';
+import { GeocoderService, Base, Address } from 'moh-common-lib';
 import { ControlContainer, NgForm } from '@angular/forms';
 
 @Component({

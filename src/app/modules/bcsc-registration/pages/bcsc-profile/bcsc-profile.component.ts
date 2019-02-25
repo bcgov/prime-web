@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 // Development purpose
 import { DummyDataService } from '../../../../services/dummy-data.service';
 import { PrimeDataService } from '../../../../services/prime-data.service';
-import { AbstractForm } from '../../../../shared-core/models/abstract-form';
+import { AbstractForm } from 'moh-common-lib';
 import { Router } from '@angular/router';
 
 @Component({

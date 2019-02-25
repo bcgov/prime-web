@@ -1,7 +1,5 @@
 import { Component, OnInit, Input, forwardRef } from '@angular/core';
-import { Address } from '../../../../shared-core/models/address.model';
 import { ControlContainer, NgForm } from '@angular/forms';
-import { SimpleDate } from '../../../../shared-core/interfaces/simple-date.interface';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { Registrant } from '../../models/registrant.model';
 
