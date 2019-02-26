@@ -55,7 +55,7 @@ export class ApplDocUploadComponent implements OnInit {
     const selection: DocumentType = this.dropdownValueAsDocumentType;
     // Only add if unique
     if (!this.selectedDocType.includes(selection)) {
-      this.selectedDocType.push(selection);
+      this.selectedDocType.unshift(selection);
     }
   }
 
