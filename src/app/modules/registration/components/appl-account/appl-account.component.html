@@ -40,7 +40,7 @@
                        [minLen]="pwdMinLen"
                        [errorMessages]="newPwdErrorMsgs"
                        [password]="registrant?.password"
-                       (onPasswordChange)="debug($event)"></common-password>
+                       (passwordChange)="registrant.password=$event"></common-password>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
