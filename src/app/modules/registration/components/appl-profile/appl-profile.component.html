@@ -29,7 +29,9 @@
 
     <div class="col-sm-6 p-sm-0">
       <common-date [disabled]="!editIdentityInfo"
-                   [label]="'Birthdate'"
+                   [label]="dateLabel"
+                   [errorMessages]="dateErrorMsg"
+                   [restrictDate]="'past'"
                    [(date)]="registrant.dateOfBirth"></common-date>
     </div>
 

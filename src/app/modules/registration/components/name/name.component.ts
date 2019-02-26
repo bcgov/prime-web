@@ -24,7 +24,7 @@ export class NameComponent extends Base implements OnInit {
   @Input() label: string = 'Name';
   @Input() maxLen: string = '40';
 
-  @Output() onNameChange: EventEmitter<string> = new EventEmitter<string>();
+  @Output() nameChange: EventEmitter<string> = new EventEmitter<string>();
 
   /**
    * Valid characters for name
@@ -43,6 +43,6 @@ export class NameComponent extends Base implements OnInit {
    * @param name value the was entered by
    */
   setName( value: string ) {
-    this.onNameChange.emit( value );
+    this.nameChange.emit( value );
   }
 }
