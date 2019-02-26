@@ -1,5 +1,10 @@
 import { Person, Address } from 'moh-common-lib';
 
+export interface SecurityQuestionsAnswers {
+  question: string;
+  answer: string;
+}
+
 export class Registrant extends Person {
 
   /** Parts of a person's name */
@@ -17,6 +22,8 @@ export class Registrant extends Person {
   public password: string;
   public emailAddress: string;
   public smsPhone: string;
+
+  public secQuestionsAnswer: SecurityQuestionsAnswers[] = [];
 
   /* Copy function */
   copy( object: Registrant ) {
