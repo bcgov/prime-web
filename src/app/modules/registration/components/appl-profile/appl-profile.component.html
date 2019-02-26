@@ -7,33 +7,24 @@
 
   <prime-page-sections layout='tips'>
     <div class="form-group col-sm-6 p-sm-0">
-      <label class="control-label">First Name</label>
-      <input class="form-control"
-              name="first_name"
-              id="first_name"
-              [ngModel]="registrant?.firstName"
-              (ngModelChange)="registrant.firstName = $event"
-              [disabled]="!editIdentityInfo" />
+      <prime-name [label]="'First Name'"
+                  [required]="false"
+                  [disabled]="!editIdentityInfo"
+                  [nameStr]="registrant.firstName"></prime-name>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <label class="control-label">Middle Name</label>
-      <input class="form-control"
-              name="middle_name"
-              id="middle_name"
-              [ngModel]="registrant?.middleName"
-              (ngModelChange)="registrant.middleName = $event"
-              [disabled]="!editIdentityInfo" />
+      <prime-name [label]="'Middle Name'"
+                  [required]="false"
+                  [disabled]="!editIdentityInfo"
+                  [nameStr]="registrant.middleName"></prime-name>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <label class="control-label">Last Name</label>
-      <input class="form-control"
-              name="last_name"
-              id="last_name"
-              [ngModel]="registrant?.lastName"
-              (ngModelChange)="registrant.lastName = $event"
-              [disabled]="!editIdentityInfo" />
+      <prime-name [label]="'Last Name'"
+                  [required]="true"
+                  [disabled]="!editIdentityInfo"
+                  [nameStr]="registrant.lastName"></prime-name>
     </div>
 
     <div class="col-sm-6 p-sm-0">
@@ -56,30 +47,21 @@
 
   <prime-page-sections layout='tips'>
     <div class="form-group col-sm-6 p-sm-0">
-      <label class="control-label">Preferred First Name</label>
-      <input class="form-control"
-            name="pref_first_name"
-            id="pref_first_name"
-            [ngModel]="registrant?.preferredFirstName"
-            (ngModelChange)="registrant.preferredFirstName = $event" />
+      <prime-name [label]="'Preferred First Name'"
+                  [required]="false"
+                  [nameStr]="registrant.preferredFirstName"></prime-name>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <label class="control-label">Preferred Middle Name</label>
-      <input class="form-control"
-            name="pref_middle_name"
-            id="pref_middle_name"
-            [ngModel]="registrant?.preferredMiddleName"
-            (ngModelChange)="registrant.preferredMiddleName = $event" />
+      <prime-name [label]="'Preferred Middle Name'"
+                  [required]="false"
+                  [nameStr]="registrant.preferredMiddleName"></prime-name>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <label class="control-label">Preferred Last Name</label>
-      <input class="form-control"
-            name="pref_last_name"
-            id="pref_last_name"
-            [ngModel]="registrant?.preferredLastName"
-            (ngModelChange)="registrant.preferredLastName = $event"/>
+      <prime-name [label]="'Preferred Last Name'"
+                  [required]="false"
+                  [nameStr]="registrant.preferredLastName"></prime-name>
     </div>
     <aside>TIPS</aside>
   </prime-page-sections>

@@ -16,9 +16,19 @@ export class ApplAccountComponent implements OnInit {
 
   @Input() mohCredientials: boolean = true;
 
-  /** TODO: Figure out how to set this correctly to validate NFR in section 3.3.10 of SRQ */
-  public passwordCriteria: string =
-  '^((?=.*[^a-zA-Z\s])(?=.*[a-z])(?=.*[A-Z])|(?=.*[^a-zA-Z0-9\s])(?=.*\d)(?=.*[a-zA-Z])).*$';
+  /**
+   * At least 3 of the following categories:
+   *  a) Upper case characters (A-Z)
+   *  b) Lower case characters (a-z)
+   *  c) Numeral (0-9)
+   *  d) Non-alphanumeric characters e.g. []?/\.<~#`!@#$%^&*()-+=|:"',>{}
+   *
+   * TODO: Figure out RegExp for achieving this using pattern, else need validation
+   *       to be added to password component
+   */
+  public passwordCriteria = RegExp(
+    '^((?=.*[^a-zA-Z\s])(?=.*[a-z])(?=.*[A-Z])|(?=.*[^a-zA-Z0-9\s])(?=.*\d)(?=.*[a-zA-Z])).*$'
+    );
 
   constructor( private primeDataService: PrimeDataService ) { }
 
