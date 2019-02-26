@@ -26,7 +26,7 @@ export class CacheService {
    *  b) NFR-Configurability - Number of security questions to setup
    *
    */
-  public secQuestionSetup: number = 3;
+  public numSecQuestion: number = 3;
   public secQuestionList: string[] = [
     'What was your first pet\'s name?',
     'What was the make of your first car?',

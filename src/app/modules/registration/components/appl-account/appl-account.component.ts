@@ -3,6 +3,7 @@ import { PrimeDataService } from '../../../../services/prime-data.service';
 import { Registrant } from '../../models/registrant.model';
 import { ControlContainer, NgForm } from '@angular/forms';
 import { CacheService } from '../../../../services/cache.service';
+import { Base } from 'moh-common-lib';
 
 @Component({
   selector: 'prime-appl-account',
@@ -13,7 +14,7 @@ import { CacheService } from '../../../../services/cache.service';
    */
   viewProviders: [ { provide: ControlContainer, useExisting: forwardRef(() => NgForm ) } ]
 })
-export class ApplAccountComponent implements OnInit {
+export class ApplAccountComponent extends Base implements OnInit {
 
   @Input() mohCredientials: boolean = true;
 
@@ -47,7 +48,13 @@ export class ApplAccountComponent implements OnInit {
   };
 
   constructor( private primeDataService: PrimeDataService,
-               private cache: CacheService ) { }
+               private cache: CacheService ) {
+
+    super();
+
+    this.registrant.secQuestionsAnswer.length = this.numSecQuestions;
+
+  }
 
   ngOnInit() {
   }
@@ -56,11 +63,22 @@ export class ApplAccountComponent implements OnInit {
     return this.primeDataService.registrant;
   }
 
+  /**
+   * Cached items
+   */
   get pwdMinLen(): string {
     return this.cache.pwdMinLen;
   }
 
   get userIdMinLen(): string {
     return this.cache.userIDMinLen;
+  }
+
+  get numSecQuestions(): number {
+    return this.cache.numSecQuestion;
+  }
+
+  get secQuestionList(): string[] {
+    return this.cache.secQuestionList;
   }
 }

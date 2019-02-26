@@ -62,6 +62,17 @@
 
   <prime-page-sections layout='tips'>
 
+    <div *ngFor="let count of registrant.secQuestionsAnswer.length">
+      <select class="form-control"
+              id="sec_question_{{objectId}}"
+              name="sec_question_{{objectId}}"
+              required>
+        <option value="null" label="-- Select question --" selected></option>
+        <option *ngFor="let question of secQuestionList; let i = index;" [value]="i + 1">{{question}}</option>
+      </select>
+      <input type="text" value="" required/>
+    </div>
+
     <aside>TIPS</aside>
 
   </prime-page-sections>
