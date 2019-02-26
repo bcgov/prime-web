@@ -1,5 +1,4 @@
-import { Person } from 'moh-common-lib';
-import { Address } from 'moh-common-lib';
+import { Person, Address } from 'moh-common-lib';
 
 export class Registrant extends Person {
 

@@ -17,6 +17,19 @@ export class ApplProfileComponent implements OnInit {
 
   @Input() editIdentityInfo: boolean = true;
 
+  /**
+   * Date of birth error messages
+   */
+  public dateLabel = 'Birthdate';
+  public dateErrorMsg = {
+    required: this.dateLabel + ' is required.',
+    dayOutOfRange: 'Invalid ' + this.dateLabel + '.',
+    yearDistantPast: 'Invalid ' + this.dateLabel + '.',
+    yearDistantFuture: 'Invalid ' + this.dateLabel + '.',
+    noFutureDatesAllowed: 'Invalid ' + this.dateLabel + '.',
+    invalidValue: 'Invalid ' + this.dateLabel + '.'
+  };
+
   constructor( private primeDataService: PrimeDataService ) {
   }
 

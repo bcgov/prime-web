@@ -11,6 +11,7 @@ import { AddressComponent } from './components/address/address.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PageSectionsComponent } from './components/page-sections/page-sections.component';
 import { ApplConfirmationComponent } from './components/appl-confirmation/appl-confirmation.component';
+import { NameComponent } from './components/name/name.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { ApplConfirmationComponent } from './components/appl-confirmation/appl-c
     ApplDocUploadComponent,
     AddressComponent,
     PageSectionsComponent,
-    ApplConfirmationComponent
+    ApplConfirmationComponent,
+    NameComponent
   ],
   exports: [
     ApplProfileComponent,

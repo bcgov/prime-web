@@ -7,7 +7,6 @@ export class PrimeDataModule {
     return {
       ngModule: PrimeDataModule,
       providers: [PrimeDataService]
-
      };
   }
 }

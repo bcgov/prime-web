@@ -5,7 +5,7 @@
           spellcheck="false"
           type="text"
           id="country_{{objectId}}"
-          name="country"
+          name="country_{{objectId}}"
           [ngModel]="address?.country"
           (ngModelChange)="address.country = $event"
           [disabled]="disabled" />
@@ -18,7 +18,7 @@
           spellcheck="false"
           type="text"
           id="province_{{objectId}}"
-          name="province"
+          name="province_{{objectId}}"
           [ngModel]="address?.province"
           (ngModelChange)="address.province = $event"
           [disabled]="disabled" />
@@ -30,7 +30,7 @@
           spellcheck="false"
           type="text"
           id="street_{{objectId}}"
-          name="street"
+          name="street_{{objectId}}"
           [ngModel]="address?.street"
           (ngModelChange)="address.street = $event"
           [disabled]="disabled" />
@@ -42,7 +42,7 @@
           spellcheck="false"
           type="text"
           id="city_{{objectId}}"
-          name="city"
+          name="city_{{objectId}}"
           [ngModel]="address?.city"
           (ngModelChange)="address.city = $event"
           [disabled]="disabled" />
@@ -54,7 +54,7 @@
           spellcheck="false"
           type="text"
           id="postalCode_{{objectId}}"
-          name="postalCode"
+          name="postalCode_{{objectId}}"
           [ngModel]="address?.postal"
           (ngModelChange)="address.postal = $event"
           [disabled]="disabled" />

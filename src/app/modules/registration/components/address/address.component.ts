@@ -16,13 +16,21 @@ export class AddressComponent extends Base implements OnInit {
   @Input() disabled: boolean = false;
   @Input() address: Address;
 
-  @Output() onDateChange: EventEmitter<Address> = new EventEmitter<Address>();
+  @Output() addressChange: EventEmitter<Address> = new EventEmitter<Address>();
 
   constructor( private geocoderService: GeocoderService ) {
     super();
    }
 
   ngOnInit() {
+  }
+
+  /**
+   * Passes the value entered back to the calling component
+   * @param value value the was entered by
+   */
+  setName( value: Address ) {
+    this.addressChange.emit( value );
   }
 
   // TODO: Add geocoder to this module for BC addresses only
