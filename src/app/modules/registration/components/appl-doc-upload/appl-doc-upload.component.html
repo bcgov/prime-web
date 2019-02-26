@@ -61,7 +61,7 @@ so it works and leave the second link as is
 
     <prime-page-sections layout='tips'>
         <p>appl-doc-upload works!</p>
-        <common-datepicker class='d-inline-block mr-3' labelText='License Expiry'></common-datepicker> 
+        <common-datepicker class='d-inline-block mr-3' labelText='{{section.name}} Expiry'></common-datepicker> 
         <a href="#">Sample Document</a>
 
         <common-file-uploader [images]='tempImages' (addDocument)='onAddImage($event)'>
