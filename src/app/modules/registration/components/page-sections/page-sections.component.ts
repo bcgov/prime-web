@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'prime-page-sections',
   templateUrl: './page-sections.component.html',
-  styleUrls: ['./page-sections.component.scss']
+  styleUrls: ['./page-sections.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class PageSectionsComponent implements OnInit {
 
