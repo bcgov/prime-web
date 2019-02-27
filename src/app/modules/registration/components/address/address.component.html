@@ -6,8 +6,10 @@
           [ngModel]="address?.country"
           (ngModelChange)="setCountry($event)"
           [required]="isRequired"
-          [disabled]="disabled" >
-    <option value="null" label="-- Select country --" selected></option>
+          [disabled]="disabled">
+    <option value="null"
+            label="-- Select country --" selected
+            [disabled]="isRequired"></option>
     <option *ngFor="let country of countryList"
             [value]="country.countryCode">{{country.description}}</option>
   </select>
@@ -22,7 +24,10 @@
           (ngModelChange)="address.province = $event"
           [required]="isRequired"
           [disabled]="disabled" >
-    <option value="null" label="-- Select {{isCanada() ? 'province' : 'state' }} --" selected></option>
+    <option value="null"
+            label="-- Select {{isCanada() ? 'province' : 'state' }} --"
+            selected
+            [disabled]="isRequired"></option>
     <option *ngFor="let prov of provList"
             [value]="prov.provCode">{{prov.description}}</option>
   </select>
@@ -64,7 +69,7 @@
           [ngModel]="address?.postal"
           (ngModelChange)="address.postal = $event"
           [required]="isRequired"
-          [disabled]="disabled" />
+          [disabled]="disabled"/>
 </div>
 
 <ng-template #NotCanadaUSA>

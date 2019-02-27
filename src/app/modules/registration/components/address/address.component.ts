@@ -13,6 +13,7 @@ export interface ProvinceList {
   provCode: string;
   description: string;
 }
+
 @Component({
   selector: 'prime-address',
   templateUrl: './address.component.html',
@@ -39,9 +40,6 @@ export class AddressComponent extends Base implements OnInit {
    }
 
   ngOnInit() {
-
-    console.log( 'Init Address: ', this.address );
-
     if ( this.address ) {
 
       if ( !this.address.country ) {
@@ -74,8 +72,6 @@ export class AddressComponent extends Base implements OnInit {
    * @param value
    */
   setCountry( value: string ) {
-
-    console.log( 'setCountry: ', value );
     this.address.province = this.setDefaultProvinceAsOption( value );
     this.address.country = value;
   }
@@ -97,7 +93,14 @@ export class AddressComponent extends Base implements OnInit {
     }).filter( x => x );
   }
 
-
+ /**
+   * Upper cases letters in string
+   * @param {string} text
+   * @returns {string}
+   */
+  upperCasePipe( text: string ) {
+    return text.toUpperCase();
+  }
 
   /**
    * Sets the default province option value

@@ -22,7 +22,7 @@ export class NameComponent extends Base implements OnInit {
   @Input() required: boolean = true;
   @Input() nameStr: string;
   @Input() label: string = 'Name';
-  @Input() maxLen: string = '40';
+  @Input() maxLen: string = '255';
 
   @Output() nameChange: EventEmitter<string> = new EventEmitter<string>();
 

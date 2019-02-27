@@ -15,6 +15,7 @@
              name="user_id"
              id="user_id"
              [minlength]="userIdMinLen"
+             [maxlength]="userIdMaxLen"
              [ngModel]="registrant?.userID"
              (ngModelChange)="registrant.userID = $event"
              required />
@@ -117,6 +118,7 @@
              type="email"
              name="user_email"
              id="user_email"
+             [maxlength]="emailMaxLen"
              [ngModel]="registrant?.emailAddress"
              (ngModelChange)="registrant.emailAddress = $event" />
     </div>

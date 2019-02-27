@@ -73,9 +73,9 @@
     <h2 class="border-bottom">Address</h2>
     <prime-address [disabled]="!editIdentityInfo"
                    [(address)]="registrant.address"
-                   [defaultCountry]="'Canada'"
+                   [defaultCountry]="defaultCountry"
                    [countryList]="countryList"
-                   [defaultProvince]="'BC'"
+                   [defaultProvince]="defaultProvince"
                    [provinceList]="provinceList"
                    [isRequired]="true"></prime-address>
     <div class="custom-control custom-checkbox">
@@ -92,9 +92,9 @@
     <h2 class="border-bottom">Mailing Address</h2>
     <div *ngIf="!registrant.identityIsMailingAddress; else NoMailingAddress">
         <prime-address [(address)]="registrant.mailAddress"
-                       [defaultCountry]="'Canada'"
+                       [defaultCountry]="defaultCountry"
                        [countryList]="countryList"
-                       [defaultProvince]="'BC'"
+                       [defaultProvince]="defaultProvince"
                        [provinceList]="provinceList"></prime-address>
     </div>
   </aside>
