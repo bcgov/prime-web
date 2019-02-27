@@ -1,9 +1,8 @@
 import { Component, OnInit, Input, forwardRef } from '@angular/core';
 import { PrimeDataService } from '../../../../services/prime-data.service';
-import { Registrant } from '../../models/registrant.model';
+import { Registrant, SecurityQuestionsAnswers } from '../../models/registrant.model';
 import { ControlContainer, NgForm } from '@angular/forms';
 import { CacheService } from '../../../../services/cache.service';
-import { Base } from 'moh-common-lib';
 
 @Component({
   selector: 'prime-appl-account',
@@ -14,7 +13,7 @@ import { Base } from 'moh-common-lib';
    */
   viewProviders: [ { provide: ControlContainer, useExisting: forwardRef(() => NgForm ) } ]
 })
-export class ApplAccountComponent extends Base implements OnInit {
+export class ApplAccountComponent implements OnInit {
 
   @Input() mohCredientials: boolean = true;
 
@@ -50,10 +49,10 @@ export class ApplAccountComponent extends Base implements OnInit {
   constructor( private primeDataService: PrimeDataService,
                private cache: CacheService ) {
 
-    super();
-
-    this.registrant.secQuestionsAnswer.length = this.numSecQuestions;
-
+    // initialize question/answer array
+    for ( let i = 0; i < this.numSecQuestions; i++ ) {
+      this.registrant.secQuestionsAnswer.push( {question: null, answer: null} );
+    }
   }
 
   ngOnInit() {
