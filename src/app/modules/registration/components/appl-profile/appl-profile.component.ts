@@ -2,6 +2,8 @@ import { Component, OnInit, Input, forwardRef } from '@angular/core';
 import { ControlContainer, NgForm } from '@angular/forms';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { Registrant } from '../../models/registrant.model';
+import { CacheService } from '../../../../services/cache.service';
+import { CountryList, ProvinceList } from '../address/address.component';
 
 
 @Component({
@@ -30,7 +32,8 @@ export class ApplProfileComponent implements OnInit {
     invalidValue: 'Invalid ' + this.dateLabel + '.'
   };
 
-  constructor( private primeDataService: PrimeDataService ) {
+  constructor( private primeDataService: PrimeDataService,
+               private cache: CacheService  ) {
   }
 
   ngOnInit() {
@@ -42,5 +45,13 @@ export class ApplProfileComponent implements OnInit {
 
   toggleCheckBox() {
     this.registrant.identityIsMailingAddress = !this.registrant.identityIsMailingAddress;
+  }
+
+  get countryList(): CountryList[] {
+    return this.cache.countryList;
+  }
+
+  get provinceList(): ProvinceList[] {
+    return this.cache.provinceList;
   }
 }
