@@ -4,6 +4,7 @@ import { PrimeDataService } from '../../../../services/prime-data.service';
 import { Registrant } from '../../models/registrant.model';
 import { CacheService } from '../../../../services/cache.service';
 import { CountryList, ProvinceList } from '../address/address.component';
+import { PrimeConstants } from '../../models/prime-constants';
 
 
 @Component({
@@ -18,6 +19,9 @@ import { CountryList, ProvinceList } from '../address/address.component';
 export class ApplProfileComponent implements OnInit {
 
   @Input() editIdentityInfo: boolean = true;
+
+  public defaultCountry = PrimeConstants.CANADA;
+  public defaultProvince = PrimeConstants.BRITISH_COLUMBIA;
 
   /**
    * Date of birth error messages

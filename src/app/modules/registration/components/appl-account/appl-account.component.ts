@@ -3,6 +3,7 @@ import { PrimeDataService } from '../../../../services/prime-data.service';
 import { Registrant, SecurityQuestionsAnswers } from '../../models/registrant.model';
 import { ControlContainer, NgForm } from '@angular/forms';
 import { CacheService } from '../../../../services/cache.service';
+import { PrimeConstants } from '../../models/prime-constants';
 
 @Component({
   selector: 'prime-appl-account',
@@ -45,6 +46,10 @@ export class ApplAccountComponent implements OnInit {
     required: this.confirmPwdLabel + ' is required',
     criteria: this.confirmPwdLabel + ' does not match.'
   };
+
+  /** Maximum length as defined by database fields */
+  public userIdMaxLen = PrimeConstants.USERID_MAXLEN;
+  public emailMaxLen = PrimeConstants.EMAIL_MAXLEN;
 
   constructor( private primeDataService: PrimeDataService,
                private cache: CacheService ) {
