@@ -72,7 +72,12 @@
 <prime-page-sections layout='double'>
     <h2 class="border-bottom">Address</h2>
     <prime-address [disabled]="!editIdentityInfo"
-                   [(address)]='registrant.address'></prime-address>
+                   [(address)]="registrant.address"
+                   [defaultCountry]="'Canada'"
+                   [countryList]="countryList"
+                   [defaultProvince]="'BC'"
+                   [provinceList]="provinceList"
+                   [isRequired]="true"></prime-address>
     <div class="custom-control custom-checkbox">
       <input type="checkbox"
              class="custom-control-input"
@@ -85,8 +90,12 @@
     </div>
   <aside>
     <h2 class="border-bottom">Mailing Address</h2>
-    <div *ngIf='!registrant.identityIsMailingAddress; else NoMailingAddress'>
-        <prime-address [(address)]='registrant.mailAddress'></prime-address>
+    <div *ngIf="!registrant.identityIsMailingAddress; else NoMailingAddress">
+        <prime-address [(address)]="registrant.mailAddress"
+                       [defaultCountry]="'Canada'"
+                       [countryList]="countryList"
+                       [defaultProvince]="'BC'"
+                       [provinceList]="provinceList"></prime-address>
     </div>
   </aside>
 </prime-page-sections>

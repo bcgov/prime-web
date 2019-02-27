@@ -22,8 +22,8 @@ export class DummyDataService {
 
     registrant.dateOfBirth = { month: 2, day: 3, year: 1999 };
 
-    registrant.address.country = 'Canada';
-    registrant.address.province = 'British Columbia';
+    registrant.address.country = 'CAN';
+    registrant.address.province = 'BC';
     registrant.address.street = '123 Oz Street';
     registrant.address.city = 'Victoria';
     registrant.address.postal = 'V1V1V1';
