@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { DocumentType } from '../models/documents.interface';
 
 /**
  * TODO: Set up service to store data returned from the cache service once
@@ -315,6 +316,18 @@ export class CacheService {
     { provCode: 'NT', name: 'Northwest Territories' },
     { provCode: 'NU', name: 'Nunavut' },
     { provCode: 'YT', name: 'Yukon' }
+  ];
+
+
+  DocumentTypes: DocumentType[] = [
+    {
+      name: 'Driver\'s License',
+      tips: 'Scan the document or take a photo of it.  Make sure that it\'s: <br/>-test test'
+    },
+    {
+      name: 'Passport',
+      tips: 'passport tips etc etc etc',
+    }
   ];
 
   constructor() { }

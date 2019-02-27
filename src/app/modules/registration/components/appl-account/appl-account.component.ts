@@ -43,7 +43,8 @@ export class ApplAccountComponent implements OnInit {
   public confirmPwdLabel: string = 'Confirm Password';
   public confirmPwdErrorMsgs = {
     required: this.confirmPwdLabel + ' is required',
-    criteria: this.confirmPwdLabel + ' does not match.'
+    criteria: this.confirmPwdLabel + ' does not match.',
+    minLength: this.confirmPwdLabel + ' does not match.'
   };
 
   constructor( private primeDataService: PrimeDataService,

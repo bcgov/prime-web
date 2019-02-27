@@ -1,4 +1,5 @@
-import { Person, Address } from 'moh-common-lib';
+import { Person, Address } from 'moh-common-lib/models';
+import { Document } from '../../../models/documents.interface';
 
 export class Registrant extends Person {
 
@@ -17,6 +18,9 @@ export class Registrant extends Person {
   public password: string;
   public emailAddress: string;
   public smsPhone: string;
+
+  /* Documents */
+  public documents: Document[] = [];
 
   /* Copy function */
   copy( object: Registrant ) {

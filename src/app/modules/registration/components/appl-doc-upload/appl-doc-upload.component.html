@@ -1,84 +1,61 @@
-<!-- TODO - Fix issue where duplicate common-page-frameworks appear 
-http://localhost:4305/moh-registration/upload-documents // wraps this component in a page-framework
-vs
-http://localhost:4305/moh-doc-upload // doesn't
+<h2>Identity Documents</h2>
+<prime-page-sections layout='tips'>
 
-should be made consistent. discuss with Kristin
-I propose that common-page-frameowrks should never be added via a container because that
-removes the layout control from the individual page. So we should change the first link 
-so it works and leave the second link as is
--->
-<!-- <common-page-framework layout='blank'> -->
-
-<form #formRef='ngForm'>
-
-  <h2>Identity Documents</h2>
-  <prime-page-sections layout='tips'>
-
-      <p>Prior to identity-proofing upload the front and back of at least one valid government-issued photo ID</p>
+    <p>Prior to identity-proofing upload the front and back of at least one valid government-issued photo ID</p>
 
 
-      <div class="form-row align-items-end">
-        <div class="col-auto">
-          <label for="docType">Document Type</label>
-          <select class="form-control" id="docType" name="docType" [(ngModel)]="docTypeDropdownValue">
-            <!-- We show the blank option so the user can clear out their data.-->
-            <option value="null" label="Choose" selected></option>
-            <option *ngFor="let doc of docTypesList; let i = index;" [value]="doc.name">{{doc.name}}</option>
-          </select>
-        </div>
-
-
-        <div class="col-auto">
-          <button class="btn btn-secondary" (click)='add()' [disabled]='addDisabled()'>Add</button>
-        </div>
+    <div class="form-row align-items-end">
+      <div class="col-auto">
+        <label for="docType">Document Type</label>
+        <select class="form-control" id="docType" name="docType" [(ngModel)]="docTypeDropdownValue" #docTypeEl='ngModel' required>
+          <option value="" selected disabled>Choose</option>
+          <option *ngFor="let doc of docTypesList; let i = index;" [value]="doc.name">{{doc.name}}</option>
+        </select>
       </div>
 
 
+      <div class="col-auto">
+        <button class="btn btn-secondary" (click)='add()' [disabled]='addDisabled()'>Add</button>
+      </div>
+    </div>
 
 
-    <aside>
-      <h5>Tip</h5>
-      Scan the document, or take a photo of it.  Make sure that it's:
-      <ul>
-        <li>The entire document, from corner to corner</li>
-        <li>At least 1000px wide x 1500 px tall</li>
-        <li>Rotated correctly (not upside down or sideways)</li>
-        <li>In focus and easy to read</li>
-        <li>A JPG, PNG, GIF, or BMP file (not a PDF)</li>
-      </ul>
-    </aside>
-  </prime-page-sections>
 
-  <div *ngFor="let section of selectedDocType">
-    <h2 class='border-bottom'>
-      <i class="status-icon fa" aria-hidden="true" [ngClass]="{'fa-circle': !section.completed, 'fa-check-circle text-success': section.completed}"></i>
-      {{section.name}}
-      <button class='d-inline-block float-right close' (click)='remove(section)'>
-        <i class="fa fa-times text-danger" aria-hidden="true"></i>
-      </button>
-    </h2>
 
-    <prime-page-sections layout='tips'>
-        <p>appl-doc-upload works!</p>
-        <common-datepicker class='d-inline-block mr-3' labelText='{{section.name}} Expiry'></common-datepicker> 
-        <a href="#">Sample Document</a>
+  <aside>
+    <h5>Tip</h5>
+    Scan the document, or take a photo of it.  Make sure that it's:
+    <ul>
+      <li>The entire document, from corner to corner</li>
+      <li>At least 1000px wide x 1500 px tall</li>
+      <li>Rotated correctly (not upside down or sideways)</li>
+      <li>In focus and easy to read</li>
+      <li>A JPG, PNG, GIF, or BMP file (not a PDF)</li>
+    </ul>
+  </aside>
+</prime-page-sections>
 
-        <common-file-uploader [images]='tempImages' (addDocument)='onAddImage($event)'>
-          <span id="uploadInstruction" tabindex="0" #uploadInstruction>
-              Please upload required documents
-          </span>
-        </common-file-uploader>
-    
-        <aside>
-          {{ section.tips }}
-        </aside>
-      </prime-page-sections>
-  </div>
-</form>
+<div *ngFor="let section of documents">
+  <h2 class='border-bottom'>
+    <i class="status-icon fa" aria-hidden="true" [ngClass]="{'fa-circle': !section.isValid(), 'fa-check-circle text-success': section.isValid()}"></i>
+    {{section.type.name}}
+    <button class='d-inline-block float-right close' (click)='remove(section)'>
+      <i class="fa fa-times text-danger" aria-hidden="true"></i>
+    </button>
+  </h2>
 
-<!-- Display bar during registration -->
-<!-- <common-form-action-bar>
-</common-form-action-bar> -->
+  <prime-page-sections layout='tips'>
+      <common-datepicker class='d-inline-block mr-3' labelText='{{section.type.name}} Expiry' [required]='"true"'></common-datepicker> 
+      <a href="#">Sample Document</a>
 
-<!-- </common-page-framework> -->
+      <common-file-uploader [(images)]='section.images'>
+        <span id="uploadInstruction" tabindex="0" #uploadInstruction>
+            Please upload required documents
+        </span>
+      </common-file-uploader>
+  
+      <aside>
+        {{ section.type.tips }}
+      </aside>
+    </prime-page-sections>
+</div>

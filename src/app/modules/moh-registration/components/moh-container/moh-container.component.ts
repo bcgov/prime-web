@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { mohPages } from '../../moh-registration-page-routing.module';
 import { Router } from '@angular/router';
-import { Container } from 'moh-common-lib';
+import { Container } from 'moh-common-lib/models';
 
 @Component({
   selector: 'prime-moh-container',

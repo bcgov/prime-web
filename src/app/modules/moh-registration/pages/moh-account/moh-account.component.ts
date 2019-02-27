@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractForm } from 'moh-common-lib';
+import { AbstractForm } from 'moh-common-lib/models';
 import { Router } from '@angular/router';
 
 @Component({

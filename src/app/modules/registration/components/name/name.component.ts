@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, forwardRef, Output, EventEmitter } from '@angular/core';
 import { ControlContainer, NgForm } from '@angular/forms';
-import { Base } from 'moh-common-lib';
+import { Base } from 'moh-common-lib/models';
 
 
 /**
