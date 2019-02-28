@@ -48,7 +48,7 @@
       <common-datepicker class='d-inline-block mr-3' labelText='{{section.type.name}} Expiry' [required]='"true"'></common-datepicker> 
       <a href="#">Sample Document</a>
 
-      <common-file-uploader [(images)]='section.images'>
+      <common-file-uploader [(images)]='section.images' [id]='section.type.name'>
         <span id="uploadInstruction" tabindex="0" #uploadInstruction>
             Please upload required documents
         </span>

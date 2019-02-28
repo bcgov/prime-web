@@ -26,8 +26,6 @@ export class ApplDocUploadComponent implements OnInit {
   // TODO - Need to store these on dataService, and one PER doc type! And then get the UUIds back on reg.
   documents: Document[];
 
-  images: CommonImage[] = [];
-
   constructor(private dataService: PrimeDataService, private cacheService: CacheService) {
     this.documents = this.dataService.documents; // this is basically an alias, since arrays are pass-by-reference,
     this.docTypesList = this.cacheService.DocumentTypes;
@@ -52,7 +50,7 @@ export class ApplDocUploadComponent implements OnInit {
         type: selection,
         imageUUID: [], // ? - necessary?
         registrantUUID: this.registrant.objectId, // TODO !!!
-        images: []
+        images: [] // ! BUG - When trying to add to a second Document.images, it's adding to the first one. Why?
       });
 
       // TODO - MOVE THIS SO IT'S JUST DATASERVICE
