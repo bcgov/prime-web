@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, forwardRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, forwardRef, ViewChild, ElementRef } from '@angular/core';
 import { GeocoderService, Base, Address } from 'moh-common-lib';
 import { ControlContainer, NgForm } from '@angular/forms';
 
@@ -24,6 +24,12 @@ export interface ProvinceList {
   viewProviders: [ { provide: ControlContainer, useExisting: forwardRef(() => NgForm ) } ]
 })
 export class AddressComponent extends Base implements OnInit {
+
+  // Exists for unit testing to validate errors set
+  @ViewChild( 'provRef') provRef: ElementRef;
+  @ViewChild( 'streetRef') streetRef: ElementRef;
+  @ViewChild( 'cityRef' ) cityRef: ElementRef;
+  @ViewChild( 'postalRef' ) postalRef: ElementRef;
 
   @Input() disabled: boolean = false;
   @Input() isRequired: boolean = false;
@@ -60,20 +66,37 @@ export class AddressComponent extends Base implements OnInit {
   }
 
   /**
-   * Passes the value entered back to the calling component
-   * @param value value the was entered by
-   */
-  setName( value: Address ) {
-    this.addressChange.emit( value );
-  }
-
-  /**
    * Set country province blank
    * @param value
    */
   setCountry( value: string ) {
     this.address.province = this.setDefaultProvinceAsOption( value );
     this.address.country = value;
+    this.addressChange.emit( this.address );
+  }
+
+  setProvince( value: string ) {
+    this.address.province = value;
+    this.addressChange.emit( this.address );
+  }
+
+  setStreetAddress( value: string ) {
+    this.address.street = value;
+    this.addressChange.emit( this.address );
+  }
+
+  setCity( value: string ) {
+    this.address.city = value;
+    this.addressChange.emit( this.address );
+  }
+
+  /**
+   * Sets string after converted upper case
+   * @param text
+   */
+  setPostalCode( value: string ) {
+    this.address.postal = value.toUpperCase();
+    this.addressChange.emit( this.address );
   }
 
   isCanada(): boolean {
@@ -91,15 +114,6 @@ export class AddressComponent extends Base implements OnInit {
         return prov;
       }
     }).filter( x => x );
-  }
-
- /**
-   * Upper cases letters in string
-   * @param {string} text
-   * @returns {string}
-   */
-  upperCasePipe( text: string ) {
-    return text.toUpperCase();
   }
 
   /**

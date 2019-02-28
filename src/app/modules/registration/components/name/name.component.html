@@ -1,16 +1,16 @@
 <div class="form-group">
   <label class="control-label">{{label}}</label>
   <input #nameRef="ngModel"
-        class="form-control"
-        name="name_{{objectId}}"
-        id="name_{{objectId}}"
-        [ngModel]="nameStr"
-        (ngModelChange)="setName($event)"
-        [pattern]="nameCriteria"
-        [maxlength]="maxLen"
-        [required]="required"
-        [disabled]="disabled" />
-    <!-- Error messages for component -->
+         class="form-control"
+         name="name_{{objectId}}"
+         id="name_{{objectId}}"
+         [ngModel]="nameStr"
+         (ngModelChange)="setName($event)"
+         [pattern]="nameCriteria"
+         [maxlength]="maxLen"
+         [required]="required"
+         [disabled]="disabled" />
+  <!-- Error messages for component -->
   <div *ngIf="!nameRef.disabled && nameRef.touched"
       role="alert"
       class="error-container"
