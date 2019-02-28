@@ -1,9 +1,11 @@
 <common-page-framework layout='blank'>
 
+  <form #formRef='ngForm'>
     <prime-appl-doc-upload></prime-appl-doc-upload>
+  </form>
 
-    <!-- Display bar during registration -->
-    <common-form-action-bar (btnClick)="continue()">
-    </common-form-action-bar>
+  <!-- Display bar during registration -->
+  <common-form-action-bar (btnClick)="continue()">
+  </common-form-action-bar>
 
-  </common-page-framework>
+</common-page-framework>

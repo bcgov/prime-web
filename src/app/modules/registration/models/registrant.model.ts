@@ -1,4 +1,5 @@
-import { Person, Address } from 'moh-common-lib';
+import { Person, Address } from 'moh-common-lib/models';
+import { Document } from '../../../models/documents.interface';
 
 export interface SecurityQuestionsAnswers {
   question: string;
@@ -24,6 +25,8 @@ export class Registrant extends Person {
   public smsPhone: string;
 
   public secQuestionsAnswer: SecurityQuestionsAnswers[] = [];
+  /* Documents */
+  public documents: Document[] = [];
 
   /* Copy function */
   copy( object: Registrant ) {

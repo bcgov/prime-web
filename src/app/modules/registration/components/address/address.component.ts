@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, forwardRef, ViewChild, ElementRef } from '@angular/core';
-import { GeocoderService, Base, Address } from 'moh-common-lib';
 import { ControlContainer, NgForm } from '@angular/forms';
+import { Base, Address } from 'moh-common-lib/models';
+import { GeocoderService } from 'moh-common-lib/services';
 
 /** Interface for countries */
 export interface CountryList {
