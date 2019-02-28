@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, forwardRef } from '@angular/core';
+import { ControlContainer, NgForm } from '@angular/forms';
 
 
 interface DocumentType {
@@ -25,7 +26,11 @@ const DocumentTypes: DocumentType[] = [
 @Component({
   selector: 'prime-appl-doc-upload',
   templateUrl: './appl-doc-upload.component.html',
-  styleUrls: ['./appl-doc-upload.component.scss']
+  styleUrls: ['./appl-doc-upload.component.scss'],
+ /* Re-use the same ngForm that it's parent is using. The component will show
+   * up in its parents `this.form`, and will auto-update `this.form.valid`
+   */
+  viewProviders: [ { provide: ControlContainer,  useExisting: forwardRef(() => NgForm ) } ]
 })
 export class ApplDocUploadComponent implements OnInit {
 

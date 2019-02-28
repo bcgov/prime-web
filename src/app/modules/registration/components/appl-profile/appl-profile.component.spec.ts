@@ -8,6 +8,7 @@ import { PageSectionsComponent } from '../page-sections/page-sections.component'
 import { AddressComponent } from '../address/address.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { PrimeDataService } from '../../../../services/prime-data.service';
+import { NameComponent } from '../name/name.component';
 
 describe('ApplProfileComponent', () => {
   let component: ApplProfileComponent;
@@ -18,7 +19,8 @@ describe('ApplProfileComponent', () => {
       declarations: [
         ApplProfileComponent,
         PageSectionsComponent,
-        AddressComponent
+        AddressComponent,
+        NameComponent
       ],
       imports: [
         FormsModule,
