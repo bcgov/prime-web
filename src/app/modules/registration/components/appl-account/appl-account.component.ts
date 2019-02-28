@@ -85,4 +85,15 @@ export class ApplAccountComponent implements OnInit {
   get secQuestionList(): string[] {
     return this.cache.secQuestionList;
   }
+
+  isCanada(): boolean {
+
+    if ( !this.registrant.address ) {
+      return true; // Default to Canada
+    } else if ( this.registrant.identityIsMailingAddress ) {
+      return (this.registrant.address.country === PrimeConstants.CANADA);
+    }
+    return (this.registrant.mailAddress.country === PrimeConstants.CANADA);
+  }
+
 }

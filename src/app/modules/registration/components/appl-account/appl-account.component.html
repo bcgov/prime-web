@@ -104,12 +104,17 @@
 
     <div class="form-group col-sm-6 p-sm-0">
       <label class="control-label">Mobile/SMS</label>
-      <input class="form-control"
-             type="text"
-             name="mobile_phone"
-             id="mobile_phone"
-             [ngModel]="registrant?.smsPhone"
-             (ngModelChange)="registrant.smsPhone = $event" />
+      <div *ngIf="isCanada(); else NotCanda">
+        <input class="form-control"
+               type="text"
+               name="mobile_phone"
+               id="mobile_phone"
+               [ngModel]="registrant?.smsPhone"
+               (ngModelChange)="registrant.smsPhone = $event"
+               prefix="+1 "
+               mask="(000) 000-0000"
+               showMaskTyped="true"/>
+      </div>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
@@ -118,6 +123,8 @@
              type="email"
              name="user_email"
              id="user_email"
+             placeholder="username@example.com"
+             required
              [maxlength]="emailMaxLen"
              [ngModel]="registrant?.emailAddress"
              (ngModelChange)="registrant.emailAddress = $event" />
@@ -128,3 +135,13 @@
   </prime-page-sections>
 
 </div>
+
+<ng-template #NotCanda>
+    <input class="form-control"
+           type="text"
+           name="mobile_phone"
+           id="mobile_phone"
+           [ngModel]="registrant?.smsPhone"
+           (ngModelChange)="registrant.smsPhone = $event"/>
+</ng-template>
+

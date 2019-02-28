@@ -25,6 +25,7 @@ export interface ProvinceList {
 })
 export class AddressComponent extends Base implements OnInit {
 
+  // TODO: Create Unit tests for this component
   // Exists for unit testing to validate errors set
   @ViewChild( 'provRef') provRef: ElementRef;
   @ViewChild( 'streetRef') streetRef: ElementRef;
