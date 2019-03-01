@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, forwardRef } from '@angular/core';
+import { PrimeDataService } from '../../../../services/prime-data.service';
+import { Registrant } from '../../models/registrant.model';
+import { ControlContainer, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'prime-appl-security',
@@ -7,7 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ApplSecurityComponent implements OnInit {
 
-  constructor() { }
+  phone_num = "1-555-555-5555";
+
+  constructor( private primeDataService: PrimeDataService ) {
+  }
 
   ngOnInit() {
   }

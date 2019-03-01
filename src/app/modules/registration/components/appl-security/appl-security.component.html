@@ -1,3 +1,106 @@
-<p>
-  appl-security works!
-</p>
+<h1>Security</h1>
+<h3>Multi Factor Authentication Methods</h3>
+
+<!-- Use Mobile/SMS for Authorization OPTION -->
+<div>
+  <!-- 
+    Insert right after id="mobile_sms_auth":
+      [checked]="????"
+      (click)="toggleCheckBox()
+  -->
+  <div>
+    <h2 class='border-bottom'>  
+      <input type="checkbox"
+             name="mobile_sms_auth"
+             id="mobile_sms_auth"
+             ng-model="enable"/>
+      Use Mobile/SMS for Authorization
+    </h2>
+  </div>
+
+  <ng-content select="[identityInstruct]"></ng-content>
+
+  <!--
+    Insert right after id="phone_num":
+      [ngModel]="registrant?.phoneNum" ???
+      (ngModelChange)="setPhoneNum($event)" ???
+      [disabled]="!editIdentityInfo" ???
+  -->
+  <prime-page-sections layout='tips'>
+    <div class="form-group col-sm-6 p-sm-0">
+      <label class="control-label">Phone Number</label>
+      <input class="form-control"
+              name="phone_num"
+              id="phone_num"
+              placeholder="{{phone_num}}"
+              ng-disabled="enable"/>
+    </div>
+
+    <aside>
+      Details<br>
+      Activate for enhanced account security<br><br><br>
+    </aside>
+  </prime-page-sections>
+</div>
+
+<!-- Use Security Key OPTION -->
+<div>
+  <!-- 
+    Insert right after id="securtiy_key":
+     [checked]="????" 
+     (click)="toggleCheckBox()
+  -->
+  <div>
+    <h2 class='border-bottom'>  
+      <input type="checkbox"
+             name="security_key"
+             id="security_key"/>
+      Use Security Key
+    </h2>
+  </div>
+  
+  <ng-content select="[identityInstruct]"></ng-content>
+  
+  <prime-page-sections layout='tips'>
+    <div class="form-group col-sm-6 p-sm-0">
+      <label class="control-label">Security Key</label>
+        <p> This is an informative text blurb </p>
+      </div>
+  
+      <aside>
+        Details<br>
+        Activate for enhanced account security<br><br><br>
+      </aside>
+  </prime-page-sections>
+</div>
+
+<!-- Use Mobile App Authentication OPTION -->
+<div>
+  <!-- 
+    Insert right after id="securtiy_key":
+      [checked]="????"
+      (click)="toggleCheckBox()
+  --> 
+  <div>
+    <h2 class='border-bottom'>  
+      <input type="checkbox"
+             name="mobile_app_auth"
+             id="mobile_app_auth"/>
+      Use Mobile App Authentication
+    </h2>
+  </div>
+    
+  <ng-content select="[identityInstruct]"></ng-content>
+    
+  <prime-page-sections layout='tips'>
+    <div class="form-group col-sm-6 p-sm-0">
+      <label class="control-label">App Code</label>
+        <p> This is an informative text blurb </p>
+    </div>
+    
+    <aside>
+        Details<br>
+        Activate for enhanced account security<br><br><br>
+      </aside>
+  </prime-page-sections>
+</div>
