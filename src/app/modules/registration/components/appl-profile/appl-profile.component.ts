@@ -4,7 +4,7 @@ import { PrimeDataService } from '../../../../services/prime-data.service';
 import { Registrant } from '../../models/registrant.model';
 import { CacheService } from '../../../../services/cache.service';
 import { CountryList, ProvinceList } from '../address/address.component';
-import { PrimeConstants } from '../../models/prime-constants';
+import { PrimeConstants } from '../../../../models/prime-constants';
 
 
 @Component({

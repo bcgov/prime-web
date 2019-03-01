@@ -13,6 +13,7 @@ import { AddressComponent } from './components/address/address.component';
 import { PageSectionsComponent } from './components/page-sections/page-sections.component';
 import { ApplConfirmationComponent } from './components/appl-confirmation/appl-confirmation.component';
 import { NameComponent } from './components/name/name.component';
+import { TypeaheadModule } from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { NameComponent } from './components/name/name.component';
     FormsModule,
     SharedCoreModule,
     HttpClientModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    TypeaheadModule.forRoot()
   ],
   declarations: [
     ApplProfileComponent,

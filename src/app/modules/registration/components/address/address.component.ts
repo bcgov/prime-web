@@ -2,6 +2,10 @@ import { Component, OnInit, Input, Output, EventEmitter, forwardRef, ViewChild, 
 import { ControlContainer, NgForm } from '@angular/forms';
 import { Base, Address } from 'moh-common-lib/models';
 import { GeocoderService } from 'moh-common-lib/services';
+import { Observable, Subject, of } from 'rxjs';
+import { GeoAddressResult } from 'moh-common-lib/services/geocoder.service';
+import { debounceTime, distinctUntilChanged, switchMap, catchError } from 'rxjs/operators';
+import { TypeaheadMatch } from 'ngx-bootstrap';
 
 /** Interface for countries */
 export interface CountryList {
@@ -43,11 +47,22 @@ export class AddressComponent extends Base implements OnInit {
 
   @Output() addressChange: EventEmitter<Address> = new EventEmitter<Address>();
 
+  /** Search string to store result from GeoCoder request */
+  public search: string;
+  /**
+   * The list of results, from API, that is passed to the typeahead list
+   * Result from GeoCoderService address lookup
+   */
+  public typeaheadList$: Observable<GeoAddressResult[]>;
+  /** The subject that triggers on user text input and gets typeaheadList$ to update.  */
+  private searchText$ = new Subject<string>();
+
   constructor( private geocoderService: GeocoderService ) {
     super();
    }
 
   ngOnInit() {
+
     if ( this.address ) {
 
       if ( !this.address.country ) {
@@ -65,6 +80,18 @@ export class AddressComponent extends Base implements OnInit {
         this.address.province = this.setDefaultProvinceAsOption( this.address.country );
       }
     }
+
+    // Set up for using GeoCoder
+    this.typeaheadList$ = this.searchText$.pipe(
+      debounceTime( 500 ),
+      distinctUntilChanged(),
+      // Trigger the network request, get results
+      switchMap( searchPhrase => {
+        return this.geocoderService.lookup( searchPhrase );
+      } ),
+      // tap(log => console.log('taplog', log)),
+      catchError( err => this.onError( err ) )
+    );
   }
 
   /**
@@ -130,6 +157,42 @@ export class AddressComponent extends Base implements OnInit {
     return (provObj ? provObj.provCode : null );
   }
 
+  // GeoCoder
 
-  // TODO: Add geocoder to this module for BC addresses only
+  /**
+   * GeoCoder only is applicable when address is BC, Canada.
+   */
+  useGeoCoder(): boolean {
+    return ( this.isCanada() && 'BC' === this.address.province );
+  }
+
+  onKeyUp( event: KeyboardEvent ): void {
+    /**
+     * Filter out 'enter' and other similar keyboard events that can trigger
+     * when user is selecting a typeahead option instead of entering new text.
+     * Without this filter, we do another HTTP request + force disiplay the UI
+     * for now reason
+     */
+    if (event.keyCode === 13 || event.keyCode === 9) {  // enter & tab
+      return;
+    }
+
+    // Clear out selection
+    // this.selectedAddress = null;
+    this.searchText$.next( this.search );
+  }
+
+  onError( err: any ): Observable<GeoAddressResult[]> {
+    console.log( 'Has error' );
+    // Empty array simulates no result response, nothing for typeahead to iterate over
+    return of([]);
+  }
+
+  onSelect( event: TypeaheadMatch ): void {
+    const data: GeoAddressResult = event.item;
+    console.log( 'onSelect (item): ', data );
+    this.search = data.street;
+    this.address.street = data.street;
+    this.address.city = data.city;
+  }
 }

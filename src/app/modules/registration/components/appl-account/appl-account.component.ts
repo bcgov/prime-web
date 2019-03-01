@@ -3,7 +3,7 @@ import { PrimeDataService } from '../../../../services/prime-data.service';
 import { Registrant, SecurityQuestionsAnswers } from '../../models/registrant.model';
 import { ControlContainer, NgForm } from '@angular/forms';
 import { CacheService } from '../../../../services/cache.service';
-import { PrimeConstants } from '../../models/prime-constants';
+import { PrimeConstants } from '../../../../models/prime-constants';
 
 @Component({
   selector: 'prime-appl-account',

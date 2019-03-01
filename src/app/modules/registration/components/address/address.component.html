@@ -52,24 +52,30 @@
 
 <div class="form-group col-sm-8 p-sm-0">
   <label for="street_{objectId}}">Full street address or rural route</label>
-  <input class="form-control"
-          #streetRef="ngModel"
-          spellcheck="false"
-          type="text"
-          id="street_{{objectId}}"
-          name="street_{{objectId}}"
-          [ngModel]="address?.street"
-          (ngModelChange)="setStreetAddress($event)"
-          [required]="isRequired"
-          [disabled]="disabled" />
+  <div *ngIf="useGeoCoder() && !disabled; else noGeoCoder;">
+    <input class="form-control"
+           #streetRef="ngModel"
+           spellcheck="false"
+           type="text"
+           id="street_{{objectId}}"
+           name="street_{{objectId}}"
+           [(ngModel)]="search"
+           (keyup)='onKeyUp($event)'
+           [typeahead]='typeaheadList$'
+           (typeaheadOnSelect)="onSelect($event)"
+           typeaheadOptionField='fullAddress'
+           typeaheadMinLength='3'
+           autocomplete="nope"
+           [required]="isRequired" />
 
-  <!-- Error messages for input -->
-  <div *ngIf="!disabled && streetRef.touched"
-       role="alert"
-       class="error-container"
-       aria-live="assertive">
-    <div class="text-danger" *ngIf="streetRef?.errors?.required">
-      Full street address or rural route is required.
+    <!-- Error messages for input -->
+    <div *ngIf="!disabled && streetRef.touched"
+         role="alert"
+         class="error-container"
+         aria-live="assertive">
+      <div class="text-danger" *ngIf="streetRef?.errors?.required">
+        Full street address or rural route is required.
+      </div>
     </div>
   </div>
 </div>
@@ -114,7 +120,7 @@
             [ngModel]="address?.postal"
             (ngModelChange)="setPostalCode($event)"
             mask="S0S 0S0"
-            showMaskTyped="true"
+            placeholder="V0V 0V0"
             [required]="isRequired"
             [disabled]="disabled" />
 
@@ -172,6 +178,29 @@
         aria-live="assertive">
     <div class="text-danger" *ngIf="postalRef?.errors?.required">
       Postal Code is required.
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #noGeoCoder>
+  <input class="form-control"
+         #streetRef="ngModel"
+         spellcheck="false"
+         type="text"
+         id="street_{{objectId}}"
+         name="street_{{objectId}}"
+         [ngModel]="address?.street"
+         (ngModelChange)="setStreetAddress($event)"
+         [required]="isRequired"
+         [disabled]="disabled" />
+
+  <!-- Error messages for input -->
+  <div *ngIf="!disabled && streetRef.touched"
+       role="alert"
+       class="error-container"
+       aria-live="assertive">
+    <div class="text-danger" *ngIf="streetRef?.errors?.required">
+      Full street address or rural route is required.
     </div>
   </div>
 </ng-template>
