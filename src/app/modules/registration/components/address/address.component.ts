@@ -177,22 +177,21 @@ export class AddressComponent extends Base implements OnInit {
       return;
     }
 
-    // Clear out selection
-    // this.selectedAddress = null;
     this.searchText$.next( this.search );
   }
 
   onError( err: any ): Observable<GeoAddressResult[]> {
-    console.log( 'Has error' );
     // Empty array simulates no result response, nothing for typeahead to iterate over
     return of([]);
   }
 
+  // Only BC addresses therefore no need to copy province into structure.
   onSelect( event: TypeaheadMatch ): void {
     const data: GeoAddressResult = event.item;
-    console.log( 'onSelect (item): ', data );
+    // console.log( 'onSelect (item): ', data );
     this.search = data.street;
     this.address.street = data.street;
     this.address.city = data.city;
+    this.addressChange.emit( this.address );
   }
 }
