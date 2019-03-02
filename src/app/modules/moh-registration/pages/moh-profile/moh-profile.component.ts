@@ -17,6 +17,26 @@ export class MohProfileComponent  extends AbstractForm implements OnInit {
   }
 
   continue() {
-    console.log( 'form: ', this.form );
+
+    console.log( 'Form: ' + this.form );
+
+    // Errors exist on form
+    if ( this.form.invalid ) {
+
+      // Mark all fields as touched to display errors
+      Object.keys(this.form.form.controls).forEach( x => {
+        this.form.form.get( x ).markAsTouched();
+      });
+      return;
+    }
+
+    // All required fields have data
+
+
+    // TODO: Check if first name does not exist - ask if have first name
+
+    // Navigate to next page
+    this.navigate( 'moh-registration/upload-documents' );
+
   }
 }

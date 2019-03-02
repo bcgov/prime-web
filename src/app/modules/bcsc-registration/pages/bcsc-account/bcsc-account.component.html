@@ -1,12 +1,14 @@
 <common-page-framework layout='blank'>
 
-  <prime-appl-account [mohCredientials]='false'>
+  <form #formRef='ngForm'>
+    <prime-appl-account [mohCredientials]='false'>
 
-    <p AccountInstruct>
-      Information for creating account with BCSC credientials
-    </p>
+      <p AccountInstruct>
+        Information for creating account with BCSC credientials
+      </p>
 
-  </prime-appl-account>
+    </prime-appl-account>
+  </form>
 
   <!-- Display bar during registration -->
   <common-form-action-bar (btnClick)="continue()">
