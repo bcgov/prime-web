@@ -19,7 +19,16 @@ export class MohDocUploadComponent extends AbstractForm implements OnInit {
   continue() {
     console.log(`form valid? ${this.form.valid}`, this.form);
 
-    // Navigate to next page
-    this.navigate( 'moh-registration/account' );
+    if (this.form.valid) {
+      // Navigate to next page
+      this.navigate('moh-registration/account');
+    } else {
+      // Errors exist on form
+      // Mark all fields as touched to display errors
+      // TODO - Make this a method on AbstractForm
+      Object.keys(this.form.form.controls).forEach(x => {
+        this.form.form.get(x).markAsTouched();
+      });
+    }
   }
 }

@@ -7,7 +7,7 @@
     <div class="form-row align-items-end">
       <div class="col-auto">
         <label for="docType">Document Type</label>
-        <select class="form-control" id="docType" name="docType" [(ngModel)]="docTypeDropdownValue" #docTypeEl='ngModel' required>
+        <select class="form-control" id="docType" name="docType" [(ngModel)]="docTypeDropdownValue" (change)='updateValidation()' #docTypeEl='ngModel' required>
           <option value="" selected disabled>Choose</option>
           <option *ngFor="let doc of docTypesList; let i = index;" [value]="doc.name">{{doc.name}}</option>
         </select>
@@ -20,8 +20,8 @@
     </div>
 
     <div *ngIf="docTypeEl.touched" role="alert" class='error-container' aria-live="assertive">
-      <div class="text-danger" *ngIf="docTypeEl?.errors?.required">
-       At least one document type is required
+      <div class="text-danger" *ngIf="docTypeEl?.errors?.required || docTypeEl?.errors?.mustSelect">
+       At least one document type must be added
       </div>
     
    </div>

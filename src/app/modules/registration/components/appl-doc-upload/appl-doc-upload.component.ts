@@ -1,4 +1,4 @@
-import { Component, OnInit, forwardRef } from '@angular/core';
+import { Component, OnInit, forwardRef, ViewChild } from '@angular/core';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { CommonImage } from 'moh-common-lib/images';
 import { CacheService } from '../../../../services/cache.service';
@@ -25,12 +25,15 @@ export class ApplDocUploadComponent implements OnInit {
 
   documents: Document[];
 
+  @ViewChild('docTypeEl') docTypeEl;
+
   constructor(private dataService: PrimeDataService, private cacheService: CacheService) {
     this.documents = this.dataService.documents; // this is basically an alias, since arrays are pass-by-reference,
     this.docTypesList = this.cacheService.DocumentTypes;
   }
 
   ngOnInit() {
+    this.docTypeEl.control.setErrors({'mustSelect': true});
   }
 
   /** Add a new section based on what's selected in the dropdown */
@@ -50,6 +53,17 @@ export class ApplDocUploadComponent implements OnInit {
       this.documents.unshift(document);
     }
 
+    this.updateValidation();
+  }
+
+  /** Updates the validity of the docTypeEl dropdown, and thus the form. */
+  updateValidation() {
+    // We need this function because it fixes a bug where the user would make a
+    // selection in the dropdown (which satisfies angular validation), but then
+    // the user could continue immediately without pressing 'Add'.  We don't
+    // want the form valid unless the user has clicked 'Add' and has one doc.
+    const valid = this.documents.length === 0 ? {'mustSelect' : true } : null;
+    this.docTypeEl.control.setErrors(valid);
   }
 
   onImagesChange(doc: Document, img: CommonImage) {
