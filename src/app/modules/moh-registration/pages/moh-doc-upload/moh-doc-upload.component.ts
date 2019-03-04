@@ -25,10 +25,7 @@ export class MohDocUploadComponent extends AbstractForm implements OnInit {
     } else {
       // Errors exist on form
       // Mark all fields as touched to display errors
-      // TODO - Make this a method on AbstractForm
-      Object.keys(this.form.form.controls).forEach(x => {
-        this.form.form.get(x).markAsTouched();
-      });
+      this.markAllInputsTouched();
     }
   }
 }
