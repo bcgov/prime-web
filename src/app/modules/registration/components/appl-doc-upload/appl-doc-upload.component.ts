@@ -1,6 +1,6 @@
 import { Component, OnInit, forwardRef } from '@angular/core';
 import { PrimeDataService } from '../../../../services/prime-data.service';
-import { CommonImage } from 'moh-common-lib//images';
+import { CommonImage } from 'moh-common-lib/images';
 import { CacheService } from '../../../../services/cache.service';
 import { DocumentType, Document } from '../../../../models/documents.interface';
 import { ControlContainer, NgForm } from '@angular/forms';
@@ -23,7 +23,6 @@ export class ApplDocUploadComponent implements OnInit {
   /** String visible in the selectdropdown. Related to `dropdownValueAsDocumentType` */
   docTypeDropdownValue: string = ''; // the default non-choice
 
-  // TODO - Need to store these on dataService, and one PER doc type! And then get the UUIds back on reg.
   documents: Document[];
 
   constructor(private dataService: PrimeDataService, private cacheService: CacheService) {
@@ -40,29 +39,26 @@ export class ApplDocUploadComponent implements OnInit {
 
 
     if (this.canAddDocumentType(selection)) {
-      // TODO - Maybe store Documents on DataService?
-      // TODO - And on the Registrant, just store a "documentsUUID: string[]"
-
-      // TODO - Need to store images in DataService and populate imageUUID here.
-
-      // TODO - halfway through having images stored in this Document object which is going to be MOVED
       const document = new Document({
         type: selection,
         imageUUID: [], // ? - necessary?
-        registrantUUID: this.registrant.objectId, // TODO !!!
-        images: [] // ! BUG - When trying to add to a second Document.images, it's adding to the first one. Why?
+        registrantUUID: this.registrant.objectId,
+        images: []
       });
 
-      // TODO - MOVE THIS SO IT'S JUST DATASERVICE
       // Add new documents to beginning so they appear at top to user
       this.documents.unshift(document);
     }
 
   }
 
+  onImagesChange(doc: Document, img: CommonImage) {
+    console.log('onImagesChanges', img);
+  }
+
   /** Can only add unique document types */
   private canAddDocumentType(selection: DocumentType): boolean {
-    return this.registrant.documents.filter(x => x.type === selection).length === 0;
+    return this.documents.filter(x => x.type === selection).length === 0;
   }
 
   addDisabled(): boolean {
