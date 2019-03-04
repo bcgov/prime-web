@@ -7,6 +7,7 @@ import { ApplSecurityComponent } from './modules/registration/components/appl-se
 import { MohProfileComponent } from './modules/moh-registration/pages/moh-profile/moh-profile.component';
 import { BcscProfileComponent } from './modules/bcsc-registration/pages/bcsc-profile/bcsc-profile.component';
 import { ApplConfirmationComponent } from './modules/registration/components/appl-confirmation/appl-confirmation.component';
+import { PrimeConstants } from './models/prime-constants';
 
 const routes: Routes = [
   {
@@ -32,7 +33,7 @@ const routes: Routes = [
 
   // Lazy loading modules below
   {
-    path: 'moh-registration',
+    path: PrimeConstants.MOH_REGISTRATION,
     loadChildren: 'app/modules/moh-registration/moh-registration.module#MohRegistrationModule'
   },
   {

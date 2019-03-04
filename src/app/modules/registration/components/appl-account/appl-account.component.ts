@@ -18,35 +18,9 @@ export class ApplAccountComponent implements OnInit {
 
   @Input() mohCredientials: boolean = true;
 
-  /**
-   * At least 3 of the following categories:
-   *  a) Upper case characters (A-Z)
-   *  b) Lower case characters (a-z)
-   *  c) Numeral (0-9)
-   *  d) Non-alphanumeric characters e.g. []?/\.<~#`!@#$%^&*()-+=|:"',>{}
-   *
-   * TODO: Figure out RegExp for achieving this using pattern, else need validation
-   *       to be added to password component
-   */
-  public passwordCriteria = RegExp(
-    '^((?=.*[^a-zA-Z\s])(?=.*[a-z])(?=.*[A-Z])|(?=.*[^a-zA-Z0-9\s])(?=.*\d)(?=.*[a-zA-Z])).*$'
-    );
-
   public newPwdLabel: string = 'New Password';
-  public newPwdErrorMsgs = {
-    required: this.newPwdLabel + ' is required',
-    minLength: this.newPwdLabel + ' must be at least ' + this.pwdMinLen + ' characters in length.',
-    criteria: this.newPwdLabel + ' must contain characters from at least 3 of the following: ' +
-              'Upper case characters (A-Z), Lower case characters (a-z), Numeral (0-9), and ' +
-              'Non-alphanumeric symbols.'
-  };
 
   public confirmPwdLabel: string = 'Confirm Password';
-  public confirmPwdErrorMsgs = {
-    required: this.confirmPwdLabel + ' is required',
-    criteria: this.confirmPwdLabel + ' does not match.',
-    minLength: this.confirmPwdLabel + ' does not match.'
-  };
 
   /** Maximum length as defined by database fields */
   public userIdMaxLen = PrimeConstants.USERID_MAXLEN;
@@ -54,18 +28,28 @@ export class ApplAccountComponent implements OnInit {
 
   constructor( private primeDataService: PrimeDataService,
                private cache: CacheService ) {
-
-    // initialize question/answer array
-    for ( let i = 0; i < this.numSecQuestions; i++ ) {
-      this.registrant.secQuestionsAnswer.push( {question: null, answer: null} );
-    }
   }
 
   ngOnInit() {
+
+    if ( !this.registrant.secQuestionsAnswer.length ) {
+      // initialize question/answer array
+      for ( let i = 0; i < this.numSecQuestions; i++ ) {
+        this.registrant.secQuestionsAnswer.push( {question: null, answer: null} );
+      }
+    }
   }
 
   get registrant(): Registrant {
     return this.primeDataService.registrant;
+  }
+
+  // Unable to use pattern in password module causes unterminated string
+  set confirmPassword( password: string ) {
+    this.primeDataService.confirmPassword = password;
+  }
+  get confirmPassword(): string {
+    return this.primeDataService.confirmPassword;
   }
 
   /**

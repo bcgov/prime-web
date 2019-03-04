@@ -10,27 +10,26 @@
       <prime-name [label]="'First Name'"
                   [required]="false"
                   [disabled]="!editIdentityInfo"
-                  [nameStr]="registrant.firstName"></prime-name>
+                  [(nameStr)]="registrant.firstName"></prime-name>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
       <prime-name [label]="'Middle Name'"
                   [required]="false"
                   [disabled]="!editIdentityInfo"
-                  [nameStr]="registrant.middleName"></prime-name>
+                  [(nameStr)]="registrant.middleName"></prime-name>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
       <prime-name [label]="'Last Name'"
                   [required]="true"
                   [disabled]="!editIdentityInfo"
-                  [nameStr]="registrant.lastName"></prime-name>
+                  [(nameStr)]="registrant.lastName"></prime-name>
     </div>
 
     <div class="col-sm-6 p-sm-0">
       <common-date [disabled]="!editIdentityInfo"
                    [label]="dateLabel"
-                   [errorMessages]="dateErrorMsg"
                    [restrictDate]="'past'"
                    [(date)]="registrant.dateOfBirth"></common-date>
     </div>
@@ -51,19 +50,19 @@
     <div class="form-group col-sm-6 p-sm-0">
       <prime-name [label]="'Preferred First Name'"
                   [required]="false"
-                  [nameStr]="registrant.preferredFirstName"></prime-name>
+                  [(nameStr)]="registrant.preferredFirstName"></prime-name>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
       <prime-name [label]="'Preferred Middle Name'"
                   [required]="false"
-                  [nameStr]="registrant.preferredMiddleName"></prime-name>
+                  [(nameStr)]="registrant.preferredMiddleName"></prime-name>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
       <prime-name [label]="'Preferred Last Name'"
                   [required]="false"
-                  [nameStr]="registrant.preferredLastName"></prime-name>
+                  [(nameStr)]="registrant.preferredLastName"></prime-name>
     </div>
     <aside>TIPS</aside>
   </prime-page-sections>
