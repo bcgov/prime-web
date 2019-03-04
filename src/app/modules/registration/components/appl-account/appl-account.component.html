@@ -36,19 +36,16 @@
 
     <div class="form-group col-sm-6 p-sm-0">
       <common-password componentLabel="{{newPwdLabel}}"
-                       [pswdCriteria]="passwordCriteria"
                        [showPasswordStrength]="true"
                        [minLen]="pwdMinLen"
                        [errorMessages]="newPwdErrorMsgs"
-                       [password]="registrant?.password"
-                       (passwordChange)="registrant.password=$event"></common-password>
+                       [(password)]="registrant.password"></common-password>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
       <common-password componentLabel="{{confirmPwdLabel}}"
                        [minLen]="pwdMinLen"
-                       [errorMessages]="confirmPwdErrorMsgs"
-                       [pswdCriteria]="registrant.password"></common-password>
+                       [(password)]="confirmPassword"></common-password>
 
     </div>
 
@@ -67,7 +64,8 @@
          *ngFor="let item of registrant.secQuestionsAnswer; let i = index;">
       <div class="p-2">
         <label class="control-label" for="sec_question_{{i}}">Question #{{i+1}}</label>
-        <select class="form-control"
+        <select #questionRef="ngModel"
+                class="form-control"
                 id="sec_question_{{i}}"
                 name="sec_question_{{i}}"
                 [ngModel]="item?.question"
@@ -77,10 +75,20 @@
           <option *ngFor="let question of secQuestionList"
                   [value]="question">{{question}}</option>
         </select>
+          <!-- Error messages for component -->
+          <div *ngIf="questionRef.touched"
+                role="alert"
+                class='error-container'
+                aria-live="assertive">
+          <div class="text-danger" *ngIf="questionRef?.errors?.required">
+            Question #{{i + 1}} is required.
+          </div>
+        </div>
       </div>
       <div class="p-2">
         <label class="control-label" for="sec_answer_{{i}}">Answer</label>
-        <input type="text"
+        <input #answerRef="ngModel"
+                type="text"
                 class="form-control"
                 id="sec_answer_{{i}}"
                 name="sec_answer_{{i}}"
@@ -88,6 +96,16 @@
                 (ngModelChange)="item.answer=$event"
                 placeholder="Enter answer"
                 required />
+
+        <!-- Error messages for component -->
+        <div *ngIf="answerRef.touched"
+            role="alert"
+            class='error-container'
+            aria-live="assertive">
+          <div class="text-danger" *ngIf="answerRef?.errors?.required">
+            Answer for Question #{{i + 1}} is required.
+          </div>
+        </div>
       </div>
     </div>
 
@@ -119,15 +137,26 @@
 
     <div class="form-group col-sm-6 p-sm-0">
       <label class="control-label">Email</label>
-      <input class="form-control"
+      <input #emailRef="ngModel"
+             class="form-control"
              type="email"
              name="user_email"
              id="user_email"
              placeholder="username@example.com"
-             required
+             [required]="mohCredientials"
              [maxlength]="emailMaxLen"
              [ngModel]="registrant?.emailAddress"
              (ngModelChange)="registrant.emailAddress = $event" />
+
+        <!-- Error messages for component -->
+        <div *ngIf="emailRef.touched"
+            role="alert"
+            class='error-container'
+            aria-live="assertive">
+          <div class="text-danger" *ngIf="emailRef?.errors?.required">
+            Email is required.
+          </div>
+        </div>
     </div>
 
     <aside>TIPS</aside>

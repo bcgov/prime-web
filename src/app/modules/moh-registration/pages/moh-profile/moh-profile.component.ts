@@ -1,6 +1,7 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { AbstractForm } from 'moh-common-lib/models';
 import { Router } from '@angular/router';
+import { PrimeConstants } from '../../../../models/prime-constants';
 
 @Component({
   selector: 'prime-moh-profile',
@@ -18,7 +19,7 @@ export class MohProfileComponent  extends AbstractForm implements OnInit {
 
   continue() {
 
-    console.log( 'Form: ' + this.form );
+    console.log( 'form: ', this.form );
 
     // Errors exist on form
     if ( this.form.invalid ) {
@@ -36,7 +37,7 @@ export class MohProfileComponent  extends AbstractForm implements OnInit {
     // TODO: Check if first name does not exist - ask if have first name
 
     // Navigate to next page
-    this.navigate( 'moh-registration/upload-documents' );
+    this.navigate( PrimeConstants.MOH_REGISTRATION + '/upload-documents' );
 
   }
 }

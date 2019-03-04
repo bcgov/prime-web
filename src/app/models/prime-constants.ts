@@ -12,4 +12,7 @@ export class PrimeConstants {
   // Address field lengths will need to be checked on continue
   public static CITY_MAXLEN = '100';
   public static STREET_RURAL_MAXLEN = '1000';
+
+  // Routes
+  public static MOH_REGISTRATION = 'moh-registration';
 }

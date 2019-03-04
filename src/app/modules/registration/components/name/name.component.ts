@@ -29,7 +29,7 @@ export class NameComponent extends Base implements OnInit {
   /**
    * Valid characters for name
    */
-  public nameCriteria = RegExp( '^[a-zA-Z][a-zA-Z\-.\' ]*$' );
+  public nameCriteria: RegExp = RegExp( '^[a-zA-Z][a-zA-Z\-.\' ]*$' );
 
   constructor() {
     super();
