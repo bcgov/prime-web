@@ -1,6 +1,6 @@
-import { Component, OnInit, forwardRef } from '@angular/core';
+import { Component, OnInit, forwardRef, ViewChild } from '@angular/core';
 import { PrimeDataService } from '../../../../services/prime-data.service';
-import { CommonImage } from 'moh-common-lib//images';
+import { CommonImage } from 'moh-common-lib/images';
 import { CacheService } from '../../../../services/cache.service';
 import { DocumentType, Document } from '../../../../models/documents.interface';
 import { ControlContainer, NgForm } from '@angular/forms';
@@ -23,8 +23,9 @@ export class ApplDocUploadComponent implements OnInit {
   /** String visible in the selectdropdown. Related to `dropdownValueAsDocumentType` */
   docTypeDropdownValue: string = ''; // the default non-choice
 
-  // TODO - Need to store these on dataService, and one PER doc type! And then get the UUIds back on reg.
   documents: Document[];
+
+  @ViewChild('docTypeEl') docTypeEl;
 
   constructor(private dataService: PrimeDataService, private cacheService: CacheService) {
     this.documents = this.dataService.documents; // this is basically an alias, since arrays are pass-by-reference,
@@ -32,6 +33,7 @@ export class ApplDocUploadComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.docTypeEl.control.setErrors({'mustSelect': true});
   }
 
   /** Add a new section based on what's selected in the dropdown */
@@ -40,29 +42,37 @@ export class ApplDocUploadComponent implements OnInit {
 
 
     if (this.canAddDocumentType(selection)) {
-      // TODO - Maybe store Documents on DataService?
-      // TODO - And on the Registrant, just store a "documentsUUID: string[]"
-
-      // TODO - Need to store images in DataService and populate imageUUID here.
-
-      // TODO - halfway through having images stored in this Document object which is going to be MOVED
       const document = new Document({
         type: selection,
         imageUUID: [], // ? - necessary?
-        registrantUUID: this.registrant.objectId, // TODO !!!
-        images: [] // ! BUG - When trying to add to a second Document.images, it's adding to the first one. Why?
+        registrantUUID: this.registrant.objectId,
+        images: []
       });
 
-      // TODO - MOVE THIS SO IT'S JUST DATASERVICE
       // Add new documents to beginning so they appear at top to user
       this.documents.unshift(document);
     }
 
+    this.updateValidation();
+  }
+
+  /** Updates the validity of the docTypeEl dropdown, and thus the form. */
+  updateValidation() {
+    // We need this function because it fixes a bug where the user would make a
+    // selection in the dropdown (which satisfies angular validation), but then
+    // the user could continue immediately without pressing 'Add'.  We don't
+    // want the form valid unless the user has clicked 'Add' and has one doc.
+    const valid = this.documents.length === 0 ? {'mustSelect' : true } : null;
+    this.docTypeEl.control.setErrors(valid);
+  }
+
+  onImagesChange(doc: Document, img: CommonImage) {
+    console.log('onImagesChanges', img);
   }
 
   /** Can only add unique document types */
   private canAddDocumentType(selection: DocumentType): boolean {
-    return this.registrant.documents.filter(x => x.type === selection).length === 0;
+    return this.documents.filter(x => x.type === selection).length === 0;
   }
 
   addDisabled(): boolean {

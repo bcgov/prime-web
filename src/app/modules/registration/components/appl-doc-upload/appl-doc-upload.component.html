@@ -7,7 +7,7 @@
     <div class="form-row align-items-end">
       <div class="col-auto">
         <label for="docType">Document Type</label>
-        <select class="form-control" id="docType" name="docType" [(ngModel)]="docTypeDropdownValue" #docTypeEl='ngModel' required>
+        <select class="form-control" id="docType" name="docType" [(ngModel)]="docTypeDropdownValue" (change)='updateValidation()' #docTypeEl='ngModel' required>
           <option value="" selected disabled>Choose</option>
           <option *ngFor="let doc of docTypesList; let i = index;" [value]="doc.name">{{doc.name}}</option>
         </select>
@@ -18,6 +18,14 @@
         <button class="btn btn-secondary" (click)='add()' [disabled]='addDisabled()'>Add</button>
       </div>
     </div>
+
+    <div *ngIf="docTypeEl.touched" role="alert" class='error-container' aria-live="assertive">
+      <div class="text-danger" *ngIf="docTypeEl?.errors?.required || docTypeEl?.errors?.mustSelect">
+       At least one document type must be added
+      </div>
+    
+   </div>
+
 
 
 
@@ -45,10 +53,17 @@
   </h2>
 
   <prime-page-sections layout='tips'>
-      <common-datepicker class='d-inline-block mr-3' labelText='{{section.type.name}} Expiry' [required]='"true"'></common-datepicker> 
-      <a href="#">Sample Document</a>
+      <div class="d-flex align-items-baseline flex-wrap">
+        <common-datepicker class='d-inline-block mr-3' 
+                            labelText='{{section.type.name}} Expiry' 
+                            [onlyFutureDates]='"true"'
+                            [required]='"true"' 
+                            [(date)]='section.expiry'>
+        </common-datepicker> 
+        <a href="#" class='nowrap'>Sample Document</a>
+      </div>
 
-      <common-file-uploader [(images)]='section.images' [id]='section.type.name'>
+      <common-file-uploader [(images)]='section.images' [id]='section.type.name' (imagesChange)='onImagesChange(section, $event)'>
         <span id="uploadInstruction" tabindex="0" #uploadInstruction>
             Please upload required documents
         </span>

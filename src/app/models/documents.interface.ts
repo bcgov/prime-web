@@ -8,21 +8,19 @@ export interface DocumentType {
 
 export class Document {
     type: DocumentType;
-    imageUUID: string[];
     registrantUUID: string;
     expiry?: SimpleDate;
     images: CommonImage[];
 
     constructor(input) {
         this.type = input.type;
-        this.imageUUID = input.imageUUID;
         this.registrantUUID = input.registrantUUID;
         this.expiry = input.expiry;
         this.images  = [];
     }
 
     isValid(): boolean {
-        return this.expiry !== null && this.imageUUID.length >= 1;
+        return this.expiry && this.images.length >= 1;
     }
 }
 
