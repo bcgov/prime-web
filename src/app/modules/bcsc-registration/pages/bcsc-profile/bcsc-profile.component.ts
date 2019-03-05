@@ -5,6 +5,7 @@ import { DummyDataService } from '../../../../services/dummy-data.service';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { AbstractForm } from 'moh-common-lib/models';
 import { Router } from '@angular/router';
+import { PrimeConstants } from '../../../../models/prime-constants';
 
 @Component({
   selector: 'app-bcsc-profile',
@@ -40,7 +41,8 @@ export class BcscProfileComponent extends AbstractForm implements OnInit {
 
 
     // Navigate to next page
-    this.navigate( 'bcsc-registration/account' );
+    this.navigate( PrimeConstants.BCSC_REGISTRATION +
+                   PrimeConstants.ACCOUNT_PG );
   }
 
 }

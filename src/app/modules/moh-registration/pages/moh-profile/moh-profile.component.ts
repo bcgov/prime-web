@@ -37,7 +37,8 @@ export class MohProfileComponent  extends AbstractForm implements OnInit {
     // TODO: Check if first name does not exist - ask if have first name
 
     // Navigate to next page
-    this.navigate( PrimeConstants.MOH_REGISTRATION + '/upload-documents' );
+    this.navigate( PrimeConstants.MOH_REGISTRATION +
+                   PrimeConstants.DOC_UPLD_PG );
 
   }
 }
