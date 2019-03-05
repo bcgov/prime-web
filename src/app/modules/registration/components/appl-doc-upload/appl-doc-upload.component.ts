@@ -62,8 +62,8 @@ export class ApplDocUploadComponent implements OnInit {
     // selection in the dropdown (which satisfies angular validation), but then
     // the user could continue immediately without pressing 'Add'.  We don't
     // want the form valid unless the user has clicked 'Add' and has one doc.
-    const valid = this.documents.length === 0 ? {'mustSelect' : true } : null;
-    this.docTypeEl.control.setErrors(valid);
+    // const valid = this.documents.length === 0 ? {'mustSelect' : true } : null;
+    // this.docTypeEl.control.setErrors(valid);
   }
 
   onImagesChange(doc: Document, img: CommonImage) {

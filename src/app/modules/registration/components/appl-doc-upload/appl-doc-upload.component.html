@@ -7,7 +7,6 @@
     <div class="form-row align-items-end">
       <div class="col-auto">
         <label for="docType">Document Type</label>
-        <!-- TODO - Only required if user hasn't made any selections already -->
         <select class="form-control"
                 id="docType"
                 name="docType"
@@ -64,7 +63,7 @@
         <common-datepicker class='d-inline-block mr-3' 
                             labelText='{{section.type.name}} Expiry' 
                             [onlyFutureDates]='"true"'
-                            [required]='"true"' 
+                            [required]='true' 
                             [(date)]='section.expiry'>
         </common-datepicker> 
         <a href="#" class='nowrap'>Sample Document</a>
