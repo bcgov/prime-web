@@ -30,10 +30,12 @@
     <div class="form-group col-sm-6 p-sm-0">
       <label class="control-label">Phone Number</label>
       <input class="form-control"
-              name="phone_num"
-              id="phone_num"
-              placeholder="{{phone_num}}"
-              ng-disabled="enable"/>
+             type="text"
+             name="mobile_phone"
+             id="mobile_phone"
+             placeholder="{{phoneNumber}}"
+             [ngModel]="registrant?.smsPhone"
+             (ngModelChange)="registrant.smsPhone = $event" />
     </div>
 
     <aside>
@@ -99,8 +101,8 @@
     </div>
     
     <aside>
-        Details<br>
-        Activate for enhanced account security<br><br><br>
-      </aside>
+      Details<br>
+      Activate for enhanced account security<br><br><br>
+    </aside>
   </prime-page-sections>
 </div>

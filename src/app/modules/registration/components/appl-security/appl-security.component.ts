@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, forwardRef } from '@angular/core';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { Registrant } from '../../models/registrant.model';
+import { CacheService } from '../../../../services/cache.service';
 import { ControlContainer, NgForm } from '@angular/forms';
 
 @Component({
@@ -10,12 +11,18 @@ import { ControlContainer, NgForm } from '@angular/forms';
 })
 export class ApplSecurityComponent implements OnInit {
 
-  phone_num = "1-555-555-5555";
+  phoneNumber = "1-555-555-5555"
 
-  constructor( private primeDataService: PrimeDataService ) {
+  constructor( private primeDataService: PrimeDataService,
+               private cache: CacheService  ) {
+
   }
 
   ngOnInit() {
+  }
+
+  get registrant(): Registrant {
+    return this.primeDataService.registrant;
   }
 
 }
