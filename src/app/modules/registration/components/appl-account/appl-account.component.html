@@ -121,18 +121,8 @@
   <prime-page-sections layout='tips'>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <label class="control-label">Mobile/SMS</label>
-      <div *ngIf="isCanada(); else NotCanda">
-        <input class="form-control"
-               type="text"
-               name="mobile_phone"
-               id="mobile_phone"
-               [ngModel]="registrant?.smsPhone"
-               (ngModelChange)="registrant.smsPhone = $event"
-               prefix="+1 "
-               mask="(000) 000-0000"
-               showMaskTyped="true"/>
-      </div>
+      <prime-phone-number [displayMask]="isCanada()"
+                          [(phoneNumber)]="registrant.phoneNumber"></prime-phone-number>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
@@ -164,13 +154,4 @@
   </prime-page-sections>
 
 </div>
-
-<ng-template #NotCanda>
-    <input class="form-control"
-           type="text"
-           name="mobile_phone"
-           id="mobile_phone"
-           [ngModel]="registrant?.smsPhone"
-           (ngModelChange)="registrant.smsPhone = $event"/>
-</ng-template>
 
