@@ -50,7 +50,7 @@ export class MohAccountComponent extends AbstractForm implements OnInit {
     if ( this.validPassword() ) {
 
       // Navigate to next pag
-      this.navigate( PrimeConstants.MOH_REGISTRATION +
+      this.navigate( PrimeConstants.MOH_REGISTRATION + '/' +
                      PrimeConstants.SECURITY_PG );
     }
   }

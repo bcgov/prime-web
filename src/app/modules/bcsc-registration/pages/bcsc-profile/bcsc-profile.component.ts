@@ -41,7 +41,7 @@ export class BcscProfileComponent extends AbstractForm implements OnInit {
 
 
     // Navigate to next page
-    this.navigate( PrimeConstants.BCSC_REGISTRATION +
+    this.navigate( PrimeConstants.BCSC_REGISTRATION + '/' +
                    PrimeConstants.ACCOUNT_PG );
   }
 

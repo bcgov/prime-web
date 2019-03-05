@@ -22,5 +22,5 @@ export class PrimeConstants {
   public static DOC_UPLD_PG = 'upload-documents';
   public static ACCOUNT_PG = 'account';
   public static SECURITY_PG = 'security';
-
+  public static CONFIRMATION_PG = 'confirmation';
 }

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { BcscContainerComponent } from './components/bcsc-container/bcsc-container.component';
 import { bcscPages } from './bcsc-registration-page-routing.module';
 import { BcscConfirmationComponent } from './pages/bcsc-confirmation/bcsc-confirmation.component';
+import { PrimeConstants } from '../../models/prime-constants';
 
 const routes: Routes = [
   {
@@ -11,7 +12,7 @@ const routes: Routes = [
     children: bcscPages
   },
   {
-    path: 'confirmation',
+    path: PrimeConstants.CONFIRMATION_PG,
     component: BcscConfirmationComponent,
     data: { title: 'BCSC Registration Confirmation'}
   },
