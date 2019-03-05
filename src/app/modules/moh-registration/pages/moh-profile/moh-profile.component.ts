@@ -8,7 +8,7 @@ import { PrimeConstants } from '../../../../models/prime-constants';
   templateUrl: './moh-profile.component.html',
   styleUrls: ['./moh-profile.component.scss']
 })
-export class MohProfileComponent  extends AbstractForm implements OnInit {
+export class MohProfileComponent extends AbstractForm implements OnInit {
 
   constructor( protected router: Router ) {
     super( router );
@@ -19,25 +19,22 @@ export class MohProfileComponent  extends AbstractForm implements OnInit {
 
   continue() {
 
-    console.log( 'form: ', this.form );
+    console.log(`form`, {valid: this.form.valid, submitted: this.form.submitted}, this.form);
 
-    // Errors exist on form
-    if ( this.form.invalid ) {
+    if (this.form.valid) {
 
+      // TODO: Check if first name does not exist - ask if have first name
+
+
+
+      // Navigate to next page
+      this.navigate( PrimeConstants.MOH_REGISTRATION + '/' +
+                     PrimeConstants.DOC_UPLD_PG );
+
+    } else {
+      // Errors exist on form
       // Mark all fields as touched to display errors
-      Object.keys(this.form.form.controls).forEach( x => {
-        this.form.form.get( x ).markAsTouched();
-      });
-      return;
+      this.markAllInputsTouched();
     }
-
-    // All required fields have data
-
-
-    // TODO: Check if first name does not exist - ask if have first name
-
-    // Navigate to next page
-    this.navigate( PrimeConstants.MOH_REGISTRATION + '/upload-documents' );
-
   }
 }

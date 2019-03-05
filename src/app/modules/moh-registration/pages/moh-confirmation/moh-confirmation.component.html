@@ -1,5 +1,19 @@
 <common-page-framework layout='blank'>
 
-  <prime-appl-confirmation></prime-appl-confirmation>
+  <prime-appl-confirmation [displayIcon]="'0'" [hasQrCode]="true">
+
+    <p>
+      Confirmation message
+    </p>
+
+    <div qrcode>
+      QR Code image to be displayed
+    </div>
+
+    <p nextSteps>
+      Next step instructions
+    </p>
+
+  </prime-appl-confirmation>
 
 </common-page-framework>

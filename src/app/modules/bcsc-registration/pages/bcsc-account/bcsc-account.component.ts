@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractForm } from 'moh-common-lib/models';
 import { Router } from '@angular/router';
+import { PrimeConstants } from '../../../../models/prime-constants';
 
 @Component({
   selector: 'app-bcsc-account',
@@ -28,6 +29,10 @@ export class BcscAccountComponent extends AbstractForm implements OnInit {
         });
         return;
       }
+
+      // Navigate to next page
+      this.navigate( PrimeConstants.BCSC_REGISTRATION + '/' +
+                     PrimeConstants.CONFIRMATION_PG );
 
     }
 }
