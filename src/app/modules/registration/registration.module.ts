@@ -14,6 +14,7 @@ import { PageSectionsComponent } from './components/page-sections/page-sections.
 import { ApplConfirmationComponent } from './components/appl-confirmation/appl-confirmation.component';
 import { NameComponent } from './components/name/name.component';
 import { TypeaheadModule } from 'ngx-bootstrap';
+import { PhoneNumberComponent } from './components/phone-number/phone-number.component';
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import { TypeaheadModule } from 'ngx-bootstrap';
     AddressComponent,
     PageSectionsComponent,
     ApplConfirmationComponent,
-    NameComponent
+    NameComponent,
+    PhoneNumberComponent
   ],
   exports: [
     ApplProfileComponent,
@@ -41,7 +43,8 @@ import { TypeaheadModule } from 'ngx-bootstrap';
     ApplDocUploadComponent,
     AddressComponent,
     PageSectionsComponent,
-    ApplConfirmationComponent
+    ApplConfirmationComponent,
+    PhoneNumberComponent
   ]
 })
 export class RegistrationModule { }

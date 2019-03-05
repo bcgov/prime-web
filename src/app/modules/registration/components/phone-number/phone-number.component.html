@@ -1,0 +1,47 @@
+
+<label class="control-label">{{label}}</label>
+<div *ngIf="displayMask; else NoMask">
+  <input #phoneRef="ngModel"
+          class="form-control"
+          type="text"
+          name="mobile_phone_{{objectid}}"
+          id="mobile_phone_{{objectId}}"
+          [ngModel]="phoneNumber"
+          (ngModelChange)="setPhoneNumber($event)"
+          prefix="+1 "
+          mask="(000) 000-0000"
+          showMaskTyped="true"
+          [required]="required"
+          [disabled]="disabled"/>
+  <!-- Error messages for component -->
+  <div *ngIf="!disabled && phoneRef.touched"
+      role="alert"
+      class="error-container"
+      aria-live="assertive">
+    <div class="text-danger" *ngIf="phoneRef?.errors?.required">
+      {{label}} is required.
+    </div>
+  </div>
+</div>
+
+<ng-template #NoMask>
+  <input #phoneRef="ngModel"
+          class="form-control"
+          type="text"
+          name="mobile_phone_{{objectId}}"
+          id="mobile_phone_{{objectId}}"
+          [ngModel]="phoneNumber"
+          (ngModelChange)="setPhoneNumber($event)"
+          [required]="required"
+          [disabled]="disabled" />
+          <!-- Error messages for component -->
+  <div *ngIf="!disabled && phoneRef.touched"
+        role="alert"
+        class="error-container"
+        aria-live="assertive">
+    <div class="text-danger" *ngIf="phoneRef?.errors?.required">
+      {{label}} is required.
+     </div>
+  </div>
+</ng-template>
+

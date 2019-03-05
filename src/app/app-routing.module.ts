@@ -37,7 +37,7 @@ const routes: Routes = [
     loadChildren: 'app/modules/moh-registration/moh-registration.module#MohRegistrationModule'
   },
   {
-    path: 'bcsc-registration',
+    path: PrimeConstants.BCSC_REGISTRATION,
     loadChildren: 'app/modules/bcsc-registration/bcsc-registration.module#BcscRegistrationModule'
   },
   {

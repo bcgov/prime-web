@@ -15,4 +15,12 @@ export class PrimeConstants {
 
   // Routes
   public static MOH_REGISTRATION = 'moh-registration';
+  public static BCSC_REGISTRATION = 'bscs-registration';
+
+  // Pages
+  public static PROFILE_PG = 'profile';
+  public static DOC_UPLD_PG = 'upload-documents';
+  public static ACCOUNT_PG = 'account';
+  public static SECURITY_PG = 'security';
+  public static CONFIRMATION_PG = 'confirmation';
 }
