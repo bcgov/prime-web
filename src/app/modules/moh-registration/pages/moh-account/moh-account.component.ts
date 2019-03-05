@@ -17,16 +17,9 @@ export class MohAccountComponent extends AbstractForm implements OnInit {
    *  b) Lower case characters (a-z)
    *  c) Numeral (0-9)
    *  d) Non-alphanumeric characters e.g. []?/\.<~#`!@#$%^&*()-+=|:"',>{}
-   *
-   * TODO: Figure out RegExp for achieving this using pattern, else need validation
-   *       to be added to password component
    */
-  private upperChars = '(?=.*[A-Z])';
-  private lowerChars = '(?=.*[a-z])';
-  private numerals = '(?=.*\d)';
-  private symbolChars = '(?=.*[\[\]?/\.<~#`!@#$%\^&*()-+=|:"\',>{}])';
 
-  constructor( protected router: Router ,
+  constructor( protected router: Router,
                private primeDataService: PrimeDataService ) {
     super( router );
   }
@@ -35,46 +28,46 @@ export class MohAccountComponent extends AbstractForm implements OnInit {
   }
 
   continue() {
-    console.log( 'form: ', this.form );
 
-    // Errors exist on form
-    if ( this.form.invalid ) {
+    console.log(`form`, {valid: this.form.valid, submitted: this.form.submitted}, this.form);
 
+   // if (this.form.valid) {
+
+
+      this.validPassword();
+
+      // Navigate to next page
+    //  this.navigate( PrimeConstants.MOH_REGISTRATION + '/' +
+     //                PrimeConstants.SECURITY_PG );
+
+   // } else {
+      // Errors exist on form
       // Mark all fields as touched to display errors
-      Object.keys(this.form.form.controls).forEach( x => {
-        this.form.form.get( x ).markAsTouched();
-      });
-      return;
-    }
-
-    if ( this.validPassword() ) {
-
-      // Navigate to next pag
-      this.navigate( PrimeConstants.MOH_REGISTRATION + '/security' );
-    }
+   //   this.markAllInputsTouched();
+   // }
   }
 
-
+  /**
+   * At least 3 of the following categories:
+   *  a) Upper case characters (A-Z)
+   *  b) Lower case characters (a-z)
+   *  c) Numeral (0-9)
+   *  d) Non-alphanumeric characters e.g. []?/\.<~#`!@#$%^&*()-+=|:"',>{}
+   */
   private validPassword(): boolean {
-    console.log( 'Validate password' );
-
     const pwdCriteria = RegExp(
-      '^(' +
-      this.symbolChars +
-      ').*$'
+      '^((?=.*[^a-zA-Z\S])(?=.*[a-z])(?=.*[A-Z])|(?=.*[^a-zA-Z0-9\S])(?=.*\d)(?=.*[a-zA-Z])).*$'
     );
+    console.log( 'Validate password criteria: ', pwdCriteria );
 
-   // '^((?=.*[^a-zA-Z\s])(?=.*[a-z])(?=.*[A-Z])|(?=.*[^a-zA-Z0-9\s])(?=.*\d)(?=.*[a-zA-Z])).*$'
-
+   //
     const password = this.primeDataService.registrant.password;
-    console.log( pwdCriteria.test( password ) );
-
-    Object.keys(this.form.form.controls).map( x => {
-      const control = this.form.form.get( x );
-      console.log( 'control.get(name) ', control.get('name') );
-    });
 
 
-    return true;
+    console.log( 'Validate password password: ', password );
+    console.log('Validate password: ', pwdCriteria.test( password ) );
+
+
+    return false;
   }
 }

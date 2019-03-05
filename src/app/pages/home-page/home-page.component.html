@@ -4,24 +4,9 @@
 
   <div class='row mb-4'>
     <div class='col-md-3 p-4'>
-      <a routerLink='moh-doc-upload'>
-        <button class="btn btn-block btn-lg btn-secondary">
-          MoH Document Upload
-        </button>
-      </a>
-    </div>
-    <div class='col-md-3 p-4'>
       <a routerLink='moh-security'>
         <button class="btn btn-block btn-lg btn-secondary">
           MoH Security
-        </button>
-      </a>
-    </div>
-
-    <div class='col-md-3 p-4'>
-      <a routerLink='moh-confirmation'>
-        <button class="btn btn-block btn-lg btn-secondary">
-          MoH Confirmation
         </button>
       </a>
     </div>
@@ -29,14 +14,14 @@
 
   <div class='row mb-4'>
     <div class='col-md-3 p-4'>
-      <a routerLink='moh-registration'>
+      <a [routerLink]='mohRegistration'>
         <button class="btn btn-block btn-lg btn-secondary">
           Moh Registration
         </button>
       </a>
     </div>
     <div class='col-md-3 p-4'>
-        <a routerLink='bcsc-registration'>
+        <a [routerLink]='bcscRegistration'>
           <button class="btn btn-block btn-lg btn-secondary">
             BCSC Registration
           </button>

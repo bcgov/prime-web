@@ -22,13 +22,13 @@ export class MohDocUploadComponent extends AbstractForm implements OnInit {
 
     if (this.form.valid) {
       // Navigate to next page
-      //  todo - re-enable
-      this.navigate( PrimeConstants.MOH_REGISTRATION + '/account' );
+      this.navigate( PrimeConstants.MOH_REGISTRATION + '/' +
+                     PrimeConstants.ACCOUNT_PG );
+
     } else {
       // Errors exist on form
       // Mark all fields as touched to display errors
       this.markAllInputsTouched();
     }
-    // Navigate to next page
   }
 }
