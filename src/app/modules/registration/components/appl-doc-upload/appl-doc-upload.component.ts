@@ -27,9 +27,13 @@ export class ApplDocUploadComponent implements OnInit {
 
   @ViewChild('docTypeEl') docTypeEl;
 
-  constructor(private dataService: PrimeDataService, private cacheService: CacheService) {
+  public formRef: NgForm;
+
+  constructor(private dataService: PrimeDataService, private cacheService: CacheService, public formRefC: ControlContainer) {
     this.documents = this.dataService.documents; // this is basically an alias, since arrays are pass-by-reference,
     this.docTypesList = this.cacheService.DocumentTypes;
+
+    this.formRef = (formRefC as NgForm);
   }
 
   ngOnInit() {
@@ -80,9 +84,9 @@ export class ApplDocUploadComponent implements OnInit {
     return this.docTypeDropdownValue === '' || cannotAdd;
   }
 
-  remove(section: DocumentType) {
-    this.selectedDocType = this.selectedDocType.filter(x => {
-      return x.name !== section.name;
+  remove(section: Document) {
+    this.documents = this.documents.filter(x => {
+      return x !== section;
     });
   }
 
