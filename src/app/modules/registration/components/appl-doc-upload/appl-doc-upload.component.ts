@@ -27,9 +27,13 @@ export class ApplDocUploadComponent implements OnInit {
 
   @ViewChild('docTypeEl') docTypeEl;
 
-  constructor(private dataService: PrimeDataService, private cacheService: CacheService) {
+  public formRef: NgForm;
+
+  constructor(private dataService: PrimeDataService, private cacheService: CacheService, public formRefC: ControlContainer) {
     this.documents = this.dataService.documents; // this is basically an alias, since arrays are pass-by-reference,
     this.docTypesList = this.cacheService.DocumentTypes;
+
+    this.formRef = (formRefC as NgForm);
   }
 
   ngOnInit() {
@@ -62,8 +66,8 @@ export class ApplDocUploadComponent implements OnInit {
     // selection in the dropdown (which satisfies angular validation), but then
     // the user could continue immediately without pressing 'Add'.  We don't
     // want the form valid unless the user has clicked 'Add' and has one doc.
-    // const valid = this.documents.length === 0 ? {'mustSelect' : true } : null;
-    // this.docTypeEl.control.setErrors(valid);
+    const valid = this.documents.length === 0 ? {'mustSelect' : true } : null;
+    this.docTypeEl.control.setErrors(valid);
   }
 
   onImagesChange(doc: Document, img: CommonImage) {
@@ -80,9 +84,9 @@ export class ApplDocUploadComponent implements OnInit {
     return this.docTypeDropdownValue === '' || cannotAdd;
   }
 
-  remove(section: DocumentType) {
-    this.selectedDocType = this.selectedDocType.filter(x => {
-      return x.name !== section.name;
+  remove(section: Document) {
+    this.documents = this.documents.filter(x => {
+      return x !== section;
     });
   }
 

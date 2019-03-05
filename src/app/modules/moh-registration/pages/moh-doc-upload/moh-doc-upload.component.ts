@@ -18,10 +18,11 @@ export class MohDocUploadComponent extends AbstractForm implements OnInit {
   }
 
   continue() {
-    console.log(`form valid? ${this.form.valid}`, this.form);
+    console.log(`form`, {valid: this.form.valid, submitted: this.form.submitted}, this.form);
 
     if (this.form.valid) {
       // Navigate to next page
+      //  todo - re-enable
       this.navigate( PrimeConstants.MOH_REGISTRATION + '/account' );
     } else {
       // Errors exist on form

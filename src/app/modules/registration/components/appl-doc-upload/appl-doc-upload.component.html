@@ -25,8 +25,8 @@
       </div>
     </div>
 
-    <div *ngIf="docTypeEl.touched" role="alert" class='error-container' aria-live="assertive">
-      <div class="text-danger" *ngIf="docTypeEl?.errors?.required || docTypeEl?.errors?.mustSelect">
+    <div *ngIf="docTypeEl.touched || formRef.submitted" role="alert" class='error-container' aria-live="assertive">
+      <div class="text-danger" *ngIf="docTypeEl?.errors?.required || (documents.length === 0 && formRef.submitted)">
        At least one document type must be added
       </div>
     
@@ -53,7 +53,7 @@
   <h2 class='border-bottom'>
     <i class="status-icon fa" aria-hidden="true" [ngClass]="{'fa-circle': !section.isValid(), 'fa-check-circle text-success': section.isValid()}"></i>
     {{section.type.name}}
-    <button class='d-inline-block float-right close' (click)='remove(section)'>
+    <button class='d-inline-block float-right close' (click)='remove(section)' type='button'>
       <i class="fa fa-times text-danger" aria-hidden="true"></i>
     </button>
   </h2>
