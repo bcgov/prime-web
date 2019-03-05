@@ -13,35 +13,24 @@
       <input type="checkbox"
              name="mobile_sms_auth"
              id="mobile_sms_auth"
-             ng-model="enable"/>
+             [(ngModel)]='useMobile'/>
       Use Mobile/SMS for Authorization
     </h2>
+    <div class="form-group col-sm-4 p-sm-0">
+      <!-- isCanada() still in progress, will be added later on-->
+        <prime-phone-number [displayMask]="true"
+                            [(phoneNumber)]="registrant.phoneNumber"
+                            [disabled]="!useMobile">
+        </prime-phone-number>
+    </div>
   </div>
 
   <ng-content select="[identityInstruct]"></ng-content>
-
-  <!--
-    Insert right after id="phone_num":
-      [ngModel]="registrant?.phoneNum" ???
-      (ngModelChange)="setPhoneNum($event)" ???
-      [disabled]="!editIdentityInfo" ???
-  -->
   <prime-page-sections layout='tips'>
-    <div class="form-group col-sm-6 p-sm-0">
-      <label class="control-label">Phone Number</label>
-      <input class="form-control"
-             type="text"
-             name="mobile_phone"
-             id="mobile_phone"
-             placeholder="{{phoneNumber}}"
-             [ngModel]="registrant?.smsPhone"
-             (ngModelChange)="registrant.smsPhone = $event" />
-    </div>
-
-    <aside>
-      Details<br>
-      Activate for enhanced account security<br><br><br>
-    </aside>
+      <aside>
+        Details<br>
+        Activate for enhanced account security<br><br><br>
+      </aside>
   </prime-page-sections>
 </div>
 
