@@ -18,10 +18,10 @@ export class MohSecurityComponent extends AbstractForm implements OnInit {
   }
 
   continue() {
-    console.log( 'button pushed' );
+    console.log( 'button pushed' , this.form.valid, this.form);
 
     // Navigate to next page
-    this.navigate( PrimeConstants.MOH_REGISTRATION + '/' +
-                   PrimeConstants.CONFIRMATION_PG );
+    // this.navigate( PrimeConstants.MOH_REGISTRATION + '/' +
+    //                PrimeConstants.CONFIRMATION_PG );
   }
 }

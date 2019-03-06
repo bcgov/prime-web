@@ -13,10 +13,14 @@ import { PrimeConstants } from '../../../../models/prime-constants';
 export class ApplSecurityComponent implements OnInit {
 
   public useMobile;
+  public useSecurity;
+  public useApp;
+  public formRef: NgForm;
 
   constructor( private primeDataService: PrimeDataService,
-               private cache: CacheService  ) {
-
+               private cache: CacheService,
+               public formRefC: ControlContainer  ) {
+        this.formRef = (formRefC as NgForm);
   }
 
   ngOnInit() {
