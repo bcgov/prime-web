@@ -1,9 +1,13 @@
 <common-page-framework layout='blank'>
 
+  <form #formRef='ngForm' (ngSubmit)='continue()'>
+
     <prime-appl-security></prime-appl-security>
+    <common-form-submit-bar [increaseWidth]='"true"'></common-form-submit-bar>
+  </form>
 
     <!-- Display bar during registration -->
-    <common-form-action-bar (btnClick)="continue()">
-    </common-form-action-bar>
+    <!-- <common-form-action-bar (btnClick)="continue()">
+    </common-form-action-bar> -->
 
   </common-page-framework>

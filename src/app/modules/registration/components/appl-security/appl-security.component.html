@@ -1,46 +1,40 @@
 <h1>Security</h1>
 <h3>Multi Factor Authentication Methods</h3>
+<div *ngIf="formRef.submitted"
+     role="alert"
+     class="error-container"
+     aria-live="assertive">
+  <div class="text-danger" *ngIf="!useMobile && !useSecurity && !useApp">
+    At least one Multi Factor Authentication Method option must be checked.
+  </div>
+</div>
 
 <!-- Use Mobile/SMS for Authorization OPTION -->
+
 <div>
-  <!-- 
-    Insert right after id="mobile_sms_auth":
-      [checked]="????"
-      (click)="toggleCheckBox()
-  -->
   <div>
     <h2 class='border-bottom'>  
       <input type="checkbox"
              name="mobile_sms_auth"
              id="mobile_sms_auth"
-             ng-model="enable"/>
+             [(ngModel)]='useMobile'/>
       Use Mobile/SMS for Authorization
     </h2>
   </div>
-
-  <ng-content select="[identityInstruct]"></ng-content>
-
-  <!--
-    Insert right after id="phone_num":
-      [ngModel]="registrant?.phoneNum" ???
-      (ngModelChange)="setPhoneNum($event)" ???
-      [disabled]="!editIdentityInfo" ???
-  -->
   <prime-page-sections layout='tips'>
-    <div class="form-group col-sm-6 p-sm-0">
-      <label class="control-label">Phone Number</label>
-      <input class="form-control"
-             type="text"
-             name="mobile_phone"
-             id="mobile_phone"
-             placeholder="{{phoneNumber}}"
-             [ngModel]="registrant?.smsPhone"
-             (ngModelChange)="registrant.smsPhone = $event" />
+    <div class="form-group col-sm-4 p-sm-0">
+      <!-- isCanada() still in progress, will be added later on-->
+      <prime-phone-number [displayMask]="true"
+                          [(phoneNumber)]="registrant.phoneNumber"
+                          [disabled]="!useMobile">
+     </prime-phone-number>
     </div>
-
+    
+    <ng-content select="[identityInstruct]"></ng-content>
+  
     <aside>
-      Details<br>
-      Activate for enhanced account security<br><br><br>
+       Details<br>
+       Activate for enhanced account security<br><br><br>
     </aside>
   </prime-page-sections>
 </div>
@@ -56,7 +50,8 @@
     <h2 class='border-bottom'>  
       <input type="checkbox"
              name="security_key"
-             id="security_key"/>
+             id="security_key"
+             [(ngModel)]='useSecurity'/>
       Use Security Key
     </h2>
   </div>
@@ -87,7 +82,8 @@
     <h2 class='border-bottom'>  
       <input type="checkbox"
              name="mobile_app_auth"
-             id="mobile_app_auth"/>
+             id="mobile_app_auth"
+             [(ngModel)]='useApp'/>
       Use Mobile App Authentication
     </h2>
   </div>
