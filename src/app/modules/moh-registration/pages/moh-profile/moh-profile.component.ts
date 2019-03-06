@@ -21,20 +21,24 @@ export class MohProfileComponent extends AbstractForm implements OnInit {
 
     console.log(`form`, {valid: this.form.valid, submitted: this.form.submitted}, this.form);
 
-    if (this.form.valid) {
+    if (this.form.invalid) {
 
-      // TODO: Check if first name does not exist - ask if have first name
-
-
-
-      // Navigate to next page
-      this.navigate( PrimeConstants.MOH_REGISTRATION + '/' +
-                     PrimeConstants.DOC_UPLD_PG );
-
-    } else {
       // Errors exist on form
       // Mark all fields as touched to display errors
       this.markAllInputsTouched();
+      return;
+    }
+    this.loading = true;
+  }
+
+
+  continueRegistration( valid: boolean ) {
+    this.loading = false;
+
+    if ( valid ) {
+      // Navigate to next page
+      this.navigate( PrimeConstants.MOH_REGISTRATION + '/' +
+                     PrimeConstants.DOC_UPLD_PG );
     }
   }
 }

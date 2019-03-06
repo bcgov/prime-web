@@ -8,7 +8,7 @@
   <prime-page-sections layout='tips'>
     <div class="form-group col-sm-6 p-sm-0">
       <prime-name [label]="'First Name'"
-                  [required]="false"
+                  [required]="firstNameRequired"
                   [disabled]="!editIdentityInfo"
                   [(nameStr)]="registrant.firstName"></prime-name>
     </div>

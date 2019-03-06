@@ -9,7 +9,6 @@ export class PrimeDataService {
 
 
   public registrant: Registrant;
-  public confirmPassword: string;
 
   // TODO - CHANGE! Needs to be a nested array and first type should be meta-data (e.g. driver's license? passport?)
   public documents: Document[];

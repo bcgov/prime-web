@@ -27,22 +27,24 @@ export class BcscProfileComponent extends AbstractForm implements OnInit {
   }
 
   continue() {
-    console.log( 'form: ', this.form );
-
     // Errors exist on form
-    if ( this.form.invalid ) {
+    if (this.form.invalid) {
 
       // Mark all fields as touched to display errors
-      Object.keys(this.form.form.controls).forEach( x => {
-        this.form.form.get( x ).markAsTouched();
-      });
+      this.markAllInputsTouched();
       return;
     }
-
-
-    // Navigate to next page
-    this.navigate( PrimeConstants.BCSC_REGISTRATION + '/' +
-                   PrimeConstants.ACCOUNT_PG );
+    this.loading = true;
   }
 
+
+  continueRegistration( valid: boolean ) {
+    this.loading = false;
+
+    if ( valid ) {
+      // Navigate to next page
+      this.navigate( PrimeConstants.BCSC_REGISTRATION + '/' +
+                    PrimeConstants.ACCOUNT_PG );
+    }
+  }
 }

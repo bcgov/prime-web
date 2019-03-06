@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractForm } from 'moh-common-lib/models';
 import { Router } from '@angular/router';
-import { PrimeDataService } from '../../../../services/prime-data.service';
 import { PrimeConstants } from '../../../../models/prime-constants';
 
 @Component({
@@ -11,16 +10,9 @@ import { PrimeConstants } from '../../../../models/prime-constants';
 })
 export class MohAccountComponent extends AbstractForm implements OnInit {
 
-  /**
-   * At least 3 of the following categories:
-   *  a) Upper case characters (A-Z)
-   *  b) Lower case characters (a-z)
-   *  c) Numeral (0-9)
-   *  d) Non-alphanumeric characters e.g. []?/\.<~#`!@#$%^&*()-+=|:"',>{}
-   */
 
-  constructor( protected router: Router,
-               private primeDataService: PrimeDataService ) {
+
+  constructor( protected router: Router ) {
     super( router );
   }
 
@@ -30,44 +22,27 @@ export class MohAccountComponent extends AbstractForm implements OnInit {
   continue() {
 
     console.log(`form`, {valid: this.form.valid, submitted: this.form.submitted}, this.form);
+    if (this.form.invalid) {
 
-   // if (this.form.valid) {
-
-
-      this.validPassword();
-
-      // Navigate to next page
-    //  this.navigate( PrimeConstants.MOH_REGISTRATION + '/' +
-     //                PrimeConstants.SECURITY_PG );
-
-   // } else {
       // Errors exist on form
       // Mark all fields as touched to display errors
-   //   this.markAllInputsTouched();
-   // }
+      this.markAllInputsTouched();
+      return;
+    }
+    this.loading = true;
   }
 
-  /**
-   * At least 3 of the following categories:
-   *  a) Upper case characters (A-Z)
-   *  b) Lower case characters (a-z)
-   *  c) Numeral (0-9)
-   *  d) Non-alphanumeric characters e.g. []?/\.<~#`!@#$%^&*()-+=|:"',>{}
-   */
-  private validPassword(): boolean {
-    const pwdCriteria = RegExp(
-      '^((?=.*[^a-zA-Z\S])(?=.*[a-z])(?=.*[A-Z])|(?=.*[^a-zA-Z0-9\S])(?=.*\d)(?=.*[a-zA-Z])).*$'
-    );
-    console.log( 'Validate password criteria: ', pwdCriteria );
+  registerAccount( valid: boolean ) {
 
-   //
-    const password = this.primeDataService.registrant.password;
+    console.log( 'onValidation: ', valid );
 
+    // TODO: Make REST call REG_20 to register user
 
-    console.log( 'Validate password password: ', password );
-    console.log('Validate password: ', pwdCriteria.test( password ) );
-
-
-    return false;
+    this.loading = false;
+    if ( valid ) {
+      // Navigate to next page
+      this.navigate( PrimeConstants.MOH_REGISTRATION + '/' +
+                      PrimeConstants.SECURITY_PG );
+    }
   }
 }
