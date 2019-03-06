@@ -8,7 +8,8 @@ import { PrimeConstants } from '../../../../models/prime-constants';
 @Component({
   selector: 'prime-appl-security',
   templateUrl: './appl-security.component.html',
-  styleUrls: ['./appl-security.component.scss']
+  styleUrls: ['./appl-security.component.scss'],
+  viewProviders: [ { provide: ControlContainer, useExisting: forwardRef(() => NgForm ) } ]
 })
 export class ApplSecurityComponent implements OnInit {
 
