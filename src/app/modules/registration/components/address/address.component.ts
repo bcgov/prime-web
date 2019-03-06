@@ -119,11 +119,15 @@ export class AddressComponent extends Base implements OnInit {
     this.addressChange.emit( this.address );
   }
 
+  get postalCode() {
+    return this.address.postal;
+  }
+  
   /**
    * Sets string after converted upper case
    * @param text
    */
-  setPostalCode( value: string ) {
+  set postalCode( value: string ) {
     this.address.postal = value.toUpperCase();
     this.addressChange.emit( this.address );
   }
