@@ -44,6 +44,7 @@ import { PhoneNumberComponent } from './components/phone-number/phone-number.com
     AddressComponent,
     PageSectionsComponent,
     ApplConfirmationComponent,
+    NameComponent,
     PhoneNumberComponent
   ]
 })
