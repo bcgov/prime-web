@@ -9,7 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "pree2e": "webdriver-manager update --versions.chrome=2.40"
+    "pree2e": "webdriver-manager update --versions.chrome=2.40",
+    "prebuild": "node src/version.js"
   },
   "private": true,
   "dependencies": {
@@ -33,7 +34,7 @@
     "moment": "^2.24.0",
     "mygovbc-bootstrap-theme": "^0.4.0",
     "ngx-bootstrap": "^3.2.0",
-    "ngx-mask": "^7.3.6",
+    "ngx-mask": "6.5.16",
     "ngx-mydatepicker": "^2.4.9",
     "pdfjs-dist": "^2.0.550",
     "popper.js": "^1.14.7",

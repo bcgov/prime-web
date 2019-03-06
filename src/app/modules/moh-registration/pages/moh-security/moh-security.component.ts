@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AbstractForm } from 'moh-common-lib/models';
 import { PrimeConstants } from '../../../../models/prime-constants';
 import { Router } from '@angular/router';
@@ -10,18 +10,25 @@ import { Router } from '@angular/router';
 })
 export class MohSecurityComponent extends AbstractForm implements OnInit {
 
-  constructor( protected router: Router ) {
-    super( router );
+  constructor(protected router: Router, private cd: ChangeDetectorRef) {
+    super(router);
   }
 
   ngOnInit() {
   }
 
   continue() {
-    console.log( 'button pushed' );
+    console.log('button pushed', this.form.valid, this.form);
 
-    // Navigate to next page
-    this.navigate( PrimeConstants.MOH_REGISTRATION + '/' +
+    if (this.form.valid) {
+      this.loading = true;
+
+      // ! Temporary - this just waits 2.5sec to simulate an HTTP request.
+      setTimeout(() => {
+      this.navigate( PrimeConstants.MOH_REGISTRATION + '/' +
                    PrimeConstants.CONFIRMATION_PG );
+      }, 2500);
+    }
+
   }
 }
