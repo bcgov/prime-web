@@ -25,7 +25,13 @@ describe('MoH Registration - Profile Page', () => {
     expect(browser.getCurrentUrl()).toContain(PAGE_URL, 'url should not change');
   });
 
-  // should not let user continue before completing page
+  fit('should let the user continue when the form is filled out', () => {
+    page.navigateTo();
+    page.fillName();
 
+    browser.sleep(5 * 1000);
+  });
+
+  // should not let user continue before completing page
   // should allow the first name to NOT be entered
 });
