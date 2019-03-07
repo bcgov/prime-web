@@ -121,7 +121,7 @@
             "protractorConfig": "e2e/protractor.conf.js",
             "webdriverUpdate":false,
             "devServerTarget": "Prime:serve",
-            "port": 4305
+            "port": 4306
           },
           "configurations": {
             "production": {
