@@ -49,7 +49,7 @@
   <prime-page-sections layout='tips'>
     <div class="form-group col-sm-6 p-sm-0">
       <prime-name [label]="'Preferred First Name'"
-                  [required]="false"
+                  [required]="preferredIsRequired"
                   [(nameStr)]="registrant.preferredFirstName"></prime-name>
     </div>
 
@@ -61,6 +61,7 @@
 
     <div class="form-group col-sm-6 p-sm-0">
       <prime-name [label]="'Preferred Last Name'"
+                  [required]="preferredIsRequired"
                   [required]="false"
                   [(nameStr)]="registrant.preferredLastName"></prime-name>
     </div>

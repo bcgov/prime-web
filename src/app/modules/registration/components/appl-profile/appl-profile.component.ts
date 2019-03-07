@@ -25,6 +25,7 @@ export class ApplProfileComponent implements OnInit {
   public defaultProvince = PrimeConstants.BRITISH_COLUMBIA;
 
   public firstNameRequired: boolean = false;
+  public preferredIsRequired: boolean = false;
 
   /**
    * Date of birth error messages
@@ -58,22 +59,20 @@ export class ApplProfileComponent implements OnInit {
   }
 
   private validateInfo( val: any ) {
-    let valid = false;
-    console.log( ' Validate Info - registrant: ', this.registrant );
 
-    if ( this.form.valid ) {
+    // If preferred firstname is entered, then legal first name is required
+    this.firstNameRequired = !!(this.registrant.preferredFirstName);
 
-      valid = true;
-    }
+    // If either of these fields contain data, then required.
+    this.preferredIsRequired =  !!( this.registrant.preferredFirstName ||
+                                    this.registrant.preferredLastName );
 
+  /**
+   *  TODO: validations pertaining to profile
+   *        a) firstname check if missed ( modal dialog requried)
+   *
+   */
 
-    /**
-     *  TODO: validations pertaining to profile
-     *        a) firstname check if missed
-     *        b) If optional first name must have legal name
-     *
-     */
-
-    this.dataValid.emit( valid );
+    this.dataValid.emit( this.form.valid );
   }
 }
