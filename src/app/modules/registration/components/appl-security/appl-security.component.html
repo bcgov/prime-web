@@ -4,23 +4,23 @@
      role="alert"
      class="error-container"
      aria-live="assertive">
-  <div class="text-danger" *ngIf="!useMobile && !useSecurity && !useApp">
+  <div class="text-danger" *ngIf="!checkAtLeastOne()">
     At least one Multi Factor Authentication Method option must be checked.
   </div>
 </div>
 
 <!-- Use Mobile/SMS for Authorization OPTION -->
-
 <div>
-  <div>
-    <h2 class='border-bottom'>  
+  <div class='border-bottom'>
+    <label class='h2 normal'>  
       <input type="checkbox"
              name="mobile_sms_auth"
              id="mobile_sms_auth"
              [(ngModel)]='useMobile'/>
       Use Mobile/SMS for Authorization
-    </h2>
+    </label>
   </div>
+    
   <prime-page-sections layout='tips'>
     <div class="form-group col-sm-4 p-sm-0">
       <!-- isCanada() still in progress, will be added later on-->
@@ -41,19 +41,14 @@
 
 <!-- Use Security Key OPTION -->
 <div>
-  <!-- 
-    Insert right after id="securtiy_key":
-     [checked]="????" 
-     (click)="toggleCheckBox()
-  -->
-  <div>
-    <h2 class='border-bottom'>  
+    <div class='border-bottom'>
+        <label class='h2 normal'> 
       <input type="checkbox"
              name="security_key"
              id="security_key"
              [(ngModel)]='useSecurity'/>
       Use Security Key
-    </h2>
+        </label>
   </div>
   
   <ng-content select="[identityInstruct]"></ng-content>
@@ -73,19 +68,14 @@
 
 <!-- Use Mobile App Authentication OPTION -->
 <div>
-  <!-- 
-    Insert right after id="securtiy_key":
-      [checked]="????"
-      (click)="toggleCheckBox()
-  --> 
-  <div>
-    <h2 class='border-bottom'>  
+    <div class='border-bottom'>
+        <label class='h2 normal'>  
       <input type="checkbox"
              name="mobile_app_auth"
              id="mobile_app_auth"
              [(ngModel)]='useApp'/>
       Use Mobile App Authentication
-    </h2>
+        </label>
   </div>
     
   <ng-content select="[identityInstruct]"></ng-content>

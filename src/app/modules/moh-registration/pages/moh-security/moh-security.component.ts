@@ -29,6 +29,9 @@ export class MohSecurityComponent extends AbstractForm implements OnInit {
                    PrimeConstants.CONFIRMATION_PG );
       }, 2500);
     }
+    else {
+      this.markAllInputsTouched();
+    }
 
   }
 }
