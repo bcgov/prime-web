@@ -25,19 +25,18 @@ export class ApplSecurityComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
   get registrant(): Registrant {
     return this.primeDataService.registrant;
   }
 
-  isCanada(): boolean {
-    if ( !this.registrant.address ) {
-      return true; // Default to Canada
-    } 
-    else if ( this.registrant.identityIsMailingAddress ) {
-      return (this.registrant.address.country === PrimeConstants.CANADA);
+  public checkAtLeastOne(): boolean {
+    if (this.useMobile || this.useSecurity || this.useApp){
+      return true;
     }
-    return (this.registrant.mailAddress.country === PrimeConstants.CANADA);
+    this.formRef.invalid;
+    return false;
   }
 }
