@@ -1,22 +1,11 @@
-// import { browser, by, element } from 'protractor';
 import * as faker from 'faker';
-// import { Registrant } from 'src/app/modules/registration/models/registrant.model';
-// import { Registrant } from '../../src/app/modules/registration/models/registrant.model';
 
 export class FakeData {
-
-    // createRegistrant(): Registrant {
-    //     const registrant = new Registrant();
-    //     // name
-
-
-    //     return registrant;
-    // }
 
     randomProfileInfo() {
         return {
             firstName: faker.name.firstName(),
-            // middleName: faker.name.firstName(),
+            middleName: Math.random() > 0.5 ? faker.name.firstName() : undefined,
             lastName: faker.name.lastName(),
             birthDate: faker.date.past(),
             country: faker.address.country(),
