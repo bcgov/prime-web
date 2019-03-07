@@ -17,4 +17,14 @@ export class BcscConfirmationComponent implements OnInit {
     // TODO: build logic to retrieve code from message
     return ApiStatusCodes.ERROR;
   }
+
+  get confirmationMessage() {
+    // TODO: build logic to retrieve confirmation messages
+    return 'Confirmation message';
+  }
+
+  get nextStepMessage() {
+    // TODO: build logic to retrieve confirmation messages
+    return 'Next step instructions';
+  }
 }

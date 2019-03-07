@@ -13,9 +13,28 @@ export class MohConfirmationComponent implements OnInit {
   ngOnInit() {
   }
 
+  hasQRCode(): boolean {
+    // TODO: build logic to determine whether or not QR code is displayed
+    return true;
+  }
+
   get statusCode() {
     // TODO: build logic to retrieve code from message
     return ApiStatusCodes.SUCCESS;
   }
 
+  get confirmationMessage() {
+    // TODO: build logic to retrieve confirmation messages
+    return 'Error message';
+  }
+
+  get QRCode() {
+    // TODO: build logic to retrieve confirmation messages
+    return 'QR Code image to be displayed';
+  }
+
+  get nextStepMessage() {
+    // TODO: build logic to retrieve confirmation messages
+    return 'Next step instructions';
+  }
 }

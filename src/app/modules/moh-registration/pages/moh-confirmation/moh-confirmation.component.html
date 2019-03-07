@@ -1,18 +1,12 @@
 <common-page-framework layout='blank'>
 
-  <prime-appl-confirmation [displayIcon]="statusCode" [hasQrCode]="true">
+  <prime-appl-confirmation [displayIcon]='statusCode' [hasQrCode]='hasQRCode()'>
 
-    <p>
-      Confirmation message
-    </p>
+    <p>{{confirmationMessage}}</p>
 
-    <div qrcode>
-      QR Code image to be displayed
-    </div>
+    <div qrcode>{{QRCode}}</div>
 
-    <p nextSteps>
-      Next step instructions
-    </p>
+    <p nextSteps>{{nextStepMessage}}</p>
 
   </prime-appl-confirmation>
 
