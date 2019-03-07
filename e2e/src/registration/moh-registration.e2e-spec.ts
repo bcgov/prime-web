@@ -2,7 +2,7 @@ import { MohProfilePage } from './moh-registration.po';
 import { browser } from 'protractor';
 import { PrimeConstants } from '../../../src/app/models/prime-constants';
 
-describe('workspace-project App', () => {
+describe('MoH Registration - Profile Page', () => {
   let page: MohProfilePage;
   const PAGE_URL = `${PrimeConstants.MOH_REGISTRATION}/${PrimeConstants.PROFILE_PG}`;
 
@@ -20,14 +20,9 @@ describe('workspace-project App', () => {
     page.navigateTo();
     expect(page.formErrors().count()).toBe(0, 'should be no errors on page load');
     page.continue();
-    console.log('before continue, errors');
-    browser.sleep(1000 * 10);
-    expect(page.formErrors().count()).toBeGreaterThanOrEqual(1, 'should be at least one error displayed if user tries to continue');
+    // 5 errors - last name, birthdate, address, city, postal
+    expect(page.formErrors().count()).toEqual(5, 'page should show 5 error texts on continue');
     expect(browser.getCurrentUrl()).toContain(PAGE_URL, 'url should not change');
-
-    // we also expect validation errors to appear to user
-
-    // expect(browser.getCurrentUrl()).toContain(PAGE_URL);
   });
 
   // should not let user continue before completing page
