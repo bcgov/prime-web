@@ -1,9 +1,7 @@
-import { Component, OnInit, Input, forwardRef } from '@angular/core';
+import { Component, OnInit, forwardRef, Output, EventEmitter } from '@angular/core';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { Registrant } from '../../models/registrant.model';
-import { CacheService } from '../../../../services/cache.service';
 import { ControlContainer, NgForm } from '@angular/forms';
-import { PrimeConstants } from '../../../../models/prime-constants';
 
 @Component({
   selector: 'prime-appl-security',
@@ -13,18 +11,22 @@ import { PrimeConstants } from '../../../../models/prime-constants';
 })
 export class ApplSecurityComponent implements OnInit {
 
-  public useMobile;
-  public useSecurity;
-  public useApp;
-  public formRef: NgForm;
+  @Output() dataValid: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  // MFA options
+  public useMobile: boolean = false;
+  public useSecurity: boolean = false;
+  public useApp: boolean = false;
+
+  public submitted: boolean = false;
 
   constructor( private primeDataService: PrimeDataService,
-               private cache: CacheService,
-               public formRefC: ControlContainer  ) {
-        this.formRef = (formRefC as NgForm);
+               private form: NgForm ) {
   }
 
   ngOnInit() {
+    // Listen for submission of form
+    this.form.ngSubmit.subscribe( val => this.validateInfo( val ) );
   }
 
   get registrant(): Registrant {
@@ -32,12 +34,21 @@ export class ApplSecurityComponent implements OnInit {
   }
 
   isCanada(): boolean {
-    if ( !this.registrant.address ) {
-      return true; // Default to Canada
-    } 
-    else if ( this.registrant.identityIsMailingAddress ) {
-      return (this.registrant.address.country === PrimeConstants.CANADA);
+    return this.primeDataService.isCanada();
+  }
+
+  private validateInfo( val: any ) {
+
+    let valid: boolean = false;
+
+    // form has been submitted
+    this.submitted = true;
+
+    if ( this.form.valid ) {
+      // Need to verify MFA options selected
+      // Token has to have Canadian address otherwise not valid option
+      valid  = (this.useApp || this.useMobile || this.useSecurity);
     }
-    return (this.registrant.mailAddress.country === PrimeConstants.CANADA);
+    this.dataValid.emit( valid );
   }
 }

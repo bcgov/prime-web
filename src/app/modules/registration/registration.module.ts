@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { NgxMaskModule } from 'ngx-mask';
 
 import { ApplProfileComponent } from './components/appl-profile/appl-profile.component';
 import { ApplAccountComponent } from './components/appl-account/appl-account.component';
@@ -14,6 +13,7 @@ import { PageSectionsComponent } from './components/page-sections/page-sections.
 import { ApplConfirmationComponent } from './components/appl-confirmation/appl-confirmation.component';
 import { NameComponent } from './components/name/name.component';
 import { TypeaheadModule } from 'ngx-bootstrap';
+import { TextMaskModule } from 'angular2-text-mask';
 import { PhoneNumberComponent } from './components/phone-number/phone-number.component';
 
 @NgModule({
@@ -22,7 +22,7 @@ import { PhoneNumberComponent } from './components/phone-number/phone-number.com
     FormsModule,
     SharedCoreModule,
     HttpClientModule,
-    NgxMaskModule.forRoot(),
+    TextMaskModule,
     TypeaheadModule.forRoot()
   ],
   declarations: [

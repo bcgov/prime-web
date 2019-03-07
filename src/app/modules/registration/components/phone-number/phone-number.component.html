@@ -6,11 +6,10 @@
           type="text"
           name="mobile_phone_{{objectid}}"
           id="mobile_phone_{{objectId}}"
-          [ngModel]="phoneNumber"
-          (ngModelChange)="setPhoneNumber($event)"
-          prefix="+1 "
-          mask="(000) 000-0000"
-          showMaskTyped="true"
+          [ngModel]="value"
+          (ngModelChange)="onUpdate($event)"
+          [placeholder]="placeholder "
+          [textMask]="{mask: mask}"
           [required]="required"
           [disabled]="disabled"/>
   <!-- Error messages for component -->
@@ -30,8 +29,8 @@
           type="text"
           name="mobile_phone_{{objectId}}"
           id="mobile_phone_{{objectId}}"
-          [ngModel]="phoneNumber"
-          (ngModelChange)="setPhoneNumber($event)"
+          [ngModel]="value"
+          (ngModelChange)="onUpdate($event)"
           [required]="required"
           [disabled]="disabled" />
           <!-- Error messages for component -->

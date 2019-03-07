@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, forwardRef, Output, EventEmitter } from '@angular/core';
 import { ControlContainer, NgForm } from '@angular/forms';
-import { Base } from 'moh-common-lib/models';
+import { MaskModel, NUMBER, SPACE } from 'moh-common-lib/models';
 
 @Component({
   selector: 'prime-phone-number',
@@ -12,29 +12,20 @@ import { Base } from 'moh-common-lib/models';
   viewProviders: [ { provide: ControlContainer, useExisting: forwardRef(() => NgForm ) } ]
 
 })
-export class PhoneNumberComponent extends Base implements OnInit {
+export class PhoneNumberComponent extends MaskModel implements OnInit {
 
   @Input() displayMask: boolean = true;
   @Input() label: string = 'Mobile/SMS';
-  @Input() phoneNumber: string;
-  @Input() disabled: boolean = false;
-  @Input() required: boolean = true;
-
-  @Output() phoneNumberChange: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() {
     super();
+
+    this.mask = ['+', '1', SPACE, '(', NUMBER, NUMBER,
+                 NUMBER, ')', SPACE, NUMBER, NUMBER,
+                 NUMBER, '-', NUMBER, NUMBER, NUMBER, NUMBER];
+    this.placeholder = '+1 (555) 555-5555';
   }
 
   ngOnInit() {
   }
-
-  /**
-   * Passes the value entered back to the calling component
-   * @param value value the was entered by
-   */
-  setPhoneNumber( value: string ) {
-    this.phoneNumberChange.emit( value );
-  }
-
 }

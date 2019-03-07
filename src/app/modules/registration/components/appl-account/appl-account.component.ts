@@ -48,7 +48,7 @@ export class ApplAccountComponent implements OnInit {
 
   private validateAccountInfo( val: any ) {
     let valid = false;
-    console.log( ' Validate Account Info' );
+    console.log( 'Validate Account Info' );
     if ( this.form.valid ) {
 
       /* TODO:
