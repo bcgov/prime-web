@@ -4,7 +4,7 @@
 
   <!-- Icons and confirmation messages -->
   <div [ngSwitch]="displayIcon">
-    <ng-container *ngSwitchCase="'0'">
+    <ng-container *ngSwitchCase="successCode">
       <div  class="message-container border border-success">
         <p class="prime-icon--success">
           <i class="fa fa-2x fa-check-circle text-success" aria-label="success"></i>
@@ -13,7 +13,7 @@
       </div>
     </ng-container>
 
-    <ng-container *ngSwitchCase="'1'">
+    <ng-container *ngSwitchCase="errorCode">
       <div  class="message-container border border-danger">
         <p class="prime-icon--error">
           <i class="fa fa-2x fa-exclamation-triangle text-danger" aria-label="error"></i>
@@ -22,7 +22,7 @@
       </div>
     </ng-container>
 
-    <ng-container *ngSwitchCase="'2'">
+    <ng-container *ngSwitchCase="warningCode">
       <div  class="message-container border border-warning">
         <p class="prime-icon--warning">
           <i class="fa fa-2x fa-exclamation-circle text-warning" aria-label="warning"></i>

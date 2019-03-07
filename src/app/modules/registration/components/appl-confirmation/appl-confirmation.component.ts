@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ApiStatusCodes } from '../../../../models/api-status-codes.enum';
 
 @Component({
   selector: 'prime-appl-confirmation',
@@ -7,12 +8,25 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ApplConfirmationComponent implements OnInit {
 
-  @Input() displayIcon: string = '0';
+  @Input() displayIcon: ApiStatusCodes = ApiStatusCodes.SUCCESS;
   @Input() hasQrCode: boolean = false;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  // Status codes
+  get successCode() {
+    return ApiStatusCodes.SUCCESS;
+  }
+
+  get errorCode() {
+    return ApiStatusCodes.ERROR;
+  }
+
+  get warningCode() {
+    return ApiStatusCodes.WARNING;
   }
 
 }
