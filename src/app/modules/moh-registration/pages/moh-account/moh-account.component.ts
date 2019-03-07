@@ -21,7 +21,6 @@ export class MohAccountComponent extends AbstractForm implements OnInit {
 
   continue() {
 
-    console.log(`form`, {valid: this.form.valid, submitted: this.form.submitted}, this.form);
     if (this.form.invalid) {
 
       // Errors exist on form
@@ -32,11 +31,11 @@ export class MohAccountComponent extends AbstractForm implements OnInit {
     this.loading = true;
   }
 
-  registerAccount( valid: boolean ) {
+  continueRegister( valid: boolean ) {
 
     console.log( 'onValidation: ', valid );
 
-    // TODO: Make REST call REG_20 to register user
+
 
     this.loading = false;
     if ( valid ) {

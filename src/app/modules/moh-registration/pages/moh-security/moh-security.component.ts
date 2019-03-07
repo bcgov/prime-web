@@ -20,17 +20,18 @@ export class MohSecurityComponent extends AbstractForm implements OnInit {
   continue() {
     console.log('button pushed', this.form.valid, this.form);
 
-    if (this.form.valid) {
-      this.loading = true;
+  }
 
+  registerAccount( valid: boolean ) {
+
+    // TODO: Make REST call REG_20 to register user
+    if ( valid ) {
+      this.loading = true;
       // ! Temporary - this just waits 2.5sec to simulate an HTTP request.
       setTimeout(() => {
-      this.navigate( PrimeConstants.MOH_REGISTRATION + '/' +
-                   PrimeConstants.CONFIRMATION_PG );
-      }, 2500);
-    }
-    else {
-      this.markAllInputsTouched();
+        this.navigate( PrimeConstants.MOH_REGISTRATION + '/' +
+                      PrimeConstants.CONFIRMATION_PG );
+        }, 2500);
     }
 
   }

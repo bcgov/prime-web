@@ -2,7 +2,7 @@
 
   <form #formRef='ngForm' (ngSubmit)='continue()'>
 
-    <prime-appl-security></prime-appl-security>
+    <prime-appl-security (dataValid)='registerAccount($event)'></prime-appl-security>
     <common-form-submit-bar [increaseWidth]='"true"'
                             [defaultColor]='false'
                             [isLoading]='loading'
