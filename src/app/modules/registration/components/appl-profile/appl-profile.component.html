@@ -49,7 +49,7 @@
   <prime-page-sections layout='tips'>
     <div class="form-group col-sm-6 p-sm-0">
       <prime-name [label]="'Preferred First Name'"
-                  [required]="false"
+                  [required]="preferredIsRequired"
                   [(nameStr)]="registrant.preferredFirstName"></prime-name>
     </div>
 
@@ -61,6 +61,7 @@
 
     <div class="form-group col-sm-6 p-sm-0">
       <prime-name [label]="'Preferred Last Name'"
+                  [required]="preferredIsRequired"
                   [required]="false"
                   [(nameStr)]="registrant.preferredLastName"></prime-name>
     </div>
@@ -105,5 +106,17 @@
     <button type="button"
             class="btn btn-lg btn-warning mx-auto d-block"
             (click)="toggleCheckBox()">My mailing address is different.</button>
+  </div>
+</ng-template>
+
+<ng-template #ConfirmLegalName>
+  <div class="modal-body text-center">
+    <p>Did you forget to enter your Legal First Name?</p>
+    <button type="button"
+            class="btn btn-default"
+            (click)="hasLegalFirstName()">Yes</button>
+    <button type="button"
+            class="btn btn-default"
+            (click)="hasNoLegalFirstName()">No</button>
   </div>
 </ng-template>

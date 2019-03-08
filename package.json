@@ -31,7 +31,7 @@
     "faker": "^4.1.0",
     "font-awesome": "^4.6.3",
     "jquery": "^3.3.1",
-    "moh-common-lib": "^0.0.11",
+    "moh-common-lib": "^0.0.12",
     "moment": "^2.24.0",
     "mygovbc-bootstrap-theme": "^0.4.0",
     "ngx-bootstrap": "^3.2.0",

@@ -34,17 +34,16 @@ export class BcscProfileComponent extends AbstractForm implements OnInit {
       this.markAllInputsTouched();
       return;
     }
-    this.loading = true;
   }
 
 
   continueRegistration( valid: boolean ) {
-    this.loading = false;
+    this.loading = true;
 
     if ( valid ) {
       // Navigate to next page
       this.navigate( PrimeConstants.BCSC_REGISTRATION + '/' +
-                    PrimeConstants.ACCOUNT_PG );
+                     PrimeConstants.ACCOUNT_PG );
     }
   }
 }

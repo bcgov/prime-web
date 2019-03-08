@@ -15,21 +15,6 @@ const routes: Routes = [
     component: HomePageComponent,
     data: { title: 'Home'}
   },
-  {
-    path: 'moh-doc-upload',
-    component: ApplDocUploadComponent,
-    data: { title: 'Upload Documents'}
-  },
-  {
-    path: 'moh-security',
-    component: ApplSecurityComponent,
-    data: { title: 'Security'}
-  },
-  {
-    path: 'moh-confirmation',
-    component: ApplConfirmationComponent,
-    data: { title: 'Confirmation'}
-  },
 
   // Lazy loading modules below
   {

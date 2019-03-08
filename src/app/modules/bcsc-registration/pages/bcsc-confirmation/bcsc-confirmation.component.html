@@ -1,15 +1,11 @@
 <common-page-framework layout='blank'>
 
-  <prime-appl-confirmation [displayIcon]="'1'">
+  <prime-appl-confirmation [displayIcon]="statusCode">
 
-      <p>
-        Error message
-      </p>
+    <p>{{confirmationMessage}}</p>
 
-      <p nextSteps>
-        Next step instructions
-      </p>
+    <p nextSteps>{{nextStepMessage}}</p>
 
-    </prime-appl-confirmation>
+  </prime-appl-confirmation>
 
 </common-page-framework>

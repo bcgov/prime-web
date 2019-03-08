@@ -16,6 +16,5 @@ export class BcscContainerComponent extends Container implements OnInit {
   }
 
   ngOnInit() {
-    console.log( 'bcsc-container  url: ' + this.router.url );
   }
 }

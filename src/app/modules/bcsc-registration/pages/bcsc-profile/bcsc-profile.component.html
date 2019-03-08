@@ -1,7 +1,8 @@
 <common-page-framework layout='blank'>
 
   <form #formRef='ngForm' (ngSubmit)='continue()'>
-    <prime-appl-profile [editIdentityInfo]="false">
+    <prime-appl-profile [editIdentityInfo]="false"
+                        (dataValid)='continueRegistration($event)'>
 
       <p identityInstruct>
         Information received from BCSC - Ministry verbage required

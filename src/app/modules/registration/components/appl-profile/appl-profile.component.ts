@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, forwardRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, forwardRef, Output, EventEmitter, TemplateRef } from '@angular/core';
 import { ControlContainer, NgForm } from '@angular/forms';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { Registrant } from '../../models/registrant.model';
 import { CacheService } from '../../../../services/cache.service';
 import { CountryList, ProvinceList } from '../address/address.component';
 import { PrimeConstants } from '../../../../models/prime-constants';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 
 
 @Component({
@@ -25,6 +26,9 @@ export class ApplProfileComponent implements OnInit {
   public defaultProvince = PrimeConstants.BRITISH_COLUMBIA;
 
   public firstNameRequired: boolean = false;
+  public preferredIsRequired: boolean = false;
+
+  public modalRef: BsModalRef;
 
   /**
    * Date of birth error messages
@@ -33,7 +37,8 @@ export class ApplProfileComponent implements OnInit {
 
   constructor( private primeDataService: PrimeDataService,
                private cache: CacheService,
-               private form: NgForm  ) {
+               private form: NgForm,
+               private modalService: BsModalService ) {
   }
 
   ngOnInit() {
@@ -49,6 +54,21 @@ export class ApplProfileComponent implements OnInit {
     this.registrant.identityIsMailingAddress = !this.registrant.identityIsMailingAddress;
   }
 
+  openModal( template: TemplateRef<any> ) {
+    this.modalRef = this.modalService.show( template, {class: 'modal-sm'} );
+  }
+
+  hasNoLegalFirstName() {
+    this.firstNameRequired = false;
+    this.modalRef.hide();
+  }
+
+  hasLegalFirstName() {
+    this.firstNameRequired = true;
+    this.modalRef.hide();
+  }
+
+  // Cache items
   get countryList(): CountryList[] {
     return this.cache.countryList;
   }
@@ -58,22 +78,18 @@ export class ApplProfileComponent implements OnInit {
   }
 
   private validateInfo( val: any ) {
-    let valid = false;
-    console.log( ' Validate Info - registrant: ', this.registrant );
 
-    if ( this.form.valid ) {
+    // If either of these fields contain data, then required.
+    this.preferredIsRequired = !!((this.registrant.preferredFirstName
+      || this.registrant.preferredLastName) && this.registrant.firstName ) ||
+      !!(this.registrant.preferredFirstName);
 
-      valid = true;
-    }
+  /**
+   *  TODO: validations pertaining to profile
+   *        a) firstname check if missed ( modal dialog requried)
+   *
+   */
 
-
-    /**
-     *  TODO: validations pertaining to profile
-     *        a) firstname check if missed
-     *        b) If optional first name must have legal name
-     *
-     */
-
-    this.dataValid.emit( valid );
+    this.dataValid.emit( this.form.valid );
   }
 }

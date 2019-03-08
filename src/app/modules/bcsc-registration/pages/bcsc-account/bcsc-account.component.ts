@@ -10,29 +10,38 @@ import { PrimeConstants } from '../../../../models/prime-constants';
 })
 export class BcscAccountComponent extends AbstractForm implements OnInit {
 
-    constructor( protected router: Router ) {
-      super( router );
-    }
+  constructor( protected router: Router ) {
+    super( router );
+  }
 
-    ngOnInit() {
-    }
+  ngOnInit() {
+  }
 
-    continue() {
-      console.log( 'form: ', this.form );
+  continue() {
+
+    console.log( 'form: ', this.form );
+    if (this.form.invalid) {
 
       // Errors exist on form
-      if ( this.form.invalid ) {
-
-        // Mark all fields as touched to display errors
-        Object.keys(this.form.form.controls).forEach( x => {
-          this.form.form.get( x ).markAsTouched();
-        });
-        return;
-      }
-
-      // Navigate to next page
-      this.navigate( PrimeConstants.BCSC_REGISTRATION + '/' +
-                     PrimeConstants.CONFIRMATION_PG );
-
+      // Mark all fields as touched to display errors
+      this.markAllInputsTouched();
+      return;
     }
+    this.loading = true;
+  }
+
+  registerAccount( valid: boolean ) {
+
+    if ( valid ) {
+
+      this.loading = true;
+
+      // ! Temporary - this just waits 2.5sec to simulate an HTTP request.
+      setTimeout(() => {
+        // Navigate to next page
+        this.navigate( PrimeConstants.BCSC_REGISTRATION + '/' +
+                      PrimeConstants.CONFIRMATION_PG );
+        }, 2500);
+    }
+  }
 }

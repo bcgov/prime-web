@@ -15,7 +15,7 @@ export class PrimeConstants {
 
   // Routes
   public static MOH_REGISTRATION = 'moh-registration';
-  public static BCSC_REGISTRATION = 'bscs-registration';
+  public static BCSC_REGISTRATION = 'bcsc-registration';
 
   // Pages
   public static PROFILE_PG = 'profile';
