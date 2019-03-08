@@ -1,7 +1,8 @@
 <common-page-framework layout='blank'>
 
   <form #formRef='ngForm' (ngSubmit)='continue()'>
-    <prime-appl-account [mohCredientials]='false'>
+    <prime-appl-account [mohCredientials]='false'
+                        (dataValid)='registerAccount($event)'>
 
       <p AccountInstruct>
         Information for creating account with BCSC credientials
@@ -11,7 +12,9 @@
 
     <!-- Display bar during registration -->
     <common-form-submit-bar [increaseWidth]='true'
-                            [isLoading]='loading'></common-form-submit-bar>
+                            [isLoading]='loading'
+                            [defaultColor]='false'
+                            submitLabel='Complete Registration'></common-form-submit-bar>
   </form>
 
 </common-page-framework>

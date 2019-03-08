@@ -16,6 +16,5 @@ export class MohContainerComponent extends Container implements OnInit {
   }
 
   ngOnInit() {
-    console.log( 'moh-container  url: ' + this.router.url );
   }
 }

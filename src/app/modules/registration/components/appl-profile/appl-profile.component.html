@@ -108,3 +108,15 @@
             (click)="toggleCheckBox()">My mailing address is different.</button>
   </div>
 </ng-template>
+
+<ng-template #ConfirmLegalName>
+  <div class="modal-body text-center">
+    <p>Did you forget to enter your Legal First Name?</p>
+    <button type="button"
+            class="btn btn-default"
+            (click)="hasLegalFirstName()">Yes</button>
+    <button type="button"
+            class="btn btn-default"
+            (click)="hasNoLegalFirstName()">No</button>
+  </div>
+</ng-template>
