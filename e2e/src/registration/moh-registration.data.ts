@@ -2,7 +2,7 @@ import * as faker from 'faker';
 
 export class FakeDataMohReg {
 
-    profileInfo() {
+    profileInfo(): ProfilePageTest {
         return {
             firstName: faker.name.firstName(),
             middleName: Math.random() > 0.5 ? faker.name.firstName() : undefined,
@@ -16,8 +16,21 @@ export class FakeDataMohReg {
     }
 }
 
+// TODO - Refactor and improve this so we can create interfaces / types automatically at compiletime based off the return type.
 // Create interfaces automatically based off the method return types.
 // const data = new FakeDataMohReg();
-// export type TestProfileInfo = typeof data.randomProfileInfo();
+// export type TestProfileInfo = typeof data.profileInfo();
 
-// export interface ProfileDataFields
+export interface ProfilePageTest {
+  firstName: string;
+  middleName: string;
+  lastName: string;
+  birthDate: Date;
+  country: string;
+  address: string;
+  city: string;
+  postal: string;
+
+  /** Currently province is not auto-generated and is manually added during tests. */
+  province?: string;
+}

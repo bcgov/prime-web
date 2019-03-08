@@ -13,9 +13,8 @@ describe('MoH Registration - Profile Page', () => {
         page = new MohProfilePage();
     });
 
-    it('should navigate to the moh-registration/profile page without route guards', () => {
+    it('should load the page without issue', () => {
         page.navigateTo();
-        browser.sleep(25); // Total guess - giving time to see if route guards fire.
         expect(browser.getCurrentUrl()).toContain(PAGE_URL);
     });
 
@@ -23,45 +22,55 @@ describe('MoH Registration - Profile Page', () => {
         page.navigateTo();
         expect(page.formErrors().count()).toBe(0, 'should be no errors on page load');
         page.continue();
+
         // user should see errors and not move forward pages
         // 5 errors - last name, birthdate, address, city, postal
         expect(page.formErrors().count()).toEqual(5, 'page should show 5 error texts on continue');
         expect(browser.getCurrentUrl()).toContain(PAGE_URL, 'url should not change');
     });
 
-    fit('should let the user continue when the form is filled out (Canada)', async () => {
+    it('should let the user continue when the form is filled out (Canada)', () => {
         const profileData = data.profileInfo();
+        profileData['country'] = 'Canada';
+
         page.navigateTo();
-
-        // potentially have a - fullPage(data) fn that calls lower ones as helper
-        page.fillName(profileData);
-        page.fillBirthDate(profileData.birthDate);
-        page.fillAddress(profileData);
-
-        browser.sleep(1 * 1000);
+        page.fillPage(profileData);
         page.continue();
-        expect(browser.getCurrentUrl()).toContain(NEXT_PAGE_URL, 'should navigate to the Document Upload page')
+
+        expect(browser.getCurrentUrl()).toContain(NEXT_PAGE_URL, 'should navigate to the Document Upload page');
         expect(page.formErrors().count()).toBe(0, 'should be no errors as form should be valid');
-
-        // expect(await page.getNameComponentVal('First Name'))
-        // .toEqual(profileData.firstName, 'first name should match');
-
-        // expect(page.getNameComponentVal('Last Name'))
-        // .toEqual(profileData.lastName, 'last name should match');
-
-
-
-      // expect(browser.)
-        // expect()
-
-        // const elName = page.getNameElement()
-
-        // expect(profileData.firstName).to
-
-        browser.sleep(2 * 1000);
     });
 
-    //
-    // should not let user continue before completing page
-    // should allow the first name to NOT be entered
+    it('should let the user continue when the form is filled out (United States)', () => {
+      const profileData = data.profileInfo();
+      profileData['country'] = 'United States';
+      profileData['province'] = 'California';
+
+      page.navigateTo();
+      page.fillPage(profileData);
+      page.continue();
+
+      expect(browser.getCurrentUrl()).toContain(NEXT_PAGE_URL, 'should navigate to the Document Upload page');
+      expect(page.formErrors().count()).toBe(0, 'should be no errors as form should be valid');
+  });
+
+    // should allow first name to be blank
+    // should not allow last name to be blank
+
+    // should not let user continue if mailing address is empty
+      // -- form has been filled out and is valid
+      // -- then click 'My Mailing Address is Different'
+      // -- form should NOT be valid now
+
+    // should show mailing address when checkbox is unchecked
+    // should show mailing address when button is pressed
+    // should hide mailing address when checkbox is re-checked
+    // should hide mailing address when checkbox is re-checked after button press
+
+    // should show a blue "Continue" button on the bottom
+      // -- bonus if you can use protractor's "isDisplayed()"
+
+    // todo - get some tests about Preferred Name. will have to fix the
+    // getNameComponent method as it can't select them now. maybe a parent
+    // selector?
 });
