@@ -28,7 +28,7 @@ export class BaseMohRegistrationPage {
 }
 
 export class MohProfilePage extends BaseMohRegistrationPage {
-    private fakeData = new FakeData();
+    // private fakeData = new FakeData();
 
     // TODO - Move to generic parent / abstract
     async getNameElement(labelName): Promise<WebElement> {
@@ -37,7 +37,8 @@ export class MohProfilePage extends BaseMohRegistrationPage {
     }
 
 
-    async fillName(data = this.fakeData.randomProfileInfo()) {
+    // TODO - TYPE THIS DATA! Either interface or maybe use the `type` operator?
+    async fillName(data) {
         (await this.getNameElement('First Name')).sendKeys(data.firstName);
         if (data.middleName) {
             (await this.getNameElement('Middle Name')).sendKeys(data.middleName);
