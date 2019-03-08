@@ -1,16 +1,16 @@
-import { MohProfilePage } from './moh-registration.po';
+import { MohProfileTestPage } from './moh-registration.po';
 import { browser } from 'protractor';
 import { PrimeConstants } from '../../../src/app/models/prime-constants';
 import { FakeDataMohReg } from './moh-registration.data';
 
 describe('MoH Registration - Profile Page', () => {
-    let page: MohProfilePage;
+    let page: MohProfileTestPage;
     const data = new FakeDataMohReg();
     const PAGE_URL = `${PrimeConstants.MOH_REGISTRATION}/${PrimeConstants.PROFILE_PG}`;
     const NEXT_PAGE_URL =  `${PrimeConstants.MOH_REGISTRATION}/${PrimeConstants.DOC_UPLD_PG}`;
 
     beforeEach(() => {
-        page = new MohProfilePage();
+        page = new MohProfileTestPage();
     });
 
     it('should load the page without issue', () => {
@@ -38,6 +38,7 @@ describe('MoH Registration - Profile Page', () => {
         page.continue();
 
         expect(browser.getCurrentUrl()).toContain(NEXT_PAGE_URL, 'should navigate to the Document Upload page');
+        // todo - improve this, so that it properly shows the error names if they exist
         expect(page.formErrors().count()).toBe(0, 'should be no errors as form should be valid');
     });
 

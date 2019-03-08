@@ -1,10 +1,10 @@
-import { PrimePage } from './app.po';
+import { PrimeTestPage } from './app.po';
 
 xdescribe('PRIME App', () => {
-  let page: PrimePage;
+  let page: PrimeTestPage;
 
   beforeEach(() => {
-    page = new PrimePage();
+    page = new PrimeTestPage();
   });
 
   it('should display Prime in banner', () => {

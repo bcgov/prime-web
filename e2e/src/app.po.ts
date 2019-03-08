@@ -6,7 +6,7 @@ import { browser, by, element, WebElement, $$ } from 'protractor';
  * `moh-common-lib/testing` once created. That way different Angular projects
  * can use the same e2e starting board.
  */
-export class PrimePage {
+export class PrimeTestPage {
   /** Every class should override this to point to the page it is testing.  */
   navigateTo() {
     return browser.get('/');

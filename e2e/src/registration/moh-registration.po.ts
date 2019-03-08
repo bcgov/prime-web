@@ -1,8 +1,8 @@
 import { browser, by, element, WebElement } from 'protractor';
-import { PrimePage } from '../app.po';
+import { PrimeTestPage } from '../app.po';
 import { ProfilePageTest } from './moh-registration.data';
 
-export class BaseMohRegistrationPage extends PrimePage {
+export class BaseMohRegTestPage extends PrimeTestPage {
     private continueButton: WebElement;
 
     constructor() {
@@ -19,7 +19,7 @@ export class BaseMohRegistrationPage extends PrimePage {
     }
 }
 
-export class MohProfilePage extends BaseMohRegistrationPage {
+export class MohProfileTestPage extends BaseMohRegTestPage {
 
     /** Fill out the entire page. Page will be valid after.  */
     fillPage(data: ProfilePageTest) {
