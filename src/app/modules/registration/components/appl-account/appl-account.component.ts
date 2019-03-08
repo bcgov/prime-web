@@ -123,10 +123,15 @@ export class ApplAccountComponent implements OnInit {
       return;
     }
 
-    console.log( 'userID: ', this.registrant.userID );
-    if ( this.registrant.userID && this.registrant.password.match( this.registrant.userID ) ) {
+    // Check for user ID or names in password
+    if ( (this.registrant.userID &&
+          this.registrant.password.includes( this.registrant.userID )  ||
+        this.primeDataService.userNameList.map( x => {
+          if ( x.length > 1 ) { // ignore initials for names
+            return this.registrant.password.includes( x );
+          }
+        }).filter( item => item === true ).length > 0 ) ) {
       this.form.form.setErrors( {'containsUserNames': true} );
-      return;
     }
   }
 }
