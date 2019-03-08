@@ -1,8 +1,8 @@
 import * as faker from 'faker';
 
-export class FakeData {
+export class FakeDataMohReg {
 
-    randomProfileInfo() {
+    profileInfo() {
         return {
             firstName: faker.name.firstName(),
             middleName: Math.random() > 0.5 ? faker.name.firstName() : undefined,
@@ -13,6 +13,11 @@ export class FakeData {
             city: faker.address.city(),
             postal: faker.address.zipCode('?#? #?#')
         };
-
     }
 }
+
+// Create interfaces automatically based off the method return types.
+// const data = new FakeDataMohReg();
+// export type TestProfileInfo = typeof data.randomProfileInfo();
+
+// export interface ProfileDataFields

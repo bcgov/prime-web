@@ -1,10 +1,11 @@
-import { browser, by, element, $$, WebElement } from 'protractor';
-import { FakeData } from '../fake-data';
+import { browser, by, element, WebElement } from 'protractor';
+import { PrimePage } from '../app.po';
 
-export class BaseMohRegistrationPage {
-    private continueButton;
+export class BaseMohRegistrationPage extends PrimePage {
+    private continueButton: WebElement;
 
     constructor() {
+        super();
         this.continueButton = element(by.css('.form-bar .submit'));
     }
 
@@ -15,40 +16,37 @@ export class BaseMohRegistrationPage {
     continue() {
         this.continueButton.click();
     }
-
-    // TODO - Move these to a generic class for all e2e tests
-
-    noFormErrors() {
-        return this.formErrors().count();
-    }
-
-    formErrors() {
-        return $$('[role=alert] .text-danger');
-    }
 }
 
 export class MohProfilePage extends BaseMohRegistrationPage {
-    // private fakeData = new FakeData();
-
-    // TODO - Move to generic parent / abstract
-    async getNameElement(labelName): Promise<WebElement> {
-        const label = element(by.cssContainingText('prime-name label', labelName));
-        return element(by.id(await label.getAttribute('for')));
-    }
-
-
     // TODO - TYPE THIS DATA! Either interface or maybe use the `type` operator?
     async fillName(data) {
-        (await this.getNameElement('First Name')).sendKeys(data.firstName);
+        (await this.getNameComponent('First Name')).sendKeys(data.firstName);
         if (data.middleName) {
-            (await this.getNameElement('Middle Name')).sendKeys(data.middleName);
+            (await this.getNameComponent('Middle Name')).sendKeys(data.middleName);
         }
-        (await this.getNameElement('Last Name')).sendKeys(data.lastName);
+        (await this.getNameComponent('Last Name')).sendKeys(data.lastName);
     }
 
-    fillBirthDate() {
-        // TODO - figure out how to select from dropdown
-        // old prime did - element.all(by.css('#dateOfBirth select option')).get(3).click();
+    async fillBirthDate(date: Date) {
+        // TODO: Abstract to general function to fill out date components - move to PrimePage for now.
+        const birthDateCSS = '[ng-reflect-label="Birthdate"]';
+        const month = date.getMonth();
+        const year = date.getFullYear();
+        const day = date.getDate();
+        element.all(by.css(`${birthDateCSS} select option`)).get(month).click();
+
+        element.all(by.css(`${birthDateCSS} [name^="year"]`)).sendKeys(year);
+        element.all(by.css(`${birthDateCSS} [name^="day"]`)).sendKeys(day);
+    }
+
+    // need to type this interface like fillName()
+    fillAddress(data) {
+      // TODO - This could be refactored to actually use the Geocoder / typeahead part
+      // For now it just treats it as a simple input.
+      element(by.css('prime-address [id^="street"]')).sendKeys(data.address);
+      element(by.css('prime-address [id^="city"]')).sendKeys(data.city);
+      element(by.css('prime-address [id^="postal"]')).sendKeys(data.postal);
     }
 
 
