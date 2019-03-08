@@ -15,12 +15,12 @@ export class BcscConfirmationComponent implements OnInit {
 
   get statusCode() {
     // TODO: build logic to retrieve code from message
-    return ApiStatusCodes.ERROR;
+    return ApiStatusCodes.SUCCESS;
   }
 
   get confirmationMessage() {
     // TODO: build logic to retrieve confirmation messages
-    return 'Confirmation message';
+    return 'Registration has been successfully completed.';
   }
 
   get nextStepMessage() {

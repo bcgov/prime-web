@@ -25,7 +25,7 @@ export class MohConfirmationComponent implements OnInit {
 
   get confirmationMessage() {
     // TODO: build logic to retrieve confirmation messages
-    return 'Error message';
+    return 'Account successfully created.';
   }
 
   get QRCode() {
@@ -35,6 +35,6 @@ export class MohConfirmationComponent implements OnInit {
 
   get nextStepMessage() {
     // TODO: build logic to retrieve confirmation messages
-    return 'Next step instructions';
+    return 'Please log on to complete to ID Proofing.';
   }
 }
