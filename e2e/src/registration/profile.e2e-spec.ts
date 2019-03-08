@@ -52,7 +52,10 @@ describe('MoH Registration - Profile Page', () => {
       page.continue();
 
       expect(browser.getCurrentUrl()).toContain(NEXT_PAGE_URL, 'should navigate to the Document Upload page');
-      expect(page.formErrors().count()).toBe(0, 'should be no errors as form should be valid');
+      // expect(page.formErrors().count()).toBe(0, 'should be no errors as form should be valid');
+
+      expect(page.formErrors()).toEqual([], 'should be no errors as form is valid');
+
   });
 
     // should allow first name to be blank

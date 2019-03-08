@@ -77,3 +77,14 @@ export class MohProfileTestPage extends BaseMohRegTestPage {
   }
 }
 
+
+export class MohAccountTestPage extends BaseMohRegTestPage {
+
+  fillPrimeAccount() { }
+
+  navigateTo() {
+    return browser.get('/moh-registration/account');
+}
+
+}
+
