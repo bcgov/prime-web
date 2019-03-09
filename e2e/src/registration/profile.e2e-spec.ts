@@ -29,7 +29,7 @@ describe('MoH Registration - Profile Page', () => {
         expect(browser.getCurrentUrl()).toContain(PAGE_URL, 'url should not change');
     });
 
-    it('should let the user continue when the form is filled out (Canada)', () => {
+    xit('should let the user continue when the form is filled out (Canada)', () => {
         const profileData = data.profileInfo();
         profileData['country'] = 'Canada';
 
@@ -42,7 +42,7 @@ describe('MoH Registration - Profile Page', () => {
         expect(page.formErrors().count()).toBe(0, 'should be no errors as form should be valid');
     });
 
-    it('should let the user continue when the form is filled out (United States)', () => {
+    xit('should let the user continue when the form is filled out (United States)', () => {
       const profileData = data.profileInfo();
       profileData['country'] = 'United States';
       profileData['province'] = 'California';
