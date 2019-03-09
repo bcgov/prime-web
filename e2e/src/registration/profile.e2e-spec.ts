@@ -59,7 +59,20 @@ describe('MoH Registration - Profile Page', () => {
   });
 
     // should allow first name to be blank
+    
     // should not allow last name to be blank
+    xit('should not allow last name to be blank', () => {
+      const profileData = data.profileInfo();
+      profileData['lastName'] = ' ';
+
+      page.navigateTo();
+      page.fillPage(profileData);
+      //browser.sleep(1000 * 10);
+      page.continue();
+      
+      expect(page.formErrors().count()).toEqual(5, 'page should show 5 error texts on continue');
+      expect(browser.getCurrentUrl()).toContain(PAGE_URL, 'url should not change');
+    });
 
     // should not let user continue if mailing address is empty
       // -- form has been filled out and is valid
