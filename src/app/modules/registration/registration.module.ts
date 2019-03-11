@@ -15,7 +15,11 @@ import { NameComponent } from './components/name/name.component';
 import { TypeaheadModule } from 'ngx-bootstrap';
 import { TextMaskModule } from 'angular2-text-mask';
 import { PhoneNumberComponent } from './components/phone-number/phone-number.component';
+<<<<<<< HEAD
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
+=======
+import { NgSelectModule} from '@ng-select/ng-select';
+>>>>>>> master
 
 @NgModule({
   imports: [
@@ -24,7 +28,8 @@ import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.
     SharedCoreModule,
     HttpClientModule,
     TextMaskModule,
-    TypeaheadModule.forRoot()
+    TypeaheadModule.forRoot(),
+    NgSelectModule
   ],
   declarations: [
     ApplProfileComponent,

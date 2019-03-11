@@ -90,17 +90,18 @@
          *ngFor="let item of registrant.secQuestionsAnswer; let i = index;">
       <div class="p-2">
         <label class="control-label" for="sec_question_{{i}}">Question #{{i+1}}</label>
-        <select #questionRef="ngModel"
-                class="form-control"
-                id="sec_question_{{i}}"
-                name="sec_question_{{i}}"
-                [ngModel]="item?.question"
-                (ngModelChange)="item.question=$event"
-                required>
-          <option value="null" label="-- Select question --" selected></option>
-          <option *ngFor="let question of secQuestionList"
-                  [value]="question">{{question}}</option>
-        </select>
+        <ng-select #questionRef='ngModel'
+                   name='sec_question_{{i}}'
+                   labelForId='sec_question_{{i}}'
+                   [ngModel]='item?.question'
+                   (ngModelChange)='item.question=$event'
+                   [items]='secQuestionList'
+                   placeholder=' -- Select Question --'
+                   autocorrect='on'
+                   addTag=true
+                   addTagText='Add question'
+                   required></ng-select>
+
           <!-- Error messages for component -->
           <div *ngIf="questionRef.touched"
                 role="alert"

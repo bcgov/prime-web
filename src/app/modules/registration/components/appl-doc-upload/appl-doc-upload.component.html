@@ -7,16 +7,18 @@
     <div class="form-row align-items-end">
       <div class="col-auto">
         <label for="docType">Document Type</label>
-        <select class="form-control"
-                id="docType"
-                name="docType"
-                [(ngModel)]="docTypeDropdownValue"
-                (change)='updateValidation()'
-                #docTypeEl='ngModel'
-                [required]='documents.length === 0'>
-          <option value="" selected disabled>Choose</option>
-          <option *ngFor="let doc of docTypesList; let i = index;" [value]="doc.name">{{doc.name}}</option>
-        </select>
+        <ng-select name='docType'
+                   labelForId='docType'
+                   [(ngModel)]='docTypeDropdownValue'
+                   [items]='docTypesList'
+                   bindLabel='name'
+                   bindValue='name'
+                   placeholder='Choose'
+                   #docTypeEl='ngModel'
+                   [clearable]='false'
+                   [searchable]='false'
+                   (change)='updateValidation()'
+                   [required]='documents.length === 0'></ng-select>
       </div>
 
 

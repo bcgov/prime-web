@@ -1,18 +1,21 @@
 <div class="form-group col-sm-8 p-sm-0">
   <label for="country_{{objectId}}">Country</label>
-  <select class="form-control"
-          id="country_{{objectId}}"
-          name="country_{{objectId}}"
-          [ngModel]="address?.country"
-          (ngModelChange)="setCountry($event)"
-          [required]="isRequired"
-          [disabled]="disabled">
-    <option value="null"
-            label="-- Select country --" selected
-            [disabled]="isRequired"></option>
-    <option *ngFor="let country of countryList"
-            [value]="country.countryCode">{{country.description}}</option>
-  </select>
+  <!-- todo - doc upload -->
+  <!-- todo - security questions (with addTag) -->
+  <!-- todo - will need to update e2e tests for using select/dropdowns -->
+
+
+  <ng-select [items]='countryList'
+             [ngModel]='address?.country'
+             (ngModelChange)='setCountry($event)'
+             [required]='isRequired'
+             [disabled]='disabled'
+             name='country_{{objectId}}'
+             labelForId='country_{{objectId}}'
+             bindValue='countryCode'
+             [clearable]='false'
+             bindLabel='description'></ng-select>
+
 </div>
 
 <div class="form-group col-sm-8 p-sm-0">
@@ -22,21 +25,19 @@
       TODO: See if there is a way not to duplicate errors for fields that change based on
             some criteria
     -->
-    <select class="form-control"
-            #provRef="ngModel"
-            id="province_{{objectId}}"
-            name="province_{{objectId}}"
-            [ngModel]="address?.province"
-            (ngModelChange)="setProvince($event)"
-            [required]="isRequired"
-            [disabled]="disabled" >
-      <option value="null"
-              label="-- Select {{isCanada() ? 'province' : 'state' }} --"
-              selected
-              [disabled]="isRequired"></option>
-      <option *ngFor="let prov of provList"
-              [value]="prov.provCode">{{prov.description}}</option>
-    </select>
+
+    <ng-select #provRef='ngModel'
+               name='province_{{objectId}}'
+               labelForId='province_{{objectId}}'
+               [ngModel]="address?.province"
+               (ngModelChange)="setProvince($event)"
+               [items]='provList'
+               [required]='isRequired'
+               [disabled]='disabled'
+               bindValue='provCode'
+               [clearable]='false'
+               bindLabel='description'></ng-select>
+
 
     <!-- Error messages for select -->
     <div *ngIf="!disabled && provRef.touched"

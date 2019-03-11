@@ -26,4 +26,18 @@ export class PrimeTestPage {
   formErrors() {
     return $$('[role=alert] .text-danger');
   }
+
+  /**
+   * Selects from an ng-select component.
+   *
+   * TODO - Need to test this works! Right now just copied from GitHub with minor tweaks.
+   * IDEA - Mirror getNameComponent, where we lookup via the label text and use the 'for' attribute.
+   *
+   * @param labelId corresponds to labelForId on the <ng-select>
+   * @param optionText the option we want to select
+   */
+  selectOption(labelId: string, optionText: string) {
+    element(by.css(`ng-select[ng-reflect-for-id="${labelId}"]`)).click(); // opens dropdown
+    element(by.cssContainingText('span.ng-option-label', optionText)).click(); // selects option by provided text
+  }
 }
