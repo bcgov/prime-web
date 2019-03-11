@@ -57,6 +57,8 @@ export class AddressComponent extends Base implements OnInit {
   /** The subject that triggers on user text input and gets typeaheadList$ to update.  */
   private searchText$ = new Subject<string>();
 
+  public provList: ProvinceList[];
+
   constructor( private geocoderService: GeocoderService ) {
     super();
    }
@@ -78,7 +80,10 @@ export class AddressComponent extends Base implements OnInit {
 
       if ( !this.address.province ) {
         this.address.province = this.setDefaultProvinceAsOption( this.address.country );
+        console.log('setting default province', this.address);
       }
+
+      this.updateProvList();
     }
 
     // Set up for using GeoCoder
@@ -101,6 +106,7 @@ export class AddressComponent extends Base implements OnInit {
   setCountry( value: string ) {
     this.address.province = this.setDefaultProvinceAsOption( value );
     this.address.country = value;
+    this.updateProvList();
     this.addressChange.emit( this.address );
   }
 
@@ -122,7 +128,7 @@ export class AddressComponent extends Base implements OnInit {
   get postalCode() {
     return this.address.postal;
   }
-  
+
   /**
    * Sets string after converted upper case
    * @param text
@@ -140,9 +146,12 @@ export class AddressComponent extends Base implements OnInit {
     return (this.address && 'USA' === this.address.country) || this.isCanada();
   }
 
-  /** Constains provinces and states */
-  get provList(): ProvinceList[] {
-    return this.provinceList.map( prov => {
+  /**
+   * Updates the provList variable. Values must be stored in a variable and not
+   * accessed via function invocation for performance.
+   */
+  private updateProvList() {
+    this.provList = this.provinceList.map( prov => {
       if ( prov.country === this.address.country ) {
         return prov;
       }
