@@ -80,7 +80,6 @@ export class AddressComponent extends Base implements OnInit {
 
       if ( !this.address.province ) {
         this.address.province = this.setDefaultProvinceAsOption( this.address.country );
-        console.log('setting default province', this.address);
       }
 
       this.updateProvList();
