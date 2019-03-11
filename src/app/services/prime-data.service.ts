@@ -13,6 +13,9 @@ export class PrimeDataService {
   // TODO - CHANGE! Needs to be a nested array and first type should be meta-data (e.g. driver's license? passport?)
   public documents: Document[];
 
+  // List of the user's names to be used during password verification
+  public userNameList: string[];
+
   constructor() {
     // Data for registrants
     this.registrant = new Registrant();

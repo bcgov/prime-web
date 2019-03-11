@@ -40,6 +40,23 @@
                        [minLen]="pwdMinLen"
                        [pwdCriteria]="pwdValidChars"
                        [(password)]="registrant.password"></common-password>
+      <div *ngIf="formErrors"
+            role="alert"
+            class='error-container'
+            aria-live="assertive">
+        <div class="text-danger" *ngIf="formErrors?.failCriteria">
+            {{newPwdLabel}} must contain characters from 3 of the 4 following categories:
+            <ul>
+              <li>a) Upper characters</li>
+              <li>b) Lower characters</li>
+              <li>c) Numerals</li>
+              <li>d) Non-alphanumeric characters</li>
+            </ul>
+        </div>
+        <div class="text-danger" *ngIf="formErrors?.containsUserNames">
+            {{newPwdLabel}} cannot contain user names or user ID.
+        </div>
+      </div>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
@@ -47,7 +64,15 @@
                        [minLen]="pwdMinLen"
                        [(password)]="confirmPassword"
                        [errorMessages]="confirmPwdMsg"></common-password>
-
+      <!-- Error messages for component -->
+      <div *ngIf="formErrors"
+            role="alert"
+            class='error-container'
+            aria-live="assertive">
+        <div class="text-danger" *ngIf="formErrors?.noPasswordMatch">
+            {{confirmPwdLabel}} does not match.
+        </div>
+      </div>
     </div>
 
     <aside>TIPS</aside>
@@ -136,7 +161,7 @@
              id="user_email"
              placeholder="username@example.com"
              [pattern]="emailCriteria"
-             [required]="mohCredientials"
+             required
              [maxlength]="emailMaxLen"
              [ngModel]="registrant?.emailAddress"
              (ngModelChange)="registrant.emailAddress = $event" />

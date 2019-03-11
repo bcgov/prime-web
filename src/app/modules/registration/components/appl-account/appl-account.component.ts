@@ -36,9 +36,9 @@ export class ApplAccountComponent implements OnInit {
   // TODO: Need to know valid characters for email.
   public emailCriteria = /^([A-Za-z0-9_\-.+])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,})$/;
 
-  constructor(private primeDataService: PrimeDataService,
-    private cache: CacheService,
-    private form: NgForm) {
+  constructor( private primeDataService: PrimeDataService,
+               private cache: CacheService,
+               private form: NgForm ) {
   }
 
   ngOnInit() {
@@ -55,52 +55,25 @@ export class ApplAccountComponent implements OnInit {
   }
 
   private validateAccountInfo(val: any) {
-    let valid = false;
-    console.log('Validate Account Info');
-    if (this.form.valid) {
 
-      /* TODO:
-       *  a) Check password criteria
-       *  b) Make REST call REG_10
-       *
-   * At least 3 of the following categories:
-   *  a) Upper case characters (A-Z)
-   *  b) Lower case characters (a-z)
-   *  c) Numeral (0-9)
-   *  d) Non-alphanumeric characters e.g. []?/\.<~#`!@#$%^&*()-+=|:"',>{}
+    if ( this.mohCredientials && this.registrant.password ) {
+      this.verifyPassword();
 
-   no userID and no names
-
-   At least one upper case English letter, (?=.*?[A-Z])
-At least one lower case English letter, (?=.*?[a-z])
-At least one digit, (?=.*?[0-9])
-At least one special character, (?=.*?[#?!@$%^&*-])
-
-    // '^((?=.*[^a-zA-Z\s])(?=.*[a-z])(?=.*[A-Z])|(?=.*[^a-zA-Z0-9\s])(?=.*\d)(?=.*[a-zA-Z])).*$'
-
-   */
-      valid = true;
+      // User has entered both passwords, compare to see if they match
+      if ( this.confirmPassword && ( this.confirmPassword !== this.registrant.password ) ) {
+        this.form.form.setErrors( {'noPasswordMatch': true} );
+      }
     }
 
-    const pwdCriteria = RegExp(
-      '^((?=.*[^a-zA-Z\s])(?=.*[a-z])(?=.*[A-Z])|(?=.*[^a-zA-Z0-9\s])(?=.*\d)(?=.*[a-zA-Z])).*$'
-    );
-    console.log('Validate password password: ', this.registrant.password);
-    console.log('Validate password: ', pwdCriteria.test(this.registrant.password));
-
-
-    const pwdCriteria2 = RegExp(this.registrant.password );
-    console.log('Validate confirm password: ', pwdCriteria2.test(this.registrant.password));
-
-    if ( this.registrant.password !== this.confirmPassword ) {
-      console.log( 'Password mismatch ' );
-    }
-
-    this.dataValid.emit(valid);
+    this.dataValid.emit(this.form.valid);
   }
 
   get registrant(): Registrant {
     return this.primeDataService.registrant;
+  }
+
+  get formErrors() {
+    return this.form.errors;
   }
 
   isCanada(): boolean {
@@ -124,5 +97,41 @@ At least one special character, (?=.*?[#?!@$%^&*-])
 
   get secQuestionList(): string[] {
     return this.cache.secQuestionList;
+  }
+
+  // private method
+  private verifyPassword() {
+
+    /**
+     * At least 3 of the following categories:
+     *  a) Upper case characters (A-Z)
+     *  b) Lower case characters (a-z)
+     *  c) Numeral (0-9)
+     *  d) Non-alphanumeric characters e.g. ?/.<~#`!@#$%^&*()+=|:"',>{}
+     *  e) no userID and no names
+     */
+    const upperChars = RegExp( '^(?=.*?[A-Z]).*$' ).test(this.registrant.password) ? 1 : 0;
+    const lowerChars = RegExp( '^(?=.*?[a-z]).*$' ).test(this.registrant.password) ? 1 : 0;
+    const numerals = RegExp( '^(?=.*?[0-9]).*$' ).test(this.registrant.password) ? 1 : 0;
+    const symbols = RegExp( '^(?=.*[?/\.<~#`!@#$%^&*()+=|:\"\',>{}]).*$' ).test(this.registrant.password) ? 1 : 0;
+
+    console.log('Validate password (categories): ',
+      {symbols: symbols, numerals: numerals, lowercase: lowerChars, uppercase: upperChars} );
+
+    if ( upperChars + lowerChars + numerals + symbols < 3 ) {
+      this.form.form.setErrors( {'failCriteria': true} );
+      return;
+    }
+
+    // Check for user ID or names in password
+    if ( (this.registrant.userID &&
+          this.registrant.password.includes( this.registrant.userID )  ||
+        this.primeDataService.userNameList.map( x => {
+          if ( x.length > 1 ) { // ignore initials for names
+            return this.registrant.password.includes( x );
+          }
+        }).filter( item => item === true ).length > 0 ) ) {
+      this.form.form.setErrors( {'containsUserNames': true} );
+    }
   }
 }

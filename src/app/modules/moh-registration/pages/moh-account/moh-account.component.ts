@@ -36,6 +36,8 @@ export class MohAccountComponent extends AbstractForm implements OnInit {
     console.log( 'onValidation: ', valid );
 
 
+    console.log( 'form: ', this.form );
+
 
     this.loading = false;
     if ( valid ) {
