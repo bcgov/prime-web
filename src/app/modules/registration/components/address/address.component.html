@@ -3,8 +3,6 @@
   <!-- todo - doc upload -->
   <!-- todo - security questions (with addTag) -->
   <!-- todo - will need to update e2e tests for using select/dropdowns -->
-  <!-- todo - look at a11y for ng-select -->
-  <!-- TODO - a11y / labels for ng-select -->
 
 
   <ng-select [items]='countryList'
@@ -13,7 +11,7 @@
              [required]='isRequired'
              [disabled]='disabled'
              name='country_{{objectId}}'
-             id='country_{{objectId}}'
+             labelForId='country_{{objectId}}'
              bindValue='countryCode'
              bindLabel='description'></ng-select>
 
@@ -27,9 +25,9 @@
             some criteria
     -->
 
-    <!-- TODO - a11y / labels? -->
     <ng-select #provRef='ngModel'
                name='province_{{objectId}}'
+               labelForId='province_{{objectId}}'
                [ngModel]="address?.province"
                (ngModelChange)="setProvince($event)"
                [items]='provList'
