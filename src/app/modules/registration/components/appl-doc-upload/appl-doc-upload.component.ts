@@ -21,7 +21,7 @@ export class ApplDocUploadComponent implements OnInit {
   /** List of currently selected document types */
   selectedDocType: DocumentType[] = [];
   /** String visible in the selectdropdown. Related to `dropdownValueAsDocumentType` */
-  docTypeDropdownValue: string = ''; // the default non-choice
+  docTypeDropdownValue: string;
 
   documents: Document[];
 

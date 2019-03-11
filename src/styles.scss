@@ -48,6 +48,9 @@ $fa-font-path: '~font-awesome/fonts';
     }
     .ng-arrow-wrapper { display: none; } 
 }
+.ng-select {
+    min-width: 10rem;
+}
 
 @import "overrides";
 
