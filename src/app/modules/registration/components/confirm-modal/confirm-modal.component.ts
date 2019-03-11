@@ -18,14 +18,14 @@ export class ConfirmModalComponent implements OnInit {
   ngOnInit() {
   }
 
-  confirm() {
+  onAffirmative() {
     console.log( 'Confirm' );
 
     this.bsModalRef.hide();
     this.result.emit(true);
   }
 
-  decline() {
+  onNegative() {
     console.log( 'Declined' );
 
     this.bsModalRef.hide();

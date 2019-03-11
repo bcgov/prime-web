@@ -88,7 +88,9 @@ export class ApplProfileComponent implements OnInit {
               ConfirmModalComponent,
               {
                 initialState: {message: message},
-                class: 'modal-sm'
+                class: 'modal-sm',
+                ignoreBackdropClick: true,
+                keyboard: false
               } );
 
     modal.content.result.subscribe( result => this.firstNameRequired = result );
