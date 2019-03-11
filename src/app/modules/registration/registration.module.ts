@@ -15,6 +15,7 @@ import { NameComponent } from './components/name/name.component';
 import { TypeaheadModule } from 'ngx-bootstrap';
 import { TextMaskModule } from 'angular2-text-mask';
 import { PhoneNumberComponent } from './components/phone-number/phone-number.component';
+import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import { PhoneNumberComponent } from './components/phone-number/phone-number.com
     PageSectionsComponent,
     ApplConfirmationComponent,
     NameComponent,
-    PhoneNumberComponent
+    PhoneNumberComponent,
+    ConfirmModalComponent
   ],
   exports: [
     ApplProfileComponent,
@@ -45,7 +47,11 @@ import { PhoneNumberComponent } from './components/phone-number/phone-number.com
     PageSectionsComponent,
     ApplConfirmationComponent,
     NameComponent,
-    PhoneNumberComponent
+    PhoneNumberComponent,
+    ConfirmModalComponent
+  ],
+  entryComponents: [
+    ConfirmModalComponent
   ]
 })
 export class RegistrationModule { }
