@@ -15,7 +15,6 @@ import { NameComponent } from './components/name/name.component';
 import { TypeaheadModule } from 'ngx-bootstrap';
 import { TextMaskModule } from 'angular2-text-mask';
 import { PhoneNumberComponent } from './components/phone-number/phone-number.component';
-import { SelectComponent } from './components/prime-select/prime-select.component';
 import { NgSelectModule} from '@ng-select/ng-select';
 
 @NgModule({
@@ -26,8 +25,7 @@ import { NgSelectModule} from '@ng-select/ng-select';
     HttpClientModule,
     TextMaskModule,
     TypeaheadModule.forRoot(),
-
-    NgSelectModule, // TODO REMOVE
+    NgSelectModule
   ],
   declarations: [
     ApplProfileComponent,
@@ -39,8 +37,6 @@ import { NgSelectModule} from '@ng-select/ng-select';
     ApplConfirmationComponent,
     NameComponent,
     PhoneNumberComponent,
-
-    SelectComponent // TODO - REmove and put into moh-common-lib
   ],
   exports: [
     ApplProfileComponent,
