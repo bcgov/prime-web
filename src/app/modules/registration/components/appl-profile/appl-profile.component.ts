@@ -1,11 +1,12 @@
-import { Component, OnInit, Input, forwardRef, Output, EventEmitter, TemplateRef } from '@angular/core';
+import { Component, OnInit, Input, forwardRef, Output, EventEmitter } from '@angular/core';
 import { ControlContainer, NgForm } from '@angular/forms';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { Registrant } from '../../models/registrant.model';
 import { CacheService } from '../../../../services/cache.service';
 import { CountryList, ProvinceList } from '../address/address.component';
 import { PrimeConstants } from '../../../../models/prime-constants';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { BsModalService } from 'ngx-bootstrap';
+import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
 
 
 @Component({
@@ -27,8 +28,6 @@ export class ApplProfileComponent implements OnInit {
 
   public firstNameRequired: boolean = false;
   public preferredIsRequired: boolean = false;
-
-  public modalRef: BsModalRef;
 
   /**
    * Date of birth error messages
@@ -54,20 +53,6 @@ export class ApplProfileComponent implements OnInit {
     this.registrant.identityIsMailingAddress = !this.registrant.identityIsMailingAddress;
   }
 
-  openModal( template: TemplateRef<any> ) {
-    this.modalRef = this.modalService.show( template, {class: 'modal-sm'} );
-  }
-
-  hasNoLegalFirstName() {
-    this.firstNameRequired = false;
-    this.modalRef.hide();
-  }
-
-  hasLegalFirstName() {
-    this.firstNameRequired = true;
-    this.modalRef.hide();
-  }
-
   // Cache items
   get countryList(): CountryList[] {
     return this.cache.countryList;
@@ -84,12 +69,6 @@ export class ApplProfileComponent implements OnInit {
       || this.registrant.preferredLastName) && this.registrant.firstName ) ||
       !!(this.registrant.preferredFirstName);
 
-  /**
-   *  TODO: validations pertaining to profile
-   *        a) firstname check if missed ( modal dialog requried)
-   *
-   */
-
     // Store list of names to be used by password check method
     this.primeDataService.userNameList = Object.keys(this.form.value).map( x => {
       if ( x.match( 'name' ) ) {
@@ -97,6 +76,24 @@ export class ApplProfileComponent implements OnInit {
       }
     }).filter( item => item );
 
+    if ( !this.registrant.firstName ) {
+      this.confirm( 'Did you forget your legal first name?' );
+    }
+
     this.dataValid.emit( this.form.valid );
   }
+
+  confirm( message: string ) {
+    const modal = this.modalService.show(
+              ConfirmModalComponent,
+              {
+                initialState: {message: message},
+                class: 'modal-sm',
+                ignoreBackdropClick: true,
+                keyboard: false
+              } );
+
+    modal.content.result.subscribe( result => this.firstNameRequired = result );
+  }
+
 }

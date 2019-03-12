@@ -15,7 +15,9 @@ import { NameComponent } from './components/name/name.component';
 import { TypeaheadModule } from 'ngx-bootstrap';
 import { TextMaskModule } from 'angular2-text-mask';
 import { PhoneNumberComponent } from './components/phone-number/phone-number.component';
+import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 import { NgSelectModule} from '@ng-select/ng-select';
+
 
 @NgModule({
   imports: [
@@ -37,6 +39,7 @@ import { NgSelectModule} from '@ng-select/ng-select';
     ApplConfirmationComponent,
     NameComponent,
     PhoneNumberComponent,
+    ConfirmModalComponent
   ],
   exports: [
     ApplProfileComponent,
@@ -47,7 +50,11 @@ import { NgSelectModule} from '@ng-select/ng-select';
     PageSectionsComponent,
     ApplConfirmationComponent,
     NameComponent,
-    PhoneNumberComponent
+    PhoneNumberComponent,
+    ConfirmModalComponent
+  ],
+  entryComponents: [
+    ConfirmModalComponent
   ]
 })
 export class RegistrationModule { }
