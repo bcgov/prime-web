@@ -39,7 +39,7 @@
     "ngx-bootstrap": "3.0.0",
     "ngx-mydatepicker": "2.4.5",
     "rx-dom": "^7.0.3",
-    "rxjs": "^6.2.1",
+    "rxjs": "6.3.3",
     "typescript": "2.7.2",
     "zone.js": "^0.8.26",
     "@types/node": "^10.0.9",
