@@ -17,6 +17,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { PhoneNumberComponent } from './components/phone-number/phone-number.component';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 import { NgSelectModule} from '@ng-select/ng-select';
+import { UniqueQuestionDirective } from './components/appl-account/unique-question.directive';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { NgSelectModule} from '@ng-select/ng-select';
     ApplConfirmationComponent,
     NameComponent,
     PhoneNumberComponent,
-    ConfirmModalComponent
+    ConfirmModalComponent,
+    UniqueQuestionDirective
   ],
   exports: [
     ApplProfileComponent,

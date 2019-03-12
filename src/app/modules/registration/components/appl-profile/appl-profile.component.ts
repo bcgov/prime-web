@@ -76,7 +76,8 @@ export class ApplProfileComponent implements OnInit {
       }
     }).filter( item => item );
 
-    if ( !this.registrant.firstName ) {
+    // Display confirmation box only if the legal name is editable
+    if ( !this.registrant.firstName && this.editIdentityInfo ) {
       this.confirm( 'Did you forget your legal first name?' );
     }
 

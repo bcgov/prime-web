@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, forwardRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, forwardRef, Output, EventEmitter, ViewChildren, QueryList } from '@angular/core';
 import { PrimeDataService } from '../../../../services/prime-data.service';
-import { Registrant } from '../../models/registrant.model';
+import { Registrant, SecurityQuestionsAnswers } from '../../models/registrant.model';
 import { ControlContainer, NgForm } from '@angular/forms';
 import { CacheService } from '../../../../services/cache.service';
 import { PrimeConstants } from '../../../../models/prime-constants';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'prime-appl-account',
@@ -19,7 +20,10 @@ export class ApplAccountComponent implements OnInit {
   @Input() mohCredientials: boolean = true;
   @Output() dataValid: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  @ViewChildren('questionRef') questionList: QueryList<NgSelectModule>;
+
   public newPwdLabel: string = 'New Password';
+
   // Express did not work with the following symbols: []\-
   public pwdValidChars = '[a-zA-Z0-9?/\.<~#`!@#$%^&*()+=|:\"\',>{}]*';
 

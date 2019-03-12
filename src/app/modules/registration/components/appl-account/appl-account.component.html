@@ -100,7 +100,8 @@
                    autocorrect='on'
                    addTag=true
                    addTagText='Add question'
-                   required></ng-select>
+                   required
+                   uniqueQuestion></ng-select>
 
           <!-- Error messages for component -->
           <div *ngIf="questionRef.touched"
@@ -109,6 +110,9 @@
                 aria-live="assertive">
           <div class="text-danger" *ngIf="questionRef?.errors?.required">
             Question #{{i + 1}} is required.
+          </div>
+          <div class="text-danger" *ngIf="questionRef?.errors?.duplicateQuestion">
+            Question #{{i + 1}} must be unique.
           </div>
         </div>
       </div>
