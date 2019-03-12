@@ -71,7 +71,7 @@ export class ApplProfileComponent implements OnInit {
 
     // Store list of names to be used by password check method
     this.primeDataService.userNameList = Object.keys(this.form.value).map( x => {
-      if ( x.match( 'name' ) ) {
+      if ( x.includes( 'name' ) ) {
         return this.form.form.get( x ).value;
       }
     }).filter( item => item );

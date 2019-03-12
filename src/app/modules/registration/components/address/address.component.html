@@ -1,10 +1,6 @@
 <div class="form-group col-sm-8 p-sm-0">
   <label for="country_{{objectId}}">Country</label>
-  <!-- todo - doc upload -->
-  <!-- todo - security questions (with addTag) -->
-  <!-- todo - will need to update e2e tests for using select/dropdowns -->
-
-
+ 
   <ng-select [items]='countryList'
              [ngModel]='address?.country'
              (ngModelChange)='setCountry($event)'
@@ -21,10 +17,6 @@
 <div class="form-group col-sm-8 p-sm-0">
   <label for="province_{{objectId}}">Province</label>
   <div *ngIf="isCanadaUSA(); else NotCanadaUSA">
-    <!--
-      TODO: See if there is a way not to duplicate errors for fields that change based on
-            some criteria
-    -->
 
     <ng-select #provRef='ngModel'
                name='province_{{objectId}}'
@@ -35,6 +27,7 @@
                [required]='isRequired'
                [disabled]='disabled'
                bindValue='provCode'
+               placeholder='Select a state'
                [clearable]='false'
                bindLabel='description'></ng-select>
 
