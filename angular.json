@@ -297,7 +297,13 @@
             "styles": [
               "projects/prime-registration/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/app/styles"
+              ]
+            },
+            "preserveSymlinks": true
           },
           "configurations": {
             "production": {

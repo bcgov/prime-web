@@ -1,0 +1,18 @@
+<common-page-framework layout='blank'>
+
+  <form #formRef='ngForm' (ngSubmit)='continue()'>
+    <prime-appl-profile [editIdentityInfo]="false"
+                        (dataValid)='continueRegistration($event)'>
+
+      <p identityInstruct>
+        Information received from BCSC - Ministry verbage required
+      </p>
+
+    </prime-appl-profile>
+
+    <!-- Display bar during registration -->
+    <common-form-submit-bar [increaseWidth]='true'></common-form-submit-bar>
+
+  </form>
+
+  </common-page-framework>

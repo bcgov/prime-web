@@ -1,0 +1,13 @@
+<common-page-framework layout='blank'>
+
+  <form #formRef='ngForm' (ngSubmit)='continue()'>
+
+    <prime-appl-security (dataValid)='registerAccount($event)'></prime-appl-security>
+    <common-form-submit-bar [increaseWidth]='"true"'
+                            [defaultColor]='false'
+                            [isLoading]='loading'
+                            submitLabel='Complete Registration'>
+    </common-form-submit-bar>
+  </form>
+
+  </common-page-framework>

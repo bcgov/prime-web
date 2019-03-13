@@ -10,23 +10,33 @@ module.exports = function (config) {
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
-      require('@angular-devkit/build-angular/plugins/karma')
+      require('@angular-devkit/build-angular/plugins/karma'),
+      require('karma-spec-reporter')
     ],
     client: {
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
+    mime: {
+      'text/x-typescript': ['ts','tsx']
+    },
     coverageIstanbulReporter: {
-      dir: require('path').join(__dirname, '../../coverage/prime-registration'),
-      reports: ['html', 'lcovonly', 'text-summary'],
+      dir: require('path').join(__dirname, '../coverage'),
+      reports: ['html', 'lcovonly'],
       fixWebpackSourcePaths: true
     },
-    reporters: ['progress', 'kjhtml'],
+    reporters: config.angularCli && config.angularCli.codeCoverage
+              ? ['progress', 'coverage-istanbul']
+              : ['spec', 'kjhtml'],
+
+    specReporter: {
+      suppressSkipped: true,
+      showSpecTiming: true // print the time elapsed for each spec
+    },
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['Chrome'],
-    singleRun: false,
-    restartOnFileChange: true
+    singleRun: false
   });
 };
