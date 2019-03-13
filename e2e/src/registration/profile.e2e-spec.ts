@@ -29,7 +29,7 @@ describe('MoH Registration - Profile Page', () => {
         expect(browser.getCurrentUrl()).toContain(PAGE_URL, 'url should not change');
     });
 
-    xit('should let the user continue when the form is filled out (Canada)', () => {
+    fit('should let the user continue when the form is filled out (Canada)', () => {
         const profileData = data.profileInfo();
         profileData['country'] = 'Canada';
 
@@ -42,7 +42,7 @@ describe('MoH Registration - Profile Page', () => {
         expect(page.formErrors().count()).toBe(0, 'should be no errors as form should be valid');
     });
 
-    xit('should let the user continue when the form is filled out (United States)', () => {
+    it('should let the user continue when the form is filled out (United States)', () => {
       const profileData = data.profileInfo();
       profileData['country'] = 'United States';
       profileData['province'] = 'California';
@@ -61,13 +61,13 @@ describe('MoH Registration - Profile Page', () => {
     // should allow first name to be blank
     
     // should not allow last name to be blank
-    xit('should not allow last name to be blank', () => {
+    it('should not allow last name to be blank', () => {
       const profileData = data.profileInfo();
       profileData['lastName'] = ' ';
 
       page.navigateTo();
       page.fillPage(profileData);
-      //browser.sleep(1000 * 10);
+      browser.sleep(1000 * 10);
       page.continue();
       
       expect(page.formErrors().count()).toEqual(5, 'page should show 5 error texts on continue');

@@ -51,7 +51,12 @@ export class MohProfileTestPage extends BaseMohRegTestPage {
     // TODO - This could be refactored to actually use the Geocoder / typeahead part
     fillAddress(data: ProfilePageTest) {
       // country
-      element(by.cssContainingText('prime-address [id^="country"] option', data.country)).click();
+
+      // first - try and scroll down
+      const countryEl = element(by.cssContainingText('prime-address [id^="country"] option', data.country));
+      browser.actions().mouseMove(countryEl).perform();
+      
+      countryEl.click();
 
       // Provine does NOT exist by default on object,
       // is only added manually in tests
