@@ -166,8 +166,7 @@
             "styles": [
               "projects/prime-enrollment/src/styles.scss"
             ],
-            "scripts": [],
-            "es5BrowserSupport": true
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -298,8 +297,7 @@
             "styles": [
               "projects/prime-registration/src/styles.scss"
             ],
-            "scripts": [],
-            "es5BrowserSupport": true
+            "scripts": []
           },
           "configurations": {
             "production": {
