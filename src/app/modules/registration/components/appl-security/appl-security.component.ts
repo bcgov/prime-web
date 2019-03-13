@@ -20,11 +20,15 @@ export class ApplSecurityComponent implements OnInit {
 
   public submitted: boolean = false;
 
+  private form: NgForm;
+
   constructor( private primeDataService: PrimeDataService,
-               private form: NgForm ) {
+               private cntrlContainer: ControlContainer ) {
   }
 
   ngOnInit() {
+    this.form = (this.cntrlContainer as NgForm);
+
     // Listen for submission of form
     this.form.ngSubmit.subscribe( val => this.validateInfo( val ) );
   }
