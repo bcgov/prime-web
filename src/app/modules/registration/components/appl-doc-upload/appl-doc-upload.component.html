@@ -16,9 +16,7 @@
                    placeholder='Choose'
                    #docTypeEl='ngModel'
                    [clearable]='false'
-                   [searchable]='false'
-                   (change)='updateValidation()'
-                   [required]='documents.length === 0'></ng-select>
+                   [searchable]='false'></ng-select>
       </div>
 
 
@@ -71,7 +69,7 @@
         <a href="#" class='nowrap'>Sample Document</a>
       </div>
 
-      <common-file-uploader [images]='section.images'
+      <common-file-uploader [(images)]='section.images'
                             [id]='section.type.name'
                             (imagesChange)='onImagesChange(section, $event)'
                             [required]='true'>
