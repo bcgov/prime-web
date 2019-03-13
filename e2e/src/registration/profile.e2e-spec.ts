@@ -3,14 +3,16 @@ import { browser } from 'protractor';
 import { PrimeConstants } from '../../../src/app/models/prime-constants';
 import { FakeDataMohReg } from './moh-registration.data';
 
-describe('MoH Registration - Profile Page', () => {
+fdescribe('MoH Registration - Profile Page', () => {
     let page: MohProfileTestPage;
     const data = new FakeDataMohReg();
+    let profileData;
     const PAGE_URL = `${PrimeConstants.MOH_REGISTRATION}/${PrimeConstants.PROFILE_PG}`;
     const NEXT_PAGE_URL =  `${PrimeConstants.MOH_REGISTRATION}/${PrimeConstants.DOC_UPLD_PG}`;
 
     beforeEach(() => {
         page = new MohProfileTestPage();
+        profileData = data.profileInfo();
     });
 
     it('should load the page without issue', () => {
@@ -29,8 +31,7 @@ describe('MoH Registration - Profile Page', () => {
         expect(browser.getCurrentUrl()).toContain(PAGE_URL, 'url should not change');
     });
 
-    fit('should let the user continue when the form is filled out (Canada)', () => {
-        const profileData = data.profileInfo();
+    it('should let the user continue when the form is filled out (Canada)', () => {
         profileData['country'] = 'Canada';
 
         page.navigateTo();
@@ -38,12 +39,10 @@ describe('MoH Registration - Profile Page', () => {
         page.continue();
 
         expect(browser.getCurrentUrl()).toContain(NEXT_PAGE_URL, 'should navigate to the Document Upload page');
-        // todo - improve this, so that it properly shows the error names if they exist
-        expect(page.formErrors().count()).toBe(0, 'should be no errors as form should be valid');
+        expect(page.formErrors()).toEqual([], 'should be no errors as form should be valid');
     });
 
     it('should let the user continue when the form is filled out (United States)', () => {
-      const profileData = data.profileInfo();
       profileData['country'] = 'United States';
       profileData['province'] = 'California';
 
@@ -62,7 +61,6 @@ describe('MoH Registration - Profile Page', () => {
     
     // should not allow last name to be blank
     it('should not allow last name to be blank', () => {
-      const profileData = data.profileInfo();
       profileData['lastName'] = ' ';
 
       page.navigateTo();
