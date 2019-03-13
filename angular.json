@@ -389,7 +389,8 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "projects/prime-registration-e2e/protractor.conf.js",
-            "devServerTarget": "prime-registration:serve"
+            "devServerTarget": "prime-registration:serve",
+            "webdriverUpdate": false
           },
           "configurations": {
             "production": {
