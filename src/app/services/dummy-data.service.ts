@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Registrant } from '../modules/registration/models/registrant.model';
+import { Registrant } from '../../../projects/prime-registration/src/app/modules/registration/models/registrant.model';
+// import { Registrant } from '@prime-registration/modules/registration/models/registrant.model'
 
 
 /**

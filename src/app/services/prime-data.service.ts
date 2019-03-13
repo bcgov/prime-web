@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Registrant } from '../modules/registration/models/registrant.model';
 import { Document } from '../models/documents.interface';
 import { PrimeConstants } from '../models/prime-constants';
+import { Registrant } from '@prime-registration/modules/registration/models/registrant.model';
+// import { Registrant } from '@prime-reg/src/app/modules/registration/models/registrant.model';
 
+// TODO - Move this over to registration as it specifically uses registrant.
 
 @Injectable()
 export class PrimeDataService {
