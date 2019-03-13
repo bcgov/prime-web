@@ -7,8 +7,7 @@ import { ApplSecurityComponent } from './modules/registration/components/appl-se
 import { MohProfileComponent } from './modules/moh-registration/pages/moh-profile/moh-profile.component';
 import { BcscProfileComponent } from './modules/bcsc-registration/pages/bcsc-profile/bcsc-profile.component';
 import { ApplConfirmationComponent } from './modules/registration/components/appl-confirmation/appl-confirmation.component';
-import { PrimeConstants } from './models/prime-constants';
-// import { BcscRegistrationModule } from './modules/bcsc-registration/bcsc-registration.module';
+import { PrimeConstants } from '@prime-core/models/prime-constants';
 
 const routes: Routes = [
   {

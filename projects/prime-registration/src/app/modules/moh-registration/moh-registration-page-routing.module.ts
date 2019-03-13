@@ -3,7 +3,8 @@ import { MohProfileComponent } from './pages/moh-profile/moh-profile.component';
 import { MohAccountComponent } from './pages/moh-account/moh-account.component';
 import { MohDocUploadComponent } from './pages/moh-doc-upload/moh-doc-upload.component';
 import { MohSecurityComponent } from './pages/moh-security/moh-security.component';
-import { PrimeConstants } from '../../models/prime-constants';
+import { PrimeConstants } from '@prime-core/models/prime-constants';
+
 
 export const mohPages: Routes = [
   {

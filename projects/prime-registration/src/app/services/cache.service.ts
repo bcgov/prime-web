@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DocumentType } from '../models/documents.interface';
+import { DocumentType } from '@prime-core/models/documents.interface';
 
 /**
  * TODO: Set up service to store data returned from the cache service once

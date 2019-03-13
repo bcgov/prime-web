@@ -1,5 +1,5 @@
 import { Component, OnInit, forwardRef, Output, EventEmitter } from '@angular/core';
-import { PrimeDataService } from '../../../../services/prime-data.service';
+import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
 import { Registrant } from '../../models/registrant.model';
 import { ControlContainer, NgForm } from '@angular/forms';
 
@@ -20,7 +20,7 @@ export class ApplSecurityComponent implements OnInit {
 
   public submitted: boolean = false;
 
-  constructor( private primeDataService: PrimeDataService,
+  constructor( private primeDataService: RegistrationDataService,
                private form: NgForm ) {
   }
 

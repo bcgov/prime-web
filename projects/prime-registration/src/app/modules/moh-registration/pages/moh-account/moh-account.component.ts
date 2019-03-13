@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractForm } from 'moh-common-lib/models';
 import { Router } from '@angular/router';
-import { PrimeConstants } from '../../../../models/prime-constants';
+import { PrimeConstants } from '@prime-core/models/prime-constants';
 
 @Component({
   selector: 'app-moh-account',

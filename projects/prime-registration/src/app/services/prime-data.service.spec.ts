@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { PrimeDataService } from './prime-data.service';
+import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
 
 describe('PrimeDataServiceService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [PrimeDataService]
+      providers: [RegistrationDataService]
     });
   });
 
-  it('should be created', inject([PrimeDataService], (service: PrimeDataService) => {
+  it('should be created', inject([RegistrationDataService], (service: RegistrationDataService) => {
     expect(service).toBeTruthy();
   }));
 });

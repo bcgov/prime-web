@@ -289,7 +289,7 @@
             "index": "projects/prime-registration/src/index.html",
             "main": "projects/prime-registration/src/main.ts",
             "polyfills": "projects/prime-registration/src/polyfills.ts",
-            "tsConfig": "projects/prime-registration/tsconfig.app.json",
+            "tsConfig": "projects/prime-registration/src/tsconfig.app.json",
             "assets": [
               "projects/prime-registration/src/favicon.ico",
               "projects/prime-registration/src/assets"

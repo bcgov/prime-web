@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { BcscContainerComponent } from './components/bcsc-container/bcsc-container.component';
 import { bcscPages } from './bcsc-registration-page-routing.module';
 import { BcscConfirmationComponent } from './pages/bcsc-confirmation/bcsc-confirmation.component';
-import { PrimeConstants } from '../../models/prime-constants';
+import { PrimeConstants } from '@prime-core/models/prime-constants';
 
 const routes: Routes = [
   {

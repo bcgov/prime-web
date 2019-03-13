@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 // Development purpose
 import { DummyDataService } from '../../../../services/dummy-data.service';
-import { PrimeDataService } from '../../../../services/prime-data.service';
+import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
 import { AbstractForm } from 'moh-common-lib/models';
 import { Router } from '@angular/router';
-import { PrimeConstants } from '../../../../models/prime-constants';
+import { PrimeConstants } from '@prime-core/models/prime-constants';
 
 @Component({
   selector: 'app-bcsc-profile',
@@ -15,7 +15,7 @@ import { PrimeConstants } from '../../../../models/prime-constants';
 export class BcscProfileComponent extends AbstractForm implements OnInit {
 
   constructor( private dummyDataService: DummyDataService,
-               private primeDataServie: PrimeDataService ,
+               private primeDataServie: RegistrationDataService ,
                protected router: Router ) {
     super( router );
 

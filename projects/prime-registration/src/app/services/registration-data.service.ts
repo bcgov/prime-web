@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Registrant } from '../modules/registration/models/registrant.model';
-import { Document } from '../models/documents.interface';
-import { PrimeConstants } from '../models/prime-constants';
+import { Registrant } from '@prime-registration/modules/registration/models/registrant.model';
+import { PrimeConstants } from '@prime-core/models/prime-constants';
+import { Document } from '@prime-core/models/documents.interface';
 
 
 @Injectable()
-export class PrimeDataService {
+export class RegistrationDataService {
 
 
   public registrant: Registrant;

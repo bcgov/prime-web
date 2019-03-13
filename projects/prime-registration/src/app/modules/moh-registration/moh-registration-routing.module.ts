@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MohContainerComponent } from './components/moh-container/moh-container.component';
 import { mohPages } from './moh-registration-page-routing.module';
 import { MohConfirmationComponent } from './pages/moh-confirmation/moh-confirmation.component';
-import { PrimeConstants } from '../../models/prime-constants';
+import { PrimeConstants } from '@prime-core/models/prime-constants';
 
 export const routes: Routes = [
   {

@@ -5,7 +5,7 @@ import { RegistrationModule } from '../../../registration/registration.module';
 import { SharedCoreModule } from 'moh-common-lib';
 import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { PrimeDataService } from '../../../../services/prime-data.service';
+import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
 
 describe('BcscAccountComponent', () => {
   let component: BcscAccountComponent;
@@ -21,7 +21,7 @@ describe('BcscAccountComponent', () => {
         RouterTestingModule
       ],
       providers: [
-        PrimeDataService
+        RegistrationDataService
       ]
     })
     .compileComponents();

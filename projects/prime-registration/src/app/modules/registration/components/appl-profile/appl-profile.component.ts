@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, forwardRef, Output, EventEmitter } from '@angular/core';
 import { ControlContainer, NgForm } from '@angular/forms';
-import { PrimeDataService } from '../../../../services/prime-data.service';
+import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
 import { Registrant } from '../../models/registrant.model';
 import { CacheService } from '../../../../services/cache.service';
 import { CountryList, ProvinceList } from '../address/address.component';
-import { PrimeConstants } from '../../../../models/prime-constants';
+import { PrimeConstants } from '@prime-core/models/prime-constants';
 import { BsModalService } from 'ngx-bootstrap';
 import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
 
@@ -34,7 +34,7 @@ export class ApplProfileComponent implements OnInit {
    */
   public dateLabel = 'Birthdate';
 
-  constructor( private primeDataService: PrimeDataService,
+  constructor( private primeDataService: RegistrationDataService,
                private cache: CacheService,
                private form: NgForm,
                private modalService: BsModalService ) {

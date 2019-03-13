@@ -7,7 +7,7 @@ import { RegistrationModule } from '../../registration.module';
 import { PageSectionsComponent } from '../page-sections/page-sections.component';
 import { AddressComponent } from '../address/address.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { PrimeDataService } from '../../../../services/prime-data.service';
+import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
 import { NameComponent } from '../name/name.component';
 
 describe('ApplProfileComponent', () => {
@@ -28,7 +28,7 @@ describe('ApplProfileComponent', () => {
         HttpClientTestingModule
       ],
       providers: [
-        PrimeDataService,
+        RegistrationDataService,
         NgForm
       ]
     })

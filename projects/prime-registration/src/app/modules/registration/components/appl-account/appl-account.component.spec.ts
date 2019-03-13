@@ -4,7 +4,7 @@ import { ApplAccountComponent } from './appl-account.component';
 import { FormsModule, NgForm } from '@angular/forms';
 import { SharedCoreModule } from 'moh-common-lib';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { PrimeDataService } from '../../../../services/prime-data.service';
+import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
 import { PageSectionsComponent } from '../page-sections/page-sections.component';
 
 describe('ApplAccountComponent', () => {
@@ -23,7 +23,7 @@ describe('ApplAccountComponent', () => {
         HttpClientTestingModule
       ],
       providers: [
-        PrimeDataService,
+        RegistrationDataService,
         NgForm
       ]
     })

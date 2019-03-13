@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PrimeConstants } from '../../models/prime-constants';
+import { PrimeConstants } from '@prime-core/models/prime-constants';
 
 @Component({
   selector: 'app-home-page',

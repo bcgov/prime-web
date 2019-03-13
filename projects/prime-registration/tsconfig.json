@@ -17,6 +17,10 @@
       "dom"
     ],
     "skipLibCheck": true,
+    "paths": {
+      "@prime-core/*" : ["../../src/app/*"],
+      "@prime-registration/*" : ["src/app/*"],
+    }
   },
   "angularCompilerOptions": {
     "preserveWhitespaces": false

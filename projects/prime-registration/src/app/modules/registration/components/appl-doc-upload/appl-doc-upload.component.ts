@@ -1,9 +1,9 @@
 import { Component, OnInit, forwardRef, ViewChild } from '@angular/core';
-import { PrimeDataService } from '../../../../services/prime-data.service';
 import { CommonImage } from 'moh-common-lib/images';
-import { CacheService } from '../../../../services/cache.service';
-import { DocumentType, Document } from '../../../../models/documents.interface';
+import { CacheService } from '@prime-core/services/cache.service';
+import { DocumentType, Document } from '@prime-core/models/documents.interface';
 import { ControlContainer, NgForm } from '@angular/forms';
+import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
 
 
 
@@ -29,7 +29,7 @@ export class ApplDocUploadComponent implements OnInit {
 
   public formRef: NgForm;
 
-  constructor(private dataService: PrimeDataService, private cacheService: CacheService, public formRefC: ControlContainer) {
+  constructor(private dataService: RegistrationDataService, private cacheService: CacheService, public formRefC: ControlContainer) {
     this.documents = this.dataService.documents; // this is basically an alias, since arrays are pass-by-reference,
     this.docTypesList = this.cacheService.DocumentTypes;
 

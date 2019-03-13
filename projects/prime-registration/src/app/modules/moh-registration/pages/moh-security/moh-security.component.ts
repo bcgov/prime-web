@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AbstractForm } from 'moh-common-lib/models';
-import { PrimeConstants } from '../../../../models/prime-constants';
+import { PrimeConstants } from '@prime-core/models/prime-constants';
 import { Router } from '@angular/router';
 
 @Component({

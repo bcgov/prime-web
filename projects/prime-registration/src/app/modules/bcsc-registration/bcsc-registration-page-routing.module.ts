@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { BcscProfileComponent } from './pages/bcsc-profile/bcsc-profile.component';
 import { BcscAccountComponent } from './pages/bcsc-account/bcsc-account.component';
-import { PrimeConstants } from '../../models/prime-constants';
+import { PrimeConstants } from '@prime-core/models/prime-constants';
 
 export const bcscPages: Routes = [
   {
