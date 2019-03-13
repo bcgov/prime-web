@@ -31,7 +31,7 @@
       <div class="text-danger" *ngIf="docTypeEl?.errors?.required || (documents.length === 0 && formRef.submitted)">
        At least one document type must be added
       </div>
-    
+
    </div>
 
 
@@ -62,16 +62,16 @@
 
   <prime-page-sections layout='tips'>
       <div class="d-flex align-items-baseline flex-wrap">
-        <common-datepicker class='d-inline-block mr-3' 
-                            labelText='{{section.type.name}} Expiry' 
+        <common-datepicker class='d-inline-block mr-3'
+                            labelText='{{section.type.name}} Expiry'
                             [onlyFutureDates]='"true"'
-                            [required]='true' 
+                            [required]='true'
                             [(date)]='section.expiry'>
-        </common-datepicker> 
+        </common-datepicker>
         <a href="#" class='nowrap'>Sample Document</a>
       </div>
 
-      <common-file-uploader [(images)]='section.images'
+      <common-file-uploader [images]='section.images'
                             [id]='section.type.name'
                             (imagesChange)='onImagesChange(section, $event)'
                             [required]='true'>
@@ -79,7 +79,7 @@
             Please upload required documents
         </span>
       </common-file-uploader>
-  
+
       <aside>
         {{ section.type.tips }}
       </aside>
