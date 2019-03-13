@@ -15,16 +15,6 @@ const routes: Routes = [
     component: HomePageComponent,
     data: { title: 'Home'}
   },
-
-  // Lazy loading modules below
-  {
-    path: PrimeConstants.MOH_REGISTRATION,
-    loadChildren: 'app/modules/moh-registration/moh-registration.module#MohRegistrationModule'
-  },
-  {
-    path: PrimeConstants.BCSC_REGISTRATION,
-    loadChildren: 'app/modules/bcsc-registration/bcsc-registration.module#BcscRegistrationModule'
-  },
   {
     path: '**',
     redirectTo: '',

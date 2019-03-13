@@ -9,7 +9,7 @@ xdescribe('PRIME App', () => {
 
   it('should display Prime in banner', () => {
     page.navigateTo();
-    // expect(page.getParagraphText()).toEqual(newFunction());
+    expect(page.getParagraphText()).toContain('PRIME');
   });
 });
 function newFunction(): any {
