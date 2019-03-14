@@ -18,7 +18,7 @@ export class MohDocUploadComponent extends AbstractForm implements OnInit {
   }
 
   continue() {
-    console.log(`form`, {valid: this.form.valid, submitted: this.form.submitted}, this.form);
+    console.log('MoH form', {valid: this.form.valid, submitted: this.form.submitted}, this.form);
 
     if (this.form.valid) {
       // Navigate to next page

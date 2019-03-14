@@ -82,6 +82,11 @@ export class AddressComponent extends Base implements OnInit {
         this.address.province = this.setDefaultProvinceAsOption( this.address.country );
       }
 
+      // BC address that contains street address need to fill with existing data
+      if ( this.address.street && this.useGeoCoder()) {
+        this.search = this.address.street;
+      }
+
       this.updateProvList();
     }
 
@@ -200,7 +205,7 @@ export class AddressComponent extends Base implements OnInit {
   // Only BC addresses therefore no need to copy province into structure.
   onSelect( event: TypeaheadMatch ): void {
     const data: GeoAddressResult = event.item;
-    // console.log( 'onSelect (item): ', data );
+
     this.search = data.street;
     this.address.street = data.street;
     this.address.city = data.city;
