@@ -1,6 +1,6 @@
 {
   "name": "prime",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "npm run dev",
@@ -10,7 +10,10 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "e2e:setup": "webdriver-manager update --versions.chrome 2.41",
-    "prebuild": "node src/version.js"
+    "prebuild": "node src/version.js",
+    "test-version": "npm version minor -m 'TEST build: %s'",
+    "prod-version": "npm version major -m 'PROD build: %s'",
+    "push-version": "git push --follow-tags"
   },
   "private": true,
   "dependencies": {
