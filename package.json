@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "e2e:setup": "webdriver-manager update --versions.chrome 2.41",
+    "e2e:setup": "webdriver-manager update --versions.chrome 73.0.3683.75",
     "prebuild": "node src/version.js"
   },
   "private": true,

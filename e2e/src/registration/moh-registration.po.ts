@@ -4,10 +4,15 @@ import { ProfilePageTest } from './moh-registration.data';
 
 export class BaseMohRegTestPage extends PrimeTestPage {
     private continueButton: WebElement;
+    private diffMailAddressButton: WebElement;
+    private diffMailAddressCheckbox: WebElement;
+
 
     constructor() {
         super();
         this.continueButton = element(by.css('.form-bar .submit'));
+        this.diffMailAddressButton = element(by.css('.mail-address-container .btn'));
+        this.diffMailAddressCheckbox = element(by.css('.custom-checkbox .custom-control-label'));
     }
 
     navigateTo() {
@@ -16,6 +21,18 @@ export class BaseMohRegTestPage extends PrimeTestPage {
 
     continue() {
         this.continueButton.click();
+    }
+
+    clickDiffMailAddress(){
+        this.diffMailAddressButton.click();
+    }
+
+    checkDiffMailAddress(){
+        this.diffMailAddressCheckbox.click();
+    }
+
+    getContinueButton(){
+        return this.continueButton;
     }
 }
 
