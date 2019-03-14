@@ -16,7 +16,9 @@
                    placeholder='Choose'
                    #docTypeEl='ngModel'
                    [clearable]='false'
-                   [searchable]='false'></ng-select>
+                   [searchable]='false'
+                   (change)='updateValidation()'
+                   [required]='documents.length === 0'></ng-select>
       </div>
 
 

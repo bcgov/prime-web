@@ -1,4 +1,4 @@
-import { Component, OnInit, forwardRef, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, forwardRef, ViewChild } from '@angular/core';
 import { PrimeDataService } from '../../../../services/prime-data.service';
 import { CommonImage } from 'moh-common-lib/images';
 import { CacheService } from '../../../../services/cache.service';
@@ -16,8 +16,6 @@ import { ControlContainer, NgForm } from '@angular/forms';
 })
 export class ApplDocUploadComponent implements OnInit {
 
-  @Output() dataValid: EventEmitter<boolean> = new EventEmitter<boolean>();
-
   /** List of all possible document types */
   docTypesList: DocumentType[];
   /** List of currently selected document types */
@@ -31,28 +29,14 @@ export class ApplDocUploadComponent implements OnInit {
 
   public formRef: NgForm;
 
-  constructor( private dataService: PrimeDataService,
-               private cacheService: CacheService,
-               public formRefC: ControlContainer ) {
-
+  constructor(private dataService: PrimeDataService, private cacheService: CacheService, public formRefC: ControlContainer) {
     this.documents = this.dataService.documents; // this is basically an alias, since arrays are pass-by-reference,
     this.docTypesList = this.cacheService.DocumentTypes;
+
+    this.formRef = (formRefC as NgForm);
   }
 
   ngOnInit() {
-    this.formRef = (this.formRefC as NgForm);
-
-    // Listen for submission of form
-    this.formRef.ngSubmit.subscribe( val => this.validateInfo( val ) );
-  }
-
-  private validateInfo( val: any ) {
-
-    this.docTypeEl.control.setErrors(
-      (this.documents.length === 0 ? {'mustSelect' : true } : null )
-    );
-
-    this.dataValid.emit( this.formRef.valid );
   }
 
   /** Add a new section based on what's selected in the dropdown */
@@ -71,6 +55,18 @@ export class ApplDocUploadComponent implements OnInit {
       // Add new documents to beginning so they appear at top to user
       this.documents.unshift(document);
     }
+
+    this.updateValidation();
+  }
+
+  /** Updates the validity of the docTypeEl dropdown, and thus the form. */
+  updateValidation() {
+    // We need this function because it fixes a bug where the user would make a
+    // selection in the dropdown (which satisfies angular validation), but then
+    // the user could continue immediately without pressing 'Add'.  We don't
+    // want the form valid unless the user has clicked 'Add' and has one doc.
+    const valid = this.documents.length === 0 ? {'mustSelect' : true } : null;
+    this.docTypeEl.control.setErrors(valid);
   }
 
   onImagesChange(doc: Document, img: CommonImage) {
