@@ -37,7 +37,6 @@ export class ApplDocUploadComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.docTypeEl.control.setErrors({'mustSelect': true});
   }
 
   /** Add a new section based on what's selected in the dropdown */
