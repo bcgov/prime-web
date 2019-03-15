@@ -2,9 +2,11 @@ import { MohProfileTestPage } from './moh-registration.po';
 import { browser } from 'protractor';
 import { PrimeConstants } from '../../../src/app/models/prime-constants';
 import { FakeDataMohReg } from './moh-registration.data';
+import { PrimeTestPage } from '../app.po';
 
 fdescribe('MoH Registration - Profile Page', () => {
     let page: MohProfileTestPage;
+    let page2: PrimeTestPage;
     const data = new FakeDataMohReg();
     let profileData;
     const PAGE_URL = `${PrimeConstants.MOH_REGISTRATION}/${PrimeConstants.PROFILE_PG}`;
@@ -12,7 +14,13 @@ fdescribe('MoH Registration - Profile Page', () => {
 
     beforeEach(() => {
         page = new MohProfileTestPage();
+        page2 = new PrimeTestPage();
         profileData = data.profileInfo();
+        profileData['firstName'] = "John";
+        profileData['lastName'] = "Doe";
+        profileData['preferredFirstName'] = "John";
+        profileData['preferredLastName'] = "Doe";
+        profileData['country'] = 'Canada'; // forced the country to be Canada so the faker will generate a province
     });
 
     it('should load the page without issue', () => {
@@ -32,8 +40,6 @@ fdescribe('MoH Registration - Profile Page', () => {
     });
 
     it('should let the user continue when the form is filled out (Canada)', () => {
-        profileData['country'] = 'Canada';
-
         page.navigateTo();
         page.fillPage(profileData);
         page.continue();
@@ -59,7 +65,6 @@ fdescribe('MoH Registration - Profile Page', () => {
     // should allow first name to be blank
     it('should allow first name to be blank', () => {
       profileData['firstName'] = '';
-      profileData['country'] = 'Canada'; // forced the country to be Canada so the faker will generate a province
 
       page.navigateTo();
       page.fillPage(profileData);
@@ -73,7 +78,6 @@ fdescribe('MoH Registration - Profile Page', () => {
     // should not allow last name to be blank
     it('should not allow last name to be blank', () => {
       profileData['lastName'] = '';
-      profileData['country'] = 'Canada'; // forced the country to be Canada so the faker will generate a province
 
       page.navigateTo();
       page.fillPage(profileData);
@@ -89,8 +93,6 @@ fdescribe('MoH Registration - Profile Page', () => {
       // -- then click 'My Mailing Address is Different'
       // -- form should NOT be valid now
     it('should not let user continue if mailing address is empty', () => {
-      profileData['country'] = 'Canada'; // forced the country to be Canada so the faker will generate a province
-
       page.navigateTo();
       page.fillPage(profileData);
       page.clickDiffMailAddress(); // clicks the "My Mailing address is different" button
@@ -103,10 +105,9 @@ fdescribe('MoH Registration - Profile Page', () => {
 
     // should show mailing address when checkbox is unchecked
     it('should show mailing address when checkbox is unchecked', () => {
-      profileData['country'] = 'Canada'; // forced the country to be Canada so the faker will generate a province
-
       page.navigateTo();
       page.fillPage(profileData);
+      //browser.sleep(1000 * 10);
       page.checkDiffMailAddress(); // unchecks the "This is my mailing address" checkbox
       page.continue();
       
@@ -118,8 +119,6 @@ fdescribe('MoH Registration - Profile Page', () => {
     // THIS is identical to "should not let user continue if mailing address is empty" test
     // should show mailing address when button is pressed 
     it('should show mailing address when button is pressed', () => {
-      profileData['country'] = 'Canada'; // forced the country to be Canada so the faker will generate a province
-
       page.navigateTo();
       page.fillPage(profileData);
       page.clickDiffMailAddress(); // clicks the "My Mailing address is different" button
@@ -132,8 +131,6 @@ fdescribe('MoH Registration - Profile Page', () => {
 
     // should hide mailing address when checkbox is re-checked
     it('should hide mailing address when checkbox is re-checked', () => {
-      profileData['country'] = 'Canada'; // forced the country to be Canada so the faker will generate a province
-
       page.navigateTo();
       page.fillPage(profileData);
       page.checkDiffMailAddress(); // unchecks the "This is my mailing address" checkbox
@@ -147,8 +144,6 @@ fdescribe('MoH Registration - Profile Page', () => {
 
     // should hide mailing address when checkbox is re-checked after button press
     it('should hide mailing address when checkbox is re-checked after button press', () => {
-      profileData['country'] = 'Canada'; // forced the country to be Canada so the faker will generate a province
-
       page.navigateTo();
       page.fillPage(profileData);
       page.clickDiffMailAddress(); // clicks the "My Mailing address is different" button
@@ -173,10 +168,11 @@ fdescribe('MoH Registration - Profile Page', () => {
     // selector?
 
     // Tests for Preferred Name:
-    // -- should be let the user to continue when preferred name is blank
-    it('should be let the user to continue when preferred name is blank', () => {
-      profileData['country'] = 'Canada'; // forced the country to be Canada so the faker will generate a province
-
+    // -- should make the preferred name fields optional
+    it('should make the preferred name fields optional', () => {
+      profileData['preferredFirstName'] = '';
+      profileData['preferredMiddleName'] = '';
+      profileData['preferredLastName'] = '';
       page.navigateTo();
       page.fillPage(profileData);
       //browser.sleep(1000 * 10);
@@ -184,5 +180,23 @@ fdescribe('MoH Registration - Profile Page', () => {
 
       expect(browser.getCurrentUrl()).toContain(NEXT_PAGE_URL, 'should navigate to the Document Upload page');
       expect(page.formErrors()).toEqual([], 'should be no errors as form should be valid');
-  });
+    });
+
+    // -- should make sure that preferred first and last name must be filled out if any preferred name field is filled out
+    it('should make sure that preferred first and last name must be filled out if any preferred name field is filled out', () => {
+      page.navigateTo();
+      page.fillPage(profileData);
+      //browser.sleep(1000 * 20);
+      page.continue();
+
+      if(expect(page2.getNameComponent("Preferred First Name")) != null){
+        expect(page2.getNameComponent("Preferred Last Name")).toBeTruthy();
+        //expect(profileData['preferredLastName']).toBe(!null, 'last name should be filled out');
+      }
+      if(expect(page2.getNameComponent("Preferred Last Name")) != null){
+        expect(page2.getNameComponent("Preferred First Name")).toBeTruthy();
+      //  expect(profileData['preferredFirstName'].isPresent()).toBe(true);
+      }
+      //expect(page.formErrors()).toEqual([], 'should be no errors as form should be valid');
+    });
 });

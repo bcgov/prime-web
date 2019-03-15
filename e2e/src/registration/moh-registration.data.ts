@@ -7,6 +7,9 @@ export class FakeDataMohReg {
             firstName: faker.name.firstName(),
             middleName: Math.random() > 0.5 ? faker.name.firstName() : undefined,
             lastName: faker.name.lastName(),
+            preferredFirstName: faker.name.firstName(),
+            preferredMiddleName: Math.random() > 0.5 ? faker.name.firstName() : undefined,
+            preferredLastName: faker.name.lastName(),
             birthDate: faker.date.past(),
             country: faker.address.country(),
             address: faker.address.streetAddress(),
@@ -25,6 +28,9 @@ export interface ProfilePageTest {
   firstName: string;
   middleName: string;
   lastName: string;
+  preferredFirstName: string;
+  preferredMiddleName: string;
+  preferredLastName: string;
   birthDate: Date;
   country: string;
   address: string;

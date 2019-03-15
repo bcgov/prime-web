@@ -41,6 +41,7 @@ export class MohProfileTestPage extends BaseMohRegTestPage {
     /** Fill out the entire page. Page will be valid after.  */
     fillPage(data: ProfilePageTest) {
       this.fillName(data);
+      this.fillPreferredName(data);
       this.fillBirthDate(data.birthDate);
       this.fillAddress(data);
     }
@@ -51,6 +52,14 @@ export class MohProfileTestPage extends BaseMohRegTestPage {
             (await this.getNameComponent('Middle Name')).sendKeys(data.middleName);
         }
         (await this.getNameComponent('Last Name')).sendKeys(data.lastName);
+    }
+
+    async fillPreferredName(data: ProfilePageTest) {
+      (await this.getNameComponent('Preferred First Name')).sendKeys(data.preferredFirstName);
+      if (data.preferredMiddleName) {
+          (await this.getNameComponent('Preferred Middle Name')).sendKeys(data.preferredMiddleName);
+      }
+      (await this.getNameComponent('Preferred Last Name')).sendKeys(data.preferredLastName);
     }
 
     fillBirthDate(date: Date) {
