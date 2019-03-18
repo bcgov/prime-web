@@ -40,12 +40,15 @@ export class ApplAccountComponent implements OnInit {
   // TODO: Need to know valid characters for email.
   public emailCriteria = /^([A-Za-z0-9_\-.+])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,})$/;
 
+  private form: NgForm;
+
   constructor( private primeDataService: RegistrationDataService,
                private cache: CacheService,
-               private form: NgForm ) {
+               private cntrlContainer: ControlContainer ) {
   }
 
   ngOnInit() {
+    this.form = (this.cntrlContainer as NgForm);
 
     if (!this.registrant.secQuestionsAnswer.length) {
       // initialize question/answer array

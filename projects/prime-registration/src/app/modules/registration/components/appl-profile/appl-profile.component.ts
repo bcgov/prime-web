@@ -34,13 +34,17 @@ export class ApplProfileComponent implements OnInit {
    */
   public dateLabel = 'Birthdate';
 
+  private form: NgForm;
+
   constructor( private primeDataService: RegistrationDataService,
                private cache: CacheService,
-               private form: NgForm,
-               private modalService: BsModalService ) {
+               private modalService: BsModalService,
+               private cntrlContainer: ControlContainer ) {
   }
 
   ngOnInit() {
+    this.form = (this.cntrlContainer as NgForm);
+
     // Listen for submission of form
     this.form.ngSubmit.subscribe( val => this.validateInfo( val ) );
   }
