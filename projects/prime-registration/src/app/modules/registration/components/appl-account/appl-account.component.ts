@@ -2,7 +2,7 @@ import { Component, OnInit, Input, forwardRef, Output, EventEmitter, ViewChildre
 import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
 import { Registrant, SecurityQuestionsAnswers } from '../../models/registrant.model';
 import { ControlContainer, NgForm } from '@angular/forms';
-import { CacheService } from '../../../../services/cache.service';
+import { RegCacheService } from '../../../../services/reg-cache.service';
 import { PrimeConstants } from '@prime-core/models/prime-constants';
 import { NgSelectModule } from '@ng-select/ng-select';
 
@@ -43,7 +43,7 @@ export class ApplAccountComponent implements OnInit {
   private form: NgForm;
 
   constructor( private primeDataService: RegistrationDataService,
-               private cache: CacheService,
+               private regCache: RegCacheService,
                private cntrlContainer: ControlContainer ) {
   }
 
@@ -91,19 +91,19 @@ export class ApplAccountComponent implements OnInit {
    * Cached items
    */
   get pwdMinLen(): string {
-    return this.cache.pwdMinLen;
+    return this.regCache.pwdMinLen;
   }
 
   get userIdMinLen(): string {
-    return this.cache.userIDMinLen;
+    return this.regCache.userIDMinLen;
   }
 
   get numSecQuestions(): number {
-    return this.cache.numSecQuestion;
+    return this.regCache.numSecQuestion;
   }
 
   get secQuestionList(): string[] {
-    return this.cache.secQuestionList;
+    return this.regCache.secQuestionList;
   }
 
   // private method
