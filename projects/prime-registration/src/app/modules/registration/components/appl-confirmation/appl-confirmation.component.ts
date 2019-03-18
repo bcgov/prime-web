@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ApiStatusCodes } from '@prime-core/models/api-status-codes.enum';
+import { ApiStatusCodes } from '@prime-core/models/api-base.model';
 
 @Component({
   selector: 'prime-appl-confirmation',
