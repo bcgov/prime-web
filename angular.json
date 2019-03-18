@@ -158,7 +158,7 @@
             "index": "projects/prime-enrollment/src/index.html",
             "main": "projects/prime-enrollment/src/main.ts",
             "polyfills": "projects/prime-enrollment/src/polyfills.ts",
-            "tsConfig": "projects/prime-enrollment/tsconfig.app.json",
+            "tsConfig": "projects/prime-enrollment/src/tsconfig.app.json",
             "assets": [
               "projects/prime-enrollment/src/favicon.ico",
               "projects/prime-enrollment/src/assets"
@@ -217,7 +217,7 @@
           "options": {
             "main": "projects/prime-enrollment/src/test.ts",
             "polyfills": "projects/prime-enrollment/src/polyfills.ts",
-            "tsConfig": "projects/prime-enrollment/tsconfig.spec.json",
+            "tsConfig": "projects/prime-enrollment/src/tsconfig.spec.json",
             "karmaConfig": "projects/prime-enrollment/karma.conf.js",
             "styles": [
               "projects/prime-enrollment/src/styles.scss"
