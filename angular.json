@@ -24,7 +24,12 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./assets",
+                "output": "./assets"
+              }
             ],
             "styles": [
               "src/styles.scss"
@@ -161,9 +166,15 @@
             "tsConfig": "projects/prime-enrollment/src/tsconfig.app.json",
             "assets": [
               "projects/prime-enrollment/src/favicon.ico",
-              "projects/prime-enrollment/src/assets"
+              "projects/prime-enrollment/src/assets",
+              {
+                "glob": "**/*",
+                "input": "./assets",
+                "output": "./assets"
+              }
             ],
             "styles": [
+              "src/app/styles/styles.scss",
               "projects/prime-enrollment/src/styles.scss"
             ],
             "scripts": [],
@@ -297,9 +308,15 @@
             "tsConfig": "projects/prime-registration/src/tsconfig.app.json",
             "assets": [
               "projects/prime-registration/src/favicon.ico",
-              "projects/prime-registration/src/assets"
+              "projects/prime-registration/src/assets",
+              {
+                "glob": "**/*",
+                "input": "./assets",
+                "output": "./assets"
+              }
             ],
             "styles": [
+              "src/app/styles/styles.scss",
               "projects/prime-registration/src/styles.scss"
             ],
             "scripts": [],
