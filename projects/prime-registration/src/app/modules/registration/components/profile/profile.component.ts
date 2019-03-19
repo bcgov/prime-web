@@ -4,16 +4,17 @@ import {
   Input,
   forwardRef,
   Output,
-  EventEmitter
+  EventEmitter,
+  OnDestroy
 } from '@angular/core';
 import { ControlContainer, NgForm } from '@angular/forms';
 import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
-import { Registrant } from '../../models/registrant.model';
 import { CacheService } from '../../../../services/cache.service';
 import { CountryList, ProvinceList } from '../address/address.component';
 import { PrimeConstants } from '@prime-core/models/prime-constants';
 import { BsModalService } from 'ngx-bootstrap';
 import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'prime-profile',
@@ -26,13 +27,14 @@ import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component'
     { provide: ControlContainer, useExisting: forwardRef(() => NgForm) }
   ]
 })
-export class ProfileComponent implements OnInit {
-  @Input() data: Registrant;
+export class ProfileComponent<T> implements OnInit, OnDestroy {
+  @Input() data: T;
   @Input() countries;
   @Input() provinces;
   @Input()
   editIdentityInfo: boolean = true;
   @Output() dataValid: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() formData: EventEmitter<T> = new EventEmitter<T>();
 
   public defaultCountry = PrimeConstants.CANADA;
   public defaultProvince = PrimeConstants.BRITISH_COLUMBIA;
@@ -55,9 +57,12 @@ export class ProfileComponent implements OnInit {
 
     // Listen for submission of form
     this.form.ngSubmit.subscribe(val => this.validateInfo(val));
+    const newObs = of(this.registrant).subscribe(obs => console.log(obs));
   }
 
-  get registrant(): Registrant {
+  ngOnDestroy() {}
+
+  get registrant(): any {
     return this.data;
   }
 

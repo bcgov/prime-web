@@ -27,7 +27,8 @@ import { ProfileComponent } from '../profile/profile.component';
     { provide: ControlContainer, useExisting: forwardRef(() => NgForm) }
   ]
 })
-export class ApplProfileComponent extends ProfileComponent implements OnInit {
+export class ApplProfileComponent extends ProfileComponent<Registrant>
+  implements OnInit {
   @Input() editIdentityInfo: boolean = true;
   @Output() dataValid: EventEmitter<boolean> = new EventEmitter<boolean>();
 
