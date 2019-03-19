@@ -1,4 +1,4 @@
-import { CountryList } from '../../../projects/prime-registration/src/app/modules/registration/components/address/address.component';
+import { CountryList, ProvinceList } from '../../../projects/prime-registration/src/app/modules/registration/components/address/address.component';
 
 export enum ApiStatusCodes {
   SUCCESS = '0',
@@ -30,23 +30,24 @@ export interface PayloadInterface {
    * Return value
    */
   statusCode?: string;
+  statusMsgs?: string[];
 }
 
 
 /**
- * Get Cache countries
+ * Get Cache
  */
-export interface CountriesInterface extends PayloadInterface {
-  counties: CountryList[];
+export interface CacheInterface extends PayloadInterface {
+  country?: CountryList[];
+  province?: ProvinceList[];
 }
-
-
 
 export class ServerPayload implements PayloadInterface {
   eventUUID: string;
   clientName: string;
   processDate: string;
   statusCode: string;
+  statusMsgs: string[];
 
 
   constructor(payload: PayloadInterface) {
@@ -55,6 +56,7 @@ export class ServerPayload implements PayloadInterface {
     this.clientName = payload.clientName;
     this.processDate = payload.processDate;
     this.statusCode = payload.statusCode;
+    this.statusMsgs = payload.statusMsgs;
   }
 
   get success(): boolean {
@@ -71,11 +73,13 @@ export class ServerPayload implements PayloadInterface {
 }
 
 
-export class CountriesPayLoad extends ServerPayload {
-  countries: CountryList[];
+export class CachePayLoad extends ServerPayload {
+  country: CountryList[];
+  province: ProvinceList[];
 
-  constructor( payload: CountriesInterface ) {
-    super(payload);
-    this.countries = payload.counties;
+  constructor( payload: CacheInterface ) {
+    super( payload );
+    this.country = payload.country ? payload.country : undefined;
+    this.province = payload.province ? payload.province : undefined;
   }
 }

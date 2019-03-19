@@ -5,7 +5,7 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
 import { ApiService } from '../../../../src/app/services/api-service.service';
 import { RegCacheService } from './services/reg-cache.service';
-import { CountriesPayLoad } from '../../../../src/app/models/api-base.model';
+import { CachePayLoad } from '../../../../src/app/models/api-base.model';
 
 @Component({
   selector: 'app-root',
@@ -68,13 +68,24 @@ export class AppComponent implements OnInit {
     console.log( 'Load registration cache!' );
 
     // Load countries for address component
-    this.apiService.getCountries().subscribe(
+    this.apiService.getCache( 'countries' ).subscribe(
       (response) => {
-        const payload = new CountriesPayLoad( response );
+        const payload = new CachePayLoad( response );
         if ( payload.success ) {
-          this.regCache.countryList = payload.countries;
+          this.regCache.countryList = payload.country;
         } else {
           console.log( 'Failed to retrieve list of countries.' );
+        }
+    });
+
+    // Load provinces for address component
+    this.apiService.getCache( 'province' ).subscribe(
+      (response) => {
+        const payload = new CachePayLoad( response );
+        if ( payload.success ) {
+          this.regCache.provinceList = payload.province;
+        } else {
+          console.log( 'Failed to retrieve list of province.' );
         }
     });
   }

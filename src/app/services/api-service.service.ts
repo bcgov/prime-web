@@ -3,7 +3,7 @@ import { HttpHeaders, HttpErrorResponse, HttpParams, HttpClient } from '@angular
 import { throwError } from 'rxjs';
 import * as moment from 'moment';
 import { environment } from '../../../projects/prime-registration/src/environments/environment';
-import { CountriesInterface } from '../models/api-base.model';
+import { CacheInterface } from '../models/api-base.model';
 import { AbstractHttpService } from 'moh-common-lib/services';
 
 
@@ -17,27 +17,26 @@ export class ApiService extends AbstractHttpService {
    *  at runtime in the httpOptions() method.
    */
   protected _headers: HttpHeaders = new HttpHeaders();
-  protected _options: HttpParams;
+
+
 
   constructor( protected http: HttpClient ) {
     super( http );
   }
 
   // Cache requests
-  getCountries() {
-    const url = environment.cacheAPIUrl + 'countries';
-
-    return this.get<CountriesInterface>(url);
+  getCache( paramValue: string ) {
+    const url = environment.cacheAPIUrl;
+    const params = new HttpParams().set( 'param', paramValue );
+    return this.get<CacheInterface>( url, params );
   }
-
-
 
 
   /**
    *
    * @param error
    */
-  protected handleError(error: HttpErrorResponse) {
+  protected handleError( error: HttpErrorResponse ) {
 
     if (error.error instanceof ErrorEvent) {
       // Client-side / network error occured
