@@ -5,7 +5,7 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
 import { ApiService } from '../../../../src/app/services/api-service.service';
 import { RegCacheService } from './services/reg-cache.service';
-import { CachePayLoad } from '../../../../src/app/models/api-base.model';
+import { CachePayLoad } from '../../../../src/app/models/cache-api.model';
 
 @Component({
   selector: 'app-root',

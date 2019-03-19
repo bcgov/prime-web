@@ -3,7 +3,7 @@ import { HttpHeaders, HttpErrorResponse, HttpParams, HttpClient } from '@angular
 import { throwError } from 'rxjs';
 import * as moment from 'moment';
 import { environment } from '../../../projects/prime-registration/src/environments/environment';
-import { CacheInterface } from '../models/api-base.model';
+import { CacheInterface } from '../models/cache-api.model';
 import { AbstractHttpService } from 'moh-common-lib/services';
 
 
