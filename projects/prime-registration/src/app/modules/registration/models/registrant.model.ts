@@ -25,8 +25,15 @@ export class Registrant extends Person {
   public smsPhone: string;
 
   public secQuestionsAnswer: SecurityQuestionsAnswers[] = [];
+
   /* Documents */
   public documents: Document[] = [];
+
+  /** Multi-factor authenication */
+  public useMfaSMS: boolean = false;
+  public mfaSMSphone: string;
+  public useMfaSecurityKey: boolean = false;
+  public useMfaApp: boolean = false;
 
   /* Copy function */
   copy( object: Registrant ) {
@@ -42,5 +49,12 @@ export class Registrant extends Person {
     this.password = object.password;
     this.emailAddress = object.emailAddress;
     this.smsPhone = object.smsPhone;
+
+    this.secQuestionsAnswer.push( ...object.secQuestionsAnswer );
+
+    this.useMfaSMS = object.useMfaSMS;
+    this.mfaSMSphone = object.mfaSMSphone
+    this.useMfaSecurityKey = object.useMfaSecurityKey;
+    this.useMfaApp = object.useMfaApp;
   }
 }
