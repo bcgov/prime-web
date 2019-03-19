@@ -1,6 +1,6 @@
 <div class="form-group col-sm-8 p-sm-0">
   <label for="country_{{objectId}}">Country</label>
- 
+
   <ng-select [items]='countryList'
              [ngModel]='address?.country'
              (ngModelChange)='setCountry($event)'
@@ -26,7 +26,7 @@
                [items]='provList'
                [required]='isRequired'
                [disabled]='disabled'
-               bindValue='provCode'
+               bindValue='provinceCode'
                placeholder='Select a state'
                [clearable]='false'
                bindLabel='description'></ng-select>

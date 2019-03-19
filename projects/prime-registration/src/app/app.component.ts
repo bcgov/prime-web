@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
-import { ApiService } from '../../../../src/app/services/api-service.service';
+import { CacheApiService } from '../../../../src/app/services/cache-api.service';
 import { RegCacheService } from './services/reg-cache.service';
 import { CachePayLoad } from '../../../../src/app/models/cache-api.model';
 
@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   constructor( private router: Router,
                private activatedRoute: ActivatedRoute,
                private titleService: Title,
-               private apiService: ApiService,
+               private cacheApiService: CacheApiService,
                private regCache: RegCacheService ) {
   }
 
@@ -68,7 +68,7 @@ export class AppComponent implements OnInit {
     console.log( 'Load registration cache!' );
 
     // Load countries for address component
-    this.apiService.getCache( 'countries' ).subscribe(
+    this.cacheApiService.getCache( 'countries' ).subscribe(
       (response) => {
         const payload = new CachePayLoad( response );
         if ( payload.success ) {
@@ -79,7 +79,7 @@ export class AppComponent implements OnInit {
     });
 
     // Load provinces for address component
-    this.apiService.getCache( 'province' ).subscribe(
+    this.cacheApiService.getCache( 'provinces' ).subscribe(
       (response) => {
         const payload = new CachePayLoad( response );
         if ( payload.success ) {

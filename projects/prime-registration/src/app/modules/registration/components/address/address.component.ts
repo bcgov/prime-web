@@ -15,7 +15,7 @@ export interface CountryList {
 
 export interface ProvinceList {
   country: string;
-  provCode: string;
+  provinceCode: string;
   description: string;
 }
 
@@ -167,11 +167,11 @@ export class AddressComponent extends Base implements OnInit {
    */
   private setDefaultProvinceAsOption( country: string ): string {
     const provObj = !this.provinceList ? null : this.provinceList.find(
-      val => (val.provCode === this.defaultProvince ||
+      val => (val.provinceCode === this.defaultProvince ||
              val.description === this.defaultProvince) &&
              val.country === country
     );
-    return (provObj ? provObj.provCode : null );
+    return (provObj ? provObj.provinceCode : null );
   }
 
   // GeoCoder

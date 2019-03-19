@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpErrorResponse, HttpParams, HttpClient } from '@angular/common/http';
 import { throwError } from 'rxjs';
-import * as moment from 'moment';
 import { environment } from '../../../projects/prime-registration/src/environments/environment';
 import { CacheInterface } from '../models/cache-api.model';
 import { AbstractHttpService } from 'moh-common-lib/services';
@@ -10,7 +9,7 @@ import { AbstractHttpService } from 'moh-common-lib/services';
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService extends AbstractHttpService {
+export class CacheApiService extends AbstractHttpService {
 
   /**
    *  Default hardcoded header values.  Note: Authentication headers are added
@@ -49,12 +48,4 @@ export class ApiService extends AbstractHttpService {
      return throwError( 'Unable to process request!' );
   }
 
-  // Private functions
-
-  /**
-   * Returns current date in YYYYMMDD, e.g. '20180801'
-   */
-  private getProcessDate(): string {
-    return moment().format('YYYYMMDD');
-  }
 }

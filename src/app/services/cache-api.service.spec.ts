@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ApiService } from './api-service.service';
+import { CacheApiService } from './cache-api.service';
 
-describe('ApiService', () => {
+describe('CacheApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ApiService = TestBed.get(ApiService);
+    const service: CacheApiService = TestBed.get(CacheApiService);
     expect(service).toBeTruthy();
   });
 });

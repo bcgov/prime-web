@@ -26,8 +26,8 @@ export interface PayloadInterface {
   /**
    * Return value
    */
-  statusCode?: string;
-  statusMsgs?: string[];
+  statusCode: string;
+  statusMsgs: string[];
 }
 
 export class ServerPayload implements PayloadInterface {
