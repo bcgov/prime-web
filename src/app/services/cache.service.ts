@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { DocumentType } from '@prime-core/models/documents.interface';
-
 /**
  * TODO: Set up service to store data returned from the cache service once
  *       determined how it will be configured/setup
@@ -13,7 +11,6 @@ export class CacheService {
 
 
   constructor() { }
-  
   /**
    * Country list { countryCode: string, description: string }
    * TODO: Data to be stored in database and pushed to cache service, confirm format of JSON

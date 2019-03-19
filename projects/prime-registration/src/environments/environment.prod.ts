@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  useMockBackend: false
+  useMockBackend: false,
+  cacheAPIUrl: '/cache/api/reg/rest/getCache'
 };

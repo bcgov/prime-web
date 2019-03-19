@@ -341,7 +341,8 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "prime-registration:build",
-            "port": 4305
+            "port": 4305,
+            "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {

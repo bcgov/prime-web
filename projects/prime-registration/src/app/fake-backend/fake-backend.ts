@@ -35,7 +35,7 @@ export class FakeBackendInterceptor implements HttpInterceptor  {
         }*/
 
       } else if ( 'GET' === request.method ) {
-
+        console.log( 'Get request' );
       }
 
       // Pass through to actual service
