@@ -14,12 +14,11 @@ import { CountryList, ProvinceList } from '../address/address.component';
 import { PrimeConstants } from '@prime-core/models/prime-constants';
 import { BsModalService } from 'ngx-bootstrap';
 import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
-import { ProfileComponent } from '../profile/profile.component';
 
 @Component({
-  selector: 'prime-appl-profile',
-  templateUrl: './appl-profile.component.html',
-  styleUrls: ['./appl-profile.component.scss'],
+  selector: 'prime-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss'],
   /* Re-use the same ngForm that it's parent is using. The component will show
    * up in its parents `this.form`, and will auto-update `this.form.valid`
    */
@@ -27,8 +26,12 @@ import { ProfileComponent } from '../profile/profile.component';
     { provide: ControlContainer, useExisting: forwardRef(() => NgForm) }
   ]
 })
-export class ApplProfileComponent extends ProfileComponent implements OnInit {
-  @Input() editIdentityInfo: boolean = true;
+export class ProfileComponent implements OnInit {
+  @Input() data: Registrant;
+  @Input() countries;
+  @Input() provinces;
+  @Input()
+  editIdentityInfo: boolean = true;
   @Output() dataValid: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   public defaultCountry = PrimeConstants.CANADA;
@@ -42,16 +45,10 @@ export class ApplProfileComponent extends ProfileComponent implements OnInit {
    */
   public dateLabel = 'Birthdate';
 
-  private form: NgForm;
+  form: NgForm;
+  userNameList: string[] = [];
 
-  constructor(
-    private primeDataService: RegistrationDataService,
-    private cache: CacheService,
-    private modalService: BsModalService,
-    private cntrlContainer: ControlContainer
-  ) {
-    super(cntrlContainer);
-  }
+  constructor(private cntrlContainer: ControlContainer) {}
 
   ngOnInit() {
     this.form = this.cntrlContainer as NgForm;
@@ -61,7 +58,7 @@ export class ApplProfileComponent extends ProfileComponent implements OnInit {
   }
 
   get registrant(): Registrant {
-    return this.primeDataService.registrant;
+    return this.data;
   }
 
   toggleCheckBox() {
@@ -71,11 +68,11 @@ export class ApplProfileComponent extends ProfileComponent implements OnInit {
 
   // Cache items
   get countryList(): CountryList[] {
-    return this.cache.countryList;
+    return this.countries;
   }
 
   get provinceList(): ProvinceList[] {
-    return this.cache.provinceList;
+    return this.provinces;
   }
 
   private validateInfo(val: any) {
@@ -88,7 +85,7 @@ export class ApplProfileComponent extends ProfileComponent implements OnInit {
       ) || !!this.registrant.preferredFirstName;
 
     // Store list of names to be used by password check method
-    this.primeDataService.userNameList = Object.keys(this.form.value)
+    this.userNameList = Object.keys(this.form.value)
       .map(x => {
         if (x.includes('name')) {
           return this.form.form.get(x).value;
@@ -105,13 +102,12 @@ export class ApplProfileComponent extends ProfileComponent implements OnInit {
   }
 
   confirm(message: string) {
-    const modal = this.modalService.show(ConfirmModalComponent, {
-      initialState: { message: message },
-      class: 'modal-sm',
-      ignoreBackdropClick: true,
-      keyboard: false
-    });
-
-    modal.content.result.subscribe(result => (this.firstNameRequired = result));
+    // const modal = this.modalService.show(ConfirmModalComponent, {
+    //   initialState: { message: message },
+    //   class: 'modal-sm',
+    //   ignoreBackdropClick: true,
+    //   keyboard: false
+    // });
+    // modal.content.result.subscribe(result => (this.firstNameRequired = result));
   }
 }
