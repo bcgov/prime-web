@@ -3,6 +3,25 @@ export enum ApiStatusCodes {
   ERROR = '1',
   WARNING = '2'
 }
+
+/** Screen section identifiers */
+export enum ScreenAreaID {
+  CONFIRMATION = 'CONFIRMATION',
+  QRCODE = 'QR',
+  NEXT_STEPS = 'NEXT STEPS'
+}
+
+/**
+ *  Structure for confirmation page to display messages in correct
+ *  screen area
+ */
+export interface StatusMsgInterface {
+  msgID: string;
+  msgText: string;
+  msgType: string;
+  scrArea: ScreenAreaID;
+  appLayer: string;
+}
 export interface PayloadInterface {
 
   /**
@@ -22,12 +41,16 @@ export interface PayloadInterface {
    */
   processDate: string;
 
-
   /**
-   * Return value
+   * Returned status code values: 0 = success, continue, 1 = error,
+   * do not continue, 2 = warning.
    */
   statusCode: string;
-  statusMsgs: string[];
+
+  /**
+   * Contains the list of Enhanced Message related to the process execution
+   */
+  statusMsgs: string | string[] | StatusMsgInterface;
 }
 
 export class ServerPayload implements PayloadInterface {
@@ -35,7 +58,7 @@ export class ServerPayload implements PayloadInterface {
   clientName: string;
   processDate: string;
   statusCode: string;
-  statusMsgs: string[];
+  statusMsgs: string | string[] | StatusMsgInterface;
 
 
   constructor(payload: PayloadInterface) {

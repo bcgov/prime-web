@@ -1,5 +1,8 @@
 import { PayloadInterface, ServerPayload } from '../../../../../../../src/app/models/api-base.model';
 
+/**
+ * Return structure for searches return from back-end
+ */
 export interface SearchResult {
   matchFound: boolean;
   msgID: string;
@@ -29,3 +32,4 @@ export class UserAttrPayload extends ServerPayload {
     this.mobileMatch = payload.mobileMatch;
   }
 }
+

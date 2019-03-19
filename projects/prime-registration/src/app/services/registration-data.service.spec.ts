@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
 
-describe('PrimeDataServiceService', () => {
+describe('RegistrationDataService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [RegistrationDataService]

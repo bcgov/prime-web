@@ -93,8 +93,8 @@
         <ng-select #questionRef='ngModel'
                    name='sec_question_{{i}}'
                    labelForId='sec_question_{{i}}'
-                   [ngModel]='item?.question'
-                   (ngModelChange)='item.question=$event'
+                   [ngModel]='item?.name'
+                   (ngModelChange)='item.name=$event'
                    [items]='secQuestionList'
                    placeholder=' -- Select Question --'
                    autocorrect='on'
@@ -123,8 +123,8 @@
                 class="form-control"
                 id="sec_answer_{{i}}"
                 name="sec_answer_{{i}}"
-                [ngModel]="item?.answer"
-                (ngModelChange)="item.answer=$event"
+                [ngModel]="item?.value"
+                (ngModelChange)="item.value=$event"
                 placeholder="Enter answer"
                 required />
 

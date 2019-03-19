@@ -1,5 +1,5 @@
 {
-  "/prime-reg/api/": {
+  "/api/rest/": {
       "target": "https://maximus-prime-dev.pathfinder.gov.bc.ca/",
       "changeOrigin": true,
       "secure": false,

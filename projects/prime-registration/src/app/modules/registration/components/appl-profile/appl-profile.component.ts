@@ -73,13 +73,6 @@ export class ApplProfileComponent implements OnInit {
       || this.registrant.preferredLastName) && this.registrant.firstName ) ||
       !!(this.registrant.preferredFirstName);
 
-    // Store list of names to be used by password check method
-    this.primeDataService.userNameList = Object.keys(this.form.value).map( x => {
-      if ( x.includes( 'name' ) ) {
-        return this.form.form.get( x ).value;
-      }
-    }).filter( item => item );
-
     // Display confirmation box only if the legal name is editable
     if ( !this.registrant.firstName && this.editIdentityInfo ) {
       this.confirm( 'Did you forget your legal first name?' );

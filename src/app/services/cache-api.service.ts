@@ -17,8 +17,6 @@ export class CacheApiService extends AbstractHttpService {
    */
   protected _headers: HttpHeaders = new HttpHeaders();
 
-
-
   constructor( protected http: HttpClient ) {
     super( http );
   }

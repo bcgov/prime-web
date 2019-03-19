@@ -2,8 +2,8 @@ import { Person, Address } from 'moh-common-lib/models';
 import { Document } from '@prime-core/models/documents.interface';
 
 export interface SecurityQuestionsAnswers {
-  question: string;
-  answer: string;
+  name: string;
+  value: string;
 }
 
 export class Registrant extends Person {
@@ -50,10 +50,10 @@ export class Registrant extends Person {
     this.emailAddress = object.emailAddress;
     this.smsPhone = object.smsPhone;
 
-    this.secQuestionsAnswer.push( ...object.secQuestionsAnswer );
+    this.secQuestionsAnswer = object.secQuestionsAnswer;
 
     this.useMfaSMS = object.useMfaSMS;
-    this.mfaSMSphone = object.mfaSMSphone
+    this.mfaSMSphone = object.mfaSMSphone;
     this.useMfaSecurityKey = object.useMfaSecurityKey;
     this.useMfaApp = object.useMfaApp;
   }

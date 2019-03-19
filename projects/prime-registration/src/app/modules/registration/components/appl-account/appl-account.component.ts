@@ -42,9 +42,17 @@ export class ApplAccountComponent implements OnInit {
 
   private form: NgForm;
 
+  private _nameList: string[];
+
   constructor( private primeDataService: RegistrationDataService,
                private regCache: RegCacheService,
                private cntrlContainer: ControlContainer ) {
+
+   this._nameList = Object.keys(this.primeDataService.registrant).map( x => {
+        if ( x.includes( 'Name' ) ) {
+          return this.primeDataService.registrant[x];
+        }
+      }).filter( item => item );
   }
 
   ngOnInit() {
@@ -53,7 +61,7 @@ export class ApplAccountComponent implements OnInit {
     if (!this.registrant.secQuestionsAnswer.length) {
       // initialize question/answer array
       for (let i = 0; i < this.numSecQuestions; i++) {
-        this.registrant.secQuestionsAnswer.push({ question: null, answer: null });
+        this.registrant.secQuestionsAnswer.push({ name: null, value: null });
       }
     }
 
@@ -133,7 +141,7 @@ export class ApplAccountComponent implements OnInit {
     // Check for user ID or names in password
     if ( (this.registrant.userID &&
           this.registrant.password.includes( this.registrant.userID )  ||
-        this.primeDataService.userNameList.map( x => {
+        this._nameList.map( x => {
           if ( x.length > 1 ) { // ignore initials for names
             return this.registrant.password.includes( x );
           }
