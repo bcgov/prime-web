@@ -1,5 +1,3 @@
-
-
 // NOTE - THIS CSS SHOULD BE IN THE 'prime-header' COMPONENT
 // HOWEVER, THAT FILE HAS NOT YET BEEN CREATED IN THE COMMON STYLES LIB, SO HERE IS THE TEMPORARY HOME
 
@@ -7,7 +5,8 @@
 
 // Header, adds the gold bottom border and shadow
 header nav {
-  background-color: map-get($theme-colors, primary);;
+  background-color: map-get($theme-colors, primary);
+  ;
   border-bottom: 2px solid map-get($theme-colors, secondary);
 
   -webkit-box-shadow: 0 3px 3px 1px rgba(51, 51, 51, 0.5);
@@ -36,7 +35,7 @@ header {
     white-space: nowrap;
     align-self: center;
 
-    @include media-breakpoint-down(xs){
+    @include media-breakpoint-down(xs) {
       font-size: 24px;
     }
   }
@@ -61,7 +60,10 @@ header .nav-link {
 // For mobile.
 .header-container {
   margin-top: -1em;
-  & > .d-flex { margin-top: 1em; }
+
+  &>.d-flex {
+    margin-top: 1em;
+  }
 }
 
 .skip-to-content {
@@ -85,17 +87,21 @@ header .nav-link {
   // Only visible if focused
   opacity: 0;
   height: 0;
-  &:focus { opacity: 1; height: auto; }
+
+  &:focus {
+    opacity: 1;
+    height: auto;
+  }
 }
 
 .container-fluid {
   padding: 0 $container-gutter-size;
 
-  @include media-breakpoint-down(md){
+  @include media-breakpoint-down(md) {
     padding: 0 ($container-gutter-size / 2);
   }
 
-  @include media-breakpoint-down(sm){
+  @include media-breakpoint-down(sm) {
     padding: 0 ($container-gutter-size / 5);
   }
 }
@@ -106,6 +112,7 @@ header .nav-link {
   flex-direction: column;
   justify-content: space-between;
 }
+
 #wrap {
   margin-bottom: 2rem;
 }
