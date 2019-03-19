@@ -4,7 +4,7 @@ import { CacheService } from '@prime-core/services/cache.service';
 import { DocumentType, Document } from '@prime-core/models/documents.interface';
 import { ControlContainer, NgForm } from '@angular/forms';
 import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
-
+import { DocumentUploaderService } from '@prime-core/services/document-uploader.service';
 
 
 
@@ -29,7 +29,10 @@ export class ApplDocUploadComponent implements OnInit {
 
   public formRef: NgForm;
 
-  constructor(private dataService: RegistrationDataService, private cacheService: CacheService, public formRefC: ControlContainer) {
+  // TODO - DEV ONLY, MAKE SURE TO REMOVE THE DOC UPLOADER FROM HERE!
+
+  constructor(private dataService: RegistrationDataService, private cacheService: CacheService, public formRefC: ControlContainer
+    , public documentUploader: DocumentUploaderService) {
     this.documents = this.dataService.documents; // this is basically an alias, since arrays are pass-by-reference,
     this.docTypesList = this.cacheService.DocumentTypes;
 

@@ -1,0 +1,8 @@
+{
+    "/prime-reg/api/": {
+        "target": "https://moh-fpcare-dev.pathfinder.gov.bc.ca/",
+        "changeOrigin": true,
+        "secure": false,
+        "logLevel": "debug"
+    }
+}
