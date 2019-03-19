@@ -17,6 +17,10 @@ export class FakeDataMohReg {
             postal: faker.address.zipCode('?#? #?#')
         };
     }
+
+    setSeed(number){
+         faker.seed(number);
+    }
 }
 
 // TODO - Refactor and improve this so we can create interfaces / types automatically at compiletime based off the return type.

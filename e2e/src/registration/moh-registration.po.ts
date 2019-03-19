@@ -34,6 +34,10 @@ export class BaseMohRegTestPage extends PrimeTestPage {
     getContinueButton(){
         return this.continueButton;
     }
+
+    scrollDown(){
+        browser.executeScript('window.scrollTo(0, document.body.scrollHeight)');
+    }
 }
 
 export class MohProfileTestPage extends BaseMohRegTestPage {
