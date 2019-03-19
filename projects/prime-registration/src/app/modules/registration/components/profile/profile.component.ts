@@ -48,7 +48,7 @@ export class ProfileComponent implements OnInit {
   form: NgForm;
   userNameList: string[] = [];
 
-  constructor(private cntrlContainer: ControlContainer) {}
+  constructor(public cntrlContainer: ControlContainer) {}
 
   ngOnInit() {
     this.form = this.cntrlContainer as NgForm;
@@ -75,7 +75,7 @@ export class ProfileComponent implements OnInit {
     return this.provinces;
   }
 
-  private validateInfo(val: any) {
+  public validateInfo(val: any) {
     // If either of these fields contain data, then required.
     this.preferredIsRequired =
       !!(

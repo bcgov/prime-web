@@ -42,13 +42,13 @@ export class ApplProfileComponent extends ProfileComponent implements OnInit {
    */
   public dateLabel = 'Birthdate';
 
-  private form: NgForm;
+  form: NgForm;
 
   constructor(
     private primeDataService: RegistrationDataService,
     private cache: CacheService,
     private modalService: BsModalService,
-    private cntrlContainer: ControlContainer
+    public cntrlContainer: ControlContainer
   ) {
     super(cntrlContainer);
   }
@@ -78,7 +78,7 @@ export class ApplProfileComponent extends ProfileComponent implements OnInit {
     return this.cache.provinceList;
   }
 
-  private validateInfo(val: any) {
+  public validateInfo(val: any) {
     // If either of these fields contain data, then required.
     this.preferredIsRequired =
       !!(
