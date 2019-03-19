@@ -5,13 +5,10 @@
       "secure": false,
       "logLevel": "debug"
   },
-  "/cache/api/": {
-    "target": "https://prime-msp-service-dev.pathfinder.gov.bc.ca/",
+  "/api/reg/rest/getCache": {
+    "target": "https://maximus-prime-dev.pathfinder.gov.bc.ca/",
     "changeOrigin": true,
     "secure": false,
     "logLevel": "debug"
-}
-
-
-
+  }
 }
