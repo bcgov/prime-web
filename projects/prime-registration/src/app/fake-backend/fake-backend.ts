@@ -86,6 +86,16 @@ export class FakeBackendInterceptor extends Base implements HttpInterceptor  {
           province: this.fakebackendService.provinceList
         };
 
+        case 'messages':
+        return {
+          eventUUID: 'cache-' + this.objectId,
+          clientName: this._clientName,
+          processDate: this._processDate,
+          statusCode: ApiStatusCodes.SUCCESS,
+          statusMsgs: [],
+          messages: this.fakebackendService.messageList;
+        };
+
       default:
        console.log( 'don\'t know the param: ', param );
     }

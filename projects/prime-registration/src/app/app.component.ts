@@ -88,5 +88,16 @@ export class AppComponent implements OnInit {
           console.log( 'Failed to retrieve list of province.' );
         }
     });
+
+    // Load provinces for address component
+    this.cacheApiService.getCache( 'messages' ).subscribe(
+      (response) => {
+        const payload = new CachePayLoad( response );
+        if ( payload.success ) {
+          this.regCache.enhancedMsgList = payload.messages;
+        } else {
+          console.log( 'Failed to retrieve list of enhance messages.' );
+        }
+    });
   }
 }

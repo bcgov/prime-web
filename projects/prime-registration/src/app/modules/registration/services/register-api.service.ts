@@ -40,7 +40,7 @@ export class RegisterApiService extends AbstractHttpService {
 
     return this.post<UserAttrInterface>(url, {
       eventUUID: '980348',  // to generate
-      clientName: 'dummyValue', // to get from OpenShift environment
+      clientName: '', // to get from OpenShift environment
       processDate: this.getProcessDate(),
       userID: input.userID,
       email: input.email,
