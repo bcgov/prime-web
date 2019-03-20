@@ -16,9 +16,9 @@ import { TypeaheadModule } from 'ngx-bootstrap';
 import { TextMaskModule } from 'angular2-text-mask';
 import { PhoneNumberComponent } from './components/phone-number/phone-number.component';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
-import { NgSelectModule} from '@ng-select/ng-select';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { UniqueQuestionDirective } from './components/appl-account/unique-question.directive';
-
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   imports: [
@@ -41,7 +41,8 @@ import { UniqueQuestionDirective } from './components/appl-account/unique-questi
     NameComponent,
     PhoneNumberComponent,
     ConfirmModalComponent,
-    UniqueQuestionDirective
+    UniqueQuestionDirective,
+    ProfileComponent
   ],
   exports: [
     ApplProfileComponent,
@@ -53,10 +54,9 @@ import { UniqueQuestionDirective } from './components/appl-account/unique-questi
     ApplConfirmationComponent,
     NameComponent,
     PhoneNumberComponent,
-    ConfirmModalComponent
+    ConfirmModalComponent,
+    ProfileComponent
   ],
-  entryComponents: [
-    ConfirmModalComponent
-  ]
+  entryComponents: [ConfirmModalComponent]
 })
-export class RegistrationModule { }
+export class RegistrationModule {}

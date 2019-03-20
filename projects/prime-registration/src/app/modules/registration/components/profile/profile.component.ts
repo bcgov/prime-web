@@ -4,22 +4,22 @@ import {
   Input,
   forwardRef,
   Output,
-  EventEmitter
+  EventEmitter,
+  OnDestroy
 } from '@angular/core';
 import { ControlContainer, NgForm } from '@angular/forms';
 import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
-import { Registrant } from '../../models/registrant.model';
 import { CacheService } from '../../../../services/cache.service';
 import { CountryList, ProvinceList } from '../address/address.component';
 import { PrimeConstants } from '@prime-core/models/prime-constants';
 import { BsModalService } from 'ngx-bootstrap';
 import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
-import { ProfileComponent } from '../profile/profile.component';
+import { of, from, Observable, Subscription } from 'rxjs';
 
 @Component({
-  selector: 'prime-appl-profile',
-  templateUrl: './appl-profile.component.html',
-  styleUrls: ['./appl-profile.component.scss'],
+  selector: 'prime-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss'],
   /* Re-use the same ngForm that it's parent is using. The component will show
    * up in its parents `this.form`, and will auto-update `this.form.valid`
    */
@@ -27,10 +27,14 @@ import { ProfileComponent } from '../profile/profile.component';
     { provide: ControlContainer, useExisting: forwardRef(() => NgForm) }
   ]
 })
-export class ApplProfileComponent extends ProfileComponent<Registrant>
-  implements OnInit {
-  @Input() editIdentityInfo: boolean = true;
+export class ProfileComponent<T> implements OnInit, OnDestroy {
+  @Input() data: T;
+  @Input() countries;
+  @Input() provinces;
+  @Input()
+  editIdentityInfo: boolean = true;
   @Output() dataValid: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() changes: EventEmitter<T> = new EventEmitter<T>();
 
   public defaultCountry = PrimeConstants.CANADA;
   public defaultProvince = PrimeConstants.BRITISH_COLUMBIA;
@@ -44,25 +48,34 @@ export class ApplProfileComponent extends ProfileComponent<Registrant>
   public dateLabel = 'Birthdate';
 
   form: NgForm;
+  userNameList: string[] = [];
+  subscriptions: Subscription[];
 
-  constructor(
-    private primeDataService: RegistrationDataService,
-    private cache: CacheService,
-    private modalService: BsModalService,
-    public cntrlContainer: ControlContainer
-  ) {
-    super(cntrlContainer);
+  emitChanges(itm: T) {
+    this.changes.emit(itm);
   }
+
+  constructor(public cntrlContainer: ControlContainer) {}
 
   ngOnInit() {
     this.form = this.cntrlContainer as NgForm;
 
     // Listen for submission of form
     this.form.ngSubmit.subscribe(val => this.validateInfo(val));
+    let newObs = new Observable();
+    newObs = of(this.registrant);
+    newObs.subscribe(obs => console.log(obs));
+    this.subscriptions = [
+      this.cntrlContainer.valueChanges.subscribe(obs => this.emitChanges(obs))
+    ];
   }
 
-  get registrant(): Registrant {
-    return this.primeDataService.registrant;
+  ngOnDestroy() {
+    this.subscriptions.forEach(itm => itm.unsubscribe());
+  }
+
+  get registrant(): any {
+    return this.data;
   }
 
   toggleCheckBox() {
@@ -72,11 +85,15 @@ export class ApplProfileComponent extends ProfileComponent<Registrant>
 
   // Cache items
   get countryList(): CountryList[] {
-    return this.cache.countryList;
+    return this.countries;
   }
 
   get provinceList(): ProvinceList[] {
-    return this.cache.provinceList;
+    return this.provinces;
+  }
+  get test() {
+    console.log(this.registrant);
+    return this.registrant;
   }
 
   public validateInfo(val: any) {
@@ -89,7 +106,7 @@ export class ApplProfileComponent extends ProfileComponent<Registrant>
       ) || !!this.registrant.preferredFirstName;
 
     // Store list of names to be used by password check method
-    this.primeDataService.userNameList = Object.keys(this.form.value)
+    this.userNameList = Object.keys(this.form.value)
       .map(x => {
         if (x.includes('name')) {
           return this.form.form.get(x).value;
@@ -106,13 +123,12 @@ export class ApplProfileComponent extends ProfileComponent<Registrant>
   }
 
   confirm(message: string) {
-    const modal = this.modalService.show(ConfirmModalComponent, {
-      initialState: { message: message },
-      class: 'modal-sm',
-      ignoreBackdropClick: true,
-      keyboard: false
-    });
-
-    modal.content.result.subscribe(result => (this.firstNameRequired = result));
+    // const modal = this.modalService.show(ConfirmModalComponent, {
+    //   initialState: { message: message },
+    //   class: 'modal-sm',
+    //   ignoreBackdropClick: true,
+    //   keyboard: false
+    // });
+    // modal.content.result.subscribe(result => (this.firstNameRequired = result));
   }
 }

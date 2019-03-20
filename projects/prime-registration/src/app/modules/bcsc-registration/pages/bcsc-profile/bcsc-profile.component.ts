@@ -13,37 +13,36 @@ import { PrimeConstants } from '@prime-core/models/prime-constants';
   styleUrls: ['./bcsc-profile.component.scss']
 })
 export class BcscProfileComponent extends AbstractForm implements OnInit {
-
-  constructor( private dummyDataService: DummyDataService,
-               private primeDataServie: RegistrationDataService ,
-               protected router: Router ) {
-    super( router );
+  constructor(
+    private dummyDataService: DummyDataService,
+    private primeDataServie: RegistrationDataService,
+    protected router: Router
+  ) {
+    super(router);
 
     // Development purposes
-    primeDataServie.registrant.copy( this.dummyDataService.getBcscRegistrant() );
+    primeDataServie.registrant.copy(this.dummyDataService.getBcscRegistrant());
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   continue() {
     // Errors exist on form
     if (this.form.invalid) {
-
       // Mark all fields as touched to display errors
       this.markAllInputsTouched();
       return;
     }
   }
 
-
-  continueRegistration( valid: boolean ) {
+  continueRegistration(valid: boolean) {
     this.loading = true;
 
-    if ( valid ) {
+    if (valid) {
       // Navigate to next page
-      this.navigate( PrimeConstants.BCSC_REGISTRATION + '/' +
-                     PrimeConstants.ACCOUNT_PG );
+      this.navigate(
+        PrimeConstants.BCSC_REGISTRATION + '/' + PrimeConstants.ACCOUNT_PG
+      );
     }
   }
 }
