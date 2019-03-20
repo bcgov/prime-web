@@ -1,5 +1,5 @@
 import { Person, Address } from 'moh-common-lib/models';
-import { Document } from '@prime-core/models/documents.interface';
+import { Document } from '../../../../../../../src/app/models/documents.interface';
 
 export interface SecurityQuestionsAnswers {
   question: string;
@@ -7,7 +7,6 @@ export interface SecurityQuestionsAnswers {
 }
 
 export class Registrant extends Person {
-
   /** Parts of a person's name */
   public preferredFirstName: string;
   public preferredMiddleName: string;
@@ -29,14 +28,14 @@ export class Registrant extends Person {
   public documents: Document[] = [];
 
   /* Copy function */
-  copy( object: Registrant ) {
-    super.copy( object );
+  copy(object: Registrant) {
+    super.copy(object);
     this.preferredFirstName = object.preferredFirstName;
     this.preferredMiddleName = object.preferredMiddleName;
     this.preferredLastName = object.preferredLastName;
 
-    this.address.copy( object.address );
-    this.mailAddress.copy( object.mailAddress );
+    this.address.copy(object.address);
+    this.mailAddress.copy(object.mailAddress);
 
     this.userID = object.userID;
     this.password = object.password;

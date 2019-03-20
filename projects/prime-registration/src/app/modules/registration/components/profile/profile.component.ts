@@ -8,10 +8,10 @@ import {
   OnDestroy
 } from '@angular/core';
 import { ControlContainer, NgForm } from '@angular/forms';
-import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
+// import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
 import { CacheService } from '../../../../services/cache.service';
 import { CountryList, ProvinceList } from '../address/address.component';
-import { PrimeConstants } from '@prime-core/models/prime-constants';
+// import { PrimeConstants } from '@prime-core/models/prime-constants';
 import { BsModalService } from 'ngx-bootstrap';
 import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
 import { of, from, Observable, Subscription } from 'rxjs';
@@ -36,8 +36,8 @@ export class ProfileComponent<T> implements OnInit, OnDestroy {
   @Output() dataValid: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() changes: EventEmitter<T> = new EventEmitter<T>();
 
-  public defaultCountry = PrimeConstants.CANADA;
-  public defaultProvince = PrimeConstants.BRITISH_COLUMBIA;
+  // public defaultCountry = PrimeConstants.CANADA;
+  // public defaultProvince = PrimeConstants.BRITISH_COLUMBIA;
 
   public firstNameRequired: boolean = false;
   public preferredIsRequired: boolean = false;
@@ -121,7 +121,7 @@ export class ProfileComponent<T> implements OnInit, OnDestroy {
 
     this.dataValid.emit(this.form.valid);
   }
-
+  // TODO: re-work this modal service
   confirm(message: string) {
     // const modal = this.modalService.show(ConfirmModalComponent, {
     //   initialState: { message: message },
