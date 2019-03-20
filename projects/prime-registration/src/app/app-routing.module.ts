@@ -8,37 +8,41 @@ import { MohProfileComponent } from './modules/moh-registration/pages/moh-profil
 import { BcscProfileComponent } from './modules/bcsc-registration/pages/bcsc-profile/bcsc-profile.component';
 import { ApplConfirmationComponent } from './modules/registration/components/appl-confirmation/appl-confirmation.component';
 import { PrimeConstants } from '@prime-core/models/prime-constants';
+import { ProfileComponent } from './modules/registration/components/profile/profile.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomePageComponent,
-    data: { title: 'Home'}
+    data: { title: 'Home' }
   },
 
   // Lazy loading modules below
   {
     path: PrimeConstants.MOH_REGISTRATION,
     // loadChildren: 'app/modules/moh-registration/moh-registration.module#MohRegistrationModule'
-    loadChildren: './modules/moh-registration/moh-registration.module#MohRegistrationModule'
-
+    loadChildren:
+      './modules/moh-registration/moh-registration.module#MohRegistrationModule'
   },
   {
     path: PrimeConstants.BCSC_REGISTRATION,
     // loadChildren: 'app/modules/bcsc-registration/bcsc-registration.module#BcscRegistrationModule'
-    loadChildren: './modules/bcsc-registration/bcsc-registration.module#BcscRegistrationModule'
-
+    loadChildren:
+      './modules/bcsc-registration/bcsc-registration.module#BcscRegistrationModule'
+  },
+  {
+    path: 'test',
+    component: ProfileComponent
   },
   {
     path: '**',
     redirectTo: '',
     pathMatch: 'full'
   }
-
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

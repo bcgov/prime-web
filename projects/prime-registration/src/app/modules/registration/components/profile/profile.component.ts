@@ -14,7 +14,7 @@ import { CountryList, ProvinceList } from '../address/address.component';
 import { PrimeConstants } from '@prime-core/models/prime-constants';
 import { BsModalService } from 'ngx-bootstrap';
 import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
-import { of } from 'rxjs';
+import { of, from, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'prime-profile',
@@ -34,7 +34,7 @@ export class ProfileComponent<T> implements OnInit, OnDestroy {
   @Input()
   editIdentityInfo: boolean = true;
   @Output() dataValid: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() formData: EventEmitter<T> = new EventEmitter<T>();
+  @Output() changes: EventEmitter<T> = new EventEmitter<T>();
 
   public defaultCountry = PrimeConstants.CANADA;
   public defaultProvince = PrimeConstants.BRITISH_COLUMBIA;
@@ -49,6 +49,11 @@ export class ProfileComponent<T> implements OnInit, OnDestroy {
 
   form: NgForm;
   userNameList: string[] = [];
+  subscriptions: Subscription[];
+
+  emitChanges(itm: T) {
+    this.changes.emit(itm);
+  }
 
   constructor(public cntrlContainer: ControlContainer) {}
 
@@ -57,10 +62,17 @@ export class ProfileComponent<T> implements OnInit, OnDestroy {
 
     // Listen for submission of form
     this.form.ngSubmit.subscribe(val => this.validateInfo(val));
-    const newObs = of(this.registrant).subscribe(obs => console.log(obs));
+    let newObs = new Observable();
+    newObs = of(this.registrant);
+    newObs.subscribe(obs => console.log(obs));
+    this.subscriptions = [
+      this.cntrlContainer.valueChanges.subscribe(obs => this.emitChanges(obs))
+    ];
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    this.subscriptions.forEach(itm => itm.unsubscribe());
+  }
 
   get registrant(): any {
     return this.data;
@@ -78,6 +90,10 @@ export class ProfileComponent<T> implements OnInit, OnDestroy {
 
   get provinceList(): ProvinceList[] {
     return this.provinces;
+  }
+  get test() {
+    console.log(this.registrant);
+    return this.registrant;
   }
 
   public validateInfo(val: any) {
