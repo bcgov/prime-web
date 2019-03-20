@@ -147,7 +147,7 @@
       "root": "projects/prime-enrollment/",
       "sourceRoot": "projects/prime-enrollment/src",
       "projectType": "application",
-      "prefix": "app",
+      "prefix": "enroll",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"

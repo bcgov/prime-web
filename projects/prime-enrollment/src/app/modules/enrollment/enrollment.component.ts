@@ -13,6 +13,7 @@ import { Container } from 'moh-common-lib/models';
         [progressSteps]="progressSteps"
       ></common-wizard-progress-bar>
     </common-core-breadcrumb>
+
     <router-outlet></router-outlet>
   `,
   styleUrls: ['./enrollment.component.scss'],

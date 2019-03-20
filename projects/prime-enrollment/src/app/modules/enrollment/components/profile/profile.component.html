@@ -1,16 +1,15 @@
 <common-page-framework layout='blank'>
 
   <form #formRef='ngForm' (ngSubmit)='continue()'>
-    <prime-appl-profile [editIdentityInfo]="false" (dataValid)='continueRegistration($event)'>
 
-      <p identityInstruct>
-        Information received from BCSC - Ministry verbage required
-      </p>
+    <p identityInstruct>
+      Information received from BCSC - Ministry verbage required
+    </p>
 
-    </prime-appl-profile>
-
+    <enroll-enrollment-profile [data]="enrollStateSvc.profileForm" [editIdentityInfo]='false' [countries]="countryList"
+      [provinces]="provinceList">
+    </enroll-enrollment-profile>
     <!-- Display bar during registration -->
-    <common-form-submit-bar [increaseWidth]='true'></common-form-submit-bar>
 
   </form>
 

@@ -4,7 +4,7 @@ import { Registrant } from '../../../../../../prime-registration/src/app/modules
 import { ControlContainer, NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'app-enrollment-profile',
+  selector: 'enroll-enrollment-profile',
   templateUrl: './enrollment-profile.component.html',
   styleUrls: ['./enrollment-profile.component.scss'],
   viewProviders: [

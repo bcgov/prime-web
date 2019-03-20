@@ -7,6 +7,9 @@ import { EnrollmentProfileComponent } from './components/enrollment-profile/enro
 import { NameComponent } from '../../../../../projects/prime-registration/src/app/modules/registration/components/name/name.component';
 import { AddressComponent } from '../../../../../projects/prime-registration/src/app/modules/registration/components/address/address.component';
 import { PageSectionsComponent } from '../../../../../projects/prime-registration/src/app/modules/registration/components/page-sections/page-sections.component';
+import { FormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { TypeaheadModule } from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,20 @@ import { PageSectionsComponent } from '../../../../../projects/prime-registratio
     AddressComponent,
     PageSectionsComponent
   ],
-  imports: [CommonModule, SharedCoreModule],
-  exports: [SharedCoreModule, HomePageComponent, ProfileComponent]
+
+  imports: [
+    CommonModule,
+    TypeaheadModule.forRoot(),
+    FormsModule,
+    NgSelectModule,
+    SharedCoreModule
+  ],
+  exports: [
+    FormsModule,
+    SharedCoreModule,
+    NgSelectModule,
+    HomePageComponent,
+    EnrollmentProfileComponent
+  ]
 })
 export class SharedModule {}
