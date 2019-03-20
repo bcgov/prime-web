@@ -2,7 +2,7 @@ import { MohProfileTestPage } from './moh-registration.po';
 import { browser } from 'protractor';
 import { PrimeConstants } from '../../../src/app/models/prime-constants';
 import { FakeDataMohReg } from './moh-registration.data';
-import { PrimeTestPage } from '../app.po';
+import { PrimeTestPage } from '../../../e2e/src/app.po';
 
 fdescribe('MoH Registration - Profile Page', () => {
     let page: MohProfileTestPage;
