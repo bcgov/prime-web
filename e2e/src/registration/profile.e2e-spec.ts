@@ -193,7 +193,7 @@ fdescribe('MoH Registration - Profile Page', () => {
     });
 
 
-    it('14. should make sure that preferred first name must be filled out if preferred last name field is filled out', async () => {
+    xit('14. should make sure that preferred first name must be filled out if preferred last name field is filled out', async () => {
       page.navigateTo();
       page.fillPage(profileData);
       //browser.sleep(1000 * 20);
@@ -206,7 +206,7 @@ fdescribe('MoH Registration - Profile Page', () => {
     });
 
 
-    it('15. should make sure that preferred last name must be filled out if preferred first name field is filled out', async () => {
+    xit('15. should make sure that preferred last name must be filled out if preferred first name field is filled out', async () => {
       page.navigateTo();
       page.fillPage(profileData);
       //browser.sleep(1000 * 20);
