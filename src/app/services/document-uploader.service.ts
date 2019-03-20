@@ -18,7 +18,9 @@ export class DocumentUploaderService extends AbstractHttpService {
 
   uploadImage(image: CommonImage) {
     const eventUUID = UUID.UUID();
-    const URL = `/file/event/${eventUUID}/document/${image.uuid}`;
+    // TODO - Change this to use base URL from environments file. Kristin working on that in her branch, so for now just hardcode.
+    const baseURL = '/api/';
+    const URL = `${baseURL}file/event/${eventUUID}/document/${image.uuid}`;
     this._headers = new HttpHeaders({
       programArea: 'reg',
       'Document-Type': 'TEST_DOCUMENT',
