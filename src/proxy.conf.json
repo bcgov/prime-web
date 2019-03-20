@@ -1,14 +1,8 @@
 {
-  "/api/rest/": {
-      "target": "https://maximus-prime-dev.pathfinder.gov.bc.ca/",
+  "/api/": {
+      "target": "https://maximus-prime-dev.pathfinder.gov.bc.ca",
       "changeOrigin": true,
       "secure": false,
       "logLevel": "debug"
-  },
-  "/api/reg/rest/getCache": {
-    "target": "https://maximus-prime-dev.pathfinder.gov.bc.ca/",
-    "changeOrigin": true,
-    "secure": false,
-    "logLevel": "debug"
   }
 }
