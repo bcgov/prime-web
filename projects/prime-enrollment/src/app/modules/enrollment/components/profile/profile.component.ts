@@ -1,7 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { EnrollmentStateService } from '../../services/enrollment-state.service';
 import { countryList, provinceList } from '../../data/country';
-
+const country = countryList;
+const province = provinceList;
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -9,8 +10,8 @@ import { countryList, provinceList } from '../../data/country';
 })
 export class ProfileComponent implements OnInit {
   constructor(public enrollStateSvc: EnrollmentStateService) {}
-  countries = countryList;
-  provinces = provinceList;
+  countries = country;
+  provinces = province;
 
   ngOnInit() {}
 }

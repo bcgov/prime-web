@@ -36,8 +36,8 @@ export class ProfileComponent<T> implements OnInit, OnDestroy {
   @Output() dataValid: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() changes: EventEmitter<T> = new EventEmitter<T>();
 
-  // public defaultCountry = PrimeConstants.CANADA;
-  // public defaultProvince = PrimeConstants.BRITISH_COLUMBIA;
+  public defaultCountry = 'CAN';
+  public defaultProvince = 'BC';
 
   public firstNameRequired: boolean = false;
   public preferredIsRequired: boolean = false;
@@ -85,6 +85,7 @@ export class ProfileComponent<T> implements OnInit, OnDestroy {
 
   // Cache items
   get countryList(): CountryList[] {
+    console.log(this);
     return this.countries;
   }
 
