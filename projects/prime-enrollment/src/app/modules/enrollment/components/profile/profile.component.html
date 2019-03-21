@@ -1,0 +1,16 @@
+<common-page-framework layout='blank'>
+
+  <form #formRef='ngForm' (ngSubmit)='continue()'>
+
+    <p identityInstruct>
+      Information received from BCSC - Ministry verbage required
+    </p>
+
+    <enroll-enrollment-profile [data]="enrollStateSvc.profileForm" [editIdentityInfo]='false' [countries]="provinces"
+      [provinces]="countries">
+    </enroll-enrollment-profile>
+    <!-- Display bar during registration -->
+
+  </form>
+
+</common-page-framework>

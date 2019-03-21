@@ -1,0 +1,29 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { EnrollmentRoutingModule } from './enrollment-routing.module';
+import { EnrollmentComponent } from './enrollment.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { ProfessionalComponent } from './components/professional/professional.component';
+import { SelfDeclarationComponent } from './components/self-declaration/self-declaration.component';
+import { PharmanetAccessComponent } from './components/pharmanet-access/pharmanet-access.component';
+import { ReviewComponent } from './components/review/review.component';
+import { SharedModule } from '@prime-enrollment/shared/shared.module';
+import { ContactDetailsComponent } from './components/contact-details/contact-details.component';
+
+@NgModule({
+  declarations: [
+    EnrollmentComponent,
+    ProfileComponent,
+    ContactComponent,
+    ProfessionalComponent,
+    SelfDeclarationComponent,
+    PharmanetAccessComponent,
+    ReviewComponent,
+    ContactDetailsComponent
+  ],
+  imports: [CommonModule, EnrollmentRoutingModule, SharedModule],
+  exports: []
+})
+export class EnrollmentModule {}
