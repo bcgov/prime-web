@@ -9,7 +9,7 @@ import { ProfessionalComponent } from './components/professional/professional.co
 import { SelfDeclarationComponent } from './components/self-declaration/self-declaration.component';
 import { PharmanetAccessComponent } from './components/pharmanet-access/pharmanet-access.component';
 import { ReviewComponent } from './components/review/review.component';
-import { SharedModule } from '@prime-enrollment/shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 import { ContactDetailsComponent } from './components/contact-details/contact-details.component';
 
 @NgModule({

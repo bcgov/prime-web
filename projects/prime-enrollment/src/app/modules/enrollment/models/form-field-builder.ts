@@ -1,20 +1,18 @@
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { IContact } from '@prime-enrollment/core/interfaces/i-contact';
-import { ILicense } from '@prime-enrollment/core/interfaces/i-license';
 import {
   IDeviceProvider,
-  IProfessionalInformation
-} from '@prime-enrollment/core/interfaces/i-professional-information';
-import {
+  ILicense,
+  IProfessionalInformation,
   IDeclaration,
   IFindOrganization,
   IOrganization,
   IOrganizationForm,
-  ISupportingDetails
-} from '@prime-enrollment/core/interfaces';
+  ISupportingDetails,
+  IContact
+} from '../../../core/interfaces';
 
 export abstract class FormFieldBuilder {
-  get contactFields(): IContact {
+  static get contactFields() {
     const phone = new FormControl(undefined, [Validators.required]);
     const sms = new FormControl(undefined, [Validators.required]);
     const ext = new FormControl(undefined, []);
@@ -23,7 +21,7 @@ export abstract class FormFieldBuilder {
     return { phone, sms, ext, email, preferredContact };
   }
 
-  get licenseFields(): ILicense {
+  static get licenseFields() {
     const collegeCert = new FormControl(undefined, [Validators.required]);
     const description = new FormControl(undefined, [Validators.required]);
     const collegeNo = new FormControl(undefined, [Validators.required]);
@@ -40,21 +38,21 @@ export abstract class FormFieldBuilder {
       renewalDate
     };
   }
-  get deviceProviderFields() {
+  static get deviceProviderFields() {
     return new FormControl(undefined, [Validators.required]);
   }
 
-  get onBehalfOfFields() {
+  static get onBehalfOfFields() {
     return new FormControl(undefined, [Validators.required]);
   }
-  get professionInformationFields(): IProfessionalInformation {
+  static get professionInformationFields() {
     const deviceProvider = new FormControl(undefined, [Validators.required]);
     const collegeCert = new FormControl(undefined, [Validators.required]);
     const onBehalfOf = new FormControl(undefined, [Validators.required]);
     return { onBehalfOf, collegeCert, deviceProvider };
   }
 
-  get declarationFields(): IDeclaration {
+  static get declarationFields() {
     const conviction = new FormControl(undefined, [Validators.required]);
     const regSuspension = new FormControl(undefined, [Validators.required]);
     const tAndC = new FormControl(undefined, [Validators.required]);
@@ -63,26 +61,25 @@ export abstract class FormFieldBuilder {
     return { conviction, regSuspension, tAndC, pharmaSuspension };
   }
 
-  get declarationDetailsControl() {
+  static get declarationDetailsControl() {
     return new FormControl(null, [Validators.required]);
   }
 
-  get findOrganizationFields(): IFindOrganization {
+  static get findOrganizationFields() {
     const type = new FormControl(null, [Validators.required]);
     const organization = new FormControl(null, [Validators.required]);
     const city = new FormControl(null, [Validators.required]);
     return { type, organization, city };
   }
 
-  get organizationFields(): IOrganization {
+  static get organizationFields() {
     const name = new FormControl(null, []);
     const type = new FormControl(null, []);
     const city = new FormControl(null, []);
     return { name, type, city };
   }
   // TODO: fix the type checking on organization - not working for some reason;
-  get organizationFormFields(): IOrganizationForm {
-    const organization = this.organizationFields as IOrganization;
+  static get organizationFormFields() {
     const start = new FormControl(null, []);
     const end = new FormControl(null, []);
 
@@ -90,7 +87,7 @@ export abstract class FormFieldBuilder {
     return { organization, start, end };
   }
 
-  get supportingDetailsField(): ISupportingDetails {
+  static get supportingDetailsField() {
     const details = new FormControl(null, []);
     const documents = new FormControl(null, []);
     return { details, documents };
