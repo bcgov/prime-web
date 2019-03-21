@@ -4,10 +4,15 @@ import { PrimeTestPage } from '../../../e2e/src/app.po';
 
 export class BaseMohRegTestPage extends PrimeTestPage {
     private continueButton: WebElement;
+    private diffMailAddressButton: WebElement;
+    private diffMailAddressCheckbox: WebElement;
+
 
     constructor() {
         super();
         this.continueButton = element(by.css('.form-bar .submit'));
+        this.diffMailAddressButton = element(by.css('.mail-address-container .btn'));
+        this.diffMailAddressCheckbox = element(by.css('.custom-checkbox .custom-control-label'));
     }
 
     navigateTo() {
@@ -17,6 +22,22 @@ export class BaseMohRegTestPage extends PrimeTestPage {
     continue() {
         this.continueButton.click();
     }
+
+    clickDiffMailAddress(){
+        this.diffMailAddressButton.click();
+    }
+
+    checkDiffMailAddress(){
+        this.diffMailAddressCheckbox.click();
+    }
+
+    getContinueButton(){
+        return this.continueButton;
+    }
+
+    scrollDown(){
+        browser.executeScript('window.scrollTo(0, document.body.scrollHeight)');
+    }
 }
 
 export class MohProfileTestPage extends BaseMohRegTestPage {
@@ -24,6 +45,7 @@ export class MohProfileTestPage extends BaseMohRegTestPage {
     /** Fill out the entire page. Page will be valid after.  */
     fillPage(data: ProfilePageTest) {
       this.fillName(data);
+      this.fillPreferredName(data);
       this.fillBirthDate(data.birthDate);
       this.fillAddress(data);
     }
@@ -34,6 +56,14 @@ export class MohProfileTestPage extends BaseMohRegTestPage {
             (await this.getNameComponent('Middle Name')).sendKeys(data.middleName);
         }
         (await this.getNameComponent('Last Name')).sendKeys(data.lastName);
+    }
+
+    async fillPreferredName(data: ProfilePageTest) {
+      (await this.getNameComponent('Preferred First Name')).sendKeys(data.preferredFirstName);
+      if (data.preferredMiddleName) {
+          (await this.getNameComponent('Preferred Middle Name')).sendKeys(data.preferredMiddleName);
+      }
+      (await this.getNameComponent('Preferred Last Name')).sendKeys(data.preferredLastName);
     }
 
     fillBirthDate(date: Date) {
@@ -51,7 +81,12 @@ export class MohProfileTestPage extends BaseMohRegTestPage {
     // TODO - This could be refactored to actually use the Geocoder / typeahead part
     fillAddress(data: ProfilePageTest) {
       // country
-      element(by.cssContainingText('prime-address [id^="country"] option', data.country)).click();
+
+      // first - try and scroll down
+      const countryEl = element(by.cssContainingText('prime-address [id^="country"] option', data.country));
+      browser.actions().mouseMove(countryEl).perform();
+      
+      countryEl.click();
 
       // Provine does NOT exist by default on object,
       // is only added manually in tests

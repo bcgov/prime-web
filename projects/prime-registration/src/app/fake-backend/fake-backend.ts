@@ -63,9 +63,9 @@ export class FakeBackendInterceptor extends Base implements HttpInterceptor  {
 
   // Methods to handle API calls
 
-  private getCache( param: string ) : any {
+  private getCache( param: string ): any {
 
-    switch( param ) {
+    switch ( param ) {
       case 'countries':
         return {
           eventUUID: 'cache-' + this.objectId,
@@ -93,7 +93,7 @@ export class FakeBackendInterceptor extends Base implements HttpInterceptor  {
           processDate: this._processDate,
           statusCode: ApiStatusCodes.SUCCESS,
           statusMsgs: [],
-          messages: this.fakebackendService.messageList;
+          messages: this.fakebackendService.messageList
         };
 
       default:
