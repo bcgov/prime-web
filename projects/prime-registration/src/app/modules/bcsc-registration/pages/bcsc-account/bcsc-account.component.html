@@ -2,7 +2,11 @@
 
   <form #formRef='ngForm' (ngSubmit)='continue()'>
     <prime-appl-account [mohCredientials]='false'
-                        (dataValid)='registerAccount($event)'>
+                        [(data)]='registrant'
+                        [isCanada]='isCanada()'
+                        [cache]='cache'
+                        [userNameList]='nameList'>
+
 
       <p AccountInstruct>
         Information for creating account with BCSC credientials
