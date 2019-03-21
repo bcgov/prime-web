@@ -2,11 +2,11 @@ import { Component, OnInit, Input, forwardRef, Output, EventEmitter } from '@ang
 import { ControlContainer, NgForm } from '@angular/forms';
 import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
 import { Registrant } from '../../models/registrant.model';
-import { CacheService } from '../../../../services/cache.service';
 import { CountryList, ProvinceList } from '../address/address.component';
 import { PrimeConstants } from '@prime-core/models/prime-constants';
 import { BsModalService } from 'ngx-bootstrap';
 import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
+import { RegCacheService } from '../../../../services/reg-cache.service';
 
 
 @Component({
@@ -37,7 +37,7 @@ export class ApplProfileComponent implements OnInit {
   private form: NgForm;
 
   constructor( private primeDataService: RegistrationDataService,
-               private cache: CacheService,
+               private regCache: RegCacheService,
                private modalService: BsModalService,
                private cntrlContainer: ControlContainer ) {
   }
@@ -59,11 +59,11 @@ export class ApplProfileComponent implements OnInit {
 
   // Cache items
   get countryList(): CountryList[] {
-    return this.cache.countryList;
+    return this.regCache.countryList;
   }
 
   get provinceList(): ProvinceList[] {
-    return this.cache.provinceList;
+    return this.regCache.provinceList;
   }
 
   private validateInfo( val: any ) {
@@ -72,13 +72,6 @@ export class ApplProfileComponent implements OnInit {
     this.preferredIsRequired = !!((this.registrant.preferredFirstName
       || this.registrant.preferredLastName) && this.registrant.firstName ) ||
       !!(this.registrant.preferredFirstName);
-
-    // Store list of names to be used by password check method
-    this.primeDataService.userNameList = Object.keys(this.form.value).map( x => {
-      if ( x.includes( 'name' ) ) {
-        return this.form.form.get( x ).value;
-      }
-    }).filter( item => item );
 
     // Display confirmation box only if the legal name is editable
     if ( !this.registrant.firstName && this.editIdentityInfo ) {

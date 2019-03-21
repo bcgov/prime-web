@@ -12,21 +12,21 @@
 <!-- Use Mobile/SMS for Authorization OPTION -->
 <div>
   <div class='border-bottom'>
-    <label class='h2 normal'>  
+    <label class='h2 normal'>
       <input type="checkbox"
              name="mobile_sms_auth"
              id="mobile_sms_auth"
-             [(ngModel)]='useMobile'/>
+             [(ngModel)]='this.registrant.useMfaSMS'/>
       Use Mobile/SMS for Authorization
     </label>
   </div>
-    
+
   <prime-page-sections layout='tips'>
     <div class="form-group col-sm-4 p-sm-0">
       <!-- isCanada() still in progress, will be added later on-->
       <prime-phone-number [displayMask]="isCanada()"
-                          [(value)]="registrant.smsPhone"
-                          [disabled]="!useMobile">
+                          [(value)]="registrant.mfaSMSphone"
+                          [disabled]="!this.registrant.useMfaSMS">
      </prime-phone-number>
     </div>
 
@@ -42,11 +42,11 @@
 <!-- Use Security Key OPTION -->
 <div *ngIf="isCanada()">
     <div class='border-bottom'>
-        <label class='h2 normal'> 
+        <label class='h2 normal'>
       <input type="checkbox"
              name="security_key"
              id="security_key"
-             [(ngModel)]='useSecurity'/>
+             [(ngModel)]='this.registrant.useMfaSecurityKey'/>
       Use Security Key
         </label>
   </div>
@@ -69,11 +69,11 @@
 <!-- Use Mobile App Authentication OPTION -->
 <div>
     <div class='border-bottom'>
-        <label class='h2 normal'>  
+        <label class='h2 normal'>
       <input type="checkbox"
              name="mobile_app_auth"
              id="mobile_app_auth"
-             [(ngModel)]='useApp'/>
+             [(ngModel)]='this.registrant.useMfaApp'/>
       Use Mobile App Authentication
         </label>
   </div>

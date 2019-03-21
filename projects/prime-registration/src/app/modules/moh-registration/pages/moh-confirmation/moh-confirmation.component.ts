@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiStatusCodes } from '@prime-core/models/api-status-codes.enum';
+import { ApiStatusCodes } from '@prime-core/models/api-base.model';
 // import { ApiStatusCodes } from '../../../../models/api-status-codes.enum';
 
 @Component({

@@ -13,17 +13,16 @@ export class ApplSecurityComponent implements OnInit {
 
   @Output() dataValid: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  // MFA options
-  public useMobile: boolean = false;
-  public useSecurity: boolean = false;
-  public useApp: boolean = false;
-
   public submitted: boolean = false;
 
   private form: NgForm;
 
   constructor( private primeDataService: RegistrationDataService,
                private cntrlContainer: ControlContainer ) {
+
+    if ( !this.registrant.mfaSMSphone ) {
+      this.registrant.mfaSMSphone = this.registrant.smsPhone;
+    }
   }
 
   ngOnInit() {
@@ -36,7 +35,6 @@ export class ApplSecurityComponent implements OnInit {
   get registrant(): Registrant {
     return this.primeDataService.registrant;
   }
-
 
   isCanada(): boolean {
     return this.primeDataService.isCanada();
@@ -52,7 +50,9 @@ export class ApplSecurityComponent implements OnInit {
     if ( this.form.valid ) {
       // Need to verify MFA options selected
       // Token has to have Canadian address otherwise not valid option
-      valid  = (this.useApp || this.useMobile || this.useSecurity);
+      valid  = ( this.registrant.useMfaApp ||
+                 this.registrant.useMfaSMS ||
+                 this.registrant.useMfaSecurityKey );
     }
     this.dataValid.emit( valid );
   }

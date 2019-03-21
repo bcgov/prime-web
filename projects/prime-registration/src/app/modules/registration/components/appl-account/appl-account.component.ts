@@ -2,7 +2,7 @@ import { Component, OnInit, Input, forwardRef, Output, EventEmitter, ViewChildre
 import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
 import { Registrant, SecurityQuestionsAnswers } from '../../models/registrant.model';
 import { ControlContainer, NgForm } from '@angular/forms';
-import { CacheService } from '../../../../services/cache.service';
+import { RegCacheService } from '../../../../services/reg-cache.service';
 import { PrimeConstants } from '@prime-core/models/prime-constants';
 import { NgSelectModule } from '@ng-select/ng-select';
 
@@ -42,9 +42,17 @@ export class ApplAccountComponent implements OnInit {
 
   private form: NgForm;
 
+  private _nameList: string[];
+
   constructor( private primeDataService: RegistrationDataService,
-               private cache: CacheService,
+               private regCache: RegCacheService,
                private cntrlContainer: ControlContainer ) {
+
+   this._nameList = Object.keys(this.primeDataService.registrant).map( x => {
+        if ( x.includes( 'Name' ) ) {
+          return this.primeDataService.registrant[x];
+        }
+      }).filter( item => item );
   }
 
   ngOnInit() {
@@ -53,7 +61,7 @@ export class ApplAccountComponent implements OnInit {
     if (!this.registrant.secQuestionsAnswer.length) {
       // initialize question/answer array
       for (let i = 0; i < this.numSecQuestions; i++) {
-        this.registrant.secQuestionsAnswer.push({ question: null, answer: null });
+        this.registrant.secQuestionsAnswer.push({ name: null, value: null });
       }
     }
 
@@ -91,19 +99,19 @@ export class ApplAccountComponent implements OnInit {
    * Cached items
    */
   get pwdMinLen(): string {
-    return this.cache.pwdMinLen;
+    return this.regCache.pwdMinLen;
   }
 
   get userIdMinLen(): string {
-    return this.cache.userIDMinLen;
+    return this.regCache.userIDMinLen;
   }
 
   get numSecQuestions(): number {
-    return this.cache.numSecQuestion;
+    return this.regCache.numSecQuestion;
   }
 
   get secQuestionList(): string[] {
-    return this.cache.secQuestionList;
+    return this.regCache.secQuestionList;
   }
 
   // private method
@@ -133,7 +141,7 @@ export class ApplAccountComponent implements OnInit {
     // Check for user ID or names in password
     if ( (this.registrant.userID &&
           this.registrant.password.includes( this.registrant.userID )  ||
-        this.primeDataService.userNameList.map( x => {
+        this._nameList.map( x => {
           if ( x.length > 1 ) { // ignore initials for names
             return this.registrant.password.includes( x );
           }

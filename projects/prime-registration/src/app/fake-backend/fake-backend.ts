@@ -11,11 +11,18 @@ import {mergeMap, delay} from 'rxjs/operators';
 import {of} from 'rxjs/internal/observable/of';
 import {Injectable} from '@angular/core';
 import { FakeBackendService } from './fake-backend.service';
+import { ApiStatusCodes } from '../../../../../src/app/models/api-base.model';
+import { Base } from 'moh-common-lib/models';
 
 @Injectable()
-export class FakeBackendInterceptor implements HttpInterceptor  {
+export class FakeBackendInterceptor extends Base implements HttpInterceptor  {
 
-  constructor(private fakebackendService: FakeBackendService ) { }
+  private _processDate: string = new Date().toDateString();
+  private _clientName: string = 'regweb';
+
+  constructor(private fakebackendService: FakeBackendService ) {
+    super();
+   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
@@ -35,6 +42,17 @@ export class FakeBackendInterceptor implements HttpInterceptor  {
         }*/
 
       } else if ( 'GET' === request.method ) {
+        let response = null;
+
+          if ( request.url.endsWith( '/getCache' ) ) {
+            console.log( 'Get cache ', request.params );
+            response = this.getCache(  request.params.get( 'param' ) );
+          }
+
+         if ( response ) {
+          return of( new HttpResponse( {status: 200, body: response} ) )
+            .pipe(delay(1000));
+         }
 
       }
 
@@ -44,6 +62,44 @@ export class FakeBackendInterceptor implements HttpInterceptor  {
   }
 
   // Methods to handle API calls
+
+  private getCache( param: string ): any {
+
+    switch ( param ) {
+      case 'countries':
+        return {
+          eventUUID: 'cache-' + this.objectId,
+          clientName: this._clientName,
+          processDate: this._processDate,
+          statusCode: ApiStatusCodes.SUCCESS,
+          statusMsgs: [],
+          country: this.fakebackendService.countryList
+        };
+
+      case 'provinces':
+        return {
+          eventUUID: 'cache-' + this.objectId,
+          clientName: this._clientName,
+          processDate: this._processDate,
+          statusCode: ApiStatusCodes.SUCCESS,
+          statusMsgs: [],
+          province: this.fakebackendService.provinceList
+        };
+
+        case 'messages':
+        return {
+          eventUUID: 'cache-' + this.objectId,
+          clientName: this._clientName,
+          processDate: this._processDate,
+          statusCode: ApiStatusCodes.SUCCESS,
+          statusMsgs: [],
+          messages: this.fakebackendService.messageList
+        };
+
+      default:
+       console.log( 'don\'t know the param: ', param );
+    }
+  }
 }
 
 export let fakeBackendProvider = {
