@@ -54,6 +54,7 @@ export class ApplProfileComponent extends ProfileComponent<Registrant>
 
     // Listen for submission of form
     this.form.ngSubmit.subscribe(val => this.validateInfo(val));
+    super.ngOnInit();
   }
 
   get registrant(): Registrant {
