@@ -1,7 +1,7 @@
-import { FormData } from './form-data';
+import { FormFieldBuilder } from './form-field-builder';
 
 describe('FormData', () => {
   it('should create an instance', () => {
-    expect(new FormData()).toBeTruthy();
+    expect(FormFieldBuilder.prototype.contactFields).toBeTruthy();
   });
 });

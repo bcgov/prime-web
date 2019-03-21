@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { EnrollmentModule } from './modules/enrollment/enrollment.module';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { PhoneInputComponent } from './shared/components/phone-input/phone-input.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -14,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     SharedModule,
+    ReactiveFormsModule,
     EnrollmentModule,
     HttpClientModule
   ],

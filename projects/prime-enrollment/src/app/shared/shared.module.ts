@@ -7,9 +7,11 @@ import { EnrollmentProfileComponent } from './components/enrollment-profile/enro
 import { NameComponent } from '../../../../../projects/prime-registration/src/app/modules/registration/components/name/name.component';
 import { AddressComponent } from '../../../../../projects/prime-registration/src/app/modules/registration/components/address/address.component';
 import { PageSectionsComponent } from '../../../../../projects/prime-registration/src/app/modules/registration/components/page-sections/page-sections.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { TypeaheadModule } from 'ngx-bootstrap';
+import { TypeaheadModule, BsDropdownModule } from 'ngx-bootstrap';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { PhoneInputComponent } from './components/phone-input/phone-input.component';
 
 @NgModule({
   declarations: [
@@ -18,22 +20,27 @@ import { TypeaheadModule } from 'ngx-bootstrap';
     ProfileComponent,
     NameComponent,
     AddressComponent,
-    PageSectionsComponent
+    PageSectionsComponent,
+    PhoneInputComponent
   ],
 
   imports: [
     CommonModule,
     TypeaheadModule.forRoot(),
+    BsDropdownModule.forRoot(),
     FormsModule,
+    ReactiveFormsModule,
     NgSelectModule,
-    SharedCoreModule
+    SharedCoreModule,
+    NgxIntlTelInputModule
   ],
   exports: [
     FormsModule,
     SharedCoreModule,
     NgSelectModule,
     HomePageComponent,
-    EnrollmentProfileComponent
+    EnrollmentProfileComponent,
+    PhoneInputComponent
   ]
 })
 export class SharedModule {}

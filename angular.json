@@ -173,7 +173,8 @@
             ],
             "styles": [
               "src/app/styles/styles.scss",
-              "projects/prime-enrollment/src/styles.scss"
+              "projects/prime-enrollment/src/styles.scss",
+              "./node_modules/intl-tel-input/build/css/intlTelInput.css"
             ],
             "scripts": [],
             "stylePreprocessorOptions": {

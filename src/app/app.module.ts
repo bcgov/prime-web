@@ -6,34 +6,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 
-
 /* moh-common-lib can be pulled from npm, or locally via npm link */
 import { SharedCoreModule } from 'moh-common-lib';
 
 /** Pages (Appl* will be removed later when registration flow coded - just page development) */
 import { HomePageComponent } from './pages/home-page/home-page.component';
 
-
 // List of providers for applicant
-const providerList: any = [
-  Title
-];
-
+const providerList: any = [Title];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomePageComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    SharedCoreModule
-  ],
-  providers: [
-    providerList
-  ],
+  declarations: [AppComponent, HomePageComponent],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, SharedCoreModule],
+  providers: [providerList],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
