@@ -35,6 +35,10 @@ export class Registrant extends Person {
   public useMfaSecurityKey: boolean = false;
   public useMfaApp: boolean = false;
 
+  hasMfaMethod(): boolean {
+    return this.useMfaApp || this.useMfaSMS || this.useMfaSecurityKey;
+  }
+
   /* Copy function */
   copy( object: Registrant ) {
     super.copy( object );
