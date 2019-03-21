@@ -6,7 +6,8 @@ const province = provinceList;
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
+  providers: [EnrollmentStateService]
 })
 export class ProfileComponent implements OnInit {
   constructor(public enrollStateSvc: EnrollmentStateService) {}

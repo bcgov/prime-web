@@ -1,4 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { EnrollmentStateService } from '../../services/enrollment-state.service';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-contact',
@@ -7,10 +9,11 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContactComponent implements OnInit {
+  fg: FormGroup;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(public stateSvc: EnrollmentStateService) {
+    this.fg = this.stateSvc.contactForm;
   }
 
+  ngOnInit() {}
 }

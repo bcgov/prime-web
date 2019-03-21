@@ -1,4 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { FormArray } from '@angular/forms';
+import { EnrollmentStateService } from '../../services/enrollment-state.service';
 
 @Component({
   selector: 'app-professional',
@@ -7,10 +9,10 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfessionalComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
+  fa: FormArray;
+  constructor(private stateSvc: EnrollmentStateService) {
+    this.fa = this.stateSvc.professionalForm;
   }
 
+  ngOnInit() {}
 }

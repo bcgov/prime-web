@@ -1,4 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { FormArray } from '@angular/forms';
+import { EnrollmentStateService } from '../../services/enrollment-state.service';
 
 @Component({
   selector: 'app-pharmanet-access',
@@ -7,10 +9,11 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PharmanetAccessComponent implements OnInit {
+  fa: FormArray;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private stateSvc: EnrollmentStateService) {
+    this.fa = this.stateSvc.organizationForm;
   }
 
+  ngOnInit() {}
 }
