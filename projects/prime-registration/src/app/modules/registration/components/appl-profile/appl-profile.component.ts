@@ -30,13 +30,9 @@ import { ProfileComponent } from '../profile/profile.component';
 export class ApplProfileComponent extends ProfileComponent<Registrant>
   implements OnInit {
   @Input() editIdentityInfo: boolean = true;
-  @Output() dataValid: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   public defaultCountry = PrimeConstants.CANADA;
   public defaultProvince = PrimeConstants.BRITISH_COLUMBIA;
-
-  public firstNameRequired: boolean = false;
-  public preferredIsRequired: boolean = false;
 
   /**
    * Date of birth error messages
@@ -48,7 +44,6 @@ export class ApplProfileComponent extends ProfileComponent<Registrant>
   constructor(
     private primeDataService: RegistrationDataService,
     private regCache: RegCacheService,
-    private modalService: BsModalService,
     public cntrlContainer: ControlContainer
   ) {
     super(cntrlContainer);
@@ -77,42 +72,5 @@ export class ApplProfileComponent extends ProfileComponent<Registrant>
 
   get provinceList(): ProvinceList[] {
     return this.regCache.provinceList;
-  }
-
-  public validateInfo(val: any) {
-    // If either of these fields contain data, then required.
-    this.preferredIsRequired =
-      !!(
-        (this.registrant.preferredFirstName ||
-          this.registrant.preferredLastName) &&
-        this.registrant.firstName
-      ) || !!this.registrant.preferredFirstName;
-
-    // Store list of names to be used by password check method
-    this.primeDataService.userNameList = Object.keys(this.form.value)
-      .map(x => {
-        if (x.includes('name')) {
-          return this.form.form.get(x).value;
-        }
-      })
-      .filter(item => item);
-
-    // Display confirmation box only if the legal name is editable
-    if (!this.registrant.firstName && this.editIdentityInfo) {
-      this.confirm('Did you forget your legal first name?');
-    }
-
-    this.dataValid.emit(this.form.valid);
-  }
-
-  confirm(message: string) {
-    const modal = this.modalService.show(ConfirmModalComponent, {
-      initialState: { message: message },
-      class: 'modal-sm',
-      ignoreBackdropClick: true,
-      keyboard: false
-    });
-
-    modal.content.result.subscribe(result => (this.firstNameRequired = result));
   }
 }

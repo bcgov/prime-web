@@ -1,10 +1,10 @@
 <h1>Security</h1>
 <h3>Multi Factor Authentication Methods</h3>
-<div *ngIf="submitted"
+<div *ngIf="isSubmitted"
      role="alert"
      class="error-container"
      aria-live="assertive">
-  <div class="text-danger" *ngIf="!useMobile && !useSecurity && !useApp">
+  <div class="text-danger" *ngIf="!hasMfaMethod()">
     At least one Multi Factor Authentication Method option must be checked.
   </div>
 </div>
@@ -16,17 +16,17 @@
       <input type="checkbox"
              name="mobile_sms_auth"
              id="mobile_sms_auth"
-             [(ngModel)]='this.registrant.useMfaSMS'/>
+             [ngModel]='data.useMfaSMS'
+             (ngModelChange)="setUseMfaSMS($event)"/>
       Use Mobile/SMS for Authorization
     </label>
   </div>
 
   <prime-page-sections layout='tips'>
     <div class="form-group col-sm-4 p-sm-0">
-      <!-- isCanada() still in progress, will be added later on-->
-      <prime-phone-number [displayMask]="isCanada()"
-                          [(value)]="registrant.mfaSMSphone"
-                          [disabled]="!this.registrant.useMfaSMS">
+      <prime-phone-number [displayMask]="isCanada"
+                          [(value)]="mfaSMSphone"
+                          [disabled]="!data.useMfaSMS">
      </prime-phone-number>
     </div>
 
@@ -40,13 +40,14 @@
 </div>
 
 <!-- Use Security Key OPTION -->
-<div *ngIf="isCanada()">
+<div *ngIf="isCanada">
     <div class='border-bottom'>
         <label class='h2 normal'>
       <input type="checkbox"
              name="security_key"
              id="security_key"
-             [(ngModel)]='this.registrant.useMfaSecurityKey'/>
+             [ngModel]="data.useMfaSecurityKey"
+             (ngModelChange)="setUseMfaSecurityKey($event)"/>
       Use Security Key
         </label>
   </div>
@@ -73,7 +74,8 @@
       <input type="checkbox"
              name="mobile_app_auth"
              id="mobile_app_auth"
-             [(ngModel)]='this.registrant.useMfaApp'/>
+             [(ngModel)]="data.useMfaApp"
+             (ngModelChange)="setUseMfaApp($event)"/>
       Use Mobile App Authentication
         </label>
   </div>

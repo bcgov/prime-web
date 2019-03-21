@@ -1,8 +1,6 @@
 import { Component, OnInit, Input, forwardRef, Output, EventEmitter, ViewChildren, QueryList } from '@angular/core';
-import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
-import { Registrant, SecurityQuestionsAnswers } from '../../models/registrant.model';
+import { Registrant } from '../../models/registrant.model';
 import { ControlContainer, NgForm } from '@angular/forms';
-import { RegCacheService } from '../../../../services/reg-cache.service';
 import { PrimeConstants } from '@prime-core/models/prime-constants';
 import { NgSelectModule } from '@ng-select/ng-select';
 
@@ -18,7 +16,11 @@ import { NgSelectModule } from '@ng-select/ng-select';
 export class ApplAccountComponent implements OnInit {
 
   @Input() mohCredientials: boolean = true;
-  @Output() dataValid: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() userNameList: string[];
+  @Input() isCanada: boolean = true;
+  @Input() cache: any;
+  @Input() data: Registrant;
+  @Output() dataChange: EventEmitter<Registrant> = new EventEmitter<Registrant>();
 
   @ViewChildren('questionRef') questionList: QueryList<NgSelectModule>;
 
@@ -42,111 +44,87 @@ export class ApplAccountComponent implements OnInit {
 
   private form: NgForm;
 
-  private _nameList: string[];
-
-  constructor( private primeDataService: RegistrationDataService,
-               private regCache: RegCacheService,
-               private cntrlContainer: ControlContainer ) {
-
-   this._nameList = Object.keys(this.primeDataService.registrant).map( x => {
-        if ( x.includes( 'Name' ) ) {
-          return this.primeDataService.registrant[x];
-        }
-      }).filter( item => item );
+  constructor( private cntrlContainer: ControlContainer ) {
   }
 
   ngOnInit() {
-    this.form = (this.cntrlContainer as NgForm);
-
-    if (!this.registrant.secQuestionsAnswer.length) {
-      // initialize question/answer array
-      for (let i = 0; i < this.numSecQuestions; i++) {
-        this.registrant.secQuestionsAnswer.push({ name: null, value: null });
-      }
-    }
-
-    // Listen form submission
-    this.form.ngSubmit.subscribe(val => this.validateAccountInfo(val));
+    this.form = (this.cntrlContainer as NgForm) ;
   }
 
-  private validateAccountInfo(val: any) {
-
-    if ( this.mohCredientials && this.registrant.password ) {
-      this.verifyPassword();
-
-      // User has entered both passwords, compare to see if they match
-      if ( this.confirmPassword && ( this.confirmPassword !== this.registrant.password ) ) {
-        this.form.form.setErrors( {'noPasswordMatch': true} );
-      }
-    }
-
-    this.dataValid.emit(this.form.valid);
-  }
-
-  get registrant(): Registrant {
-    return this.primeDataService.registrant;
+  public updateData() {
+    this.dataChange.emit( this.data );
   }
 
   get formErrors() {
     return this.form.errors;
   }
 
-  isCanada(): boolean {
-    return this.primeDataService.isCanada();
-  }
-
   /**
    * Cached items
    */
   get pwdMinLen(): string {
-    return this.regCache.pwdMinLen;
+    return (this.cache ? this.cache.pwdMinLen : null);
   }
 
   get userIdMinLen(): string {
-    return this.regCache.userIDMinLen;
-  }
-
-  get numSecQuestions(): number {
-    return this.regCache.numSecQuestion;
+    return (this.cache ? this.cache.userIDMinLen : null);
   }
 
   get secQuestionList(): string[] {
-    return this.regCache.secQuestionList;
+    return (this.cache ? this.cache.secQuestionList : [] );
   }
 
-  // private method
-  private verifyPassword() {
+  setNewPassword( pswd: string ) {
 
-    /**
-     * At least 3 of the following categories:
-     *  a) Upper case characters (A-Z)
-     *  b) Lower case characters (a-z)
-     *  c) Numeral (0-9)
-     *  d) Non-alphanumeric characters e.g. ?/.<~#`!@#$%^&*()+=|:"',>{}
-     *  e) no userID and no names
-     */
-    const upperChars = RegExp( '^(?=.*?[A-Z]).*$' ).test(this.registrant.password) ? 1 : 0;
-    const lowerChars = RegExp( '^(?=.*?[a-z]).*$' ).test(this.registrant.password) ? 1 : 0;
-    const numerals = RegExp( '^(?=.*?[0-9]).*$' ).test(this.registrant.password) ? 1 : 0;
-    const symbols = RegExp( '^(?=.*[?/\.<~#`!@#$%^&*()+=|:\"\',>{}]).*$' ).test(this.registrant.password) ? 1 : 0;
+    this.data.password = pswd;
 
-    console.log('Validate password (categories): ',
-      {symbols: symbols, numerals: numerals, lowercase: lowerChars, uppercase: upperChars} );
+    // Criteria
+    if ( this.data.password && this.data.password.length >= Number( this.pwdMinLen ) ) {
+      /**
+       * At least 3 of the following categories:
+       *  a) Upper case characters (A-Z)
+       *  b) Lower case characters (a-z)
+       *  c) Numeral (0-9)
+       *  d) Non-alphanumeric characters e.g. ?/.<~#`!@#$%^&*()+=|:"',>{}
+       *  e) no userID and no names
+       */
+      const upperChars = RegExp( '^(?=.*?[A-Z]).*$' ).test(this.data.password) ? 1 : 0;
+      const lowerChars = RegExp( '^(?=.*?[a-z]).*$' ).test(this.data.password) ? 1 : 0;
+      const numerals = RegExp( '^(?=.*?[0-9]).*$' ).test(this.data.password) ? 1 : 0;
+      const symbols = RegExp( '^(?=.*[?/\.<~#`!@#$%^&*()+=|:\"\',>{}]).*$' ).test(this.data.password) ? 1 : 0;
 
-    if ( upperChars + lowerChars + numerals + symbols < 3 ) {
-      this.form.form.setErrors( {'failCriteria': true} );
-      return;
+      console.log('Validate password (categories): ',
+        {symbols: symbols, numerals: numerals, lowercase: lowerChars, uppercase: upperChars} );
+
+      if ( upperChars + lowerChars + numerals + symbols < 3  ) {
+        this.form.form.setErrors( {'failCriteria': true} );
+        return;
+      }
     }
 
     // Check for user ID or names in password
-    if ( (this.registrant.userID &&
-          this.registrant.password.includes( this.registrant.userID )  ||
-        this._nameList.map( x => {
+    if ( (this.data.userID &&
+          this.data.password.includes( this.data.userID )  ||
+          ( this.userNameList && this.userNameList.map( x => {
           if ( x.length > 1 ) { // ignore initials for names
-            return this.registrant.password.includes( x );
+            return this.data.password.includes( x );
           }
-        }).filter( item => item === true ).length > 0 ) ) {
+        }).filter( item => item === true ).length > 0 ) ) ) {
       this.form.form.setErrors( {'containsUserNames': true} );
     }
+    this.updateData();
+  }
+
+  setConfirmPassword( pswd: string ) {
+    this.confirmPassword = pswd;
+
+    // User has entered both passwords, compare to see if they match
+    if ( this.confirmPassword && this.data.password &&
+       ( this.confirmPassword.length >= this.data.password.length) &&
+      ( this.confirmPassword !== this.data.password ) ) {
+      this.form.form.setErrors( {'noPasswordMatch': true} );
+    }
+
+    this.updateData();
   }
 }

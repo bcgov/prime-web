@@ -19,10 +19,11 @@ import { Base } from 'moh-common-lib/models';
 export class NameComponent extends Base implements OnInit {
 
   @Input() disabled: boolean = false;
-  @Input() required: boolean = true;
+  @Input() required: boolean = false;
   @Input() nameStr: string;
   @Input() label: string = 'Name';
   @Input() maxLen: string = '255';
+  @Input() objectID: string = 'name_' + this.objectId;
 
   @Output() nameStrChange: EventEmitter<string> = new EventEmitter<string>();
 

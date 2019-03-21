@@ -1,7 +1,9 @@
 <common-page-framework layout='blank'>
 
   <form #formRef='ngForm' (ngSubmit)='continue()'>
-    <prime-appl-doc-upload></prime-appl-doc-upload>
+    <prime-appl-doc-upload [objectID]="registrant.objectId"
+                           [(documents)]="documents"
+                           [docTypesList]="docTypesList"></prime-appl-doc-upload>
     <!-- Display bar during registration -->
     <common-form-submit-bar [increaseWidth]='"true"'></common-form-submit-bar>
   </form>
