@@ -14,6 +14,12 @@ import { PrimeConstants } from '@prime-core/models/prime-constants';
 })
 export class BcscProfileComponent extends AbstractForm implements OnInit {
 
+  private _firstNameCtrl = 'first_name';
+  private _preferredFirstNameCtrl = 'preferred_first_name';
+  private _preferredLastNameCtrl = 'preferred_last_name';
+
+  private _requiredError = {required: true};
+
   constructor( private dummyDataService: DummyDataService,
                private primeDataServie: RegistrationDataService ,
                protected router: Router ) {
@@ -34,16 +40,37 @@ export class BcscProfileComponent extends AbstractForm implements OnInit {
       this.markAllInputsTouched();
       return;
     }
+
+    // Check preferred names
+    this.checkPreferredNames();
+
+    if ( this.form.valid ) {
+      this.navigate( PrimeConstants.BCSC_REGISTRATION + '/' + PrimeConstants.ACCOUNT_PG );
+    }
   }
 
 
-  continueRegistration( valid: boolean ) {
-    this.loading = true;
+  private checkPreferredNames() {
+    const hasPreferFirstName = !!this.form.controls[this._preferredFirstNameCtrl].value;
+    const hasPreferLastName = !!this.form.controls[this._preferredLastNameCtrl].value;
+    const hasFirstName = !!this.form.controls[this._firstNameCtrl].value;
 
-    if ( valid ) {
-      // Navigate to next page
-      this.navigate( PrimeConstants.BCSC_REGISTRATION + '/' +
-                     PrimeConstants.ACCOUNT_PG );
+    // If either preferred name is entered and user has firstname, both must be entered.
+    if ( hasFirstName ) {
+
+      if ( hasPreferFirstName && !hasPreferLastName ) {
+        this.setCntrolError( this._preferredLastNameCtrl, this._requiredError );
+      } else if ( !hasPreferFirstName && hasPreferLastName ) {
+        this.setCntrolError( this._preferredFirstNameCtrl, this._requiredError );
+      } else {
+        this.setCntrolError( this._preferredLastNameCtrl, null );
+        this.setCntrolError( this._preferredFirstNameCtrl, null );
+      }
     }
+  }
+
+  private setCntrolError( ctrlName: string, error: any ) {
+    this.form.controls[ctrlName].setErrors( error );
+    this.form.controls[ctrlName].markAsTouched();
   }
 }

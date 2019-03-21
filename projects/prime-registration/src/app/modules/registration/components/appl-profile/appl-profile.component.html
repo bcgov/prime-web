@@ -7,24 +7,25 @@
 
   <prime-page-sections layout='tips'>
     <div class="form-group col-sm-6 p-sm-0">
-      <prime-name [label]="'First Name'"
-                  [required]="firstNameRequired"
+      <prime-name label="First Name"
                   [disabled]="!editIdentityInfo"
-                  [(nameStr)]="registrant.firstName"></prime-name>
+                  [(nameStr)]="registrant.firstName"
+                  objectID="first_name"></prime-name>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <prime-name [label]="'Middle Name'"
-                  [required]="false"
+      <prime-name label="Middle Name"
                   [disabled]="!editIdentityInfo"
-                  [(nameStr)]="registrant.middleName"></prime-name>
+                  [(nameStr)]="registrant.middleName"
+                  objectID="middle_name"></prime-name>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <prime-name [label]="'Last Name'"
+      <prime-name label="Last Name"
                   [required]="true"
                   [disabled]="!editIdentityInfo"
-                  [(nameStr)]="registrant.lastName"></prime-name>
+                  [(nameStr)]="registrant.lastName"
+                  objectID="last_name"></prime-name>
     </div>
 
     <div class="col-sm-6 p-sm-0">
@@ -48,22 +49,21 @@
 
   <prime-page-sections layout='tips'>
     <div class="form-group col-sm-6 p-sm-0">
-      <prime-name [label]="'Preferred First Name'"
-                  [required]="preferredIsRequired"
-                  [(nameStr)]="registrant.preferredFirstName"></prime-name>
+      <prime-name label="Preferred First Name"
+                  [(nameStr)]="registrant.preferredFirstName"
+                  objectID="preferred_first_name"></prime-name>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <prime-name [label]="'Preferred Middle Name'"
-                  [required]="false"
-                  [(nameStr)]="registrant.preferredMiddleName"></prime-name>
+      <prime-name label="Preferred Middle Name"
+                  [(nameStr)]="registrant.preferredMiddleName"
+                  objectID="preferred_middle_name"></prime-name>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <prime-name [label]="'Preferred Last Name'"
-                  [required]="preferredIsRequired"
-                  [required]="false"
-                  [(nameStr)]="registrant.preferredLastName"></prime-name>
+      <prime-name label="Preferred Last Name"
+                  [(nameStr)]="registrant.preferredLastName"
+                  objectID="preferred_last_name"></prime-name>
     </div>
     <aside>TIPS</aside>
   </prime-page-sections>

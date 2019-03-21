@@ -21,32 +21,21 @@ import { RegCacheService } from '../../../../services/reg-cache.service';
 export class ApplProfileComponent implements OnInit {
 
   @Input() editIdentityInfo: boolean = true;
-  @Output() dataValid: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   public defaultCountry = PrimeConstants.CANADA;
   public defaultProvince = PrimeConstants.BRITISH_COLUMBIA;
-
-  public firstNameRequired: boolean = false;
-  public preferredIsRequired: boolean = false;
 
   /**
    * Date of birth error messages
    */
   public dateLabel = 'Birthdate';
 
-  private form: NgForm;
-
   constructor( private primeDataService: RegistrationDataService,
-               private regCache: RegCacheService,
-               private modalService: BsModalService,
-               private cntrlContainer: ControlContainer ) {
+               private regCache: RegCacheService ) {
   }
 
   ngOnInit() {
-    this.form = (this.cntrlContainer as NgForm);
 
-    // Listen for submission of form
-    this.form.ngSubmit.subscribe( val => this.validateInfo( val ) );
   }
 
   get registrant(): Registrant {
@@ -65,33 +54,4 @@ export class ApplProfileComponent implements OnInit {
   get provinceList(): ProvinceList[] {
     return this.regCache.provinceList;
   }
-
-  private validateInfo( val: any ) {
-
-    // If either of these fields contain data, then required.
-    this.preferredIsRequired = !!((this.registrant.preferredFirstName
-      || this.registrant.preferredLastName) && this.registrant.firstName ) ||
-      !!(this.registrant.preferredFirstName);
-
-    // Display confirmation box only if the legal name is editable
-    if ( !this.registrant.firstName && this.editIdentityInfo ) {
-      this.confirm( 'Did you forget your legal first name?' );
-    }
-
-    this.dataValid.emit( this.form.valid );
-  }
-
-  confirm( message: string ) {
-    const modal = this.modalService.show(
-              ConfirmModalComponent,
-              {
-                initialState: {message: message},
-                class: 'modal-sm',
-                ignoreBackdropClick: true,
-                keyboard: false
-              } );
-
-    modal.content.result.subscribe( result => this.firstNameRequired = result );
-  }
-
 }
