@@ -26,16 +26,14 @@ export class BcscProfileComponent extends AbstractForm implements OnInit {
     super( router );
 
     // Development purposes
-    primeDataServie.registrant.copy( this.dummyDataService.getBcscRegistrant() );
+    primeDataServie.registrant.copy(this.dummyDataService.getBcscRegistrant());
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   continue() {
     // Errors exist on form
     if (this.form.invalid) {
-
       // Mark all fields as touched to display errors
       this.markAllInputsTouched();
       return;
