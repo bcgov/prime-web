@@ -99,5 +99,27 @@ export class AppComponent implements OnInit {
           console.log( 'Failed to retrieve list of enhance messages.' );
         }
     });
+
+    // Load secuiity questions for account component
+    this.cacheApiService.getCache( 'securityQues' ).subscribe(
+      (response) => {
+        const payload = new CachePayLoad( response );
+        if ( payload.success ) {
+          this.regCache.secQuestionList = payload.secQues;
+        } else {
+          console.log( 'Failed to retrieve list of security questions.' );
+        }
+    });
+
+    // Load secuiity questions for account component
+    this.cacheApiService.getCache( 'docTypes' ).subscribe(
+      (response) => {
+        const payload = new CachePayLoad( response );
+        if ( payload.success ) {
+          this.regCache.documentTypes = payload.documentType;
+        } else {
+          console.log( 'Failed to retrieve list of security questions.' );
+        }
+    });
   }
 }

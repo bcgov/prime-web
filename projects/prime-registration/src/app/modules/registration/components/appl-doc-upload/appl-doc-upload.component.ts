@@ -2,7 +2,7 @@ import { Component, OnInit, forwardRef, ViewChild, Input, Output, EventEmitter }
 import { CommonImage } from 'moh-common-lib/images';
 import { DocumentType, Document } from '@prime-core/models/documents.interface';
 import { ControlContainer, NgForm } from '@angular/forms';
-import { Registrant } from '../../models/registrant.model';
+
 
 
 @Component({
@@ -14,9 +14,9 @@ import { Registrant } from '../../models/registrant.model';
 export class ApplDocUploadComponent implements OnInit {
 
   @Input() objectID: string;
-  @Input() documents: Document[];
+  @Input() documents: Document[] = [];
   /** List of all possible document types */
-  @Input() docTypesList: DocumentType[];
+  @Input() docTypesList: DocumentType[] = [];
 
   @Output() documentsChange: EventEmitter<Document[]> = new EventEmitter<Document[]>();
 
@@ -35,6 +35,8 @@ export class ApplDocUploadComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    console.log( 'doctypelist: ', this.docTypesList );
   }
 
   /** Add a new section based on what's selected in the dropdown */
@@ -90,7 +92,7 @@ export class ApplDocUploadComponent implements OnInit {
 
   /** The current DocumentType that's selected in the dropdown. Related to `docTypeDropdownValue` */
   get dropdownValueAsDocumentType(): DocumentType {
-    return this.docTypesList.find(x => x.name === this.docTypeDropdownValue);
+    return this.docTypesList ? this.docTypesList.find(x => x.docType === this.docTypeDropdownValue) : null;
   }
 }
 

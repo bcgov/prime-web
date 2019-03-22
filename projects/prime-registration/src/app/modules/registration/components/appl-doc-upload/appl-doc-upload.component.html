@@ -6,13 +6,13 @@
 
     <div class="form-row align-items-end">
       <div class="col-auto">
-        <label for="docType">Document Type</label>
-        <ng-select name='docType'
+        <label for="docTypes">Document Type</label>
+        <ng-select name='docTypes'
                    labelForId='docType'
                    [(ngModel)]='docTypeDropdownValue'
                    [items]='docTypesList'
-                   bindLabel='name'
-                   bindValue='name'
+                   bindLabel='docType'
+                   bindValue='docType'
                    placeholder='Choose'
                    #docTypeEl='ngModel'
                    [clearable]='false'
@@ -63,7 +63,7 @@
   <prime-page-sections layout='tips'>
       <div class="d-flex align-items-baseline flex-wrap">
         <common-datepicker class='d-inline-block mr-3'
-                            labelText='{{section.type.name}} Expiry'
+                            labelText='{{section.type.docType}} Expiry'
                             [onlyFutureDates]='"true"'
                             [required]='true'
                             [(date)]='section.expiry'>
@@ -72,7 +72,7 @@
       </div>
 
       <common-file-uploader [(images)]='section.images'
-                            [id]='section.type.name'
+                            [id]='section.type.docType'
                             (imagesChange)='onImagesChange(section, $event)'
                             [required]='true'>
         <span id="uploadInstruction" tabindex="0" #uploadInstruction>
@@ -81,7 +81,7 @@
       </common-file-uploader>
 
       <aside>
-        {{ section.type.tips }}
+        {{ section.type.description }}
       </aside>
     </prime-page-sections>
 </div>

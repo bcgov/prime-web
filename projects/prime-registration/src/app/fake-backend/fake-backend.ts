@@ -96,6 +96,26 @@ export class FakeBackendInterceptor extends Base implements HttpInterceptor  {
           messages: this.fakebackendService.messageList
         };
 
+        case 'securityQues':
+        return {
+          eventUUID: 'cache-' + this.objectId,
+          clientName: this._clientName,
+          processDate: this._processDate,
+          statusCode: ApiStatusCodes.SUCCESS,
+          statusMsgs: [],
+          secQues: this.fakebackendService.secQuestionList
+        };
+
+        case 'docTypes':
+        return {
+          eventUUID: 'cache-' + this.objectId,
+          clientName: this._clientName,
+          processDate: this._processDate,
+          statusCode: ApiStatusCodes.SUCCESS,
+          statusMsgs: [],
+          documentTypes: this.fakebackendService.docTypes
+        };
+
       default:
        console.log( 'don\'t know the param: ', param );
     }

@@ -20,7 +20,6 @@ export class ApplAccountComponent implements OnInit {
   @Input() isCanada: boolean = true;
   @Input() cache: any;
   @Input() data: Registrant;
-  @Output() dataChange: EventEmitter<Registrant> = new EventEmitter<Registrant>();
 
   @ViewChildren('questionRef') questionList: QueryList<NgSelectModule>;
 
@@ -49,10 +48,6 @@ export class ApplAccountComponent implements OnInit {
 
   ngOnInit() {
     this.form = (this.cntrlContainer as NgForm) ;
-  }
-
-  public updateData() {
-    this.dataChange.emit( this.data );
   }
 
   get formErrors() {
@@ -112,7 +107,6 @@ export class ApplAccountComponent implements OnInit {
         }).filter( item => item === true ).length > 0 ) ) ) {
       this.form.form.setErrors( {'containsUserNames': true} );
     }
-    this.updateData();
   }
 
   setConfirmPassword( pswd: string ) {
@@ -124,7 +118,5 @@ export class ApplAccountComponent implements OnInit {
       ( this.confirmPassword !== this.data.password ) ) {
       this.form.form.setErrors( {'noPasswordMatch': true} );
     }
-
-    this.updateData();
   }
 }

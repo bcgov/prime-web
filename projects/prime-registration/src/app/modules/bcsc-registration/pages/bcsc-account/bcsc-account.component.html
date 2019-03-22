@@ -2,10 +2,9 @@
 
   <form #formRef='ngForm' (ngSubmit)='continue()'>
     <prime-appl-account [mohCredientials]='false'
-                        [(data)]='registrant'
+                        [data]='registrant'
                         [isCanada]='isCanada()'
-                        [cache]='cache'
-                        [userNameList]='nameList'>
+                        [cache]='cache'>
 
 
       <p AccountInstruct>

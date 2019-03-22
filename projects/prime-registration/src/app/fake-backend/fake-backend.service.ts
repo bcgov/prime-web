@@ -1,4 +1,5 @@
-import {Injectable, ɵNOT_FOUND_CHECK_ONLY_ELEMENT_INJECTOR} from '@angular/core';
+import {Injectable} from '@angular/core';
+import { DocumentType } from '@prime-core/models/documents.interface';
 
 
 /**
@@ -575,5 +576,28 @@ export class FakeBackendService {
      msgType: '1',
      scrArea: 'CONFIRMATION',
      appLayer: 'ALL'}
+    ];
+
+    public secQuestionList: string[] = [
+      'What was your first pet\'s name?',
+      'What was the make of your first car?',
+      'What was the last name of your favorite teacher?',
+      'What was the last name of your childhood best friend?',
+      'What is your oldest cousin\'s first name',
+      'What town was your father born in?',
+      'What town was your mother born in?',
+      'Where did you meet your spouse?',
+      'What is the name of your favorite book?'
+    ];
+
+    public docTypes: DocumentType[] = [
+      {
+        docType: 'Driver\'s License',
+        description: 'Scan the document or take a photo of it.  Make sure that it\'s: <br/>-test test'
+      },
+      {
+        docType: 'Passport',
+        description: 'passport tips etc etc etc',
+      }
     ];
 }

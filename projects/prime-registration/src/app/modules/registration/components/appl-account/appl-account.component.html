@@ -17,7 +17,7 @@
              [minlength]="userIdMinLen"
              [maxlength]="userIdMaxLen"
              [ngModel]="data?.userID"
-             (ngModelChange)="data.userID = $event; updateData();"
+             (ngModelChange)="data.userID = $event"
              required />
 
       <!-- Error messages for component -->
@@ -158,7 +158,7 @@
     <div class="form-group col-sm-6 p-sm-0">
       <prime-phone-number [displayMask]="isCanada"
                           [value]="data.smsPhone"
-                          (valueChange)="data.smsPhone=$event; updateData()"></prime-phone-number>
+                          (valueChange)="data.smsPhone=$event"></prime-phone-number>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
@@ -173,7 +173,7 @@
              required
              [maxlength]="emailMaxLen"
              [ngModel]="data?.emailAddress"
-             (ngModelChange)="data.emailAddress=$event; updateData()"/>
+             (ngModelChange)="data.emailAddress=$event"/>
 
         <!-- Error messages for component -->
         <div *ngIf="emailRef.touched"

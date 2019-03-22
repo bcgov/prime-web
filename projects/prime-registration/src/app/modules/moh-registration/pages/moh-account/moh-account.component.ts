@@ -57,7 +57,7 @@ export class MohAccountComponent extends AbstractForm implements OnInit {
       this.markAllInputsTouched();
       return;
     }
-    
+
     this.loading = true;
 
     // ! Temporary - this just waits 2.5sec to simulate an HTTP request.

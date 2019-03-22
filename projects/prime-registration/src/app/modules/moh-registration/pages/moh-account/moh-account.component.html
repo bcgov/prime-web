@@ -1,7 +1,7 @@
 <common-page-framework layout='blank'>
 
   <form #formRef='ngForm' (ngSubmit)='continue()'>
-    <prime-appl-account [(data)]='registrant'
+    <prime-appl-account [data]='registrant'
                         [isCanada]='isCanada()'
                         [cache]='cache'
                         [userNameList]='nameList'>

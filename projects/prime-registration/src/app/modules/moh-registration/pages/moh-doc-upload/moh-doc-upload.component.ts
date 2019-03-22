@@ -20,12 +20,11 @@ export class MohDocUploadComponent extends AbstractForm implements OnInit {
                private cacheService: RegCacheService,
                private dataService: RegistrationDataService  ) {
     super(router);
-
-    this.documents = this.dataService.documents; // this is basically an alias, since arrays are pass-by-reference,
-    this.docTypesList = this.cacheService.DocumentTypes;
   }
 
   ngOnInit() {
+    this.documents = this.dataService.documents; // this is basically an alias, since arrays are pass-by-reference,
+    this.docTypesList = this.cacheService.documentTypes;
   }
 
   get registrant() {
@@ -35,6 +34,8 @@ export class MohDocUploadComponent extends AbstractForm implements OnInit {
   continue() {
     console.log('MoH form', {valid: this.form.valid, submitted: this.form.submitted}, this.form);
 
+    this.registrant.documents = this.documents;
+    
     if (this.form.valid) {
       // Navigate to next page
       this.navigate( PrimeConstants.MOH_REGISTRATION + '/' + PrimeConstants.ACCOUNT_PG );
