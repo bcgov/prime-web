@@ -12,6 +12,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { TypeaheadModule, BsDropdownModule } from 'ngx-bootstrap';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { PhoneInputComponent } from './components/phone-input/phone-input.component';
+import { SharedProfileComponent } from './components/shared-profile/shared-profile.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { PhoneInputComponent } from './components/phone-input/phone-input.compon
     NameComponent,
     AddressComponent,
     PageSectionsComponent,
-    PhoneInputComponent
+    PhoneInputComponent,
+    SharedProfileComponent
   ],
 
   imports: [
@@ -40,7 +42,8 @@ import { PhoneInputComponent } from './components/phone-input/phone-input.compon
     NgSelectModule,
     HomePageComponent,
     EnrollmentProfileComponent,
-    PhoneInputComponent
+    PhoneInputComponent,
+    SharedProfileComponent
   ]
 })
 export class SharedModule {}

@@ -27,12 +27,13 @@ export class EnrollmentStateService {
     //   this.currentIndex = stateOpts[obs];
     // });
     // const genForms = () => {
-    console.log(FormGenerator.contactForm);
+    // console.log(FormGenerator.contactForm);
     this.contactForm = FormGenerator.contactForm;
     this.declarationForm = FormGenerator.declarationForm;
     this.findOrganizationForm = FormGenerator.findOrganizationForm;
     this.organizationForm = FormGenerator.organizationForm;
     this.professionalForm = FormGenerator.professionalForm;
+    console.log(this);
     // };
     // genForms();
   }

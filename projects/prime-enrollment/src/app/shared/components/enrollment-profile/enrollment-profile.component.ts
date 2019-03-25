@@ -1,7 +1,7 @@
 import { Component, OnInit, forwardRef } from '@angular/core';
-import { ProfileComponent } from '../../../../../../prime-registration/src/app/modules/registration/components/profile/profile.component';
-import { Registrant } from '../../../../../../prime-registration/src/app/modules/registration/models/registrant.model';
 import { ControlContainer, NgForm } from '@angular/forms';
+import { SharedProfileComponent } from '../shared-profile/shared-profile.component';
+import { Registrant } from '@prime-enrollment/modules/enrollment/models/registrant';
 
 @Component({
   selector: 'enroll-enrollment-profile',
@@ -11,7 +11,8 @@ import { ControlContainer, NgForm } from '@angular/forms';
     { provide: ControlContainer, useExisting: forwardRef(() => NgForm) }
   ]
 })
-export class EnrollmentProfileComponent extends ProfileComponent<Registrant>
+export class EnrollmentProfileComponent
+  extends SharedProfileComponent<Registrant>
   implements OnInit {
   constructor(ctrlContainer: ControlContainer) {
     super(ctrlContainer);

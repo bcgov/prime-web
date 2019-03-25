@@ -4,10 +4,9 @@ import { countryList, provinceList } from '../../data/country';
 const country = countryList;
 const province = provinceList;
 @Component({
-  selector: 'app-profile',
+  selector: 'enroll-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss'],
-  providers: [EnrollmentStateService]
+  styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
   constructor(public enrollStateSvc: EnrollmentStateService) {}
