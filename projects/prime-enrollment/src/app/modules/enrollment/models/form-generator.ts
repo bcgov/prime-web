@@ -20,7 +20,8 @@ export abstract class FormGenerator {
   static get organizationForm(): FormArray {
     const controls = FormFieldBuilder.organizationFormFields;
     const orgControls = FormFieldBuilder.organizationFields;
-    return new FormArray([new FormGroup(orgControls), new FormGroup(controls)]);
+    const organization = new FormGroup(orgControls);
+    return new FormArray([organization, new FormGroup(controls)]);
   }
 
   static get licenseForm(): FormGroup {
@@ -37,9 +38,9 @@ export abstract class FormGenerator {
   onBehalfOfThis?: string | FormControl;
   */
 
-  static get professionalForm(): FormArray {
+  static get professionalForm(): FormGroup {
     const controls = FormFieldBuilder.professionInformationFields;
 
-    return new FormArray([new FormGroup(controls), new FormGroup({})]);
+    return new FormGroup(controls);
   }
 }

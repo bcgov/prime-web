@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormArray } from '@angular/forms';
+import { FormArray, FormGroup } from '@angular/forms';
 import { EnrollmentStateService } from '../../services/enrollment-state.service';
 
 @Component({
@@ -10,8 +10,10 @@ import { EnrollmentStateService } from '../../services/enrollment-state.service'
 })
 export class ProfessionalComponent implements OnInit {
   fa: FormArray;
+  fg: FormGroup;
   constructor(private stateSvc: EnrollmentStateService) {
-    this.fa = this.stateSvc.professionalForm;
+    this.fg = this.stateSvc.professionalForm;
+    console.log(this.fa);
   }
 
   ngOnInit() {}

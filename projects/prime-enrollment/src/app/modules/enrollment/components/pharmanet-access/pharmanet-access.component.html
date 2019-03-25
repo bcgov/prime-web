@@ -1,3 +1,13 @@
-<p>
-  pharmanet-access works!
-</p>
+<common-page-framework>
+
+  <h2 class="border-bottom">Pharmanet Access</h2>
+
+  <ng-content select="[identityInstruct]"></ng-content>
+  <p identityInstruct>
+    Information received from BCSC - Ministry verbage required
+  </p>
+  <div>
+    <form [formGroup]="fa">
+    </form>
+  </div>
+</common-page-framework>

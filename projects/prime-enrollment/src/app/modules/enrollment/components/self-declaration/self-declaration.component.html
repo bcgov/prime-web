@@ -1,3 +1,13 @@
-<p>
-  self-declaration works!
-</p>
+<common-page-framework>
+
+  <h2 class="border-bottom">Self Declaration</h2>
+
+  <ng-content select="[identityInstruct]"></ng-content>
+  <p identityInstruct>
+    Information received from BCSC - Ministry verbage required
+  </p>
+  <div>
+    <form [formGroup]="fg">
+    </form>
+  </div>
+</common-page-framework>

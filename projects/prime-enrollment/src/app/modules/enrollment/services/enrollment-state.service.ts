@@ -17,7 +17,7 @@ export class EnrollmentStateService {
   findOrganizationForm: FormGroup;
   organizationForm: FormArray;
   contactForm: FormGroup;
-  professionalForm: FormArray;
+  professionalForm: FormGroup;
 
   constructor() // private route: ActivatedRoute
   {

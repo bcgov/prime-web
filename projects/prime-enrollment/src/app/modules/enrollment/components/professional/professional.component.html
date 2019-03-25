@@ -1,3 +1,57 @@
-<p>
-  professional works!
-</p>
+<common-page-framework>
+
+  <h2>Professional Information</h2>
+
+  <ng-content select="[identityInstruct]"></ng-content>
+  <p identityInstruct class="border-bottom">
+    Profile information helper text.
+  </p>
+  <div>
+    <form [formGroup]="fg">
+      <label class="control-label">Do you have a college certification?
+      </label>
+      <div class="form-check">
+        <input class='form-check-input' formControlName="collegeCert" type="radio" id="aafalse" tabindex="0"
+          [value]="false">
+        <label class='form-check-label' for="aafalse">
+          No
+        </label>
+        <input class='form-check-input' type="radio" formControlName="collegeCert" name="" id="aatrue" tabindex="0"
+          [value]="true">
+        <label class='form-check-label' for="aatrue">
+          Yes
+        </label>
+      </div>
+
+      <label class="control-label">Are you a device provider?
+      </label>
+      <div class="form-check">
+        <input class='form-check-input' formControlName="deviceProvider" type="radio" id="dpFalse" tabindex="0"
+          [value]="false">
+        <label class='form-check-label' for="dpFalse">
+          No
+        </label>
+        <input class='form-check-input' type="radio" formControlName="deviceProvider" name="" id="dptrue" tabindex="0"
+          [value]="true">
+        <label class='form-check-label' for="dptrue">
+          Yes
+        </label>
+      </div>
+
+      <label class="control-label">Are you accessing pharmanet on behalf of someone else?
+      </label>
+      <div class="form-check">
+        <input class='form-check-input' formControlName="onBehalfOf" type="radio" id="oboFalse" tabindex="0"
+          [value]="false">
+        <label class='form-check-label' for="oboFalse">
+          No
+        </label>
+        <input class='form-check-input' type="radio" formControlName="onBehalfOf" name="" id="obotrue" tabindex="0"
+          [value]="true">
+        <label class='form-check-label' for="obotrue">
+          Yes
+        </label>
+      </div>
+    </form>
+  </div>
+</common-page-framework>
