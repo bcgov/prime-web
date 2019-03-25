@@ -3,14 +3,40 @@
   <h2 class="border-bottom">Your Information</h2>
 
   <ng-content select="[identityInstruct]"></ng-content>
+  <p identityInstruct>
+    Information received from BCSC - Ministry verbage required
+  </p>
   <div>
     <form [formGroup]="fg">
       <!-- <ngx-intl-tel-input [preferredCountries]="['ca', 'us']" [enablePlaceholder]="true" name="phone"
         formControlName="phone"></ngx-intl-tel-input> -->
-      <international-phone-number formControlName="phone" placeholder="Enter phone number" [maxlength]="20"
-        [defaultCountry]="'ca'" [required]="true" name="phone_number" [allowedCountries]="['ca', 'us']">
-      </international-phone-number>
+      <div class="form-group col-sm-6">
+        <label class="control-label">Phone</label>
+        <international-phone-number formControlName="phone" placeholder="Enter phone number" [maxlength]="13"
+          [defaultCountry]="'ca'" [required]="true" name="phone_number" [allowedCountries]="['ca', 'us']">
+        </international-phone-number>
+      </div>
+      <div class="form-group col-sm-6">
+        <input class="form-check-inline" type="checkbox" id="capable" formControlName="sms">
+        <label class="form-check-label" for="capable">This number is SMS capable</label>
+      </div>
+      <div class="form-group col-sm-6">
 
+        <label for="ext" class="control-label">Extension Number (Optional)</label>
+        <input class="form-control" formControlName="ext" id="ext">
+      </div>
+      <div class="form-group col-sm-6">
+
+        <label for="email" class="control-label">Email</label>
+        <input class="form-control" formControlName="email" id="email">
+      </div>
+      <div class="form-group col-sm-6">
+
+        <label class="control-label" for="preferred">Preferred Contact</label>
+        <select class="form-control" formControlName="preferredContact" id="preferred">
+          <option value="email" label="email">Email</option>
+          <option value="sms" label="sms">SMS</option>
+        </select>
+      </div>
     </form>
   </div>
-</common-page-framework>
