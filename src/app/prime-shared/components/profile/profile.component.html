@@ -10,6 +10,7 @@
       <prime-name label="First Name"
                   [disabled]="!editIdentityInfo"
                   [(nameStr)]="data.firstName"
+                  (blurEvent)="onBlur($event)"
                   objectID="first_name"></prime-name>
     </div>
 
@@ -51,7 +52,8 @@
     <div class="form-group col-sm-6 p-sm-0">
       <prime-name label="Preferred First Name"
                   [(nameStr)]="data.preferredFirstName"
-                  objectID="preferred_first_name"></prime-name>
+                  objectID="preferred_first_name"
+                  (blurEvent)="onBlur($event)"></prime-name>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
@@ -63,7 +65,8 @@
     <div class="form-group col-sm-6 p-sm-0">
       <prime-name label="Preferred Last Name"
                   [(nameStr)]="data.preferredLastName"
-                  objectID="preferred_last_name"></prime-name>
+                  objectID="preferred_last_name"
+                  (blurEvent)="onBlur($event)"></prime-name>
     </div>
     <aside>TIPS</aside>
   </prime-page-sections>

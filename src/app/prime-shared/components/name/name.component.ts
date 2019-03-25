@@ -26,6 +26,7 @@ export class NameComponent extends Base implements OnInit {
   @Input() objectID: string = 'name_' + this.objectId;
 
   @Output() nameStrChange: EventEmitter<string> = new EventEmitter<string>();
+  @Output() blurEvent = new EventEmitter();
 
   /**
    * Valid characters for name
@@ -45,5 +46,10 @@ export class NameComponent extends Base implements OnInit {
    */
   setName( value: string ) {
     this.nameStrChange.emit( value );
+  }
+
+  onInputBlur($event) {
+    console.log( 'onBlur: ', event );
+    this.blurEvent.emit( event );
   }
 }
