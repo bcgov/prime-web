@@ -174,7 +174,7 @@
             "styles": [
               "src/app/styles/styles.scss",
               "projects/prime-enrollment/src/styles.scss",
-              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css"
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
             ],
             "scripts": [],
             "stylePreprocessorOptions": {

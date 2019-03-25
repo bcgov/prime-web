@@ -10,9 +10,13 @@ import { PageSectionsComponent } from '../../../../../projects/prime-registratio
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TypeaheadModule, BsDropdownModule } from 'ngx-bootstrap';
-import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import {
+  NgxIntlTelInputModule,
+  NgxIntlTelInputComponent
+} from 'ngx-intl-tel-input';
 import { PhoneInputComponent } from './components/phone-input/phone-input.component';
 import { SharedProfileComponent } from './components/shared-profile/shared-profile.component';
+import { InternationalPhoneNumberModule } from 'ngx-international-phone-number';
 
 @NgModule({
   declarations: [
@@ -34,16 +38,20 @@ import { SharedProfileComponent } from './components/shared-profile/shared-profi
     ReactiveFormsModule,
     NgSelectModule,
     SharedCoreModule,
-    NgxIntlTelInputModule
+    NgxIntlTelInputModule,
+    InternationalPhoneNumberModule
   ],
   exports: [
     FormsModule,
+    ReactiveFormsModule,
     SharedCoreModule,
     NgSelectModule,
     HomePageComponent,
     EnrollmentProfileComponent,
     PhoneInputComponent,
-    SharedProfileComponent
+    SharedProfileComponent,
+    NgxIntlTelInputComponent,
+    InternationalPhoneNumberModule
   ]
 })
 export class SharedModule {}

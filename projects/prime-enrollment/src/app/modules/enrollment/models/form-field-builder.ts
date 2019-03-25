@@ -13,21 +13,21 @@ import {
 
 export abstract class FormFieldBuilder {
   static get contactFields() {
-    const phone = new FormControl(undefined, [Validators.required]);
-    const sms = new FormControl(undefined, [Validators.required]);
-    const ext = new FormControl(undefined, []);
-    const email = new FormControl(undefined, [Validators.required]);
-    const preferredContact = new FormControl(undefined, [Validators.required]);
+    const phone = new FormControl(null, [Validators.required]);
+    const sms = new FormControl(null, [Validators.required]);
+    const ext = new FormControl(null, []);
+    const email = new FormControl(null, [Validators.required]);
+    const preferredContact = new FormControl(null, [Validators.required]);
     return { phone, sms, ext, email, preferredContact };
   }
 
   static get licenseFields() {
-    const collegeCert = new FormControl(undefined, [Validators.required]);
-    const description = new FormControl(undefined, [Validators.required]);
-    const collegeNo = new FormControl(undefined, [Validators.required]);
-    const licenseNum = new FormControl(undefined, [Validators.required]);
-    const licenseFields = new FormControl(undefined, [Validators.required]);
-    const licenseClass = new FormControl(undefined, [Validators.required]);
+    const collegeCert = new FormControl(null, [Validators.required]);
+    const description = new FormControl(null, [Validators.required]);
+    const collegeNo = new FormControl(null, [Validators.required]);
+    const licenseNum = new FormControl(null, [Validators.required]);
+    const licenseFields = new FormControl(null, [Validators.required]);
+    const licenseClass = new FormControl(null, [Validators.required]);
     const renewalDate = new FormControl(new Date(), [Validators.required]);
     return {
       collegeCert,
@@ -39,24 +39,24 @@ export abstract class FormFieldBuilder {
     };
   }
   static get deviceProviderFields() {
-    return new FormControl(undefined, [Validators.required]);
+    return new FormControl(null, [Validators.required]);
   }
 
   static get onBehalfOfFields() {
-    return new FormControl(undefined, [Validators.required]);
+    return new FormControl(null, [Validators.required]);
   }
   static get professionInformationFields() {
-    const deviceProvider = new FormControl(undefined, [Validators.required]);
-    const collegeCert = new FormControl(undefined, [Validators.required]);
-    const onBehalfOf = new FormControl(undefined, [Validators.required]);
+    const deviceProvider = new FormControl(null, [Validators.required]);
+    const collegeCert = new FormControl(null, [Validators.required]);
+    const onBehalfOf = new FormControl(null, [Validators.required]);
     return { onBehalfOf, collegeCert, deviceProvider };
   }
 
   static get declarationFields() {
-    const conviction = new FormControl(undefined, [Validators.required]);
-    const regSuspension = new FormControl(undefined, [Validators.required]);
-    const tAndC = new FormControl(undefined, [Validators.required]);
-    const pharmaSuspension = new FormControl(undefined, [Validators.required]);
+    const conviction = new FormControl(null, [Validators.required]);
+    const regSuspension = new FormControl(null, [Validators.required]);
+    const tAndC = new FormControl(null, [Validators.required]);
+    const pharmaSuspension = new FormControl(null, [Validators.required]);
 
     return { conviction, regSuspension, tAndC, pharmaSuspension };
   }

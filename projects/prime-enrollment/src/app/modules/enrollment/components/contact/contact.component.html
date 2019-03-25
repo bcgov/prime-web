@@ -1,3 +1,16 @@
-<p>
-  contact works!
-</p>
+<common-page-framework>
+
+  <h2 class="border-bottom">Your Information</h2>
+
+  <ng-content select="[identityInstruct]"></ng-content>
+  <div>
+    <form [formGroup]="fg">
+      <!-- <ngx-intl-tel-input [preferredCountries]="['ca', 'us']" [enablePlaceholder]="true" name="phone"
+        formControlName="phone"></ngx-intl-tel-input> -->
+      <international-phone-number formControlName="phone" placeholder="Enter phone number" [maxlength]="20"
+        [defaultCountry]="'ca'" [required]="true" name="phone_number" [allowedCountries]="['ca', 'us']">
+      </international-phone-number>
+
+    </form>
+  </div>
+</common-page-framework>

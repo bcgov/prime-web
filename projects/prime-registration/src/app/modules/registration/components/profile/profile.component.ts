@@ -8,7 +8,6 @@ import {
   OnDestroy
 } from '@angular/core';
 import { ControlContainer, NgForm } from '@angular/forms';
-// import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
 import { CacheService } from '../../../../services/cache.service';
 import { CountryList, ProvinceList } from '../address/address.component';
 // import { PrimeConstants } from '@prime-core/models/prime-constants';
@@ -71,7 +70,9 @@ export class ProfileComponent<T> implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach(itm => itm.unsubscribe());
+    if (this.subscriptions) {
+      this.subscriptions.forEach(itm => itm.unsubscribe());
+    }
   }
 
   get registrant(): any {
