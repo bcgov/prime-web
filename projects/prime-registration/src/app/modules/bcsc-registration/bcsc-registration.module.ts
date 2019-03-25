@@ -9,6 +9,7 @@ import { BcscContainerComponent } from './components/bcsc-container/bcsc-contain
 import { BcscAccountComponent } from './pages/bcsc-account/bcsc-account.component';
 import { BcscConfirmationComponent } from './pages/bcsc-confirmation/bcsc-confirmation.component';
 import { FormsModule } from '@angular/forms';
+import { PrimeSharedModule } from '@prime-core/prime-shared/prime-shared.module';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { FormsModule } from '@angular/forms';
     BcscRegistrationRoutingModule,
     RegistrationModule,
     SharedCoreModule,
-    FormsModule
+    FormsModule,
+    PrimeSharedModule
   ],
   declarations: [
     BcscContainerComponent,

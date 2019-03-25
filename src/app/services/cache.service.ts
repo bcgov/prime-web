@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { CountryList, ProvinceList } from '../../../projects/prime-registration/src/app/modules/registration/components/address/address.component';
-import { StatusMsgInterface } from '../models/api-base.model';
+import { StatusMsgInterface } from '@prime-core/models/api-base.model';
+import { CountryList, ProvinceList } from '@prime-core/prime-shared/components/address/address.component';
 /**
  * TODO: Set up service to store data returned from the cache service once
  *       determined how it will be configured/setup

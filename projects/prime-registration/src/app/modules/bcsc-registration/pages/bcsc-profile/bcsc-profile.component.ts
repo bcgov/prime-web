@@ -6,6 +6,7 @@ import { RegistrationDataService } from '@prime-registration/services/registrati
 import { AbstractForm } from 'moh-common-lib/models';
 import { Router } from '@angular/router';
 import { PrimeConstants } from '@prime-core/models/prime-constants';
+import { RegCacheService } from '../../../../services/reg-cache.service';
 
 @Component({
   selector: 'app-bcsc-profile',
@@ -21,15 +22,24 @@ export class BcscProfileComponent extends AbstractForm implements OnInit {
   private _requiredError = {required: true};
 
   constructor( private dummyDataService: DummyDataService,
-               private primeDataServie: RegistrationDataService ,
+               private registrantService: RegistrationDataService,
+               private regCacheService: RegCacheService,
                protected router: Router ) {
     super( router );
 
     // Development purposes
-    primeDataServie.registrant.copy(this.dummyDataService.getBcscRegistrant());
+    registrantService.registrant.copy(this.dummyDataService.getBcscRegistrant());
   }
 
   ngOnInit() {}
+
+  get registrant() {
+    return  this.registrantService.registrant;
+  }
+
+  get cache() {
+    return this.regCacheService;
+  }
 
   continue() {
     // Errors exist on form

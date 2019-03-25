@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { PrimeConstants } from '@prime-core/models/prime-constants';
 import { ConfirmModalComponent } from '../../../registration/components/confirm-modal/confirm-modal.component';
 import { BsModalService } from 'ngx-bootstrap';
+import { RegistrationDataService } from '../../../../services/registration-data.service';
+import { RegCacheService } from '../../../../services/reg-cache.service';
 
 @Component({
   selector: 'prime-moh-profile',
@@ -19,11 +21,21 @@ export class MohProfileComponent extends AbstractForm implements OnInit {
   private _requiredError = {required: true};
 
   constructor( protected router: Router,
-               private modalService: BsModalService ) {
+               private modalService: BsModalService,
+               private registrantService: RegistrationDataService,
+               private regCacheService: RegCacheService ) {
     super( router );
   }
 
   ngOnInit() {
+  }
+
+  get registrant() {
+    return  this.registrantService.registrant;
+  }
+
+  get cache() {
+    return this.regCacheService;
   }
 
   continue() {

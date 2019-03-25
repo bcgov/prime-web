@@ -1,9 +1,6 @@
 import { ServerPayload, PayloadInterface, StatusMsgInterface } from './api-base.model';
-import {
-  CountryList,
-  ProvinceList
-} from '../../../projects/prime-registration/src/app/modules/registration/components/address/address.component';
 import { DocumentType } from '@prime-core/models/documents.interface';
+import { CountryList, ProvinceList } from '@prime-core/prime-shared/components/address/address.component';
 
 /**
  * Get Cache

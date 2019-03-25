@@ -1,12 +1,15 @@
 <common-page-framework layout='blank'>
 
   <form #formRef='ngForm' (ngSubmit)='continue()'>
-    <prime-appl-profile>
+    <prime-profile [data]='registrant'
+                   [countryList]='cache.countryList'
+                   [provinceList]='cache.provinceList'>
+
       <p identityInstruct>
         Prior to identity-proofing, please upload the front and back of a valid
         government-issued photo ID.
       </p>
-    </prime-appl-profile>
+    </prime-profile>
 
     <!-- Display bar during registration -->
     <common-form-submit-bar [increaseWidth]='true'
