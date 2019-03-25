@@ -1,4 +1,4 @@
-import { Document } from '../../../../../../../src/app/models/documents.interface';
+import { Document } from '@prime-core/models/documents.interface';
 import { PrimePerson } from '@prime-core/models/prime-person.model';
 export interface SecurityQuestionsAnswers {
   name: string;

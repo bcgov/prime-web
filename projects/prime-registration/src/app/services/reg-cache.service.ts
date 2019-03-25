@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DocumentType } from '@prime-core/models/documents.interface';
-import { CacheService } from '../../../../../src/app/services/cache.service';
+import { CacheService } from '@prime-core/services/cache.service';
 
 /**
  * Store data retrieved from cache service

@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 // Development purpose
-import { DummyDataService } from '../../../../services/dummy-data.service';
+import { DummyDataService } from '@prime-registration/services/dummy-data.service';
 import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
 import { AbstractForm } from 'moh-common-lib/models';
 import { Router } from '@angular/router';
 import { PrimeConstants } from '@prime-core/models/prime-constants';
-import { RegCacheService } from '../../../../services/reg-cache.service';
-import { PrimePerson } from '../../../../../../../../src/app/models/prime-person.model';
+import { RegCacheService } from '@prime-registration/services/reg-cache.service';
 
 @Component({
   selector: 'app-bcsc-profile',

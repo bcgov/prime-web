@@ -11,6 +11,7 @@ import { TypeaheadModule } from 'ngx-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 
 
 const componentList = [
@@ -18,7 +19,8 @@ const componentList = [
   NameComponent,
   ProfileComponent,
   PageSectionsComponent,
-  PhoneNumberComponent
+  PhoneNumberComponent,
+  ConfirmationComponent
 ];
 
 @NgModule({
