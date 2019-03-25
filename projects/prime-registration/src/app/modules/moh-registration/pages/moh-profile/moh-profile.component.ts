@@ -6,6 +6,7 @@ import { ConfirmModalComponent } from '../../../registration/components/confirm-
 import { BsModalService } from 'ngx-bootstrap';
 import { RegistrationDataService } from '../../../../services/registration-data.service';
 import { RegCacheService } from '../../../../services/reg-cache.service';
+import { PrimePerson } from '@prime-core/models/prime-person.model';
 
 @Component({
   selector: 'prime-moh-profile',

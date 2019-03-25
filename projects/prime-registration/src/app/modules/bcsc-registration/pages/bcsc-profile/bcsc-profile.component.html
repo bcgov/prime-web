@@ -1,10 +1,10 @@
 <common-page-framework layout='blank'>
 
   <form #formRef='ngForm' (ngSubmit)='continue()'>
-    <prime-profile [data]='registrant'
-                       [countryList]='cache.countryList'
-                       [provinceList]='cache.provinceList'
-                       [editIdentityInfo]="false">
+    <prime-profile [(data)]='registrant'
+                   [countryList]='cache.countryList'
+                   [provinceList]='cache.provinceList'
+                   [editIdentityInfo]="false">
 
       <p identityInstruct>
         Information received from BCSC - Ministry verbage required

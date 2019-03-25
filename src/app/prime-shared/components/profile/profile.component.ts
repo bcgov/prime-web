@@ -30,7 +30,7 @@ export class ProfileComponent extends Base implements OnInit, OnDestroy {
   @Input() countryList: CountryList[] = [];
   @Input() provinceList: ProvinceList[] = [];
   @Input() editIdentityInfo: boolean = true;
-  @Output() changes: EventEmitter<PrimePerson> = new EventEmitter<PrimePerson>();
+  @Output() dataChange: EventEmitter<PrimePerson> = new EventEmitter<PrimePerson>();
 
   public defaultCountry = PrimeConstants.CANADA;
   public defaultProvince = PrimeConstants.BRITISH_COLUMBIA;
@@ -40,16 +40,14 @@ export class ProfileComponent extends Base implements OnInit, OnDestroy {
    */
   public dateLabel = 'Birthdate';
 
-  form: NgForm;
   subscriptions: Subscription[];
 
   constructor( private cntrlContainer: ControlContainer) {
     super();
-    this.form = this.cntrlContainer as NgForm;
   }
 
   emitChanges( itm: PrimePerson ) {
-    this.changes.emit( itm );
+    this.dataChange.emit( itm );
   }
 
   ngOnInit() {
@@ -64,7 +62,7 @@ export class ProfileComponent extends Base implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
- //   this.subscriptions.forEach(itm => itm.unsubscribe());
+    this.subscriptions.forEach(itm => itm.unsubscribe());
   }
 
   toggleCheckBox() {

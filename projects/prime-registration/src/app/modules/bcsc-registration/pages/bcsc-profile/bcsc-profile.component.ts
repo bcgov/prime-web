@@ -7,6 +7,7 @@ import { AbstractForm } from 'moh-common-lib/models';
 import { Router } from '@angular/router';
 import { PrimeConstants } from '@prime-core/models/prime-constants';
 import { RegCacheService } from '../../../../services/reg-cache.service';
+import { PrimePerson } from '../../../../../../../../src/app/models/prime-person.model';
 
 @Component({
   selector: 'app-bcsc-profile',
@@ -28,19 +29,20 @@ export class BcscProfileComponent extends AbstractForm implements OnInit {
     super( router );
 
     // Development purposes
-    registrantService.registrant.copy(this.dummyDataService.getBcscRegistrant());
+    if ( !registrantService.registrant.firstName ) {
+      registrantService.registrant.copy(this.dummyDataService.getBcscRegistrant());
+    }
   }
 
   ngOnInit() {}
 
   get registrant() {
-    return  this.registrantService.registrant;
+    return this.registrantService.registrant;
   }
 
   get cache() {
     return this.regCacheService;
   }
-
   continue() {
     // Errors exist on form
     if (this.form.invalid) {
