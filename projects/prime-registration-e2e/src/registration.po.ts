@@ -1,5 +1,5 @@
 import { browser, by, element, WebElement } from 'protractor';
-import { ProfilePageTest } from './moh-registration.data';
+import { ProfilePageTest } from './registration.data';
 import { PrimeTestPage } from '../../../e2e/src/app.po';
 
 export class BaseMohRegTestPage extends PrimeTestPage {
@@ -112,6 +112,11 @@ export class MohProfileTestPage extends BaseMohRegTestPage {
   }
 }
 
+export class BCSCRegistrationPage extends MohProfileTestPage {
+  navigateTo(){
+    return browser.get('/bcsc-registration/profile');
+  }
+}
 
 export class MohAccountTestPage extends BaseMohRegTestPage {
 

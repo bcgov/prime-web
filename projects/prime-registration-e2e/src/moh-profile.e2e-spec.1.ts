@@ -1,10 +1,10 @@
-import { MohProfileTestPage } from './moh-registration.po';
+import { MohProfileTestPage } from './registration.po';
 import { browser } from 'protractor';
 import { PrimeConstants } from '../../../src/app/models/prime-constants';
-import { FakeDataMohReg } from './moh-registration.data';
+import { FakeDataMohReg } from './registration.data';
 import { PrimeTestPage } from '../../../e2e/src/app.po';
 
-fdescribe('MoH Registration - Profile Page', () => {
+describe('MoH Registration - Profile Page', () => {
     let page: MohProfileTestPage;
     let page2: PrimeTestPage;
     const data = new FakeDataMohReg();
@@ -29,6 +29,7 @@ fdescribe('MoH Registration - Profile Page', () => {
     it('01. should load the page without issue', () => {
         page.navigateTo();
         expect(browser.getCurrentUrl()).toContain(PAGE_URL);
+        browser.sleep(1000 * 5);
     });
 
 

@@ -1,7 +1,7 @@
-import { MohAccountTestPage } from './moh-registration.po';
+import { MohAccountTestPage } from './registration.po';
 import { browser } from 'protractor';
 import { PrimeConstants } from '../../../src/app/models/prime-constants';
-import { FakeDataMohReg } from './moh-registration.data';
+import { FakeDataMohReg } from './registration.data';
 
 describe('MoH Registration - Account Page', () => {
     let page: MohAccountTestPage;
