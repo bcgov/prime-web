@@ -35,7 +35,7 @@
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <common-password label="{{newPwdLabel}}"
+      <common-password componentLabel="{{newPwdLabel}}"
                        [showPasswordStrength]="true"
                        [minLen]="pwdMinLen"
                        [pwdCriteria]="pwdValidChars"
@@ -61,7 +61,7 @@
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <common-password label="{{confirmPwdLabel}}"
+      <common-password componentLabel="{{confirmPwdLabel}}"
                        [minLen]="pwdMinLen"
                        [password]="confirmPassword"
                        (passwordChange)="setConfirmPassword($event)"
