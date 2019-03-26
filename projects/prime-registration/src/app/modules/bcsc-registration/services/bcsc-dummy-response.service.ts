@@ -23,6 +23,9 @@ export class BCSCDummyResponseService {
 
     }
 
+    /**
+     * Generates a Registrant with pretend/random data from the BCSC login.
+     */
     getBcscRegistrant(): Registrant {
         const data = this.getMockBCSCResponse();
         const reg = new Registrant();
@@ -36,13 +39,22 @@ export class BCSCDummyResponseService {
         reg.smsPhone = data.mobile;
         reg.address.street = data.street;
         reg.address.city = data.city;
-        reg.address.province = data.province;
+        reg.address.province = 'BC';
         reg.address.postal = data.postal;
         reg.address.country = data.country;
         reg.assuranceLevel = data.assuranceLevel;
         return reg;
     }
 
+    /**
+     * The idea is that this response if from BCSC after a successful OAuth
+     * login.  However, we don't have BCSC OAuth setup yet, so we're just
+     * mocking the response.
+     *
+     * Note: Some fields are not on the actual BCSC Response, like eventUUID and
+     * clientName, but we'll be POSTING them up so they're generated here for
+     * convenience.
+     */
     getMockBCSCResponse(): IBCSCResponse {
         return {
             eventUUID: this.strUUID,
