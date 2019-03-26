@@ -70,11 +70,11 @@
 </div>
 
 <prime-page-sections layout='double'>
-    <h2 class="border-bottom">2Address</h2>
+    <h2 class="border-bottom">Address</h2>
     <prime-address [disabled]="!editIdentityInfo"
                    [(address)]="registrant.address"
                    [defaultCountry]="defaultCountry"
-                   [countryList]="countryList"
+                   [countryList]="regCache.$countrylist | async"
                    [defaultProvince]="defaultProvince"
                    [provinceList]="regCache.$provinceList | async"
                    [isRequired]="true"></prime-address>

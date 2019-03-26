@@ -66,12 +66,4 @@ export class ApplProfileComponent extends ProfileComponent<Registrant>
       .identityIsMailingAddress;
   }
 
-  // Cache items
-  get countryList(): CountryList[] {
-    return this.regCache.countryList;
-  }
-
-  get provinceList(): ProvinceList[] {
-    return this.regCache.provinceList;
-  }
 }

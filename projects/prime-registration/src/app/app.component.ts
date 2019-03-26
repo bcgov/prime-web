@@ -77,18 +77,18 @@ export class AppComponent implements OnInit {
   private loadCache() {
     console.log( 'Load registration cache!' );
 
-    // TODO - Refactor. Have one .catch()?
+    // TODO - Refactor. Move requests into cache service.
 
     // Load countries for address component
-    this.cacheApiService.getCache( 'countries' ).subscribe(
-      (response) => {
-        const payload = new CachePayLoad( response );
-        if ( payload.success ) {
-          this.regCache.countryList = payload.country;
-        } else {
-          console.log( 'Failed to retrieve list of countries.' );
-        }
-    });
+    // this.cacheApiService.getCache( 'countries' ).subscribe(
+    //   (response) => {
+    //     const payload = new CachePayLoad( response );
+    //     if ( payload.success ) {
+    //       this.regCache.countryList = payload.country;
+    //     } else {
+    //       console.log( 'Failed to retrieve list of countries.' );
+    //     }
+    // });
 
     // Load provinces for address component
     // this.cacheApiService.getCache( 'provinces' ).subscribe(
