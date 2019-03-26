@@ -3,14 +3,69 @@
 
 <div *ngIf="fg; else loading">
   <form [formGroup]="fg">
+    <div class="col-sm-12">
+      <div class="form-group col-sm-6">
+        <label class="control-label" for="license">College Certifications</label>
+
+        <select class="form-control" formControlName="collegeCert" id="cert">
+          <option label="Choose" value="">Choose</option>
+          <option value="sms" label="sms">Pharmacists of BC</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-6" for="license">License Number</label>
+        <input class="form-control" id="license">
+      </div>
+      <div class="col-sm-12">
+        <div class="form-group col-sm-3">
+          <label class="control-label col-sm-6" for="licenseClass">License Class</label>
+          <select class="form-control" formControlName="licenseClass" id="licenseClass">
+            <option label="Choose" value="">Choose</option>
+            <option value="sms" label="sms">Full Pharmacists</option>
+          </select>
+        </div>
+        <div class="form-group col-sm-3">
+          <label class="control-label" for="license">Renewal Date</label>
+          <div class="input-group">
+
+            <input class="form-control" placeholder="YYYY/MM/DD" ngx-mydatepicker formControlName="renewalDate">
+
+            <span class="input-group-append float-label-append">
+              <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
+                <i class="fa fa-calendar"></i>
+              </button>
+            </span>
+          </div>
+        </div>
+        <div class="form-group col-sm-6">
+          <label class="control-label" for="advanced">Advanced Practice</label>
+          <select class="form-control" formControlName="advancedPractice" id="advanced">
+            <option label="Choose" value="">Choose</option>
+            <option value="sms" label="sms">Pharmacists of BC</option>
+          </select>
+        </div>
+
+      </div>
+    </div>
   </form>
 </div>
 <ng-template #loading>
   loading
 </ng-template>
 <!-- license number -->
+
 <!-- 1-2-3 -->
 <!-- license class -->
 <!-- renewal date -->
 <!-- advanced practice -->
 <!-- add another license -->
+<!--
+
+  const
+const description
+const collegeNo
+const licenseNum
+const licenseFields
+const licenseClass
+const renewalDate
+ -->

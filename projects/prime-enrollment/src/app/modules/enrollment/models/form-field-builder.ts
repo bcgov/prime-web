@@ -23,15 +23,15 @@ export abstract class FormFieldBuilder {
 
   static get licenseFields() {
     const collegeCert = new FormControl(null, [Validators.required]);
-    const description = new FormControl(null, [Validators.required]);
+    // const description = new FormControl(null, [Validators.required]);
     const collegeNo = new FormControl(null, [Validators.required]);
     const licenseNum = new FormControl(null, [Validators.required]);
-    const licenseFields = new FormControl(null, [Validators.required]);
+    const advancedPractice = new FormControl(null, [Validators.required]);
     const licenseClass = new FormControl(null, [Validators.required]);
     const renewalDate = new FormControl(new Date(), [Validators.required]);
     return {
       collegeCert,
-      description,
+      advancedPractice,
       collegeNo,
       licenseNum,
       licenseClass,
