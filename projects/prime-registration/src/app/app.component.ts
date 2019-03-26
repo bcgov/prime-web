@@ -8,6 +8,8 @@ import { RegCacheService } from './services/reg-cache.service';
 import { CachePayLoad } from '../../../../src/app/models/cache-api.model';
 import { Registrant } from './modules/registration/models/registrant.model';
 import { ControlContainer, NgForm } from '@angular/forms';
+import { RegistrationDataService } from './services/registration-data.service';
+import { Base } from 'moh-common-lib/models';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +19,7 @@ import { ControlContainer, NgForm } from '@angular/forms';
     { provide: ControlContainer, useExisting: forwardRef(() => NgForm) }
   ]
 })
-export class AppComponent implements OnInit {
+export class AppComponent extends Base implements OnInit {
   title = 'Prime';
   registrant = new Registrant();
 
@@ -25,7 +27,10 @@ export class AppComponent implements OnInit {
                private activatedRoute: ActivatedRoute,
                private titleService: Title,
                private cacheApiService: CacheApiService,
-               private regCache: RegCacheService ) {
+               private regCache: RegCacheService,
+               private registrationDataService: RegistrationDataService ) {
+
+    super();
   }
 
   ngOnInit() {
@@ -33,6 +38,10 @@ export class AppComponent implements OnInit {
     version.success
       ? console.log('%c' + version.message, 'color: #036; font-size: 20px;')
       : console.error(version.message);
+
+    // session ID to track events
+    this.registrationDataService.eventUUID = this.objectId;
+
     this.updateTitleOnRouteChange();
 
     this.loadCache();

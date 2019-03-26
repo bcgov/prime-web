@@ -7,6 +7,8 @@ import { AbstractForm } from 'moh-common-lib/models';
 import { Router } from '@angular/router';
 import { PrimeConstants } from '@prime-core/models/prime-constants';
 import { RegCacheService } from '@prime-registration/services/reg-cache.service';
+import { PrimePerson } from '../../../../../../../../src/app/models/prime-person.model';
+import { Registrant } from '../../../registration/models/registrant.model';
 
 @Component({
   selector: 'app-bcsc-profile',
@@ -31,6 +33,10 @@ export class BcscProfileComponent extends AbstractForm implements OnInit {
 
   get registrant() {
     return this.registrantService.registrant;
+  }
+
+  set registrant( person: Registrant ) {
+    this.registrantService.registrant.copy( person );
   }
 
   get cache() {

@@ -15,19 +15,22 @@ export interface SearchResult {
  * MOH_REG_10_RQ/MOH_REG_10_RS
  */
 export interface UserAttrInterface extends PayloadInterface {
-  userIDMatch: SearchResult;
+  userIDMatch?: SearchResult;
+  pdidMatch?: SearchResult;
   emailMatch: SearchResult;
   mobileMatch: SearchResult;
 }
 
 export class UserAttrPayload extends ServerPayload {
   userIDMatch: SearchResult;
+  pdidMatch: SearchResult;
   emailMatch: SearchResult;
   mobileMatch: SearchResult;
 
   constructor( payload: UserAttrInterface ) {
     super( payload );
-    this.userIDMatch = payload.userIDMatch;
+    this.userIDMatch = payload.userIDMatch ? payload.userIDMatch : undefined;
+    this.pdidMatch = payload.pdidMatch ? payload.pdidMatch : undefined;
     this.emailMatch = payload.emailMatch;
     this.mobileMatch = payload.mobileMatch;
   }

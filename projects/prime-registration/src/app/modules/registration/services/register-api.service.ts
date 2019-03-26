@@ -5,6 +5,8 @@ import { throwError, Observable } from 'rxjs';
 import * as moment from 'moment';
 import { environment } from '../../../../environments/environment.prod';
 import { UserAttrInterface } from '../models/register-api.model';
+import { Registrant } from '../models/registrant.model';
+import { RegCredTypes } from '../../../../../../../src/app/models/prime-constants';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +18,8 @@ export class RegisterApiService extends AbstractHttpService {
    *  at runtime in the httpOptions() method.
    */
   protected _headers: HttpHeaders = new HttpHeaders();
+
+  private _clientName: string = 'regweb';
 
   constructor( protected http: HttpClient ) {
     super( http );
@@ -31,21 +35,34 @@ export class RegisterApiService extends AbstractHttpService {
    *            For BC Service Card accounts the User ID is provided by the identity provider.
    *    email:  The email address for the registrant.
    *    mobile: Mobile number for a SMS capable device.
+   *    uuid:   Event UUID
+   *
+   * @param mohCred indicate whether MoH crediential is being supplied (default = false)
    */
-  verifyUserAttr( input: {
-    userID: string, email: string, mobile: string
-  }): Observable<UserAttrInterface> {
+  verifyUserAttr( registrant: Registrant, uuid: string ): Observable<UserAttrInterface> {
 
     const url = environment.baseAPIUrl + 'validateUser';
 
-    return this.post<UserAttrInterface>(url, {
-      eventUUID: '980348',  // to generate
-      clientName: '', // to get from OpenShift environment
+    const params = ( registrant.credType === RegCredTypes.MOH ? {
+      eventUUID: uuid,
+      clientName: this._clientName,
       processDate: this.getProcessDate(),
-      userID: input.userID,
-      email: input.email,
-      mobile: input.mobile
+      providerCode: registrant.credType,
+      userID: registrant.userAccountName,
+      email: registrant.emailAddress,
+      mobile: registrant.smsPhone
+    } : {
+      eventUUID: uuid,
+      clientName: this._clientName,
+      processDate: this.getProcessDate(),
+      providerCode: registrant.credType,
+      pdid: registrant.userAccountName,
+      email: registrant.emailAddress,
+      mobile: registrant.smsPhone
     });
+
+
+    return this.post<UserAttrInterface>(url, params);
   }
 
 

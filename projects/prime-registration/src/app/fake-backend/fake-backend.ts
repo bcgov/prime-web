@@ -44,16 +44,15 @@ export class FakeBackendInterceptor extends Base implements HttpInterceptor  {
       } else if ( 'GET' === request.method ) {
         let response = null;
 
-          if ( request.url.endsWith( '/getCache' ) ) {
-            console.log( 'Get cache ', request.params );
-            response = this.getCache(  request.params.get( 'param' ) );
-          }
+        if ( request.url.endsWith( '/getCache' ) ) {
+          console.log( 'Get cache ', request.params );
+          response = this.getCache(  request.params.get( 'param' ) );
+        }
 
-         if ( response ) {
-          return of( new HttpResponse( {status: 200, body: response} ) )
-            .pipe(delay(1000));
-         }
-
+        if ( response ) {
+        return of( new HttpResponse( {status: 200, body: response} ) )
+          .pipe(delay(1000));
+        }
       }
 
       // Pass through to actual service

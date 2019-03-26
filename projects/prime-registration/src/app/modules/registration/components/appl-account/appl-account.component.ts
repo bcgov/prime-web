@@ -98,8 +98,8 @@ export class ApplAccountComponent implements OnInit {
     }
 
     // Check for user ID or names in password
-    if ( (this.data.userID &&
-          this.data.password.includes( this.data.userID )  ||
+    if ( (this.data.userAccountName &&
+          this.data.password.includes( this.data.userAccountName )  ||
           ( this.userNameList && this.userNameList.map( x => {
           if ( x.length > 1 ) { // ignore initials for names
             return this.data.password.includes( x );
