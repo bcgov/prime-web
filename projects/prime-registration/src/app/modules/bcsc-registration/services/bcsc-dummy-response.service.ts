@@ -17,7 +17,6 @@ export class BCSCDummyResponseService {
 
     private accountTypes = ['BCSC', 'MOH'];
     private cities = ['Vancouver', 'Victoria', 'Langford'];
-    private strUUID = UUID.UUID();
 
     constructor() {
 
@@ -57,11 +56,11 @@ export class BCSCDummyResponseService {
      */
     getMockBCSCResponse(): IBCSCResponse {
         return {
-            eventUUID: this.strUUID,
+            eventUUID: UUID.UUID(),
             clientName: 'regweb',
             processDate: faker.date.past(),
             accountType: this.generateFakeAccountType(),
-            pdid: this.strUUID.substring(0, 11),
+            pdid: UUID.UUID().substring(0, 11),
             assuranceLevel: faker.random.number(),
             email: faker.internet.email(),
             mobile: faker.phone.phoneNumberFormat(2),
