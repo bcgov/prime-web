@@ -9,11 +9,12 @@ import { EnrollmentStateService } from '../../services/enrollment-state.service'
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfessionalComponent implements OnInit {
-  fa: FormArray;
+  certFa: FormArray;
   fg: FormGroup;
   constructor(private stateSvc: EnrollmentStateService) {
     this.fg = this.stateSvc.professionalForm;
-    console.log(this.fa);
+    // console.log(this.fa);
+    this.certFa = this.stateSvc.certForms;
   }
 
   ngOnInit() {}

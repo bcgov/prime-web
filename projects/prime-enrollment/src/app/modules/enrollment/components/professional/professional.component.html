@@ -11,17 +11,20 @@
       <label class="control-label">Do you have a college certification?
       </label>
       <div class="form-check">
-        <input class='form-check-input' formControlName="collegeCert" type="radio" id="aafalse" tabindex="0"
+        <input class='form-check-input' formControlName="collegeCert" type="radio" id="ccfalse" tabindex="0"
           [value]="false">
-        <label class='form-check-label' for="aafalse">
+        <label class='form-check-label' for="ccfalse">
           No
         </label>
-        <input class='form-check-input' type="radio" formControlName="collegeCert" name="" id="aatrue" tabindex="0"
+        <input class='form-check-input' type="radio" formControlName="collegeCert" name="" id="cctrue" tabindex="0"
           [value]="true">
-        <label class='form-check-label' for="aatrue">
+        <label class='form-check-label' for="cctrue">
           Yes
         </label>
       </div>
+      <ng-container *ngIf="fg.controls['collegeCert']">
+        <enroll-license></enroll-license>
+      </ng-container>
 
       <label class="control-label">Are you a device provider?
       </label>

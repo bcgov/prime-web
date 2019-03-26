@@ -18,9 +18,17 @@ export class EnrollmentStateService {
   organizationForm: FormArray;
   contactForm: FormGroup;
   professionalForm: FormGroup;
+  private _certForms: FormArray;
 
-  constructor() // private route: ActivatedRoute
-  {
+  set certForms(fa: FormArray) {
+    this._certForms = fa;
+  }
+
+  get certForms() {
+    return this._certForms;
+  }
+  // private route: ActivatedRoute
+  constructor() {
     // TODO: come back to this function to state match once routing is done.
     // @ts-ignore
     // this.route.url.subscribe(obs => {
@@ -33,9 +41,15 @@ export class EnrollmentStateService {
     this.findOrganizationForm = FormGenerator.findOrganizationForm;
     this.organizationForm = FormGenerator.organizationForm;
     this.professionalForm = FormGenerator.professionalForm;
+    this.certForms = new FormArray([FormGenerator.licenseForm]);
     console.log(this);
     // };
     // genForms();
+  }
+
+  addFormToArray(fg: FormGroup, fa: FormArray) {
+    fa.push(fg);
+    return fa;
   }
 
   addFormControl(fg: FormGroup, fc: FormControl, name: string) {
