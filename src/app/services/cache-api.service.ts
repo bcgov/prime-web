@@ -31,13 +31,6 @@ export class CacheApiService extends AbstractHttpService {
     return this.get<CacheInterface>( url, params );
   }
 
-  // Cache requests
-  getCacheGeneric<T>( paramValue: string ) {
-    const url = environment.cacheAPIUrl;
-    const params = new HttpParams().set( 'param', paramValue );
-    return this.get<T>( url, params );
-  }
-
 
   /**
    *

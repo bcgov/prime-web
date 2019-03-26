@@ -12,9 +12,18 @@ import { map } from 'rxjs/operators';
 @Injectable()
 export class CacheService {
 
-  // We use private BehaviorSubjects to cache results instead of having repeat HTTP requests.
+  // We use private BehaviorSubjects to cache results instead of having repeat
+  // HTTP requests. This way the response is cached for the lifetime of the
+  // session.
   private $provinceListSubject: BehaviorSubject<ProvinceList[]> = new BehaviorSubject([]);
   private $countrylistSubject: BehaviorSubject<CountryList[]> = new BehaviorSubject([]);
+  private $enhancedMessagesSubject: BehaviorSubject<StatusMsgInterface[]> = new BehaviorSubject([]);
+
+  /**
+   * Message List
+   * Populated via call to reg/rest/getCache?param=messages
+   */
+  public $enhancedMsgList = this.$enhancedMessagesSubject.asObservable;
 
   /**
    * Country List
@@ -30,23 +39,27 @@ export class CacheService {
 
 
 
-
+  constructor(protected cacheApiService: CacheApiService) {
+    this.setupBehaviorSubject('provinces', 'province', this.$provinceListSubject);
+    this.setupBehaviorSubject('countries', 'country', this.$countrylistSubject);
+    this.setupBehaviorSubject('messages', 'messages', this.$enhancedMessagesSubject);
+  }
 
   /**
-   * Message List
-   * Populated via call to reg/rest/getCache?param=messages
+   * A simple helper to setup BehaviorSubjects and Observables with API data.
+   * HTTP requests will be sent out immediately at application load.
+   *
+   * We use BehaviorSubjects to cache values to stop repeat responses. This
+   * requires that the properties are already setup on the class, including the
+   * Observable and BehaviorSubject.
+   *
+   * @param cacheName the name of the parameter to pass to getCache()
+   * @param propertyName the name of the property on the response we want
+   * @param $subject the BehaviorSubject to emit the value found at propertyName
    */
-  public enhancedMsgList: StatusMsgInterface[];
-
-  constructor(protected cacheApiService: CacheApiService) {
-    console.log('Cache service init', cacheApiService.RAND);
-
-    this.cacheApiService.getCache('provinces').pipe(map(x => x.province))
-      .subscribe(provinceList => this.$provinceListSubject.next(provinceList));
-
-    this.cacheApiService.getCache('countries').pipe(map(x => x.country))
-      .subscribe(countryList => this.$countrylistSubject.next(countryList));
-
+  private setupBehaviorSubject<T>( cacheName: string, propertyName: string, $subject: BehaviorSubject<T> ) {
+    this.cacheApiService.getCache(cacheName).pipe(map(x => x[propertyName]))
+      .subscribe(val => $subject.next(val));
   }
 
 }

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { DocumentType } from '@prime-core/models/documents.interface';
 import { CacheService } from '../../../../../src/app/services/cache.service';
 import { CacheApiService } from '@prime-core/services/cache-api.service';
+import { BehaviorSubject } from 'rxjs';
+import { StatusMsgInterface } from '@prime-core/models/api-base.model';
 
 /**
  * TODO: Set up service to store data returned from the cache service once

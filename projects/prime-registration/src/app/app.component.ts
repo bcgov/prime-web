@@ -37,7 +37,6 @@ export class AppComponent implements OnInit {
       : console.error(version.message);
     this.updateTitleOnRouteChange();
 
-    this.loadCache();
   }
 
   /**
@@ -74,45 +73,4 @@ export class AppComponent implements OnInit {
   }
 
 
-  private loadCache() {
-    console.log( 'Load registration cache!' );
-
-    // TODO - Refactor. Move requests into cache service.
-
-    // Load countries for address component
-    // this.cacheApiService.getCache( 'countries' ).subscribe(
-    //   (response) => {
-    //     const payload = new CachePayLoad( response );
-    //     if ( payload.success ) {
-    //       this.regCache.countryList = payload.country;
-    //     } else {
-    //       console.log( 'Failed to retrieve list of countries.' );
-    //     }
-    // });
-
-    // Load provinces for address component
-    // this.cacheApiService.getCache( 'provinces' ).subscribe(
-    //   (response) => {
-    //     const payload = new CachePayLoad( response );
-    //     if ( payload.success ) {
-    //       this.regCache.provinceList = payload.province;
-    //     } else {
-    //       console.log( 'Failed to retrieve list of province.' );
-    //     }
-    // });
-
-    // this.regCache.$provinceList = this.cacheApiService.getCacheGeneric<ProvinceList[]>('provinces');
-    // this.regCache.$provinceList = this.cacheApiService.getCacheGeneric('provinces');
-
-    // Load provinces for address component
-    this.cacheApiService.getCache( 'messages' ).subscribe(
-      (response) => {
-        const payload = new CachePayLoad( response );
-        if ( payload.success ) {
-          this.regCache.enhancedMsgList = payload.messages;
-        } else {
-          console.log( 'Failed to retrieve list of enhance messages.' );
-        }
-    });
-  }
 }
