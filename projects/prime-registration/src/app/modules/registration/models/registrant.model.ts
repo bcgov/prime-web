@@ -13,7 +13,6 @@ export class Registrant extends PrimePerson {
   public password: string;
   public emailAddress: string;
   public smsPhone: string;
-
   public secQuestionsAnswer: SecurityQuestionsAnswers[] = [];
 
   /* Documents */

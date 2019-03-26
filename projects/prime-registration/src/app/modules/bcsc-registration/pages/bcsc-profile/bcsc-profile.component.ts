@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 // Development purpose
-import { DummyDataService } from '@prime-registration/services/dummy-data.service';
+
+import { BCSCDummyResponseService } from '../../services/bcsc-dummy-response.service';
 import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
 import { AbstractForm } from 'moh-common-lib/models';
 import { Router } from '@angular/router';
@@ -17,7 +18,8 @@ import { Registrant } from '../../../registration/models/registrant.model';
 })
 export class BcscProfileComponent extends AbstractForm implements OnInit {
 
-  constructor( private dummyDataService: DummyDataService,
+  constructor( private dummyDataService: BCSCDummyResponseService,
+               private dataService: RegistrationDataService,
                private registrantService: RegistrationDataService,
                private regCacheService: RegCacheService,
                protected router: Router ) {
@@ -27,6 +29,7 @@ export class BcscProfileComponent extends AbstractForm implements OnInit {
     if ( !registrantService.registrant.firstName ) {
       registrantService.registrant.copy(this.dummyDataService.getBcscRegistrant());
     }
+
   }
 
   ngOnInit() {}
