@@ -8,8 +8,6 @@ import { AbstractHttpService } from 'moh-common-lib/services';
 
 @Injectable()
 export class CacheApiService extends AbstractHttpService {
-  RAND = Math.random() * 100;
-
   /**
    *  Default hardcoded header values.  Note: Authentication headers are added
    *  at runtime in the httpOptions() method.
@@ -18,7 +16,6 @@ export class CacheApiService extends AbstractHttpService {
 
   constructor( protected http: HttpClient ) {
     super( http );
-    console.log('\n\nCacheApiService init - Should be called ONCE!\n\n\n');
   }
 
   // Cache requests
