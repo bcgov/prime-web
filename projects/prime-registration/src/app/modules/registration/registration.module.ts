@@ -20,7 +20,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { UniqueQuestionDirective } from './components/appl-account/unique-question.directive';
 import { ProfileComponent } from './components/profile/profile.component';
 import { CacheApiService } from '@prime-core/services/cache-api.service';
-import { CacheService } from '@prime-core/services/cache.service';
+import { RegCacheService } from '@prime-registration/services/reg-cache.service';
 
 @NgModule({
   imports: [
@@ -60,9 +60,8 @@ import { CacheService } from '@prime-core/services/cache.service';
     ProfileComponent
   ],
   providers: [
-    // TODO - Verify if this is necessary, or just had to fix the constructor().
     CacheApiService,
-    CacheService,
+    RegCacheService,
   ],
   entryComponents: [ConfirmModalComponent]
 })
