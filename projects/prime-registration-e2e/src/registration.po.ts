@@ -113,8 +113,34 @@ export class MohProfileTestPage extends BaseMohRegTestPage {
 }
 
 export class BCSCRegistrationPage extends MohProfileTestPage {
+
+  private streetField: WebElement; 
+
+  constructor() {
+    super();
+    this.streetField = element(by.css('prime-address [id^="street"]'));
+  }
+
+  checkEnabled(){
+    return this.streetField.isEnabled(); 
+  }
+
   navigateTo(){
     return browser.get('/bcsc-registration/profile');
+  }
+
+  async fillPreferredName(data: ProfilePageTest) {
+    (await this.getNameComponent('Preferred First Name')).sendKeys(data.preferredFirstName);
+    if (data.preferredMiddleName) {
+        (await this.getNameComponent('Preferred Middle Name')).sendKeys(data.preferredMiddleName);
+    }
+    (await this.getNameComponent('Preferred Last Name')).sendKeys(data.preferredLastName);
+  }
+
+  fillMailingAddress(data: ProfilePageTest) {
+    element(by.css('prime-address:nth-child(1) [id^="street"]')).sendKeys(data.address);
+    element(by.css('prime-address:nth-child(1) [id^="city"]')).sendKeys(data.city);
+    element(by.css('prime-address:nth-child(1) [id^="postal"]')).sendKeys(data.postal);
   }
 }
 
@@ -124,6 +150,27 @@ export class MohAccountTestPage extends BaseMohRegTestPage {
 
   navigateTo() {
     return browser.get('/moh-registration/account');
+}
+
+}
+
+export class BCSCAccountTestPage extends MohAccountTestPage {
+
+  fillPrimeAccount() { }
+
+  private completeRegistrationButton: WebElement;
+
+  constructor() {
+      super();
+      this.completeRegistrationButton = element(by.css('common-form-submit-bar'));
+  }
+
+  navigateTo() {
+    return browser.get('/bcsc-registration/account');
+  }
+
+  completeRegistration() {
+    this.completeRegistrationButton.click();
 }
 
 }
