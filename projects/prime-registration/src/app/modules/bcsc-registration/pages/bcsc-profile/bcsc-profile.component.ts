@@ -19,7 +19,6 @@ import { Registrant } from '../../../registration/models/registrant.model';
 export class BcscProfileComponent extends AbstractForm implements OnInit {
 
   constructor( private dummyDataService: BCSCDummyResponseService,
-               private dataService: RegistrationDataService,
                private registrantService: RegistrationDataService,
                private regCacheService: RegCacheService,
                protected router: Router ) {

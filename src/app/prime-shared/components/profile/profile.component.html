@@ -77,9 +77,9 @@
     <prime-address [disabled]="!editIdentityInfo"
                    [(address)]="data.address"
                    [defaultCountry]="defaultCountry"
-                   [countryList]="regCache.$countryList | async"
+                   [countryList]="countryList"
                    [defaultProvince]="defaultProvince"
-                   [provinceList]="regCache.$provinceList | async"
+                   [provinceList]="provinceList"
                    [isRequired]="true"></prime-address>
     <div class="custom-control custom-checkbox">
       <input type="checkbox"

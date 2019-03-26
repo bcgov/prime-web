@@ -2,8 +2,8 @@
 
   <form #formRef='ngForm' (ngSubmit)='continue()'>
     <prime-profile [data]='registrant'
-                   [countryList]='cache.countryList'
-                   [provinceList]='cache.provinceList'
+                   [countryList]='cache.$countryList | async'
+                   [provinceList]='cache.$provinceList | async'
                    [editIdentityInfo]="false">
 
       <p identityInstruct>

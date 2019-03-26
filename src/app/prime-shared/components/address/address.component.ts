@@ -173,6 +173,8 @@ export class AddressComponent extends Base implements OnInit {
     if (changes['provinceList'] && changes['provinceList'].currentValue) {
       this.updateProvList();
     }
+    // TODO - update defaults based on country when country has changed
+    // if (changes[country]) - update defaults
   }
 
   /**

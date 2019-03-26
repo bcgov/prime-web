@@ -8,9 +8,7 @@ import { StatusMsgInterface } from '@prime-core/models/api-base.model';
 /**
  * Store data retrieved from cache service
  */
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class RegCacheService extends CacheService {
 
   /**
