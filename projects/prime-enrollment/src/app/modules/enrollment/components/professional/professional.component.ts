@@ -9,7 +9,7 @@ import { EnrollmentStateService } from '../../services/enrollment-state.service'
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfessionalComponent implements OnInit {
-  certFa: FormArray;
+  certFa: FormGroup[];
   fg: FormGroup;
   constructor(private stateSvc: EnrollmentStateService) {
     this.fg = this.stateSvc.professionalForm;

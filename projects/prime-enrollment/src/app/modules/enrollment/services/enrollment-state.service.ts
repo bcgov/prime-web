@@ -18,9 +18,9 @@ export class EnrollmentStateService {
   organizationForm: FormArray;
   contactForm: FormGroup;
   professionalForm: FormGroup;
-  private _certForms: FormArray;
+  private _certForms: FormGroup[] = [];
 
-  set certForms(fa: FormArray) {
+  set certForms(fa: FormGroup[]) {
     this._certForms = fa;
   }
 
@@ -41,7 +41,7 @@ export class EnrollmentStateService {
     this.findOrganizationForm = FormGenerator.findOrganizationForm;
     this.organizationForm = FormGenerator.organizationForm;
     this.professionalForm = FormGenerator.professionalForm;
-    this.certForms = new FormArray([FormGenerator.licenseForm]);
+    this.certForms = [FormGenerator.licenseForm];
     console.log(this);
     // };
     // genForms();

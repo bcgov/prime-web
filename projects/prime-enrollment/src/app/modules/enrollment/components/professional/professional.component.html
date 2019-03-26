@@ -22,8 +22,11 @@
           Yes
         </label>
       </div>
-      <ng-container *ngIf="fg.controls['collegeCert']">
-        <enroll-license></enroll-license>
+      <ng-container *ngIf="fg.controls['collegeCert'].value">
+        <ng-container *ngFor="let fg of certFa">
+          <enroll-license [fg]="fg"></enroll-license>
+        </ng-container>
+
       </ng-container>
 
       <label class="control-label">Are you a device provider?
