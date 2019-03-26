@@ -34,6 +34,7 @@ export class Registrant extends Person {
   public useMfaApp: boolean = false;
 
   /** BSCS Registration attributes */
+  // TODO - Should refactor to enum.
   public assuranceLevel: number;
 
   hasMfaMethod(): boolean {

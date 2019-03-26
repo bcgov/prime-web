@@ -3,6 +3,7 @@ import { Registrant } from '../../../modules/registration/models/registrant.mode
 import { Address } from 'moh-common-lib/models/public_api';
 import * as faker from 'faker';
 import { UUID } from 'angular2-uuid';
+import { PrimeConstants } from '@prime-core/models/prime-constants';
 
 /**
  * Dummy data for development purposes
@@ -38,7 +39,7 @@ export class BCSCDummyResponseService {
         reg.smsPhone = data.mobile;
         reg.address.street = data.street;
         reg.address.city = data.city;
-        reg.address.province = 'BC';
+        reg.address.province = PrimeConstants.BRITISH_COLUMBIA;
         reg.address.postal = data.postal;
         reg.address.country = data.country;
         reg.assuranceLevel = data.assuranceLevel;
@@ -59,7 +60,7 @@ export class BCSCDummyResponseService {
             eventUUID: UUID.UUID(),
             clientName: 'regweb',
             processDate: faker.date.past(),
-            accountType: this.generateFakeAccountType(),
+            accountType: 'BCSC',
             pdid: UUID.UUID().substring(0, 11),
             assuranceLevel: faker.random.number(),
             email: faker.internet.email(),
@@ -70,9 +71,9 @@ export class BCSCDummyResponseService {
             dateOfBirth: faker.date.between('1959-01-01', '1999-01-01'),
             street: faker.address.streetAddress(),
             city: this.generateFakeCity(),
-            province: 'BC',
+            province: PrimeConstants.BRITISH_COLUMBIA,
             postal: faker.address.zipCode('?#? #?#'),
-            country: 'CAN'
+            country: PrimeConstants.CANADA
         };
     }
 
