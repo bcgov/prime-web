@@ -52,6 +52,11 @@ export class EnrollmentStateService {
     return fa;
   }
 
+  removeFormGroup(fa: FormGroup[], index: number) {
+    fa.splice(index, 1);
+    return fa;
+  }
+
   addFormControl(fg: FormGroup, fc: FormControl, name: string) {
     return fg.addControl(name, fc);
   }

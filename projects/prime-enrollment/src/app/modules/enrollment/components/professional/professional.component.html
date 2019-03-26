@@ -22,8 +22,9 @@
         </label>
       </div>
       <div *ngIf="fg.controls['collegeCert'].value">
-        <ng-container *ngFor="let fg of certFa">
-          <enroll-license [fg]="fg"></enroll-license>
+        <ng-container *ngFor="let fg of certFa; index as i">
+          <enroll-license [fg]="fg" (delete)="removeLicenseForm(i, certFa)" [enableDelete]="certFa.length > 1">
+          </enroll-license>
         </ng-container>
         <button class="btn btn-md btn-primary" (click)="addLicenseForm(certFa)">Add Another License</button>
       </div>

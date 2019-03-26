@@ -26,5 +26,8 @@ export class ProfessionalComponent implements OnInit {
     this.stateSvc.certForms = fg;
   }
 
-  removeLicenseForm(index: number) {}
+  removeLicenseForm(index: number, fa: FormGroup[]) {
+    const ret = this.stateSvc.removeFormGroup(fa, index);
+    this.stateSvc.certForms = ret;
+  }
 }

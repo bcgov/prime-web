@@ -33,6 +33,14 @@
 
 .delete {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: -12px;
+  right: 4px;
+  padding: 0px;
+  // border-radius: 100%;
+  color: "red" !important;
+
+  i {
+    color: "red";
+  }
+
 }
