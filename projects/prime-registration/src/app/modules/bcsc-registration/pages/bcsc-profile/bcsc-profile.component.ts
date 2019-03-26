@@ -6,10 +6,8 @@ import { BCSCDummyResponseService } from '../../services/bcsc-dummy-response.ser
 import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
 import { AbstractForm } from 'moh-common-lib/models';
 import { Router } from '@angular/router';
-import { PrimeConstants } from '@prime-core/models/prime-constants';
 import { RegCacheService } from '@prime-registration/services/reg-cache.service';
-import { PrimePerson } from '../../../../../../../../src/app/models/prime-person.model';
-import { Registrant } from '../../../registration/models/registrant.model';
+import { RegistrationConstants } from '../../../registration/models/registration-constants.model';
 
 @Component({
   selector: 'app-bcsc-profile',
@@ -49,7 +47,7 @@ export class BcscProfileComponent extends AbstractForm implements OnInit {
     }
 
     if ( this.form.valid ) {
-      this.navigate( PrimeConstants.BCSC_REGISTRATION + '/' + PrimeConstants.ACCOUNT_PG );
+      this.navigate( RegistrationConstants.BCSC_REGISTRATION + '/' + RegistrationConstants.ACCOUNT_PG );
     }
   }
 }

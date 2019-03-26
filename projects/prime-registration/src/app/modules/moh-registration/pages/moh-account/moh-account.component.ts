@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractForm } from 'moh-common-lib/models';
 import { Router } from '@angular/router';
-import { PrimeConstants } from '@prime-core/models/prime-constants';
-import { RegCacheService } from '../../../../services/reg-cache.service';
-import { RegistrationDataService } from '../../../../services/registration-data.service';
+import { RegCacheService } from '@prime-registration/services/reg-cache.service';
+import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
+import { RegistrationConstants } from '../../../registration/models/registration-constants.model';
 
 @Component({
   selector: 'app-moh-account',
@@ -64,8 +64,8 @@ export class MohAccountComponent extends AbstractForm implements OnInit {
     setTimeout(() => {
       this.loading = false;
       // Navigate to next page
-      this.navigate( PrimeConstants.MOH_REGISTRATION + '/' +
-                    PrimeConstants.SECURITY_PG );
+      this.navigate( RegistrationConstants.MOH_REGISTRATION + '/' +
+      RegistrationConstants.SECURITY_PG );
       }, 2500);
   }
 }

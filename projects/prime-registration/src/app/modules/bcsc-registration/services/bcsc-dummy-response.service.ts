@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Registrant } from '../../../modules/registration/models/registrant.model';
+import { Registrant } from '../../registration/models/registrant.model';
 import * as faker from 'faker';
 import { UUID } from 'angular2-uuid';
-import { PrimeConstants, AssuranceLevel } from '@prime-core/models/prime-constants';
+import { RegistrationConstants } from '../../registration/models/registration-constants.model';
+import { AssuranceLevel, RegCredTypes } from '@prime-core/models/prime-constants';
 
 /**
  * Dummy data for development purposes
@@ -15,7 +16,7 @@ import { PrimeConstants, AssuranceLevel } from '@prime-core/models/prime-constan
 })
 export class BCSCDummyResponseService {
 
-    private accountTypes = ['BCSC', 'MOH'];
+    private accountTypes = Object.keys(RegCredTypes);
     private cities = ['Vancouver', 'Victoria', 'Langford'];
 
     constructor() {
@@ -40,7 +41,7 @@ export class BCSCDummyResponseService {
         reg.smsPhone = data.mobile;
         reg.address.street = data.street;
         reg.address.city = data.city;
-        reg.address.province = PrimeConstants.BRITISH_COLUMBIA;
+        reg.address.province = RegistrationConstants.BRITISH_COLUMBIA;
         reg.address.postal = data.postal;
         reg.address.country = data.country;
         reg.assuranceLevel = AssuranceLevel.LEVEL_3;
@@ -74,9 +75,9 @@ export class BCSCDummyResponseService {
             dateOfBirth: faker.date.between('1959-01-01', '1999-01-01'),
             street: faker.address.streetAddress(),
             city: this.generateFakeCity(),
-            province: PrimeConstants.BRITISH_COLUMBIA,
+            province: RegistrationConstants.BRITISH_COLUMBIA,
             postal: faker.address.zipCode('?#? #?#'),
-            country: PrimeConstants.CANADA
+            country: RegistrationConstants.CANADA
         };
     }
 

@@ -37,7 +37,7 @@
     <div class="form-group col-sm-6 p-sm-0">
       <common-password componentLabel="{{newPwdLabel}}"
                        [showPasswordStrength]="true"
-                       [minLen]="pwdMinLen"
+                       [minLen]="getSysParamValue('')"
                        [pwdCriteria]="pwdValidChars"
                        [password]="data.password"
                        (passwordChange)="setNewPassword($event)"></common-password>

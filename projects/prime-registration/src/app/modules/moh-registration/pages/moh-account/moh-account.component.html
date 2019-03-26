@@ -3,7 +3,9 @@
   <form #formRef='ngForm' (ngSubmit)='continue()'>
     <prime-appl-account [data]='registrant'
                         [isCanada]='isCanada()'
-                        [cache]='cache'
+                        [secQuestionList]='cache.$secQuestionList | async'
+                        [pwdMinLen]='cache.pwdMinLen'
+                        [userIdMinLen]='cache.userIDMinLen'
                         [userNameList]='nameList'>
       <p AccountInstruct>
         Please provide the Account Holder's personal information.

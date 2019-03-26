@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { DocumentType } from '@prime-core/models/documents.interface';
 import { CacheService } from '@prime-core/services/cache.service';
 import { CacheApiService } from '@prime-core/services/cache-api.service';
-import { BehaviorSubject } from 'rxjs';
-import { StatusMsgInterface } from '@prime-core/models/api-base.model';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { RegistrationConstants } from '../modules/registration/models/registration-constants.model';
 
 /**
  * Store data retrieved from cache service
@@ -12,27 +12,46 @@ import { StatusMsgInterface } from '@prime-core/models/api-base.model';
 export class RegCacheService extends CacheService {
 
   /**
-   * Security NFRs
+   * Security/Configurable NFRs
    *  a) NFR-C: Security - UserID minimum 6 characters in length
    *  b) NFR-C-OCIO: Security - Password minimum 8 characters in length
+   *  c) NFR-Configurability - Available security questions
+   *
+   *  TODO retrive sysParams from cache service
    */
   public userIDMinLen: string = '6';
   public pwdMinLen: string = '8';
+  public numSecQuestion: number =
+    Number( this.getSysParamValue( RegistrationConstants.SEC_QUEST_CNT ) );
 
+  // We use private BehaviorSubjects to cache results instead of having repeat
+  // HTTP requests. This way the response is cached for the lifetime of the
+  // session.
+  private $secQuestionListSubject: BehaviorSubject<string[]> = new BehaviorSubject([]);
+  private $documentTypeListSubject: BehaviorSubject<DocumentType[]> = new BehaviorSubject([]);
 
-  constructor(protected cacheApiService: CacheApiService) {
-    super(cacheApiService);
+  constructor( protected cacheApiService: CacheApiService ) {
+    super( cacheApiService );
+
+    this.setupBehaviorSubject( 'securityQues', 'secQues', this.$secQuestionListSubject );
+    this.setupBehaviorSubject( 'docTypes', 'documentType', this.$documentTypeListSubject );
    }
 
   /**
-   * TODO: Make calls to cache service to retrieve questions, or some other
-   *       method that allows modification without changing source code
-   *  a) NFR-Configurability - Available security questions
-   *  b) NFR-Configurability - Number of security questions to setup
-   *
+   * Security Question List
+   * Populated via call to reg/rest/getCache?param=securityQues
    */
-  public numSecQuestion: number = 3;
-  public secQuestionList: string[];
+  public $secQuestionList: Observable<string[]> = this.$secQuestionListSubject.asObservable();
 
-  public documentTypes: DocumentType[];
+  /**
+   * Document Type List
+   * Populated via call to reg/rest/getCache?param=securityQues
+   */
+  public $documentTypeList: Observable<DocumentType[]> = this.$documentTypeListSubject.asObservable();
+
+  /** Retrieve parameter value from list */
+  private getSysParamValue( paramCode: string ): string {
+    const param = this.sysParamList.find( item => item.paramCode === paramCode );
+    return param ? param.paramValue : null;
+  }
 }

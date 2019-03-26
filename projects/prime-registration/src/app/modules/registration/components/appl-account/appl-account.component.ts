@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, forwardRef, ViewChildren, QueryList } from '@angular/core';
 import { Registrant } from '../../models/registrant.model';
 import { ControlContainer, NgForm } from '@angular/forms';
-import { PrimeConstants } from '@prime-core/models/prime-constants';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { RegistrationConstants } from '../../models/registration-constants.model';
 
 @Component({
   selector: 'prime-appl-account',
@@ -18,8 +18,10 @@ export class ApplAccountComponent implements OnInit {
   @Input() mohCredientials: boolean = true;
   @Input() userNameList: string[];
   @Input() isCanada: boolean = true;
-  @Input() cache: any;
   @Input() data: Registrant;
+  @Input() secQuestionList: string[] = [];
+  @Input() pwdMinLen: string;
+  @Input() userIdMinLen: string;
 
   @ViewChildren('questionRef') questionList: QueryList<NgSelectModule>;
 
@@ -35,8 +37,8 @@ export class ApplAccountComponent implements OnInit {
   public confirmPwdMsg = {minLength: ' ', criteria: ' '};
 
   /** Maximum length as defined by database fields */
-  public userIdMaxLen = PrimeConstants.USERID_MAXLEN;
-  public emailMaxLen = PrimeConstants.EMAIL_MAXLEN;
+  public userIdMaxLen = RegistrationConstants.USERID_MAXLEN;
+  public emailMaxLen = RegistrationConstants.EMAIL_MAXLEN;
 
   // TODO: Need to know valid characters for email.
   public emailCriteria = /^([A-Za-z0-9_\-.+])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,})$/;
@@ -52,21 +54,6 @@ export class ApplAccountComponent implements OnInit {
 
   get formErrors() {
     return this.form.errors;
-  }
-
-  /**
-   * Cached items
-   */
-  get pwdMinLen(): string {
-    return (this.cache ? this.cache.pwdMinLen : null);
-  }
-
-  get userIdMinLen(): string {
-    return (this.cache ? this.cache.userIDMinLen : null);
-  }
-
-  get secQuestionList(): string[] {
-    return (this.cache ? this.cache.secQuestionList : [] );
   }
 
   setNewPassword( pswd: string ) {

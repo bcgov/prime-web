@@ -4,6 +4,7 @@ import { CacheApiService } from '@prime-core/services/cache-api.service';
 import { map } from 'rxjs/operators';
 import { CountryList, ProvinceList } from '@prime-core/prime-shared/components/address/address.component';
 import { StatusMsgInterface } from '@prime-core/models/api-base.model';
+import { SysParamInterface } from '../models/cache-api.model';
 /**
  * TODO: Set up service to store data returned from the cache service once
  *       determined how it will be configured/setup
@@ -36,6 +37,15 @@ export class CacheService {
    */
   public $provinceList: Observable<ProvinceList[]> = this.$provinceListSubject.asObservable();
 
+  /**
+   * System Parameter List
+   * Populated via call to reg/rest/getCache?param=sysParam
+   *
+   * TODO: Change to observable when request completed
+   */
+  public sysParamList: SysParamInterface[] = [
+    { paramCode: 'REG_SECQUES_CNT', paramValue: '3' }
+  ];
 
 
   constructor(protected cacheApiService: CacheApiService) {
@@ -56,7 +66,7 @@ export class CacheService {
    * @param propertyName the name of the property on the response we want
    * @param $subject the BehaviorSubject to emit the value found at propertyName
    */
-  private setupBehaviorSubject<T>( cacheName: string, propertyName: string, $subject: BehaviorSubject<T> ) {
+  protected setupBehaviorSubject<T>( cacheName: string, propertyName: string, $subject: BehaviorSubject<T> ) {
     this.cacheApiService.getCache(cacheName).pipe(map(x => x[propertyName]))
       .subscribe(val => $subject.next(val));
   }

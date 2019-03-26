@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AbstractForm } from 'moh-common-lib/models';
-import { PrimeConstants } from '@prime-core/models/prime-constants';
 import { Router } from '@angular/router';
-import { RegistrationDataService } from '../../../../services/registration-data.service';
+import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
+import { RegistrationConstants } from '../../../registration/models/registration-constants.model';
 
 @Component({
   selector: 'app-moh-security',
@@ -44,7 +44,7 @@ export class MohSecurityComponent extends AbstractForm implements OnInit {
       // ! Temporary - this just waits 2.5sec to simulate an HTTP request.
       setTimeout(() => {
         this.loading = false;
-        this.navigate( PrimeConstants.MOH_REGISTRATION + '/' + PrimeConstants.CONFIRMATION_PG );
+        this.navigate( RegistrationConstants.MOH_REGISTRATION + '/' + RegistrationConstants.CONFIRMATION_PG );
         }, 2500);
     }
 

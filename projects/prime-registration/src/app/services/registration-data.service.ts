@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Registrant } from '@prime-registration/modules/registration/models/registrant.model';
-import { PrimeConstants } from '@prime-core/models/prime-constants';
 import { Document } from '@prime-core/models/documents.interface';
+import { RegistrationConstants } from '../modules/registration/models/registration-constants.model';
 
 @Injectable()
 export class RegistrationDataService {
@@ -31,8 +31,8 @@ export class RegistrationDataService {
     if (!this.registrant.address.country) {
       return true; // Default to Canada
     } else if (this.registrant.identityIsMailingAddress) {
-      return this.registrant.address.country === PrimeConstants.CANADA;
+      return this.registrant.address.country === RegistrationConstants.CANADA;
     }
-    return this.registrant.mailAddress.country === PrimeConstants.CANADA;
+    return this.registrant.mailAddress.country === RegistrationConstants.CANADA;
   }
 }

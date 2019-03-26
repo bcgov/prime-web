@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MohContainerComponent } from './components/moh-container/moh-container.component';
 import { mohPages } from './moh-registration-page-routing.module';
 import { MohConfirmationComponent } from './pages/moh-confirmation/moh-confirmation.component';
-import { PrimeConstants } from '@prime-core/models/prime-constants';
+import { RegistrationConstants } from '../registration/models/registration-constants.model';
 
 export const routes: Routes = [
   {
@@ -12,7 +12,7 @@ export const routes: Routes = [
     children: mohPages
   },
   {
-    path: PrimeConstants.CONFIRMATION_PG,
+    path: RegistrationConstants.CONFIRMATION_PG,
     component: MohConfirmationComponent,
     data: { title: 'MoH Registration Confirmation'}
   },

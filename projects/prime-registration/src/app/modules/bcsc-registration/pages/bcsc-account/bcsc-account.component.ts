@@ -87,4 +87,4 @@ export class BcscAccountComponent extends AbstractForm implements OnInit {
 }
 
 
-//  this.navigate( PrimeConstants.BCSC_REGISTRATION + '/' + PrimeConstants.CONFIRMATION_PG );
+//  this.navigate( RegistrationConstants.BCSC_REGISTRATION + '/' + RegistrationConstants.CONFIRMATION_PG );
