@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Registrant } from '../../../modules/registration/models/registrant.model';
-import { Address } from 'moh-common-lib/models/public_api';
 import * as faker from 'faker';
 import { UUID } from 'angular2-uuid';
-import { PrimeConstants } from '@prime-core/models/prime-constants';
+import { PrimeConstants, AssuranceLevel } from '@prime-core/models/prime-constants';
 
 /**
  * Dummy data for development purposes
@@ -29,12 +28,14 @@ export class BCSCDummyResponseService {
     getBcscRegistrant(): Registrant {
         const data = this.getMockBCSCResponse();
         const reg = new Registrant();
-        const dob = data.dateOfBirth;
-
         reg.firstName = data.firstname;
         reg.middleName = Math.random() > 0.5 ? faker.name.firstName() : undefined,
         reg.lastName = data.lastname;
-        reg.dateOfBirth = { month: dob.getMonth(), day: dob.getDay(), year: dob.getFullYear() };
+        reg.dateOfBirth = {
+          month: data.dateOfBirth.getMonth(),
+          day: data.dateOfBirth.getDay(),
+          year: data.dateOfBirth.getFullYear()
+        };
         reg.emailAddress = data.email;
         reg.smsPhone = data.mobile;
         reg.address.street = data.street;
@@ -42,7 +43,9 @@ export class BCSCDummyResponseService {
         reg.address.province = PrimeConstants.BRITISH_COLUMBIA;
         reg.address.postal = data.postal;
         reg.address.country = data.country;
-        reg.assuranceLevel = data.assuranceLevel;
+        reg.assuranceLevel = AssuranceLevel.LEVEL_3;
+        reg.userAccountName = UUID.UUID().substring(0, 11);
+
         return reg;
     }
 

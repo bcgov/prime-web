@@ -1,7 +1,7 @@
 <common-page-framework layout='blank'>
 
   <form #formRef='ngForm' (ngSubmit)='continue()'>
-    <prime-profile [(data)]='registrant'
+    <prime-profile [data]='registrant'
                    [countryList]='cache.countryList'
                    [provinceList]='cache.provinceList'
                    [editIdentityInfo]="false">

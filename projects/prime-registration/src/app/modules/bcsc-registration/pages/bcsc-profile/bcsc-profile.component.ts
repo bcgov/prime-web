@@ -38,10 +38,6 @@ export class BcscProfileComponent extends AbstractForm implements OnInit {
     return this.registrantService.registrant;
   }
 
-  set registrant( person: Registrant ) {
-    this.registrantService.registrant.copy( person );
-  }
-
   get cache() {
     return this.regCacheService;
   }
