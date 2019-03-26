@@ -5,11 +5,8 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
 import { CacheApiService } from '../../../../src/app/services/cache-api.service';
 import { RegCacheService } from './services/reg-cache.service';
-import { CachePayLoad } from '../../../../src/app/models/cache-api.model';
 import { Registrant } from './modules/registration/models/registrant.model';
 import { ControlContainer, NgForm } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { ProvinceList } from '@prime-registration/modules/registration/components/address/address.component';
 
 @Component({
   selector: 'app-root',
@@ -25,9 +22,7 @@ export class AppComponent implements OnInit {
 
   constructor( private router: Router,
                private activatedRoute: ActivatedRoute,
-               private titleService: Title,
-               private cacheApiService: CacheApiService,
-               private regCache: RegCacheService ) {
+               private titleService: Title ) {
   }
 
   ngOnInit() {
