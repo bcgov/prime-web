@@ -1,6 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { EnrollmentStateService } from '../../services/enrollment-state.service';
+import { FormFieldBuilder } from '../../models/form-field-builder';
+import { FormGenerator } from '../../models/form-generator';
 
 @Component({
   selector: 'app-professional',
@@ -18,4 +20,11 @@ export class ProfessionalComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  addLicenseForm(fa: FormGroup[]) {
+    const fg = this.stateSvc.addFormToArray(FormGenerator.licenseForm, fa);
+    this.stateSvc.certForms = fg;
+  }
+
+  removeLicenseForm(index: number) {}
 }

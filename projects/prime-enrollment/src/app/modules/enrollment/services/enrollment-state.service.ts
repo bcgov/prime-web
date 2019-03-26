@@ -47,8 +47,8 @@ export class EnrollmentStateService {
     // genForms();
   }
 
-  addFormToArray(fg: FormGroup, fa: FormArray) {
-    fa.push(fg);
+  addFormToArray(fg: FormGroup, fa: FormGroup[]) {
+    fa.unshift(fg);
     return fa;
   }
 

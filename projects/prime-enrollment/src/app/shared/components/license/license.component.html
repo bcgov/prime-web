@@ -1,9 +1,6 @@
-<!-- 1-2 -->
-<!-- college certification -->
-
-<div *ngIf="fg; else loading">
+<div *ngIf="fg; else loading" class="border padded">
   <form [formGroup]="fg">
-    <!-- <div class="col-sm-12"> -->
+
     <div class="row">
       <div class="form-group col-sm-6">
         <label class="control-label" for="license">College Certifications</label>
@@ -12,13 +9,14 @@
           <option label="Choose" value="">Choose</option>
           <option value="sms" label="sms">Pharmacists of BC</option>
         </select>
+
       </div>
       <div class="form-group col-sm-6">
         <label class="control-label" for="license">License Number</label>
-        <input class="form-control" id="license">
+        <input class="form-control" id="license" formControlName="licenseNum">
+        <button class="btn delete"> <i class="fa fa-2x fa-window-close "></i></button>
+
       </div>
-      <!-- </div> -->
-      <!-- <div class="col-sm-12"> -->
       <div class="form-group col-sm-3">
         <label class="control-label" for="licenseClass">License Class</label>
         <select class="form-control" formControlName="licenseClass" id="licenseClass">
@@ -26,6 +24,7 @@
           <option value="sms" label="sms">Full Pharmacists</option>
         </select>
       </div>
+
       <div class="form-group col-sm-3">
         <label class="control-label" for="license">Renewal Date</label>
         <div class="input-group">
@@ -39,7 +38,6 @@
           </span>
         </div>
       </div>
-      <!-- </div> -->
       <div class="form-group col-sm-6">
         <label class="control-label" for="advanced">Advanced Practice</label>
         <select class="form-control" formControlName="advancedPractice" id="advanced">

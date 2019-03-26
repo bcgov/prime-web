@@ -26,3 +26,13 @@
 .has-float-label {
   flex-basis: calc(100% - 36px);
 }
+
+.padded {
+  padding: 1rem;
+}
+
+.delete {
+  position: absolute;
+  top: 0;
+  right: 0;
+}

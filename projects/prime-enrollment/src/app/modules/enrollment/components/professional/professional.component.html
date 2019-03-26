@@ -1,5 +1,4 @@
 <common-page-framework>
-
   <h2>Professional Information</h2>
 
   <ng-content select="[identityInstruct]"></ng-content>
@@ -22,12 +21,12 @@
           Yes
         </label>
       </div>
-      <ng-container *ngIf="fg.controls['collegeCert'].value">
+      <div *ngIf="fg.controls['collegeCert'].value">
         <ng-container *ngFor="let fg of certFa">
           <enroll-license [fg]="fg"></enroll-license>
         </ng-container>
-
-      </ng-container>
+        <button class="btn btn-md btn-primary" (click)="addLicenseForm(certFa)">Add Another License</button>
+      </div>
 
       <label class="control-label">Are you a device provider?
       </label>

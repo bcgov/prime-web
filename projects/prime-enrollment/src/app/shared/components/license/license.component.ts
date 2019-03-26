@@ -3,7 +3,9 @@ import {
   OnInit,
   ChangeDetectionStrategy,
   Input,
-  ViewChild
+  ViewChild,
+  Output,
+  EventEmitter
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -18,6 +20,7 @@ import { NgxMyDatePickerDirective, INgxMyDpOptions } from 'ngx-mydatepicker';
 export class LicenseComponent implements OnInit {
   @Input() fg: FormGroup;
   @Input() licenseOptions: Observable<any>;
+  @Output() delete: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @ViewChild('dp') ngxdp: NgxMyDatePickerDirective;
 
@@ -27,4 +30,8 @@ export class LicenseComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  remove() {
+    this.delete.emit(true);
+  }
 }
