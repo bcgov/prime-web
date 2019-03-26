@@ -107,8 +107,6 @@ export class AddressComponent extends Base implements OnInit {
       }
 
       this.updateProvList();
-
-      // this.provList = this.provinceList
     }
 
     // Set up for using GeoCoder
