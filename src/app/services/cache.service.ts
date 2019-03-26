@@ -23,7 +23,7 @@ export class CacheService {
    * Message List
    * Populated via call to reg/rest/getCache?param=messages
    */
-  public $enhancedMsgList = this.$enhancedMessagesSubject.asObservable;
+  public $enhancedMsgList = this.$enhancedMessagesSubject.asObservable();
 
   /**
    * Country List
