@@ -169,11 +169,18 @@ export class AddressComponent extends Base implements OnInit {
     return (this.address && 'USA' === this.address.country) || this.isCanada();
   }
 
+  ngOnChanges(changes) {
+    if (changes['provinceList'] && changes['provinceList'].currentValue) {
+      this.updateProvList();
+    }
+  }
+
   /**
    * Updates the provList variable. Values must be stored in a variable and not
    * accessed via function invocation for performance.
    */
   private updateProvList() {
+    if (!this.provinceList) { return; } // When data is async and hasn't loaded
     this.provList = this.provinceList
       .map(prov => {
         if (prov.country === this.address.country) {

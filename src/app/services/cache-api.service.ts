@@ -6,11 +6,8 @@ import { CacheInterface } from '../models/cache-api.model';
 import { AbstractHttpService } from 'moh-common-lib/services';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class CacheApiService extends AbstractHttpService {
-
   /**
    *  Default hardcoded header values.  Note: Authentication headers are added
    *  at runtime in the httpOptions() method.

@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { DocumentType } from '@prime-core/models/documents.interface';
 import { CacheService } from '@prime-core/services/cache.service';
+import { CacheApiService } from '@prime-core/services/cache-api.service';
+import { BehaviorSubject } from 'rxjs';
+import { StatusMsgInterface } from '@prime-core/models/api-base.model';
 
 /**
  * Store data retrieved from cache service
@@ -19,8 +22,8 @@ export class RegCacheService extends CacheService {
   public pwdMinLen: string = '8';
 
 
-  constructor() {
-    super();
+  constructor(protected cacheApiService: CacheApiService) {
+    super(cacheApiService);
    }
 
   /**

@@ -5,7 +5,6 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
 import { CacheApiService } from '../../../../src/app/services/cache-api.service';
 import { RegCacheService } from './services/reg-cache.service';
-import { CachePayLoad } from '../../../../src/app/models/cache-api.model';
 import { Registrant } from './modules/registration/models/registrant.model';
 import { ControlContainer, NgForm } from '@angular/forms';
 import { RegistrationDataService } from './services/registration-data.service';
@@ -25,11 +24,8 @@ export class AppComponent extends Base implements OnInit {
 
   constructor( private router: Router,
                private activatedRoute: ActivatedRoute,
-               private titleService: Title,
-               private cacheApiService: CacheApiService,
-               private regCache: RegCacheService,
-               private registrationDataService: RegistrationDataService ) {
-
+               private registrationDataService: RegistrationDataService,
+               private titleService: Title ) {
     super();
   }
 
@@ -44,7 +40,6 @@ export class AppComponent extends Base implements OnInit {
 
     this.updateTitleOnRouteChange();
 
-    this.loadCache();
   }
 
   /**
@@ -81,62 +76,4 @@ export class AppComponent extends Base implements OnInit {
   }
 
 
-  private loadCache() {
-    console.log( 'Load registration cache!' );
-
-    // Load countries for address component
-    this.cacheApiService.getCache( 'countries' ).subscribe(
-      (response) => {
-        const payload = new CachePayLoad( response );
-        if ( payload.success ) {
-          this.regCache.countryList = payload.country;
-        } else {
-          console.log( 'Failed to retrieve list of countries.' );
-        }
-    });
-
-    // Load provinces for address component
-    this.cacheApiService.getCache( 'provinces' ).subscribe(
-      (response) => {
-        const payload = new CachePayLoad( response );
-        if ( payload.success ) {
-          this.regCache.provinceList = payload.province;
-        } else {
-          console.log( 'Failed to retrieve list of province.' );
-        }
-    });
-
-    // Load provinces for address component
-    this.cacheApiService.getCache( 'messages' ).subscribe(
-      (response) => {
-        const payload = new CachePayLoad( response );
-        if ( payload.success ) {
-          this.regCache.enhancedMsgList = payload.messages;
-        } else {
-          console.log( 'Failed to retrieve list of enhance messages.' );
-        }
-    });
-
-    // Load secuiity questions for account component
-    this.cacheApiService.getCache( 'securityQues' ).subscribe(
-      (response) => {
-        const payload = new CachePayLoad( response );
-        if ( payload.success ) {
-          this.regCache.secQuestionList = payload.secQues;
-        } else {
-          console.log( 'Failed to retrieve list of security questions.' );
-        }
-    });
-
-    // Load secuiity questions for account component
-    this.cacheApiService.getCache( 'docTypes' ).subscribe(
-      (response) => {
-        const payload = new CachePayLoad( response );
-        if ( payload.success ) {
-          this.regCache.documentTypes = payload.documentType;
-        } else {
-          console.log( 'Failed to retrieve list of security questions.' );
-        }
-    });
-  }
 }

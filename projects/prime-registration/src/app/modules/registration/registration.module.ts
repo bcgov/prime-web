@@ -12,6 +12,8 @@ import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.
 import { NgSelectModule } from '@ng-select/ng-select';
 import { UniqueQuestionDirective } from './components/appl-account/unique-question.directive';
 import { PrimeSharedModule } from '@prime-core/prime-shared/prime-shared.module';
+import { CacheApiService } from '@prime-core/services/cache-api.service';
+import { RegCacheService } from '@prime-registration/services/reg-cache.service';
 
 
 const componentList = [
@@ -38,6 +40,10 @@ const componentList = [
   ],
   exports: [
     componentList
+  ],
+  providers: [
+    CacheApiService,
+    RegCacheService,
   ],
   entryComponents: [ConfirmModalComponent]
 })
