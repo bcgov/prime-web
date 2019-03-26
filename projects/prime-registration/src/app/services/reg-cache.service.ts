@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DocumentType } from '@prime-core/models/documents.interface';
 import { CacheService } from '../../../../../src/app/services/cache.service';
+import { CacheApiService } from '@prime-core/services/cache-api.service';
 
 /**
  * TODO: Set up service to store data returned from the cache service once
@@ -21,8 +22,8 @@ export class RegCacheService extends CacheService {
   public pwdMinLen: string = '8';
 
 
-  constructor() {
-    super();
+  constructor(protected cacheApiService: CacheApiService) {
+    super(cacheApiService);
    }
 
   /**

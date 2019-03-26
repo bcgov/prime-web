@@ -8,6 +8,8 @@ import { RegCacheService } from './services/reg-cache.service';
 import { CachePayLoad } from '../../../../src/app/models/cache-api.model';
 import { Registrant } from './modules/registration/models/registrant.model';
 import { ControlContainer, NgForm } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { ProvinceList } from '@prime-registration/modules/registration/components/address/address.component';
 
 @Component({
   selector: 'app-root',
@@ -75,6 +77,8 @@ export class AppComponent implements OnInit {
   private loadCache() {
     console.log( 'Load registration cache!' );
 
+    // TODO - Refactor. Have one .catch()?
+
     // Load countries for address component
     this.cacheApiService.getCache( 'countries' ).subscribe(
       (response) => {
@@ -87,15 +91,18 @@ export class AppComponent implements OnInit {
     });
 
     // Load provinces for address component
-    this.cacheApiService.getCache( 'provinces' ).subscribe(
-      (response) => {
-        const payload = new CachePayLoad( response );
-        if ( payload.success ) {
-          this.regCache.provinceList = payload.province;
-        } else {
-          console.log( 'Failed to retrieve list of province.' );
-        }
-    });
+    // this.cacheApiService.getCache( 'provinces' ).subscribe(
+    //   (response) => {
+    //     const payload = new CachePayLoad( response );
+    //     if ( payload.success ) {
+    //       this.regCache.provinceList = payload.province;
+    //     } else {
+    //       console.log( 'Failed to retrieve list of province.' );
+    //     }
+    // });
+
+    // this.regCache.$provinceList = this.cacheApiService.getCacheGeneric<ProvinceList[]>('provinces');
+    // this.regCache.$provinceList = this.cacheApiService.getCacheGeneric('provinces');
 
     // Load provinces for address component
     this.cacheApiService.getCache( 'messages' ).subscribe(

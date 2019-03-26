@@ -19,6 +19,8 @@ import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.
 import { NgSelectModule } from '@ng-select/ng-select';
 import { UniqueQuestionDirective } from './components/appl-account/unique-question.directive';
 import { ProfileComponent } from './components/profile/profile.component';
+import { CacheApiService } from '@prime-core/services/cache-api.service';
+import { CacheService } from '@prime-core/services/cache.service';
 
 @NgModule({
   imports: [
@@ -56,6 +58,11 @@ import { ProfileComponent } from './components/profile/profile.component';
     PhoneNumberComponent,
     ConfirmModalComponent,
     ProfileComponent
+  ],
+  providers: [
+    // TODO - Verify if this is necessary, or just had to fix the constructor().
+    CacheApiService,
+    CacheService,
   ],
   entryComponents: [ConfirmModalComponent]
 })

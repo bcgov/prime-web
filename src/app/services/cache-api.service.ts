@@ -6,10 +6,12 @@ import { CacheInterface } from '../models/cache-api.model';
 import { AbstractHttpService } from 'moh-common-lib/services';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+// @Injectable({
+//   providedIn: 'root'
+// })
+@Injectable()
 export class CacheApiService extends AbstractHttpService {
+  RAND = Math.random() * 100;
 
   /**
    *  Default hardcoded header values.  Note: Authentication headers are added
@@ -19,6 +21,7 @@ export class CacheApiService extends AbstractHttpService {
 
   constructor( protected http: HttpClient ) {
     super( http );
+    console.log('\n\nCacheApiService init - Should be called ONCE!\n\n\n');
   }
 
   // Cache requests
@@ -26,6 +29,13 @@ export class CacheApiService extends AbstractHttpService {
     const url = environment.cacheAPIUrl;
     const params = new HttpParams().set( 'param', paramValue );
     return this.get<CacheInterface>( url, params );
+  }
+
+  // Cache requests
+  getCacheGeneric<T>( paramValue: string ) {
+    const url = environment.cacheAPIUrl;
+    const params = new HttpParams().set( 'param', paramValue );
+    return this.get<T>( url, params );
   }
 
 
