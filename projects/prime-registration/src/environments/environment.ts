@@ -9,11 +9,10 @@ export const environment = {
   useMockBackend: false,
 
 
-  /** Base url for all Cache requests.
+  /** Base url for all requests.
    * Note: This should be a relative URL, not absolute, so it can properly map to dev/test/prod.
    */
-  cacheAPIUrl: '/api/reg/rest/getCache',
-  baseAPIUrl: '/api/rest/'
+  baseAPIUrl: '/api/reg/rest/'
 };
 
 /*
