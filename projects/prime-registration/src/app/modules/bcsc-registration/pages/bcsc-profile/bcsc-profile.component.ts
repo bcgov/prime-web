@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 // Development purpose
-import { DummyDataService } from '../../../../services/dummy-data.service';
+// import { DummyDataService } from '../../../../services/dummy-data.service';
+import { BCSCDummyResponseService } from '../../services/bcsc-dummy-response.service';
 import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
 import { AbstractForm } from 'moh-common-lib/models';
 import { Router } from '@angular/router';
@@ -20,7 +21,7 @@ export class BcscProfileComponent extends AbstractForm implements OnInit {
 
   private _requiredError = {required: true};
 
-  constructor( private dummyDataService: DummyDataService,
+  constructor( private dummyDataService: BCSCDummyResponseService,
                private primeDataServie: RegistrationDataService ,
                protected router: Router ) {
     super( router );

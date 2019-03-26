@@ -22,7 +22,6 @@ export class Registrant extends Person {
   public password: string;
   public emailAddress: string;
   public smsPhone: string;
-
   public secQuestionsAnswer: SecurityQuestionsAnswers[] = [];
 
   /* Documents */
@@ -33,6 +32,9 @@ export class Registrant extends Person {
   public mfaSMSphone: string;
   public useMfaSecurityKey: boolean = false;
   public useMfaApp: boolean = false;
+
+  /** BSCS Registration attributes */
+  public assuranceLevel: number;
 
   hasMfaMethod(): boolean {
     return this.useMfaApp || this.useMfaSMS || this.useMfaSecurityKey;
