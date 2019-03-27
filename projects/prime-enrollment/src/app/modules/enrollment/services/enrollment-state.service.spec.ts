@@ -24,7 +24,7 @@ describe('EnrollmentStateService', () => {
     const service: EnrollmentStateService = TestBed.get(EnrollmentStateService);
     const fa = new FormArray([new FormControl('')]);
     const fc = new FormControl('');
-    const ret = service.addControlToFormArray(fa, fc);
+    const ret = service.addControlToFa(fa, fc);
     expect(ret).toBeDefined();
     expect(ret.controls.length).toBe(2);
     expect(ret.controls.length).toBeGreaterThan(fa.controls.length);
@@ -33,7 +33,9 @@ describe('EnrollmentStateService', () => {
   it('should remove a formControl from a form array', () => {
     const service: EnrollmentStateService = TestBed.get(EnrollmentStateService);
     const fa = new FormArray([new FormControl('')]);
-    const fc = new FormControl('');
+    const ret = service.removeControlFromFa(fa, 0);
+    expect(fa.controls).toBeDefined();
+    expect(fa.controls.length).toBeLessThan(1);
   });
 
   it('Test', () => {});

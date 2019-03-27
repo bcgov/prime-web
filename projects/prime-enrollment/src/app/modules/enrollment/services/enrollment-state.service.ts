@@ -60,10 +60,14 @@ export class EnrollmentStateService {
     return fg.addControl(name, fc);
   }
 
-  addControlToFormArray(fa: FormArray, fc: FormControl) {
-    fa.insert(0, fc);
+  addControlToFa(fa: FormArray, fc: FormControl) {
+    // fa.insert(0, fc);
     const ret = new FormArray([...fa.controls, fc]);
     return ret;
+  }
+
+  removeControlFromFa(fa: FormArray, index: number) {
+    fa.removeAt(index);
   }
 
   removeFormControl(fg: FormGroup, name: string) {
