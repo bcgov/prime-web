@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Registrant } from '../../../../../../prime-registration/src/app/modules/registration/models/registrant.model';
 import { FormGenerator } from '../models/form-generator';
 import { FormGroup, FormArray, FormControl } from '@angular/forms';
+import { FormFieldBuilder } from '../models/form-field-builder';
 
 const stateOpts = StateOptions;
 
@@ -19,6 +20,7 @@ export class EnrollmentStateService {
   contactForm: FormGroup;
   professionalForm: FormGroup;
   private _certForms: FormGroup[] = [];
+  dpFa: FormArray;
 
   set certForms(fa: FormGroup[]) {
     this._certForms = fa;
@@ -42,6 +44,7 @@ export class EnrollmentStateService {
     this.organizationForm = FormGenerator.organizationForm;
     this.professionalForm = FormGenerator.professionalForm;
     this.certForms = [FormGenerator.licenseForm];
+    this.dpFa = new FormArray([FormFieldBuilder.deviceProviderFields]);
     // };
     // genForms();
   }
@@ -68,6 +71,7 @@ export class EnrollmentStateService {
 
   removeControlFromFa(fa: FormArray, index: number) {
     fa.removeAt(index);
+    return fa;
   }
 
   removeFormControl(fg: FormGroup, name: string) {

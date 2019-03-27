@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DeviceProviderComponent } from './device-provider.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('DeviceProviderComponent', () => {
   let component: DeviceProviderComponent;
@@ -8,9 +9,9 @@ describe('DeviceProviderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DeviceProviderComponent ]
-    })
-    .compileComponents();
+      imports: [ReactiveFormsModule],
+      declarations: [DeviceProviderComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

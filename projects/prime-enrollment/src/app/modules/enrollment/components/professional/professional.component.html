@@ -43,6 +43,14 @@
           Yes
         </label>
       </div>
+      <div *ngIf="fg.controls['deviceProvider'].value">
+        <ng-container *ngFor="let fc of dpFa.controls; index as i">
+          <enroll-device-provider [enableDelete]="dpFa.controls.length > 1" [fc]="dpFa.controls[i]"
+            (remove)="removeDeviceFc(dpFa)">
+          </enroll-device-provider>
+        </ng-container>
+        <button class="btn btn-md btn-primary" (click)="addDeviceFc(dpFa)">Add Another License</button>
+      </div>
 
       <label class="control-label">Are you accessing pharmanet on behalf of someone else?
       </label>
