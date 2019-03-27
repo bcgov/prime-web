@@ -10,4 +10,5 @@ export interface IDeclaration {
   tAndCDesc?: ISupportingDetails | FormControl;
   pharmaSuspension: string | FormControl;
   pharmaSuspensionDesc?: ISupportingDetails | FormControl;
+  supportingDocs: Document[];
 }

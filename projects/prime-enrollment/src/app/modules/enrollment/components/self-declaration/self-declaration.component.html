@@ -8,15 +8,21 @@
   </p>
   <div>
     <form [formGroup]="fg">
-      <enroll-yes-no [fg]="fg" fc="conviction" [label]="convictionLabel"></enroll-yes-no>
+      <enroll-yes-no class="panel " [fg]="fg" fc="conviction" [label]="convictionLabel"
+        [ngStyle]="{'border-bottom': fg.controls['conviction'].value}"></enroll-yes-no>
       <enroll-details *ngIf="fg.controls['conviction'].value" [fg]="fg" fc="convictionDesc"></enroll-details>
       <enroll-yes-no [fg]="fg" fc="regSuspension" [label]="regSuspensionLabel"></enroll-yes-no>
       <enroll-details *ngIf="fg.controls['regSuspension'].value" [fg]="fg" fc="regSuspensionDesc"></enroll-details>
       <enroll-yes-no [fg]="fg" fc="tAndC" [label]="tAndCLabel"></enroll-yes-no>
-      <enroll-details *ngIf="fg.controls['regSuspension'].value" [fg]="fg" fc="regSuspensionDesc"></enroll-details>
+      <enroll-details *ngIf="fg.controls['tAndC'].value" [fg]="fg" fc="regSuspensionDesc"></enroll-details>
       <enroll-yes-no [fg]="fg" fc="pharmaSuspension" [label]="pharmaSuspensionLabel"></enroll-yes-no>
       <enroll-details *ngIf="fg.controls['pharmaSuspension'].value" [fg]="fg" fc="pharmaSuspensionDesc">
       </enroll-details>
+      <common-file-uploader
+        *ngIf="fg.controls['conviction'].value || fg.controls['regSuspension'].value || fg.controls['tAndC'].value || fg.controls['pharmaSuspension'].value"
+        (imagesChange)="imagesChange($event)" id="blahblah" [images]="images">
+      </common-file-uploader>
+
     </form>
   </div>
 </common-page-framework>

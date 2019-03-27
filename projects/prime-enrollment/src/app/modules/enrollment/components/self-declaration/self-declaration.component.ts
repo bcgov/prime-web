@@ -17,11 +17,14 @@ export class SelfDeclarationComponent implements OnInit {
     'Have you ever had Terms and Conditions imposed on your license as a result of disciplinary actions taken by a governing body?';
   pharmaSuspensionLabel =
     'Have you ever had your access to PharmaNet suspended or revoked?';
+  images = [];
   constructor(private stateSvc: EnrollmentStateService) {
     this.fg = stateSvc.declarationForm;
   }
 
   ngOnInit() {}
 
-  addControl() {}
+  imagesChange(evt: any) {
+    console.log(evt);
+  }
 }
