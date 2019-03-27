@@ -62,6 +62,7 @@ export abstract class FormFieldBuilder {
     const regSuspensionDesc = new FormControl(null);
     const tAndCDesc = new FormControl(null);
     const pharmaSuspensionDesc = new FormControl(null);
+    const supportingDocs = new FormControl(null);
 
     return {
       conviction,
@@ -71,7 +72,8 @@ export abstract class FormFieldBuilder {
       pharmaSuspensionDesc,
       tAndCDesc,
       regSuspensionDesc,
-      convictionDesc
+      convictionDesc,
+      supportingDocs
     };
   }
 

@@ -46,6 +46,11 @@ export class EnrollmentStateService {
     this.dpFa = new FormArray([FormFieldBuilder.deviceProviderFields]);
   }
 
+  addValueToFc(fc: FormControl, val: string | object[]) {
+    fc.setValue(val);
+    return fc;
+  }
+
   addFormToArray(fg: FormGroup, fa: FormGroup[]) {
     fa.unshift(fg);
     return fa;

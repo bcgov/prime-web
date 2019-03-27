@@ -20,7 +20,7 @@
       </enroll-details>
       <common-file-uploader
         *ngIf="fg.controls['conviction'].value || fg.controls['regSuspension'].value || fg.controls['tAndC'].value || fg.controls['pharmaSuspension'].value"
-        (imagesChange)="imagesChange($event)" id="blahblah" [images]="images">
+        (imagesChange)="imagesChange($event, fg.controls['supportingDocs'])" id="blahblah" [images]="images">
       </common-file-uploader>
 
     </form>

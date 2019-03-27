@@ -20,11 +20,14 @@ export class SelfDeclarationComponent implements OnInit {
   images = [];
   constructor(private stateSvc: EnrollmentStateService) {
     this.fg = stateSvc.declarationForm;
+    this.fg.valueChanges.subscribe(obs => console.log(obs));
   }
 
   ngOnInit() {}
 
-  imagesChange(evt: any) {
-    console.log(evt);
+  imagesChange(evt: any, fc: FormControl) {
+    // console.log(evt);
+    // console.log(fc);
+    this.stateSvc.addValueToFc(fc, evt);
   }
 }
