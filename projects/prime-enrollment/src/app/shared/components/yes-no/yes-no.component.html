@@ -1,0 +1,12 @@
+<label class="control-label">{{ label }}
+</label>
+<div class="form-check">
+  <input class='form-check-input' [formControl]="fc" type="radio" id="fcfalse" tabindex="0" [value]="false">
+  <label class='form-check-label' for="fcfalse">
+    No
+  </label>
+  <input class='form-check-input' type="radio" [formControl]="fc" id="fctrue" tabindex="0" [value]="true">
+  <label class='form-check-label' for="fctrue">
+    Yes
+  </label>
+</div>

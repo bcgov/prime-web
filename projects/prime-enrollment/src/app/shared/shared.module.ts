@@ -19,6 +19,7 @@ import { SharedProfileComponent } from './components/shared-profile/shared-profi
 import { InternationalPhoneNumberModule } from 'ngx-international-phone-number';
 import { LicenseComponent } from './components/license/license.component';
 import { DeviceProviderComponent } from './components/device-provider/device-provider.component';
+import { YesNoComponent } from './components/yes-no/yes-no.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { DeviceProviderComponent } from './components/device-provider/device-pro
     PhoneInputComponent,
     SharedProfileComponent,
     LicenseComponent,
-    DeviceProviderComponent
+    DeviceProviderComponent,
+    YesNoComponent
   ],
 
   imports: [
@@ -57,7 +59,8 @@ import { DeviceProviderComponent } from './components/device-provider/device-pro
     NgxIntlTelInputComponent,
     InternationalPhoneNumberModule,
     LicenseComponent,
-    DeviceProviderComponent
+    DeviceProviderComponent,
+    YesNoComponent
   ]
 })
 export class SharedModule {}
