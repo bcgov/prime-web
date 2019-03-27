@@ -1,5 +1,4 @@
-<div class="form-group" *ngIf="fc">
+<div class="form-group border-top" *ngIf="fg" [formGroup]="fg">
   <label class="control-label" for="fc">{{ label }}</label>
-  <textarea class="form-control" rows="5" id="fc" [formControl]="fc"></textarea>
-
+  <textarea class="form-control" rows="5" id="fc" [formControlName]="fc"></textarea>
 </div>

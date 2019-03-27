@@ -4,7 +4,7 @@ import {
   ChangeDetectionStrategy,
   Input
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'enroll-details',
@@ -13,7 +13,8 @@ import { FormControl } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DetailsComponent implements OnInit {
-  @Input() fc: FormControl;
+  @Input() fg: FormGroup;
+  @Input() fc: string;
   constructor() {}
 
   ngOnInit() {}

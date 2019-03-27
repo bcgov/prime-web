@@ -58,8 +58,21 @@ export abstract class FormFieldBuilder {
     const regSuspension = new FormControl(null, [Validators.required]);
     const tAndC = new FormControl(null, [Validators.required]);
     const pharmaSuspension = new FormControl(null, [Validators.required]);
+    const convictionDesc = new FormControl(null);
+    const regSuspensionDesc = new FormControl(null);
+    const tAndCDesc = new FormControl(null);
+    const pharmaSuspensionDesc = new FormControl(null);
 
-    return { conviction, regSuspension, tAndC, pharmaSuspension };
+    return {
+      conviction,
+      regSuspension,
+      tAndC,
+      pharmaSuspension,
+      pharmaSuspensionDesc,
+      tAndCDesc,
+      regSuspensionDesc,
+      convictionDesc
+    };
   }
 
   static get declarationDetailsControl() {
