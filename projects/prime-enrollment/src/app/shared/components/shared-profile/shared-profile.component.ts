@@ -64,7 +64,6 @@ export class SharedProfileComponent<T> implements OnInit, OnDestroy {
     this.form.ngSubmit.subscribe(val => this.validateInfo(val));
     let newObs = new Observable();
     newObs = of(this.registrant);
-    newObs.subscribe(obs => console.log(obs));
     this.subscriptions = [
       this.cntrlContainer.valueChanges.subscribe(obs => this.emitChanges(obs))
     ];
@@ -87,7 +86,6 @@ export class SharedProfileComponent<T> implements OnInit, OnDestroy {
 
   // Cache items
   get countryList() {
-    console.log(this);
     return this.countries;
   }
 
@@ -95,7 +93,6 @@ export class SharedProfileComponent<T> implements OnInit, OnDestroy {
     return this.provinces;
   }
   get test() {
-    console.log(this.registrant);
     return this.registrant;
   }
 

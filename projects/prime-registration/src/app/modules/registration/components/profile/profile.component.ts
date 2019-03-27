@@ -86,7 +86,6 @@ export class ProfileComponent<T> implements OnInit, OnDestroy {
 
   // Cache items
   get countryList(): CountryList[] {
-    console.log(this);
     return this.countries;
   }
 
@@ -94,7 +93,6 @@ export class ProfileComponent<T> implements OnInit, OnDestroy {
     return this.provinces;
   }
   get test() {
-    console.log(this.registrant);
     return this.registrant;
   }
 

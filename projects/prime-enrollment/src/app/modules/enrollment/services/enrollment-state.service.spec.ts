@@ -4,13 +4,14 @@ import { EnrollmentStateService } from './enrollment-state.service';
 import { ActivatedRoute } from '@angular/router';
 import { MockActivatedRoute } from '../mocks/mock-activated-route';
 import { RouterTestingModule } from '@angular/router/testing';
+import { FormControl, FormArray, ReactiveFormsModule } from '@angular/forms';
 
 describe('EnrollmentStateService', () => {
   let activeRoute = new MockActivatedRoute();
 
   beforeEach(() =>
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule]
+      imports: [RouterTestingModule, ReactiveFormsModule]
     })
   );
 
@@ -18,4 +19,22 @@ describe('EnrollmentStateService', () => {
     const service: EnrollmentStateService = TestBed.get(EnrollmentStateService);
     expect(service).toBeTruthy();
   });
+
+  it('should add a formControl to a form array', () => {
+    const service: EnrollmentStateService = TestBed.get(EnrollmentStateService);
+    const fa = new FormArray([new FormControl('')]);
+    const fc = new FormControl('');
+    const ret = service.addControlToFormArray(fa, fc);
+    expect(ret).toBeDefined();
+    expect(ret.controls.length).toBe(2);
+    expect(ret.controls.length).toBeGreaterThan(fa.controls.length);
+  });
+
+  it('should remove a formControl from a form array', () => {
+    const service: EnrollmentStateService = TestBed.get(EnrollmentStateService);
+    const fa = new FormArray([new FormControl('')]);
+    const fc = new FormControl('');
+  });
+
+  it('Test', () => {});
 });

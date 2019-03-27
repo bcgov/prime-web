@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LicenseComponent } from './license.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('LicenseComponent', () => {
   let component: LicenseComponent;
@@ -8,9 +9,9 @@ describe('LicenseComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LicenseComponent ]
-    })
-    .compileComponents();
+      imports: [ReactiveFormsModule],
+      declarations: [LicenseComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

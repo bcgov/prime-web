@@ -42,7 +42,6 @@ export class EnrollmentStateService {
     this.organizationForm = FormGenerator.organizationForm;
     this.professionalForm = FormGenerator.professionalForm;
     this.certForms = [FormGenerator.licenseForm];
-    console.log(this);
     // };
     // genForms();
   }
@@ -59,6 +58,12 @@ export class EnrollmentStateService {
 
   addFormControl(fg: FormGroup, fc: FormControl, name: string) {
     return fg.addControl(name, fc);
+  }
+
+  addControlToFormArray(fa: FormArray, fc: FormControl) {
+    fa.insert(0, fc);
+    const ret = new FormArray([...fa.controls, fc]);
+    return ret;
   }
 
   removeFormControl(fg: FormGroup, name: string) {

@@ -1,7 +1,7 @@
 import { Component, OnInit, forwardRef } from '@angular/core';
 import { ControlContainer, NgForm } from '@angular/forms';
 import { SharedProfileComponent } from '../shared-profile/shared-profile.component';
-import { Registrant } from '@prime-enrollment/modules/enrollment/models/registrant';
+import { Registrant } from '../../../../../../prime-registration/src/app/modules/registration/models/registrant.model';
 
 @Component({
   selector: 'enroll-enrollment-profile',
