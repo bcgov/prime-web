@@ -4,6 +4,10 @@ import { Router } from '@angular/router';
 import { RegCacheService } from '@prime-registration/services/reg-cache.service';
 import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
 import { RegistrationConstants } from '../../../registration/models/registration-constants.model';
+import { RegisterApiService } from '../../../registration/services/register-api.service';
+import { RegisterRespService } from '../../../registration/services/register-resp.service';
+import { RegCredTypes } from '../../../../../../../../src/app/models/prime-constants';
+import { UserAttrPayload } from '../../../registration/models/register-api.model';
 
 @Component({
   selector: 'app-moh-account',
@@ -16,7 +20,9 @@ export class MohAccountComponent extends AbstractForm implements OnInit {
 
   constructor( protected router: Router,
                private registrationDataService: RegistrationDataService ,
-               private cacheService: RegCacheService ) {
+               private cacheService: RegCacheService,
+               private registerApiService: RegisterApiService,
+               private registerRespService: RegisterRespService ) {
     super( router );
   }
 
@@ -60,12 +66,34 @@ export class MohAccountComponent extends AbstractForm implements OnInit {
 
     this.loading = true;
 
-    // ! Temporary - this just waits 2.5sec to simulate an HTTP request.
-    setTimeout(() => {
-      this.loading = false;
-      // Navigate to next page
-      this.navigate( RegistrationConstants.MOH_REGISTRATION + '/' +
-      RegistrationConstants.SECURITY_PG );
-      }, 2500);
+    // Verify user based on attributes i.e email, userID, mobile phone number
+    this.registrant.credType = RegCredTypes.MOH;
+     const subscription = this.registerApiService.verifyUserAttr(
+       this.registrant, this.registrationDataService.eventUUID
+       );
+
+    // Trigger the HTTP request
+    subscription.subscribe(
+      response => {
+        this.registerRespService.payload = new UserAttrPayload( response );
+        this.loading = false;
+
+        if ( this.registerRespService.payload.success ) {
+
+          // Register User can continue with registration
+          this.navigate( RegistrationConstants.MOH_REGISTRATION + '/' +
+                         RegistrationConstants.SECURITY_PG );
+
+        } else if ( this.registerRespService.payload.warning ) {
+          console.log( 'Correct issue and try again.' );
+        } else {
+          this.navigate( RegistrationConstants.MOH_REGISTRATION + '/' +
+                         RegistrationConstants.CONFIRMATION_PG );
+        }
+      },
+      responseError => {
+        this.loading = false;
+        console.log( 'Error occurred: ', responseError );
+      });
   }
 }

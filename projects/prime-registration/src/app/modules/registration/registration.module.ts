@@ -14,14 +14,16 @@ import { UniqueQuestionDirective } from './components/appl-account/unique-questi
 import { PrimeSharedModule } from '@prime-core/prime-shared/prime-shared.module';
 import { CacheApiService } from '@prime-core/services/cache-api.service';
 import { RegCacheService } from '@prime-registration/services/reg-cache.service';
+import { ApplConfirmationComponent } from './components/appl-confirmation/appl-confirmation.component';
 
 
 const componentList = [
   ApplAccountComponent,
   ApplSecurityComponent,
   ApplDocUploadComponent,
+  ApplConfirmationComponent,
   ConfirmModalComponent,
-  UniqueQuestionDirective,
+  UniqueQuestionDirective
 ];
 
 @NgModule({

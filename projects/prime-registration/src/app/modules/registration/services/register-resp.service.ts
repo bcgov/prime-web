@@ -8,8 +8,6 @@ export class RegisterRespService {
 
   public payload: UserAttrPayload ;
 
-
-
   constructor() { }
 
 
