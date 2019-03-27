@@ -33,10 +33,11 @@ export class BCSCDummyResponseService {
         reg.middleName = Math.random() > 0.5 ? faker.name.firstName() : undefined,
         reg.lastName = data.lastname;
         reg.dateOfBirth = {
-          month: data.dateOfBirth.getMonth(),
+          month: data.dateOfBirth.getMonth() + 1,
           day: data.dateOfBirth.getDay(),
           year: data.dateOfBirth.getFullYear()
         };
+        console.log( 'Dob: ', data.dateOfBirth, reg.dateOfBirth );
         reg.emailAddress = data.email;
         reg.smsPhone = data.mobile;
         reg.address.street = data.street;
