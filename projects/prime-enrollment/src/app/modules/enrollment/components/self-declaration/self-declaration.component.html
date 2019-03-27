@@ -6,8 +6,12 @@
   <p identityInstruct>
     Information received from BCSC - Ministry verbage required
   </p>
-  <!-- <div>
+  <div>
     <form [formGroup]="fg">
+      <enroll-yes-no [fg]="fg" fc="conviction" [label]="convictionLabel"></enroll-yes-no>
+      <enroll-yes-no [fg]="fg" fc="regSuspension" [label]="regSuspensionLabel"></enroll-yes-no>
+      <enroll-yes-no [fg]="fg" fc="tAndC" [label]="tAndCLabel"></enroll-yes-no>
+      <enroll-yes-no [fg]="fg" fc="pharmaSuspension" [label]="pharmaSuspensionLabel"></enroll-yes-no>
     </form>
-  </div> -->
+  </div>
 </common-page-framework>

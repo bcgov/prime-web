@@ -9,11 +9,14 @@ import { ISupportingDetails } from '../../../../core/interfaces';
 })
 export class SelfDeclarationComponent implements OnInit {
   fg: FormGroup;
-  conviction: boolean | FormControl;
-  regSuspensionDesc: ISupportingDetails | FormControl;
-  tAndCDesc: ISupportingDetails | FormControl;
-  pharmaSuspensionDesc?: ISupportingDetails | FormControl;
-
+  convictionLabel =
+    'Have you ever been the subject of an order or a conviction for an information contravention?';
+  regSuspensionLabel =
+    'Have you ever had your registration with a governing body of a health profession suspended or cancelled?';
+  tAndCLabel =
+    'Have you ever had Terms and Conditions imposed on your license as a result of disciplinary actions taken by a governing body?';
+  pharmaSuspensionLabel =
+    'Have you ever had your access to PharmaNet suspended or revoked?';
   constructor(private stateSvc: EnrollmentStateService) {
     this.fg = stateSvc.declarationForm;
   }

@@ -4,7 +4,7 @@ import {
   ChangeDetectionStrategy,
   Input
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'enroll-yes-no',
@@ -13,8 +13,9 @@ import { FormControl } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class YesNoComponent implements OnInit {
-  @Input() fc: FormControl = new FormControl('');
+  @Input() fc: string;
   @Input() label: string;
+  @Input() fg: FormGroup;
   constructor() {}
 
   ngOnInit() {}
