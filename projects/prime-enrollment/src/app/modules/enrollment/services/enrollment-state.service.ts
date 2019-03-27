@@ -36,8 +36,7 @@ export class EnrollmentStateService {
     // this.route.url.subscribe(obs => {
     //   this.currentIndex = stateOpts[obs];
     // });
-    // const genForms = () => {
-    // console.log(FormGenerator.contactForm);
+
     this.contactForm = FormGenerator.contactForm;
     this.declarationForm = FormGenerator.declarationForm;
     this.findOrganizationForm = FormGenerator.findOrganizationForm;
@@ -45,8 +44,6 @@ export class EnrollmentStateService {
     this.professionalForm = FormGenerator.professionalForm;
     this.certForms = [FormGenerator.licenseForm];
     this.dpFa = new FormArray([FormFieldBuilder.deviceProviderFields]);
-    // };
-    // genForms();
   }
 
   addFormToArray(fg: FormGroup, fa: FormGroup[]) {

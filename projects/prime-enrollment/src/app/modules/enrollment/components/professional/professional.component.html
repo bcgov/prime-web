@@ -66,6 +66,18 @@
           Yes
         </label>
       </div>
+      <div>
+        <div *ngIf="fg.controls['onBehalfOf'].value; else loading" class="border padded">
+          <div class="form-group col-sm-12">
+            <label class="control-label" for="onBehalfOfJobTitle">Device Provider Name</label>
+            <select class="form-control" id="onBehalfOfJobTitle" formControlName="onBehalfOfJobTitle"
+              placeholder="Choose">
+              <option value="" selected>Choose</option>
+              <option *ngFor="let option of onBehalfOfOptions | async" value="option">{{option}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
     </form>
   </div>
 </common-page-framework>

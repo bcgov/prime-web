@@ -49,7 +49,8 @@ export abstract class FormFieldBuilder {
     const deviceProvider = new FormControl(null, [Validators.required]);
     const collegeCert = new FormControl(null, [Validators.required]);
     const onBehalfOf = new FormControl(null, [Validators.required]);
-    return { onBehalfOf, collegeCert, deviceProvider };
+    const onBehalfOfJobTitle = this.onBehalfOfFields;
+    return { onBehalfOf, collegeCert, deviceProvider, onBehalfOfJobTitle };
   }
 
   static get declarationFields() {
