@@ -15,6 +15,7 @@ import { Container } from 'moh-common-lib/models';
     </common-core-breadcrumb>
 
     <router-outlet></router-outlet>
+    <common-form-action-bar></common-form-action-bar>
   `,
   styleUrls: ['./enrollment.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
