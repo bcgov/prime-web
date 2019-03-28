@@ -36,8 +36,8 @@ export class BCSCDummyResponseService {
           day: data.dateOfBirth.getDay(),
           year: data.dateOfBirth.getFullYear()
         };
-        reg.emailAddress = data.email;
-        reg.smsPhone = data.mobile;
+        //reg.emailAddress = data.email;
+        //reg.smsPhone = data.mobile;
         reg.address.street = data.street;
         reg.address.city = data.city;
         reg.address.province = PrimeConstants.BRITISH_COLUMBIA;

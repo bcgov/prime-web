@@ -1,4 +1,4 @@
-import { browser, by, element, WebElement } from 'protractor';
+import { browser, by, element, WebElement, protractor } from 'protractor';
 import { ProfilePageTest } from './registration.data';
 import { PrimeTestPage } from '../../../e2e/src/app.po';
 
@@ -162,7 +162,7 @@ export class BCSCAccountTestPage extends MohAccountTestPage {
 
   constructor() {
       super();
-      this.completeRegistrationButton = element(by.css('common-form-submit-bar'));
+      this.completeRegistrationButton = element(by.css('.submit'));
   }
 
   navigateTo() {
@@ -171,7 +171,31 @@ export class BCSCAccountTestPage extends MohAccountTestPage {
 
   completeRegistration() {
     this.completeRegistrationButton.click();
-}
+  }
 
+  fillData(data: ProfilePageTest){
+    element(by.css('[id^="phone"]')).sendKeys(data.mobile);
+    element(by.css('[id^="user_email"]')).sendKeys(data.email);
+  }
+
+  fillSecurityQuestions(data: ProfilePageTest){
+    element(by.css('[id^="sec_question_0"]')).sendKeys(data.secQues1);
+    browser.actions().sendKeys(protractor.Key.ENTER).perform();
+    element(by.css('[id^="sec_answer_0"]')).sendKeys(data.secAns1);
+    element(by.css('[id^="sec_question_1"]')).sendKeys(data.secQues2);
+    browser.actions().sendKeys(protractor.Key.ENTER).perform();
+    element(by.css('[id^="sec_answer_1"]')).sendKeys(data.secAns2);
+    element(by.css('[id^="sec_question_2"]')).sendKeys(data.secQues3);
+    browser.actions().sendKeys(protractor.Key.ENTER).perform();
+    element(by.css('[id^="sec_answer_2"]')).sendKeys(data.secAns3);
+  }
+
+  /*
+  checkSecurityQuestions(data: ProfilePageTest){
+    let question1 = element(by.css('[id^="sec_question_0"]')).sendKeys(data.secQues1).;
+    let option1 = element(by.css('[id^="sec_question_0"] .ng-option .ng-option-marked')).getText;
+    if (data.secQues1 == option1){
+    }
+  }*/
 }
 

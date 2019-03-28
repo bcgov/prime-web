@@ -14,7 +14,15 @@ export class FakeDataMohReg {
             country: faker.address.country(),
             address: faker.address.streetAddress(),
             city: faker.address.city(),
-            postal: faker.address.zipCode('?#? #?#')
+            postal: faker.address.zipCode('?#? #?#'),
+            mobile: faker.phone.phoneNumberFormat(2),
+            email: faker.internet.email(),
+            secQues1: faker.lorem.sentence(),
+            secAns1: faker.lorem.word(),
+            secQues2: faker.lorem.sentence(),
+            secAns2: faker.lorem.word(),
+            secQues3: faker.lorem.sentence(),
+            secAns3: faker.lorem.word()
         };
     }
 
@@ -40,6 +48,14 @@ export interface ProfilePageTest {
   address: string;
   city: string;
   postal: string;
+  mobile: string;
+  email: string;
+  secQues1: string;
+  secAns1: string;
+  secQues2: string;
+  secAns2: string;
+  secQues3: string;
+  secAns3: string;
 
   /** Currently province is not auto-generated and is manually added during tests. */
   province?: string;
