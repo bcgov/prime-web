@@ -16,4 +16,8 @@ export class PharmanetAccessComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  addOrganization() {
+    return () => console.log('I was clicked');
+  }
 }

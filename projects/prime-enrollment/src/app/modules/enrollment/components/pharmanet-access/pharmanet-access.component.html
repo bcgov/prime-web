@@ -1,12 +1,15 @@
-<common-page-framework>
+<common-page-framework layout="blank">
 
-  <h1 class="border-bottom">Pharmanet Access</h1>
+  <h1>Pharmanet Access</h1>
 
-  <ng-content select="[identityInstruct]"></ng-content>
-  <h2 identityInstruct>
+  <h2 class="border-bottom">
     Pharmanet Access - helper text
   </h2>
-  <div>
+  <prime-page-sections layout="noTips">
+    <enroll-action-block [action]="addOrganization()" label="Add Organization" class="action-block">
+    </enroll-action-block>
+  </prime-page-sections>
+  <div *ngIf="organization">
     <form [formGroup]="fa">
     </form>
   </div>
