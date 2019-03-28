@@ -56,54 +56,48 @@ export class ApplAccountComponent implements OnInit {
     return this.form.errors;
   }
 
-  setNewPassword( pswd: string ) {
+  checkPswdCriteria( $event ) {
 
-    this.data.password = pswd;
+    /**
+     * At least 3 of the following categories:
+     *  a) Upper case characters (A-Z)
+     *  b) Lower case characters (a-z)
+     *  c) Numeral (0-9)
+     *  d) Non-alphanumeric characters e.g. ?/.<~#`!@#$%^&*()+=|:"',>{}
+     *  e) no userID and no names
+     */
+    const upperChars = RegExp( '^(?=.*?[A-Z]).*$' ).test(this.data.password) ? 1 : 0;
+    const lowerChars = RegExp( '^(?=.*?[a-z]).*$' ).test(this.data.password) ? 1 : 0;
+    const numerals = RegExp( '^(?=.*?[0-9]).*$' ).test(this.data.password) ? 1 : 0;
+    const symbols = RegExp( '^(?=.*[?/\.<~#`!@#$%^&*()+=|:\"\',>{}]).*$' ).test(this.data.password) ? 1 : 0;
 
-    // Criteria
-    if ( this.data.password && this.data.password.length >= Number( this.pwdMinLen ) ) {
-      /**
-       * At least 3 of the following categories:
-       *  a) Upper case characters (A-Z)
-       *  b) Lower case characters (a-z)
-       *  c) Numeral (0-9)
-       *  d) Non-alphanumeric characters e.g. ?/.<~#`!@#$%^&*()+=|:"',>{}
-       *  e) no userID and no names
-       */
-      const upperChars = RegExp( '^(?=.*?[A-Z]).*$' ).test(this.data.password) ? 1 : 0;
-      const lowerChars = RegExp( '^(?=.*?[a-z]).*$' ).test(this.data.password) ? 1 : 0;
-      const numerals = RegExp( '^(?=.*?[0-9]).*$' ).test(this.data.password) ? 1 : 0;
-      const symbols = RegExp( '^(?=.*[?/\.<~#`!@#$%^&*()+=|:\"\',>{}]).*$' ).test(this.data.password) ? 1 : 0;
+    console.log('Validate password (categories): ',
+      {symbols: symbols, numerals: numerals, lowercase: lowerChars, uppercase: upperChars} );
 
-      console.log('Validate password (categories): ',
-        {symbols: symbols, numerals: numerals, lowercase: lowerChars, uppercase: upperChars} );
-
-      if ( upperChars + lowerChars + numerals + symbols < 3  ) {
-        this.form.form.setErrors( {'failCriteria': true} );
-        return;
-      }
+    if ( upperChars + lowerChars + numerals + symbols < 3  ) {
+      this.form.form.setErrors( {'failCriteria': true} );
+      return;
     }
 
     // Check for user ID or names in password
     if ( (this.data.userAccountName &&
-          this.data.password.includes( this.data.userAccountName )  ||
-          ( this.userNameList && this.userNameList.map( x => {
-          if ( x.length > 1 ) { // ignore initials for names
-            return this.data.password.includes( x );
-          }
-        }).filter( item => item === true ).length > 0 ) ) ) {
+      this.data.password.includes( this.data.userAccountName )  ||
+      ( this.userNameList && this.userNameList.map( x => {
+      if ( x.length > 1 ) { // ignore initials for names
+        return this.data.password.includes( x );
+      }
+    }).filter( item => item === true ).length > 0 ) ) ) {
       this.form.form.setErrors( {'containsUserNames': true} );
     }
   }
 
-  setConfirmPassword( pswd: string ) {
-    this.confirmPassword = pswd;
-
+  checkConfirmPswd($event) {
+    console.log( 'check confirm password' );
     // User has entered both passwords, compare to see if they match
     if ( this.confirmPassword && this.data.password &&
-       ( this.confirmPassword.length >= this.data.password.length) &&
-      ( this.confirmPassword !== this.data.password ) ) {
-      this.form.form.setErrors( {'noPasswordMatch': true} );
-    }
+      ( this.confirmPassword.length >= this.data.password.length) &&
+     ( this.confirmPassword !== this.data.password ) ) {
+     this.form.form.setErrors( {'noPasswordMatch': true} );
+   }
   }
 }

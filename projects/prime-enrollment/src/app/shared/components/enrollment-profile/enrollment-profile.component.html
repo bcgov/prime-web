@@ -5,7 +5,7 @@
 
   <ng-content select="[identityInstruct]"></ng-content>
 
-  <prime-page-sections layout="tips">
+  <common-page-section layout="tips">
     <div class="form-group col-sm-6 p-sm-0">
       <prime-name [label]="'First Name'" [required]="firstNameRequired" [disabled]="!editIdentityInfo"
         [(nameStr)]="registrant.firstName"></prime-name>
@@ -27,7 +27,7 @@
     </div>
 
     <aside>TIPS</aside>
-  </prime-page-sections>
+  </common-page-section>
 </div>
 
 <div>
@@ -38,7 +38,7 @@
     you by, enter your full preferred name.
   </p>
 
-  <prime-page-sections layout="tips">
+  <common-page-section layout="tips">
     <div class="form-group col-sm-6 p-sm-0">
       <prime-name [label]="'Preferred First Name'" [required]="preferredIsRequired"
         [(nameStr)]="registrant.preferredFirstName"></prime-name>
@@ -54,10 +54,10 @@
         [(nameStr)]="registrant.preferredLastName"></prime-name>
     </div>
     <aside>TIPS</aside>
-  </prime-page-sections>
+  </common-page-section>
 </div>
 
-<prime-page-sections layout="double">
+<common-page-section layout="double">
   <h2 class="border-bottom">Address</h2>
   <prime-address [disabled]="!editIdentityInfo" [(address)]="registrant.address" [defaultCountry]="defaultCountry"
     [countryList]="countryList" [defaultProvince]="defaultProvince" [provinceList]="provinceList" [isRequired]="true">
@@ -76,7 +76,7 @@
         [defaultProvince]="defaultProvince" [provinceList]="provinceList" [isRequired]="true"></prime-address>
     </div>
   </aside>
-</prime-page-sections>
+</common-page-section>
 
 <ng-template #NoMailingAddress>
   <div class="mail-address-container">

@@ -6,7 +6,7 @@
 
   <h2 class="border-bottom">Prime Account</h2>
 
-  <prime-page-sections layout='tips'>
+  <common-page-section layout='tips'>
 
     <div class="form-group col-sm-6 p-sm-0">
       <label class="control-label" for="user_id">User ID</label>
@@ -35,12 +35,13 @@
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <common-password componentLabel="{{newPwdLabel}}"
+      <common-password label="{{newPwdLabel}}"
                        [showPasswordStrength]="true"
                        [minLen]="pwdMinLen"
                        [pwdCriteria]="pwdValidChars"
                        [password]="data.password"
-                       (passwordChange)="setNewPassword($event)"></common-password>
+                       (passwordChange)="data.password=$event"
+                       (blurEvent)="checkPswdCriteria($event)"></common-password>
       <div *ngIf="formErrors"
             role="alert"
             class='error-container'
@@ -61,10 +62,10 @@
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <common-password componentLabel="{{confirmPwdLabel}}"
+      <common-password label="{{confirmPwdLabel}}"
                        [minLen]="pwdMinLen"
-                       [password]="confirmPassword"
-                       (passwordChange)="setConfirmPassword($event)"
+                       [(password)]="confirmPassword"
+                       (blurEvent)="checkConfirmPswd($event)"
                        [errorMessages]="confirmPwdMsg"></common-password>
       <!-- Error messages for component -->
       <div *ngIf="formErrors"
@@ -79,14 +80,14 @@
 
     <aside>TIPS</aside>
 
-  </prime-page-sections>
+  </common-page-section>
 
 </div>
 
 <div>
   <h2 class="border-bottom">Security Questions</h2>
 
-  <prime-page-sections layout='tips'>
+  <common-page-section layout='tips'>
 
     <div class="form-group"
          *ngFor="let item of data.secQuestionsAnswer; let i = index;">
@@ -146,14 +147,14 @@
 
     <aside>TIPS</aside>
 
-  </prime-page-sections>
+  </common-page-section>
 
 </div>
 
 <div>
   <h2 class="border-bottom">Contact</h2>
 
-  <prime-page-sections layout='tips'>
+  <common-page-section layout='tips'>
 
     <div class="form-group col-sm-6 p-sm-0">
       <prime-phone-number [displayMask]="isCanada"
@@ -191,7 +192,7 @@
 
     <aside>TIPS</aside>
 
-  </prime-page-sections>
+  </common-page-section>
 
 </div>
 
