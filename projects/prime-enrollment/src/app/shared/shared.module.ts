@@ -63,7 +63,8 @@ import { DetailsComponent } from './components/details/details.component';
     LicenseComponent,
     DeviceProviderComponent,
     YesNoComponent,
-    DetailsComponent
+    DetailsComponent,
+    PageSectionsComponent
   ]
 })
 export class SharedModule {}

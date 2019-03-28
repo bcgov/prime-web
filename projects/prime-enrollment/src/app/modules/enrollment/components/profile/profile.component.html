@@ -2,9 +2,9 @@
 
   <form #formRef='ngForm' (ngSubmit)='continue()'>
 
-    <p identityInstruct>
+    <!-- <p identityInstruct>
       Information received from BCSC - Ministry verbage required
-    </p>
+    </p> -->
 
     <enroll-enrollment-profile [data]="enrollStateSvc.profileForm" [editIdentityInfo]='false' [countries]="provinces"
       [provinces]="countries">

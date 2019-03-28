@@ -1,83 +1,86 @@
-<common-page-framework>
-  <h2>Professional Information</h2>
+<common-page-framework layout="blank">
+  <h1>Professional Information</h1>
 
   <ng-content select="[identityInstruct]"></ng-content>
-  <p identityInstruct class="border-bottom">
+  <h2 identityInstruct class="border-bottom">
     Profile information helper text.
-  </p>
-  <div>
-    <form [formGroup]="fg">
-      <label class="control-label">Do you have a college certification?
-      </label>
-      <div class="form-check">
-        <input class='form-check-input' formControlName="collegeCert" type="radio" id="ccfalse" tabindex="0"
-          [value]="false">
-        <label class='form-check-label' for="ccfalse">
-          No
+  </h2>
+  <prime-page-sections layout="tips">
+    <div>
+      <form [formGroup]="fg">
+        <label class="control-label">Do you have a college certification?
         </label>
-        <input class='form-check-input' type="radio" formControlName="collegeCert" name="" id="cctrue" tabindex="0"
-          [value]="true">
-        <label class='form-check-label' for="cctrue">
-          Yes
-        </label>
-      </div>
-      <div *ngIf="fg.controls['collegeCert'].value">
-        <ng-container *ngFor="let fg of certFa; index as i">
-          <enroll-license [fg]="fg" (delete)="removeLicenseForm(i, certFa)" [enableDelete]="certFa.length > 1">
-          </enroll-license>
-        </ng-container>
-        <button class="btn btn-md btn-primary" (click)="addLicenseForm(certFa)">Add Another License</button>
-      </div>
+        <div class="form-check">
+          <input class='form-check-input' formControlName="collegeCert" type="radio" id="ccfalse" tabindex="0"
+            [value]="false">
+          <label class='form-check-label' for="ccfalse">
+            No
+          </label>
+          <input class='form-check-input' type="radio" formControlName="collegeCert" name="" id="cctrue" tabindex="0"
+            [value]="true">
+          <label class='form-check-label' for="cctrue">
+            Yes
+          </label>
+        </div>
+        <div *ngIf="fg.controls['collegeCert'].value">
+          <ng-container *ngFor="let fg of certFa; index as i">
+            <enroll-license [fg]="fg" (delete)="removeLicenseForm(i, certFa)" [enableDelete]="certFa.length > 1">
+            </enroll-license>
+          </ng-container>
+          <button class="btn btn-md btn-primary" (click)="addLicenseForm(certFa)">Add Another License</button>
+        </div>
 
-      <label class="control-label">Are you a device provider?
-      </label>
-      <div class="form-check">
-        <input class='form-check-input' formControlName="deviceProvider" type="radio" id="dpFalse" tabindex="0"
-          [value]="false">
-        <label class='form-check-label' for="dpFalse">
-          No
+        <label class="control-label">Are you a device provider?
         </label>
-        <input class='form-check-input' type="radio" formControlName="deviceProvider" name="" id="dptrue" tabindex="0"
-          [value]="true">
-        <label class='form-check-label' for="dptrue">
-          Yes
-        </label>
-      </div>
-      <div *ngIf="fg.controls['deviceProvider'].value">
-        <ng-container *ngFor="let fc of dpFa.controls; index as i">
-          <enroll-device-provider [enableDelete]="dpFa.controls.length > 1" [fc]="dpFa.controls[i]"
-            (remove)="removeDeviceFc(dpFa)">
-          </enroll-device-provider>
-        </ng-container>
-        <button class="btn btn-md btn-primary" (click)="addDeviceFc(dpFa)">Add Another License</button>
-      </div>
+        <div class="form-check">
+          <input class='form-check-input' formControlName="deviceProvider" type="radio" id="dpFalse" tabindex="0"
+            [value]="false">
+          <label class='form-check-label' for="dpFalse">
+            No
+          </label>
+          <input class='form-check-input' type="radio" formControlName="deviceProvider" name="" id="dptrue" tabindex="0"
+            [value]="true">
+          <label class='form-check-label' for="dptrue">
+            Yes
+          </label>
+        </div>
+        <div *ngIf="fg.controls['deviceProvider'].value">
+          <ng-container *ngFor="let fc of dpFa.controls; index as i">
+            <enroll-device-provider [enableDelete]="dpFa.controls.length > 1" [fc]="dpFa.controls[i]"
+              (remove)="removeDeviceFc(dpFa)">
+            </enroll-device-provider>
+          </ng-container>
+          <button class="btn btn-md btn-primary" (click)="addDeviceFc(dpFa)">Add Another License</button>
+        </div>
 
-      <label class="control-label">Are you accessing pharmanet on behalf of someone else?
-      </label>
-      <div class="form-check">
-        <input class='form-check-input' formControlName="onBehalfOf" type="radio" id="oboFalse" tabindex="0"
-          [value]="false">
-        <label class='form-check-label' for="oboFalse">
-          No
+        <label class="control-label">Are you accessing pharmanet on behalf of someone else?
         </label>
-        <input class='form-check-input' type="radio" formControlName="onBehalfOf" name="" id="obotrue" tabindex="0"
-          [value]="true">
-        <label class='form-check-label' for="obotrue">
-          Yes
-        </label>
-      </div>
-      <div>
-        <div *ngIf="fg.controls['onBehalfOf'].value; else loading" class="border padded">
-          <div class="form-group col-sm-12">
-            <label class="control-label" for="onBehalfOfJobTitle">Device Provider Name</label>
-            <select class="form-control" id="onBehalfOfJobTitle" formControlName="onBehalfOfJobTitle"
-              placeholder="Choose">
-              <option value="" selected>Choose</option>
-              <option *ngFor="let option of onBehalfOfOptions | async" value="option">{{option}}</option>
-            </select>
+        <div class="form-check">
+          <input class='form-check-input' formControlName="onBehalfOf" type="radio" id="oboFalse" tabindex="0"
+            [value]="false">
+          <label class='form-check-label' for="oboFalse">
+            No
+          </label>
+          <input class='form-check-input' type="radio" formControlName="onBehalfOf" name="" id="obotrue" tabindex="0"
+            [value]="true">
+          <label class='form-check-label' for="obotrue">
+            Yes
+          </label>
+        </div>
+        <div>
+          <div *ngIf="fg.controls['onBehalfOf'].value; else loading" class="border padded">
+            <div class="form-group col-sm-12">
+              <label class="control-label" for="onBehalfOfJobTitle">Device Provider Name</label>
+              <select class="form-control" id="onBehalfOfJobTitle" formControlName="onBehalfOfJobTitle"
+                placeholder="Choose">
+                <option value="" selected>Choose</option>
+                <option *ngFor="let option of onBehalfOfOptions | async" value="option">{{option}}</option>
+              </select>
+            </div>
           </div>
         </div>
-      </div>
-    </form>
-  </div>
+      </form>
+    </div>
+    <aside>TIPS</aside>
+  </prime-page-sections>
 </common-page-framework>

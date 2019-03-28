@@ -16,7 +16,10 @@ export class YesNoComponent implements OnInit {
   @Input() fc: string;
   @Input() label: string;
   @Input() fg: FormGroup;
-  constructor() {}
+  random: number;
+  constructor() {
+    this.random = Math.random();
+  }
 
   ngOnInit() {}
 }
