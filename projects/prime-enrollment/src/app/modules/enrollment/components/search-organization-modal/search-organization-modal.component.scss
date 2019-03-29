@@ -1,9 +1,50 @@
 @import 'variables.scss';
 
-.heading {
-  background-color: $color-primary;
-}
-
 :host() {
   padding: 0px;
+}
+
+button {
+  width: 160px;
+}
+
+header {
+  background-color: map-get($theme-colors, primary);
+  // -webkit-box-shadow: 0 3px 3px 1px rgba(51, 51, 51, 0.5);
+  // -moz-box-shadow: 0 3px 3px 1px rgba(51, 51, 51, 0.5);
+  // box-shadow: 0 3px 3px 1px rgba(51, 51, 51, 0.5);
+  margin-bottom: 20px;
+  color: #fff;
+  font-size: 18px;
+  padding: 8px;
+}
+
+label {
+  margin-bottom: 0px;
+}
+
+mat-card {
+  width: 300px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 6px;
+  background-color: $gray;
+
+  .cancel {
+    background-color: #fff;
+  }
+
+  .add {
+    margin-left: 6px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  mat-card {
+    min-width: 500px;
+  }
 }

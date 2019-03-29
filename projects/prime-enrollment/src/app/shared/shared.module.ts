@@ -23,6 +23,7 @@ import { YesNoComponent } from './components/yes-no/yes-no.component';
 import { DetailsComponent } from './components/details/details.component';
 import { ActionBlockComponent } from './components/action-block/action-block.component';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { MatDialogModule, MatDialog } from '@angular/material/dialog';
     SharedCoreModule,
     NgxIntlTelInputModule,
     InternationalPhoneNumberModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCardModule
   ],
   exports: [
     FormsModule,
@@ -69,7 +71,8 @@ import { MatDialogModule, MatDialog } from '@angular/material/dialog';
     YesNoComponent,
     DetailsComponent,
     PageSectionsComponent,
-    ActionBlockComponent
+    ActionBlockComponent,
+    MatCardModule
   ]
 })
 export class SharedModule {}

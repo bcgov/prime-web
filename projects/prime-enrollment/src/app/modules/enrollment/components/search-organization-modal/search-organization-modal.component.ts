@@ -11,6 +11,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class SearchOrganizationModalComponent implements OnInit {
   fg: FormGroup;
+  search = true;
+
   constructor(
     private stateSvc: EnrollmentStateService,
     public dialogRef: MatDialogRef<SearchOrganizationModalComponent>
@@ -25,5 +27,9 @@ export class SearchOrganizationModalComponent implements OnInit {
   }
   add() {
     console.log('add clicked');
+  }
+
+  find() {
+    this.search = false;
   }
 }
