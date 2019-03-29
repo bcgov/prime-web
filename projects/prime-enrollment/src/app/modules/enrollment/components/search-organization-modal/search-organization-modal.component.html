@@ -1,0 +1,16 @@
+<label mat-dialog-title>Find an Organization</label>
+<div mat-dialog-content>
+  <form [formGroup]="fg">
+    <div class="form-group">
+      <ng-select formControlName="type"></ng-select>
+    </div>
+    <div class="form-group">
+
+    </div>
+    <div class="form-group">
+
+    </div>
+  </form>
+</div>
+<button mat-dialog-actions class="btn" click="cancel()">Cancel</button><button mat-dialog-actions class="btn"
+  (click)="add()">Add</button>

@@ -22,6 +22,7 @@ import { DeviceProviderComponent } from './components/device-provider/device-pro
 import { YesNoComponent } from './components/yes-no/yes-no.component';
 import { DetailsComponent } from './components/details/details.component';
 import { ActionBlockComponent } from './components/action-block/action-block.component';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ActionBlockComponent } from './components/action-block/action-block.com
     NgSelectModule,
     SharedCoreModule,
     NgxIntlTelInputModule,
-    InternationalPhoneNumberModule
+    InternationalPhoneNumberModule,
+    MatDialogModule
   ],
   exports: [
     FormsModule,

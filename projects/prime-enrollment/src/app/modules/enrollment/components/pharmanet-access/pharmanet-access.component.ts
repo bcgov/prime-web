@@ -1,6 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormArray } from '@angular/forms';
 import { EnrollmentStateService } from '../../services/enrollment-state.service';
+import { SearchOrganizationModalComponent } from '../search-organization-modal/search-organization-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-pharmanet-access',
@@ -11,13 +13,25 @@ import { EnrollmentStateService } from '../../services/enrollment-state.service'
 export class PharmanetAccessComponent implements OnInit {
   fa: FormArray;
 
-  constructor(private stateSvc: EnrollmentStateService) {
+  constructor(
+    private stateSvc: EnrollmentStateService,
+    public dialog: MatDialog
+  ) {
     this.fa = this.stateSvc.organizationForm;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.openModal();
+  }
 
   addOrganization() {
     return () => console.log('I was clicked');
+  }
+
+  openModal() {
+    const dialog = this.dialog;
+    const ref = dialog.open(SearchOrganizationModalComponent, {
+      panelClass: 'test'
+    });
   }
 }

@@ -10,6 +10,7 @@ import { SelfDeclarationComponent } from './components/self-declaration/self-dec
 import { PharmanetAccessComponent } from './components/pharmanet-access/pharmanet-access.component';
 import { ReviewComponent } from './components/review/review.component';
 import { SharedModule } from '../../shared/shared.module';
+import { SearchOrganizationModalComponent } from './components/search-organization-modal/search-organization-modal.component';
 
 @NgModule({
   declarations: [
@@ -19,9 +20,11 @@ import { SharedModule } from '../../shared/shared.module';
     ProfessionalComponent,
     SelfDeclarationComponent,
     PharmanetAccessComponent,
-    ReviewComponent
+    ReviewComponent,
+    SearchOrganizationModalComponent
   ],
   imports: [CommonModule, EnrollmentRoutingModule, SharedModule],
+  entryComponents: [SearchOrganizationModalComponent],
   exports: []
 })
 export class EnrollmentModule {}

@@ -1,0 +1,9 @@
+@import 'variables.scss';
+
+.heading {
+  background-color: $color-primary;
+}
+
+:host() {
+  padding: 0px;
+}
