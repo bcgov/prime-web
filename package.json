@@ -4,17 +4,25 @@
   "scripts": {
     "ng": "ng",
     "start": "npm run dev",
-    "dev": "ng serve --host='0.0.0.0' -o",
-    "build": "ng build --project=prime-registration --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "dev:reg": "ng serve --project=prime-registration --host='0.0.0.0' -o",
-    "build:reg": "ng build --project=prime-registration --prod",
-    "test:reg": "ng test --project=prime-registration",
-    "dev:enroll": "ng serve --project=prime-enrollment --host='0.0.0.0' -o",
-    "build:enroll": "ng build --project=prime-enrollment --prod",
-    "test:enroll": "ng test --project=prime-enrollment",
+
+    "host": "--host='0.0.0.0'",
+    "host:serve": "ng serve -- -o",
+
+    "prime-reg": "--project=prime-registration",
+    "prime-reg:prod": "-- --prod",
+    "prime-reg:prod:build": "ng build --",
+    "prime-reg:serve": "ng serve -- --host='0.0.0.0' -o",
+    "prime-reg:test": "ng test --",
+
+    "prime-enroll": "--project=prime-enrollment",
+    "prime-enroll:prod": "-- --prod",
+    "prime-enroll:prod:build": "ng build --",
+    "prime-enroll:serve": "ng serve -- --host='0.0.0.0' -o",
+    "prime-enroll:test": "ng test --",
+  
     "e2e:setup": "webdriver-manager update --versions.chrome 73.0.3683.75",
     "prebuild": "node src/version.js",
     "prebuild:reg": "npm run prebuild",

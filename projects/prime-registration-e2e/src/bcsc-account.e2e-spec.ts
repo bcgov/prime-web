@@ -83,6 +83,7 @@ describe('BCSC Registration - Account Page', () => {
         expect(browser.getCurrentUrl()).toContain(PAGE_URL, 'url should not change');
         // expect(browser.getCurrentUrl()).toContain(NEXT_PAGE_URL, 'should navigate to the Confirmation page');
     });
+
     xit('07. should be able to create own question and check if it is included in the options ', () => {
         page.navigateTo();
         page.fillSecurityQuestions(profileData);

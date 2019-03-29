@@ -37,15 +37,17 @@ fdescribe('BCSC Registration - End to end', () => {
     it ('02. should be able to go through Account page THEN Confirmation page only if all the required fiellds are filled out', () => {
         page1.navigateTo();
         expect(browser.getCurrentUrl()).toContain(PAGE1_URL);
-
+        page1.scrollDown();
+        browser.sleep(1000 * 10);
         page1.continue();
         expect(browser.getCurrentUrl()).toContain(PAGE2_URL, 'should navigate to the Accounts page');
         expect(page1.formErrors()).toEqual([], 'should be no errors as form should be valid');
 
+        browser.sleep(1000 * 10);
         page2.fillSecurityQuestions(profileData);
         page2.scrollDown();
         page2.fillData(profileData);
-        browser.sleep(1000 * 5);
+        browser.sleep(1000 * 10);
         page2.completeRegistration();
         expect(page2.formErrors().count()).toBe(0, 'should be no errors');
         // expect(browser.getCurrentUrl()).toContain(PAGE3_URL, 'should navigate to the Confirmation page');
