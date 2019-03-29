@@ -239,6 +239,8 @@ export class AddressComponent extends Base implements OnInit, OnChanges {
     this.search = data.street;
     this.address.street = data.street;
     this.address.city = data.city;
+    this.address.province = 'BC';
+    this.address.country = 'CAN';
     this.addressChange.emit(this.address);
   }
 }
