@@ -190,12 +190,9 @@ export class BCSCAccountTestPage extends MohAccountTestPage {
     element(by.css('[id^="sec_answer_2"]')).sendKeys(data.secAns3);
   }
 
-  /*
   checkSecurityQuestions(data: ProfilePageTest){
-    let question1 = element(by.css('[id^="sec_question_0"]')).sendKeys(data.secQues1).;
-    let option1 = element(by.css('[id^="sec_question_0"] .ng-option .ng-option-marked')).getText;
-    if (data.secQues1 == option1){
-    }
-  }*/
+    //element(by.css('[id^="sec_question_0"]')).click();
+    element(by.cssContainingText('[id^="sec_question_0"] .ng-dropdown-panel .ng-select-bottom', data.secQues1)).click();
+  }
 }
 

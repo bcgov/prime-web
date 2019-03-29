@@ -4,7 +4,7 @@ import { PrimeConstants } from '../../../src/app/models/prime-constants';
 import { FakeDataMohReg } from './registration.data';
 import faker = require('faker');
 
-fdescribe('BCSC Registration - Account Page', () => {
+describe('BCSC Registration - Account Page', () => {
     let page: BCSCAccountTestPage;
     let profileData;
     const data = new FakeDataMohReg();
@@ -72,7 +72,7 @@ fdescribe('BCSC Registration - Account Page', () => {
         //expect(browser.getCurrentUrl()).toContain(NEXT_PAGE_URL, 'should navigate to the Confirmation page');
     });
 
-    xit('06.  ', () => {
+    xit('06. should be able to select a security questions from the default options ', () => {
         page.navigateTo();
         page.fillSecurityQuestions(profileData);
         //page.checkSecurityQuestions();
@@ -85,6 +85,17 @@ fdescribe('BCSC Registration - Account Page', () => {
         //expect(browser.getCurrentUrl()).toContain(NEXT_PAGE_URL, 'should navigate to the Confirmation page');
     });
 
-	//should have default security questions
-
+	xit('07. should be able to create own question and check if it is included in the options ', () => {
+        page.navigateTo();
+        page.fillSecurityQuestions(profileData);
+        //page.checkSecurityQuestions(profileData);
+        browser.sleep(1000*10);
+        page.scrollDown();
+        page.fillData(profileData);
+        browser.sleep(1000*5);
+        page.completeRegistration();
+        //expect(page.formErrors().count()).toEqual(1, 'page should show 1 error text on continue');
+        expect(browser.getCurrentUrl()).toContain(PAGE_URL, 'url should not change');
+        //expect(browser.getCurrentUrl()).toContain(NEXT_PAGE_URL, 'should navigate to the Confirmation page');
+    });
 });
