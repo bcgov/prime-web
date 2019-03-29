@@ -6,14 +6,14 @@ import { PrimeTestPage } from '../../../e2e/src/app.po';
 
 describe('BCSC Registration - Profile Page', () => {
     let page: BCSCRegistrationPage;
-    //let page2: PrimeTestPage;
+    // let page2: PrimeTestPage;
     const data = new FakeDataMohReg();
     let profileData;
     const PAGE_URL = `${PrimeConstants.BCSC_REGISTRATION}/${PrimeConstants.PROFILE_PG}`;
     const NEXT_PAGE_URL =  `${PrimeConstants.BCSC_REGISTRATION}/${PrimeConstants.ACCOUNT_PG}`;
 
     beforeEach(() => {
-        page = new BCSCRegistrationPage(); 
+        page = new BCSCRegistrationPage();
         profileData = data.profileInfo();
         data.setSeed(123);
         profileData['country'] = 'Canada'; // forced the country to be Canada so the faker will generate a province
@@ -70,7 +70,7 @@ describe('BCSC Registration - Profile Page', () => {
     it('06. should let users set Preferred First, Middle, and Last name', () => {
       page.navigateTo();
       page.fillPreferredName(profileData);
-      browser.sleep(1000*5);
+      browser.sleep(1000 * 5);
       page.continue();
 
       expect(browser.getCurrentUrl()).toContain(NEXT_PAGE_URL, 'should navigate to the Accounts page');
@@ -79,7 +79,7 @@ describe('BCSC Registration - Profile Page', () => {
 
     it('07. should not be able to edit read-only information (just check that the fields are disabled)', () => {
       page.navigateTo();
-      expect(page.checkEnabled()).toBe(false); 
+      expect(page.checkEnabled()).toBe(false);
     });
 
 });

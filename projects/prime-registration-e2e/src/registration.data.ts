@@ -26,7 +26,7 @@ export class FakeDataMohReg {
         };
     }
 
-    setSeed(number){
+    setSeed(number) {
          faker.seed(number);
     }
 }

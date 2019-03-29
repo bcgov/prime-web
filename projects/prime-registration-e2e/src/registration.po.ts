@@ -23,19 +23,19 @@ export class BaseMohRegTestPage extends PrimeTestPage {
         this.continueButton.click();
     }
 
-    clickDiffMailAddress(){
+    clickDiffMailAddress() {
         this.diffMailAddressButton.click();
     }
 
-    checkDiffMailAddress(){
+    checkDiffMailAddress() {
         this.diffMailAddressCheckbox.click();
     }
 
-    getContinueButton(){
+    getContinueButton() {
         return this.continueButton;
     }
 
-    scrollDown(){
+    scrollDown() {
         browser.executeScript('window.scrollTo(0, document.body.scrollHeight)');
     }
 }
@@ -85,7 +85,7 @@ export class MohProfileTestPage extends BaseMohRegTestPage {
       // first - try and scroll down
       const countryEl = element(by.cssContainingText('prime-address [id^="country"] option', data.country));
       browser.actions().mouseMove(countryEl).perform();
-      
+
       countryEl.click();
 
       // Provine does NOT exist by default on object,
@@ -114,18 +114,18 @@ export class MohProfileTestPage extends BaseMohRegTestPage {
 
 export class BCSCRegistrationPage extends MohProfileTestPage {
 
-  private streetField: WebElement; 
+  private streetField: WebElement;
 
   constructor() {
     super();
     this.streetField = element(by.css('prime-address [id^="street"]'));
   }
 
-  checkEnabled(){
-    return this.streetField.isEnabled(); 
+  checkEnabled() {
+    return this.streetField.isEnabled();
   }
 
-  navigateTo(){
+  navigateTo() {
     return browser.get('/bcsc-registration/profile');
   }
 
@@ -158,6 +158,7 @@ export class BCSCAccountTestPage extends MohAccountTestPage {
 
   fillPrimeAccount() { }
 
+// tslint:disable-next-line: member-ordering
   private completeRegistrationButton: WebElement;
 
   constructor() {
@@ -173,12 +174,12 @@ export class BCSCAccountTestPage extends MohAccountTestPage {
     this.completeRegistrationButton.click();
   }
 
-  fillData(data: ProfilePageTest){
+  fillData(data: ProfilePageTest) {
     element(by.css('[id^="phone"]')).sendKeys(data.mobile);
     element(by.css('[id^="user_email"]')).sendKeys(data.email);
   }
 
-  fillSecurityQuestions(data: ProfilePageTest){
+  fillSecurityQuestions(data: ProfilePageTest) {
     element(by.css('[id^="sec_question_0"]')).sendKeys(data.secQues1);
     browser.actions().sendKeys(protractor.Key.ENTER).perform();
     element(by.css('[id^="sec_answer_0"]')).sendKeys(data.secAns1);
@@ -190,8 +191,8 @@ export class BCSCAccountTestPage extends MohAccountTestPage {
     element(by.css('[id^="sec_answer_2"]')).sendKeys(data.secAns3);
   }
 
-  checkSecurityQuestions(data: ProfilePageTest){
-    //element(by.css('[id^="sec_question_0"]')).click();
+  checkSecurityQuestions(data: ProfilePageTest) {
+    // element(by.css('[id^="sec_question_0"]')).click();
     element(by.cssContainingText('[id^="sec_question_0"] .ng-dropdown-panel .ng-select-bottom', data.secQues1)).click();
   }
 }
