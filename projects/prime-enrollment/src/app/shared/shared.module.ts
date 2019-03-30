@@ -25,6 +25,7 @@ import { ActionBlockComponent } from './components/action-block/action-block.com
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { ListItemComponent } from './components/list-item/list-item.component';
+import { ListItemHeaderComponent } from './components/list-item-header/list-item-header.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { ListItemComponent } from './components/list-item/list-item.component';
     YesNoComponent,
     DetailsComponent,
     ActionBlockComponent,
-    ListItemComponent
+    ListItemComponent,
+    ListItemHeaderComponent
   ],
 
   imports: [
@@ -75,7 +77,8 @@ import { ListItemComponent } from './components/list-item/list-item.component';
     PageSectionsComponent,
     ActionBlockComponent,
     MatCardModule,
-    ListItemComponent
+    ListItemComponent,
+    ListItemHeaderComponent
   ]
 })
 export class SharedModule {}

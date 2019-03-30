@@ -1,0 +1,17 @@
+@import 'variables.scss';
+
+:host() {
+  display: grid;
+  background-color: $gray;
+  grid-template-columns: 20px auto auto auto;
+  width: 100%;
+  align-items: center;
+  // justify-content: space-evenly;
+
+  span {
+    padding: 5px;
+    max-width: 60px;
+    text-align: center;
+  }
+
+}

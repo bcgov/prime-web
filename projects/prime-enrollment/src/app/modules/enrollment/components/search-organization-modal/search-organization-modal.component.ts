@@ -17,7 +17,7 @@ export class SearchOrganizationModalComponent implements OnInit {
   fg: FormGroup;
   search = true;
   types: Observable<string[]>;
-  searchResults: Observable<string[]> = new Observable();
+  searchResults: Observable<Array<string[]>> = new Observable();
 
   constructor(
     private dataSvc: EnrollmentDataService,
@@ -27,15 +27,20 @@ export class SearchOrganizationModalComponent implements OnInit {
     this.fg = this.stateSvc.findOrganizationForm;
   }
 
+  results(evt: boolean, data: any) {
+    console.log(evt, data);
+  }
+
   ngOnInit() {
     this.dataSvc.organizationTypesInit(tempArr);
     this.types = this.dataSvc.organizationTypes$;
-    this.searchResults = of(data[0]);
+    this.searchResults = of(data);
   }
 
   cancel() {
     console.log('cancel clicked');
   }
+
   add() {
     console.log('add clicked');
   }

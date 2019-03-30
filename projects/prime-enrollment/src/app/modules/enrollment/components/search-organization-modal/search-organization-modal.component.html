@@ -21,7 +21,11 @@
       <button class="btn btn-lg btn-secondary " *ngIf="search">Find</button>
     </form>
   </mat-card-content>
-  <enroll-list-item [data]="searchResults | async"></enroll-list-item>
+  <enroll-list-item-header [data]="searchHeader | async"></enroll-list-item-header>
+  *<ng-container *ngIf="searchResults | async as results">
+    <enroll-list-item *ngFor="let result of results" [data]="result" (selected)="itemselected($event, results)">
+    </enroll-list-item>
+  </ng-container>
 </mat-card>
 <div class="actions">
   <button mat-dialog-actions class="btn btn-lg cancel" click="cancel()">Cancel</button><button mat-dialog-actions
