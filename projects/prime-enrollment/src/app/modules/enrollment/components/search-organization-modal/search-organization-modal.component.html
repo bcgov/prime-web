@@ -8,7 +8,7 @@
     <form [formGroup]="fg">
       <div class="form-group">
         <label class="control-label" for="type">Type</label>
-        <ng-select id="type" formControlName="type"></ng-select>
+        <ng-select id="type" formControlName="type" [items]="types | async"></ng-select>
       </div>
       <div class="form-group">
         <label class="control-label" for="organization">Organization Name (Optional)</label>
@@ -21,7 +21,7 @@
       <button class="btn btn-lg btn-secondary " *ngIf="search">Find</button>
     </form>
   </mat-card-content>
-
+  <enroll-list-item [data]="searchResults | async"></enroll-list-item>
 </mat-card>
 <div class="actions">
   <button mat-dialog-actions class="btn btn-lg cancel" click="cancel()">Cancel</button><button mat-dialog-actions
