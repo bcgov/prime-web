@@ -21,8 +21,9 @@
       <button class="btn btn-lg btn-secondary " *ngIf="search">Find</button>
     </form>
   </mat-card-content>
-  <enroll-list-item-header [data]="searchHeader | async"></enroll-list-item-header>
-  *<ng-container *ngIf="searchResults | async as results">
+  <ng-container *ngIf="searchResults | async as results">
+    <enroll-list-item-header [headers]="searchResultsHeaders | async "></enroll-list-item-header>
+
     <enroll-list-item *ngFor="let result of results" [data]="result" (selected)="itemselected($event, results)">
     </enroll-list-item>
   </ng-container>

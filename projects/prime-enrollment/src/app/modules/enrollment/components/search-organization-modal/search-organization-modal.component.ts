@@ -7,6 +7,7 @@ import { Observable, of } from 'rxjs';
 
 const tempArr = ['Health Authority', 'Pharmacy'];
 const data = [['data 1', 'data2', 'data3']];
+const headers = ['Type', 'Organization Name', 'City'];
 @Component({
   selector: 'enroll-search-organization-modal',
   templateUrl: './search-organization-modal.component.html',
@@ -18,6 +19,8 @@ export class SearchOrganizationModalComponent implements OnInit {
   search = true;
   types: Observable<string[]>;
   searchResults: Observable<Array<string[]>> = new Observable();
+  searchResultsHeaders: Observable<string[]> = new Observable();
+  headers: string[];
 
   constructor(
     private dataSvc: EnrollmentDataService,
@@ -25,18 +28,19 @@ export class SearchOrganizationModalComponent implements OnInit {
     public dialogRef: MatDialogRef<SearchOrganizationModalComponent>
   ) {
     this.fg = this.stateSvc.findOrganizationForm;
-  }
-
-  results(evt: boolean, data: any) {
-    console.log(evt, data);
+    this.headers = headers;
   }
 
   ngOnInit() {
     this.dataSvc.organizationTypesInit(tempArr);
     this.types = this.dataSvc.organizationTypes$;
+    console.log(headers);
     this.searchResults = of(data);
+    this.searchResultsHeaders = of(this.headers);
   }
-
+  results(evt: boolean, data: any) {
+    console.log(evt, data);
+  }
   cancel() {
     console.log('cancel clicked');
   }

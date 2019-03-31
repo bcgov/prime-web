@@ -12,8 +12,12 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListItemHeaderComponent implements OnInit {
-  @Input() data: string[];
-  constructor() {}
+  @Input() headers: string[];
+  constructor() {
+    console.log(this);
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this);
+  }
 }
