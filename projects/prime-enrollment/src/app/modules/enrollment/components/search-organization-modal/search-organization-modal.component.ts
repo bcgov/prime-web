@@ -42,7 +42,7 @@ export class SearchOrganizationModalComponent implements OnInit {
     console.log(evt, data);
   }
   cancel() {
-    console.log('cancel clicked');
+    this.dialogRef.close();
   }
 
   add() {

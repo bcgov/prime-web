@@ -1,5 +1,6 @@
 <header mat-dialog-title class="mat-elevation-z2">
   <label>Find and Add an Organization</label>
+  <button class="btn" (click)="cancel()"><span class="fa fa-2x fa-times-circle-o close"></span></button>
 </header>
 <mat-card class="mat-elevation-z0">
   <mat-card-header>
@@ -29,6 +30,6 @@
   </ng-container>
 </mat-card>
 <div class="actions">
-  <button mat-dialog-actions class="btn btn-lg cancel" click="cancel()">Cancel</button><button mat-dialog-actions
+  <button mat-dialog-actions class="btn btn-lg cancel" (click)="cancel()">Cancel</button><button mat-dialog-actions
     class="btn btn-primary btn-lg add" (click)="add()">Add</button>
 </div>

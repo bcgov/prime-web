@@ -9,14 +9,19 @@ button {
 }
 
 header {
+  display: flex;
   background-color: map-get($theme-colors, primary);
   // -webkit-box-shadow: 0 3px 3px 1px rgba(51, 51, 51, 0.5);
   // -moz-box-shadow: 0 3px 3px 1px rgba(51, 51, 51, 0.5);
   // box-shadow: 0 3px 3px 1px rgba(51, 51, 51, 0.5);
   margin-bottom: 20px;
   color: #fff;
-  font-size: 18px;
-  padding: 8px;
+  font-size: 1rem;
+  padding: 12px;
+
+  .close {
+    color: #fff
+  }
 }
 
 label {
@@ -31,7 +36,7 @@ mat-card {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  padding: 6px;
+  padding: 12px;
   background-color: $gray;
 
   .cancel {
@@ -39,12 +44,17 @@ mat-card {
   }
 
   .add {
-    margin-left: 6px;
+    margin-left: 18px;
   }
 }
 
 @media only screen and (min-width: 600px) {
+  header {
+    font-size: 2rem;
+  }
+
   mat-card {
     min-width: 500px;
+
   }
 }

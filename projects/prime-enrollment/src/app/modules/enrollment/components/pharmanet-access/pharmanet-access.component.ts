@@ -25,7 +25,7 @@ export class PharmanetAccessComponent implements OnInit {
   }
 
   addOrganization() {
-    return () => console.log('I was clicked');
+    return this.openModal();
   }
 
   openModal() {
