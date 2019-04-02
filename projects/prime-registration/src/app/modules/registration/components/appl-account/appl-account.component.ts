@@ -3,6 +3,7 @@ import { Registrant } from '../../models/registrant.model';
 import { ControlContainer, NgForm } from '@angular/forms';
 import { PrimeConstants } from '@prime-core/models/prime-constants';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { of, Observable } from 'rxjs';
 
 @Component({
   selector: 'prime-appl-account',
@@ -65,8 +66,8 @@ export class ApplAccountComponent implements OnInit {
     return (this.cache ? this.cache.userIDMinLen : null);
   }
 
-  get secQuestionList(): string[] {
-    return (this.cache ? this.cache.secQuestionList : [] );
+  get secQuestionList(): Observable<string[]> {
+    return (this.cache ? this.cache.$securityQuestionsList : of([]) );
   }
 
   setNewPassword( pswd: string ) {

@@ -98,7 +98,7 @@
                    [ngModel]='item?.name'
                    (ngModelChange)='item.name=$event;'
                    (ngModelBlur)="update()"
-                   [items]='secQuestionList'
+                   [items]='secQuestionList | async'
                    placeholder=' -- Select Question --'
                    autocorrect='on'
                    addTag=true
