@@ -19,7 +19,7 @@ export class RegisterApiService extends AbstractHttpService {
    */
   protected _headers: HttpHeaders = new HttpHeaders();
 
-  private _clientName: string = 'regweb';
+  public clientName: string;
 
   constructor( protected http: HttpClient ) {
     super( http );
@@ -45,7 +45,7 @@ export class RegisterApiService extends AbstractHttpService {
 
     const params = ( registrant.credType === RegCredTypes.MOH ? {
       eventUUID: uuid,
-      clientName: this._clientName,
+      clientName: this.clientName,
       processDate: this.getProcessDate(),
       providerCode: registrant.credType,
       userID: registrant.userAccountName,
@@ -53,7 +53,7 @@ export class RegisterApiService extends AbstractHttpService {
       mobile: registrant.smsPhone
     } : {
       eventUUID: uuid,
-      clientName: this._clientName,
+      clientName: this.clientName,
       processDate: this.getProcessDate(),
       providerCode: registrant.credType,
       pdid: registrant.userAccountName,

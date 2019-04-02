@@ -3,8 +3,8 @@ import { DocumentType } from '@prime-core/models/documents.interface';
 import { CountryList, ProvinceList } from '@prime-core/prime-shared/components/address/address.component';
 
 export interface SysParamInterface {
-  paramCode: string;
-  paramValue: string;
+  name: string;
+  value: string;
 }
 
 /**
@@ -25,7 +25,7 @@ export class CachePayLoad extends ServerPayload {
   messages: StatusMsgInterface[];
   secQues: string[];
   documentType: DocumentType[];
-  sysParm: SysParamInterface[];
+  sysParam: SysParamInterface[];
 
   constructor( payload: CacheInterface ) {
     super( payload );
@@ -34,7 +34,7 @@ export class CachePayLoad extends ServerPayload {
     this.messages = payload.messages ? payload.messages : undefined;
     this.secQues = payload.secQues ? payload.secQues : undefined;
     this.documentType = payload.documentType ? payload.documentType : undefined;
-    this.sysParm = payload.sysParam ? payload.sysParam : undefined;
+    this.sysParam = payload.sysParam ? payload.sysParam : undefined;
   }
 }
 

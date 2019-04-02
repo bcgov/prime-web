@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core';
 import { AbstractForm } from 'moh-common-lib/models';
 import { Router } from '@angular/router';
 import { RegCredTypes } from '@prime-core/models/prime-constants';
@@ -7,13 +7,17 @@ import { RegCacheService } from '@prime-registration/services/reg-cache.service'
 import { UserAttrPayload } from '@prime-registration/modules/registration/models/register-api.model';
 import { RegisterApiService } from '@prime-registration/modules/registration/services/register-api.service';
 import { RegisterRespService } from '@prime-registration/modules/registration/services/register-resp.service';
+import { RegistrationConstants } from '@prime-registration/modules/registration/models/registration-constants.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-bcsc-account',
   templateUrl: './bcsc-account.component.html',
   styleUrls: ['./bcsc-account.component.scss']
 })
-export class BcscAccountComponent extends AbstractForm implements OnInit {
+export class BcscAccountComponent extends AbstractForm implements OnInit, OnDestroy {
+
+  private hasParameters$: Subscription;
 
   constructor( protected router: Router,
                private registrationDataService: RegistrationDataService ,
@@ -25,12 +29,23 @@ export class BcscAccountComponent extends AbstractForm implements OnInit {
 
   ngOnInit() {
 
-    if (!this.registrant.secQuestionsAnswer.length) {
-      // initialize question/answer array
-      for (let i = 0; i < this.cache.numSecQuestion; i++) {
-        this.registrant.secQuestionsAnswer.push({ name: null, value: null });
-      }
-    }
+    this.hasParameters$ = this.cacheService.$sysParamList.subscribe( obs => {
+        let param = obs.find( x => x.name === RegistrationConstants.SEC_QUEST_CNT );
+
+       if (param) {
+          // initialize question/answer arra
+          for (let i = this.registrant.secQuestionsAnswer.length; i < Number(param.value); i++) {
+            this.registrant.secQuestionsAnswer.push({ name: null, value: null });
+          }
+        }
+
+        param = obs.find( x => x.name === RegistrationConstants.REG_CLIENTNAME );
+        this.registerApiService.clientName = param ? param.value : null;
+    } );
+  }
+
+  ngOnDestroy() {
+    this.hasParameters$.unsubscribe();
   }
 
   get registrant() {

@@ -19,5 +19,6 @@ export class RegistrationConstants extends PrimeConstants {
 
   // System Parameter Codes for Registration
   public static SEC_QUEST_CNT = 'REG_SECQUES_CNT';
+  public static REG_CLIENTNAME = 'REG_CLIENT_NAME';
 
 }

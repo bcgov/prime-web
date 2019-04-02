@@ -3,6 +3,7 @@ import { Registrant } from '../../models/registrant.model';
 import { ControlContainer, NgForm } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { RegistrationConstants } from '../../models/registration-constants.model';
+import { SysParamInterface } from '../../../../../../../../src/app/models/cache-api.model';
 
 @Component({
   selector: 'prime-appl-account',
@@ -99,5 +100,13 @@ export class ApplAccountComponent implements OnInit {
      ( this.confirmPassword !== this.data.password ) ) {
      this.form.form.setErrors( {'noPasswordMatch': true} );
    }
+  }
+
+
+  update( ) {
+    console.log( 'update: ' );
+    this.questionList.forEach( x => {
+      console.log( 'update: ', x );
+    });
   }
 }

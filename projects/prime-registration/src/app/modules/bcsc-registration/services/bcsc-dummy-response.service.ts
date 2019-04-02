@@ -34,7 +34,7 @@ export class BCSCDummyResponseService {
         reg.lastName = data.lastname;
         reg.dateOfBirth = {
           month: data.dateOfBirth.getMonth() + 1,
-          day: data.dateOfBirth.getDay(),
+          day: data.dateOfBirth.getDay() + 1,
           year: data.dateOfBirth.getFullYear()
         };
         console.log( 'Dob: ', data.dateOfBirth, reg.dateOfBirth );

@@ -18,7 +18,7 @@ export class CacheService {
   private $provinceListSubject: BehaviorSubject<ProvinceList[]> = new BehaviorSubject([]);
   private $countrylistSubject: BehaviorSubject<CountryList[]> = new BehaviorSubject([]);
   private $enhancedMessagesSubject: BehaviorSubject<StatusMsgInterface[]> = new BehaviorSubject([]);
-
+  private $sysParamListSubject: BehaviorSubject<SysParamInterface[]> = new BehaviorSubject([]);
   /**
    * Message List
    * Populated via call to reg/rest/getCache?param=messages
@@ -40,18 +40,15 @@ export class CacheService {
   /**
    * System Parameter List
    * Populated via call to reg/rest/getCache?param=sysParam
-   *
-   * TODO: Change to observable when request completed
    */
-  public sysParamList: SysParamInterface[] = [
-    { paramCode: 'REG_SECQUES_CNT', paramValue: '3' }
-  ];
+  public $sysParamList: Observable<SysParamInterface[]> = this.$sysParamListSubject.asObservable();
 
 
   constructor(protected cacheApiService: CacheApiService) {
     this.setupBehaviorSubject('provinces', 'province', this.$provinceListSubject);
     this.setupBehaviorSubject('countries', 'country', this.$countrylistSubject);
     this.setupBehaviorSubject('messages', 'messages', this.$enhancedMessagesSubject);
+    this.setupBehaviorSubject('sysParams', 'sysParam', this.$sysParamListSubject);
   }
 
   /**
@@ -70,5 +67,4 @@ export class CacheService {
     this.cacheApiService.getCache(cacheName).pipe(map(x => x[propertyName]))
       .subscribe(val => $subject.next(val));
   }
-
 }

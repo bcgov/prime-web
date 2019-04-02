@@ -21,8 +21,6 @@ export class RegCacheService extends CacheService {
    */
   public userIDMinLen: string = '6';
   public pwdMinLen: string = '8';
-  public numSecQuestion: number =
-    Number( this.getSysParamValue( RegistrationConstants.SEC_QUEST_CNT ) );
 
   // We use private BehaviorSubjects to cache results instead of having repeat
   // HTTP requests. This way the response is cached for the lifetime of the
@@ -48,10 +46,4 @@ export class RegCacheService extends CacheService {
    * Populated via call to reg/rest/getCache?param=securityQues
    */
   public $documentTypeList: Observable<DocumentType[]> = this.$documentTypeListSubject.asObservable();
-
-  /** Retrieve parameter value from list */
-  private getSysParamValue( paramCode: string ): string {
-    const param = this.sysParamList.find( item => item.paramCode === paramCode );
-    return param ? param.paramValue : null;
-  }
 }

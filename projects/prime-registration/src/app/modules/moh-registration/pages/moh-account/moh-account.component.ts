@@ -1,22 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AbstractForm } from 'moh-common-lib/models';
 import { Router } from '@angular/router';
 import { RegCacheService } from '@prime-registration/services/reg-cache.service';
 import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
-import { RegistrationConstants } from '../../../registration/models/registration-constants.model';
-import { RegisterApiService } from '../../../registration/services/register-api.service';
-import { RegisterRespService } from '../../../registration/services/register-resp.service';
-import { RegCredTypes } from '../../../../../../../../src/app/models/prime-constants';
-import { UserAttrPayload } from '../../../registration/models/register-api.model';
+import { RegistrationConstants } from '@prime-registration/modules/registration/models/registration-constants.model';
+import { RegisterApiService } from '@prime-registration/modules/registration/services/register-api.service';
+import { RegisterRespService } from '@prime-registration/modules/registration/services/register-resp.service';
+import { RegCredTypes } from '@prime-core/models/prime-constants';
+import { UserAttrPayload } from '@prime-registration/modules/registration/models/register-api.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-moh-account',
   templateUrl: './moh-account.component.html',
   styleUrls: ['./moh-account.component.scss']
 })
-export class MohAccountComponent extends AbstractForm implements OnInit {
+export class MohAccountComponent extends AbstractForm implements OnInit, OnDestroy {
 
   public nameList: string[] = [];
+  private hasParameters$: Subscription;
 
   constructor( protected router: Router,
                private registrationDataService: RegistrationDataService ,
@@ -27,19 +29,29 @@ export class MohAccountComponent extends AbstractForm implements OnInit {
   }
 
   ngOnInit() {
+    this.hasParameters$ = this.cacheService.$sysParamList.subscribe( obs => {
+      let param = obs.find( x => x.name === RegistrationConstants.SEC_QUEST_CNT );
 
-    if (!this.registrant.secQuestionsAnswer.length) {
-      // initialize question/answer array
-      for (let i = 0; i < this.cache.numSecQuestion; i++) {
-        this.registrant.secQuestionsAnswer.push({ name: null, value: null });
+     if (param) {
+        // initialize question/answer arra
+        for (let i = this.registrant.secQuestionsAnswer.length; i < Number(param.value); i++) {
+          this.registrant.secQuestionsAnswer.push({ name: null, value: null });
+        }
       }
-    }
+
+      param = obs.find( x => x.name === RegistrationConstants.REG_CLIENTNAME );
+      this.registerApiService.clientName = param ? param.value : null;
+  } );
 
     this.nameList = Object.keys(this.registrant).map( x => {
       if ( x.includes( 'Name' ) ) {
         return this.registrant[x];
       }
     }).filter( item => item );
+  }
+
+  ngOnDestroy() {
+    this.hasParameters$.unsubscribe();
   }
 
   get registrant() {
