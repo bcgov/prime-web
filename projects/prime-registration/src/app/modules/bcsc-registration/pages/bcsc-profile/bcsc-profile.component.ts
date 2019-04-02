@@ -30,15 +30,19 @@ export class BcscProfileComponent extends AbstractForm implements OnInit {
     if (!registrantService.registrant.firstName) {
       registrantService.registrant.copy(this.dummyDataService.getBcscRegistrant());
 
-      // TODO - REMOVE! FOR TESTERS ONLY
-      // This lets the user overwrite the BCSC response via query params. Left in for test only.
+      // TODO - REMOVE! FOR TESTERS ONLY. SHOULD NEVER EVER EVER BE IN PROD.
+      // This lets the user overwrite the BCSC response via query params.
+      // Currently this code checks the URL to ensure it's not in prod. But this
+      // code should be removed entirely after TEST is done with it. Kristin has
+      // said that TEST only needs this temporarily during setup and will not
+      // need it during test for stablization fixes.
+      const VALID_HOSTNAMES = ['localhost', 'maximus-prime-dev.pathfinder.gov.bc.ca', 'maximus-prime-test.pathfinder.gov.bc.ca'];
+
       this.activatedroute.queryParams.subscribe(params => {
         if (Object.keys(params).length) {
-          const now = new Date();
-          const expiry = new Date('15 March 2019');
-          // REMOVE ONCE EXPIRED! CODE SHOULD NEVER BE IN A PROD BUILD!
-          if (now > expiry) {
-            alert('BCSC overwriting via query params has expired');
+  
+          if (!VALID_HOSTNAMES.includes(location.hostname)){
+            alert('BCSC overwriting is not allowed');
             return;
           }
           console.log('DEV ONLY! Updating Registrant via query params');
