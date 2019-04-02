@@ -28,7 +28,6 @@ describe('BCSC Registration - Account Page', () => {
         page.navigateTo();
         expect(page.formErrors().count()).toBe(0, 'should be no errors on page load');
         page.scrollDown();
-        browser.sleep(1000 * 5);
         page.completeRegistration();
         expect(page.formErrors().count()).toEqual(8, 'page should show 8 error texts on continue');
         expect(browser.getCurrentUrl()).toContain(PAGE_URL, 'url should not change');
@@ -38,7 +37,6 @@ describe('BCSC Registration - Account Page', () => {
         page.navigateTo();
         page.scrollDown();
         page.fillData(profileData);
-        browser.sleep(1000 * 5);
         page.completeRegistration();
         expect(page.formErrors().count()).toEqual(6, 'page should show 6 error texts on continue');
         expect(browser.getCurrentUrl()).toContain(PAGE_URL, 'url should not change');
@@ -49,7 +47,6 @@ describe('BCSC Registration - Account Page', () => {
         page.fillSecurityQuestions(profileData);
         page.scrollDown();
         page.fillData(profileData);
-        browser.sleep(1000 * 5);
         page.completeRegistration();
         expect(page.formErrors().count()).toBe(0, 'should be no errors');
         // expect(browser.getCurrentUrl()).toContain(NEXT_PAGE_URL, 'should navigate to the Confirmation page');
@@ -64,36 +61,8 @@ describe('BCSC Registration - Account Page', () => {
         page.fillSecurityQuestions(profileData);
         page.scrollDown();
         page.fillData(profileData);
-        browser.sleep(1000 * 5);
         page.completeRegistration();
         expect(page.formErrors().count()).toEqual(1, 'page should show 1 error text on continue');
-        expect(browser.getCurrentUrl()).toContain(PAGE_URL, 'url should not change');
-        // expect(browser.getCurrentUrl()).toContain(NEXT_PAGE_URL, 'should navigate to the Confirmation page');
-    });
-
-    xit('06. should be able to select a security questions from the default options ', () => {
-        page.navigateTo();
-        page.fillSecurityQuestions(profileData);
-        // page.checkSecurityQuestions();
-        page.scrollDown();
-        page.fillData(profileData);
-        browser.sleep(1000 * 5);
-        page.completeRegistration();
-        expect(page.formErrors().count()).toEqual(1, 'page should show 1 error text on continue');
-        expect(browser.getCurrentUrl()).toContain(PAGE_URL, 'url should not change');
-        // expect(browser.getCurrentUrl()).toContain(NEXT_PAGE_URL, 'should navigate to the Confirmation page');
-    });
-
-    xit('07. should be able to create own question and check if it is included in the options ', () => {
-        page.navigateTo();
-        page.fillSecurityQuestions(profileData);
-        // page.checkSecurityQuestions(profileData);
-        browser.sleep(1000 * 10);
-        page.scrollDown();
-        page.fillData(profileData);
-        browser.sleep(1000 * 5);
-        page.completeRegistration();
-        // expect(page.formErrors().count()).toEqual(1, 'page should show 1 error text on continue');
         expect(browser.getCurrentUrl()).toContain(PAGE_URL, 'url should not change');
         // expect(browser.getCurrentUrl()).toContain(NEXT_PAGE_URL, 'should navigate to the Confirmation page');
     });

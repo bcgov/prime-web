@@ -4,9 +4,9 @@ import { PrimeConstants } from '../../../src/app/models/prime-constants';
 import { FakeDataMohReg } from './registration.data';
 import { PrimeTestPage } from '../../../e2e/src/app.po';
 
-describe('MoH Registration - Profile Page', () => {
+xdescribe('MoH Registration - Profile Page', () => {
     let page: MohProfileTestPage;
-    let page2: PrimeTestPage;
+    let accountPage: PrimeTestPage;
     const data = new FakeDataMohReg();
     let profileData;
     const PAGE_URL = `${PrimeConstants.MOH_REGISTRATION}/${PrimeConstants.PROFILE_PG}`;
@@ -14,7 +14,7 @@ describe('MoH Registration - Profile Page', () => {
 
     beforeEach(() => {
         page = new MohProfileTestPage();
-        page2 = new PrimeTestPage();
+        accountPage = new PrimeTestPage();
         profileData = data.profileInfo();
         data.setSeed(123);
         // profileData['firstName'] = "John";
@@ -191,7 +191,7 @@ describe('MoH Registration - Profile Page', () => {
       expect(page.formErrors()).toEqual([], 'should be no errors as form should be valid');
     });
 
-
+    /*
     xit('14. should make sure that preferred first name must be filled out if preferred last name field is filled out', async () => {
       page.navigateTo();
       page.fillPage(profileData);
@@ -199,7 +199,7 @@ describe('MoH Registration - Profile Page', () => {
       page.continue();
 
       if (profileData['preferredLastName'] != null) {
-        const nameVal = await page2.getNameComponentVal('Preferred First Name');
+        const nameVal = await accountPage.getNameComponentVal('Preferred First Name');
         expect(nameVal).toEqual(profileData['preferredFirstName']);
       }
     });
@@ -212,10 +212,10 @@ describe('MoH Registration - Profile Page', () => {
       page.continue();
 
       if (profileData['preferredFirstName'] != null) {
-        const nameVal = await page2.getNameComponent('Preferred Last Name');
+        const nameVal = await accountPage.getNameComponent('Preferred Last Name');
         // browser.wait(5000);
         expect(nameVal).toEqual(profileData['preferredLastName']);
       }
-    });
+    });*/
 
 });

@@ -6,7 +6,7 @@ import { PrimeTestPage } from '../../../e2e/src/app.po';
 
 describe('BCSC Registration - Profile Page', () => {
     let page: BCSCRegistrationPage;
-    // let page2: PrimeTestPage;
+    // let accountPage: PrimeTestPage;
     const data = new FakeDataMohReg();
     let profileData;
     const PAGE_URL = `${PrimeConstants.BCSC_REGISTRATION}/${PrimeConstants.PROFILE_PG}`;

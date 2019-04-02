@@ -179,21 +179,39 @@ export class BCSCAccountTestPage extends MohAccountTestPage {
     element(by.css('[id^="user_email"]')).sendKeys(data.email);
   }
 
-  fillSecurityQuestions(data: ProfilePageTest) {
-    element(by.css('[id^="sec_question_0"]')).sendKeys(data.secQues1);
-    browser.actions().sendKeys(protractor.Key.ENTER).perform();
-    element(by.css('[id^="sec_answer_0"]')).sendKeys(data.secAns1);
-    element(by.css('[id^="sec_question_1"]')).sendKeys(data.secQues2);
-    browser.actions().sendKeys(protractor.Key.ENTER).perform();
-    element(by.css('[id^="sec_answer_1"]')).sendKeys(data.secAns2);
-    element(by.css('[id^="sec_question_2"]')).sendKeys(data.secQues3);
-    browser.actions().sendKeys(protractor.Key.ENTER).perform();
-    element(by.css('[id^="sec_answer_2"]')).sendKeys(data.secAns3);
+  selectSecurityQuestions(data: ProfilePageTest) {
+    this.selectSecurityQuestion(0, { answer: data.secAns1 });
+    this.selectSecurityQuestion(1, { answer: data.secAns2 });
+    this.selectSecurityQuestion(2, { answer: data.secAns3 });
   }
 
-  checkSecurityQuestions(data: ProfilePageTest) {
-    // element(by.css('[id^="sec_question_0"]')).click();
-    element(by.cssContainingText('[id^="sec_question_0"] .ng-dropdown-panel .ng-select-bottom', data.secQues1)).click();
+  private selectSecurityQuestion(index: number, data: {answer: string}){
+    const fieldSelector = `[id^="sec_question_${index}"]`;
+    const questionSelector = `ng-select[ng-reflect-name="sec_question_${index}"] .ng-option:nth-of-type(${index + 1})`;
+    const answerSelector = `[id^="sec_answer_${index}"]`;
+
+    element(by.css(fieldSelector)).click();
+    element(by.css(questionSelector)).click();
+    element(by.css(answerSelector)).sendKeys(data.answer);
+  }
+
+  fillSecurityQuestions(data: ProfilePageTest) {
+    this.fillSecurityQuestion(0, {question: data.secQues1, answer: data.secAns1 });
+    this.fillSecurityQuestion(1, {question: data.secQues2, answer: data.secAns2 });
+    this.fillSecurityQuestion(2, {question: data.secQues3, answer: data.secAns3 });
+  }
+
+  private fillSecurityQuestion(index: number, data: {question: string, answer: string}){
+    const questionSelector = `[id^="sec_question_${index}"]`;
+    const answerSelector = `[id^="sec_answer_${index}"]`;
+    element(by.css(questionSelector)).sendKeys(data.question);
+    browser.actions().sendKeys(protractor.Key.ENTER).perform();
+    element(by.css(answerSelector)).sendKeys(data.answer);
+  }
+
+  totalNumOfSecurityQuestions() {
+    element(by.css('ng-select[ng-reflect-name="sec_question_0"]')).click();
+    return element.all(by.css('ng-select[ng-reflect-name="sec_question_0"] .ng-option'));
   }
 }
 
