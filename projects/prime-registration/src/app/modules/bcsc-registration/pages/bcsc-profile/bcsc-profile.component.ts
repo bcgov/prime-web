@@ -47,7 +47,16 @@ export class BcscProfileComponent extends AbstractForm implements OnInit {
           }
           console.log('DEV ONLY! Updating Registrant via query params');
           Object.keys(params).map(key => {
-            registrantService.registrant[key] = params[key];
+            // console.log(`${key} === ${params[key]}`);
+            let value = params[key];
+            try {
+              const isJSON = JSON.parse(params[key]);
+              if (isJSON){
+                value = isJSON;
+              }
+
+            } catch (err) { }
+            registrantService.registrant[key] = value;
           });
         }
       });
