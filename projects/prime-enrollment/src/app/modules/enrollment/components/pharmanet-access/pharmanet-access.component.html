@@ -6,8 +6,7 @@
     Pharmanet Access - helper text
   </h2>
   <prime-page-sections layout="noTips">
-    <enroll-action-block [action]="addOrganization()" label="Add Organization" text="No Organizations"
-      class="action-block">
+    <enroll-action-block (clicked)="openModal()" label="Add Organization" text="No Organizations" class="action-block">
     </enroll-action-block>
   </prime-page-sections>
   <div *ngIf="organization">

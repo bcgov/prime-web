@@ -2,7 +2,9 @@ import {
   Component,
   OnInit,
   ChangeDetectionStrategy,
-  Input
+  Input,
+  EventEmitter,
+  Output
 } from '@angular/core';
 
 @Component({
@@ -12,13 +14,11 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActionBlockComponent implements OnInit {
-  @Input() action: () => any;
+  @Output() clicked = new EventEmitter<boolean>();
   @Input() label: string = 'Click me';
   @Input() text: string = 'Click below';
 
-  constructor() {
-    console.log(this);
-  }
+  constructor() {}
 
   ngOnInit() {}
 }

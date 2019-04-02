@@ -4,12 +4,11 @@
   padding: 0px;
 }
 
-button {
-  width: 160px;
-}
+
 
 header {
   display: flex;
+  justify-content: space-between;
   background-color: map-get($theme-colors, primary);
   // -webkit-box-shadow: 0 3px 3px 1px rgba(51, 51, 51, 0.5);
   // -moz-box-shadow: 0 3px 3px 1px rgba(51, 51, 51, 0.5);
@@ -30,6 +29,14 @@ label {
 
 mat-card {
   width: 300px;
+}
+
+.action-button {
+  width: 160px;
+}
+
+.close-button {
+  width: 1fr;
 }
 
 .actions {

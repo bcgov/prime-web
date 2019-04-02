@@ -34,11 +34,10 @@ export class SearchOrganizationModalComponent implements OnInit {
   ngOnInit() {
     this.dataSvc.organizationTypesInit(tempArr);
     this.types = this.dataSvc.organizationTypes$;
-    console.log(headers);
     this.searchResults = of(data);
     this.searchResultsHeaders = of(this.headers);
   }
-  results(evt: boolean, data: any) {
+  selectedResults(evt: boolean, data: any) {
     console.log(evt, data);
   }
   cancel() {

@@ -27,7 +27,10 @@ export class ListItemComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.sub = this.fc.valueChanges.subscribe();
+    this.sub = this.fc.valueChanges.subscribe(obs => {
+      console.log(this);
+      this.selected.emit(obs);
+    });
   }
 
   ngOnDestroy(): void {

@@ -20,9 +20,7 @@ export class PharmanetAccessComponent implements OnInit {
     this.fa = this.stateSvc.organizationForm;
   }
 
-  ngOnInit() {
-    this.openModal();
-  }
+  ngOnInit() {}
 
   addOrganization() {
     return this.openModal();
