@@ -26,6 +26,15 @@ import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { ListItemComponent } from './components/list-item/list-item.component';
 import { ListItemHeaderComponent } from './components/list-item-header/list-item-header.component';
+import { ProfileBlockComponent } from './components/profile-block/profile-block.component';
+import { AddressBlockComponent } from './components/address-block/address-block.component';
+import { MailingAddressBlockComponent } from './components/mailing-address-block/mailing-address-block.component';
+import { ContactBlockComponent } from './components/contact-block/contact-block.component';
+import { SelfDeclarationBlockComponent } from './components/self-declaration-block/self-declaration-block.component';
+import { SelfDeclarationQuestionBlockComponent } from './components/self-declaration-question-block/self-declaration-question-block.component';
+import { ProfessionalInformationBlockComponent } from './components/professional-information-block/professional-information-block.component';
+import { PharmanetBlockComponent } from './components/pharmanet-block/pharmanet-block.component';
+import { PharmanetOrganizationBlockComponent } from './components/pharmanet-organization-block/pharmanet-organization-block.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +52,16 @@ import { ListItemHeaderComponent } from './components/list-item-header/list-item
     DetailsComponent,
     ActionBlockComponent,
     ListItemComponent,
-    ListItemHeaderComponent
+    ListItemHeaderComponent,
+    ProfileBlockComponent,
+    AddressBlockComponent,
+    MailingAddressBlockComponent,
+    ContactBlockComponent,
+    SelfDeclarationBlockComponent,
+    SelfDeclarationQuestionBlockComponent,
+    ProfessionalInformationBlockComponent,
+    PharmanetBlockComponent,
+    PharmanetOrganizationBlockComponent
   ],
 
   imports: [
@@ -78,7 +96,16 @@ import { ListItemHeaderComponent } from './components/list-item-header/list-item
     ActionBlockComponent,
     MatCardModule,
     ListItemComponent,
-    ListItemHeaderComponent
+    ListItemHeaderComponent,
+    ProfileBlockComponent,
+    AddressBlockComponent,
+    MailingAddressBlockComponent,
+    ContactBlockComponent,
+    SelfDeclarationBlockComponent,
+    SelfDeclarationQuestionBlockComponent,
+    ProfessionalInformationBlockComponent,
+    PharmanetBlockComponent,
+    PharmanetOrganizationBlockComponent
   ]
 })
 export class SharedModule {}
