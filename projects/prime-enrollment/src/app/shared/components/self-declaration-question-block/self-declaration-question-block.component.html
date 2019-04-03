@@ -1,3 +1,8 @@
-<p>
-  self-declaration-question-block works!
-</p>
+<label>{{ question }}</label>
+<span>{{ yesNo }}</span>
+<ng-container *ngIf="answer">
+  <label>Details</label>
+  <span>{{ details }}</span>
+  <label>Documents</label>
+  <span>{{ documents }}</span>
+</ng-container>

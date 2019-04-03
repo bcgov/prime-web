@@ -1,4 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input
+} from '@angular/core';
 
 @Component({
   selector: 'enroll-self-declaration-question-block',
@@ -7,10 +12,16 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelfDeclarationQuestionBlockComponent implements OnInit {
+  @Input() question: string;
+  @Input() answer: boolean = false;
+  @Input() details: string;
+  @Input() documents: string;
+  yesNo: string;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor() {
+    if (this.answer) this.yesNo = 'Yes';
+    else this.yesNo = 'No';
   }
 
+  ngOnInit() {}
 }
