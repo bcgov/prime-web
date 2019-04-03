@@ -33,7 +33,6 @@ import { SelfDeclarationBlockComponent } from './components/self-declaration-blo
 import { SelfDeclarationQuestionBlockComponent } from './components/self-declaration-question-block/self-declaration-question-block.component';
 import { ProfessionalInformationBlockComponent } from './components/professional-information-block/professional-information-block.component';
 import { PharmanetBlockComponent } from './components/pharmanet-block/pharmanet-block.component';
-import { PharmanetOrganizationBlockComponent } from './components/pharmanet-organization-block/pharmanet-organization-block.component';
 
 @NgModule({
   declarations: [
@@ -58,8 +57,7 @@ import { PharmanetOrganizationBlockComponent } from './components/pharmanet-orga
     SelfDeclarationBlockComponent,
     SelfDeclarationQuestionBlockComponent,
     ProfessionalInformationBlockComponent,
-    PharmanetBlockComponent,
-    PharmanetOrganizationBlockComponent
+    PharmanetBlockComponent
   ],
 
   imports: [
@@ -101,8 +99,7 @@ import { PharmanetOrganizationBlockComponent } from './components/pharmanet-orga
     SelfDeclarationBlockComponent,
     SelfDeclarationQuestionBlockComponent,
     ProfessionalInformationBlockComponent,
-    PharmanetBlockComponent,
-    PharmanetOrganizationBlockComponent
+    PharmanetBlockComponent
   ]
 })
 export class SharedModule {}
