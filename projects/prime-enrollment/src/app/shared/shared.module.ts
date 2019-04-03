@@ -28,7 +28,6 @@ import { ListItemComponent } from './components/list-item/list-item.component';
 import { ListItemHeaderComponent } from './components/list-item-header/list-item-header.component';
 import { ProfileBlockComponent } from './components/profile-block/profile-block.component';
 import { AddressBlockComponent } from './components/address-block/address-block.component';
-import { MailingAddressBlockComponent } from './components/mailing-address-block/mailing-address-block.component';
 import { ContactBlockComponent } from './components/contact-block/contact-block.component';
 import { SelfDeclarationBlockComponent } from './components/self-declaration-block/self-declaration-block.component';
 import { SelfDeclarationQuestionBlockComponent } from './components/self-declaration-question-block/self-declaration-question-block.component';
@@ -55,7 +54,6 @@ import { PharmanetOrganizationBlockComponent } from './components/pharmanet-orga
     ListItemHeaderComponent,
     ProfileBlockComponent,
     AddressBlockComponent,
-    MailingAddressBlockComponent,
     ContactBlockComponent,
     SelfDeclarationBlockComponent,
     SelfDeclarationQuestionBlockComponent,
@@ -99,7 +97,6 @@ import { PharmanetOrganizationBlockComponent } from './components/pharmanet-orga
     ListItemHeaderComponent,
     ProfileBlockComponent,
     AddressBlockComponent,
-    MailingAddressBlockComponent,
     ContactBlockComponent,
     SelfDeclarationBlockComponent,
     SelfDeclarationQuestionBlockComponent,
