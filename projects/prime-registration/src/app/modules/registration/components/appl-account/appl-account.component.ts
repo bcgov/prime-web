@@ -101,12 +101,4 @@ export class ApplAccountComponent implements OnInit {
      this.form.form.setErrors( {'noPasswordMatch': true} );
    }
   }
-
-
-  update( ) {
-    console.log( 'update: ' );
-    this.questionList.forEach( x => {
-      console.log( 'update: ', x );
-    });
-  }
 }

@@ -14,11 +14,17 @@ export class PrimeConstants {
   public static STREET_RURAL_MAXLEN = '1000';
 }
 
-export enum RegCredTypes {
+/**
+ * Identity provider
+ */
+export enum ProviderCode {
   MOH = 'MOH',
   BCSC = 'BCSC'
 }
 
+/**
+ * Security assurance level for the person.
+ */
 export enum AssuranceLevel {
   LEVEL_1 = '1',
   LEVEL_2 = '2',

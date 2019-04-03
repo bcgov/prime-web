@@ -6,8 +6,8 @@ import { RegistrationDataService } from '@prime-registration/services/registrati
 import { RegistrationConstants } from '@prime-registration/modules/registration/models/registration-constants.model';
 import { RegisterApiService } from '@prime-registration/modules/registration/services/register-api.service';
 import { RegisterRespService } from '@prime-registration/modules/registration/services/register-resp.service';
-import { RegCredTypes } from '@prime-core/models/prime-constants';
-import { UserAttrPayload } from '@prime-registration/modules/registration/models/register-api.model';
+import { ProviderCode } from '@prime-core/models/prime-constants';
+import { UserAttrPayload, CheckUserAttr } from '@prime-registration/modules/registration/models/register-api.model';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -79,10 +79,12 @@ export class MohAccountComponent extends AbstractForm implements OnInit, OnDestr
     this.loading = true;
 
     // Verify user based on attributes i.e email, userID, mobile phone number
-    this.registrant.credType = RegCredTypes.MOH;
-     const subscription = this.registerApiService.verifyUserAttr(
-       this.registrant, this.registrationDataService.eventUUID
-       );
+     const subscription = this.registerApiService.verifyUserAttr( {
+        email: this.registrant.emailAddress,
+        mobile: this.registrant.smsPhone,
+        providerCode: this.registrant.providerCode,
+        accountID: this.registrant.userAccountName
+      } );
 
     // Trigger the HTTP request
     subscription.subscribe(

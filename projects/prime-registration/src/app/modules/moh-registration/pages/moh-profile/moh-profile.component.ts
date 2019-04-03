@@ -7,6 +7,7 @@ import { RegistrationDataService } from '@prime-registration/services/registrati
 import { RegCacheService } from '@prime-registration/services/reg-cache.service';
 import { Registrant } from '../../../registration/models/registrant.model';
 import { RegistrationConstants } from '../../../registration/models/registration-constants.model';
+import { ProviderCode, AssuranceLevel } from '@prime-core/models/prime-constants';
 
 @Component({
   selector: 'prime-moh-profile',
@@ -23,6 +24,10 @@ export class MohProfileComponent extends AbstractForm implements OnInit {
                private registrantService: RegistrationDataService,
                private regCacheService: RegCacheService ) {
     super( router );
+
+    // Set providerCode and assurance level for registrant
+    registrantService.registrant.providerCode = ProviderCode.MOH;
+    registrantService.registrant.assuranceLevel = AssuranceLevel.LEVEL_1;
   }
 
   ngOnInit() {

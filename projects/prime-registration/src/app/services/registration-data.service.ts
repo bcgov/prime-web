@@ -6,9 +6,6 @@ import { RegistrationConstants } from '../modules/registration/models/registrati
 @Injectable()
 export class RegistrationDataService {
 
-  // Session identifier
-  public eventUUID: string;
-
   // Information pertaining to registrant
   public registrant: Registrant;
 

@@ -3,7 +3,7 @@ import { Registrant } from '../../registration/models/registrant.model';
 import * as faker from 'faker';
 import { UUID } from 'angular2-uuid';
 import { RegistrationConstants } from '../../registration/models/registration-constants.model';
-import { AssuranceLevel, RegCredTypes } from '@prime-core/models/prime-constants';
+import { AssuranceLevel, ProviderCode } from '@prime-core/models/prime-constants';
 
 /**
  * Dummy data for development purposes
@@ -16,7 +16,7 @@ import { AssuranceLevel, RegCredTypes } from '@prime-core/models/prime-constants
 })
 export class BCSCDummyResponseService {
 
-    private accountTypes = Object.keys(RegCredTypes);
+    private accountTypes = ProviderCode.BCSC;
     private cities = ['Vancouver', 'Victoria', 'Langford'];
 
     constructor() {

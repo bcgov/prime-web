@@ -1,10 +1,7 @@
 import { Document } from '@prime-core/models/documents.interface';
 import { PrimePerson } from '@prime-core/models/prime-person.model';
-import { AssuranceLevel, RegCredTypes } from '@prime-core/models/prime-constants';
-export interface SecurityQuestionsAnswers {
-  name: string;
-  value: string;
-}
+import { AssuranceLevel, ProviderCode } from '@prime-core/models/prime-constants';
+import { SecurityQuestionsAnswers } from './register-api.model';
 
 export class Registrant extends PrimePerson {
 
@@ -19,7 +16,7 @@ export class Registrant extends PrimePerson {
   public documents: Document[] = [];
 
   public assuranceLevel: AssuranceLevel; // Level 1 or 3
-  public credType: RegCredTypes; // MOH or BCSC
+  public providerCode: ProviderCode; // MOH or BCSC
 
   /** Multi-factor authenication */
   public useMfaSMS: boolean = false;

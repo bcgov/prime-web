@@ -7,7 +7,8 @@ import { RegistrationDataService } from '@prime-registration/services/registrati
 import { AbstractForm } from 'moh-common-lib/models';
 import { Router } from '@angular/router';
 import { RegCacheService } from '@prime-registration/services/reg-cache.service';
-import { RegistrationConstants } from '../../../registration/models/registration-constants.model';
+import { RegistrationConstants } from '@prime-registration/modules/registration/models/registration-constants.model';
+import { AssuranceLevel, ProviderCode } from '@prime-core/models/prime-constants';
 
 @Component({
   selector: 'app-bcsc-profile',
@@ -27,6 +28,9 @@ export class BcscProfileComponent extends AbstractForm implements OnInit {
       registrantService.registrant.copy(this.dummyDataService.getBcscRegistrant());
     }
 
+    // Set providerCode and assurance level for registrant
+    registrantService.registrant.providerCode = ProviderCode.BCSC;
+    registrantService.registrant.assuranceLevel = AssuranceLevel.LEVEL_3;
   }
 
   ngOnInit() {}

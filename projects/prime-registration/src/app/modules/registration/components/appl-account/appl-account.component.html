@@ -97,8 +97,7 @@
                    name='sec_question_{{i}}'
                    labelForId='sec_question_{{i}}'
                    [ngModel]='item?.name'
-                   (ngModelChange)='item.name=$event;'
-                   (ngModelBlur)="update()"
+                   (ngModelChange)='item.name=$event'
                    [items]='secQuestionList'
                    placeholder=' -- Select Question --'
                    autocorrect='on'

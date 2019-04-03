@@ -1,7 +1,6 @@
-import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AbstractForm } from 'moh-common-lib/models';
 import { Router } from '@angular/router';
-import { RegCredTypes } from '@prime-core/models/prime-constants';
 import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
 import { RegCacheService } from '@prime-registration/services/reg-cache.service';
 import { UserAttrPayload } from '@prime-registration/modules/registration/models/register-api.model';
@@ -9,6 +8,7 @@ import { RegisterApiService } from '@prime-registration/modules/registration/ser
 import { RegisterRespService } from '@prime-registration/modules/registration/services/register-resp.service';
 import { RegistrationConstants } from '@prime-registration/modules/registration/models/registration-constants.model';
 import { Subscription } from 'rxjs';
+import { ServerPayload, StatusMsgInterface, PayloadInterface, ApiStatusCodes, ScreenAreaID } from '@prime-core/models/api-base.model';
 
 @Component({
   selector: 'app-bcsc-account',
@@ -74,32 +74,87 @@ export class BcscAccountComponent extends AbstractForm implements OnInit, OnDest
     this.loading = true;
 
     // Verify user based on attributes i.e email, userID, mobile phone number
-    this.registrant.credType = RegCredTypes.BCSC;
-     const subscription = this.registerApiService.verifyUserAttr(
-       this.registrant, this.registrationDataService.eventUUID
-       );
+    const subscription = this.registerApiService.verifyUserAttr( {
+      email: this.registrant.emailAddress,
+      mobile: this.registrant.smsPhone,
+      providerCode: this.registrant.providerCode,
+      accountID: this.registrant.userAccountName
+    } );
 
     // Trigger the HTTP request
     subscription.subscribe(
       response => {
         this.registerRespService.payload = new UserAttrPayload( response );
-        this.loading = false;
 
         if ( this.registerRespService.payload.success ) {
 
           // Register User in PRIME
-          console.log( 'Can attempt to register user in PRIME.' );
-
+          this.requestRegisterUser();
         } else {
+
+          // TODO: Code
+          this.loading = false;
           console.log( 'Correct issue and try again.' );
         }
       },
       responseError => {
+        this.handleError( responseError );
+      });
+  }
+
+  /**
+   * Handle error from request
+   * @param error
+   */
+  private handleError( error: any )  {
+
+    const respMsg: StatusMsgInterface[] = [];
+    this.cacheService.$enhancedMsgList.subscribe( obs => {
+      const msg = obs.find( x => x.msgID === '9999' );
+      if ( msg ) {
+        respMsg.push(msg);
+      } else {
+        // No cache loaded hard coded message to display to user
+        respMsg.push( {
+          msgID: null,
+          msgText: 'This error occurred because the system encountered an unanticipated situation which forced it to stop.',
+          msgType: ApiStatusCodes.ERROR,
+          scrArea: ScreenAreaID.CONFIRMATION,
+          appLayer: null
+        });
+      }
+    });
+
+    this.loading = false;
+
+    console.log( 'Error occurred: ', error  );
+    this.registerRespService.payload = new ServerPayload( {
+        eventUUID: null,
+        clientName: null,
+        processDate: null,
+        statusCode: ApiStatusCodes.ERROR,
+        statusMsgs: respMsg
+      } );
+
+    this.navigate( RegistrationConstants.BCSC_REGISTRATION + '/' + RegistrationConstants.CONFIRMATION_PG );
+  }
+
+  /**
+   * Request to back-end to register the user in PRIME
+   */
+  private requestRegisterUser() {
+
+    // Register User in PRIME
+    const subscription2 = this.registerApiService.registerUser( this.registrant );
+    subscription2.subscribe(
+      regResp => {
         this.loading = false;
-        console.log( 'Error occurred: ', responseError );
+        this.registerRespService.payload = new ServerPayload( regResp );
+        this.navigate( RegistrationConstants.BCSC_REGISTRATION + '/' +
+          RegistrationConstants.CONFIRMATION_PG );
+      },
+      regRespError => {
+        this.handleError( regRespError );
       });
   }
 }
-
-
-//  this.navigate( RegistrationConstants.BCSC_REGISTRATION + '/' + RegistrationConstants.CONFIRMATION_PG );

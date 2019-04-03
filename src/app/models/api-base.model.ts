@@ -8,7 +8,9 @@ export enum ApiStatusCodes {
 export enum ScreenAreaID {
   CONFIRMATION = 'CONFIRMATION',
   QRCODE = 'QR',
-  NEXT_STEPS = 'NEXT STEPS'
+  NEXT_STEPS = 'NEXT STEPS',
+  INTERIM = 'INTERIM',
+  FINAL = 'FINAL'
 }
 
 /**
