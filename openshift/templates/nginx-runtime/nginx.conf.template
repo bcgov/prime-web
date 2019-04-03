@@ -47,29 +47,34 @@ http {
     limit_req_zone $binary_remote_addr zone=bra3:10m rate=3r/s;
     limit_req_zone $binary_remote_addr zone=bra5:10m rate=5r/s;
     limit_req_zone $binary_remote_addr zone=bra25:10m rate=25r/s;
-    limit_req_zone $binary_remote_addr zone=bra100:10m rate=100r/s;
 
     #default throttle; not inherited if set in nested level
-    limit_req zone=bra5 burst=100;
+    # limit_req_zone $binary_remote_addr zone=bra5:10m rate=100r/s;
+    # limit_req zone=bra5 burst=100;
+    limit_req_zone $binary_remote_addr zone=bra100:10m rate=1400r/s;
+    # limit_req zone=bra100 burst=1400;
+
+    client_max_body_size 100m;
 
     # HTTP Basic rules
-    auth_basic_user_file /tmp/.htpasswd;
+    # auth_basic_user_file /tmp/.htpasswd;
 
     server {
         listen       8080;
         server_name  localhost;
 
-        # add in most common security headers
-        add_header Content-Security-Policy "default-src * data: blob: filesystem: 'unsafe-inline' 'unsafe-eval'";
-        add_header Strict-Transport-Security "max-age=86400; includeSubDomains";
+        add_header Content-Security-Policy "default-src 'self' data: blob: filesystem: 'unsafe-inline' 'unsafe-eval'";
+        add_header Cache-Control private;
+        add_header Strict-Transport-Security "max-age=3153600; includeSubDomains";
         add_header X-Content-Type-Options "nosniff";
         add_header X-XSS-Protection 1;
         add_header X-Frame-Options DENY;
 
         # serve our angular app here
         location / {
-            rewrite ^/prime(/.*)$ $1;
-            root   /tmp/app/dist/Prime;
+	    rewrite ^/prime(/.*)$ $1;
+            # TODO - This root path here will have to be changed per PRIME application. Env variable?
+            root   /tmp/app/dist/prime-registration;
             index  index.html index.htm;
             try_files $uri /index.html;
             gzip            on;
@@ -105,7 +110,7 @@ http {
             }
 
             location /api/captcha/ {
-                 proxy_pass http://mygovbc-captcha-service:8080/;
+                proxy_pass http://mygovbc-captcha-service:8080/;
             }
         }
 
@@ -125,7 +130,7 @@ http {
             # Enable Nginx stats
             stub_status on;
 
-            # Only allow access from localhost
+            # Only allow access from within OpenShift
             allow %RealIpFrom%;
 
             # Other request should be denied
@@ -134,6 +139,5 @@ http {
             # No need to log this request, its just noise
             access_log off;
         }
-
     }
 }
