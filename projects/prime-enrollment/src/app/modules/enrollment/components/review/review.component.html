@@ -1,9 +1,9 @@
 <common-page-framework layout="blank">
-  <h1>Professional Information</h1>
+  <h1>Application Review</h1>
 
   <ng-content select="[identityInstruct]"></ng-content>
   <h2 identityInstruct class="border-bottom">
-    Profile information helper text.
+    You will not be able to change your answers once submitted.
   </h2>
   <prime-page-sections layout="double">
     <div class="label-row">
@@ -27,7 +27,23 @@
       <i class="fa fa-pencil"></i>
     </div>
     <enroll-self-declaration-question-block></enroll-self-declaration-question-block>
+    <aside>
+      <div>
+        <div class="label-row">
 
+          <h3>Professional Information</h3>
+          <i class="fa fa-pencil"></i>
+        </div>
+        <enroll-professional-information-block></enroll-professional-information-block>
+      </div>
+      <div>
+        <div class="label-row">
 
+          <h3>PharmaNet</h3>
+          <i class="fa fa-pencil"></i>
+        </div>
+        <enroll-pharmanet-block></enroll-pharmanet-block>
+      </div>
+    </aside>
   </prime-page-sections>
 </common-page-framework>
