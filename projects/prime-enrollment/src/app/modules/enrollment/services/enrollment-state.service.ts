@@ -107,6 +107,9 @@ export class EnrollmentStateService {
     this.professionalForm = FormGenerator.professionalForm;
     this.certForms = [FormGenerator.licenseForm];
     this.dpFa = new FormArray([FormFieldBuilder.deviceProviderFields]);
+    this.declarationForm.valueChanges.subscribe(obs =>
+      console.log('declaration form', this.declarationForm)
+    );
   }
 
   addValueToFc(fc: FormControl, val: string | object[]) {

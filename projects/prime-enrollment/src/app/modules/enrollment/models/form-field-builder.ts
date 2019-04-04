@@ -10,7 +10,7 @@ import {
   ISupportingDetails,
   IContact
 } from '../../../core/interfaces';
-import { behalfOfValidator } from './validators';
+import { behalfOfValidator, descriptionValidator } from './validators';
 
 export abstract class FormFieldBuilder {
   static get contactFields() {
@@ -59,10 +59,19 @@ export abstract class FormFieldBuilder {
     const regSuspension = new FormControl(null, [Validators.required]);
     const tAndC = new FormControl(null, [Validators.required]);
     const pharmaSuspension = new FormControl(null, [Validators.required]);
-    const convictionDesc = new FormControl(null);
-    const regSuspensionDesc = new FormControl(null);
-    const tAndCDesc = new FormControl(null);
-    const pharmaSuspensionDesc = new FormControl(null);
+    const convictionDesc = new FormControl(
+      null,
+      descriptionValidator('conviction')
+    );
+    const regSuspensionDesc = new FormControl(
+      null,
+      descriptionValidator('regSuspension')
+    );
+    const tAndCDesc = new FormControl(null, descriptionValidator('tAndC'));
+    const pharmaSuspensionDesc = new FormControl(
+      null,
+      descriptionValidator('pharmaSuspension')
+    );
     const supportingDocs = new FormControl(null);
 
     return {
