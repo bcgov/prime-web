@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { EnrollmentStateService } from '../../services/enrollment-state.service';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-contact',
@@ -15,5 +15,12 @@ export class ContactComponent implements OnInit {
     this.fg = this.stateSvc.contactForm;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.fg.controls.ext.enable();
+  }
+
+  toggleExtension(fc: FormControl) {
+    console.log(fc);
+    return fc.parent.controls['sms'].value ? fc.enable() : fc.disable();
+  }
 }
