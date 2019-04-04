@@ -14,7 +14,7 @@ import {
 export class ContactBlockComponent implements OnInit {
   @Input() phone: string = '1-250-555-5555';
   @Input() email: string = 'mail@mail.com';
-  @Input() preferredContact: string = 'Email';
+  @Input() contactMethod: string = 'Email';
   constructor() {}
 
   ngOnInit() {}
