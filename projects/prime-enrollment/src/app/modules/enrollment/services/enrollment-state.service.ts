@@ -50,12 +50,12 @@ export class EnrollmentStateService {
 
   validateProfessionalForm(fg: FormGroup): boolean {
     if (fg.invalid) return false;
-    if (fg.controls.collegeCert) {
+    if (fg.controls.collegeCert.value) {
       for (const form of this._certForms) {
         if (form.invalid) return false;
       }
     }
-    if (fg.controls.deviceProvider) {
+    if (fg.controls.deviceProvider.value) {
       if (this.dpFa.invalid) return false;
     }
     return true;
@@ -72,6 +72,10 @@ export class EnrollmentStateService {
       case 2:
         return this.contactForm.valid;
       case 3:
+        console.log(
+          'professional form',
+          this.validateProfessionalForm(this.professionalForm)
+        );
         return this.validateProfessionalForm(this.professionalForm);
       case 4:
         return this.declarationForm.valid;
@@ -86,7 +90,6 @@ export class EnrollmentStateService {
     const index = this.currentIndex;
     let i = 1;
     for (i; i <= index; i++) {
-      console.log('check', this.isIndexValid(i));
       if (!this.isIndexValid(i)) return false;
     }
     return true;
