@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedCoreModule } from 'moh-common-lib';
 import { HomePageComponent } from './components/home-page/home-page.component';
-import { EnrollmentProfileComponent } from './components/enrollment-profile/enrollment-profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TypeaheadModule, BsDropdownModule } from 'ngx-bootstrap';
@@ -34,7 +33,6 @@ import { PrimeSharedModule } from '../../../../../src/app/prime-shared/prime-sha
 @NgModule({
   declarations: [
     HomePageComponent,
-    EnrollmentProfileComponent,
     // ProfileComponent,
     PhoneInputComponent,
     SharedProfileComponent,
@@ -74,7 +72,6 @@ import { PrimeSharedModule } from '../../../../../src/app/prime-shared/prime-sha
     SharedCoreModule,
     NgSelectModule,
     HomePageComponent,
-    EnrollmentProfileComponent,
     PhoneInputComponent,
     SharedProfileComponent,
     NgxIntlTelInputComponent,

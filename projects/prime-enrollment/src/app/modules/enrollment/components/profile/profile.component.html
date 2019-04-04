@@ -6,9 +6,10 @@
       Information received from BCSC - Ministry verbage required
     </p> -->
 
-    <enroll-enrollment-profile [data]="enrollStateSvc.profileForm" [editIdentityInfo]='false' [countries]="provinces"
-      [provinces]="countries">
-    </enroll-enrollment-profile>
+    <prime-profile [data]='enrollStateSvc.profileForm'
+                   [countryList]='countries | async'
+                   [provinceList]='provinces | async'
+                   [editIdentityInfo]="false"></prime-profile>
     <!-- Display bar during registration -->
 
   </form>
