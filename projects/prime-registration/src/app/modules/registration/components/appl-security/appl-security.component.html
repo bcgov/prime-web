@@ -22,7 +22,7 @@
     </label>
   </div>
 
-  <prime-page-sections layout='tips'>
+  <common-page-section layout='tips'>
     <div class="form-group col-sm-4 p-sm-0">
       <prime-phone-number [displayMask]="isCanada"
                           [(value)]="mfaSMSphone"
@@ -36,7 +36,7 @@
        Details<br>
        Activate for enhanced account security<br><br><br>
     </aside>
-  </prime-page-sections>
+  </common-page-section>
 </div>
 
 <!-- Use Security Key OPTION -->
@@ -54,7 +54,7 @@
 
   <ng-content select="[identityInstruct]"></ng-content>
 
-  <prime-page-sections layout='tips'>
+  <common-page-section layout='tips'>
     <div class="form-group col-sm-6 p-sm-0">
       <label class="control-label">Security Key</label>
         <p> This is an informative text blurb </p>
@@ -64,7 +64,7 @@
         Details<br>
         Activate for enhanced account security<br><br><br>
       </aside>
-  </prime-page-sections>
+  </common-page-section>
 </div>
 
 <!-- Use Mobile App Authentication OPTION -->
@@ -82,7 +82,7 @@
 
   <ng-content select="[identityInstruct]"></ng-content>
 
-  <prime-page-sections layout='tips'>
+  <common-page-section layout='tips'>
     <div class="form-group col-sm-6 p-sm-0">
       <label class="control-label">App Code</label>
         <p> This is an informative text blurb </p>
@@ -92,5 +92,5 @@
       Details<br>
       Activate for enhanced account security<br><br><br>
     </aside>
-  </prime-page-sections>
+  </common-page-section>
 </div>
