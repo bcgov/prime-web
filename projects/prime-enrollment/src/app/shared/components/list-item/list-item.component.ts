@@ -28,7 +28,6 @@ export class ListItemComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.sub = this.fc.valueChanges.subscribe(obs => {
-      console.log(this);
       this.selected.emit(obs);
     });
   }
@@ -38,7 +37,6 @@ export class ListItemComponent implements OnInit, OnDestroy {
   }
 
   toggled(bool: boolean) {
-    console.log(bool);
     return this.selected.emit(bool);
   }
 }

@@ -19,11 +19,9 @@ export class ProfessionalComponent implements OnInit {
 
   constructor(private stateSvc: EnrollmentStateService) {
     this.fg = this.stateSvc.professionalForm;
-    // console.log(this.fa);
     this.certFa = this.stateSvc.certForms;
     this.dpFa = this.stateSvc.dpFa;
     this.onBehalfOfOptions = of(options);
-    this.fg.valueChanges.subscribe(obs => console.log(this.fg));
   }
 
   ngOnInit() {}

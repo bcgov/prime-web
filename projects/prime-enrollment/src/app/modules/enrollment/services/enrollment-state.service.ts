@@ -72,10 +72,6 @@ export class EnrollmentStateService {
       case 2:
         return this.contactForm.valid;
       case 3:
-        console.log(
-          'professional form',
-          this.validateProfessionalForm(this.professionalForm)
-        );
         return this.validateProfessionalForm(this.professionalForm);
       case 4:
         return this.declarationForm.valid;

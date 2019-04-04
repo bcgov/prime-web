@@ -13,11 +13,7 @@ import {
 })
 export class ListItemHeaderComponent implements OnInit {
   @Input() headers: string[];
-  constructor() {
-    console.log(this);
-  }
+  constructor() {}
 
-  ngOnInit() {
-    console.log(this);
-  }
+  ngOnInit() {}
 }
