@@ -6,9 +6,9 @@
 
   <div class="form-row align-items-end">
     <div class="col-auto">
-      <label for="docType">Document Type</label>
-      <ng-select name='docType' labelForId='docType' [(ngModel)]='docTypeDropdownValue' [items]='docTypesList'
-        bindLabel='name' bindValue='name' placeholder='Choose' #docTypeEl='ngModel' [clearable]='false'
+      <label for="docTypes">Document Type</label>
+      <ng-select name='docTypes' labelForId='docType' [(ngModel)]='docTypeDropdownValue' [items]='docTypesList'
+        bindLabel='docType' bindValue='docType' placeholder='Choose' #docTypeEl='ngModel' [clearable]='false'
         [searchable]='false' (change)='updateValidation()' [required]='documents.length === 0'></ng-select>
     </div>
 
@@ -16,6 +16,7 @@
     <div class="col-auto">
       <button class="btn btn-secondary" (click)='add()' [disabled]='addDisabled()'>Add</button>
     </div>
+  </div>
   </div>
 
   <div *ngIf="docTypeEl.touched || formRef.submitted" role="alert" class='error-container' aria-live="assertive">
@@ -54,13 +55,13 @@
 
   <prime-page-sections layout='tips'>
     <div class="d-flex align-items-baseline flex-wrap">
-      <common-datepicker class='d-inline-block mr-3' labelText='{{section.type.name}} Expiry' [onlyFutureDates]='"true"'
-        [required]='true' [(date)]='section.expiry'>
+      <common-datepicker class='d-inline-block mr-3' labelText='{{section.type.docType}} Expiry'
+        [onlyFutureDates]='"true"' [required]='true' [(date)]='section.expiry'>
       </common-datepicker>
       <a href="#" class='nowrap'>Sample Document</a>
     </div>
 
-    <common-file-uploader [(images)]='section.images' [id]='section.type.name'
+    <common-file-uploader [(images)]='section.images' [id]='section.type.docType'
       (imagesChange)='onImagesChange(section, $event)' [required]='true'>
       <span id="uploadInstruction" tabindex="0" #uploadInstruction>
         Please upload required documents
@@ -68,7 +69,7 @@
     </common-file-uploader>
 
     <aside>
-      {{ section.type.tips }}
+      {{ section.type.description }}
     </aside>
   </prime-page-sections>
 </div>

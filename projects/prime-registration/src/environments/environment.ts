@@ -4,9 +4,16 @@
 
 export const environment = {
   production: false,
-  
+
   /** Front-end development without backend */
-  useMockBackend: true
+  useMockBackend: false,
+
+
+  /** Base url for all Cache requests.
+   * Note: This should be a relative URL, not absolute, so it can properly map to dev/test/prod.
+   */
+  cacheAPIUrl: '/api/reg/rest/getCache',
+  baseAPIUrl: '/api/rest/'
 };
 
 /*

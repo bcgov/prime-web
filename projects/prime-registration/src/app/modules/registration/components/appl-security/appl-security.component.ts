@@ -1,4 +1,4 @@
-import { Component, OnInit, forwardRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, forwardRef, Output, EventEmitter, Input } from '@angular/core';
 import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
 import { Registrant } from '../../models/registrant.model';
 import { ControlContainer, NgForm } from '@angular/forms';
@@ -11,49 +11,40 @@ import { ControlContainer, NgForm } from '@angular/forms';
 })
 export class ApplSecurityComponent implements OnInit {
 
-  @Output() dataValid: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() isCanada: boolean = true;
+  @Input() isSubmitted: boolean = false;
+  @Input() data: Registrant;
+  @Output() dataChange: EventEmitter<Registrant> = new EventEmitter<Registrant>();
 
-  // MFA options
-  public useMobile: boolean = false;
-  public useSecurity: boolean = false;
-  public useApp: boolean = false;
+  constructor() {}
 
-  public submitted: boolean = false;
+  ngOnInit() {}
 
-  private form: NgForm;
-
-  constructor( private primeDataService: RegistrationDataService,
-               private cntrlContainer: ControlContainer ) {
+  set mfaSMSphone( phone: string ) {
+    this.data.mfaSMSphone = phone;
+    this.dataChange.emit( this.data );
   }
 
-  ngOnInit() {
-    this.form = (this.cntrlContainer as NgForm);
-
-    // Listen for submission of form
-    this.form.ngSubmit.subscribe( val => this.validateInfo( val ) );
+  get mfaSMSphone() {
+    return this.data.mfaSMSphone;
   }
 
-  get registrant(): Registrant {
-    return this.primeDataService.registrant;
+  hasMfaMethod(): boolean {
+    return this.data.hasMfaMethod();
   }
 
-
-  isCanada(): boolean {
-    return this.primeDataService.isCanada();
+  setUseMfaApp( useMethod: boolean ) {
+    this.data.useMfaApp = useMethod;
+    this.dataChange.emit( this.data );
   }
 
-  private validateInfo( val: any ) {
+  setUseMfaSMS( useMethod: boolean ) {
+    this.data.useMfaSMS = useMethod;
+    this.dataChange.emit( this.data );
+  }
 
-    let valid: boolean = false;
-
-    // form has been submitted
-    this.submitted = true;
-
-    if ( this.form.valid ) {
-      // Need to verify MFA options selected
-      // Token has to have Canadian address otherwise not valid option
-      valid  = (this.useApp || this.useMobile || this.useSecurity);
-    }
-    this.dataValid.emit( valid );
+  setUseMfaSecurityKey( useMethod: boolean ) {
+    this.data.useMfaSecurityKey = useMethod;
+    this.dataChange.emit( this.data );
   }
 }

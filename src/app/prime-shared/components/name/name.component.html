@@ -1,12 +1,13 @@
 
-<label for='name_{{objectId}}' class="control-label">{{label}}</label>
+<label for='{{objectID}}' class="control-label">{{label}}</label>
 <input #nameRef="ngModel"
         type="text"
         class="form-control"
-        name="name_{{objectId}}"
-        id="name_{{objectId}}"
+        name="{{objectID}}"
+        id="{{objectID}}"
         [ngModel]="nameStr"
         (ngModelChange)="setName($event)"
+        (blur)="onInputBlur($event)"
         [pattern]="nameCriteria"
         [maxlength]="maxLen"
         [required]="required"

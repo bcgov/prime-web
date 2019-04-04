@@ -1,12 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ApiStatusCodes } from '@prime-core/models/api-status-codes.enum';
+import { ApiStatusCodes } from '@prime-core/models/api-base.model';
 
 @Component({
-  selector: 'prime-appl-confirmation',
-  templateUrl: './appl-confirmation.component.html',
-  styleUrls: ['./appl-confirmation.component.scss']
+  selector: 'prime-confirmation',
+  templateUrl: './confirmation.component.html',
+  styleUrls: ['./confirmation.component.scss']
 })
-export class ApplConfirmationComponent implements OnInit {
+export class ConfirmationComponent implements OnInit {
 
   @Input() displayIcon: ApiStatusCodes = ApiStatusCodes.SUCCESS;
   @Input() hasQrCode: boolean = false;
@@ -28,5 +28,4 @@ export class ApplConfirmationComponent implements OnInit {
   get warningCode() {
     return ApiStatusCodes.WARNING;
   }
-
 }

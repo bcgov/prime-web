@@ -5,6 +5,11 @@ import { Document } from '@prime-core/models/documents.interface';
 
 @Injectable()
 export class RegistrationDataService {
+
+  // Session identifier
+  public eventUUID: string;
+
+  // Information pertaining to registrant
   public registrant: Registrant;
 
   // TODO - CHANGE! Needs to be a nested array and first type should be meta-data (e.g. driver's license? passport?)

@@ -24,3 +24,14 @@ export class PrimeConstants {
   public static SECURITY_PG = 'security';
   public static CONFIRMATION_PG = 'confirmation';
 }
+
+export enum RegCredTypes {
+  MOH = 'MOH',
+  BCSC = 'BCSC'
+}
+
+export enum AssuranceLevel {
+  LEVEL_1 = '1',
+  LEVEL_2 = '2',
+  LEVEL_3 = '3'
+}

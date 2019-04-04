@@ -1,385 +1,70 @@
 import { Injectable } from '@angular/core';
-import { DocumentType } from '@prime-core/models/documents.interface';
-
+import { Observable, BehaviorSubject } from 'rxjs';
+import { CacheApiService } from '@prime-core/services/cache-api.service';
+import { map } from 'rxjs/operators';
+import { CountryList, ProvinceList } from '@prime-core/prime-shared/components/address/address.component';
+import { StatusMsgInterface } from '@prime-core/models/api-base.model';
 /**
  * TODO: Set up service to store data returned from the cache service once
  *       determined how it will be configured/setup
  */
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class CacheService {
 
+  // We use private BehaviorSubjects to cache results instead of having repeat
+  // HTTP requests. This way the response is cached for the lifetime of the
+  // session.
+  private $provinceListSubject: BehaviorSubject<ProvinceList[]> = new BehaviorSubject([]);
+  private $countrylistSubject: BehaviorSubject<CountryList[]> = new BehaviorSubject([]);
+  private $enhancedMessagesSubject: BehaviorSubject<StatusMsgInterface[]> = new BehaviorSubject([]);
+  private $securityQuestionsSubject: BehaviorSubject<StatusMsgInterface[]> = new BehaviorSubject([]);
+
   /**
-   * Security NFRs
-   *  a) NFR-C: Security - UserID minimum 6 characters in length
-   *  b) NFR-C-OCIO: Security - Password minimum 8 characters in length
+   * Message List
+   * Populated via call to reg/rest/getCache?param=messages
    */
-  public userIDMinLen: string = '6';
-  public pwdMinLen: string = '8';
-
+  public $enhancedMsgList = this.$enhancedMessagesSubject.asObservable();
 
   /**
-   * TODO: Make calls to cache service to retrieve questions, or some other
-   *       method that allows modification without changing source code
-   *  a) NFR-Configurability - Available security questions
-   *  b) NFR-Configurability - Number of security questions to setup
+   * Country List
+   * Populated via call to reg/rest/getCache?param=countries
+   */
+  public $countryList: Observable<CountryList[]> = this.$countrylistSubject.asObservable();
+
+  /**
+   * Province List
+   * Populated via call to reg/rest/getCache?param=provinces
+   */
+  public $provinceList: Observable<ProvinceList[]> = this.$provinceListSubject.asObservable();
+
+  /**
+   * Security questions list
+   * populated via call to reg/rest/getCache?param=securityQues
+   */
+  public $securityQuestionsList: Observable<StatusMsgInterface[]> = this.$securityQuestionsSubject.asObservable();
+
+  constructor(protected cacheApiService: CacheApiService) {
+    this.setupBehaviorSubject('provinces', 'province', this.$provinceListSubject);
+    this.setupBehaviorSubject('countries', 'country', this.$countrylistSubject);
+    this.setupBehaviorSubject('messages', 'messages', this.$enhancedMessagesSubject);
+    this.setupBehaviorSubject('securityQues', 'secQues', this.$securityQuestionsSubject);
+  }
+
+  /**
+   * A simple helper to setup BehaviorSubjects and Observables with API data.
+   * HTTP requests will be sent out immediately at application load.
    *
+   * We use BehaviorSubjects to cache values to stop repeat responses. This
+   * requires that the properties are already setup on the class, including the
+   * Observable and BehaviorSubject.
+   *
+   * @param cacheName the name of the parameter to pass to getCache()
+   * @param propertyName the name of the property on the response we want
+   * @param $subject the BehaviorSubject to emit the value found at propertyName
    */
-  public numSecQuestion: number = 3;
-  public secQuestionList: string[] = [
-    'What was your first pet\'s name?',
-    'What was the make of your first car?',
-    'What was the last name of your favorite teacher?',
-    'What was the last name of your childhood best friend?',
-    'What is your oldest cousin\'s first name',
-    'What town was your father born in?',
-    'What town was your mother born in?',
-    'Where did you meet your spouse?',
-    'What is the name of your favorite book?'
-  ];
+  private setupBehaviorSubject<T>( cacheName: string, propertyName: string, $subject: BehaviorSubject<T> ) {
+    this.cacheApiService.getCache(cacheName).pipe(map(x => x[propertyName]))
+      .subscribe(val => $subject.next(val));
+  }
 
-  /**
-   * Country list { countryCode: string, description: string }
-   * TODO: Data to be stored in database and pushed to cache service, confirm format of JSON
-   *       message and REST call
-   */
-  public countryList = [
-   { countryCode: 'AFG', description: 'Afghanistan' },
-   { countryCode: 'ALA', description: 'Åland Islands' },
-   { countryCode: 'ALB', description: 'Albania' },
-   { countryCode: 'DZA', description: 'Algeria' },
-   { countryCode: 'ASM', description: 'American Samoa' },
-   { countryCode: 'AND', description: 'Andorra' },
-   { countryCode: 'AGO', description: 'Angola' },
-   { countryCode: 'AIA', description: 'Anguilla' },
-   { countryCode: 'ATA', description: 'Antarctica' },
-   { countryCode: 'ATG', description: 'Antigua and Barbuda' },
-   { countryCode: 'ARG', description: 'Argentina' },
-   { countryCode: 'ARM', description: 'Armenia' },
-   { countryCode: 'ABW', description: 'Aruba' },
-   { countryCode: 'AUS', description: 'Australia' },
-   { countryCode: 'AUT', description: 'Austria' },
-   { countryCode: 'AZE', description: 'Azerbaijan' },
-   { countryCode: 'BHS', description: 'Bahamas' },
-   { countryCode: 'BHR', description: 'Bahrain' },
-   { countryCode: 'BGD', description: 'Bangladesh' },
-   { countryCode: 'BRB', description: 'Barbados' },
-   { countryCode: 'BLR', description: 'Belarus' },
-   { countryCode: 'BEL', description: 'Belgium' },
-   { countryCode: 'BLZ', description: 'Belize' },
-   { countryCode: 'BEN', description: 'Benin' },
-   { countryCode: 'BMU', description: 'Bermuda' },
-   { countryCode: 'BTN', description: 'Bhutan' },
-   { countryCode: 'BOL', description: 'Bolivia, Plurinational State of' },
-   { countryCode: 'BES', description: 'Bonaire, Sint Eustatius and Saba' },
-   { countryCode: 'BIH', description: 'Bosnia and Herzegovina' },
-   { countryCode: 'BWA', description: 'Botswana' },
-   { countryCode: 'BVT', description: 'Bouvet Island' },
-   { countryCode: 'BRA', description: 'Brazil' },
-   { countryCode: 'IOT', description: 'British Indian Ocean Territory' },
-   { countryCode: 'BRN', description: 'Brunei Darussalam' },
-   { countryCode: 'BGR', description: 'Bulgaria' },
-   { countryCode: 'BFA', description: 'Burkina Faso' },
-   { countryCode: 'BDI', description: 'Burundi' },
-   { countryCode: 'KHM', description: 'Cambodia' },
-   { countryCode: 'CMR', description: 'Cameroon' },
-   { countryCode: 'CAN', description: 'Canada' },
-   { countryCode: 'CPV', description: 'Cape Verde' },
-   { countryCode: 'CYM', description: 'Cayman Islands' },
-   { countryCode: 'CAF', description: 'Central African Republic' },
-   { countryCode: 'TCD', description: 'Chad' },
-   { countryCode: 'CHL', description: 'Chile' },
-   { countryCode: 'CHN', description: 'China' },
-   { countryCode: 'CXR', description: 'Christmas Island' },
-   { countryCode: 'CCK', description: 'Cocos (Keeling) Islands' },
-   { countryCode: 'COL', description: 'Colombia' },
-   { countryCode: 'COM', description: 'Comoros' },
-   { countryCode: 'COG', description: 'Congo' },
-   { countryCode: 'COD', description: 'Congo, the Democratic Republic of the' },
-   { countryCode: 'COK', description: 'Cook Islands' },
-   { countryCode: 'CRI', description: 'Costa Rica' },
-   { countryCode: 'CIV', description: 'Côte d\'Ivoire' },
-   { countryCode: 'HRV', description: 'Croatia' },
-   { countryCode: 'CUB', description: 'Cuba' },
-   { countryCode: 'CUW', description: 'Curaçao' },
-   { countryCode: 'CYP', description: 'Cyprus' },
-   { countryCode: 'CZE', description: 'Czech Republic' },
-   { countryCode: 'DNK', description: 'Denmark' },
-   { countryCode: 'DJI', description: 'Djibouti' },
-   { countryCode: 'DMA', description: 'Dominica' },
-   { countryCode: 'DOM', description: 'Dominican Republic' },
-   { countryCode: 'ECU', description: 'Ecuador' },
-   { countryCode: 'EGY', description: 'Egypt' },
-   { countryCode: 'SLV', description: 'El Salvador' },
-   { countryCode: 'GNQ', description: 'Equatorial Guinea' },
-   { countryCode: 'ERI', description: 'Eritrea' },
-   { countryCode: 'EST', description: 'Estonia' },
-   { countryCode: 'ETH', description: 'Ethiopia' },
-   { countryCode: 'FLK', description: 'Falkland Islands (Malvinas)' },
-   { countryCode: 'FRO', description: 'Faroe Islands' },
-   { countryCode: 'FJI', description: 'Fiji' },
-   { countryCode: 'FIN', description: 'Finland' },
-   { countryCode: 'FRA', description: 'France' },
-   { countryCode: 'GUF', description: 'French Guiana' },
-   { countryCode: 'PYF', description: 'French Polynesia' },
-   { countryCode: 'ATF', description: 'French Southern Territories' },
-   { countryCode: 'GAB', description: 'Gabon' },
-   { countryCode: 'GMB', description: 'Gambia' },
-   { countryCode: 'GEO', description: 'Georgia' },
-   { countryCode: 'DEU', description: 'Germany' },
-   { countryCode: 'GHA', description: 'Ghana' },
-   { countryCode: 'GIB', description: 'Gibraltar' },
-   { countryCode: 'GRC', description: 'Greece' },
-   { countryCode: 'GRL', description: 'Greenland' },
-   { countryCode: 'GRD', description: 'Grenada' },
-   { countryCode: 'GLP', description: 'Guadeloupe' },
-   { countryCode: 'GUM', description: 'Guam' },
-   { countryCode: 'GTM', description: 'Guatemala' },
-   { countryCode: 'GGY', description: 'Guernsey' },
-   { countryCode: 'GIN', description: 'Guinea' },
-   { countryCode: 'GNB', description: 'Guinea-Bissau' },
-   { countryCode: 'GUY', description: 'Guyana' },
-   { countryCode: 'HTI', description: 'Haiti' },
-   { countryCode: 'HMD', description: 'Heard Island and McDonald Islands' },
-   { countryCode: 'VAT', description: 'Holy See (Vatican City State)' },
-   { countryCode: 'HND', description: 'Honduras' },
-   { countryCode: 'HKG', description: 'Hong Kong' },
-   { countryCode: 'HUN', description: 'Hungary' },
-   { countryCode: 'ISL', description: 'Iceland' },
-   { countryCode: 'IND', description: 'India' },
-   { countryCode: 'IDN', description: 'Indonesia' },
-   { countryCode: 'IRN', description: 'Iran, Islamic Republic of' },
-   { countryCode: 'IRQ', description: 'Iraq' },
-   { countryCode: 'IRL', description: 'Ireland' },
-   { countryCode: 'IMN', description: 'Isle of Man' },
-   { countryCode: 'ISR', description: 'Israel' },
-   { countryCode: 'ITA', description: 'Italy' },
-   { countryCode: 'JAM', description: 'Jamaica' },
-   { countryCode: 'JPN', description: 'Japan' },
-   { countryCode: 'JEY', description: 'Jersey' },
-   { countryCode: 'JOR', description: 'Jordan' },
-   { countryCode: 'KAZ', description: 'Kazakhstan' },
-   { countryCode: 'KEN', description: 'Kenya' },
-   { countryCode: 'KIR', description: 'Kiribati' },
-   { countryCode: 'PRK', description: 'Korea, Democratic People\'s Republic of' },
-   { countryCode: 'KOR', description: 'Korea, Republic of' },
-   { countryCode: 'KWT', description: 'Kuwait' },
-   { countryCode: 'KGZ', description: 'Kyrgyzstan' },
-   { countryCode: 'LAO', description: 'Lao People\'s Democratic Republic' },
-   { countryCode: 'LVA', description: 'Latvia' },
-   { countryCode: 'LBN', description: 'Lebanon' },
-   { countryCode: 'LSO', description: 'Lesotho' },
-   { countryCode: 'LBR', description: 'Liberia' },
-   { countryCode: 'LBY', description: 'Libya' },
-   { countryCode: 'LIE', description: 'Liechtenstein' },
-   { countryCode: 'LTU', description: 'Lithuania' },
-   { countryCode: 'LUX', description: 'Luxembourg' },
-   { countryCode: 'MAC', description: 'Macao' },
-   { countryCode: 'MKD', description: 'Macedonia, the former Yugoslav Republic of' },
-   { countryCode: 'MDG', description: 'Madagascar' },
-   { countryCode: 'MWI', description: 'Malawi' },
-   { countryCode: 'MYS', description: 'Malaysia' },
-   { countryCode: 'MDV', description: 'Maldives' },
-   { countryCode: 'MLI', description: 'Mali' },
-   { countryCode: 'MLT', description: 'Malta' },
-   { countryCode: 'MHL', description: 'Marshall Islands' },
-   { countryCode: 'MTQ', description: 'Martinique' },
-   { countryCode: 'MRT', description: 'Mauritania' },
-   { countryCode: 'MUS', description: 'Mauritius' },
-   { countryCode: 'MYT', description: 'Mayotte' },
-   { countryCode: 'MEX', description: 'Mexico' },
-   { countryCode: 'FSM', description: 'Micronesia, Federated States of' },
-   { countryCode: 'MDA', description: 'Moldova, Republic of' },
-   { countryCode: 'MCO', description: 'Monaco' },
-   { countryCode: 'MNG', description: 'Mongolia' },
-   { countryCode: 'MNE', description: 'Montenegro' },
-   { countryCode: 'MSR', description: 'Montserrat' },
-   { countryCode: 'MAR', description: 'Morocco' },
-   { countryCode: 'MOZ', description: 'Mozambique' },
-   { countryCode: 'MMR', description: 'Myanmar' },
-   { countryCode: 'NAM', description: 'Namibia' },
-   { countryCode: 'NRU', description: 'Nauru' },
-   { countryCode: 'NPL', description: 'Nepal' },
-   { countryCode: 'NLD', description: 'Netherlands' },
-   { countryCode: 'NCL', description: 'New Caledonia' },
-   { countryCode: 'NZL', description: 'New Zealand' },
-   { countryCode: 'NIC', description: 'Nicaragua' },
-   { countryCode: 'NER', description: 'Niger' },
-   { countryCode: 'NGA', description: 'Nigeria' },
-   { countryCode: 'NIU', description: 'Niue' },
-   { countryCode: 'NFK', description: 'Norfolk Island' },
-   { countryCode: 'MNP', description: 'Northern Mariana Islands' },
-   { countryCode: 'NOR', description: 'Norway' },
-   { countryCode: 'OMN', description: 'Oman' },
-   { countryCode: 'PAK', description: 'Pakistan' },
-   { countryCode: 'PLW', description: 'Palau' },
-   { countryCode: 'PSE', description: 'Palestinian Territory, Occupied' },
-   { countryCode: 'PAN', description: 'Panama' },
-   { countryCode: 'PNG', description: 'Papua New Guinea' },
-   { countryCode: 'PRY', description: 'Paraguay' },
-   { countryCode: 'PER', description: 'Peru' },
-   { countryCode: 'PHL', description: 'Philippines' },
-   { countryCode: 'PCN', description: 'Pitcairn' },
-   { countryCode: 'POL', description: 'Poland' },
-   { countryCode: 'PRT', description: 'Portugal' },
-   { countryCode: 'PRI', description: 'Puerto Rico' },
-   { countryCode: 'QAT', description: 'Qatar' },
-   { countryCode: 'REU', description: 'Réunion' },
-   { countryCode: 'ROU', description: 'Romania' },
-   { countryCode: 'RUS', description: 'Russian Federation' },
-   { countryCode: 'RWA', description: 'Rwanda' },
-   { countryCode: 'BLM', description: 'Saint Barthélemy' },
-   { countryCode: 'SHN', description: 'Saint Helena, Ascension and Tristan da Cunha' },
-   { countryCode: 'KNA', description: 'Saint Kitts and Nevis' },
-   { countryCode: 'LCA', description: 'Saint Lucia' },
-   { countryCode: 'MAF', description: 'Saint Martin (French part)' },
-   { countryCode: 'SPM', description: 'Saint Pierre and Miquelon' },
-   { countryCode: 'VCT', description: 'Saint Vincent and the Grenadines' },
-   { countryCode: 'WSM', description: 'Samoa' },
-   { countryCode: 'SMR', description: 'San Marino' },
-   { countryCode: 'STP', description: 'Sao Tome and Principe' },
-   { countryCode: 'SAU', description: 'Saudi Arabia' },
-   { countryCode: 'SEN', description: 'Senegal' },
-   { countryCode: 'SRB', description: 'Serbia' },
-   { countryCode: 'SYC', description: 'Seychelles' },
-   { countryCode: 'SLE', description: 'Sierra Leone' },
-   { countryCode: 'SGP', description: 'Singapore' },
-   { countryCode: 'SXM', description: 'Sint Maarten (Dutch part)' },
-   { countryCode: 'SVK', description: 'Slovakia' },
-   { countryCode: 'SVN', description: 'Slovenia' },
-   { countryCode: 'SLB', description: 'Solomon Islands' },
-   { countryCode: 'SOM', description: 'Somalia' },
-   { countryCode: 'ZAF', description: 'South Africa' },
-   { countryCode: 'SGS', description: 'South Georgia and the South Sandwich Islands' },
-   { countryCode: 'SSD', description: 'South Sudan' },
-   { countryCode: 'ESP', description: 'Spain' },
-   { countryCode: 'LKA', description: 'Sri Lanka' },
-   { countryCode: 'SDN', description: 'Sudan' },
-   { countryCode: 'SUR', description: 'Suriname' },
-   { countryCode: 'SJM', description: 'Svalbard and Jan Mayen' },
-   { countryCode: 'SWZ', description: 'Swaziland' },
-   { countryCode: 'SWE', description: 'Sweden' },
-   { countryCode: 'CHE', description: 'Switzerland' },
-   { countryCode: 'SYR', description: 'Syrian Arab Republic' },
-   { countryCode: 'TWN', description: 'Taiwan, Province of China' },
-   { countryCode: 'TJK', description: 'Tajikistan' },
-   { countryCode: 'TZA', description: 'Tanzania, United Republic of' },
-   { countryCode: 'THA', description: 'Thailand' },
-   { countryCode: 'TLS', description: 'Timor-Leste' },
-   { countryCode: 'TGO', description: 'Togo' },
-   { countryCode: 'TKL', description: 'Tokelau' },
-   { countryCode: 'TON', description: 'Tonga' },
-   { countryCode: 'TTO', description: 'Trinidad and Tobago' },
-   { countryCode: 'TUN', description: 'Tunisia' },
-   { countryCode: 'TUR', description: 'Turkey' },
-   { countryCode: 'TKM', description: 'Turkmenistan' },
-   { countryCode: 'TCA', description: 'Turks and Caicos Islands' },
-   { countryCode: 'TUV', description: 'Tuvalu' },
-   { countryCode: 'UGA', description: 'Uganda' },
-   { countryCode: 'UKR', description: 'Ukraine' },
-   { countryCode: 'ARE', description: 'United Arab Emirates' },
-   { countryCode: 'GBR', description: 'United Kingdom' },
-   { countryCode: 'USA', description: 'United States' },
-   { countryCode: 'UMI', description: 'United States Minor Outlying Islands' },
-   { countryCode: 'URY', description: 'Uruguay' },
-   { countryCode: 'UZB', description: 'Uzbekistan' },
-   { countryCode: 'VUT', description: 'Vanuatu' },
-   { countryCode: 'VEN', description: 'Venezuela, Bolivarian Republic of' },
-   { countryCode: 'VNM', description: 'Viet Nam' },
-   { countryCode: 'VGB', description: 'Virgin Islands, British' },
-   { countryCode: 'VIR', description: 'Virgin Islands, U.S.' },
-   { countryCode: 'WLF', description: 'Wallis and Futuna' },
-   { countryCode: 'ESH', description: 'Western Sahara' },
-   { countryCode: 'YEM', description: 'Yemen' },
-   { countryCode: 'ZMB', description: 'Zambia' },
-   { countryCode: 'ZWE', description: 'Zimbabwe' }
-  ];
-
-  /**
-   * Province list { country: string , provCode:string, description: string }
-   * TODO: Data to be stored in database and pushed to cache service, confirm format of JSON
-   *       message and REST call
-   */
-  public provinceList = [
-    { country: 'CAN', provCode: 'AB', description: 'Alberta' },
-    { country: 'CAN', provCode: 'BC', description: 'British Columbia' },
-    { country: 'CAN', provCode: 'MB', description: 'Manitoba' },
-    { country: 'CAN', provCode: 'NB', description: 'New Brunswick' },
-    { country: 'CAN', provCode: 'NL', description: 'Newfoundland and Labrador' },
-    { country: 'CAN', provCode: 'NS', description: 'Nova Scotia' },
-    { country: 'CAN', provCode: 'ON', description: 'Ontario' },
-    { country: 'CAN', provCode: 'PE', description: 'Prince Edward Island' },
-    { country: 'CAN', provCode: 'QC', description: 'Quebec' },
-    { country: 'CAN', provCode: 'SK', description: 'Saskatchewan' },
-    { country: 'CAN', provCode: 'NT', description: 'Northwest Territories' },
-    { country: 'CAN', provCode: 'NU', description: 'Nunavut' },
-    { country: 'CAN', provCode: 'YT', description: 'Yukon' },
-    { country: 'USA', provCode: 'AL', description: 'Alabama' },
-    { country: 'USA', provCode: 'AK', description: 'Alaska' },
-    { country: 'USA', provCode: 'AZ', description: 'Arizona' },
-    { country: 'USA', provCode: 'AR', description: 'Arkansas' },
-    { country: 'USA', provCode: 'CA', description: 'California' },
-    { country: 'USA', provCode: 'CO', description: 'Colorado' },
-    { country: 'USA', provCode: 'CT', description: 'Connecticut' },
-    { country: 'USA', provCode: 'DE', description: 'Delaware' },
-    { country: 'USA', provCode: 'DC', description: 'District Of Columbia' },
-    { country: 'USA', provCode: 'FL', description: 'Florida' },
-    { country: 'USA', provCode: 'GA', description: 'Georgia' },
-    { country: 'USA', provCode: 'HI', description: 'Hawaii' },
-    { country: 'USA', provCode: 'ID', description: 'Idaho' },
-    { country: 'USA', provCode: 'IL', description: 'Illinois' },
-    { country: 'USA', provCode: 'IN', description: 'Indiana' },
-    { country: 'USA', provCode: 'IA', description: 'Iowa' },
-    { country: 'USA', provCode: 'KS', description: 'Kansas' },
-    { country: 'USA', provCode: 'KY', description: 'Kentucky' },
-    { country: 'USA', provCode: 'LA', description: 'Louisiana' },
-    { country: 'USA', provCode: 'ME', description: 'Maine' },
-    { country: 'USA', provCode: 'MD', description: 'Maryland' },
-    { country: 'USA', provCode: 'MA', description: 'Massachusetts' },
-    { country: 'USA', provCode: 'MI', description: 'Michigan' },
-    { country: 'USA', provCode: 'MN', description: 'Minnesota' },
-    { country: 'USA', provCode: 'MS', description: 'Mississippi' },
-    { country: 'USA', provCode: 'MO', description: 'Missouri' },
-    { country: 'USA', provCode: 'MT', description: 'Montana' },
-    { country: 'USA', provCode: 'NE', description: 'Nebraska' },
-    { country: 'USA', provCode: 'NV', description: 'Nevada' },
-    { country: 'USA', provCode: 'NH', description: 'New Hampshire' },
-    { country: 'USA', provCode: 'NJ', description: 'New Jersey' },
-    { country: 'USA', provCode: 'NM', description: 'New Mexico' },
-    { country: 'USA', provCode: 'NY', description: 'New York' },
-    { country: 'USA', provCode: 'NC', description: 'North Carolina' },
-    { country: 'USA', provCode: 'ND', description: 'North Dakota' },
-    { country: 'USA', provCode: 'OH', description: 'Ohio' },
-    { country: 'USA', provCode: 'OK', description: 'Oklahoma' },
-    { country: 'USA', provCode: 'OR', description: 'Oregon' },
-    { country: 'USA', provCode: 'PA', description: 'Pennsylvania' },
-    { country: 'USA', provCode: 'RI', description: 'Rhode Island' },
-    { country: 'USA', provCode: 'SC', description: 'South Carolina' },
-    { country: 'USA', provCode: 'SD', description: 'South Dakota' },
-    { country: 'USA', provCode: 'TN', description: 'Tennessee' },
-    { country: 'USA', provCode: 'TX', description: 'Texas' },
-    { country: 'USA', provCode: 'UT', description: 'Utah' },
-    { country: 'USA', provCode: 'VT', description: 'Vermont' },
-    { country: 'USA', provCode: 'VA', description: 'Virginia' },
-    { country: 'USA', provCode: 'WA', description: 'Washington' },
-    { country: 'USA', provCode: 'WV', description: 'West Virginia' },
-    { country: 'USA', provCode: 'WI', description: 'Wisconsin' },
-    { country: 'USA', provCode: 'WY', description: 'Wyoming' }
-  ];
-
-
-  DocumentTypes: DocumentType[] = [
-    {
-      name: 'Driver\'s License',
-      tips: 'Scan the document or take a photo of it.  Make sure that it\'s: <br/>-test test'
-    },
-    {
-      name: 'Passport',
-      tips: 'passport tips etc etc etc',
-    }
-  ];
-
-  constructor() { }
 }

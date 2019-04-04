@@ -7,31 +7,33 @@
 
   <prime-page-sections layout='tips'>
     <div class="form-group col-sm-6 p-sm-0">
-      <prime-name [label]="'First Name'"
-                  [required]="firstNameRequired"
+      <prime-name label="First Name"
                   [disabled]="!editIdentityInfo"
-                  [(nameStr)]="registrant.firstName"></prime-name>
+                  [(nameStr)]="data.firstName"
+                  (blurEvent)="onBlur($event)"
+                  objectID="first_name"></prime-name>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <prime-name [label]="'Middle Name'"
-                  [required]="false"
+      <prime-name label="Middle Name"
                   [disabled]="!editIdentityInfo"
-                  [(nameStr)]="registrant.middleName"></prime-name>
+                  [(nameStr)]="data.middleName"
+                  objectID="middle_name"></prime-name>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <prime-name [label]="'Last Name'"
+      <prime-name label="Last Name"
                   [required]="true"
                   [disabled]="!editIdentityInfo"
-                  [(nameStr)]="registrant.lastName"></prime-name>
+                  [(nameStr)]="data.lastName"
+                  objectID="last_name"></prime-name>
     </div>
 
     <div class="col-sm-6 p-sm-0">
       <common-date [disabled]="!editIdentityInfo"
                    [label]="dateLabel"
                    [restrictDate]="'past'"
-                   [(date)]="registrant.dateOfBirth"></common-date>
+                   [(date)]="data.dateOfBirth"></common-date>
     </div>
 
     <aside>TIPS</aside>
@@ -48,22 +50,23 @@
 
   <prime-page-sections layout='tips'>
     <div class="form-group col-sm-6 p-sm-0">
-      <prime-name [label]="'Preferred First Name'"
-                  [required]="preferredIsRequired"
-                  [(nameStr)]="registrant.preferredFirstName"></prime-name>
+      <prime-name label="Preferred First Name"
+                  [(nameStr)]="data.preferredFirstName"
+                  objectID="preferred_first_name"
+                  (blurEvent)="onBlur($event)"></prime-name>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <prime-name [label]="'Preferred Middle Name'"
-                  [required]="false"
-                  [(nameStr)]="registrant.preferredMiddleName"></prime-name>
+      <prime-name label="Preferred Middle Name"
+                  [(nameStr)]="data.preferredMiddleName"
+                  objectID="preferred_middle_name"></prime-name>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <prime-name [label]="'Preferred Last Name'"
-                  [required]="preferredIsRequired"
-                  [required]="false"
-                  [(nameStr)]="registrant.preferredLastName"></prime-name>
+      <prime-name label="Preferred Last Name"
+                  [(nameStr)]="data.preferredLastName"
+                  objectID="preferred_last_name"
+                  (blurEvent)="onBlur($event)"></prime-name>
     </div>
     <aside>TIPS</aside>
   </prime-page-sections>
@@ -72,7 +75,7 @@
 <prime-page-sections layout='double'>
     <h2 class="border-bottom">Address</h2>
     <prime-address [disabled]="!editIdentityInfo"
-                   [(address)]="registrant.address"
+                   [(address)]="data.address"
                    [defaultCountry]="defaultCountry"
                    [countryList]="countryList"
                    [defaultProvince]="defaultProvince"
@@ -82,7 +85,7 @@
       <input type="checkbox"
              class="custom-control-input"
              id="isMailingAddress"
-             [checked]="registrant.identityIsMailingAddress"
+             [checked]="data.identityIsMailingAddress"
              (click)="toggleCheckBox()"/>
       <label class="custom-control-label" for="isMailingAddress">
         This is my mailing address.
@@ -90,8 +93,8 @@
     </div>
   <aside>
     <h2 class="border-bottom">Mailing Address</h2>
-    <div *ngIf="!registrant.identityIsMailingAddress; else NoMailingAddress">
-        <prime-address [(address)]="registrant.mailAddress"
+    <div *ngIf="!data.identityIsMailingAddress; else NoMailingAddress">
+        <prime-address [(address)]="data.mailAddress"
                        [defaultCountry]="defaultCountry"
                        [countryList]="countryList"
                        [defaultProvince]="defaultProvince"

@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractForm } from 'moh-common-lib/models';
 import { Router } from '@angular/router';
-import { PrimeConstants } from '@prime-core/models/prime-constants';
+import { RegCredTypes } from '@prime-core/models/prime-constants';
+import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
+import { RegCacheService } from '@prime-registration/services/reg-cache.service';
+import { UserAttrPayload } from '@prime-registration/modules/registration/models/register-api.model';
+import { RegisterApiService } from '@prime-registration/modules/registration/services/register-api.service';
+import { RegisterRespService } from '@prime-registration/modules/registration/services/register-resp.service';
 
 @Component({
   selector: 'app-bcsc-account',
@@ -10,11 +15,34 @@ import { PrimeConstants } from '@prime-core/models/prime-constants';
 })
 export class BcscAccountComponent extends AbstractForm implements OnInit {
 
-  constructor( protected router: Router ) {
+  constructor( protected router: Router,
+               private registrationDataService: RegistrationDataService ,
+               private cacheService: RegCacheService,
+               private registerApiService: RegisterApiService,
+               private registerRespService: RegisterRespService ) {
     super( router );
   }
 
   ngOnInit() {
+
+    if (!this.registrant.secQuestionsAnswer.length) {
+      // initialize question/answer array
+      for (let i = 0; i < this.cache.numSecQuestion; i++) {
+        this.registrant.secQuestionsAnswer.push({ name: null, value: null });
+      }
+    }
+  }
+
+  get registrant() {
+    return this.registrationDataService.registrant;
+  }
+
+  get cache() {
+    return this.cacheService;
+  }
+
+  isCanada(): boolean {
+    return this.registrationDataService.isCanada();
   }
 
   continue() {
@@ -27,21 +55,36 @@ export class BcscAccountComponent extends AbstractForm implements OnInit {
       this.markAllInputsTouched();
       return;
     }
+
     this.loading = true;
-  }
 
-  registerAccount( valid: boolean ) {
+    // Verify user based on attributes i.e email, userID, mobile phone number
+    this.registrant.credType = RegCredTypes.BCSC;
+     const subscription = this.registerApiService.verifyUserAttr(
+       this.registrant, this.registrationDataService.eventUUID
+       );
 
-    if ( valid ) {
+    // Trigger the HTTP request
+    subscription.subscribe(
+      response => {
+        this.registerRespService.payload = new UserAttrPayload( response );
+        this.loading = false;
 
-      this.loading = true;
+        if ( this.registerRespService.payload.success ) {
 
-      // ! Temporary - this just waits 2.5sec to simulate an HTTP request.
-      setTimeout(() => {
-        // Navigate to next page
-        this.navigate( PrimeConstants.BCSC_REGISTRATION + '/' +
-                      PrimeConstants.CONFIRMATION_PG );
-        }, 2500);
-    }
+          // Register User in PRIME
+          console.log( 'Can attempt to register user in PRIME.' );
+
+        } else {
+          console.log( 'Correct issue and try again.' );
+        }
+      },
+      responseError => {
+        this.loading = false;
+        console.log( 'Error occurred: ', responseError );
+      });
   }
 }
+
+
+//  this.navigate( PrimeConstants.BCSC_REGISTRATION + '/' + PrimeConstants.CONFIRMATION_PG );

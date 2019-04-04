@@ -1,7 +1,10 @@
 <common-page-framework layout='blank'>
 
   <form #formRef='ngForm' (ngSubmit)='continue()'>
-    <prime-appl-account (dataValid)='continueRegister($event)'>
+    <prime-appl-account [data]='registrant'
+                        [isCanada]='isCanada()'
+                        [cache]='cache'
+                        [userNameList]='nameList'>
       <p AccountInstruct>
         Please provide the Account Holder's personal information.
       </p>

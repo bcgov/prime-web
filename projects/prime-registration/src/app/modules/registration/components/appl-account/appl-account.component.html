@@ -16,8 +16,8 @@
              id="user_id"
              [minlength]="userIdMinLen"
              [maxlength]="userIdMaxLen"
-             [ngModel]="registrant?.userID"
-             (ngModelChange)="registrant.userID = $event"
+             [ngModel]="data?.userAccountName"
+             (ngModelChange)="data.userID = $event"
              required />
 
       <!-- Error messages for component -->
@@ -35,11 +35,12 @@
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <common-password componentLabel="{{newPwdLabel}}"
+      <common-password label="{{newPwdLabel}}"
                        [showPasswordStrength]="true"
                        [minLen]="pwdMinLen"
                        [pwdCriteria]="pwdValidChars"
-                       [(password)]="registrant.password"></common-password>
+                       [password]="data.password"
+                       (passwordChange)="setNewPassword($event)"></common-password>
       <div *ngIf="formErrors"
             role="alert"
             class='error-container'
@@ -60,9 +61,10 @@
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <common-password componentLabel="{{confirmPwdLabel}}"
+      <common-password label="{{confirmPwdLabel}}"
                        [minLen]="pwdMinLen"
-                       [(password)]="confirmPassword"
+                       [password]="confirmPassword"
+                       (passwordChange)="setConfirmPassword($event)"
                        [errorMessages]="confirmPwdMsg"></common-password>
       <!-- Error messages for component -->
       <div *ngIf="formErrors"
@@ -87,15 +89,16 @@
   <prime-page-sections layout='tips'>
 
     <div class="form-group"
-         *ngFor="let item of registrant.secQuestionsAnswer; let i = index;">
+         *ngFor="let item of data.secQuestionsAnswer; let i = index;">
       <div class="p-2">
         <label class="control-label" for="sec_question_{{i}}">Question #{{i+1}}</label>
         <ng-select #questionRef='ngModel'
                    name='sec_question_{{i}}'
                    labelForId='sec_question_{{i}}'
-                   [ngModel]='item?.question'
-                   (ngModelChange)='item.question=$event'
-                   [items]='secQuestionList'
+                   [ngModel]='item?.name'
+                   (ngModelChange)='item.name=$event;'
+                   (ngModelBlur)="update()"
+                   [items]='secQuestionList | async'
                    placeholder=' -- Select Question --'
                    autocorrect='on'
                    addTag=true
@@ -123,8 +126,9 @@
                 class="form-control"
                 id="sec_answer_{{i}}"
                 name="sec_answer_{{i}}"
-                [ngModel]="item?.answer"
-                (ngModelChange)="item.answer=$event"
+                [ngModel]="item?.value"
+                (ngModelChange)="item.value=$event"
+                (ngModelBlur)="update()"
                 placeholder="Enter answer"
                 required />
 
@@ -152,8 +156,9 @@
   <prime-page-sections layout='tips'>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <prime-phone-number [displayMask]="isCanada()"
-                          [(value)]="registrant.smsPhone"></prime-phone-number>
+      <prime-phone-number [displayMask]="isCanada"
+                          [value]="data.smsPhone"
+                          (valueChange)="data.smsPhone=$event"></prime-phone-number>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
@@ -167,8 +172,8 @@
              [pattern]="emailCriteria"
              required
              [maxlength]="emailMaxLen"
-             [ngModel]="registrant?.emailAddress"
-             (ngModelChange)="registrant.emailAddress = $event" />
+             [ngModel]="data?.emailAddress"
+             (ngModelChange)="data.emailAddress=$event"/>
 
         <!-- Error messages for component -->
         <div *ngIf="emailRef.touched"

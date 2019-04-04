@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { environment } from '../environments/environment';
 
 /* moh-common-lib can be pulled from npm, or locally via npm link */
 import { SharedCoreModule } from 'moh-common-lib';

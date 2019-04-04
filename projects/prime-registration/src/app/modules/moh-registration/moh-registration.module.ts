@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { MohSecurityComponent } from './pages/moh-security/moh-security.component';
 import { MohDocUploadComponent } from './pages/moh-doc-upload/moh-doc-upload.component';
 import { MohConfirmationComponent } from './pages/moh-confirmation/moh-confirmation.component';
+import { PrimeSharedModule } from '@prime-core/prime-shared/prime-shared.module';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { MohConfirmationComponent } from './pages/moh-confirmation/moh-confirmat
     SharedCoreModule,
     MohRegistrationRoutingModule,
     RegistrationModule,
-    FormsModule
+    FormsModule,
+    PrimeSharedModule
   ],
   declarations: [
     MohContainerComponent,

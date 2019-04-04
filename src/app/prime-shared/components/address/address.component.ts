@@ -29,7 +29,7 @@ export interface CountryList {
 
 export interface ProvinceList {
   country: string;
-  provCode: string;
+  provinceCode: string;
   description: string;
 }
 
@@ -169,11 +169,20 @@ export class AddressComponent extends Base implements OnInit {
     return (this.address && 'USA' === this.address.country) || this.isCanada();
   }
 
+  ngOnChanges(changes) {
+    if (changes['provinceList'] && changes['provinceList'].currentValue) {
+      this.updateProvList();
+    }
+    // TODO - update defaults based on country when country has changed
+    // if (changes[country]) - update defaults
+  }
+
   /**
    * Updates the provList variable. Values must be stored in a variable and not
    * accessed via function invocation for performance.
    */
   private updateProvList() {
+    if (!this.provinceList) { return; } // When data is async and hasn't loaded
     this.provList = this.provinceList
       .map(prov => {
         if (prov.country === this.address.country) {
@@ -186,16 +195,13 @@ export class AddressComponent extends Base implements OnInit {
   /**
    * Sets the default province option value
    */
-  private setDefaultProvinceAsOption(country: string): string {
-    const provObj = !this.provinceList
-      ? null
-      : this.provinceList.find(
-          val =>
-            (val.provCode === this.defaultProvince ||
-              val.description === this.defaultProvince) &&
-            val.country === country
-        );
-    return provObj ? provObj.provCode : null;
+  private setDefaultProvinceAsOption( country: string ): string {
+    const provObj = !this.provinceList ? null : this.provinceList.find(
+      val => (val.provinceCode === this.defaultProvince ||
+             val.description === this.defaultProvince) &&
+             val.country === country
+    );
+    return (provObj ? provObj.provinceCode : null );
   }
 
   // GeoCoder

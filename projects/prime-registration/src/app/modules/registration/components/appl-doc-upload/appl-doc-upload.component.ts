@@ -1,10 +1,7 @@
-import { Component, OnInit, forwardRef, ViewChild } from '@angular/core';
+import { Component, OnInit, forwardRef, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { CommonImage } from 'moh-common-lib/images';
-import { CacheService } from '@prime-core/services/cache.service';
 import { DocumentType, Document } from '@prime-core/models/documents.interface';
 import { ControlContainer, NgForm } from '@angular/forms';
-import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
-
 
 
 
@@ -16,27 +13,30 @@ import { RegistrationDataService } from '@prime-registration/services/registrati
 })
 export class ApplDocUploadComponent implements OnInit {
 
+  @Input() objectID: string;
+  @Input() documents: Document[] = [];
   /** List of all possible document types */
-  docTypesList: DocumentType[];
+  @Input() docTypesList: DocumentType[] = [];
+
+  @Output() documentsChange: EventEmitter<Document[]> = new EventEmitter<Document[]>();
+
+
   /** List of currently selected document types */
   selectedDocType: DocumentType[] = [];
   /** String visible in the selectdropdown. Related to `dropdownValueAsDocumentType` */
   docTypeDropdownValue: string;
 
-  documents: Document[];
-
   @ViewChild('docTypeEl') docTypeEl;
 
   public formRef: NgForm;
 
-  constructor(private dataService: RegistrationDataService, private cacheService: CacheService, public formRefC: ControlContainer) {
-    this.documents = this.dataService.documents; // this is basically an alias, since arrays are pass-by-reference,
-    this.docTypesList = this.cacheService.DocumentTypes;
-
+  constructor( public formRefC: ControlContainer)  {
     this.formRef = (formRefC as NgForm);
   }
 
   ngOnInit() {
+
+    console.log( 'doctypelist: ', this.docTypesList );
   }
 
   /** Add a new section based on what's selected in the dropdown */
@@ -48,7 +48,7 @@ export class ApplDocUploadComponent implements OnInit {
       const document = new Document({
         type: selection,
         imageUUID: [], // ? - necessary?
-        registrantUUID: this.registrant.objectId,
+        registrantUUID: this.objectID,
         images: []
       });
 
@@ -71,6 +71,7 @@ export class ApplDocUploadComponent implements OnInit {
 
   onImagesChange(doc: Document, img: CommonImage) {
     console.log('onImagesChanges', img);
+    this.documentsChange.emit( this.documents ); // Not sure this will work
   }
 
   /** Can only add unique document types */
@@ -91,13 +92,7 @@ export class ApplDocUploadComponent implements OnInit {
 
   /** The current DocumentType that's selected in the dropdown. Related to `docTypeDropdownValue` */
   get dropdownValueAsDocumentType(): DocumentType {
-    return this.docTypesList.find(x => x.name === this.docTypeDropdownValue);
+    return this.docTypesList ? this.docTypesList.find(x => x.docType === this.docTypeDropdownValue) : null;
   }
-
-  get registrant() {
-    return this.dataService.registrant;
-  }
-
-
 }
 

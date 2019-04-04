@@ -2,9 +2,10 @@ import { SimpleDate } from 'moh-common-lib';
 import { CommonImage } from 'moh-common-lib/images/images';
 
 export interface DocumentType {
-    name: string;
-    tips: string;
+    docType: string;
+    description: string;
 }
+
 
 export class Document {
     type: DocumentType;
