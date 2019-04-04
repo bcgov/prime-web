@@ -73,7 +73,8 @@ export class EnrollmentStateService {
     const index = this.currentIndex;
     let i = 1;
     for (i; i <= index; i++) {
-      if (!this.isIndexValid) return false;
+      console.log('check', this.isIndexValid(i));
+      if (!this.isIndexValid(i)) return false;
     }
     return true;
   }

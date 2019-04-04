@@ -38,5 +38,9 @@ describe('EnrollmentStateService', () => {
     expect(fa.controls.length).toBeLessThan(1);
   });
 
-  it('should return true', () => {});
+  it('should return true', () => {
+    const service: EnrollmentStateService = TestBed.get(EnrollmentStateService);
+    const bool = service.isIndexValid(2);
+    expect(bool).toBeFalsy();
+  });
 });

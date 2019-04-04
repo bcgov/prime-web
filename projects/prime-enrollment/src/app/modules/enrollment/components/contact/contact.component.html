@@ -9,13 +9,14 @@
   <prime-page-sections layout="tips">
     <div>
       <form [formGroup]="fg">
-        <!-- <ngx-intl-tel-input [preferredCountries]="['ca', 'us']" [enablePlaceholder]="true" name="phone"
-        formControlName="phone"></ngx-intl-tel-input> -->
+
         <div class="form-group col-sm-6">
           <label class="control-label">Phone</label>
-          <international-phone-number formControlName="phone" placeholder="Enter phone number" [maxlength]="13"
-            [defaultCountry]="'ca'" [required]="true" name="phone_number" [allowedCountries]="['ca', 'us']">
-          </international-phone-number>
+          <!-- <international-phone-number formControlName="phone" placeholder="Enter phone number" [maxlength]="13"
+            [defaultCountry]="'ca'" name="phone_number" [allowedCountries]="['ca', 'us']">
+          </international-phone-number> -->
+          <ngx-intl-tel-input [preferredCountries]="['ca', 'us']" [enablePlaceholder]="true" name="phone"
+            formControlName="phone"></ngx-intl-tel-input>
         </div>
         <div class="form-group col-sm-6">
           <input class="form-check-inline" type="checkbox" id="capable" formControlName="sms">

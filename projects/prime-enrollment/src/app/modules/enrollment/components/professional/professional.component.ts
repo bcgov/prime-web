@@ -23,6 +23,7 @@ export class ProfessionalComponent implements OnInit {
     this.certFa = this.stateSvc.certForms;
     this.dpFa = this.stateSvc.dpFa;
     this.onBehalfOfOptions = of(options);
+    this.fg.valueChanges.subscribe(obs => console.log(this.fg));
   }
 
   ngOnInit() {}
