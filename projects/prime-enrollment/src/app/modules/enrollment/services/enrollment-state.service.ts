@@ -48,6 +48,19 @@ export class EnrollmentStateService {
     }
   }
 
+  validateProfessionalForm(fg: FormGroup): boolean {
+    if (fg.invalid) return false;
+    if (fg.controls.collegeCert) {
+      for (const form of this._certForms) {
+        if (form.invalid) return false;
+      }
+    }
+    if (fg.controls.deviceProvider) {
+      if (this.dpFa.invalid) return false;
+    }
+    return true;
+  }
+
   get currentIndex() {
     return this._currentIndex;
   }
@@ -59,7 +72,7 @@ export class EnrollmentStateService {
       case 2:
         return this.contactForm.valid;
       case 3:
-        return this.professionalForm.valid;
+        return this.validateProfessionalForm(this.professionalForm);
       case 4:
         return this.declarationForm.valid;
       case 5:

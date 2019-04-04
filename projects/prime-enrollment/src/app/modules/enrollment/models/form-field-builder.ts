@@ -10,6 +10,7 @@ import {
   ISupportingDetails,
   IContact
 } from '../../../core/interfaces';
+import { behalfOfValidator } from './validators';
 
 export abstract class FormFieldBuilder {
   static get contactFields() {
@@ -43,7 +44,7 @@ export abstract class FormFieldBuilder {
   }
 
   static get onBehalfOfFields() {
-    return new FormControl(null, [Validators.required]);
+    return new FormControl(null, [behalfOfValidator()]);
   }
   static get professionInformationFields() {
     const deviceProvider = new FormControl(null, [Validators.required]);
