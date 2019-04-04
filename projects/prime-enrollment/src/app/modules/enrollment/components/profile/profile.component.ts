@@ -1,11 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { EnrollmentStateService } from '../../services/enrollment-state.service';
-import { countryList, provinceList } from '../../data/country';
 import { CacheService } from '@prime-core/services/cache.service';
 
-
-const country = countryList;
-const province = provinceList;
 @Component({
   selector: 'enroll-profile',
   templateUrl: './profile.component.html',
