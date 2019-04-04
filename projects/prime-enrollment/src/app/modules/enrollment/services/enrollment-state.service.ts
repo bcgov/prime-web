@@ -37,9 +37,9 @@ export class EnrollmentStateService {
         return (this._currentIndex = 1);
       case '/enrollment/contact':
         return (this._currentIndex = 2);
-      case '/enrollment/contact':
+      case '/enrollment/professional':
         return (this._currentIndex = 3);
-      case '/enrollment/contact':
+      case '/enrollment/self-declaration':
         return (this._currentIndex = 4);
       case '/enrollment/pharmanet-access':
         return (this._currentIndex = 5);
@@ -64,8 +64,18 @@ export class EnrollmentStateService {
         return this.declarationForm.valid;
       case 5:
         return this.organizationForm.valid;
+      default:
+        return false;
     }
-    return false;
+  }
+
+  get currentStateValid(): boolean {
+    const index = this.currentIndex;
+    let i = 1;
+    for (i; i <= index; i++) {
+      if (!this.isIndexValid) return false;
+    }
+    return true;
   }
 
   constructor(private router: Router) {

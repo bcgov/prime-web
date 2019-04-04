@@ -29,7 +29,6 @@ import { SelfDeclarationBlockComponent } from './components/self-declaration-blo
 import { SelfDeclarationQuestionBlockComponent } from './components/self-declaration-question-block/self-declaration-question-block.component';
 import { ProfessionalInformationBlockComponent } from './components/professional-information-block/professional-information-block.component';
 import { PharmanetBlockComponent } from './components/pharmanet-block/pharmanet-block.component';
-import { ProfileComponent } from '@prime-enrollment/modules/enrollment/components/profile/profile.component';
 import { PrimeSharedModule } from '../../../../../src/app/prime-shared/prime-shared.module';
 
 @NgModule({
