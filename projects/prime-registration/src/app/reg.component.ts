@@ -12,8 +12,8 @@ import { Base } from 'moh-common-lib/models';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  templateUrl: './reg.component.html',
+  styleUrls: ['./reg.component.scss'],
   providers: [
     { provide: ControlContainer, useExisting: forwardRef(() => NgForm) }
   ]

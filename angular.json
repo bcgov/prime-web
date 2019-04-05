@@ -286,7 +286,7 @@
       "root": "projects/prime-registration/",
       "sourceRoot": "projects/prime-registration/src",
       "projectType": "application",
-      "prefix": "app",
+      "prefix": "reg",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
