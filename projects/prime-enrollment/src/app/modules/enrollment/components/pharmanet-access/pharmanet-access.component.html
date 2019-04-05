@@ -13,6 +13,7 @@
     </ng-container>
   </prime-page-sections>
   <ng-container *ngIf="fa$ | async as fa">
+    <button class="btn btn-secondary btn-lg" (click)="openModal()">Add Organization</button>
     <div class="header-row">
       <!-- <enroll-list-item-header class="col-sm-6" [headers]="headers" [isSelectable]="false"></enroll-list-item-header> -->
       <span>Organization Name</span>
