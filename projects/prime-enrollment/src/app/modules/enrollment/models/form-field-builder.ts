@@ -14,7 +14,7 @@ import { behalfOfValidator, descriptionValidator } from './validators';
 
 export abstract class FormFieldBuilder {
   static get contactFields() {
-    const phone = new FormControl(null, [Validators.required]);
+    const phone = new FormControl({ number: null }, [Validators.required]);
     const sms = new FormControl(false, [Validators.required]);
     const ext = new FormControl(null, []);
     const email = new FormControl(null, [Validators.required]);

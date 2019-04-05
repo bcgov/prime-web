@@ -20,13 +20,15 @@
       <h3>Contact</h3>
       <i class="fa fa-pencil"></i>
     </div>
-    <enroll-contact-block></enroll-contact-block>
+    <enroll-contact-block [phone]="stateSvc.contactForm.controls.phone.value.number"
+      [email]="formValue('contactForm', 'email')" [contactMethod]="formValue('contactForm', 'preferredContact')">
+    </enroll-contact-block>
     <div class="label-row">
 
       <h3>Self Declaration</h3>
       <i class="fa fa-pencil"></i>
     </div>
-    <enroll-self-declaration-question-block></enroll-self-declaration-question-block>
+    <enroll-self-declaration-question-block [question]="sdForm[0].question"></enroll-self-declaration-question-block>
     <aside>
       <div>
         <div class="label-row">
