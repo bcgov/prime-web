@@ -4,7 +4,7 @@ import { EnrollmentStateService } from '../../services/enrollment-state.service'
 import { SearchOrganizationModalComponent } from '../search-organization-modal/search-organization-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { EnrollmentDataService } from '../../services/enrollment-data.service';
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-pharmanet-access',
@@ -13,7 +13,7 @@ import { Observable, of } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PharmanetAccessComponent implements OnInit {
-  fa$: Observable<FormGroup[]> = new Observable();
+  fa$: BehaviorSubject<FormGroup[]> = new BehaviorSubject(null);
   results = false;
   constructor(
     private stateSvc: EnrollmentStateService,
@@ -37,7 +37,7 @@ export class PharmanetAccessComponent implements OnInit {
       panelClass: 'test'
     });
     ref.afterClosed().subscribe(obs => {
-      this.fa$ = of(obs);
+      this.fa$.next(obs);
       console.log(obs);
       this.results = true;
     });
