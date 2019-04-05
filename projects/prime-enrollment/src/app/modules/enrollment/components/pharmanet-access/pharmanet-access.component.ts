@@ -1,8 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormArray } from '@angular/forms';
+import { FormArray, FormGroup } from '@angular/forms';
 import { EnrollmentStateService } from '../../services/enrollment-state.service';
 import { SearchOrganizationModalComponent } from '../search-organization-modal/search-organization-modal.component';
 import { MatDialog } from '@angular/material/dialog';
+import { EnrollmentDataService } from '../../services/enrollment-data.service';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-pharmanet-access',
@@ -11,13 +13,14 @@ import { MatDialog } from '@angular/material/dialog';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PharmanetAccessComponent implements OnInit {
-  fa: FormArray;
-
+  fa$: Observable<FormGroup[]> = new Observable();
+  results = false;
   constructor(
     private stateSvc: EnrollmentStateService,
     public dialog: MatDialog
   ) {
-    this.fa = this.stateSvc.organizationForm;
+    // this.fa = this.stateSvc.organizationForm;
+    // this.fa = this.stateSvc.organizationForm;z
   }
 
   ngOnInit() {}
@@ -27,9 +30,16 @@ export class PharmanetAccessComponent implements OnInit {
   }
 
   openModal() {
+    // this.stateSvc.organizationForm = [];
+    this.stateSvc.orgResultsClear();
     const dialog = this.dialog;
     const ref = dialog.open(SearchOrganizationModalComponent, {
       panelClass: 'test'
+    });
+    ref.afterClosed().subscribe(obs => {
+      this.fa$ = of(obs);
+      console.log(obs);
+      this.results = true;
     });
   }
 }

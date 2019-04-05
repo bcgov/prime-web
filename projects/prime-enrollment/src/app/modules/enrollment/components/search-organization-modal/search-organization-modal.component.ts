@@ -48,6 +48,13 @@ export class SearchOrganizationModalComponent implements OnInit {
   }
 
   add() {
+    const res = this.stateSvc.orgResults;
+    if (res.length < 1) return console.log('no results to add');
+    this.stateSvc
+      .orgResultsForm(res)
+      // .then(fga => (this.stateSvc.organizationForm = fga))
+      .then(fga => this.dialogRef.close(fga));
+
     console.log('add clicked');
   }
 

@@ -6,13 +6,20 @@
     Pharmanet Access - helper text
   </h2>
   <prime-page-sections layout="noTips">
-    <enroll-action-block (clicked)="openModal()" label="Add Organization" text="No Organizations" class="action-block">
-    </enroll-action-block>
+    <ng-container *ngIf="!results; else grid">
+      <enroll-action-block (clicked)="openModal()" label="Add Organization" text="No Organizations"
+        class="action-block">
+      </enroll-action-block>
+    </ng-container>
   </prime-page-sections>
-  <div *ngIf="organization">
-    <form [formGroup]="fa">
+  <ng-container *ngIf="fa$ | async as fa">
+    <form *ngFor="let fg of fa" [formGroup]="fg">
+      {{fg.controls.name.value}}
     </form>
-  </div>
+  </ng-container>
 </common-page-framework>
+<!-- <ng-template #grid> -->
+
+<!-- <ng-template> -->
 
 <!-- glyphicon glyphicon-remove-circle -->

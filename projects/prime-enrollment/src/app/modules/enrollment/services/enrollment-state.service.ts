@@ -3,7 +3,7 @@ import { StateOptions } from '../data/state.enum';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Registrant } from '../../../../../../prime-registration/src/app/modules/registration/models/registrant.model';
 import { FormGenerator } from '../models/form-generator';
-import { FormGroup, FormArray, FormControl } from '@angular/forms';
+import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { FormFieldBuilder } from '../models/form-field-builder';
 import { filter } from 'rxjs/operators';
 import { IOrganization } from '@prime-enrollment/core/interfaces';
@@ -21,7 +21,7 @@ export class EnrollmentStateService {
   profileForm = new Registrant();
   declarationForm: FormGroup;
   findOrganizationForm: FormGroup;
-  organizationForm: FormArray;
+  organizationForm: FormGroup[] = [];
   contactForm: FormGroup;
   professionalForm: FormGroup;
   dpFa: FormArray;
@@ -79,7 +79,9 @@ export class EnrollmentStateService {
       case 4:
         return this.declarationForm.valid;
       case 5:
-        return this.organizationForm.valid;
+        // TODO: update validation logic for the organization form array (see case 3)
+        return true;
+      // return this.organizationForm.valid;
       default:
         return false;
     }
@@ -102,8 +104,29 @@ export class EnrollmentStateService {
     this._selectedOrgSet.delete(res);
   }
 
-  get orgResults() {
-    return this._selectedOrgSet.values();
+  async orgResultsForm(data: IOrganization[]) {
+    const fga = this.organizationForm;
+    data.forEach(itm => {
+      const name = new FormControl(itm.name);
+      const city = new FormControl(itm.city);
+      const type = new FormControl(itm.type);
+      name.disable();
+      city.disable();
+      type.disable();
+      const startDate = new FormControl(null, Validators.required);
+      const endDate = new FormControl(null, Validators.required);
+      const fg = new FormGroup({ name, city, type, startDate, endDate });
+      fga.push(fg);
+    });
+    return fga;
+  }
+
+  get orgResults(): IOrganization[] {
+    return Array.from(this._selectedOrgSet);
+  }
+
+  orgResultsClear() {
+    this._selectedOrgSet.clear();
   }
 
   constructor(private router: Router) {
@@ -118,7 +141,7 @@ export class EnrollmentStateService {
     this.contactForm = FormGenerator.contactForm;
     this.declarationForm = FormGenerator.declarationForm;
     this.findOrganizationForm = FormGenerator.findOrganizationForm;
-    this.organizationForm = FormGenerator.organizationForm;
+    // this.organizationForm = FormGenerator.organizationForm;
     this.professionalForm = FormGenerator.professionalForm;
     this.certForms = [FormGenerator.licenseForm];
     this.dpFa = new FormArray([FormFieldBuilder.deviceProviderFields]);
