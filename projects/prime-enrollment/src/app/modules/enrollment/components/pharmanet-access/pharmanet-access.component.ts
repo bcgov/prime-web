@@ -5,7 +5,7 @@ import { SearchOrganizationModalComponent } from '../search-organization-modal/s
 import { MatDialog } from '@angular/material/dialog';
 import { EnrollmentDataService } from '../../services/enrollment-data.service';
 import { Observable, of, BehaviorSubject } from 'rxjs';
-
+const headers = ['Organization Name', 'Type', 'City'];
 @Component({
   selector: 'app-pharmanet-access',
   templateUrl: './pharmanet-access.component.html',
@@ -15,15 +15,19 @@ import { Observable, of, BehaviorSubject } from 'rxjs';
 export class PharmanetAccessComponent implements OnInit {
   fa$: BehaviorSubject<FormGroup[]> = new BehaviorSubject(null);
   results = false;
+  headers: string[];
   constructor(
     private stateSvc: EnrollmentStateService,
     public dialog: MatDialog
   ) {
     // this.fa = this.stateSvc.organizationForm;
-    // this.fa = this.stateSvc.organizationForm;z
+    // this.fa = this.stateSvc.organizationForm;
+    this.headers = headers;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.fa$.next(this.stateSvc.organizationForm);
+  }
 
   addOrganization() {
     return this.openModal();
@@ -37,7 +41,8 @@ export class PharmanetAccessComponent implements OnInit {
       panelClass: 'test'
     });
     ref.afterClosed().subscribe(obs => {
-      this.fa$.next(obs);
+      this.stateSvc.organizationForm = obs;
+      this.fa$.next(this.stateSvc.organizationForm);
       console.log(obs);
       this.results = true;
     });

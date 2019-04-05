@@ -1,3 +1,23 @@
+@import 'variables.scss';
+
 .action-block {
   height: 300px
+}
+
+.header-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  background-color: $gray;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+}
+
+.list-item-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+
 }

@@ -21,7 +21,7 @@ export class EnrollmentStateService {
   profileForm = new Registrant();
   declarationForm: FormGroup;
   findOrganizationForm: FormGroup;
-  organizationForm: FormGroup[] = [];
+  organizationForm: FormGroup[];
   contactForm: FormGroup;
   professionalForm: FormGroup;
   dpFa: FormArray;
@@ -105,7 +105,7 @@ export class EnrollmentStateService {
   }
 
   async orgResultsForm(data: IOrganization[]) {
-    const fga = this.organizationForm;
+    const fga = [];
     data.forEach(itm => {
       const name = new FormControl(itm.name);
       const city = new FormControl(itm.city);
@@ -118,6 +118,7 @@ export class EnrollmentStateService {
       const fg = new FormGroup({ name, city, type, startDate, endDate });
       fga.push(fg);
     });
+    this.organizationForm = fga;
     return fga;
   }
 

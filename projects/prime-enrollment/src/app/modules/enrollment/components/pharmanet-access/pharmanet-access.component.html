@@ -13,8 +13,43 @@
     </ng-container>
   </prime-page-sections>
   <ng-container *ngIf="fa$ | async as fa">
+    <div class="header-row">
+      <!-- <enroll-list-item-header class="col-sm-6" [headers]="headers" [isSelectable]="false"></enroll-list-item-header> -->
+      <span>Organization Name</span>
+      <span>Type</span>
+      <span>City</span>
+      <span>Start Date</span>
+      <span>End Date</span>
+
+    </div>
     <form *ngFor="let fg of fa" [formGroup]="fg">
-      {{fg.controls.name.value}}
+      <div class="list-item-row">
+        <span>{{ fg.controls.name.value }}</span>
+        <span>{{ fg.controls.type.value }}</span>
+        <span>{{ fg.controls.city.value }}</span>
+
+
+        <div class="input-group">
+
+          <input class="form-control" placeholder="YYYY/MM/DD" ngx-mydatepicker formControlName="startDate">
+
+          <span class="input-group-append float-label-append">
+            <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
+              <i class="fa fa-calendar"></i>
+            </button>
+          </span>
+        </div>
+        <div class="input-group">
+
+          <input class="form-control" placeholder="YYYY/MM/DD" ngx-mydatepicker formControlName="endDate">
+
+          <span class="input-group-append float-label-append">
+            <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
+              <i class="fa fa-calendar"></i>
+            </button>
+          </span>
+        </div>
+      </div>
     </form>
   </ng-container>
 </common-page-framework>
