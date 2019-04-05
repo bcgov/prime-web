@@ -28,7 +28,11 @@
       <h3>Self Declaration</h3>
       <i class="fa fa-pencil"></i>
     </div>
-    <enroll-self-declaration-question-block [question]="sdForm[0].question"></enroll-self-declaration-question-block>
+    <ng-container *ngFor="let declaration of declarations">
+
+      <enroll-self-declaration-question-block [question]="declaration.question" [answer]="declaration.value"
+        [details]="declaration.details"></enroll-self-declaration-question-block>
+    </ng-container>
     <aside>
       <div>
         <div class="label-row">

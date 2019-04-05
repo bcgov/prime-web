@@ -12,3 +12,9 @@ export interface IDeclaration {
   pharmaSuspensionDesc?: ISupportingDetails | FormControl;
   supportingDocs: Document[];
 }
+
+export interface IDeclarationBlock {
+  question: string;
+  value: boolean;
+  details: string;
+}
