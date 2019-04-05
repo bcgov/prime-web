@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ApplDocUploadComponent } from './appl-doc-upload.component';
-import { PageSectionsComponent } from '../page-sections/page-sections.component';
 import { FormsModule, NgForm } from '@angular/forms';
 import { SharedCoreModule } from 'moh-common-lib';
 
@@ -12,8 +11,7 @@ describe('ApplDocUploadComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        ApplDocUploadComponent,
-        PageSectionsComponent
+        ApplDocUploadComponent
        ],
        imports: [
         FormsModule,
