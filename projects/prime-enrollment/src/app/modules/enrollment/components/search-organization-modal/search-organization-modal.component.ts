@@ -38,9 +38,10 @@ export class SearchOrganizationModalComponent implements OnInit {
     // this.searchResults = this.dataSvc.searchResults;
     this.searchResultsHeaders = of(this.headers);
   }
-  selectedResults(evt: boolean, data: any) {
-    console.log(evt, data);
-    // evt ?
+  selectedResults(evt: boolean, data: IOrganization) {
+    evt
+      ? this.stateSvc.addOrgResults(data)
+      : this.stateSvc.removeOrgResults(data);
   }
   cancel() {
     this.dialogRef.close();

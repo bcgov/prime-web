@@ -15,7 +15,7 @@ const stateOpts = StateOptions;
 })
 export class EnrollmentStateService {
   private _currentIndex: number;
-  private _selectedSet: Set<IOrganization>;
+  private _selectedOrgSet: Set<IOrganization> = new Set(null);
   private _certForms: FormGroup[] = [];
 
   profileForm = new Registrant();
@@ -92,6 +92,18 @@ export class EnrollmentStateService {
       if (!this.isIndexValid(i)) return false;
     }
     return true;
+  }
+
+  addOrgResults(res: IOrganization) {
+    this._selectedOrgSet.add(res);
+  }
+
+  removeOrgResults(res: IOrganization) {
+    this._selectedOrgSet.delete(res);
+  }
+
+  get orgResults() {
+    return this._selectedOrgSet.values();
   }
 
   constructor(private router: Router) {
