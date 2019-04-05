@@ -19,7 +19,7 @@
         <label class="control-label" for="city">City (Optional)</label>
         <input class="form-control" id="city" formControlName="city">
       </div>
-      <button class="btn btn-lg btn-secondary action-button" *ngIf="search">Find</button>
+      <button class="btn btn-lg btn-secondary action-button" (click)="find()" *ngIf="search">Find</button>
     </form>
   </mat-card-content>
   <ng-container *ngIf="searchResults | async as results">

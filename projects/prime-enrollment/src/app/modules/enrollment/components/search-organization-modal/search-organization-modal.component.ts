@@ -4,10 +4,11 @@ import { EnrollmentStateService } from '../../services/enrollment-state.service'
 import { MatDialogRef } from '@angular/material/dialog';
 import { EnrollmentDataService } from '../../services/enrollment-data.service';
 import { Observable, of } from 'rxjs';
+import { IOrganization } from '@prime-enrollment/core/interfaces';
 
 const tempArr = ['Health Authority', 'Pharmacy'];
-const data = [['data 1', 'data2', 'data3']];
-const headers = ['Type', 'Organization Name', 'City'];
+// const data = [['data 1', 'data2', 'data3']];
+const headers = ['Organization Name', 'Type', 'City'];
 @Component({
   selector: 'enroll-search-organization-modal',
   templateUrl: './search-organization-modal.component.html',
@@ -18,7 +19,7 @@ export class SearchOrganizationModalComponent implements OnInit {
   fg: FormGroup;
   search = true;
   types: Observable<string[]>;
-  searchResults: Observable<Array<string[]>> = new Observable();
+  searchResults: Observable<Array<IOrganization>>;
   searchResultsHeaders: Observable<string[]> = new Observable();
   headers: string[];
 
@@ -34,11 +35,12 @@ export class SearchOrganizationModalComponent implements OnInit {
   ngOnInit() {
     this.dataSvc.organizationTypesInit(tempArr);
     this.types = this.dataSvc.organizationTypes$;
-    this.searchResults = of(data);
+    // this.searchResults = this.dataSvc.searchResults;
     this.searchResultsHeaders = of(this.headers);
   }
   selectedResults(evt: boolean, data: any) {
     console.log(evt, data);
+    // evt ?
   }
   cancel() {
     this.dialogRef.close();
@@ -49,6 +51,11 @@ export class SearchOrganizationModalComponent implements OnInit {
   }
 
   find() {
+    const data = this.fg.value;
+    console.log(data);
     this.search = false;
+    const res = this.dataSvc.findOrganizations(data);
+    this.searchResults = res;
+    console.log(res);
   }
 }

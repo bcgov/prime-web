@@ -6,6 +6,7 @@ import { FormGenerator } from '../models/form-generator';
 import { FormGroup, FormArray, FormControl } from '@angular/forms';
 import { FormFieldBuilder } from '../models/form-field-builder';
 import { filter } from 'rxjs/operators';
+import { IOrganization } from '@prime-enrollment/core/interfaces';
 
 const stateOpts = StateOptions;
 
@@ -14,13 +15,15 @@ const stateOpts = StateOptions;
 })
 export class EnrollmentStateService {
   private _currentIndex: number;
+  private _selectedSet: Set<IOrganization>;
+  private _certForms: FormGroup[] = [];
+
   profileForm = new Registrant();
   declarationForm: FormGroup;
   findOrganizationForm: FormGroup;
   organizationForm: FormArray;
   contactForm: FormGroup;
   professionalForm: FormGroup;
-  private _certForms: FormGroup[] = [];
   dpFa: FormArray;
 
   set certForms(fa: FormGroup[]) {

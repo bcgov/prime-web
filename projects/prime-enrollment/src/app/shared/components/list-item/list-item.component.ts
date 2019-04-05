@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { IOrganization } from '@prime-enrollment/core/interfaces';
 
 @Component({
   selector: 'enroll-list-item',
@@ -17,7 +18,7 @@ import { Subscription } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListItemComponent implements OnInit, OnDestroy {
-  @Input() data: string[];
+  @Input() data: IOrganization;
   @Output() selected: EventEmitter<boolean> = new EventEmitter<boolean>();
   fc: FormControl;
   sub: Subscription;
