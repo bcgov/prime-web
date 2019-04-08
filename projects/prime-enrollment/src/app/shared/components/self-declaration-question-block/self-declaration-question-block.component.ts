@@ -13,15 +13,15 @@ import {
 })
 export class SelfDeclarationQuestionBlockComponent implements OnInit {
   @Input() question: string;
-  @Input() answer: boolean = false;
+  @Input() answer: boolean;
   @Input() details: string;
   @Input() documents: string;
   yesNo: string;
 
-  constructor() {
+  constructor() {}
+
+  ngOnInit() {
     if (this.answer) this.yesNo = 'Yes';
     else this.yesNo = 'No';
   }
-
-  ngOnInit() {}
 }
