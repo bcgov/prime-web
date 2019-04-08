@@ -19,6 +19,7 @@ export class ReviewComponent implements OnInit {
 
   ngOnInit() {
     this.declarations = this.sdForm;
+    console.log('init');
   }
 
   get sdForm() {

@@ -8,7 +8,7 @@
   <prime-page-sections layout="double">
     <div class="label-row">
       <h3>Profile</h3>
-      <i class="fa fa-pencil"></i>
+      <a [routerLink]="['/enrollment/profile']"><i class="fa fa-pencil"></i></a>
     </div>
     <enroll-profile-block></enroll-profile-block>
     <h3>Address</h3>
@@ -18,15 +18,18 @@
     <div class="label-row">
 
       <h3>Contact</h3>
-      <i class="fa fa-pencil"></i>
+      <a [routerLink]="['/enrollment/contact']">
+        <i class="fa fa-pencil"></i>
+      </a>
     </div>
+
     <enroll-contact-block [phone]="stateSvc.contactForm.controls.phone.value.number"
       [email]="formValue('contactForm', 'email')" [contactMethod]="formValue('contactForm', 'preferredContact')">
     </enroll-contact-block>
     <div class="label-row">
 
       <h3>Self Declaration</h3>
-      <i class="fa fa-pencil"></i>
+      <a [routerLink]="['/enrollment/self-declaration']"><i class="fa fa-pencil"></i></a>
     </div>
     <ng-container *ngFor="let declaration of declarations">
 
@@ -38,7 +41,7 @@
         <div class="label-row">
 
           <h3>Professional Information</h3>
-          <i class="fa fa-pencil"></i>
+          <a [routerLink]="['/enrollment/professional']"><i class="fa fa-pencil"></i></a>
         </div>
         <enroll-professional-information-block></enroll-professional-information-block>
       </div>
@@ -46,7 +49,9 @@
         <div class="label-row">
 
           <h3>PharmaNet</h3>
-          <i class="fa fa-pencil"></i>
+          <a [routerLink]="['/enrollment/pharmanet-access']">
+            <i class="fa fa-pencil"></i>
+          </a>
         </div>
         <enroll-pharmanet-block></enroll-pharmanet-block>
       </div>
