@@ -12,14 +12,17 @@ import { IDeclarationBlock } from '@prime-enrollment/core/interfaces';
 export class ReviewComponent implements OnInit {
   df: FormGroup;
   declarations: Array<IDeclarationBlock>;
+  certForms: FormGroup[];
 
   constructor(public stateSvc: EnrollmentStateService) {
     this.df = this.stateSvc.declarationForm;
+    this.certForms = this.stateSvc.certForms;
   }
 
   ngOnInit() {
     this.declarations = this.sdForm;
-    console.log('init');
+
+    console.log(this.certForms);
   }
 
   get sdForm() {

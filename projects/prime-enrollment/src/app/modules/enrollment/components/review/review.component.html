@@ -37,13 +37,17 @@
         [details]="declaration.details"></enroll-self-declaration-question-block>
     </ng-container>
     <aside>
-      <div>
+      <div *ngFor="let cert of certForms">
         <div class="label-row">
 
           <h3>Professional Information</h3>
           <a [routerLink]="['/enrollment/professional']"><i class="fa fa-pencil"></i></a>
         </div>
-        <enroll-professional-information-block></enroll-professional-information-block>
+        <enroll-professional-information-block [license]="cert.value['collegeCert']"
+          [college]="cert.value['licenseNum']" [class]="cert.value['licenseClass']"
+          [renewal]="cert.value['renewalDate']">
+
+        </enroll-professional-information-block>
       </div>
       <div>
         <div class="label-row">

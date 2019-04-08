@@ -26,6 +26,7 @@ export class PharmanetAccessComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (!!this.stateSvc.organizationForm) this.results = true;
     this.fa$.next(this.stateSvc.organizationForm);
   }
 

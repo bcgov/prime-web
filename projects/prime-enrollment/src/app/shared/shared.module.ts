@@ -9,7 +9,6 @@ import {
   NgxIntlTelInputModule,
   NgxIntlTelInputComponent
 } from 'ngx-intl-tel-input';
-import { PhoneInputComponent } from './components/phone-input/phone-input.component';
 import { SharedProfileComponent } from './components/shared-profile/shared-profile.component';
 import { InternationalPhoneNumberModule } from 'ngx-international-phone-number';
 import { LicenseComponent } from './components/license/license.component';
@@ -24,17 +23,16 @@ import { ListItemHeaderComponent } from './components/list-item-header/list-item
 import { ProfileBlockComponent } from './components/profile-block/profile-block.component';
 import { AddressBlockComponent } from './components/address-block/address-block.component';
 import { ContactBlockComponent } from './components/contact-block/contact-block.component';
-import { SelfDeclarationBlockComponent } from './components/self-declaration-block/self-declaration-block.component';
 import { SelfDeclarationQuestionBlockComponent } from './components/self-declaration-question-block/self-declaration-question-block.component';
 import { ProfessionalInformationBlockComponent } from './components/professional-information-block/professional-information-block.component';
 import { PharmanetBlockComponent } from './components/pharmanet-block/pharmanet-block.component';
 import { PrimeSharedModule } from '../../../../../src/app/prime-shared/prime-shared.module';
+import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 
 @NgModule({
   declarations: [
     HomePageComponent,
     // ProfileComponent,
-    PhoneInputComponent,
     SharedProfileComponent,
     LicenseComponent,
     DeviceProviderComponent,
@@ -46,7 +44,6 @@ import { PrimeSharedModule } from '../../../../../src/app/prime-shared/prime-sha
     ProfileBlockComponent,
     AddressBlockComponent,
     ContactBlockComponent,
-    SelfDeclarationBlockComponent,
     SelfDeclarationQuestionBlockComponent,
     ProfessionalInformationBlockComponent,
     PharmanetBlockComponent
@@ -64,7 +61,8 @@ import { PrimeSharedModule } from '../../../../../src/app/prime-shared/prime-sha
     InternationalPhoneNumberModule,
     MatDialogModule,
     MatCardModule,
-    PrimeSharedModule
+    PrimeSharedModule,
+    NgxMyDatePickerModule.forRoot()
   ],
   exports: [
     FormsModule,
@@ -72,7 +70,6 @@ import { PrimeSharedModule } from '../../../../../src/app/prime-shared/prime-sha
     SharedCoreModule,
     NgSelectModule,
     HomePageComponent,
-    PhoneInputComponent,
     SharedProfileComponent,
     NgxIntlTelInputComponent,
     InternationalPhoneNumberModule,
@@ -87,11 +84,11 @@ import { PrimeSharedModule } from '../../../../../src/app/prime-shared/prime-sha
     ProfileBlockComponent,
     AddressBlockComponent,
     ContactBlockComponent,
-    SelfDeclarationBlockComponent,
     SelfDeclarationQuestionBlockComponent,
     ProfessionalInformationBlockComponent,
     PharmanetBlockComponent,
-    PrimeSharedModule
+    PrimeSharedModule,
+    NgxMyDatePickerModule
   ]
 })
 export class SharedModule {}

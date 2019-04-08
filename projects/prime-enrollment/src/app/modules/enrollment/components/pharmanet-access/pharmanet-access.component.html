@@ -15,7 +15,6 @@
   <ng-container *ngIf="fa$ | async as fa">
     <button class="btn btn-secondary btn-lg" (click)="openModal()">Add Organization</button>
     <div class="header-row">
-      <!-- <enroll-list-item-header class="col-sm-6" [headers]="headers" [isSelectable]="false"></enroll-list-item-header> -->
       <span>Organization Name</span>
       <span>Type</span>
       <span>City</span>
@@ -32,17 +31,19 @@
 
         <div class="input-group">
 
-          <input class="form-control" placeholder="YYYY/MM/DD" ngx-mydatepicker formControlName="startDate">
+          <input class="form-control" placeholder="YYYY/MM/DD" ngx-mydatepicker formControlName="startDate"
+            #sd="ngx-mydatepicker">
 
           <span class="input-group-append float-label-append">
-            <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
+            <button type="button" class="btn btn-default" (click)="sd.toggleCalendar()">
               <i class="fa fa-calendar"></i>
             </button>
           </span>
         </div>
         <div class="input-group">
 
-          <input class="form-control" placeholder="YYYY/MM/DD" ngx-mydatepicker formControlName="endDate">
+          <input class="form-control" placeholder="YYYY/MM/DD" ngx-mydatepicker formControlName="endDate"
+            #dp="ngx-mydatepicker">
 
           <span class="input-group-append float-label-append">
             <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
