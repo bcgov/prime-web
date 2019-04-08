@@ -3,7 +3,6 @@ import { Registrant } from '../../models/registrant.model';
 import { ControlContainer, NgForm } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { RegistrationConstants } from '../../models/registration-constants.model';
-import { SysParamInterface } from '../../../../../../../../src/app/models/cache-api.model';
 
 @Component({
   selector: 'prime-appl-account',
