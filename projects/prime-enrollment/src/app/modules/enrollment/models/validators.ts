@@ -17,10 +17,8 @@ export function descriptionValidator(name: string): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
     if (!control.parent) return null;
     if (!control.parent[name]) {
-      console.log('no name');
       return;
     }
-    console.log(name, control.parent[name].value);
     return control.parent.controls[name].value
       ? control.value === null
         ? {

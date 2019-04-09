@@ -18,7 +18,10 @@ import {
 
 export abstract class FormFieldBuilder {
   static get contactFields() {
-    const phone = new FormControl(null, [Validators.required]);
+    const phone = new FormControl(null, [
+      Validators.required,
+      Validators.minLength(10)
+    ]);
     const sms = new FormControl(false, [Validators.required]);
     const ext = new FormControl(null, []);
     const email = new FormControl(null, [Validators.required]);

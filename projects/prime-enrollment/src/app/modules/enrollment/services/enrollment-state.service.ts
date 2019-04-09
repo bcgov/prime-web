@@ -34,20 +34,29 @@ export class EnrollmentStateService {
     return this._certForms;
   }
 
+  get currentIndex() {
+    return this._currentIndex;
+  }
+
   setIndex(url: string) {
+    this._currentIndex = this.findIndex(url);
+  }
+
+  findIndex(url: string) {
+    console.log('find index', url);
     switch (url) {
       case '/enrollment/profile':
-        return (this._currentIndex = 1);
+        return 1;
       case '/enrollment/contact':
-        return (this._currentIndex = 2);
+        return 2;
       case '/enrollment/professional':
-        return (this._currentIndex = 3);
+        return 3;
       case '/enrollment/self-declaration':
-        return (this._currentIndex = 4);
+        return 4;
       case '/enrollment/pharmanet-access':
-        return (this._currentIndex = 5);
+        return 5;
       case '/enrollment/contact':
-        return (this._currentIndex = 6);
+        return 6;
     }
   }
 
@@ -62,10 +71,6 @@ export class EnrollmentStateService {
       if (this.dpFa.invalid) return false;
     }
     return true;
-  }
-
-  get currentIndex() {
-    return this._currentIndex;
   }
 
   isIndexValid(index: number): boolean {
