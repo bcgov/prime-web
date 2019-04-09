@@ -37,6 +37,23 @@ export function descriptionValidator(name: string): ValidatorFn {
   };
 }
 
+export function preferredContactValidator(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    if (!control.parent) return null;
+    const val = control.parent.controls['sms'].value;
+    if (val && control.value === 'sms') return null;
+    if (!val && control.value === 'email') return null;
+    if (!val && control.value === 'sms') {
+      return {
+        invalidSMS: {
+          value:
+            'Cannot select SMS alerts if the phone number is not SMS capable'
+        }
+      };
+    }
+  };
+}
+
 export function numberValidator() {
   return (control: AbstractControl): { [key: string]: any } | null => {
     const forbidden = !/([0-9])/.test(control.value);

@@ -40,10 +40,13 @@ export class ContactComponent implements OnInit {
 
   ngOnInit() {
     this.fg.controls.ext.enable();
+    this.fg.valueChanges.subscribe(obs => console.log(this.fg));
   }
 
-  toggleExtension(fc: FormControl) {
+  toggleExtension(fc: FormControl, fg: FormGroup) {
     console.log(fc);
-    return fc.parent.controls['sms'].value ? fc.enable() : fc.disable();
+
+    fc.parent.controls['sms'].value ? fc.enable() : fc.disable();
+    return fg.updateValueAndValidity();
   }
 }
