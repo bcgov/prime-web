@@ -14,7 +14,8 @@ import {
   behalfOfValidator,
   descriptionValidator,
   numberValidator,
-  preferredContactValidator
+  preferredContactValidator,
+  smsValidator
 } from './validators';
 
 export abstract class FormFieldBuilder {
@@ -23,7 +24,7 @@ export abstract class FormFieldBuilder {
       Validators.required,
       Validators.minLength(10)
     ]);
-    const sms = new FormControl(false, [Validators.required]);
+    const sms = new FormControl(null, [Validators.required, smsValidator()]);
     const ext = new FormControl(null, []);
     const email = new FormControl(null, [Validators.required]);
     const preferredContact = new FormControl(null, [
