@@ -15,8 +15,10 @@
           <!-- <international-phone-number formControlName="phone" placeholder="Enter phone number" [maxlength]="13"
             [defaultCountry]="'ca'" name="phone_number" [allowedCountries]="['ca', 'us']">
           </international-phone-number> -->
-          <ngx-intl-tel-input [preferredCountries]="['ca', 'us']" [enablePlaceholder]="true" name="phone"
-            formControlName="phone"></ngx-intl-tel-input>
+          <!-- <ngx-intl-tel-input [preferredCountries]="['ca', 'us']" [enablePlaceholder]="true" name="phone"
+            formControlName="phone"></ngx-intl-tel-input> -->
+          <input class="form-control" name="phone" formControlName="phone" [textMask]="{mask: mask}"
+            [placeholder]="placeholder">
         </div>
         <div class="form-group col-sm-6">
           <input class="form-check-inline" type="checkbox" id="capable" formControlName="sms"

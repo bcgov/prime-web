@@ -28,6 +28,7 @@ import { ProfessionalInformationBlockComponent } from './components/professional
 import { PharmanetBlockComponent } from './components/pharmanet-block/pharmanet-block.component';
 import { PrimeSharedModule } from '../../../../../src/app/prime-shared/prime-shared.module';
 import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
+import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
     MatDialogModule,
     MatCardModule,
     PrimeSharedModule,
-    NgxMyDatePickerModule.forRoot()
+    NgxMyDatePickerModule.forRoot(),
+    TextMaskModule
   ],
   exports: [
     FormsModule,
@@ -88,7 +90,8 @@ import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
     ProfessionalInformationBlockComponent,
     PharmanetBlockComponent,
     PrimeSharedModule,
-    NgxMyDatePickerModule
+    NgxMyDatePickerModule,
+    TextMaskModule
   ]
 })
 export class SharedModule {}

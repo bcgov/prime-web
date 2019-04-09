@@ -31,25 +31,25 @@
 
         <div class="input-group">
 
-          <input class="form-control" placeholder="YYYY/MM/DD" ngx-mydatepicker formControlName="startDate"
-            #sd="ngx-mydatepicker">
+          <input class="form-control" style="float:none" placeholder="YYYY/MM/DD" ngx-mydatepicker name="startDate"
+            [options]="dateOptions" formControlName="startDate" #sd="ngx-mydatepicker">
 
-          <span class="input-group-append float-label-append">
-            <button type="button" class="btn btn-default" (click)="sd.toggleCalendar()">
-              <i class="fa fa-calendar"></i>
-            </button>
-          </span>
+          <!-- <span class="input-group-append float-label-append"> -->
+          <button type="button" class="btn btn-default" (click)="sd.toggleCalendar()">
+            <i class="fa fa-calendar"></i>
+          </button>
+          <!-- </span> -->
         </div>
         <div class="input-group">
 
-          <input class="form-control" placeholder="YYYY/MM/DD" ngx-mydatepicker formControlName="endDate"
-            #dp="ngx-mydatepicker">
+          <input class="form-control" style="float:none" placeholder="YYYY/MM/DD" ngx-mydatepicker
+            [options]="dateOptions" formControlName="endDate" #dp="ngx-mydatepicker">
 
-          <span class="input-group-append float-label-append">
-            <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
-              <i class="fa fa-calendar"></i>
-            </button>
-          </span>
+          <!-- <span class="input-group-append float-label-append"> -->
+          <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
+            <i class="fa fa-calendar"></i>
+          </button>
+          <!-- </span> -->
         </div>
       </div>
     </form>

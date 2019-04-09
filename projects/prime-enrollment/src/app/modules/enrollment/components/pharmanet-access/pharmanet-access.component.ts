@@ -5,6 +5,7 @@ import { SearchOrganizationModalComponent } from '../search-organization-modal/s
 import { MatDialog } from '@angular/material/dialog';
 import { EnrollmentDataService } from '../../services/enrollment-data.service';
 import { Observable, of, BehaviorSubject } from 'rxjs';
+import { INgxMyDpOptions } from 'ngx-mydatepicker';
 const headers = ['Organization Name', 'Type', 'City'];
 @Component({
   selector: 'app-pharmanet-access',
@@ -16,6 +17,13 @@ export class PharmanetAccessComponent implements OnInit {
   fa$: BehaviorSubject<FormGroup[]> = new BehaviorSubject(null);
   results = false;
   headers: string[];
+  dateOptions: INgxMyDpOptions = {
+    // other options...
+    dateFormat: 'dd.mm.yyyy',
+    openSelectorTopOfInput: true,
+    showSelectorArrow: false
+  };
+
   constructor(
     private stateSvc: EnrollmentStateService,
     public dialog: MatDialog
@@ -36,15 +44,16 @@ export class PharmanetAccessComponent implements OnInit {
 
   openModal() {
     // this.stateSvc.organizationForm = [];
-    this.stateSvc.orgResultsClear();
+    // this.stateSvc.orgResultsClear();
     const dialog = this.dialog;
     const ref = dialog.open(SearchOrganizationModalComponent, {
       panelClass: 'test'
     });
     ref.afterClosed().subscribe(obs => {
+      console.log(obs);
+      const arr = this.stateSvc.organizationForm;
       this.stateSvc.organizationForm = obs;
       this.fa$.next(this.stateSvc.organizationForm);
-      console.log(obs);
       this.results = true;
     });
   }
