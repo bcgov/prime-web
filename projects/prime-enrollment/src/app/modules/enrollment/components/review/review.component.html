@@ -23,8 +23,8 @@
       </a>
     </div>
 
-    <enroll-contact-block [phone]="stateSvc.contactForm.controls.phone.value.number"
-      [email]="formValue('contactForm', 'email')" [contactMethod]="formValue('contactForm', 'preferredContact')">
+    <enroll-contact-block [phone]="formValue('contactForm', 'phone')" [email]="formValue('contactForm', 'email')"
+      [contactMethod]="formValue('contactForm', 'preferredContact')">
     </enroll-contact-block>
     <div class="label-row">
 

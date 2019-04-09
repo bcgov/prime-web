@@ -7,7 +7,9 @@
 
         <select class="form-control" formControlName="collegeCert" id="cert">
           <option label="Choose" value="">Choose</option>
-          <option value="sms" label="sms">Pharmacists of BC</option>
+          <ng-container *ngIf="licenseOptions | async as opts">
+            <option *ngFor="let opt of opts" [value]="opt" [label]="opt">Pharmacists of BC</option>
+          </ng-container>
         </select>
 
       </div>

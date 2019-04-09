@@ -5,6 +5,12 @@ import { FormFieldBuilder } from '../../models/form-field-builder';
 import { FormGenerator } from '../../models/form-generator';
 import { Observable, of } from 'rxjs';
 const options = ['Programmer', 'Pharmacist'];
+const collegeOptions = [
+  'College of Physicians and Surgeons of BC (CPSBC) - 91',
+  'College of Pharmacists of BC (CPBC) - P1',
+  'College of Registered Nurses of BC (CRNBC) - 96',
+  'None'
+];
 @Component({
   selector: 'app-professional',
   templateUrl: './professional.component.html',
@@ -16,12 +22,14 @@ export class ProfessionalComponent implements OnInit {
   dpFa: FormArray;
   fg: FormGroup;
   onBehalfOfOptions: Observable<string[]>;
+  collegeOptions: Observable<string[]>;
 
   constructor(private stateSvc: EnrollmentStateService) {
     this.fg = this.stateSvc.professionalForm;
     this.certFa = this.stateSvc.certForms;
     this.dpFa = this.stateSvc.dpFa;
     this.onBehalfOfOptions = of(options);
+    this.collegeOptions = of(collegeOptions);
   }
 
   ngOnInit() {}

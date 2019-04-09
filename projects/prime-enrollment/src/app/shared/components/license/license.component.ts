@@ -23,8 +23,6 @@ export class LicenseComponent implements OnInit {
   @Input() enableDelete: boolean;
   @Output() delete: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  @ViewChild('dp') ngxdp: NgxMyDatePickerDirective;
-
   /** Default options for wrapped ngx-datepicker. */
   datepickerOptions: INgxMyDpOptions;
 
