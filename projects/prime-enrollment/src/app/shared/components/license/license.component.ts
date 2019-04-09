@@ -20,6 +20,7 @@ import { NgxMyDatePickerDirective, INgxMyDpOptions } from 'ngx-mydatepicker';
 export class LicenseComponent implements OnInit {
   @Input() fg: FormGroup;
   @Input() licenseOptions: Observable<any>;
+  @Input() apOptions: Observable<any>;
   @Input() enableDelete: boolean;
   @Output() delete: EventEmitter<boolean> = new EventEmitter<boolean>();
 

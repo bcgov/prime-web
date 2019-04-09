@@ -11,6 +11,12 @@ const collegeOptions = [
   'College of Registered Nurses of BC (CRNBC) - 96',
   'None'
 ];
+const apOptions = [
+  'Remote Practice',
+  'Reproductive Care',
+  'Sexually Transmitted Infections (STI)',
+  'None'
+];
 @Component({
   selector: 'app-professional',
   templateUrl: './professional.component.html',
@@ -23,6 +29,7 @@ export class ProfessionalComponent implements OnInit {
   fg: FormGroup;
   onBehalfOfOptions: Observable<string[]>;
   collegeOptions: Observable<string[]>;
+  apOptions: Observable<string[]>;
 
   constructor(private stateSvc: EnrollmentStateService) {
     this.fg = this.stateSvc.professionalForm;
@@ -30,6 +37,7 @@ export class ProfessionalComponent implements OnInit {
     this.dpFa = this.stateSvc.dpFa;
     this.onBehalfOfOptions = of(options);
     this.collegeOptions = of(collegeOptions);
+    this.apOptions = of(apOptions);
   }
 
   ngOnInit() {}

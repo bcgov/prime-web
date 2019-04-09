@@ -44,8 +44,10 @@
       <div class="form-group col-sm-6">
         <label class="control-label" for="advanced">Advanced Practice</label>
         <select class="form-control" formControlName="advancedPractice" id="advanced">
-          <option label="Choose" value="">Choose</option>
-          <option value="sms" label="sms">Pharmacists of BC</option>
+          <option label="Choose" value="" selected>Choose</option>
+          <ng-container *ngIf="apOptions | async as opts">
+            <option *ngFor="let opt of opts" [value]="opt" [label]="opt">/option>
+          </ng-container>
         </select>
       </div>
 
