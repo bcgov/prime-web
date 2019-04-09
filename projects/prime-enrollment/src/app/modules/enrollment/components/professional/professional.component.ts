@@ -4,7 +4,6 @@ import { EnrollmentStateService } from '../../services/enrollment-state.service'
 import { FormFieldBuilder } from '../../models/form-field-builder';
 import { FormGenerator } from '../../models/form-generator';
 import { Observable, of } from 'rxjs';
-const options = ['Programmer', 'Pharmacist'];
 const collegeOptions = [
   'College of Physicians and Surgeons of BC (CPSBC) - 91',
   'College of Pharmacists of BC (CPBC) - P1',
@@ -16,6 +15,17 @@ const apOptions = [
   'Reproductive Care',
   'Sexually Transmitted Infections (STI)',
   'None'
+];
+
+const oboOptions = [
+  'Medical Office Assistant',
+  'Midwife',
+  'Nurse (not Nurse Practitioner)',
+  'Pharmacy Assistant',
+  'Pharmacy Technician',
+  'Registration Clerk',
+  'Ward Clerk',
+  'Other'
 ];
 @Component({
   selector: 'app-professional',
@@ -35,7 +45,7 @@ export class ProfessionalComponent implements OnInit {
     this.fg = this.stateSvc.professionalForm;
     this.certFa = this.stateSvc.certForms;
     this.dpFa = this.stateSvc.dpFa;
-    this.onBehalfOfOptions = of(options);
+    this.onBehalfOfOptions = of(oboOptions);
     this.collegeOptions = of(collegeOptions);
     this.apOptions = of(apOptions);
   }

@@ -75,7 +75,8 @@
               <select class="form-control" id="onBehalfOfJobTitle" formControlName="onBehalfOfJobTitle"
                 placeholder="Choose">
                 <option value="" selected>Choose</option>
-                <option *ngFor="let option of onBehalfOfOptions | async" value="option">{{option}}</option>
+                <option *ngFor="let option of onBehalfOfOptions | async" [value]="option" [label]="option">{{option}}
+                </option>
               </select>
             </div>
           </div>
