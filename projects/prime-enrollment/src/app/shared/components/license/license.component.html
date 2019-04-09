@@ -16,6 +16,7 @@
       <div class="form-group col-sm-6">
         <label class="control-label" for="license">License Number</label>
         <input class="form-control" id="license" formControlName="licenseNum">
+        <span *ngIf="fg.controls.licenseNum.invalid">invalid</span>
         <button class="btn delete" (click)="remove()" *ngIf="enableDelete"><i style="color: red !important;"
             class="fa fa-2x fa-times-circle-o"></i></button>
 

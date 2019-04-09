@@ -38,3 +38,12 @@ export function descriptionValidator(name: string): ValidatorFn {
       : null;
   };
 }
+
+export function numberValidator() {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const forbidden = !/([0-9])/.test(control.value);
+    return forbidden
+      ? { invalid: { value: `${control.value} is not valid` } }
+      : null;
+  };
+}

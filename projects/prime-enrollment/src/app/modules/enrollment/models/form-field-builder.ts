@@ -10,7 +10,11 @@ import {
   ISupportingDetails,
   IContact
 } from '../../../core/interfaces';
-import { behalfOfValidator, descriptionValidator } from './validators';
+import {
+  behalfOfValidator,
+  descriptionValidator,
+  numberValidator
+} from './validators';
 
 export abstract class FormFieldBuilder {
   static get contactFields() {
@@ -26,7 +30,11 @@ export abstract class FormFieldBuilder {
     const collegeCert = new FormControl(null, [Validators.required]);
     // const description = new FormControl(null, [Validators.required]);
     const collegeNo = new FormControl(null, [Validators.required]);
-    const licenseNum = new FormControl(null, [Validators.required]);
+    const licenseNum = new FormControl(null, [
+      Validators.required,
+      numberValidator(),
+      Validators.maxLength(12)
+    ]);
     const advancedPractice = new FormControl(null, [Validators.required]);
     const licenseClass = new FormControl(null, [Validators.required]);
     const renewalDate = new FormControl(new Date(), [Validators.required]);
