@@ -219,4 +219,13 @@ fdescribe('MoH Registration - Profile Page', () => {
       }
     });
 
+    fit('make sure skip to main content feature is working', async () => {
+      page.navigateTo();
+      page.fillPage(profileData);
+      page.clickSkipToContent();
+
+      const PAGE_URL2 = `${RegistrationConstants.MOH_REGISTRATION}/${RegistrationConstants.PROFILE_PG}#content`;
+      expect(browser.getCurrentUrl()).toContain(PAGE_URL2);
+    });
+
 });
