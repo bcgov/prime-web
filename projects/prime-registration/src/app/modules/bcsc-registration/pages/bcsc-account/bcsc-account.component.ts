@@ -107,35 +107,9 @@ export class BcscAccountComponent extends AbstractForm implements OnInit, OnDest
    * @param error
    */
   private handleError( error: any )  {
-
-    const respMsg: StatusMsgInterface[] = [];
-    this.cacheService.$enhancedMsgList.subscribe( obs => {
-      const msg = obs.find( x => x.msgID === '9999' );
-      if ( msg ) {
-        respMsg.push(msg);
-      } else {
-        // No cache loaded hard coded message to display to user
-        respMsg.push( {
-          msgID: null,
-          msgText: 'This error occurred because the system encountered an unanticipated situation which forced it to stop.',
-          msgType: ApiStatusCodes.ERROR,
-          scrArea: ScreenAreaID.CONFIRMATION,
-          appLayer: null
-        });
-      }
-    });
-
     this.loading = false;
 
     console.log( 'Error occurred: ', error  );
-    this.registerRespService.payload = new ServerPayload( {
-        eventUUID: null,
-        clientName: null,
-        processDate: null,
-        statusCode: ApiStatusCodes.ERROR,
-        statusMsgs: respMsg
-      } );
-
     this.navigate( RegistrationConstants.BCSC_REGISTRATION + '/' + RegistrationConstants.CONFIRMATION_PG );
   }
 

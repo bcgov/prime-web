@@ -1,6 +1,8 @@
 <common-page-framework layout='blank'>
 
-  <prime-confirmation [displayIcon]='statusCode' [hasQrCode]='hasQRCode()'>
+  <prime-confirmation [displayIcon]='statusCode'
+                      [hasQrCode]='hasQRCode()'
+                      (btnClick)='onButtonClick($event)'>
 
     <p>{{confirmationMessage}}</p>
 

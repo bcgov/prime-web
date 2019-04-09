@@ -48,7 +48,8 @@
      <ng-content select="[nextSteps]"></ng-content>
 
     <div class="p-3">
-      <button class="btn btn-md btn-primary">Login</button>
+      <button class="btn btn-md btn-primary"
+              (click)="onClick($event)">{{btnLabel}}</button>
     </div>
   </common-page-section>
 </div>
