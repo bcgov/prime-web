@@ -54,16 +54,12 @@ export class SearchOrganizationModalComponent implements OnInit {
       .orgResultsForm(res)
       // .then(fga => (this.stateSvc.organizationForm = fga))
       .then(fga => this.dialogRef.close(fga));
-
-    console.log('add clicked');
   }
 
   find() {
     const data = this.fg.value;
-    console.log(data);
     this.search = false;
     const res = this.dataSvc.findOrganizations(data);
     this.searchResults = res;
-    console.log(res);
   }
 }

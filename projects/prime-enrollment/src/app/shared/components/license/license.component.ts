@@ -29,9 +29,7 @@ export class LicenseComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
-    this.fg.valueChanges.subscribe(obs => console.log(this.fg));
-  }
+  ngOnInit() {}
 
   remove() {
     this.delete.emit(true);

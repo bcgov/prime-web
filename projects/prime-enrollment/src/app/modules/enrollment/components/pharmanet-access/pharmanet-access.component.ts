@@ -50,7 +50,6 @@ export class PharmanetAccessComponent implements OnInit {
       panelClass: 'test'
     });
     ref.afterClosed().subscribe(obs => {
-      console.log(obs);
       const arr = this.stateSvc.organizationForm;
       this.stateSvc.organizationForm = obs;
       this.fa$.next(this.stateSvc.organizationForm);

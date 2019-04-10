@@ -40,21 +40,12 @@ export class ContactComponent implements OnInit {
 
   ngOnInit() {
     this.fg.controls.ext.enable();
-    this.fg.valueChanges.subscribe(obs => console.log(this.fg));
     this.fg.controls.preferredContact.valueChanges.subscribe(obs => {
       this.fg.controls.sms.updateValueAndValidity();
-      console.log(obs);
-    });
-    this.fg.controls.sms.valueChanges.subscribe(obs => {
-      // this.fg.controls.preferredContact.updateValueAndValidity();
-      console.log(obs);
     });
   }
 
   toggleExtension(fc: FormControl, fg: FormGroup) {
-    // fg.controls.sms.updateValueAndValidity();
-    // fg.controls.preferredContact.updateValueAndValidity();
-    // console.log(fg.controls.preferredContact);
     if (!fc.parent.controls['sms']) {
       this.fg.controls.preferredContact.setValue('email');
     }
@@ -62,6 +53,5 @@ export class ContactComponent implements OnInit {
       emitEvent: true
     });
     return fc.parent.controls['sms'].value ? fc.enable() : fc.disable();
-    // return fg.updateValueAndValidity();
   }
 }

@@ -21,8 +21,6 @@ export class ReviewComponent implements OnInit {
 
   ngOnInit() {
     this.declarations = this.sdForm;
-
-    console.log(this.certForms);
   }
 
   get sdForm() {
@@ -58,7 +56,6 @@ export class ReviewComponent implements OnInit {
   }
 
   formValue(fg: string, name: string) {
-    console.log(this.stateSvc[fg].controls[name].value);
     return this.stateSvc[fg].controls[name].value;
   }
 }
