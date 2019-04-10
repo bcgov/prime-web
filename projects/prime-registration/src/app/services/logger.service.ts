@@ -1,12 +1,21 @@
 import { Injectable } from '@angular/core';
 import { CommonLogger, CommonLogMessage } from 'moh-common-lib/services';
 import { HttpClient } from '@angular/common/http';
-import { UUID } from 'angular2-uuid';
 import { environment } from '../../environments/environment';
+
+export enum RegistrationEvent {
+  VALIDATE_USER = 'validate user',
+  REGISTER_USER = 'register user',
+  NAVIGATION = 'navigation'
+}
 
 export interface LogMessage {
   /** The type of event being logged. */
-  event: 'BCSC Account' | 'navigation';
+  event: RegistrationEvent;
+  title?: string;
+  url?: string;
+  errMsg?: string;
+  success?: boolean;
   [key: string]: any;
 }
 

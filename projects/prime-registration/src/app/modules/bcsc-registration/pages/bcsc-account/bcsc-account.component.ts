@@ -9,7 +9,7 @@ import { RegisterRespService } from '@prime-registration/modules/registration/se
 import { RegistrationConstants } from '@prime-registration/modules/registration/models/registration-constants.model';
 import { Subscription } from 'rxjs';
 import { ServerPayload } from '@prime-core/models/api-base.model';
-import { LoggerService } from '../../../../services/logger.service';
+import { LoggerService, RegistrationEvent, LogMessage } from '@prime-registration/services/logger.service';
 
 @Component({
   selector: 'app-bcsc-account',
@@ -90,20 +90,32 @@ export class BcscAccountComponent extends AbstractForm implements OnInit, OnDest
 
         if ( this.registerRespService.payload.success ) {
 
+          this.logger.log({
+            event: RegistrationEvent.VALIDATE_USER,
+            success: this.registerRespService.payload.success
+          });
+
           // Register User in PRIME
           this.requestRegisterUser();
         } else if ( this.registerRespService.payload.error ) {
-          this.nextPage( false );
+          this.nextPage( RegistrationEvent.VALIDATE_USER, false,
+                         <string>this.registerRespService.payload.statusMsgs );
         } else {
 
           // Display errors on page
           this.loading = false;
           console.log( 'Correct issue and try again.' );
+
+          this.logger.log({
+            event: RegistrationEvent.VALIDATE_USER,
+            success: false,
+            errMsg: 'Duplicate email or phone number found.'
+          });
         }
       },
       responseError => {
         console.log( 'Error: ', responseError );
-        this.nextPage( false );
+        this.nextPage( RegistrationEvent.VALIDATE_USER, false, responseError );
       });
   }
 
@@ -118,21 +130,30 @@ export class BcscAccountComponent extends AbstractForm implements OnInit, OnDest
       regResp => {
         this.loading = false;
         this.registerRespService.payload = new ServerPayload( regResp );
-        this.nextPage( true );
+        this.nextPage(
+          RegistrationEvent.REGISTER_USER,
+          this.registerRespService.payload.success,
+          <string>this.registerRespService.payload.statusMsgs
+          );
       },
       regRespError => {
         console.log( 'Error: ', regRespError );
-        this.nextPage( false );
+        this.nextPage( RegistrationEvent.REGISTER_USER, false, regRespError );
       });
   }
 
-  private nextPage( success: boolean ) {
+  private nextPage( event: RegistrationEvent, success: boolean, errMsg: string = null ) {
+    const logMessage: LogMessage = {
+      event: event,
+      success: success
+    };
+
+    if ( !success ) {
+      logMessage.errMsg = errMsg;
+    }
 
     // Logging
-    this.logger.log( {
-        event: 'BCSC Account',
-        success: success
-      } );
+    this.logger.log( logMessage );
 
     this.loading = false;
     this.navigate( RegistrationConstants.BCSC_REGISTRATION + '/' + RegistrationConstants.CONFIRMATION_PG );

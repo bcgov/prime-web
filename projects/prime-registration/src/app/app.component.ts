@@ -10,7 +10,7 @@ import { ControlContainer, NgForm } from '@angular/forms';
 import { RegistrationDataService } from './services/registration-data.service';
 import { Base } from 'moh-common-lib/models';
 import { RegisterApiService } from './modules/registration/services/register-api.service';
-import { LoggerService } from './services/logger.service';
+import { LoggerService, RegistrationEvent } from './services/logger.service';
 
 @Component({
   selector: 'app-root',
@@ -67,7 +67,7 @@ export class AppComponent extends Base implements OnInit {
       .subscribe((data: { title?: string }) => {
         this.setTitle(data.title);
         this.logger.log({
-          event: 'navigation',
+          event: RegistrationEvent.NAVIGATION,
           title: data.title ? data.title : this.title,
           url: this.router.url,
         });
