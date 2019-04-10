@@ -8,7 +8,9 @@ export enum ApiStatusCodes {
 export enum ScreenAreaID {
   CONFIRMATION = 'CONFIRMATION',
   QRCODE = 'QR',
-  NEXT_STEPS = 'NEXT STEPS'
+  NEXT_STEPS = 'NEXT STEPS',
+  INTERIM = 'INTERIM',
+  FINAL = 'FINAL'
 }
 
 /**
@@ -50,7 +52,7 @@ export interface PayloadInterface {
   /**
    * Contains the list of Enhanced Message related to the process execution
    */
-  statusMsgs: string | string[] | StatusMsgInterface;
+  statusMsgs: StatusMsgInterface[] | string | string[];
 }
 
 export class ServerPayload implements PayloadInterface {
@@ -58,7 +60,7 @@ export class ServerPayload implements PayloadInterface {
   clientName: string;
   processDate: string;
   statusCode: string;
-  statusMsgs: string | string[] | StatusMsgInterface;
+  statusMsgs: StatusMsgInterface[] | string | string[];
 
 
   constructor(payload: PayloadInterface) {

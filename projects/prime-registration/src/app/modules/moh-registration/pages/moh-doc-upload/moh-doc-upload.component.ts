@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractForm } from 'moh-common-lib/models';
 import { Router } from '@angular/router';
-import { PrimeConstants } from '@prime-core/models/prime-constants';
-import { DocumentType, Document } from '@prime-core/models/documents.interface';
-import { RegCacheService } from '../../../../services/reg-cache.service';
-import { RegistrationDataService } from '../../../../services/registration-data.service';
+import { Document } from '@prime-core/models/documents.interface';
+import { RegCacheService } from '@prime-registration/services/reg-cache.service';
+import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
+import { RegistrationConstants } from '../../../registration/models/registration-constants.model';
 
 @Component({
   selector: 'app-moh-doc-upload',
@@ -13,7 +13,6 @@ import { RegistrationDataService } from '../../../../services/registration-data.
 })
 export class MohDocUploadComponent extends AbstractForm implements OnInit {
 
-  public docTypesList: DocumentType[];
   public documents: Document[];
 
   constructor( protected router: Router,
@@ -24,21 +23,24 @@ export class MohDocUploadComponent extends AbstractForm implements OnInit {
 
   ngOnInit() {
     this.documents = this.dataService.documents; // this is basically an alias, since arrays are pass-by-reference,
-    this.docTypesList = this.cacheService.documentTypes;
   }
 
   get registrant() {
     return this.dataService.registrant;
   }
 
+  get cache() {
+    return this.cacheService;
+  }
+
   continue() {
     console.log('MoH form', {valid: this.form.valid, submitted: this.form.submitted}, this.form);
 
     this.registrant.documents = this.documents;
-    
+
     if (this.form.valid) {
       // Navigate to next page
-      this.navigate( PrimeConstants.MOH_REGISTRATION + '/' + PrimeConstants.ACCOUNT_PG );
+      this.navigate( RegistrationConstants.MOH_REGISTRATION + '/' + RegistrationConstants.ACCOUNT_PG );
 
     } else {
       // Errors exist on form

@@ -8,7 +8,7 @@
   </div>
   <div>
     <form [formGroup]="fg">
-      <prime-page-sections layout="noTips">
+      <common-page-section layout="noTips">
         <enroll-yes-no class="panel " [fg]="fg" fc="conviction" [label]="convictionLabel"></enroll-yes-no>
         <enroll-details *ngIf="fg.controls['conviction'].value" [fg]="fg" fc="convictionDesc"></enroll-details>
         <enroll-yes-no [fg]="fg" fc="regSuspension" [label]="regSuspensionLabel"></enroll-yes-no>
@@ -18,8 +18,8 @@
         <enroll-yes-no [fg]="fg" fc="pharmaSuspension" [label]="pharmaSuspensionLabel"></enroll-yes-no>
         <enroll-details *ngIf="fg.controls['pharmaSuspension'].value" [fg]="fg" fc="pharmaSuspensionDesc">
         </enroll-details>
-      </prime-page-sections>
-      <prime-page-sections layout="tips"
+      </common-page-section>
+      <common-page-section layout="tips"
         *ngIf="fg.controls['conviction'].value || fg.controls['regSuspension'].value || fg.controls['tAndC'].value || fg.controls['pharmaSuspension'].value">
         <common-file-uploader (imagesChange)="imagesChange($event, fg.controls['supportingDocs'])" id="blahblah"
           [images]="images">
@@ -37,7 +37,7 @@
             <li>A JPG, PNG, GIF, or BMP file (not </li>
           </ul>
         </aside>
-      </prime-page-sections>
+      </common-page-section>
     </form>
   </div>
 </common-page-framework>

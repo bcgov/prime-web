@@ -16,7 +16,7 @@ export class ApplDocUploadComponent implements OnInit {
   @Input() objectID: string;
   @Input() documents: Document[] = [];
   /** List of all possible document types */
-  @Input() docTypesList: DocumentType[] = [];
+  @Input() docTypeList: DocumentType[] = [];
 
   @Output() documentsChange: EventEmitter<Document[]> = new EventEmitter<Document[]>();
 
@@ -36,7 +36,7 @@ export class ApplDocUploadComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log( 'doctypelist: ', this.docTypesList );
+    console.log( 'doctypelist: ', this.docTypeList );
   }
 
   /** Add a new section based on what's selected in the dropdown */
@@ -92,7 +92,7 @@ export class ApplDocUploadComponent implements OnInit {
 
   /** The current DocumentType that's selected in the dropdown. Related to `docTypeDropdownValue` */
   get dropdownValueAsDocumentType(): DocumentType {
-    return this.docTypesList ? this.docTypesList.find(x => x.docType === this.docTypeDropdownValue) : null;
+    return this.docTypeList ? this.docTypeList.find(x => x.docType === this.docTypeDropdownValue) : null;
   }
 }
 

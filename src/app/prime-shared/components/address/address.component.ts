@@ -6,7 +6,8 @@ import {
   EventEmitter,
   forwardRef,
   ViewChild,
-  ElementRef
+  ElementRef,
+  OnChanges
 } from '@angular/core';
 import { ControlContainer, NgForm } from '@angular/forms';
 import { Base, Address } from 'moh-common-lib/models';
@@ -44,7 +45,7 @@ export interface ProvinceList {
     { provide: ControlContainer, useExisting: forwardRef(() => NgForm) }
   ]
 })
-export class AddressComponent extends Base implements OnInit {
+export class AddressComponent extends Base implements OnInit, OnChanges {
   // TODO: Create Unit tests for this component
   // Exists for unit testing to validate errors set
   @ViewChild('provRef') provRef: ElementRef;
@@ -79,36 +80,6 @@ export class AddressComponent extends Base implements OnInit {
   }
 
   ngOnInit() {
-    if (this.address) {
-      if (!this.address.country) {
-        /**
-         * Set country to default
-         * Search uses country code or country name to find item is list.
-         */
-        const countryObj = !this.countryList
-          ? null
-          : this.countryList.find(
-              val =>
-                val.countryCode === this.defaultCountry ||
-                val.description === this.defaultCountry
-            );
-        this.address.country = countryObj ? countryObj.countryCode : null;
-      }
-
-      if (!this.address.province) {
-        this.address.province = this.setDefaultProvinceAsOption(
-          this.address.country
-        );
-      }
-
-      // BC address that contains street address need to fill with existing data
-      if (this.address.street && this.useGeoCoder()) {
-        this.search = this.address.street;
-      }
-
-      this.updateProvList();
-    }
-
     // Set up for using GeoCoder
     this.typeaheadList$ = this.searchText$.pipe(
       debounceTime(500),
@@ -170,11 +141,24 @@ export class AddressComponent extends Base implements OnInit {
   }
 
   ngOnChanges(changes) {
-    if (changes['provinceList'] && changes['provinceList'].currentValue) {
+    if (changes['countryList'] && changes['countryList'].currentValue) {
+
+      if ( !this.address.country ) {
+        // Set defaults
+        this.address.country = this.setDefaultCountryAsOption();
+      }
+      // Set defaults
+      this.address.province = this.setDefaultProvinceAsOption( this.address.country );
+
       this.updateProvList();
     }
-    // TODO - update defaults based on country when country has changed
-    // if (changes[country]) - update defaults
+    if (changes['provinceList'] && changes['provinceList'].currentValue) {
+      if ( !this.address.province ) {
+        // Set defaults
+        this.address.province = this.setDefaultProvinceAsOption( this.address.country );
+      }
+      this.updateProvList();
+    }
   }
 
   /**
@@ -202,6 +186,21 @@ export class AddressComponent extends Base implements OnInit {
              val.country === country
     );
     return (provObj ? provObj.provinceCode : null );
+  }
+
+  /**
+   * Set country to default
+   * Search uses country code or country name to find item is list.
+   */
+  private setDefaultCountryAsOption(): string {
+    const countryObj = !this.countryList
+    ? null
+    : this.countryList.find(
+        val =>
+          val.countryCode === this.defaultCountry ||
+          val.description === this.defaultCountry
+      );
+    return countryObj ? countryObj.countryCode : null;
   }
 
   // GeoCoder
@@ -240,6 +239,8 @@ export class AddressComponent extends Base implements OnInit {
     this.search = data.street;
     this.address.street = data.street;
     this.address.city = data.city;
+    this.address.province = 'BC';
+    this.address.country = 'CAN';
     this.addressChange.emit(this.address);
   }
 }

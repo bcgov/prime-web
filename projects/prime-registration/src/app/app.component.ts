@@ -9,6 +9,7 @@ import { Registrant } from './modules/registration/models/registrant.model';
 import { ControlContainer, NgForm } from '@angular/forms';
 import { RegistrationDataService } from './services/registration-data.service';
 import { Base } from 'moh-common-lib/models';
+import { RegisterApiService } from './modules/registration/services/register-api.service';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +25,7 @@ export class AppComponent extends Base implements OnInit {
 
   constructor( private router: Router,
                private activatedRoute: ActivatedRoute,
-               private registrationDataService: RegistrationDataService,
+               private registerApiService: RegisterApiService,
                private titleService: Title ) {
     super();
   }
@@ -36,7 +37,7 @@ export class AppComponent extends Base implements OnInit {
       : console.error(version.message);
 
     // session ID to track events
-    this.registrationDataService.eventUUID = this.objectId;
+    this.registerApiService.eventUUID = this.objectId;
 
     this.updateTitleOnRouteChange();
 

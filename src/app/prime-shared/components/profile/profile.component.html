@@ -5,7 +5,7 @@
 
   <ng-content select="[identityInstruct]"></ng-content>
 
-  <prime-page-sections layout='tips'>
+  <common-page-section layout='tips'>
     <div class="form-group col-sm-6 p-sm-0">
       <prime-name label="First Name"
                   [disabled]="!editIdentityInfo"
@@ -37,7 +37,7 @@
     </div>
 
     <aside>TIPS</aside>
-  </prime-page-sections>
+  </common-page-section>
 </div>
 
 <div>
@@ -48,7 +48,7 @@
     enter your full preferred name.
   </p>
 
-  <prime-page-sections layout='tips'>
+  <common-page-section layout='tips'>
     <div class="form-group col-sm-6 p-sm-0">
       <prime-name label="Preferred First Name"
                   [(nameStr)]="data.preferredFirstName"
@@ -69,10 +69,10 @@
                   (blurEvent)="onBlur($event)"></prime-name>
     </div>
     <aside>TIPS</aside>
-  </prime-page-sections>
+  </common-page-section>
 </div>
 
-<prime-page-sections layout='double'>
+<common-page-section layout='double'>
     <h2 class="border-bottom">Address</h2>
     <prime-address [disabled]="!editIdentityInfo"
                    [(address)]="data.address"
@@ -102,7 +102,7 @@
                        [isRequired]="true"></prime-address>
     </div>
   </aside>
-</prime-page-sections>
+</common-page-section>
 
 <ng-template #NoMailingAddress>
   <div class="mail-address-container">

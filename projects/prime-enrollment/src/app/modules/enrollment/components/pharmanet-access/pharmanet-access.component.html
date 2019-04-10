@@ -5,13 +5,13 @@
   <h2 class="border-bottom">
     Pharmanet Access - helper text
   </h2>
-  <prime-page-sections layout="noTips">
+  <common-page-section layout="noTips">
     <ng-container *ngIf="!results; else grid">
       <enroll-action-block (clicked)="openModal()" label="Add Organization" text="No Organizations"
         class="action-block">
       </enroll-action-block>
     </ng-container>
-  </prime-page-sections>
+  </common-page-section>
   <ng-container *ngIf="fa$ | async as fa">
     <button class="btn btn-secondary btn-lg" (click)="openModal()">Add Organization</button>
     <div class="header-row">

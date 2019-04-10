@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PrimeConstants } from '@prime-core/models/prime-constants';
+import { RegistrationConstants } from '../../modules/registration/models/registration-constants.model';
 
 @Component({
   selector: 'app-home-page',
@@ -8,8 +8,8 @@ import { PrimeConstants } from '@prime-core/models/prime-constants';
 })
 export class HomePageComponent implements OnInit {
 
-  public mohRegistration = PrimeConstants.MOH_REGISTRATION;
-  public bcscRegistration = PrimeConstants.BCSC_REGISTRATION;
+  public mohRegistration = RegistrationConstants.MOH_REGISTRATION;
+  public bcscRegistration = RegistrationConstants.BCSC_REGISTRATION;
 
   constructor() { }
 
