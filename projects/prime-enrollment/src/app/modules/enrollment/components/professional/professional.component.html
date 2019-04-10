@@ -1,10 +1,10 @@
 <common-page-framework layout="blank">
-  <h1>Professional Information</h1>
+  <h2>Professional Information</h2>
 
   <ng-content select="[identityInstruct]"></ng-content>
-  <h2 identityInstruct class="border-bottom">
+  <p identityInstruct class="border-bottom">
     Profile information helper text.
-  </h2>
+  </p>
   <common-page-section layout="tips">
     <div>
       <form [formGroup]="fg">
@@ -18,7 +18,7 @@
               [apOptions]="apOptions" [enableDelete]="certFa.length > 1">
             </enroll-license>
           </ng-container>
-          <button class="btn btn-md btn-primary" (click)="addLicenseForm(certFa)">Add Another License</button>
+          <button class="btn btn-md btn-secondary" (click)="addLicenseForm(certFa)">Add Another License</button>
         </div>
 
         <label class="control-label">Are you a device provider?
@@ -31,7 +31,7 @@
               (remove)="removeDeviceFc(dpFa)">
             </enroll-device-provider>
           </ng-container>
-          <button class="btn btn-md btn-primary" (click)="addDeviceFc(dpFa)">Add Another License</button>
+          <button class="btn btn-md btn-secondary" (click)="addDeviceFc(dpFa)">Add Another License</button>
         </div>
 
         <label class="control-label">Are you accessing pharmanet on behalf of someone else?

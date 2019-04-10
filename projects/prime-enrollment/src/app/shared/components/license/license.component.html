@@ -5,12 +5,13 @@
       <div class="form-group col-sm-6">
         <label class="control-label" for="license">College Certifications</label>
 
-        <select class="form-control" formControlName="collegeCert" id="cert">
-          <option label="Choose" value="">Choose</option>
-          <ng-container *ngIf="licenseOptions | async as opts">
-            <option *ngFor="let opt of opts" [value]="opt" [label]="opt">Pharmacists of BC</option>
-          </ng-container>
-        </select>
+        <!-- <select class="form-control" formControlName="collegeCert" id="cert"> -->
+        <!-- <option label="Choose" value="">Choose</option> -->
+        <ng-container *ngIf="licenseOptions | async as opts">
+          <ng-select id="collegeCert" formControlName="collegeCert" [items]="opts"></ng-select>
+          <!-- <option *ngFor="let opt of opts" [value]="opt" [label]="opt">Pharmacists of BC</option> -->
+        </ng-container>
+        <!-- </select> -->
 
       </div>
       <div class="form-group col-sm-6">
@@ -23,10 +24,12 @@
       </div>
       <div class=" form-group col-sm-3">
         <label class="control-label" for="licenseClass">License Class</label>
-        <select class="form-control" formControlName="licenseClass" id="licenseClass">
+        <!-- <select class="form-control" formControlName="licenseClass" id="licenseClass">
           <option label="Choose" value="">Choose</option>
           <option value="sms" label="sms">Full Pharmacists</option>
-        </select>
+        </select> -->
+        <ng-select id="licenseClass" formControlName="licenseClass" [items]="types | async">
+        </ng-select>
       </div>
 
       <div class="form-group col-sm-3">
@@ -45,13 +48,13 @@
         </div>
       </div>
       <div class="form-group col-sm-6">
-        <label class="control-label" for="advanced">Advanced Practice</label>
-        <select class="form-control" formControlName="advancedPractice" id="advanced">
-          <option label="Choose" value="" selected>Choose</option>
-          <ng-container *ngIf="apOptions | async as opts">
-            <option *ngFor="let opt of opts" [value]="opt" [label]="opt">/option>
-          </ng-container>
-        </select>
+        <label class="control-label" for="advancedPractice">Advanced Practice</label>
+        <!-- <select class="form-control" formControlName="advancedPractice" id="advanced"> -->
+        <!-- <option label="Choose" value="" selected>Choose</option> -->
+        <ng-container *ngIf="apOptions | async as opts">
+          <ng-select id="advancedPractice" formControlName="advancedPractice" [items]="opts"></ng-select>
+        </ng-container>
+        <!-- </select> -->
       </div>
 
     </div>

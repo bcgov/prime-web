@@ -1,10 +1,10 @@
 <common-page-framework layout="blank">
 
-  <h1>Pharmanet Access</h1>
+  <h2>Pharmanet Access</h2>
 
-  <h2 class="border-bottom">
+  <p class="border-bottom">
     Pharmanet Access - helper text
-  </h2>
+  </p>
   <common-page-section layout="noTips">
     <ng-container *ngIf="!results; else grid">
       <enroll-action-block (clicked)="openModal()" label="Add Organization" text="No Organizations"
