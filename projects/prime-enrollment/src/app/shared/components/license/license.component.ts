@@ -23,6 +23,7 @@ export class LicenseComponent implements OnInit {
   @Input() licenseLabel: Observable<any>;
   @Input() apOptions: Observable<any>;
   @Input() enableDelete: boolean;
+  @Input() classOptions: Observable<any>;
   @Output() delete: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() selected: EventEmitter<string> = new EventEmitter<string>();
 
@@ -38,6 +39,7 @@ export class LicenseComponent implements OnInit {
   collegeSelectionChange(evt: any) {
     this.fg.updateValueAndValidity();
     this.fg.controls.licenseNum.updateValueAndValidity();
+    this.fg.controls.licenseClass.setValue(null);
     this.selected.emit(evt);
   }
 
