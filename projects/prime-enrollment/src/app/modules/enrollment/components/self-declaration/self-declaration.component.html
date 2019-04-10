@@ -9,7 +9,6 @@
   <div>
     <form [formGroup]="fg">
       <prime-page-sections layout="noTips">
-
         <enroll-yes-no class="panel " [fg]="fg" fc="conviction" [label]="convictionLabel"></enroll-yes-no>
         <enroll-details *ngIf="fg.controls['conviction'].value" [fg]="fg" fc="convictionDesc"></enroll-details>
         <enroll-yes-no [fg]="fg" fc="regSuspension" [label]="regSuspensionLabel"></enroll-yes-no>

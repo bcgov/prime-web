@@ -1,13 +1,18 @@
 <label class="control-label">{{ label }}
 </label>
-<div class="form-check" *ngIf="fc" [formGroup]="fg">
-  <input class='form-check-input' [formControlName]="fc" type="radio" id="fcfalse{{random}}" tabindex="0"
-    [value]="false">
-  <label class='form-check-label' for="fcfalse{{random}}">
-    No
-  </label>
-  <input class='form-check-input' type="radio" [formControlName]="fc" id="fctrue{{random}}" tabindex="0" [value]="true">
-  <label class='form-check-label' for="fctrue{{random}}">
-    Yes
-  </label>
+<div [formGroup]="fg">
+  <enroll-radio-button [formControlName]="fc" labelOne="fcfalse{{random}}" labelTwo="fctrue{{random}}"
+    name="name {{random }}">
+  </enroll-radio-button>
 </div>
+<!-- <div class="form-check" *ngIf="fc" [formGroup]="fg"> -->
+<!-- <input class='form-check-input' [formControlName]="fc" type="radio" id="fcfalse{{random}}" tabindex="0" -->
+<!-- [value]="false"> -->
+<!-- <label class='form-check-label' for="fcfalse{{random}}"> -->
+<!-- No -->
+<!-- </label> -->
+<!-- <input class='form-check-input' type="radio" [formControlName]="fc" id="fctrue{{random}}" tabindex="0" [value]="true"> -->
+<!-- <label class='form-check-label' for="fctrue{{random}}"> -->
+<!-- Yes -->
+<!-- </label> -->
+<!-- </div> -->
