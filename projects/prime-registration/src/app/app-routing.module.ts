@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomePageComponent } from './pages/home-page/home-page.component';
-import { PrimeConstants } from '@prime-core/models/prime-constants';
+import { RegistrationConstants } from './modules/registration/models/registration-constants.model';
+
 
 const routes: Routes = [
   {
@@ -12,12 +13,12 @@ const routes: Routes = [
 
   // Lazy loading modules below
   {
-    path: PrimeConstants.MOH_REGISTRATION,
+    path: RegistrationConstants.MOH_REGISTRATION,
     loadChildren:
       './modules/moh-registration/moh-registration.module#MohRegistrationModule'
   },
   {
-    path: PrimeConstants.BCSC_REGISTRATION,
+    path: RegistrationConstants.BCSC_REGISTRATION,
     loadChildren:
       './modules/bcsc-registration/bcsc-registration.module#BcscRegistrationModule'
   },

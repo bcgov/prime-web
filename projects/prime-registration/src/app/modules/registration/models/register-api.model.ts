@@ -36,3 +36,50 @@ export class UserAttrPayload extends ServerPayload {
   }
 }
 
+export interface SecurityQuestionsAnswers {
+  name: string;
+  value: string;
+}
+
+export interface AddressInterface {
+  street: string;
+  city: string;
+  province: string;
+  postalCode: string;
+  country: string;
+}
+
+export interface RegRequestInterface {
+  eventUUID: string;
+  clientName: string;
+  processDate: string;
+}
+
+export interface CheckUserAttr extends RegRequestInterface {
+  providerCode: string;
+  userId?: string;
+  pdid?: string;
+  email: string;
+  mobile: string;
+}
+
+export interface RegisterUser extends RegRequestInterface {
+  providerCode: string;             // BCSC (MoH is on-hold until further notice)
+  assuranceLevel: string;           // BCSC assurance level = 3
+  pdid?: string;
+  userId?: string;                  // Currently unused (MoH is on-hold until further notice)
+  email: string;
+  mobile: string;
+  securityQuestions: SecurityQuestionsAnswers[];
+  firstname: string;
+  lastname: string;
+  givennames: string;                // Concatenation of First and middle names
+  dateOfBirth: string;               // DOB format 'YYYYMMDD'
+  preffirstname: string;             // Field must be present in message, but data can be null
+  preflastname: string;              // Field must be present in message, but data can be null
+  prefmiddlename: string;            // Field must be present in message, but data can be null
+  address: AddressInterface;
+  mailingAddress: AddressInterface; // Field must be present in message, but data can be null
+}
+
+

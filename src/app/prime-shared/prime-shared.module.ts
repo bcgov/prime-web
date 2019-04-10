@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { AddressComponent } from './components/address/address.component';
 import { NameComponent } from './components/name/name.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { PageSectionsComponent } from './components/page-sections/page-sections.component';
 import { PhoneNumberComponent } from './components/phone-number/phone-number.component';
 import { SharedCoreModule } from 'moh-common-lib';
 import { HttpClientModule } from '@angular/common/http';
@@ -18,7 +17,6 @@ const componentList = [
   AddressComponent,
   NameComponent,
   ProfileComponent,
-  PageSectionsComponent,
   PhoneNumberComponent,
   ConfirmationComponent
 ];
@@ -31,7 +29,7 @@ const componentList = [
     HttpClientModule,
     TextMaskModule,
     TypeaheadModule.forRoot(),
-    NgSelectModule
+    NgSelectModule,
   ],
   declarations: [
     componentList

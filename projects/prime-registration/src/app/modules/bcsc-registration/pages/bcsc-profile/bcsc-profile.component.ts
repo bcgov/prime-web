@@ -6,10 +6,9 @@ import { BCSCDummyResponseService } from '../../services/bcsc-dummy-response.ser
 import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
 import { AbstractForm } from 'moh-common-lib/models';
 import { Router, ActivatedRoute } from '@angular/router';
-import { PrimeConstants } from '@prime-core/models/prime-constants';
 import { RegCacheService } from '@prime-registration/services/reg-cache.service';
-import { PrimePerson } from '../../../../../../../../src/app/models/prime-person.model';
-import { Registrant } from '../../../registration/models/registrant.model';
+import { RegistrationConstants } from '@prime-registration/modules/registration/models/registration-constants.model';
+import { AssuranceLevel, ProviderCode } from '@prime-core/models/prime-constants';
 
 @Component({
   selector: 'app-bcsc-profile',
@@ -17,7 +16,7 @@ import { Registrant } from '../../../registration/models/registrant.model';
   styleUrls: ['./bcsc-profile.component.scss']
 })
 export class BcscProfileComponent extends AbstractForm implements OnInit {
-  
+
   constructor( private dummyDataService: BCSCDummyResponseService,
                private registrantService: RegistrationDataService,
                private regCacheService: RegCacheService,
@@ -40,7 +39,7 @@ export class BcscProfileComponent extends AbstractForm implements OnInit {
 
       this.activatedroute.queryParams.subscribe(params => {
         if (Object.keys(params).length) {
-  
+
           if (!VALID_HOSTNAMES.includes(location.hostname)){
             alert('BCSC overwriting is not allowed');
             return;
@@ -64,6 +63,9 @@ export class BcscProfileComponent extends AbstractForm implements OnInit {
 
     }
 
+    // Set providerCode and assurance level for registrant
+    registrantService.registrant.providerCode = ProviderCode.BCSC;
+    registrantService.registrant.assuranceLevel = AssuranceLevel.LEVEL_3;
   }
 
   ngOnInit() {}
@@ -84,7 +86,7 @@ export class BcscProfileComponent extends AbstractForm implements OnInit {
     }
 
     if ( this.form.valid ) {
-      this.navigate( PrimeConstants.BCSC_REGISTRATION + '/' + PrimeConstants.ACCOUNT_PG );
+      this.navigate( RegistrationConstants.BCSC_REGISTRATION + '/' + RegistrationConstants.ACCOUNT_PG );
     }
   }
 }

@@ -1,6 +1,6 @@
 <h1 class="border-bottom">Confirmation Message</h1>
 
-<prime-page-sections layout='noTips'>
+<common-page-section layout='noTips'>
 
   <!-- Icons and confirmation messages -->
   <div [ngSwitch]="displayIcon">
@@ -31,26 +31,26 @@
       </div>
     </ng-container>
   </div>
-</prime-page-sections>
+</common-page-section>
 
 <div *ngIf="hasQrCode">
   <h2 class="border-bottom">QR Code</h2>
-  <prime-page-sections layout='tips'>
+  <common-page-section layout='tips'>
     <ng-content select="[qrcode]"></ng-content>
 
     <aside>TIPS</aside>
-  </prime-page-sections>
+  </common-page-section>
 </div>
 
 <div>
   <h2 class="border-bottom">Next Steps</h2>
-  <prime-page-sections layout='noTips'>
+  <common-page-section layout='noTips'>
      <ng-content select="[nextSteps]"></ng-content>
 
     <div class="p-3">
       <button class="btn btn-md btn-primary">Login</button>
     </div>
-  </prime-page-sections>
+  </common-page-section>
 </div>
 
 <ng-template #message>

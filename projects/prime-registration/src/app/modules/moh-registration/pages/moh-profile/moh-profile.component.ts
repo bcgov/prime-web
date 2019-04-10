@@ -1,13 +1,13 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { AbstractForm } from 'moh-common-lib/models';
 import { Router } from '@angular/router';
-import { PrimeConstants } from '@prime-core/models/prime-constants';
 import { ConfirmModalComponent } from '../../../registration/components/confirm-modal/confirm-modal.component';
 import { BsModalService } from 'ngx-bootstrap';
-import { RegistrationDataService } from '../../../../services/registration-data.service';
-import { RegCacheService } from '../../../../services/reg-cache.service';
-import { PrimePerson } from '@prime-core/models/prime-person.model';
+import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
+import { RegCacheService } from '@prime-registration/services/reg-cache.service';
 import { Registrant } from '../../../registration/models/registrant.model';
+import { RegistrationConstants } from '../../../registration/models/registration-constants.model';
+import { ProviderCode, AssuranceLevel } from '@prime-core/models/prime-constants';
 
 @Component({
   selector: 'prime-moh-profile',
@@ -24,6 +24,10 @@ export class MohProfileComponent extends AbstractForm implements OnInit {
                private registrantService: RegistrationDataService,
                private regCacheService: RegCacheService ) {
     super( router );
+
+    // Set providerCode and assurance level for registrant
+    registrantService.registrant.providerCode = ProviderCode.MOH;
+    registrantService.registrant.assuranceLevel = AssuranceLevel.LEVEL_1;
   }
 
   ngOnInit() {
@@ -71,7 +75,7 @@ export class MohProfileComponent extends AbstractForm implements OnInit {
 
   private navigateNext() {
     // Navigate to next page
-    this.navigate( PrimeConstants.MOH_REGISTRATION + '/' + PrimeConstants.DOC_UPLD_PG );
+    this.navigate( RegistrationConstants.MOH_REGISTRATION + '/' + RegistrationConstants.DOC_UPLD_PG );
   }
 
   confirm( message: string ) {

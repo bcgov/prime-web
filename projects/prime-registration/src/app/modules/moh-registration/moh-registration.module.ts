@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { MohRegistrationRoutingModule } from './moh-registration-routing.module';
 import { MohProfileComponent } from './pages/moh-profile/moh-profile.component';
 import { RegistrationModule } from '../registration/registration.module';
@@ -10,7 +9,6 @@ import { MohAccountComponent } from './pages/moh-account/moh-account.component';
 import { FormsModule } from '@angular/forms';
 import { MohSecurityComponent } from './pages/moh-security/moh-security.component';
 import { MohDocUploadComponent } from './pages/moh-doc-upload/moh-doc-upload.component';
-import { MohConfirmationComponent } from './pages/moh-confirmation/moh-confirmation.component';
 import { PrimeSharedModule } from '@prime-core/prime-shared/prime-shared.module';
 
 @NgModule({
@@ -27,8 +25,7 @@ import { PrimeSharedModule } from '@prime-core/prime-shared/prime-shared.module'
     MohProfileComponent,
     MohAccountComponent,
     MohSecurityComponent,
-    MohDocUploadComponent,
-    MohConfirmationComponent
+    MohDocUploadComponent
   ]
 })
 export class MohRegistrationModule { }
