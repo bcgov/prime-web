@@ -36,18 +36,8 @@
 
         <label class="control-label">Are you accessing pharmanet on behalf of someone else?
         </label>
-        <div class="form-check">
-          <input class='form-check-input' formControlName="onBehalfOf" type="radio" id="oboFalse" tabindex="0"
-            [value]="false">
-          <label class='form-check-label' for="oboFalse">
-            No
-          </label>
-          <input class='form-check-input' type="radio" formControlName="onBehalfOf" name="" id="obotrue" tabindex="0"
-            [value]="true">
-          <label class='form-check-label' for="obotrue">
-            Yes
-          </label>
-        </div>
+        <enroll-radio-button formControlName="onBehalfOf" labelOne="oboFalse" labelTwo="obotrue" name="obo">
+        </enroll-radio-button>
         <div>
           <div *ngIf="fg.controls['onBehalfOf'].value; else loading" class="border padded">
             <div class="form-group col-sm-12">
