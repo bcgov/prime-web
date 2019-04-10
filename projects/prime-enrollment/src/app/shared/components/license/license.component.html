@@ -6,7 +6,8 @@
         <label class="control-label" for="license">College Certifications</label>
 
         <ng-container *ngIf="licenseOptions | async as opts">
-          <ng-select id="collegeCert" (change)="selected.emit($event)" formControlName="collegeCert" [items]="opts">
+          <ng-select id="collegeCert" (change)="collegeSelectionChange($event)" formControlName="collegeCert"
+            [items]="opts">
           </ng-select>
         </ng-container>
 
@@ -23,7 +24,9 @@
           <input type="text" class="form-control" formControlName="licenseNum" aria-label="License Number"
             aria-describedby="basic-addon1">
         </div>
-        <span *ngIf="fg.controls.licenseNum.invalid">invalid</span>
+        <!-- <span *ngIf="fg.controls.licenseNum.invalid">License number is invalid</span> -->
+        <enroll-error label="License number" [touched]="fg.controls.licenseNum.touched"
+          [valid]="fg.controls.licenseNum.valid"></enroll-error>
         <button class="btn delete" (click)="remove()" *ngIf="enableDelete"><i style="color: red !important;"
             class="fa fa-2x fa-times-circle"></i></button>
 

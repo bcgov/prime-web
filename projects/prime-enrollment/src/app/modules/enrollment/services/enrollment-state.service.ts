@@ -34,6 +34,10 @@ export class EnrollmentStateService {
     return this._certForms;
   }
 
+  updateCertFormValidity(index: number) {
+    this._certForms[index].updateValueAndValidity();
+  }
+
   get currentIndex() {
     return this._currentIndex;
   }

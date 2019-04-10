@@ -76,6 +76,15 @@ export function smsValidator(): ValidatorFn {
 
 export function numberValidator() {
   return (control: AbstractControl): { [key: string]: any } | null => {
+    console.log('run');
+    // console.log(control);
+    if (!control.parent) return null;
+    if (!control.parent.controls['collegeCert'].value) return null;
+    console.log(control.parent.controls['collegeCert']);
+    if (control.parent.controls['collegeCert'].value === 'None') return null;
+    if (control.value.length < 1) {
+      return { invalid: { value: `${control.value} is not valid` } };
+    }
     const forbidden = !/([0-9])/.test(control.value);
     return forbidden
       ? { invalid: { value: `${control.value} is not valid` } }

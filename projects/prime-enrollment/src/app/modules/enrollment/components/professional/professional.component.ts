@@ -47,7 +47,9 @@ export class ProfessionalComponent implements OnInit {
     this.apOptions = of(apOptions);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.fg.valueChanges.subscribe(obs => console.log(obs));
+  }
 
   addLicenseForm(fa: FormGroup[]) {
     const fg = this.stateSvc.addFormToArray(FormGenerator.licenseForm, fa);

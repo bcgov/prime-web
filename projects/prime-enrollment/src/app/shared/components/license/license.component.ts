@@ -36,8 +36,9 @@ export class LicenseComponent implements OnInit {
   ngOnInit() {}
 
   collegeSelectionChange(evt: any) {
-    console.log(evt);
-    // this.selected.emit($event)
+    this.fg.updateValueAndValidity();
+    this.fg.controls.licenseNum.updateValueAndValidity();
+    this.selected.emit(evt);
   }
 
   remove() {

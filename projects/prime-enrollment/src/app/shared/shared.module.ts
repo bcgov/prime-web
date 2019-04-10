@@ -30,6 +30,7 @@ import { PrimeSharedModule } from '../../../../../src/app/prime-shared/prime-sha
 import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 import { TextMaskModule } from 'angular2-text-mask';
 import { RadioButtonComponent } from './components/radio-button/radio-button.component';
+import { ErrorComponent } from './components/error-block/error.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { RadioButtonComponent } from './components/radio-button/radio-button.com
     SelfDeclarationQuestionBlockComponent,
     ProfessionalInformationBlockComponent,
     PharmanetBlockComponent,
-    RadioButtonComponent
+    RadioButtonComponent,
+    ErrorComponent
   ],
 
   imports: [
@@ -94,7 +96,8 @@ import { RadioButtonComponent } from './components/radio-button/radio-button.com
     PrimeSharedModule,
     NgxMyDatePickerModule,
     TextMaskModule,
-    RadioButtonComponent
+    RadioButtonComponent,
+    ErrorComponent
   ]
 })
 export class SharedModule {}

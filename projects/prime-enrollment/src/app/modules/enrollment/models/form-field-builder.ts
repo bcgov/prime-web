@@ -38,8 +38,7 @@ export abstract class FormFieldBuilder {
     const collegeCert = new FormControl(null, [Validators.required]);
     // const description = new FormControl(null, [Validators.required]);
     const collegeNo = new FormControl(null, [Validators.required]);
-    const licenseNum = new FormControl(null, [
-      Validators.required,
+    const licenseNum = new FormControl('', [
       numberValidator(),
       Validators.maxLength(12)
     ]);
