@@ -4,12 +4,8 @@ import { EnrollmentStateService } from '../../services/enrollment-state.service'
 import { FormFieldBuilder } from '../../models/form-field-builder';
 import { FormGenerator } from '../../models/form-generator';
 import { Observable, of } from 'rxjs';
-const collegeOptions = [
-  'College of Physicians and Surgeons of BC (CPSBC) - 91',
-  'College of Pharmacists of BC (CPBC) - P1',
-  'College of Registered Nurses of BC (CRNBC) - 96',
-  'None'
-];
+import { EnrollmentCacheService } from '../../services/enrollment-cache.service';
+
 const apOptions = [
   'Remote Practice',
   'Reproductive Care',
@@ -38,15 +34,16 @@ export class ProfessionalComponent implements OnInit {
   dpFa: FormArray;
   fg: FormGroup;
   onBehalfOfOptions: Observable<string[]>;
-  collegeOptions: Observable<string[]>;
   apOptions: Observable<string[]>;
 
-  constructor(private stateSvc: EnrollmentStateService) {
+  constructor(
+    private stateSvc: EnrollmentStateService,
+    public cacheSvc: EnrollmentCacheService
+  ) {
     this.fg = this.stateSvc.professionalForm;
     this.certFa = this.stateSvc.certForms;
     this.dpFa = this.stateSvc.dpFa;
     this.onBehalfOfOptions = of(oboOptions);
-    this.collegeOptions = of(collegeOptions);
     this.apOptions = of(apOptions);
   }
 

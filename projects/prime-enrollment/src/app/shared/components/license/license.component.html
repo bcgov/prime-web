@@ -5,18 +5,24 @@
       <div class="form-group col-sm-6">
         <label class="control-label" for="license">College Certifications</label>
 
-        <!-- <select class="form-control" formControlName="collegeCert" id="cert"> -->
-        <!-- <option label="Choose" value="">Choose</option> -->
         <ng-container *ngIf="licenseOptions | async as opts">
-          <ng-select id="collegeCert" formControlName="collegeCert" [items]="opts"></ng-select>
-          <!-- <option *ngFor="let opt of opts" [value]="opt" [label]="opt">Pharmacists of BC</option> -->
+          <ng-select id="collegeCert" (change)="selected.emit($event)" formControlName="collegeCert" [items]="opts">
+          </ng-select>
         </ng-container>
-        <!-- </select> -->
 
       </div>
       <div class="form-group col-sm-6">
         <label class="control-label" for="license">License Number</label>
-        <input class="form-control" id="license" formControlName="licenseNum">
+        <div class="input-group mb-3">
+          <ng-container *ngIf="licenseLabel | async as label">
+
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">{{ label }}</span>
+            </div>
+          </ng-container>
+          <input type="text" class="form-control" formControlName="licenseNum" aria-label="License Number"
+            aria-describedby="basic-addon1">
+        </div>
         <span *ngIf="fg.controls.licenseNum.invalid">invalid</span>
         <button class="btn delete" (click)="remove()" *ngIf="enableDelete"><i style="color: red !important;"
             class="fa fa-2x fa-times-circle"></i></button>
@@ -24,10 +30,6 @@
       </div>
       <div class=" form-group col-sm-3">
         <label class="control-label" for="licenseClass">License Class</label>
-        <!-- <select class="form-control" formControlName="licenseClass" id="licenseClass">
-          <option label="Choose" value="">Choose</option>
-          <option value="sms" label="sms">Full Pharmacists</option>
-        </select> -->
         <ng-select id="licenseClass" formControlName="licenseClass" [items]="types | async">
         </ng-select>
       </div>

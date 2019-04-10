@@ -14,8 +14,9 @@
 
         <div *ngIf="fg.controls['collegeCert'].value">
           <ng-container *ngFor="let fg of certFa; index as i">
-            <enroll-license [fg]="fg" (delete)="removeLicenseForm(i, certFa)" [licenseOptions]="collegeOptions"
-              [apOptions]="apOptions" [enableDelete]="certFa.length > 1">
+            <enroll-license [fg]="fg" (delete)="removeLicenseForm(i, certFa)"
+              [licenseOptions]="cacheSvc.collegeOptions$" [apOptions]="apOptions" [enableDelete]="certFa.length > 1"
+              [licenseLabel]="cacheSvc.licenseLabel$" (selected)="cacheSvc.setLicenseLabel$($event)">
             </enroll-license>
           </ng-container>
           <button class="btn btn-md btn-secondary" (click)="addLicenseForm(certFa)">Add Another License</button>

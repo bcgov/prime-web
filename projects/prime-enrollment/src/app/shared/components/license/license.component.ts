@@ -20,16 +20,25 @@ import { NgxMyDatePickerDirective, INgxMyDpOptions } from 'ngx-mydatepicker';
 export class LicenseComponent implements OnInit {
   @Input() fg: FormGroup;
   @Input() licenseOptions: Observable<any>;
+  @Input() licenseLabel: Observable<any>;
   @Input() apOptions: Observable<any>;
   @Input() enableDelete: boolean;
   @Output() delete: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() selected: EventEmitter<string> = new EventEmitter<string>();
 
   /** Default options for wrapped ngx-datepicker. */
   datepickerOptions: INgxMyDpOptions;
 
-  constructor() {}
+  constructor() {
+    console.log(this.licenseLabel);
+  }
 
   ngOnInit() {}
+
+  collegeSelectionChange(evt: any) {
+    console.log(evt);
+    // this.selected.emit($event)
+  }
 
   remove() {
     this.delete.emit(true);
