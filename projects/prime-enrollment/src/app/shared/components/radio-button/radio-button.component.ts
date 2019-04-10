@@ -19,6 +19,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
             type="radio"
             name="{{ name }}"
             [checked]="value === false"
+            [disabled]="disabled"
           />
           <label for="{{ labelOne }}">No</label>
         </div>
@@ -29,6 +30,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
             type="radio"
             name="{{ name }}"
             [checked]="value"
+            [disabled]="disabled"
           />
           <label for="{{ labelTwo }}">Yes</label>
         </div>
@@ -52,6 +54,7 @@ export class RadioButtonComponent implements OnInit, ControlValueAccessor {
   value: any;
   onModelChange: any;
   onTouch: any;
+  disabled: boolean;
   writeValue(obj: any): void {
     this.value = obj;
   }
@@ -62,7 +65,7 @@ export class RadioButtonComponent implements OnInit, ControlValueAccessor {
     this.onTouch = fn;
   }
   setDisabledState?(isDisabled: boolean): void {
-    throw new Error('Method not implemented.');
+    this.disabled = isDisabled;
   }
 
   constructor() {}
