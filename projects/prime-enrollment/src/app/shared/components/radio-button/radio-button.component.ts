@@ -12,12 +12,24 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   template: `
     <section>
       <div>
-        <div class="md-radio md-radio-inline" (click)="selectType(false)">
-          <input id="labelOne" type="radio" name="{{ name }}" checked />
+        <div class="md-radio md-radio-inline">
+          <input
+            (click)="selectType(false)"
+            id="labelOne"
+            type="radio"
+            name="{{ name }}"
+            [checked]="value === false"
+          />
           <label for="labelOne">{{ labelOne }}</label>
         </div>
-        <div class="md-radio md-radio-inline" (click)="selectType(true)">
-          <input id="2" type="radio" name="{{ name }}" />
+        <div class="md-radio md-radio-inline">
+          <input
+            (click)="selectType(true)"
+            id="2"
+            type="radio"
+            name="{{ name }}"
+            [checked]="value"
+          />
           <label for="2">{{ labelTwo }}</label>
         </div>
       </div>
@@ -37,7 +49,7 @@ export class RadioButtonComponent implements OnInit, ControlValueAccessor {
   @Input() labelOne: string = 'No';
   @Input() labelTwo: string = 'Yes';
   @Input() name: string = 'name';
-  value: any = false;
+  value: any;
   onModelChange: any;
   onTouch: any;
   writeValue(obj: any): void {
