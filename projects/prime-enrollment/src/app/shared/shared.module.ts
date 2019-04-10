@@ -29,6 +29,7 @@ import { PharmanetBlockComponent } from './components/pharmanet-block/pharmanet-
 import { PrimeSharedModule } from '../../../../../src/app/prime-shared/prime-shared.module';
 import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 import { TextMaskModule } from 'angular2-text-mask';
+import { RadioButtonComponent } from './components/radio-button/radio-button.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { TextMaskModule } from 'angular2-text-mask';
     ContactBlockComponent,
     SelfDeclarationQuestionBlockComponent,
     ProfessionalInformationBlockComponent,
-    PharmanetBlockComponent
+    PharmanetBlockComponent,
+    RadioButtonComponent
   ],
 
   imports: [
@@ -91,7 +93,8 @@ import { TextMaskModule } from 'angular2-text-mask';
     PharmanetBlockComponent,
     PrimeSharedModule,
     NgxMyDatePickerModule,
-    TextMaskModule
+    TextMaskModule,
+    RadioButtonComponent
   ]
 })
 export class SharedModule {}

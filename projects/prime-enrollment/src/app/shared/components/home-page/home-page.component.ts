@@ -11,5 +11,7 @@ export class HomePageComponent implements OnInit {
   fc = new FormControl('', []);
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.fc.valueChanges.subscribe(obs => console.log(obs));
+  }
 }
