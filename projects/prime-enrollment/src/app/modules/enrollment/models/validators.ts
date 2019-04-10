@@ -60,7 +60,7 @@ export function smsValidator(): ValidatorFn {
     if (!control.parent) return null;
     const preferredContact = control.parent.controls['preferredContact'].value;
     console.log('sms validator', control.value);
-    if (!preferredContact || preferredContact.length < 1) return null;
+    if (!preferredContact) return null;
     if (control.value) return null;
     else {
       if (preferredContact === 'sms') {
@@ -72,6 +72,7 @@ export function smsValidator(): ValidatorFn {
         };
       } else return null;
     }
+    return null;
   };
 }
 

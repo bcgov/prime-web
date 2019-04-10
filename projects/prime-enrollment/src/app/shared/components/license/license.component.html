@@ -18,7 +18,7 @@
         <input class="form-control" id="license" formControlName="licenseNum">
         <span *ngIf="fg.controls.licenseNum.invalid">invalid</span>
         <button class="btn delete" (click)="remove()" *ngIf="enableDelete"><i style="color: red !important;"
-            class="fa fa-2x fa-times-circle-o"></i></button>
+            class="fa fa-2x fa-times-circle"></i></button>
 
       </div>
       <div class=" form-group col-sm-3">
@@ -33,13 +33,15 @@
         <label class="control-label" for="license">Renewal Date</label>
         <div class="input-group">
 
-          <input class="form-control" placeholder="YYYY/MM/DD" ngx-mydatepicker formControlName="renewalDate">
+          <!-- <input class="form-control" placeholder="YYYY/MM/DD" ngx-mydatepicker formControlName="renewalDate"> -->
 
-          <span class="input-group-append float-label-append">
+          <!-- <span class="input-group-append float-label-append">
             <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
               <i class="fa fa-calendar"></i>
             </button>
-          </span>
+          </span> -->
+
+          <common-datepicker></common-datepicker>
         </div>
       </div>
       <div class="form-group col-sm-6">
