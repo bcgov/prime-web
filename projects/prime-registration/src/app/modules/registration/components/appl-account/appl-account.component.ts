@@ -56,6 +56,9 @@ export class ApplAccountComponent implements OnInit {
     return this.form.errors;
   }
 
+  /**
+   * MoH provider requires password and user ID
+   */
   checkPswdCriteria( $event ) {
 
     /**

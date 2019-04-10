@@ -1,11 +1,11 @@
 
-<label class="control-label">{{label}}</label>
+<label class="control-label" for="{{objectID}}">{{label}}</label>
 <div *ngIf="displayMask; else NoMask">
   <input #phoneRef="ngModel"
           class="form-control"
           type="text"
-          name="phone_{{objectId}}"
-          id="phone_{{objectId}}"
+          name="{{objectID}}"
+          id="{{objectID}}"
           [ngModel]="value"
           (ngModelChange)="onUpdate($event)"
           [placeholder]="placeholder "
@@ -27,8 +27,8 @@
   <input #phoneRef="ngModel"
           class="form-control"
           type="text"
-          name="mobile_phone_{{objectId}}"
-          id="mobile_phone_{{objectId}}"
+          name="{{objectID}}"
+          id="{{objectID}}"
           [ngModel]="value"
           (ngModelChange)="onUpdate($event)"
           [required]="required"

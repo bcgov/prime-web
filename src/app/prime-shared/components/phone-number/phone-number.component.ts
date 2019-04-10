@@ -2,9 +2,7 @@ import {
   Component,
   OnInit,
   Input,
-  forwardRef,
-  Output,
-  EventEmitter
+  forwardRef
 } from '@angular/core';
 import { ControlContainer, NgForm } from '@angular/forms';
 import { MaskModel, NUMBER, SPACE } from 'moh-common-lib/models';
@@ -23,6 +21,7 @@ import { MaskModel, NUMBER, SPACE } from 'moh-common-lib/models';
 export class PhoneNumberComponent extends MaskModel implements OnInit {
   @Input() displayMask: boolean = true;
   @Input() label: string = 'Mobile/SMS';
+  @Input() objectID: string = 'phone_' + this.objectId;
 
   constructor() {
     super();

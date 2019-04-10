@@ -8,7 +8,7 @@ import { RegisterApiService } from '@prime-registration/modules/registration/ser
 import { RegisterRespService } from '@prime-registration/modules/registration/services/register-resp.service';
 import { RegistrationConstants } from '@prime-registration/modules/registration/models/registration-constants.model';
 import { Subscription } from 'rxjs';
-import { ServerPayload, StatusMsgInterface, PayloadInterface, ApiStatusCodes, ScreenAreaID } from '@prime-core/models/api-base.model';
+import { ServerPayload } from '@prime-core/models/api-base.model';
 
 @Component({
   selector: 'app-bcsc-account',
@@ -90,27 +90,19 @@ export class BcscAccountComponent extends AbstractForm implements OnInit, OnDest
 
           // Register User in PRIME
           this.requestRegisterUser();
+        } else if ( this.registerRespService.payload.error ) {
+          this.nextPage();
         } else {
 
-          // TODO: Code
+          // Display errors on page
           this.loading = false;
           console.log( 'Correct issue and try again.' );
         }
       },
       responseError => {
-        this.handleError( responseError );
+        console.log( 'Error: ', responseError );
+        this.nextPage();
       });
-  }
-
-  /**
-   * Handle error from request
-   * @param error
-   */
-  private handleError( error: any )  {
-    this.loading = false;
-
-    console.log( 'Error occurred: ', error  );
-    this.navigate( RegistrationConstants.BCSC_REGISTRATION + '/' + RegistrationConstants.CONFIRMATION_PG );
   }
 
   /**
@@ -124,11 +116,24 @@ export class BcscAccountComponent extends AbstractForm implements OnInit, OnDest
       regResp => {
         this.loading = false;
         this.registerRespService.payload = new ServerPayload( regResp );
-        this.navigate( RegistrationConstants.BCSC_REGISTRATION + '/' +
-          RegistrationConstants.CONFIRMATION_PG );
+        this.nextPage();
       },
       regRespError => {
-        this.handleError( regRespError );
+        console.log( 'Error: ', regRespError );
+        this.nextPage();
       });
+  }
+
+  private nextPage() {
+
+    // Logging
+    /*
+      this.logger.log({
+          event: 'eligibilityCheck',
+          success: this.responseStore.eligibility.success
+        });*/
+
+    this.loading = false;
+    this.navigate( RegistrationConstants.BCSC_REGISTRATION + '/' + RegistrationConstants.CONFIRMATION_PG );
   }
 }

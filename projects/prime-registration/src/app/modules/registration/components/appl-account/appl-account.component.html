@@ -158,13 +158,14 @@
   <common-page-section layout='tips'>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <prime-phone-number [displayMask]="isCanada"
+      <prime-phone-number objectID="mobile_phone"
+                          [displayMask]="isCanada"
                           [value]="data.smsPhone"
                           (valueChange)="data.smsPhone=$event"></prime-phone-number>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <label class="control-label">Email</label>
+      <label class="control-label" for="user_email">Email</label>
       <input #emailRef="ngModel"
              class="form-control"
              type="email"

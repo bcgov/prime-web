@@ -131,7 +131,7 @@ export class RegisterApiService extends AbstractHttpService {
    * Returns current date in YYYYMMDD HH:MM:SS, e.g. '20180801 12:01:01'
    */
   private getProcessDate(): string {
-    return moment().format('YYYYMMDD HH:mm:ss');
+    return moment().format('YYYYMMDD');
   }
 
   /**
