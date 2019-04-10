@@ -9,6 +9,7 @@ import { RegisterRespService } from '@prime-registration/modules/registration/se
 import { RegistrationConstants } from '@prime-registration/modules/registration/models/registration-constants.model';
 import { Subscription } from 'rxjs';
 import { ServerPayload } from '@prime-core/models/api-base.model';
+import { LoggerService } from '../../../../services/logger.service';
 
 @Component({
   selector: 'app-bcsc-account',
@@ -23,7 +24,8 @@ export class BcscAccountComponent extends AbstractForm implements OnInit, OnDest
                private registrationDataService: RegistrationDataService ,
                private cacheService: RegCacheService,
                private registerApiService: RegisterApiService,
-               private registerRespService: RegisterRespService ) {
+               private registerRespService: RegisterRespService,
+               private logger: LoggerService ) {
     super( router );
   }
 
@@ -91,7 +93,7 @@ export class BcscAccountComponent extends AbstractForm implements OnInit, OnDest
           // Register User in PRIME
           this.requestRegisterUser();
         } else if ( this.registerRespService.payload.error ) {
-          this.nextPage();
+          this.nextPage( false );
         } else {
 
           // Display errors on page
@@ -101,7 +103,7 @@ export class BcscAccountComponent extends AbstractForm implements OnInit, OnDest
       },
       responseError => {
         console.log( 'Error: ', responseError );
-        this.nextPage();
+        this.nextPage( false );
       });
   }
 
@@ -116,22 +118,21 @@ export class BcscAccountComponent extends AbstractForm implements OnInit, OnDest
       regResp => {
         this.loading = false;
         this.registerRespService.payload = new ServerPayload( regResp );
-        this.nextPage();
+        this.nextPage( true );
       },
       regRespError => {
         console.log( 'Error: ', regRespError );
-        this.nextPage();
+        this.nextPage( false );
       });
   }
 
-  private nextPage() {
+  private nextPage( success: boolean ) {
 
     // Logging
-    /*
-      this.logger.log({
-          event: 'eligibilityCheck',
-          success: this.responseStore.eligibility.success
-        });*/
+    this.logger.log( {
+        event: 'BCSC Account',
+        success: success
+      } );
 
     this.loading = false;
     this.navigate( RegistrationConstants.BCSC_REGISTRATION + '/' + RegistrationConstants.CONFIRMATION_PG );

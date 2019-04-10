@@ -10,6 +10,7 @@ import { ControlContainer, NgForm } from '@angular/forms';
 import { RegistrationDataService } from './services/registration-data.service';
 import { Base } from 'moh-common-lib/models';
 import { RegisterApiService } from './modules/registration/services/register-api.service';
+import { LoggerService } from './services/logger.service';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +26,7 @@ export class AppComponent extends Base implements OnInit {
 
   constructor( private router: Router,
                private activatedRoute: ActivatedRoute,
+               private logger: LoggerService,
                private registerApiService: RegisterApiService,
                private titleService: Title ) {
     super();
@@ -37,8 +39,9 @@ export class AppComponent extends Base implements OnInit {
       : console.error(version.message);
 
     // session ID to track events
-    this.registerApiService.eventUUID = this.objectId;
-
+    this.logger.applicationId = this.objectId;
+    this.logger.programName = 'prime-registration';
+    this.registerApiService.eventUUID = this.logger.applicationId;
     this.updateTitleOnRouteChange();
 
   }
@@ -63,6 +66,11 @@ export class AppComponent extends Base implements OnInit {
       )
       .subscribe((data: { title?: string }) => {
         this.setTitle(data.title);
+        this.logger.log({
+          event: 'navigation',
+          title: data.title ? data.title : this.title,
+          url: this.router.url,
+        });
       });
   }
 
