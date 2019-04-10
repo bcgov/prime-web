@@ -8,10 +8,7 @@ import { FormControl } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomePageComponent implements OnInit {
-  fc = new FormControl('', []);
   constructor() {}
 
-  ngOnInit() {
-    this.fc.valueChanges.subscribe(obs => console.log(obs));
-  }
+  ngOnInit() {}
 }

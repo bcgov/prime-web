@@ -15,22 +15,22 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         <div class="md-radio md-radio-inline">
           <input
             (click)="selectType(false)"
-            id="labelOne"
+            id="{{ labelOne }}"
             type="radio"
             name="{{ name }}"
             [checked]="value === false"
           />
-          <label for="labelOne">{{ labelOne }}</label>
+          <label for="{{ labelOne }}">No</label>
         </div>
         <div class="md-radio md-radio-inline">
           <input
             (click)="selectType(true)"
-            id="2"
+            id="{{ labelTwo }}"
             type="radio"
             name="{{ name }}"
             [checked]="value"
           />
-          <label for="2">{{ labelTwo }}</label>
+          <label for="{{ labelTwo }}">Yes</label>
         </div>
       </div>
     </section>

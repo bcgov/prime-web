@@ -10,18 +10,8 @@
       <form [formGroup]="fg">
         <label class="control-label">Do you have a college certification?
         </label>
-        <div class="form-check">
-          <input class='form-check-input' formControlName="collegeCert" type="radio" id="ccfalse" tabindex="0"
-            [value]="false">
-          <label class='form-check-label' for="ccfalse">
-            No
-          </label>
-          <input class='form-check-input' type="radio" formControlName="collegeCert" name="" id="cctrue" tabindex="0"
-            [value]="true">
-          <label class='form-check-label' for="cctrue">
-            Yes
-          </label>
-        </div>
+        <enroll-radio-button formControlName="collegeCert"></enroll-radio-button>
+
         <div *ngIf="fg.controls['collegeCert'].value">
           <ng-container *ngFor="let fg of certFa; index as i">
             <enroll-license [fg]="fg" (delete)="removeLicenseForm(i, certFa)" [licenseOptions]="collegeOptions"
@@ -33,18 +23,8 @@
 
         <label class="control-label">Are you a device provider?
         </label>
-        <div class="form-check">
-          <input class='form-check-input' formControlName="deviceProvider" type="radio" id="dpFalse" tabindex="0"
-            [value]="false">
-          <label class='form-check-label' for="dpFalse">
-            No
-          </label>
-          <input class='form-check-input' type="radio" formControlName="deviceProvider" name="" id="dptrue" tabindex="0"
-            [value]="true">
-          <label class='form-check-label' for="dptrue">
-            Yes
-          </label>
-        </div>
+        <enroll-radio-button formControlName="deviceProvider" labelOne="dpfalse" labelTwo="dptrue" name="dp">
+        </enroll-radio-button>
         <div *ngIf="fg.controls['deviceProvider'].value">
           <ng-container *ngFor="let fc of dpFa.controls; index as i">
             <enroll-device-provider [enableDelete]="dpFa.controls.length > 1" [fc]="dpFa.controls[i]"
