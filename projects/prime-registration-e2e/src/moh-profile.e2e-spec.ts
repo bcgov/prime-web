@@ -1,12 +1,12 @@
-import { MohProfileTestPage } from './moh-registration.po';
+import { MohProfileTestPage } from './registration.po';
 import { browser } from 'protractor';
-import { FakeDataMohReg } from './moh-registration.data';
+import { FakeDataMohReg } from './registration.data';
 import { PrimeTestPage } from '../../../e2e/src/app.po';
 import { RegistrationConstants } from '@prime-registration/modules/registration/models/registration-constants.model';
 
-fdescribe('MoH Registration - Profile Page', () => {
+xdescribe('MoH Registration - Profile Page', () => {
     let page: MohProfileTestPage;
-    let page2: PrimeTestPage;
+    let accountPage: PrimeTestPage;
     const data = new FakeDataMohReg();
     let profileData;
     const PAGE_URL = `${RegistrationConstants.MOH_REGISTRATION}/${RegistrationConstants.PROFILE_PG}`;
@@ -14,14 +14,14 @@ fdescribe('MoH Registration - Profile Page', () => {
 
     beforeEach(() => {
         page = new MohProfileTestPage();
-        page2 = new PrimeTestPage();
+        accountPage = new PrimeTestPage();
         profileData = data.profileInfo();
         data.setSeed(123);
-        //profileData['firstName'] = "John";
-        //profileData['lastName'] = "Doe";
-        //profileData['birthDate'] = new Date();
-        //profileData['preferredFirstName'] = "John";
-        //profileData['preferredLastName'] = "Doe";
+        // profileData['firstName'] = "John";
+        // profileData['lastName'] = "Doe";
+        // profileData['birthDate'] = new Date();
+        // profileData['preferredFirstName'] = "John";
+        // profileData['preferredLastName'] = "Doe";
         profileData['country'] = 'Canada'; // forced the country to be Canada so the faker will generate a province
     });
 
@@ -29,6 +29,7 @@ fdescribe('MoH Registration - Profile Page', () => {
     it('01. should load the page without issue', () => {
         page.navigateTo();
         expect(browser.getCurrentUrl()).toContain(PAGE_URL);
+        browser.sleep(1000 * 5);
     });
 
 
@@ -67,26 +68,24 @@ fdescribe('MoH Registration - Profile Page', () => {
       // expect(page.formErrors().count()).toBe(0, 'should be no errors as form should be valid');
     });
 
-
     it('05. should allow first name to be blank', () => {
       profileData['firstName'] = '';
 
       page.navigateTo();
       page.fillPage(profileData);
-      //browser.sleep(1000 * 10);
+      // browser.sleep(1000 * 10);
       page.continue();
 
       expect(browser.getCurrentUrl()).toContain(NEXT_PAGE_URL, 'should navigate to the Document Upload page');
       expect(page.formErrors()).toEqual([], 'should be no errors as form should be valid');
     });
 
-
     it('06. should not allow last name to be blank', () => {
       profileData['lastName'] = '';
 
       page.navigateTo();
       page.fillPage(profileData);
-      //browser.sleep(1000 * 10);
+      // browser.sleep(1000 * 10);
       page.continue();
 
       expect(page.formErrors().count()).toEqual(1, 'page should show 1 error texts on continue');
@@ -106,7 +105,7 @@ fdescribe('MoH Registration - Profile Page', () => {
 
       expect(page.formErrors().count()).toEqual(3, 'page should show 3 error texts on continue');
       expect(browser.getCurrentUrl()).toContain(PAGE_URL, 'url should not change');
-      //browser.sleep(1000 * 10);
+      // browser.sleep(1000 * 10);
     });
 
 
@@ -114,13 +113,13 @@ fdescribe('MoH Registration - Profile Page', () => {
       page.navigateTo();
       page.fillPage(profileData);
       page.scrollDown();
-      //browser.sleep(1000 * 10);
+      // browser.sleep(1000 * 10);
       page.checkDiffMailAddress(); // unchecks the "This is my mailing address" checkbox
       page.continue();
 
       expect(page.formErrors().count()).toEqual(3, 'page should show 3 error texts on continue');
       expect(browser.getCurrentUrl()).toContain(PAGE_URL, 'url should not change');
-      //browser.sleep(1000 * 10);
+      // browser.sleep(1000 * 10);
     });
 
 
@@ -129,7 +128,7 @@ fdescribe('MoH Registration - Profile Page', () => {
       page.navigateTo();
       page.fillPage(profileData);
       page.clickDiffMailAddress(); // clicks the "My Mailing address is different" button
-      //browser.sleep(1000 * 10);
+      // browser.sleep(1000 * 10);
       page.continue();
 
       expect(page.formErrors().count()).toEqual(3, 'page should show 3 error texts on continue');
@@ -144,7 +143,7 @@ fdescribe('MoH Registration - Profile Page', () => {
       page.scrollDown();
       page.checkDiffMailAddress(); // unchecks the "This is my mailing address" checkbox
       page.checkDiffMailAddress(); // rechecks it
-      //browser.sleep(1000 * 10);
+      // browser.sleep(1000 * 10);
       page.continue();
 
       expect(browser.getCurrentUrl()).toContain(NEXT_PAGE_URL, 'should navigate to the Document Upload page');
@@ -158,7 +157,7 @@ fdescribe('MoH Registration - Profile Page', () => {
       page.scrollDown();
       page.clickDiffMailAddress(); // clicks the "My Mailing address is different" button
       page.checkDiffMailAddress(); // checks the "This is my mailing address" checkbox
-      //browser.sleep(1000 * 10);
+      // browser.sleep(1000 * 10);
       page.continue();
 
       expect(browser.getCurrentUrl()).toContain(NEXT_PAGE_URL, 'should navigate to the Document Upload page');
@@ -170,7 +169,7 @@ fdescribe('MoH Registration - Profile Page', () => {
     it('12. should show a blue "Continue" button on the bottom', () => {
         page.navigateTo();
         expect(page.getContinueButton().isDisplayed()).toBe(true); // should be visible at the bottom of the page
-        //browser.sleep(1000 * 10);
+        // browser.sleep(1000 * 10);
     });
 
     // todo - get some tests about Preferred Name. will have to fix the
@@ -185,22 +184,22 @@ fdescribe('MoH Registration - Profile Page', () => {
 
       page.navigateTo();
       page.fillPage(profileData);
-      //browser.sleep(1000 * 10);
+      // browser.sleep(1000 * 10);
       page.continue();
 
       expect(browser.getCurrentUrl()).toContain(NEXT_PAGE_URL, 'should navigate to the Document Upload page');
       expect(page.formErrors()).toEqual([], 'should be no errors as form should be valid');
     });
 
-
+    /*
     xit('14. should make sure that preferred first name must be filled out if preferred last name field is filled out', async () => {
       page.navigateTo();
       page.fillPage(profileData);
-      //browser.sleep(1000 * 20);
+      // browser.sleep(1000 * 20);
       page.continue();
 
-      if (profileData['preferredLastName'] != null){
-        let nameVal = await page2.getNameComponentVal('Preferred First Name');
+      if (profileData['preferredLastName'] != null) {
+        const nameVal = await accountPage.getNameComponentVal('Preferred First Name');
         expect(nameVal).toEqual(profileData['preferredFirstName']);
       }
     });
@@ -209,14 +208,14 @@ fdescribe('MoH Registration - Profile Page', () => {
     xit('15. should make sure that preferred last name must be filled out if preferred first name field is filled out', async () => {
       page.navigateTo();
       page.fillPage(profileData);
-      //browser.sleep(1000 * 20);
+      // browser.sleep(1000 * 20);
       page.continue();
 
-      if (profileData['preferredFirstName'] != null){
-        let nameVal = await page2.getNameComponent('Preferred Last Name');
-        //browser.wait(5000);
+      if (profileData['preferredFirstName'] != null) {
+        const nameVal = await accountPage.getNameComponent('Preferred Last Name');
+        // browser.wait(5000);
         expect(nameVal).toEqual(profileData['preferredLastName']);
       }
-    });
+    });*/
 
 });
