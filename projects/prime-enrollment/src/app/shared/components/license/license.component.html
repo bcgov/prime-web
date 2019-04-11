@@ -9,6 +9,8 @@
           <ng-select id="collegeCert" (change)="collegeSelectionChange($event)" formControlName="collegeCert"
             [items]="opts">
           </ng-select>
+          <enroll-error label="College certifications" [touched]="fg.controls.collegeCert.touched"
+            [valid]="fg.controls.collegeCert.valid"></enroll-error>
         </ng-container>
 
       </div>
@@ -23,6 +25,7 @@
           </ng-container>
           <input type="text" class="form-control" formControlName="licenseNum" aria-label="License Number"
             aria-describedby="basic-addon1">
+
         </div>
         <!-- <span *ngIf="fg.controls.licenseNum.invalid">License number is invalid</span> -->
         <enroll-error label="License number" [touched]="fg.controls.licenseNum.touched"
@@ -35,11 +38,15 @@
         <label class="control-label" for="licenseClass">License Class</label>
         <ng-select id="licenseClass" formControlName="licenseClass" [items]="classOptions | async">
         </ng-select>
+        <enroll-error label="License class" [touched]="fg.controls.licenseClass.touched"
+          [valid]="fg.controls.licenseClass.valid"></enroll-error>
       </div>
+
 
       <div class="form-group col-sm-3">
         <label class="control-label" for="license">Renewal Date</label>
         <div class="input-group">
+
 
           <!-- <input class="form-control" placeholder="YYYY/MM/DD" ngx-mydatepicker formControlName="renewalDate"> -->
 
@@ -50,16 +57,16 @@
           </span> -->
 
           <common-datepicker></common-datepicker>
+          <enroll-error label="Renewal date" [touched]="fg.controls.renewalDate.touched"
+            [valid]="fg.controls.renewalDate.valid"></enroll-error>
         </div>
+
       </div>
       <div class="form-group col-sm-6">
         <label class="control-label" for="advancedPractice">Advanced Practice (Optional)</label>
-        <!-- <select class="form-control" formControlName="advancedPractice" id="advanced"> -->
-        <!-- <option label="Choose" value="" selected>Choose</option> -->
         <ng-container *ngIf="apOptions | async as opts">
           <ng-select id="advancedPractice" formControlName="advancedPractice" [items]="opts"></ng-select>
         </ng-container>
-        <!-- </select> -->
       </div>
 
     </div>

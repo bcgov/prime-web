@@ -15,7 +15,8 @@ import {
   descriptionValidator,
   numberValidator,
   preferredContactValidator,
-  smsValidator
+  smsValidator,
+  licenseClassValidator
 } from './validators';
 
 export abstract class FormFieldBuilder {
@@ -43,7 +44,7 @@ export abstract class FormFieldBuilder {
       Validators.maxLength(12)
     ]);
     const advancedPractice = new FormControl(null, [Validators.required]);
-    const licenseClass = new FormControl(null, [Validators.required]);
+    const licenseClass = new FormControl(null, [licenseClassValidator()]);
     const renewalDate = new FormControl(new Date(), [Validators.required]);
     return {
       collegeCert,

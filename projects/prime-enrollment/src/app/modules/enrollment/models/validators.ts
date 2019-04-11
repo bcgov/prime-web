@@ -13,6 +13,20 @@ export function behalfOfValidator(): ValidatorFn {
   };
 }
 
+export function licenseClassValidator(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    if (!control.parent) return null;
+
+    if (!control.parent.controls['collegeCert']) return null;
+    const parent = control.parent.controls['collegeCert'].value;
+    if (parent === null || parent === 'None') return null;
+    if (control.untouched) return null;
+    return control.value === null
+      ? { invalidLicenseClass: { value: 'Invalid license class' } }
+      : null;
+  };
+}
+
 export function descriptionValidator(name: string): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
     if (!control.parent) return null;
@@ -76,11 +90,9 @@ export function smsValidator(): ValidatorFn {
 
 export function numberValidator() {
   return (control: AbstractControl): { [key: string]: any } | null => {
-    console.log('run');
     // console.log(control);
     if (!control.parent) return null;
     if (!control.parent.controls['collegeCert'].value) return null;
-    console.log(control.parent.controls['collegeCert']);
     if (control.parent.controls['collegeCert'].value === 'None') return null;
     if (control.value.length < 1) {
       return { invalid: { value: `${control.value} is not valid` } };

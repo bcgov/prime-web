@@ -40,6 +40,7 @@ export class LicenseComponent implements OnInit {
     this.fg.updateValueAndValidity();
     this.fg.controls.licenseNum.updateValueAndValidity();
     this.fg.controls.licenseClass.setValue(null);
+    this.fg.controls.licenseClass.updateValueAndValidity();
     this.selected.emit(evt);
   }
 
