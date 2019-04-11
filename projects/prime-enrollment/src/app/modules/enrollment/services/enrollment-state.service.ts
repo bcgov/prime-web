@@ -8,8 +8,15 @@ import { FormFieldBuilder } from '../models/form-field-builder';
 import { filter } from 'rxjs/operators';
 import { IOrganization } from '@prime-enrollment/core/interfaces';
 import { BehaviorSubject } from 'rxjs';
+import { mockUser } from '../mocks/profile';
+import { SimpleDate } from 'moh-common-lib';
 
-const stateOpts = StateOptions;
+const dateOfBirth = {
+  day: 26,
+  month: 4,
+  year: 1984
+} as SimpleDate;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -154,6 +161,16 @@ export class EnrollmentStateService {
     this.professionalForm = FormGenerator.professionalForm;
     this.certForms = [FormGenerator.licenseForm];
     this.dpFa = new FormArray([FormFieldBuilder.deviceProviderFields]);
+
+    this.profileForm.address.street = '123 fake st';
+    this.profileForm.address.postal = 'V9L 3W8';
+    this.profileForm.address.country = 'CA';
+    this.profileForm.address.province = 'BC';
+    this.profileForm.address.city = 'Victoria';
+
+    this.profileForm.firstName = 'Sean';
+    this.profileForm.lastName = 'Hamilton';
+    this.profileForm.dateOfBirth = dateOfBirth;
   }
 
   addValueToFc(fc: FormControl, val: string | object[]) {
