@@ -103,7 +103,7 @@ export class EnrollmentStateService {
   }
 
   get currentStateValid(): boolean {
-    const index = this.currentIndex;
+    const index = this._currentIndex;
     let i = 1;
     for (i; i <= index; i++) {
       if (!this.isIndexValid(i)) return false;
