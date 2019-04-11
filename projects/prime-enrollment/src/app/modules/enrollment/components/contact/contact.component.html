@@ -9,42 +9,34 @@
   <common-page-section layout="tips">
     <div>
       <form [formGroup]="fg">
-
+        <h3>What's your preferred method of contact?</h3>
         <div class="form-group phone">
           <label class="control-label">Phone</label>
-          <!-- <international-phone-number formControlName="phone" placeholder="Enter phone number" [maxlength]="13"
-            [defaultCountry]="'ca'" name="phone_number" [allowedCountries]="['ca', 'us']">
-          </international-phone-number> -->
-          <!-- <ngx-intl-tel-input [preferredCountries]="['ca', 'us']" [enablePlaceholder]="true" name="phone"
-            formControlName="phone"></ngx-intl-tel-input> -->
           <input class="form-control" name="phone" formControlName="phone" [textMask]="{mask: mask}"
             [placeholder]="placeholder">
+          <span>This number must be text message capable phone</span>
         </div>
-        <div class="form-group">
-          <input class="form-check-inline" type="checkbox" id="capable" formControlName="sms"
-            (click)="toggleExtension(fg.controls.ext, fg)">
-          <label class="form-check-label" for="capable">This number is SMS capable</label>
-        </div>
-        <div class="form-group">
 
-          <label for="ext" class="control-label ">Extension Number (Optional)</label>
-          <input class="form-control col-sm-3 col-md-3 col-lg-3" formControlName="ext" id="ext">
-        </div>
         <div class="form-group">
 
           <label for="email" class="control-label">Email</label>
           <input class="form-control" formControlName="email" id="email">
         </div>
+        <h3>How would you like to be contacted by voice calls from agents</h3>
+        <div class="form-group phone">
+          <label class="control-label">Phone</label>
+          <input class="form-control" name="phone" formControlName="voicePhone" [textMask]="{mask: mask}"
+            [placeholder]="placeholder">
+          <span>This number must be text message capable phone</span>
+        </div>
         <div class="form-group">
 
-          <label class="control-label" for="preferred">Preferred Contact</label>
-          <select class="form-control" formControlName="preferredContact" id="preferred">
-            <option value="email" label="email">Email</option>
-            <option value="sms" label="sms">SMS</option>
-          </select>
+          <label for="ext" class="control-label">Extension Number (Optional)</label>
+          <input class="form-control col-sm-3 col-md-3 col-lg-3" formControlName="ext" id="ext">
         </div>
       </form>
     </div>
+
     <aside>Tips</aside>
   </common-page-section>
 </common-page-framework>

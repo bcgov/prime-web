@@ -25,14 +25,18 @@ export abstract class FormFieldBuilder {
       Validators.required,
       Validators.minLength(10)
     ]);
-    const sms = new FormControl(null, [smsValidator()]);
+    // const sms = new FormControl(null, [smsValidator()]);
     const ext = new FormControl(null, []);
-    const email = new FormControl(null, [Validators.required]);
-    const preferredContact = new FormControl(null, [
+    const email = new FormControl(null, [
       Validators.required,
-      preferredContactValidator()
+      Validators.email
     ]);
-    return { phone, sms, ext, email, preferredContact };
+    const voicePhone = new FormControl(null, [Validators.required]);
+    // const preferredContact = new FormControl(null, [
+    //   Validators.required
+    //   // preferredContactValidator()
+    // ]);
+    return { phone, ext, email, voicePhone };
   }
 
   static get licenseFields() {
