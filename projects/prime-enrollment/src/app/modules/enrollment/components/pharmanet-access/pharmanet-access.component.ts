@@ -1,10 +1,15 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  OnDestroy
+} from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { EnrollmentStateService } from '../../services/enrollment-state.service';
 import { SearchOrganizationModalComponent } from '../search-organization-modal/search-organization-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { EnrollmentDataService } from '../../services/enrollment-data.service';
-import { Observable, of, BehaviorSubject } from 'rxjs';
+import { Observable, of, BehaviorSubject, Subscription } from 'rxjs';
 import { INgxMyDpOptions } from 'ngx-mydatepicker';
 const headers = ['Organization Name', 'Type', 'City'];
 @Component({
@@ -13,7 +18,7 @@ const headers = ['Organization Name', 'Type', 'City'];
   styleUrls: ['./pharmanet-access.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PharmanetAccessComponent implements OnInit {
+export class PharmanetAccessComponent implements OnInit, OnDestroy {
   fa$: BehaviorSubject<FormGroup[]> = new BehaviorSubject(null);
   results = false;
   dateOptions: INgxMyDpOptions = {
@@ -22,6 +27,7 @@ export class PharmanetAccessComponent implements OnInit {
     openSelectorTopOfInput: true,
     showSelectorArrow: false
   };
+  sub: Subscription;
 
   constructor(
     private stateSvc: EnrollmentStateService,
@@ -33,18 +39,20 @@ export class PharmanetAccessComponent implements OnInit {
     this.fa$.next(this.stateSvc.organizationForm);
   }
 
+  ngOnDestroy(): void {
+    if (this.sub) this.sub.unsubscribe();
+  }
+
   addOrganization() {
     return this.openModal();
   }
 
   openModal() {
-    // this.stateSvc.organizationForm = [];
-    // this.stateSvc.orgResultsClear();
     const dialog = this.dialog;
     const ref = dialog.open(SearchOrganizationModalComponent, {
       panelClass: 'test'
     });
-    ref.afterClosed().subscribe(obs => {
+    this.sub = ref.afterClosed().subscribe(obs => {
       if (!obs) return;
       const arr = this.stateSvc.organizationForm;
       this.stateSvc.organizationForm = obs;
