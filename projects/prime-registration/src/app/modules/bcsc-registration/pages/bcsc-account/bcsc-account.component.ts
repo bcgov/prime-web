@@ -8,7 +8,7 @@ import { RegisterApiService } from '@prime-registration/modules/registration/ser
 import { RegisterRespService } from '@prime-registration/modules/registration/services/register-resp.service';
 import { RegistrationConstants } from '@prime-registration/modules/registration/models/registration-constants.model';
 import { Subscription } from 'rxjs';
-import { ServerPayload } from '@prime-core/models/api-base.model';
+import { ServerPayload, StatusMsgInterface, ScreenAreaID } from '@prime-core/models/api-base.model';
 import { LoggerService, RegistrationEvent, LogMessage } from '@prime-registration/services/logger.service';
 
 @Component({
@@ -99,7 +99,7 @@ export class BcscAccountComponent extends AbstractForm implements OnInit, OnDest
           this.requestRegisterUser();
         } else if ( this.registerRespService.payload.error ) {
           this.nextPage( RegistrationEvent.VALIDATE_USER, false,
-                         <string>this.registerRespService.payload.statusMsgs );
+                         this.registerRespService.payload.statusMsgs );
         } else {
 
           // Display errors on page
@@ -142,14 +142,22 @@ export class BcscAccountComponent extends AbstractForm implements OnInit, OnDest
       });
   }
 
-  private nextPage( event: RegistrationEvent, success: boolean, errMsg: string = null ) {
+  private nextPage(
+    event: RegistrationEvent,
+    success: boolean,
+    errMsg: string | StatusMsgInterface[] = null ) {
     const logMessage: LogMessage = {
       event: event,
       success: success
     };
 
     if ( !success ) {
-      logMessage.errMsg = errMsg;
+      if ( typeof errMsg === 'string' ) {
+        logMessage.errMsg = errMsg;
+      } else {
+        const msgStruct = errMsg.find( x => x.scrArea === ScreenAreaID.CONFIRMATION );
+        logMessage.errMsg = msgStruct ? msgStruct.msgText : 'Error occurred';
+      }
     }
 
     // Logging

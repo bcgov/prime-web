@@ -24,9 +24,6 @@ export class LoggerService extends CommonLogger {
 
   constructor( protected http: HttpClient ) {
     super( http );
-
-    this._headers = this._headers.set( 'program', 'prime-registration' );
-
     this.setURL( environment.loggingURL );
   }
 
