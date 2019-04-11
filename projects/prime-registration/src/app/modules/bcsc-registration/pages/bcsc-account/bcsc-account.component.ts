@@ -3,22 +3,27 @@ import { AbstractForm } from 'moh-common-lib/models';
 import { Router } from '@angular/router';
 import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
 import { RegCacheService } from '@prime-registration/services/reg-cache.service';
-import { UserAttrPayload } from '@prime-registration/modules/registration/models/register-api.model';
+import { UserAttrPayload, UserAttrInterface } from '@prime-registration/modules/registration/models/register-api.model';
 import { RegisterApiService } from '@prime-registration/modules/registration/services/register-api.service';
 import { RegisterRespService } from '@prime-registration/modules/registration/services/register-resp.service';
 import { RegistrationConstants } from '@prime-registration/modules/registration/models/registration-constants.model';
 import { Subscription } from 'rxjs';
 import { ServerPayload, StatusMsgInterface, ScreenAreaID } from '@prime-core/models/api-base.model';
 import { LoggerService, RegistrationEvent, LogMessage } from '@prime-registration/services/logger.service';
+import { AccountErrorInterface } from '../../../registration/components/appl-account/appl-account.component';
+
 
 @Component({
   selector: 'app-bcsc-account',
   templateUrl: './bcsc-account.component.html',
   styleUrls: ['./bcsc-account.component.scss']
 })
-export class BcscAccountComponent extends AbstractForm implements OnInit, OnDestroy {
+export class BcscAccountComponent extends AbstractForm
+       implements OnInit, OnDestroy {
 
+  public backendErrMsgs: AccountErrorInterface;
   private hasParameters$: Subscription;
+
 
   constructor( protected router: Router,
                private registrationDataService: RegistrationDataService ,
@@ -99,12 +104,18 @@ export class BcscAccountComponent extends AbstractForm implements OnInit, OnDest
           this.requestRegisterUser();
         } else if ( this.registerRespService.payload.error ) {
           this.nextPage( RegistrationEvent.VALIDATE_USER, false,
-                         this.registerRespService.payload.statusMsgs );
+                         <StatusMsgInterface[]>this.registerRespService.payload.statusMsgs );
         } else {
 
           // Display errors on page
           this.loading = false;
           console.log( 'Correct issue and try again.' );
+          const userAttrPayload = <UserAttrPayload>this.registerRespService.payload;
+
+          this.backendErrMsgs = {
+            email: userAttrPayload.emailMatch.matchFound ? userAttrPayload.emailMatch.msgText : null,
+            mobile: userAttrPayload.mobileMatch.matchFound ? userAttrPayload.mobileMatch.msgText : null,
+          };
 
           this.logger.log({
             event: RegistrationEvent.VALIDATE_USER,

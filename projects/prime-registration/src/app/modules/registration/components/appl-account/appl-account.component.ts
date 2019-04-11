@@ -1,8 +1,15 @@
-import { Component, OnInit, Input, forwardRef, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, Input, forwardRef, ViewChildren, QueryList, OnDestroy, ChangeDetectorRef, OnChanges } from '@angular/core';
 import { Registrant } from '../../models/registrant.model';
 import { ControlContainer, NgForm } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { RegistrationConstants } from '../../models/registration-constants.model';
+import { BehaviorSubject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+
+export interface AccountErrorInterface {
+  // We allow any other properties/values in the interface
+  [key: string]: any;
+}
 
 @Component({
   selector: 'prime-appl-account',
@@ -13,7 +20,7 @@ import { RegistrationConstants } from '../../models/registration-constants.model
    */
   viewProviders: [{ provide: ControlContainer, useExisting: forwardRef(() => NgForm) }]
 })
-export class ApplAccountComponent implements OnInit {
+export class ApplAccountComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() mohCredientials: boolean = true;
   @Input() userNameList: string[];
@@ -22,6 +29,7 @@ export class ApplAccountComponent implements OnInit {
   @Input() secQuestionList: string[] = [];
   @Input() pwdMinLen: string;
   @Input() userIdMinLen: string;
+  @Input() accountErrMsg: AccountErrorInterface;
 
   @ViewChildren('questionRef') questionList: QueryList<NgSelectModule>;
 
@@ -45,15 +53,52 @@ export class ApplAccountComponent implements OnInit {
 
   private form: NgForm;
 
-  constructor( private cntrlContainer: ControlContainer ) {
+  private errMsgChange = new BehaviorSubject(null );
+
+  constructor( private cntrlContainer: ControlContainer,
+               private cdref: ChangeDetectorRef ) {
   }
 
   ngOnInit() {
     this.form = (this.cntrlContainer as NgForm) ;
+
+    // Setup listener for error message chanages
+    this.errMsgChange.pipe(
+      distinctUntilChanged(),
+      debounceTime(200),
+    ).subscribe(_ => {
+
+      if ( !this.accountErrMsg ) {
+        return;
+      }
+
+      // Since we use debounceTime(), updates can happen after Angular change
+      // detection is done, so we have to manually invoke it.
+      this.cdref.detectChanges();
+    });
   }
 
-  get formErrors() {
-    return this.form.errors;
+  ngOnDestroy() {
+    this.errMsgChange.unsubscribe();
+  }
+
+  ngOnChanges( changes ) {
+
+    if ( changes.accountErrMsg  && this.form ) {
+
+      this.form.controls['user_email'].setErrors(
+        this.accountErrMsg.email ? { 'duplicateEmail': true } : null
+      );
+
+      this.form.controls['mobile_phone'].setErrors(
+        this.accountErrMsg.mobile ? { 'duplicateMobile': true } : null
+      );
+    }
+  }
+
+  // Get the errors for field
+  hasError( fieldName: string ) {
+    return this.form.controls[fieldName] ? this.form.controls[fieldName].errors : null;
   }
 
   /**
@@ -78,9 +123,10 @@ export class ApplAccountComponent implements OnInit {
       {symbols: symbols, numerals: numerals, lowercase: lowerChars, uppercase: upperChars} );
 
     if ( upperChars + lowerChars + numerals + symbols < 3  ) {
-      this.form.form.setErrors( {'failCriteria': true} );
+      this.form.controls['new_password'].setErrors( {'failCriteria': true} );
       return;
     }
+
 
     // Check for user ID or names in password
     if ( (this.data.userAccountName &&
@@ -90,7 +136,7 @@ export class ApplAccountComponent implements OnInit {
         return this.data.password.includes( x );
       }
     }).filter( item => item === true ).length > 0 ) ) ) {
-      this.form.form.setErrors( {'containsUserNames': true} );
+      this.form.controls['new_password'].setErrors( {'containsUserNames': true} );
     }
   }
 
@@ -100,7 +146,7 @@ export class ApplAccountComponent implements OnInit {
     if ( this.confirmPassword && this.data.password &&
       ( this.confirmPassword.length >= this.data.password.length) &&
      ( this.confirmPassword !== this.data.password ) ) {
-     this.form.form.setErrors( {'noPasswordMatch': true} );
+     this.form.controls['confirm_password'].setErrors( {'noPasswordMatch': true} );
    }
   }
 }
