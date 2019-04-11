@@ -5,6 +5,7 @@ export interface IContact {
   sms: boolean | FormControl;
   ext: string | FormControl;
   email: string | FormControl;
+  voicePhone: string | FormControl;
   preferredContact: ContactOpts | FormControl;
 }
 
