@@ -22,7 +22,7 @@
       <span>End Date</span>
 
     </div>
-    <form *ngFor="let fg of fa" [formGroup]="fg">
+    <form *ngFor="let fg of fa; index as i" [formGroup]="fg">
       <div class="list-item-row">
         <span>{{ fg.controls.name.value }}</span>
         <span>{{ fg.controls.type.value }}</span>
@@ -52,7 +52,7 @@
           <!-- </span> -->
 
         </div>
-        <button class="btn delete" (click)="remove()" *ngIf="fa$.value.length > 1"><i style="color: red !important;"
+        <button class="btn delete" (click)="remove(i)" *ngIf="fa$.value.length > 1"><i style="color: red !important;"
             class="fa fa-2x fa-times-circle"></i></button>
       </div>
 

@@ -49,13 +49,13 @@
           <div>
             <div *ngIf="fg.value.onBehalfOf; else loading" class="border padded">
               <div class="form-group col-sm-12">
-                <label class="control-label" for="onBehalfOfJobTitle">Device Provider Name</label>
-                <select class="form-control" id="onBehalfOfJobTitle" formControlName="onBehalfOfJobTitle"
-                  placeholder="Choose">
-                  <option value="" selected>Choose</option>
-                  <option *ngFor="let option of onBehalfOfOptions | async" [value]="option" [label]="option">{{option}}
-                  </option>
-                </select>
+                <label class="control-label" for="onBehalfOfJobTitle">Job Title</label>
+                <ng-select id="onBehalfOfJobTitle" formControlName="onBehalfOfJobTitle" placeholder="Choose"
+                  [items]="onBehalfOfOptions | async" addTag="true" multiple="true">
+                  <!-- <option value="" selected>Choose</option> -->
+                  <!-- <option *ngFor="let option of onBehalfOfOptions | async" [value]="option" [label]="option">{{option}} -->
+                  <!-- </option> -->
+                </ng-select>
               </div>
             </div>
           </div>
