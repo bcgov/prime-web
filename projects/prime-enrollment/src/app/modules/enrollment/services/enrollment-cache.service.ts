@@ -20,11 +20,7 @@ export class EnrollmentCacheService {
 
   collegeOptions$: Observable<any> = this.collegeOptions.asObservable();
 
-  get classOptions$() {
-    console.log('run');
-    return this.classOptions.asObservable();
-  }
-
+  classOptions$ = this.classOptions.asObservable();
   setLicenseLabel$(str: string) {
     switch (str) {
       case 'College of Pharmacists of BC (CPBC)':

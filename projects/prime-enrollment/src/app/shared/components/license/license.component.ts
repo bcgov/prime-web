@@ -30,9 +30,7 @@ export class LicenseComponent implements OnInit {
   /** Default options for wrapped ngx-datepicker. */
   datepickerOptions: INgxMyDpOptions;
 
-  constructor() {
-    console.log(this.licenseLabel);
-  }
+  constructor() {}
 
   ngOnInit() {}
 

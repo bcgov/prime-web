@@ -8,9 +8,8 @@ describe('ApplSecurityComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ApplSecurityComponent ]
-    })
-    .compileComponents();
+      declarations: [ApplSecurityComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
