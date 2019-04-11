@@ -15,23 +15,17 @@ import {
   descriptionValidator,
   numberValidator,
   preferredContactValidator,
-  smsValidator,
-  licenseClassValidator
+  licenseClassValidator,
+  contactValidator
 } from './validators';
 
 export abstract class FormFieldBuilder {
   static get contactFields() {
-    const phone = new FormControl(null, [
-      Validators.required,
-      Validators.minLength(10)
-    ]);
+    const phone = new FormControl(null, [contactValidator()]);
     // const sms = new FormControl(null, [smsValidator()]);
     const ext = new FormControl(null, []);
-    const email = new FormControl(null, [
-      Validators.required,
-      Validators.email
-    ]);
-    const voicePhone = new FormControl(null, [Validators.required]);
+    const email = new FormControl(null, [contactValidator()]);
+    const voicePhone = new FormControl(null, []);
     // const preferredContact = new FormControl(null, [
     //   Validators.required
     //   // preferredContactValidator()

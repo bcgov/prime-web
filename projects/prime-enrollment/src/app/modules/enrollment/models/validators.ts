@@ -68,23 +68,20 @@ export function preferredContactValidator(): ValidatorFn {
   };
 }
 
-export function smsValidator(): ValidatorFn {
+export function contactValidator(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
     if (!control.parent) return null;
-    const preferredContact = control.parent.controls['preferredContact'].value;
-    if (!preferredContact) return null;
-    if (control.value) return null;
-    else {
-      if (preferredContact === 'sms') {
-        return {
-          invalidSMS: {
-            value:
-              'Cannot select SMS alerts if the phone number is not SMS capable'
-          }
-        };
-      } else return null;
-    }
-    return null;
+    if (
+      !control.parent.controls['phone'] &&
+      !control.parent.controls['email']
+    ) {
+      return {
+        invalid: {
+          value:
+            'Cannot select SMS alerts if the phone number is not SMS capable'
+        }
+      };
+    } else return null;
   };
 }
 
