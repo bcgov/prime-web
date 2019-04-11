@@ -9,18 +9,21 @@
               src="assets/gov3_bc_logo.png">
           </a>
           <span class="title px-2 mt-1" role="banner">Prime</span>
+          <a [href]='skipLinkPath' class='skip-to-content'>Skip to main content</a>
         </div>
       </div>
     </header>
 
-
-
-
-    <!-- TODO - Replace the header above with this header component once setup
+    <!-- TODO - Replace the header above with this header component once setup 
   <fpcare-header></fpcare-header> -->
+  
     <main class="container-fluid" id="content">
       <router-outlet></router-outlet>
     </main>
+    <!-- <fpcare-header class="container-fluid" id="content">
+            <router-outlet></router-outlet>
+          </fpcare-header>
+    -->
     <div id="pad"></div>
   </div>
 
@@ -28,7 +31,7 @@
     <nav class="navbar navbar-expand-md bg-primary">
       <div class="container-fluid">
         <ul class="nav navbar-nav">
-          <li><a class='nav-link' href="http://www2.gov.bc.ca/gov/content/home/disclaimer"
+          <li><a id='content' class='nav-link' href="http://www2.gov.bc.ca/gov/content/home/disclaimer"
               target="_blank">Disclaimer</a></li>
           <li><a class='nav-link' href="http://www2.gov.bc.ca/gov/content/home/privacy" target="_blank">Privacy</a></li>
           <li><a class='nav-link' href="http://www2.gov.bc.ca/gov/content/home/accessibility"
