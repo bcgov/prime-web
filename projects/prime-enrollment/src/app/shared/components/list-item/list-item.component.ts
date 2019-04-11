@@ -24,7 +24,7 @@ export class ListItemComponent implements OnInit, OnDestroy {
   sub: Subscription;
 
   constructor() {
-    this.fc = new FormControl('');
+    this.fc = new FormControl(null);
   }
 
   ngOnInit() {
