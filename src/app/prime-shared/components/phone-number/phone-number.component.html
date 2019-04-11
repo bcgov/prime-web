@@ -1,5 +1,5 @@
 
-<label class="control-label" for="{{objectID}}">{{label}}</label>
+<label for="phone_{{objectId}}" class="control-label">{{label}}</label>
 <div *ngIf="displayMask; else NoMask">
   <input #phoneRef="ngModel"
           class="form-control"

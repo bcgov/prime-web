@@ -23,6 +23,8 @@ import { LoggerService, RegistrationEvent } from './services/logger.service';
 export class AppComponent extends Base implements OnInit {
   title = 'Prime';
   registrant = new Registrant();
+  public skipLinkPath;
+  private SKIP_CONTENT_HASH = '#content';
 
   constructor( private router: Router,
                private activatedRoute: ActivatedRoute,
@@ -43,6 +45,11 @@ export class AppComponent extends Base implements OnInit {
     this.logger.programName = 'prime-registration';
     this.registerApiService.eventUUID = this.logger.applicationId;
     this.updateTitleOnRouteChange();
+    this.router.events.pipe(
+      filter(ev => ev instanceof NavigationEnd),
+    ).subscribe(this.updateSkipContentLink.bind(this));
+
+    this.updateSkipContentLink();
 
   }
 
@@ -82,6 +89,25 @@ export class AppComponent extends Base implements OnInit {
       // Default title
       this.titleService.setTitle(this.title);
     }
+  }
+
+  routeIsActive(url: string): boolean {
+    return this.router.url.includes(url);
+  }
+
+  updateSkipContentLink(){
+    this.skipLinkPath = this.generateSkipToContentLink();
+  }
+
+  // Slightly complicated because we have to include the deployUrl in manually.
+  // If deployUrl changes this code must too.
+
+  private generateSkipToContentLink(): string {
+    // don't add duplicate #contents
+    if (window.location.href.indexOf(this.SKIP_CONTENT_HASH) !== -1) {
+      return window.location.href;
+    }
+    return `${window.location.origin}${this.router.url}#content`;
   }
 
 

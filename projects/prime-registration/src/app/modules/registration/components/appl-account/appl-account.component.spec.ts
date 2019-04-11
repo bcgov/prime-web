@@ -5,7 +5,6 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { SharedCoreModule } from 'moh-common-lib';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
-import { PageSectionsComponent } from '../page-sections/page-sections.component';
 
 describe('ApplAccountComponent', () => {
   let component: ApplAccountComponent;
@@ -14,8 +13,7 @@ describe('ApplAccountComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        ApplAccountComponent,
-        PageSectionsComponent
+        ApplAccountComponent
       ],
       imports: [
         FormsModule,
