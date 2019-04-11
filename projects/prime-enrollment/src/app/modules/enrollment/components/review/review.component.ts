@@ -18,6 +18,7 @@ export class ReviewComponent implements OnInit {
   profileForm: Registrant;
   $registrantName: Observable<any>;
   $preferredName: Observable<any>;
+  $mailingAddress: Observable<any>;
 
   constructor(public stateSvc: EnrollmentStateService) {
     this.df = this.stateSvc.declarationForm;
@@ -28,7 +29,6 @@ export class ReviewComponent implements OnInit {
   ngOnInit() {
     this.declarations = this.sdForm;
     const profile = this.profileForm;
-
     this.$registrantName = of(
       `${profile.firstName || null} ${profile.lastName}`
     );
@@ -37,6 +37,9 @@ export class ReviewComponent implements OnInit {
           `${profile.preferredFirstName} ${profile.preferredLastName}`
         ))
       : (this.$preferredName = this.$registrantName);
+    profile.mailAddress.hasOwnProperty('street')
+      ? (this.$mailingAddress = of(profile.mailAddress))
+      : (this.$mailingAddress = of(profile.address));
   }
 
   get sdForm() {
