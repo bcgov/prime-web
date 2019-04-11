@@ -23,6 +23,7 @@ export class EnrollmentStateService {
   private _currentIndex: number;
   private _selectedOrgSet: Set<IOrganization> = new Set(null);
   private _certForms: FormGroup[] = [];
+  private _certFa: FormArray;
 
   profileForm = new Registrant();
   declarationForm: FormGroup;
@@ -178,7 +179,7 @@ export class EnrollmentStateService {
   }
 
   addFormToArray(fg: FormGroup, fa: FormGroup[]) {
-    fa.unshift(fg);
+    fa.push(fg);
     return fa;
   }
 

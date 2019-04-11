@@ -49,11 +49,10 @@ export abstract class FormFieldBuilder {
     ]);
     const advancedPractice = new FormControl(null, [Validators.required]);
     const licenseClass = new FormControl(null, [licenseClassValidator()]);
-    const renewalDate = new FormControl(new Date(), [Validators.required]);
+    const renewalDate = new FormControl(new Date(), []);
     return {
       collegeCert,
       advancedPractice,
-      collegeNo,
       licenseNum,
       licenseClass,
       renewalDate

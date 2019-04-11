@@ -36,6 +36,19 @@ export class ProfessionalComponent implements OnInit {
   onBehalfOfOptions: Observable<string[]>;
   apOptions: Observable<string[]>;
 
+  get certFaValid() {
+    let valid = true;
+    if (this.fg.value.collegeCert === true) {
+      for (const fg of this.certFa) {
+        fg.valid ? null : (valid = false);
+      }
+    }
+    if (this.fg.value.collegeCert === null) return false;
+    if (this.fg.value.collegeCert === false) return true;
+
+    return valid;
+  }
+
   constructor(
     private stateSvc: EnrollmentStateService,
     public cacheSvc: EnrollmentCacheService

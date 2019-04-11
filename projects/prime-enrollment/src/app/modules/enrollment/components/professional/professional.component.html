@@ -20,14 +20,18 @@
               (selected)="cacheSvc.setLicenseLabel$($event)">
             </enroll-license>
           </ng-container>
-          <button class="btn btn-md btn-secondary" (click)="addLicenseForm(certFa)">Add Another License</button>
+          <button class="btn btn-md btn-secondary" (click)="addLicenseForm(certFa)" [disabled]="!certFaValid">Add
+            Another
+            License</button>
         </div>
+        <ng-container *ngIf="certFaValid">
+          <label class="control-label">Are you a device provider?
+          </label>
+          <enroll-radio-button formControlName="deviceProvider" labelOne="dpfalse" labelTwo="dptrue" name="dp">
+          </enroll-radio-button>
+        </ng-container>
 
-        <label class="control-label">Are you a device provider?
-        </label>
-        <enroll-radio-button formControlName="deviceProvider" labelOne="dpfalse" labelTwo="dptrue" name="dp">
-        </enroll-radio-button>
-        <div *ngIf="fg.controls['deviceProvider'].value">
+        <div *ngIf="fg.value.deviceProvider">
           <ng-container *ngFor="let fc of dpFa.controls; index as i">
             <enroll-device-provider [enableDelete]="dpFa.controls.length > 1" [fc]="dpFa.controls[i]"
               (remove)="removeDeviceFc(dpFa)">
@@ -35,7 +39,6 @@
           </ng-container>
           <button class="btn btn-md btn-secondary" (click)="addDeviceFc(dpFa)">Add Another License</button>
         </div>
-
         <label class="control-label">Are you accessing pharmanet on behalf of someone else?
         </label>
         <enroll-radio-button formControlName="onBehalfOf" labelOne="oboFalse" labelTwo="obotrue" name="obo">
