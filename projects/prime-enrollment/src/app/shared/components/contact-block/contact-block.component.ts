@@ -12,9 +12,10 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContactBlockComponent implements OnInit {
-  @Input() phone: string = '1-250-555-5555';
-  @Input() email: string = 'mail@mail.com';
-  @Input() contactMethod: string = 'Email';
+  @Input() phone: string;
+  @Input() email: string;
+  @Input() voicePhone: string;
+  // @Input() contactMethod: string = 'Email';
   constructor() {}
 
   ngOnInit() {}

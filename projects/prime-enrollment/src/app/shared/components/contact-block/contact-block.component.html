@@ -1,6 +1,15 @@
-<label>Phone</label>
+<ng-container *ngIf="phone">
+  <label>Phone</label>
+</ng-container>
+
+
 <span>{{ phone }}</span>
-<label>Email</label>
-<span>{{ email }}</span>
-<label>Preferred Contact Method</label>
-<span>{{ contactMethod }}</span>
+<ng-container *ngIf="email">
+  <label>Email</label>
+  <span>{{ email }}</span>
+</ng-container>
+<ng-container *ngIf="voicePhone">
+
+  <label>Voice Phone</label>
+  <span>{{ voicePhone }}</span>
+</ng-container>
