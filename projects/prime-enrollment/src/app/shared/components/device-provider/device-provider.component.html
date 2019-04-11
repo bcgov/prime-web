@@ -1,6 +1,6 @@
 <div *ngIf="fc; else loading" class="border padded">
   <div class="form-group col-sm-12">
-    <label class="control-label" for="device">Device Provider Name</label>
+    <label class="control-label" for="device">Device Provider Number</label>
     <input class="form-control" id="device" [formControl]="fc">
     <button class="btn delete " (click)="remove.emit(true)" *ngIf="enableDelete"><i style="color: red !important;"
         class="fa fa-2x fa-times-circle-o"></i></button>

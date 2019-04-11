@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 const collegeOptions = [
   'College of Physicians and Surgeons of BC (CPSBC)',
   'College of Pharmacists of BC (CPBC)',
@@ -18,11 +18,10 @@ export class EnrollmentCacheService {
 
   private licenseLabel: BehaviorSubject<string> = new BehaviorSubject(null);
 
-  get collegeOptions$() {
-    return this.collegeOptions.asObservable();
-  }
+  collegeOptions$: Observable<any> = this.collegeOptions.asObservable();
 
   get classOptions$() {
+    console.log('run');
     return this.classOptions.asObservable();
   }
 

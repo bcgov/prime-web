@@ -4,6 +4,8 @@ import {
   ChangeDetectionStrategy,
   Input
 } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { Address } from 'moh-common-lib/models';
 
 @Component({
   selector: 'enroll-address-block',
@@ -12,13 +14,13 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddressBlockComponent implements OnInit {
-  @Input() country: string = 'Canada';
-  @Input() province: string = 'B.C.';
-  @Input() address: string = '123 Fake St';
-  @Input() city: string = 'Victoria';
-  @Input() postalCode: string = 'V8G8S1';
+  @Input() address: Address;
+  address$: Observable<any>;
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.address);
+    this.address$ = of(this.address);
+  }
 }
