@@ -10,7 +10,7 @@
       <h3>Profile</h3>
       <a [routerLink]="['/enrollment/profile']"><i class="fa fa-pencil"></i></a>
     </div>
-    <enroll-profile-block [name]="registrantName" [preferredName]="registrantName"
+    <enroll-profile-block [name]="$registrantName | async" [preferredName]="$preferredName | async"
       [dateOfBirth]="profileForm.dateOfBirth">
     </enroll-profile-block>
     <h3>Address</h3>

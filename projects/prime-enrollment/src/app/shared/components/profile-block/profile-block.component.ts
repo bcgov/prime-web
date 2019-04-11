@@ -23,7 +23,9 @@ export class ProfileBlockComponent implements OnInit {
     return this._dob;
   }
 
-  constructor() {}
+  constructor() {
+    console.log(this.preferredName);
+  }
 
   ngOnInit() {
     const dob = this.dateOfBirth;

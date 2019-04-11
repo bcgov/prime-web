@@ -3,6 +3,7 @@ import { EnrollmentStateService } from '../../services/enrollment-state.service'
 import { FormGroup } from '@angular/forms';
 import { IDeclarationBlock } from '@prime-enrollment/core/interfaces';
 import { Registrant } from '../../../../../../../prime-registration/src/app/modules/registration/models/registrant.model';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-review',
@@ -15,11 +16,8 @@ export class ReviewComponent implements OnInit {
   declarations: Array<IDeclarationBlock>;
   certForms: FormGroup[];
   profileForm: Registrant;
-  private _registrantName: string;
-
-  get registrantName() {
-    return this._registrantName;
-  }
+  $registrantName: Observable<any>;
+  $preferredName: Observable<any>;
 
   constructor(public stateSvc: EnrollmentStateService) {
     this.df = this.stateSvc.declarationForm;
@@ -29,9 +27,16 @@ export class ReviewComponent implements OnInit {
 
   ngOnInit() {
     this.declarations = this.sdForm;
-    this._registrantName = `${this.profileForm.firstName} ${
-      this.profileForm.lastName
-    }`;
+    const profile = this.profileForm;
+
+    this.$registrantName = of(
+      `${profile.firstName || null} ${profile.lastName}`
+    );
+    profile.preferredFirstName
+      ? (this.$preferredName = of(
+          `${profile.preferredFirstName} ${profile.preferredLastName}`
+        ))
+      : (this.$preferredName = this.$registrantName);
   }
 
   get sdForm() {
