@@ -50,13 +50,12 @@
             <i class="fa fa-calendar"></i>
           </button>
           <!-- </span> -->
+
         </div>
+        <button class="btn delete" (click)="remove()" *ngIf="fa$.value.length > 1"><i style="color: red !important;"
+            class="fa fa-2x fa-times-circle"></i></button>
       </div>
+
     </form>
   </ng-container>
 </common-page-framework>
-<!-- <ng-template #grid> -->
-
-<!-- <ng-template> -->
-
-<!-- glyphicon glyphicon-remove-circle -->

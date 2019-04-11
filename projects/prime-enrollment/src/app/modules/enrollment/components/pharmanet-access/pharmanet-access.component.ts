@@ -16,7 +16,6 @@ const headers = ['Organization Name', 'Type', 'City'];
 export class PharmanetAccessComponent implements OnInit {
   fa$: BehaviorSubject<FormGroup[]> = new BehaviorSubject(null);
   results = false;
-  headers: string[];
   dateOptions: INgxMyDpOptions = {
     // other options...
     dateFormat: 'dd.mm.yyyy',
@@ -27,11 +26,7 @@ export class PharmanetAccessComponent implements OnInit {
   constructor(
     private stateSvc: EnrollmentStateService,
     public dialog: MatDialog
-  ) {
-    // this.fa = this.stateSvc.organizationForm;
-    // this.fa = this.stateSvc.organizationForm;
-    this.headers = headers;
-  }
+  ) {}
 
   ngOnInit() {
     if (!!this.stateSvc.organizationForm) this.results = true;
@@ -55,5 +50,10 @@ export class PharmanetAccessComponent implements OnInit {
       this.fa$.next(this.stateSvc.organizationForm);
       this.results = true;
     });
+  }
+
+  remove(i: number) {
+    const fa = this.stateSvc.removeFormGroup(this.fa$.value, i);
+    this.stateSvc.organizationForm = fa;
   }
 }

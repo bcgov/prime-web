@@ -39,7 +39,8 @@ export class ContactComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.fg.controls.ext.enable();
+    this.fg.valueChanges.subscribe(obs => console.log(obs));
+    // this.fg.controls.ext.enable();
     // this.fg.controls.preferredContact.valueChanges.subscribe(obs => {
     //   this.fg.controls.sms.updateValueAndValidity();
     // });
