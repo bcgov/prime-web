@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { EnrollmentStateService } from '../../services/enrollment-state.service';
 import { FormGroup } from '@angular/forms';
 import { IDeclarationBlock } from '@prime-enrollment/core/interfaces';
+import { Registrant } from '../../../../../../../prime-registration/src/app/modules/registration/models/registrant.model';
 
 @Component({
   selector: 'app-review',
@@ -13,14 +14,24 @@ export class ReviewComponent implements OnInit {
   df: FormGroup;
   declarations: Array<IDeclarationBlock>;
   certForms: FormGroup[];
+  profileForm: Registrant;
+  private _registrantName: string;
+
+  get registrantName() {
+    return this._registrantName;
+  }
 
   constructor(public stateSvc: EnrollmentStateService) {
     this.df = this.stateSvc.declarationForm;
     this.certForms = this.stateSvc.certForms;
+    this.profileForm = this.stateSvc.profileForm;
   }
 
   ngOnInit() {
     this.declarations = this.sdForm;
+    this._registrantName = `${this.profileForm.firstName} ${
+      this.profileForm.lastName
+    }`;
   }
 
   get sdForm() {

@@ -10,7 +10,9 @@
       <h3>Profile</h3>
       <a [routerLink]="['/enrollment/profile']"><i class="fa fa-pencil"></i></a>
     </div>
-    <enroll-profile-block></enroll-profile-block>
+    <enroll-profile-block [name]="registrantName" [preferredName]="registrantName"
+      [dateOfBirth]="profileForm.dateOfBirth">
+    </enroll-profile-block>
     <h3>Address</h3>
     <enroll-address-block></enroll-address-block>
     <h3>Mailing Address</h3>

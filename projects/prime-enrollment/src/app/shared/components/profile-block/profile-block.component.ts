@@ -4,6 +4,7 @@ import {
   ChangeDetectionStrategy,
   Input
 } from '@angular/core';
+import { SimpleDate } from 'moh-common-lib';
 
 @Component({
   selector: 'enroll-profile-block',
@@ -14,8 +15,18 @@ import {
 export class ProfileBlockComponent implements OnInit {
   @Input() name: string = 'Melissa Anderson';
   @Input() preferredName = 'Mel Anderson';
-  @Input() birthDate = '04/07/1981';
+  @Input() dateOfBirth: SimpleDate;
+
+  private _dob: string;
+
+  get dob() {
+    return this._dob;
+  }
+
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    const dob = this.dateOfBirth;
+    this._dob = `${dob.month}/${dob.day}/${dob.year}`;
+  }
 }
