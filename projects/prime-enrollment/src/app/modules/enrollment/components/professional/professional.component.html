@@ -37,25 +37,29 @@
               (remove)="removeDeviceFc(dpFa)">
             </enroll-device-provider>
           </ng-container>
-          <button class="btn btn-md btn-secondary" (click)="addDeviceFc(dpFa)">Add Another License</button>
+          <button class="btn btn-md btn-secondary" (click)="addDeviceFc(dpFa)" [disabled]="dpFa.invalid">Add Another
+            License</button>
         </div>
-        <label class="control-label">Are you accessing pharmanet on behalf of someone else?
-        </label>
-        <enroll-radio-button formControlName="onBehalfOf" labelOne="oboFalse" labelTwo="obotrue" name="obo">
-        </enroll-radio-button>
-        <div>
-          <div *ngIf="fg.controls['onBehalfOf'].value; else loading" class="border padded">
-            <div class="form-group col-sm-12">
-              <label class="control-label" for="onBehalfOfJobTitle">Device Provider Name</label>
-              <select class="form-control" id="onBehalfOfJobTitle" formControlName="onBehalfOfJobTitle"
-                placeholder="Choose">
-                <option value="" selected>Choose</option>
-                <option *ngFor="let option of onBehalfOfOptions | async" [value]="option" [label]="option">{{option}}
-                </option>
-              </select>
+        <ng-container *ngIf="fg.value.deviceProvider === false || dpFa.valid === true">
+          <label class="control-label">Are you accessing pharmanet on behalf of someone else?
+          </label>
+
+          <enroll-radio-button formControlName="onBehalfOf" labelOne="oboFalse" labelTwo="obotrue" name="obo">
+          </enroll-radio-button>
+          <div>
+            <div *ngIf="fg.value.onBehalfOf; else loading" class="border padded">
+              <div class="form-group col-sm-12">
+                <label class="control-label" for="onBehalfOfJobTitle">Device Provider Name</label>
+                <select class="form-control" id="onBehalfOfJobTitle" formControlName="onBehalfOfJobTitle"
+                  placeholder="Choose">
+                  <option value="" selected>Choose</option>
+                  <option *ngFor="let option of onBehalfOfOptions | async" [value]="option" [label]="option">{{option}}
+                  </option>
+                </select>
+              </div>
             </div>
           </div>
-        </div>
+        </ng-container>
       </form>
     </div>
     <aside>TIPS</aside>
