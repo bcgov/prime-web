@@ -8,7 +8,6 @@ import { FormFieldBuilder } from '../models/form-field-builder';
 import { filter } from 'rxjs/operators';
 import { IOrganization } from '@prime-enrollment/core/interfaces';
 import { BehaviorSubject } from 'rxjs';
-import { mockUser } from '../mocks/profile';
 import { SimpleDate } from 'moh-common-lib';
 
 const dateOfBirth = {
