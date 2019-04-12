@@ -9,8 +9,8 @@ import { LoggerService, RegistrationEvent } from './services/logger.service';
 
 @Component({
   selector: 'reg-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  templateUrl: './reg.component.html',
+  styleUrls: ['./reg.component.scss'],
   providers: [
     { provide: ControlContainer, useExisting: forwardRef(() => NgForm) }
   ]

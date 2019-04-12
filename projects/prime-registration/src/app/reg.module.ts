@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AppComponent } from './reg.component';
 import { environment } from '../environments/environment';
 import { fakeBackendProvider } from './fake-backend/fake-backend';
 
