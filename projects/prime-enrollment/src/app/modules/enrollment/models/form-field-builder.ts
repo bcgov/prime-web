@@ -76,16 +76,22 @@ export abstract class FormFieldBuilder {
       null,
       descriptionValidator('conviction')
     );
+    const convictionDocs = new FormControl();
+
     const regSuspensionDesc = new FormControl(
       null,
       descriptionValidator('regSuspension')
     );
+    const regSuspensionDocs = new FormControl();
+
     const tAndCDesc = new FormControl(null, descriptionValidator('tAndC'));
+    const tAndCDocs = new FormControl();
+
     const pharmaSuspensionDesc = new FormControl(
       null,
       descriptionValidator('pharmaSuspension')
     );
-    const supportingDocs = new FormControl(null);
+    const pharmaSuspensionDocs = new FormControl();
 
     return {
       conviction,
@@ -96,7 +102,10 @@ export abstract class FormFieldBuilder {
       tAndCDesc,
       regSuspensionDesc,
       convictionDesc,
-      supportingDocs
+      tAndCDocs,
+      pharmaSuspensionDocs,
+      regSuspensionDocs,
+      convictionDocs
     };
   }
 
