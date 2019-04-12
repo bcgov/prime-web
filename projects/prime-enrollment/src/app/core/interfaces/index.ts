@@ -1,6 +1,6 @@
 import { IProfessionalInformation } from './i-professional-information';
 import { IContact } from './i-contact';
-import { IDeclaration } from './i-declaration';
+import { IDeclaration, IDeclarationBlock } from './i-declaration';
 import {
   IFindOrganization,
   IOrganization,

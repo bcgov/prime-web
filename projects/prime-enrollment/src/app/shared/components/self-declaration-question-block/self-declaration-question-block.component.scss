@@ -1,0 +1,9 @@
+@import 'variables.scss';
+
+:host() {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  background-color: #f2f2f2;
+  padding: 12px;
+
+}

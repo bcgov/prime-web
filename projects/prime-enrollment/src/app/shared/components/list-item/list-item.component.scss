@@ -1,0 +1,15 @@
+:host() {
+  display: grid;
+
+  grid-template-columns: 20px 1fr 1fr 1fr;
+  width: 100%;
+  align-items: center;
+  // justify-content: space-evenly;
+
+  span {
+    padding: 5px;
+    // max-width: 60px;
+    text-align: left;
+  }
+
+}

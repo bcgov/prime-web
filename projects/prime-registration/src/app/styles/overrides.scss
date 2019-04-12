@@ -9,13 +9,13 @@
 
 // Only paragraph links should be underlined
 p a {
-   text-decoration: underline;
- }
+  text-decoration: underline;
+}
 
- .bg-light {
-    // Need to use !important because BS4
-    background-color: darken($gray-100, 1) !important;
- }
+.bg-light {
+  // Need to use !important because BS4
+  background-color: darken($gray-100, 1) !important;
+}
 
 
 .footer {
@@ -23,7 +23,7 @@ p a {
   border-color: $color-secondary;
   border-top: 2px solid $color-secondary;
 
-  & > .navbar {
+  &>.navbar {
     min-height: 3.65rem;
     padding: 0 !important;
     flex-flow: column;
@@ -31,8 +31,10 @@ p a {
 }
 
 
+
+
 // Only sibling list items in footer get left border
-footer li+li  {
+footer li+li {
   @include media-breakpoint-up(lg) {
     border-left: 1px solid #4b5e73;
   }
@@ -56,15 +58,18 @@ a {
 footer a {
   text-decoration: none;
 }
+
 footer a:hover {
   text-decoration: underline !important;
 }
+
 footer li {
   border-left: 1px solid #4b5e73;
   padding: 2px 17px;
   margin-top: 10px;
 }
-footer .navbar-nav > li > a {
+
+footer .navbar-nav>li>a {
   padding-top: 0;
   padding-bottom: 0;
 }
@@ -75,7 +80,7 @@ footer nav {
 }
 
 // Only sibling list items in footer get left border
-footer li+li  {
+footer li+li {
   @include media-breakpoint-up(lg) {
     border-left: 1px solid #4b5e73;
   }
@@ -84,7 +89,7 @@ footer li+li  {
 // Have to ensure footer nav links are white
 
 footer .nav-link {
-    color: white !important;
+  color: white !important;
 }
 
 // Sticky footer
@@ -93,7 +98,8 @@ html {
   min-height: 100%;
 }
 
-html, body {
+html,
+body {
   position: relative;
   height: 100%;
 }
@@ -109,8 +115,12 @@ html, body {
 
 }
 
-h1, h2, h3,
-.h1, .h2, .h3 {
+h1,
+h2,
+h3,
+.h1,
+.h2,
+.h3 {
   color: $color-primary;
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
@@ -141,21 +151,25 @@ h1, h2, h3,
 
 .has-float-label {
 
-  > input, > select {
+  >input,
+  >select {
     border: 1px solid $gray-400;
     border-radius: 0.25rem;
   }
 
-  > input.disabled, > input:disabled {
+  >input.disabled,
+  >input:disabled {
     border-color: $gray-500;
   }
 
-  > input:focus, > select:focus {
+  >input:focus,
+  >select:focus {
     box-shadow: none !important; //Override Bootstrap styling for .form-control
     border-color: $color-primary;
   }
 
-  > span, label {
+  >span,
+  label {
     white-space: nowrap;
 
     // Add padding, due to new border
@@ -167,12 +181,14 @@ h1, h2, h3,
   }
 }
 
-.has-float-label + .has-float-label {
+.has-float-label+.has-float-label {
   margin-top: 0.5em;
 }
 
 
-.has-float-label input:placeholder-shown:not(:focus) + *, .has-float-label select:placeholder-shown:not(:focus) + *, .has-float-label textarea:placeholder-shown:not(:focus) + * {
+.has-float-label input:placeholder-shown:not(:focus)+*,
+.has-float-label select:placeholder-shown:not(:focus)+*,
+.has-float-label textarea:placeholder-shown:not(:focus)+* {
   // Shrink font from 150% to 125% and verticall center
   font-size: 125%;
   // opacity: .5; // Removed to meet accessibility standards

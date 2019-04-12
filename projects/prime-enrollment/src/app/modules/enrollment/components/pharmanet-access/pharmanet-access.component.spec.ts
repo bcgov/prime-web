@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PharmanetAccessComponent } from './pharmanet-access.component';
 import { SharedModule } from '../../../../shared/shared.module';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('PharmanetAccessComponent', () => {
   let component: PharmanetAccessComponent;
@@ -9,7 +10,7 @@ describe('PharmanetAccessComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [SharedModule],
+      imports: [SharedModule, RouterTestingModule],
       declarations: [PharmanetAccessComponent]
     }).compileComponents();
   }));

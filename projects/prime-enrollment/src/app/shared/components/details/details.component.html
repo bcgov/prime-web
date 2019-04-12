@@ -1,0 +1,7 @@
+<common-page-section layout="tips">
+  <div class="form-group border-top" *ngIf="fg" [formGroup]="fg">
+    <label class="control-label" for="fc{{random}}"></label>
+    <textarea class="form-control" rows="5" id="fc{{random}}" [formControlName]="fc"></textarea>
+  </div>
+  <aside>Tip</aside>
+</common-page-section>
