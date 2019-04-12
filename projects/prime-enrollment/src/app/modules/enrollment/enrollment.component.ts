@@ -20,6 +20,7 @@ import { EnrollmentStateService } from './services/enrollment-state.service';
     <common-form-action-bar
       [canContinue]="stateSvc.currentStateValid"
       (btnClick)="advancePage()"
+      [defaultColor]="!stateSvc.submit"
     ></common-form-action-bar>
   `,
   styleUrls: ['./enrollment.component.scss'],

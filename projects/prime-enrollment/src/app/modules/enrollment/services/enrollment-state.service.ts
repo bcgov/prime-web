@@ -32,6 +32,7 @@ export class EnrollmentStateService {
   contactForm: FormGroup;
   professionalForm: FormGroup;
   dpFa: FormArray;
+  submit: boolean;
 
   set certForms(fa: FormGroup[]) {
     this._certForms = fa;
@@ -50,7 +51,10 @@ export class EnrollmentStateService {
   }
 
   setIndex(url: string) {
-    this._currentIndex = this.findIndex(url);
+    const currentIndex = this.findIndex(url);
+    if (currentIndex === 6) this.submit = true;
+    else this.submit = false;
+    this._currentIndex = currentIndex;
   }
 
   findIndex(url: string) {
