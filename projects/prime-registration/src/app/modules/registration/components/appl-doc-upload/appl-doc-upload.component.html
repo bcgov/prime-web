@@ -17,14 +17,11 @@
       <button class="btn btn-secondary" (click)='add()' [disabled]='addDisabled()'>Add</button>
     </div>
   </div>
-  </div>
-  </div>
 
   <div *ngIf="docTypeEl.touched || formRef.submitted" role="alert" class='error-container' aria-live="assertive">
     <div class="text-danger" *ngIf="docTypeEl?.errors?.required || (documents.length === 0 && formRef.submitted)">
       At least one document type must be added
     </div>
-
   </div>
 
 
