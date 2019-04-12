@@ -9,22 +9,15 @@ import * as version from '@prime-core/version.GENERATED.ts';
 /**
  * PrimeSharedAppComponent is a class containing shared functionality for the
  * various "AppComponent"s for each individual prime application. The important
- * functionality is in the constructor and ngOnInit().  The template is not
- * used, just the methods.
+ * functionality is in the constructor and ngOnInit().  Unfortunately this does
+ * not come bundled with a template and instead templates must be updated for
+ * each project manually.
  *
  * **Note** - you MUST call super.ngOnInit() you have an ngOnInit() method in
  * your subclass. Otherwise, the title and accessability functions concerns
  * won't update.
  */
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  providers: [
-    { provide: ControlContainer, useExisting: forwardRef(() => NgForm) }
-  ]
-})
-export class PrimeSharedAppComponent extends Base implements OnInit {
+export class PrimeSharedAppComponentBase extends Base implements OnInit {
   title = 'Prime';
   public skipLinkPath;
   private SKIP_CONTENT_HASH = '#content';

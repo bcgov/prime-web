@@ -10,7 +10,7 @@ import { ControlContainer, NgForm } from '@angular/forms';
 // import { RegistrationDataService } from './services/registration-data.service';
 // import { Base } from 'moh-common-lib/models';
 import { RegisterApiService } from './modules/registration/services/register-api.service';
-import { PrimeSharedAppComponent } from '@prime-core/prime-shared/components/prime-app-component/app.component';
+import { PrimeSharedAppComponentBase } from '@prime-core/prime-shared/components/prime-app-component/app.component';
 
 
 @Component({
@@ -21,7 +21,7 @@ import { PrimeSharedAppComponent } from '@prime-core/prime-shared/components/pri
     { provide: ControlContainer, useExisting: forwardRef(() => NgForm) }
   ]
 })
-export class AppComponent extends PrimeSharedAppComponent implements OnInit {
+export class AppComponent extends PrimeSharedAppComponentBase implements OnInit {
   title = 'Prime';
   // TODO - Verify we can remove.
   // registrant = new Registrant();
