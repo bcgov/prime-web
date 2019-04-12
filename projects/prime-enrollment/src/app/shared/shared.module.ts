@@ -5,12 +5,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TypeaheadModule, BsDropdownModule } from 'ngx-bootstrap';
-import {
-  NgxIntlTelInputModule,
-  NgxIntlTelInputComponent
-} from 'ngx-intl-tel-input';
 import { SharedProfileComponent } from './components/shared-profile/shared-profile.component';
-import { InternationalPhoneNumberModule } from 'ngx-international-phone-number';
 import { LicenseComponent } from './components/license/license.component';
 import { DeviceProviderComponent } from './components/device-provider/device-provider.component';
 import { YesNoComponent } from './components/yes-no/yes-no.component';
@@ -62,8 +57,6 @@ import { ErrorComponent } from './components/error-block/error.component';
     ReactiveFormsModule,
     NgSelectModule,
     SharedCoreModule,
-    NgxIntlTelInputModule,
-    InternationalPhoneNumberModule,
     MatDialogModule,
     MatCardModule,
     PrimeSharedModule,
@@ -77,8 +70,6 @@ import { ErrorComponent } from './components/error-block/error.component';
     NgSelectModule,
     HomePageComponent,
     SharedProfileComponent,
-    NgxIntlTelInputComponent,
-    InternationalPhoneNumberModule,
     LicenseComponent,
     DeviceProviderComponent,
     YesNoComponent,
