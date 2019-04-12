@@ -36,7 +36,7 @@
     <ng-container *ngFor="let declaration of declarations">
 
       <enroll-self-declaration-question-block [question]="declaration.question" [answer]="declaration.value"
-        [details]="declaration.details"></enroll-self-declaration-question-block>
+        [details]="declaration.details" [documents]="declaration.docs"></enroll-self-declaration-question-block>
     </ng-container>
     <aside>
       <div *ngFor="let cert of certForms">

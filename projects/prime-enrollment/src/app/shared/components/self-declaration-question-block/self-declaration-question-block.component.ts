@@ -4,6 +4,8 @@ import {
   ChangeDetectionStrategy,
   Input
 } from '@angular/core';
+import { CommonImage } from 'moh-common-lib/images/src/images';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'enroll-self-declaration-question-block',
@@ -15,7 +17,9 @@ export class SelfDeclarationQuestionBlockComponent implements OnInit {
   @Input() question: string;
   @Input() answer: boolean;
   @Input() details: string;
-  @Input() documents: string;
+  @Input() documents: Array<CommonImage>;
+
+  documents$: Observable<string>;
   yesNo: string;
 
   constructor() {}
@@ -23,5 +27,12 @@ export class SelfDeclarationQuestionBlockComponent implements OnInit {
   ngOnInit() {
     if (this.answer) this.yesNo = 'Yes';
     else this.yesNo = 'No';
+    if (this.documents) {
+      const res = this.documents
+        .map(obj => obj.name)
+        .reduce((a, b, i, arr) => a + ', ' + b);
+
+      this.documents$ = of(res);
+    }
   }
 }
