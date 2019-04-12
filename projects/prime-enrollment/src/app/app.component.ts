@@ -3,6 +3,7 @@ import { PrimeSharedAppComponentBase } from '@prime-core/prime-shared/components
 import { Router, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

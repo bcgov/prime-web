@@ -22,9 +22,9 @@ export class PrimeSharedAppComponentBase extends Base implements OnInit {
   public skipLinkPath;
   private SKIP_CONTENT_HASH = '#content';
 
-  constructor( private router: Router,
-               private activatedRoute: ActivatedRoute,
-               private titleService: Title ) {
+  constructor( private pRouter: Router,
+               private pActivatedRoute: ActivatedRoute,
+               private pTitleService: Title ) {
     super();
     version.success
       ? console.log('%c' + version.message, 'color: #036; font-size: 20px;')
@@ -33,7 +33,7 @@ export class PrimeSharedAppComponentBase extends Base implements OnInit {
 
   ngOnInit() {
     this.updateTitleOnRouteChange();
-    this.router.events.pipe(
+    this.pRouter.events.pipe(
       filter(ev => ev instanceof NavigationEnd),
     ).subscribe(this.updateSkipContentLink.bind(this));
 
@@ -45,10 +45,10 @@ export class PrimeSharedAppComponentBase extends Base implements OnInit {
    * 'title' property in the route's data.
    */
   private updateTitleOnRouteChange() {
-    this.router.events
+    this.pRouter.events
       .pipe(
         filter(event => event instanceof NavigationEnd),
-        map(() => this.activatedRoute),
+        map(() => this.pActivatedRoute),
         map(route => {
           while (route.firstChild) {
             route = route.firstChild;
@@ -66,15 +66,15 @@ export class PrimeSharedAppComponentBase extends Base implements OnInit {
   /** Set the page title. Includes basic formatting and fallback */
   private setTitle(title?: string) {
     if (title) {
-      this.titleService.setTitle(`Prime | ${title}`);
+      this.pTitleService.setTitle(`Prime | ${title}`);
     } else {
       // Default title
-      this.titleService.setTitle(this.title);
+      this.pTitleService.setTitle(this.title);
     }
   }
 
   routeIsActive(url: string): boolean {
-    return this.router.url.includes(url);
+    return this.pRouter.url.includes(url);
   }
 
   /**
@@ -94,7 +94,7 @@ export class PrimeSharedAppComponentBase extends Base implements OnInit {
     if (window.location.href.indexOf(this.SKIP_CONTENT_HASH) !== -1) {
       return window.location.href;
     }
-    return `${window.location.origin}${this.router.url}#content`;
+    return `${window.location.origin}${this.pRouter.url}#content`;
   }
 
 
