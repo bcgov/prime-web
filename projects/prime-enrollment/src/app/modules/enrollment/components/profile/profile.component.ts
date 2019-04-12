@@ -1,17 +1,21 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { EnrollmentStateService } from '../../services/enrollment-state.service';
-import { countryList, provinceList } from '../../data/country';
-const country = countryList;
-const province = provinceList;
+import { CacheService } from '@prime-core/services/cache.service';
+
 @Component({
-  selector: 'app-profile',
+  selector: 'enroll-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  constructor(public enrollStateSvc: EnrollmentStateService) {}
-  countries = country;
-  provinces = province;
+  // TODO - replace CacheService with EnrolmentCacheService when created.
+  constructor(public enrollStateSvc: EnrollmentStateService, private cacheService: CacheService) {
+  }
+
+  countries = this.cacheService.$countryList;
+  provinces = this.cacheService.$provinceList;
 
   ngOnInit() {}
+
+  continue() {}
 }

@@ -1,3 +1,61 @@
-<p>
-  pharmanet-access works!
-</p>
+<common-page-framework layout="blank">
+
+  <h2>Pharmanet Access</h2>
+
+  <p class="border-bottom">
+    Pharmanet Access - helper text
+  </p>
+  <common-page-section layout="noTips">
+    <ng-container *ngIf="!results">
+      <enroll-action-block (clicked)="openModal()" label="Add Organization" text="No Organizations"
+        class="action-block">
+      </enroll-action-block>
+    </ng-container>
+  </common-page-section>
+  <ng-container *ngIf="fa$ | async as fa">
+    <button class="btn btn-secondary btn-lg" (click)="openModal()">Add Organization</button>
+    <div class="header-row">
+      <span>Organization Name</span>
+      <span>Type</span>
+      <span>City</span>
+      <span>Start Date</span>
+      <span>End Date</span>
+
+    </div>
+    <form *ngFor="let fg of fa; index as i" [formGroup]="fg">
+      <div class="list-item-row">
+        <span>{{ fg.controls.name.value }}</span>
+        <span>{{ fg.controls.type.value }}</span>
+        <span>{{ fg.controls.city.value }}</span>
+
+
+        <div class="input-group">
+
+          <input class="form-control" style="float:none" placeholder="YYYY/MM/DD" ngx-mydatepicker name="startDate"
+            [options]="dateOptions" formControlName="startDate" #sd="ngx-mydatepicker">
+
+          <!-- <span class="input-group-append float-label-append"> -->
+          <button type="button" class="btn btn-default" (click)="sd.toggleCalendar()">
+            <i class="fa fa-calendar"></i>
+          </button>
+          <!-- </span> -->
+        </div>
+        <div class="input-group">
+
+          <input class="form-control" style="float:none" placeholder="YYYY/MM/DD" ngx-mydatepicker
+            [options]="dateOptions" formControlName="endDate" #dp="ngx-mydatepicker">
+
+          <!-- <span class="input-group-append float-label-append"> -->
+          <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
+            <i class="fa fa-calendar"></i>
+          </button>
+          <!-- </span> -->
+
+        </div>
+        <button class="btn delete" (click)="remove(i)" *ngIf="fa$.value.length > 1"><i style="color: red !important;"
+            class="fa fa-2x fa-times-circle"></i></button>
+      </div>
+
+    </form>
+  </ng-container>
+</common-page-framework>

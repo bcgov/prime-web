@@ -7,7 +7,7 @@ export interface IProfessionalInformation {
   deviceProvider: boolean | FormControl;
   providerNum?: number | FormControl;
   onBehalfOf: boolean | FormControl;
-  onBehalfOfThis?: string | FormControl;
+  onBehalfOfJobTitle?: string | FormControl;
 }
 
 export interface IDeviceProvider {

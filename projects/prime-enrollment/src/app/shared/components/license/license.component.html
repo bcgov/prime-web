@@ -1,0 +1,77 @@
+<div *ngIf="fg; else loading" class="border padded">
+  <form [formGroup]="fg">
+
+    <div class="row">
+      <div class="form-group col-sm-6">
+        <label class="control-label" for="license">College Certifications</label>
+
+        <ng-container *ngIf="licenseOptions | async as opts">
+          <ng-select id="collegeCert" (change)="collegeSelectionChange($event)" formControlName="collegeCert"
+            [items]="opts">
+          </ng-select>
+          <enroll-error label="College certifications" [touched]="fg.controls.collegeCert.touched"
+            [valid]="fg.controls.collegeCert.valid"></enroll-error>
+        </ng-container>
+
+      </div>
+      <div class="form-group col-sm-6">
+        <label class="control-label" for="license">License Number</label>
+        <div class="input-group mb-3">
+          <ng-container *ngIf="licenseLabel | async as label">
+
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">{{ label }}</span>
+            </div>
+          </ng-container>
+          <input type="text" class="form-control" formControlName="licenseNum" aria-label="License Number"
+            aria-describedby="basic-addon1">
+
+        </div>
+        <!-- <span *ngIf="fg.controls.licenseNum.invalid">License number is invalid</span> -->
+        <enroll-error label="License number" [touched]="fg.controls.licenseNum.touched"
+          [valid]="fg.controls.licenseNum.valid"></enroll-error>
+        <button class="btn delete" (click)="remove()" *ngIf="enableDelete"><i style="color: red !important;"
+            class="fa fa-2x fa-times-circle"></i></button>
+
+      </div>
+      <div class=" form-group col-sm-3">
+        <label class="control-label" for="licenseClass">License Class</label>
+        <ng-select id="licenseClass" formControlName="licenseClass" [items]="classOptions | async">
+        </ng-select>
+        <enroll-error label="License class" [touched]="fg.controls.licenseClass.touched"
+          [valid]="fg.controls.licenseClass.valid"></enroll-error>
+      </div>
+
+
+      <div class="form-group col-sm-3">
+        <label class="control-label" for="license">Renewal Date</label>
+        <div class="input-group">
+
+
+          <!-- <input class="form-control" placeholder="YYYY/MM/DD" ngx-mydatepicker formControlName="renewalDate"> -->
+
+          <!-- <span class="input-group-append float-label-append">
+            <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
+              <i class="fa fa-calendar"></i>
+            </button>
+          </span> -->
+
+          <common-datepicker></common-datepicker>
+          <enroll-error label="Renewal date" [touched]="fg.controls.renewalDate.touched"
+            [valid]="fg.controls.renewalDate.valid"></enroll-error>
+        </div>
+
+      </div>
+      <div class="form-group col-sm-6">
+        <label class="control-label" for="advancedPractice">Advanced Practice (Optional)</label>
+        <ng-container *ngIf="apOptions | async as opts">
+          <ng-select id="advancedPractice" formControlName="advancedPractice" [items]="opts"></ng-select>
+        </ng-container>
+      </div>
+
+    </div>
+  </form>
+</div>
+<ng-template #loading>
+  loading
+</ng-template>

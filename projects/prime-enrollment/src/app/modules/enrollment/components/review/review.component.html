@@ -1,3 +1,66 @@
-<p>
-  review works!
-</p>
+<common-page-framework layout="blank">
+  <h2>Application Review</h2>
+
+  <ng-content select="[identityInstruct]"></ng-content>
+  <p identityInstruct class="border-bottom">
+    Review - helper text
+  </p>
+  <common-page-section layout="double">
+    <div class="label-row">
+      <h3>Profile</h3>
+      <a [routerLink]="['/enrollment/profile']"><i class="fa fa-pencil"></i></a>
+    </div>
+    <enroll-profile-block [name]="$registrantName | async" [preferredName]="$preferredName | async"
+      [dateOfBirth]="profileForm.dateOfBirth">
+    </enroll-profile-block>
+    <h3>Address</h3>
+    <enroll-address-block [address]="profileForm.address"></enroll-address-block>
+    <h3>Mailing Address</h3>
+    <enroll-address-block [address]="$mailingAddress | async"></enroll-address-block>
+    <div class="label-row">
+
+      <h3>Contact</h3>
+      <a [routerLink]="['/enrollment/contact']">
+        <i class="fa fa-pencil"></i>
+      </a>
+    </div>
+
+    <enroll-contact-block [phone]="formValue('contactForm', 'phone')" [email]="formValue('contactForm', 'email')"
+      [voicePhone]="formValue('contactForm', 'voicePhone')">
+    </enroll-contact-block>
+    <div class="label-row">
+
+      <h3>Self Declaration</h3>
+      <a [routerLink]="['/enrollment/self-declaration']"><i class="fa fa-pencil"></i></a>
+    </div>
+    <ng-container *ngFor="let declaration of declarations">
+
+      <enroll-self-declaration-question-block [question]="declaration.question" [answer]="declaration.value"
+        [details]="declaration.details"></enroll-self-declaration-question-block>
+    </ng-container>
+    <aside>
+      <div *ngFor="let cert of certForms">
+        <div class="label-row">
+
+          <h3>Professional Information</h3>
+          <a [routerLink]="['/enrollment/professional']"><i class="fa fa-pencil"></i></a>
+        </div>
+        <enroll-professional-information-block [license]="cert.value['collegeCert']"
+          [college]="cert.value['licenseNum']" [class]="cert.value['licenseClass']"
+          [renewal]="cert.value['renewalDate']">
+
+        </enroll-professional-information-block>
+      </div>
+      <div>
+        <div class="label-row">
+
+          <h3>PharmaNet</h3>
+          <a [routerLink]="['/enrollment/pharmanet-access']">
+            <i class="fa fa-pencil"></i>
+          </a>
+        </div>
+        <enroll-pharmanet-block></enroll-pharmanet-block>
+      </div>
+    </aside>
+  </common-page-section>
+</common-page-framework>

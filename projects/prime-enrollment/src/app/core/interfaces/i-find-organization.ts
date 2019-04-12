@@ -8,14 +8,13 @@ export interface IFindOrganization {
 
 export interface IOrganization {
   name: string | FormControl;
-  type: organizationType | FormControl;
+  type: string | FormControl;
   city: string | FormControl;
 }
 
 export interface IOrganizationForm extends IOrganization {
-  organization: IOrganization;
-  start: Date | FormControl;
-  end: Date | FormControl;
+  startDate: Date | FormControl;
+  endDate: Date | FormControl;
 }
 
 export type organizationType = 'Health Authority' | 'Pharmacy';

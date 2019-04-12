@@ -1,0 +1,67 @@
+@import 'variables.scss';
+
+:host() {
+  padding: 0px;
+}
+
+
+
+header {
+  display: flex;
+  justify-content: space-between;
+  background-color: map-get($theme-colors, primary);
+  // -webkit-box-shadow: 0 3px 3px 1px rgba(51, 51, 51, 0.5);
+  // -moz-box-shadow: 0 3px 3px 1px rgba(51, 51, 51, 0.5);
+  // box-shadow: 0 3px 3px 1px rgba(51, 51, 51, 0.5);
+  margin-bottom: 20px;
+  color: #fff;
+  font-size: 1rem;
+  padding: 12px;
+
+  .close {
+    color: #fff
+  }
+}
+
+label {
+  margin-bottom: 0px;
+}
+
+mat-card {
+  width: 300px;
+}
+
+.action-button {
+  width: 160px;
+}
+
+.close-button {
+  width: 1fr;
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 12px;
+  background-color: $gray;
+
+  .cancel {
+    background-color: #fff;
+  }
+
+  .add {
+    margin-left: 18px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  header {
+    font-size: 2rem;
+  }
+
+  mat-card {
+    min-width: 500px;
+
+  }
+}

@@ -1,0 +1,16 @@
+.padded {
+  padding: 1rem;
+}
+
+.delete {
+  position: absolute;
+  top: -12px;
+  right: 4px;
+  padding: 0px;
+  // border-radius: 100%;
+  color: "red" !important;
+
+  i {
+    color: "red";
+  }
+}

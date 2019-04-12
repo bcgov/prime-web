@@ -1,3 +1,67 @@
-<p>
-  professional works!
-</p>
+<common-page-framework layout="blank">
+  <h2>Professional Information</h2>
+
+  <ng-content select="[identityInstruct]"></ng-content>
+  <p identityInstruct class="border-bottom">
+    Profile information helper text.
+  </p>
+  <common-page-section layout="tips">
+    <div>
+      <form [formGroup]="fg">
+        <label class="control-label">Do you have a college certification?
+        </label>
+        <enroll-radio-button formControlName="collegeCert"></enroll-radio-button>
+
+        <div *ngIf="fg.controls['collegeCert'].value">
+          <ng-container *ngFor="let fg of certFa; index as i">
+            <enroll-license [fg]="fg" (delete)="removeLicenseForm(i, certFa)"
+              [licenseOptions]="cacheSvc.collegeOptions$" [apOptions]="apOptions" [enableDelete]="certFa.length > 1"
+              [licenseLabel]="cacheSvc.licenseLabel$" [classOptions]="cacheSvc.classOptions$"
+              (selected)="cacheSvc.setLicenseLabel$($event)">
+            </enroll-license>
+          </ng-container>
+          <button class="btn btn-md btn-secondary" (click)="addLicenseForm(certFa)" [disabled]="!certFaValid">Add
+            Another
+            License</button>
+        </div>
+        <ng-container *ngIf="certFaValid">
+          <label class="control-label">Are you a device provider?
+          </label>
+          <enroll-radio-button formControlName="deviceProvider" labelOne="dpfalse" labelTwo="dptrue" name="dp">
+          </enroll-radio-button>
+        </ng-container>
+
+        <div *ngIf="fg.value.deviceProvider">
+          <ng-container *ngFor="let fc of dpFa.controls; index as i">
+            <enroll-device-provider [enableDelete]="dpFa.controls.length > 1" [fc]="dpFa.controls[i]"
+              (remove)="removeDeviceFc(dpFa)">
+            </enroll-device-provider>
+          </ng-container>
+          <button class="btn btn-md btn-secondary" (click)="addDeviceFc(dpFa)" [disabled]="dpFa.invalid">Add Another
+            License</button>
+        </div>
+        <ng-container *ngIf="fg.value.deviceProvider === false || dpFa.valid === true">
+          <label class="control-label">Are you accessing pharmanet on behalf of someone else?
+          </label>
+
+          <enroll-radio-button formControlName="onBehalfOf" labelOne="oboFalse" labelTwo="obotrue" name="obo">
+          </enroll-radio-button>
+          <div>
+            <div *ngIf="fg.value.onBehalfOf; else loading" class="border padded">
+              <div class="form-group col-sm-12">
+                <label class="control-label" for="onBehalfOfJobTitle">Job Title</label>
+                <ng-select id="onBehalfOfJobTitle" formControlName="onBehalfOfJobTitle" placeholder="Choose"
+                  [items]="onBehalfOfOptions | async" addTag="true" multiple="true">
+                  <!-- <option value="" selected>Choose</option> -->
+                  <!-- <option *ngFor="let option of onBehalfOfOptions | async" [value]="option" [label]="option">{{option}} -->
+                  <!-- </option> -->
+                </ng-select>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </form>
+    </div>
+    <aside>TIPS</aside>
+  </common-page-section>
+</common-page-framework>

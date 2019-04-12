@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ReviewComponent } from './review.component';
+import { SharedModule } from '@prime-enrollment/shared/shared.module';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ReviewComponent', () => {
   let component: ReviewComponent;
@@ -8,9 +10,9 @@ describe('ReviewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ReviewComponent ]
-    })
-    .compileComponents();
+      imports: [SharedModule, RouterTestingModule],
+      declarations: [ReviewComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

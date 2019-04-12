@@ -1,0 +1,35 @@
+<header mat-dialog-title class="mat-elevation-z2">
+  <label>Find and Add an Organization</label>
+  <button class="btn close-button" (click)="cancel()"><i class="fa fa-2x fa-times-circle-o close"></i></button>
+</header>
+<mat-card class="mat-elevation-z0">
+  <mat-card-header>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="fg">
+      <div class="form-group">
+        <label class="control-label" for="type">Type</label>
+        <ng-select id="type" formControlName="type" [items]="types | async"></ng-select>
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="organization">Organization Name (Optional)</label>
+        <input class="form-control" id="organization" formControlName="organization">
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="city">City (Optional)</label>
+        <input class="form-control" id="city" formControlName="city">
+      </div>
+      <button class="btn btn-lg btn-secondary action-button" (click)="find()" *ngIf="search">Find</button>
+    </form>
+  </mat-card-content>
+  <ng-container *ngIf="searchResults | async as results">
+    <enroll-list-item-header [headers]="searchResultsHeaders | async "></enroll-list-item-header>
+
+    <enroll-list-item *ngFor="let result of results" [data]="result" (selected)="selectedResults($event, result)">
+    </enroll-list-item>
+  </ng-container>
+</mat-card>
+<div class="actions">
+  <button mat-dialog-actions class="btn btn-lg cancel action-button" (click)="cancel()">Cancel</button><button
+    mat-dialog-actions class="btn btn-primary btn-lg add  action-button" (click)="add()">Add</button>
+</div>

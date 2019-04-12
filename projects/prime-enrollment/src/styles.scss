@@ -1,2 +1,10 @@
-// For styles specific to prime-enrollment. 
+// For styles specific to prime-enrollment.
 // All global prime styles should go in app/src/styles.csss
+
+.mat-dialog-container {
+  padding: 0px !important;
+}
+
+.mat-card {
+  padding: 0px;
+}

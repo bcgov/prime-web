@@ -46,7 +46,7 @@
         },
         "runPolicy": "Parallel",
         "source": {
-		  "dockerfile": "\|-\nFROM angular-builder-${NAME}:latest\nCOPY * /tmp/app/dist/CMD  /usr/libexec/s2i/run",
+		  "dockerfile": "\nFROM angular-builder-${NAME}:latest\nCOPY * /tmp/app/dist/\nCMD  /usr/libexec/s2i/run",
 		  "images": [
 			{
 			  "as": null,
