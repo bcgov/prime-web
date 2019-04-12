@@ -70,7 +70,7 @@ http {
         # serve our angular app here
         location / {
             rewrite ^/prime(/.*)$ $1;
-            root   /tmp/app/dist/prime-registration;
+            root   /tmp/app/dist/prime-enrollment;
             index  index.html index.htm;
             try_files $uri /index.html;
             gzip            on;
@@ -128,8 +128,6 @@ http {
 
             # Only allow access from localhost
             allow %RealIpFrom%;
-            # Question - why is PRIME making requests to nginx_status from localhost?
-            allow localhost;
 
             # Other request should be denied
             deny all;
