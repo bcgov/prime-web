@@ -31,7 +31,7 @@ export class UniqueQuestionDirective implements Validator {
       // Clear duplicate errors if no duplicate exists
       objList.forEach( element => {
         const dup = objList.find( x => x.value === element.value && x !== element );
-          if (!dup) {
+          if ( !dup && element.getError('duplicateQuestion') ) {
             element.setErrors(null);
           }
       });
