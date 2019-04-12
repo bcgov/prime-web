@@ -16,4 +16,6 @@ export class ProfileComponent implements OnInit {
   provinces = this.cacheService.$provinceList;
 
   ngOnInit() {}
+
+  continue() {}
 }

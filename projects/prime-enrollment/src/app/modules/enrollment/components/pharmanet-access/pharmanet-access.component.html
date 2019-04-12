@@ -6,7 +6,7 @@
     Pharmanet Access - helper text
   </p>
   <common-page-section layout="noTips">
-    <ng-container *ngIf="!results; else grid">
+    <ng-container *ngIf="!results">
       <enroll-action-block (clicked)="openModal()" label="Add Organization" text="No Organizations"
         class="action-block">
       </enroll-action-block>
