@@ -6,6 +6,7 @@ export class BaseMohRegTestPage extends PrimeTestPage {
     private continueButton: WebElement;
     private diffMailAddressButton: WebElement;
     private diffMailAddressCheckbox: WebElement;
+    private skipToContentButton: WebElement;
 
 
     constructor() {
@@ -13,6 +14,7 @@ export class BaseMohRegTestPage extends PrimeTestPage {
         this.continueButton = element(by.css('.form-bar .submit'));
         this.diffMailAddressButton = element(by.css('.mail-address-container .btn'));
         this.diffMailAddressCheckbox = element(by.css('.custom-checkbox .custom-control-label'));
+        this.skipToContentButton = element(by.css('.skip-to-content'));
     }
 
     navigateTo() {
@@ -37,6 +39,10 @@ export class BaseMohRegTestPage extends PrimeTestPage {
 
     scrollDown() {
         browser.executeScript('window.scrollTo(0, document.body.scrollHeight)');
+    }
+
+    clickSkipToContent(){
+      this.skipToContentButton.click();
     }
 }
 

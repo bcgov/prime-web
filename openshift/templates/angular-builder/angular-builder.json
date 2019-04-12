@@ -2,7 +2,7 @@
   "kind": "Template",
   "apiVersion": "v1",
   "metadata": {
-    "name": "angular-builder",
+    "name": "angular-builder-app-branch",
     "creationTimestamp": null
   },
   "objects": [
@@ -24,25 +24,46 @@
         }
       },
       "spec": {
-        "runPolicy": "Serial",
-        "source": {
-          "type": "Git",
-          "git": {
-            "uri": "${GIT_REPO_URL}"
-          },
-          "contextDir": "openshift/templates/angular-builder/"
-        },
-        "strategy": {
-          "type": "Docker"
-        },
+		"failedBuildsHistoryLimit": 5,
         "output": {
           "to": {
             "kind": "ImageStreamTag",
             "name": "${NAME}:latest"
           }
         },
-        "resources": {},
-        "postCommit": {}
+        "postCommit": {},
+        "resources": {
+		  "limits": {
+			"cpu": "1",
+			"memory": "4Gi"
+		  },
+		  "requests": {
+			"memory": "2Gi"
+		  }
+		},
+        "source": {
+          "type": "Git",
+          "git": {
+            "uri": "${GIT_REPO_URL}",
+	        "ref": "${GIT_REFERENCE}"
+          }
+        },
+        "strategy": {
+		  "sourceStrategy": {
+		    "from": {
+			  "kind": "ImageStreamTag",
+			  "name": 'nodejs:8',
+			  "namespace": "openshift"
+		    }
+		  },
+          "type": "Source"
+        },
+		"successfulBuildsHistoryLimit": 5,
+		"triggers": [ 
+		{
+			"type": "ConfigChange"
+		}
+		]
       },
       "status": {
         "lastVersion": 0
@@ -53,16 +74,23 @@
     {
       "name": "NAME",
       "displayName": "Name",
-      "description": "The name assigned to all of the frontend objects defined in this template.  You should keep this as default unless your know what your doing.",
+      "description": "The name assigned to app-branch-angular-builder. Ie. angular-builder-msp-account-letter, if on master branch: angular-builder-msp",
       "required": true,
-      "value": "angular-builder"
+      "value": "angular-builder-app-branch"
     },
     {
       "name": "GIT_REPO_URL",
       "displayName": "Git Repo URL",
-      "description": "The URL to your GIT repo, don't use the this default unless your just experimenting.",
+      "description": "The URL to your GIT repo, don't use the default unless your just experimenting.",
       "required": true,
-      "value": "https://github.com/bcgov/prime-web"
+      "value": "https://github.com/bcgov/prime-web.git"
+    },
+    {
+      "name": "GIT_REFERENCE",
+      "displayName": "Git Reference",
+      "description": "Optional branch, tag, or commit.",
+      "required": true,
+      "value": "master"
     }
   ]
 }
