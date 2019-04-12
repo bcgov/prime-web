@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RegisterRespService } from '../../services/register-resp.service';
-import { ServerPayload, StatusMsgInterface, ScreenAreaID } from '@prime-core/models/api-base.model';
+import { ServerPayload, StatusMsgInterface, ScreenAreaID, ApiStatusCodes } from '@prime-core/models/api-base.model';
+import { RegCacheService } from '@prime-registration/services/reg-cache.service';
 
 @Component({
   selector: 'app-confirmation',
@@ -13,16 +14,39 @@ export class ApplConfirmationComponent implements OnInit {
   private respPayLoad: ServerPayload;
   private statusMessage: StatusMsgInterface[];
 
-  constructor( private registerRespService: RegisterRespService ) {
-    this.respPayLoad = this.registerRespService.payload;
-    this.statusMessage = <StatusMsgInterface[]>this.respPayLoad.statusMsgs;
+  constructor( private registerRespService: RegisterRespService,
+               private cacheService: RegCacheService ) {
   }
 
   ngOnInit() {
+
+    this.respPayLoad = this.registerRespService.payload;
+    if ( this.respPayLoad ) {
+      this.statusMessage = <StatusMsgInterface[]>this.respPayLoad.statusMsgs;
+    } else {  // Empty payload
+
+      const respMsg: StatusMsgInterface[] = [];
+      this.cacheService.$enhancedMsgList.subscribe( obs => {
+        const msg = obs.find( x => x.msgID === '9999' );
+        if ( msg ) {
+          respMsg.push(msg);
+        } else {
+          // No cache loaded hard coded message to display to user
+          respMsg.push( {
+            msgID: null,
+            msgText: 'This error occurred because the system encountered an unanticipated situation which forced it to stop.',
+            msgType: ApiStatusCodes.ERROR,
+            scrArea: ScreenAreaID.CONFIRMATION,
+            appLayer: null
+          });
+        }
+      });
+      this.statusMessage = respMsg;
+    }
   }
 
   get statusCode() {
-    return this.respPayLoad.statusCode;
+    return this.respPayLoad ? this.respPayLoad.statusCode : ApiStatusCodes.ERROR;
   }
 
   hasQRCode(): boolean {
@@ -40,6 +64,10 @@ export class ApplConfirmationComponent implements OnInit {
 
   get nextStepMessage() {
     return this.getMessage( ScreenAreaID.NEXT_STEPS );
+  }
+
+  onButtonClick($event) {
+    console.log( 'button clicked' );
   }
 
   /**

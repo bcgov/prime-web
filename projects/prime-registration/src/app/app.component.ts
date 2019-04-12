@@ -1,17 +1,11 @@
-// import * as version from '@prime-core/version.GENERATED';
 import { Component, OnInit, forwardRef } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { filter, map, mergeMap } from 'rxjs/operators';
-// import { CacheApiService } from '../../../../src/app/services/cache-api.service';
-// import { RegCacheService } from './services/reg-cache.service';
-// import { Registrant } from './modules/registration/models/registrant.model';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ControlContainer, NgForm } from '@angular/forms';
-// import { RegistrationDataService } from './services/registration-data.service';
-// import { Base } from 'moh-common-lib/models';
 import { RegisterApiService } from './modules/registration/services/register-api.service';
 import { PrimeSharedAppComponentBase } from '@prime-core/prime-shared/components/prime-app-component/app.component';
 
+import { LoggerService, RegistrationEvent } from './services/logger.service';
 
 @Component({
   selector: 'app-root',
@@ -29,6 +23,7 @@ export class AppComponent extends PrimeSharedAppComponentBase implements OnInit 
 
   constructor( private router: Router,
                private activatedRoute: ActivatedRoute,
+               private logger: LoggerService,
                private registerApiService: RegisterApiService,
                private titleService: Title ) {
     super(router, activatedRoute, titleService);
@@ -36,6 +31,10 @@ export class AppComponent extends PrimeSharedAppComponentBase implements OnInit 
 
   ngOnInit() {
     super.ngOnInit();
+    // session ID to track events
+    // this.logger.applicationId = this.objectId;
+    this.logger.programName = 'prime-registration';
+    this.registerApiService.eventUUID = this.logger.applicationId;
   }
 
 }

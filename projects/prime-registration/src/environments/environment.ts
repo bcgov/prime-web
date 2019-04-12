@@ -12,7 +12,9 @@ export const environment = {
   /** Base url for all requests.
    * Note: This should be a relative URL, not absolute, so it can properly map to dev/test/prod.
    */
-  baseAPIUrl: '/api/reg/rest/'
+  baseAPIUrl: '/api/reg/rest/',
+  /** URL for log service */
+  loggingURL: '/api/logging'
 };
 
 /*
