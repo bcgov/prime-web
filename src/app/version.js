@@ -10,7 +10,7 @@ const fs = require('fs');
 
 // To update project version, use npm version patch/minor/major
 // https://docs.npmjs.com/cli/version
-const { version: projectVersion } = require('../package.json');
+const { version: projectVersion } = require('../../package.json');
 
 require('child_process').exec('git rev-parse --short HEAD', function(err, stdout) {
     console.log('Last commit hash on this branch is:', stdout);
