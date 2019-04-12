@@ -144,7 +144,7 @@ export class BcscAccountComponent extends AbstractForm
         this.nextPage(
           RegistrationEvent.REGISTER_USER,
           this.registerRespService.payload.success,
-          <string>this.registerRespService.payload.statusMsgs
+          <StatusMsgInterface[]>this.registerRespService.payload.statusMsgs
           );
       },
       regRespError => {

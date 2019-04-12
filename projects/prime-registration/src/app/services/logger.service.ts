@@ -3,12 +3,14 @@ import { CommonLogger, CommonLogMessage } from 'moh-common-lib/services';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
+/** Types of events to be logged */
 export enum RegistrationEvent {
   VALIDATE_USER = 'validate user',
   REGISTER_USER = 'register user',
   NAVIGATION = 'navigation'
 }
 
+/** Log message format, must be structured like CommonLogMessage Interface */
 export interface LogMessage {
   /** The type of event being logged. */
   event: RegistrationEvent;
@@ -16,7 +18,6 @@ export interface LogMessage {
   url?: string;
   errMsg?: string;
   success?: boolean;
-  [key: string]: any;
 }
 
 @Injectable()

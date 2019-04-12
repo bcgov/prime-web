@@ -68,7 +68,6 @@ export class RegisterApiService extends AbstractHttpService {
     return this.post<UserAttrInterface>(url, params);
   }
 
-
   /**
    * Request to create a BCSC Account in PRIME
    * @param registrant  information pertaining to person who is registering
@@ -95,8 +94,9 @@ export class RegisterApiService extends AbstractHttpService {
       preflastname: registrant.preferredMiddleName ? registrant.preferredMiddleName : null,
       prefmiddlename: registrant.preferredLastName ? registrant.preferredLastName : null,
       address: this.convertAddress( registrant.address ),
-      mailingAddress: !registrant.identityIsMailingAddress ?
-        this.convertAddress( registrant.mailAddress ) : null
+      mailingAddress: this.convertAddress(
+        !registrant.identityIsMailingAddress ? registrant.mailAddress : null
+        )
     };
 
     if ( registrant.providerCode === ProviderCode.BCSC ) {
@@ -138,13 +138,13 @@ export class RegisterApiService extends AbstractHttpService {
    * Populate
    * @param item
    */
-  private convertAddress( item: Address ): AddressInterface {
+  private convertAddress( item: Address | null ): AddressInterface {
     return {
-      street: item.street,
-      city: item.city,
-      province: item.province,
-      postalCode: this.stripSpaces( item.postal ),
-      country: item.country
+      street: item ? item.street : null,
+      city: item ? item.city : null,
+      province: item ? item.province : null,
+      postalCode: item ?  this.stripSpaces( item.postal ) : null,
+      country: item ? item.country : null
     };
   }
 
