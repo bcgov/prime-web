@@ -8,7 +8,7 @@ import { PrimeSharedAppComponentBase } from '@prime-core/prime-shared/components
 import { LoggerService, RegistrationEvent } from './services/logger.service';
 
 @Component({
-  selector: 'app-root',
+  selector: 'reg-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   providers: [

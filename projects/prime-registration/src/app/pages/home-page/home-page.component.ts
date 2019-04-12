@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RegistrationConstants } from '../../modules/registration/models/registration-constants.model';
 
 @Component({
-  selector: 'app-home-page',
+  selector: 'reg-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss']
 })

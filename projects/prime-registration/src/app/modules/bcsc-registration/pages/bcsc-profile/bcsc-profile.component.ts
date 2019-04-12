@@ -11,7 +11,7 @@ import { RegistrationConstants } from '@prime-registration/modules/registration/
 import { AssuranceLevel, ProviderCode } from '@prime-core/models/prime-constants';
 
 @Component({
-  selector: 'app-bcsc-profile',
+  selector: 'reg-bcsc-profile',
   templateUrl: './bcsc-profile.component.html',
   styleUrls: ['./bcsc-profile.component.scss']
 })

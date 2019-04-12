@@ -7,7 +7,7 @@ import { RegistrationDataService } from '@prime-registration/services/registrati
 import { RegistrationConstants } from '../../../registration/models/registration-constants.model';
 
 @Component({
-  selector: 'app-moh-doc-upload',
+  selector: 'reg-moh-doc-upload',
   templateUrl: './moh-doc-upload.component.html',
   styleUrls: ['./moh-doc-upload.component.scss']
 })

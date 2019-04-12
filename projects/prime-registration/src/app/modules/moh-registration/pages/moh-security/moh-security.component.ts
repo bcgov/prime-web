@@ -5,7 +5,7 @@ import { RegistrationDataService } from '@prime-registration/services/registrati
 import { RegistrationConstants } from '../../../registration/models/registration-constants.model';
 
 @Component({
-  selector: 'app-moh-security',
+  selector: 'reg-moh-security',
   templateUrl: './moh-security.component.html',
   styleUrls: ['./moh-security.component.scss']
 })

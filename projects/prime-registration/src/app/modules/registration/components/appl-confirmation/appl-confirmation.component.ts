@@ -4,7 +4,7 @@ import { ServerPayload, StatusMsgInterface, ScreenAreaID, ApiStatusCodes } from 
 import { RegCacheService } from '@prime-registration/services/reg-cache.service';
 
 @Component({
-  selector: 'app-confirmation',
+  selector: 'reg-confirmation',
   templateUrl: './appl-confirmation.component.html',
   styleUrls: ['./appl-confirmation.component.scss']
 })

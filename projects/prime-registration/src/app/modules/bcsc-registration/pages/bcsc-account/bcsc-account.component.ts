@@ -14,7 +14,7 @@ import { AccountErrorInterface } from '../../../registration/components/appl-acc
 
 
 @Component({
-  selector: 'app-bcsc-account',
+  selector: 'reg-bcsc-account',
   templateUrl: './bcsc-account.component.html',
   styleUrls: ['./bcsc-account.component.scss']
 })

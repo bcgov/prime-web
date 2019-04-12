@@ -11,7 +11,7 @@ import { UserAttrPayload, CheckUserAttr } from '@prime-registration/modules/regi
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-moh-account',
+  selector: 'reg-moh-account',
   templateUrl: './moh-account.component.html',
   styleUrls: ['./moh-account.component.scss']
 })
