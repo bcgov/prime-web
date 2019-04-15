@@ -32,5 +32,6 @@
 </mat-card>
 <div class="actions">
   <button mat-dialog-actions class="btn btn-md cancel action-button" (click)="cancel()">Cancel</button><button
-    mat-dialog-actions class="btn btn-primary btn-md add  action-button" (click)="add()">Add</button>
+    mat-dialog-actions class="btn btn-primary btn-md add action-button" (click)="add()"
+    [disabled]="!stateSvc.selectedOrgs">Add</button>
 </div>

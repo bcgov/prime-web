@@ -25,6 +25,8 @@ export class EnrollmentStateService {
   private _certForms: FormGroup[] = [];
   private _certFa: FormArray;
 
+  selectedOrgs = false;
+
   profileForm = new Registrant();
   declarationForm: FormGroup;
   findOrganizationForm: FormGroup;
@@ -117,10 +119,13 @@ export class EnrollmentStateService {
 
   addOrgResults(res: IOrganization) {
     this._selectedOrgSet.add(res);
+    if (!this.selectedOrgs) this.selectedOrgs = true;
   }
 
   removeOrgResults(res: IOrganization) {
     this._selectedOrgSet.delete(res);
+    if (this.selectedOrgs && this._selectedOrgSet.size < 1)
+      this.selectedOrgs = false;
   }
 
   async orgResultsForm(data: IOrganization[]) {
