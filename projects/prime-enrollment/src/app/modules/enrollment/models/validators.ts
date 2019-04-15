@@ -84,6 +84,7 @@ export function contactValidator(): ValidatorFn {
     } else return null;
   };
 }
+// +1 (403) 437-4886
 
 export function numberValidator() {
   return (control: AbstractControl): { [key: string]: any } | null => {
@@ -94,6 +95,17 @@ export function numberValidator() {
       return { invalid: { value: `${control.value} is not valid` } };
     }
     const forbidden = !/([0-9])/.test(control.value);
+    return forbidden
+      ? { invalid: { value: `${control.value} is not valid` } }
+      : null;
+  };
+}
+
+export function phoneNumberValidator() {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const forbidden = !/^[\+]{1}[(]{1}[0-9]{3}[)]{1}[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(
+      control.value
+    );
     return forbidden
       ? { invalid: { value: `${control.value} is not valid` } }
       : null;

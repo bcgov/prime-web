@@ -16,19 +16,24 @@
             [placeholder]="placeholder">
           <span>This number must be text message capable phone</span>
         </div>
-
+        <enroll-error label="Phone" [touched]="fg.controls.phone.touched" [valid]="fg.controls.phone.valid">
+        </enroll-error>
         <div class="form-group">
 
           <label for="email" class="control-label">Email</label>
           <input class="form-control" formControlName="email" id="email" placeholder="user@example.com">
         </div>
+        <enroll-error label="Email" [touched]="fg.controls.email.touched" [valid]="fg.controls.email.valid">
+        </enroll-error>
         <h3>How would you like to be contacted by voice calls from agents</h3>
         <div class="form-group phone">
           <label class="control-label">Phone (Optional)</label>
           <input class="form-control" name="phone" formControlName="voicePhone" [textMask]="{mask: mask}"
             [placeholder]="placeholder">
-          <span>This number must be text message capable phone</span>
+          <!-- <span>This number must be text message capable phone</span> -->
         </div>
+        <enroll-error label="Voice phone" [touched]="fg.controls.voicePhone.touched"
+          [valid]="fg.controls.voicePhone.valid"></enroll-error>
         <div class="form-group">
 
           <label for="ext" class="control-label">Extension Number (Optional)</label>
