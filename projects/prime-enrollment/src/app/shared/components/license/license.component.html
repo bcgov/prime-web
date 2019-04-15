@@ -47,16 +47,7 @@
         <label class="control-label" for="license">Renewal Date</label>
         <div class="input-group">
 
-
-          <!-- <input class="form-control" placeholder="YYYY/MM/DD" ngx-mydatepicker formControlName="renewalDate"> -->
-
-          <!-- <span class="input-group-append float-label-append">
-            <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
-              <i class="fa fa-calendar"></i>
-            </button>
-          </span> -->
-
-          <common-datepicker></common-datepicker>
+          <common-datepicker formControlName="renewalDate"></common-datepicker>
           <enroll-error label="Renewal date" [touched]="fg.controls.renewalDate.touched"
             [valid]="fg.controls.renewalDate.valid"></enroll-error>
         </div>
