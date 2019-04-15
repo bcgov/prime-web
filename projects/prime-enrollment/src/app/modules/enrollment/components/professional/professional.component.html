@@ -39,12 +39,18 @@
           </ng-container>
           <button class="btn btn-md btn-secondary" (click)="addDeviceFc(dpFa)" [disabled]="dpFa.invalid">Add Another
             License</button>
-        </div>
-        <ng-container *ngIf="fg.value.deviceProvider === false || dpFa.valid === true">
-          <label class="control-label">Are you accessing pharmanet on behalf of someone else?
-          </label>
 
-          <enroll-radio-button formControlName="onBehalfOf" labelOne="oboFalse" labelTwo="obotrue" name="obo">
+        </div>
+        <ng-container *ngIf="fg.value.deviceProvider">
+          <label class="control-label">Are you an insulin pump provider?</label>
+          <enroll-radio-button formControlName="insulinPump" labelOne="ipFalse" labelTwo="ipTrue" name="obo">
+          </enroll-radio-button>
+        </ng-container>
+        <ng-container
+          *ngIf="fg.value.deviceProvider === false || dpFa.valid === true && fg.controls['insulinPump'].valid === true">
+          <label class="control-label">Are you accessing pharmanet on behalf of someone else?</label>
+
+          <enroll-radio-button formControlName="onBehalfOf" labelOne="oboFalse" labelTwo="oboTrue" name="obo">
           </enroll-radio-button>
           <div>
             <div *ngIf="fg.value.onBehalfOf; else loading" class="border padded">

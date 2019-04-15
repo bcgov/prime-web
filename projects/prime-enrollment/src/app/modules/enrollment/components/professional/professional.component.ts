@@ -61,7 +61,7 @@ export class ProfessionalComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.fg.valueChanges.subscribe(obs => console.log(obs));
+    this.fg.valueChanges.subscribe(obs => console.log(this.fg));
   }
 
   addLicenseForm(fa: FormGroup[]) {

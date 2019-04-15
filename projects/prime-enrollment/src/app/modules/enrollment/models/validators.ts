@@ -100,3 +100,16 @@ export function numberValidator() {
       : null;
   };
 }
+
+export function insulinPumpValidator() {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    if (!control.parent) return null;
+    if (!control.parent.value.deviceProvider) return null;
+    console.log('run');
+    if (control.value === null || control.value === undefined) {
+      return {
+        invalid: { ipValue: `Invalid value for insulin pump provider` }
+      };
+    } else return null;
+  };
+}
