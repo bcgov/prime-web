@@ -1,8 +1,8 @@
-<label>{{ question }}</label>
-<span>{{ yesNo }}</span>
+<label class="font-weight-lighter">{{ question }}</label>
+<span class="font-weight-bolder">{{ yesNo }}</span>
 <ng-container *ngIf="answer">
-  <label>Details</label>
-  <span>{{ details }}</span>
-  <label>Documents</label>
-  <span>{{ documents$ | async }}</span>
+  <label class="font-weight-lighter">Details</label>
+  <span class="font-weight-bolder">{{ details }}</span>
+  <label class="font-weight-lighter">Documents</label>
+  <span class="font-weight-bolder">{{ documents$ | async }}</span>
 </ng-container>

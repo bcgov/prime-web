@@ -1,15 +1,14 @@
 <ng-container *ngIf="phone">
-  <label>Phone</label>
+  <label class="font-weight-lighter">Phone</label>
+  <span class="font-weight-bolder">{{ phone }}</span>
 </ng-container>
 
-
-<span>{{ phone }}</span>
 <ng-container *ngIf="email">
-  <label>Email</label>
-  <span>{{ email }}</span>
+  <label class="font-weight-lighter">Email</label>
+  <span class="font-weight-bolder">{{ email }}</span>
 </ng-container>
 <ng-container *ngIf="voicePhone">
 
-  <label>Voice Phone</label>
-  <span>{{ voicePhone }}</span>
+  <label class="font-weight-lighter">Voice Phone</label>
+  <span class="font-weight-bolder">{{ voicePhone }}</span>
 </ng-container>

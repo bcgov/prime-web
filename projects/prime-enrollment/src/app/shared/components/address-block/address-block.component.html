@@ -1,12 +1,12 @@
 <ng-container *ngIf="address$ | async as add">
-  <label>Country</label>
-  <span>{{ add.country }}</span>
-  <label>Province</label>
-  <span>{{ add.province }}</span>
-  <label>Street Address</label>
-  <span>{{ add.street }}</span>
-  <label>City</label>
-  <span>{{ add.city }}</span>
-  <label>Postal Code</label>
-  <span>{{ add.postal }}</span>
+  <label class="font-weight-lighter">Country</label>
+  <span class="font-weight-bolder">{{ add.country }}</span>
+  <label class="font-weight-lighter">Province</label>
+  <span class="font-weight-bolder">{{ add.province }}</span>
+  <label class="font-weight-lighter">Street Address</label>
+  <span class="font-weight-bolder">{{ add.street }}</span>
+  <label class="font-weight-lighter">City</label>
+  <span class="font-weight-bolder">{{ add.city }}</span>
+  <label class="font-weight-lighter">Postal Code</label>
+  <span class="font-weight-bolder">{{ add.postal }}</span>
 </ng-container>
