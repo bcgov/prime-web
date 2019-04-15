@@ -33,6 +33,10 @@ mat-card {
   font-family: Myriad-Pro, Calibri, Arial, sans serif !important;
 }
 
+h2 {
+  color: #fff;
+}
+
 .action-button {
   width: 160px;
 }
@@ -57,7 +61,7 @@ mat-card {
   }
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 569px) {
   header {
     font-size: 2rem;
   }

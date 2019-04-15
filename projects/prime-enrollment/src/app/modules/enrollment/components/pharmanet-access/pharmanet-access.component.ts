@@ -50,7 +50,9 @@ export class PharmanetAccessComponent implements OnInit, OnDestroy {
   openModal() {
     const dialog = this.dialog;
     const ref = dialog.open(SearchOrganizationModalComponent, {
-      panelClass: 'test'
+      panelClass: 'test',
+      disableClose: true,
+      position: { top: 'yes' }
     });
     this.sub = ref.afterClosed().subscribe(obs => {
       if (!obs) return;
