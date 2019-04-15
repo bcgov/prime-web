@@ -40,8 +40,6 @@ export class ReviewComponent implements OnInit {
     profile.mailAddress.hasOwnProperty('street')
       ? (this.$mailingAddress = of(profile.mailAddress))
       : (this.$mailingAddress = of(profile.address));
-
-    console.log(this.df);
   }
 
   get sdForm() {
