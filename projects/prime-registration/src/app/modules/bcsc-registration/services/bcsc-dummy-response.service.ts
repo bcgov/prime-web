@@ -37,9 +37,6 @@ export class BCSCDummyResponseService {
           day: data.dateOfBirth.getDay() + 1,
           year: data.dateOfBirth.getFullYear()
         };
-        // Phone and email should be entered by user, not pre-genereated.
-        // reg.emailAddress = data.email;
-        // reg.smsPhone = data.mobile;
         reg.address.street = data.street;
         reg.address.city = data.city;
         reg.address.province = RegistrationConstants.BRITISH_COLUMBIA;

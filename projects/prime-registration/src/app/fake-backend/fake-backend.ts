@@ -14,6 +14,7 @@ import { FakeBackendService } from './fake-backend.service';
 import { ApiStatusCodes, PayloadInterface, ScreenAreaID, StatusMsgInterface } from '../../../../../src/app/models/api-base.model';
 import { Base } from 'moh-common-lib/models';
 import { CacheInterface } from '../../../../../src/app/models/cache-api.model';
+import { UserAttrInterface } from '../modules/registration/models/register-api.model';
 
 @Injectable()
 export class FakeBackendInterceptor extends Base implements HttpInterceptor  {
@@ -39,6 +40,8 @@ export class FakeBackendInterceptor extends Base implements HttpInterceptor  {
 
          if (request.url.endsWith('/registerUser')) {
             payload = this.getRespRegister( request );
+         } else if (request.url.endsWith('/validateUser')) {
+           payload = this.getRespSearch( request );
          }
 
         if ( payload ) {
@@ -127,6 +130,20 @@ export class FakeBackendInterceptor extends Base implements HttpInterceptor  {
       statusMsgs: msg
    };
    return resp;
+  }
+
+  getRespSearch( request: HttpRequest<any> ): UserAttrInterface {
+    const resp: UserAttrInterface = {
+      eventUUID: request.body.eventUUID,
+      clientName: request.body.clientName,
+      processDate: request.body.processDate,
+      statusCode: ApiStatusCodes.WARNING,
+      statusMsgs: null,
+      pdidMatch: { matchFound: false, msgID: null, msgText: null },
+      emailMatch: { matchFound: true, msgID: '123', msgText: 'duplicate email' },
+      mobileMatch: { matchFound: true, msgID: '124', msgText: 'duplicate phone' }
+    };
+    return resp;
   }
 }
 

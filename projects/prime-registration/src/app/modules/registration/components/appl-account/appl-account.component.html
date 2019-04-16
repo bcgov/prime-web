@@ -36,17 +36,18 @@
 
     <div class="form-group col-sm-6 p-sm-0">
       <common-password label="{{newPwdLabel}}"
+                       objectID='new_password'
                        [showPasswordStrength]="true"
                        [minLen]="pwdMinLen"
                        [pwdCriteria]="pwdValidChars"
                        [password]="data.password"
                        (passwordChange)="data.password=$event"
                        (blurEvent)="checkPswdCriteria($event)"></common-password>
-      <div *ngIf="formErrors"
+      <div *ngIf="hasError('new_password')"
             role="alert"
             class='error-container'
             aria-live="assertive">
-        <div class="text-danger" *ngIf="formErrors?.failCriteria">
+        <div class="text-danger" *ngIf="hasError('new_password')?.failCriteria">
             {{newPwdLabel}} must contain characters from 3 of the 4 following categories:
             <ul>
               <li>a) Upper characters</li>
@@ -55,7 +56,7 @@
               <li>d) Non-alphanumeric characters</li>
             </ul>
         </div>
-        <div class="text-danger" *ngIf="formErrors?.containsUserNames">
+        <div class="text-danger" *ngIf="hasError('new_password')?.containsUserNames">
             {{newPwdLabel}} cannot contain user names or user ID.
         </div>
       </div>
@@ -63,16 +64,17 @@
 
     <div class="form-group col-sm-6 p-sm-0">
       <common-password label="{{confirmPwdLabel}}"
+                       objectID="confirm_password"
                        [minLen]="pwdMinLen"
                        [(password)]="confirmPassword"
                        (blurEvent)="checkConfirmPswd($event)"
                        [errorMessages]="confirmPwdMsg"></common-password>
       <!-- Error messages for component -->
-      <div *ngIf="formErrors"
+      <div *ngIf="hasError('confirm_password')"
             role="alert"
             class='error-container'
             aria-live="assertive">
-        <div class="text-danger" *ngIf="formErrors?.noPasswordMatch">
+        <div class="text-danger" *ngIf="hasError('confirm_password')?.noPasswordMatch">
             {{confirmPwdLabel}} does not match.
         </div>
       </div>
@@ -99,9 +101,6 @@
                    [ngModel]='item?.name'
                    (ngModelChange)='item.name=$event'
                    [items]='secQuestionList'
-                   (ngModelChange)='item.name=$event;'
-                   (ngModelBlur)="update()"
-                   [items]='secQuestionList | async'
                    placeholder=' -- Select Question --'
                    autocorrect='on'
                    addTag=true
@@ -158,9 +157,18 @@
   <common-page-section layout='tips'>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <prime-phone-number [displayMask]="isCanada"
+      <prime-phone-number objectID="mobile_phone"
+                          [displayMask]="isCanada"
                           [value]="data.smsPhone"
                           (valueChange)="data.smsPhone=$event"></prime-phone-number>
+      <div *ngIf="hasError('mobile_phone')"
+            role="alert"
+            class='error-container'
+            aria-live="assertive">
+      <div class="text-danger" *ngIf="hasError('mobile_phone')?.duplicateMobile">
+        {{accountErrMsg ? accountErrMsg.mobile : null}}
+      </div>
+      </div>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
@@ -177,18 +185,21 @@
              [ngModel]="data?.emailAddress"
              (ngModelChange)="data.emailAddress=$event"/>
 
-        <!-- Error messages for component -->
-        <div *ngIf="emailRef.touched"
-            role="alert"
-            class='error-container'
-            aria-live="assertive">
-          <div class="text-danger" *ngIf="emailRef?.errors?.required">
-            Email is required.
-          </div>
-          <div class="text-danger" *ngIf="emailRef?.errors?.pattern">
-              Invalid email.
-          </div>
+      <!-- Error messages for component -->
+      <div *ngIf="emailRef.touched"
+          role="alert"
+          class='error-container'
+          aria-live="assertive">
+        <div class="text-danger" *ngIf="emailRef?.errors?.required">
+          Email is required.
         </div>
+        <div class="text-danger" *ngIf="emailRef?.errors?.pattern">
+            Invalid email.
+        </div>
+        <div class="text-danger" *ngIf="emailRef?.errors?.duplicateEmail">
+          {{accountErrMsg ? accountErrMsg.email : null}}
+        </div>
+      </div>
     </div>
 
     <aside>TIPS</aside>

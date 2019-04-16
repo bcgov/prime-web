@@ -3,27 +3,34 @@ import { AbstractForm } from 'moh-common-lib/models';
 import { Router } from '@angular/router';
 import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
 import { RegCacheService } from '@prime-registration/services/reg-cache.service';
-import { UserAttrPayload } from '@prime-registration/modules/registration/models/register-api.model';
+import { UserAttrPayload, UserAttrInterface } from '@prime-registration/modules/registration/models/register-api.model';
 import { RegisterApiService } from '@prime-registration/modules/registration/services/register-api.service';
 import { RegisterRespService } from '@prime-registration/modules/registration/services/register-resp.service';
 import { RegistrationConstants } from '@prime-registration/modules/registration/models/registration-constants.model';
 import { Subscription } from 'rxjs';
-import { ServerPayload, StatusMsgInterface, PayloadInterface, ApiStatusCodes, ScreenAreaID } from '@prime-core/models/api-base.model';
+import { ServerPayload, StatusMsgInterface, ScreenAreaID } from '@prime-core/models/api-base.model';
+import { LoggerService, RegistrationEvent, LogMessage } from '@prime-registration/services/logger.service';
+import { AccountErrorInterface } from '../../../registration/components/appl-account/appl-account.component';
+
 
 @Component({
   selector: 'app-bcsc-account',
   templateUrl: './bcsc-account.component.html',
   styleUrls: ['./bcsc-account.component.scss']
 })
-export class BcscAccountComponent extends AbstractForm implements OnInit, OnDestroy {
+export class BcscAccountComponent extends AbstractForm
+       implements OnInit, OnDestroy {
 
+  public backendErrMsgs: AccountErrorInterface;
   private hasParameters$: Subscription;
+
 
   constructor( protected router: Router,
                private registrationDataService: RegistrationDataService ,
                private cacheService: RegCacheService,
                private registerApiService: RegisterApiService,
-               private registerRespService: RegisterRespService ) {
+               private registerRespService: RegisterRespService,
+               private logger: LoggerService ) {
     super( router );
   }
 
@@ -88,55 +95,39 @@ export class BcscAccountComponent extends AbstractForm implements OnInit, OnDest
 
         if ( this.registerRespService.payload.success ) {
 
+          this.logger.log({
+            event: RegistrationEvent.VALIDATE_USER,
+            success: this.registerRespService.payload.success
+          });
+
           // Register User in PRIME
           this.requestRegisterUser();
+        } else if ( this.registerRespService.payload.error ) {
+          this.nextPage( RegistrationEvent.VALIDATE_USER, false,
+                         <StatusMsgInterface[]>this.registerRespService.payload.statusMsgs );
         } else {
 
-          // TODO: Code
+          // Display errors on page
           this.loading = false;
           console.log( 'Correct issue and try again.' );
+          const userAttrPayload = <UserAttrPayload>this.registerRespService.payload;
+
+          this.backendErrMsgs = {
+            email: userAttrPayload.emailMatch.matchFound ? userAttrPayload.emailMatch.msgText : null,
+            mobile: userAttrPayload.mobileMatch.matchFound ? userAttrPayload.mobileMatch.msgText : null,
+          };
+
+          this.logger.log({
+            event: RegistrationEvent.VALIDATE_USER,
+            success: false,
+            errMsg: 'Duplicate email or phone number found.'
+          });
         }
       },
       responseError => {
-        this.handleError( responseError );
+        console.log( 'Error: ', responseError );
+        this.nextPage( RegistrationEvent.VALIDATE_USER, false, responseError );
       });
-  }
-
-  /**
-   * Handle error from request
-   * @param error
-   */
-  private handleError( error: any )  {
-
-    const respMsg: StatusMsgInterface[] = [];
-    this.cacheService.$enhancedMsgList.subscribe( obs => {
-      const msg = obs.find( x => x.msgID === '9999' );
-      if ( msg ) {
-        respMsg.push(msg);
-      } else {
-        // No cache loaded hard coded message to display to user
-        respMsg.push( {
-          msgID: null,
-          msgText: 'This error occurred because the system encountered an unanticipated situation which forced it to stop.',
-          msgType: ApiStatusCodes.ERROR,
-          scrArea: ScreenAreaID.CONFIRMATION,
-          appLayer: null
-        });
-      }
-    });
-
-    this.loading = false;
-
-    console.log( 'Error occurred: ', error  );
-    this.registerRespService.payload = new ServerPayload( {
-        eventUUID: null,
-        clientName: null,
-        processDate: null,
-        statusCode: ApiStatusCodes.ERROR,
-        statusMsgs: respMsg
-      } );
-
-    this.navigate( RegistrationConstants.BCSC_REGISTRATION + '/' + RegistrationConstants.CONFIRMATION_PG );
   }
 
   /**
@@ -150,11 +141,40 @@ export class BcscAccountComponent extends AbstractForm implements OnInit, OnDest
       regResp => {
         this.loading = false;
         this.registerRespService.payload = new ServerPayload( regResp );
-        this.navigate( RegistrationConstants.BCSC_REGISTRATION + '/' +
-          RegistrationConstants.CONFIRMATION_PG );
+        this.nextPage(
+          RegistrationEvent.REGISTER_USER,
+          this.registerRespService.payload.success,
+          <StatusMsgInterface[]>this.registerRespService.payload.statusMsgs
+          );
       },
       regRespError => {
-        this.handleError( regRespError );
+        console.log( 'Error: ', regRespError );
+        this.nextPage( RegistrationEvent.REGISTER_USER, false, regRespError );
       });
+  }
+
+  private nextPage(
+    event: RegistrationEvent,
+    success: boolean,
+    errMsg: string | StatusMsgInterface[] = null ) {
+    const logMessage: LogMessage = {
+      event: event,
+      success: success
+    };
+
+    if ( !success ) {
+      if ( typeof errMsg === 'string' ) {
+        logMessage.errMsg = errMsg;
+      } else {
+        const msgStruct = errMsg.find( x => x.scrArea === ScreenAreaID.CONFIRMATION );
+        logMessage.errMsg = msgStruct ? msgStruct.msgText : 'Error occurred';
+      }
+    }
+
+    // Logging
+    this.logger.log( logMessage );
+
+    this.loading = false;
+    this.navigate( RegistrationConstants.BCSC_REGISTRATION + '/' + RegistrationConstants.CONFIRMATION_PG );
   }
 }

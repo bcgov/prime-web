@@ -12,6 +12,11 @@
       "type": "npm",
       "script": "build:reg",
       "problemMatcher": []
+    },
+    {
+      "type": "npm",
+      "script": "dev:reg",
+      "problemMatcher": []
     }
   ]
 }

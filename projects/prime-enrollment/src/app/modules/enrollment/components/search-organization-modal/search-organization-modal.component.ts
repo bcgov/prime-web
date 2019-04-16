@@ -25,7 +25,7 @@ export class SearchOrganizationModalComponent implements OnInit {
 
   constructor(
     private dataSvc: EnrollmentDataService,
-    private stateSvc: EnrollmentStateService,
+    public stateSvc: EnrollmentStateService,
     public dialogRef: MatDialogRef<SearchOrganizationModalComponent>
   ) {
     this.fg = this.stateSvc.findOrganizationForm;

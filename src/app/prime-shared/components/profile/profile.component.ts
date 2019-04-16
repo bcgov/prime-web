@@ -30,6 +30,7 @@ export class ProfileComponent extends Base implements OnInit, OnDestroy {
   @Input() countryList: CountryList[] = [];
   @Input() provinceList: ProvinceList[] = [];
   @Input() editIdentityInfo: boolean = true;
+  @Input() pageTitle: string = 'Profile Information';
   @Output() dataChange: EventEmitter<PrimePerson> = new EventEmitter<PrimePerson>();
 
   public defaultCountry = PrimeConstants.CANADA;

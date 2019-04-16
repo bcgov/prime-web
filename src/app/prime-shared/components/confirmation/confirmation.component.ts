@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ApiStatusCodes } from '@prime-core/models/api-base.model';
 
 @Component({
@@ -10,6 +10,9 @@ export class ConfirmationComponent implements OnInit {
 
   @Input() displayIcon: ApiStatusCodes = ApiStatusCodes.SUCCESS;
   @Input() hasQrCode: boolean = false;
+  @Input() btnLabel: string = 'Login';
+
+  @Output() btnClick: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }
 
@@ -27,5 +30,11 @@ export class ConfirmationComponent implements OnInit {
 
   get warningCode() {
     return ApiStatusCodes.WARNING;
+  }
+
+  onClick($event) {
+    this.btnClick.emit($event);
+    $event.stopPropagation();
+    return false;
   }
 }
