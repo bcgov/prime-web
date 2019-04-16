@@ -46,7 +46,7 @@ export abstract class FormFieldBuilder {
       numberValidator(),
       Validators.maxLength(12)
     ]);
-    const advancedPractice = new FormControl(null, [Validators.required]);
+    const advancedPractice = new FormControl(null, []);
     const licenseClass = new FormControl(null, [licenseClassValidator()]);
     // const renewalDate = new FormControl(new Date(), []);
     const renewalDate = new FormControl(null, []);
