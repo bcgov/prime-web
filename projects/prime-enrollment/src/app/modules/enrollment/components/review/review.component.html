@@ -45,19 +45,22 @@
         [details]="declaration.details" [documents]="declaration.docs"></enroll-self-declaration-question-block>
     </ng-container>
     <aside>
-      <div *ngFor="let cert of certForms">
-        <!-- <div class="label-row"> -->
-        <a [routerLink]="['/enrollment/professional']">
-          <h3>Professional Information</h3>
-        </a>
-        <!-- <i class="fa fa-pencil"></i> -->
-        <!-- </div> -->
-        <enroll-professional-information-block [license]="cert.value['collegeCert']"
-          [college]="cert.value['licenseNum']" [class]="cert.value['licenseClass']"
-          [renewal]="cert.value['renewalDate']">
+      <!-- <div class="label-row"> -->
+      <a [routerLink]="['/enrollment/professional']">
+        <h3>Professional Information</h3>
+      </a>
+      <!-- <i class="fa fa-pencil"></i> -->
+      <!-- </div> -->
+      <ng-container *ngIf="certForms[0].valid">
 
-        </enroll-professional-information-block>
-      </div>
+        <div *ngFor="let cert of certForms">
+          <enroll-professional-information-block [license]="cert.value['collegeCert']"
+            [college]="cert.value['licenseNum']" [class]="cert.value['licenseClass']"
+            [renewal]="cert.value['renewalDate']">
+
+          </enroll-professional-information-block>
+        </div>
+      </ng-container>
       <div>
         <!-- <div class="label-row"> -->
         <a [routerLink]="['/enrollment/pharmanet-access']">
@@ -67,7 +70,10 @@
 
         <!-- <i class="fa fa-pencil"></i> -->
         <!-- </div> -->
-        <enroll-pharmanet-block></enroll-pharmanet-block>
+        <ng-container *ngFor="let fg of organizationForm">
+          <enroll-pharmanet-block [name]="fg.value.name" [type]="fg.value.type" [city]="fg.value.city"
+            [startDate]="fg.value.startDate" [endDate]="fg.value.endDate"></enroll-pharmanet-block>
+        </ng-container>
       </div>
     </aside>
   </common-page-section>

@@ -21,12 +21,14 @@ import { EnrollmentStateService } from './services/enrollment-state.service';
       [canContinue]="stateSvc.currentStateValid"
       (btnClick)="advancePage()"
       [defaultColor]="!stateSvc.submit"
+      [submitLabel]="stateSvc.submitLabel$ | async"
     ></common-form-action-bar>
   `,
   styleUrls: ['./enrollment.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EnrollmentComponent extends Container implements OnInit {
+  submitLabel = 'Continue';
   constructor(public stateSvc: EnrollmentStateService, private router: Router) {
     super();
     this.setProgressSteps(subRoutes);
