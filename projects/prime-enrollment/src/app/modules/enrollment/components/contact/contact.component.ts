@@ -38,5 +38,7 @@ export class ContactComponent implements OnInit {
     this.placeholder = '+1 (555) 555-5555';
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.fg.valueChanges.subscribe(() => console.log(this.fg.value));
+  }
 }
