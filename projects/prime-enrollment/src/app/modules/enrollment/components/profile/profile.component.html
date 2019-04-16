@@ -1,15 +1,13 @@
 <common-page-framework layout='blank'>
 
-  <form #formRef='ngForm' (ngSubmit)='continue()'>
+  <form #formRef='ngForm'>
 
     <!-- <p identityInstruct>
       Information received from BCSC - Ministry verbage required
     </p> -->
 
-    <prime-profile [data]='enrollStateSvc.profileForm'
-                   [countryList]='countries | async'
-                   [provinceList]='provinces | async'
-                   [editIdentityInfo]="false"></prime-profile>
+    <prime-profile [data]='enrollStateSvc.profileForm' [countryList]='countries | async'
+      [provinceList]='provinces | async' [editIdentityInfo]="false"></prime-profile>
     <!-- Display bar during registration -->
 
   </form>

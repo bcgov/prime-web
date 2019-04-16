@@ -1,8 +1,8 @@
-<label>Name</label>
-<span>{{name}}</span>
-<ng-container *ngIf="preferredName">
-  <label>Preferred Name</label>
-  <span>{{preferredName}}</span>
-</ng-container>
-<label>Birthdate</label>
-<span>{{dob}}</span>
+  <label class="font-weight-lighter">Name</label>
+  <span class="font-weight-bolder">{{name}}</span>
+  <ng-container *ngIf="preferredName">
+    <label class="font-weight-lighter">Preferred Name</label>
+    <span class="font-weight-bolder">{{preferredName}}</span>
+  </ng-container>
+  <label class="font-weight-lighter">Birthdate</label>
+  <span class="font-weight-bolder">{{dob}}</span>

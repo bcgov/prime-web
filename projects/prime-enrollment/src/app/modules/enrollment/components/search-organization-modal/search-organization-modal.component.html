@@ -1,5 +1,5 @@
 <header mat-dialog-title class="mat-elevation-z2">
-  <label>Find and Add an Organization</label>
+  <h2>Find and Add an Organization</h2>
   <button class="btn close-button" (click)="cancel()"><i class="fa fa-2x fa-times-circle-o close"></i></button>
 </header>
 <mat-card class="mat-elevation-z0">
@@ -19,7 +19,8 @@
         <label class="control-label" for="city">City (Optional)</label>
         <input class="form-control" id="city" formControlName="city">
       </div>
-      <button class="btn btn-lg btn-secondary action-button" (click)="find()" *ngIf="search">Find</button>
+      <button class="btn btn-md btn-secondary action-button" (click)="find()" *ngIf="search"
+        [disabled]="!fg.value.type">Find</button>
     </form>
   </mat-card-content>
   <ng-container *ngIf="searchResults | async as results">
@@ -30,6 +31,7 @@
   </ng-container>
 </mat-card>
 <div class="actions">
-  <button mat-dialog-actions class="btn btn-lg cancel action-button" (click)="cancel()">Cancel</button><button
-    mat-dialog-actions class="btn btn-primary btn-lg add  action-button" (click)="add()">Add</button>
+  <button mat-dialog-actions class="btn btn-md cancel action-button" (click)="cancel()">Cancel</button><button
+    mat-dialog-actions class="btn btn-primary btn-md add action-button" (click)="add()"
+    [disabled]="!stateSvc.selectedOrgs">Add</button>
 </div>

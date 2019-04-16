@@ -16,16 +16,21 @@ import {
   numberValidator,
   preferredContactValidator,
   licenseClassValidator,
-  contactValidator
+  contactValidator,
+  insulinPumpValidator,
+  phoneNumberValidator
 } from './validators';
 
 export abstract class FormFieldBuilder {
   static get contactFields() {
-    const phone = new FormControl(null, [contactValidator()]);
+    const phone = new FormControl(null, [phoneNumberValidator()]);
     // const sms = new FormControl(null, [smsValidator()]);
     const ext = new FormControl(null, []);
-    const email = new FormControl(null, [contactValidator()]);
-    const voicePhone = new FormControl(null, []);
+    const email = new FormControl(null, [
+      Validators.required,
+      Validators.email
+    ]);
+    const voicePhone = new FormControl(null, [phoneNumberValidator()]);
     // const preferredContact = new FormControl(null, [
     //   Validators.required
     //   // preferredContactValidator()
@@ -64,8 +69,15 @@ export abstract class FormFieldBuilder {
     const deviceProvider = new FormControl(null, [Validators.required]);
     const collegeCert = new FormControl(null, [Validators.required]);
     const onBehalfOf = new FormControl(null, [Validators.required]);
+    const insulinPump = new FormControl(null, [insulinPumpValidator()]);
     const onBehalfOfJobTitle = this.onBehalfOfFields;
-    return { onBehalfOf, collegeCert, deviceProvider, onBehalfOfJobTitle };
+    return {
+      onBehalfOf,
+      collegeCert,
+      deviceProvider,
+      onBehalfOfJobTitle,
+      insulinPump
+    };
   }
 
   static get declarationFields() {
@@ -77,16 +89,22 @@ export abstract class FormFieldBuilder {
       null,
       descriptionValidator('conviction')
     );
+    const convictionDocs = new FormControl();
+
     const regSuspensionDesc = new FormControl(
       null,
       descriptionValidator('regSuspension')
     );
+    const regSuspensionDocs = new FormControl();
+
     const tAndCDesc = new FormControl(null, descriptionValidator('tAndC'));
+    const tAndCDocs = new FormControl();
+
     const pharmaSuspensionDesc = new FormControl(
       null,
       descriptionValidator('pharmaSuspension')
     );
-    const supportingDocs = new FormControl(null);
+    const pharmaSuspensionDocs = new FormControl();
 
     return {
       conviction,
@@ -97,7 +115,10 @@ export abstract class FormFieldBuilder {
       tAndCDesc,
       regSuspensionDesc,
       convictionDesc,
-      supportingDocs
+      tAndCDocs,
+      pharmaSuspensionDocs,
+      regSuspensionDocs,
+      convictionDocs
     };
   }
 
