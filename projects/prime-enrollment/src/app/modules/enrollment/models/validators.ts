@@ -3,6 +3,7 @@ import { AbstractControl, ValidatorFn } from '@angular/forms';
 export function behalfOfValidator(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
     if (!control.parent) return null;
+    if (control.parent.controls['collegeCert'].value) return null;
     return control.parent.controls['onBehalfOf'].value
       ? control.value === null
         ? { invalidOnbehalfOf: { value: 'On behalf of job title is required' } }
@@ -17,10 +18,10 @@ export function licenseClassValidator(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
     if (!control.parent) return null;
 
-    if (!control.parent.controls['collegeCert']) return null;
+    if (!control.parent.controls['collegeCert'].value) return null;
     const parent = control.parent.controls['collegeCert'].value;
     if (parent === null || parent === 'None') return null;
-    if (control.untouched) return null;
+    // if (control.untouched) return null;
     return control.value === null
       ? { invalidLicenseClass: { value: 'Invalid license class' } }
       : null;

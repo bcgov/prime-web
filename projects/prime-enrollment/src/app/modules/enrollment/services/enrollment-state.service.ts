@@ -77,6 +77,7 @@ export class EnrollmentStateService {
   }
 
   validateProfessionalForm(fg: FormGroup): boolean {
+    console.log(fg);
     if (fg.invalid) return false;
     if (fg.controls.collegeCert.value) {
       for (const form of this._certForms) {
@@ -124,8 +125,9 @@ export class EnrollmentStateService {
 
   removeOrgResults(res: IOrganization) {
     this._selectedOrgSet.delete(res);
-    if (this.selectedOrgs && this._selectedOrgSet.size < 1)
+    if (this.selectedOrgs && this._selectedOrgSet.size < 1) {
       this.selectedOrgs = false;
+    }
   }
 
   async orgResultsForm(data: IOrganization[]) {
