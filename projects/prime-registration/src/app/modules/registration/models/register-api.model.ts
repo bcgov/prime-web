@@ -50,13 +50,18 @@ export interface AddressInterface {
 }
 
 export interface RegRequestInterface {
-  eventUUID: string;
   clientName: string;
   processDate: string;
+  providerCode: string;   // BCSC (MoH is on-hold until further notice)
+
+  // BCSC information
+  authPartyId?: string;    // BCSC Authoritative Party Identifier related to login session
+  authPartyName?: string;  // BCSC Authoritative Party Name related to login session
+  userIdType?: string;     // BCSC User Identifier Type related to login session
+  userType?: string;       // BCSC User Identifier Type related to login session
 }
 
 export interface CheckUserAttr extends RegRequestInterface {
-  providerCode: string;
   userId?: string;
   pdid?: string;
   email: string;
@@ -64,7 +69,6 @@ export interface CheckUserAttr extends RegRequestInterface {
 }
 
 export interface RegisterUser extends RegRequestInterface {
-  providerCode: string;             // BCSC (MoH is on-hold until further notice)
   assuranceLevel: string;           // BCSC assurance level = 3
   pdid?: string;
   userId?: string;                  // Currently unused (MoH is on-hold until further notice)

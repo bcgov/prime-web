@@ -32,7 +32,8 @@
           [ngModel]="value"
           (ngModelChange)="onUpdate($event)"
           [required]="required"
-          [disabled]="disabled" />
+          [disabled]="disabled"
+          maxlength="{{maxlen}}"/>
           <!-- Error messages for component -->
   <div *ngIf="!disabled && phoneRef.touched"
         role="alert"

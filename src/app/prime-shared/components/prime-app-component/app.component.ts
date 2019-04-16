@@ -1,10 +1,10 @@
-import { Component, OnInit, forwardRef } from '@angular/core';
+import { OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
-import { ControlContainer, NgForm } from '@angular/forms';
 import { Base } from 'moh-common-lib/models';
 import * as version from '@prime-core/version.GENERATED.ts';
+import { CommonLogger } from 'moh-common-lib/services/logger.service';
 
 /**
  * PrimeSharedAppComponent is a class containing shared functionality for the
@@ -22,9 +22,10 @@ export class PrimeSharedAppComponentBase extends Base implements OnInit {
   public skipLinkPath;
   private SKIP_CONTENT_HASH = '#content';
 
-  constructor( private pRouter: Router,
-               private pActivatedRoute: ActivatedRoute,
-               private pTitleService: Title ) {
+  constructor( protected pRouter: Router,
+               protected pActivatedRoute: ActivatedRoute,
+               protected pTitleService: Title,
+               protected logger: CommonLogger ) {
     super();
     version.success
       ? console.log('%c' + version.message, 'color: #036; font-size: 20px;')
@@ -44,7 +45,7 @@ export class PrimeSharedAppComponentBase extends Base implements OnInit {
    * Listen to every route change, and update the page title based on the
    * 'title' property in the route's data.
    */
-  private updateTitleOnRouteChange() {
+  protected updateTitleOnRouteChange() {
     this.pRouter.events
       .pipe(
         filter(event => event instanceof NavigationEnd),
@@ -60,11 +61,16 @@ export class PrimeSharedAppComponentBase extends Base implements OnInit {
       )
       .subscribe((data: { title?: string }) => {
         this.setTitle(data.title);
+        this.logger.log({
+          event: 'navigation',
+          title: data.title ? data.title : this.title,
+          url: this.pRouter.url
+        });
       });
   }
 
   /** Set the page title. Includes basic formatting and fallback */
-  private setTitle(title?: string) {
+  protected setTitle(title?: string) {
     if (title) {
       this.pTitleService.setTitle(`Prime | ${title}`);
     } else {
@@ -89,13 +95,11 @@ export class PrimeSharedAppComponentBase extends Base implements OnInit {
   // Slightly complicated because we have to include the deployUrl in manually.
   // If deployUrl changes this code must too.
 
-  private generateSkipToContentLink(): string {
+  protected generateSkipToContentLink(): string {
     // don't add duplicate #contents
     if (window.location.href.indexOf(this.SKIP_CONTENT_HASH) !== -1) {
       return window.location.href;
     }
     return `${window.location.origin}${this.pRouter.url}#content`;
   }
-
-
 }

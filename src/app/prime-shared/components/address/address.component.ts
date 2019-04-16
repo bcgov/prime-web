@@ -46,6 +46,12 @@ export interface ProvinceList {
   ]
 })
 export class AddressComponent extends Base implements OnInit, OnChanges {
+    // Field lengths
+    public static CITY_MAXLEN = '100';
+    public static PROV_MAXLEN = '250';
+    public static STREET_RURAL_MAXLEN = '1000';
+
+
   // TODO: Create Unit tests for this component
   // Exists for unit testing to validate errors set
   @ViewChild('provRef') provRef: ElementRef;

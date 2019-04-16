@@ -22,6 +22,7 @@ export class PhoneNumberComponent extends MaskModel implements OnInit {
   @Input() displayMask: boolean = true;
   @Input() label: string = 'Mobile/SMS';
   @Input() objectID: string = 'phone_' + this.objectId;
+  @Input() maxlen: string = '30';
 
   constructor() {
     super();

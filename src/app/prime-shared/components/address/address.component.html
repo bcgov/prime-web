@@ -60,7 +60,8 @@
            typeaheadOptionField='fullAddress'
            typeaheadMinLength='3'
            autocomplete="nope"
-           [required]="isRequired" />
+           [required]="isRequired"
+           maxlength="{{STREET_RURAL_MAXLEN}}">
 
     <!-- Error messages for input -->
     <div *ngIf="!disabled && streetRef.touched"
@@ -85,7 +86,8 @@
           [ngModel]="address?.city"
           (ngModelChange)="setCity($event)"
           [required]="isRequired"
-          [disabled]="disabled" />
+          [disabled]="disabled"
+          maxlength="{{CITY_MAXLEN}}"/>
 
    <!-- Error messages for input -->
   <div *ngIf="!disabled && cityRef.touched"
@@ -99,7 +101,7 @@
 </div>
 
 <div class="form-group col-sm-4 p-sm-0">
-  <common-postal-code [label]="'Postal Code'" 
+  <common-postal-code [label]="'Postal Code'"
                       [displayMask]="isCanada()"
                       [disabled]="disabled"
                       [(value)]="postalCode"></common-postal-code>
@@ -115,7 +117,8 @@
          [ngModel]="address?.province"
          (ngModelChange)="setProvince($event)"
          [required]="isRequired"
-         [disabled]="disabled" />
+         [disabled]="disabled"
+         maxlength="{{PROV_MAXLEN}}"/>
 
   <!-- Error messages for select -->
   <div *ngIf="!disabled && provRef.touched"
@@ -138,7 +141,8 @@
          [ngModel]="address?.street"
          (ngModelChange)="setStreetAddress($event)"
          [required]="isRequired"
-         [disabled]="disabled" />
+         [disabled]="disabled"
+         maxlength="{{STREET_RURAL_MAXLEN}}"/>
 
   <!-- Error messages for input -->
   <div *ngIf="!disabled && streetRef.touched"

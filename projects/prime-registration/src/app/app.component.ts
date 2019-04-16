@@ -4,8 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ControlContainer, NgForm } from '@angular/forms';
 import { RegisterApiService } from './modules/registration/services/register-api.service';
 import { PrimeSharedAppComponentBase } from '@prime-core/prime-shared/components/prime-app-component/app.component';
-
 import { LoggerService, RegistrationEvent } from './services/logger.service';
+import { CommonLogger } from 'moh-common-lib/services/logger.service';
 
 @Component({
   selector: 'app-root',
@@ -21,18 +21,19 @@ export class AppComponent extends PrimeSharedAppComponentBase implements OnInit 
   // registrant = new Registrant();
   public skipLinkPath;
 
-  constructor( private router: Router,
-               private activatedRoute: ActivatedRoute,
-               private logger: LoggerService,
+  constructor( protected router: Router,
+               protected activatedRoute: ActivatedRoute,
+               public logger: LoggerService,
                private registerApiService: RegisterApiService,
-               private titleService: Title ) {
-    super(router, activatedRoute, titleService);
+               protected titleService: Title ) {
+    super( router, activatedRoute, titleService, logger as CommonLogger );
   }
 
   ngOnInit() {
     super.ngOnInit();
+
     // session ID to track events
-    // this.logger.applicationId = this.objectId;
+    this.logger.applicationId = this.objectId;
     this.logger.programName = 'prime-registration';
     this.registerApiService.eventUUID = this.logger.applicationId;
   }

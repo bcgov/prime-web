@@ -3,15 +3,11 @@
 export class PrimeConstants {
 
   // Email length from database
-  public static EMAIL_MAXLEN = '200';
+  public static EMAIL_MAXLEN = '256';
 
   // Address Constants
   public static CANADA = 'CAN';
   public static BRITISH_COLUMBIA = 'BC';
-
-  // Address field lengths will need to be checked on continue
-  public static CITY_MAXLEN = '100';
-  public static STREET_RURAL_MAXLEN = '1000';
 }
 
 /**

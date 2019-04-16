@@ -24,11 +24,26 @@ export class RegisterApiService extends AbstractHttpService {
   // Client name retrieved from parameter in cache
   public clientName: string;
 
-  // Session identifier
-  public eventUUID: string;
-
   constructor( protected http: HttpClient ) {
     super( http );
+  }
+
+  // Session identifier
+  set eventUUID( id: string ) {
+    this._headers = this._headers.set( 'eventUUID', id );
+  }
+
+  get eventUUID() {
+    return this._headers.get( 'eventUUID' );
+  }
+
+  // BCSC Authentication Transaction Identifier related to login session
+  set authTrxId( id: string ) {
+    this._headers = this._headers.set( 'authTrxId', id );
+  }
+
+  get authTrxId() {
+    return this._headers.get( 'authTrxId' );
   }
 
   /**
@@ -51,7 +66,6 @@ export class RegisterApiService extends AbstractHttpService {
 
     const url = environment.baseAPIUrl + 'validateUser';
     const params: CheckUserAttr = {
-      eventUUID: this.eventUUID,
       clientName: this.clientName,
       processDate: processDate,
       providerCode: input.providerCode,
@@ -78,7 +92,6 @@ export class RegisterApiService extends AbstractHttpService {
     const url = environment.baseAPIUrl + 'registerUser';
 
     const params: RegisterUser = {
-      eventUUID: this.eventUUID,
       clientName: this.clientName,
       processDate: processDate,
       providerCode: registrant.providerCode,

@@ -59,23 +59,27 @@ export class BCSCDummyResponseService {
      */
     getMockBCSCResponse(): IBCSCResponse {
         return {
-            eventUUID: UUID.UUID(),
-            clientName: 'regweb',
-            processDate: faker.date.past(),
-            accountType: 'BCSC',
-            pdid: UUID.UUID().substring(0, 11),
-            assuranceLevel: faker.random.number(),
-            email: faker.internet.email(),
-            mobile: faker.phone.phoneNumberFormat(2),
-            firstname: faker.name.firstName(),
-            lastname: faker.name.lastName(),
-            givennames: faker.name.findName(),
-            dateOfBirth: faker.date.between('1959-01-01', '1999-01-01'),
-            street: faker.address.streetAddress(),
-            city: this.generateFakeCity(),
-            province: RegistrationConstants.BRITISH_COLUMBIA,
-            postal: faker.address.zipCode('?#? #?#'),
-            country: RegistrationConstants.CANADA
+          authTrxId: 'bcsctx-' + UUID.UUID(),
+          authPartyId: 'urn:ca:bc:gov:ias:prd',
+          authPartyName: 'IAS',
+          userIdType: 'did',
+          userType: 'VerifiedIndividual',
+          clientName: 'regweb',
+          processDate: faker.date.past(),
+          accountType: 'BCSC',
+          pdid: UUID.UUID().substring(0, 11),
+          assuranceLevel: faker.random.number(),
+          email: faker.internet.email(),
+          mobile: faker.phone.phoneNumberFormat(2),
+          firstname: faker.name.firstName(),
+          lastname: faker.name.lastName(),
+          givennames: faker.name.findName(),
+          dateOfBirth: faker.date.between('1959-01-01', '1999-01-01'),
+          street: faker.address.streetAddress(),
+          city: this.generateFakeCity(),
+          province: RegistrationConstants.BRITISH_COLUMBIA,
+          postal: faker.address.zipCode('?#? #?#'),
+          country: RegistrationConstants.CANADA
         };
     }
 
@@ -92,21 +96,25 @@ export class BCSCDummyResponseService {
 }
 
 export interface IBCSCResponse {
-    eventUUID: string;
-    clientName: string;
-    processDate: Date;
-    accountType: string;
-    pdid: string;
-    assuranceLevel: number;
-    email: string;
-    mobile: string;
-    firstname: string;
-    lastname: string;
-    givennames: string;
-    dateOfBirth: Date;
-    street: string;
-    city: string;
-    province: string;
-    postal: string;
-    country: string;
+  authTrxId: string;      // BCSC Authentication Transaction Identifier related to login session identifier
+  authPartyId: string;    // BCSC Authoritative Party Identifier related to login session
+  authPartyName: string;  // BCSC Authoritative Party Name related to login session
+  userIdType: string;     // BCSC User Identifier Type related to login session
+  userType: string;       // BCSC User Identifier Type related to login session
+  clientName: string;
+  processDate: Date;
+  accountType: string;
+  pdid: string;
+  assuranceLevel: number;
+  email: string;
+  mobile: string;
+  firstname: string;
+  lastname: string;
+  givennames: string;
+  dateOfBirth: Date;
+  street: string;
+  city: string;
+  province: string;
+  postal: string;
+  country: string;
 }
