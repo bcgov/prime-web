@@ -11,7 +11,8 @@
         <label class="control-label">Do you have a college certification?
         </label>
         <enroll-radio-button formControlName="collegeCert"></enroll-radio-button>
-
+        <enroll-error label="College certification" [touched]="fg.controls.collegeCert.touched"
+          [valid]="fg.controls.collegeCert.valid"></enroll-error>
         <div *ngIf="fg.controls['collegeCert'].value">
           <ng-container *ngFor="let fg of certFa; index as i">
             <enroll-license [fg]="fg" (delete)="removeLicenseForm(i, certFa)"
@@ -29,6 +30,8 @@
           </label>
           <enroll-radio-button formControlName="deviceProvider" labelOne="dpfalse" labelTwo="dptrue" name="dp">
           </enroll-radio-button>
+          <enroll-error label="DeviceProvider" [touched]="fg.controls.deviceProvider.touched"
+            [valid]="fg.controls.deviceProvider.valid"></enroll-error>
         </ng-container>
 
         <div *ngIf="fg.value.deviceProvider">
@@ -45,6 +48,8 @@
           <label class="control-label">Are you an insulin pump provider?</label>
           <enroll-radio-button formControlName="insulinPump" labelOne="ipFalse" labelTwo="ipTrue" name="ip">
           </enroll-radio-button>
+          <enroll-error label="Insulin pump" [touched]="fg.controls.insulinPump.touched"
+            [valid]="fg.controls.insulinPump.valid"></enroll-error>
         </ng-container>
         <ng-container
           *ngIf="!fg.value.collegeCert && fg.value.deviceProvider === false || dpFa.valid === true && fg.controls['insulinPump'].valid === true && !fg.value.collegeCert">
@@ -52,6 +57,8 @@
 
           <enroll-radio-button formControlName="onBehalfOf" labelOne="oboFalse" labelTwo="oboTrue" name="obo">
           </enroll-radio-button>
+          <enroll-error label="On behalf of" [touched]="fg.controls.onBehalfOf.touched"
+            [valid]="fg.controls.onBehalfOf.valid"></enroll-error>
           <div>
             <div *ngIf="fg.value.onBehalfOf; else loading" class="border padded">
               <div class="form-group col-sm-12">
