@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { EnrollmentStateService } from '../../services/enrollment-state.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MaskModel, NUMBER, SPACE } from 'moh-common-lib/models';
+import { BehaviorSubject, Observable } from 'rxjs';
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
@@ -9,14 +10,14 @@ import { MaskModel, NUMBER, SPACE } from 'moh-common-lib/models';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContactComponent implements OnInit {
-  fg: FormGroup;
+  fg$: Observable<FormGroup>;
   mask: (string | RegExp)[];
   placeholder: string;
   displayMask = true;
   contactOpts = ['Email', 'Phone', 'Both'];
 
   constructor(public stateSvc: EnrollmentStateService) {
-    this.fg = this.stateSvc.contactForm;
+    this.fg$ = this.stateSvc.contactForm;
     this.mask = [
       '+',
       '1',
@@ -39,5 +40,7 @@ export class ContactComponent implements OnInit {
     this.placeholder = '+1 (555) 555-5555';
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    // this.fg$.valueChanges.subscribe(obs => console.log(obs));
+  }
 }

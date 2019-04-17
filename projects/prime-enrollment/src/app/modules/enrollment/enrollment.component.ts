@@ -19,7 +19,6 @@ import { Observable, of, BehaviorSubject, Subject } from 'rxjs';
 
     <router-outlet></router-outlet>
     <common-form-action-bar
-      [canContinue]="stateSvc.currentStateValid"
       (btnClick)="advancePage()"
       [defaultColor]="!stateSvc.submit"
       [submitLabel]="stateSvc.submitLabel$ | async"
@@ -36,15 +35,19 @@ export class EnrollmentComponent extends Container implements OnInit {
     super();
     this.setProgressSteps(subRoutes);
     this.stateSvc.routes = mappedRoutes(subRoutes, 'enrollment');
-    console.log(this.stateSvc.routes);
   }
 
   ngOnInit() {}
 
   advancePage() {
     const index = this.stateSvc.currentIndex;
+    const valid = this.stateSvc.isIndexValid(index);
+    console.log(valid);
+    return valid ? this.navigate(index) : this.touchIndex(index);
+  }
+  navigate(index: number) {
     const route = this.stateSvc.routes[index];
-    if (route === 6) {
+    if (index === 6) {
       return setTimeout(() => {
         this.loading.next(false);
         this.router.navigate(['/success']);
@@ -52,22 +55,11 @@ export class EnrollmentComponent extends Container implements OnInit {
     }
     return this.router.navigate([route]);
   }
-  // switch (index) {
-  //   case 1:
-  //     return this.router.navigate(['/enrollment/contact']);
-  //   case 2:
-  //     return this.router.navigate(['/enrollment/professional']);
-  //   case 3:
-  //     return this.router.navigate(['/enrollment/self-declaration']);
-  //   case 4:
-  //     return this.router.navigate(['/enrollment/pharmanet-access']);
-  //   case 5:
-  //     return this.router.navigate(['/enrollment/review']);
-  //   case 6:
-  //     this.loading.next(true);
-  //     setTimeout(() => {
-  //       this.loading.next(false);
-  //       this.router.navigate(['/success']);
-  //     }, 2000);
-  // }
+
+  touchIndex(index: number) {
+    switch (index) {
+      case 2:
+        this.stateSvc.touchContactForm();
+    }
+  }
 }

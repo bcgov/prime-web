@@ -27,7 +27,6 @@ export class EnrollmentStateService {
   submitLabel = 'Continue';
   submitLabel$ = of(this.submitLabel);
   routes;
-  // .pipe(multicast(() => new Subject()));
 
   selectedOrgs = false;
 
@@ -35,7 +34,8 @@ export class EnrollmentStateService {
   declarationForm: FormGroup;
   findOrganizationForm: FormGroup;
   organizationForm: FormGroup[];
-  contactForm: FormGroup;
+  contactForm$ = new BehaviorSubject<FormGroup>(null);
+  contactForm = this.contactForm$.asObservable();
   professionalForm: FormGroup;
   dpFa: FormArray;
   submit: boolean;
@@ -83,7 +83,6 @@ export class EnrollmentStateService {
     if (fg.controls.deviceProvider.value) {
       if (this.dpFa.invalid) return false;
     }
-    console.log(fg);
     return true;
   }
 
@@ -103,20 +102,14 @@ export class EnrollmentStateService {
       case 1:
         return true;
       case 2:
-        // return true;
-        return this.contactForm.valid;
+        return this.contactForm$.value.valid;
       case 3:
-        // return true;
-
         const valid = this.validateProfessionalForm(this.professionalForm);
         console.log(valid);
         return valid;
       case 4:
-        // return true;
-
         return this.declarationForm.valid;
       case 5:
-        // return true;
         return this.validateOrganizationForm();
       case 6:
         return true;
@@ -181,7 +174,7 @@ export class EnrollmentStateService {
         )
       )
       .subscribe((obs: any) => this.setIndex(obs.url));
-    this.contactForm = FormGenerator.contactForm;
+    this.contactForm$.next(FormGenerator.contactForm);
     this.declarationForm = FormGenerator.declarationForm;
     this.findOrganizationForm = FormGenerator.findOrganizationForm;
     this.professionalForm = FormGenerator.professionalForm;
@@ -233,5 +226,18 @@ export class EnrollmentStateService {
     for (const key of Object.keys(fg.controls)) {
       if (key === name) return fg.removeControl(name);
     }
+  }
+
+  touchContactForm() {
+    const fg = this.contactForm$.value;
+    console.log('run');
+    for (const control in fg.controls) {
+      if (fg.controls.hasOwnProperty(control)) {
+        fg.controls[control].markAsTouched();
+        // this.contactForm.controls[control].markAsTouched();
+        this.contactForm$.next(fg);
+      }
+    }
+    // this.contactForm.updateValueAndValidity({ emitEvent: true });
   }
 }
