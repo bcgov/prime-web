@@ -25,7 +25,6 @@ export class ReviewComponent implements OnInit {
     this.df = this.stateSvc.declarationForm;
     this.certForms = this.stateSvc.certForms;
     this.profileForm = this.stateSvc.profileForm;
-    console.log(this.certForms);
   }
 
   ngOnInit() {
