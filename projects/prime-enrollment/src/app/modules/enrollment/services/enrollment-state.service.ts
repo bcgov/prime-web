@@ -26,6 +26,7 @@ export class EnrollmentStateService {
   private _certFa: FormArray;
   submitLabel = 'Continue';
   submitLabel$ = of(this.submitLabel);
+  routes;
   // .pipe(multicast(() => new Subject()));
 
   selectedOrgs = false;
@@ -68,20 +69,8 @@ export class EnrollmentStateService {
   }
 
   findIndex(url: string) {
-    switch (url) {
-      case '/enrollment/profile':
-        return 1;
-      case '/enrollment/contact':
-        return 2;
-      case '/enrollment/professional':
-        return 3;
-      case '/enrollment/self-declaration':
-        return 4;
-      case '/enrollment/pharmanet-access':
-        return 5;
-      case '/enrollment/review':
-        return 6;
-    }
+    if (!this.routes) return;
+    return this.routes.indexOf(url) + 1;
   }
 
   validateProfessionalForm(fg: FormGroup): boolean {

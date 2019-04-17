@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { subRoutes } from './data/sub-routes';
+import { subRoutes, mappedRoutes } from './data/sub-routes';
 import { Container } from 'moh-common-lib/models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EnrollmentStateService } from './services/enrollment-state.service';
@@ -35,6 +35,8 @@ export class EnrollmentComponent extends Container implements OnInit {
   constructor(public stateSvc: EnrollmentStateService, private router: Router) {
     super();
     this.setProgressSteps(subRoutes);
+    this.stateSvc.routes = mappedRoutes(subRoutes, 'enrollment');
+    console.log(this.stateSvc.routes);
   }
 
   ngOnInit() {}
