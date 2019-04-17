@@ -123,7 +123,7 @@ export class EnrollmentStateService {
 
         return this.declarationForm.valid;
       case 5:
-        // TODO: update validation logic for the organization form array (see case 3)
+        // return true;
         return this.validateOrganizationForm();
       case 6:
         return true;
