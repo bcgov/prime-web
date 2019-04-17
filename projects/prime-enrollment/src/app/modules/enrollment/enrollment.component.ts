@@ -43,23 +43,31 @@ export class EnrollmentComponent extends Container implements OnInit {
 
   advancePage() {
     const index = this.stateSvc.currentIndex;
-    switch (index) {
-      case 1:
-        return this.router.navigate(['/enrollment/contact']);
-      case 2:
-        return this.router.navigate(['/enrollment/professional']);
-      case 3:
-        return this.router.navigate(['/enrollment/self-declaration']);
-      case 4:
-        return this.router.navigate(['/enrollment/pharmanet-access']);
-      case 5:
-        return this.router.navigate(['/enrollment/review']);
-      case 6:
-        this.loading.next(true);
-        setTimeout(() => {
-          this.loading.next(false);
-          this.router.navigate(['/success']);
-        }, 2000);
+    const route = this.stateSvc.routes[index];
+    if (route === 6) {
+      return setTimeout(() => {
+        this.loading.next(false);
+        this.router.navigate(['/success']);
+      }, 2000);
     }
+    return this.router.navigate([route]);
   }
+  // switch (index) {
+  //   case 1:
+  //     return this.router.navigate(['/enrollment/contact']);
+  //   case 2:
+  //     return this.router.navigate(['/enrollment/professional']);
+  //   case 3:
+  //     return this.router.navigate(['/enrollment/self-declaration']);
+  //   case 4:
+  //     return this.router.navigate(['/enrollment/pharmanet-access']);
+  //   case 5:
+  //     return this.router.navigate(['/enrollment/review']);
+  //   case 6:
+  //     this.loading.next(true);
+  //     setTimeout(() => {
+  //       this.loading.next(false);
+  //       this.router.navigate(['/success']);
+  //     }, 2000);
+  // }
 }

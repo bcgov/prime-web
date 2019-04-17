@@ -83,6 +83,7 @@ export class EnrollmentStateService {
     if (fg.controls.deviceProvider.value) {
       if (this.dpFa.invalid) return false;
     }
+    console.log(fg);
     return true;
   }
 
@@ -106,7 +107,10 @@ export class EnrollmentStateService {
         return this.contactForm.valid;
       case 3:
         // return true;
-        return this.validateProfessionalForm(this.professionalForm);
+
+        const valid = this.validateProfessionalForm(this.professionalForm);
+        console.log(valid);
+        return valid;
       case 4:
         // return true;
 
