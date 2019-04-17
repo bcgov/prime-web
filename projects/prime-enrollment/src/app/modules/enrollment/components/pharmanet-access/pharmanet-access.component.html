@@ -5,13 +5,13 @@
   </p>
   <common-page-section layout="noTips">
     <ng-container *ngIf="!results">
-      <enroll-action-block (clicked)="openModal()" label="Add Organization" text="No Organizations"
+      <enroll-action-block (clicked)="openModal(modal)" label="Add Organization" text="No Organizations"
         class="action-block">
       </enroll-action-block>
     </ng-container>
   </common-page-section>
   <ng-container *ngIf="fa$ | async as fa">
-    <button class="btn btn-secondary btn-lg" (click)="openModal()">Add Organization</button>
+    <button class="btn btn-secondary btn-lg" (click)="openModal(modal)">Add Organization</button>
     <div class="header-row">
       <span>Organization Name</span>
       <span>Type</span>
@@ -35,4 +35,8 @@
       </div>
     </form>
   </ng-container>
+  <ng-template #modal>
+    <enroll-search-organization-modal (submit)="modalSubmit($event)" (result)="modalResult($event)">
+    </enroll-search-organization-modal>
+  </ng-template>
 </common-page-framework>
