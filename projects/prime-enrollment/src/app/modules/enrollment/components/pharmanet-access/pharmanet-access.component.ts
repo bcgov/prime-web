@@ -41,9 +41,7 @@ export class PharmanetAccessComponent implements OnInit, OnDestroy {
     this.fa$.next(this.stateSvc.organizationForm);
   }
 
-  ngOnDestroy(): void {
-    // if (this.sub) this.sub.unsubscribe();
-  }
+  ngOnDestroy(): void {}
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalSvc.show(template, {

@@ -111,7 +111,7 @@ export class EnrollmentStateService {
   isIndexValid(index: number): boolean {
     switch (index) {
       case 1:
-      // return true;
+        return true;
       case 2:
         // return true;
         return this.contactForm.valid;
