@@ -6,7 +6,7 @@ export interface IContact {
   ext: string | FormControl;
   email: string | FormControl;
   voicePhone: string | FormControl;
-  // preferredContact: ContactOpts | FormControl;
+  preferredContact: ContactOpts | FormControl;
 }
 
-export type ContactOpts = 'Email' | 'Phone';
+export type ContactOpts = 'Email' | 'Phone' | 'Both';

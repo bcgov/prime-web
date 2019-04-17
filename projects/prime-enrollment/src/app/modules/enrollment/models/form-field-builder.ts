@@ -31,11 +31,11 @@ export abstract class FormFieldBuilder {
       Validators.email
     ]);
     const voicePhone = new FormControl(null, [phoneNumberValidator()]);
-    // const preferredContact = new FormControl(null, [
-    //   Validators.required
-    //   // preferredContactValidator()
-    // ]);
-    return { phone, ext, email, voicePhone };
+    const preferredContact = new FormControl(null, [
+      Validators.required
+      // preferredContactValidator()
+    ]);
+    return { phone, ext, email, voicePhone, preferredContact };
   }
 
   static get licenseFields() {

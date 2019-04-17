@@ -13,6 +13,7 @@ export class ContactComponent implements OnInit {
   mask: (string | RegExp)[];
   placeholder: string;
   displayMask = true;
+  contactOpts = ['Email', 'Phone', 'Both'];
 
   constructor(public stateSvc: EnrollmentStateService) {
     this.fg = this.stateSvc.contactForm;
