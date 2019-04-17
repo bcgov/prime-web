@@ -85,7 +85,6 @@ export class EnrollmentStateService {
   }
 
   validateProfessionalForm(fg: FormGroup): boolean {
-    console.log(fg);
     if (fg.invalid) return false;
     if (fg.controls.collegeCert.value) {
       for (const form of this._certForms) {
@@ -99,12 +98,14 @@ export class EnrollmentStateService {
   }
 
   validateOrganizationForm() {
+    let valid = true;
     if (!this.organizationForm) return false;
     if (this.organizationForm.length > 0) {
       for (const form of this.organizationForm) {
-        if (form.invalid) return false;
+        if (form.invalid) valid = false;
       }
     } else return false;
+    return valid;
   }
 
   isIndexValid(index: number): boolean {
@@ -112,16 +113,20 @@ export class EnrollmentStateService {
       case 1:
         return true;
       case 2:
+        // return true;
         return this.contactForm.valid;
       case 3:
+        // return true;
         return this.validateProfessionalForm(this.professionalForm);
       case 4:
+        // return true;
+
         return this.declarationForm.valid;
       case 5:
         // TODO: update validation logic for the organization form array (see case 3)
         return this.validateOrganizationForm();
+      case 6:
         return true;
-      // return this.organizationForm.valid;
       default:
         return false;
     }
@@ -175,9 +180,12 @@ export class EnrollmentStateService {
     // TODO: come back to this function to state match once routing is done.
     this.router.events
       .pipe(
-        filter(obs => obs.hasOwnProperty('id')),
-        filter(obs => !obs.hasOwnProperty('state')),
-        filter(obs => !obs.hasOwnProperty('navigationTrigger'))
+        filter(
+          obs =>
+            obs.hasOwnProperty('id') ||
+            !obs.hasOwnProperty('state') ||
+            !obs.hasOwnProperty('navigationTrigger')
+        )
       )
       .subscribe((obs: any) => this.setIndex(obs.url));
     this.contactForm = FormGenerator.contactForm;
