@@ -6,7 +6,7 @@
     Profile information helper text.
   </p>
   <common-page-section layout="tips">
-    <div>
+    <div *ngIf="fg$ | async as fg">
       <form [formGroup]="fg">
         <label class="control-label">Do you have a college certification?
         </label>

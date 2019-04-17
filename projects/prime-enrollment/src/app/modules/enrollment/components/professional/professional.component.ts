@@ -32,19 +32,20 @@ const oboOptions = [
 export class ProfessionalComponent implements OnInit {
   certFa: FormGroup[];
   dpFa: FormArray;
-  fg: FormGroup;
+  fg$: Observable<any>;
   onBehalfOfOptions: Observable<string[]>;
   apOptions: Observable<string[]>;
 
   get certFaValid() {
     let valid = true;
-    if (this.fg.value.collegeCert === true) {
+    const fg = this.stateSvc.professionalForm$.value;
+    if (fg.value.collegeCert === true) {
       for (const fg of this.certFa) {
         fg.valid ? null : (valid = false);
       }
     }
-    if (this.fg.value.collegeCert === null) return false;
-    if (this.fg.value.collegeCert === false) return true;
+    if (fg.value.collegeCert === null) return false;
+    if (fg.value.collegeCert === false) return true;
 
     return valid;
   }
@@ -53,7 +54,7 @@ export class ProfessionalComponent implements OnInit {
     private stateSvc: EnrollmentStateService,
     public cacheSvc: EnrollmentCacheService
   ) {
-    this.fg = this.stateSvc.professionalForm;
+    this.fg$ = this.stateSvc.professionalForm$;
     this.certFa = this.stateSvc.certForms;
     this.dpFa = this.stateSvc.dpFa;
     this.onBehalfOfOptions = of(oboOptions);

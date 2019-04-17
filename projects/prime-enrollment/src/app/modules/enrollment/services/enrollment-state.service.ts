@@ -36,7 +36,8 @@ export class EnrollmentStateService {
   organizationForm: FormGroup[];
   contactForm$ = new BehaviorSubject<FormGroup>(null);
   contactForm = this.contactForm$.asObservable();
-  professionalForm: FormGroup;
+  professionalForm$ = new BehaviorSubject<any>(null);
+  professionalForm = this.professionalForm$.asObservable();
   dpFa: FormArray;
   submit: boolean;
 
@@ -104,7 +105,9 @@ export class EnrollmentStateService {
       case 2:
         return this.contactForm$.value.valid;
       case 3:
-        const valid = this.validateProfessionalForm(this.professionalForm);
+        const valid = this.validateProfessionalForm(
+          this.professionalForm$.value
+        );
         console.log(valid);
         return valid;
       case 4:
@@ -177,7 +180,7 @@ export class EnrollmentStateService {
     this.contactForm$.next(FormGenerator.contactForm);
     this.declarationForm = FormGenerator.declarationForm;
     this.findOrganizationForm = FormGenerator.findOrganizationForm;
-    this.professionalForm = FormGenerator.professionalForm;
+    this.professionalForm$.next(FormGenerator.professionalForm);
     this.certForms = [FormGenerator.licenseForm];
     this.dpFa = new FormArray([FormFieldBuilder.deviceProviderFields]);
 
@@ -226,19 +229,6 @@ export class EnrollmentStateService {
     for (const key of Object.keys(fg.controls)) {
       if (key === name) return fg.removeControl(name);
     }
-  }
-
-  touchContactForm() {
-    const fg = this.contactForm$.value;
-    console.log('run');
-    for (const control in fg.controls) {
-      if (fg.controls.hasOwnProperty(control)) {
-        fg.controls[control].markAsTouched();
-        // this.contactForm.controls[control].markAsTouched();
-        this.contactForm$.next(fg);
-      }
-    }
-    // this.contactForm.updateValueAndValidity({ emitEvent: true });
   }
 
   touchForm(fg: FormGroup) {
