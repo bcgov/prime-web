@@ -240,4 +240,19 @@ export class EnrollmentStateService {
     }
     // this.contactForm.updateValueAndValidity({ emitEvent: true });
   }
+
+  touchForm(fg: FormGroup) {
+    for (const control in fg.controls) {
+      if (fg.controls.hasOwnProperty(control)) {
+        const fc = fg.controls[control] as FormControl;
+        this.touchControl(fc);
+      }
+    }
+    return fg;
+  }
+
+  touchControl(fc: FormControl) {
+    fc.markAsTouched();
+    return fc;
+  }
 }

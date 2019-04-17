@@ -59,7 +59,9 @@ export class EnrollmentComponent extends Container implements OnInit {
   touchIndex(index: number) {
     switch (index) {
       case 2:
-        this.stateSvc.touchContactForm();
+        const fg = this.stateSvc.contactForm$.value;
+        const changed = this.stateSvc.touchForm(fg);
+        this.stateSvc.contactForm$.next(changed);
     }
   }
 }
