@@ -54,7 +54,10 @@ export class EnrollmentComponent extends Container implements OnInit {
         return this.router.navigate(['/enrollment/review']);
       case 6:
         this.loading.next(true);
-        setTimeout(() => this.loading.next(false), 2000);
+        setTimeout(() => {
+          this.loading.next(false);
+          this.router.navigate(['/success']);
+        }, 2000);
     }
   }
 }

@@ -26,6 +26,7 @@ import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 import { TextMaskModule } from 'angular2-text-mask';
 import { RadioButtonComponent } from './components/radio-button/radio-button.component';
 import { ErrorComponent } from './components/error-block/error.component';
+import { EnrollmentConfirmationComponent } from './components/enrollment-confirmation/enrollment-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { ErrorComponent } from './components/error-block/error.component';
     ProfessionalInformationBlockComponent,
     PharmanetBlockComponent,
     RadioButtonComponent,
-    ErrorComponent
+    ErrorComponent,
+    EnrollmentConfirmationComponent
   ],
 
   imports: [
@@ -88,7 +90,8 @@ import { ErrorComponent } from './components/error-block/error.component';
     NgxMyDatePickerModule,
     TextMaskModule,
     RadioButtonComponent,
-    ErrorComponent
+    ErrorComponent,
+    EnrollmentConfirmationComponent
   ]
 })
 export class SharedModule {}

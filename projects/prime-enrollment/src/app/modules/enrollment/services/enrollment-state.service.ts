@@ -111,7 +111,7 @@ export class EnrollmentStateService {
   isIndexValid(index: number): boolean {
     switch (index) {
       case 1:
-        return true;
+      // return true;
       case 2:
         // return true;
         return this.contactForm.valid;
@@ -191,7 +191,6 @@ export class EnrollmentStateService {
     this.contactForm = FormGenerator.contactForm;
     this.declarationForm = FormGenerator.declarationForm;
     this.findOrganizationForm = FormGenerator.findOrganizationForm;
-    // this.organizationForm = FormGenerator.organizationForm;
     this.professionalForm = FormGenerator.professionalForm;
     this.certForms = [FormGenerator.licenseForm];
     this.dpFa = new FormArray([FormFieldBuilder.deviceProviderFields]);
