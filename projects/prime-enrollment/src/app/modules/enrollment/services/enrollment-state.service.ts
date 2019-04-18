@@ -113,6 +113,7 @@ export class EnrollmentStateService {
         console.log(valid);
         return valid;
       case 4:
+        console.log(this.declarationForm$.value);
         return this.declarationForm$.value.valid;
       case 5:
         return this.validateOrganizationForm();
