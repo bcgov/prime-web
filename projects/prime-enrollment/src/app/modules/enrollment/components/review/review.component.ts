@@ -16,7 +16,7 @@ export class ReviewComponent implements OnInit {
   declarations: Array<IDeclarationBlock>;
   certForms: FormGroup[];
   profileForm: Registrant;
-  organizationForm: FormGroup[] = this.stateSvc.organizationForm;
+  organizationForm: FormGroup[] = this.stateSvc.organizationForm$.value;
   $registrantName: Observable<any>;
   $preferredName: Observable<any>;
   $mailingAddress: Observable<any>;

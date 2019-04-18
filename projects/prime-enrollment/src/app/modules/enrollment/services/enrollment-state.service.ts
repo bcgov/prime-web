@@ -34,7 +34,7 @@ export class EnrollmentStateService {
   declarationForm$ = new BehaviorSubject<FormGroup>(null);
   declarationForm = this.declarationForm$.asObservable();
   findOrganizationForm: FormGroup;
-  organizationForm: FormGroup[];
+  organizationForm$ = new BehaviorSubject<FormGroup[]>(null);
   contactForm$ = new BehaviorSubject<FormGroup>(null);
   contactForm = this.contactForm$.asObservable();
   professionalForm$ = new BehaviorSubject<any>(null);
@@ -90,9 +90,9 @@ export class EnrollmentStateService {
 
   validateOrganizationForm() {
     let valid = true;
-    if (!this.organizationForm) return false;
-    if (this.organizationForm.length > 0) {
-      for (const form of this.organizationForm) {
+    if (!this.organizationForm$.value) return false;
+    if (this.organizationForm$.value.length > 0) {
+      for (const form of this.organizationForm$.value) {
         if (form.invalid) valid = false;
       }
     } else return false;
@@ -154,7 +154,7 @@ export class EnrollmentStateService {
       const fg = new FormGroup({ name, city, type, startDate, endDate });
       fga.push(fg);
     });
-    this.organizationForm = fga;
+    this.organizationForm$.next(fga);
     return fga;
   }
 

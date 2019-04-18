@@ -37,8 +37,8 @@ export class PharmanetAccessComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    if (!!this.stateSvc.organizationForm) this.results = true;
-    this.fa$.next(this.stateSvc.organizationForm);
+    if (!!this.stateSvc.organizationForm$.value) this.results = true;
+    this.fa$ = this.stateSvc.organizationForm$;
   }
 
   ngOnDestroy(): void {}
@@ -52,9 +52,9 @@ export class PharmanetAccessComponent implements OnInit, OnDestroy {
   }
 
   modalResult(evt: any) {
-    const arr = this.stateSvc.organizationForm;
-    this.stateSvc.organizationForm = evt;
-    this.fa$.next(this.stateSvc.organizationForm);
+    const arr = this.stateSvc.organizationForm$.value;
+    this.stateSvc.organizationForm$.next(evt);
+    // this.fa$.next(this.stateSvc.organizationForm);
     this.results = true;
   }
 
@@ -64,6 +64,6 @@ export class PharmanetAccessComponent implements OnInit, OnDestroy {
 
   remove(i: number) {
     const fa = this.stateSvc.removeFormGroup(this.fa$.value, i);
-    this.stateSvc.organizationForm = fa;
+    // this.stateSvc.organizationForm$fa;
   }
 }

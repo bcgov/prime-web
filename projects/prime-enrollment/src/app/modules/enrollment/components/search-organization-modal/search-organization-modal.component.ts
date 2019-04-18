@@ -59,8 +59,8 @@ export class SearchOrganizationModalComponent implements OnInit {
     if (res.length < 1) return console.log('no results to add');
     this.stateSvc
       .orgResultsForm(res)
-      .then(fga => (this.stateSvc.organizationForm = fga))
-      .then(() => this.result.emit(this.stateSvc.organizationForm))
+      .then(fga => this.stateSvc.organizationForm$.next(fga))
+      .then(() => this.result.emit(this.stateSvc.organizationForm$.value))
       .then(() => this.submit.emit(true));
     // .then(fga => this.dialogRef.close(fga));
   }

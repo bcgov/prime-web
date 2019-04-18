@@ -21,14 +21,19 @@
     </div>
     <form *ngFor="let fg of fa; index as i" [formGroup]="fg">
       <div class="list-item-row">
-        <span>{{ fg.controls.name.value }}</span>
-        <span>{{ fg.controls.type.value }}</span>
-        <span>{{ fg.controls.city.value }}</span>
+        <span class="values">{{ fg.controls.name.value }}</span>
+        <span class="values">{{ fg.controls.type.value }}</span>
+        <span class="values">{{ fg.controls.city.value }}</span>
         <div class="input-group">
           <common-datepicker formControlName="startDate"></common-datepicker>
+          <enroll-error label="Start date" [touched]="fg.controls.startDate.touched"
+            [valid]="fg.controls.startDate.valid"></enroll-error>
         </div>
         <div class="input-group">
           <common-datepicker formControlName="endDate"></common-datepicker>
+          <enroll-error label="Start date" [touched]="fg.controls.endDate.touched" [valid]="fg.controls.endDate.valid">
+          </enroll-error>
+
         </div>
         <button class="btn delete" (click)="remove(i)" *ngIf="fa$.value.length > 1"><i style="color: red !important;"
             class="fa fa-2x fa-times-circle"></i></button>
