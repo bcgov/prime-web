@@ -9,6 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { RegCacheService } from '@prime-registration/services/reg-cache.service';
 import { RegistrationConstants } from '@prime-registration/modules/registration/models/registration-constants.model';
 import { AssuranceLevel, ProviderCode } from '@prime-core/models/prime-constants';
+import { RegisterApiService } from '../../../registration/services/register-api.service';
 
 @Component({
   selector: 'app-bcsc-profile',
@@ -21,7 +22,8 @@ export class BcscProfileComponent extends AbstractForm implements OnInit {
                private registrantService: RegistrationDataService,
                private regCacheService: RegCacheService,
                protected router: Router,
-               private activatedroute: ActivatedRoute ) {
+               private activatedroute: ActivatedRoute ,
+               private registerApiService: RegisterApiService ) {
     super( router );
 
 
@@ -66,6 +68,10 @@ export class BcscProfileComponent extends AbstractForm implements OnInit {
     // Set providerCode and assurance level for registrant
     registrantService.registrant.providerCode = ProviderCode.BCSC;
     registrantService.registrant.assuranceLevel = AssuranceLevel.LEVEL_3;
+
+    if ( registerApiService.bcscSession.isEmpty() ) {
+      registerApiService.bcscSession.setSessionData( this.dummyDataService.getBCSCSession() );
+    }
   }
 
   ngOnInit() {}

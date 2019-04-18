@@ -4,6 +4,7 @@ import * as faker from 'faker';
 import { UUID } from 'angular2-uuid';
 import { RegistrationConstants } from '../../registration/models/registration-constants.model';
 import { AssuranceLevel, ProviderCode } from '@prime-core/models/prime-constants';
+import { BCSCSessionInterface } from '@prime-core/models/bcsc-session';
 
 /**
  * Dummy data for development purposes
@@ -16,7 +17,6 @@ import { AssuranceLevel, ProviderCode } from '@prime-core/models/prime-constants
 })
 export class BCSCDummyResponseService {
 
-    private accountTypes = ProviderCode.BCSC;
     private cities = ['Vancouver', 'Victoria', 'Langford'];
 
     constructor() {
@@ -42,9 +42,9 @@ export class BCSCDummyResponseService {
         reg.address.province = RegistrationConstants.BRITISH_COLUMBIA;
         reg.address.postal = data.postal;
         reg.address.country = data.country;
+        reg.userAccountName = data.pdid;
         reg.assuranceLevel = AssuranceLevel.LEVEL_3;
-        reg.userAccountName = UUID.UUID().substring(0, 11);
-
+        reg.providerCode = ProviderCode.BCSC;
         return reg;
     }
 
@@ -58,16 +58,10 @@ export class BCSCDummyResponseService {
      * convenience.
      */
     getMockBCSCResponse(): IBCSCResponse {
+      const pdid = UUID.UUID().replace( /-/g, '' );
         return {
-          authTrxId: 'bcsctx-' + UUID.UUID(),
-          authPartyId: 'urn:ca:bc:gov:ias:prd',
-          authPartyName: 'IAS',
-          userIdType: 'did',
-          userType: 'VerifiedIndividual',
-          clientName: 'regweb',
           processDate: faker.date.past(),
-          accountType: 'BCSC',
-          pdid: UUID.UUID().substring(0, 11),
+          pdid: pdid.substring(0, 9),
           assuranceLevel: faker.random.number(),
           email: faker.internet.email(),
           mobile: faker.phone.phoneNumberFormat(2),
@@ -83,27 +77,26 @@ export class BCSCDummyResponseService {
         };
     }
 
-    private generateFakeAccountType() {
-        const index = Math.floor(Math.random() * Math.floor(this.accountTypes.length));
-        return this.accountTypes[index];
-    }
 
-    private generateFakeCity() {
-        const index = Math.floor(Math.random() * Math.floor(this.cities.length));
-        return this.cities[index];
-    }
+  public getBCSCSession(): BCSCSessionInterface {
 
+    return {
+      authTrxId: UUID.UUID().replace(/-/g, ''),
+      authPartyId: 'urn:ca:bc:gov:ias:prd',
+      authPartyName: 'IAS',
+      userIdType: 'did',
+      userType: 'VerifiedIndividual'
+    };
+  }
+
+  private generateFakeCity() {
+      const index = Math.floor(Math.random() * Math.floor(this.cities.length));
+      return this.cities[index];
+  }
 }
 
 export interface IBCSCResponse {
-  authTrxId: string;      // BCSC Authentication Transaction Identifier related to login session identifier
-  authPartyId: string;    // BCSC Authoritative Party Identifier related to login session
-  authPartyName: string;  // BCSC Authoritative Party Name related to login session
-  userIdType: string;     // BCSC User Identifier Type related to login session
-  userType: string;       // BCSC User Identifier Type related to login session
-  clientName: string;
   processDate: Date;
-  accountType: string;
   pdid: string;
   assuranceLevel: number;
   email: string;

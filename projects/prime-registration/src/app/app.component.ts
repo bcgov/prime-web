@@ -10,20 +10,15 @@ import { CommonLogger } from 'moh-common-lib/services/logger.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  providers: [
-    { provide: ControlContainer, useExisting: forwardRef(() => NgForm) }
-  ]
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent extends PrimeSharedAppComponentBase implements OnInit {
-  title = 'Prime';
-  // TODO - Verify we can remove.
-  // registrant = new Registrant();
+  title = 'Prime Registration';
   public skipLinkPath;
 
   constructor( protected router: Router,
                protected activatedRoute: ActivatedRoute,
-               public logger: LoggerService,
+               protected logger: LoggerService,
                private registerApiService: RegisterApiService,
                protected titleService: Title ) {
     super( router, activatedRoute, titleService, logger as CommonLogger );
@@ -33,9 +28,7 @@ export class AppComponent extends PrimeSharedAppComponentBase implements OnInit 
     super.ngOnInit();
 
     // session ID to track events
-    this.logger.applicationId = this.objectId;
+    this.logger.applicationId = this.registerApiService.eventUUID;
     this.logger.programName = 'prime-registration';
-    this.registerApiService.eventUUID = this.logger.applicationId;
   }
-
 }

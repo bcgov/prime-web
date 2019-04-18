@@ -73,7 +73,6 @@ export class FakeBackendInterceptor extends Base implements HttpInterceptor  {
   private getCache( param: string ): any {
 
     const cacheResp: CacheInterface = {
-      eventUUID: 'cache-' + this.objectId,
       clientName: this._clientName,
       processDate: this._processDate,
       statusCode: ApiStatusCodes.SUCCESS,
@@ -123,7 +122,6 @@ export class FakeBackendInterceptor extends Base implements HttpInterceptor  {
 
     msg.push( this.fakebackendService.messageList.find( x => x.msgID === '1' ) );
     const resp: PayloadInterface = {
-      eventUUID: request.body.eventUUID,
       clientName: request.body.clientName,
       processDate: request.body.processDate,
       statusCode: ApiStatusCodes.SUCCESS,
@@ -134,7 +132,6 @@ export class FakeBackendInterceptor extends Base implements HttpInterceptor  {
 
   getRespSearch( request: HttpRequest<any> ): UserAttrInterface {
     const resp: UserAttrInterface = {
-      eventUUID: request.body.eventUUID,
       clientName: request.body.clientName,
       processDate: request.body.processDate,
       statusCode: ApiStatusCodes.WARNING,

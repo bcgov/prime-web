@@ -104,7 +104,7 @@ export class BcscAccountComponent extends AbstractForm
           this.requestRegisterUser();
         } else if ( this.registerRespService.payload.error ) {
           this.nextPage( RegistrationEvent.VALIDATE_USER, false,
-                         <StatusMsgInterface[]>this.registerRespService.payload.statusMsgs );
+                         this.registerRespService.payload.statusMsgs );
         } else {
 
           // Display errors on page
@@ -144,7 +144,7 @@ export class BcscAccountComponent extends AbstractForm
         this.nextPage(
           RegistrationEvent.REGISTER_USER,
           this.registerRespService.payload.success,
-          <StatusMsgInterface[]>this.registerRespService.payload.statusMsgs
+          this.registerRespService.payload.statusMsgs
           );
       },
       regRespError => {
@@ -156,7 +156,7 @@ export class BcscAccountComponent extends AbstractForm
   private nextPage(
     event: RegistrationEvent,
     success: boolean,
-    errMsg: string | StatusMsgInterface[] = null ) {
+    errMsg: any = null ) {
     const logMessage: LogMessage = {
       event: event,
       success: success

@@ -12,7 +12,7 @@ export class ApplConfirmationComponent implements OnInit {
 
   // Base class
   private respPayLoad: ServerPayload;
-  private statusMessage: StatusMsgInterface[];
+  private statusMessage: StatusMsgInterface[] | string;
 
   constructor( private registerRespService: RegisterRespService,
                private cacheService: RegCacheService ) {
@@ -22,7 +22,9 @@ export class ApplConfirmationComponent implements OnInit {
 
     this.respPayLoad = this.registerRespService.payload;
     if ( this.respPayLoad ) {
-      this.statusMessage = <StatusMsgInterface[]>this.respPayLoad.statusMsgs;
+      this.statusMessage = (typeof this.respPayLoad.statusMsgs === 'string') ?
+        <string>this.respPayLoad.statusMsgs :
+        <StatusMsgInterface[]>this.respPayLoad.statusMsgs;
     } else {  // Empty payload
 
       const respMsg: StatusMsgInterface[] = [];
@@ -75,10 +77,16 @@ export class ApplConfirmationComponent implements OnInit {
    * @param scrArea
    */
   private getMessage( scrArea: ScreenAreaID ): string {
-    if ( this.statusMessage ) {
-      const msg = this.statusMessage.find( x => x.scrArea === scrArea );
-      return msg ? msg.msgText : null;
+
+    if ( !this.statusMessage ) {
+      return null;
     }
-    return null;
+
+    if ( typeof this.statusMessage  === 'string' ) {
+      return (scrArea === ScreenAreaID.CONFIRMATION) ? this.statusMessage : null;
+    }
+
+    const msg = (<StatusMsgInterface[]>this.statusMessage).find( x => x.scrArea === scrArea );
+    return msg ? msg.msgText : null;
   }
 }

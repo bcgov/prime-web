@@ -9,17 +9,23 @@ import { ProviderCode } from '@prime-core/models/prime-constants';
 import { PayloadInterface } from '@prime-core/models/api-base.model';
 import { Registrant } from '../models/registrant.model';
 import { Address } from 'moh-common-lib/models';
+import { UUID } from 'angular2-uuid';
+import { BcscSession } from '@prime-core/models/bcsc-session';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegisterApiService extends AbstractHttpService {
 
+  public bcscSession: BcscSession = new BcscSession();
+
     /**
    *  Default hardcoded header values.  Note: Authentication headers are added
    *  at runtime in the httpOptions() method.
    */
-  protected _headers: HttpHeaders = new HttpHeaders();
+  protected _headers: HttpHeaders = new HttpHeaders({
+    eventUUID: UUID.UUID().toString()
+  });
 
   // Client name retrieved from parameter in cache
   public clientName: string;
@@ -35,15 +41,6 @@ export class RegisterApiService extends AbstractHttpService {
 
   get eventUUID() {
     return this._headers.get( 'eventUUID' );
-  }
-
-  // BCSC Authentication Transaction Identifier related to login session
-  set authTrxId( id: string ) {
-    this._headers = this._headers.set( 'authTrxId', id );
-  }
-
-  get authTrxId() {
-    return this._headers.get( 'authTrxId' );
   }
 
   /**
@@ -70,7 +67,7 @@ export class RegisterApiService extends AbstractHttpService {
       processDate: processDate,
       providerCode: input.providerCode,
       email: input.email,
-      mobile: input.mobile
+      mobile: this.stripFormatting( input.mobile )
     };
 
     if ( input.providerCode === ProviderCode.BCSC ) {
@@ -79,7 +76,7 @@ export class RegisterApiService extends AbstractHttpService {
       params.userId = input.accountID;
     }
 
-    return this.post<UserAttrInterface>(url, params);
+    return this.post<UserAttrInterface>(url, this.setBcscSessionData( params ) );
   }
 
   /**
@@ -90,14 +87,13 @@ export class RegisterApiService extends AbstractHttpService {
   registerUser( registrant: Registrant, processDate = this.getProcessDate() ): Observable<PayloadInterface> {
 
     const url = environment.baseAPIUrl + 'registerUser';
-
     const params: RegisterUser = {
       clientName: this.clientName,
       processDate: processDate,
       providerCode: registrant.providerCode,
       assuranceLevel: registrant.assuranceLevel,
       email: registrant.emailAddress,
-      mobile: this.stripDashes( registrant.smsPhone ),
+      mobile: this.stripFormatting( registrant.smsPhone ),
       securityQuestions: registrant.secQuestionsAnswer,
       firstname: registrant.firstName,
       lastname: registrant.lastName,
@@ -118,7 +114,7 @@ export class RegisterApiService extends AbstractHttpService {
       params.userId = registrant.userAccountName;
     }
 
-    return this.post<PayloadInterface>(url, params);
+    return this.post<PayloadInterface>(url, this.setBcscSessionData( params ) );
   }
 
   /**
@@ -156,16 +152,39 @@ export class RegisterApiService extends AbstractHttpService {
       street: item ? item.street : null,
       city: item ? item.city : null,
       province: item ? item.province : null,
-      postalCode: item ?  this.stripSpaces( item.postal ) : null,
+      postalCode: item ?  this.stripFormatting( item.postal ) : null,
       country: item ? item.country : null
     };
   }
-
-  private stripSpaces( value: string ): string {
-    return (value ? value.replace(/ /g, '') : null);
+  /**
+   * Strip the formatting the frome string
+   * @param value
+   */
+  private stripFormatting( value: string ): string {
+    let val = value;
+    if ( val ) {
+      val = val.replace(/ /g, '');
+      val = val.replace(/-/g, '');
+      val = val.replace(/\+/g, '');
+      val = val.replace(/\(/g, '');
+      val = val.replace(/\)/g, '');
+    }
+    return val;
   }
 
-  private stripDashes( value: string ): string {
-    return (value ? value.replace(/-/g, '') : null);
+  private setBcscSessionData( data: RegisterUser | CheckUserAttr ): RegisterUser | CheckUserAttr {
+
+    if ( !this.bcscSession.isEmpty() ) {
+
+      // BCSC Authentication Transaction Identifier related to login session
+      this._headers = this._headers.set( 'authTrxId', this.bcscSession.authTrxId );
+
+      // Payload data
+      data.authPartyId = this.bcscSession.authPartyId;
+      data.authPartyName = this.bcscSession.authPartyName;
+      data.userIdType = this.bcscSession.userIdType;
+      data.userType = this.bcscSession.userType;
+    }
+    return data;
   }
 }
