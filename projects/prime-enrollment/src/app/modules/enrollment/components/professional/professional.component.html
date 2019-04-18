@@ -69,6 +69,8 @@
                   <!-- <option *ngFor="let option of onBehalfOfOptions | async" [value]="option" [label]="option">{{option}} -->
                   <!-- </option> -->
                 </ng-select>
+                <enroll-error label="Job title" [valid]="fg.controls.onBehalfOfJobTitle.valid"
+                  [touched]="fg.controls.onBehalfOfJobTitle.touched"></enroll-error>
               </div>
             </div>
           </div>

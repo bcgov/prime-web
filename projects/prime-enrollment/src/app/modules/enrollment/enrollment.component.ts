@@ -4,6 +4,7 @@ import { Container } from 'moh-common-lib/models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EnrollmentStateService } from './services/enrollment-state.service';
 import { Observable, of, BehaviorSubject, Subject } from 'rxjs';
+import { FormControl } from '@angular/forms';
 
 // TODO:  re-add progress steps once routing is done.
 
@@ -71,6 +72,15 @@ export class EnrollmentComponent extends Container implements OnInit {
           fa.forEach(form => {
             newArr.push(this.stateSvc.touchForm(form));
           });
+          this.stateSvc.certForms = newArr;
+          if (changed.controls.deviceProvider) {
+            const fa = this.stateSvc.dpFa;
+
+            fa.controls.forEach((ctrl: FormControl) => {
+              newArr.push(this.stateSvc.touchControl(ctrl));
+            });
+            this.stateSvc.dpFa = fa;
+          }
         }
 
         return this.stateSvc.professionalForm$.next(changed);
