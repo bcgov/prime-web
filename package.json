@@ -15,6 +15,8 @@
     "dev:enroll": "npm run dev -- --project=prime-enrollment",
     "build:enroll": "npm run build -- --project=prime-enrollment",
     "test:enroll": "npm run test -- --project=prime-enrollment",
+    "build:lib": "ng build prime-core",
+    "test:lib": "ng test prime-core",
     "e2e:setup": "webdriver-manager update --versions.chrome 73.0.3683.75",
     "prebuild": "node src/app/version.js",
     "prebuild:reg": "npm run prebuild",
