@@ -3,5 +3,9 @@
  */
 
 export * from './lib/prime-core.service';
-export * from './lib/prime-core.component';
 export * from './lib/prime-core.module';
+
+
+// Models
+export * from './lib/models/prime-constants';
+export { PrimePerson } from './lib/models/prime-person.model';
