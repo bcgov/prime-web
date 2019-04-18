@@ -7,13 +7,12 @@ import { AppComponent } from './app.component';
 
 /* moh-common-lib can be pulled from npm, or locally via npm link */
 import { SharedCoreModule } from 'moh-common-lib';
-import { BcscComponent } from './bcsc/bcsc.component';
 
 // List of providers for applicant
 const providerList: any = [Title];
 
 @NgModule({
-  declarations: [AppComponent, BcscComponent],
+  declarations: [AppComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, SharedCoreModule],
   providers: [providerList],
   bootstrap: [AppComponent]
