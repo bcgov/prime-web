@@ -1,19 +1,21 @@
 <header mat-dialog-title class="mat-elevation-z2">
   <h2>Find and Add an Organization</h2>
-  <button class="btn close-button" (click)="cancel()"><i class="fa fa-2x fa-times-circle-o close"></i></button>
+  <button class="btn close-button" (click)="submit.emit(false)"><i
+      class="fa fa-2x fa-times-circle-o close"></i></button>
 </header>
 <mat-card class="mat-elevation-z0">
-  <mat-card-content *ngIf="fg$ | async as fg">
+  <mat-card-content>
     <form [formGroup]="fg">
       <div class="form-group">
         <label class="control-label" for="type">Type</label>
         <ng-select id="type" formControlName="type" [items]="types | async"></ng-select>
-        <enroll-error label="Type" [valid]="fg.controls.type.valid" [touched]="fg.controls.type.valid"></enroll-error>
+        <enroll-error label="Type" [valid]="fg.controls.type.valid" [touched]="fg.controls.type.touched"></enroll-error>
       </div>
       <div class="form-group">
         <label class="control-label" for="organization">Organization Name</label>
         <input class="form-control" id="organization" formControlName="organization">
-        <enroll-error label="Type" [valid]="fg.controls.organization.valid" [touched]="fg.controls.organization.valid">
+        <enroll-error label="Organization" [valid]="fg.controls.organization.valid"
+          [touched]="fg.controls.organization.touched">
         </enroll-error>
 
       </div>
@@ -22,8 +24,7 @@
         <input class="form-control" id="city" formControlName="city">
 
       </div>
-      <button class="btn btn-md btn-secondary action-button" (click)="find()" *ngIf="search"
-        [disabled]="!fg.value.type || !fg.value.organization">Find</button>
+      <button class="btn btn-md btn-secondary action-button" (click)="find()" *ngIf="search">Find</button>
     </form>
   </mat-card-content>
   <ng-container *ngIf="searchResults | async as results">

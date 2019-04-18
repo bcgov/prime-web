@@ -46,8 +46,9 @@ export class PharmanetAccessComponent implements OnInit, OnDestroy {
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalSvc.show(template, {
       backdrop: true,
-      ignoreBackdropClick: false,
-      class: 'modal-md'
+      ignoreBackdropClick: true,
+      class: 'modal-md',
+      keyboard: false
     });
   }
 

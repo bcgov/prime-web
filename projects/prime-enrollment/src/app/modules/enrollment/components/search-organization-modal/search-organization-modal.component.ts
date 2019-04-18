@@ -18,13 +18,14 @@ const headers = ['Organization Name', 'Type', 'City'];
 @Component({
   selector: 'enroll-search-organization-modal',
   templateUrl: './search-organization-modal.component.html',
-  styleUrls: ['./search-organization-modal.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./search-organization-modal.component.scss']
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchOrganizationModalComponent implements OnInit {
   @Output() submit: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() result: EventEmitter<any> = new EventEmitter<any>();
   fg$: BehaviorSubject<FormGroup>;
+  fg: FormGroup;
   search = true;
   types: Observable<string[]>;
   searchResults: Observable<Array<IOrganization>>;
@@ -35,7 +36,7 @@ export class SearchOrganizationModalComponent implements OnInit {
     private dataSvc: EnrollmentDataService,
     public stateSvc: EnrollmentStateService // public dialogRef: MatDialogRef<SearchOrganizationModalComponent>
   ) {
-    this.fg$ = this.stateSvc.findOrganizationForm$;
+    this.fg = this.stateSvc.findOrganizationForm$.value;
     this.headers = headers;
   }
 
@@ -50,9 +51,6 @@ export class SearchOrganizationModalComponent implements OnInit {
       ? this.stateSvc.addOrgResults(data)
       : this.stateSvc.removeOrgResults(data);
   }
-  cancel() {
-    // this.dialogRef.close();
-  }
 
   add() {
     const res = this.stateSvc.orgResults;
@@ -66,9 +64,18 @@ export class SearchOrganizationModalComponent implements OnInit {
   }
 
   find() {
-    const data = this.fg$.value as any;
+    this.touchForm();
+    this.doSearch();
+  }
+
+  doSearch() {
+    const data = this.fg.value as any;
     this.search = false;
     const res = this.dataSvc.findOrganizations(data);
     this.searchResults = res;
+  }
+
+  touchForm() {
+    const changed = this.stateSvc.touchForm(this.fg);
   }
 }
