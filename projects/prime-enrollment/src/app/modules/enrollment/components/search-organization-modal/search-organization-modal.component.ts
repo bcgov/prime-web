@@ -34,7 +34,7 @@ export class SearchOrganizationModalComponent implements OnInit {
 
   constructor(
     private dataSvc: EnrollmentDataService,
-    public stateSvc: EnrollmentStateService // public dialogRef: MatDialogRef<SearchOrganizationModalComponent>
+    public stateSvc: EnrollmentStateService
   ) {
     this.fg = this.stateSvc.findOrganizationForm$.value;
     this.headers = headers;
@@ -43,7 +43,6 @@ export class SearchOrganizationModalComponent implements OnInit {
   ngOnInit() {
     this.dataSvc.organizationTypesInit(tempArr);
     this.types = this.dataSvc.organizationTypes$;
-    // this.searchResults = this.dataSvc.searchResults;
     this.searchResultsHeaders = of(this.headers);
   }
   selectedResults(evt: boolean, data: IOrganization) {
@@ -60,7 +59,6 @@ export class SearchOrganizationModalComponent implements OnInit {
       .then(fga => this.stateSvc.organizationForm$.next(fga))
       .then(() => this.result.emit(this.stateSvc.organizationForm$.value))
       .then(() => this.submit.emit(true));
-    // .then(fga => this.dialogRef.close(fga));
   }
 
   find() {

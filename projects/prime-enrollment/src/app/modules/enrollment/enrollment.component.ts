@@ -65,6 +65,14 @@ export class EnrollmentComponent extends Container implements OnInit {
       case 3:
         fg = this.stateSvc.professionalForm$.value;
         changed = this.stateSvc.touchForm(fg);
+        if (changed.controls.collegeCert) {
+          const fa = this.stateSvc.certForms;
+          const newArr = [];
+          fa.forEach(form => {
+            newArr.push(this.stateSvc.touchForm(form));
+          });
+        }
+
         return this.stateSvc.professionalForm$.next(changed);
       case 4:
         fg = this.stateSvc.declarationForm$.value;

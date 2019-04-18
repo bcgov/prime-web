@@ -24,23 +24,18 @@ import {
 export abstract class FormFieldBuilder {
   static get contactFields() {
     const phone = new FormControl(null, [phoneNumberValidator()]);
-    // const sms = new FormControl(null, [smsValidator()]);
     const ext = new FormControl(null, []);
     const email = new FormControl(null, [
       Validators.required,
       Validators.email
     ]);
     const voicePhone = new FormControl(null, [phoneNumberValidator()]);
-    const preferredContact = new FormControl(null, [
-      Validators.required
-      // preferredContactValidator()
-    ]);
+    const preferredContact = new FormControl(null, [Validators.required]);
     return { phone, ext, email, voicePhone, preferredContact };
   }
 
   static get licenseFields() {
     const collegeCert = new FormControl(null, [Validators.required]);
-    // const description = new FormControl(null, [Validators.required]);
     const collegeNo = new FormControl(null, [Validators.required]);
     const licenseNum = new FormControl('', [
       numberValidator(),
@@ -48,7 +43,6 @@ export abstract class FormFieldBuilder {
     ]);
     const advancedPractice = new FormControl(null, []);
     const licenseClass = new FormControl(null, [licenseClassValidator()]);
-    // const renewalDate = new FormControl(new Date(), []);
     const renewalDate = new FormControl(null, [Validators.required]);
     return {
       collegeCert,
