@@ -44,10 +44,12 @@
           },
           "configurations": {
             "production": {
-              "fileReplacements": [{
-                "replace": "src/environments/environment.ts",
-                "with": "src/environments/environment.prod.ts"
-              }],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -174,7 +176,7 @@
             "styles": [
               "src/app/styles/styles.scss",
               "projects/prime-enrollment/src/styles.scss",
-              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css"
             ],
             "scripts": [],
             "stylePreprocessorOptions": {
@@ -185,10 +187,12 @@
           },
           "configurations": {
             "production": {
-              "fileReplacements": [{
-                "replace": "projects/prime-enrollment/src/environments/environment.ts",
-                "with": "projects/prime-enrollment/src/environments/environment.prod.ts"
-              }],
+              "fileReplacements": [
+                {
+                  "replace": "projects/prime-enrollment/src/environments/environment.ts",
+                  "with": "projects/prime-enrollment/src/environments/environment.prod.ts"
+                }
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -198,11 +202,13 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "budgets": [{
-                "type": "initial",
-                "maximumWarning": "2mb",
-                "maximumError": "5mb"
-              }]
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
             }
           }
         },
@@ -325,10 +331,12 @@
           },
           "configurations": {
             "production": {
-              "fileReplacements": [{
-                "replace": "projects/prime-registration/src/environments/environment.ts",
-                "with": "projects/prime-registration/src/environments/environment.prod.ts"
-              }],
+              "fileReplacements": [
+                {
+                  "replace": "projects/prime-registration/src/environments/environment.ts",
+                  "with": "projects/prime-registration/src/environments/environment.prod.ts"
+                }
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -338,11 +346,13 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "budgets": [{
-                "type": "initial",
-                "maximumWarning": "2mb",
-                "maximumError": "5mb"
-              }]
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
             }
           }
         },
@@ -418,6 +428,41 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "projects/prime-registration-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "prime-core": {
+      "root": "projects/prime-core",
+      "sourceRoot": "projects/prime-core/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/prime-core/tsconfig.lib.json",
+            "project": "projects/prime-core/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/prime-core/src/test.ts",
+            "tsConfig": "projects/prime-core/tsconfig.spec.json",
+            "karmaConfig": "projects/prime-core/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/prime-core/tsconfig.lib.json",
+              "projects/prime-core/tsconfig.spec.json"
+            ],
             "exclude": [
               "**/node_modules/**"
             ]
