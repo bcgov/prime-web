@@ -33,7 +33,8 @@ export class EnrollmentStateService {
   profileForm = new Registrant();
   declarationForm$ = new BehaviorSubject<FormGroup>(null);
   declarationForm = this.declarationForm$.asObservable();
-  findOrganizationForm: FormGroup;
+  findOrganizationForm$ = new BehaviorSubject<FormGroup>(null);
+
   organizationForm$ = new BehaviorSubject<FormGroup[]>(null);
   contactForm$ = new BehaviorSubject<FormGroup>(null);
   contactForm = this.contactForm$.asObservable();
@@ -180,7 +181,7 @@ export class EnrollmentStateService {
       .subscribe((obs: any) => this.setIndex(obs.url));
     this.contactForm$.next(FormGenerator.contactForm);
     this.declarationForm$.next(FormGenerator.declarationForm);
-    this.findOrganizationForm = FormGenerator.findOrganizationForm;
+    this.findOrganizationForm$.next(FormGenerator.findOrganizationForm);
     this.professionalForm$.next(FormGenerator.professionalForm);
     this.certForms = [FormGenerator.licenseForm];
     this.dpFa = new FormArray([FormFieldBuilder.deviceProviderFields]);

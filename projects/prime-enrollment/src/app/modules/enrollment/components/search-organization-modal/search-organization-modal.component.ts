@@ -9,7 +9,7 @@ import { FormGroup } from '@angular/forms';
 import { EnrollmentStateService } from '../../services/enrollment-state.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { EnrollmentDataService } from '../../services/enrollment-data.service';
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { IOrganization } from '@prime-enrollment/core/interfaces';
 
 const tempArr = ['Health Authority', 'Pharmacy'];
@@ -24,7 +24,7 @@ const headers = ['Organization Name', 'Type', 'City'];
 export class SearchOrganizationModalComponent implements OnInit {
   @Output() submit: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() result: EventEmitter<any> = new EventEmitter<any>();
-  fg: FormGroup;
+  fg$: BehaviorSubject<FormGroup>;
   search = true;
   types: Observable<string[]>;
   searchResults: Observable<Array<IOrganization>>;
@@ -35,7 +35,7 @@ export class SearchOrganizationModalComponent implements OnInit {
     private dataSvc: EnrollmentDataService,
     public stateSvc: EnrollmentStateService // public dialogRef: MatDialogRef<SearchOrganizationModalComponent>
   ) {
-    this.fg = this.stateSvc.findOrganizationForm;
+    this.fg$ = this.stateSvc.findOrganizationForm$;
     this.headers = headers;
   }
 
@@ -66,7 +66,7 @@ export class SearchOrganizationModalComponent implements OnInit {
   }
 
   find() {
-    const data = this.fg.value;
+    const data = this.fg$.value as any;
     this.search = false;
     const res = this.dataSvc.findOrganizations(data);
     this.searchResults = res;
