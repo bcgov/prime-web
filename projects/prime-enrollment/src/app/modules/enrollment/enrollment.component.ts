@@ -70,6 +70,14 @@ export class EnrollmentComponent extends Container implements OnInit {
         fg = this.stateSvc.declarationForm$.value;
         changed = this.stateSvc.touchForm(fg);
         return this.stateSvc.declarationForm$.next(changed);
+      case 5:
+        const arr = this.stateSvc.organizationForm$.value;
+        const newArr = [];
+        arr.forEach(itm => {
+          changed = this.stateSvc.touchForm(itm);
+          newArr.push(changed);
+        });
+        this.stateSvc.organizationForm$.next(newArr);
     }
   }
 }
