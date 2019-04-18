@@ -66,6 +66,10 @@ export class EnrollmentComponent extends Container implements OnInit {
         fg = this.stateSvc.professionalForm$.value;
         changed = this.stateSvc.touchForm(fg);
         return this.stateSvc.professionalForm$.next(changed);
+      case 4:
+        fg = this.stateSvc.declarationForm$.value;
+        changed = this.stateSvc.touchForm(fg);
+        return this.stateSvc.declarationForm$.next(changed);
     }
   }
 }
