@@ -5,9 +5,9 @@ import { Registrant } from '../../../../../../prime-registration/src/app/modules
 import { FormGenerator } from '../models/form-generator';
 import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { FormFieldBuilder } from '../models/form-field-builder';
-import { filter } from 'rxjs/operators';
+import { filter, multicast } from 'rxjs/operators';
 import { IOrganization } from '@prime-enrollment/core/interfaces';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of, Subject } from 'rxjs';
 import { SimpleDate } from 'moh-common-lib';
 
 const dateOfBirth = {
@@ -24,6 +24,12 @@ export class EnrollmentStateService {
   private _selectedOrgSet: Set<IOrganization> = new Set(null);
   private _certForms: FormGroup[] = [];
   private _certFa: FormArray;
+  submitLabel = 'Continue';
+  submitLabel$ = of(this.submitLabel);
+  routes;
+  // .pipe(multicast(() => new Subject()));
+
+  selectedOrgs = false;
 
   profileForm = new Registrant();
   declarationForm: FormGroup;
@@ -52,26 +58,19 @@ export class EnrollmentStateService {
 
   setIndex(url: string) {
     const currentIndex = this.findIndex(url);
-    if (currentIndex === 6) this.submit = true;
-    else this.submit = false;
+    if (currentIndex === 6) {
+      this.submit = true;
+      this.submitLabel$ = of('Submit');
+    } else {
+      this.submitLabel$ = of('Continue');
+      this.submit = false;
+    }
     this._currentIndex = currentIndex;
   }
 
   findIndex(url: string) {
-    switch (url) {
-      case '/enrollment/profile':
-        return 1;
-      case '/enrollment/contact':
-        return 2;
-      case '/enrollment/professional':
-        return 3;
-      case '/enrollment/self-declaration':
-        return 4;
-      case '/enrollment/pharmanet-access':
-        return 5;
-      case '/enrollment/contact':
-        return 6;
-    }
+    if (!this.routes) return;
+    return this.routes.indexOf(url) + 1;
   }
 
   validateProfessionalForm(fg: FormGroup): boolean {
@@ -84,7 +83,19 @@ export class EnrollmentStateService {
     if (fg.controls.deviceProvider.value) {
       if (this.dpFa.invalid) return false;
     }
+    console.log(fg);
     return true;
+  }
+
+  validateOrganizationForm() {
+    let valid = true;
+    if (!this.organizationForm) return false;
+    if (this.organizationForm.length > 0) {
+      for (const form of this.organizationForm) {
+        if (form.invalid) valid = false;
+      }
+    } else return false;
+    return valid;
   }
 
   isIndexValid(index: number): boolean {
@@ -92,15 +103,23 @@ export class EnrollmentStateService {
       case 1:
         return true;
       case 2:
+        // return true;
         return this.contactForm.valid;
       case 3:
-        return this.validateProfessionalForm(this.professionalForm);
+        // return true;
+
+        const valid = this.validateProfessionalForm(this.professionalForm);
+        console.log(valid);
+        return valid;
       case 4:
+        // return true;
+
         return this.declarationForm.valid;
       case 5:
-        // TODO: update validation logic for the organization form array (see case 3)
+        // return true;
+        return this.validateOrganizationForm();
+      case 6:
         return true;
-      // return this.organizationForm.valid;
       default:
         return false;
     }
@@ -117,10 +136,14 @@ export class EnrollmentStateService {
 
   addOrgResults(res: IOrganization) {
     this._selectedOrgSet.add(res);
+    if (!this.selectedOrgs) this.selectedOrgs = true;
   }
 
   removeOrgResults(res: IOrganization) {
     this._selectedOrgSet.delete(res);
+    if (this.selectedOrgs && this._selectedOrgSet.size < 1) {
+      this.selectedOrgs = false;
+    }
   }
 
   async orgResultsForm(data: IOrganization[]) {
@@ -129,10 +152,7 @@ export class EnrollmentStateService {
       const name = new FormControl(itm.name);
       const city = new FormControl(itm.city);
       const type = new FormControl(itm.type);
-      name.disable();
-      city.disable();
-      type.disable();
-      const startDate = new FormControl(null, Validators.required);
+      const startDate = new FormControl(new Date(), Validators.required);
       const endDate = new FormControl(null, Validators.required);
       const fg = new FormGroup({ name, city, type, startDate, endDate });
       fga.push(fg);
@@ -153,15 +173,17 @@ export class EnrollmentStateService {
     // TODO: come back to this function to state match once routing is done.
     this.router.events
       .pipe(
-        filter(obs => obs.hasOwnProperty('id')),
-        filter(obs => !obs.hasOwnProperty('state')),
-        filter(obs => !obs.hasOwnProperty('navigationTrigger'))
+        filter(
+          obs =>
+            obs.hasOwnProperty('id') ||
+            !obs.hasOwnProperty('state') ||
+            !obs.hasOwnProperty('navigationTrigger')
+        )
       )
       .subscribe((obs: any) => this.setIndex(obs.url));
     this.contactForm = FormGenerator.contactForm;
     this.declarationForm = FormGenerator.declarationForm;
     this.findOrganizationForm = FormGenerator.findOrganizationForm;
-    // this.organizationForm = FormGenerator.organizationForm;
     this.professionalForm = FormGenerator.professionalForm;
     this.certForms = [FormGenerator.licenseForm];
     this.dpFa = new FormArray([FormFieldBuilder.deviceProviderFields]);

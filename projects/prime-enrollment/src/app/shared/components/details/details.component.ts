@@ -15,6 +15,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class DetailsComponent implements OnInit {
   @Input() fg: FormGroup;
   @Input() fc: string;
+  @Input() docFc: string;
   random: number;
   constructor() {
     this.random = Math.random();

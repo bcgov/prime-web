@@ -45,3 +45,7 @@ export const subRoutes: Routes = [
     data: { title: 'Review' }
   }
 ];
+
+export function mappedRoutes(routes: Routes, prefix: string) {
+  return routes.map(itm => `/${prefix}/${itm.path}`);
+}

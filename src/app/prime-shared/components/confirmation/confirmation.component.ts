@@ -7,17 +7,15 @@ import { ApiStatusCodes } from '@prime-core/models/api-base.model';
   styleUrls: ['./confirmation.component.scss']
 })
 export class ConfirmationComponent implements OnInit {
-
   @Input() displayIcon: ApiStatusCodes = ApiStatusCodes.SUCCESS;
   @Input() hasQrCode: boolean = false;
   @Input() btnLabel: string = 'Login';
 
   @Output() btnClick: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   // Status codes
   get successCode() {

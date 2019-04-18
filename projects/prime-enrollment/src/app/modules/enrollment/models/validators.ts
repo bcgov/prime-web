@@ -3,6 +3,7 @@ import { AbstractControl, ValidatorFn } from '@angular/forms';
 export function behalfOfValidator(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
     if (!control.parent) return null;
+    if (control.parent.controls['collegeCert'].value) return null;
     return control.parent.controls['onBehalfOf'].value
       ? control.value === null
         ? { invalidOnbehalfOf: { value: 'On behalf of job title is required' } }
@@ -17,10 +18,10 @@ export function licenseClassValidator(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
     if (!control.parent) return null;
 
-    if (!control.parent.controls['collegeCert']) return null;
+    if (!control.parent.controls['collegeCert'].value) return null;
     const parent = control.parent.controls['collegeCert'].value;
     if (parent === null || parent === 'None') return null;
-    if (control.untouched) return null;
+    // if (control.untouched) return null;
     return control.value === null
       ? { invalidLicenseClass: { value: 'Invalid license class' } }
       : null;
@@ -84,10 +85,10 @@ export function contactValidator(): ValidatorFn {
     } else return null;
   };
 }
+// +1 (403) 437-4886
 
 export function numberValidator() {
   return (control: AbstractControl): { [key: string]: any } | null => {
-    // console.log(control);
     if (!control.parent) return null;
     if (!control.parent.controls['collegeCert'].value) return null;
     if (control.parent.controls['collegeCert'].value === 'None') return null;
@@ -98,5 +99,28 @@ export function numberValidator() {
     return forbidden
       ? { invalid: { value: `${control.value} is not valid` } }
       : null;
+  };
+}
+
+export function phoneNumberValidator() {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const forbidden = !/^^[\+]?[1][ ][(]?[0-9]{3}[)]?[ ][-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/gim.test(
+      control.value
+    );
+    return forbidden
+      ? { invalid: { value: `${control.value} is not valid` } }
+      : null;
+  };
+}
+
+export function insulinPumpValidator() {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    if (!control.parent) return null;
+    if (!control.parent.value.deviceProvider) return null;
+    if (control.value === null || control.value === undefined) {
+      return {
+        invalid: { ipValue: `Invalid value for insulin pump provider` }
+      };
+    } else return null;
   };
 }

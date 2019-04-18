@@ -5,12 +5,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TypeaheadModule, BsDropdownModule } from 'ngx-bootstrap';
-import {
-  NgxIntlTelInputModule,
-  NgxIntlTelInputComponent
-} from 'ngx-intl-tel-input';
 import { SharedProfileComponent } from './components/shared-profile/shared-profile.component';
-import { InternationalPhoneNumberModule } from 'ngx-international-phone-number';
 import { LicenseComponent } from './components/license/license.component';
 import { DeviceProviderComponent } from './components/device-provider/device-provider.component';
 import { YesNoComponent } from './components/yes-no/yes-no.component';
@@ -31,6 +26,7 @@ import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 import { TextMaskModule } from 'angular2-text-mask';
 import { RadioButtonComponent } from './components/radio-button/radio-button.component';
 import { ErrorComponent } from './components/error-block/error.component';
+import { EnrollmentConfirmationComponent } from './components/enrollment-confirmation/enrollment-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +47,8 @@ import { ErrorComponent } from './components/error-block/error.component';
     ProfessionalInformationBlockComponent,
     PharmanetBlockComponent,
     RadioButtonComponent,
-    ErrorComponent
+    ErrorComponent,
+    EnrollmentConfirmationComponent
   ],
 
   imports: [
@@ -62,8 +59,6 @@ import { ErrorComponent } from './components/error-block/error.component';
     ReactiveFormsModule,
     NgSelectModule,
     SharedCoreModule,
-    NgxIntlTelInputModule,
-    InternationalPhoneNumberModule,
     MatDialogModule,
     MatCardModule,
     PrimeSharedModule,
@@ -77,8 +72,6 @@ import { ErrorComponent } from './components/error-block/error.component';
     NgSelectModule,
     HomePageComponent,
     SharedProfileComponent,
-    NgxIntlTelInputComponent,
-    InternationalPhoneNumberModule,
     LicenseComponent,
     DeviceProviderComponent,
     YesNoComponent,
@@ -97,7 +90,8 @@ import { ErrorComponent } from './components/error-block/error.component';
     NgxMyDatePickerModule,
     TextMaskModule,
     RadioButtonComponent,
-    ErrorComponent
+    ErrorComponent,
+    EnrollmentConfirmationComponent
   ]
 })
 export class SharedModule {}

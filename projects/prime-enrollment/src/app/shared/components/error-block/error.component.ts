@@ -9,7 +9,7 @@ import {
   selector: 'enroll-error',
   template: `
     <span *ngIf="touched && !valid; else elseBlock" class="text-danger"
-      >{{ label }} is invalid</span
+      >{{ label }} is required</span
     >
     <ng-template #elseBlock>
       <div class="else-block"></div>

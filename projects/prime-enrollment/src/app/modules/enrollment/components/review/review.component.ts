@@ -16,6 +16,7 @@ export class ReviewComponent implements OnInit {
   declarations: Array<IDeclarationBlock>;
   certForms: FormGroup[];
   profileForm: Registrant;
+  organizationForm: FormGroup[] = this.stateSvc.organizationForm;
   $registrantName: Observable<any>;
   $preferredName: Observable<any>;
   $mailingAddress: Observable<any>;
@@ -47,24 +48,28 @@ export class ReviewComponent implements OnInit {
       question:
         'Have you ever been the subject of an order or a conviction for an information contravention?',
       value: this.dfValues('conviction'),
-      details: this.dfValues('convictionDesc')
+      details: this.dfValues('convictionDesc'),
+      docs: this.dfValues('convictionDocs')
     };
     const regSuspension = {
       question:
         'Have you ever had your registration with a governing body of a health care profession suspended or cancelled?',
       value: this.dfValues('regSuspension'),
-      details: this.dfValues('regSuspensionDesc')
+      details: this.dfValues('regSuspensionDesc'),
+      docs: this.dfValues('regSuspensionDocs')
     };
     const tAndC = {
       question: `Have you ever had Terms and Conditions imposed on your license as a result of disciplinary actions taken by a governing body?`,
       value: this.dfValues('tAndC'),
-      details: this.dfValues('tAndCDesc')
+      details: this.dfValues('tAndCDesc'),
+      docs: this.dfValues('tAndCDocs')
     };
     const pharmaSuspension = {
       question:
         'Have you ever had your access to PharmaNet suspended or revoked?',
       value: this.dfValues('pharmaSuspension'),
-      details: this.dfValues('pharmaSuspensionDesc')
+      details: this.dfValues('pharmaSuspensionDesc'),
+      docs: this.dfValues('pharmaSuspensionDocs')
     };
 
     return [conviction, regSuspension, tAndC, pharmaSuspension];

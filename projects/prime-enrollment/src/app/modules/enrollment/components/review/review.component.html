@@ -6,60 +6,74 @@
     Review - helper text
   </p>
   <common-page-section layout="double">
-    <div class="label-row">
+    <!-- <div class="label-row"> -->
+    <a [routerLink]="['/enrollment/profile']">
       <h3>Profile</h3>
-      <a [routerLink]="['/enrollment/profile']"><i class="fa fa-pencil"></i></a>
-    </div>
+    </a>
+    <!-- <i class="fa fa-pencil"></i></a> -->
+    <!-- </div> -->
     <enroll-profile-block [name]="$registrantName | async" [preferredName]="$preferredName | async"
       [dateOfBirth]="profileForm.dateOfBirth">
     </enroll-profile-block>
-    <h3>Address</h3>
+    <!-- <h3>Address</h3> -->
     <enroll-address-block [address]="profileForm.address"></enroll-address-block>
-    <h3>Mailing Address</h3>
+    <!-- <h3>Mailing Address</h3> -->
     <enroll-address-block [address]="$mailingAddress | async"></enroll-address-block>
-    <div class="label-row">
+    <!-- <div class="label-row"> -->
 
+    <a [routerLink]="['/enrollment/contact']">
       <h3>Contact</h3>
-      <a [routerLink]="['/enrollment/contact']">
-        <i class="fa fa-pencil"></i>
-      </a>
-    </div>
+    </a>
+
+    <!-- <i class="fa fa-pencil"></i> -->
+    <!-- </a> -->
+    <!-- </div> -->
 
     <enroll-contact-block [phone]="formValue('contactForm', 'phone')" [email]="formValue('contactForm', 'email')"
       [voicePhone]="formValue('contactForm', 'voicePhone')">
     </enroll-contact-block>
-    <div class="label-row">
+    <!-- <div class="label-row"> -->
 
+    <a [routerLink]="['/enrollment/self-declaration']">
       <h3>Self Declaration</h3>
-      <a [routerLink]="['/enrollment/self-declaration']"><i class="fa fa-pencil"></i></a>
-    </div>
+    </a>
+    <!-- <i class="fa fa-pencil"></i> -->
+    <!-- </div> -->
     <ng-container *ngFor="let declaration of declarations">
 
       <enroll-self-declaration-question-block [question]="declaration.question" [answer]="declaration.value"
-        [details]="declaration.details"></enroll-self-declaration-question-block>
+        [details]="declaration.details" [documents]="declaration.docs"></enroll-self-declaration-question-block>
     </ng-container>
     <aside>
-      <div *ngFor="let cert of certForms">
-        <div class="label-row">
+      <!-- <div class="label-row"> -->
+      <a [routerLink]="['/enrollment/professional']">
+        <h3>Professional Information</h3>
+      </a>
+      <!-- <i class="fa fa-pencil"></i> -->
+      <!-- </div> -->
+      <ng-container *ngIf="certForms[0].valid">
 
-          <h3>Professional Information</h3>
-          <a [routerLink]="['/enrollment/professional']"><i class="fa fa-pencil"></i></a>
+        <div *ngFor="let cert of certForms">
+          <enroll-professional-information-block [license]="cert.value['collegeCert']"
+            [college]="cert.value['licenseNum']" [class]="cert.value['licenseClass']"
+            [renewal]="cert.value['renewalDate']">
+
+          </enroll-professional-information-block>
         </div>
-        <enroll-professional-information-block [license]="cert.value['collegeCert']"
-          [college]="cert.value['licenseNum']" [class]="cert.value['licenseClass']"
-          [renewal]="cert.value['renewalDate']">
-
-        </enroll-professional-information-block>
-      </div>
+      </ng-container>
       <div>
-        <div class="label-row">
+        <!-- <div class="label-row"> -->
+        <a [routerLink]="['/enrollment/pharmanet-access']">
 
           <h3>PharmaNet</h3>
-          <a [routerLink]="['/enrollment/pharmanet-access']">
-            <i class="fa fa-pencil"></i>
-          </a>
-        </div>
-        <enroll-pharmanet-block></enroll-pharmanet-block>
+        </a>
+
+        <!-- <i class="fa fa-pencil"></i> -->
+        <!-- </div> -->
+        <ng-container *ngFor="let fg of organizationForm">
+          <enroll-pharmanet-block [name]="fg.value.name" [type]="fg.value.type" [city]="fg.value.city"
+            [startDate]="fg.value.startDate" [endDate]="fg.value.endDate"></enroll-pharmanet-block>
+        </ng-container>
       </div>
     </aside>
   </common-page-section>

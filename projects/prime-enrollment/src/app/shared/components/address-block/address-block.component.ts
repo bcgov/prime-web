@@ -20,7 +20,6 @@ export class AddressBlockComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    console.log(this.address);
     this.address$ = of(this.address);
   }
 }

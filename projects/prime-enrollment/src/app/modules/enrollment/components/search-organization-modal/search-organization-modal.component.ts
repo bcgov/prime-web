@@ -1,4 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  EventEmitter,
+  Output
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { EnrollmentStateService } from '../../services/enrollment-state.service';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -16,6 +22,8 @@ const headers = ['Organization Name', 'Type', 'City'];
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchOrganizationModalComponent implements OnInit {
+  @Output() submit: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() result: EventEmitter<any> = new EventEmitter<any>();
   fg: FormGroup;
   search = true;
   types: Observable<string[]>;
@@ -25,8 +33,7 @@ export class SearchOrganizationModalComponent implements OnInit {
 
   constructor(
     private dataSvc: EnrollmentDataService,
-    private stateSvc: EnrollmentStateService,
-    public dialogRef: MatDialogRef<SearchOrganizationModalComponent>
+    public stateSvc: EnrollmentStateService // public dialogRef: MatDialogRef<SearchOrganizationModalComponent>
   ) {
     this.fg = this.stateSvc.findOrganizationForm;
     this.headers = headers;
@@ -44,7 +51,7 @@ export class SearchOrganizationModalComponent implements OnInit {
       : this.stateSvc.removeOrgResults(data);
   }
   cancel() {
-    this.dialogRef.close();
+    // this.dialogRef.close();
   }
 
   add() {
@@ -52,8 +59,10 @@ export class SearchOrganizationModalComponent implements OnInit {
     if (res.length < 1) return console.log('no results to add');
     this.stateSvc
       .orgResultsForm(res)
-      // .then(fga => (this.stateSvc.organizationForm = fga))
-      .then(fga => this.dialogRef.close(fga));
+      .then(fga => (this.stateSvc.organizationForm = fga))
+      .then(() => this.result.emit(this.stateSvc.organizationForm))
+      .then(() => this.submit.emit(true));
+    // .then(fga => this.dialogRef.close(fga));
   }
 
   find() {

@@ -1,11 +1,11 @@
-<h1 class="border-bottom">Confirmation Message</h1>
+<h2 class="border-bottom">Confirmation Message</h2>
 
 <common-page-section layout='noTips'>
 
   <!-- Icons and confirmation messages -->
   <div [ngSwitch]="displayIcon">
     <ng-container *ngSwitchCase="successCode">
-      <div  class="message-container border border-success">
+      <div class="message-container border border-success">
         <p class="prime-icon--success">
           <i class="fa fa-2x fa-check-circle text-success" aria-label="success"></i>
         </p>
@@ -14,7 +14,7 @@
     </ng-container>
 
     <ng-container *ngSwitchCase="errorCode">
-      <div  class="message-container border border-danger">
+      <div class="message-container border border-danger">
         <p class="prime-icon--error">
           <i class="fa fa-2x fa-exclamation-triangle text-danger" aria-label="error"></i>
         </p>
@@ -23,7 +23,7 @@
     </ng-container>
 
     <ng-container *ngSwitchCase="warningCode">
-      <div  class="message-container border border-warning">
+      <div class="message-container border border-warning">
         <p class="prime-icon--warning">
           <i class="fa fa-2x fa-exclamation-circle text-warning" aria-label="warning"></i>
         </p>
@@ -43,13 +43,12 @@
 </div>
 
 <div>
-  <h2 class="border-bottom">Next Steps</h2>
+  <h3 class="border-bottom">Next Steps</h3>
   <common-page-section layout='noTips'>
-     <ng-content select="[nextSteps]"></ng-content>
+    <ng-content select="[nextSteps]"></ng-content>
 
     <div class="p-3">
-      <button class="btn btn-md btn-primary"
-              (click)="onClick($event)">{{btnLabel}}</button>
+      <button class="btn btn-md btn-primary" (click)="onClick($event)">{{btnLabel}}</button>
     </div>
   </common-page-section>
 </div>
