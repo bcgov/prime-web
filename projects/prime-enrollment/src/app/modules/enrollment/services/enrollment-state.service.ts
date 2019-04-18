@@ -31,7 +31,8 @@ export class EnrollmentStateService {
   selectedOrgs = false;
 
   profileForm = new Registrant();
-  declarationForm: FormGroup;
+  declarationForm$ = new BehaviorSubject<FormGroup>(null);
+  declarationForm = this.declarationForm$.asObservable();
   findOrganizationForm: FormGroup;
   organizationForm: FormGroup[];
   contactForm$ = new BehaviorSubject<FormGroup>(null);
@@ -111,7 +112,7 @@ export class EnrollmentStateService {
         console.log(valid);
         return valid;
       case 4:
-        return this.declarationForm.valid;
+        return this.declarationForm$.value.valid;
       case 5:
         return this.validateOrganizationForm();
       case 6:
@@ -178,7 +179,7 @@ export class EnrollmentStateService {
       )
       .subscribe((obs: any) => this.setIndex(obs.url));
     this.contactForm$.next(FormGenerator.contactForm);
-    this.declarationForm = FormGenerator.declarationForm;
+    this.declarationForm$.next(FormGenerator.declarationForm);
     this.findOrganizationForm = FormGenerator.findOrganizationForm;
     this.professionalForm$.next(FormGenerator.professionalForm);
     this.certForms = [FormGenerator.licenseForm];

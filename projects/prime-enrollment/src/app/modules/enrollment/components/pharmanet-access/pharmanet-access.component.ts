@@ -49,20 +49,6 @@ export class PharmanetAccessComponent implements OnInit, OnDestroy {
       ignoreBackdropClick: false,
       class: 'modal-md'
     });
-    // const dialog = this.dialog;
-    // const ref = dialog.open(SearchOrganizationModalComponent, {
-    //   panelClass: 'test',
-    //   disableClose: true,
-    //   position: { top: '25px' },
-    //   minWidth: '50vw'
-    // });
-    // this.sub = ref.afterClosed().subscribe(obs => {
-    //   if (!obs) return;
-    //   const arr = this.stateSvc.organizationForm;
-    //   this.stateSvc.organizationForm = obs;
-    //   this.fa$.next(this.stateSvc.organizationForm);
-    //   this.results = true;
-    // });
   }
 
   modalResult(evt: any) {
@@ -70,7 +56,6 @@ export class PharmanetAccessComponent implements OnInit, OnDestroy {
     this.stateSvc.organizationForm = evt;
     this.fa$.next(this.stateSvc.organizationForm);
     this.results = true;
-    // this.stateSvc.organizaitonForm
   }
 
   modalSubmit() {

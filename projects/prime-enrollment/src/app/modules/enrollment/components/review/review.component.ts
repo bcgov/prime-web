@@ -22,7 +22,7 @@ export class ReviewComponent implements OnInit {
   $mailingAddress: Observable<any>;
 
   constructor(public stateSvc: EnrollmentStateService) {
-    this.df = this.stateSvc.declarationForm;
+    this.df = this.stateSvc.declarationForm$.value;
     this.certForms = this.stateSvc.certForms;
     this.profileForm = this.stateSvc.profileForm;
   }
