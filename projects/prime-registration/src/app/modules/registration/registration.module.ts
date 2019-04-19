@@ -15,7 +15,7 @@ import { PrimeSharedModule } from '@prime-core/prime-shared/prime-shared.module'
 import { CacheApiService } from '@prime-core/services/cache-api.service';
 import { RegCacheService } from '@prime-registration/services/reg-cache.service';
 import { ApplConfirmationComponent } from './components/appl-confirmation/appl-confirmation.component';
-
+import { PrimeCoreModule } from 'prime-core';
 
 const componentList = [
   ApplAccountComponent,
@@ -35,13 +35,15 @@ const componentList = [
     TextMaskModule,
     TypeaheadModule.forRoot(),
     NgSelectModule,
-    PrimeSharedModule
+    PrimeSharedModule,
+    PrimeCoreModule
   ],
   declarations: [
     componentList
   ],
   exports: [
-    componentList
+    componentList,
+    PrimeCoreModule
   ],
   providers: [
     CacheApiService,

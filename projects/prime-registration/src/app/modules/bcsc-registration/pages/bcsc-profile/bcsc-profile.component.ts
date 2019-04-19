@@ -8,7 +8,7 @@ import { AbstractForm } from 'moh-common-lib/models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RegCacheService } from '@prime-registration/services/reg-cache.service';
 import { RegistrationConstants } from '@prime-registration/modules/registration/models/registration-constants.model';
-import { AssuranceLevel, ProviderCode } from '@prime-core/models/prime-constants';
+import { AssuranceLevel, ProviderCode } from 'prime-core';
 import { RegisterApiService } from '../../../registration/services/register-api.service';
 
 @Component({
@@ -42,7 +42,7 @@ export class BcscProfileComponent extends AbstractForm implements OnInit {
       this.activatedroute.queryParams.subscribe(params => {
         if (Object.keys(params).length) {
 
-          if (!VALID_HOSTNAMES.includes(location.hostname)){
+          if (!VALID_HOSTNAMES.includes(location.hostname)) {
             alert('BCSC overwriting is not allowed');
             return;
           }
@@ -52,7 +52,7 @@ export class BcscProfileComponent extends AbstractForm implements OnInit {
             let value = params[key];
             try {
               const isJSON = JSON.parse(params[key]);
-              if (isJSON){
+              if (isJSON) {
                 value = isJSON;
               }
 

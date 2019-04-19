@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { CacheApiService } from '@prime-core/services/cache-api.service';
 import { map } from 'rxjs/operators';
-import { CountryList, ProvinceList } from '@prime-core/prime-shared/components/address/address.component';
 import { StatusMsgInterface } from '@prime-core/models/api-base.model';
 import { SysParamInterface } from '../models/cache-api.model';
+import { ProvinceList, CountryList } from 'prime-core/lib/components/address/address.component';
 /**
  * TODO: Set up service to store data returned from the cache service once
  *       determined how it will be configured/setup

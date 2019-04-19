@@ -17,6 +17,7 @@
     "test:enroll": "npm run test -- --project=prime-enrollment",
     "build:lib": "ng build prime-core",
     "test:lib": "ng test prime-core",
+    "pack:lib": "cd dist/prime-core && npm pack",
     "e2e:setup": "webdriver-manager update --versions.chrome 73.0.3683.75",
     "prebuild": "node src/app/version.js",
     "prebuild:reg": "npm run prebuild",
@@ -54,7 +55,7 @@
     "ngx-mydatepicker": "^2.4.9",
     "pdfjs-dist": "^2.0.550",
     "popper.js": "^1.14.7",
-    "prime-core": "file:dist/prime-core",
+    "prime-core": "file:dist/prime-core/prime-core-0.0.1.tgz",
     "rxjs": "^6.4.0",
     "sha1": "^1.1.1",
     "zone.js": "^0.8.26"

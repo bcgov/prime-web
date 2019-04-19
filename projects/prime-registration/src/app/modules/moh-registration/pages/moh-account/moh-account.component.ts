@@ -6,7 +6,6 @@ import { RegistrationDataService } from '@prime-registration/services/registrati
 import { RegistrationConstants } from '@prime-registration/modules/registration/models/registration-constants.model';
 import { RegisterApiService } from '@prime-registration/modules/registration/services/register-api.service';
 import { RegisterRespService } from '@prime-registration/modules/registration/services/register-resp.service';
-import { ProviderCode } from '@prime-core/models/prime-constants';
 import { UserAttrPayload, CheckUserAttr } from '@prime-registration/modules/registration/models/register-api.model';
 import { Subscription } from 'rxjs';
 

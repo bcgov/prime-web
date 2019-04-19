@@ -1,7 +1,7 @@
 <common-page-framework layout='blank'>
 
   <form #formRef='ngForm' (ngSubmit)='continue()'>
-    <prime-profile [data]='registrant'
+    <lib-prime-profile [data]='registrant'
                    [countryList]='cache.$countryList | async'
                    [provinceList]='cache.$provinceList | async'
                    [editIdentityInfo]="false">
@@ -10,7 +10,7 @@
         Information received from BCSC - Ministry verbage required
       </p>
 
-    </prime-profile>
+    </lib-prime-profile>
 
     <!-- Display bar during registration -->
     <common-form-submit-bar [increaseWidth]='true'></common-form-submit-bar>

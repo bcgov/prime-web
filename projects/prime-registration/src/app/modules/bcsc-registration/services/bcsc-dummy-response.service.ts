@@ -3,7 +3,7 @@ import { Registrant } from '../../registration/models/registrant.model';
 import * as faker from 'faker';
 import { UUID } from 'angular2-uuid';
 import { RegistrationConstants } from '../../registration/models/registration-constants.model';
-import { AssuranceLevel, ProviderCode } from '@prime-core/models/prime-constants';
+import { AssuranceLevel, ProviderCode } from 'prime-core';
 import { BCSCSessionInterface } from '@prime-core/models/bcsc-session';
 
 /**
