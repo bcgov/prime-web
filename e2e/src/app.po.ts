@@ -1,4 +1,4 @@
-import { browser, by, element, WebElement, $$ } from 'protractor';
+import { browser, by, element, WebElement, $$, protractor } from 'protractor';
 
 /**
  * This class is for GENERAL functions, and all those that target components
@@ -37,7 +37,13 @@ export class PrimeTestPage {
    * @param optionText the option we want to select
    */
   selectOption(labelId: string, optionText: string) {
-    element(by.css(`ng-select[ng-reflect-for-id="${labelId}"]`)).click(); // opens dropdown
+    element(by.css(`ng-select[id="${labelId}"]`)).click(); // opens dropdown
     element(by.cssContainingText('span.ng-option-label', optionText)).click(); // selects option by provided text
+  }
+
+  typeOption(labelId: string, data: string) {
+    element(by.css(`ng-select[id="${labelId}"]`)).click(); // opens dropdown
+    element(by.css(`input[role="combobox"]`)).sendKeys(data); // type option
+    browser.actions().sendKeys(protractor.Key.ENTER).perform(); // hit enter key
   }
 }

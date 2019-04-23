@@ -13,7 +13,7 @@
           <label class="control-label" for="contactMethod">Preferred Contact Method</label>
           <ng-select id="contactMethod" formControlName="preferredContact" placeholder="Choose" [items]="contactOpts">
           </ng-select>
-          <enroll-error label="Email" [touched]="fg.controls.preferredContact.touched"
+          <enroll-error label="Contact Method" [touched]="fg.controls.preferredContact.touched"
             [valid]="fg.controls.preferredContact.valid">
           </enroll-error>
         </div>
