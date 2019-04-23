@@ -57,7 +57,6 @@ export class ServerPayload implements PayloadInterface {
 
 
   constructor(payload: PayloadInterface) {
-    
     this.clientName = payload.clientName;
     this.processDate = payload.processDate;
     this.statusCode = payload.statusCode;

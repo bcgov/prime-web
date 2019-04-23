@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { PhoneNumberComponent } from './components/phone-number/phone-number.component';
 import { SharedCoreModule } from 'moh-common-lib';
 import { HttpClientModule } from '@angular/common/http';
 import { TextMaskModule } from 'angular2-text-mask';
@@ -11,7 +10,7 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
 
 
 const componentList = [
-  PhoneNumberComponent,
+
   ConfirmationComponent
 ];
 

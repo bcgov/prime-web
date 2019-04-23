@@ -24,10 +24,10 @@
 
   <common-page-section layout='tips'>
     <div class="form-group col-sm-4 p-sm-0">
-      <prime-phone-number [displayMask]="isCanada"
+      <lib-prime-phone-number [displayMask]="isCanada"
                           [(value)]="mfaSMSphone"
                           [disabled]="!data.useMfaSMS">
-     </prime-phone-number>
+     </lib-prime-phone-number>
     </div>
 
     <ng-content select="[identityInstruct]"></ng-content>

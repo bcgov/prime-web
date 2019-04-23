@@ -8,12 +8,14 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { TextMaskModule } from 'angular2-text-mask';
 import { FormsModule } from '@angular/forms';
 import { TypeaheadModule } from 'ngx-bootstrap';
+import { PhoneNumberComponent } from './components/phone-number/phone-number.component';
 
 @NgModule({
   declarations: [
     AddressComponent,
     NameComponent,
-    ProfileComponent
+    ProfileComponent,
+    PhoneNumberComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +28,8 @@ import { TypeaheadModule } from 'ngx-bootstrap';
   exports: [
     AddressComponent,
     NameComponent,
-    ProfileComponent
+    ProfileComponent,
+    PhoneNumberComponent
   ]
 })
 export class PrimeCoreModule { }
