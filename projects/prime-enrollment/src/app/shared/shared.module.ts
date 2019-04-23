@@ -18,8 +18,12 @@ import { ListItemHeaderComponent } from './components/list-item-header/list-item
 import { ProfileBlockComponent } from './components/profile-block/profile-block.component';
 import { AddressBlockComponent } from './components/address-block/address-block.component';
 import { ContactBlockComponent } from './components/contact-block/contact-block.component';
-import { SelfDeclarationQuestionBlockComponent } from './components/self-declaration-question-block/self-declaration-question-block.component';
-import { ProfessionalInformationBlockComponent } from './components/professional-information-block/professional-information-block.component';
+import {
+  SelfDeclarationQuestionBlockComponent
+} from './components/self-declaration-question-block/self-declaration-question-block.component';
+import {
+  ProfessionalInformationBlockComponent
+ } from './components/professional-information-block/professional-information-block.component';
 import { PharmanetBlockComponent } from './components/pharmanet-block/pharmanet-block.component';
 import { PrimeSharedModule } from '../../../../../src/app/prime-shared/prime-shared.module';
 import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
@@ -27,11 +31,11 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { RadioButtonComponent } from './components/radio-button/radio-button.component';
 import { ErrorComponent } from './components/error-block/error.component';
 import { EnrollmentConfirmationComponent } from './components/enrollment-confirmation/enrollment-confirmation.component';
+import { PrimeCoreModule } from 'prime-core';
 
 @NgModule({
   declarations: [
     HomePageComponent,
-    // ProfileComponent,
     SharedProfileComponent,
     LicenseComponent,
     DeviceProviderComponent,
@@ -63,7 +67,8 @@ import { EnrollmentConfirmationComponent } from './components/enrollment-confirm
     MatCardModule,
     PrimeSharedModule,
     NgxMyDatePickerModule.forRoot(),
-    TextMaskModule
+    TextMaskModule,
+    PrimeCoreModule
   ],
   exports: [
     FormsModule,
@@ -91,7 +96,8 @@ import { EnrollmentConfirmationComponent } from './components/enrollment-confirm
     TextMaskModule,
     RadioButtonComponent,
     ErrorComponent,
-    EnrollmentConfirmationComponent
+    EnrollmentConfirmationComponent,
+    PrimeCoreModule
   ]
 })
 export class SharedModule {}

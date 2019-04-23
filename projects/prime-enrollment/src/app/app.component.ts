@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PrimeSharedAppComponentBase } from '@prime-core/prime-shared/components/prime-app-component/app.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { CommonLogger } from 'moh-common-lib/services';
 
 
 @Component({
@@ -9,13 +10,22 @@ import { Title } from '@angular/platform-browser';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent extends PrimeSharedAppComponentBase {
+export class AppComponent extends PrimeSharedAppComponentBase implements OnInit {
   title = 'prime-enrollment';
 
-  constructor(private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private titleService: Title) {
-    super(router, activatedRoute, titleService);
+  constructor(protected router: Router,
+              protected activatedRoute: ActivatedRoute,
+              protected titleService: Title,
+              protected logger: CommonLogger ) {
+    super(router, activatedRoute, titleService, logger);
   }
 
+  ngOnInit() {
+    super.ngOnInit();
+
+    // Temporary - base component calls logging functionality
+    this.logger.programName = 'prime-enrollment';
+    this.logger.applicationId = this.objectId;
+    this.logger.setURL( 'api/logging' );
+  }
 }
