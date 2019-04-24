@@ -41,6 +41,18 @@ export class ContactComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.fg$.valueChanges.subscribe(obs => console.log(obs));
+    this.stateSvc.contactForm$.value.valueChanges.subscribe(obs =>
+      console.log(obs)
+    );
+  }
+
+  onCountryChange(evt: any) {
+    const num = evt.dialCode;
+    const index = this.mask.indexOf('(');
+    const code = ['+', ...evt.dialCode.split(''), ' '];
+    const mask = this.mask.slice(index);
+    const newArr = [...code, ...mask];
+    this.mask = newArr;
+    // this.mask.filter(itm => )
   }
 }

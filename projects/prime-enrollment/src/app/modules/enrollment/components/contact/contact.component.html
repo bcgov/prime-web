@@ -8,20 +8,43 @@
   </p>
   <common-page-section layout="tips">
     <div>
+
       <ng-container *ngIf="fg$ | async as fg">
         <form [formGroup]="fg">
-          <div class="form-group">
+          <section>
+            <h4 style="margin-bottom: 0px" class="font-weight-bolder">Preferred Contact Method</h4>
+
+            <!-- <div> -->
+            <div class="md-radio md-radio-inline">
+              <input id="email" type="radio" formControlName="preferredContact" value="email" />
+              <label for="email">Email</label>
+              <span class="tooltip">This contact is for text communication</span>
+            </div>
+            <div class="md-radio md-radio-inline">
+              <input id="phone" type="radio" formControlName="preferredContact" value="phone" />
+              <label for="phone">Phone Number (Text Capable)</label>
+            </div>
+            <div class="md-radio md-radio-inline">
+              <input id="both" type="radio" formControlName="preferredContact" value="both" />
+              <label for="both">Both (Email & Phone Number)</label>
+            </div>
+            <!-- </div> -->
+            <enroll-error label="Email" [touched]="fg.controls.preferredContact.touched"
+              [valid]="fg.controls.preferredContact.valid"></enroll-error>
+          </section>
+          <!-- <div class="form-group">
             <label class="control-label" for="contactMethod">Preferred Contact Method</label>
             <ng-select id="contactMethod" formControlName="preferredContact" placeholder="Choose" [items]="contactOpts">
             </ng-select>
             <enroll-error label="Email" [touched]="fg.controls.preferredContact.touched"
               [valid]="fg.controls.preferredContact.valid">
             </enroll-error>
-          </div>
+          </div> -->
           <div class="form-group phone">
             <label class="control-label">Phone</label>
-            <input class="form-control" name="phone" formControlName="phone" [textMask]="{mask: mask}"
-              [placeholder]="placeholder">
+            <input type="text" ng2TelInput class="form-control" name="phone" formControlName="phone"
+              [ng2TelInputOptions]="{initialCountry: 'ca'}" [textMask]="{mask: mask}" [placeholder]="placeholder"
+              (countryChange)="onCountryChange($event)">
             <span>This number must be text message capable phone</span>
           </div>
           <enroll-error label="Phone" [touched]="fg.controls.phone.touched" [valid]="fg.controls.phone.valid">
