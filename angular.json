@@ -74,6 +74,7 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "prime-enrollment:build",
+            "port": 4307,
             "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
@@ -298,6 +299,11 @@
       "sourceRoot": "projects/prime-core/src",
       "projectType": "library",
       "prefix": "lib",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
