@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { DocumentType } from '@prime-core/models/documents.interface';
-import { CacheService } from '@prime-core/services/cache.service';
-import { CacheApiService } from '@prime-core/services/cache-api.service';
+import {
+  DocumentType,
+  CacheService,
+  CacheApiService
+ } from 'prime-core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { RegistrationConstants } from '../modules/registration/models/registration-constants.model';
+import { environment } from '../../environments/environment';
 
 /**
  * Store data retrieved from cache service

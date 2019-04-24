@@ -1,6 +1,10 @@
-import { Document } from '@prime-core/models/documents.interface';
-import { PrimePerson, AssuranceLevel, ProviderCode } from 'prime-core';
 import { SecurityQuestionsAnswers } from './register-api.model';
+import {
+  Document,
+  PrimePerson,
+  AssuranceLevel,
+  ProviderCode
+} from 'prime-core';
 
 export class Registrant extends PrimePerson {
 

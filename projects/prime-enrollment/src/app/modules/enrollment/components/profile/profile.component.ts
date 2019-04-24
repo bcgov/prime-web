@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { EnrollmentStateService } from '../../services/enrollment-state.service';
-import { CacheService } from '@prime-core/services/cache.service';
+import { CacheService } from 'prime-core';
 
 @Component({
   selector: 'enroll-profile',

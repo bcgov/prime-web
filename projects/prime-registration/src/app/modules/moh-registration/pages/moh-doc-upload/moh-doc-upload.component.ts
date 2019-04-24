@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractForm } from 'moh-common-lib/models';
 import { Router } from '@angular/router';
-import { Document } from '@prime-core/models/documents.interface';
+import { Document } from 'prime-core';
 import { RegCacheService } from '@prime-registration/services/reg-cache.service';
 import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
 import { RegistrationConstants } from '../../../registration/models/registration-constants.model';

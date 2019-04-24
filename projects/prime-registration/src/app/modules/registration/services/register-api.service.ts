@@ -5,12 +5,14 @@ import { throwError, Observable } from 'rxjs';
 import * as moment from 'moment';
 import { environment } from '../../../../environments/environment.prod';
 import { UserAttrInterface, CheckUserAttr, RegisterUser, AddressInterface } from '../models/register-api.model';
-import { ProviderCode } from 'prime-core';
-import { PayloadInterface } from '../prime-core/src/models/api-base.model';
 import { Registrant } from '../models/registrant.model';
 import { Address } from 'moh-common-lib/models';
 import { UUID } from 'angular2-uuid';
-import { BcscSession } from '../prime-core/src/models/bcsc-session';
+import {
+  BcscSession,
+  PayloadInterface,
+  ProviderCode
+ } from 'prime-core';
 
 @Injectable({
   providedIn: 'root'

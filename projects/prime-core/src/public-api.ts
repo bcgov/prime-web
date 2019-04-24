@@ -5,7 +5,7 @@ export * from './lib/prime-core.module';
 
 // Models
 export * from './models/prime-constants';
-export { PrimePerson } from './models/prime-person.model';
+export * from './models/prime-person.model';
 export * from './models/api-base.model';
 export * from './models/cache-api.model';
 export * from './models/documents.interface';

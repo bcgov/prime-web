@@ -8,7 +8,7 @@ import { RegisterApiService } from '@prime-registration/modules/registration/ser
 import { RegisterRespService } from '@prime-registration/modules/registration/services/register-resp.service';
 import { RegistrationConstants } from '@prime-registration/modules/registration/models/registration-constants.model';
 import { Subscription } from 'rxjs';
-import { ServerPayload, StatusMsgInterface, ScreenAreaID } from '../prime-core/src/models/api-base.model';
+import { ServerPayload, ScreenAreaID } from 'prime-core';
 import { LoggerService, RegistrationEvent, LogMessage } from '@prime-registration/services/logger.service';
 import { AccountErrorInterface } from '../../../registration/components/appl-account/appl-account.component';
 

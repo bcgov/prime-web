@@ -1,4 +1,4 @@
-import { PayloadInterface, ServerPayload } from '@prime-core/models/api-base.model';
+import { PayloadInterface, ServerPayload } from 'prime-core';
 
 /**
  * Return structure for searches return from back-end

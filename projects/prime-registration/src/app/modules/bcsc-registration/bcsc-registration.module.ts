@@ -7,13 +7,16 @@ import { BcscProfileComponent } from './pages/bcsc-profile/bcsc-profile.componen
 import { BcscContainerComponent } from './components/bcsc-container/bcsc-container.component';
 import { BcscAccountComponent } from './pages/bcsc-account/bcsc-account.component';
 import { FormsModule } from '@angular/forms';
+import { PrimeCoreModule } from 'prime-core';
+
 @NgModule({
   imports: [
     CommonModule,
     BcscRegistrationRoutingModule,
     RegistrationModule,
     SharedCoreModule,
-    FormsModule
+    FormsModule,
+    PrimeCoreModule
   ],
   declarations: [
     BcscContainerComponent,

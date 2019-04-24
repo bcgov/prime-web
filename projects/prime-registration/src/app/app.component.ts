@@ -1,11 +1,12 @@
 import { Component, OnInit, forwardRef } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ControlContainer, NgForm } from '@angular/forms';
 import { RegisterApiService } from './modules/registration/services/register-api.service';
 import { PrimeSharedAppComponentBase } from '@prime-core/prime-shared/components/prime-app-component/app.component';
-import { LoggerService, RegistrationEvent } from './services/logger.service';
+import { LoggerService } from './services/logger.service';
 import { CommonLogger } from 'moh-common-lib/services/logger.service';
+import { CacheApiService } from 'prime-core';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',

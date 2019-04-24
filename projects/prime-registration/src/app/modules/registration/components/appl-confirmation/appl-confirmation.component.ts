@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { RegisterRespService } from '../../services/register-resp.service';
-import { ServerPayload, StatusMsgInterface, ScreenAreaID, ApiStatusCodes } from '@prime-core/models/api-base.model';
+import {
+  ServerPayload,
+  StatusMsgInterface,
+  ScreenAreaID,
+  ApiStatusCodes } from 'prime-core';
 import { RegCacheService } from '@prime-registration/services/reg-cache.service';
 
 @Component({

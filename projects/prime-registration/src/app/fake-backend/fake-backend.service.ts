@@ -1,8 +1,10 @@
 import {Injectable} from '@angular/core';
-import { DocumentType } from '@prime-core/models/documents.interface';
-import { StatusMsgInterface, ScreenAreaID } from '../../../../../src/app/models/api-base.model';
-import { SysParamInterface } from '../../../../../src/app/models/cache-api.model';
-
+import {
+  DocumentType,
+  StatusMsgInterface,
+  ScreenAreaID,
+  SysParamInterface
+ } from 'prime-core';
 
 /**
  * Fake-backend service used to develop front-end without requiring back-end for

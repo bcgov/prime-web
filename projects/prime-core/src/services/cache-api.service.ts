@@ -5,7 +5,9 @@ import { CacheInterface } from '../models/cache-api.model';
 import { AbstractHttpService } from 'moh-common-lib/services';
 
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class CacheApiService extends AbstractHttpService {
   /**
    *  Default hardcoded header values.  Note: Authentication headers are added
@@ -13,20 +15,15 @@ export class CacheApiService extends AbstractHttpService {
    */
   protected _headers: HttpHeaders = new HttpHeaders();
 
-
-  private _url: string;
+  protected _url: string;
 
   constructor( protected http: HttpClient ) {
     super( http );
   }
 
-  setUrl( url: string ) {
-    this._url = url;
-  }
-
   // Cache requests
   getCache( paramValue: string ) {
-    const url = this._url + 'getCache';
+    const url = this._url + '/getCache';
     const params = new HttpParams().set( 'param', paramValue );
     return this.get<CacheInterface>( url, params );
   }

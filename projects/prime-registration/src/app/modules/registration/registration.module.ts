@@ -11,10 +11,10 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { UniqueQuestionDirective } from './components/appl-account/unique-question.directive';
-import { CacheApiService } from '../prime-core/src/services/cache-api.service';
 import { RegCacheService } from '@prime-registration/services/reg-cache.service';
 import { ApplConfirmationComponent } from './components/appl-confirmation/appl-confirmation.component';
-import { PrimeCoreModule } from 'prime-core';
+import { CacheApiService, PrimeCoreModule } from 'prime-core';
+
 
 const componentList = [
   ApplAccountComponent,
