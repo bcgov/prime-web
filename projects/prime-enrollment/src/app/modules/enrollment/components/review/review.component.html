@@ -28,12 +28,11 @@
     <!-- <i class="fa fa-pencil"></i> -->
     <!-- </a> -->
     <!-- </div> -->
-
-    <enroll-contact-block [phone]="formValue('contactForm', 'phone')" [email]="formValue('contactForm', 'email')"
-      [voicePhone]="formValue('contactForm', 'voicePhone')">
-    </enroll-contact-block>
-    <!-- <div class="label-row"> -->
-
+    <ng-container *ngIf="contact$ | async as contact">
+      <enroll-contact-block [phone]="contact.phone" [email]="contact.email" [voicePhone]="contact.voicePhone">
+      </enroll-contact-block>
+      <!-- <div class="label-row"> -->
+    </ng-container>
     <a [routerLink]="['/enrollment/self-declaration']">
       <h3>Self Declaration</h3>
     </a>
