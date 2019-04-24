@@ -4,7 +4,7 @@ import { PrimeConstants } from '../../../src/app/models/prime-constants';
 import { FakeDataMohReg } from './registration.data';
 import { PrimeTestPage } from '../../../e2e/src/app.po';
 
-fdescribe('BCSC Registration - Contact Page', () => {
+describe('BCSC Registration - Contact Page', () => {
     let page: ContactPage;
     const data = new FakeDataMohReg();
     let contactData;

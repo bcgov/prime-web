@@ -23,4 +23,11 @@ fdescribe('BCSC Registration - Professional Page', () => {
         expect(page.formErrors().count()).toBe(0, 'should be no errors on page load');
     });
 
+    it('02. should NOT let the user to continue when no radio buttons are clicked', () => {
+        page.navigateTo();
+        page.continue();
+        expect(browser.getCurrentUrl()).toContain(PROFESSIONAL_PAGE_URL);
+        // expect(page.getContinueButton()).toBe(false);
+    });
+
 });
