@@ -106,4 +106,59 @@ export class ProfessionalPage extends BaseEnrollmentTestPage {
     navigateTo() {
         return browser.get('/enrollment/professional');
     }
+
+    clickYesForCollegeCert() {
+        element(by.css('enroll-radio-button[ng-reflect-name="collegeCert"] label[for="Yes"]')).click();
+    }
+
+    selectCollegeCert(option: string) {
+        this.selectOption('collegeCert', option);
+    }
+
+    selectLicenseClass(option: string) {
+        this.selectOption('licenseClass', option);
+    }
+
+    typeLicenseNumber(licenseNum: string) {
+        element(by.css('input[ng-reflect-name="licenseNum"]')).sendKeys(licenseNum);
+    }
+
+    typeRenewalDate(renewalDate: string) {
+        element(by.css('input[ng-reflect-name="datepicker-"]')).sendKeys(renewalDate);
+    }
+
+    checkDeviceProvider(inputVal: string) {
+        return element(by.css(`label[for="${inputVal}"]`)).isSelected();
+    }
+
+    clickYesForDeviceProvider() {
+        element(by.css('enroll-radio-button[name="dp"] label[for="dptrue"]')).click();
+    }
+
+    typeDeviceProviderNum(dpNum: string) {
+        element(by.css('input[id="device"]')).sendKeys(dpNum);
+    }
+}
+
+export class SelfDeclarationPage extends BaseEnrollmentTestPage {
+
+    constructor() {
+      super();
+    }
+
+    navigateTo() {
+        return browser.get('/enrollment/self-declaration');
+    }
+
+    clickOption(label: string, answer: string){
+        element(by.css(`enroll-yes-no[ng-reflect-label="${label}"] label[for^="${answer}"]`)).click();
+    }
+
+    checkTips() {
+        element(by.css('aside[_ngcontent-c10]')).isDisplayed();
+    }
+
+    typeDescription(label: string, text: string){
+        element(by.css(`textarea[ng-reflect-name="${label}"]`)).sendKeys(text);
+    }
 }

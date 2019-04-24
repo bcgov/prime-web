@@ -48,7 +48,7 @@ describe('BCSC Registration - Contact Page', () => {
         expect(browser.getCurrentUrl()).toContain(PROFESSIONAL_PAGE_URL);
     });
 
-    it('05. should let user to continue even if extension number is not filled out', () => {
+    it('05. should let user to continue even if extension number is not filled out (because it is optional)', () => {
         contactData['extension'] = '';
         page.navigateTo();
         page.clickContactMethod();
@@ -57,5 +57,8 @@ describe('BCSC Registration - Contact Page', () => {
         page.continue();
         expect(browser.getCurrentUrl()).toContain(PROFESSIONAL_PAGE_URL);
     });
+
+    /* FOR FUTURE TESTS */
+    // should make sure email address is unique
 
 });

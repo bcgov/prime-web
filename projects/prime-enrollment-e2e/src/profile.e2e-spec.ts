@@ -78,4 +78,14 @@ describe('BCSC Registration - Profile Page', () => {
         page.navigateTo();
         expect(page.checkEnabled()).toBe(false);
     });
+
+    // if the individual has no legal first name, they may provide a preferred last name only
+    // Where the mailing address Country is 'Canada', chosen from a list of all Canadian Provinces and Territories, defaulted to 'BC'
+    // Where the mailing address is NOT Canada, must be entered as free format text
+    // If Country is Canada the postal code must be in the standard format of a Canadian postal code (e.g. A1A 2E2)
+    // If Country is 'Other', the entry is free format text
+
+    /* FOR FUTURE TESTS */
+    // When Registration information is not being used and Country is Canada,
+    // the solution must validate the PRIME mailing information captured.
 });
