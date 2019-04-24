@@ -11,6 +11,7 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-enrollment',
   template: `
+    <h1>Application Enrolment</h1>
     <common-core-breadcrumb>
       <common-wizard-progress-bar
         center
