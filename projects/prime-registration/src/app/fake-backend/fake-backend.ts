@@ -11,9 +11,9 @@ import {mergeMap, delay} from 'rxjs/operators';
 import {of} from 'rxjs/internal/observable/of';
 import {Injectable} from '@angular/core';
 import { FakeBackendService } from './fake-backend.service';
-import { ApiStatusCodes, PayloadInterface, ScreenAreaID, StatusMsgInterface } from '../../../../../src/app/models/api-base.model';
+import { ApiStatusCodes, PayloadInterface, ScreenAreaID, StatusMsgInterface } from '../../../../prime-core/src/models/api-base.model';
 import { Base } from 'moh-common-lib/models';
-import { CacheInterface } from '../../../../../src/app/models/cache-api.model';
+import { CacheInterface } from '../../../../prime-core/src/models/cache-api.model';
 import { UserAttrInterface } from '../modules/registration/models/register-api.model';
 
 @Injectable()

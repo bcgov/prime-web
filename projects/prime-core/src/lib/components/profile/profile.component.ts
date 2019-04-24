@@ -10,9 +10,9 @@ import {
 import { ControlContainer, NgForm } from '@angular/forms';
 import { of, Observable, Subscription } from 'rxjs';
 import { Base } from 'moh-common-lib/models';
-import { PrimePerson } from '../../models/prime-person.model';
+import { PrimePerson } from '../../../models/prime-person.model';
 import { CountryList, ProvinceList } from '../address/address.component';
-import { PrimeConstants } from '../../models/prime-constants';
+import { PrimeConstants } from '../../../models/prime-constants';
 
 @Component({
   selector: 'lib-prime-profile',

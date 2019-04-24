@@ -1,6 +1,6 @@
 import { ServerPayload, PayloadInterface, StatusMsgInterface } from './api-base.model';
-import { DocumentType } from '@prime-core/models/documents.interface';
-import { CountryList, ProvinceList } from 'prime-core/lib/components/address/address.component';
+import { DocumentType } from './documents.interface';
+import { CountryList, ProvinceList } from '../lib/components/address/address.component';
 
 export interface SysParamInterface {
   name: string;

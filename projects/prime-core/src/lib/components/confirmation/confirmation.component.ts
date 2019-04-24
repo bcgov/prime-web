@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ApiStatusCodes } from '../../models/api-base.model';
+import { ApiStatusCodes } from '../../../models/api-base.model';
 
 @Component({
   selector: 'lib-prime-confirmation',
