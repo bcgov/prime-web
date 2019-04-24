@@ -134,13 +134,6 @@ export abstract class FormFieldBuilder {
     return { name, type, city };
   }
   // TODO: fix the type checking on organization - not working for some reason;
-  static get organizationFormFields() {
-    const start = new FormControl(null, []);
-    const end = new FormControl(null, []);
-
-    // @ts-ignore
-    return { start, end };
-  }
 
   static get supportingDetailsField() {
     const details = new FormControl(null, []);

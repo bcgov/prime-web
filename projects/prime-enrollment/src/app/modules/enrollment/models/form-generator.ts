@@ -17,13 +17,6 @@ export abstract class FormGenerator {
     return new FormGroup(controls);
   }
 
-  static get organizationForm(): FormArray {
-    const controls = FormFieldBuilder.organizationFormFields;
-    const orgControls = FormFieldBuilder.organizationFields;
-    const organization = new FormGroup(orgControls);
-    return new FormArray([organization, new FormGroup(controls)]);
-  }
-
   static get licenseForm(): FormGroup {
     const controls = FormFieldBuilder.licenseFields;
     return new FormGroup(controls);
