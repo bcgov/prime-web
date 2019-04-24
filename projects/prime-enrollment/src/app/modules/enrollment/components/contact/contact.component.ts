@@ -12,6 +12,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class ContactComponent implements OnInit {
   fg$: Observable<FormGroup>;
   mask: (string | RegExp)[];
+  mask2: (string | RegExp)[];
   placeholder: string;
   displayMask = true;
   contactOpts = ['Email', 'Phone', 'Both'];
@@ -37,22 +38,18 @@ export class ContactComponent implements OnInit {
       NUMBER,
       NUMBER
     ];
+    [...this.mask2] = [...this.mask];
     this.placeholder = '+1 (555) 555-5555';
   }
 
-  ngOnInit() {
-    this.stateSvc.contactForm$.value.valueChanges.subscribe(obs =>
-      console.log(obs)
-    );
-  }
+  ngOnInit() {}
 
-  onCountryChange(evt: any) {
+  onCountryChange(evt: any, maskNum: number) {
     const num = evt.dialCode;
     const index = this.mask.indexOf('(');
     const code = ['+', ...evt.dialCode.split(''), ' '];
     const mask = this.mask.slice(index);
     const newArr = [...code, ...mask];
-    this.mask = newArr;
-    // this.mask.filter(itm => )
+    maskNum === 1 ? (this.mask = newArr) : (this.mask2 = newArr);
   }
 }

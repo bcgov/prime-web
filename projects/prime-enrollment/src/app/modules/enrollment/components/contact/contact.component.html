@@ -44,7 +44,7 @@
             <label class="control-label">Phone</label>
             <input type="text" ng2TelInput class="form-control" name="phone" formControlName="phone"
               [ng2TelInputOptions]="{initialCountry: 'ca'}" [textMask]="{mask: mask}" [placeholder]="placeholder"
-              (countryChange)="onCountryChange($event)">
+              (countryChange)="onCountryChange($event, 1)">
             <span>This number must be text message capable phone</span>
           </div>
           <enroll-error label="Phone" [touched]="fg.controls.phone.touched" [valid]="fg.controls.phone.valid">
@@ -63,6 +63,10 @@
               [placeholder]="placeholder">
             <!-- <span>This number must be text message capable phone</span> -->
           </div>
+
+          <input type="text" ng2TelInput class="form-control" name="voicePhone" formControlName="voicePhone"
+            [ng2TelInputOptions]="{initialCountry: 'ca'}" [textMask]="{mask: mask2}" [placeholder]="placeholder"
+            (countryChange)="onCountryChange($event, 2)">
           <enroll-error label="Voice phone" [touched]="fg.controls.voicePhone.touched"
             [valid]="fg.controls.voicePhone.valid"></enroll-error>
           <div class="form-group">

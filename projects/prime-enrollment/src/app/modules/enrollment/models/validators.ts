@@ -105,7 +105,7 @@ export function numberValidator() {
 
 export function phoneNumberValidator() {
   return (control: AbstractControl): { [key: string]: any } | null => {
-    const forbidden = !/^^[\+]?[1][ ][(]?[0-9]{3}[)]?[ ][-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/gim.test(
+    const forbidden = !/^^[\+]?[0-9]{1,3}[ ][(]?[0-9]{3}[)]?[ ][-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/gim.test(
       control.value
     );
     return forbidden
