@@ -25,7 +25,6 @@ import {
   ProfessionalInformationBlockComponent
  } from './components/professional-information-block/professional-information-block.component';
 import { PharmanetBlockComponent } from './components/pharmanet-block/pharmanet-block.component';
-import { PrimeSharedModule } from '../../../../../src/app/prime-shared/prime-shared.module';
 import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 import { TextMaskModule } from 'angular2-text-mask';
 import { RadioButtonComponent } from './components/radio-button/radio-button.component';
@@ -65,7 +64,6 @@ import { PrimeCoreModule } from 'prime-core';
     SharedCoreModule,
     MatDialogModule,
     MatCardModule,
-    PrimeSharedModule,
     NgxMyDatePickerModule.forRoot(),
     TextMaskModule,
     PrimeCoreModule
@@ -91,7 +89,6 @@ import { PrimeCoreModule } from 'prime-core';
     SelfDeclarationQuestionBlockComponent,
     ProfessionalInformationBlockComponent,
     PharmanetBlockComponent,
-    PrimeSharedModule,
     NgxMyDatePickerModule,
     TextMaskModule,
     RadioButtonComponent,
