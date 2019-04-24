@@ -25,7 +25,7 @@
             Another
             License</button>
         </div>
-        <ng-container *ngIf="certFaValid">
+        <ng-container *ngIf="certFaValid || fg.value.deviceProvider !== null">
           <label class="control-label">Are you a device provider?
           </label>
           <enroll-radio-button formControlName="deviceProvider" labelOne="dpfalse" labelTwo="dptrue" name="dp">
