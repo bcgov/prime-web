@@ -4,6 +4,6 @@
   "deleteDestPath": false,
   "lib": {
     "entryFile": "src/public-api.ts",
-    "styleIncludePaths": ["../../src/app/styles", "../../node_modules"]
+    "styleIncludePaths": ["./lib/styles", "../../node_modules"]
   }
 }

@@ -32,14 +32,14 @@
               }
             ],
             "styles": [
-              "src/app/styles/styles.scss",
+              "src/styles/styles.scss",
               "projects/prime-enrollment/src/styles.scss",
               "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css"
             ],
             "scripts": [],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "src/app/styles"
+                "src/styles"
               ]
             }
           },
@@ -177,13 +177,13 @@
               }
             ],
             "styles": [
-              "src/app/styles/styles.scss",
+              "src/styles/styles.scss",
               "projects/prime-registration/src/styles.scss"
             ],
             "scripts": [],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "src/app/styles"
+                "src/styles"
               ]
             },
             "preserveSymlinks": true
@@ -317,7 +317,16 @@
           "options": {
             "main": "projects/prime-core/src/test.ts",
             "tsConfig": "projects/prime-core/tsconfig.spec.json",
-            "karmaConfig": "projects/prime-core/karma.conf.js"
+            "karmaConfig": "projects/prime-core/karma.conf.js",
+            "styles": [
+              "src/styles.scss"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "projects/prime-core/lib/styles/",
+                "node_modules/"
+              ]
+            }
           }
         },
         "lint": {

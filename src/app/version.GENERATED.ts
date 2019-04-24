@@ -1,9 +1,9 @@
 // DO NOT DELETE OR APP WILL FAIL TO COMPILE! Generated from version.js
-export const gitCommit = 'e734f8fb';
-export const buildTime = '4/23/2019 at 3:41:15 PM';
+export const gitCommit = 'e51ec30f';
+export const buildTime = '4/24/2019 at 9:32:38 AM';
 /** App version retrieved from package.json. */
 export const projectVersion = '0.0.1';
 /** Human readable message  */
-export const message = 'Canonical Version: e734f8fb - 4/23/2019 at 3:41:15 PM (v0.0.1) \nhttps://github.com/bcgov/prime-web/commits/e734f8fb';
+export const message = 'Canonical Version: e51ec30f - 4/24/2019 at 9:32:38 AM (v0.0.1) \nhttps://github.com/bcgov/prime-web/commits/e51ec30f';
 /** If true, other values should be present. */
 export const success = true;

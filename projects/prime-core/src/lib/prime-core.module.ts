@@ -9,13 +9,18 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { FormsModule } from '@angular/forms';
 import { TypeaheadModule } from 'ngx-bootstrap';
 import { PhoneNumberComponent } from './components/phone-number/phone-number.component';
+// import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 
+const componentList = [
+  AddressComponent,
+  NameComponent,
+  ProfileComponent,
+  PhoneNumberComponent,
+ // ConfirmationComponent
+];
 @NgModule({
   declarations: [
-    AddressComponent,
-    NameComponent,
-    ProfileComponent,
-    PhoneNumberComponent
+    componentList
   ],
   imports: [
     CommonModule,
@@ -26,10 +31,7 @@ import { PhoneNumberComponent } from './components/phone-number/phone-number.com
     SharedCoreModule
   ],
   exports: [
-    AddressComponent,
-    NameComponent,
-    ProfileComponent,
-    PhoneNumberComponent
+    componentList
   ]
 })
 export class PrimeCoreModule { }
