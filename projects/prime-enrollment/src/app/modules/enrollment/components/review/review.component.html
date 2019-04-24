@@ -45,13 +45,13 @@
     </ng-container>
     <aside>
       <!-- <div class="label-row"> -->
-      <a [routerLink]="['/enrollment/professional']">
-        <h3>Professional Information</h3>
-      </a>
+
       <!-- <i class="fa fa-pencil"></i> -->
       <!-- </div> -->
       <ng-container *ngIf="certForms[0].valid">
-
+        <a [routerLink]="['/enrollment/professional']">
+          <h3>Professional Information</h3>
+        </a>
         <div *ngFor="let cert of certForms">
           <enroll-professional-information-block [license]="cert.value['collegeCert']"
             [college]="cert.value['licenseNum']" [class]="cert.value['licenseClass']"
