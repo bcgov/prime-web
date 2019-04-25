@@ -13,8 +13,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { UniqueQuestionDirective } from './components/appl-account/unique-question.directive';
 import { RegCacheService } from '@prime-registration/services/reg-cache.service';
 import { ApplConfirmationComponent } from './components/appl-confirmation/appl-confirmation.component';
-import { CacheApiService, PrimeCoreModule } from 'prime-core';
-
+import { CacheApiService, PrimeCoreModule, BASE_URL } from 'prime-core';
+import { environment } from '../../../environments/environment';
 
 const componentList = [
   ApplAccountComponent,
@@ -44,6 +44,7 @@ const componentList = [
     PrimeCoreModule
   ],
   providers: [
+    { provide: BASE_URL, useValue: environment.baseAPIUrl },
     CacheApiService,
     RegCacheService,
   ],

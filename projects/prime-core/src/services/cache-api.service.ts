@@ -1,9 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, InjectionToken, Injector } from '@angular/core';
 import { HttpHeaders, HttpErrorResponse, HttpParams, HttpClient } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { CacheInterface } from '../models/cache-api.model';
 import { AbstractHttpService } from 'moh-common-lib/services';
 
+/** BASE_URL: URL for REST requests */
+export const BASE_URL = new InjectionToken<string>( 'BaseUrl' );
 
 @Injectable({
   providedIn: 'root'
@@ -15,15 +17,13 @@ export class CacheApiService extends AbstractHttpService {
    */
   protected _headers: HttpHeaders = new HttpHeaders();
 
-  protected _url: string;
-
-  constructor( protected http: HttpClient ) {
+  constructor( protected http: HttpClient, private injector: Injector ) {
     super( http );
   }
 
   // Cache requests
   getCache( paramValue: string ) {
-    const url = this._url + '/getCache';
+    const url = this.injector.get( BASE_URL) + '/getCache';
     const params = new HttpParams().set( 'param', paramValue );
     return this.get<CacheInterface>( url, params );
   }
