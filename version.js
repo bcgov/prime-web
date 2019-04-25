@@ -2,7 +2,7 @@ const fs = require('fs');
 /* tslint:disable */
 
 // This files is called in the npm pre-build hooks. It creates a generated
-// version file which can be loaded by app.component.ts to log out.  
+// version file which can be loaded by app.component.ts to log out.
 
 // It is important that this file is written in pure node-compatible JS so it
 // can run on Jenkins. However the genreated file is a .ts as it's consumed by
@@ -10,7 +10,7 @@ const fs = require('fs');
 
 // To update project version, use npm version patch/minor/major
 // https://docs.npmjs.com/cli/version
-const { version: projectVersion } = require('../../package.json');
+const { version: projectVersion } = require('./package.json');
 
 require('child_process').exec('git rev-parse --short HEAD', function(err, stdout) {
     console.log('Last commit hash on this branch is:', stdout);

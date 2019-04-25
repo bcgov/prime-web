@@ -19,7 +19,7 @@
     "test:lib": "ng test prime-core",
     "pack:lib": "cd dist/prime-core && npm pack",
     "e2e:setup": "webdriver-manager update --versions.chrome 73.0.3683.75",
-    "prebuild": "node src/app/version.js",
+    "prebuild": "node ./version.js",
     "prebuild:reg": "npm run prebuild",
     "test-version": "npm version minor -m 'TEST build: %s'",
     "prod-version": "npm version major -m 'PROD build: %s'",

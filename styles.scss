@@ -32,7 +32,7 @@ $Prime-theme: mat-light-theme($Prime-primary, $Prime-accent, $Prime-warn);
 // Declare primary font
 @font-face {
   font-family: 'Myriad-Pro';
-  src: url('../fonts/MyriadWebPro.ttf');
+  src: url('./fonts/MyriadWebPro.ttf');
 }
 
 //------------------------------------------------------------------------------

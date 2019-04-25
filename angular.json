@@ -32,14 +32,14 @@
               }
             ],
             "styles": [
-              "src/styles/styles.scss",
+              "styles.scss",
               "projects/prime-enrollment/src/styles.scss",
-              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css"
+              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css"
             ],
             "scripts": [],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "src/styles"
+                "styles"
               ]
             }
           },
@@ -75,7 +75,7 @@
           "options": {
             "browserTarget": "prime-enrollment:build",
             "port": 4307,
-            "proxyConfig": "src/proxy.conf.json"
+            "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
@@ -177,13 +177,12 @@
               }
             ],
             "styles": [
-              "src/styles/styles.scss",
-              "projects/prime-registration/src/styles.scss"
+              "styles.scss"
             ],
             "scripts": [],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "src/styles"
+                "styles"
               ]
             },
             "preserveSymlinks": true
@@ -220,7 +219,7 @@
           "options": {
             "browserTarget": "prime-registration:build",
             "port": 4305,
-            "proxyConfig": "src/proxy.conf.json"
+            "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
@@ -242,7 +241,7 @@
             "tsConfig": "projects/prime-registration/tsconfig.spec.json",
             "karmaConfig": "projects/prime-registration/karma.conf.js",
             "styles": [
-              "projects/prime-registration/src/styles.scss"
+              "styles.scss"
             ],
             "scripts": [],
             "assets": [
@@ -319,7 +318,7 @@
             "tsConfig": "projects/prime-core/tsconfig.spec.json",
             "karmaConfig": "projects/prime-core/karma.conf.js",
             "styles": [
-              "src/styles.scss"
+              "styles.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
