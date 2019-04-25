@@ -30,7 +30,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { RadioButtonComponent } from './components/radio-button/radio-button.component';
 import { ErrorComponent } from './components/error-block/error.component';
 import { EnrollmentConfirmationComponent } from './components/enrollment-confirmation/enrollment-confirmation.component';
-import { PrimeCoreModule } from 'prime-core';
+import { PrimeCoreModule, BASE_URL } from 'prime-core';
 
 @NgModule({
   declarations: [
@@ -95,6 +95,9 @@ import { PrimeCoreModule } from 'prime-core';
     ErrorComponent,
     EnrollmentConfirmationComponent,
     PrimeCoreModule
+  ],
+  providers: [
+    { provide: BASE_URL, useValue: '/api/reg/rest/' }
   ]
 })
 export class SharedModule {}
