@@ -7,7 +7,6 @@ import {
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { EnrollmentStateService } from '../../services/enrollment-state.service';
-import { MatDialogRef } from '@angular/material/dialog';
 import { EnrollmentDataService } from '../../services/enrollment-data.service';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { IOrganization } from '@prime-enrollment/core/interfaces';

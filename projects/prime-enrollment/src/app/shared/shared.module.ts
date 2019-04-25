@@ -11,8 +11,6 @@ import { DeviceProviderComponent } from './components/device-provider/device-pro
 import { YesNoComponent } from './components/yes-no/yes-no.component';
 import { DetailsComponent } from './components/details/details.component';
 import { ActionBlockComponent } from './components/action-block/action-block.component';
-import { MatDialogModule, MatDialog } from '@angular/material/dialog';
-import { MatCardModule } from '@angular/material/card';
 import { ListItemComponent } from './components/list-item/list-item.component';
 import { ListItemHeaderComponent } from './components/list-item-header/list-item-header.component';
 import { ProfileBlockComponent } from './components/profile-block/profile-block.component';
@@ -60,8 +58,6 @@ import { Ng2TelInputModule } from 'ng2-tel-input';
     ReactiveFormsModule,
     NgSelectModule,
     SharedCoreModule,
-    MatDialogModule,
-    MatCardModule,
     PrimeSharedModule,
     NgxMyDatePickerModule.forRoot(),
     TextMaskModule,
@@ -79,7 +75,6 @@ import { Ng2TelInputModule } from 'ng2-tel-input';
     YesNoComponent,
     DetailsComponent,
     ActionBlockComponent,
-    MatCardModule,
     ListItemComponent,
     ListItemHeaderComponent,
     ProfileBlockComponent,
