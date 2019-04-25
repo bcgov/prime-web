@@ -44,7 +44,7 @@
     "google-libphonenumber": "^3.2.2",
     "hammerjs": "^2.0.8",
     "intl-tel-input": "^15.0.2",
-    "moh-common-lib": "0.0.27",
+    "moh-common-lib": "0.0.30",
     "moment": "^2.24.0",
     "mygovbc-bootstrap-theme": "^0.4.0",
     "ng2-tel-input": "^2.0.1",
