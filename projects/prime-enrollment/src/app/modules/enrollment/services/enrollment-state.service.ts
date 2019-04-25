@@ -27,16 +27,19 @@ export class EnrollmentStateService {
   submitLabel = 'Continue';
   submitLabel$ = of(this.submitLabel);
   routes;
-  // .pipe(multicast(() => new Subject()));
 
   selectedOrgs = false;
 
   profileForm = new Registrant();
-  declarationForm: FormGroup;
-  findOrganizationForm: FormGroup;
-  organizationForm: FormGroup[];
-  contactForm: FormGroup;
-  professionalForm: FormGroup;
+  declarationForm$ = new BehaviorSubject<FormGroup>(null);
+  declarationForm = this.declarationForm$.asObservable();
+  findOrganizationForm$ = new BehaviorSubject<FormGroup>(null);
+
+  organizationForm$ = new BehaviorSubject<FormGroup[]>(null);
+  contactForm$ = new BehaviorSubject<FormGroup>(null);
+  contactForm = this.contactForm$.asObservable();
+  professionalForm$ = new BehaviorSubject<any>(null);
+  professionalForm = this.professionalForm$.asObservable();
   dpFa: FormArray;
   submit: boolean;
 
@@ -83,15 +86,14 @@ export class EnrollmentStateService {
     if (fg.controls.deviceProvider.value) {
       if (this.dpFa.invalid) return false;
     }
-    console.log(fg);
     return true;
   }
 
   validateOrganizationForm() {
     let valid = true;
-    if (!this.organizationForm) return false;
-    if (this.organizationForm.length > 0) {
-      for (const form of this.organizationForm) {
+    if (!this.organizationForm$.value) return false;
+    if (this.organizationForm$.value.length > 0) {
+      for (const form of this.organizationForm$.value) {
         if (form.invalid) valid = false;
       }
     } else return false;
@@ -103,20 +105,17 @@ export class EnrollmentStateService {
       case 1:
         return true;
       case 2:
-        // return true;
-        return this.contactForm.valid;
+        return this.contactForm$.value.valid;
       case 3:
-        // return true;
-
-        const valid = this.validateProfessionalForm(this.professionalForm);
+        const valid = this.validateProfessionalForm(
+          this.professionalForm$.value
+        );
         console.log(valid);
         return valid;
       case 4:
-        // return true;
-
-        return this.declarationForm.valid;
+        console.log(this.declarationForm$.value);
+        return this.declarationForm$.value.valid;
       case 5:
-        // return true;
         return this.validateOrganizationForm();
       case 6:
         return true;
@@ -157,7 +156,7 @@ export class EnrollmentStateService {
       const fg = new FormGroup({ name, city, type, startDate, endDate });
       fga.push(fg);
     });
-    this.organizationForm = fga;
+    this.organizationForm$.next(fga);
     return fga;
   }
 
@@ -181,10 +180,10 @@ export class EnrollmentStateService {
         )
       )
       .subscribe((obs: any) => this.setIndex(obs.url));
-    this.contactForm = FormGenerator.contactForm;
-    this.declarationForm = FormGenerator.declarationForm;
-    this.findOrganizationForm = FormGenerator.findOrganizationForm;
-    this.professionalForm = FormGenerator.professionalForm;
+    this.contactForm$.next(FormGenerator.contactForm);
+    this.declarationForm$.next(FormGenerator.declarationForm);
+    this.findOrganizationForm$.next(FormGenerator.findOrganizationForm);
+    this.professionalForm$.next(FormGenerator.professionalForm);
     this.certForms = [FormGenerator.licenseForm];
     this.dpFa = new FormArray([FormFieldBuilder.deviceProviderFields]);
 
@@ -233,5 +232,20 @@ export class EnrollmentStateService {
     for (const key of Object.keys(fg.controls)) {
       if (key === name) return fg.removeControl(name);
     }
+  }
+
+  touchForm(fg: FormGroup) {
+    for (const control in fg.controls) {
+      if (fg.controls.hasOwnProperty(control)) {
+        const fc = fg.controls[control] as FormControl;
+        this.touchControl(fc);
+      }
+    }
+    return fg;
+  }
+
+  touchControl(fc: FormControl) {
+    fc.markAsTouched();
+    return fc;
   }
 }

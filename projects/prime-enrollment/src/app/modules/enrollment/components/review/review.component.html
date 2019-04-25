@@ -28,12 +28,11 @@
     <!-- <i class="fa fa-pencil"></i> -->
     <!-- </a> -->
     <!-- </div> -->
-
-    <enroll-contact-block [phone]="formValue('contactForm', 'phone')" [email]="formValue('contactForm', 'email')"
-      [voicePhone]="formValue('contactForm', 'voicePhone')">
-    </enroll-contact-block>
-    <!-- <div class="label-row"> -->
-
+    <ng-container *ngIf="contact$ | async as contact">
+      <enroll-contact-block [phone]="contact.phone" [email]="contact.email" [voicePhone]="contact.voicePhone">
+      </enroll-contact-block>
+      <!-- <div class="label-row"> -->
+    </ng-container>
     <a [routerLink]="['/enrollment/self-declaration']">
       <h3>Self Declaration</h3>
     </a>
@@ -46,13 +45,13 @@
     </ng-container>
     <aside>
       <!-- <div class="label-row"> -->
-      <a [routerLink]="['/enrollment/professional']">
-        <h3>Professional Information</h3>
-      </a>
+
       <!-- <i class="fa fa-pencil"></i> -->
       <!-- </div> -->
       <ng-container *ngIf="certForms[0].valid">
-
+        <a [routerLink]="['/enrollment/professional']">
+          <h3>Professional Information</h3>
+        </a>
         <div *ngFor="let cert of certForms">
           <enroll-professional-information-block [license]="cert.value['collegeCert']"
             [college]="cert.value['licenseNum']" [class]="cert.value['licenseClass']"
@@ -64,7 +63,6 @@
       <div>
         <!-- <div class="label-row"> -->
         <a [routerLink]="['/enrollment/pharmanet-access']">
-
           <h3>PharmaNet</h3>
         </a>
 

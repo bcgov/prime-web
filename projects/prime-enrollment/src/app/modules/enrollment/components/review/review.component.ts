@@ -16,15 +16,18 @@ export class ReviewComponent implements OnInit {
   declarations: Array<IDeclarationBlock>;
   certForms: FormGroup[];
   profileForm: Registrant;
-  organizationForm: FormGroup[] = this.stateSvc.organizationForm;
+  organizationForm: FormGroup[] = this.stateSvc.organizationForm$.value;
   $registrantName: Observable<any>;
   $preferredName: Observable<any>;
   $mailingAddress: Observable<any>;
+  contact$: Observable<FormGroup>;
 
   constructor(public stateSvc: EnrollmentStateService) {
-    this.df = this.stateSvc.declarationForm;
-    this.certForms = this.stateSvc.certForms;
+    this.df = this.stateSvc.declarationForm$.value;
+    [...this.certForms] = [...this.stateSvc.certForms];
     this.profileForm = this.stateSvc.profileForm;
+    const contact = this.stateSvc.contactForm$.value.value;
+    this.contact$ = of(contact);
   }
 
   ngOnInit() {

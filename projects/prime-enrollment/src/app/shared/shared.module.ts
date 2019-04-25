@@ -27,6 +27,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { RadioButtonComponent } from './components/radio-button/radio-button.component';
 import { ErrorComponent } from './components/error-block/error.component';
 import { EnrollmentConfirmationComponent } from './components/enrollment-confirmation/enrollment-confirmation.component';
+import { Ng2TelInputModule } from 'ng2-tel-input';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { EnrollmentConfirmationComponent } from './components/enrollment-confirm
     MatCardModule,
     PrimeSharedModule,
     NgxMyDatePickerModule.forRoot(),
-    TextMaskModule
+    TextMaskModule,
+    Ng2TelInputModule
   ],
   exports: [
     FormsModule,
@@ -91,7 +93,8 @@ import { EnrollmentConfirmationComponent } from './components/enrollment-confirm
     TextMaskModule,
     RadioButtonComponent,
     ErrorComponent,
-    EnrollmentConfirmationComponent
+    EnrollmentConfirmationComponent,
+    Ng2TelInputModule
   ]
 })
 export class SharedModule {}

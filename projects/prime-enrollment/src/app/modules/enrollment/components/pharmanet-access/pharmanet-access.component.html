@@ -11,29 +11,46 @@
     </ng-container>
   </common-page-section>
   <ng-container *ngIf="fa$ | async as fa">
-    <button class="btn btn-secondary btn-lg" (click)="openModal(modal)">Add Organization</button>
-    <div class="header-row">
-      <span>Organization Name</span>
-      <span>Type</span>
-      <span>City</span>
-      <span>Start Date</span>
-      <span>End Date</span>
-    </div>
-    <form *ngFor="let fg of fa; index as i" [formGroup]="fg">
-      <div class="list-item-row">
-        <span>{{ fg.controls.name.value }}</span>
-        <span>{{ fg.controls.type.value }}</span>
-        <span>{{ fg.controls.city.value }}</span>
-        <div class="input-group">
-          <common-datepicker formControlName="startDate"></common-datepicker>
-        </div>
-        <div class="input-group">
-          <common-datepicker formControlName="endDate"></common-datepicker>
-        </div>
-        <button class="btn delete" (click)="remove(i)" *ngIf="fa$.value.length > 1"><i style="color: red !important;"
-            class="fa fa-2x fa-times-circle"></i></button>
+    <button class="btn btn-secondary btn-lg mb-3" (click)="openModal(modal)">Add Organization</button>
+    <div class="card">
+      <div class="card-header">
+        <span class="col">Organization Name</span>
+        <span class="col">Type</span>
+        <span class="col">City</span>
+        <span class="col">Start Date</span>
+        <span class="col">End Date</span>
       </div>
-    </form>
+      <div class="card-body">
+        <!-- <ul class="list-group list-group-flush" *ngFor="let fg of fa; index as i" [formGroup]="fg" > -->
+        <form *ngFor="let fg of fa; index as i" [formGroup]="fg" class="card-body">
+          <!-- <li class="list-group-item"> -->
+          <div class="row">
+            <span class="col">{{ fg.controls.name.value }}</span>
+            <span class="col">{{ fg.controls.type.value }}</span>
+            <span class="col">{{ fg.controls.city.value }}</span>
+            <div class="input-group col">
+              <common-datepicker formControlName="startDate"></common-datepicker>
+              <enroll-error label="Start date" [touched]="fg.controls.startDate.touched"
+                [valid]="fg.controls.startDate.valid"></enroll-error>
+            </div>
+            <div class="input-group col">
+              <common-datepicker formControlName="endDate" placeholder="yyyy/mm/dd"></common-datepicker>
+              <enroll-error label="End date" [touched]="fg.controls.endDate.touched"
+                [valid]="fg.controls.endDate.valid">
+              </enroll-error>
+
+              <button class="btn delete values" (click)="remove(i)" *ngIf="fa$.value.length > 1"><i
+                  style="color: red !important;" class="fa fa-2x fa-times-circle"></i></button>
+            </div>
+          </div>
+          <!-- </li> -->
+        </form>
+        <!-- </ul> -->
+
+      </div>
+
+    </div>
+
   </ng-container>
   <ng-template #modal>
     <enroll-search-organization-modal (submit)="modalSubmit($event)" (result)="modalResult($event)">

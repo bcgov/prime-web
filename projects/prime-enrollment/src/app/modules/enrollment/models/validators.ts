@@ -4,6 +4,7 @@ export function behalfOfValidator(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
     if (!control.parent) return null;
     if (control.parent.controls['collegeCert'].value) return null;
+    if (control.value === null) return { value: 'On behalf of is required' };
     return control.parent.controls['onBehalfOf'].value
       ? control.value === null
         ? { invalidOnbehalfOf: { value: 'On behalf of job title is required' } }
@@ -104,7 +105,7 @@ export function numberValidator() {
 
 export function phoneNumberValidator() {
   return (control: AbstractControl): { [key: string]: any } | null => {
-    const forbidden = !/^^[\+]?[1][ ][(]?[0-9]{3}[)]?[ ][-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/gim.test(
+    const forbidden = !/^^[\+]?[0-9]{1,3}[ ][(]?[0-9]{3}[)]?[ ][-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/gim.test(
       control.value
     );
     return forbidden
