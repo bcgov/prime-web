@@ -9,6 +9,7 @@ import { filter, multicast } from 'rxjs/operators';
 import { IOrganization } from '@prime-enrollment/core/interfaces';
 import { BehaviorSubject, of, Subject } from 'rxjs';
 import { SimpleDate } from 'moh-common-lib';
+import { EnrollmentCacheService } from './enrollment-cache.service';
 
 const dateOfBirth = {
   day: 26,
@@ -27,6 +28,11 @@ export class EnrollmentStateService {
   submitLabel = 'Continue';
   submitLabel$ = of(this.submitLabel);
   routes;
+
+  countryName$: Subject<string> = new Subject<string>();
+  provinceName$: Subject<string> = new Subject<string>();
+  mailCountryName$: Subject<string> = new Subject<string>();
+  mailProvinceName$: Subject<string> = new Subject<string>();
 
   selectedOrgs = false;
 
@@ -110,10 +116,8 @@ export class EnrollmentStateService {
         const valid = this.validateProfessionalForm(
           this.professionalForm$.value
         );
-        console.log(valid);
         return valid;
       case 4:
-        console.log(this.declarationForm$.value);
         return this.declarationForm$.value.valid;
       case 5:
         return this.validateOrganizationForm();
@@ -168,7 +172,10 @@ export class EnrollmentStateService {
     this._selectedOrgSet.clear();
   }
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private cacheSvc: EnrollmentCacheService
+  ) {
     // TODO: come back to this function to state match once routing is done.
     this.router.events
       .pipe(
@@ -189,13 +196,23 @@ export class EnrollmentStateService {
 
     this.profileForm.address.street = '123 fake st';
     this.profileForm.address.postal = 'V9L 3W8';
-    this.profileForm.address.country = 'CA';
+    this.profileForm.address.country = 'CAN';
     this.profileForm.address.province = 'BC';
     this.profileForm.address.city = 'Victoria';
 
     this.profileForm.firstName = 'Sean';
     this.profileForm.lastName = 'Hamilton';
     this.profileForm.dateOfBirth = dateOfBirth;
+  }
+
+  async setCountry(country: string, type: any) {
+    const res = await this.cacheSvc.findCountry(country);
+    this[type].next(res);
+  }
+
+  async setProvince(province: string, type: any) {
+    const res = await this.cacheSvc.findProvince(province);
+    this[type].next(res);
   }
 
   addValueToFc(fc: FormControl, val: string | object[]) {

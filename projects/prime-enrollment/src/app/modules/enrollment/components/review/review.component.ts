@@ -4,6 +4,9 @@ import { FormGroup } from '@angular/forms';
 import { IDeclarationBlock } from '@prime-enrollment/core/interfaces';
 import { Registrant } from '../../../../../../../prime-registration/src/app/modules/registration/models/registrant.model';
 import { Observable, of } from 'rxjs';
+import { Address } from 'moh-common-lib/models/public_api';
+import { EnrollmentCacheService } from '../../services/enrollment-cache.service';
+import { mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-review',
@@ -22,7 +25,10 @@ export class ReviewComponent implements OnInit {
   $mailingAddress: Observable<any>;
   contact$: Observable<FormGroup>;
 
-  constructor(public stateSvc: EnrollmentStateService) {
+  constructor(
+    public stateSvc: EnrollmentStateService,
+    private cacheSvc: EnrollmentCacheService
+  ) {
     this.df = this.stateSvc.declarationForm$.value;
     [...this.certForms] = [...this.stateSvc.certForms];
     this.profileForm = this.stateSvc.profileForm;
@@ -36,14 +42,40 @@ export class ReviewComponent implements OnInit {
     this.$registrantName = of(
       `${profile.firstName || null} ${profile.lastName}`
     );
+    const sub = this.cacheSvc.provinceReady$
+      .pipe(mergeMap(() => this.cacheSvc.countryReady$.asObservable()))
+      .subscribe(obs => {
+        if (!obs) return;
+        this.stateSvc.setCountry(profile.address.country, 'countryName$');
+        this.stateSvc.setProvince(profile.address.province, 'provinceName$');
+        if (profile.mailAddress.hasOwnProperty('street')) {
+          this.setMailtoAddress(profile.mailAddress);
+          this.stateSvc.setCountry(
+            profile.mailAddress.country,
+            'mailCountryName$'
+          );
+          this.stateSvc.setProvince(
+            profile.mailAddress.province,
+            'mailProvinceName$'
+          );
+        } else {
+          this.setMailtoAddress(profile.address);
+          this.stateSvc.setCountry(profile.address.country, 'mailCountryName$');
+          this.stateSvc.setProvince(
+            profile.address.province,
+            'mailProvinceName$'
+          );
+        }
+      });
     profile.preferredFirstName
       ? (this.$preferredName = of(
           `${profile.preferredFirstName} ${profile.preferredLastName}`
         ))
       : (this.$preferredName = this.$registrantName);
-    profile.mailAddress.hasOwnProperty('street')
-      ? (this.$mailingAddress = of(profile.mailAddress))
-      : (this.$mailingAddress = of(profile.address));
+  }
+
+  setMailtoAddress(address: Address) {
+    this.$mailingAddress = of(address);
   }
 
   get sdForm() {
