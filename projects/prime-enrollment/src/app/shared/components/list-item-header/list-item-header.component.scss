@@ -1,21 +1,11 @@
 @import 'variables.scss';
 
-:host() {
-  display: grid;
+:host {
   background-color: $gray;
-  grid-template-columns: 20px 1fr 1fr 1fr;
-  width: 100%;
-  align-items: center;
-  justify-content: flex-start;
+  // width: 100%;
 
-
-
-  span {
-    padding: 5px;
-    // max-width: 60px;
-    text-align: left;
-    width: 100%;
-
+  .row {
+    background-color: $gray;
+    // width: 100%;
   }
-
 }
