@@ -54,6 +54,12 @@ h2 {
   }
 }
 
+.results-card {
+  background-color: $gray;
+  font-size: 14.5px;
+  color: black;
+}
+
 @media only screen and (min-width: 569px) {
   header {
     font-size: 2rem;

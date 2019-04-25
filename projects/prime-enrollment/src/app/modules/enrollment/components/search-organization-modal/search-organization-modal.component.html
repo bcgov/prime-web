@@ -28,18 +28,29 @@
       <button class="btn btn-md btn-secondary action-button" (click)="find()" *ngIf="search">Find</button>
     </form>
   </div>
-  <ul class="list-group list-group-flush" *ngIf="searchResults | async as results">
-    <li class="list-group-item">
-      <enroll-list-item-header [headers]="searchResultsHeaders | async "></enroll-list-item-header>
-    </li>
-
-    <li class="list-group-item">
-      <enroll-list-item *ngFor="let result of results" [data]="result" (selected)="selectedResults($event, result)">
-      </enroll-list-item>
-    </li>
-  </ul>
-  <div class="actions card-body">
-    <button class="btn btn-md cancel action-button" (click)="submit.emit(false)">Cancel</button><button
-      class="btn btn-primary btn-md add action-button" (click)="add()" [disabled]="!stateSvc.selectedOrgs">Add</button>
+</div>
+<ng-container *ngIf="searchResults | async as results">
+  <div class="card">
+    <div class="card-header results-card">
+      <span class="col">Organization Name</span>
+      <span class="col">Type</span>
+      <span class="col">City</span>
+      <span class="col">Start Date</span>
+      <span class="col">End Date</span>
+    </div>
+    <div class="card-body">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <enroll-list-item *ngFor="let result of results" [data]="result" (selected)="selectedResults($event, result)">
+          </enroll-list-item>
+        </li>
+      </ul>
+    </div>
   </div>
+
+</ng-container>
+
+<div class="actions">
+  <button class="btn btn-md cancel action-button" (click)="submit.emit(false)">Cancel</button><button
+    class="btn btn-primary btn-md add action-button" (click)="add()" [disabled]="!stateSvc.selectedOrgs">Add</button>
 </div>
