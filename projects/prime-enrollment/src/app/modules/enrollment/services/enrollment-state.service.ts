@@ -83,6 +83,7 @@ export class EnrollmentStateService {
   }
 
   validateProfessionalForm(fg: FormGroup): boolean {
+    console.log(fg);
     if (fg.invalid) return false;
     if (fg.controls.collegeCert.value) {
       for (const form of this._certForms) {

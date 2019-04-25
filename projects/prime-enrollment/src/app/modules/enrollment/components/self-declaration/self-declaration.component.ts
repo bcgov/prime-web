@@ -34,6 +34,5 @@ export class SelfDeclarationComponent implements OnInit {
       ? control.setValidators(Validators.required)
       : control.setValidators(null);
     control.updateValueAndValidity();
-    console.log(this.stateSvc.declarationForm$);
   }
 }
