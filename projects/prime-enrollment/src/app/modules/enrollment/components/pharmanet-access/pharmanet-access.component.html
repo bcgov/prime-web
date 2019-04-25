@@ -19,6 +19,7 @@
         <span class="col">City</span>
         <span class="col">Start Date</span>
         <span class="col">End Date</span>
+        <span class="col-1"></span>
       </div>
       <div class="card-body">
         <!-- <ul class="list-group list-group-flush" *ngFor="let fg of fa; index as i" [formGroup]="fg" > -->
@@ -33,15 +34,16 @@
               <enroll-error label="Start date" [touched]="fg.controls.startDate.touched"
                 [valid]="fg.controls.startDate.valid"></enroll-error>
             </div>
-            <div class="input-group col">
+            <div class="input-group col align-items-center">
               <common-datepicker formControlName="endDate" placeholder="yyyy/mm/dd"></common-datepicker>
               <enroll-error label="End date" [touched]="fg.controls.endDate.touched"
                 [valid]="fg.controls.endDate.valid">
               </enroll-error>
 
-              <button class="btn delete values" (click)="remove(i)" *ngIf="fa$.value.length > 1"><i
-                  style="color: red !important;" class="fa fa-2x fa-times-circle"></i></button>
+
             </div>
+            <button class="btn delete values col-1 p-0" (click)="remove(i)" *ngIf="fa$.value.length > 1"><i
+                style="color: red !important;" class="fa fa-2x fa-times-circle"></i></button>
           </div>
           <!-- </li> -->
         </form>

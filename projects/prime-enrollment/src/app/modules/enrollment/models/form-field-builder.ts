@@ -18,7 +18,8 @@ import {
   licenseClassValidator,
   contactValidator,
   insulinPumpValidator,
-  phoneNumberValidator
+  phoneNumberValidator,
+  behalfOfJobTitleValidator
 } from './validators';
 
 export abstract class FormFieldBuilder {
@@ -57,7 +58,7 @@ export abstract class FormFieldBuilder {
   }
 
   static get onBehalfOfFields() {
-    return new FormControl(null, [behalfOfValidator()]);
+    return new FormControl(null, [behalfOfJobTitleValidator()]);
   }
   static get professionInformationFields() {
     const deviceProvider = new FormControl(null, [Validators.required]);

@@ -16,10 +16,12 @@
       [dateOfBirth]="profileForm.dateOfBirth">
     </enroll-profile-block>
     <!-- <h3>Address</h3> -->
-    <enroll-address-block [address]="profileForm.address"></enroll-address-block>
+    <enroll-address-block [address]="profileForm.address" [province]="stateSvc.provinceName$"
+      [country]="stateSvc.countryName$"></enroll-address-block>
     <!-- <h3>Mailing Address</h3> -->
-    <enroll-address-block [address]="$mailingAddress | async"></enroll-address-block>
-    <!-- <div class="label-row"> -->
+    <enroll-address-block [address]="$mailingAddress | async" [province]="stateSvc.mailProvinceName$"
+      [country]="stateSvc.mailCountryName$"></enroll-address-block>
+    <!-- <div class=" label-row"> -->
 
     <a [routerLink]="['/enrollment/contact']">
       <h3>Contact</h3>

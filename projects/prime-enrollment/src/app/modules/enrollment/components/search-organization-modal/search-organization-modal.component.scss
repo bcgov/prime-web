@@ -39,20 +39,30 @@ h2 {
 }
 
 .actions {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  padding: 12px;
-  background-color: $gray;
 
   .cancel {
     background-color: #fff;
+    width: 160px;
   }
 
   .add {
     margin-left: 18px;
+    width: 160px;
   }
 }
+
+.results-card {
+  background-color: $gray;
+  font-size: 14.5px;
+  color: black;
+}
+
+.card-footer {
+
+  // background-color: $gray;
+}
+
+
 
 @media only screen and (min-width: 569px) {
   header {
