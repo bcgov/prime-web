@@ -3,11 +3,11 @@ import { Title } from '@angular/platform-browser';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
 import { Base } from 'moh-common-lib/models';
-import * as version from '@prime-core/version.GENERATED.ts';
+//import * as version from '@prime-core/version.GENERATED.ts';
 import { CommonLogger } from 'moh-common-lib/services/logger.service';
 
 /**
- * PrimeSharedAppComponent is a class containing shared functionality for the
+ * PrimeAppBase is a class containing shared functionality for the
  * various "AppComponent"s for each individual prime application. The important
  * functionality is in the constructor and ngOnInit().  Unfortunately this does
  * not come bundled with a template and instead templates must be updated for
@@ -17,7 +17,7 @@ import { CommonLogger } from 'moh-common-lib/services/logger.service';
  * your subclass. Otherwise, the title and accessability functions concerns
  * won't update.
  */
-export class PrimeSharedAppComponentBase extends Base implements OnInit {
+export class PrimeAppBase extends Base implements OnInit {
   title = 'Prime';
   public skipLinkPath;
   private SKIP_CONTENT_HASH = '#content';
@@ -27,9 +27,9 @@ export class PrimeSharedAppComponentBase extends Base implements OnInit {
                protected pTitleService: Title,
                protected logger: CommonLogger ) {
     super();
-    version.success
-      ? console.log('%c' + version.message, 'color: #036; font-size: 20px;')
-      : console.error(version.message);
+ //   version.success
+ //     ? console.log('%c' + version.message, 'color: #036; font-size: 20px;')
+ //     : console.error(version.message);
   }
 
   ngOnInit() {

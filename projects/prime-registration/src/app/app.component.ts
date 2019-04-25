@@ -2,18 +2,16 @@ import { Component, OnInit, forwardRef } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RegisterApiService } from './modules/registration/services/register-api.service';
-import { PrimeSharedAppComponentBase } from '@prime-core/prime-shared/components/prime-app-component/app.component';
+import { PrimeAppBase } from 'prime-core';
 import { LoggerService } from './services/logger.service';
 import { CommonLogger } from 'moh-common-lib/services/logger.service';
-import { CacheApiService } from 'prime-core';
-import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent extends PrimeSharedAppComponentBase implements OnInit {
+export class AppComponent extends PrimeAppBase implements OnInit {
   title = 'Prime Registration';
   public skipLinkPath;
 

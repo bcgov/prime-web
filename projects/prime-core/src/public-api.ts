@@ -10,6 +10,7 @@ export * from './models/api-base.model';
 export * from './models/cache-api.model';
 export * from './models/documents.interface';
 export * from './models/bcsc-session';
+export * from './models/app-base.class';
 
 
 // Services

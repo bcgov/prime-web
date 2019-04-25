@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PrimeSharedAppComponentBase } from '@prime-core/prime-shared/components/prime-app-component/app.component';
+import { PrimeAppBase } from 'prime-core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { CommonLogger } from 'moh-common-lib/services';
@@ -10,7 +10,7 @@ import { CommonLogger } from 'moh-common-lib/services';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent extends PrimeSharedAppComponentBase implements OnInit {
+export class AppComponent extends PrimeAppBase implements OnInit {
   title = 'prime-enrollment';
 
   constructor(protected router: Router,
