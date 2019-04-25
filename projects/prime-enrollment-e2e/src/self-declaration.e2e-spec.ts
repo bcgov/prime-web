@@ -4,7 +4,7 @@ import { PrimeConstants } from '../../../src/app/models/prime-constants';
 import { FakeDataMohReg } from './registration.data';
 import { PrimeTestPage } from '../../../e2e/src/app.po';
 
-fdescribe('BCSC Registration - Self-Declaration Page', () => {
+fdescribe('BCSC Enrollment - Self-Declaration Page', () => {
     let page: SelfDeclarationPage;
     const data = new FakeDataMohReg();
     let selfDeclarationData;
@@ -23,18 +23,28 @@ fdescribe('BCSC Registration - Self-Declaration Page', () => {
         expect(page.formErrors().count()).toBe(0, 'should be no errors on page load');
     });
 
-    it('02. must display guidance information to provide additional details when any of the Self-Declaration responses are Yes.', () => {
+// tslint:disable-next-line: max-line-length
+    it('02. (7.3.31) must display guidance information to provide additional details when any of the Self-Declaration responses are Yes.', () => {
         page.navigateTo();
-        page.clickOption('Have you ever been the subject', 'fctrue');
+        page.clickOptions('Have you ever been the subject', 'fctrue');
         // expect(page.checkTips()).toBe(true);
         // browser.sleep(1000 * 5);
         expect(page.formErrors().count()).toBe(0, 'should be no errors on page load');
     });
 
-    it('03. must capture additional details in free format text for each Self-Declaration question answered Yes.', () => {
+    it('03. (7.3.32) must capture additional details in free format text for each Self-Declaration question answered Yes.', () => {
         page.navigateTo();
-        page.clickOption('Have you ever been the subject', 'fctrue');
+        page.clickOptions('Have you ever been the subject', 'fctrue');
         page.typeDescription('convictionDesc', 'sample string');
+        expect(page.formErrors().count()).toBe(0, 'should be no errors on page load');
+    });
+
+    xit('04. (7.3.33) must allow upload of supporting documents if any Self-Declaration question was answered Yes.', () => {
+        page.navigateTo();
+        page.clickOptions('Have you ever been the subject', 'fctrue');
+        page.typeDescription('convictionDesc', 'sample string');
+        page.uploadFile();
+        browser.sleep(1000 * 5);
         expect(page.formErrors().count()).toBe(0, 'should be no errors on page load');
     });
 
