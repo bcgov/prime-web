@@ -10,7 +10,8 @@
       <form [formGroup]="fg">
         <label class="control-label">Do you have a college certification?
         </label>
-        <enroll-radio-button formControlName="collegeCert"></enroll-radio-button>
+        <enroll-radio-button formControlName="collegeCert"
+          (click)="requireField(fg.controls.onBehalfOf, fg.value.collegeCert)"></enroll-radio-button>
         <enroll-error label="College certification" [touched]="fg.controls.collegeCert.touched"
           [valid]="fg.controls.collegeCert.valid"></enroll-error>
         <div *ngIf="fg.controls['collegeCert'].value">
@@ -40,8 +41,8 @@
               (remove)="removeDeviceFc(dpFa)">
             </enroll-device-provider>
           </ng-container>
-          <button class="btn btn-md btn-secondary" (click)="addDeviceFc(dpFa)" [disabled]="dpFa.invalid">Add Another
-            License</button>
+          <!-- <button class="btn btn-md btn-secondary" (click)="addDeviceFc(dpFa)" [disabled]="dpFa.invalid">Add Another
+            License</button> -->
 
         </div>
         <ng-container *ngIf="fg.value.deviceProvider">

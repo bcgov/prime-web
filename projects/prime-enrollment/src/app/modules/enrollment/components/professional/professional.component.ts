@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormArray, FormGroup } from '@angular/forms';
+import { FormArray, FormGroup, FormControl } from '@angular/forms';
 import { EnrollmentStateService } from '../../services/enrollment-state.service';
 import { FormFieldBuilder } from '../../models/form-field-builder';
 import { FormGenerator } from '../../models/form-generator';
@@ -61,7 +61,15 @@ export class ProfessionalComponent implements OnInit {
     this.apOptions = of(apOptions);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    // this.stateSvc.professionalForm$.value.valueChanges.subscribe(obs =>
+    //   console.log(this.stateSvc.professionalForm$.value)
+    // );
+  }
+
+  requireField(fc: FormControl, bool: boolean) {
+    fc.updateValueAndValidity();
+  }
 
   addLicenseForm(fa: FormGroup[]) {
     const fg = this.stateSvc.addFormToArray(FormGenerator.licenseForm, fa);
