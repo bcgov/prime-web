@@ -8,23 +8,37 @@
   <common-page-section layout="double">
     <!-- <div class="label-row"> -->
     <a [routerLink]="['/enrollment/profile']">
-      <h3>Profile</h3>
+      <h2>Profile</h2>
     </a>
     <!-- <i class="fa fa-pencil"></i></a> -->
     <!-- </div> -->
     <enroll-profile-block [name]="$registrantName | async" [preferredName]="$preferredName | async"
       [dateOfBirth]="profileForm.dateOfBirth">
     </enroll-profile-block>
-    <!-- <h3>Address</h3> -->
+    <!-- <h2>Address</h2> -->
+    <div class="address-label-row m-0 pl-3">
+      <a [routerLink]="['/enrollment/profile']">
+        <h3 class="m-0">Address</h3>
+      </a>
+    </div>
     <enroll-address-block [address]="profileForm.address" [province]="stateSvc.provinceName$"
       [country]="stateSvc.countryName$"></enroll-address-block>
-    <!-- <h3>Mailing Address</h3> -->
+    <!-- <h2>Mailing Address</h2> -->
+    <div class="address-label-row label-row m-0 pl-3 pr-3">
+      <a [routerLink]="['/enrollment/profile']">
+        <h3 class="m-0">Mailing Address</h3>
+      </a>
+      <a [routerLink]="['/enrollment/profile']">
+
+        <i class="fa fa-pencil"></i>
+      </a>
+    </div>
     <enroll-address-block [address]="$mailingAddress | async" [province]="stateSvc.mailProvinceName$"
       [country]="stateSvc.mailCountryName$"></enroll-address-block>
     <!-- <div class=" label-row"> -->
 
     <a [routerLink]="['/enrollment/contact']">
-      <h3>Contact</h3>
+      <h2>Contact</h2>
     </a>
 
     <!-- <i class="fa fa-pencil"></i> -->
@@ -36,7 +50,7 @@
       <!-- <div class="label-row"> -->
     </ng-container>
     <a [routerLink]="['/enrollment/self-declaration']">
-      <h3>Self Declaration</h3>
+      <h2>Self Declaration</h2>
     </a>
     <!-- <i class="fa fa-pencil"></i> -->
     <!-- </div> -->
@@ -52,7 +66,7 @@
       <!-- </div> -->
       <ng-container *ngIf="certForms[0].valid">
         <a [routerLink]="['/enrollment/professional']">
-          <h3>Professional Information</h3>
+          <h2>Professional Information</h2>
         </a>
         <div *ngFor="let cert of certForms">
           <enroll-professional-information-block [license]="cert.value['collegeCert']"
@@ -65,7 +79,7 @@
       <div>
         <!-- <div class="label-row"> -->
         <a [routerLink]="['/enrollment/pharmanet-access']">
-          <h3>PharmaNet</h3>
+          <h2>PharmaNet</h2>
         </a>
 
         <!-- <i class="fa fa-pencil"></i> -->
