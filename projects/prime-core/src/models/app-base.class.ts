@@ -4,7 +4,7 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
 import { Base } from 'moh-common-lib/models';
 //import * as version from '@prime-core/version.GENERATED.ts';
-import { CommonLogger } from 'moh-common-lib/services/logger.service';
+import { CommonLogger } from 'moh-common-lib/services';
 
 /**
  * PrimeAppBase is a class containing shared functionality for the

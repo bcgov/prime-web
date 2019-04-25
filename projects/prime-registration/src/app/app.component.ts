@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { RegisterApiService } from './modules/registration/services/register-api.service';
 import { PrimeAppBase } from 'prime-core';
 import { LoggerService } from './services/logger.service';
-import { CommonLogger } from 'moh-common-lib/services/logger.service';
+import { CommonLogger } from 'moh-common-lib/services';
 
 @Component({
   selector: 'app-root',
