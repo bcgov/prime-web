@@ -1,10 +1,11 @@
-<header mat-dialog-title class="mat-elevation-z2">
-  <h2>Find and Add an Organization</h2>
-  <button class="btn close-button" (click)="submit.emit(false)"><i
-      class="fa fa-2x fa-times-circle-o close"></i></button>
-</header>
-<mat-card class="mat-elevation-z0">
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    Find and Add an Organization
+    <button class="btn close-button" (click)="submit.emit(false)"><i
+        class="fa fa-2x fa-times-circle-o close"></i></button>
+  </div>
+
+  <div class="card-body">
     <form [formGroup]="fg">
       <div class="form-group">
         <label class="control-label" for="type">Type</label>
@@ -26,15 +27,19 @@
       </div>
       <button class="btn btn-md btn-secondary action-button" (click)="find()" *ngIf="search">Find</button>
     </form>
-  </mat-card-content>
-  <ng-container *ngIf="searchResults | async as results">
-    <enroll-list-item-header [headers]="searchResultsHeaders | async "></enroll-list-item-header>
+  </div>
+  <ul class="list-group list-group-flush" *ngIf="searchResults | async as results">
+    <li class="list-group-item">
+      <enroll-list-item-header [headers]="searchResultsHeaders | async "></enroll-list-item-header>
+    </li>
 
-    <enroll-list-item *ngFor="let result of results" [data]="result" (selected)="selectedResults($event, result)">
-    </enroll-list-item>
-  </ng-container>
-</mat-card>
-<div class="actions">
-  <button class="btn btn-md cancel action-button" (click)="submit.emit(false)">Cancel</button><button
-    class="btn btn-primary btn-md add action-button" (click)="add()" [disabled]="!stateSvc.selectedOrgs">Add</button>
+    <li class="list-group-item">
+      <enroll-list-item *ngFor="let result of results" [data]="result" (selected)="selectedResults($event, result)">
+      </enroll-list-item>
+    </li>
+  </ul>
+  <div class="actions card-body">
+    <button class="btn btn-md cancel action-button" (click)="submit.emit(false)">Cancel</button><button
+      class="btn btn-primary btn-md add action-button" (click)="add()" [disabled]="!stateSvc.selectedOrgs">Add</button>
+  </div>
 </div>
