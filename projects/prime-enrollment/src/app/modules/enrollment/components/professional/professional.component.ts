@@ -1,5 +1,11 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormArray, FormGroup, FormControl } from '@angular/forms';
+import {
+  FormArray,
+  FormGroup,
+  FormControl,
+  Validator,
+  Validators
+} from '@angular/forms';
 import { EnrollmentStateService } from '../../services/enrollment-state.service';
 import { FormFieldBuilder } from '../../models/form-field-builder';
 import { FormGenerator } from '../../models/form-generator';
@@ -61,8 +67,9 @@ export class ProfessionalComponent implements OnInit {
     this.onBehalfOfOptions = of(oboOptions);
     this.apOptions = of(apOptions);
     this.fg$.subscribe(obs => {
-      if (obs.value.onBehalfOf !== null && !obs.value.deviceProvider)
+      if (obs.value.onBehalfOf !== null && !obs.value.deviceProvider) {
         return (this.showObo = true);
+      }
       if (!obs.value.deviceProvider) return (this.showObo = true);
       else return (this.showObo = false);
     });
@@ -75,7 +82,8 @@ export class ProfessionalComponent implements OnInit {
   }
 
   requireField(fc: FormControl, bool: boolean) {
-    fc.updateValueAndValidity();
+    bool ? fc.clearValidators() : fc.setValidators([Validators.required]);
+    fc.updateValueAndValidity({ emitEvent: true });
   }
 
   addLicenseForm(fa: FormGroup[]) {

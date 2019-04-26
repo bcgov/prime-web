@@ -8,7 +8,10 @@ import {
   OnDestroy
 } from '@angular/core';
 import { ControlContainer, NgForm } from '@angular/forms';
-import { CountryList, ProvinceList } from '@prime-core/prime-shared/components/address/address.component';
+import {
+  CountryList,
+  ProvinceList
+} from '@prime-core/prime-shared/components/address/address.component';
 import { of, Observable, Subscription } from 'rxjs';
 import { PrimeConstants } from '@prime-core/models/prime-constants';
 import { Base } from 'moh-common-lib/models';
@@ -31,7 +34,9 @@ export class ProfileComponent extends Base implements OnInit, OnDestroy {
   @Input() provinceList: ProvinceList[] = [];
   @Input() editIdentityInfo: boolean = true;
   @Input() pageTitle: string = 'Profile Information';
-  @Output() dataChange: EventEmitter<PrimePerson> = new EventEmitter<PrimePerson>();
+  @Output() dataChange: EventEmitter<PrimePerson> = new EventEmitter<
+    PrimePerson
+  >();
 
   public defaultCountry = PrimeConstants.CANADA;
   public defaultProvince = PrimeConstants.BRITISH_COLUMBIA;
@@ -45,21 +50,20 @@ export class ProfileComponent extends Base implements OnInit, OnDestroy {
   private _firstNameCtrl = 'first_name';
   private _preferredFirstNameCtrl = 'preferred_first_name';
   private _preferredLastNameCtrl = 'preferred_last_name';
-  private _requiredError = {required: true};
+  private _requiredError = { required: true };
 
   subscriptions: Subscription[];
 
-  constructor( private cntrlContainer: ControlContainer) {
+  constructor(private cntrlContainer: ControlContainer) {
     super();
-    this.form = (cntrlContainer as NgForm);
+    this.form = cntrlContainer as NgForm;
   }
 
-  emitChanges( itm: PrimePerson ) {
-    this.dataChange.emit( itm );
+  emitChanges(itm: PrimePerson) {
+    this.dataChange.emit(itm);
   }
 
   ngOnInit() {
-
     // Listen for submission of form
     let newObs = new Observable();
     newObs = of(this.data);
@@ -77,33 +81,39 @@ export class ProfileComponent extends Base implements OnInit, OnDestroy {
     this.data.identityIsMailingAddress = !this.data.identityIsMailingAddress;
   }
 
-  onBlur( $event ) {
-
-    if ( event.srcElement.id === this._preferredFirstNameCtrl ||
-         event.srcElement.id === this._preferredLastNameCtrl  ||
-         event.srcElement.id === this._firstNameCtrl ) {
-
-      const hasPreferFirstName = !!this.form.controls[this._preferredFirstNameCtrl].value;
-      const hasPreferLastName = !!this.form.controls[this._preferredLastNameCtrl].value;
+  onBlur($event) {
+    if (
+      event.srcElement.id === this._preferredFirstNameCtrl ||
+      event.srcElement.id === this._preferredLastNameCtrl ||
+      event.srcElement.id === this._firstNameCtrl
+    ) {
+      const hasPreferFirstName = !!this.form.controls[
+        this._preferredFirstNameCtrl
+      ].value;
+      const hasPreferLastName = !!this.form.controls[
+        this._preferredLastNameCtrl
+      ].value;
       const hasFirstName = !!this.form.controls[this._firstNameCtrl].value;
 
       // If either preferred name is entered and user has firstname, both must be entered.
-      if ( hasFirstName ) {
-
-        if ( hasPreferFirstName && !hasPreferLastName ) {
-          this.setCntrolError( this._preferredLastNameCtrl, this._requiredError );
-        } else if ( !hasPreferFirstName && hasPreferLastName ) {
-          this.setCntrolError( this._preferredFirstNameCtrl, this._requiredError );
+      if (hasFirstName) {
+        if (hasPreferFirstName && !hasPreferLastName) {
+          this.setCntrolError(this._preferredLastNameCtrl, this._requiredError);
+        } else if (!hasPreferFirstName && hasPreferLastName) {
+          this.setCntrolError(
+            this._preferredFirstNameCtrl,
+            this._requiredError
+          );
         } else {
-          this.setCntrolError( this._preferredLastNameCtrl, null );
-          this.setCntrolError( this._preferredFirstNameCtrl, null );
+          this.setCntrolError(this._preferredLastNameCtrl, null);
+          this.setCntrolError(this._preferredFirstNameCtrl, null);
         }
       }
     }
   }
 
-  private setCntrolError( ctrlName: string, error: any ) {
-    this.form.controls[ctrlName].setErrors( error );
+  private setCntrolError(ctrlName: string, error: any) {
+    this.form.controls[ctrlName].setErrors(error);
     this.form.controls[ctrlName].markAsTouched();
   }
 }
