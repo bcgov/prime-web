@@ -53,7 +53,7 @@
             [valid]="fg.controls.insulinPump.valid"></enroll-error>
         </ng-container>
         <ng-container
-          *ngIf="fg.value.onBehalfOf !== null || !fg.value.collegeCert && fg.value.deviceProvider === false || dpFa.valid === true && fg.controls['insulinPump'].valid === true && !fg.value.collegeCert">
+          *ngIf="fg.value.collegeCert === false && fg.value.onBehalfOf !== null || !fg.value.collegeCert && fg.value.deviceProvider === false || dpFa.valid === true && fg.controls['insulinPump'].valid === true && !fg.value.collegeCert">
           <label class="control-label">Are you accessing pharmanet on behalf of someone else?</label>
 
           <enroll-radio-button formControlName="onBehalfOf" labelOne="oboFalse" labelTwo="oboTrue" name="obo">
