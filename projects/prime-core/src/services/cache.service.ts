@@ -9,9 +9,7 @@ import { ProvinceList, CountryList } from '../lib/components/address/address.com
  * TODO: Set up service to store data returned from the cache service once
  *       determined how it will be configured/setup
  */
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class CacheService {
   // We use private BehaviorSubjects to cache results instead of having repeat
   // HTTP requests. This way the response is cached for the lifetime of the
