@@ -26,7 +26,7 @@ import { PrimeConstants } from '../../../models/prime-constants';
   ]
 })
 export class ProfileComponent extends Base implements OnInit, OnDestroy {
-  @Input() data: PrimePerson;
+  @Input() data: PrimePerson = new PrimePerson();
   @Input() countryList: CountryList[] = [];
   @Input() provinceList: ProvinceList[] = [];
   @Input() editIdentityInfo: boolean = true;

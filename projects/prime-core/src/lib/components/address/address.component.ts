@@ -61,7 +61,7 @@ export class AddressComponent extends Base implements OnInit, OnChanges {
 
   @Input() disabled: boolean = false;
   @Input() isRequired: boolean = false;
-  @Input() address: Address;
+  @Input() address: Address = new Address();
   @Input() countryList: CountryList[];
   @Input() defaultCountry: string;
   @Input() provinceList: ProvinceList[];

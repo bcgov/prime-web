@@ -55,7 +55,7 @@
     "ngx-mydatepicker": "^2.4.9",
     "pdfjs-dist": "^2.0.550",
     "popper.js": "^1.14.7",
-    "prime-core": "file:dist/prime-core",
+    "prime-core": "file:dist/prime-core/prime-core-0.0.1.tgz",
     "rxjs": "^6.4.0",
     "sha1": "^1.1.1",
     "zone.js": "^0.8.26"

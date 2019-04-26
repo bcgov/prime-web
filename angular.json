@@ -321,9 +321,6 @@
             "main": "projects/prime-core/src/test.ts",
             "tsConfig": "projects/prime-core/tsconfig.spec.json",
             "karmaConfig": "projects/prime-core/karma.conf.js",
-            "styles": [
-              "styles.scss"
-            ],
             "stylePreprocessorOptions": {
               "includePaths": [
                 "projects/prime-core/lib/styles/",

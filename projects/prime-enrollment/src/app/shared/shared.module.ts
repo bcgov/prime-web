@@ -28,6 +28,7 @@ import { RadioButtonComponent } from './components/radio-button/radio-button.com
 import { ErrorComponent } from './components/error-block/error.component';
 import { EnrollmentConfirmationComponent } from './components/enrollment-confirmation/enrollment-confirmation.component';
 import { PrimeCoreModule, BASE_URL } from 'prime-core';
+import { environment } from '../../environments/environment';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,6 @@ import { PrimeCoreModule, BASE_URL } from 'prime-core';
     NgxMyDatePickerModule.forRoot(),
     TextMaskModule,
     PrimeCoreModule
-    Ng2TelInputModule
   ],
   exports: [
     FormsModule,
@@ -90,8 +90,7 @@ import { PrimeCoreModule, BASE_URL } from 'prime-core';
     PrimeCoreModule
   ],
   providers: [
-    { provide: BASE_URL, useValue: '/api/reg/rest/' }
-    Ng2TelInputModule
+    { provide: BASE_URL, useValue: environment.loggingURL }
   ]
 })
 export class SharedModule {}
