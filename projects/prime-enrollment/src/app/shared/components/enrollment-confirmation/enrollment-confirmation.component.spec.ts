@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EnrollmentConfirmationComponent } from './enrollment-confirmation.component';
-import { PrimeSharedModule } from '@prime-core/prime-shared/prime-shared.module';
+import { PrimeCoreModule } from 'prime-core';
 
 describe('EnrollmentConfirmationComponent', () => {
   let component: EnrollmentConfirmationComponent;
@@ -9,7 +9,7 @@ describe('EnrollmentConfirmationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [PrimeSharedModule],
+      imports: [PrimeCoreModule],
       declarations: [EnrollmentConfirmationComponent]
     }).compileComponents();
   }));

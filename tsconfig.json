@@ -19,9 +19,6 @@
     "skipLibCheck": true,
     "paths": {
       "*": ["types/*"],
-      "@prime-core/*": [
-        "src/app/*"
-      ],
       "@prime-registration/*": [
         "projects/prime-registration/src/app/*"
       ],

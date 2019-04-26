@@ -3,7 +3,6 @@ import { Title } from '@angular/platform-browser';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
 import { Base } from 'moh-common-lib/models';
-//import * as version from '@prime-core/version.GENERATED.ts';
 import { CommonLogger } from 'moh-common-lib/services';
 
 /**
