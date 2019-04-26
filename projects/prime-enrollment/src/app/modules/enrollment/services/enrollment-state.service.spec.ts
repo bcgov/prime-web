@@ -11,13 +11,14 @@ import {
   FormGroup
 } from '@angular/forms';
 import { FormFieldBuilder } from '../models/form-field-builder';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('EnrollmentStateService', () => {
   let activeRoute = new MockActivatedRoute();
 
   beforeEach(() =>
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, ReactiveFormsModule]
+      imports: [RouterTestingModule, ReactiveFormsModule, HttpClientModule]
     })
   );
 
