@@ -1,4 +1,4 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable, Injector, InjectionToken } from '@angular/core';
 import {
   HttpHeaders,
   HttpErrorResponse,
@@ -7,6 +7,9 @@ import {
 import { throwError } from 'rxjs';
 import { CacheInterface } from '../models/cache-api.model';
 import { AbstractHttpService } from 'moh-common-lib/services';
+
+/** BASE_URL: URL for REST requests */
+export const BASE_URL = new InjectionToken<string>( 'BaseUrl' );
 
 /** BASE_URL: URL for REST requests */
 @Injectable({ providedIn: 'root' })
