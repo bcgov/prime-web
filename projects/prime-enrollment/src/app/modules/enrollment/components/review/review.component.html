@@ -7,7 +7,7 @@
   </p>
   <common-page-section layout="double">
     <!-- <div class="label-row"> -->
-    <a [routerLink]="['/enrollment/profile']">
+    <a [routerLink]="['/enrolment/profile']">
       <h2>Profile</h2>
     </a>
     <!-- <i class="fa fa-pencil"></i></a> -->
@@ -17,7 +17,7 @@
     </enroll-profile-block>
     <!-- <h2>Address</h2> -->
     <div class="address-label-row m-0 pl-3">
-      <a [routerLink]="['/enrollment/profile']">
+      <a [routerLink]="['/enrolment/profile']">
         <h3 class="m-0">Address</h3>
       </a>
     </div>
@@ -25,10 +25,10 @@
       [country]="stateSvc.countryName$"></enroll-address-block>
     <!-- <h2>Mailing Address</h2> -->
     <div class="address-label-row label-row m-0 pl-3 pr-3">
-      <a [routerLink]="['/enrollment/profile']">
+      <a [routerLink]="['/enrolment/profile']">
         <h3 class="m-0">Mailing Address</h3>
       </a>
-      <a [routerLink]="['/enrollment/profile']">
+      <a [routerLink]="['/enrolment/profile']">
 
         <i class="fa fa-pencil"></i>
       </a>
@@ -37,10 +37,10 @@
       [country]="stateSvc.mailCountryName$"></enroll-address-block>
     <!-- <div class=" label-row"> -->
     <div class="label-row">
-      <a [routerLink]="['/enrollment/contact']">
+      <a [routerLink]="['/enrolment/contact']">
         <h2>Contact</h2>
       </a>
-      <a [routerLink]="['/enrollment/contact']">
+      <a [routerLink]="['/enrolment/contact']">
 
         <i class="fa fa-pencil"></i>
       </a>
@@ -51,10 +51,10 @@
       <!-- <div class="label-row"> -->
     </ng-container>
     <div class="label-row">
-      <a [routerLink]="['/enrollment/self-declaration']">
+      <a [routerLink]="['/enrolment/self-declaration']">
         <h2>Self Declaration</h2>
       </a>
-      <a [routerLink]="['/enrollment/self-declaration']">
+      <a [routerLink]="['/enrolment/self-declaration']">
 
         <i class="fa fa-pencil"></i>
       </a>
@@ -69,10 +69,10 @@
       <ng-container *ngIf="certForms[0].valid">
         <div class="label-row">
 
-          <a [routerLink]="['/enrollment/professional']">
+          <a [routerLink]="['/enrolment/professional']">
             <h2>Professional Information</h2>
           </a>
-          <a [routerLink]="['/enrollment/professional']">
+          <a [routerLink]="['/enrolment/professional']">
             <i class="fa fa-pencil"></i>
           </a>
 
@@ -87,10 +87,10 @@
       </ng-container>
       <div>
         <div class="label-row">
-          <a [routerLink]="['/enrollment/pharmanet-access']">
+          <a [routerLink]="['/enrolment/pharmanet-access']">
             <h2>PharmaNet</h2>
           </a>
-          <a [routerLink]="['/enrollment/pharmanet-access']">
+          <a [routerLink]="['/enrolment/pharmanet-access']">
 
             <i class="fa fa-pencil"></i>
           </a>
