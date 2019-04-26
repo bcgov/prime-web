@@ -38,7 +38,7 @@ export class EnrollmentComponent extends Container implements OnInit {
   constructor(public stateSvc: EnrollmentStateService, private router: Router) {
     super();
     this.setProgressSteps(subRoutes);
-    this.stateSvc.routes = mappedRoutes(subRoutes, 'enrollment');
+    this.stateSvc.routes = mappedRoutes(subRoutes, 'enrolment');
   }
 
   ngOnInit() {}
