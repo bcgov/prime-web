@@ -1,5 +1,15 @@
 const fs = require('fs');
+const minimist = require('minimist');
+
+let args = minimist(process.argv.slice(2), {
+    alias: {
+        p: 'project'
+    }
+});
+
 /* tslint:disable */
+var projectPath = '/projects/' + args.p;
+var jsonPkg = './' + projectPath + '/package.json';
 
 // This files is called in the npm pre-build hooks. It creates a generated
 // version file which can be loaded by app.component.ts to log out.
@@ -10,7 +20,7 @@ const fs = require('fs');
 
 // To update project version, use npm version patch/minor/major
 // https://docs.npmjs.com/cli/version
-const { version: projectVersion } = require('./package.json');
+const { version: projectVersion } = require( jsonPkg );
 
 require('child_process').exec('git rev-parse --short HEAD', function(err, stdout) {
     console.log('Last commit hash on this branch is:', stdout);
@@ -46,9 +56,10 @@ content = `//DO NOT DELETE OR APP WILL FAIL TO COMPILE! Generated from version.j
 export const success = ${success};
 export const message = 'Version error. Unable to generate version.'`
     }
+    console.log( __dirname );
 
     fs.writeFileSync(
-        __dirname + '/version.GENERATED.ts',
+        __dirname + projectPath + '/version.GENERATED.ts',
         content,
         {encoding: 'utf8'}
     )
