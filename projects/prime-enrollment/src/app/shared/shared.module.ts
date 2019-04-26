@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedCoreModule } from 'moh-common-lib';
-import { HomePageComponent } from './components/home-page/home-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TypeaheadModule, BsDropdownModule } from 'ngx-bootstrap';
@@ -29,7 +28,6 @@ import { Ng2TelInputModule } from 'ng2-tel-input';
 
 @NgModule({
   declarations: [
-    HomePageComponent,
     // ProfileComponent,
     SharedProfileComponent,
     LicenseComponent,
@@ -68,7 +66,6 @@ import { Ng2TelInputModule } from 'ng2-tel-input';
     ReactiveFormsModule,
     SharedCoreModule,
     NgSelectModule,
-    HomePageComponent,
     SharedProfileComponent,
     LicenseComponent,
     DeviceProviderComponent,

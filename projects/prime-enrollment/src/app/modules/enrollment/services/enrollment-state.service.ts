@@ -156,8 +156,12 @@ export class EnrollmentStateService {
       const name = new FormControl(itm.name);
       const city = new FormControl(itm.city);
       const type = new FormControl(itm.type);
+      // const startDate = new FormControl(new Date(), Validators.required);
+      // const endDate = new FormControl(undefined, Validators.required);
+      
       const startDate = new FormControl(new Date(), Validators.required);
-      const endDate = new FormControl(null, Validators.required);
+      const endDate = new FormControl(undefined, Validators.required);
+      
       const fg = new FormGroup({ name, city, type, startDate, endDate });
       fga.push(fg);
     });
