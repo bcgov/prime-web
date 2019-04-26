@@ -36,38 +36,47 @@
     <enroll-address-block [address]="$mailingAddress | async" [province]="stateSvc.mailProvinceName$"
       [country]="stateSvc.mailCountryName$"></enroll-address-block>
     <!-- <div class=" label-row"> -->
+    <div class="label-row">
+      <a [routerLink]="['/enrollment/contact']">
+        <h2>Contact</h2>
+      </a>
+      <a [routerLink]="['/enrollment/contact']">
 
-    <a [routerLink]="['/enrollment/contact']">
-      <h2>Contact</h2>
-    </a>
-
-    <!-- <i class="fa fa-pencil"></i> -->
-    <!-- </a> -->
-    <!-- </div> -->
+        <i class="fa fa-pencil"></i>
+      </a>
+    </div>
     <ng-container *ngIf="contact$ | async as contact">
       <enroll-contact-block [phone]="contact.phone" [email]="contact.email" [voicePhone]="contact.voicePhone">
       </enroll-contact-block>
       <!-- <div class="label-row"> -->
     </ng-container>
-    <a [routerLink]="['/enrollment/self-declaration']">
-      <h2>Self Declaration</h2>
-    </a>
-    <!-- <i class="fa fa-pencil"></i> -->
-    <!-- </div> -->
+    <div class="label-row">
+      <a [routerLink]="['/enrollment/self-declaration']">
+        <h2>Self Declaration</h2>
+      </a>
+      <a [routerLink]="['/enrollment/self-declaration']">
+
+        <i class="fa fa-pencil"></i>
+      </a>
+    </div>
     <ng-container *ngFor="let declaration of declarations">
 
       <enroll-self-declaration-question-block [question]="declaration.question" [answer]="declaration.value"
         [details]="declaration.details" [documents]="declaration.docs"></enroll-self-declaration-question-block>
     </ng-container>
     <aside>
-      <!-- <div class="label-row"> -->
 
-      <!-- <i class="fa fa-pencil"></i> -->
-      <!-- </div> -->
       <ng-container *ngIf="certForms[0].valid">
-        <a [routerLink]="['/enrollment/professional']">
-          <h2>Professional Information</h2>
-        </a>
+        <div class="label-row">
+
+          <a [routerLink]="['/enrollment/professional']">
+            <h2>Professional Information</h2>
+          </a>
+          <a [routerLink]="['/enrollment/professional']">
+            <i class="fa fa-pencil"></i>
+          </a>
+
+        </div>
         <div *ngFor="let cert of certForms">
           <enroll-professional-information-block [license]="cert.value['collegeCert']"
             [college]="cert.value['licenseNum']" [class]="cert.value['licenseClass']"
@@ -77,13 +86,15 @@
         </div>
       </ng-container>
       <div>
-        <!-- <div class="label-row"> -->
-        <a [routerLink]="['/enrollment/pharmanet-access']">
-          <h2>PharmaNet</h2>
-        </a>
+        <div class="label-row">
+          <a [routerLink]="['/enrollment/pharmanet-access']">
+            <h2>PharmaNet</h2>
+          </a>
+          <a [routerLink]="['/enrollment/pharmanet-access']">
 
-        <!-- <i class="fa fa-pencil"></i> -->
-        <!-- </div> -->
+            <i class="fa fa-pencil"></i>
+          </a>
+        </div>
         <ng-container *ngFor="let fg of organizationForm">
           <enroll-pharmanet-block [name]="fg.value.name" [type]="fg.value.type" [city]="fg.value.city"
             [startDate]="fg.value.startDate" [endDate]="fg.value.endDate"></enroll-pharmanet-block>
