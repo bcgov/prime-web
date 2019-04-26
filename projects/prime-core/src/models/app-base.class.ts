@@ -1,4 +1,4 @@
-import { OnInit } from '@angular/core';
+import { OnInit, Inject } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
@@ -25,11 +25,12 @@ export class PrimeAppBase extends Base implements OnInit {
   constructor( protected pRouter: Router,
                protected pActivatedRoute: ActivatedRoute,
                protected pTitleService: Title,
-               protected logger: CommonLogger ) {
+               protected logger: CommonLogger,
+               @Inject('APP_VERSION') version ) {
     super();
- //   version.success
- //     ? console.log('%c' + version.message, 'color: #036; font-size: 20px;')
- //     : console.error(version.message);
+    version.success
+      ? console.log('%c' + version.message, 'color: #036; font-size: 20px;')
+      : console.error(version.message);
   }
 
   ngOnInit() {

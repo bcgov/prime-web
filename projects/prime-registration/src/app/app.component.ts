@@ -1,4 +1,4 @@
-import { Component, OnInit, forwardRef } from '@angular/core';
+import { Component, OnInit, forwardRef, Inject } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RegisterApiService } from './modules/registration/services/register-api.service';
@@ -19,8 +19,11 @@ export class AppComponent extends PrimeAppBase implements OnInit {
                protected activatedRoute: ActivatedRoute,
                protected logger: LoggerService,
                private registerApiService: RegisterApiService,
-               protected titleService: Title ) {
-    super( router, activatedRoute, titleService, logger as CommonLogger );
+               protected titleService: Title,
+               @Inject('APP_VERSION') version ) {
+    super( router, activatedRoute, titleService,
+           logger as CommonLogger,
+           version );
   }
 
   ngOnInit() {

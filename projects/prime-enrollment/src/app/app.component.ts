@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { PrimeAppBase } from 'prime-core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
@@ -16,8 +16,9 @@ export class AppComponent extends PrimeAppBase implements OnInit {
   constructor(protected router: Router,
               protected activatedRoute: ActivatedRoute,
               protected titleService: Title,
-              protected logger: CommonLogger ) {
-    super(router, activatedRoute, titleService, logger);
+              protected logger: CommonLogger,
+              @Inject('APP_VERSION') version ) {
+    super(router, activatedRoute, titleService, logger, version);
   }
 
   ngOnInit() {
