@@ -35,6 +35,7 @@ export class ProfessionalComponent implements OnInit {
   fg$: Observable<any>;
   onBehalfOfOptions: Observable<string[]>;
   apOptions: Observable<string[]>;
+  showObo: boolean;
 
   get certFaValid() {
     let valid = true;
@@ -59,6 +60,12 @@ export class ProfessionalComponent implements OnInit {
     this.dpFa = this.stateSvc.dpFa;
     this.onBehalfOfOptions = of(oboOptions);
     this.apOptions = of(apOptions);
+    this.fg$.subscribe(obs => {
+      if (obs.value.onBehalfOf !== null && !obs.value.deviceProvider)
+        return (this.showObo = true);
+      if (!obs.value.deviceProvider) return (this.showObo = true);
+      else return (this.showObo = false);
+    });
   }
 
   ngOnInit() {

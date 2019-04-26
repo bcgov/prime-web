@@ -18,7 +18,7 @@ export function behalfOfJobTitleValidator(): ValidatorFn {
 export function behalfOfValidator(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
     if (!control.parent) return null;
-    const bool = control.parent.controls['collegeCert'].value;
+    const bool = !control.parent.controls['collegeCert'].value;
     if (bool) {
       return null;
     } else return { invalidOnbehalfOf: { value: 'On behalf of is required' } };
