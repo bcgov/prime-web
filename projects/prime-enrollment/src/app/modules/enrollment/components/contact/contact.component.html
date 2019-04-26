@@ -1,6 +1,6 @@
 <common-page-framework layout="blank">
 
-  <h2>Your Information</h2>
+  <h2>Contact Information</h2>
 
   <ng-content select="[identityInstruct]"></ng-content>
   <p identityInstruct class="border-bottom">
@@ -8,45 +8,74 @@
   </p>
   <common-page-section layout="tips">
     <div>
-      <form [formGroup]="fg">
-        <div class="form-group">
-          <label class="control-label" for="contactMethod">Preferred Contact Method</label>
-          <ng-select id="contactMethod" formControlName="preferredContact" placeholder="Choose" [items]="contactOpts">
-          </ng-select>
-          <enroll-error label="Email" [touched]="fg.controls.preferredContact.touched"
-            [valid]="fg.controls.preferredContact.valid">
+
+      <ng-container *ngIf="fg$ | async as fg">
+        <form [formGroup]="fg">
+          <section>
+            <h4 style="margin-bottom: 0px; margin-top: 21px;" class="font-weight-bolder">Preferred Contact Method</h4>
+
+            <!-- <div> -->
+            <div class="md-radio md-radio-inline">
+              <input id="email" type="radio" formControlName="preferredContact" value="email" />
+              <label for="email">Email</label>
+              <span class="tooltip">This contact is for text communication</span>
+            </div>
+            <div class="md-radio md-radio-inline">
+              <input id="phone" type="radio" formControlName="preferredContact" value="phone" />
+              <label for="phone">Phone Number (Text Capable)</label>
+            </div>
+            <div class="md-radio md-radio-inline">
+              <input id="both" type="radio" formControlName="preferredContact" value="both" />
+              <label for="both">Both (Email & Phone Number)</label>
+            </div>
+            <!-- </div> -->
+            <enroll-error label="Email" [touched]="fg.controls.preferredContact.touched"
+              [valid]="fg.controls.preferredContact.valid"></enroll-error>
+          </section>
+          <!-- <div class="form-group">
+            <label class="control-label" for="contactMethod">Preferred Contact Method</label>
+            <ng-select id="contactMethod" formControlName="preferredContact" placeholder="Choose" [items]="contactOpts">
+            </ng-select>
+            <enroll-error label="Email" [touched]="fg.controls.preferredContact.touched"
+              [valid]="fg.controls.preferredContact.valid">
+            </enroll-error>
+          </div> -->
+          <div class="form-group phone">
+            <h4 class="control-label">Phone Number</h4>
+            <input type="text" ng2TelInput class="form-control" name="phone" formControlName="phone"
+              [ng2TelInputOptions]="{initialCountry: 'ca'}" [textMask]="{mask: mask}" [placeholder]="placeholder"
+              (countryChange)="onCountryChange($event, 1)">
+            <span>This number must be text message capable phone</span>
+          </div>
+          <enroll-error label="Phone" [touched]="fg.controls.phone.touched" [valid]="fg.controls.phone.valid">
           </enroll-error>
-        </div>
-        <div class="form-group phone">
-          <label class="control-label">Phone</label>
-          <input class="form-control" name="phone" formControlName="phone" [textMask]="{mask: mask}"
-            [placeholder]="placeholder">
-          <span>This number must be text message capable phone</span>
-        </div>
-        <enroll-error label="Phone" [touched]="fg.controls.phone.touched" [valid]="fg.controls.phone.valid">
-        </enroll-error>
-        <div class="form-group">
+          <div class="form-group">
 
-          <label for="email" class="control-label">Email</label>
-          <input class="form-control" formControlName="email" id="email" placeholder="user@example.com">
-        </div>
-        <enroll-error label="Email" [touched]="fg.controls.email.touched" [valid]="fg.controls.email.valid">
-        </enroll-error>
-        <h3>How would you like to be contacted by voice calls from agents</h3>
-        <div class="form-group phone">
-          <label class="control-label">Phone</label>
-          <input class="form-control" name="phone" formControlName="voicePhone" [textMask]="{mask: mask}"
-            [placeholder]="placeholder">
-          <!-- <span>This number must be text message capable phone</span> -->
-        </div>
-        <enroll-error label="Voice phone" [touched]="fg.controls.voicePhone.touched"
-          [valid]="fg.controls.voicePhone.valid"></enroll-error>
-        <div class="form-group">
+            <h4 for="email" class="control-label">Email</h4>
+            <input class="form-control" formControlName="email" id="email" placeholder="user@example.com">
+          </div>
+          <enroll-error label="Email" [touched]="fg.controls.email.touched" [valid]="fg.controls.email.valid">
+          </enroll-error>
+          <div class="form-group phone">
+            <h4 class="control-label" for="phone">Contact via Voice Call (Optional)</h4>
+            <!-- <input class="form-control" name="phone" formControlName="voicePhone" [textMask]="{mask: mask}"
+              [placeholder]="placeholder"> -->
+            <!-- <span>This number must be text message capable phone</span> -->
+            <input type="text" ng2TelInput class="form-control" name="voicePhone" formControlName="voicePhone"
+              [ng2TelInputOptions]="{initialCountry: 'ca'}" [textMask]="{mask: mask2}" [placeholder]="placeholder"
+              (countryChange)="onCountryChange($event, 2)">
+          </div>
+          <span class="tooltip">Used for voice calls. ie: Business Phonen</span>
 
-          <label for="ext" class="control-label">Extension Number (Optional)</label>
-          <input class="form-control col-sm-3 col-md-3 col-lg-3" formControlName="ext" id="ext" placeholder="555">
-        </div>
-      </form>
+          <enroll-error label="Voice phone" [touched]="fg.controls.voicePhone.touched"
+            [valid]="fg.controls.voicePhone.valid"></enroll-error>
+          <div class="form-group">
+
+            <h4 for="ext" class="control-label">Extension Number (Optional)</h4>
+            <input class="form-control col-sm-3 col-md-3 col-lg-3" formControlName="ext" id="ext" placeholder="555">
+          </div>
+        </form>
+      </ng-container>
     </div>
 
     <aside>Tips</aside>

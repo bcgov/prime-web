@@ -7,8 +7,15 @@ const routes: Routes = [
   {
     path: '',
     component: EnrollmentComponent,
-    children: subRoutes
-  }
+    children: [
+      {
+        path: '',
+        redirectTo: 'profile',
+        pathMatch: 'full',
+      },
+      ... subRoutes
+    ]
+  },
 ];
 
 @NgModule({

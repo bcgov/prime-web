@@ -1,5 +1,12 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable, Inject } from '@angular/core';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import {
+  CountryList,
+  ProvinceList
+} from '@prime-core/prime-shared/components/address/address.component';
+import { CacheService } from '@prime-core/services/cache.service';
+import { takeUntil } from 'rxjs/operators';
+
 const collegeOptions = [
   'College of Physicians and Surgeons of BC (CPSBC)',
   'College of Pharmacists of BC (CPBC)',
@@ -10,6 +17,9 @@ const collegeOptions = [
   providedIn: 'root'
 })
 export class EnrollmentCacheService {
+  private countries: CountryList[];
+  private provinces: ProvinceList[];
+
   private collegeOptions: BehaviorSubject<string[]> = new BehaviorSubject(
     collegeOptions
   );
@@ -21,6 +31,8 @@ export class EnrollmentCacheService {
   collegeOptions$: Observable<any> = this.collegeOptions.asObservable();
 
   classOptions$ = this.classOptions.asObservable();
+  countryReady$ = new BehaviorSubject<boolean>(false);
+  provinceReady$ = new BehaviorSubject<boolean>(false);
   setLicenseLabel$(str: string) {
     switch (str) {
       case 'College of Pharmacists of BC (CPBC)':
@@ -51,5 +63,33 @@ export class EnrollmentCacheService {
     return this.licenseLabel.asObservable();
   }
 
-  constructor() {}
+  constructor(private cacheSvc: CacheService) {
+    this.cacheSvc.$countryList
+      // .pipe(takeUntil(this.countryReady$))
+      .subscribe(obs => {
+        if (!obs) return;
+        this.countries = obs;
+        this.countryReady$.next(true);
+      });
+
+    this.cacheSvc.$provinceList
+      // .pipe(takeUntil(this.provinceReady$))
+      .subscribe(obs => {
+        if (!obs) return;
+        this.provinces = obs;
+        this.provinceReady$.next(true);
+      });
+  }
+
+  async findCountry(country: string) {
+    const res = this.countries.filter(itm => itm.countryCode === country);
+    if (res.length < 1) return;
+    return res[0].description;
+  }
+
+  async findProvince(province: string) {
+    const res = this.provinces.filter(itm => itm.provinceCode === province);
+    if (res.length < 1) return;
+    return res[0].description;
+  }
 }

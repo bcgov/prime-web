@@ -6,22 +6,61 @@
       Self Declaration - helper text
     </p>
   </div>
-  <div>
+  <div *ngIf="fg$ | async as fg">
     <form [formGroup]="fg">
       <common-page-section layout="noTips">
-        <enroll-yes-no class="panel " [fg]="fg" fc="conviction" [label]="convictionLabel"></enroll-yes-no>
-        <enroll-details *ngIf="fg.controls['conviction'].value" [fg]="fg" fc="convictionDesc" docFc="convictionDocs">
-        </enroll-details>
-        <enroll-yes-no [fg]="fg" fc="regSuspension" [label]="regSuspensionLabel"></enroll-yes-no>
-        <enroll-details *ngIf="fg.controls['regSuspension'].value" [fg]="fg" fc="regSuspensionDesc"
-          docFc="suspensionDocs"></enroll-details>
-        <enroll-yes-no [fg]="fg" fc="tAndC" [label]="tAndCLabel"></enroll-yes-no>
-        <enroll-details *ngIf="fg.controls['tAndC'].value" [fg]="fg" fc="tAndCDesc" docFc="tAndCDocs">
-        </enroll-details>
-        <enroll-yes-no [fg]="fg" fc="pharmaSuspension" [label]="pharmaSuspensionLabel"></enroll-yes-no>
-        <enroll-details *ngIf="fg.controls['pharmaSuspension'].value" [fg]="fg" fc="pharmaSuspensionDesc"
-          docFc="pharmaSuspensionDocs">
-        </enroll-details>
+        <div class="form-group">
+          <enroll-yes-no class="panel " [fg]="fg" fc="conviction" [label]="convictionLabel"
+            (click)="toggleRequire(fg.controls.conviction.value, fg.controls.convictionDesc)"></enroll-yes-no>
+          <enroll-error
+            label="Have you ever been the subject of an order or a conviction for an information contravention"
+            [touched]="fg.controls.conviction.touched" [valid]="fg.controls.conviction.valid"></enroll-error>
+          <ng-container *ngIf="fg.controls['conviction'].value">
+            <enroll-details [fg]="fg" fc="convictionDesc" docFc="convictionDocs">
+            </enroll-details>
+            <enroll-error label="More detail" [touched]="fg.controls.convictionDesc.touched"
+              [valid]="fg.controls.convictionDesc.valid">
+            </enroll-error>
+          </ng-container>
+        </div>
+
+        <enroll-yes-no [fg]="fg" fc="regSuspension" [label]="regSuspensionLabel"
+          (click)="toggleRequire(fg.controls.regSuspension.value, fg.controls.regSuspensionDesc)"></enroll-yes-no>
+        <enroll-error
+          label="Have you ever had your registration with a governing body of a health profession suspended or cancelled"
+          [touched]="fg.controls.regSuspension.touched" [valid]="fg.controls.regSuspension.valid"></enroll-error>
+        <ng-container *ngIf="fg.controls['regSuspension'].value">
+          <enroll-details [fg]="fg" fc="regSuspensionDesc" docFc="suspensionDocs"></enroll-details>
+          <enroll-error label="More detail" [touched]="fg.controls.regSuspension.touched"
+            [valid]="fg.controls.regSuspension.valid">
+          </enroll-error>
+        </ng-container>
+
+        <enroll-yes-no [fg]="fg" fc="tAndC" [label]="tAndCLabel"
+          (click)="toggleRequire(fg.controls.tAndC.value, fg.controls.tAndCDesc)"></enroll-yes-no>
+        <enroll-error
+          label="Have you ever had Terms and Conditions imposed on your license as a result of disciplinary actions taken by a governing body"
+          [touched]="fg.controls.tAndC.touched" [valid]="fg.controls.tAndC.valid"></enroll-error>
+        <ng-container *ngIf="fg.controls['tAndC'].value">
+
+          <enroll-details [fg]="fg" fc="tAndCDesc" docFc="tAndCDocs">
+          </enroll-details>
+          <enroll-error label="More detail" [touched]="fg.controls.tAndCDesc.touched"
+            [valid]="fg.controls.tAndCDesc.valid"></enroll-error>
+        </ng-container>
+
+        <enroll-yes-no [fg]="fg" fc="pharmaSuspension" [label]="pharmaSuspensionLabel"
+          (click)="toggleRequire(fg.controls.pharmaSuspension.value, fg.controls.pharmaSuspensionDesc)">
+        </enroll-yes-no>
+        <enroll-error label="Have you ever had your access to PharmaNet suspended or revoked"
+          [touched]="fg.controls.pharmaSuspension.touched" [valid]="fg.controls.pharmaSuspension.valid">
+        </enroll-error>
+        <ng-container *ngIf="fg.controls['pharmaSuspension'].value">
+          <enroll-details [fg]="fg" fc="pharmaSuspensionDesc" docFc="pharmaSuspensionDocs">
+          </enroll-details>
+          <enroll-error label="More detail" [touched]="fg.controls.pharmaSuspensionDesc.touched"
+            [valid]="fg.controls.pharmaSuspensionDesc.valid"></enroll-error>
+        </ng-container>
       </common-page-section>
 
     </form>

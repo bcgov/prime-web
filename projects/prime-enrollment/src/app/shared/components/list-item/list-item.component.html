@@ -1,7 +1,16 @@
-<input type="checkbox" [formControl]="fc">
-<!-- <ng-container *ngFor="let col of data"> -->
-<span (click)="fc.setValue(!fc.value)">{{data.name}}</span>
-<span (click)="fc.setValue(!fc.value)">{{data.type}}</span>
-<span (click)="fc.setValue(!fc.value)">{{data.city}}</span>
-
+<div class="row">
+  <div class="col-sm-1">
+    <input type="checkbox" [formControl]="fc">
+  </div>
+  <!-- <ng-container *ngFor="let col of data"> -->
+  <div class="col">
+    <span (click)="fc.setValue(!fc.value)">{{data.name}}</span>
+  </div>
+  <div class="col">
+    <span (click)="fc.setValue(!fc.value)">{{data.type}}</span>
+  </div>
+  <div class="col">
+    <span (click)="fc.setValue(!fc.value)">{{data.city}}</span>
+  </div>
+</div>
 <!-- </ng-container> -->

@@ -13,15 +13,24 @@ import { ProvinceList, CountryList } from '../lib/components/address/address.com
   providedIn: 'root'
 })
 export class CacheService {
-
   // We use private BehaviorSubjects to cache results instead of having repeat
   // HTTP requests. This way the response is cached for the lifetime of the
   // session.
-  private $provinceListSubject: BehaviorSubject<ProvinceList[]> = new BehaviorSubject([]);
-  private $countrylistSubject: BehaviorSubject<CountryList[]> = new BehaviorSubject([]);
-  private $enhancedMessagesSubject: BehaviorSubject<StatusMsgInterface[]> = new BehaviorSubject([]);
-  private $sysParamListSubject: BehaviorSubject<SysParamInterface[]> = new BehaviorSubject([]);
-  private $securityQuestionsSubject: BehaviorSubject<StatusMsgInterface[]> = new BehaviorSubject([]);
+  private $provinceListSubject: BehaviorSubject<
+    ProvinceList[]
+  > = new BehaviorSubject([]);
+  private $countrylistSubject: BehaviorSubject<
+    CountryList[]
+  > = new BehaviorSubject([]);
+  private $enhancedMessagesSubject: BehaviorSubject<
+    StatusMsgInterface[]
+  > = new BehaviorSubject([]);
+  private $sysParamListSubject: BehaviorSubject<
+    SysParamInterface[]
+  > = new BehaviorSubject([]);
+  private $securityQuestionsSubject: BehaviorSubject<
+    StatusMsgInterface[]
+  > = new BehaviorSubject([]);
 
   /**
    * Message List
@@ -33,32 +42,56 @@ export class CacheService {
    * Country List
    * Populated via call to reg/rest/getCache?param=countries
    */
-  public $countryList: Observable<CountryList[]> = this.$countrylistSubject.asObservable();
+  public $countryList: Observable<
+    CountryList[]
+  > = this.$countrylistSubject.asObservable();
 
   /**
    * Province List
    * Populated via call to reg/rest/getCache?param=provinces
    */
-  public $provinceList: Observable<ProvinceList[]> = this.$provinceListSubject.asObservable();
+  public $provinceList: Observable<
+    ProvinceList[]
+  > = this.$provinceListSubject.asObservable();
 
   /**
    * System Parameter List
    * Populated via call to reg/rest/getCache?param=sysParam
    */
-  public $sysParamList: Observable<SysParamInterface[]> = this.$sysParamListSubject.asObservable();
+  public $sysParamList: Observable<
+    SysParamInterface[]
+  > = this.$sysParamListSubject.asObservable();
 
   /**
    * Security questions list
    * populated via call to reg/rest/getCache?param=securityQues
    */
-  public $securityQuestionsList: Observable<StatusMsgInterface[]> = this.$securityQuestionsSubject.asObservable();
+  public $securityQuestionsList: Observable<
+    StatusMsgInterface[]
+  > = this.$securityQuestionsSubject.asObservable();
 
   constructor(protected cacheApiService: CacheApiService) {
-    this.setupBehaviorSubject('provinces', 'province', this.$provinceListSubject);
+    this.setupBehaviorSubject(
+      'provinces',
+      'province',
+      this.$provinceListSubject
+    );
     this.setupBehaviorSubject('countries', 'country', this.$countrylistSubject);
-    this.setupBehaviorSubject('messages', 'messages', this.$enhancedMessagesSubject);
-    this.setupBehaviorSubject('sysParams', 'sysParam', this.$sysParamListSubject);
-    this.setupBehaviorSubject('securityQues', 'secQues', this.$securityQuestionsSubject);
+    this.setupBehaviorSubject(
+      'messages',
+      'messages',
+      this.$enhancedMessagesSubject
+    );
+    this.setupBehaviorSubject(
+      'sysParams',
+      'sysParam',
+      this.$sysParamListSubject
+    );
+    this.setupBehaviorSubject(
+      'securityQues',
+      'secQues',
+      this.$securityQuestionsSubject
+    );
   }
 
   /**
@@ -73,8 +106,14 @@ export class CacheService {
    * @param propertyName the name of the property on the response we want
    * @param $subject the BehaviorSubject to emit the value found at propertyName
    */
-  protected setupBehaviorSubject<T>( cacheName: string, propertyName: string, $subject: BehaviorSubject<T> ) {
-    this.cacheApiService.getCache(cacheName).pipe(map(x => x[propertyName]))
+  protected setupBehaviorSubject<T>(
+    cacheName: string,
+    propertyName: string,
+    $subject: BehaviorSubject<T>
+  ) {
+    this.cacheApiService
+      .getCache(cacheName)
+      .pipe(map(x => x[propertyName]))
       .subscribe(val => $subject.next(val));
   }
 }

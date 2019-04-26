@@ -34,9 +34,13 @@
             "styles": [
               "styles.scss",
               "projects/prime-enrollment/src/styles.scss",
-              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css"
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "./node_modules/intl-tel-input/build/css/intlTelInput.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "./node_modules/intl-tel-input/build/js/intlTelInput.min.js",
+              "./node_modules/intl-tel-input/build/js/utils.js"
+            ],
             "stylePreprocessorOptions": {
               "includePaths": [
                 "styles"
