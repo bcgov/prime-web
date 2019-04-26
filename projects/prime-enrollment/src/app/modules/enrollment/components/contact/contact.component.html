@@ -49,16 +49,18 @@
           </enroll-error>
           <div class="form-group phone">
             <h4 class="control-label">Phone Number for text messages</h4>
-            <input type="text" ng2TelInput class="form-control" name="phone" formControlName="phone"
+            <!-- <input type="text" ng2TelInput class="form-control" name="phone" formControlName="phone"
               [ng2TelInputOptions]="{initialCountry: 'ca'}" [textMask]="{mask: mask}" [placeholder]="placeholder"
-              (countryChange)="onCountryChange($event, 1)">
+              (countryChange)="onCountryChange($event, 1)"> -->
             <!-- <span>This number must be text message capable phone</span> -->
+            <input class="form-control" name="phone" formControlName="phone" [textMask]="{mask: mask}"
+              [placeholder]="placeholder">
           </div>
           <enroll-error label="Phone" [touched]="fg.controls.phone.touched" [valid]="fg.controls.phone.valid">
           </enroll-error>
 
-          <h4 class="control-label" for="phone">Contact via Voice Call (Optional)</h4>
-          <input class="form-control" name="phone" formControlName="voicePhone" [textMask]="{mask: mask}"
+          <h4 class="control-label" for="phone">Phone Number for Voice Contact</h4>
+          <input class="form-control" name="voicePhone" formControlName="voicePhone" [textMask]="{mask: mask}"
             [placeholder]="placeholder">
           <!-- <span>This number must be text message capable phone</span>  -->
           <!-- <input type="text" ng2TelInput class="form-control" name="voicePhone" formControlName="voicePhone"

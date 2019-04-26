@@ -63,7 +63,7 @@ export abstract class FormFieldBuilder {
   static get professionInformationFields() {
     const deviceProvider = new FormControl(null, [Validators.required]);
     const collegeCert = new FormControl(null, [Validators.required]);
-    const onBehalfOf = new FormControl(null, [behalfOfValidator()]);
+    const onBehalfOf = new FormControl(null, []);
     const insulinPump = new FormControl(null, [insulinPumpValidator()]);
     const onBehalfOfJobTitle = this.onBehalfOfFields;
     return {
