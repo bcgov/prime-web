@@ -1,11 +1,11 @@
 import { Injectable, Inject } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
 import {
   CountryList,
   ProvinceList
 } from '@prime-core/prime-shared/components/address/address.component';
 import { CacheService } from '@prime-core/services/cache.service';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, catchError } from 'rxjs/operators';
 
 const collegeOptions = [
   'College of Physicians and Surgeons of BC (CPSBC)',
@@ -17,8 +17,8 @@ const collegeOptions = [
   providedIn: 'root'
 })
 export class EnrollmentCacheService {
-  private countries: CountryList[];
-  private provinces: ProvinceList[];
+  countries: CountryList[];
+  provinces: ProvinceList[];
 
   private collegeOptions: BehaviorSubject<string[]> = new BehaviorSubject(
     collegeOptions
@@ -72,13 +72,14 @@ export class EnrollmentCacheService {
         this.countryReady$.next(true);
       });
 
-    this.cacheSvc.$provinceList
-      // .pipe(takeUntil(this.provinceReady$))
-      .subscribe(obs => {
+    this.cacheSvc.$provinceList.pipe(catchError(err => of([]))).subscribe(
+      obs => {
         if (!obs) return;
         this.provinces = obs;
         this.provinceReady$.next(true);
-      });
+      },
+      err => console.log(err)
+    );
   }
 
   async findCountry(country: string) {

@@ -12,7 +12,7 @@ import { SysParamInterface } from '../models/cache-api.model';
  * TODO: Set up service to store data returned from the cache service once
  *       determined how it will be configured/setup
  */
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class CacheService {
   // We use private BehaviorSubjects to cache results instead of having repeat
   // HTTP requests. This way the response is cached for the lifetime of the

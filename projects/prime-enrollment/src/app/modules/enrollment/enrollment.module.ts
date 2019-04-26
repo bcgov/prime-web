@@ -29,8 +29,8 @@ import { CacheApiService } from '@prime-core/services/cache-api.service';
   entryComponents: [SearchOrganizationModalComponent],
   providers: [
     // TODO - Replace CacheService with EnrolmentCacheService when created (compare with RegCacheService)
-    CacheService,
-    CacheApiService,
+    // CacheService,
+    // CacheApiService,
   ],
   exports: []
 })
