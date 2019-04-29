@@ -53,37 +53,38 @@
           </enroll-error>
           <!--  <div class="form-group phone">
             <h4 class="control-label">Phone Number for text messages</h4>
-            <!-- <input type="text" ng2TelInput class="form-control" name="phone" formControlName="phone"
+           <input type="text" ng2TelInput class="form-control" name="phone" formControlName="phone"
               [ng2TelInputOptions]="{initialCountry: 'ca'}" [textMask]="{mask: mask}" [placeholder]="placeholder"
               (countryChange)="onCountryChange($event, 1)"> -->
           <!-- <span>This number must be text message capable phone</span> -->
           <input class="form-control" name="phone" formControlName="phone" [textMask]="{mask: mask}"
             [placeholder]="placeholder">
-    </div>
-    <enroll-error label="Phone" [touched]="fg.controls.phone.touched "
-      [valid]="fg.controls.phone.disabled || fg.controls.phone.valid">
-    </enroll-error>
-    <h3 style="margin-bottom: 0px; margin-top: 21px;" class="font-weight-bolder">Voice Contact</h3>
-    <p class="border-bottom">Used for voice calls. ie: Business Phone</p>
-    <h4 class="control-label" for="phone">Phone Number for Voice Contact</h4>
-    <input class="form-control" name="voicePhone" formControlName="voicePhone" [textMask]="{mask: mask}"
-      [placeholder]="placeholder">
-    <!-- <span>This number must be text message capable phone</span>  -->
-    <!-- <input type="text" ng2TelInput class="form-control" name="voicePhone" formControlName="voicePhone"
+          <!-- </div> -->
+          <enroll-error label="Phone" [touched]="fg.controls.phone.touched "
+            [valid]="fg.controls.phone.disabled || fg.controls.phone.valid">
+          </enroll-error>
+          <h3 style="margin-bottom: 0px; margin-top: 21px;" class="font-weight-bolder">Voice Contact</h3>
+          <p class="border-bottom">Used for voice calls. ie: Business Phone</p>
+          <h4 class="control-label" for="phone">Phone Number for Voice Contact</h4>
+          <input class="form-control" name="voicePhone" formControlName="voicePhone" [textMask]="{mask: mask}"
+            [placeholder]="placeholder">
+          <!-- <span>This number must be text message capable phone</span>  -->
+          <!-- <input type="text" ng2TelInput class="form-control" name="voicePhone" formControlName="voicePhone"
               [ng2TelInputOptions]="{initialCountry: 'ca'}" [textMask]="{mask: mask2}" [placeholder]="placeholder"
               (countryChange)="onCountryChange($event, 2)">
           </div> -->
-    <!-- <span class="tooltip">Used for voice calls. ie: Business Phone</span> -->
+          <!-- <span class="tooltip">Used for voice calls. ie: Business Phone</span> -->
 
-    <enroll-error label="Voice phone" [touched]="fg.controls.voicePhone.touched" [valid]="fg.controls.voicePhone.valid">
-    </enroll-error>
-    <div class="form-group">
+          <enroll-error label="Voice phone" [touched]="fg.controls.voicePhone.touched"
+            [valid]="fg.controls.voicePhone.valid">
+          </enroll-error>
+          <div class="form-group">
 
-      <h4 for="ext" class="control-label">Extension Number (Optional)</h4>
-      <input class="form-control col-sm-3 col-md-3 col-lg-3" formControlName="ext" id="ext" placeholder="555">
-    </div>
-    </form>
-    </ng-container>
+            <h4 for="ext" class="control-label">Extension Number (Optional)</h4>
+            <input class="form-control col-sm-3 col-md-3 col-lg-3" formControlName="ext" id="ext" placeholder="555">
+          </div>
+        </form>
+      </ng-container>
     </div>
 
     <aside>Tips</aside>
