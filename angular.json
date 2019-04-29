@@ -74,7 +74,7 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "prime-provisioner:build",
-            "port": 43078,
+            "port": 4308,
             "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
