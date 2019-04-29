@@ -30,6 +30,9 @@
       ],
       "prime-core/*": [
         "dist/prime-core/*"
+      ],
+      "@prime-provisioner": [
+        "projects/prime-provisioner/src/app/*"
       ]
     }
   },
