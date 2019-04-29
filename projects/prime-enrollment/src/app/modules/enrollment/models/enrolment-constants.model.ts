@@ -1,7 +1,6 @@
-import { PrimeConstants } from '@prime-core/models/prime-constants';
+import { PrimeConstants } from 'prime-core';
 
 export class EnrolmentConstants extends PrimeConstants {
-
   public static ENROLMENT = 'enrolment';
 
   // Pages
@@ -12,5 +11,4 @@ export class EnrolmentConstants extends PrimeConstants {
   public static PHARMANET_PG = 'pharmanet-access';
   public static REVIEW_PG = 'review';
   public static CONFIRMATION_PG = 'confirmation';
-
 }
