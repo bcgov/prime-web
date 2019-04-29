@@ -3,21 +3,13 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ProfileComponent } from './modules/profile/profile.component';
 import { EnrolmentModule } from './modules/enrolment/enrolment.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ProfileComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    EnrolmentModule
-  ],
+  declarations: [AppComponent],
+  imports: [BrowserModule, AppRoutingModule, EnrolmentModule],
   providers: [],
   bootstrap: [AppComponent],
-  exports: [ProfileComponent]
+  exports: []
 })
-export class AppModule { }
+export class AppModule {}

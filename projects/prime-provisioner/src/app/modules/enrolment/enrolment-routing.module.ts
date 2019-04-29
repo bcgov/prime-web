@@ -1,10 +1,25 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { subRoutes } from '@prime-prov/core/models/sub-routes';
+import { ProvisionerConstants } from '@prime-prov/core/models/provisioner-constants.model';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: '',
+    component: ProvisionerConstants,
+    children: [
+      {
+        path: '',
+        redirectTo: ProvisionerConstants.PROFILE_PG,
+        pathMatch: 'full'
+      },
+      ...subRoutes
+    ]
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class EnrolmentRoutingModule { }
+export class EnrolmentRoutingModule {}

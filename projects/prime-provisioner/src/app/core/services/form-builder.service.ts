@@ -5,10 +5,7 @@ import { FormBuilder, Validators } from '@angular/forms';
   providedIn: 'root'
 })
 export class FormBuilderService {
-  constructor() // private fb: FormBuilder
-  {
-    // const this.fb.group()
-  }
+  constructor() {}
 
   static profileForm(fb: FormBuilder) {
     const fg = fb.group({});
@@ -21,11 +18,23 @@ export class FormBuilderService {
       phone: [null],
       voicePhone: [null]
     });
+    return fg;
   }
 
-  static selfDeclarationForm() {}
+  static selfDeclarationForm(fb: FormBuilder) {
+    const fg = fb.group({
+      conviction: [null, Validators.required],
+      convictionDesc: [null],
+      regSuspension: [null, Validators.required],
+      regSuspensionDesc: [null],
+      tAndC: [null, Validators.required],
+      tAndCDesc: [null],
+      pharmaSuspension: [null, Validators.required],
+      pharmaSuspensionDesc: [null]
+    });
+  }
 
-  static organizationForm() {}
-
-  static reviewForm() {}
+  static organizationForm(fb: FormBuilder) {
+    const fg = fb.group({});
+  }
 }
