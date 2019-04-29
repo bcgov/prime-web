@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EnrollmentStateService } from './services/enrollment-state.service';
 import { Observable, of, BehaviorSubject, Subject } from 'rxjs';
 import { FormControl } from '@angular/forms';
-import { EnrolmentConstants } from '@prime-enrollment/modules/enrollment/models/enrolment-constants.model';
+import { EnrolmentConstants } from './data/enrolment-constants.model';
 
 // TODO:  re-add progress steps once routing is done.
 
@@ -39,7 +39,10 @@ export class EnrollmentComponent extends Container implements OnInit {
   constructor(public stateSvc: EnrollmentStateService, private router: Router) {
     super();
     this.setProgressSteps(subRoutes);
-    this.stateSvc.routes = mappedRoutes(subRoutes, EnrolmentConstants.ENROLMENT);
+    this.stateSvc.routes = mappedRoutes(
+      subRoutes,
+      EnrolmentConstants.ENROLMENT
+    );
   }
 
   ngOnInit() {}

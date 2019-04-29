@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { EnrollmentComponent } from './enrollment.component';
 import { subRoutes } from './data/sub-routes';
-import { EnrolmentConstants } from '@prime-enrollment/modules/enrollment/models/enrolment-constants.model';
+import { EnrolmentConstants } from './data/enrolment-constants.model';
 
 const routes: Routes = [
   {
@@ -12,11 +12,11 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: EnrolmentConstants.PROFILE_PG,
-        pathMatch: 'full',
+        pathMatch: 'full'
       },
-      ... subRoutes
+      ...subRoutes
     ]
-  },
+  }
 ];
 
 @NgModule({

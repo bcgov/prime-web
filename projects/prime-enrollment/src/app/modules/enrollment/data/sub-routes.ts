@@ -6,8 +6,7 @@ import { SelfDeclarationComponent } from '../components/self-declaration/self-de
 import { PharmanetAccessComponent } from '../components/pharmanet-access/pharmanet-access.component';
 import { ReviewComponent } from '../components/review/review.component';
 import { StepperGuard } from '@prime-enrollment/core/guards/stepper.guard';
-import { EnrolmentConstants } from '@prime-enrollment/modules/enrollment/models/enrolment-constants.model';
-
+import { EnrolmentConstants } from './enrolment-constants.model';
 
 export const subRoutes: Routes = [
   {

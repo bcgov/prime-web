@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { StepperGuard } from './core/guards/stepper.guard';
 import { EnrollmentConfirmationComponent } from './shared/components/enrollment-confirmation/enrollment-confirmation.component';
-import { EnrolmentConstants } from '@prime-enrollment/modules/enrollment/models/enrolment-constants.model';
+import { EnrolmentConstants } from './modules/enrollment/data/enrolment-constants.model';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: EnrolmentConstants.ENROLMENT,
-    pathMatch: 'full',
+    pathMatch: 'full'
   },
   {
     path: 'success',
