@@ -1,40 +1,36 @@
-import { Component, OnInit, forwardRef } from '@angular/core';
+import { Component, OnInit, forwardRef, Inject } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ControlContainer, NgForm } from '@angular/forms';
 import { RegisterApiService } from './modules/registration/services/register-api.service';
-import { PrimeSharedAppComponentBase } from '@prime-core/prime-shared/components/prime-app-component/app.component';
-
-import { LoggerService, RegistrationEvent } from './services/logger.service';
+import { PrimeAppBase } from 'prime-core';
+import { LoggerService } from './services/logger.service';
+import { CommonLogger } from 'moh-common-lib/services';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  providers: [
-    { provide: ControlContainer, useExisting: forwardRef(() => NgForm) }
-  ]
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent extends PrimeSharedAppComponentBase implements OnInit {
-  title = 'Prime';
-  // TODO - Verify we can remove.
-  // registrant = new Registrant();
+export class AppComponent extends PrimeAppBase implements OnInit {
+  title = 'Prime Registration';
   public skipLinkPath;
 
-  constructor( private router: Router,
-               private activatedRoute: ActivatedRoute,
-               private logger: LoggerService,
+  constructor( protected router: Router,
+               protected activatedRoute: ActivatedRoute,
+               protected logger: LoggerService,
                private registerApiService: RegisterApiService,
-               private titleService: Title ) {
-    super(router, activatedRoute, titleService);
+               protected titleService: Title,
+               @Inject('APP_VERSION') version ) {
+    super( router, activatedRoute, titleService,
+           logger as CommonLogger,
+           version );
   }
 
   ngOnInit() {
     super.ngOnInit();
-    // session ID to track events
-    // this.logger.applicationId = this.objectId;
-    this.logger.programName = 'prime-registration';
-    this.registerApiService.eventUUID = this.logger.applicationId;
-  }
 
+    // session ID to track events
+    this.logger.applicationId = this.registerApiService.eventUUID;
+    this.logger.programName = 'prime-registration';
+  }
 }

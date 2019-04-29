@@ -1,11 +1,10 @@
-import { Injectable, Inject } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import {
   CountryList,
   ProvinceList
-} from '@prime-core/prime-shared/components/address/address.component';
-import { CacheService } from '@prime-core/services/cache.service';
-import { takeUntil, catchError } from 'rxjs/operators';
+} from 'prime-core/lib/components/address/address.component';
+import { CacheService, CacheApiService } from 'prime-core';
 
 const collegeOptions = [
   'College of Physicians and Surgeons of BC (CPSBC)',
@@ -16,10 +15,9 @@ const collegeOptions = [
 @Injectable({
   providedIn: 'root'
 })
-export class EnrollmentCacheService {
+export class EnrollmentCacheService extends CacheService {
   countries: CountryList[];
   provinces: ProvinceList[];
-
   private collegeOptions: BehaviorSubject<string[]> = new BehaviorSubject(
     collegeOptions
   );
@@ -31,8 +29,7 @@ export class EnrollmentCacheService {
   collegeOptions$: Observable<any> = this.collegeOptions.asObservable();
 
   classOptions$ = this.classOptions.asObservable();
-  countryReady$ = new BehaviorSubject<boolean>(false);
-  provinceReady$ = new BehaviorSubject<boolean>(false);
+
   setLicenseLabel$(str: string) {
     switch (str) {
       case 'College of Pharmacists of BC (CPBC)':
@@ -63,23 +60,8 @@ export class EnrollmentCacheService {
     return this.licenseLabel.asObservable();
   }
 
-  constructor(private cacheSvc: CacheService) {
-    this.cacheSvc.$countryList
-      // .pipe(takeUntil(this.countryReady$))
-      .subscribe(obs => {
-        if (!obs) return;
-        this.countries = obs;
-        this.countryReady$.next(true);
-      });
-
-    this.cacheSvc.$provinceList.pipe(catchError(err => of([]))).subscribe(
-      obs => {
-        if (!obs) return;
-        this.provinces = obs;
-        this.provinceReady$.next(true);
-      },
-      err => console.log(err)
-    );
+  constructor(protected cacheSvc: CacheApiService) {
+    super( cacheSvc );
   }
 
   async findCountry(country: string) {

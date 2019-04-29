@@ -5,7 +5,7 @@
 // import { ContactComponent } from './contact.component';
 // import { SharedModule } from '../../../../shared/shared.module';
 // import { RouterTestingModule } from '@angular/router/testing';
-// import { CacheService } from '@prime-core/services/cache.service';
+// import { CacheService } from 'prime-core';
 
 // describe('ContactComponent', () => {
 //   let component: ContactComponent;

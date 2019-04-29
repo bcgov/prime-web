@@ -1,15 +1,15 @@
 import { BCSCAccountTestPage } from './registration.po';
 import { browser } from 'protractor';
-import { PrimeConstants } from '../../../src/app/models/prime-constants';
 import { FakeDataMohReg } from './registration.data';
 import faker = require('faker');
+import { RegistrationConstants } from '../../prime-registration/src/app/modules/registration/models/registration-constants.model';
 
 describe('BCSC Registration - Account Page', () => {
     let page: BCSCAccountTestPage;
     let profileData;
     const data = new FakeDataMohReg();
-    const PAGE_URL = `${PrimeConstants.BCSC_REGISTRATION}/${PrimeConstants.ACCOUNT_PG}`;
-    const NEXT_PAGE_URL =  `${PrimeConstants.BCSC_REGISTRATION}/${PrimeConstants.CONFIRMATION_PG}`;
+    const PAGE_URL = `${RegistrationConstants.BCSC_REGISTRATION}/${RegistrationConstants.ACCOUNT_PG}`;
+    const NEXT_PAGE_URL =  `${RegistrationConstants.BCSC_REGISTRATION}/${RegistrationConstants.CONFIRMATION_PG}`;
 
     beforeEach(() => {
         // TODO - Should be BCSCAccountTestPage() - create new class and extend from MoHAccountTestPage

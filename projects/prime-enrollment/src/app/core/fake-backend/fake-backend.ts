@@ -12,13 +12,12 @@ import { of } from 'rxjs/internal/observable/of';
 import { Injectable } from '@angular/core';
 import { FakeBackendService } from './fake-backend.service';
 import { Base } from 'moh-common-lib/models';
-import { CacheInterface } from '@prime-core/models/cache-api.model';
 import {
   ApiStatusCodes,
   PayloadInterface,
-  StatusMsgInterface
-} from '@prime-core/models/api-base.model';
-import { UserAttrInterface } from '../../../../../prime-registration/src/app/modules/registration/models/register-api.model';
+  StatusMsgInterface,
+  CacheInterface
+} from 'prime-core';
 
 @Injectable()
 export class FakeBackendInterceptor extends Base implements HttpInterceptor {
@@ -41,13 +40,7 @@ export class FakeBackendInterceptor extends Base implements HttpInterceptor {
         if ('POST' === request.method) {
           console.log('Post request');
 
-          let payload = null;
-
-          if (request.url.endsWith('/registerUser')) {
-            payload = this.getRespRegister(request);
-          } else if (request.url.endsWith('/validateUser')) {
-            payload = this.getRespSearch(request);
-          }
+          const payload = null;
 
           if (payload) {
             return of(new HttpResponse({ status: 200, body: payload })).pipe(
@@ -79,7 +72,6 @@ export class FakeBackendInterceptor extends Base implements HttpInterceptor {
 
   private getCache(param: string): any {
     const cacheResp: CacheInterface = {
-      eventUUID: 'cache-' + this.objectId,
       clientName: this._clientName,
       processDate: this._processDate,
       statusCode: ApiStatusCodes.SUCCESS,
@@ -113,7 +105,7 @@ export class FakeBackendInterceptor extends Base implements HttpInterceptor {
 
       default:
         cacheResp.statusCode = ApiStatusCodes.ERROR;
-        console.log("don't know the param: ", param);
+        console.log( 'don\'t know the param: ', param);
         break;
     }
 
@@ -129,33 +121,10 @@ export class FakeBackendInterceptor extends Base implements HttpInterceptor {
 
     msg.push(this.fakebackendService.messageList.find(x => x.msgID === '1'));
     const resp: PayloadInterface = {
-      eventUUID: request.body.eventUUID,
       clientName: request.body.clientName,
       processDate: request.body.processDate,
       statusCode: ApiStatusCodes.SUCCESS,
       statusMsgs: msg
-    };
-    return resp;
-  }
-
-  getRespSearch(request: HttpRequest<any>): UserAttrInterface {
-    const resp: UserAttrInterface = {
-      eventUUID: request.body.eventUUID,
-      clientName: request.body.clientName,
-      processDate: request.body.processDate,
-      statusCode: ApiStatusCodes.WARNING,
-      statusMsgs: null,
-      pdidMatch: { matchFound: false, msgID: null, msgText: null },
-      emailMatch: {
-        matchFound: true,
-        msgID: '123',
-        msgText: 'duplicate email'
-      },
-      mobileMatch: {
-        matchFound: true,
-        msgID: '124',
-        msgText: 'duplicate phone'
-      }
     };
     return resp;
   }

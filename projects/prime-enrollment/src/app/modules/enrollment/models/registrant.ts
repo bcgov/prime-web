@@ -1,5 +1,5 @@
 import { Person, Address } from 'moh-common-lib/models';
-import { Document } from '../../../../../../../src/app/models/documents.interface';
+import { Document } from 'prime-core';
 
 export interface SecurityQuestionsAnswers {
   question: string;

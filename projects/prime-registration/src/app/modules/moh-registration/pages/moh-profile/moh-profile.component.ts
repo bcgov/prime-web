@@ -7,7 +7,7 @@ import { RegistrationDataService } from '@prime-registration/services/registrati
 import { RegCacheService } from '@prime-registration/services/reg-cache.service';
 import { Registrant } from '../../../registration/models/registrant.model';
 import { RegistrationConstants } from '../../../registration/models/registration-constants.model';
-import { ProviderCode, AssuranceLevel } from '@prime-core/models/prime-constants';
+import { ProviderCode, AssuranceLevel } from 'prime-core';
 
 @Component({
   selector: 'prime-moh-profile',

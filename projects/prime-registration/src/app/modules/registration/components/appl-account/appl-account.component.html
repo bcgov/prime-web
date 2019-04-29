@@ -157,10 +157,10 @@
   <common-page-section layout='tips'>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <prime-phone-number objectID="mobile_phone"
+      <lib-prime-phone-number objectID="mobile_phone"
                           [displayMask]="isCanada"
                           [value]="data.smsPhone"
-                          (valueChange)="data.smsPhone=$event"></prime-phone-number>
+                          (valueChange)="data.smsPhone=$event"></lib-prime-phone-number>
       <div *ngIf="hasError('mobile_phone')"
             role="alert"
             class='error-container'

@@ -1,16 +1,16 @@
 import { BCSCRegistrationPage } from './registration.po';
 import { browser } from 'protractor';
-import { PrimeConstants } from '../../../src/app/models/prime-constants';
 import { FakeDataMohReg } from './registration.data';
 import { PrimeTestPage } from '../../../e2e/src/app.po';
+import { RegistrationConstants } from '../../prime-registration/src/app/modules/registration/models/registration-constants.model';
 
 describe('BCSC Registration - Profile Page', () => {
     let page: BCSCRegistrationPage;
     // let accountPage: PrimeTestPage;
     const data = new FakeDataMohReg();
     let profileData;
-    const PAGE_URL = `${PrimeConstants.BCSC_REGISTRATION}/${PrimeConstants.PROFILE_PG}`;
-    const NEXT_PAGE_URL =  `${PrimeConstants.BCSC_REGISTRATION}/${PrimeConstants.ACCOUNT_PG}`;
+    const PAGE_URL = `${RegistrationConstants.BCSC_REGISTRATION}/${RegistrationConstants.PROFILE_PG}`;
+    const NEXT_PAGE_URL =  `${RegistrationConstants.BCSC_REGISTRATION}/${RegistrationConstants.ACCOUNT_PG}`;
 
     beforeEach(() => {
         page = new BCSCRegistrationPage();

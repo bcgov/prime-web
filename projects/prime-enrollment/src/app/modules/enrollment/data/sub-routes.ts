@@ -6,40 +6,42 @@ import { SelfDeclarationComponent } from '../components/self-declaration/self-de
 import { PharmanetAccessComponent } from '../components/pharmanet-access/pharmanet-access.component';
 import { ReviewComponent } from '../components/review/review.component';
 import { StepperGuard } from '@prime-enrollment/core/guards/stepper.guard';
+import { EnrolmentConstants } from '@prime-enrollment/modules/enrollment/models/enrolment-constants.model';
+
 
 export const subRoutes: Routes = [
   {
-    path: 'profile',
+    path: EnrolmentConstants.PROFILE_PG,
     component: ProfileComponent,
     canActivate: [StepperGuard],
     data: { title: 'Profile' }
   },
   {
-    path: 'contact',
+    path: EnrolmentConstants.CONTACT_PG,
     component: ContactComponent,
     canActivate: [StepperGuard],
     data: { title: 'Contact' }
   },
   {
-    path: 'professional',
+    path: EnrolmentConstants.PROFESSIONAL_PG,
     component: ProfessionalComponent,
     canActivate: [StepperGuard],
     data: { title: 'Professional' }
   },
   {
-    path: 'self-declaration',
+    path: EnrolmentConstants.SELF_DEC_PG,
     component: SelfDeclarationComponent,
     canActivate: [StepperGuard],
     data: { title: 'Self Declaration' }
   },
   {
-    path: 'pharmanet-access',
+    path: EnrolmentConstants.PHARMANET_PG,
     component: PharmanetAccessComponent,
     canActivate: [StepperGuard],
     data: { title: 'Pharmanet Access' }
   },
   {
-    path: 'review',
+    path: EnrolmentConstants.REVIEW_PG,
     component: ReviewComponent,
     canActivate: [StepperGuard],
     data: { title: 'Review' }

@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  loggingURL: '/api/logging',
+  baseAPIUrl: '/api/reg/rest/'
 };

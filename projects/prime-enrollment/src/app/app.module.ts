@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import * as version from '../../version.GENERATED';
+
 @NgModule({
   declarations: [AppComponent],
 
@@ -21,7 +23,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     EnrollmentModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: 'APP_VERSION', useValue: version }
+  ],
   bootstrap: [AppComponent],
   exports: []
 })
