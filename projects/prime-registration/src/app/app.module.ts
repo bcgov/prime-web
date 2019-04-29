@@ -17,6 +17,9 @@ import { SharedCoreModule } from 'moh-common-lib';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LoggerService } from './services/logger.service';
 
+import * as version from '../../version.GENERATED';
+
+
 // List of providers for applicant
 const providerList: any = [
   Title
@@ -43,7 +46,8 @@ if ( environment.useMockBackend ) {
   ],
   providers: [
     providerList,
-    LoggerService
+    LoggerService,
+    { provide: 'APP_VERSION', useValue: version }
   ],
   bootstrap: [AppComponent]
 })

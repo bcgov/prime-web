@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UserAttrPayload } from '../models/register-api.model';
-import { ServerPayload } from '@prime-core/models/api-base.model';
+import { ServerPayload } from 'prime-core';
 
 @Injectable({
   providedIn: 'root'

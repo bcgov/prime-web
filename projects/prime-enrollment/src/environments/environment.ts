@@ -4,6 +4,16 @@
 
 export const environment = {
   production: false,
+
+  /** URL for log service */
+  loggingURL: '/api/logging',
+
+  /**
+   *  TODO: updated to when enrol implemented,
+   *  also decision - will cache be retrieved
+   *  from existing registration integration layer or will new cache service created
+   *  for enrolment?
+   */
   baseAPIUrl: '/api/reg/rest/'
 };
 

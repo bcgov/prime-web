@@ -8,7 +8,7 @@ import { RegisterApiService } from '@prime-registration/modules/registration/ser
 import { RegisterRespService } from '@prime-registration/modules/registration/services/register-resp.service';
 import { RegistrationConstants } from '@prime-registration/modules/registration/models/registration-constants.model';
 import { Subscription } from 'rxjs';
-import { ServerPayload, StatusMsgInterface, ScreenAreaID } from '@prime-core/models/api-base.model';
+import { ServerPayload, ScreenAreaID } from 'prime-core';
 import { LoggerService, RegistrationEvent, LogMessage } from '@prime-registration/services/logger.service';
 import { AccountErrorInterface } from '../../../registration/components/appl-account/appl-account.component';
 
@@ -104,7 +104,7 @@ export class BcscAccountComponent extends AbstractForm
           this.requestRegisterUser();
         } else if ( this.registerRespService.payload.error ) {
           this.nextPage( RegistrationEvent.VALIDATE_USER, false,
-                         <StatusMsgInterface[]>this.registerRespService.payload.statusMsgs );
+                         this.registerRespService.payload.statusMsgs );
         } else {
 
           // Display errors on page
@@ -144,7 +144,7 @@ export class BcscAccountComponent extends AbstractForm
         this.nextPage(
           RegistrationEvent.REGISTER_USER,
           this.registerRespService.payload.success,
-          <StatusMsgInterface[]>this.registerRespService.payload.statusMsgs
+          this.registerRespService.payload.statusMsgs
           );
       },
       regRespError => {
@@ -156,7 +156,7 @@ export class BcscAccountComponent extends AbstractForm
   private nextPage(
     event: RegistrationEvent,
     success: boolean,
-    errMsg: string | StatusMsgInterface[] = null ) {
+    errMsg: any = null ) {
     const logMessage: LogMessage = {
       event: event,
       success: success

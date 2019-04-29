@@ -6,7 +6,6 @@ import {
   IOrganization
 } from '@prime-enrollment/core/interfaces';
 import { orgResults } from '../mocks/organization.mock';
-import { CountryList } from '@prime-core/prime-shared/components/address/address.component';
 
 @Injectable({
   providedIn: 'root'

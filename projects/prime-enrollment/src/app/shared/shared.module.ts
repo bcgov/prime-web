@@ -15,20 +15,23 @@ import { ListItemHeaderComponent } from './components/list-item-header/list-item
 import { ProfileBlockComponent } from './components/profile-block/profile-block.component';
 import { AddressBlockComponent } from './components/address-block/address-block.component';
 import { ContactBlockComponent } from './components/contact-block/contact-block.component';
-import { SelfDeclarationQuestionBlockComponent } from './components/self-declaration-question-block/self-declaration-question-block.component';
-import { ProfessionalInformationBlockComponent } from './components/professional-information-block/professional-information-block.component';
+import {
+  SelfDeclarationQuestionBlockComponent
+} from './components/self-declaration-question-block/self-declaration-question-block.component';
+import {
+  ProfessionalInformationBlockComponent
+ } from './components/professional-information-block/professional-information-block.component';
 import { PharmanetBlockComponent } from './components/pharmanet-block/pharmanet-block.component';
-import { PrimeSharedModule } from '../../../../../src/app/prime-shared/prime-shared.module';
 import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 import { TextMaskModule } from 'angular2-text-mask';
 import { RadioButtonComponent } from './components/radio-button/radio-button.component';
 import { ErrorComponent } from './components/error-block/error.component';
 import { EnrollmentConfirmationComponent } from './components/enrollment-confirmation/enrollment-confirmation.component';
-import { Ng2TelInputModule } from 'ng2-tel-input';
+import { PrimeCoreModule, BASE_URL } from 'prime-core';
+import { environment } from '../../environments/environment';
 
 @NgModule({
   declarations: [
-    // ProfileComponent,
     SharedProfileComponent,
     LicenseComponent,
     DeviceProviderComponent,
@@ -56,10 +59,9 @@ import { Ng2TelInputModule } from 'ng2-tel-input';
     ReactiveFormsModule,
     NgSelectModule,
     SharedCoreModule,
-    PrimeSharedModule,
     NgxMyDatePickerModule.forRoot(),
     TextMaskModule,
-    Ng2TelInputModule
+    PrimeCoreModule
   ],
   exports: [
     FormsModule,
@@ -80,13 +82,15 @@ import { Ng2TelInputModule } from 'ng2-tel-input';
     SelfDeclarationQuestionBlockComponent,
     ProfessionalInformationBlockComponent,
     PharmanetBlockComponent,
-    PrimeSharedModule,
     NgxMyDatePickerModule,
     TextMaskModule,
     RadioButtonComponent,
     ErrorComponent,
     EnrollmentConfirmationComponent,
-    Ng2TelInputModule
+    PrimeCoreModule
+  ],
+  providers: [
+    { provide: BASE_URL, useValue: environment.loggingURL }
   ]
 })
 export class SharedModule {}

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Registrant } from '@prime-registration/modules/registration/models/registrant.model';
-import { Document } from '@prime-core/models/documents.interface';
+import { Document } from 'prime-core';
 import { RegistrationConstants } from '../modules/registration/models/registration-constants.model';
 
 @Injectable()

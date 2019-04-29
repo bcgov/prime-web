@@ -42,6 +42,9 @@ export class ReviewComponent implements OnInit {
     this.$registrantName = of(
       `${profile.firstName || null} ${profile.lastName}`
     );
+    /** NOTE: Why are we doing this?  The review should show what the enrollee entered or
+     * was provided to us by BSCS service or whoever provider is.
+     * 
     const sub = this.cacheSvc.provinceReady$
       .pipe(mergeMap(() => this.cacheSvc.countryReady$.asObservable()))
       .subscribe(obs => {
@@ -67,6 +70,7 @@ export class ReviewComponent implements OnInit {
           );
         }
       });
+      */
     profile.preferredFirstName
       ? (this.$preferredName = of(
           `${profile.preferredFirstName} ${profile.preferredLastName}`
