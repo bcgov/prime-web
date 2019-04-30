@@ -8,12 +8,17 @@ import { SelfDeclarationComponent } from './pages/self-declaration/self-declarat
 import { OrganizationComponent } from './pages/organization/organization.component';
 import { ReviewComponent } from './pages/review/review.component';
 import { EnrolmentComponent } from './enrolment.component';
+import { CoreModule } from '@prime-prov/core/core.module';
 
 @NgModule({
-  declarations: [ProfileComponent, ContactComponent, SelfDeclarationComponent, OrganizationComponent, ReviewComponent, EnrolmentComponent],
-  imports: [
-    CommonModule,
-    EnrolmentRoutingModule
-  ]
+  declarations: [
+    ProfileComponent,
+    ContactComponent,
+    SelfDeclarationComponent,
+    OrganizationComponent,
+    ReviewComponent,
+    EnrolmentComponent
+  ],
+  imports: [CommonModule, EnrolmentRoutingModule, CoreModule]
 })
-export class EnrolmentModule { }
+export class EnrolmentModule {}
