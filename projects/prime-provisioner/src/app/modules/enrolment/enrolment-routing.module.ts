@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { subRoutes } from '@prime-prov/core/models/sub-routes';
 import { ProvisionerConstants } from '@prime-prov/core/models/provisioner-constants.model';
+import { EnrolmentComponent } from './enrolment.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ProvisionerConstants,
+    component: EnrolmentComponent,
     children: [
       {
         path: '',

@@ -1,7 +1,7 @@
 import { PrimeConstants } from 'prime-core';
 
 export class ProvisionerConstants extends PrimeConstants {
-  public static PROVISIONER = 'provisioner';
+  public static PROVISIONER = 'enrolment';
 
   // Pages
   public static PROFILE_PG = 'profile';

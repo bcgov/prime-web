@@ -17,9 +17,9 @@ import { of, from } from 'rxjs';
     </common-core-breadcrumb>
 
     <router-outlet></router-outlet>
+    <!-- TODO: change the submit color to yellow when ready to advance -->
     <common-form-action-bar
       (btnClick)="advancePage()"
-      [defaultColor]="!stateSvc.submit"
       [submitLabel]="submitLabel$ | async"
       [isLoading]="loading"
     ></common-form-action-bar>
@@ -29,7 +29,7 @@ import { of, from } from 'rxjs';
 })
 export class EnrolmentComponent extends Container implements OnInit {
   loading = false;
-  submitLabel$ = from('Continue');
+  submitLabel$ = of('Continue');
 
   constructor() {
     super();
