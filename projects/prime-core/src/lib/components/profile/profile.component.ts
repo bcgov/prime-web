@@ -113,4 +113,9 @@ export class ProfileComponent extends Base implements OnInit, OnDestroy {
     this.form.controls[ctrlName].setErrors(error);
     this.form.controls[ctrlName].markAsTouched();
   }
+
+  setValue( $event ) {
+    console.log( 'setValue: ', $event );
+    this.data.firstName = $event;
+  }
 }

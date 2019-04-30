@@ -1,7 +1,10 @@
-import { Component, OnInit, Input, forwardRef, Output, EventEmitter } from '@angular/core';
-import { ControlContainer, NgForm } from '@angular/forms';
-import { Base } from 'moh-common-lib/models';
-
+import {
+  Component,
+  Input,
+  ChangeDetectionStrategy,
+  Optional,
+  Self } from '@angular/core';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
 
 /**
  * TODO: Determine whether this component should be in the moh-common-lib
@@ -11,45 +14,57 @@ import { Base } from 'moh-common-lib/models';
   selector: 'lib-prime-name',
   templateUrl: './name.component.html',
   styleUrls: ['./name.component.scss'],
-  /* Re-use the same ngForm that it's parent is using. The component will show
-   * up in its parents `this.form`, and will auto-update `this.form.valid`
-   */
-  viewProviders: [ { provide: ControlContainer, useExisting: forwardRef(() => NgForm ) } ]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NameComponent extends Base implements OnInit {
+export class NameComponent implements ControlValueAccessor {
 
   @Input() disabled: boolean = false;
-  @Input() required: boolean = false;
-  @Input() nameStr: string;
   @Input() label: string = 'Name';
-  @Input() maxLen: string = '255';
-  @Input() objectID: string = 'name_' + this.objectId;
+  @Input() maxlen: string = '255';
+  @Input() labelforId: string = 'name';
 
-  @Output() nameStrChange: EventEmitter<string> = new EventEmitter<string>();
-  @Output() blurEvent = new EventEmitter();
+  public nameStr: string = null;
 
-  /**
-   * Valid characters for name
-   */
-  public nameCriteria: RegExp = RegExp( '^[a-zA-Z][a-zA-Z\-.\' ]*$' );
+  _onChange = (_: any) => {};
+  _onTouched = (_: any) => {};
 
-  constructor() {
-    super();
-   }
-
-  ngOnInit() {
+  constructor( @Optional() @Self() public controlDir: NgControl ) {
+    if ( controlDir ) {
+      controlDir.valueAccessor = this;
+    }
   }
 
-  /**
-   * Passes the value entered back to the calling component
-   * @param name value the was entered by
-   */
-  setName( value: string ) {
-    this.nameStrChange.emit( value );
+  onValueChange( value: any ) {
+    console.log( 'onValueChange: ', value  );
+    this._onChange( value );
   }
 
-  onInputBlur($event) {
-    console.log( 'onBlur: ', event );
-    this.blurEvent.emit( event );
+  inputTouched( value: any ) {
+    this._onTouched( value );
+  }
+
+  writeValue( value: any ): void {
+    console.log( 'writeValue: ', value );
+    if ( value !== undefined ) {
+      this.nameStr = value;
+    }
+  }
+
+  // Register change function
+  registerOnChange( fn: any ): void {
+    this._onChange = fn;
+  }
+
+  // Register touched function
+  registerOnTouched( fn: any ): void {
+    this._onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
+
+  displayErrors(): boolean {
+    return this.controlDir && !this.controlDir.disabled && this.controlDir.touched;
   }
 }
