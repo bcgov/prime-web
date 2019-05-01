@@ -23,5 +23,6 @@ export class EnrolmentStateService {
     this.profileForm.firstName = 'Sean';
     this.profileForm.lastName = 'Hamilton';
     this.profileForm.dateOfBirth = dateOfBirth;
+    // console.log(this);
   }
 }

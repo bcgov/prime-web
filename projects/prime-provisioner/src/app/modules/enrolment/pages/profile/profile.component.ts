@@ -24,7 +24,9 @@ export class ProfileComponent implements OnInit {
   constructor(
     public stateSvc: EnrolmentStateService,
     public cacheSvc: CacheService
-  ) {}
+  ) {
+    // console.log(this.stateSvc);
+  }
 
   ngOnInit() {}
 }
