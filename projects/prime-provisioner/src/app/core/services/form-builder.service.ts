@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Registrant } from '../../../../../prime-registration/src/app/modules/registration/models/registrant.model';
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +8,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class FormBuilderService {
   constructor() {}
 
-  static profileForm(fb: FormBuilder) {
-    const fg = fb.group({});
+  static profileForm() {
+    return new Registrant();
   }
 
   static contactForm(fb: FormBuilder) {
