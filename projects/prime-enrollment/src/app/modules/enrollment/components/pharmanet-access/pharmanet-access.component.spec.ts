@@ -3,6 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { PharmanetAccessComponent } from './pharmanet-access.component';
 import { SharedModule } from '../../../../shared/shared.module';
 import { RouterTestingModule } from '@angular/router/testing';
+import { SearchOrganizationModalComponent } from '../search-organization-modal/search-organization-modal.component';
+import { fakeBackendProvider } from '@prime-enrollment/core/fake-backend/fake-backend';
 
 describe('PharmanetAccessComponent', () => {
   let component: PharmanetAccessComponent;
@@ -11,7 +13,8 @@ describe('PharmanetAccessComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [SharedModule, RouterTestingModule],
-      declarations: [PharmanetAccessComponent]
+      providers: [fakeBackendProvider],
+      declarations: [SearchOrganizationModalComponent, PharmanetAccessComponent]
     }).compileComponents();
   }));
 

@@ -11,8 +11,7 @@ import { PharmanetAccessComponent } from './components/pharmanet-access/pharmane
 import { ReviewComponent } from './components/review/review.component';
 import { SharedModule } from '../../shared/shared.module';
 import { SearchOrganizationModalComponent } from './components/search-organization-modal/search-organization-modal.component';
-import { CacheService } from '@prime-core/services/cache.service';
-import { CacheApiService } from '@prime-core/services/cache-api.service';
+import { CacheService, CacheApiService } from 'prime-core';
 
 @NgModule({
   declarations: [
@@ -29,8 +28,8 @@ import { CacheApiService } from '@prime-core/services/cache-api.service';
   entryComponents: [SearchOrganizationModalComponent],
   providers: [
     // TODO - Replace CacheService with EnrolmentCacheService when created (compare with RegCacheService)
-    CacheService,
-    CacheApiService,
+    // CacheService,
+    // CacheApiService,
   ],
   exports: []
 })

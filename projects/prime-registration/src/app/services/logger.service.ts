@@ -6,8 +6,7 @@ import { environment } from '../../environments/environment';
 /** Types of events to be logged */
 export enum RegistrationEvent {
   VALIDATE_USER = 'validate user',
-  REGISTER_USER = 'register user',
-  NAVIGATION = 'navigation'
+  REGISTER_USER = 'register user'
 }
 
 /** Log message format, must be structured like CommonLogMessage Interface */

@@ -1,8 +1,8 @@
 <ng-container *ngIf="address$ | async as add">
   <label class="font-weight-lighter">Country</label>
-  <span class="font-weight-bolder">{{ add.country }}</span>
+  <span class="font-weight-bolder text-capitalize ">{{ country | async | lowercase }}</span>
   <label class="font-weight-lighter">Province</label>
-  <span class="font-weight-bolder">{{ add.province }}</span>
+  <span class="font-weight-bolder">{{ province | async }}</span>
   <label class="font-weight-lighter">Street Address</label>
   <span class="font-weight-bolder">{{ add.street }}</span>
   <label class="font-weight-lighter">City</label>

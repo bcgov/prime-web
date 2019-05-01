@@ -1,6 +1,6 @@
 import { Component, OnInit, forwardRef, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { CommonImage } from 'moh-common-lib/images';
-import { DocumentType, Document } from '@prime-core/models/documents.interface';
+import { DocumentType, Document } from 'prime-core';
 import { ControlContainer, NgForm } from '@angular/forms';
 
 

@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DeviceProviderComponent } from './device-provider.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ErrorComponent } from '../error-block/error.component';
 
 describe('DeviceProviderComponent', () => {
   let component: DeviceProviderComponent;
@@ -10,7 +11,7 @@ describe('DeviceProviderComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule],
-      declarations: [DeviceProviderComponent]
+      declarations: [DeviceProviderComponent, ErrorComponent]
     }).compileComponents();
   }));
 

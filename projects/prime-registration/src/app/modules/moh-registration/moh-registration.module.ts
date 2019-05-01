@@ -9,7 +9,6 @@ import { MohAccountComponent } from './pages/moh-account/moh-account.component';
 import { FormsModule } from '@angular/forms';
 import { MohSecurityComponent } from './pages/moh-security/moh-security.component';
 import { MohDocUploadComponent } from './pages/moh-doc-upload/moh-doc-upload.component';
-import { PrimeSharedModule } from '@prime-core/prime-shared/prime-shared.module';
 
 @NgModule({
   imports: [
@@ -17,8 +16,7 @@ import { PrimeSharedModule } from '@prime-core/prime-shared/prime-shared.module'
     SharedCoreModule,
     MohRegistrationRoutingModule,
     RegistrationModule,
-    FormsModule,
-    PrimeSharedModule
+    FormsModule
   ],
   declarations: [
     MohContainerComponent,

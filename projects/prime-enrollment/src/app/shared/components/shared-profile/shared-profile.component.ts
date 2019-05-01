@@ -11,7 +11,7 @@ import { ControlContainer, NgForm } from '@angular/forms';
 // import { RegistrationDataService } from '@prime-registration/services/registration-data.service';
 // import { CacheService } from '../../../../services/cache.service';
 // import { CountryList, ProvinceList } from '../address/address.component';
-// import { PrimeConstants } from '@prime-core/models/prime-constants';
+// import { PrimeConstants } from 'prime-core';
 import { BsModalService } from 'ngx-bootstrap';
 // import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
 import { of, from, Observable, Subscription } from 'rxjs';

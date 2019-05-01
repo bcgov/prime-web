@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EnrollmentConfirmationComponent } from './enrollment-confirmation.component';
+import { PrimeCoreModule } from 'prime-core';
 
 describe('EnrollmentConfirmationComponent', () => {
   let component: EnrollmentConfirmationComponent;
@@ -8,9 +9,9 @@ describe('EnrollmentConfirmationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EnrollmentConfirmationComponent ]
-    })
-    .compileComponents();
+      imports: [PrimeCoreModule],
+      declarations: [EnrollmentConfirmationComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

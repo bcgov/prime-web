@@ -3,7 +3,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 @Component({
   selector: 'enroll-enrollment-confirmation',
   template: `
-    <prime-confirmation btnLabel="Continue">
+    <lib-prime-confirmation btnLabel="Continue">
       <p message>Your application has been submitted</p>
       <p nextSteps>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -11,7 +11,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
         commodo consequat.
       </p>
-    </prime-confirmation>
+    </lib-prime-confirmation>
   `,
   styleUrls: ['./enrollment-confirmation.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

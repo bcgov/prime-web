@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import {
+  CountryList,
+  ProvinceList
+} from 'prime-core/lib/components/address/address.component';
+import { CacheService, CacheApiService } from 'prime-core';
+
 const collegeOptions = [
   'College of Physicians and Surgeons of BC (CPSBC)',
   'College of Pharmacists of BC (CPBC)',
@@ -9,7 +15,9 @@ const collegeOptions = [
 @Injectable({
   providedIn: 'root'
 })
-export class EnrollmentCacheService {
+export class EnrollmentCacheService extends CacheService {
+  countries: CountryList[];
+  provinces: ProvinceList[];
   private collegeOptions: BehaviorSubject<string[]> = new BehaviorSubject(
     collegeOptions
   );
@@ -21,6 +29,7 @@ export class EnrollmentCacheService {
   collegeOptions$: Observable<any> = this.collegeOptions.asObservable();
 
   classOptions$ = this.classOptions.asObservable();
+
   setLicenseLabel$(str: string) {
     switch (str) {
       case 'College of Pharmacists of BC (CPBC)':
@@ -51,5 +60,19 @@ export class EnrollmentCacheService {
     return this.licenseLabel.asObservable();
   }
 
-  constructor() {}
+  constructor(protected cacheSvc: CacheApiService) {
+    super( cacheSvc );
+  }
+
+  async findCountry(country: string) {
+    const res = this.countries.filter(itm => itm.countryCode === country);
+    if (res.length < 1) return;
+    return res[0].description;
+  }
+
+  async findProvince(province: string) {
+    const res = this.provinces.filter(itm => itm.provinceCode === province);
+    if (res.length < 1) return;
+    return res[0].description;
+  }
 }

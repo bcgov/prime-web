@@ -4,7 +4,7 @@ import {
   ChangeDetectionStrategy,
   Input
 } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { Address } from 'moh-common-lib/models';
 
 @Component({
@@ -15,6 +15,8 @@ import { Address } from 'moh-common-lib/models';
 })
 export class AddressBlockComponent implements OnInit {
   @Input() address: Address;
+  @Input() country: Subject<string>;
+  @Input() province: Subject<string>;
   address$: Observable<any>;
 
   constructor() {}

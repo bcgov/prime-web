@@ -37,8 +37,8 @@ export class PharmanetAccessComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    if (!!this.stateSvc.organizationForm) this.results = true;
-    this.fa$.next(this.stateSvc.organizationForm);
+    if (!!this.stateSvc.organizationForm$.value) this.results = true;
+    this.fa$ = this.stateSvc.organizationForm$;
   }
 
   ngOnDestroy(): void {}
@@ -46,31 +46,17 @@ export class PharmanetAccessComponent implements OnInit, OnDestroy {
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalSvc.show(template, {
       backdrop: true,
-      ignoreBackdropClick: false,
-      class: 'modal-md'
+      ignoreBackdropClick: true,
+      class: 'modal-md',
+      keyboard: false
     });
-    // const dialog = this.dialog;
-    // const ref = dialog.open(SearchOrganizationModalComponent, {
-    //   panelClass: 'test',
-    //   disableClose: true,
-    //   position: { top: '25px' },
-    //   minWidth: '50vw'
-    // });
-    // this.sub = ref.afterClosed().subscribe(obs => {
-    //   if (!obs) return;
-    //   const arr = this.stateSvc.organizationForm;
-    //   this.stateSvc.organizationForm = obs;
-    //   this.fa$.next(this.stateSvc.organizationForm);
-    //   this.results = true;
-    // });
   }
 
   modalResult(evt: any) {
-    const arr = this.stateSvc.organizationForm;
-    this.stateSvc.organizationForm = evt;
-    this.fa$.next(this.stateSvc.organizationForm);
+    const arr = this.stateSvc.organizationForm$.value;
+    this.stateSvc.organizationForm$.next(evt);
+    // this.fa$.next(this.stateSvc.organizationForm);
     this.results = true;
-    // this.stateSvc.organizaitonForm
   }
 
   modalSubmit() {
@@ -79,6 +65,6 @@ export class PharmanetAccessComponent implements OnInit, OnDestroy {
 
   remove(i: number) {
     const fa = this.stateSvc.removeFormGroup(this.fa$.value, i);
-    this.stateSvc.organizationForm = fa;
+    // this.stateSvc.organizationForm$fa;
   }
 }

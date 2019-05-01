@@ -3,7 +3,6 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@prime-core/*": ["../../src/app/*"],
       "@prime-registration/*": ["src/app/*"],
     }
   }

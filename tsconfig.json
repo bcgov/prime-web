@@ -17,11 +17,20 @@
       "dom"
     ],
     "skipLibCheck": true,
-    // If you have problems importing from here, make sure your projects tsconfig.app.json does ont have a baseUrl set.
     "paths": {
-      "@prime-core/*": ["src/app/*"],
-      "@prime-registration/*": ["projects/prime-registration/src/app/*"],
-      "@prime-enrollment/*": ["projects/prime-enrollment/src/app/*"],
+      "*": ["types/*"],
+      "@prime-registration/*": [
+        "projects/prime-registration/src/app/*"
+      ],
+      "@prime-enrollment/*": [
+        "projects/prime-enrollment/src/app/*"
+      ],
+      "prime-core": [
+        "dist/prime-core"
+      ],
+      "prime-core/*": [
+        "dist/prime-core/*"
+      ]
     }
   },
   "angularCompilerOptions": {

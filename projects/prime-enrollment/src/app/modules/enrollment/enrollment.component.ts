@@ -4,12 +4,17 @@ import { Container } from 'moh-common-lib/models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EnrollmentStateService } from './services/enrollment-state.service';
 import { Observable, of, BehaviorSubject, Subject } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { EnrolmentConstants } from '@prime-enrollment/modules/enrollment/models/enrolment-constants.model';
 
 // TODO:  re-add progress steps once routing is done.
 
 @Component({
   selector: 'app-enrollment',
   template: `
+    <common-page-framework layout="blank">
+      <h1>Application Enrolment</h1>
+    </common-page-framework>
     <common-core-breadcrumb>
       <common-wizard-progress-bar
         center
@@ -19,7 +24,6 @@ import { Observable, of, BehaviorSubject, Subject } from 'rxjs';
 
     <router-outlet></router-outlet>
     <common-form-action-bar
-      [canContinue]="stateSvc.currentStateValid"
       (btnClick)="advancePage()"
       [defaultColor]="!stateSvc.submit"
       [submitLabel]="stateSvc.submitLabel$ | async"
@@ -35,16 +39,20 @@ export class EnrollmentComponent extends Container implements OnInit {
   constructor(public stateSvc: EnrollmentStateService, private router: Router) {
     super();
     this.setProgressSteps(subRoutes);
-    this.stateSvc.routes = mappedRoutes(subRoutes, 'enrollment');
-    console.log(this.stateSvc.routes);
+    this.stateSvc.routes = mappedRoutes(subRoutes, EnrolmentConstants.ENROLMENT);
   }
 
   ngOnInit() {}
 
   advancePage() {
     const index = this.stateSvc.currentIndex;
+    const valid = this.stateSvc.isIndexValid(index);
+    console.log(valid);
+    return valid ? this.navigate(index) : this.touchIndex(index);
+  }
+  navigate(index: number) {
     const route = this.stateSvc.routes[index];
-    if (route === 6) {
+    if (index === 6) {
       return setTimeout(() => {
         this.loading.next(false);
         this.router.navigate(['/success']);
@@ -52,22 +60,46 @@ export class EnrollmentComponent extends Container implements OnInit {
     }
     return this.router.navigate([route]);
   }
-  // switch (index) {
-  //   case 1:
-  //     return this.router.navigate(['/enrollment/contact']);
-  //   case 2:
-  //     return this.router.navigate(['/enrollment/professional']);
-  //   case 3:
-  //     return this.router.navigate(['/enrollment/self-declaration']);
-  //   case 4:
-  //     return this.router.navigate(['/enrollment/pharmanet-access']);
-  //   case 5:
-  //     return this.router.navigate(['/enrollment/review']);
-  //   case 6:
-  //     this.loading.next(true);
-  //     setTimeout(() => {
-  //       this.loading.next(false);
-  //       this.router.navigate(['/success']);
-  //     }, 2000);
-  // }
+
+  touchIndex(index: number) {
+    switch (index) {
+      case 2:
+        let fg = this.stateSvc.contactForm$.value;
+        let changed = this.stateSvc.touchForm(fg);
+        return this.stateSvc.contactForm$.next(changed);
+      case 3:
+        fg = this.stateSvc.professionalForm$.value;
+        changed = this.stateSvc.touchForm(fg);
+        if (changed.controls.collegeCert) {
+          const fa = this.stateSvc.certForms;
+          const newArr = [];
+          fa.forEach(form => {
+            newArr.push(this.stateSvc.touchForm(form));
+          });
+          this.stateSvc.certForms = newArr;
+          if (changed.controls.deviceProvider) {
+            const fa = this.stateSvc.dpFa;
+
+            fa.controls.forEach((ctrl: FormControl) => {
+              newArr.push(this.stateSvc.touchControl(ctrl));
+            });
+            this.stateSvc.dpFa = fa;
+          }
+        }
+
+        return this.stateSvc.professionalForm$.next(changed);
+      case 4:
+        fg = this.stateSvc.declarationForm$.value;
+        changed = this.stateSvc.touchForm(fg);
+        return this.stateSvc.declarationForm$.next(changed);
+      case 5:
+        const arr = this.stateSvc.organizationForm$.value;
+        const newArr = [];
+        arr.forEach(itm => {
+          changed = this.stateSvc.touchForm(itm);
+          newArr.push(changed);
+        });
+        this.stateSvc.organizationForm$.next(newArr);
+    }
+  }
 }

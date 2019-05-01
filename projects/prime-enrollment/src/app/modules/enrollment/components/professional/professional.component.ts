@@ -1,5 +1,11 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormArray, FormGroup } from '@angular/forms';
+import {
+  FormArray,
+  FormGroup,
+  FormControl,
+  Validator,
+  Validators
+} from '@angular/forms';
 import { EnrollmentStateService } from '../../services/enrollment-state.service';
 import { FormFieldBuilder } from '../../models/form-field-builder';
 import { FormGenerator } from '../../models/form-generator';
@@ -32,19 +38,21 @@ const oboOptions = [
 export class ProfessionalComponent implements OnInit {
   certFa: FormGroup[];
   dpFa: FormArray;
-  fg: FormGroup;
+  fg$: Observable<any>;
   onBehalfOfOptions: Observable<string[]>;
   apOptions: Observable<string[]>;
+  showObo: boolean;
 
   get certFaValid() {
     let valid = true;
-    if (this.fg.value.collegeCert === true) {
+    const fg = this.stateSvc.professionalForm$.value;
+    if (fg.value.collegeCert === true) {
       for (const fg of this.certFa) {
         fg.valid ? null : (valid = false);
       }
     }
-    if (this.fg.value.collegeCert === null) return false;
-    if (this.fg.value.collegeCert === false) return true;
+    if (fg.value.collegeCert === null) return false;
+    if (fg.value.collegeCert === false) return true;
 
     return valid;
   }
@@ -53,14 +61,30 @@ export class ProfessionalComponent implements OnInit {
     private stateSvc: EnrollmentStateService,
     public cacheSvc: EnrollmentCacheService
   ) {
-    this.fg = this.stateSvc.professionalForm;
+    this.fg$ = this.stateSvc.professionalForm$;
     this.certFa = this.stateSvc.certForms;
     this.dpFa = this.stateSvc.dpFa;
     this.onBehalfOfOptions = of(oboOptions);
     this.apOptions = of(apOptions);
+    this.fg$.subscribe(obs => {
+      if (obs.value.onBehalfOf !== null && !obs.value.deviceProvider) {
+        return (this.showObo = true);
+      }
+      if (!obs.value.deviceProvider) return (this.showObo = true);
+      else return (this.showObo = false);
+    });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    // this.stateSvc.professionalForm$.value.valueChanges.subscribe(obs =>
+    //   console.log(this.stateSvc.professionalForm$.value)
+    // );
+  }
+
+  requireField(fc: FormControl, bool: boolean) {
+    bool ? fc.clearValidators() : fc.setValidators([Validators.required]);
+    fc.updateValueAndValidity({ emitEvent: true });
+  }
 
   addLicenseForm(fa: FormGroup[]) {
     const fg = this.stateSvc.addFormToArray(FormGenerator.licenseForm, fa);
