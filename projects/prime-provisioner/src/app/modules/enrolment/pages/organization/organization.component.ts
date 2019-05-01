@@ -16,6 +16,12 @@ import { OrganizationStateService } from './organization-state.service';
         [provisionerFc]="orgStateSvc.provisionerGroupControl"
         [orgOptions]="orgStateSvc.orgOptions | async"
       ></prov-search-provisioner-access>
+      <ng-container *ngIf="orgStateSvc.searchResults | async as results">
+        <prov-organization-table
+          *ngFor="let result of results"
+          [org]="result"
+        ></prov-organization-table>
+      </ng-container>
       <!-- TODO: accordian list -->
       <!-- TODO: sublist table w/ site info -->
       <!-- </common-page-section> -->

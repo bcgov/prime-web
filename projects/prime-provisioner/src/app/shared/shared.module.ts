@@ -4,20 +4,23 @@ import { PageHeaderComponent } from './components/page-header/page-header.compon
 import { RadioControlComponent } from './components/radio-control/radio-control.component';
 import { SubheaderComponent } from './components/subheader/subheader.component';
 import { DeclarationQuestionComponent } from './components/declaration-question/declaration-question.component';
+import { PanelComponent } from './components/panel/panel.component';
 
 @NgModule({
   declarations: [
     PageHeaderComponent,
     RadioControlComponent,
     SubheaderComponent,
-    DeclarationQuestionComponent
+    DeclarationQuestionComponent,
+    PanelComponent
   ],
   imports: [CommonModule],
   exports: [
     PageHeaderComponent,
     RadioControlComponent,
     SubheaderComponent,
-    DeclarationQuestionComponent
+    DeclarationQuestionComponent,
+    PanelComponent
   ]
 })
 export class SharedModule {}
