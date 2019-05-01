@@ -61,8 +61,8 @@ export class SelfDeclarationComponent implements OnInit {
       },
       {
         radioOpts: [
-          this.generateRadioOpts('rs', false),
-          this.generateRadioOpts('rs', true)
+          this.generateRadioOpts('tc', false),
+          this.generateRadioOpts('tc', true)
         ],
         label:
           'Have you ever had Terms and Conditions imposed on your license as a result of disciplinary actions taken by a governing body?',
@@ -70,8 +70,8 @@ export class SelfDeclarationComponent implements OnInit {
       },
       {
         radioOpts: [
-          this.generateRadioOpts('rs', false),
-          this.generateRadioOpts('rs', true)
+          this.generateRadioOpts('ps', false),
+          this.generateRadioOpts('ps', true)
         ],
         label:
           'Have you ever had your access to PharmaNet Suspended or revoked?',
