@@ -9,6 +9,7 @@ import { OrganizationComponent } from './pages/organization/organization.compone
 import { ReviewComponent } from './pages/review/review.component';
 import { EnrolmentComponent } from './enrolment.component';
 import { CoreModule } from '@prime-prov/core/core.module';
+import { SharedModule } from '@prime-prov/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,6 @@ import { CoreModule } from '@prime-prov/core/core.module';
     ReviewComponent,
     EnrolmentComponent
   ],
-  imports: [CommonModule, EnrolmentRoutingModule, CoreModule]
+  imports: [CommonModule, EnrolmentRoutingModule, CoreModule, SharedModule]
 })
 export class EnrolmentModule {}
