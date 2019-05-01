@@ -16,7 +16,7 @@ export class VerifyPreferNameDirective implements Validator  {
 
     const parent = control.parent;
 
-    if ( this.depCtrlName ) {
+    if ( this.depCtrlName && parent ) {
       const depCtrl = parent.get( this.depCtrlName );
 
       if ( depCtrl ) {
