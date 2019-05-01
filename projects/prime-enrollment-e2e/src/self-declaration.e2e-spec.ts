@@ -1,12 +1,12 @@
-import { SelfDeclarationPage } from './registration.po';
 import { browser } from 'protractor';
 import { PrimeConstants } from '../../../src/app/models/prime-constants';
-import { FakeDataMohReg } from './registration.data';
 import { PrimeTestPage } from '../../../e2e/src/app.po';
+import { SelfDeclarationPage } from './enrollment.po';
+import { FakeDataEnrollment } from './enrollment.data';
 
-fdescribe('BCSC Enrollment - Self-Declaration Page', () => {
+describe('BCSC Enrollment - Self-Declaration Page', () => {
     let page: SelfDeclarationPage;
-    const data = new FakeDataMohReg();
+    const data = new FakeDataEnrollment();
     let selfDeclarationData;
     const SELF_DECLARATION_PAGE_URL = `enrollment/self-declaration`;
     const PHARMANET_ACCESS_PAGE_URL = `enrollment/pharmanet-access`;

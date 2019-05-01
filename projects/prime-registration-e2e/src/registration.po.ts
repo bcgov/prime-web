@@ -3,47 +3,15 @@ import { ProfilePageTest } from './registration.data';
 import { PrimeTestPage } from '../../../e2e/src/app.po';
 
 export class BaseMohRegTestPage extends PrimeTestPage {
-    private continueButton: WebElement;
-    private diffMailAddressButton: WebElement;
-    private diffMailAddressCheckbox: WebElement;
-    private skipToContentButton: WebElement;
-
 
     constructor() {
         super();
-        this.continueButton = element(by.css('.form-bar .submit'));
-        this.diffMailAddressButton = element(by.css('.mail-address-container .btn'));
-        this.diffMailAddressCheckbox = element(by.css('.custom-checkbox .custom-control-label'));
-        this.skipToContentButton = element(by.css('.skip-to-content'));
     }
 
     navigateTo() {
         return browser.get('/moh-registration/profile');
     }
 
-    continue() {
-        this.continueButton.click();
-    }
-
-    clickDiffMailAddress() {
-        this.diffMailAddressButton.click();
-    }
-
-    checkDiffMailAddress() {
-        this.diffMailAddressCheckbox.click();
-    }
-
-    getContinueButton() {
-        return this.continueButton;
-    }
-
-    scrollDown() {
-        browser.executeScript('window.scrollTo(0, document.body.scrollHeight)');
-    }
-
-    clickSkipToContent(){
-      this.skipToContentButton.click();
-    }
 }
 
 export class MohProfileTestPage extends BaseMohRegTestPage {
@@ -120,15 +88,8 @@ export class MohProfileTestPage extends BaseMohRegTestPage {
 
 export class BCSCRegistrationPage extends MohProfileTestPage {
 
-  private streetField: WebElement;
-
   constructor() {
     super();
-    this.streetField = element(by.css('prime-address [id^="street"]'));
-  }
-
-  checkEnabled() {
-    return this.streetField.isEnabled();
   }
 
   navigateTo() {

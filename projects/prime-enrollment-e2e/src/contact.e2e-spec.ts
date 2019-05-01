@@ -1,10 +1,10 @@
-import { ContactPage } from './registration.po';
 import { browser } from 'protractor';
 import { PrimeConstants } from '../../../src/app/models/prime-constants';
-import { FakeDataMohReg } from './registration.data';
 import { PrimeTestPage } from '../../../e2e/src/app.po';
+import { ContactPage } from './enrollment.po';
+import { FakeDataMohReg } from './enrollment.data';
 
-fdescribe('BCSC Enrollment- Contact Page', () => {
+describe('BCSC Enrollment- Contact Page', () => {
     let page: ContactPage;
     const data = new FakeDataMohReg();
     let contactData;

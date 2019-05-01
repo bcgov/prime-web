@@ -7,9 +7,52 @@ import { browser, by, element, WebElement, $$, protractor } from 'protractor';
  * can use the same e2e starting board.
  */
 export class PrimeTestPage {
+  protected continueButton: WebElement;
+  protected diffMailAddressButton: WebElement;
+  protected diffMailAddressCheckbox: WebElement;
+  protected skipToContentButton: WebElement;
+  protected streetField: WebElement;
+
+  constructor() {
+    this.continueButton = element(by.css('.form-bar .submit'));
+    this.diffMailAddressButton = element(by.css('.mail-address-container .btn'));
+    this.diffMailAddressCheckbox = element(by.css('.custom-checkbox .custom-control-label'));
+    this.skipToContentButton = element(by.css('.skip-to-content'));
+    this.streetField = element(by.css('prime-address [id^="street"]'));
+  }
+
   /** Every class should override this to point to the page it is testing.  */
   navigateTo() {
     return browser.get('/');
+  }
+
+  continue() {
+    this.continueButton.click();
+  }
+
+  getContinueButton() {
+    return this.continueButton;
+  }
+
+  /** Scrolls down to the bottom of the page */
+  scrollDown() {
+    browser.executeScript('window.scrollTo(0, document.body.scrollHeight)');
+  }
+
+  clickDiffMailAddress() {
+    this.diffMailAddressButton.click();
+  }
+
+  checkDiffMailAddress() {
+    this.diffMailAddressCheckbox.click();
+  }
+
+  clickSkipToContent() {
+    this.skipToContentButton.click();
+  }
+
+  checkEnabled() {
+    return this.streetField.isEnabled();
   }
 
   /** Returns the input for an associated human readable label. If the label is a duplicate, it will grab the first one only. */
@@ -45,5 +88,9 @@ export class PrimeTestPage {
     element(by.css(`ng-select[id="${labelId}"]`)).click(); // opens dropdown
     element(by.css(`input[role="combobox"]`)).sendKeys(data); // type option
     browser.actions().sendKeys(protractor.Key.ENTER).perform(); // hit enter key
+  }
+
+  typeText(labelId: string, text: string) {
+    element(by.css(`input[ng-reflect-name="${labelId}"]`)).sendKeys(text);
   }
 }

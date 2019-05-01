@@ -1,12 +1,12 @@
-import { ProfilePage } from './registration.po';
 import { browser } from 'protractor';
 import { PrimeConstants } from '../../../src/app/models/prime-constants';
-import { FakeDataMohReg } from './registration.data';
 import { PrimeTestPage } from '../../../e2e/src/app.po';
+import { ProfilePage } from './enrollment.po';
+import { FakeDataEnrollment } from './enrollment.data';
 
-fdescribe('BCSC Enrollment - Profile Page', () => {
+describe('BCSC Enrollment - Profile Page', () => {
     let page: ProfilePage;
-    const data = new FakeDataMohReg();
+    const data = new FakeDataEnrollment();
     let profileData;
     const PROFILE_PAGE_URL = `enrollment/profile`;
     const CONTACT_PAGE_URL = `enrollment/contact`;

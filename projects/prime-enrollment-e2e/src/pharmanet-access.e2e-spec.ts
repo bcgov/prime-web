@@ -1,12 +1,12 @@
-import { PharmanetAccessPage } from './registration.po';
 import { browser } from 'protractor';
 import { PrimeConstants } from '../../../src/app/models/prime-constants';
-import { FakeDataMohReg } from './registration.data';
 import { PrimeTestPage } from '../../../e2e/src/app.po';
+import { PharmanetAccessPage } from './enrollment.po';
+import { FakeDataEnrollment } from './enrollment.data';
 
-fdescribe('BCSC Enrollment - Pharmanet-Access Page', () => {
+describe('BCSC Enrollment - Pharmanet-Access Page', () => {
     let page: PharmanetAccessPage;
-    const data = new FakeDataMohReg();
+    const data = new FakeDataEnrollment();
     let pharmanetAccessData;
     const PHARMANET_ACCESS_PAGE_URL = `enrollment/pharmanet-access`;
     const REVIEW_PAGE_URL = `enrollment/review`;

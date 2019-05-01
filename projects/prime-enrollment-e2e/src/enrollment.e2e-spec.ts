@@ -1,8 +1,8 @@
-import { ProfilePage, ContactPage, ProfessionalPage, SelfDeclarationPage, PharmanetAccessPage } from './registration.po';
 import { browser } from 'protractor';
 import { PrimeConstants } from '../../../src/app/models/prime-constants';
-import { FakeDataMohReg } from './registration.data';
 import { PrimeTestPage } from '../../../e2e/src/app.po';
+import { ProfilePage, ContactPage, ProfessionalPage, SelfDeclarationPage, PharmanetAccessPage } from './enrollment.po';
+import { FakeDataEnrollment } from './enrollment.data';
 
 fdescribe('BCSC Enrollment - End to End', () => {
     let profilePage: ProfilePage;
@@ -10,7 +10,7 @@ fdescribe('BCSC Enrollment - End to End', () => {
     let professionalPage: ProfessionalPage;
     let selfDeclarationPage: SelfDeclarationPage;
     let pharmanetAccessPage: PharmanetAccessPage;
-    const data = new FakeDataMohReg();
+    const data = new FakeDataEnrollment();
     let profileData, contactData;
     const PROFILE_PAGE_URL = `enrollment/profile`;
     const CONTACT_PAGE_URL = `enrollment/contact`;
@@ -27,7 +27,7 @@ fdescribe('BCSC Enrollment - End to End', () => {
         profileData['country'] = 'Canada'; // forced the country to be Canada so the faker will generate a province
     });
 
-    it('01. should go through from Profile to Review page when all required fields are filled out', () => {
+    fit('01. should go through from Profile to Review page when all required fields are filled out', () => {
         profilePage.navigateTo();
         profilePage.continue();
         contactPage.typeContactMethod();
