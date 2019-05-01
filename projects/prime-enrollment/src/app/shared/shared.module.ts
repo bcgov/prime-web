@@ -90,7 +90,7 @@ import { environment } from '../../environments/environment';
     PrimeCoreModule
   ],
   providers: [
-    { provide: BASE_URL, useValue: environment.loggingURL }
+    { provide: BASE_URL, useValue: environment.baseAPIUrl }
   ]
 })
 export class SharedModule {}

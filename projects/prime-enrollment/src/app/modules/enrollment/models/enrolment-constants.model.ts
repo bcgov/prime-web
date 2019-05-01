@@ -1,4 +1,4 @@
-import { PrimeConstants } from '@prime-core/models/prime-constants';
+import { PrimeConstants } from 'prime-core';
 
 export class EnrolmentConstants extends PrimeConstants {
 

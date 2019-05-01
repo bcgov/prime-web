@@ -14,7 +14,7 @@ export const environment = {
    *  from existing registration integration layer or will new cache service created
    *  for enrolment?
    */
-  baseAPIUrl: '/api/reg/rest/'
+  baseAPIUrl: '/api/reg/rest'
 };
 
 /*
