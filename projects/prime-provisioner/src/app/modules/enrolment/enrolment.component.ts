@@ -6,17 +6,18 @@ import { of, from } from 'rxjs';
 @Component({
   selector: 'prov-enrolment',
   template: `
-    <common-page-framework layout="blank">
-      <h1>Application Enrolment</h1>
-    </common-page-framework>
     <common-core-breadcrumb>
       <common-wizard-progress-bar
         center
         [progressSteps]="progressSteps"
       ></common-wizard-progress-bar>
     </common-core-breadcrumb>
+    <common-page-framework layout="blank">
+      <h1>Application Enrolment</h1>
+    </common-page-framework>
 
     <router-outlet></router-outlet>
+
     <!-- TODO: change the submit color to yellow when ready to advance -->
     <common-form-action-bar
       (btnClick)="advancePage()"

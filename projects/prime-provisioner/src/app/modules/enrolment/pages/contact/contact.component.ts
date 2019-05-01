@@ -11,7 +11,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
         [title]="title"
         [helperText]="helperText"
       ></prov-page-header>
-      <!--
+    </common-page-framework>
+    <!--
   TODO: multi-selected preferred contact method
 
   TODO: email input (note - check email validator)
@@ -19,7 +20,6 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   TODO: Phone number
 
  -->
-    </common-page-framework>
   `,
   styleUrls: ['./contact.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
