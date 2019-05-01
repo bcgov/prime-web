@@ -16,73 +16,75 @@ import { MaskModel, NUMBER, SPACE } from 'moh-common-lib/models';
   selector: 'prov-contact',
   template: `
     <common-page-framework layout="blank">
+      <!-- <common-page-section layout="single"> -->
+      <prov-page-header
+        [title]="title"
+        [helperText]="helperText"
+      ></prov-page-header>
+      <!-- </common-page-section> -->
       <common-page-section layout="tips">
-        <prov-page-header
-          [title]="title"
-          [helperText]="helperText"
-        ></prov-page-header>
+        <prov-subheader
+          [title]="subTitle"
+          [helperText]="subHelperText"
+        ></prov-subheader>
+        <form [formGroup]="stateSvc.contactForm">
+          <prov-radio-control
+            (selection)="
+              preferredContactValueChange($event, stateSvc.contactForm)
+            "
+            formControlName="preferredContact"
+            [controls]="contactOptions"
+          ></prov-radio-control>
+          <div class="form-group">
+            <label for="email" class="control-label">Email</label>
+            <input
+              class="form-control"
+              formControlName="email"
+              id="email"
+              placeholder="user@example.com"
+            />
+          </div>
+          <div class="form-group phone">
+            <label for="email" class="control-label">Phone</label>
+
+            <input
+              class="form-control"
+              name="phone"
+              formControlName="phone"
+              [textMask]="{ mask: mask }"
+              [placeholder]="placeholder"
+            />
+          </div>
+          <prov-subheader
+            [title]="voicePhoneTitle"
+            [helperText]="voicePhoneHelperText"
+          ></prov-subheader>
+          <label class="control-label" for="phone">
+            Phone Number for Voice Contact
+          </label>
+          <div class="form-group">
+            <input
+              class="form-control"
+              name="voicePhone"
+              formControlName="voicePhone"
+              [textMask]="{ mask: mask }"
+              [placeholder]="placeholder"
+            />
+          </div>
+          <div class="form-group">
+            <label for="ext" class="control-label"
+              >Extension Number (Optional)</label
+            >
+            <input
+              class="form-control col-sm-3 col-md-3 col-lg-3"
+              formControlName="ext"
+              id="ext"
+              placeholder="555"
+            />
+          </div>
+        </form>
         <aside>Tips</aside>
       </common-page-section>
-      <prov-subheader
-        [title]="subTitle"
-        [helperText]="subHelperText"
-      ></prov-subheader>
-      <form [formGroup]="stateSvc.contactForm">
-        <prov-radio-control
-          (selection)="
-            preferredContactValueChange($event, stateSvc.contactForm)
-          "
-          formControlName="preferredContact"
-          [controls]="contactOptions"
-        ></prov-radio-control>
-        <div class="form-group">
-          <label for="email" class="control-label">Email</label>
-          <input
-            class="form-control"
-            formControlName="email"
-            id="email"
-            placeholder="user@example.com"
-          />
-        </div>
-        <div class="form-group phone">
-          <label for="email" class="control-label">Phone</label>
-
-          <input
-            class="form-control"
-            name="phone"
-            formControlName="phone"
-            [textMask]="{ mask: mask }"
-            [placeholder]="placeholder"
-          />
-        </div>
-        <prov-subheader
-          [title]="voicePhoneTitle"
-          [helperText]="voicePhoneHelperText"
-        ></prov-subheader>
-        <label class="control-label" for="phone">
-          Phone Number for Voice Contact
-        </label>
-        <div class="form-group">
-          <input
-            class="form-control"
-            name="voicePhone"
-            formControlName="voicePhone"
-            [textMask]="{ mask: mask }"
-            [placeholder]="placeholder"
-          />
-        </div>
-        <div class="form-group">
-          <label for="ext" class="control-label"
-            >Extension Number (Optional)</label
-          >
-          <input
-            class="form-control col-sm-3 col-md-3 col-lg-3"
-            formControlName="ext"
-            id="ext"
-            placeholder="555"
-          />
-        </div>
-      </form>
     </common-page-framework>
     <!--
 
