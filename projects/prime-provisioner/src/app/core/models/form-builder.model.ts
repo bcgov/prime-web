@@ -1,13 +1,7 @@
-import { Injectable } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
 import { Registrant } from '../../../../../prime-registration/src/app/modules/registration/models/registrant.model';
+import { FormBuilder, Validators } from '@angular/forms';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class FormBuilderService {
-  constructor() {}
-
+export abstract class EnrolmentFormBuilder {
   static profileForm() {
     return new Registrant();
   }

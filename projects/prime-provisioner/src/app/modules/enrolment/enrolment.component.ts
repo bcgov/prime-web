@@ -13,7 +13,7 @@ import { of, from } from 'rxjs';
       ></common-wizard-progress-bar>
     </common-core-breadcrumb>
     <common-page-framework layout="blank">
-      <h1>Application Enrolment</h1>
+      <h1>Provisioner Enrolment</h1>
     </common-page-framework>
 
     <router-outlet></router-outlet>
