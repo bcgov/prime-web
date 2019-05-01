@@ -5,6 +5,7 @@ import { SharedCoreModule } from 'moh-common-lib';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TextMaskModule } from 'angular2-text-mask';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [],
@@ -15,14 +16,16 @@ import { TextMaskModule } from 'angular2-text-mask';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    TextMaskModule
+    TextMaskModule,
+    NgSelectModule
   ],
   exports: [
     PrimeCoreModule,
     SharedCoreModule,
     FormsModule,
     ReactiveFormsModule,
-    TextMaskModule
+    TextMaskModule,
+    NgSelectModule
   ]
 })
 export class CoreModule {}
