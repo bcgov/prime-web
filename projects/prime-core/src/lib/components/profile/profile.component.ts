@@ -2,7 +2,6 @@ import {
   Component,
   OnInit,
   Input,
-  forwardRef,
   Output,
   EventEmitter,
   OnDestroy
@@ -22,7 +21,7 @@ import { PrimeConstants } from '../../../models/prime-constants';
    * up in its parents `this.form`, and will auto-update `this.form.valid`
    */
   viewProviders: [
-    { provide: ControlContainer, useExisting: forwardRef(() => NgForm) }
+    { provide: ControlContainer, useExisting: NgForm }
   ]
 })
 export class ProfileComponent extends Base implements OnInit, OnDestroy {
