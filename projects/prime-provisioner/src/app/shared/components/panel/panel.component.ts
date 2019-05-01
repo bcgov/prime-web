@@ -8,18 +8,18 @@ import {
 @Component({
   selector: 'prov-panel',
   template: `
-    <div class="header row" (click)="open = !open">
+    <div class="header" (click)="open = !open">
       <a>
         <ng-container *ngIf="open; else closed">
-          <i class="fa fa-caret-down col-2"></i> </ng-container
-        >{{ label }}
+          <i class="fa fa-caret-down mr-3"></i> </ng-container
+        ><span>{{ label }}</span>
       </a>
     </div>
-    <div class="p-3">
-      <ng-content *ngIf="open"></ng-content>
+    <div class="p-3 card-bg" *ngIf="open">
+      <ng-content></ng-content>
     </div>
     <ng-template #closed>
-      <i class="fa fa-caret-right col-2"></i>
+      <i class="fa fa-caret-right mr-3"></i>
     </ng-template>
   `,
   styleUrls: ['./panel.component.scss'],
