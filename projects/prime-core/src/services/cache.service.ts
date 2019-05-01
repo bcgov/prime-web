@@ -26,9 +26,7 @@ export class CacheService {
   private $sysParamListSubject: BehaviorSubject<
     SysParamInterface[]
   > = new BehaviorSubject([]);
-  private $securityQuestionsSubject: BehaviorSubject<
-    StatusMsgInterface[]
-  > = new BehaviorSubject([]);
+
 
   /**
    * Message List
@@ -60,14 +58,6 @@ export class CacheService {
     SysParamInterface[]
   > = this.$sysParamListSubject.asObservable();
 
-  /**
-   * Security questions list
-   * populated via call to reg/rest/getCache?param=securityQues
-   */
-  public $securityQuestionsList: Observable<
-    StatusMsgInterface[]
-  > = this.$securityQuestionsSubject.asObservable();
-
   constructor(protected cacheApiService: CacheApiService) {
     this.setupBehaviorSubject(
       'provinces',
@@ -84,11 +74,6 @@ export class CacheService {
       'sysParams',
       'sysParam',
       this.$sysParamListSubject
-    );
-    this.setupBehaviorSubject(
-      'securityQues',
-      'secQues',
-      this.$securityQuestionsSubject
     );
   }
 
