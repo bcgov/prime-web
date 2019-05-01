@@ -11,7 +11,8 @@ export abstract class EnrolmentFormBuilder {
       preferredContact: [null, Validators.required],
       email: [null],
       phone: [null],
-      voicePhone: [null]
+      voicePhone: [null],
+      ext: [null]
     });
     return fg;
   }

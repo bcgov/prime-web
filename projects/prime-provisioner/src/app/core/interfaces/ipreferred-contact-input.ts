@@ -1,6 +1,8 @@
 export interface IPreferredContactInput {
   name: string;
-  value: string;
+  value: ContactValueOption;
   id: string;
   label: string;
 }
+
+export type ContactValueOption = 'phone' | 'email' | 'both';

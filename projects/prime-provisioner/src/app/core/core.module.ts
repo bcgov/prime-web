@@ -4,6 +4,7 @@ import { PrimeCoreModule } from 'prime-core';
 import { SharedCoreModule } from 'moh-common-lib';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   declarations: [],
@@ -13,8 +14,15 @@ import { HttpClientModule } from '@angular/common/http';
     SharedCoreModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    TextMaskModule
   ],
-  exports: [PrimeCoreModule, SharedCoreModule, FormsModule, ReactiveFormsModule]
+  exports: [
+    PrimeCoreModule,
+    SharedCoreModule,
+    FormsModule,
+    ReactiveFormsModule,
+    TextMaskModule
+  ]
 })
 export class CoreModule {}

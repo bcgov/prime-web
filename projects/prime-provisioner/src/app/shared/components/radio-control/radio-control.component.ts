@@ -3,9 +3,14 @@ import {
   OnInit,
   ChangeDetectionStrategy,
   Input,
-  forwardRef
+  forwardRef,
+  Output,
+  EventEmitter
 } from '@angular/core';
-import { IPreferredContactInput } from '@prime-prov/core/interfaces/ipreferred-contact-input';
+import {
+  IPreferredContactInput,
+  ContactValueOption
+} from '@prime-prov/core/interfaces/ipreferred-contact-input';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 @Component({
@@ -39,6 +44,7 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 })
 export class RadioControlComponent implements OnInit, ControlValueAccessor {
   @Input() controls: IPreferredContactInput[];
+  @Output() selection = new EventEmitter<string>();
   value: any;
   onModelChange: any;
   onTouch: any;
@@ -64,5 +70,6 @@ export class RadioControlComponent implements OnInit, ControlValueAccessor {
     this.value = itm;
     this.onModelChange(itm);
     this.onTouch();
+    this.selection.emit(itm);
   }
 }
