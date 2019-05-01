@@ -12,6 +12,7 @@ import { CoreModule } from '@prime-prov/core/core.module';
 import { SharedModule } from '@prime-prov/shared/shared.module';
 import { DetailsComponent } from './components/details/details.component';
 import { SearchProvisionerAccessComponent } from './components/search-provisioner-access/search-provisioner-access.component';
+import { OrganizationTableComponent } from './components/organization-table/organization-table.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SearchProvisionerAccessComponent } from './components/search-provisione
     ReviewComponent,
     EnrolmentComponent,
     DetailsComponent,
-    SearchProvisionerAccessComponent
+    SearchProvisionerAccessComponent,
+    OrganizationTableComponent
   ],
   imports: [CommonModule, EnrolmentRoutingModule, CoreModule, SharedModule]
 })
