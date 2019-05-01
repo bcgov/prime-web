@@ -1,5 +1,4 @@
 import { browser } from 'protractor';
-import { PrimeConstants } from '../../../src/app/models/prime-constants';
 import { PrimeTestPage } from '../../../e2e/src/app.po';
 import { ProfilePage, ContactPage, ProfessionalPage, SelfDeclarationPage, PharmanetAccessPage } from './enrollment.po';
 import { FakeDataEnrollment } from './enrollment.data';
@@ -12,8 +11,8 @@ describe('BCSC Enrollment - End to End', () => {
     let pharmanetAccessPage: PharmanetAccessPage;
     const data = new FakeDataEnrollment();
     let profileData, contactData;
-    const PROFILE_PAGE_URL = `enrollment/profile`;
-    const CONTACT_PAGE_URL = `enrollment/contact`;
+    const PROFILE_PAGE_URL = `enrolment/profile`;
+    const CONTACT_PAGE_URL = `enrolment/contact`;
 
     beforeEach(() => {
         profilePage = new ProfilePage();

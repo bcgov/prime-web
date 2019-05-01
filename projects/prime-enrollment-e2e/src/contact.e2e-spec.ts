@@ -1,15 +1,14 @@
 import { browser } from 'protractor';
-import { PrimeConstants } from '../../../src/app/models/prime-constants';
 import { PrimeTestPage } from '../../../e2e/src/app.po';
 import { ContactPage } from './enrollment.po';
 import { FakeDataEnrollment } from './enrollment.data';
 
-describe('BCSC Enrollment- Contact Page', () => {
+fdescribe('BCSC Enrollment- Contact Page', () => {
     let page: ContactPage;
     const data = new FakeDataEnrollment();
     let contactData;
-    const CONTACT_PAGE_URL = `enrollment/contact`;
-    const PROFESSIONAL_PAGE_URL = `enrollment/professional`;
+    const CONTACT_PAGE_URL = `enrolment/contact`;
+    const PROFESSIONAL_PAGE_URL = `enrolment/professional`;
 
     beforeEach(() => {
         page = new ContactPage();
@@ -30,28 +29,19 @@ describe('BCSC Enrollment- Contact Page', () => {
         // expect(page.getContinueButton()).toBe(false);
     });
 
-    it('03. should let user to continue when all the fields are filled out', () => {
+    fit('03. should let user to continue when all the fields are filled out', () => {
         page.navigateTo();
-        page.clickContactMethod();
+        page.clickOption('preferredContact', 'email');
         page.fillContactInfo(contactData);
         browser.sleep(1000 * 5);
         page.continue();
         expect(browser.getCurrentUrl()).toContain(PROFESSIONAL_PAGE_URL);
     });
 
-    it('04. should let user type the preferred contact method', () => {
-        page.navigateTo();
-        page.typeContactMethod();
-        page.fillContactInfo(contactData);
-        browser.sleep(1000 * 5);
-        page.continue();
-        expect(browser.getCurrentUrl()).toContain(PROFESSIONAL_PAGE_URL);
-    });
-
-    it('05. should let user to continue even if extension number is not filled out (because it is optional)', () => {
+    fit('04. should let user to continue even if extension number is not filled out (because it is optional)', () => {
         contactData['extension'] = '';
         page.navigateTo();
-        page.clickContactMethod();
+        page.clickOption('preferredContact', 'email');
         page.fillContactInfo(contactData);
         browser.sleep(1000 * 5);
         page.continue();

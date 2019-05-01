@@ -1,5 +1,4 @@
 import { browser } from 'protractor';
-import { PrimeConstants } from '../../../src/app/models/prime-constants';
 import { PrimeTestPage } from '../../../e2e/src/app.po';
 import { ProfilePage } from './enrollment.po';
 import { FakeDataEnrollment } from './enrollment.data';
@@ -8,8 +7,8 @@ describe('BCSC Enrollment - Profile Page', () => {
     let page: ProfilePage;
     const data = new FakeDataEnrollment();
     let profileData;
-    const PROFILE_PAGE_URL = `enrollment/profile`;
-    const CONTACT_PAGE_URL = `enrollment/contact`;
+    const PROFILE_PAGE_URL = `enrolment/profile`;
+    const CONTACT_PAGE_URL = `enrolment/contact`;
 
     beforeEach(() => {
         page = new ProfilePage();

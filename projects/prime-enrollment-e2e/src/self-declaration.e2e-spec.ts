@@ -1,5 +1,4 @@
 import { browser } from 'protractor';
-import { PrimeConstants } from '../../../src/app/models/prime-constants';
 import { PrimeTestPage } from '../../../e2e/src/app.po';
 import { SelfDeclarationPage } from './enrollment.po';
 import { FakeDataEnrollment } from './enrollment.data';
@@ -8,8 +7,8 @@ describe('BCSC Enrollment - Self-Declaration Page', () => {
     let page: SelfDeclarationPage;
     const data = new FakeDataEnrollment();
     let selfDeclarationData;
-    const SELF_DECLARATION_PAGE_URL = `enrollment/self-declaration`;
-    const PHARMANET_ACCESS_PAGE_URL = `enrollment/pharmanet-access`;
+    const SELF_DECLARATION_PAGE_URL = `enrolment/self-declaration`;
+    const PHARMANET_ACCESS_PAGE_URL = `enrolment/pharmanet-access`;
 
     beforeEach(() => {
         page = new SelfDeclarationPage();

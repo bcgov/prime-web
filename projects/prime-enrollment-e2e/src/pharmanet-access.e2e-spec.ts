@@ -1,5 +1,4 @@
 import { browser } from 'protractor';
-import { PrimeConstants } from '../../../src/app/models/prime-constants';
 import { PrimeTestPage } from '../../../e2e/src/app.po';
 import { PharmanetAccessPage } from './enrollment.po';
 import { FakeDataEnrollment } from './enrollment.data';
@@ -8,8 +7,8 @@ describe('BCSC Enrollment - Pharmanet-Access Page', () => {
     let page: PharmanetAccessPage;
     const data = new FakeDataEnrollment();
     let pharmanetAccessData;
-    const PHARMANET_ACCESS_PAGE_URL = `enrollment/pharmanet-access`;
-    const REVIEW_PAGE_URL = `enrollment/review`;
+    const PHARMANET_ACCESS_PAGE_URL = `enrolment/pharmanet-access`;
+    const REVIEW_PAGE_URL = `enrolment/review`;
 
     beforeEach(() => {
         page = new PharmanetAccessPage();
