@@ -2,11 +2,11 @@ import { browser } from 'protractor';
 import { PrimeConstants } from '../../../src/app/models/prime-constants';
 import { PrimeTestPage } from '../../../e2e/src/app.po';
 import { ContactPage } from './enrollment.po';
-import { FakeDataMohReg } from './enrollment.data';
+import { FakeDataEnrollment } from './enrollment.data';
 
 describe('BCSC Enrollment- Contact Page', () => {
     let page: ContactPage;
-    const data = new FakeDataMohReg();
+    const data = new FakeDataEnrollment();
     let contactData;
     const CONTACT_PAGE_URL = `enrollment/contact`;
     const PROFESSIONAL_PAGE_URL = `enrollment/professional`;

@@ -4,7 +4,7 @@ import { PrimeTestPage } from '../../../e2e/src/app.po';
 import { ProfilePage, ContactPage, ProfessionalPage, SelfDeclarationPage, PharmanetAccessPage } from './enrollment.po';
 import { FakeDataEnrollment } from './enrollment.data';
 
-fdescribe('BCSC Enrollment - End to End', () => {
+describe('BCSC Enrollment - End to End', () => {
     let profilePage: ProfilePage;
     let contactPage: ContactPage;
     let professionalPage: ProfessionalPage;
@@ -27,7 +27,7 @@ fdescribe('BCSC Enrollment - End to End', () => {
         profileData['country'] = 'Canada'; // forced the country to be Canada so the faker will generate a province
     });
 
-    fit('01. should go through from Profile to Review page when all required fields are filled out', () => {
+    it('01. should go through from Profile to Review page when all required fields are filled out', () => {
         profilePage.navigateTo();
         profilePage.continue();
         contactPage.typeContactMethod();

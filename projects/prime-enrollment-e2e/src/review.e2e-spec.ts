@@ -2,12 +2,12 @@ import { browser } from 'protractor';
 import { PrimeConstants } from '../../../src/app/models/prime-constants';
 import { PrimeTestPage } from '../../../e2e/src/app.po';
 import { ReviewPage, ProfilePage } from './enrollment.po';
-import { FakeDataMohReg } from './enrollment.data';
+import { FakeDataEnrollment } from './enrollment.data';
 
 describe('BCSC Enrollment - Review Page', () => {
     let page: ReviewPage;
     let profilePage: ProfilePage;
-    const data = new FakeDataMohReg();
+    const data = new FakeDataEnrollment();
     let profileData;
     const REVIEW_PAGE_URL = `enrollment/review`;
 
