@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NameComponent } from './name.component';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 describe('NameComponent', () => {
   let component: NameComponent;
@@ -12,8 +12,7 @@ describe('NameComponent', () => {
       declarations: [ NameComponent ],
       imports: [
         FormsModule
-      ],
-      providers: [ NgForm ]
+      ]
     })
     .compileComponents();
   }));

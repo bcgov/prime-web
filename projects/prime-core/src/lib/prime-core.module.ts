@@ -10,7 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { TypeaheadModule } from 'ngx-bootstrap';
 import { PhoneNumberComponent } from './components/phone-number/phone-number.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
-import { ValidateNameDirective } from './validateName/validate-name.directive';
+import { ValidateNameDirective } from './components/name/validate-name.directive';
+import { VerifyPreferNameDirective } from './components/profile/verify-prefer-name.directive';
 
 const componentList = [
   AddressComponent,
@@ -18,12 +19,12 @@ const componentList = [
   ProfileComponent,
   PhoneNumberComponent,
   ConfirmationComponent,
-  ValidateNameDirective
+  ValidateNameDirective,
+  VerifyPreferNameDirective
 ];
 @NgModule({
   declarations: [
-    componentList,
-    ValidateNameDirective
+    componentList
   ],
   imports: [
     CommonModule,

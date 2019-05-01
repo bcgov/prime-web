@@ -5,7 +5,7 @@
        id="{{labelforId}}"
        [value]="nameStr"
        (change)="onValueChange( $event.target.value )"
-       (blur)="inputTouched( $event )"
+       (blur)="onBlurEvent( $event )"
        [disabled]="disabled"
        [attr.maxlength]="maxlen" />
 <!-- Error messages for component -->

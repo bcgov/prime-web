@@ -16,7 +16,9 @@ export class ValidateNameDirective implements Validator {
 
   validate( control: AbstractControl ): {[key: string]: any} | null {
 
-    console.log( 'ValidateNameDirective: ', control );
-    return this.criteria.test( control.value ) ? null : { 'invalidChar': true };
+    if ( control.value ) {
+      return this.criteria.test( control.value ) ? null : { 'invalidChar': true };
+    }
+    return null;
   }
 }
