@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { EnrolmentStateService } from '../../services/enrolment-state.service';
 import { IPreferredContactInput } from '@prime-prov/core/interfaces/ipreferred-contact-input';
+import { FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'prov-self-declaration',
@@ -17,9 +18,15 @@ import { IPreferredContactInput } from '@prime-prov/core/interfaces/ipreferred-c
           <prov-radio-control
             id="conviction"
             [controls]="control.radioOpts"
-            (selection)="updateSelection($event, 'conviction')"
+            (selection)="updateSelection($event, control.fcName, fg)"
             formControlName="{{ control.fcName }}"
           ></prov-radio-control>
+          <prov-details
+            *ngIf="fg.controls[control.fcName].value"
+            fc="{{ control.fcName }}Desc"
+            docFc="{{ control.fcName }}Docs"
+            [fg]="fg"
+          ></prov-details>
         </ng-container>
       </form>
     </common-page-framework>
@@ -36,8 +43,8 @@ export class SelfDeclarationComponent implements OnInit {
     this.controls = [
       {
         radioOpts: [
-          this.generateRadioOpts('c', true),
-          this.generateRadioOpts('c', false)
+          this.generateRadioOpts('c', false),
+          this.generateRadioOpts('c', true)
         ],
         label:
           'Have you ever been the subject of an order or a conviction for an information contravention?',
@@ -45,8 +52,8 @@ export class SelfDeclarationComponent implements OnInit {
       },
       {
         radioOpts: [
-          this.generateRadioOpts('rs', true),
-          this.generateRadioOpts('rs', false)
+          this.generateRadioOpts('rs', false),
+          this.generateRadioOpts('rs', true)
         ],
         label:
           'Have you ever had your registration with a governing body of a health profession suspended or cancelled?',
@@ -54,8 +61,8 @@ export class SelfDeclarationComponent implements OnInit {
       },
       {
         radioOpts: [
-          this.generateRadioOpts('rs', true),
-          this.generateRadioOpts('rs', false)
+          this.generateRadioOpts('rs', false),
+          this.generateRadioOpts('rs', true)
         ],
         label:
           'Have you ever had Terms and Conditions imposed on your license as a result of disciplinary actions taken by a governing body?',
@@ -63,8 +70,8 @@ export class SelfDeclarationComponent implements OnInit {
       },
       {
         radioOpts: [
-          this.generateRadioOpts('rs', true),
-          this.generateRadioOpts('rs', false)
+          this.generateRadioOpts('rs', false),
+          this.generateRadioOpts('rs', true)
         ],
         label:
           'Have you ever had your access to PharmaNet Suspended or revoked?',
@@ -75,10 +82,14 @@ export class SelfDeclarationComponent implements OnInit {
 
   ngOnInit() {}
 
-  updateSelection(itm: any, fcName: string) {
-    console.log(fcName);
-    console.log(itm);
-    console.log(this.fg);
+  updateSelection(bool: any, fcName: string, fg: FormGroup) {
+    if (typeof bool === undefined) return;
+    const controlName = `${fcName}Desc`;
+    bool
+      ? fg.controls[controlName].setValidators(Validators.required)
+      : fg.controls[controlName].clearValidators();
+    fg.updateValueAndValidity({ emitEvent: true });
+    this.stateSvc.selfDeclarationForm = fg;
   }
 
   generateRadioOpts(name, value: boolean) {

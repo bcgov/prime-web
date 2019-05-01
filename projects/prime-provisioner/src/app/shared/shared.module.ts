@@ -6,10 +6,18 @@ import { SubheaderComponent } from './components/subheader/subheader.component';
 import { DeclarationQuestionComponent } from './components/declaration-question/declaration-question.component';
 
 @NgModule({
-  declarations: [PageHeaderComponent, RadioControlComponent, SubheaderComponent, DeclarationQuestionComponent],
-  imports: [
-    CommonModule
+  declarations: [
+    PageHeaderComponent,
+    RadioControlComponent,
+    SubheaderComponent,
+    DeclarationQuestionComponent
   ],
-  exports: [PageHeaderComponent, RadioControlComponent, SubheaderComponent, DeclarationQuestionComponent]
+  imports: [CommonModule],
+  exports: [
+    PageHeaderComponent,
+    RadioControlComponent,
+    SubheaderComponent,
+    DeclarationQuestionComponent
+  ]
 })
-export class SharedModule { }
+export class SharedModule {}

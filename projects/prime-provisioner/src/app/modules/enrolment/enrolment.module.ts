@@ -10,6 +10,7 @@ import { ReviewComponent } from './pages/review/review.component';
 import { EnrolmentComponent } from './enrolment.component';
 import { CoreModule } from '@prime-prov/core/core.module';
 import { SharedModule } from '@prime-prov/shared/shared.module';
+import { DetailsComponent } from './components/details/details.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SharedModule } from '@prime-prov/shared/shared.module';
     SelfDeclarationComponent,
     OrganizationComponent,
     ReviewComponent,
-    EnrolmentComponent
+    EnrolmentComponent,
+    DetailsComponent
   ],
   imports: [CommonModule, EnrolmentRoutingModule, CoreModule, SharedModule]
 })
