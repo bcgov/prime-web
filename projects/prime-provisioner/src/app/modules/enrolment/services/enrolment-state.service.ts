@@ -16,6 +16,7 @@ const dateOfBirth = {
 export class EnrolmentStateService {
   profileForm = new Registrant();
   contactForm = EnrolmentFormBuilder.contactForm(this.fb);
+  selfDeclarationForm = EnrolmentFormBuilder.selfDeclarationForm(this.fb);
   constructor(private fb: FormBuilder) {
     this.profileForm.address.street = '123 fake st';
     this.profileForm.address.postal = 'V9L 3W8';

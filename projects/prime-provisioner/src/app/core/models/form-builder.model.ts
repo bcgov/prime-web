@@ -28,6 +28,7 @@ export abstract class EnrolmentFormBuilder {
       pharmaSuspension: [null, Validators.required],
       pharmaSuspensionDesc: [null]
     });
+    return fg;
   }
 
   static organizationForm(fb: FormBuilder) {

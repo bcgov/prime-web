@@ -1,6 +1,6 @@
 export interface IPreferredContactInput {
   name: string;
-  value: ContactValueOption;
+  value: ContactValueOption | boolean;
   id: string;
   label: string;
 }

@@ -16,12 +16,10 @@ import { MaskModel, NUMBER, SPACE } from 'moh-common-lib/models';
   selector: 'prov-contact',
   template: `
     <common-page-framework layout="blank">
-      <!-- <common-page-section layout="single"> -->
       <prov-page-header
         [title]="title"
         [helperText]="helperText"
       ></prov-page-header>
-      <!-- </common-page-section> -->
       <common-page-section layout="tips">
         <prov-subheader
           [title]="subTitle"
