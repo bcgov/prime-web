@@ -29,7 +29,7 @@ describe('BCSC Enrollment - End to End', () => {
     it('01. should go through from Profile to Review page when all required fields are filled out', () => {
         profilePage.navigateTo();
         profilePage.continue();
-        contactPage.typeContactMethod();
+        contactPage.clickContactMethod();
         contactPage.fillContactInfo(contactData);
         contactPage.continue();
         professionalPage.clickOption('collegeCert', 'No');

@@ -3,7 +3,7 @@ import { PrimeTestPage } from '../../../e2e/src/app.po';
 import { ContactPage } from './enrollment.po';
 import { FakeDataEnrollment } from './enrollment.data';
 
-fdescribe('BCSC Enrollment- Contact Page', () => {
+describe('BCSC Enrollment- Contact Page', () => {
     let page: ContactPage;
     const data = new FakeDataEnrollment();
     let contactData;
@@ -29,19 +29,19 @@ fdescribe('BCSC Enrollment- Contact Page', () => {
         // expect(page.getContinueButton()).toBe(false);
     });
 
-    fit('03. should let user to continue when all the fields are filled out', () => {
+    it('03. should let user to continue when all the fields are filled out', () => {
         page.navigateTo();
-        page.clickOption('preferredContact', 'email');
+        page.clickContactMethod();
         page.fillContactInfo(contactData);
         browser.sleep(1000 * 5);
         page.continue();
         expect(browser.getCurrentUrl()).toContain(PROFESSIONAL_PAGE_URL);
     });
 
-    fit('04. should let user to continue even if extension number is not filled out (because it is optional)', () => {
+    it('04. should let user to continue even if extension number is not filled out (because it is optional)', () => {
         contactData['extension'] = '';
         page.navigateTo();
-        page.clickOption('preferredContact', 'email');
+        page.clickContactMethod();
         page.fillContactInfo(contactData);
         browser.sleep(1000 * 5);
         page.continue();

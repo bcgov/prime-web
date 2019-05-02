@@ -75,6 +75,7 @@ describe('BCSC Enrollment - Profile Page', () => {
 
     it('07. should not be able to edit read-only information (just check that the fields are disabled)', () => {
         page.navigateTo();
+        page.scrollDown();
         expect(page.checkEnabled()).toBe(false);
     });
 

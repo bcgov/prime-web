@@ -57,13 +57,14 @@ describe('BCSC Enrollment - Professional Page', () => {
         expect(page.formErrors().count()).toBe(0, 'should be no errors');
     });
 
-    it('06. (7.3.24) must capture the Device Provider Number when the individual has identified as a Device Provider.', () => {
+    fit('06. (7.3.24) must capture the Device Provider Number when the individual has identified as a Device Provider.', () => {
         page.navigateTo();
         page.clickOption('collegeCert', 'Yes');
         page.selectOption('collegeCert', 'College of Pharmacists of BC (CPBC)');
         page.typeText('licenseNum', '0');
         page.selectOption('licenseClass', 'Full Pharmacist');
         page.typeText('datepicker-', '2020/01/01');
+        page.scrollDown();
         page.clickYesForDeviceProvider();
         page.typeDeviceProviderNum('0');
         expect(page.formErrors().count()).toBe(0, 'should be no errors');

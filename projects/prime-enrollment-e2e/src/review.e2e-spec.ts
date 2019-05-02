@@ -30,7 +30,7 @@ describe('BCSC Enrollment - Review Page', () => {
     it('03. (7.3.41) must provide the ability for the PharmaNet Users  to edit information entered prior to submission', () => {
         profileData = data.profileInfo();
         page.navigateTo();
-        page.clickLink('h3', 'Profile');
+        page.clickLink('h2', 'Profile');
         profilePage.fillPreferredName(profileData);
         browser.sleep(1000 * 5);
         page.clickLink('span', 'Review');

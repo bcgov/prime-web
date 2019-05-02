@@ -11,14 +11,12 @@ export class PrimeTestPage {
   protected diffMailAddressButton: WebElement;
   protected diffMailAddressCheckbox: WebElement;
   protected skipToContentButton: WebElement;
-  protected streetField: WebElement;
 
   constructor() {
     this.continueButton = element(by.css('.form-bar .submit'));
     this.diffMailAddressButton = element(by.css('.mail-address-container .btn'));
     this.diffMailAddressCheckbox = element(by.css('.custom-checkbox .custom-control-label'));
     this.skipToContentButton = element(by.css('.skip-to-content'));
-    this.streetField = element(by.css('prime-address [id^="street"]'));
   }
 
   /** Every class should override this to point to the page it is testing.  */
@@ -49,10 +47,6 @@ export class PrimeTestPage {
 
   clickSkipToContent() {
     this.skipToContentButton.click();
-  }
-
-  checkEnabled() {
-    return this.streetField.isEnabled();
   }
 
   /** Returns the input for an associated human readable label. If the label is a duplicate, it will grab the first one only. */
@@ -91,6 +85,6 @@ export class PrimeTestPage {
   }
 
   typeText(labelId: string, text: string) {
-    element(by.css(`input[ng-reflect-name="${labelId}"]`)).sendKeys(text);
+    element(by.css(`input[ng-reflect-name^="${labelId}"]`)).sendKeys(text);
   }
 }
