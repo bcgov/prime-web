@@ -24,9 +24,10 @@
 
   <common-page-section layout='tips'>
     <div class="form-group col-sm-4 p-sm-0">
-      <lib-prime-phone-number [displayMask]="isCanada"
-                          [(value)]="mfaSMSphone"
-                          [disabled]="!data.useMfaSMS">
+      <lib-prime-phone-number name="sms_phone"
+                              [displayMask]="isCanada"
+                              [(ngModel)]="mfaSMSphone"
+                              [disabled]="!data.useMfaSMS">
      </lib-prime-phone-number>
     </div>
 

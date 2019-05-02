@@ -40,12 +40,11 @@ export class NameComponent extends Base implements ControlValueAccessor {
 
   onValueChange( value: any ) {
     this._onChange( value );
-
   }
 
-  onBlurEvent( value: any ) {
-    this._onTouched( value );
-    this.blurEvent.emit( value );
+  onBlurEvent( event: any ) {
+    this._onTouched( event );
+    this.blurEvent.emit( event.target.value );
   }
 
   writeValue( value: any ): void {
