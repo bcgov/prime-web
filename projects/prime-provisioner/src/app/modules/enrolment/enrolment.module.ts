@@ -13,6 +13,7 @@ import { SharedModule } from '@prime-prov/shared/shared.module';
 import { DetailsComponent } from './components/details/details.component';
 import { SearchProvisionerAccessComponent } from './components/search-provisioner-access/search-provisioner-access.component';
 import { OrganizationTableComponent } from './components/organization-table/organization-table.component';
+import { OrganizationListItemComponent } from './components/organization-list-item/organization-list-item.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { OrganizationTableComponent } from './components/organization-table/orga
     EnrolmentComponent,
     DetailsComponent,
     SearchProvisionerAccessComponent,
-    OrganizationTableComponent
+    OrganizationTableComponent,
+    OrganizationListItemComponent
   ],
   imports: [CommonModule, EnrolmentRoutingModule, CoreModule, SharedModule]
 })

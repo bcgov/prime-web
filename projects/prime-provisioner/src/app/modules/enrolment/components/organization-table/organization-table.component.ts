@@ -20,12 +20,19 @@ import { IOrganization } from '@prime-prov/core/interfaces/i-organization';
             <div class="col"><span>Site Type</span></div>
             <div class="col"><span>Vendor</span></div>
             <div class="col"><span>Status</span></div>
-            <div class="col"><span>Group Name</span></div>
+            <div class="col-2"><span>Group Name</span></div>
           </div>
         </div>
-        <div class="card-body">
-          abcdef
-        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" *ngFor="let site of org.sites">
+            <prov-organization-list-item
+              [itm]="site"
+            ></prov-organization-list-item>
+          </li>
+          <!-- <li class="list-group-item">
+            <prov-organization-list-item></prov-organization-list-item>
+          </li> -->
+        </ul>
       </div>
     </prov-panel>
     <!-- TODO: list header - use panel -->

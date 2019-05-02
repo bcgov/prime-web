@@ -1,9 +1,9 @@
 export interface IOrganization {
   name: string;
-  sites: SiteInfo[];
+  sites: ISiteInfo[];
 }
 
-export interface SiteInfo {
+export interface ISiteInfo {
   name: string;
   id: string;
   address: string;
