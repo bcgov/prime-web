@@ -24,6 +24,15 @@ export class NameComponent extends Base implements ControlValueAccessor {
   @Input() maxlen: string = '255';
   @Input() labelforId: string = 'name_' + this.objectId;
 
+  @Input()
+  set value( val: string ) {
+    this.nameStr = val;
+  }
+  get value() {
+    return this.nameStr;
+  }
+
+  @Output() valueChange: EventEmitter<string> = new EventEmitter<string>();
   @Output() blurEvent: EventEmitter<any> = new EventEmitter<any>();
 
   public nameStr: string = null;
@@ -40,6 +49,7 @@ export class NameComponent extends Base implements ControlValueAccessor {
 
   onValueChange( value: any ) {
     this._onChange( value );
+    this.valueChange.emit( value );
   }
 
   onBlurEvent( event: any ) {

@@ -21,6 +21,15 @@ export class PhoneNumberComponent extends Base implements ControlValueAccessor {
   @Input() maxlen: string = '30';
   @Input() disabled: boolean = false;
 
+  @Input()
+  set value( val: string ) {
+    this.phoneNumber = val;
+  }
+  get value() {
+    return this.phoneNumber;
+  }
+
+  @Output() valueChange: EventEmitter<string> = new EventEmitter<string>();
   @Output() blurEvent: EventEmitter<any> = new EventEmitter<any>();
 
   phoneNumber: string = null;
@@ -61,7 +70,7 @@ export class PhoneNumberComponent extends Base implements ControlValueAccessor {
 
   onValueChange( value: any ) {
     this._onChange( value );
-
+    this.valueChange.emit( value );
   }
 
   onBlurEvent( event: any ) {
