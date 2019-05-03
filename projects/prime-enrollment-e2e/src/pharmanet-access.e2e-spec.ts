@@ -25,24 +25,24 @@ describe('BCSC Enrollment - Pharmanet-Access Page', () => {
 // tslint:disable-next-line: max-line-length
     it('02. (7.3.34) must allow the PharmaNet User to search for an Organization.', () => {
         page.navigateTo();
-        page.clickButton('btn btn-secondary');
+        page.clickButton('btn btn-secondary', 'Add Organization');
         page.selectTypeOfOrg('Health Authority');
         page.typeValue('organization', 'a');
         page.typeValue('city', 'a');
-        page.clickButton('btn btn-md');
+        page.clickButton('btn btn-md', 'Find');
         expect(page.formErrors().count()).toBe(0, 'should be no errors');
     });
 
     it('03. (7.3.36) must allow the PharmaNet User to select one or more Organization (s) to enroll at', () => {
         page.navigateTo();
-        page.clickButton('btn btn-secondary');
+        page.clickButton('btn btn-secondary', 'Add Organization');
         page.selectTypeOfOrg('Pharmacy');
         page.typeValue('organization', 'a');
         page.typeValue('city', 'a');
-        page.clickButton('btn btn-md');
+        page.clickButton('btn btn-md', 'Find');
         page.clickCheckBox('Shopper Drug Mart');
         page.clickCheckBox('Save on Foods');
-        page.clickButton('btn btn-primary');
+        page.clickButton('btn btn-primary', 'Add');
         browser.sleep(1000 * 5);
         expect(page.formErrors().count()).toBe(0, 'should be no errors');
     });

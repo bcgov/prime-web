@@ -57,7 +57,7 @@ describe('BCSC Enrollment - Professional Page', () => {
         expect(page.formErrors().count()).toBe(0, 'should be no errors');
     });
 
-    fit('06. (7.3.24) must capture the Device Provider Number when the individual has identified as a Device Provider.', () => {
+    it('06. (7.3.24) must capture the Device Provider Number when the individual has identified as a Device Provider.', () => {
         page.navigateTo();
         page.clickOption('collegeCert', 'Yes');
         page.selectOption('collegeCert', 'College of Pharmacists of BC (CPBC)');

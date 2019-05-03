@@ -1,6 +1,6 @@
 import { browser } from 'protractor';
 import { PrimeTestPage } from '../../../e2e/src/app.po';
-import { ProfilePage, ContactPage, ProfessionalPage, SelfDeclarationPage, PharmanetAccessPage } from './enrollment.po';
+import { ProfilePage, ContactPage, ProfessionalPage, SelfDeclarationPage, PharmanetAccessPage, ReviewPage } from './enrollment.po';
 import { FakeDataEnrollment } from './enrollment.data';
 
 describe('BCSC Enrollment - End to End', () => {
@@ -9,10 +9,10 @@ describe('BCSC Enrollment - End to End', () => {
     let professionalPage: ProfessionalPage;
     let selfDeclarationPage: SelfDeclarationPage;
     let pharmanetAccessPage: PharmanetAccessPage;
+    let reviewPage: ReviewPage;
     const data = new FakeDataEnrollment();
     let profileData, contactData;
-    const PROFILE_PAGE_URL = `enrolment/profile`;
-    const CONTACT_PAGE_URL = `enrolment/contact`;
+    const SUCCESS_PAGE_URL = `success`;
 
     beforeEach(() => {
         profilePage = new ProfilePage();
@@ -20,6 +20,7 @@ describe('BCSC Enrollment - End to End', () => {
         professionalPage = new ProfessionalPage();
         selfDeclarationPage = new SelfDeclarationPage();
         pharmanetAccessPage = new PharmanetAccessPage();
+        reviewPage = new ReviewPage();
         profileData = data.profileInfo();
         contactData = data.contactInfo();
         data.setSeed(123);
@@ -41,16 +42,59 @@ describe('BCSC Enrollment - End to End', () => {
         selfDeclarationPage.clickOption('tAndC', 'fcfalse');
         selfDeclarationPage.clickOption('pharmaSuspension', 'fcfalse');
         selfDeclarationPage.continue();
-        pharmanetAccessPage.clickButton('btn btn-secondary');
+        pharmanetAccessPage.clickButton('btn btn-secondary', 'Add Organization');
         pharmanetAccessPage.selectTypeOfOrg('Health Authority');
         pharmanetAccessPage.typeValue('organization', 'a');
         pharmanetAccessPage.typeValue('city', 'a');
-        pharmanetAccessPage.clickButton('btn btn-md');
+        pharmanetAccessPage.clickButton('btn btn-md', 'Find');
         pharmanetAccessPage.clickCheckBox('Vancouver Island Health');
-        pharmanetAccessPage.clickButton('btn btn-primary');
+        pharmanetAccessPage.clickButton('btn btn-primary', 'Add');
         pharmanetAccessPage.selectDate();
         pharmanetAccessPage.continue();
         browser.sleep(1000 * 5);
+        reviewPage.scrollDown();
+        reviewPage.clickSubmit();
+        expect(browser.getCurrentUrl()).toContain(SUCCESS_PAGE_URL);
+    });
+
+    it('02. should be able to edit fields when user reached the Review Page', () => {
+        profilePage.navigateTo();
+        profilePage.continue();
+        contactPage.clickContactMethod();
+        contactPage.fillContactInfo(contactData);
+        contactPage.continue();
+        professionalPage.clickOption('collegeCert', 'No');
+        professionalPage.clickOption('deviceProvider', 'dpfalse');
+        professionalPage.clickOption('onBehalfOf', 'oboFalse');
+        professionalPage.continue();
+        selfDeclarationPage.clickOption('conviction', 'fcfalse');
+        selfDeclarationPage.clickOption('regSuspension', 'fcfalse');
+        selfDeclarationPage.clickOption('tAndC', 'fcfalse');
+        selfDeclarationPage.clickOption('pharmaSuspension', 'fcfalse');
+        selfDeclarationPage.continue();
+        pharmanetAccessPage.clickButton('btn btn-secondary', 'Add Organization');
+        pharmanetAccessPage.selectTypeOfOrg('Health Authority');
+        pharmanetAccessPage.typeValue('organization', 'a');
+        pharmanetAccessPage.typeValue('city', 'a');
+        pharmanetAccessPage.clickButton('btn btn-md', 'Find');
+        pharmanetAccessPage.clickCheckBox('Vancouver Island Health');
+        pharmanetAccessPage.clickButton('btn btn-primary', 'Add');
+        pharmanetAccessPage.selectDate();
+        pharmanetAccessPage.continue();
+        reviewPage.clickLink('h2', 'PharmaNet');
+        pharmanetAccessPage.clickButton('btn btn-secondary', 'Add Organization');
+        pharmanetAccessPage.selectTypeOfOrg('Pharmacy');
+        pharmanetAccessPage.typeValue('organization', 'a');
+        pharmanetAccessPage.typeValue('city', 'a');
+        pharmanetAccessPage.clickButton('btn btn-md', 'Find');
+        pharmanetAccessPage.clickCheckBox('Shopper Drug Mart');
+        pharmanetAccessPage.clickButton('btn btn-primary', 'Add');
+        pharmanetAccessPage.selectDate();
+        reviewPage.clickLink('span', 'Review');
+        browser.sleep(1000 * 5);
+        reviewPage.scrollDown();
+        reviewPage.clickSubmit();
+        expect(browser.getCurrentUrl()).toContain(SUCCESS_PAGE_URL);
     });
 
 });

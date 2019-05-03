@@ -51,7 +51,7 @@ export class PrimeTestPage {
 
   /** Returns the input for an associated human readable label. If the label is a duplicate, it will grab the first one only. */
   async getNameComponent(labelName: string): Promise<WebElement> {
-    const label = element.all(by.cssContainingText('prime-name label', labelName)).first();
+    const label = element.all(by.cssContainingText('lib-prime-name label', labelName)).first();
     return element(by.id(await label.getAttribute('for')));
   }
 
@@ -86,5 +86,9 @@ export class PrimeTestPage {
 
   typeText(labelId: string, text: string) {
     element(by.css(`input[ng-reflect-name^="${labelId}"]`)).sendKeys(text);
+  }
+
+  clickButton(labelId: string, value: string) {
+    element(by.cssContainingText(`button[class^="${labelId}"]`, value)).click();
   }
 }
