@@ -22,12 +22,9 @@ describe('BCSC Enrollment - Self-Declaration Page', () => {
         expect(page.formErrors().count()).toBe(0, 'should be no errors on page load');
     });
 
-// tslint:disable-next-line: max-line-length
     it('02. (7.3.31) must display guidance information to provide additional details when any of the Self-Declaration responses are Yes.', () => {
         page.navigateTo();
         page.clickOptions('Have you ever been the subject', 'fctrue');
-        // expect(page.checkTips()).toBe(true);
-        // browser.sleep(1000 * 5);
         expect(page.formErrors().count()).toBe(0, 'should be no errors on page load');
     });
 

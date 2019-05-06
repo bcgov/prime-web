@@ -91,4 +91,8 @@ export class PrimeTestPage {
   clickButton(labelId: string, value: string) {
     element(by.cssContainingText(`button[class^="${labelId}"]`, value)).click();
   }
+
+  clickCheckBox(labelRefName: string) {
+    element(by.css(`input[ng-reflect-name="${labelRefName}"]`)).click();
+  }
 }

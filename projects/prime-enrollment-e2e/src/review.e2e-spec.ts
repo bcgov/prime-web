@@ -9,6 +9,7 @@ describe('BCSC Enrollment - Review Page', () => {
     const data = new FakeDataEnrollment();
     let profileData;
     const REVIEW_PAGE_URL = `enrolment/review`;
+    const SUCCESS_PAGE_URL = `success`;
 
     beforeEach(() => {
         page = new ReviewPage();
@@ -21,7 +22,6 @@ describe('BCSC Enrollment - Review Page', () => {
         expect(page.formErrors().count()).toBe(0, 'should be no errors on page load');
     });
 
-// tslint:disable-next-line: max-line-length
     it('02. (7.3.40) must display the PharmaNet User\'s information', () => {
         page.navigateTo();
         expect(page.formErrors().count()).toBe(0, 'should be no errors');
@@ -37,13 +37,11 @@ describe('BCSC Enrollment - Review Page', () => {
         expect(page.formErrors().count()).toBe(0, 'should be no errors');
     });
 
-    /* Test/s failed */
-    // Will not work if it's NOT end-to-end testing
-// tslint:disable-next-line: max-line-length
-    xit('(7.3.43) must present a Submit function to the PRIME User. Upon submission the Request will proceed to Approval processing.', () => {
+    it('(7.3.43) must present a Submit function to the PRIME User. Upon submission the Request will proceed to Approval processing.', () => {
         page.navigateTo();
         page.clickSubmit();
         expect(page.formErrors().count()).toBe(0, 'should be no errors');
+        expect(browser.getCurrentUrl()).toContain(SUCCESS_PAGE_URL);
     });
 
 });

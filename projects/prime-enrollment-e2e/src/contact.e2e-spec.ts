@@ -26,7 +26,6 @@ describe('BCSC Enrollment- Contact Page', () => {
         page.navigateTo();
         page.continue();
         expect(browser.getCurrentUrl()).toContain(CONTACT_PAGE_URL);
-        // expect(page.getContinueButton()).toBe(false);
     });
 
     it('03. should let user to continue when all the fields are filled out', () => {

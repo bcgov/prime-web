@@ -22,7 +22,6 @@ describe('BCSC Enrollment - Pharmanet-Access Page', () => {
         expect(page.formErrors().count()).toBe(0, 'should be no errors on page load');
     });
 
-// tslint:disable-next-line: max-line-length
     it('02. (7.3.34) must allow the PharmaNet User to search for an Organization.', () => {
         page.navigateTo();
         page.clickButton('btn btn-secondary', 'Add Organization');
@@ -45,6 +44,7 @@ describe('BCSC Enrollment - Pharmanet-Access Page', () => {
         page.clickButton('btn btn-primary', 'Add');
         browser.sleep(1000 * 5);
         expect(page.formErrors().count()).toBe(0, 'should be no errors');
+        expect(browser.getCurrentUrl()).toContain(PHARMANET_ACCESS_PAGE_URL);
     });
 
     /* FOR FUTURE TESTS */
