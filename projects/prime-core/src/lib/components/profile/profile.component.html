@@ -82,12 +82,21 @@
 
 <common-page-section layout='double'>
   <h2 class="border-bottom">Address</h2>
-  <lib-prime-address [disabled]="!editIdentityInfo" [(address)]="data.address" [defaultCountry]="defaultCountry"
-    [countryList]="countryList" [defaultProvince]="defaultProvince" [provinceList]="provinceList" [isRequired]="true">
+  <lib-prime-address name="identity_address"
+                     [disabled]="!editIdentityInfo"
+                     [(address)]="data.address"
+                     [defaultCountry]="defaultCountry"
+                     [countryList]="countryList"
+                     [defaultProvince]="defaultProvince"
+                     [provinceList]="provinceList"
+                     [isRequired]="true">
   </lib-prime-address>
   <div class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input" id="isMailingAddress" [checked]="data.identityIsMailingAddress"
-      (click)="toggleCheckBox()" />
+    <input type="checkbox"
+          class="custom-control-input"
+          id="isMailingAddress"
+          [checked]="data.identityIsMailingAddress"
+          (click)="toggleCheckBox()" />
     <label class="custom-control-label" for="isMailingAddress">
       This is my mailing address.
     </label>
@@ -95,8 +104,12 @@
   <aside>
     <h2 class="border-bottom">Mailing Address</h2>
     <div *ngIf="!data.identityIsMailingAddress; else NoMailingAddress">
-      <lib-prime-address [(address)]="data.mailAddress" [defaultCountry]="defaultCountry" [countryList]="countryList"
-        [defaultProvince]="defaultProvince" [provinceList]="provinceList" [isRequired]="true"></lib-prime-address>
+      <lib-prime-address [(address)]="data.mailAddress"
+                         [defaultCountry]="defaultCountry"
+                         [countryList]="countryList"
+                         [defaultProvince]="defaultProvince"
+                         [provinceList]="provinceList"
+                         [isRequired]="true"></lib-prime-address>
     </div>
   </aside>
 </common-page-section>

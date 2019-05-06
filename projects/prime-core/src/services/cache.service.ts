@@ -4,7 +4,10 @@ import { CacheApiService } from './cache-api.service';
 import { map } from 'rxjs/operators';
 import { StatusMsgInterface } from '../models/api-base.model';
 import { SysParamInterface } from '../models/cache-api.model';
-import { ProvinceList, CountryList } from '../lib/components/address/address.component';
+import { ProvinceList } from 'moh-common-lib/lib/components/province/province.component';
+import { CountryList } from 'moh-common-lib/lib/components/country/country.component';
+
+
 /**
  * TODO: Set up service to store data returned from the cache service once
  *       determined how it will be configured/setup
