@@ -1,3 +1,5 @@
+@import 'variables.scss';
+
 span {
   font-size: 14px;
   line-height: 18px;
@@ -9,4 +11,5 @@ span {
 
 .card-header {
   min-height: auto;
+  background-color: $gray;
 }
