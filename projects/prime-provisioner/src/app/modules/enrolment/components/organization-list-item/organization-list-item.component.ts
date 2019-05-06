@@ -13,8 +13,10 @@ import { Observable, of } from 'rxjs';
     <!-- <li > -->
     <div class="row" *ngIf="itm$ | async as itm">
       <div class="col-3">
-        <a>{{ itm.name }} [{{ itm.id }}]</a>
-        <label>{{ itm.address }}</label>
+        <a class="row col"
+          ><u>{{ itm.name }} [{{ itm.id }}]</u></a
+        >
+        <label class="row col">{{ itm.address }}</label>
       </div>
       <span class="col">{{ itm.type }}</span>
       <span class="col">{{ itm.vendor }}</span>

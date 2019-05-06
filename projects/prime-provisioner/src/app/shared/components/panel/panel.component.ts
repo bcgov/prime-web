@@ -12,7 +12,9 @@ import {
       <a>
         <ng-container *ngIf="open; else closed">
           <i class="fa fa-caret-down mr-3"></i> </ng-container
-        ><span>{{ label }}</span>
+        ><span
+          ><u>{{ label }}</u></span
+        >
       </a>
     </div>
     <div class="p-3 card-bg" *ngIf="open">
