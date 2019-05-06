@@ -27,7 +27,8 @@ const genSite = (
     address,
     type,
     vendor,
-    groupName
+    groupName,
+    status: 'Active'
   };
 };
 

@@ -20,7 +20,9 @@ import { Observable, of } from 'rxjs';
       </div>
       <span class="col">{{ itm.type }}</span>
       <span class="col">{{ itm.vendor }}</span>
-      <span class="col">{{ itm.status }}</span>
+      <span class="col"
+        ><i class="fa fa-check-circle"></i>{{ itm.status }}</span
+      >
       <span class="col">{{ itm.groupName }}</span>
     </div>
     <!-- </li> -->

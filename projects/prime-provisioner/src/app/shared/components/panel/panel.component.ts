@@ -17,7 +17,7 @@ import {
         >
       </a>
     </div>
-    <div class="p-3 card-bg" *ngIf="open">
+    <div class="p-5 card-bg" *ngIf="open">
       <ng-content></ng-content>
     </div>
     <ng-template #closed>
