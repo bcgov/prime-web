@@ -10,9 +10,7 @@ import { ControlContainer, NgForm } from '@angular/forms';
 import { of, Observable, Subscription } from 'rxjs';
 import { Base } from 'moh-common-lib/models';
 import { PrimePerson } from '../../../models/prime-person.model';
-import { PrimeConstants } from '../../../models/prime-constants';
-import { CountryList } from 'moh-common-lib/lib/components/country/country.component';
-import { ProvinceList } from 'moh-common-lib/lib/components/province/province.component';
+import { CountryList , ProvinceList, CANADA, BRITISH_COLUMBIA } from 'moh-common-lib';
 
 @Component({
   selector: 'lib-prime-profile',
@@ -35,8 +33,8 @@ export class ProfileComponent extends Base implements OnInit, OnDestroy {
     PrimePerson
   >();
 
-  public defaultCountry = PrimeConstants.CANADA;
-  public defaultProvince = PrimeConstants.BRITISH_COLUMBIA;
+  public defaultCountry = CANADA;
+  public defaultProvince = BRITISH_COLUMBIA;
 
   /**
    * Date of birth error messages

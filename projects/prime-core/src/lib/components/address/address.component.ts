@@ -10,8 +10,7 @@ import {
 import { ControlContainer, NgForm } from '@angular/forms';
 import { Base, Address } from 'moh-common-lib/models';
 import { GeoAddressResult } from 'moh-common-lib/services/geocoder.service';
-import { CountryList } from 'moh-common-lib/lib/components/country/country.component';
-import { ProvinceList } from 'moh-common-lib/lib/components/province/province.component';
+import { CountryList , ProvinceList, CANADA, UNITED_STATES, BRITISH_COLUMBIA  } from 'moh-common-lib';
 
 
 @Component({
@@ -22,7 +21,7 @@ import { ProvinceList } from 'moh-common-lib/lib/components/province/province.co
     { provide: ControlContainer, useExisting: forwardRef(() => NgForm) }
   ],
 })
-export class AddressComponent extends Base implements OnInit, OnChanges {
+export class AddressComponent extends Base implements OnChanges {
 
   @Input() disabled: boolean = false;
   @Input() isRequired: boolean = false;
@@ -38,9 +37,6 @@ export class AddressComponent extends Base implements OnInit, OnChanges {
 
   constructor() {
     super();
-  }
-
-  ngOnInit() {
   }
 
   /**
@@ -79,11 +75,11 @@ export class AddressComponent extends Base implements OnInit, OnChanges {
   }
 
   isCanada(): boolean {
-    return this.address && 'CAN' === this.address.country;
+    return this.address && CANADA === this.address.country;
   }
 
   isCanadaUSA(): boolean {
-    return (this.address && 'USA' === this.address.country) || this.isCanada();
+    return (this.address && UNITED_STATES === this.address.country) || this.isCanada();
   }
 
   ngOnChanges(changes) {
@@ -155,13 +151,16 @@ export class AddressComponent extends Base implements OnInit, OnChanges {
    * GeoCoder only is applicable when address is BC, Canada.
    */
   useGeoCoder(): boolean {
-    return this.isCanada() && 'BC' === this.address.province;
+    return this.isCanada() && BRITISH_COLUMBIA === this.address.province;
   }
 
   // Only BC addresses therefore no need to copy province into structure.
   setAddress(data: GeoAddressResult) {
+    console.log('setAddress: ', data );
     this.address.street = data.street;
     this.address.city = data.city;
+    this.address.province = data.province;
+    this.address.country = data.country;
     this.addressChange.emit(this.address);
   }
 }

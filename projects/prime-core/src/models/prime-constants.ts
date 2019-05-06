@@ -4,10 +4,6 @@ export class PrimeConstants {
 
   // Email length from database
   public static EMAIL_MAXLEN = '256';
-
-  // Address Constants
-  public static CANADA = 'CAN';
-  public static BRITISH_COLUMBIA = 'BC';
 }
 
 /**

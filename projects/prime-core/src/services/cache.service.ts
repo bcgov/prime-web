@@ -4,8 +4,7 @@ import { CacheApiService } from './cache-api.service';
 import { map } from 'rxjs/operators';
 import { StatusMsgInterface } from '../models/api-base.model';
 import { SysParamInterface } from '../models/cache-api.model';
-import { ProvinceList } from 'moh-common-lib/lib/components/province/province.component';
-import { CountryList } from 'moh-common-lib/lib/components/country/country.component';
+import { CountryList , ProvinceList} from 'moh-common-lib';
 
 
 /**

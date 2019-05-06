@@ -44,7 +44,7 @@
                       [label]="'Postal Code'"
                       [displayMask]="isCanada()"
                       [disabled]="disabled"
-                      [(ngModel)]="address.postal"
+                      [ngModel]="address?.postal"
                       (ngModelChange)="setPostalCode($event)"
                       [required]="isRequired"></common-postal-code>
 </div>
