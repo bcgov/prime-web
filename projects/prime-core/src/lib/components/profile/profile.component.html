@@ -82,15 +82,15 @@
 
 <common-page-section layout='double'>
   <h2 class="border-bottom">Address</h2>
-  <lib-prime-address name="identity_address"
-                     [disabled]="!editIdentityInfo"
-                     [(address)]="data.address"
-                     [defaultCountry]="defaultCountry"
-                     [countryList]="countryList"
-                     [defaultProvince]="defaultProvince"
-                     [provinceList]="provinceList"
-                     [isRequired]="true">
-  </lib-prime-address>
+  <common-address [disabled]="!editIdentityInfo"
+                  [address]="data?.address"
+                  (addressChange)="data.address=$event"
+                  [defaultCountry]="defaultCountry"
+                  [countryList]="countryList"
+                  [defaultProvince]="defaultProvince"
+                  [provinceList]="provinceList"
+                  [isRequired]="true">
+  </common-address>
   <div class="custom-control custom-checkbox">
     <input type="checkbox"
           class="custom-control-input"
@@ -104,12 +104,13 @@
   <aside>
     <h2 class="border-bottom">Mailing Address</h2>
     <div *ngIf="!data.identityIsMailingAddress; else NoMailingAddress">
-      <lib-prime-address [(address)]="data.mailAddress"
-                         [defaultCountry]="defaultCountry"
-                         [countryList]="countryList"
-                         [defaultProvince]="defaultProvince"
-                         [provinceList]="provinceList"
-                         [isRequired]="true"></lib-prime-address>
+      <common-address [address]="data?.mailAddress"
+                      (addressChange)="data.mailAddress=$event"
+                      [defaultCountry]="defaultCountry"
+                      [countryList]="countryList"
+                      [defaultProvince]="defaultProvince"
+                      [provinceList]="provinceList"
+                      [isRequired]="true"></common-address>
     </div>
   </aside>
 </common-page-section>

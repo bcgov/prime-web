@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { ProfileComponent } from './components/profile/profile.component';
-import { AddressComponent } from './components/address/address.component';
 import { NameComponent } from './components/name/name.component';
 import { SharedCoreModule } from 'moh-common-lib';
 import { CommonModule } from '@angular/common';
@@ -14,7 +13,6 @@ import { ValidateNameDirective } from './components/name/validate-name.directive
 import { VerifyPreferNameDirective } from './components/profile/verify-prefer-name.directive';
 
 const componentList = [
-  AddressComponent,
   NameComponent,
   ProfileComponent,
   PhoneNumberComponent,

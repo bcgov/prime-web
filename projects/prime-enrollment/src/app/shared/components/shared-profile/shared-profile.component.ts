@@ -15,6 +15,7 @@ import { ControlContainer, NgForm } from '@angular/forms';
 import { BsModalService } from 'ngx-bootstrap';
 // import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
 import { of, from, Observable, Subscription } from 'rxjs';
+import { BRITISH_COLUMBIA, CANADA } from 'moh-common-lib';
 
 @Component({
   selector: 'enroll-profile',
@@ -36,8 +37,8 @@ export class SharedProfileComponent<T> implements OnInit, OnDestroy {
   @Output() dataValid: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() changes: EventEmitter<T> = new EventEmitter<T>();
 
-  public defaultCountry = 'CAN';
-  public defaultProvince = 'BC';
+  public defaultCountry = CANADA;
+  public defaultProvince = BRITISH_COLUMBIA;
 
   public firstNameRequired: boolean = false;
   public preferredIsRequired: boolean = false;

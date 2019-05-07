@@ -4,7 +4,10 @@ import {
   Input,
   Output,
   EventEmitter,
-  OnDestroy
+  OnDestroy,
+  Optional,
+  Host,
+  forwardRef
 } from '@angular/core';
 import { ControlContainer, NgForm } from '@angular/forms';
 import { of, Observable, Subscription } from 'rxjs';
@@ -16,14 +19,14 @@ import { CountryList , ProvinceList, CANADA, BRITISH_COLUMBIA } from 'moh-common
   selector: 'lib-prime-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
-  /* Re-use the same ngForm that it's parent is using. The component will show
+   /* Re-use the same ngForm that it's parent is using. The component will show
    * up in its parents `this.form`, and will auto-update `this.form.valid`
    */
   viewProviders: [
-    { provide: ControlContainer, useExisting: NgForm }
+    { provide: ControlContainer, useExisting: forwardRef(() => NgForm) }
   ]
 })
-export class ProfileComponent extends Base implements OnInit, OnDestroy {
+export class ProfileComponent extends Base implements OnDestroy {
   @Input() data: PrimePerson = new PrimePerson();
   @Input() countryList: CountryList[] = [];
   @Input() provinceList: ProvinceList[] = [];
@@ -42,27 +45,27 @@ export class ProfileComponent extends Base implements OnInit, OnDestroy {
   public dateLabel = 'Birthdate';
 
   subscriptions: Subscription[];
+  newObs = new Observable();
 
-  constructor(private cntrlContainer: ControlContainer) {
+  constructor( @Optional() @Host() public parent: ControlContainer ) {
     super();
-  }
 
-  emitChanges(itm: PrimePerson) {
-    this.dataChange.emit(itm);
-  }
+    this.newObs = of(this.data);
+    this.subscriptions = [ this.newObs.subscribe(obs => console.log(obs) ) ];
 
-  ngOnInit() {
-    // Listen for submission of form
-    let newObs = new Observable();
-    newObs = of(this.data);
-    newObs.subscribe(obs => console.log(obs));
-    this.subscriptions = [
-      this.cntrlContainer.valueChanges.subscribe(obs => this.emitChanges(obs))
-    ];
+    if ( parent ) {
+      this.subscriptions.push( parent.valueChanges.subscribe(obs => {
+        console.log( '(profile) parent change values: ', obs );
+        this.dataChange.emit( obs );
+      }) );
+      this.subscriptions.push( parent.statusChanges.subscribe( x => {
+        console.log( '(profile) parent change status: ', parent.status );
+      }) );
+    }
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach(itm => itm.unsubscribe());
+    this.subscriptions.forEach( itm => itm.unsubscribe() );
   }
 
   toggleCheckBox() {
