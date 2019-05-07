@@ -3,6 +3,8 @@ import { Registrant } from '../../../../../../prime-registration/src/app/modules
 import { SimpleDate } from 'moh-common-lib/models/simple-date.interface';
 import { FormBuilder } from '@angular/forms';
 import { EnrolmentFormBuilder } from '@prime-prov/core/models/form-builder.model';
+import { Router, ActivatedRoute, UrlSegment } from '@angular/router';
+import { ProvisionerConstants } from '@prime-prov/core/models/provisioner-constants.model';
 
 const dateOfBirth = {
   day: 26,
@@ -17,6 +19,9 @@ export class EnrolmentStateService {
   profileForm = new Registrant();
   contactForm = EnrolmentFormBuilder.contactForm(this.fb);
   selfDeclarationForm = EnrolmentFormBuilder.selfDeclarationForm(this.fb);
+  index = 0;
+  routes;
+
   constructor(private fb: FormBuilder) {
     this.profileForm.address.street = '123 fake st';
     this.profileForm.address.postal = 'V9L 3W8';
@@ -28,5 +33,23 @@ export class EnrolmentStateService {
     this.profileForm.lastName = 'Hamilton';
     this.profileForm.dateOfBirth = dateOfBirth;
     // console.log(this);
+    const routes = [];
+    const addRoute = (route: string) => {
+      routes.push(route);
+    };
+    for (let key in ProvisionerConstants) {
+      if (ProvisionerConstants.hasOwnProperty(key)) {
+        key === 'PROVISIONER' ? null : addRoute(ProvisionerConstants[key]);
+      }
+    }
+    // console.log(ProvisionerConstants);
+    this.routes = routes;
+  }
+
+  findIndex(urlSeg: UrlSegment[]) {
+    const url = urlSeg[0].path;
+    const index = this.routes.indexOf(url);
+    console.log(index);
+    this.index = index;
   }
 }

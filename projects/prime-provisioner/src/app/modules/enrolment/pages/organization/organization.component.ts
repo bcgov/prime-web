@@ -1,5 +1,13 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  OnDestroy
+} from '@angular/core';
 import { OrganizationStateService } from './organization-state.service';
+import { ActivatedRoute } from '@angular/router';
+import { EnrolmentStateService } from '../../services/enrolment-state.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'prov-organization',
@@ -32,10 +40,21 @@ import { OrganizationStateService } from './organization-state.service';
   // TODO: figure out what hte state should be on this.
   // providers: [OrganizationStateService]
 })
-export class OrganizationComponent implements OnInit {
+export class OrganizationComponent implements OnInit, OnDestroy {
   title = 'Provisioner Access';
   helperText = 'Provisioner Access - helper text';
-  constructor(public orgStateSvc: OrganizationStateService) {}
+  urlSub: Subscription;
+  constructor(
+    private stateSvc: EnrolmentStateService,
+    public orgStateSvc: OrganizationStateService,
+    private route: ActivatedRoute
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.urlSub = this.route.url.subscribe(obs => this.stateSvc.findIndex(obs));
+  }
+
+  ngOnDestroy(): void {
+    this.urlSub.unsubscribe();
+  }
 }

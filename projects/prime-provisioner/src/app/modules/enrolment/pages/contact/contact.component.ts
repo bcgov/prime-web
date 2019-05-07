@@ -1,4 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  OnDestroy
+} from '@angular/core';
 import {
   IPreferredContactInput,
   ContactValueOption
@@ -8,6 +13,8 @@ import { FormGroup, Validators } from '@angular/forms';
 import { phoneNumberValidator } from '@prime-prov/core/models/validators';
 
 import { MaskModel, NUMBER, SPACE } from 'moh-common-lib/models';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 // TODO: set standard page views
 
 // TODO: create the header component
@@ -95,7 +102,7 @@ import { MaskModel, NUMBER, SPACE } from 'moh-common-lib/models';
   styleUrls: ['./contact.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ContactComponent implements OnInit {
+export class ContactComponent implements OnInit, OnDestroy {
   // component headers
   title = 'Contact Information';
   helperText = 'Contact Information - helper text';
@@ -106,13 +113,17 @@ export class ContactComponent implements OnInit {
   contactOptions: IPreferredContactInput[];
   mask: (string | RegExp)[];
   placeholder: string;
+  urlSub: Subscription;
 
   // TODO: manage the state of the selected preferrence
   //
 
   // TODO: dynamically add the validators
 
-  constructor(public stateSvc: EnrolmentStateService) {
+  constructor(
+    public stateSvc: EnrolmentStateService,
+    private route: ActivatedRoute
+  ) {
     const preferredContact = [
       {
         name: 'email',
@@ -156,7 +167,16 @@ export class ContactComponent implements OnInit {
     this.placeholder = '+1 (555) 555-5555';
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.urlSub = this.route.url.subscribe(obs => {
+      console.log(obs[0].path);
+      this.stateSvc.findIndex(obs);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.urlSub.unsubscribe();
+  }
 
   preferredContactValueChange(itm: ContactValueOption, fg: FormGroup) {
     switch (itm) {
