@@ -1,7 +1,14 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  OnDestroy
+} from '@angular/core';
 import { EnrolmentStateService } from '../../services/enrolment-state.service';
 import { IPreferredContactInput } from '@prime-prov/core/interfaces/ipreferred-contact-input';
 import { FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'prov-self-declaration',
@@ -34,12 +41,16 @@ import { FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./self-declaration.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SelfDeclarationComponent implements OnInit {
+export class SelfDeclarationComponent implements OnInit, OnDestroy {
   title = 'Self Declaration';
   helperText = 'Self Declaration - helper text';
   fg = this.stateSvc.selfDeclarationForm;
+  urlSub: Subscription;
   controls: any;
-  constructor(public stateSvc: EnrolmentStateService) {
+  constructor(
+    public stateSvc: EnrolmentStateService,
+    private route: ActivatedRoute
+  ) {
     this.controls = [
       {
         radioOpts: [
@@ -80,7 +91,13 @@ export class SelfDeclarationComponent implements OnInit {
     ];
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.urlSub = this.route.url.subscribe(obs => this.stateSvc.findIndex(obs));
+  }
+
+  ngOnDestroy() {
+    this.urlSub.unsubscribe();
+  }
 
   updateSelection(bool: any, fcName: string, fg: FormGroup) {
     if (typeof bool === undefined) return;

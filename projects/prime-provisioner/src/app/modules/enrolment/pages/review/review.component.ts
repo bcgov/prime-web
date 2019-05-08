@@ -1,4 +1,12 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  OnDestroy
+} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { EnrolmentStateService } from '../../services/enrolment-state.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'prov-review',
@@ -13,10 +21,20 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./review.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ReviewComponent implements OnInit {
+export class ReviewComponent implements OnInit, OnDestroy {
+  urlSub: Subscription;
   title = 'Application Review';
   helperText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit..';
-  constructor() {}
+  constructor(
+    private route: ActivatedRoute,
+    private stateSvc: EnrolmentStateService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.urlSub = this.route.url.subscribe(obs => this.stateSvc.findIndex(obs));
+  }
+
+  ngOnDestroy() {
+    this.urlSub.unsubscribe();
+  }
 }

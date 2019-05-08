@@ -168,10 +168,7 @@ export class ContactComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.urlSub = this.route.url.subscribe(obs => {
-      console.log(obs[0].path);
-      this.stateSvc.findIndex(obs);
-    });
+    this.urlSub = this.route.url.subscribe(obs => this.stateSvc.findIndex(obs));
   }
 
   ngOnDestroy(): void {
