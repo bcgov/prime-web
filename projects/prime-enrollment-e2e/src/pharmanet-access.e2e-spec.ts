@@ -52,5 +52,4 @@ describe('BCSC Enrollment - Pharmanet-Access Page', () => {
     // (7.3.37) must display to the PharmaNet User their own Organization and Site associations.
     // (7.3.38) must capture if they will access PharmaNet themselves or if access will only be done by
     // an On-Behalf Of user working for them
-    // (7.3.39) must allow a PharmaNet User to update the following PharmaNet Access information
 });

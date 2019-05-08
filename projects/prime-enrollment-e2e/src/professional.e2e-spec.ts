@@ -43,6 +43,7 @@ describe('BCSC Enrollment - Professional Page', () => {
         expect(page.formErrors().count()).toBe(0, 'should be no errors');
     });
 
+    // This test will fail because the default value is NOT no.
     xit('05. (7.3.24) capture if the individual is registered with PharmaCare as a Device Provider. The default value for this must be No.', () => {
         page.navigateTo();
         page.clickOption('collegeCert', 'Yes');
@@ -75,7 +76,4 @@ describe('BCSC Enrollment - Professional Page', () => {
     // 7.3.22. College Registration Renewal Date - must be in the future and must be within a configurable time period e.g. must be one year or less in the future
     // 7.3.26. must capture the On-Behalf-Of job title when the individual has not identified as a Regulated User or Device Provider
 
-    /* TESTS FAILED */
-    // 7.3.24. capture if the individual is registered with PharmaCare as a Device Provider. The default value for this must be No.'
-    // 7.3.23. The solution must allow the User to select multiple Advanced Practice Certifications from the available list. The User will not be able to select multiple options if "None" is selected.
 });

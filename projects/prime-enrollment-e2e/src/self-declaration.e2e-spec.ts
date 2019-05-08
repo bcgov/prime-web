@@ -35,6 +35,7 @@ describe('BCSC Enrollment - Self-Declaration Page', () => {
         expect(page.formErrors().count()).toBe(0, 'should be no errors on page load');
     });
 
+    // This test will not work because uploadFile method is not working.
     xit('04. (7.3.33) must allow upload of supporting documents if any Self-Declaration question was answered Yes.', () => {
         page.navigateTo();
         page.clickOptions('Have you ever been the subject', 'fctrue');
