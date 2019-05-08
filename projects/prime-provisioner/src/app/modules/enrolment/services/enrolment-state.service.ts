@@ -5,6 +5,7 @@ import { FormBuilder } from '@angular/forms';
 import { EnrolmentFormBuilder } from '@prime-prov/core/models/form-builder.model';
 import { Router, ActivatedRoute, UrlSegment } from '@angular/router';
 import { ProvisionerConstants } from '@prime-prov/core/models/provisioner-constants.model';
+import { Subject } from 'rxjs';
 
 const dateOfBirth = {
   day: 26,
@@ -19,6 +20,7 @@ export class EnrolmentStateService {
   profileForm = new Registrant();
   contactForm = EnrolmentFormBuilder.contactForm(this.fb);
   selfDeclarationForm = EnrolmentFormBuilder.selfDeclarationForm(this.fb);
+  touched$ = new Subject<boolean>();
   index = 0;
   routes;
 
@@ -32,6 +34,7 @@ export class EnrolmentStateService {
     this.profileForm.firstName = 'Sean';
     this.profileForm.lastName = 'Hamilton';
     this.profileForm.dateOfBirth = dateOfBirth;
+
     // console.log(this);
     const routes = [];
     const addRoute = (route: string) => {

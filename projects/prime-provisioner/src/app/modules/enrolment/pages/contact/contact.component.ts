@@ -9,7 +9,7 @@ import {
   ContactValueOption
 } from '@prime-prov/core/interfaces/ipreferred-contact-input';
 import { EnrolmentStateService } from '../../services/enrolment-state.service';
-import { FormGroup, Validators } from '@angular/forms';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { phoneNumberValidator } from '@prime-prov/core/models/validators';
 
 import { MaskModel, NUMBER, SPACE } from 'moh-common-lib/models';
@@ -40,6 +40,11 @@ import { Subscription } from 'rxjs';
             formControlName="preferredContact"
             [controls]="contactOptions"
           ></prov-radio-control>
+          <prov-error
+            label="Contact option"
+            [touched]="touched || fg.controls['preferredContact'].touched"
+            [valid]="fg.controls['preferredContact'].valid"
+          ></prov-error>
           <div class="form-group">
             <label for="email" class="control-label">Email</label>
             <input
@@ -48,9 +53,14 @@ import { Subscription } from 'rxjs';
               id="email"
               placeholder="user@example.com"
             />
+            <prov-error
+              label="Email address"
+              [touched]="touched || fg.controls['email'].touched"
+              [valid]="fg.controls['email'].valid"
+            ></prov-error>
           </div>
           <div class="form-group phone">
-            <label for="email" class="control-label">Phone</label>
+            <label for="phone" class="control-label">Phone</label>
 
             <input
               class="form-control"
@@ -60,6 +70,11 @@ import { Subscription } from 'rxjs';
               [placeholder]="placeholder"
             />
           </div>
+          <prov-error
+            label="Phone number"
+            [touched]="touched || fg.controls['phone'].touched"
+            [valid]="fg.controls['phone'].valid"
+          ></prov-error>
           <prov-subheader
             [title]="voicePhoneTitle"
             [helperText]="voicePhoneHelperText"
@@ -76,6 +91,11 @@ import { Subscription } from 'rxjs';
               [placeholder]="placeholder"
             />
           </div>
+          <prov-error
+            label="Voice phone"
+            [touched]="touched || fg.controls['voicePhone'].touched"
+            [valid]="fg.controls['voicePhone'].valid"
+          ></prov-error>
           <div class="form-group">
             <label for="ext" class="control-label"
               >Extension Number (Optional)</label
@@ -114,6 +134,8 @@ export class ContactComponent implements OnInit, OnDestroy {
   mask: (string | RegExp)[];
   placeholder: string;
   urlSub: Subscription;
+  fg = this.stateSvc.contactForm;
+  touched: boolean;
 
   // TODO: manage the state of the selected preferrence
   //
@@ -169,6 +191,8 @@ export class ContactComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.urlSub = this.route.url.subscribe(obs => this.stateSvc.findIndex(obs));
+    this.fg.valueChanges.subscribe(obs => console.log(this.fg));
+    this.stateSvc.touched$.subscribe(obs => (this.touched = obs));
   }
 
   ngOnDestroy(): void {
@@ -217,5 +241,10 @@ export class ContactComponent implements OnInit, OnDestroy {
         break;
     }
     console.log(fg);
+  }
+
+  toggleRequired(ctrl: FormControl, bool: boolean) {
+    bool ? ctrl.setValidators(Validators.required) : ctrl.clearValidators();
+    ctrl.updateValueAndValidity({ emitEvent: true });
   }
 }

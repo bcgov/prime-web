@@ -5,6 +5,7 @@ import { RadioControlComponent } from './components/radio-control/radio-control.
 import { SubheaderComponent } from './components/subheader/subheader.component';
 import { DeclarationQuestionComponent } from './components/declaration-question/declaration-question.component';
 import { PanelComponent } from './components/panel/panel.component';
+import { ErrorComponent } from './components/error/error.component';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { PanelComponent } from './components/panel/panel.component';
     RadioControlComponent,
     SubheaderComponent,
     DeclarationQuestionComponent,
-    PanelComponent
+    PanelComponent,
+    ErrorComponent
   ],
   imports: [CommonModule],
   exports: [
@@ -20,7 +22,8 @@ import { PanelComponent } from './components/panel/panel.component';
     RadioControlComponent,
     SubheaderComponent,
     DeclarationQuestionComponent,
-    PanelComponent
+    PanelComponent,
+    ErrorComponent
   ]
 })
 export class SharedModule {}
