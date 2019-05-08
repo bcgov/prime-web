@@ -2,6 +2,9 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Container } from 'moh-common-lib/models';
 import { subRoutes } from '@prime-prov/core/models/sub-routes';
 import { of, from } from 'rxjs';
+import { ProvisionerConstants } from '@prime-prov/core/models/provisioner-constants.model';
+import { EnrolmentStateService } from './services/enrolment-state.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'prov-enrolment',
@@ -31,8 +34,9 @@ import { of, from } from 'rxjs';
 export class EnrolmentComponent extends Container implements OnInit {
   loading = false;
   submitLabel$ = of('Continue');
+  prefix = ProvisionerConstants.PROVISIONER;
 
-  constructor() {
+  constructor(private stateSvc: EnrolmentStateService, private router: Router) {
     super();
     this.setProgressSteps(subRoutes);
   }
@@ -40,6 +44,9 @@ export class EnrolmentComponent extends Container implements OnInit {
   ngOnInit() {}
 
   advancePage() {
-    console.log('advance the page');
+    const index = this.stateSvc.index + 1;
+    const nextUrl = this.stateSvc.routes[index];
+    const url = `/${this.prefix}/${nextUrl}`;
+    this.router.navigate([url]);
   }
 }

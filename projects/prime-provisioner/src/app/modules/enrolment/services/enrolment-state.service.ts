@@ -49,7 +49,21 @@ export class EnrolmentStateService {
   findIndex(urlSeg: UrlSegment[]) {
     const url = urlSeg[0].path;
     const index = this.routes.indexOf(url);
-    console.log(index);
     this.index = index;
+  }
+
+  validateIndex(index: number) {
+    switch (index) {
+      case 0:
+        return true;
+      case 1:
+        return this.contactForm.valid;
+      case 2:
+        return this.selfDeclarationForm.valid;
+      case 3:
+        return true;
+      case 4:
+        return true;
+    }
   }
 }
