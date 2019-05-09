@@ -55,7 +55,7 @@ describe('BCSC Enrollment - End to End', () => {
         reviewPage.scrollDown();
         reviewPage.clickSubmit();
         expect(browser.getCurrentUrl()).toContain(SUCCESS_PAGE_URL);
-    });
+    }, 60000);
 
     it('02. should be able to edit fields when user reached the Review Page', () => {
         profilePage.navigateTo();
@@ -95,6 +95,6 @@ describe('BCSC Enrollment - End to End', () => {
         reviewPage.scrollDown();
         reviewPage.clickSubmit();
         expect(browser.getCurrentUrl()).toContain(SUCCESS_PAGE_URL);
-    });
+    }, 60000);
 
 });

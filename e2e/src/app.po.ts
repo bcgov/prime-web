@@ -16,10 +16,16 @@ export class PrimeTestPage extends AbstractTestPage {
     return browser.get('/');
   }
 
+  /**
+   * Clicks the button for Different Mailing Address
+   */
   clickDiffMailAddress() {
     this.diffMailAddressButton.click();
   }
 
+  /**
+   * Ticks the checkbox for Different Mailing Address
+   */
   checkDiffMailAddress() {
     this.diffMailAddressCheckbox.click();
   }
