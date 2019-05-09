@@ -44,8 +44,11 @@ export class EnrolmentComponent extends Container implements OnInit {
   ngOnInit() {}
 
   advancePage() {
-    const index = this.stateSvc.index + 1;
-    const nextUrl = this.stateSvc.routes[index];
+    const index = this.stateSvc.index;
+    const valid = this.stateSvc.validateIndex(index);
+    console.log(valid);
+    if (!valid) return this.stateSvc.touched$.next(true);
+    const nextUrl = this.stateSvc.routes[index + 1];
     const url = `/${this.prefix}/${nextUrl}`;
     this.router.navigate([url]);
   }

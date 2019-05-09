@@ -41,7 +41,7 @@ import { Subscription } from 'rxjs';
             ></prov-radio-control>
             <prov-error
               label="Contact option"
-              [touched]="fg.controls['preferredContact'].touched"
+              [touched]="fg.controls['preferredContact'].touched || touched"
               [valid]="fg.controls['preferredContact'].valid"
             ></prov-error>
             <div class="form-group">
@@ -54,7 +54,7 @@ import { Subscription } from 'rxjs';
               />
               <prov-error
                 label="Email address"
-                [touched]="fg.controls['email'].touched"
+                [touched]="fg.controls['email'].touched || touched"
                 [valid]="
                   fg.controls['email'].valid || fg.controls.email.disabled
                 "
@@ -73,7 +73,7 @@ import { Subscription } from 'rxjs';
             </div>
             <prov-error
               label="Phone number"
-              [touched]="fg.controls.phone.touched"
+              [touched]="fg.controls.phone.touched || touched"
               [valid]="fg.controls.phone.valid || fg.controls.phone.disabled"
             ></prov-error>
             <prov-subheader
@@ -94,7 +94,7 @@ import { Subscription } from 'rxjs';
             </div>
             <prov-error
               label="Voice phone"
-              [touched]="fg.controls['voicePhone'].touched"
+              [touched]="fg.controls['voicePhone'].touched || touched"
               [valid]="fg.controls['voicePhone'].valid"
             ></prov-error>
             <div class="form-group">
@@ -194,6 +194,7 @@ export class ContactComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.urlSub = this.route.url.subscribe(obs => this.stateSvc.findIndex(obs));
     // this.fg.valueChanges.subscribe(obs => console.log(this.fg));
+    this.stateSvc.touched$.subscribe(obs => (this.touched = obs));
   }
 
   ngOnDestroy(): void {

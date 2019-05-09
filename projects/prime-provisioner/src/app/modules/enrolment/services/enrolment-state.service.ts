@@ -25,6 +25,7 @@ export class EnrolmentStateService {
   selfDeclarationForm = EnrolmentFormBuilder.selfDeclarationForm(this.fb);
   index = 0;
   routes;
+  touched$ = new Subject<boolean>();
 
   constructor(private fb: FormBuilder) {
     this.profileForm.address.street = '123 fake st';
