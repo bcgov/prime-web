@@ -18,35 +18,58 @@ import { Subscription } from 'rxjs';
         [title]="title"
         [helperText]="helperText"
       ></prov-page-header>
-      <form [formGroup]="stateSvc.selfDeclarationForm">
-        <label></label>
-        <ng-container *ngFor="let control of controls">
-          <label>{{ control.label }}</label>
-          <prov-radio-control
-            id="conviction"
-            [controls]="control.radioOpts"
-            (selection)="updateSelection($event, control.fcName, fg)"
-            formControlName="{{ control.fcName }}"
-          ></prov-radio-control>
-          <prov-details
-            *ngIf="fg.controls[control.fcName].value"
-            fc="{{ control.fcName }}Desc"
-            docFc="{{ control.fcName }}Docs"
-            [fg]="fg"
-          ></prov-details>
-        </ng-container>
+      <form [formGroup]="fg">
+        <div class="form-group">
+          <label></label>
+          <ng-container *ngFor="let control of controls">
+            <label>{{ control.label }}</label>
+            <prov-radio-control
+              id="conviction"
+              [controls]="control.radioOpts"
+              (selection)="updateSelection($event, control.fcName, fg)"
+              formControlName="{{ control.fcName }}"
+            ></prov-radio-control>
+            <prov-error
+              label="This field"
+              [touched]="fg.controls[control.fcName].touched || touched"
+              [valid]="
+                fg.controls[control.fcName].valid ||
+                fg.controls[control.fcName].disabled
+              "
+            ></prov-error>
+            <div class="row"></div>
+            <prov-details
+              *ngIf="fg.controls[control.fcName].value"
+              fc="{{ control.fcName }}Desc"
+              docFc="{{ control.fcName }}Docs"
+              [fg]="fg"
+            ></prov-details>
+            <prov-error
+              label="A description"
+              [touched]="
+                fg.controls[control.fcName + 'Desc'].touched || touched
+              "
+              [valid]="
+                fg.controls[control.fcName + 'Desc'].valid ||
+                fg.controls[control.fcName + 'Desc'].disabled
+              "
+            ></prov-error>
+            <div class="row"></div>
+          </ng-container>
+        </div>
       </form>
     </common-page-framework>
   `,
-  styleUrls: ['./self-declaration.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./self-declaration.component.scss']
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelfDeclarationComponent implements OnInit, OnDestroy {
   title = 'Self Declaration';
   helperText = 'Self Declaration - helper text';
   fg = this.stateSvc.selfDeclarationForm;
-  urlSub: Subscription;
+  urlSub: Subscription[];
   controls: any;
+  touched: boolean;
   constructor(
     public stateSvc: EnrolmentStateService,
     private route: ActivatedRoute
@@ -92,11 +115,16 @@ export class SelfDeclarationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.urlSub = this.route.url.subscribe(obs => this.stateSvc.findIndex(obs));
+    this.urlSub = [
+      this.route.url.subscribe(obs => this.stateSvc.findIndex(obs))
+    ];
+    this.urlSub.push(
+      this.stateSvc.touched$.subscribe(obs => (this.touched = obs))
+    );
   }
 
   ngOnDestroy() {
-    this.urlSub.unsubscribe();
+    this.urlSub.forEach(itm => itm.unsubscribe());
   }
 
   updateSelection(bool: any, fcName: string, fg: FormGroup) {

@@ -20,13 +20,13 @@ export abstract class EnrolmentFormBuilder {
 
   static selfDeclarationForm(fb: FormBuilder) {
     const fg = fb.group({
-      conviction: [null, Validators.required],
+      conviction: [null, [Validators.required]],
       convictionDesc: [null],
-      regSuspension: [null, Validators.required],
+      regSuspension: [null, [Validators.required]],
       regSuspensionDesc: [null],
-      tAndC: [null, Validators.required],
+      tAndC: [null, [Validators.required]],
       tAndCDesc: [null],
-      pharmaSuspension: [null, Validators.required],
+      pharmaSuspension: [null, [Validators.required]],
       pharmaSuspensionDesc: [null]
     });
     return fg;

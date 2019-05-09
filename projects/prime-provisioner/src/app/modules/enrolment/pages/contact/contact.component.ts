@@ -34,16 +34,18 @@ import { Subscription } from 'rxjs';
         ></prov-subheader>
         <ng-container *ngIf="fg$ | async as fg">
           <form [formGroup]="fg">
-            <prov-radio-control
-              (selection)="preferredContactValueChange($event, fg)"
-              formControlName="preferredContact"
-              [controls]="contactOptions"
-            ></prov-radio-control>
-            <prov-error
-              label="Contact option"
-              [touched]="fg.controls['preferredContact'].touched || touched"
-              [valid]="fg.controls['preferredContact'].valid"
-            ></prov-error>
+            <div class="form-group">
+              <prov-radio-control
+                (selection)="preferredContactValueChange($event, fg)"
+                formControlName="preferredContact"
+                [controls]="contactOptions"
+              ></prov-radio-control>
+              <prov-error
+                label="Contact option"
+                [touched]="fg.controls['preferredContact'].touched || touched"
+                [valid]="fg.controls['preferredContact'].valid"
+              ></prov-error>
+            </div>
             <div class="form-group">
               <label for="email" class="control-label">Email</label>
               <input
@@ -70,12 +72,13 @@ import { Subscription } from 'rxjs';
                 [textMask]="{ mask: mask }"
                 [placeholder]="placeholder"
               />
+              <prov-error
+                label="Phone number"
+                [touched]="fg.controls.phone.touched || touched"
+                [valid]="fg.controls.phone.valid || fg.controls.phone.disabled"
+              ></prov-error>
             </div>
-            <prov-error
-              label="Phone number"
-              [touched]="fg.controls.phone.touched || touched"
-              [valid]="fg.controls.phone.valid || fg.controls.phone.disabled"
-            ></prov-error>
+
             <prov-subheader
               [title]="voicePhoneTitle"
               [helperText]="voicePhoneHelperText"
