@@ -69,11 +69,17 @@ describe('BCSC Enrollment - Professional Page', () => {
     });
 
     /* FOR FUTURE TESTS */
-    // 7.3.18. capture Practitioner College ID -  alphanumeric free format text, the solution must validate Practitioner College ID against PharmaNet
-    // 7.3.20. must capture any Limits and Conditions that have been placed on the PharmaNet User's licence, for each College Licence entered.
-    // 7.3.21. capture a License End Date for each of the individual's professional college associations with a Time Limited License Class
-    // The date entered must be one year or less from today's date. The list of Time Limited License Classes will be provided by the Ministry.
-    // 7.3.22. College Registration Renewal Date - must be in the future and must be within a configurable time period e.g. must be one year or less in the future
-    // 7.3.26. must capture the On-Behalf-Of job title when the individual has not identified as a Regulated User or Device Provider
+    /*
+        7.3.18. capture Practitioner College ID -  alphanumeric free format text, the solution must validate Practitioner College ID against PharmaNet
+        7.3.20. must capture any Limits and Conditions that have been placed on the PharmaNet User's licence, for each College Licence entered.
+        7.3.21. capture a License End Date for each of the individual's professional college associations with a Time Limited License Class
+        The date entered must be one year or less from today's date. The list of Time Limited License Classes will be provided by the Ministry.
+        7.3.22. College Registration Renewal Date - must be in the future and must be within a configurable time period e.g. must be one year or less in the future
+        7.3.26. must capture the On-Behalf-Of job title when the individual has not identified as a Regulated User or Device Provider
+
+        - Page validation - at least one option has to be 'yes'. Can't do no-no-no and continue.
+        - Renewal Date -> doesn't have a datepicker (IE?). it's just a weird text input.
+        - Job title for OBO should be required. Currently user can conitnue with having a blank OBO Job title balnk.
+    */
 
 });

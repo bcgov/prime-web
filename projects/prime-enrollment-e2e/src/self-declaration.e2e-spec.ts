@@ -45,4 +45,11 @@ describe('BCSC Enrollment - Self-Declaration Page', () => {
         expect(page.formErrors().count()).toBe(0, 'should be no errors on page load');
     });
 
+    /* FOR FUTURE TESTS */
+    /*
+        Click continue on blank page. The error labels are too verboes.
+        Should just be "please answer yes /no" etc. 
+        Label details not super important but we want to just not reiterate question.
+    */
+
 });

@@ -44,4 +44,8 @@ describe('BCSC Enrollment - Review Page', () => {
         expect(browser.getCurrentUrl()).toContain(SUCCESS_PAGE_URL);
     });
 
+    /* FOR FUTURE TESTS */
+    /*
+        01. Fix UI. Messed up on IE.
+    */
 });

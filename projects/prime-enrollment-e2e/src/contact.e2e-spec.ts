@@ -48,6 +48,11 @@ describe('BCSC Enrollment- Contact Page', () => {
     });
 
     /* FOR FUTURE TESTS */
-    // should make sure email address is unique
-
+    /*
+            01. should make sure email address is unique
+            02. If user enters "test" as email it says "email is required." It SHOULD say "email format wrong"
+            03. Phone Number for Voice Contact
+                - should be freeform text (i.e. user is NOT forced to start numbers with a 1. should be able to start with 0 for UK #).
+                - needs to be optional - update label and field logic
+    */
 });

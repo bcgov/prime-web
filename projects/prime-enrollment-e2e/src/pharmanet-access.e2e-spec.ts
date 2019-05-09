@@ -48,8 +48,23 @@ describe('BCSC Enrollment - Pharmanet-Access Page', () => {
     });
 
     /* FOR FUTURE TESTS */
-    // (7.3.35) solution must display all Organizations that match the search criteria for selection
-    // (7.3.37) must display to the PharmaNet User their own Organization and Site associations.
-    // (7.3.38) must capture if they will access PharmaNet themselves or if access will only be done by
-    // an On-Behalf Of user working for them
+    /*
+        (7.3.35) solution must display all Organizations that match the search criteria for selection
+        (7.3.37) must display to the PharmaNet User their own Organization and Site associations.
+        (7.3.38) must capture if they will access PharmaNet themselves or if access will only be done by
+                an On-Behalf Of user working for them
+
+        Search modal
+
+            - Shouldn't be able to search if fields are invalid. Can currently search with blank pages.
+            - Need ability to trigger secondary search within same modal.
+            - Need to make the modal more responsive. Someitmes the rows are weirdly breaking into multiple lines (potential IE).
+
+        Table
+            - Issue on IE. Clicking on the datepicker icon can trigger a click on the 'X' (remove) because the buttons somewhat overlap.
+                Needs to be fixed.
+            - Table -> if there is only one record the delete button is midding. Delete should always be visible.
+            - Issue: deleting start date lets user continue with blank date (sometimes?). User should never be able to continue with blank start date.
+    */
 });
+
