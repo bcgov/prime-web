@@ -1,5 +1,6 @@
 import { Registrant } from '../../../../../prime-registration/src/app/modules/registration/models/registrant.model';
 import { FormBuilder, Validators } from '@angular/forms';
+import { phoneNumberValidator } from './validators';
 
 export abstract class EnrolmentFormBuilder {
   static profileForm() {
@@ -9,8 +10,8 @@ export abstract class EnrolmentFormBuilder {
   static contactForm(fb: FormBuilder) {
     const fg = fb.group({
       preferredContact: [null, Validators.required],
-      email: [null],
-      phone: [null],
+      email: [null, [Validators.required, Validators.email]],
+      phone: [null, [Validators.required, phoneNumberValidator()]],
       voicePhone: [null],
       ext: [null]
     });

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Registrant } from '../../../../../../prime-registration/src/app/modules/registration/models/registrant.model';
 import { SimpleDate } from 'moh-common-lib/models/simple-date.interface';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { EnrolmentFormBuilder } from '@prime-prov/core/models/form-builder.model';
 import { Router, ActivatedRoute, UrlSegment } from '@angular/router';
 import { ProvisionerConstants } from '@prime-prov/core/models/provisioner-constants.model';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 const dateOfBirth = {
   day: 26,
@@ -18,9 +18,11 @@ const dateOfBirth = {
 })
 export class EnrolmentStateService {
   profileForm = new Registrant();
-  contactForm = EnrolmentFormBuilder.contactForm(this.fb);
+  contactForm$ = new BehaviorSubject<FormGroup>(
+    EnrolmentFormBuilder.contactForm(this.fb)
+  );
+  contactForm = this.contactForm$.asObservable();
   selfDeclarationForm = EnrolmentFormBuilder.selfDeclarationForm(this.fb);
-  touched$ = new Subject<boolean>();
   index = 0;
   routes;
 
@@ -60,7 +62,7 @@ export class EnrolmentStateService {
       case 0:
         return true;
       case 1:
-        return this.contactForm.valid;
+        return this.contactForm$.value.valid;
       case 2:
         return this.selfDeclarationForm.valid;
       case 3:
