@@ -6,6 +6,7 @@ import { SubheaderComponent } from './components/subheader/subheader.component';
 import { DeclarationQuestionComponent } from './components/declaration-question/declaration-question.component';
 import { PanelComponent } from './components/panel/panel.component';
 import { ErrorComponent } from './components/error/error.component';
+import { AddressBlockComponent } from './components/address-block/address-block.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { ErrorComponent } from './components/error/error.component';
     SubheaderComponent,
     DeclarationQuestionComponent,
     PanelComponent,
-    ErrorComponent
+    ErrorComponent,
+    AddressBlockComponent
   ],
   imports: [CommonModule],
   exports: [
@@ -23,7 +25,8 @@ import { ErrorComponent } from './components/error/error.component';
     SubheaderComponent,
     DeclarationQuestionComponent,
     PanelComponent,
-    ErrorComponent
+    ErrorComponent,
+    AddressBlockComponent
   ]
 })
 export class SharedModule {}

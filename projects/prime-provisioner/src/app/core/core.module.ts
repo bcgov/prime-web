@@ -6,9 +6,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TextMaskModule } from 'angular2-text-mask';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ProfileBlockComponent } from '../../../../prime-core/src/lib/components/profile-block/profile-block.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [ProfileBlockComponent],
   imports: [
     CommonModule,
     PrimeCoreModule,
@@ -25,7 +26,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     FormsModule,
     ReactiveFormsModule,
     TextMaskModule,
-    NgSelectModule
+    NgSelectModule,
+    ProfileBlockComponent
   ]
 })
 export class CoreModule {}

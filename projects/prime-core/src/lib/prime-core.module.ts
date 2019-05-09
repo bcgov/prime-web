@@ -10,18 +10,18 @@ import { FormsModule } from '@angular/forms';
 import { TypeaheadModule } from 'ngx-bootstrap';
 import { PhoneNumberComponent } from './components/phone-number/phone-number.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
+import { ProfileBlockComponent } from './components/profile-block/profile-block.component';
 
 const componentList = [
   AddressComponent,
   NameComponent,
   ProfileComponent,
   PhoneNumberComponent,
-  ConfirmationComponent
+  ConfirmationComponent,
+  ProfileBlockComponent
 ];
 @NgModule({
-  declarations: [
-    componentList
-  ],
+  declarations: [componentList],
   imports: [
     CommonModule,
     FormsModule,
@@ -30,8 +30,6 @@ const componentList = [
     TypeaheadModule.forRoot(),
     SharedCoreModule
   ],
-  exports: [
-    componentList
-  ]
+  exports: [componentList]
 })
-export class PrimeCoreModule { }
+export class PrimeCoreModule {}
