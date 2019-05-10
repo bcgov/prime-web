@@ -47,24 +47,65 @@ describe('BCSC Enrollment - Pharmanet-Access Page', () => {
         expect(browser.getCurrentUrl()).toContain(PHARMANET_ACCESS_PAGE_URL);
     });
 
+    // This test should fail for now because user can still search without filling out the required fields
+    xit('04. Shouldnt be able to search if fields are invalid. Can currently search with blank pages.', () => {
+        page.navigateTo();
+        page.clickButton('btn btn-secondary', 'Add Organization');
+        page.clickButton('btn btn-md', 'Find');
+        expect(page.formErrors().count()).toBe(3, 'should have 2 errors for not filling out the 2 required fields');
+        expect(browser.getCurrentUrl()).toContain(PHARMANET_ACCESS_PAGE_URL);
+    });
+
+    // This test should fail for now - issue on IE
+    xit('05. should be able to click datepicker without clicking the x button in IE', () => {
+        page.navigateTo();
+        page.clickButton('btn btn-secondary', 'Add Organization');
+        page.selectTypeOfOrg('Health Authority');
+        page.typeValue('organization', 'a');
+        page.typeValue('city', 'a');
+        page.clickButton('btn btn-md', 'Find');
+        page.clickCheckBox('Vancouver Island Health');
+        page.clickCheckBox('Shopper Drug Mart');
+        page.clickButton('btn btn-primary', 'Add');
+        expect(browser.getCurrentUrl()).toContain(PHARMANET_ACCESS_PAGE_URL);
+    });
+
+    // This test should fail for now because there's no delete button if only one record is present
+    xit('06. should be able to delete even if there is only one record', () => {
+        page.navigateTo();
+        page.clickButton('btn btn-secondary', 'Add Organization');
+        page.selectTypeOfOrg('Health Authority');
+        page.typeValue('organization', 'a');
+        page.typeValue('city', 'a');
+        page.clickButton('btn btn-md', 'Find');
+        page.clickCheckBox('Vancouver Island Health');
+        page.clickButton('btn btn-primary', 'Add');
+        page.clickButton('btn delete', '');
+        expect(page.formErrors().count()).toBe(0, 'should have no errors');
+        expect(browser.getCurrentUrl()).toContain(PHARMANET_ACCESS_PAGE_URL);
+    });
+
+
+    it('07. should make Start Date required', () => {
+        page.navigateTo();
+        page.clickButton('btn btn-secondary', 'Add Organization');
+        page.selectTypeOfOrg('Health Authority');
+        page.typeValue('organization', 'a');
+        page.typeValue('city', 'a');
+        page.clickButton('btn btn-md', 'Find');
+        page.clickCheckBox('Vancouver Island Health');
+        page.clickButton('btn btn-primary', 'Add');
+        page.selectDate();
+        expect(page.formErrors().count()).toBe(0, 'should have no errors');
+        expect(browser.getCurrentUrl()).toContain(PHARMANET_ACCESS_PAGE_URL);
+    });
+
     /* FOR FUTURE TESTS */
     /*
         (7.3.35) solution must display all Organizations that match the search criteria for selection
         (7.3.37) must display to the PharmaNet User their own Organization and Site associations.
         (7.3.38) must capture if they will access PharmaNet themselves or if access will only be done by
                 an On-Behalf Of user working for them
-
-        Search modal
-
-            - Shouldn't be able to search if fields are invalid. Can currently search with blank pages.
-            - Need ability to trigger secondary search within same modal.
-            - Need to make the modal more responsive. Someitmes the rows are weirdly breaking into multiple lines (potential IE).
-
-        Table
-            - Issue on IE. Clicking on the datepicker icon can trigger a click on the 'X' (remove) because the buttons somewhat overlap.
-                Needs to be fixed.
-            - Table -> if there is only one record the delete button is midding. Delete should always be visible.
-            - Issue: deleting start date lets user continue with blank date (sometimes?). User should never be able to continue with blank start date.
     */
 });
 

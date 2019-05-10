@@ -45,11 +45,13 @@ describe('BCSC Enrollment - Self-Declaration Page', () => {
         expect(page.formErrors().count()).toBe(0, 'should be no errors on page load');
     });
 
-    /* FOR FUTURE TESTS */
-    /*
-        Click continue on blank page. The error labels are too verboes.
-        Should just be "please answer yes /no" etc. 
-        Label details not super important but we want to just not reiterate question.
-    */
+    // This test should fail for now because error labels haven't been changed
+    xit('05. should make the error labels not verbose when user clicks continue on blank page', () => {
+        page.navigateTo();
+        page.continue();
+        expect(page.getErrorTextVal('Have you ever been the subject')).toBe('Please answer yes or no');
+        expect(page.formErrors().count()).toBe(4, 'should have 4 errors for not answering the 4 questions');
+        expect(browser.getCurrentUrl()).toContain(SELF_DECLARATION_PAGE_URL);
+    });
 
 });

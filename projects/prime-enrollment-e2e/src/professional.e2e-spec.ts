@@ -68,6 +68,39 @@ describe('BCSC Enrollment - Professional Page', () => {
         expect(page.formErrors().count()).toBe(0, 'should be no errors');
     });
 
+    // The test should fail for now because user can do no-no-no answers
+    xit('07. at least one option has to be yes. Cant do no-no-no and continue.', () => {
+        page.navigateTo();
+        page.clickOption('collegeCert', 'No');
+        page.clickOption('deviceProvider', 'dpfalse');
+        page.clickOption('onBehalfOf', 'oboFalse');
+        page.continue();
+        expect(page.formErrors().count()).toBe(1, 'should have at least one option to be Yes.');
+        expect(browser.getCurrentUrl()).toContain(PROFESSIONAL_PAGE_URL);
+    });
+
+    // e2e hasn't been tested using IE so datepicker will not be tested yet
+    it('08. should have a datepicker on Renewal Date using IE', () => {
+        page.navigateTo();
+        page.clickOption('collegeCert', 'Yes');
+        page.selectOption('collegeCert', 'College of Pharmacists of BC (CPBC)');
+        page.typeText('licenseNum', '0');
+        page.selectOption('licenseClass', 'Full Pharmacist');
+        page.typeText('datepicker-', '2020/01/01');
+        expect(page.formErrors().count()).toBe(0, 'should be no errors');
+    });
+
+    // this test should fail for now because Job Title is not yet required
+    xit('09. should make Job Title for OBO required', () => {
+        page.navigateTo();
+        page.clickOption('collegeCert', 'No');
+        page.clickOption('deviceProvider', 'dpfalse');
+        page.clickOption('onBehalfOf', 'oboTrue');
+        page.continue();
+        expect(page.formErrors().count()).toBe(1, 'should have an error for not filling our Job Title.');
+        expect(browser.getCurrentUrl()).toContain(PROFESSIONAL_PAGE_URL);
+    });
+
     /* FOR FUTURE TESTS */
     /*
         7.3.18. capture Practitioner College ID -  alphanumeric free format text, the solution must validate Practitioner College ID against PharmaNet
@@ -76,10 +109,6 @@ describe('BCSC Enrollment - Professional Page', () => {
         The date entered must be one year or less from today's date. The list of Time Limited License Classes will be provided by the Ministry.
         7.3.22. College Registration Renewal Date - must be in the future and must be within a configurable time period e.g. must be one year or less in the future
         7.3.26. must capture the On-Behalf-Of job title when the individual has not identified as a Regulated User or Device Provider
-
-        - Page validation - at least one option has to be 'yes'. Can't do no-no-no and continue.
-        - Renewal Date -> doesn't have a datepicker (IE?). it's just a weird text input.
-        - Job title for OBO should be required. Currently user can conitnue with having a blank OBO Job title balnk.
     */
 
 });

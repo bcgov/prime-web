@@ -32,7 +32,6 @@ describe('BCSC Enrollment- Contact Page', () => {
         page.navigateTo();
         page.clickContactMethod();
         page.fillContactInfo(contactData);
-        browser.sleep(1000 * 5);
         page.continue();
         expect(browser.getCurrentUrl()).toContain(PROFESSIONAL_PAGE_URL);
     });
@@ -42,17 +41,49 @@ describe('BCSC Enrollment- Contact Page', () => {
         page.navigateTo();
         page.clickContactMethod();
         page.fillContactInfo(contactData);
+        page.continue();
+        expect(browser.getCurrentUrl()).toContain(PROFESSIONAL_PAGE_URL);
+    });
+
+    // This will fail because the error text is not yet changed
+    xit('05. If user enters "test" as email it says "email is required." It SHOULD say "email format wrong"', () => {
+        contactData.email = 'test';
+        page.navigateTo();
+        page.clickContactMethod();
+        page.fillContactInfo(contactData);
+        page.continue();
+        browser.sleep(1000 * 5);
+        expect(page.getErrorTextVal('Email')).toBe('Incorrect email format');
+        expect(page.formErrors().count()).toBe(1, 'should be an error on email address');
+        expect(browser.getCurrentUrl()).toContain(CONTACT_PAGE_URL);
+    });
+
+    // Phone Number for Voice Contact
+    xit('06. should be freeform text (i.e. user is NOT forced to start numbers with a 1. should be able to start with 0 for UK #)', () => {
+        contactData.mobile = '07712345678';
+        page.navigateTo();
+        page.clickContactMethod();
+        page.fillContactInfo(contactData);
+        page.continue();
+        browser.sleep(1000 * 5);
+        expect(page.getInputTextVal('voicePhone')).toBe('07712345678');
+        expect(page.formErrors().count()).toBe(0, 'should be no errors');
+        expect(browser.getCurrentUrl()).toContain(PROFESSIONAL_PAGE_URL);
+    });
+
+    // This will fail for now because Voice Phone is still required
+    xit('07. Phone Number for Voice Contact needs to be optional', () => {
+        page.navigateTo();
+        page.clickContactMethod();
+        page.fillRequiredFields(contactData);
         browser.sleep(1000 * 5);
         page.continue();
+        expect(page.formErrors().count()).toBe(0, 'should be no errors');
         expect(browser.getCurrentUrl()).toContain(PROFESSIONAL_PAGE_URL);
     });
 
     /* FOR FUTURE TESTS */
     /*
             01. should make sure email address is unique
-            02. If user enters "test" as email it says "email is required." It SHOULD say "email format wrong"
-            03. Phone Number for Voice Contact
-                - should be freeform text (i.e. user is NOT forced to start numbers with a 1. should be able to start with 0 for UK #).
-                - needs to be optional - update label and field logic
     */
 });
