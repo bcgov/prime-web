@@ -8,9 +8,15 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ProfileBlockComponent } from '../../../../prime-core/src/lib/components/profile-block/profile-block.component';
 import { ContactBlockComponent } from '../../../../prime-core/src/lib/components/contact-block/contact-block.component';
+// tslint:disable-next-line: max-line-length
+import { SelfDeclarationQuestionBlockComponent } from '../../../../prime-core/src/lib/components/self-declaration-question-block/self-declaration-question-block.component';
 
 @NgModule({
-  declarations: [ProfileBlockComponent, ContactBlockComponent],
+  declarations: [
+    ProfileBlockComponent,
+    ContactBlockComponent,
+    SelfDeclarationQuestionBlockComponent
+  ],
   imports: [
     CommonModule,
     PrimeCoreModule,
@@ -29,7 +35,8 @@ import { ContactBlockComponent } from '../../../../prime-core/src/lib/components
     TextMaskModule,
     NgSelectModule,
     ProfileBlockComponent,
-    ContactBlockComponent
+    ContactBlockComponent,
+    SelfDeclarationQuestionBlockComponent
   ]
 })
 export class CoreModule {}

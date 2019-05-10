@@ -61,6 +61,22 @@ import { Address } from 'moh-common-lib/models/moh-common-lib-models';
             [ext]="cFg.value.ext"
           ></lib-prime-contact-block>
         </ng-container>
+        <div class="label-row">
+          <a [routerLink]="['/enrolment/self-declaration']">
+            <h2>Contact</h2>
+          </a>
+          <a [routerLink]="['/enrolment/self-declaration']">
+            <i class="fa fa-pencil"></i>
+          </a>
+        </div>
+        <ng-container *ngFor="let declaration of declarations">
+          <lib-prime-self-declaration-question-block
+            [question]="declaration.question"
+            [answer]="declaration.value"
+            [details]="declaration.details"
+            [documents]="declaration.docs"
+          ></lib-prime-self-declaration-question-block>
+        </ng-container>
       </common-page-section>
     </common-page-framework>
   `,
@@ -75,6 +91,8 @@ export class ReviewComponent implements OnInit, OnDestroy {
   preferredName$: Observable<string>;
   mailAddress$: Observable<Address>;
   contactForm = this.stateSvc.contactForm;
+  sdForm = this.stateSvc.selfDeclarationForm;
+  declarations: { question: string; value: any; details: any; docs: any }[];
 
   constructor(
     private route: ActivatedRoute,
@@ -99,9 +117,41 @@ export class ReviewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.urlSub = this.route.url.subscribe(obs => this.stateSvc.findIndex(obs));
+    const conviction = {
+      question:
+        'Have you ever been the subject of an order or a conviction for an information contravention?',
+      value: this.dfValues('conviction'),
+      details: this.dfValues('convictionDesc'),
+      docs: this.dfValues('convictionDocs')
+    };
+    const regSuspension = {
+      question:
+        'Have you ever had your registration with a governing body of a health care profession suspended or cancelled?',
+      value: this.dfValues('regSuspension'),
+      details: this.dfValues('regSuspensionDesc'),
+      docs: this.dfValues('regSuspensionDocs')
+    };
+    const tAndC = {
+      question: `Have you ever had Terms and Conditions imposed on your license as a result of disciplinary actions taken by a governing body?`,
+      value: this.dfValues('tAndC'),
+      details: this.dfValues('tAndCDesc'),
+      docs: this.dfValues('tAndCDocs')
+    };
+    const pharmaSuspension = {
+      question:
+        'Have you ever had your access to PharmaNet suspended or revoked?',
+      value: this.dfValues('pharmaSuspension'),
+      details: this.dfValues('pharmaSuspensionDesc'),
+      docs: this.dfValues('pharmaSuspensionDocs')
+    };
+    this.declarations = [conviction, regSuspension, tAndC, pharmaSuspension];
   }
 
   ngOnDestroy() {
     this.urlSub.unsubscribe();
+  }
+
+  dfValues(name: string) {
+    return this.sdForm.value[name];
   }
 }

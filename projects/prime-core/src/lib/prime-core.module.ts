@@ -12,6 +12,8 @@ import { PhoneNumberComponent } from './components/phone-number/phone-number.com
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { ProfileBlockComponent } from './components/profile-block/profile-block.component';
 import { ContactBlockComponent } from './components/contact-block/contact-block.component';
+// tslint:disable-next-line: max-line-length
+import { SelfDeclarationQuestionBlockComponent } from './components/self-declaration-question-block/self-declaration-question-block.component';
 
 const componentList = [
   AddressComponent,
@@ -20,7 +22,8 @@ const componentList = [
   PhoneNumberComponent,
   ConfirmationComponent,
   ProfileBlockComponent,
-  ContactBlockComponent
+  ContactBlockComponent,
+  SelfDeclarationQuestionBlockComponent
 ];
 @NgModule({
   declarations: [componentList],
