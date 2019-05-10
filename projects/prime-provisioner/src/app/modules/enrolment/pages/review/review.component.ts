@@ -90,7 +90,7 @@ import { Address } from 'moh-common-lib/models/moh-common-lib-models';
             label="Groups"
             [groups]="groups"
           ></prov-access-group-block>
-          <div class="row"></div>
+          <div class="row bg-white"><p></p></div>
           <prov-access-group-block
             label="Organizations"
             [groups]="organizations"
