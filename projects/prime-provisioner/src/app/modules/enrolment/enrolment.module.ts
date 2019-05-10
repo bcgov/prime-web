@@ -14,6 +14,7 @@ import { DetailsComponent } from './components/details/details.component';
 import { SearchProvisionerAccessComponent } from './components/search-provisioner-access/search-provisioner-access.component';
 import { OrganizationTableComponent } from './components/organization-table/organization-table.component';
 import { OrganizationListItemComponent } from './components/organization-list-item/organization-list-item.component';
+import { AccessGroupBlockComponent } from './components/access-group-block/access-group-block.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { OrganizationListItemComponent } from './components/organization-list-it
     DetailsComponent,
     SearchProvisionerAccessComponent,
     OrganizationTableComponent,
-    OrganizationListItemComponent
+    OrganizationListItemComponent,
+    AccessGroupBlockComponent
   ],
   imports: [CommonModule, EnrolmentRoutingModule, CoreModule, SharedModule]
 })

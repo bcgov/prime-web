@@ -77,6 +77,25 @@ import { Address } from 'moh-common-lib/models/moh-common-lib-models';
             [documents]="declaration.docs"
           ></lib-prime-self-declaration-question-block>
         </ng-container>
+        <aside>
+          <div class="label-row">
+            <a [routerLink]="['/enrolment/organization']">
+              <h2>Provisioner Access</h2>
+            </a>
+            <a [routerLink]="['/enrolment/organization']">
+              <i class="fa fa-pencil"></i>
+            </a>
+          </div>
+          <prov-access-group-block
+            label="Groups"
+            [groups]="groups"
+          ></prov-access-group-block>
+          <div class="row"></div>
+          <prov-access-group-block
+            label="Organizations"
+            [groups]="organizations"
+          ></prov-access-group-block>
+        </aside>
       </common-page-section>
     </common-page-framework>
   `,
@@ -93,6 +112,12 @@ export class ReviewComponent implements OnInit, OnDestroy {
   contactForm = this.stateSvc.contactForm;
   sdForm = this.stateSvc.selfDeclarationForm;
   declarations: { question: string; value: any; details: any; docs: any }[];
+  groups = ['Western Canada', 'Central Canada'];
+  organizations = [
+    'Alberta Health Authority',
+    'Lower Mainland Health',
+    'V.I. Health Authority'
+  ];
 
   constructor(
     private route: ActivatedRoute,
