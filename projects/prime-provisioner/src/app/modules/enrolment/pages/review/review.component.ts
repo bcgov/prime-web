@@ -44,6 +44,23 @@ import { Address } from 'moh-common-lib/models/moh-common-lib-models';
         <prov-address-block
           [address]="mailAddress$ | async"
         ></prov-address-block>
+        <ng-container *ngIf="contactForm | async as cFg">
+          <div class="label-row">
+            <a [routerLink]="['/enrolment/contact']">
+              <h2>Contact</h2>
+            </a>
+            <a [routerLink]="['/enrolment/contact']">
+              <i class="fa fa-pencil"></i>
+            </a>
+          </div>
+          <lib-prime-contact-block
+            [email]="cFg.value.email"
+            [phone]="cFg.value.phone"
+            [voicePhone]="cFg.value.voicePhone"
+            [preferredContact]="cFg.value.preferredContact"
+            [ext]="cFg.value.ext"
+          ></lib-prime-contact-block>
+        </ng-container>
       </common-page-section>
     </common-page-framework>
   `,
@@ -57,6 +74,7 @@ export class ReviewComponent implements OnInit, OnDestroy {
   profile: Registrant;
   preferredName$: Observable<string>;
   mailAddress$: Observable<Address>;
+  contactForm = this.stateSvc.contactForm;
 
   constructor(
     private route: ActivatedRoute,

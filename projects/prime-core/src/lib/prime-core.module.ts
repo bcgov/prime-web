@@ -11,6 +11,7 @@ import { TypeaheadModule } from 'ngx-bootstrap';
 import { PhoneNumberComponent } from './components/phone-number/phone-number.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { ProfileBlockComponent } from './components/profile-block/profile-block.component';
+import { ContactBlockComponent } from './components/contact-block/contact-block.component';
 
 const componentList = [
   AddressComponent,
@@ -18,7 +19,8 @@ const componentList = [
   ProfileComponent,
   PhoneNumberComponent,
   ConfirmationComponent,
-  ProfileBlockComponent
+  ProfileBlockComponent,
+  ContactBlockComponent
 ];
 @NgModule({
   declarations: [componentList],

@@ -7,9 +7,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { TextMaskModule } from 'angular2-text-mask';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ProfileBlockComponent } from '../../../../prime-core/src/lib/components/profile-block/profile-block.component';
+import { ContactBlockComponent } from '../../../../prime-core/src/lib/components/contact-block/contact-block.component';
 
 @NgModule({
-  declarations: [ProfileBlockComponent],
+  declarations: [ProfileBlockComponent, ContactBlockComponent],
   imports: [
     CommonModule,
     PrimeCoreModule,
@@ -27,7 +28,8 @@ import { ProfileBlockComponent } from '../../../../prime-core/src/lib/components
     ReactiveFormsModule,
     TextMaskModule,
     NgSelectModule,
-    ProfileBlockComponent
+    ProfileBlockComponent,
+    ContactBlockComponent
   ]
 })
 export class CoreModule {}
