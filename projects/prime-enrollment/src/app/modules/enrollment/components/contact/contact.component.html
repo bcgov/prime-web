@@ -12,21 +12,24 @@
       <ng-container *ngIf="fg$ | async as fg">
         <form [formGroup]="fg">
           <section>
-            <h4 style="margin-bottom: 0px; margin-top: 21px;" class="font-weight-bolder">Preferred contact method for
-              System Messages (must be able to receive text messages)</h4>
-
+            <h3 style="margin-bottom: 0px; margin-top: 21px;" class="font-weight-bolder">Preferred
+              Preferred Contact Method</h3>
+            <p class="border-bottom">This contact is for text massage communication</p>
             <!-- <div> -->
             <div class="md-radio md-radio-inline">
-              <input id="email" type="radio" formControlName="preferredContact" value="email" />
+              <input id="email" type="radio" formControlName="preferredContact" value="email"
+                (click)="toggleInputFields(fg, 'email')" />
               <label for="email">Email</label>
             </div>
             <div class="md-radio md-radio-inline">
-              <input id="phone" type="radio" formControlName="preferredContact" value="phone" />
-              <label for="phone">Phone Number (Text Capable)</label>
+              <input id="phone" type="radio" formControlName="preferredContact" value="phone"
+                (click)="toggleInputFields(fg, 'phone')" />
+              <label for="phone">Text Phone Number</label>
             </div>
             <div class="md-radio md-radio-inline">
-              <input id="both" type="radio" formControlName="preferredContact" value="both" />
-              <label for="both">Both (Email & Phone Number)</label>
+              <input id="both" type="radio" formControlName="preferredContact" value="both"
+                (click)="toggleInputFields(fg, 'both')" />
+              <label for="both">Both (Email & Text Phone Number)</label>
             </div>
             <!-- </div> -->
             <enroll-error label="Email" [touched]="fg.controls.preferredContact.touched"
@@ -45,10 +48,11 @@
             <h4 for="email" class="control-label">Email</h4>
             <input class="form-control" formControlName="email" id="email" placeholder="user@example.com">
           </div>
-          <enroll-error label="Email" [touched]="fg.controls.email.touched" [valid]="fg.controls.email.valid">
+          <enroll-error label="Email" [touched]="fg.controls.email.touched"
+            [valid]="fg.controls.email.disabled || fg.controls.email.valid">
           </enroll-error>
-         <div class="form-group phone">
-          <!--  <h4 class="control-label">Phone Number for text messages</h4>
+          <div class="form-group phone">
+            <!--  <h4 class="control-label">Phone Number for text messages</h4>
              <input type="text" ng2TelInput class="form-control" name="phone" formControlName="phone"
               [ng2TelInputOptions]="{initialCountry: 'ca'}" [textMask]="{mask: mask}" [placeholder]="placeholder"
               (countryChange)="onCountryChange($event, 1)"> -->
@@ -56,10 +60,11 @@
             <input class="form-control" name="phone" formControlName="phone" [textMask]="{mask: mask}"
               [placeholder]="placeholder">
           </div>
-        <!--  </div>-->
-          <enroll-error label="Phone" [touched]="fg.controls.phone.touched" [valid]="fg.controls.phone.valid">
+          <enroll-error label="Phone" [touched]="fg.controls.phone.touched "
+            [valid]="fg.controls.phone.disabled || fg.controls.phone.valid">
           </enroll-error>
-
+          <h3 style="margin-bottom: 0px; margin-top: 21px;" class="font-weight-bolder">Voice Contact</h3>
+          <p class="border-bottom">Used for voice calls. ie: Business Phone</p>
           <h4 class="control-label" for="phone">Phone Number for Voice Contact</h4>
           <input class="form-control" name="voicePhone" formControlName="voicePhone" [textMask]="{mask: mask}"
             [placeholder]="placeholder">
@@ -71,7 +76,8 @@
           <!-- <span class="tooltip">Used for voice calls. ie: Business Phone</span> -->
 
           <enroll-error label="Voice phone" [touched]="fg.controls.voicePhone.touched"
-            [valid]="fg.controls.voicePhone.valid"></enroll-error>
+            [valid]="fg.controls.voicePhone.valid">
+          </enroll-error>
           <div class="form-group">
 
             <h4 for="ext" class="control-label">Extension Number (Optional)</h4>

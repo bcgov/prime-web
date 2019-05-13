@@ -3,6 +3,123 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "prime-provisioner": {
+      "root": "projects/prime-provisioner/",
+      "sourceRoot": "projects/prime-provisioner/src",
+      "projectType": "application",
+      "prefix": "prov",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/prime-provisioner",
+            "index": "projects/prime-provisioner/src/index.html",
+            "main": "projects/prime-provisioner/src/main.ts",
+            "polyfills": "projects/prime-provisioner/src/polyfills.ts",
+            "tsConfig": "projects/prime-provisioner/src/tsconfig.app.json",
+            "assets": [
+              "projects/prime-provisioner/src/favicon.ico",
+              "projects/prime-provisioner/src/assets",
+              {
+                "glob": "**/*",
+                "input": "./assets",
+                "output": "./assets"
+              }
+            ],
+            "styles": [
+              "styles.scss",
+              "projects/prime-provisioner/src/styles.scss",
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "./node_modules/intl-tel-input/build/css/intlTelInput.css"
+            ],
+            "scripts": [
+              "./node_modules/intl-tel-input/build/js/intlTelInput.min.js",
+              "./node_modules/intl-tel-input/build/js/utils.js"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "styles"
+              ]
+            }
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [{
+                "replace": "projects/prime-provisioner/src/environments/environment.ts",
+                "with": "projects/prime-provisioner/src/environments/environment.prod.ts"
+              }],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [{
+                "type": "initial",
+                "maximumWarning": "2mb",
+                "maximumError": "5mb"
+              }]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "prime-provisioner:build",
+            "port": 4308,
+            "proxyConfig": "proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "prime-provisioner:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "prime-provisioner:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/prime-provisioner/src/test.ts",
+            "polyfills": "projects/prime-provisioner/src/polyfills.ts",
+            "tsConfig": "projects/prime-provisioner/src/tsconfig.spec.json",
+            "karmaConfig": "projects/prime-provisioner/karma.conf.js",
+            "styles": [
+              "projects/prime-provisioner/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/prime-provisioner/src/favicon.ico",
+              "projects/prime-provisioner/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/prime-provisioner/tsconfig.app.json",
+              "projects/prime-provisioner/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
     "prime-enrollment": {
       "root": "projects/prime-enrollment/",
       "sourceRoot": "projects/prime-enrollment/src",
@@ -49,12 +166,10 @@
           },
           "configurations": {
             "production": {
-              "fileReplacements": [
-                {
-                  "replace": "projects/prime-enrollment/src/environments/environment.ts",
-                  "with": "projects/prime-enrollment/src/environments/environment.prod.ts"
-                }
-              ],
+              "fileReplacements": [{
+                "replace": "projects/prime-enrollment/src/environments/environment.ts",
+                "with": "projects/prime-enrollment/src/environments/environment.prod.ts"
+              }],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -64,13 +179,11 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                }
-              ]
+              "budgets": [{
+                "type": "initial",
+                "maximumWarning": "2mb",
+                "maximumError": "5mb"
+              }]
             }
           }
         },
@@ -193,12 +306,10 @@
           },
           "configurations": {
             "production": {
-              "fileReplacements": [
-                {
-                  "replace": "projects/prime-registration/src/environments/environment.ts",
-                  "with": "projects/prime-registration/src/environments/environment.prod.ts"
-                }
-              ],
+              "fileReplacements": [{
+                "replace": "projects/prime-registration/src/environments/environment.ts",
+                "with": "projects/prime-registration/src/environments/environment.prod.ts"
+              }],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -208,13 +319,11 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                }
-              ]
+              "budgets": [{
+                "type": "initial",
+                "maximumWarning": "2mb",
+                "maximumError": "5mb"
+              }]
             }
           }
         },

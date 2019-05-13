@@ -1,0 +1,15 @@
+@import 'variables.scss';
+
+span {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.row {
+  width: 100%;
+}
+
+.card-header {
+  min-height: auto;
+  background-color: $gray;
+}
