@@ -80,6 +80,8 @@ describe('BCSC Enrollment - Profile Page', () => {
         expect(page.checkEnabled()).toBe(false);
     });
 
-    /* FOR FUTURE TESTS */
-    // When Registration information is not being used and Country is Canada, the solution must validate the PRIME mailing information captured.
+    /*
+        FOR FUTURE TESTS
+        When Registration information is not being used and Country is Canada, the solution must validate the PRIME mailing information captured.
+    */
 });

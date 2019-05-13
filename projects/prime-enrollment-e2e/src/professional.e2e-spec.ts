@@ -43,7 +43,7 @@ describe('BCSC Enrollment - Professional Page', () => {
         expect(page.formErrors().count()).toBe(0, 'should be no errors');
     });
 
-    // This test will fail because the default value is NOT no.
+    // This test should fail for now because the default value is NOT no.
     xit('05. (7.3.24) capture if the individual is registered with PharmaCare as a Device Provider. The default value for this must be No.', () => {
         page.navigateTo();
         page.clickOption('collegeCert', 'Yes');
@@ -68,19 +68,19 @@ describe('BCSC Enrollment - Professional Page', () => {
         expect(page.formErrors().count()).toBe(0, 'should be no errors');
     });
 
-    // The test should fail for now because user can do no-no-no answers
-    xit('07. at least one option has to be yes. Cant do no-no-no and continue.', () => {
+    // This test should fail for now because user can do no-no-no answers
+    xit('07. should be able to require user to select at least one "Yes" to all the questions', () => {
         page.navigateTo();
         page.clickOption('collegeCert', 'No');
         page.clickOption('deviceProvider', 'dpfalse');
         page.clickOption('onBehalfOf', 'oboFalse');
         page.continue();
         expect(page.formErrors().count()).toBe(1, 'should have at least one option to be Yes.');
-        expect(browser.getCurrentUrl()).toContain(PROFESSIONAL_PAGE_URL);
+        expect(browser.getCurrentUrl()).toContain(PROFESSIONAL_PAGE_URL, 'should stay on the same page');
     });
 
-    // e2e hasn't been tested using IE so datepicker will not be tested yet
-    it('08. should have a datepicker on Renewal Date using IE', () => {
+    // e2e hasn't been tested using IE so this test will not work for now in IE
+    it('08. should be able to select a date using Calendar Control in Renewal Date field (for IE)', () => {
         page.navigateTo();
         page.clickOption('collegeCert', 'Yes');
         page.selectOption('collegeCert', 'College of Pharmacists of BC (CPBC)');
@@ -90,19 +90,19 @@ describe('BCSC Enrollment - Professional Page', () => {
         expect(page.formErrors().count()).toBe(0, 'should be no errors');
     });
 
-    // this test should fail for now because Job Title is not yet required
-    xit('09. should make Job Title for OBO required', () => {
+    // This test should fail for now because Job Title is not yet required
+    xit('09. should be able to require user to fill out Job Title field', () => {
         page.navigateTo();
         page.clickOption('collegeCert', 'No');
         page.clickOption('deviceProvider', 'dpfalse');
         page.clickOption('onBehalfOf', 'oboTrue');
         page.continue();
         expect(page.formErrors().count()).toBe(1, 'should have an error for not filling our Job Title.');
-        expect(browser.getCurrentUrl()).toContain(PROFESSIONAL_PAGE_URL);
+        expect(browser.getCurrentUrl()).toContain(PROFESSIONAL_PAGE_URL, 'should stay on the same page');
     });
 
-    /* FOR FUTURE TESTS */
     /*
+        FOR FUTURE TESTS
         7.3.18. capture Practitioner College ID -  alphanumeric free format text, the solution must validate Practitioner College ID against PharmaNet
         7.3.20. must capture any Limits and Conditions that have been placed on the PharmaNet User's licence, for each College Licence entered.
         7.3.21. capture a License End Date for each of the individual's professional college associations with a Time Limited License Class

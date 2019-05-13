@@ -45,34 +45,33 @@ describe('BCSC Enrollment- Contact Page', () => {
         expect(browser.getCurrentUrl()).toContain(PROFESSIONAL_PAGE_URL);
     });
 
-    // This will fail because the error text is not yet changed
+    // This test should fail for now because the error text is not yet changed
     xit('05. If user enters "test" as email it says "email is required." It SHOULD say "email format wrong"', () => {
         contactData.email = 'test';
         page.navigateTo();
         page.clickContactMethod();
         page.fillContactInfo(contactData);
         page.continue();
-        browser.sleep(1000 * 5);
         expect(page.getErrorTextVal('Email')).toBe('Incorrect email format');
         expect(page.formErrors().count()).toBe(1, 'should be an error on email address');
         expect(browser.getCurrentUrl()).toContain(CONTACT_PAGE_URL);
     });
 
-    // Phone Number for Voice Contact
-    xit('06. should be freeform text (i.e. user is NOT forced to start numbers with a 1. should be able to start with 0 for UK #)', () => {
-        contactData.mobile = '07712345678';
+    // This test should fail for now because the phone number format is not yet modified
+    // (i.e. user is NOT forced to start numbers with a 1. should be able to start with 0 for UK #)
+    xit('06. should be able to enter international phone number in Voice Contact field', () => {
+        contactData.mobile = '07712345678'; // sample UK phone number
         page.navigateTo();
         page.clickContactMethod();
         page.fillContactInfo(contactData);
-        page.continue();
-        browser.sleep(1000 * 5);
         expect(page.getInputTextVal('voicePhone')).toBe('07712345678');
+        page.continue();
         expect(page.formErrors().count()).toBe(0, 'should be no errors');
         expect(browser.getCurrentUrl()).toContain(PROFESSIONAL_PAGE_URL);
     });
 
-    // This will fail for now because Voice Phone is still required
-    xit('07. Phone Number for Voice Contact needs to be optional', () => {
+    // This test should fail for now because Voice Phone is still required
+    xit('07. should be able to go through without filling out Voice Contact field - must be optional', () => {
         page.navigateTo();
         page.clickContactMethod();
         page.fillRequiredFields(contactData);
@@ -82,8 +81,8 @@ describe('BCSC Enrollment- Contact Page', () => {
         expect(browser.getCurrentUrl()).toContain(PROFESSIONAL_PAGE_URL);
     });
 
-    /* FOR FUTURE TESTS */
     /*
-            01. should make sure email address is unique
+        FOR FUTURE TESTS
+            01. should make sure email address is unique (need back-end data)
     */
 });

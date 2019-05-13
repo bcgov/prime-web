@@ -57,7 +57,7 @@ describe('BCSC Enrollment - Pharmanet-Access Page', () => {
     });
 
     // This test should fail for now - issue on IE
-    xit('05. should be able to click datepicker without clicking the x button in IE', () => {
+    xit('05. should be able to enter End Field instead of deleting the record (for IE)', () => {
         page.navigateTo();
         page.clickButton('btn btn-secondary', 'Add Organization');
         page.selectTypeOfOrg('Health Authority');
@@ -67,11 +67,12 @@ describe('BCSC Enrollment - Pharmanet-Access Page', () => {
         page.clickCheckBox('Vancouver Island Health');
         page.clickCheckBox('Shopper Drug Mart');
         page.clickButton('btn btn-primary', 'Add');
-        expect(browser.getCurrentUrl()).toContain(PHARMANET_ACCESS_PAGE_URL);
+        page.selectDate();
+        expect(page.formErrors().count()).toBe(0, 'should be no errors');
     });
 
     // This test should fail for now because there's no delete button if only one record is present
-    xit('06. should be able to delete even if there is only one record', () => {
+    xit('06. should be able to delete organization if there is only one listed', () => {
         page.navigateTo();
         page.clickButton('btn btn-secondary', 'Add Organization');
         page.selectTypeOfOrg('Health Authority');
@@ -85,8 +86,8 @@ describe('BCSC Enrollment - Pharmanet-Access Page', () => {
         expect(browser.getCurrentUrl()).toContain(PHARMANET_ACCESS_PAGE_URL);
     });
 
-
-    it('07. should make Start Date required', () => {
+    // e2e hasn't been tested using IE so this test will not work for now in IE
+    it('07. should be able to require user to fill out Start Field (for IE)', () => {
         page.navigateTo();
         page.clickButton('btn btn-secondary', 'Add Organization');
         page.selectTypeOfOrg('Health Authority');
@@ -100,8 +101,23 @@ describe('BCSC Enrollment - Pharmanet-Access Page', () => {
         expect(browser.getCurrentUrl()).toContain(PHARMANET_ACCESS_PAGE_URL);
     });
 
-    /* FOR FUTURE TESTS */
+    // This test should fail because Find button is not yet visible after the first search
+    xit('08. should be able to do another search after the first search for adding organization', () => {
+        page.navigateTo();
+        page.clickButton('btn btn-secondary', 'Add Organization');
+        page.selectTypeOfOrg('Health Authority');
+        page.typeValue('organization', 'a');
+        page.typeValue('city', 'a');
+        page.clickButton('btn btn-md', 'Find');
+        page.selectTypeOfOrg('Pharmacy');
+        page.typeValue('organization', 'a');
+        page.clickButton('btn btn-md', 'Find');
+        expect(page.formErrors().count()).toBe(0, 'should have no errors');
+        expect(browser.getCurrentUrl()).toContain(PHARMANET_ACCESS_PAGE_URL);
+    });
+
     /*
+        FOR FUTURE TESTS
         (7.3.35) solution must display all Organizations that match the search criteria for selection
         (7.3.37) must display to the PharmaNet User their own Organization and Site associations.
         (7.3.38) must capture if they will access PharmaNet themselves or if access will only be done by
