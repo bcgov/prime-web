@@ -13,17 +13,17 @@
   <ng-container *ngIf="fa$ | async as fa">
     <button class="btn btn-secondary btn-lg mb-3" (click)="openModal(modal)">Add Organization</button>
     <div class="card">
-      <div class="card-header">
+      <div class="card-header p-0">
         <span class="col">Organization Name</span>
         <span class="col">Type</span>
         <span class="col">City</span>
         <span class="col">Start Date</span>
         <span class="col">End Date</span>
-        <span class="col-1"></span>
+        <span class="col-1" *ngIf="fa.length > 1"></span>
       </div>
       <div class="card-body">
         <!-- <ul class="list-group list-group-flush" *ngFor="let fg of fa; index as i" [formGroup]="fg" > -->
-        <form *ngFor="let fg of fa; index as i" [formGroup]="fg" class="card-body">
+        <form *ngFor="let fg of fa; index as i" [formGroup]="fg">
           <!-- <li class="list-group-item"> -->
           <div class="row">
             <span class="col">{{ fg.controls.name.value }}</span>
