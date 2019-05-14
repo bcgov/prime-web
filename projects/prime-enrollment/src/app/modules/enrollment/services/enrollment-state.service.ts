@@ -22,7 +22,7 @@ const dateOfBirth = {
 })
 export class EnrollmentStateService {
   private _currentIndex: number;
-  private _selectedOrgSet: Set<IOrganization> = new Set(null);
+  _selectedOrgSet: Set<IOrganization> = new Set(null);
   private _certForms: FormGroup[] = [];
   private _certFa: FormArray;
   submitLabel = 'Continue';

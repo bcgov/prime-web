@@ -43,6 +43,7 @@ export class SearchOrganizationModalComponent implements OnInit {
     this.dataSvc.organizationTypesInit(tempArr);
     this.types = this.dataSvc.organizationTypes$;
     this.searchResultsHeaders = of(this.headers);
+    // this.stateSvc.orgResultsClear();
   }
   selectedResults(evt: boolean, data: IOrganization) {
     evt

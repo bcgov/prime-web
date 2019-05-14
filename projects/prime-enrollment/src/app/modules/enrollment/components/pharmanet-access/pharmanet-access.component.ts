@@ -20,7 +20,7 @@ const headers = ['Organization Name', 'Type', 'City'];
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PharmanetAccessComponent implements OnInit, OnDestroy {
-  fa$: BehaviorSubject<FormGroup[]> = new BehaviorSubject(null);
+  fa$: BehaviorSubject<FormGroup[]> = this.stateSvc.organizationForm$;
   results = false;
   modalRef: BsModalRef;
   dateOptions: INgxMyDpOptions = {
@@ -38,7 +38,7 @@ export class PharmanetAccessComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (!!this.stateSvc.organizationForm$.value) this.results = true;
-    this.fa$ = this.stateSvc.organizationForm$;
+    // this.fa$ = this.stateSvc.organizationForm$;
   }
 
   ngOnDestroy(): void {}
@@ -53,7 +53,8 @@ export class PharmanetAccessComponent implements OnInit, OnDestroy {
   }
 
   modalResult(evt: any) {
-    const arr = this.stateSvc.organizationForm$.value;
+    // const arr = this.stateSvc.organizationForm$.value;
+    console.log(evt);
     this.stateSvc.organizationForm$.next(evt);
     // this.fa$.next(this.stateSvc.organizationForm);
     this.results = true;
@@ -64,7 +65,22 @@ export class PharmanetAccessComponent implements OnInit, OnDestroy {
   }
 
   remove(i: number) {
+    // const arr = [];
+    const data = this.stateSvc.organizationForm$.value;
+    // console.log(data);
+    const val = [data[i]];
     const fa = this.stateSvc.removeFormGroup(this.fa$.value, i);
-    // this.stateSvc.organizationForm$fa;
+    if (fa.length === 0) this.results = false;
+    // const arr = val.map(fg => {
+    //   return {
+    //     type: fg.value.type,
+    //     name: fg.value.name,
+    //     city: fg.value.city
+    //   };
+    // });
+    const rem = Array.from(this.stateSvc._selectedOrgSet.values());
+    rem.splice(i, 1);
+    this.stateSvc.orgResultsForm(rem);
+    this.stateSvc._selectedOrgSet = new Set(rem);
   }
 }
