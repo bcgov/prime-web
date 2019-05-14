@@ -29,14 +29,14 @@ export class SearchOrganizationModalComponent implements OnInit {
   types: Observable<string[]>;
   searchResults: Observable<Array<IOrganization>>;
   searchResultsHeaders: Observable<string[]> = new Observable();
-  headers: string[];
+  headers: string[] = headers;
 
   constructor(
     private dataSvc: EnrollmentDataService,
     public stateSvc: EnrollmentStateService
   ) {
     this.fg = this.stateSvc.findOrganizationForm$.value;
-    this.headers = headers;
+    // this.headers = headers;
   }
 
   ngOnInit() {

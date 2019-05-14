@@ -28,17 +28,18 @@
       <button class="btn btn-md btn-secondary action-button" (click)="find()" *ngIf="search">Find</button>
     </form>
     <ng-container *ngIf="searchResults | async as results">
-      <!-- <div class="card"> -->
-      <div class="card-header results-card">
-        <span class="col">Organization Name</span>
-        <span class="col">Type</span>
-        <span class="col">City</span>
-        <span class="col">Start Date</span>
-        <span class="col">End Date</span>
-      </div>
       <div class="card-body">
+        <enroll-list-item-header [headers]="headers"></enroll-list-item-header>
+        <!-- <div class="card"> -->
+        <!-- <div class="card-header results-card"> -->
+        <!-- <span class="col">Organization Name</span> -->
+        <!-- <span class="col">Type</span> -->
+        <!-- <span class="col">City</span> -->
+        <!-- <span class="col">Start Date</span> -->
+        <!-- <span class="col">End Date</span> -->
+        <!-- </div> -->
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">
+          <li class="list-group-item p-0">
             <enroll-list-item *ngFor="let result of results" [data]="result"
               (selected)="selectedResults($event, result)">
             </enroll-list-item>
