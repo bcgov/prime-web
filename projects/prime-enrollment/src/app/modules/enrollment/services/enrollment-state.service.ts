@@ -83,7 +83,6 @@ export class EnrollmentStateService {
   }
 
   validateProfessionalForm(fg: FormGroup): boolean {
-    console.log(fg);
     if (fg.invalid) return false;
     if (fg.controls.collegeCert.value) {
       for (const form of this._certForms) {
@@ -92,6 +91,16 @@ export class EnrollmentStateService {
     }
     if (fg.controls.deviceProvider.value) {
       if (this.dpFa.invalid) return false;
+    }
+    if (fg.controls.onBehalfOf.value) {
+      console.log(fg.controls.onBehalfOfJobTitle);
+
+      if (
+        fg.controls.onBehalfOfJobTitle.value === null ||
+        fg.controls.onBehalfOfJobTitle.value === []
+      ) {
+        return false;
+      }
     }
     return true;
   }

@@ -82,6 +82,8 @@ export class ProfessionalComponent implements OnInit {
   }
 
   requireField(fc: FormControl, bool: boolean) {
+    console.log(bool);
+    console.log(fc.value);
     bool ? fc.clearValidators() : fc.setValidators([Validators.required]);
     fc.updateValueAndValidity({ emitEvent: true });
   }
