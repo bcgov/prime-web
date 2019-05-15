@@ -23,7 +23,8 @@
     "test-version": "npm version minor -m 'TEST build: %s'",
     "prod-version": "npm version major -m 'PROD build: %s'",
     "push-version": "git push --follow-tags",
-    "appVersion": "node ./version.js"
+    "appVersion": "node ./version.js",
+    "webdriver-update": "webdriver-manager update"
   },
   "private": true,
   "dependencies": {
