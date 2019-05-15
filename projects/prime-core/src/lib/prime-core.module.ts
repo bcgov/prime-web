@@ -11,6 +11,10 @@ import { PhoneNumberComponent } from './components/phone-number/phone-number.com
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { ValidateNameDirective } from './components/name/validate-name.directive';
 import { VerifyPreferNameDirective } from './components/profile/verify-prefer-name.directive';
+import { ProfileBlockComponent } from './components/profile-block/profile-block.component';
+import { ContactBlockComponent } from './components/contact-block/contact-block.component';
+// tslint:disable-next-line: max-line-length
+import { SelfDeclarationQuestionBlockComponent } from './components/self-declaration-question-block/self-declaration-question-block.component';
 
 const componentList = [
   NameComponent,
@@ -18,12 +22,13 @@ const componentList = [
   PhoneNumberComponent,
   ConfirmationComponent,
   ValidateNameDirective,
-  VerifyPreferNameDirective
+  VerifyPreferNameDirective,
+  ProfileBlockComponent,
+  ContactBlockComponent,
+  SelfDeclarationQuestionBlockComponent
 ];
 @NgModule({
-  declarations: [
-    componentList
-  ],
+  declarations: [componentList],
   imports: [
     CommonModule,
     FormsModule,
@@ -32,8 +37,6 @@ const componentList = [
     TypeaheadModule.forRoot(),
     SharedCoreModule
   ],
-  exports: [
-    componentList
-  ]
+  exports: [componentList]
 })
-export class PrimeCoreModule { }
+export class PrimeCoreModule {}

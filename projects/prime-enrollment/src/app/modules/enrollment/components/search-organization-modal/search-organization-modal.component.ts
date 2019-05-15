@@ -29,20 +29,21 @@ export class SearchOrganizationModalComponent implements OnInit {
   types: Observable<string[]>;
   searchResults: Observable<Array<IOrganization>>;
   searchResultsHeaders: Observable<string[]> = new Observable();
-  headers: string[];
+  headers: string[] = headers;
 
   constructor(
     private dataSvc: EnrollmentDataService,
     public stateSvc: EnrollmentStateService
   ) {
     this.fg = this.stateSvc.findOrganizationForm$.value;
-    this.headers = headers;
+    // this.headers = headers;
   }
 
   ngOnInit() {
     this.dataSvc.organizationTypesInit(tempArr);
     this.types = this.dataSvc.organizationTypes$;
     this.searchResultsHeaders = of(this.headers);
+    // this.stateSvc.orgResultsClear();
   }
   selectedResults(evt: boolean, data: IOrganization) {
     evt
@@ -59,8 +60,12 @@ export class SearchOrganizationModalComponent implements OnInit {
       .then(() => this.result.emit(this.stateSvc.organizationForm$.value))
       .then(() => this.submit.emit(true));
   }
-
+  // TODO: this find algorithm breaks if there's any if conditions or returns > the modal closes automatically.
   find() {
+    // return;
+    // if (!this.fg.valid) {
+    // return;
+    // }
     this.touchForm();
     this.doSearch();
   }

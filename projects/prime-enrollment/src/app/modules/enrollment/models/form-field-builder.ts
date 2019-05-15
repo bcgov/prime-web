@@ -30,7 +30,8 @@ export abstract class FormFieldBuilder {
       Validators.required,
       Validators.email
     ]);
-    const voicePhone = new FormControl(null, [phoneNumberValidator()]);
+    // TODO: replace this validator with nothing.
+    const voicePhone = new FormControl(null, []);
     const preferredContact = new FormControl(null, [Validators.required]);
     return { phone, ext, email, voicePhone, preferredContact };
   }

@@ -44,7 +44,9 @@ export class ReviewComponent implements OnInit {
     );
     /** NOTE: Why are we doing this?  The review should show what the enrollee entered or
      * was provided to us by BSCS service or whoever provider is.
-     * 
+     *
+     * SH - it sets the address to be the mailing address if no mailing address was entered by the user.
+
     const sub = this.cacheSvc.provinceReady$
       .pipe(mergeMap(() => this.cacheSvc.countryReady$.asObservable()))
       .subscribe(obs => {
@@ -70,7 +72,8 @@ export class ReviewComponent implements OnInit {
           );
         }
       });
-      */
+     **/
+
     profile.preferredFirstName
       ? (this.$preferredName = of(
           `${profile.preferredFirstName} ${profile.preferredLastName}`

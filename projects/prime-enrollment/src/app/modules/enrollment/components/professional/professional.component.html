@@ -11,7 +11,7 @@
         <label class="control-label">Do you have a college certification?
         </label>
         <enroll-radio-button formControlName="collegeCert"
-          (click)="requireField(fg.controls.onBehalfOf, fg.value.collegeCert)"></enroll-radio-button>
+          (click)="requireField(fg.controls.onBehalfOf, !fg.value.collegeCert)"></enroll-radio-button>
         <enroll-error label="College certification" [touched]="fg.controls.collegeCert.touched"
           [valid]="fg.controls.collegeCert.valid"></enroll-error>
         <div *ngIf="fg.controls['collegeCert'].value">
@@ -46,18 +46,23 @@
 
         </div>
         <ng-container *ngIf="fg.value.deviceProvider">
-          <label class="control-label">Are you an insulin pump provider?</label>
-          <enroll-radio-button formControlName="insulinPump" labelOne="ipFalse" labelTwo="ipTrue" name="ip">
-          </enroll-radio-button>
+          <div class="form-group">
+            <label class="control-label">Are you an insulin pump provider?</label>
+            <enroll-radio-button formControlName="insulinPump" labelOne="ipFalse" labelTwo="ipTrue" name="ip">
+            </enroll-radio-button>
+          </div>
           <enroll-error label="Insulin pump" [touched]="fg.controls.insulinPump.touched"
             [valid]="fg.controls.insulinPump.valid"></enroll-error>
         </ng-container>
         <ng-container
           *ngIf="fg.value.collegeCert === false && fg.value.onBehalfOf !== null || !fg.value.collegeCert && fg.value.deviceProvider === false || dpFa.valid === true && fg.controls['insulinPump'].valid === true && !fg.value.collegeCert">
-          <label class="control-label">Are you accessing pharmanet on behalf of someone else?</label>
+          <div class="form-group">
+            <label class="control-label">Are you accessing pharmanet on behalf of someone else?</label>
+            <enroll-radio-button formControlName="onBehalfOf" labelOne="oboFalse" labelTwo="oboTrue" name="obo"
+              (click)="requireField(fg.controls.onBehalfOfJobTitle, !fg.value.onBehalfOf)">
+            </enroll-radio-button>
+          </div>
 
-          <enroll-radio-button formControlName="onBehalfOf" labelOne="oboFalse" labelTwo="oboTrue" name="obo">
-          </enroll-radio-button>
           <enroll-error label="On behalf of" [touched]="fg.controls.onBehalfOf.touched"
             [valid]="fg.controls.onBehalfOf.valid"></enroll-error>
           <div>

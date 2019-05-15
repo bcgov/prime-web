@@ -11,9 +11,9 @@
     </ng-container>
   </common-page-section>
   <ng-container *ngIf="fa$ | async as fa">
-    <button class="btn btn-secondary btn-lg mb-3" (click)="openModal(modal)">Add Organization</button>
-    <div class="card">
-      <div class="card-header">
+    <button class="btn btn-secondary btn-lg mb-3" (click)="openModal(modal)" *ngIf="results">Add Organization</button>
+    <div class="card" *ngIf="results">
+      <div class="card-header p-0">
         <span class="col">Organization Name</span>
         <span class="col">Type</span>
         <span class="col">City</span>
@@ -23,7 +23,7 @@
       </div>
       <div class="card-body">
         <!-- <ul class="list-group list-group-flush" *ngFor="let fg of fa; index as i" [formGroup]="fg" > -->
-        <form *ngFor="let fg of fa; index as i" [formGroup]="fg" class="card-body">
+        <form *ngFor="let fg of fa; index as i" [formGroup]="fg">
           <!-- <li class="list-group-item"> -->
           <div class="row">
             <span class="col">{{ fg.controls.name.value }}</span>
@@ -42,8 +42,8 @@
 
 
             </div>
-            <button class="btn delete values col-1 p-0" (click)="remove(i)" *ngIf="fa$.value.length > 1"><i
-                style="color: red !important;" class="fa fa-2x fa-times-circle"></i></button>
+            <button class="btn delete values col-1 p-0" (click)="remove(i)"><i style="color: red !important;"
+                class="fa fa-2x fa-times-circle"></i></button>
           </div>
           <!-- </li> -->
         </form>

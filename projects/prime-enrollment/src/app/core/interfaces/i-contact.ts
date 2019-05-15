@@ -9,4 +9,4 @@ export interface IContact {
   preferredContact: ContactOpts | FormControl;
 }
 
-export type ContactOpts = 'Email' | 'Phone' | 'Both';
+export type ContactOpts = 'email' | 'phone' | 'both';

@@ -1,0 +1,18 @@
+<!-- <ng-container *ngIf="phone"> -->
+<label class="font-weight-lighter">Phone</label>
+<span class="font-weight-bolder" *ngIf="phone; else dash">{{ phone }}</span>
+<!-- </ng-container> -->
+
+<!-- <ng-container *ngIf="email"> -->
+<label class="font-weight-lighter">Email</label>
+<span class="font-weight-bolder" *ngIf="email; else dash">{{ email }}</span>
+<!-- </ng-container> -->
+<!-- <ng-container *ngIf="voicePhone"> -->
+<label class="font-weight-lighter">Preferred Contact Method</label>
+<span class="font-weight-bolder" *ngIf="preferredContact; else dash">{{ preferredContact }}</span>
+<label class="font-weight-lighter">Voice Phone</label>
+<span class="font-weight-bolder" *ngIf="voicePhone; else dash">{{ voicePhone }}</span>
+<!-- </ng-container> -->
+<label class="font-weight-lighter">Extension</label>
+<span class="font-weight-bolder" *ngIf="ext; else dash">{{ ext }}</span>
+<ng-template #dash>-</ng-template>
