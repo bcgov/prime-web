@@ -15,12 +15,8 @@ import { ListItemHeaderComponent } from './components/list-item-header/list-item
 import { ProfileBlockComponent } from './components/profile-block/profile-block.component';
 import { AddressBlockComponent } from './components/address-block/address-block.component';
 import { ContactBlockComponent } from './components/contact-block/contact-block.component';
-import {
-  SelfDeclarationQuestionBlockComponent
-} from './components/self-declaration-question-block/self-declaration-question-block.component';
-import {
-  ProfessionalInformationBlockComponent
- } from './components/professional-information-block/professional-information-block.component';
+import { SelfDeclarationQuestionBlockComponent } from './components/self-declaration-question-block/self-declaration-question-block.component';
+import { ProfessionalInformationBlockComponent } from './components/professional-information-block/professional-information-block.component';
 import { PharmanetBlockComponent } from './components/pharmanet-block/pharmanet-block.component';
 import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 import { TextMaskModule } from 'angular2-text-mask';
@@ -89,8 +85,6 @@ import { environment } from '../../environments/environment';
     EnrollmentConfirmationComponent,
     PrimeCoreModule
   ],
-  providers: [
-    { provide: BASE_URL, useValue: environment.baseAPIUrl }
-  ]
+  providers: [{ provide: BASE_URL, useValue: environment.baseAPIUrl }]
 })
 export class SharedModule {}

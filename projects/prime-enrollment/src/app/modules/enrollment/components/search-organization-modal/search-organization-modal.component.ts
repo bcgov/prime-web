@@ -63,11 +63,10 @@ export class SearchOrganizationModalComponent implements OnInit {
   // TODO: this find algorithm breaks if there's any if conditions or returns > the modal closes automatically.
   find() {
     // return;
-    // if (!this.fg.valid) {
-    // return;
-    // }
-    this.touchForm();
-    this.doSearch();
+    if (this.fg.valid) {
+      this.touchForm();
+      this.doSearch();
+    }
   }
 
   doSearch() {

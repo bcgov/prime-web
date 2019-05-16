@@ -14,6 +14,7 @@ import { ProfileBlockComponent } from './components/profile-block/profile-block.
 import { ContactBlockComponent } from './components/contact-block/contact-block.component';
 // tslint:disable-next-line: max-line-length
 import { SelfDeclarationQuestionBlockComponent } from './components/self-declaration-question-block/self-declaration-question-block.component';
+import { ReviewListItemComponent } from './components/review-list-item/review-list-item.component';
 
 const componentList = [
   AddressComponent,
@@ -26,7 +27,7 @@ const componentList = [
   SelfDeclarationQuestionBlockComponent
 ];
 @NgModule({
-  declarations: [componentList],
+  declarations: [componentList, ReviewListItemComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -35,6 +36,6 @@ const componentList = [
     TypeaheadModule.forRoot(),
     SharedCoreModule
   ],
-  exports: [componentList]
+  exports: [componentList, ReviewListItemComponent]
 })
 export class PrimeCoreModule {}
