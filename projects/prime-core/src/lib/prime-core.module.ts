@@ -24,7 +24,8 @@ const componentList = [
   ConfirmationComponent,
   ProfileBlockComponent,
   ContactBlockComponent,
-  SelfDeclarationQuestionBlockComponent
+  SelfDeclarationQuestionBlockComponent,
+  ReviewListItemComponent
 ];
 @NgModule({
   declarations: [componentList, ReviewListItemComponent],
@@ -36,6 +37,6 @@ const componentList = [
     TypeaheadModule.forRoot(),
     SharedCoreModule
   ],
-  exports: [componentList, ReviewListItemComponent]
+  exports: [componentList, ReviewListItemComponent, ReviewListItemComponent]
 })
 export class PrimeCoreModule {}

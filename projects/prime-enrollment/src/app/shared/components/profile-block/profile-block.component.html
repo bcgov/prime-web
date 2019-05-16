@@ -1,8 +1,9 @@
   <label class="font-weight-lighter">Name</label>
   <span class="font-weight-bolder">{{name}}</span>
-  <ng-container *ngIf="preferredName">
+  <lib-review-list-item *ngIf="preferredName" label="Preferred name" value="preferredName"></lib-review-list-item>
+  <!-- <ng-container >
     <label class="font-weight-lighter">Preferred Name</label>
     <span class="font-weight-bolder">{{preferredName}}</span>
-  </ng-container>
+  </ng-container> -->
   <label class="font-weight-lighter">Birthdate</label>
   <span class="font-weight-bolder">{{dob}}</span>

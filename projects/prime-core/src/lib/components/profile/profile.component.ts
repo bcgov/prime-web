@@ -78,7 +78,7 @@ export class ProfileComponent extends Base implements OnInit, OnDestroy {
     this.data.identityIsMailingAddress = !this.data.identityIsMailingAddress;
   }
 
-  onBlur($event) {
+  onBlur(event) {
     if (
       event.srcElement.id === this._preferredFirstNameCtrl ||
       event.srcElement.id === this._preferredLastNameCtrl ||
