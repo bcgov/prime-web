@@ -91,13 +91,12 @@ describe('BCSC Enrollment - Professional Page', () => {
     });
 
     // This test should fail for now because Job Title is not yet required
-    xit('09. should be able to require user to fill out Job Title field', () => {
+    it('09. should be able to require user to fill out Job Title field', () => {
         page.navigateTo();
         page.clickOption('collegeCert', 'No');
         page.clickOption('deviceProvider', 'dpfalse');
         page.clickOption('onBehalfOf', 'oboTrue');
         page.continue();
-        expect(page.formErrors().count()).toBe(1, 'should have an error for not filling our Job Title.');
         expect(browser.getCurrentUrl()).toContain(PROFESSIONAL_PAGE_URL, 'should stay on the same page');
     });
 

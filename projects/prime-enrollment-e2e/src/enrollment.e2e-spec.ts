@@ -30,8 +30,7 @@ describe('BCSC Enrollment - End to End', () => {
     it('01. should go through from Profile to Review page when all required fields are filled out', () => {
         profilePage.navigateTo();
         profilePage.continue();
-        contactPage.clickContactMethod();
-        contactPage.fillContactInfo(contactData);
+        contactPage.fillContactMethod(contactData);
         contactPage.continue();
         professionalPage.clickOption('collegeCert', 'No');
         professionalPage.clickOption('deviceProvider', 'dpfalse');
@@ -60,8 +59,7 @@ describe('BCSC Enrollment - End to End', () => {
     it('02. should be able to edit fields when user reached the Review Page', () => {
         profilePage.navigateTo();
         profilePage.continue();
-        contactPage.clickContactMethod();
-        contactPage.fillContactInfo(contactData);
+        contactPage.fillContactMethod(contactData);
         contactPage.continue();
         professionalPage.clickOption('collegeCert', 'No');
         professionalPage.clickOption('deviceProvider', 'dpfalse');

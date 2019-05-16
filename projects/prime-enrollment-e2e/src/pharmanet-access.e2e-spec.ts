@@ -52,7 +52,7 @@ describe('BCSC Enrollment - Pharmanet-Access Page', () => {
         page.navigateTo();
         page.clickButton('btn btn-secondary', 'Add Organization');
         page.clickButton('btn btn-md', 'Find');
-        expect(page.formErrors().count()).toBe(3, 'should have 2 errors for not filling out the 2 required fields');
+        expect(page.formErrors().count()).toBe(2, 'should have 2 errors for not filling out the 2 required fields');
         expect(browser.getCurrentUrl()).toContain(PHARMANET_ACCESS_PAGE_URL);
     });
 
@@ -72,7 +72,7 @@ describe('BCSC Enrollment - Pharmanet-Access Page', () => {
     });
 
     // This test should fail for now because there's no delete button if only one record is present
-    xit('06. should be able to delete organization if there is only one listed', () => {
+    it('06. should be able to delete organization if there is only one listed', () => {
         page.navigateTo();
         page.clickButton('btn btn-secondary', 'Add Organization');
         page.selectTypeOfOrg('Health Authority');
