@@ -25,6 +25,7 @@ import { ErrorComponent } from './components/error-block/error.component';
 import { EnrollmentConfirmationComponent } from './components/enrollment-confirmation/enrollment-confirmation.component';
 import { PrimeCoreModule, BASE_URL } from 'prime-core';
 import { environment } from '../../environments/environment';
+import { ReviewListItemComponent } from './components/review-list-item/review-list-item.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { environment } from '../../environments/environment';
     PharmanetBlockComponent,
     RadioButtonComponent,
     ErrorComponent,
-    EnrollmentConfirmationComponent
+    EnrollmentConfirmationComponent,
+    ReviewListItemComponent
   ],
 
   imports: [
@@ -83,7 +85,8 @@ import { environment } from '../../environments/environment';
     RadioButtonComponent,
     ErrorComponent,
     EnrollmentConfirmationComponent,
-    PrimeCoreModule
+    PrimeCoreModule,
+    ReviewListItemComponent
   ],
   providers: [{ provide: BASE_URL, useValue: environment.baseAPIUrl }]
 })

@@ -1,14 +1,6 @@
-<ng-container *ngIf="phone">
-  <label class="font-weight-lighter">Phone</label>
-  <span class="font-weight-bolder">{{ phone }}</span>
-</ng-container>
+<div class="card">
+  <enroll-review-list-item label="Phone" [value]="phone"></enroll-review-list-item>
+  <enroll-review-list-item label="Email" [value]="email"></enroll-review-list-item>
+  <enroll-review-list-item label="Voice Phone" [value]="voicePhone"></enroll-review-list-item>
 
-<ng-container *ngIf="email">
-  <label class="font-weight-lighter">Email</label>
-  <span class="font-weight-bolder">{{ email }}</span>
-</ng-container>
-<ng-container *ngIf="voicePhone">
-
-  <label class="font-weight-lighter">Voice Phone</label>
-  <span class="font-weight-bolder">{{ voicePhone }}</span>
-</ng-container>
+</div>

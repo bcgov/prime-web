@@ -1,7 +1,11 @@
-@import 'variables.scss';
+// @import 'variables.scss';
+
 
 :host() {
   background-color: #f5f6f8;
-  padding: 12px;
+  width: 100%;
+}
 
+.card {
+  border-width: 0px;
 }

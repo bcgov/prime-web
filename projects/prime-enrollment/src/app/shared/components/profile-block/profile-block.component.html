@@ -1,9 +1,10 @@
-  <label class="font-weight-lighter">Name</label>
-  <span class="font-weight-bolder">{{name}}</span>
-  <lib-review-list-item *ngIf="preferredName" label="Preferred name" value="preferredName"></lib-review-list-item>
-  <!-- <ng-container >
-    <label class="font-weight-lighter">Preferred Name</label>
-    <span class="font-weight-bolder">{{preferredName}}</span>
-  </ng-container> -->
-  <label class="font-weight-lighter">Birthdate</label>
-  <span class="font-weight-bolder">{{dob}}</span>
+  <!-- <label class="font-weight-lighter">Name</label> -->
+  <!-- <span class="font-weight-bolder">{{name}}</span> -->
+  <div class="card">
+    <enroll-review-list-item *ngIf="name" label="Name" [value]="name">
+    </enroll-review-list-item>
+    <enroll-review-list-item *ngIf="preferredName" label="Preferred name" [value]="preferredName">
+    </enroll-review-list-item>
+    <enroll-review-list-item *ngIf="dob" label="Birthdate" [value]="dob">
+    </enroll-review-list-item>
+  </div>
