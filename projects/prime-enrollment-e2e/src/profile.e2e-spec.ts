@@ -3,7 +3,7 @@ import { PrimeTestPage } from '../../../e2e/src/app.po';
 import { ProfilePage } from './enrollment.po';
 import { FakeDataEnrollment } from './enrollment.data';
 
-describe('BCSC Enrollment - Profile Page', () => {
+describe('Prime Enrolment - Profile Page', () => {
     let page: ProfilePage;
     const data = new FakeDataEnrollment();
     let profileData;

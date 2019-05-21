@@ -3,7 +3,7 @@ import { PrimeTestPage } from '../../../e2e/src/app.po';
 import { ProfessionalPage } from './enrollment.po';
 import { FakeDataEnrollment } from './enrollment.data';
 
-describe('BCSC Enrollment - Professional Page', () => {
+fdescribe('Prime Enrolment - Professional Page', () => {
     let page: ProfessionalPage;
     const data = new FakeDataEnrollment();
     let professionalData;
@@ -97,6 +97,7 @@ describe('BCSC Enrollment - Professional Page', () => {
         page.clickOption('deviceProvider', 'dpfalse');
         page.clickOption('onBehalfOf', 'oboTrue');
         page.continue();
+        expect(page.getErrorTextVal('Job title')).toBe('Job title is required');
         expect(browser.getCurrentUrl()).toContain(PROFESSIONAL_PAGE_URL, 'should stay on the same page');
     });
 

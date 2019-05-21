@@ -3,7 +3,7 @@ import { PrimeTestPage } from '../../../e2e/src/app.po';
 import { ProfilePage, ContactPage, ProfessionalPage, SelfDeclarationPage, PharmanetAccessPage, ReviewPage } from './enrollment.po';
 import { FakeDataEnrollment } from './enrollment.data';
 
-describe('BCSC Enrollment - End to End', () => {
+describe('Prime Enrolment - End to End', () => {
     let profilePage: ProfilePage;
     let contactPage: ContactPage;
     let professionalPage: ProfessionalPage;
@@ -80,6 +80,7 @@ describe('BCSC Enrollment - End to End', () => {
         pharmanetAccessPage.selectDate();
         pharmanetAccessPage.continue();
         reviewPage.clickLink('h2', 'PharmaNet');
+        pharmanetAccessPage.clickButton('btn delete', '');
         pharmanetAccessPage.clickButton('btn btn-secondary', 'Add Organization');
         pharmanetAccessPage.selectTypeOfOrg('Pharmacy');
         pharmanetAccessPage.typeValue('organization', 'a');

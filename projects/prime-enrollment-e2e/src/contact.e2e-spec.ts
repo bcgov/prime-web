@@ -3,7 +3,7 @@ import { PrimeTestPage } from '../../../e2e/src/app.po';
 import { ContactPage } from './enrollment.po';
 import { FakeDataEnrollment } from './enrollment.data';
 
-describe('BCSC Enrollment- Contact Page', () => {
+describe('Prime Enrolment - Contact Page', () => {
     let page: ContactPage;
     const data = new FakeDataEnrollment();
     let contactData;
@@ -48,8 +48,9 @@ describe('BCSC Enrollment- Contact Page', () => {
     xit('05. If user enters "test" as email it says "email is required." It SHOULD say "email format wrong"', () => {
         contactData.email = 'test';
         page.navigateTo();
-        page.fillContactMethod(contactData);
+        page.fillSpecificContactMethod(contactData);
         page.continue();
+        browser.sleep(1000 * 5);
         expect(page.getErrorTextVal('Email')).toBe('Incorrect email format');
         expect(page.formErrors().count()).toBe(1, 'should be an error on email address');
         expect(browser.getCurrentUrl()).toContain(CONTACT_PAGE_URL);

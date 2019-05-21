@@ -3,7 +3,7 @@ import { PrimeTestPage } from '../../../e2e/src/app.po';
 import { PharmanetAccessPage } from './enrollment.po';
 import { FakeDataEnrollment } from './enrollment.data';
 
-describe('BCSC Enrollment - Pharmanet-Access Page', () => {
+describe('Prime Enrolment - Pharmanet-Access Page', () => {
     let page: PharmanetAccessPage;
     const data = new FakeDataEnrollment();
     let pharmanetAccessData;
