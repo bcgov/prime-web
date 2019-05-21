@@ -1,9 +1,7 @@
-<label class="font-weight-lighter">License</label>
-<span class="font-weight-bolder">{{license}}</span>
+<div class="card">
+  <enroll-review-list-item label="License" [value]="license"></enroll-review-list-item>
+  <enroll-review-list-item label="College" [value]="college"></enroll-review-list-item>
+  <enroll-review-list-item label="Renewal" value="{{renewal | date}}"></enroll-review-list-item>
 
-<label class="font-weight-lighter">College</label>
-<span class="font-weight-bolder">{{college}}</span>
-<label class="font-weight-lighter">Class</label>
-<span class="font-weight-bolder">{{class}}</span>
-<label class="font-weight-lighter">Renewal</label>
-<span class="font-weight-bolder">{{renewal | date}}</span>
+
+</div>
