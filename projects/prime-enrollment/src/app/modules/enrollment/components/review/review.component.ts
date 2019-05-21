@@ -6,7 +6,7 @@ import { Registrant } from '../../../../../../../prime-registration/src/app/modu
 import { Observable, of } from 'rxjs';
 import { Address } from 'moh-common-lib/models/public_api';
 import { EnrollmentCacheService } from '../../services/enrollment-cache.service';
-import { mergeMap } from 'rxjs/operators';
+import { mergeMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-review',
@@ -46,11 +46,15 @@ export class ReviewComponent implements OnInit {
      * was provided to us by BSCS service or whoever provider is.
      *
      * SH - it sets the address to be the mailing address if no mailing address was entered by the user.
-
-    const sub = this.cacheSvc.provinceReady$
-      .pipe(mergeMap(() => this.cacheSvc.countryReady$.asObservable()))
+     **/
+    const sub = this.cacheSvc.$provinceList
+      .pipe(
+        tap(obs => (this.cacheSvc.provinces = obs)),
+        mergeMap(obs => this.cacheSvc.$countryList)
+      )
       .subscribe(obs => {
         if (!obs) return;
+        this.cacheSvc.countries = obs;
         this.stateSvc.setCountry(profile.address.country, 'countryName$');
         this.stateSvc.setProvince(profile.address.province, 'provinceName$');
         if (profile.mailAddress.hasOwnProperty('street')) {
@@ -72,7 +76,6 @@ export class ReviewComponent implements OnInit {
           );
         }
       });
-     **/
 
     profile.preferredFirstName
       ? (this.$preferredName = of(
