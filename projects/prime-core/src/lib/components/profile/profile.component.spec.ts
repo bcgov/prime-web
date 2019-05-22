@@ -10,6 +10,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { TextMaskModule } from 'angular2-text-mask';
 import { TypeaheadModule } from 'ngx-bootstrap';
 import { BASE_URL } from '../../../services/cache-api.service';
+import { VerifyPreferNameDirective } from './verify-prefer-name.directive';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
@@ -20,7 +21,8 @@ describe('ProfileComponent', () => {
       declarations: [
         ProfileComponent,
         AddressComponent,
-        NameComponent
+        NameComponent,
+        VerifyPreferNameDirective
       ],
       imports: [
         FormsModule,

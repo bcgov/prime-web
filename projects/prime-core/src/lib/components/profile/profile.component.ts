@@ -2,17 +2,23 @@ import {
   Component,
   OnInit,
   Input,
-  forwardRef,
   Output,
   EventEmitter,
-  OnDestroy
+  OnDestroy,
+  Optional,
+  Host,
+  forwardRef
 } from '@angular/core';
 import { ControlContainer, NgForm } from '@angular/forms';
 import { of, Observable, Subscription } from 'rxjs';
 import { Base } from 'moh-common-lib/models';
 import { PrimePerson } from '../../../models/prime-person.model';
-import { CountryList, ProvinceList } from '../address/address.component';
-import { PrimeConstants } from '../../../models/prime-constants';
+import {
+  CountryList,
+  ProvinceList,
+  CANADA,
+  BRITISH_COLUMBIA
+} from 'moh-common-lib';
 
 @Component({
   selector: 'lib-prime-profile',
@@ -25,7 +31,7 @@ import { PrimeConstants } from '../../../models/prime-constants';
     { provide: ControlContainer, useExisting: forwardRef(() => NgForm) }
   ]
 })
-export class ProfileComponent extends Base implements OnInit, OnDestroy {
+export class ProfileComponent extends Base implements OnDestroy {
   @Input() data: PrimePerson = new PrimePerson();
   @Input() countryList: CountryList[] = [];
   @Input() provinceList: ProvinceList[] = [];
@@ -35,39 +41,36 @@ export class ProfileComponent extends Base implements OnInit, OnDestroy {
     PrimePerson
   >();
 
-  public defaultCountry = PrimeConstants.CANADA;
-  public defaultProvince = PrimeConstants.BRITISH_COLUMBIA;
+  public defaultCountry = CANADA;
+  public defaultProvince = BRITISH_COLUMBIA;
 
   /**
    * Date of birth error messages
    */
   public dateLabel = 'Birthdate';
 
-  private form: NgForm;
-  private _firstNameCtrl = 'first_name';
-  private _preferredFirstNameCtrl = 'preferred_first_name';
-  private _preferredLastNameCtrl = 'preferred_last_name';
-  private _requiredError = { required: true };
-
   subscriptions: Subscription[];
+  newObs = new Observable();
 
-  constructor(private cntrlContainer: ControlContainer) {
+  constructor(@Optional() @Host() public parent: ControlContainer) {
     super();
-    this.form = cntrlContainer as NgForm;
-  }
 
-  emitChanges(itm: PrimePerson) {
-    this.dataChange.emit(itm);
-  }
+    this.newObs = of(this.data);
+    this.subscriptions = [this.newObs.subscribe(obs => console.log(obs))];
 
-  ngOnInit() {
-    // Listen for submission of form
-    let newObs = new Observable();
-    newObs = of(this.data);
-    newObs.subscribe(obs => console.log(obs));
-    this.subscriptions = [
-      this.cntrlContainer.valueChanges.subscribe(obs => this.emitChanges(obs))
-    ];
+    if (parent) {
+      this.subscriptions.push(
+        parent.valueChanges.subscribe(obs => {
+          console.log('(profile) parent change values: ', obs);
+          this.dataChange.emit(obs);
+        })
+      );
+      this.subscriptions.push(
+        parent.statusChanges.subscribe(x => {
+          console.log('(profile) parent change status: ', parent.status);
+        })
+      );
+    }
   }
 
   ngOnDestroy() {

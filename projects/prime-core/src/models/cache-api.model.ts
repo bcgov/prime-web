@@ -1,6 +1,6 @@
 import { ServerPayload, PayloadInterface, StatusMsgInterface } from './api-base.model';
 import { DocumentType } from './documents.interface';
-import { CountryList, ProvinceList } from '../lib/components/address/address.component';
+import { CountryList , ProvinceList} from 'moh-common-lib';
 
 export interface SysParamInterface {
   name: string;

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Registrant } from '../../registration/models/registrant.model';
 import * as faker from 'faker';
 import { UUID } from 'angular2-uuid';
-import { RegistrationConstants } from '../../registration/models/registration-constants.model';
+import { CANADA, BRITISH_COLUMBIA } from 'moh-common-lib';
 import {
   BCSCSessionInterface,
   AssuranceLevel,
@@ -42,7 +42,7 @@ export class BCSCDummyResponseService {
         };
         reg.address.street = data.street;
         reg.address.city = data.city;
-        reg.address.province = RegistrationConstants.BRITISH_COLUMBIA;
+        reg.address.province = BRITISH_COLUMBIA;
         reg.address.postal = data.postal;
         reg.address.country = data.country;
         reg.userAccountName = data.pdid;
@@ -74,9 +74,9 @@ export class BCSCDummyResponseService {
           dateOfBirth: faker.date.between('1959-01-01', '1999-01-01'),
           street: faker.address.streetAddress(),
           city: this.generateFakeCity(),
-          province: RegistrationConstants.BRITISH_COLUMBIA,
+          province: BRITISH_COLUMBIA,
           postal: faker.address.zipCode('?#? #?#'),
-          country: RegistrationConstants.CANADA
+          country: CANADA
         };
     }
 

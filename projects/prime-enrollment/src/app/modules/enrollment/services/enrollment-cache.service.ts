@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import {
   CountryList,
   ProvinceList
-} from 'prime-core/lib/components/address/address.component';
+} from 'moh-common-lib';
 import { CacheService, CacheApiService } from 'prime-core';
 
 const collegeOptions = [

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { ProfileComponent } from './components/profile/profile.component';
-import { AddressComponent } from './components/address/address.component';
 import { NameComponent } from './components/name/name.component';
 import { SharedCoreModule } from 'moh-common-lib';
 import { CommonModule } from '@angular/common';
@@ -10,6 +9,8 @@ import { FormsModule } from '@angular/forms';
 import { TypeaheadModule } from 'ngx-bootstrap';
 import { PhoneNumberComponent } from './components/phone-number/phone-number.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
+import { ValidateNameDirective } from './components/name/validate-name.directive';
+import { VerifyPreferNameDirective } from './components/profile/verify-prefer-name.directive';
 import { ProfileBlockComponent } from './components/profile-block/profile-block.component';
 import { ContactBlockComponent } from './components/contact-block/contact-block.component';
 // tslint:disable-next-line: max-line-length
@@ -17,11 +18,12 @@ import { SelfDeclarationQuestionBlockComponent } from './components/self-declara
 import { ReviewListItemComponent } from './components/review-list-item/review-list-item.component';
 
 const componentList = [
-  AddressComponent,
   NameComponent,
   ProfileComponent,
   PhoneNumberComponent,
   ConfirmationComponent,
+  ValidateNameDirective,
+  VerifyPreferNameDirective,
   ProfileBlockComponent,
   ContactBlockComponent,
   SelfDeclarationQuestionBlockComponent,

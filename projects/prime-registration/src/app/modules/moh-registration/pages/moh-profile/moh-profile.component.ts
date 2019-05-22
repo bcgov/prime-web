@@ -54,6 +54,13 @@ export class MohProfileComponent extends AbstractForm implements OnInit {
       // Errors exist on form
       // Mark all fields as touched to display errors
       this.markAllInputsTouched();
+
+      Object.keys(this.form.form.controls).forEach(x => {
+        console.log( x + ' control: ', this.form.form.get(x) );
+
+        this.form.form.controls[x].updateValueAndValidity();
+      });
+
       return;
     }
 

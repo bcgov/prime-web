@@ -7,18 +7,28 @@
 
   <common-page-section layout='tips'>
     <div class="form-group col-sm-6 p-sm-0">
-      <lib-prime-name label="First Name" [disabled]="!editIdentityInfo" [(nameStr)]="data.firstName"
-        (blurEvent)="onBlur($event)" objectID="first_name"></lib-prime-name>
+      <lib-prime-name label="First Name"
+                      [disabled]="!editIdentityInfo"
+                      [(ngModel)]="data.firstName"
+                      name="first_name"
+                      libValidateName></lib-prime-name>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <lib-prime-name label="Middle Name" [disabled]="!editIdentityInfo" [(nameStr)]="data.middleName"
-        objectID="middle_name"></lib-prime-name>
+      <lib-prime-name label="Middle Name"
+                      [disabled]="!editIdentityInfo"
+                      [(ngModel)]="data.middleName"
+                      name="middle_name"
+                      libValidateName></lib-prime-name>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <lib-prime-name label="Last Name" [required]="true" [disabled]="!editIdentityInfo" [(nameStr)]="data.lastName"
-        objectID="last_name"></lib-prime-name>
+      <lib-prime-name label="Last Name"
+                      [disabled]="!editIdentityInfo"
+                      [(ngModel)]="data.lastName"
+                      name="last_name"
+                      required
+                      libValidateName></lib-prime-name>
     </div>
 
     <div class="col-sm-6 p-sm-0">
@@ -38,20 +48,33 @@
     enter your full preferred name.
   </p>
 
+
   <common-page-section layout='tips'>
     <div class="form-group col-sm-6 p-sm-0">
-      <lib-prime-name label="Preferred First Name" [(nameStr)]="data.preferredFirstName" objectID="preferred_first_name"
-        (blurEvent)="onBlur($event)"></lib-prime-name>
+      <lib-prime-name label="Preferred First Name"
+                      [(ngModel)]="data.preferredFirstName"
+                      name="preferred_first_name"
+                      libValidateName
+                      libVerifyPreferName [depCtrlName]="'preferred_last_name'">
+                    </lib-prime-name>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <lib-prime-name label="Preferred Middle Name" [(nameStr)]="data.preferredMiddleName" objectID="preferred_middle_name">
+      <lib-prime-name label="Preferred Middle Name"
+                      [(ngModel)]="data.preferredMiddleName"
+                      name="preferred_middle_name"
+                      libValidateName>
       </lib-prime-name>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <lib-prime-name label="Preferred Last Name" [(nameStr)]="data.preferredLastName" objectID="preferred_last_name"
-        (blurEvent)="onBlur($event)"></lib-prime-name>
+      <lib-prime-name label="Preferred Last Name"
+                      [(ngModel)]="data.preferredLastName"
+                      name="preferred_last_name"
+                      libValidateName
+                      libVerifyPreferName
+                      depCtrlName="{{ data.firstName ? 'preferred_first_name' : undefined }}">
+                    </lib-prime-name>
     </div>
     <aside>TIPS</aside>
   </common-page-section>
@@ -59,12 +82,21 @@
 
 <common-page-section layout='double'>
   <h2 class="border-bottom">Address</h2>
-  <lib-prime-address [disabled]="!editIdentityInfo" [(address)]="data.address" [defaultCountry]="defaultCountry"
-    [countryList]="countryList" [defaultProvince]="defaultProvince" [provinceList]="provinceList" [isRequired]="true">
-  </lib-prime-address>
+  <common-address [disabled]="!editIdentityInfo"
+                  [address]="data?.address"
+                  (addressChange)="data.address=$event"
+                  [defaultCountry]="defaultCountry"
+                  [countryList]="countryList"
+                  [defaultProvince]="defaultProvince"
+                  [provinceList]="provinceList"
+                  [isRequired]="true">
+  </common-address>
   <div class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input" id="isMailingAddress" [checked]="data.identityIsMailingAddress"
-      (click)="toggleCheckBox()" />
+    <input type="checkbox"
+          class="custom-control-input"
+          id="isMailingAddress"
+          [checked]="data.identityIsMailingAddress"
+          (click)="toggleCheckBox()" />
     <label class="custom-control-label" for="isMailingAddress">
       This is my mailing address.
     </label>
@@ -72,8 +104,13 @@
   <aside>
     <h2 class="border-bottom">Mailing Address</h2>
     <div *ngIf="!data.identityIsMailingAddress; else NoMailingAddress">
-      <lib-prime-address [(address)]="data.mailAddress" [defaultCountry]="defaultCountry" [countryList]="countryList"
-        [defaultProvince]="defaultProvince" [provinceList]="provinceList" [isRequired]="true"></lib-prime-address>
+      <common-address [address]="data?.mailAddress"
+                      (addressChange)="data.mailAddress=$event"
+                      [defaultCountry]="defaultCountry"
+                      [countryList]="countryList"
+                      [defaultProvince]="defaultProvince"
+                      [provinceList]="provinceList"
+                      [isRequired]="true"></common-address>
     </div>
   </aside>
 </common-page-section>
