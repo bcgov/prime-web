@@ -32,7 +32,7 @@ fdescribe('Prime Enrolment - Professional Page', () => {
         page.navigateTo();
         page.clickOption('collegeCert', 'Yes');
         page.selectOption('collegeCert', 'College of Physicians and Surgeons of BC');
-        expect(page.getNameComponent('basic-addon1')).toContain('91');
+        expect(page.getLicenseNum()).toContain('91');
     });
 
     it('04. (7.3.19) The solution must display and capture the License Class based on selected registered college', () => {

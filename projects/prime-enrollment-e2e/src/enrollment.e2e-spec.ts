@@ -27,7 +27,7 @@ describe('Prime Enrolment - End to End', () => {
         profileData['country'] = 'Canada'; // forced the country to be Canada so the faker will generate a province
     });
 
-    it('01. should go through from Profile to Review page when all required fields are filled out', () => {
+    fit('01. should go through from Profile to Review page when all required fields are filled out', () => {
         profilePage.navigateTo();
         profilePage.continue();
         contactPage.fillContactMethod(contactData);

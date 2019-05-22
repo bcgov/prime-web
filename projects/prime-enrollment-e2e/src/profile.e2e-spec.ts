@@ -3,7 +3,7 @@ import { PrimeTestPage } from '../../../e2e/src/app.po';
 import { ProfilePage } from './enrollment.po';
 import { FakeDataEnrollment } from './enrollment.data';
 
-describe('Prime Enrolment - Profile Page', () => {
+fdescribe('Prime Enrolment - Profile Page', () => {
     let page: ProfilePage;
     const data = new FakeDataEnrollment();
     let profileData;
@@ -64,7 +64,7 @@ describe('Prime Enrolment - Profile Page', () => {
         expect(page.formErrors()).toEqual([], 'should be no errors as form should be valid');
     });
 
-    it('06. should let users set Preferred First, Middle, and Last name', () => {
+    it('06. (7.3.7) should let users set Preferred First, Middle, and Last name', () => {
         page.navigateTo();
         page.fillPreferredName(profileData);
         browser.sleep(1000 * 5);
