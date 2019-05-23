@@ -3,7 +3,7 @@ import { PrimeTestPage } from '../../../e2e/src/app.po';
 import { ProfessionalPage } from './enrollment.po';
 import { FakeDataEnrollment } from './enrollment.data';
 
-fdescribe('Prime Enrolment - Professional Page', () => {
+describe('Prime Enrolment - Professional Page', () => {
     let page: ProfessionalPage;
     const data = new FakeDataEnrollment();
     let professionalData;

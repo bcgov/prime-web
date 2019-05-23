@@ -30,7 +30,7 @@ fdescribe('Prime Enrolment - Profile Page', () => {
         expect(page.formErrors()).toEqual([], 'should be no errors as form should be valid');
     });
 
-    it('03. should let users set their own mailing address', () => {
+    it('03. should let users set their own mailing address by filling out the Mailling Address field', () => {
         page.navigateTo();
         page.scrollDown();
         page.clickDiffMailAddress();
@@ -74,7 +74,7 @@ fdescribe('Prime Enrolment - Profile Page', () => {
         expect(page.formErrors()).toEqual([], 'should be no errors as form should be valid');
     });
 
-    it('07. should not be able to edit read-only information (just check that the fields are disabled)', () => {
+    fit('07. (7.3.1) should not be able to edit read-only information (just check that the fields are disabled/display only)', () => {
         page.navigateTo();
         page.scrollDown();
         expect(page.checkEnabled()).toBe(false);
