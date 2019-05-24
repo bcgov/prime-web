@@ -34,17 +34,17 @@ export class ProfilePage extends BaseEnrollmentTestPage {
 
     constructor() {
         super();
-        this.firstNameField = element(by.css('lib-prime-name input[id^="first_name"]'));
-        this.middleNameField = element(by.css('lib-prime-name input[id^="middle_name"]'));
-        this.lastNameField = element(by.css('lib-prime-name input[id^="last_name"]'));
+        this.firstNameField = element(by.css('input[id^="first_name"]'));
+        this.middleNameField = element(by.css('input[id^="middle_name"]'));
+        this.lastNameField = element(by.css('input[id^="last_name"]'));
         this.birthMonthField = element(by.css('select[id^="month"]'));
         this.birthDayField = element(by.css('input[id^="day"]'));
         this.birthYearField = element(by.css('input[id^="year"]'));
-        this.countryField = element(by.css('lib-prime-address input[id^="country"]'));
-        this.provinceField = element(by.css('lib-prime-address input[id^="province"]'));
-        this.streetField = element(by.css('lib-prime-address input[id^="street"]'));
-        this.cityField = element(by.css('lib-prime-address input[id^="city"]'));
-        this.postalCodeField = element(by.css('lib-prime-address input[id^="postalCode"]'));
+        this.countryField = element(by.css('input[id^="country"]'));
+        this.provinceField = element(by.css('input[id^="province"]'));
+        this.streetField = element(by.css('input[id^="street"]'));
+        this.cityField = element(by.css('input[id^="city"]'));
+        this.postalCodeField = element(by.css('input[id^="postalCode"]'));
     }
 
     navigateTo() {
@@ -67,7 +67,7 @@ export class ProfilePage extends BaseEnrollmentTestPage {
 
     checkEnabled() {
         // return (this.firstNameField.isEnabled() && this.middleNameField.isEnabled() && this.lastNameField.isEnabled() && this.birthMonthField.isEnabled() && this.birthDayField.isEnabled() && this.birthYearField.isEnabled() && this.countryField.isEnabled() && this.provinceField.isEnabled() && this.streetField.isEnabled() && this.cityField.isEnabled() && this.postalCodeField.isEnabled());
-        return this.firstNameField.isEnabled();
+        return this.streetField.isEnabled();
     }
 }
 
