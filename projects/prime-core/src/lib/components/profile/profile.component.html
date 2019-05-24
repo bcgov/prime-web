@@ -32,8 +32,10 @@
     </div>
 
     <div class="col-sm-6 p-sm-0">
-      <common-date [disabled]="!editIdentityInfo" [label]="dateLabel" [restrictDate]="'past'"
-        [(date)]="data.dateOfBirth"></common-date>
+      <common-date [disabled]="!editIdentityInfo"
+                   [label]="dateLabel" [restrictDate]="'past'"
+                   [date]="data?.dateOfBirth"
+                   (date)="data.dateOfBirth"></common-date>
     </div>
 
     <aside>TIPS</aside>

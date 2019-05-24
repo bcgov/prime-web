@@ -1,6 +1,6 @@
 {
   "name": "prime-core",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Shared Prime library",
   "peerDependencies": {
     "@angular/common": "^7.2.0",
@@ -8,6 +8,6 @@
     "bootstrap": "^4.3.1",
     "@ng-select/ng-select": "^2.16.2",
     "angular2-text-mask": "^9.0.0",
-    "moh-common-lib": "0.0.29"
+    "moh-common-lib": "0.0.32"
   }
 }
