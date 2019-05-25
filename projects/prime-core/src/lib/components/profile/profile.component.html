@@ -7,35 +7,34 @@
 
   <common-page-section layout='tips'>
     <div class="form-group col-sm-6 p-sm-0">
-      <lib-prime-name label="First Name"
+      <common-name label="First Name"
                       [disabled]="!editIdentityInfo"
                       [(ngModel)]="data.firstName"
                       name="first_name"
-                      libValidateName></lib-prime-name>
+                      commonValidateName></common-name>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <lib-prime-name label="Middle Name"
+      <common-name label="Middle Name"
                       [disabled]="!editIdentityInfo"
                       [(ngModel)]="data.middleName"
                       name="middle_name"
-                      libValidateName></lib-prime-name>
+                      commonValidateName></common-name>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <lib-prime-name label="Last Name"
+      <common-name label="Last Name"
                       [disabled]="!editIdentityInfo"
                       [(ngModel)]="data.lastName"
                       name="last_name"
                       required
-                      libValidateName></lib-prime-name>
+                      commonValidateName></common-name>
     </div>
 
     <div class="col-sm-6 p-sm-0">
       <common-date [disabled]="!editIdentityInfo"
                    [label]="dateLabel" [restrictDate]="'past'"
-                   [date]="data?.dateOfBirth"
-                   (date)="data.dateOfBirth"></common-date>
+                   [(date)]="data.dateOfBirth"></common-date>
     </div>
 
     <aside>TIPS</aside>
@@ -53,30 +52,30 @@
 
   <common-page-section layout='tips'>
     <div class="form-group col-sm-6 p-sm-0">
-      <lib-prime-name label="Preferred First Name"
+      <common-name label="Preferred First Name"
                       [(ngModel)]="data.preferredFirstName"
                       name="preferred_first_name"
-                      libValidateName
+                      commonValidateName
                       libVerifyPreferName [depCtrlName]="'preferred_last_name'">
-                    </lib-prime-name>
+                    </common-name>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <lib-prime-name label="Preferred Middle Name"
+      <common-name label="Preferred Middle Name"
                       [(ngModel)]="data.preferredMiddleName"
                       name="preferred_middle_name"
-                      libValidateName>
-      </lib-prime-name>
+                      commonValidateName>
+      </common-name>
     </div>
 
     <div class="form-group col-sm-6 p-sm-0">
-      <lib-prime-name label="Preferred Last Name"
-                      [(ngModel)]="data.preferredLastName"
-                      name="preferred_last_name"
-                      libValidateName
-                      libVerifyPreferName
-                      depCtrlName="{{ data.firstName ? 'preferred_first_name' : undefined }}">
-                    </lib-prime-name>
+      <common-name label="Preferred Last Name"
+                    [(ngModel)]="data.preferredLastName"
+                    name="preferred_last_name"
+                    commonValidateName
+                    libVerifyPreferName
+                    depCtrlName="{{ data.firstName ? 'preferred_first_name' : undefined }}">
+                    </common-name>
     </div>
     <aside>TIPS</aside>
   </common-page-section>
