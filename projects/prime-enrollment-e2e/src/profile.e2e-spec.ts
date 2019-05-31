@@ -3,7 +3,7 @@ import { PrimeTestPage } from '../../../e2e/src/app.po';
 import { ProfilePage } from './enrollment.po';
 import { FakeDataEnrollment } from './enrollment.data';
 
-fdescribe('Prime Enrolment - Profile Page', () => {
+describe('Prime Enrolment - Profile Page', () => {
     let page: ProfilePage;
     const data = new FakeDataEnrollment();
     let profileData;
@@ -74,7 +74,7 @@ fdescribe('Prime Enrolment - Profile Page', () => {
         expect(page.formErrors()).toEqual([], 'should be no errors as form should be valid');
     });
 
-    fit('07. (7.3.1) should not be able to edit read-only information (just check that the fields are disabled/display only)', () => {
+    it('07. (7.3.1) should not be able to edit read-only information (just check that the fields are disabled/display only)', () => {
         page.navigateTo();
         page.scrollDown();
         expect(page.checkEnabled()).toBe(false);

@@ -60,9 +60,9 @@ export class ProfilePage extends BaseEnrollmentTestPage {
       }
 
     fillMailingAddress(data: ProfilePageTest) {
-      element(by.css('lib-prime-address:nth-child(1) [id^="street"]')).sendKeys(data.address);
-      element(by.css('lib-prime-address:nth-child(1) [id^="city"]')).sendKeys(data.city);
-      element(by.css('lib-prime-address:nth-child(1) [id^="postal"]')).sendKeys(data.postal);
+      element(by.css('common-address:nth-child(1) [id^="street"]')).sendKeys(data.address);
+      element(by.css('common-address:nth-child(1) [id^="city"]')).sendKeys(data.city);
+      element(by.css('common-address:nth-child(1) [id^="postal"]')).sendKeys(data.postal);
     }
 
     checkEnabled() {
