@@ -1,4 +1,4 @@
-import { browser } from 'protractor';
+import { browser, protractor } from 'protractor';
 import { PrimeTestPage } from '../../../e2e/src/app.po';
 import { ProfilePage } from './enrollment.po';
 import { FakeDataEnrollment } from './enrollment.data';
@@ -78,6 +78,14 @@ describe('Prime Enrolment - Profile Page', () => {
         page.navigateTo();
         page.scrollDown();
         expect(page.checkEnabled()).toBe(false);
+    });
+
+    fit('08. should be able to select auto-complete results from address component', () => {
+        page.navigateTo();
+        page.scrollDown();
+        page.clickDiffMailAddress();
+        page.selectAutoComplete();
+        expect(page.getAddressVal('country')).toBe('CANADA');
     });
 
     /*

@@ -2,6 +2,7 @@ import { browser, by, element, WebElement, protractor } from 'protractor';
 import { ProfilePageTest, ContactPageTest } from './enrollment.data';
 import { PrimeTestPage } from '../../../e2e/src/app.po';
 import { NgSelectOption } from '@angular/forms';
+import { templateVisitAll } from '@angular/compiler';
 
 export class BaseEnrollmentTestPage extends PrimeTestPage {
 
@@ -15,6 +16,10 @@ export class BaseEnrollmentTestPage extends PrimeTestPage {
 
     getErrorTextVal(label: string){
         return element(by.css(`enroll-error[ng-reflect-label="${label}"] span`)).getText();
+    }
+
+    getAddressVal(label: string) {
+        return element(by.css('common-country:nth-child(1)[label="Country"]')).element(by.css('span[class="ng-value-label"]')).getText();
     }
 }
 
@@ -57,12 +62,18 @@ export class ProfilePage extends BaseEnrollmentTestPage {
           (await this.getNameComponent('Preferred Middle Name')).sendKeys(data.preferredMiddleName);
         }
         (await this.getNameComponent('Preferred Last Name')).sendKeys(data.preferredLastName);
-      }
+    }
 
     fillMailingAddress(data: ProfilePageTest) {
       element(by.css('common-address:nth-child(1) [id^="street"]')).sendKeys(data.address);
       element(by.css('common-address:nth-child(1) [id^="city"]')).sendKeys(data.city);
       element(by.css('common-address:nth-child(1) [id^="postal"]')).sendKeys(data.postal);
+    }
+
+    selectAutoComplete() {
+        element(by.css('common-address:nth-child(1) [id^="country"]')).sendKeys('CAN');
+        element(by.css('ng-dropdown-panel div[class*="ng-option-selected"]')).click();
+        element(by.css('common-address:nth-child(1) [id^="street"]')).click();
     }
 
     checkEnabled() {
