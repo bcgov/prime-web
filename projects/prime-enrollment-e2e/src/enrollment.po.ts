@@ -14,42 +14,22 @@ export class BaseEnrollmentTestPage extends PrimeTestPage {
         element(by.css(`enroll-radio-button[ng-reflect-name="${label}"] label[for^="${value}"]`)).click();
     }
 
-    getErrorTextVal(label: string){
+    getErrorTextVal(label: string) {
         return element(by.css(`enroll-error[ng-reflect-label="${label}"] span`)).getText();
     }
 
     getAddressVal(label: string) {
-        return element(by.css('common-country:nth-child(1)[label="Country"]')).element(by.css('span[class="ng-value-label"]')).getText();
+        return element(by.css(`common-address:nth-child(1) [label="${label}"]`)).element(by.css('common-country span[class="ng-value-label"]')).getText();
     }
 }
 
 export class ProfilePage extends BaseEnrollmentTestPage {
 
     protected firstNameField: WebElement;
-    protected middleNameField: WebElement;
-    protected lastNameField: WebElement;
-    protected birthMonthField: WebElement;
-    protected birthDayField: WebElement;
-    protected birthYearField: WebElement;
-    protected countryField: WebElement;
-    protected provinceField: WebElement;
-    protected streetField: WebElement;
-    protected cityField: WebElement;
-    protected postalCodeField: WebElement;
 
     constructor() {
         super();
-        this.firstNameField = element(by.css('input[id^="first_name"]'));
-        this.middleNameField = element(by.css('input[id^="middle_name"]'));
-        this.lastNameField = element(by.css('input[id^="last_name"]'));
-        this.birthMonthField = element(by.css('select[id^="month"]'));
-        this.birthDayField = element(by.css('input[id^="day"]'));
-        this.birthYearField = element(by.css('input[id^="year"]'));
-        this.countryField = element(by.css('input[id^="country"]'));
-        this.provinceField = element(by.css('input[id^="province"]'));
-        this.streetField = element(by.css('input[id^="street"]'));
-        this.cityField = element(by.css('input[id^="city"]'));
-        this.postalCodeField = element(by.css('input[id^="postalCode"]'));
+        this.firstNameField = element(by.name('first_name')).element(by.css('input[id^="name"]'));
     }
 
     navigateTo() {
@@ -73,12 +53,11 @@ export class ProfilePage extends BaseEnrollmentTestPage {
     selectAutoComplete() {
         element(by.css('common-address:nth-child(1) [id^="country"]')).sendKeys('CAN');
         element(by.css('ng-dropdown-panel div[class*="ng-option-selected"]')).click();
-        element(by.css('common-address:nth-child(1) [id^="street"]')).click();
     }
 
     checkEnabled() {
         // return (this.firstNameField.isEnabled() && this.middleNameField.isEnabled() && this.lastNameField.isEnabled() && this.birthMonthField.isEnabled() && this.birthDayField.isEnabled() && this.birthYearField.isEnabled() && this.countryField.isEnabled() && this.provinceField.isEnabled() && this.streetField.isEnabled() && this.cityField.isEnabled() && this.postalCodeField.isEnabled());
-        return this.streetField.isEnabled();
+        return this.firstNameField.isEnabled();
     }
 }
 
@@ -100,11 +79,6 @@ export class ContactPage extends BaseEnrollmentTestPage {
         return contactMethod;
     }
 
-    fillSpecificContactMethod(data: ContactPageTest) {
-        element(by.css(`div label[for="email"]`)).click();
-        element(by.css('div input[ng-reflect-name^="email"]')).sendKeys(data.email);
-    }
-
     fillContactMethod(data: ContactPageTest, contactMethod = this.getRandomContactMethod()) {
         const cm = this.clickContactMethod(contactMethod);
         if (cm === 'email') {
@@ -117,20 +91,21 @@ export class ContactPage extends BaseEnrollmentTestPage {
         }
     }
 
+    fillSpecificContactMethod(data: ContactPageTest) {
+        element(by.css(`div label[for="email"]`)).click();
+        element(by.css('div input[ng-reflect-name^="email"]')).sendKeys(data.email);
+    }
+
     fillOptionalFields(data: ContactPageTest) {
         element(by.css('input[ng-reflect-name^="voicePhone"]')).sendKeys(data.mobile);
         element(by.css('div input[ng-reflect-name^="ext"]')).sendKeys(data.extension);
     }
-
-    getErrorTextVal(label: string) {
-        return element(by.css(`enroll-error[label="${label}"] span`)).getText();
-    }
-
+    
     getInputTextVal(label: string) {
         return element(by.css(`input[ng-reflect-name^="${label}"]`)).getAttribute('value');
     }
 
-    private getRandomContactMethod(){
+    private getRandomContactMethod() {
         const num = Math.floor(Math.random() * Math.floor(this.contactMethod.length));
         return this.contactMethod[num];
     }

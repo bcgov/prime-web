@@ -9,14 +9,15 @@ describe('Prime Enrolment - Contact Page', () => {
     let contactData;
     const CONTACT_PAGE_URL = `enrolment/contact`;
     const PROFESSIONAL_PAGE_URL = `enrolment/professional`;
+    const seedVal = Math.floor(Math.random() * Math.floor(1000));
 
     beforeEach(() => {
         page = new ContactPage();
         contactData = data.contactInfo();
-        data.setSeed(123);
+        data.setSeed(seedVal);
     });
 
-    it('01. should load the page without issue', () => {
+    it('Seed #' + seedVal + '\n 01. should load the page without issue', () => {
         page.navigateTo();
         expect(browser.getCurrentUrl()).toContain(CONTACT_PAGE_URL);
         expect(page.formErrors().count()).toBe(0, 'should be no errors on page load');

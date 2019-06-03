@@ -9,14 +9,15 @@ describe('Prime Enrolment - Self-Declaration Page', () => {
     let selfDeclarationData;
     const SELF_DECLARATION_PAGE_URL = `enrolment/self-declaration`;
     const PHARMANET_ACCESS_PAGE_URL = `enrolment/pharmanet-access`;
+    const seedVal = Math.floor(Math.random() * Math.floor(1000));
 
     beforeEach(() => {
         page = new SelfDeclarationPage();
         selfDeclarationData = data.contactInfo();
-        data.setSeed(123);
+        data.setSeed(seedVal);
     });
 
-    it('01. should load the page without issue', () => {
+    it('Seed #' + seedVal + '\n 01. should load the page without issue', () => {
         page.navigateTo();
         expect(browser.getCurrentUrl()).toContain(SELF_DECLARATION_PAGE_URL);
         expect(page.formErrors().count()).toBe(0, 'should be no errors on page load');

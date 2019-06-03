@@ -13,6 +13,7 @@ describe('Prime Enrolment - End to End', () => {
     const data = new FakeDataEnrollment();
     let profileData, contactData;
     const SUCCESS_PAGE_URL = `success`;
+    const seedVal = Math.floor(Math.random() * Math.floor(1000));
 
     beforeEach(() => {
         profilePage = new ProfilePage();
@@ -23,11 +24,11 @@ describe('Prime Enrolment - End to End', () => {
         reviewPage = new ReviewPage();
         profileData = data.profileInfo();
         contactData = data.contactInfo();
-        data.setSeed(123);
+        data.setSeed(seedVal);
         profileData['country'] = 'Canada'; // forced the country to be Canada so the faker will generate a province
     });
 
-    it('01. should go through from Profile to Review page when all required fields are filled out', () => {
+    it('Seed #' + seedVal + '\n 01. should go through from Profile to Review page when all required fields are filled out', () => {
         profilePage.navigateTo();
         profilePage.continue();
         contactPage.fillContactMethod(contactData);

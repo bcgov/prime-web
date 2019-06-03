@@ -9,14 +9,15 @@ describe('Prime Enrolment - Pharmanet-Access Page', () => {
     let pharmanetAccessData;
     const PHARMANET_ACCESS_PAGE_URL = `enrolment/pharmanet-access`;
     const REVIEW_PAGE_URL = `enrolment/review`;
+    const seedVal = Math.floor(Math.random() * Math.floor(1000));
 
     beforeEach(() => {
         page = new PharmanetAccessPage();
         pharmanetAccessData = data.contactInfo();
-        data.setSeed(123);
+        data.setSeed(seedVal);
     });
 
-    it('01. should load the page without issue', () => {
+    it('Seed #' + seedVal + '\n 01. should load the page without issue', () => {
         page.navigateTo();
         expect(browser.getCurrentUrl()).toContain(PHARMANET_ACCESS_PAGE_URL);
         expect(page.formErrors().count()).toBe(0, 'should be no errors on page load');
