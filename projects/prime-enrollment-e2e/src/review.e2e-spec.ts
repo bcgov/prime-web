@@ -10,15 +10,14 @@ describe('Prime Enrolment - Review Page', () => {
     let profileData;
     const REVIEW_PAGE_URL = `enrolment/review`;
     const SUCCESS_PAGE_URL = `success`;
-    const seedVal = Math.floor(Math.random() * Math.floor(1000));
 
     beforeEach(() => {
         page = new ReviewPage();
         profilePage = new ProfilePage();
-        data.setSeed(seedVal);
+        data.setSeed();
     });
 
-    it('Seed #' + seedVal + '\n 01. should load the page without issue', () => {
+    it('01. should load the page without issue', () => {
         page.navigateTo();
         expect(browser.getCurrentUrl()).toContain(REVIEW_PAGE_URL);
         expect(page.formErrors().count()).toBe(0, 'should be no errors on page load');

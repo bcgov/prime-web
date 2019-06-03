@@ -100,7 +100,7 @@ export class ContactPage extends BaseEnrollmentTestPage {
         element(by.css('input[ng-reflect-name^="voicePhone"]')).sendKeys(data.mobile);
         element(by.css('div input[ng-reflect-name^="ext"]')).sendKeys(data.extension);
     }
-    
+
     getInputTextVal(label: string) {
         return element(by.css(`input[ng-reflect-name^="${label}"]`)).getAttribute('value');
     }
@@ -218,9 +218,9 @@ export class PharmanetAccessPage extends BaseEnrollmentTestPage {
         element(by.cssContainingText('span', value)).click();
     }
 
-    selectDate() {
-        element(by.css('common-datepicker[ng-reflect-name="endDate"] button[class="btn btn-default"]')).click();
-        element(by.cssContainingText('div[class="datevalue currmonth"] span', '30')).click();
+    selectDate(dateLabel: string, dateVal: string) {
+        element(by.css(`common-datepicker[ng-reflect-name="${dateLabel}"]`)).element(by.css('i[class*="fa-calendar"]')).click();
+        element(by.cssContainingText('div[class*="currmonth"] span', `${dateVal}`)).click();
         /*
         const EC = protractor.ExpectedConditions;
         browser.wait(EC.presenceOf(element(by.css('btn btn-default'))), 5000).then(() => {
@@ -230,6 +230,25 @@ export class PharmanetAccessPage extends BaseEnrollmentTestPage {
         // Write your code to find next day element and click it using click() function
         // Hint: Each day is a "div" with class "btn-light" and day as content of that div element  
         */
+    }
+
+    selectSpecificDate(dateLabel: string, yearVal: string, monthVal: string, dayVal: string) {
+        // Click calendar icon
+        element(by.css(`common-datepicker[ng-reflect-name="${dateLabel}"]`)).element(by.css('i[class*="fa-calendar"]')).click();
+        // Select Year
+        element(by.css('button[class*="yearlabel"]')).click();
+        element(by.cssContainingText('div[class*="yearvalue"]', `${yearVal}`)).click();
+        // Select Month
+        element(by.css('button[class*="monthlabel"]')).click();
+        element(by.cssContainingText('div[class*="monthvalue"]', `${monthVal}`)).click();
+        // Select Day
+        element(by.cssContainingText('div[class*="currmonth"] span', `${dayVal}`)).click();
+    }
+
+    checkDate(dateLabel: string) {
+        element(by.css(`common-datepicker[ng-reflect-name="${dateLabel}"]`)).element(by.css('span')).getAttribute('value').then(function(val) {
+            return val;
+        });
     }
 
 }

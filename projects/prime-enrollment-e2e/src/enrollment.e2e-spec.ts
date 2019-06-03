@@ -13,7 +13,6 @@ describe('Prime Enrolment - End to End', () => {
     const data = new FakeDataEnrollment();
     let profileData, contactData;
     const SUCCESS_PAGE_URL = `success`;
-    const seedVal = Math.floor(Math.random() * Math.floor(1000));
 
     beforeEach(() => {
         profilePage = new ProfilePage();
@@ -24,11 +23,11 @@ describe('Prime Enrolment - End to End', () => {
         reviewPage = new ReviewPage();
         profileData = data.profileInfo();
         contactData = data.contactInfo();
-        data.setSeed(seedVal);
+        data.setSeed();
         profileData['country'] = 'Canada'; // forced the country to be Canada so the faker will generate a province
     });
 
-    it('Seed #' + seedVal + '\n 01. should go through from Profile to Review page when all required fields are filled out', () => {
+    it('01. should go through from Profile to Review page when all required fields are filled out', () => {
         profilePage.navigateTo();
         profilePage.continue();
         contactPage.fillContactMethod(contactData);
@@ -49,7 +48,8 @@ describe('Prime Enrolment - End to End', () => {
         pharmanetAccessPage.clickButton('btn btn-md', 'Find');
         pharmanetAccessPage.clickCheckBox('Vancouver Island Health');
         pharmanetAccessPage.clickButton('btn btn-primary', 'Add');
-        pharmanetAccessPage.selectDate();
+        pharmanetAccessPage.selectDate('startDate', '10');
+        pharmanetAccessPage.selectDate('endDate', '25');
         pharmanetAccessPage.continue();
         browser.sleep(1000 * 5);
         reviewPage.scrollDown();
@@ -78,7 +78,8 @@ describe('Prime Enrolment - End to End', () => {
         pharmanetAccessPage.clickButton('btn btn-md', 'Find');
         pharmanetAccessPage.clickCheckBox('Vancouver Island Health');
         pharmanetAccessPage.clickButton('btn btn-primary', 'Add');
-        pharmanetAccessPage.selectDate();
+        pharmanetAccessPage.selectDate('startDate', '10');
+        pharmanetAccessPage.selectDate('endDate', '25');
         pharmanetAccessPage.continue();
         reviewPage.clickLink('h2', 'PharmaNet');
         pharmanetAccessPage.clickButton('btn delete', '');
@@ -89,7 +90,8 @@ describe('Prime Enrolment - End to End', () => {
         pharmanetAccessPage.clickButton('btn btn-md', 'Find');
         pharmanetAccessPage.clickCheckBox('Shopper Drug Mart');
         pharmanetAccessPage.clickButton('btn btn-primary', 'Add');
-        pharmanetAccessPage.selectDate();
+        pharmanetAccessPage.selectDate('startDate', '10');
+        pharmanetAccessPage.selectDate('endDate', '25');
         reviewPage.clickLink('span', 'Review');
         browser.sleep(1000 * 5);
         reviewPage.scrollDown();

@@ -9,15 +9,14 @@ describe('Prime Enrolment - Professional Page', () => {
     let professionalData;
     const PROFESSIONAL_PAGE_URL = `enrolment/professional`;
     const SELF_DECLARATION_PAGE_URL = `enrolment/self-declaration`;
-    const seedVal = Math.floor(Math.random() * Math.floor(1000));
 
     beforeEach(() => {
         page = new ProfessionalPage();
         professionalData = data.contactInfo();
-        data.setSeed(seedVal);
+        data.setSeed();
     });
 
-    it('Seed #' + seedVal + '\n 01. should load the page without issue', () => {
+    it('01. should load the page without issue', () => {
         page.navigateTo();
         expect(browser.getCurrentUrl()).toContain(PROFESSIONAL_PAGE_URL);
         expect(page.formErrors().count()).toBe(0, 'should be no errors on page load');

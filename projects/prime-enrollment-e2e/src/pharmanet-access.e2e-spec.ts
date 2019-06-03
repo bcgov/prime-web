@@ -9,15 +9,14 @@ describe('Prime Enrolment - Pharmanet-Access Page', () => {
     let pharmanetAccessData;
     const PHARMANET_ACCESS_PAGE_URL = `enrolment/pharmanet-access`;
     const REVIEW_PAGE_URL = `enrolment/review`;
-    const seedVal = Math.floor(Math.random() * Math.floor(1000));
 
     beforeEach(() => {
         page = new PharmanetAccessPage();
         pharmanetAccessData = data.contactInfo();
-        data.setSeed(seedVal);
+        data.setSeed();
     });
 
-    it('Seed #' + seedVal + '\n 01. should load the page without issue', () => {
+    it('01. should load the page without issue', () => {
         page.navigateTo();
         expect(browser.getCurrentUrl()).toContain(PHARMANET_ACCESS_PAGE_URL);
         expect(page.formErrors().count()).toBe(0, 'should be no errors on page load');
@@ -68,7 +67,8 @@ describe('Prime Enrolment - Pharmanet-Access Page', () => {
         page.clickCheckBox('Vancouver Island Health');
         page.clickCheckBox('Shopper Drug Mart');
         page.clickButton('btn btn-primary', 'Add');
-        page.selectDate();
+        page.selectDate('startDate', '10');
+        page.selectDate('endDate', '25');
         expect(page.formErrors().count()).toBe(0, 'should be no errors');
     });
 
@@ -88,7 +88,7 @@ describe('Prime Enrolment - Pharmanet-Access Page', () => {
     });
 
     // e2e hasn't been tested using IE so this test will not work for now in IE
-    it('07. should be able to require user to fill out Start Field (for IE)', () => {
+    xit('07. should be able to require user to fill out Start Field (for IE)', () => {
         page.navigateTo();
         page.clickButton('btn btn-secondary', 'Add Organization');
         page.selectTypeOfOrg('Health Authority');
@@ -97,7 +97,8 @@ describe('Prime Enrolment - Pharmanet-Access Page', () => {
         page.clickButton('btn btn-md', 'Find');
         page.clickCheckBox('Vancouver Island Health');
         page.clickButton('btn btn-primary', 'Add');
-        page.selectDate();
+        page.selectDate('startDate', '10');
+        page.selectDate('endDate', '25');
         expect(page.formErrors().count()).toBe(0, 'should have no errors');
         expect(browser.getCurrentUrl()).toContain(PHARMANET_ACCESS_PAGE_URL);
     });
@@ -117,6 +118,36 @@ describe('Prime Enrolment - Pharmanet-Access Page', () => {
         expect(browser.getCurrentUrl()).toContain(PHARMANET_ACCESS_PAGE_URL);
     });
 
+    it('09. should be able to select start and end date by clicking the datepicker (dates have the same month)', () => {
+        page.navigateTo();
+        page.clickButton('btn btn-secondary', 'Add Organization');
+        page.selectTypeOfOrg('Health Authority');
+        page.typeValue('organization', 'a');
+        page.typeValue('city', 'a');
+        page.clickButton('btn btn-md', 'Find');
+        page.clickCheckBox('Vancouver Island Health');
+        page.clickButton('btn btn-primary', 'Add');
+        page.selectDate('startDate', '10');
+        page.selectDate('endDate', '25');
+        // expect(page.checkDate('startDate')).toBe('2019/06/10', 'should be the start date selected earlier');
+        expect(page.formErrors().count()).toBe(0, 'should have no errors');
+        expect(browser.getCurrentUrl()).toContain(PHARMANET_ACCESS_PAGE_URL);
+    });
+
+    it('10. should be able to set past and future month and year for start date and end date respectively', () => {
+        page.navigateTo();
+        page.clickButton('btn btn-secondary', 'Add Organization');
+        page.selectTypeOfOrg('Health Authority');
+        page.typeValue('organization', 'a');
+        page.typeValue('city', 'a');
+        page.clickButton('btn btn-md', 'Find');
+        page.clickCheckBox('Vancouver Island Health');
+        page.clickButton('btn btn-primary', 'Add');
+        page.selectSpecificDate('startDate', '2019', 'May', '10');
+        page.selectSpecificDate('endDate', '2029', 'Dec', '25');
+        expect(page.formErrors().count()).toBe(0, 'should have no errors');
+        expect(browser.getCurrentUrl()).toContain(PHARMANET_ACCESS_PAGE_URL);
+    });
     /*
         FOR FUTURE TESTS
         (7.3.35) solution must display all Organizations that match the search criteria for selection

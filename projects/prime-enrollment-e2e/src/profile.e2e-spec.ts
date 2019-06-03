@@ -9,16 +9,15 @@ describe('Prime Enrolment - Profile Page', () => {
     let profileData;
     const PROFILE_PAGE_URL = `enrolment/profile`;
     const CONTACT_PAGE_URL = `enrolment/contact`;
-    const seedVal = Math.floor(Math.random() * Math.floor(1000));
 
     beforeEach(() => {
         page = new ProfilePage();
         profileData = data.profileInfo();
-        data.setSeed(seedVal);
+        data.setSeed();
         profileData['country'] = 'Canada'; // forced the country to be Canada so the faker will generate a province
     });
 
-    it('Seed #' + seedVal + '\n  01. should load the page without issue', () => {
+    it('1. should load the page without issue', () => {
         page.navigateTo();
         expect(browser.getCurrentUrl()).toContain(PROFILE_PAGE_URL);
         expect(page.formErrors().count()).toBe(0, 'should be no errors on page load');

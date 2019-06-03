@@ -2,6 +2,8 @@ import * as faker from 'faker';
 
 export class FakeDataEnrollment {
 
+    private seedVal: number = Math.floor(Math.random() * Math.floor(1000));
+
     profileInfo(): ProfilePageTest {
         return {
             firstName: faker.name.firstName(),
@@ -14,7 +16,7 @@ export class FakeDataEnrollment {
             country: faker.address.country(),
             address: faker.address.streetAddress(),
             city: faker.address.city(),
-            postal: faker.address.zipCode('?#? #?#')
+            postal: faker.address.zipCode('?#? #?#'),
         };
     }
 
@@ -26,8 +28,12 @@ export class FakeDataEnrollment {
         };
     }
 
-    setSeed(number) {
-         faker.seed(number);
+    getSeed() {
+        return this.seedVal;
+    }
+
+    setSeed() {
+        faker.seed(this.seedVal);
     }
 }
 
