@@ -2,7 +2,7 @@ import * as faker from 'faker';
 
 export class FakeDataEnrollment {
 
-    private seedVal: number = Math.floor(Math.random() * Math.floor(1000));
+    private static seedVal: number = Math.floor(Math.random() * Math.floor(1000));
 
     profileInfo(): ProfilePageTest {
         return {
@@ -29,11 +29,11 @@ export class FakeDataEnrollment {
     }
 
     getSeed() {
-        return this.seedVal;
+        return FakeDataEnrollment.seedVal;
     }
 
     setSeed() {
-        faker.seed(this.seedVal);
+        faker.seed(this.getSeed());
     }
 }
 

@@ -11,7 +11,7 @@ describe('Prime Enrolment - Contact Page', () => {
     const PROFESSIONAL_PAGE_URL = `enrolment/professional`;
 
     beforeAll(() => {
-        console.log('START OF E2E ENROLMENT' + '\n Seed #: ' + data.getSeed());
+        console.log('START OF E2E ENROLMENT' + '\nThis test uses Seed #: ' + data.getSeed());
     });
 
     beforeEach(() => {

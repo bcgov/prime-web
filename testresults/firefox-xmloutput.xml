@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites disabled="44" errors="0" failures="1" tests="45" time="16.718">
+ <testsuite name="firefox.Prime Enrolment - Pharmanet-Access Page" timestamp="2019-06-04T19:21:18" hostname="localhost" time="16.708" errors="0" tests="10" skipped="0" disabled="9" failures="1">
+  <testcase classname="firefox.Prime Enrolment - Pharmanet-Access Page" name="10. should be able to set past and future month and year for start date and end date respectively" time="16.701">
+   <failure type="toBe" message="Expected &apos;2019/05/10&apos; to be &apos;CANADA&apos;."><![CDATA[Error: Failed expectation
+    at UserContext.<anonymous> (/space/workspace/prime-web/projects/prime-enrollment-e2e/src/pharmanet-access.e2e-spec.ts:148:45)
+    at /space/workspace/prime-web/node_modules/jasminewd2/index.js:112:25
+    at new ManagedPromise (/space/workspace/prime-web/node_modules/selenium-webdriver/lib/promise.js:1077:7)
+    at ControlFlow.promise (/space/workspace/prime-web/node_modules/selenium-webdriver/lib/promise.js:2505:12)
+    at schedulerExecute (/space/workspace/prime-web/node_modules/jasminewd2/index.js:95:18)
+    at TaskQueue.execute_ (/space/workspace/prime-web/node_modules/selenium-webdriver/lib/promise.js:3084:14)
+    at TaskQueue.executeNext_ (/space/workspace/prime-web/node_modules/selenium-webdriver/lib/promise.js:3067:27)
+    at asyncRun (/space/workspace/prime-web/node_modules/selenium-webdriver/lib/promise.js:2974:25)
+    at /space/workspace/prime-web/node_modules/selenium-webdriver/lib/promise.js:668:7]]>
+   </failure>
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Pharmanet-Access Page" name="01. should load the page without issue" time="0.001">
+   <skipped />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Pharmanet-Access Page" name="02. (7.3.34) must allow the PharmaNet User to search for an Organization." time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Pharmanet-Access Page" name="03. (7.3.36) must allow the PharmaNet User to select one or more Organization (s) to enroll at" time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Pharmanet-Access Page" name="04. Shouldnt be able to search if fields are invalid. Can currently search with blank pages." time="0">
+   <skipped message="Temporarily disabled with xit" />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Pharmanet-Access Page" name="05. should be able to enter End Field instead of deleting the record (for IE)" time="0">
+   <skipped message="Temporarily disabled with xit" />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Pharmanet-Access Page" name="06. should be able to delete organization if there is only one listed" time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Pharmanet-Access Page" name="07. should be able to require user to fill out Start Field (for IE)" time="0">
+   <skipped message="Temporarily disabled with xit" />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Pharmanet-Access Page" name="08. should be able to do another search after the first search for adding organization" time="0">
+   <skipped message="Temporarily disabled with xit" />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Pharmanet-Access Page" name="09. should be able to select start and end date by clicking the datepicker (dates have the same month)" time="0.002">
+   <skipped />
+  </testcase>
+ </testsuite>
+ <testsuite name="firefox.Prime Enrolment - Contact Page" timestamp="2019-06-04T19:21:35" hostname="localhost" time="0.001" errors="0" tests="6" skipped="0" disabled="6" failures="0">
+  <testcase classname="firefox.Prime Enrolment - Contact Page" name="01. should load the page without issue" time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Contact Page" name="02. should NOT let the user to continue when the required fields are not filled out" time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Contact Page" name="03. should let user to continue when all the fields are filled out" time="0.001">
+   <skipped />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Contact Page" name="04. should let user to continue even if voice phone and extension num are not filled out (they are optional)" time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Contact Page" name="05. If user enters &quot;test&quot; as email it says &quot;email is required.&quot; It SHOULD say &quot;email format wrong&quot;" time="0">
+   <skipped message="Temporarily disabled with xit" />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Contact Page" name="06. should be able to enter international phone number in Voice Contact field" time="0">
+   <skipped />
+  </testcase>
+ </testsuite>
+ <testsuite name="firefox.Prime Enrolment - End to End" timestamp="2019-06-04T19:21:35" hostname="localhost" time="0.001" errors="0" tests="2" skipped="0" disabled="2" failures="0">
+  <testcase classname="firefox.Prime Enrolment - End to End" name="01. should go through from Profile to Review page when all required fields are filled out" time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - End to End" name="02. should be able to edit fields when user reached the Review Page" time="0.001">
+   <skipped />
+  </testcase>
+ </testsuite>
+ <testsuite name="firefox.Prime Enrolment - Professional Page" timestamp="2019-06-04T19:21:35" hostname="localhost" time="0.003" errors="0" tests="9" skipped="0" disabled="9" failures="0">
+  <testcase classname="firefox.Prime Enrolment - Professional Page" name="01. should load the page without issue" time="0.001">
+   <skipped />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Professional Page" name="02. should NOT let the user to continue when no radio buttons are clicked" time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Professional Page" name="03. (7.3.17.) capture the college reference number for each of the individual&apos;s professional college association." time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Professional Page" name="04. (7.3.19) The solution must display and capture the License Class based on selected registered college" time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Professional Page" name="05. (7.3.24) capture if the individual is registered with PharmaCare as a Device Provider. The default value for this must be No." time="0">
+   <skipped message="Temporarily disabled with xit" />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Professional Page" name="06. (7.3.25) must capture the Device Provider Number when the individual has identified as a Device Provider." time="0.001">
+   <skipped />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Professional Page" name="07. should be able to require user to select at least one &quot;Yes&quot; to all the questions" time="0">
+   <skipped message="Temporarily disabled with xit" />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Professional Page" name="08. should be able to select a date using Calendar Control in Renewal Date field (for IE)" time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Professional Page" name="09. should be able to require user to fill out Job Title field" time="0.001">
+   <skipped />
+  </testcase>
+ </testsuite>
+ <testsuite name="firefox.Prime Enrolment - Profile Page" timestamp="2019-06-04T19:21:35" hostname="localhost" time="0.002" errors="0" tests="9" skipped="0" disabled="9" failures="0">
+  <testcase classname="firefox.Prime Enrolment - Profile Page" name="1. should load the page without issue" time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Profile Page" name="02. should let user continue without filling out any fields" time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Profile Page" name="03. should let users set their own mailing address by filling out the Mailling Address field" time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Profile Page" name="04. should NOT let users continue with an incomplete mailing address" time="0">
+   <skipped message="Temporarily disabled with xit" />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Profile Page" name="05. should let users partially fill out a mailing address but uncheck it, and continue" time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Profile Page" name="06. (7.3.7) should let users set Preferred First, Middle, and Last name" time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Profile Page" name="07. (7.3.1) should not be able to edit read-only information (just check that the fields are disabled/display only)" time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Profile Page" name="08. should be able to select auto-complete results from address component" time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Profile Page" name="09. should be able to type auto-complete results from address component and hit enter" time="0.001">
+   <skipped />
+  </testcase>
+ </testsuite>
+ <testsuite name="firefox.Prime Enrolment - Review Page" timestamp="2019-06-04T19:21:35" hostname="localhost" time="0" errors="0" tests="4" skipped="0" disabled="4" failures="0">
+  <testcase classname="firefox.Prime Enrolment - Review Page" name="01. should load the page without issue" time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Review Page" name="02. (7.3.40) must display the PharmaNet User&apos;s information" time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Review Page" name="03. (7.3.41) must provide the ability for the PharmaNet Users  to edit information entered prior to submission" time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Review Page" name="(7.3.43) must present a Submit function to the PRIME User. Upon submission the Request will proceed to Approval processing." time="0">
+   <skipped />
+  </testcase>
+ </testsuite>
+ <testsuite name="firefox.Prime Enrolment - Self-Declaration Page" timestamp="2019-06-04T19:21:35" hostname="localhost" time="0.003" errors="0" tests="5" skipped="0" disabled="5" failures="0">
+  <testcase classname="firefox.Prime Enrolment - Self-Declaration Page" name="01. should load the page without issue" time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Self-Declaration Page" name="02. (7.3.31) must display guidance information to provide additional details when any of the Self-Declaration responses are Yes." time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Self-Declaration Page" name="03. (7.3.32) must capture additional details in free format text for each Self-Declaration question answered Yes." time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Self-Declaration Page" name="04. (7.3.33) must allow upload of supporting documents if any Self-Declaration question was answered Yes." time="0.001">
+   <skipped />
+  </testcase>
+  <testcase classname="firefox.Prime Enrolment - Self-Declaration Page" name="05. should make the error labels not verbose when user clicks continue on blank page" time="0.001">
+   <skipped message="Temporarily disabled with xit" />
+  </testcase>
+ </testsuite>
+</testsuites>

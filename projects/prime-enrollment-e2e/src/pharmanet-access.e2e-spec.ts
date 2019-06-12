@@ -129,12 +129,11 @@ describe('Prime Enrolment - Pharmanet-Access Page', () => {
         page.clickButton('btn btn-primary', 'Add');
         page.selectDate('startDate', '10');
         page.selectDate('endDate', '25');
-        // expect(page.checkDate('startDate')).toBe('2019/06/10', 'should be the start date selected earlier');
         expect(page.formErrors().count()).toBe(0, 'should have no errors');
         expect(browser.getCurrentUrl()).toContain(PHARMANET_ACCESS_PAGE_URL);
     });
 
-    it('10. should be able to set past and future month and year for start date and end date respectively', () => {
+    fit('10. should be able to set past and future month and year for start date and end date respectively', () => {
         page.navigateTo();
         page.clickButton('btn btn-secondary', 'Add Organization');
         page.selectTypeOfOrg('Health Authority');
@@ -145,6 +144,8 @@ describe('Prime Enrolment - Pharmanet-Access Page', () => {
         page.clickButton('btn btn-primary', 'Add');
         page.selectSpecificDate('startDate', '2019', 'May', '10');
         page.selectSpecificDate('endDate', '2029', 'Dec', '25');
+        browser.sleep(2000);
+        expect(page.checkDate('startDate')).toBe('CANADA');
         expect(page.formErrors().count()).toBe(0, 'should have no errors');
         expect(browser.getCurrentUrl()).toContain(PHARMANET_ACCESS_PAGE_URL);
     });

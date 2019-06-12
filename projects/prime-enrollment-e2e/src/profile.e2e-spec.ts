@@ -67,10 +67,9 @@ describe('Prime Enrolment - Profile Page', () => {
     it('06. (7.3.7) should let users set Preferred First, Middle, and Last name', () => {
         page.navigateTo();
         page.fillPreferredName(profileData);
-        browser.sleep(1000 * 5);
-        page.continue();
-
-        expect(browser.getCurrentUrl()).toContain(CONTACT_PAGE_URL, 'should navigate to the Accounts page');
+        expect(page.getName()).toBe('CANADA');
+        // page.continue();
+        // expect(browser.getCurrentUrl()).toContain(CONTACT_PAGE_URL, 'should navigate to the Accounts page');
         expect(page.formErrors()).toEqual([], 'should be no errors as form should be valid');
     });
 
@@ -85,6 +84,15 @@ describe('Prime Enrolment - Profile Page', () => {
         page.scrollDown();
         page.clickDiffMailAddress();
         page.selectAutoComplete();
+        expect(page.getAddressVal('Country')).toBe('CANADA');
+    });
+
+    it('09. should be able to type auto-complete results from address component and hit enter', () => {
+        page.navigateTo();
+        page.scrollDown();
+        page.clickDiffMailAddress();
+        page.typeAutoComplete();
+        browser.sleep(5000);
         expect(page.getAddressVal('Country')).toBe('CANADA');
     });
 

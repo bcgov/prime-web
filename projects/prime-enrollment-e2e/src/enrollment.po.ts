@@ -1,4 +1,4 @@
-import { browser, by, element, WebElement, protractor } from 'protractor';
+import { browser, by, element, WebElement, protractor, Key } from 'protractor';
 import { ProfilePageTest, ContactPageTest } from './enrollment.data';
 import { PrimeTestPage } from '../../../e2e/src/app.po';
 import { NgSelectOption } from '@angular/forms';
@@ -55,9 +55,20 @@ export class ProfilePage extends BaseEnrollmentTestPage {
         element(by.css('ng-dropdown-panel div[class*="ng-option-selected"]')).click();
     }
 
+    typeAutoComplete() {
+        const addSelector = `common-address:nth-child(1) [id^="country"]`;
+        element(by.css(addSelector)).sendKeys('CAN');
+        element(by.css(addSelector)).sendKeys(protractor.Key.ENTER);
+    }
+
     checkEnabled() {
-        // return (this.firstNameField.isEnabled() && this.middleNameField.isEnabled() && this.lastNameField.isEnabled() && this.birthMonthField.isEnabled() && this.birthDayField.isEnabled() && this.birthYearField.isEnabled() && this.countryField.isEnabled() && this.provinceField.isEnabled() && this.streetField.isEnabled() && this.cityField.isEnabled() && this.postalCodeField.isEnabled());
         return this.firstNameField.isEnabled();
+    }
+
+    getName() {
+        // return element(by.css(`common-address:nth-child(1) [label="${label}"]`)).element(by.css('common-country span[class="ng-value-label"]')).getText();
+        // element(by.css('lib-prime-name[name="preferred_first_name"]')).
+        return element(by.css('lib-prime-name[name="preferred_first_name"]')).element(by.css('input[id^="name"]')).getAttribute('value');
     }
 }
 
@@ -235,20 +246,23 @@ export class PharmanetAccessPage extends BaseEnrollmentTestPage {
     selectSpecificDate(dateLabel: string, yearVal: string, monthVal: string, dayVal: string) {
         // Click calendar icon
         element(by.css(`common-datepicker[ng-reflect-name="${dateLabel}"]`)).element(by.css('i[class*="fa-calendar"]')).click();
+       
         // Select Year
         element(by.css('button[class*="yearlabel"]')).click();
         element(by.cssContainingText('div[class*="yearvalue"]', `${yearVal}`)).click();
+        
         // Select Month
         element(by.css('button[class*="monthlabel"]')).click();
         element(by.cssContainingText('div[class*="monthvalue"]', `${monthVal}`)).click();
+        
         // Select Day
         element(by.cssContainingText('div[class*="currmonth"] span', `${dayVal}`)).click();
     }
 
     checkDate(dateLabel: string) {
-        element(by.css(`common-datepicker[ng-reflect-name="${dateLabel}"]`)).element(by.css('span')).getAttribute('value').then(function(val) {
-            return val;
-        });
+        // element(by.css(`common-datepicker[ng-reflect-name="${dateLabel}"]`))
+        return element(by.css(`common-datepicker[ng-reflect-name="${dateLabel}"]`)).element(by.css('input[ng-reflect-name^="datepicker"]')).getAttribute('value');
+       // return element(by.css('input[ng-reflect-name^="datepicker"]')).getAttribute('value');
     }
 
 }

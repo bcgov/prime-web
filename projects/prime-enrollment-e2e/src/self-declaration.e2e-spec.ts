@@ -11,7 +11,7 @@ describe('Prime Enrolment - Self-Declaration Page', () => {
     const PHARMANET_ACCESS_PAGE_URL = `enrolment/pharmanet-access`;
 
     afterAll(() => {
-        console.log('END OF E2E ENROLMENT' + '\n Seed #: ' + data.getSeed());
+        console.log('END OF E2E ENROLMENT' + '\nThis test uses Seed #: ' + data.getSeed());
     });
 
     beforeEach(() => {
