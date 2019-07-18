@@ -48,7 +48,8 @@ export class EnrollmentComponent extends Container implements OnInit {
     const index = this.stateSvc.currentIndex;
     const valid = this.stateSvc.isIndexValid(index);
     console.log(valid);
-    return valid ? this.navigate(index) : this.touchIndex(index);
+    // return valid ? this.navigate(index) : this.touchIndex(index);
+    return this.navigate(index);
   }
   navigate(index: number) {
     const route = this.stateSvc.routes[index];
