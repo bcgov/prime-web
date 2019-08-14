@@ -34,8 +34,8 @@ export class EnrolmentStateService {
     this.profileForm.address.province = 'BC';
     this.profileForm.address.city = 'Victoria';
 
-    this.profileForm.firstName = 'Sean';
-    this.profileForm.lastName = 'Hamilton';
+    this.profileForm.firstName = 'John';
+    this.profileForm.lastName = 'Doe';
     this.profileForm.dateOfBirth = dateOfBirth;
 
     // console.log(this);
